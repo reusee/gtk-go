@@ -42,6 +42,8 @@ class Generator:
 
     self.generate_enum_symbols()
 
+    self.generate_const_symbols()
+
   def generate_function(self, func):
     # not support yet or has problem
     if func.deprecated:
@@ -122,6 +124,13 @@ class Generator:
 
   def generate_enum_symbols(self):
     for symbol in self.parser.enum_symbols:
+      go_name = symbol
+      if symbol.startswith('GTK_'):
+        go_name = symbol[4:]
+      print >>self.out, "const %s = C.%s" % (go_name, symbol)
+
+  def generate_const_symbols(self):
+    for symbol in self.parser.const_symbols:
       go_name = symbol
       if symbol.startswith('GTK_'):
         go_name = symbol[4:]

@@ -29,6 +29,7 @@ class Parser:
     self.functions = []
     self.functions_need_wrapper = []
     self.enum_symbols = []
+    self.const_symbols = []
 
   def parse(self):
     for node in self.namespace.itervalues():
@@ -128,10 +129,7 @@ class Parser:
       self.enum_symbols.append(member_symbol)
 
   def handleConstant(self, node):
-    value = node.value
-    name = node.ctype
-    c_type = node.value_type
-    #print name, c_type, value
+    self.const_symbols.append(node.ctype)
 
   def handleRecord(self, node):
     type_name = node.ctype
