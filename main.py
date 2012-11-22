@@ -8,7 +8,7 @@ from generator import Generator
 from collections import namedtuple
 import os
 
-Param = namedtuple('Param', ['name', 'c_type', 'go_type', 'need_cast'])
+Param = namedtuple('Param', ['name', 'c_type', 'go_type', 'need_cast', 'transfer'])
 
 class Parser:
   def __init__(self, filename):
@@ -89,6 +89,8 @@ class Parser:
       elif arg_name == 'len':
         arg_name = '_len'
 
+      transfer = param.transfer != 'none'
+
       arg_c_type = param.type.ctype
       if arg_c_type == '<varargs>':
         has_varargs = True
@@ -102,9 +104,9 @@ class Parser:
         arg_go_type, need_cast = convert_to_go_type(param.type.ctype)
         if need_cast:
           need_wrapper = True
-        parameters.append(Param(arg_name, arg_c_type, arg_go_type, need_cast))
+        parameters.append(Param(arg_name, arg_c_type, arg_go_type, need_cast, transfer))
     if node.throws:
-      parameters.append(Param('err', 'GError**', 'unsafe.Pointer', True))
+      parameters.append(Param('err', 'GError**', 'unsafe.Pointer', True, False))
       need_wrapper = True
     info.has_varargs = has_varargs
     info.has_va_list = has_va_list

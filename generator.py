@@ -64,14 +64,33 @@ class Generator:
 
     out = []
     # signature
+    out.append('func %s(' % func.go_name)
+    mapping_code = []
+    mapped_param_name = {}
+    sep = None
+    for param in func.parameters:
+      if sep != None: out.append(sep)
+      sep = ', '
+      mapped_type = param.go_type
+      if mapped_type == '*C.gchar':
+        mapped_type = 'string'
+        mapped_cstr_name = '_cstr_' + param.name
+        mapped_gstr_name = '_gstr_' + param.name
+        mapping_code.append('\t%s := unsafe.Pointer(C.CString(%s))\n' % (mapped_cstr_name, param.name))
+        if not param.transfer: # free it
+          mapping_code.append('\tdefer C.free(%s)\n' % mapped_cstr_name)
+        mapping_code.append('\t%s := (*C.gchar)(unsafe.Pointer(%s))\n' % (mapped_gstr_name, mapped_cstr_name))
+        mapped_param_name[param.name] = mapped_gstr_name
+      out.append('%s %s' % (param.name, mapped_type))
+    out.append(') ')
+
     mapped_return_type = func.return_go_type # type mapping
     if mapped_return_type == '*C.gchar':
       mapped_return_type = 'string'
-    out.append('func %s(%s) %s{\n' % (
-      func.go_name,
-      ', '.join('%s %s' % (param.name, param.go_type) for param in func.parameters),
-      '' if func.no_return else (mapped_return_type + ' ')
+    out.append('%s {\n' % (
+      '' if func.no_return else mapped_return_type,
       ))
+    out.extend(mapping_code)
     # body
     out.append('\t')
     if not func.no_return:
@@ -88,12 +107,13 @@ class Generator:
           out.append(sep)
         sep = ', '
         if param.need_cast:
-          out.append('unsafe.Pointer(%s)' % param.name)
+          out.append('unsafe.Pointer(%s)' % mapped_param_name.get(param.name, param.name))
         else:
-          out.append(param.name)
+          out.append(mapped_param_name.get(param.name, param.name))
       out.append(')')
     else:
-      out.append('C.%s(%s)' % (func.c_name, ', '.join(param.name for param in func.parameters)))
+      out.append('C.%s(%s)' % (func.c_name, ', '.join(mapped_param_name.get(param.name, param.name)
+        for param in func.parameters)))
     if func.return_go_type == 'unsafe.Pointer': # type mapping
       out.append(')')
     elif func.return_go_type == '*C.gchar':

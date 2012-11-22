@@ -598,8 +598,11 @@ import (
 	"unsafe"
 )
 
-func Access(filename *C.gchar, mode C.int) C.int {
-	return C._g_access(unsafe.Pointer(filename), mode)
+func Access(filename string, mode C.int) C.int {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C._g_access(unsafe.Pointer(_gstr_filename), mode)
 }
 
 func ArrayFree(array *C.GArray, free_segment C.gboolean) string {
@@ -610,11 +613,11 @@ func ArrayGetElementSize(array *C.GArray) C.guint {
 	return C.g_array_get_element_size(array)
 }
 
-func ArraySetClearFunc(array *C.GArray, clear_func C.GDestroyNotify) {
+func ArraySetClearFunc(array *C.GArray, clear_func C.GDestroyNotify)  {
 	C.g_array_set_clear_func(array, clear_func)
 }
 
-func ArrayUnref(array *C.GArray) {
+func ArrayUnref(array *C.GArray)  {
 	C.g_array_unref(array)
 }
 
@@ -622,40 +625,76 @@ func AsciiDigitValue(c C.gchar) C.gint {
 	return C.g_ascii_digit_value(c)
 }
 
-func AsciiDtostr(buffer *C.gchar, buf_len C.gint, d C.gdouble) string {
-	return C.GoString((*C.char)(C.g_ascii_dtostr(buffer, buf_len, d)))
+func AsciiDtostr(buffer string, buf_len C.gint, d C.gdouble) string {
+	_cstr_buffer := unsafe.Pointer(C.CString(buffer))
+	defer C.free(_cstr_buffer)
+	_gstr_buffer := (*C.gchar)(unsafe.Pointer(_cstr_buffer))
+	return C.GoString((*C.char)(C.g_ascii_dtostr(_gstr_buffer, buf_len, d)))
 }
 
-func AsciiFormatd(buffer *C.gchar, buf_len C.gint, format *C.gchar, d C.gdouble) string {
-	return C.GoString((*C.char)(C._g_ascii_formatd(buffer, buf_len, unsafe.Pointer(format), d)))
+func AsciiFormatd(buffer string, buf_len C.gint, format string, d C.gdouble) string {
+	_cstr_buffer := unsafe.Pointer(C.CString(buffer))
+	defer C.free(_cstr_buffer)
+	_gstr_buffer := (*C.gchar)(unsafe.Pointer(_cstr_buffer))
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	return C.GoString((*C.char)(C._g_ascii_formatd(_gstr_buffer, buf_len, unsafe.Pointer(_gstr_format), d)))
 }
 
-func AsciiStrcasecmp(s1 *C.gchar, s2 *C.gchar) C.gint {
-	return C._g_ascii_strcasecmp(unsafe.Pointer(s1), unsafe.Pointer(s2))
+func AsciiStrcasecmp(s1 string, s2 string) C.gint {
+	_cstr_s1 := unsafe.Pointer(C.CString(s1))
+	defer C.free(_cstr_s1)
+	_gstr_s1 := (*C.gchar)(unsafe.Pointer(_cstr_s1))
+	_cstr_s2 := unsafe.Pointer(C.CString(s2))
+	defer C.free(_cstr_s2)
+	_gstr_s2 := (*C.gchar)(unsafe.Pointer(_cstr_s2))
+	return C._g_ascii_strcasecmp(unsafe.Pointer(_gstr_s1), unsafe.Pointer(_gstr_s2))
 }
 
-func AsciiStrdown(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_ascii_strdown(unsafe.Pointer(str), _len)))
+func AsciiStrdown(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_ascii_strdown(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func AsciiStrncasecmp(s1 *C.gchar, s2 *C.gchar, n C.gsize) C.gint {
-	return C._g_ascii_strncasecmp(unsafe.Pointer(s1), unsafe.Pointer(s2), n)
+func AsciiStrncasecmp(s1 string, s2 string, n C.gsize) C.gint {
+	_cstr_s1 := unsafe.Pointer(C.CString(s1))
+	defer C.free(_cstr_s1)
+	_gstr_s1 := (*C.gchar)(unsafe.Pointer(_cstr_s1))
+	_cstr_s2 := unsafe.Pointer(C.CString(s2))
+	defer C.free(_cstr_s2)
+	_gstr_s2 := (*C.gchar)(unsafe.Pointer(_cstr_s2))
+	return C._g_ascii_strncasecmp(unsafe.Pointer(_gstr_s1), unsafe.Pointer(_gstr_s2), n)
 }
 
-func AsciiStrtod(nptr *C.gchar, endptr unsafe.Pointer) C.gdouble {
-	return C._g_ascii_strtod(unsafe.Pointer(nptr), unsafe.Pointer(endptr))
+func AsciiStrtod(nptr string, endptr unsafe.Pointer) C.gdouble {
+	_cstr_nptr := unsafe.Pointer(C.CString(nptr))
+	defer C.free(_cstr_nptr)
+	_gstr_nptr := (*C.gchar)(unsafe.Pointer(_cstr_nptr))
+	return C._g_ascii_strtod(unsafe.Pointer(_gstr_nptr), unsafe.Pointer(endptr))
 }
 
-func AsciiStrtoll(nptr *C.gchar, endptr unsafe.Pointer, base C.guint) C.gint64 {
-	return C._g_ascii_strtoll(unsafe.Pointer(nptr), unsafe.Pointer(endptr), base)
+func AsciiStrtoll(nptr string, endptr unsafe.Pointer, base C.guint) C.gint64 {
+	_cstr_nptr := unsafe.Pointer(C.CString(nptr))
+	defer C.free(_cstr_nptr)
+	_gstr_nptr := (*C.gchar)(unsafe.Pointer(_cstr_nptr))
+	return C._g_ascii_strtoll(unsafe.Pointer(_gstr_nptr), unsafe.Pointer(endptr), base)
 }
 
-func AsciiStrtoull(nptr *C.gchar, endptr unsafe.Pointer, base C.guint) C.guint64 {
-	return C._g_ascii_strtoull(unsafe.Pointer(nptr), unsafe.Pointer(endptr), base)
+func AsciiStrtoull(nptr string, endptr unsafe.Pointer, base C.guint) C.guint64 {
+	_cstr_nptr := unsafe.Pointer(C.CString(nptr))
+	defer C.free(_cstr_nptr)
+	_gstr_nptr := (*C.gchar)(unsafe.Pointer(_cstr_nptr))
+	return C._g_ascii_strtoull(unsafe.Pointer(_gstr_nptr), unsafe.Pointer(endptr), base)
 }
 
-func AsciiStrup(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_ascii_strup(unsafe.Pointer(str), _len)))
+func AsciiStrup(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_ascii_strup(unsafe.Pointer(_gstr_str), _len)))
 }
 
 func AsciiTolower(c C.gchar) C.gchar {
@@ -672,21 +711,21 @@ func AsciiXdigitValue(c C.gchar) C.gint {
 
 //Skipped g_assert_warning
 
-func AssertionMessage(domain *C.char, file *C.char, line C.int, _func *C.char, message *C.char) {
+func AssertionMessage(domain *C.char, file *C.char, line C.int, _func *C.char, message *C.char)  {
 	C._g_assertion_message(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func), unsafe.Pointer(message))
 }
 
 //TODO long double g_assertion_message_cmpnum
 
-func AssertionMessageCmpstr(domain *C.char, file *C.char, line C.int, _func *C.char, expr *C.char, arg1 *C.char, cmp *C.char, arg2 *C.char) {
+func AssertionMessageCmpstr(domain *C.char, file *C.char, line C.int, _func *C.char, expr *C.char, arg1 *C.char, cmp *C.char, arg2 *C.char)  {
 	C._g_assertion_message_cmpstr(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func), unsafe.Pointer(expr), unsafe.Pointer(arg1), unsafe.Pointer(cmp), unsafe.Pointer(arg2))
 }
 
-func AssertionMessageError(domain *C.char, file *C.char, line C.int, _func *C.char, expr *C.char, error *C.GError, error_domain C.GQuark, error_code C.int) {
+func AssertionMessageError(domain *C.char, file *C.char, line C.int, _func *C.char, expr *C.char, error *C.GError, error_domain C.GQuark, error_code C.int)  {
 	C._g_assertion_message_error(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func), unsafe.Pointer(expr), unsafe.Pointer(error), error_domain, error_code)
 }
 
-func AssertionMessageExpr(domain *C.char, file *C.char, line C.int, _func *C.char, expr *C.char) {
+func AssertionMessageExpr(domain *C.char, file *C.char, line C.int, _func *C.char, expr *C.char)  {
 	C._g_assertion_message_expr(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func), unsafe.Pointer(expr))
 }
 
@@ -726,33 +765,45 @@ func AssertionMessageExpr(domain *C.char, file *C.char, line C.int, _func *C.cha
 
 //Skipped g_atomic_pointer_xor
 
-func Base64Decode(text *C.gchar, out_len *C.gsize) *C.guchar {
-	return C._g_base64_decode(unsafe.Pointer(text), out_len)
+func Base64Decode(text string, out_len *C.gsize) *C.guchar {
+	_cstr_text := unsafe.Pointer(C.CString(text))
+	defer C.free(_cstr_text)
+	_gstr_text := (*C.gchar)(unsafe.Pointer(_cstr_text))
+	return C._g_base64_decode(unsafe.Pointer(_gstr_text), out_len)
 }
 
-func Base64DecodeInplace(text *C.gchar, out_len *C.gsize) *C.guchar {
-	return C.g_base64_decode_inplace(text, out_len)
+func Base64DecodeInplace(text string, out_len *C.gsize) *C.guchar {
+	_cstr_text := unsafe.Pointer(C.CString(text))
+	_gstr_text := (*C.gchar)(unsafe.Pointer(_cstr_text))
+	return C.g_base64_decode_inplace(_gstr_text, out_len)
 }
 
-func Base64DecodeStep(in *C.gchar, _len C.gsize, out *C.guchar, state *C.gint, save *C.guint) C.gsize {
-	return C.g_base64_decode_step(in, _len, out, state, save)
+func Base64DecodeStep(in string, _len C.gsize, out *C.guchar, state *C.gint, save *C.guint) C.gsize {
+	_cstr_in := unsafe.Pointer(C.CString(in))
+	defer C.free(_cstr_in)
+	_gstr_in := (*C.gchar)(unsafe.Pointer(_cstr_in))
+	return C.g_base64_decode_step(_gstr_in, _len, out, state, save)
 }
 
 func Base64Encode(data *C.guchar, _len C.gsize) string {
 	return C.GoString((*C.char)(C.g_base64_encode(data, _len)))
 }
 
-func Base64EncodeClose(break_lines C.gboolean, out *C.gchar, state *C.gint, save *C.gint) C.gsize {
-	return C.g_base64_encode_close(break_lines, out, state, save)
+func Base64EncodeClose(break_lines C.gboolean, out string, state *C.gint, save *C.gint) C.gsize {
+	_cstr_out := unsafe.Pointer(C.CString(out))
+	_gstr_out := (*C.gchar)(unsafe.Pointer(_cstr_out))
+	return C.g_base64_encode_close(break_lines, _gstr_out, state, save)
 }
 
-func Base64EncodeStep(in *C.guchar, _len C.gsize, break_lines C.gboolean, out *C.gchar, state *C.gint, save *C.gint) C.gsize {
-	return C.g_base64_encode_step(in, _len, break_lines, out, state, save)
+func Base64EncodeStep(in *C.guchar, _len C.gsize, break_lines C.gboolean, out string, state *C.gint, save *C.gint) C.gsize {
+	_cstr_out := unsafe.Pointer(C.CString(out))
+	_gstr_out := (*C.gchar)(unsafe.Pointer(_cstr_out))
+	return C.g_base64_encode_step(in, _len, break_lines, _gstr_out, state, save)
 }
 
 //Deprecated g_basename
 
-func BitLock(address *C.gint, lock_bit C.gint) {
+func BitLock(address *C.gint, lock_bit C.gint)  {
 	C.g_bit_lock(address, lock_bit)
 }
 
@@ -772,7 +823,7 @@ func BitTrylock(address *C.gint, lock_bit C.gint) C.gboolean {
 	return C.g_bit_trylock(address, lock_bit)
 }
 
-func BitUnlock(address *C.gint, lock_bit C.gint) {
+func BitUnlock(address *C.gint, lock_bit C.gint)  {
 	C.g_bit_unlock(address, lock_bit)
 }
 
@@ -788,8 +839,11 @@ func BuildFilenamev(args unsafe.Pointer) string {
 
 //TODO varargs g_build_path
 
-func BuildPathv(separator *C.gchar, args unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_build_pathv(unsafe.Pointer(separator), unsafe.Pointer(args))))
+func BuildPathv(separator string, args unsafe.Pointer) string {
+	_cstr_separator := unsafe.Pointer(C.CString(separator))
+	defer C.free(_cstr_separator)
+	_gstr_separator := (*C.gchar)(unsafe.Pointer(_cstr_separator))
+	return C.GoString((*C.char)(C._g_build_pathv(unsafe.Pointer(_gstr_separator), unsafe.Pointer(args))))
 }
 
 func ByteArrayFree(array *C.GByteArray, free_segment C.gboolean) *C.guint8 {
@@ -808,12 +862,15 @@ func ByteArrayNewTake(data *C.guint8, _len C.gsize) *C.GByteArray {
 	return C.g_byte_array_new_take(data, _len)
 }
 
-func ByteArrayUnref(array *C.GByteArray) {
+func ByteArrayUnref(array *C.GByteArray)  {
 	C.g_byte_array_unref(array)
 }
 
-func Chdir(path *C.gchar) C.int {
-	return C._g_chdir(unsafe.Pointer(path))
+func Chdir(path string) C.int {
+	_cstr_path := unsafe.Pointer(C.CString(path))
+	defer C.free(_cstr_path)
+	_gstr_path := (*C.gchar)(unsafe.Pointer(_cstr_path))
+	return C._g_chdir(unsafe.Pointer(_gstr_path))
 }
 
 func CheckVersion(required_major C.guint, required_minor C.guint, required_micro C.guint) string {
@@ -836,7 +893,7 @@ func ChildWatchSourceNew(pid C.GPid) *C.GSource {
 	return C.g_child_watch_source_new(pid)
 }
 
-func ClearError(err unsafe.Pointer) {
+func ClearError(err unsafe.Pointer)  {
 	C._g_clear_error(unsafe.Pointer(err))
 }
 
@@ -850,44 +907,77 @@ func ComputeChecksumForData(checksum_type C.GChecksumType, data *C.guchar, lengt
 	return C.GoString((*C.char)(C._g_compute_checksum_for_data(checksum_type, unsafe.Pointer(data), length)))
 }
 
-func ComputeChecksumForString(checksum_type C.GChecksumType, str *C.gchar, length C.gssize) string {
-	return C.GoString((*C.char)(C._g_compute_checksum_for_string(checksum_type, unsafe.Pointer(str), length)))
+func ComputeChecksumForString(checksum_type C.GChecksumType, str string, length C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_compute_checksum_for_string(checksum_type, unsafe.Pointer(_gstr_str), length)))
 }
 
 func ComputeHmacForData(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, data *C.guchar, length C.gsize) string {
 	return C.GoString((*C.char)(C._g_compute_hmac_for_data(digest_type, key, key_len, unsafe.Pointer(data), length)))
 }
 
-func ComputeHmacForString(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, str *C.gchar, length C.gssize) string {
-	return C.GoString((*C.char)(C._g_compute_hmac_for_string(digest_type, key, key_len, unsafe.Pointer(str), length)))
+func ComputeHmacForString(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, str string, length C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_compute_hmac_for_string(digest_type, key, key_len, unsafe.Pointer(_gstr_str), length)))
 }
 
-func Convert(str *C.gchar, _len C.gssize, to_codeset *C.gchar, from_codeset *C.gchar, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_convert(unsafe.Pointer(str), _len, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), bytes_read, bytes_written, unsafe.Pointer(err))))
+func Convert(str string, _len C.gssize, to_codeset string, from_codeset string, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	_cstr_to_codeset := unsafe.Pointer(C.CString(to_codeset))
+	defer C.free(_cstr_to_codeset)
+	_gstr_to_codeset := (*C.gchar)(unsafe.Pointer(_cstr_to_codeset))
+	_cstr_from_codeset := unsafe.Pointer(C.CString(from_codeset))
+	defer C.free(_cstr_from_codeset)
+	_gstr_from_codeset := (*C.gchar)(unsafe.Pointer(_cstr_from_codeset))
+	return C.GoString((*C.char)(C._g_convert(unsafe.Pointer(_gstr_str), _len, unsafe.Pointer(_gstr_to_codeset), unsafe.Pointer(_gstr_from_codeset), bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
 func ConvertErrorQuark() C.GQuark {
 	return C.g_convert_error_quark()
 }
 
-func ConvertWithFallback(str *C.gchar, _len C.gssize, to_codeset *C.gchar, from_codeset *C.gchar, fallback *C.gchar, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_convert_with_fallback(unsafe.Pointer(str), _len, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), unsafe.Pointer(fallback), bytes_read, bytes_written, unsafe.Pointer(err))))
+func ConvertWithFallback(str string, _len C.gssize, to_codeset string, from_codeset string, fallback string, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	_cstr_to_codeset := unsafe.Pointer(C.CString(to_codeset))
+	defer C.free(_cstr_to_codeset)
+	_gstr_to_codeset := (*C.gchar)(unsafe.Pointer(_cstr_to_codeset))
+	_cstr_from_codeset := unsafe.Pointer(C.CString(from_codeset))
+	defer C.free(_cstr_from_codeset)
+	_gstr_from_codeset := (*C.gchar)(unsafe.Pointer(_cstr_from_codeset))
+	_cstr_fallback := unsafe.Pointer(C.CString(fallback))
+	defer C.free(_cstr_fallback)
+	_gstr_fallback := (*C.gchar)(unsafe.Pointer(_cstr_fallback))
+	return C.GoString((*C.char)(C._g_convert_with_fallback(unsafe.Pointer(_gstr_str), _len, unsafe.Pointer(_gstr_to_codeset), unsafe.Pointer(_gstr_from_codeset), unsafe.Pointer(_gstr_fallback), bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func ConvertWithIconv(str *C.gchar, _len C.gssize, converter C.GIConv, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_convert_with_iconv(unsafe.Pointer(str), _len, converter, bytes_read, bytes_written, unsafe.Pointer(err))))
+func ConvertWithIconv(str string, _len C.gssize, converter C.GIConv, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_convert_with_iconv(unsafe.Pointer(_gstr_str), _len, converter, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func DatalistClear(datalist unsafe.Pointer) {
+func DatalistClear(datalist unsafe.Pointer)  {
 	C._g_datalist_clear(unsafe.Pointer(datalist))
 }
 
-func DatalistForeach(datalist unsafe.Pointer, _func C.GDataForeachFunc, user_data C.gpointer) {
+func DatalistForeach(datalist unsafe.Pointer, _func C.GDataForeachFunc, user_data C.gpointer)  {
 	C._g_datalist_foreach(unsafe.Pointer(datalist), _func, user_data)
 }
 
-func DatalistGetData(datalist unsafe.Pointer, key *C.gchar) C.gpointer {
-	return C._g_datalist_get_data(unsafe.Pointer(datalist), unsafe.Pointer(key))
+func DatalistGetData(datalist unsafe.Pointer, key string) C.gpointer {
+	_cstr_key := unsafe.Pointer(C.CString(key))
+	defer C.free(_cstr_key)
+	_gstr_key := (*C.gchar)(unsafe.Pointer(_cstr_key))
+	return C._g_datalist_get_data(unsafe.Pointer(datalist), unsafe.Pointer(_gstr_key))
 }
 
 func DatalistGetFlags(datalist unsafe.Pointer) C.guint {
@@ -910,27 +1000,27 @@ func DatalistIdReplaceData(datalist unsafe.Pointer, key_id C.GQuark, oldval C.gp
 	return C._g_datalist_id_replace_data(unsafe.Pointer(datalist), key_id, oldval, newval, destroy, old_destroy)
 }
 
-func DatalistIdSetDataFull(datalist unsafe.Pointer, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify) {
+func DatalistIdSetDataFull(datalist unsafe.Pointer, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify)  {
 	C._g_datalist_id_set_data_full(unsafe.Pointer(datalist), key_id, data, destroy_func)
 }
 
-func DatalistInit(datalist unsafe.Pointer) {
+func DatalistInit(datalist unsafe.Pointer)  {
 	C._g_datalist_init(unsafe.Pointer(datalist))
 }
 
-func DatalistSetFlags(datalist unsafe.Pointer, flags C.guint) {
+func DatalistSetFlags(datalist unsafe.Pointer, flags C.guint)  {
 	C._g_datalist_set_flags(unsafe.Pointer(datalist), flags)
 }
 
-func DatalistUnsetFlags(datalist unsafe.Pointer, flags C.guint) {
+func DatalistUnsetFlags(datalist unsafe.Pointer, flags C.guint)  {
 	C._g_datalist_unset_flags(unsafe.Pointer(datalist), flags)
 }
 
-func DatasetDestroy(dataset_location C.gconstpointer) {
+func DatasetDestroy(dataset_location C.gconstpointer)  {
 	C.g_dataset_destroy(dataset_location)
 }
 
-func DatasetForeach(dataset_location C.gconstpointer, _func C.GDataForeachFunc, user_data C.gpointer) {
+func DatasetForeach(dataset_location C.gconstpointer, _func C.GDataForeachFunc, user_data C.gpointer)  {
 	C.g_dataset_foreach(dataset_location, _func, user_data)
 }
 
@@ -942,7 +1032,7 @@ func DatasetIdRemoveNoNotify(dataset_location C.gconstpointer, key_id C.GQuark) 
 	return C.g_dataset_id_remove_no_notify(dataset_location, key_id)
 }
 
-func DatasetIdSetDataFull(dataset_location C.gconstpointer, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify) {
+func DatasetIdSetDataFull(dataset_location C.gconstpointer, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify)  {
 	C.g_dataset_id_set_data_full(dataset_location, key_id, data, destroy_func)
 }
 
@@ -962,8 +1052,14 @@ func DateIsLeapYear(year C.GDateYear) C.gboolean {
 	return C.g_date_is_leap_year(year)
 }
 
-func DateStrftime(s *C.gchar, slen C.gsize, format *C.gchar, date *C.GDate) C.gsize {
-	return C._g_date_strftime(s, slen, unsafe.Pointer(format), unsafe.Pointer(date))
+func DateStrftime(s string, slen C.gsize, format string, date *C.GDate) C.gsize {
+	_cstr_s := unsafe.Pointer(C.CString(s))
+	defer C.free(_cstr_s)
+	_gstr_s := (*C.gchar)(unsafe.Pointer(_cstr_s))
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	return C._g_date_strftime(_gstr_s, slen, unsafe.Pointer(_gstr_format), unsafe.Pointer(date))
 }
 
 func DateTimeCompare(dt1 C.gconstpointer, dt2 C.gconstpointer) C.gint {
@@ -1002,16 +1098,31 @@ func DateValidYear(year C.GDateYear) C.gboolean {
 	return C.g_date_valid_year(year)
 }
 
-func Dcgettext(domain *C.gchar, msgid *C.gchar, category C.gint) string {
-	return C.GoString((*C.char)(C._g_dcgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), category)))
+func Dcgettext(domain string, msgid string, category C.gint) string {
+	_cstr_domain := unsafe.Pointer(C.CString(domain))
+	defer C.free(_cstr_domain)
+	_gstr_domain := (*C.gchar)(unsafe.Pointer(_cstr_domain))
+	_cstr_msgid := unsafe.Pointer(C.CString(msgid))
+	defer C.free(_cstr_msgid)
+	_gstr_msgid := (*C.gchar)(unsafe.Pointer(_cstr_msgid))
+	return C.GoString((*C.char)(C._g_dcgettext(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_msgid), category)))
 }
 
-func Dgettext(domain *C.gchar, msgid *C.gchar) string {
-	return C.GoString((*C.char)(C._g_dgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid))))
+func Dgettext(domain string, msgid string) string {
+	_cstr_domain := unsafe.Pointer(C.CString(domain))
+	defer C.free(_cstr_domain)
+	_gstr_domain := (*C.gchar)(unsafe.Pointer(_cstr_domain))
+	_cstr_msgid := unsafe.Pointer(C.CString(msgid))
+	defer C.free(_cstr_msgid)
+	_gstr_msgid := (*C.gchar)(unsafe.Pointer(_cstr_msgid))
+	return C.GoString((*C.char)(C._g_dgettext(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_msgid))))
 }
 
-func DirMakeTmp(tmpl *C.gchar, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_dir_make_tmp(tmpl, unsafe.Pointer(err))))
+func DirMakeTmp(tmpl string, err unsafe.Pointer) string {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return C.GoString((*C.char)(C._g_dir_make_tmp(_gstr_tmpl, unsafe.Pointer(err))))
 }
 
 func DirectEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
@@ -1022,8 +1133,17 @@ func DirectHash(v C.gconstpointer) C.guint {
 	return C.g_direct_hash(v)
 }
 
-func Dngettext(domain *C.gchar, msgid *C.gchar, msgid_plural *C.gchar, n C.gulong) string {
-	return C.GoString((*C.char)(C._g_dngettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), unsafe.Pointer(msgid_plural), n)))
+func Dngettext(domain string, msgid string, msgid_plural string, n C.gulong) string {
+	_cstr_domain := unsafe.Pointer(C.CString(domain))
+	defer C.free(_cstr_domain)
+	_gstr_domain := (*C.gchar)(unsafe.Pointer(_cstr_domain))
+	_cstr_msgid := unsafe.Pointer(C.CString(msgid))
+	defer C.free(_cstr_msgid)
+	_gstr_msgid := (*C.gchar)(unsafe.Pointer(_cstr_msgid))
+	_cstr_msgid_plural := unsafe.Pointer(C.CString(msgid_plural))
+	defer C.free(_cstr_msgid_plural)
+	_gstr_msgid_plural := (*C.gchar)(unsafe.Pointer(_cstr_msgid_plural))
+	return C.GoString((*C.char)(C._g_dngettext(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_msgid), unsafe.Pointer(_gstr_msgid_plural), n)))
 }
 
 func DoubleEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
@@ -1034,24 +1154,51 @@ func DoubleHash(v C.gconstpointer) C.guint {
 	return C.g_double_hash(v)
 }
 
-func Dpgettext(domain *C.gchar, msgctxtid *C.gchar, msgidoffset C.gsize) string {
-	return C.GoString((*C.char)(C._g_dpgettext(unsafe.Pointer(domain), unsafe.Pointer(msgctxtid), msgidoffset)))
+func Dpgettext(domain string, msgctxtid string, msgidoffset C.gsize) string {
+	_cstr_domain := unsafe.Pointer(C.CString(domain))
+	defer C.free(_cstr_domain)
+	_gstr_domain := (*C.gchar)(unsafe.Pointer(_cstr_domain))
+	_cstr_msgctxtid := unsafe.Pointer(C.CString(msgctxtid))
+	defer C.free(_cstr_msgctxtid)
+	_gstr_msgctxtid := (*C.gchar)(unsafe.Pointer(_cstr_msgctxtid))
+	return C.GoString((*C.char)(C._g_dpgettext(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_msgctxtid), msgidoffset)))
 }
 
-func Dpgettext2(domain *C.gchar, context *C.gchar, msgid *C.gchar) string {
-	return C.GoString((*C.char)(C._g_dpgettext2(unsafe.Pointer(domain), unsafe.Pointer(context), unsafe.Pointer(msgid))))
+func Dpgettext2(domain string, context string, msgid string) string {
+	_cstr_domain := unsafe.Pointer(C.CString(domain))
+	defer C.free(_cstr_domain)
+	_gstr_domain := (*C.gchar)(unsafe.Pointer(_cstr_domain))
+	_cstr_context := unsafe.Pointer(C.CString(context))
+	defer C.free(_cstr_context)
+	_gstr_context := (*C.gchar)(unsafe.Pointer(_cstr_context))
+	_cstr_msgid := unsafe.Pointer(C.CString(msgid))
+	defer C.free(_cstr_msgid)
+	_gstr_msgid := (*C.gchar)(unsafe.Pointer(_cstr_msgid))
+	return C.GoString((*C.char)(C._g_dpgettext2(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_context), unsafe.Pointer(_gstr_msgid))))
 }
 
-func EnvironGetenv(envp unsafe.Pointer, variable *C.gchar) string {
-	return C.GoString((*C.char)(C._g_environ_getenv(unsafe.Pointer(envp), unsafe.Pointer(variable))))
+func EnvironGetenv(envp unsafe.Pointer, variable string) string {
+	_cstr_variable := unsafe.Pointer(C.CString(variable))
+	defer C.free(_cstr_variable)
+	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
+	return C.GoString((*C.char)(C._g_environ_getenv(unsafe.Pointer(envp), unsafe.Pointer(_gstr_variable))))
 }
 
-func EnvironSetenv(envp unsafe.Pointer, variable *C.gchar, value *C.gchar, overwrite C.gboolean) unsafe.Pointer {
-	return unsafe.Pointer(C._g_environ_setenv(unsafe.Pointer(envp), unsafe.Pointer(variable), unsafe.Pointer(value), overwrite))
+func EnvironSetenv(envp unsafe.Pointer, variable string, value string, overwrite C.gboolean) unsafe.Pointer {
+	_cstr_variable := unsafe.Pointer(C.CString(variable))
+	defer C.free(_cstr_variable)
+	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
+	_cstr_value := unsafe.Pointer(C.CString(value))
+	defer C.free(_cstr_value)
+	_gstr_value := (*C.gchar)(unsafe.Pointer(_cstr_value))
+	return unsafe.Pointer(C._g_environ_setenv(unsafe.Pointer(envp), unsafe.Pointer(_gstr_variable), unsafe.Pointer(_gstr_value), overwrite))
 }
 
-func EnvironUnsetenv(envp unsafe.Pointer, variable *C.gchar) unsafe.Pointer {
-	return unsafe.Pointer(C._g_environ_unsetenv(unsafe.Pointer(envp), unsafe.Pointer(variable)))
+func EnvironUnsetenv(envp unsafe.Pointer, variable string) unsafe.Pointer {
+	_cstr_variable := unsafe.Pointer(C.CString(variable))
+	defer C.free(_cstr_variable)
+	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
+	return unsafe.Pointer(C._g_environ_unsetenv(unsafe.Pointer(envp), unsafe.Pointer(_gstr_variable)))
 }
 
 func FileErrorFromErrno(err_no C.gint) C.GFileError {
@@ -1062,52 +1209,94 @@ func FileErrorQuark() C.GQuark {
 	return C.g_file_error_quark()
 }
 
-func FileGetContents(filename *C.gchar, contents unsafe.Pointer, length *C.gsize, err unsafe.Pointer) C.gboolean {
-	return C._g_file_get_contents(filename, unsafe.Pointer(contents), length, unsafe.Pointer(err))
+func FileGetContents(filename string, contents unsafe.Pointer, length *C.gsize, err unsafe.Pointer) C.gboolean {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C._g_file_get_contents(_gstr_filename, unsafe.Pointer(contents), length, unsafe.Pointer(err))
 }
 
-func FileOpenTmp(tmpl *C.gchar, name_used unsafe.Pointer, err unsafe.Pointer) C.gint {
-	return C._g_file_open_tmp(tmpl, unsafe.Pointer(name_used), unsafe.Pointer(err))
+func FileOpenTmp(tmpl string, name_used unsafe.Pointer, err unsafe.Pointer) C.gint {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return C._g_file_open_tmp(_gstr_tmpl, unsafe.Pointer(name_used), unsafe.Pointer(err))
 }
 
-func FileReadLink(filename *C.gchar, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_file_read_link(unsafe.Pointer(filename), unsafe.Pointer(err))))
+func FileReadLink(filename string, err unsafe.Pointer) string {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C.GoString((*C.char)(C._g_file_read_link(unsafe.Pointer(_gstr_filename), unsafe.Pointer(err))))
 }
 
-func FileSetContents(filename *C.gchar, contents *C.gchar, length C.gssize, err unsafe.Pointer) C.gboolean {
-	return C._g_file_set_contents(filename, contents, length, unsafe.Pointer(err))
+func FileSetContents(filename string, contents string, length C.gssize, err unsafe.Pointer) C.gboolean {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	_cstr_contents := unsafe.Pointer(C.CString(contents))
+	defer C.free(_cstr_contents)
+	_gstr_contents := (*C.gchar)(unsafe.Pointer(_cstr_contents))
+	return C._g_file_set_contents(_gstr_filename, _gstr_contents, length, unsafe.Pointer(err))
 }
 
-func FileTest(filename *C.gchar, test C.GFileTest) C.gboolean {
-	return C._g_file_test(unsafe.Pointer(filename), test)
+func FileTest(filename string, test C.GFileTest) C.gboolean {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C._g_file_test(unsafe.Pointer(_gstr_filename), test)
 }
 
-func FilenameDisplayBasename(filename *C.gchar) string {
-	return C.GoString((*C.char)(C._g_filename_display_basename(unsafe.Pointer(filename))))
+func FilenameDisplayBasename(filename string) string {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C.GoString((*C.char)(C._g_filename_display_basename(unsafe.Pointer(_gstr_filename))))
 }
 
-func FilenameDisplayName(filename *C.gchar) string {
-	return C.GoString((*C.char)(C._g_filename_display_name(unsafe.Pointer(filename))))
+func FilenameDisplayName(filename string) string {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C.GoString((*C.char)(C._g_filename_display_name(unsafe.Pointer(_gstr_filename))))
 }
 
-func FilenameFromUri(uri *C.gchar, hostname unsafe.Pointer, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_filename_from_uri(unsafe.Pointer(uri), unsafe.Pointer(hostname), unsafe.Pointer(err))))
+func FilenameFromUri(uri string, hostname unsafe.Pointer, err unsafe.Pointer) string {
+	_cstr_uri := unsafe.Pointer(C.CString(uri))
+	defer C.free(_cstr_uri)
+	_gstr_uri := (*C.gchar)(unsafe.Pointer(_cstr_uri))
+	return C.GoString((*C.char)(C._g_filename_from_uri(unsafe.Pointer(_gstr_uri), unsafe.Pointer(hostname), unsafe.Pointer(err))))
 }
 
-func FilenameFromUtf8(utf8string *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_filename_from_utf8(unsafe.Pointer(utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
+func FilenameFromUtf8(utf8string string, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_utf8string := unsafe.Pointer(C.CString(utf8string))
+	defer C.free(_cstr_utf8string)
+	_gstr_utf8string := (*C.gchar)(unsafe.Pointer(_cstr_utf8string))
+	return C.GoString((*C.char)(C._g_filename_from_utf8(unsafe.Pointer(_gstr_utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func FilenameToUri(filename *C.gchar, hostname *C.gchar, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_filename_to_uri(unsafe.Pointer(filename), unsafe.Pointer(hostname), unsafe.Pointer(err))))
+func FilenameToUri(filename string, hostname string, err unsafe.Pointer) string {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
+	defer C.free(_cstr_hostname)
+	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
+	return C.GoString((*C.char)(C._g_filename_to_uri(unsafe.Pointer(_gstr_filename), unsafe.Pointer(_gstr_hostname), unsafe.Pointer(err))))
 }
 
-func FilenameToUtf8(opsysstring *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_filename_to_utf8(unsafe.Pointer(opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
+func FilenameToUtf8(opsysstring string, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_opsysstring := unsafe.Pointer(C.CString(opsysstring))
+	defer C.free(_cstr_opsysstring)
+	_gstr_opsysstring := (*C.gchar)(unsafe.Pointer(_cstr_opsysstring))
+	return C.GoString((*C.char)(C._g_filename_to_utf8(unsafe.Pointer(_gstr_opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func FindProgramInPath(program *C.gchar) string {
-	return C.GoString((*C.char)(C._g_find_program_in_path(unsafe.Pointer(program))))
+func FindProgramInPath(program string) string {
+	_cstr_program := unsafe.Pointer(C.CString(program))
+	defer C.free(_cstr_program)
+	_gstr_program := (*C.gchar)(unsafe.Pointer(_cstr_program))
+	return C.GoString((*C.char)(C._g_find_program_in_path(unsafe.Pointer(_gstr_program))))
 }
 
 func FormatSize(size C.guint64) string {
@@ -1122,7 +1311,7 @@ func FormatSizeFull(size C.guint64, flags C.GFormatSizeFlags) string {
 
 //TODO varargs g_fprintf
 
-func Free(mem C.gpointer) {
+func Free(mem C.gpointer)  {
 	C.g_free(mem)
 }
 
@@ -1142,7 +1331,7 @@ func GetCurrentDir() string {
 	return C.GoString((*C.char)(C.g_get_current_dir()))
 }
 
-func GetCurrentTime(result *C.GTimeVal) {
+func GetCurrentTime(result *C.GTimeVal)  {
 	C.g_get_current_time(result)
 }
 
@@ -1166,8 +1355,11 @@ func GetLanguageNames() unsafe.Pointer {
 	return unsafe.Pointer(C.g_get_language_names())
 }
 
-func GetLocaleVariants(locale *C.gchar) unsafe.Pointer {
-	return unsafe.Pointer(C._g_get_locale_variants(unsafe.Pointer(locale)))
+func GetLocaleVariants(locale string) unsafe.Pointer {
+	_cstr_locale := unsafe.Pointer(C.CString(locale))
+	defer C.free(_cstr_locale)
+	_gstr_locale := (*C.gchar)(unsafe.Pointer(_cstr_locale))
+	return unsafe.Pointer(C._g_get_locale_variants(unsafe.Pointer(_gstr_locale)))
 }
 
 func GetMonotonicTime() C.gint64 {
@@ -1222,11 +1414,14 @@ func GetUserSpecialDir(directory C.GUserDirectory) string {
 	return C.GoString((*C.char)(C.g_get_user_special_dir(directory)))
 }
 
-func Getenv(variable *C.gchar) string {
-	return C.GoString((*C.char)(C._g_getenv(unsafe.Pointer(variable))))
+func Getenv(variable string) string {
+	_cstr_variable := unsafe.Pointer(C.CString(variable))
+	defer C.free(_cstr_variable)
+	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
+	return C.GoString((*C.char)(C._g_getenv(unsafe.Pointer(_gstr_variable))))
 }
 
-func HashTableAdd(hash_table *C.GHashTable, key C.gpointer) {
+func HashTableAdd(hash_table *C.GHashTable, key C.gpointer)  {
 	C.g_hash_table_add(hash_table, key)
 }
 
@@ -1234,11 +1429,11 @@ func HashTableContains(hash_table *C.GHashTable, key C.gconstpointer) C.gboolean
 	return C.g_hash_table_contains(hash_table, key)
 }
 
-func HashTableDestroy(hash_table *C.GHashTable) {
+func HashTableDestroy(hash_table *C.GHashTable)  {
 	C.g_hash_table_destroy(hash_table)
 }
 
-func HashTableInsert(hash_table *C.GHashTable, key C.gpointer, value C.gpointer) {
+func HashTableInsert(hash_table *C.GHashTable, key C.gpointer, value C.gpointer)  {
 	C.g_hash_table_insert(hash_table, key, value)
 }
 
@@ -1250,11 +1445,11 @@ func HashTableRemove(hash_table *C.GHashTable, key C.gconstpointer) C.gboolean {
 	return C.g_hash_table_remove(hash_table, key)
 }
 
-func HashTableRemoveAll(hash_table *C.GHashTable) {
+func HashTableRemoveAll(hash_table *C.GHashTable)  {
 	C.g_hash_table_remove_all(hash_table)
 }
 
-func HashTableReplace(hash_table *C.GHashTable, key C.gpointer, value C.gpointer) {
+func HashTableReplace(hash_table *C.GHashTable, key C.gpointer, value C.gpointer)  {
 	C.g_hash_table_replace(hash_table, key, value)
 }
 
@@ -1266,11 +1461,11 @@ func HashTableSteal(hash_table *C.GHashTable, key C.gconstpointer) C.gboolean {
 	return C.g_hash_table_steal(hash_table, key)
 }
 
-func HashTableStealAll(hash_table *C.GHashTable) {
+func HashTableStealAll(hash_table *C.GHashTable)  {
 	C.g_hash_table_steal_all(hash_table)
 }
 
-func HashTableUnref(hash_table *C.GHashTable) {
+func HashTableUnref(hash_table *C.GHashTable)  {
 	C.g_hash_table_unref(hash_table)
 }
 
@@ -1278,44 +1473,59 @@ func HookDestroy(hook_list *C.GHookList, hook_id C.gulong) C.gboolean {
 	return C.g_hook_destroy(hook_list, hook_id)
 }
 
-func HookDestroyLink(hook_list *C.GHookList, hook *C.GHook) {
+func HookDestroyLink(hook_list *C.GHookList, hook *C.GHook)  {
 	C.g_hook_destroy_link(hook_list, hook)
 }
 
-func HookFree(hook_list *C.GHookList, hook *C.GHook) {
+func HookFree(hook_list *C.GHookList, hook *C.GHook)  {
 	C.g_hook_free(hook_list, hook)
 }
 
-func HookInsertBefore(hook_list *C.GHookList, sibling *C.GHook, hook *C.GHook) {
+func HookInsertBefore(hook_list *C.GHookList, sibling *C.GHook, hook *C.GHook)  {
 	C.g_hook_insert_before(hook_list, sibling, hook)
 }
 
-func HookPrepend(hook_list *C.GHookList, hook *C.GHook) {
+func HookPrepend(hook_list *C.GHookList, hook *C.GHook)  {
 	C.g_hook_prepend(hook_list, hook)
 }
 
-func HookUnref(hook_list *C.GHookList, hook *C.GHook) {
+func HookUnref(hook_list *C.GHookList, hook *C.GHook)  {
 	C.g_hook_unref(hook_list, hook)
 }
 
-func HostnameIsAsciiEncoded(hostname *C.gchar) C.gboolean {
-	return C._g_hostname_is_ascii_encoded(unsafe.Pointer(hostname))
+func HostnameIsAsciiEncoded(hostname string) C.gboolean {
+	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
+	defer C.free(_cstr_hostname)
+	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
+	return C._g_hostname_is_ascii_encoded(unsafe.Pointer(_gstr_hostname))
 }
 
-func HostnameIsIpAddress(hostname *C.gchar) C.gboolean {
-	return C._g_hostname_is_ip_address(unsafe.Pointer(hostname))
+func HostnameIsIpAddress(hostname string) C.gboolean {
+	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
+	defer C.free(_cstr_hostname)
+	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
+	return C._g_hostname_is_ip_address(unsafe.Pointer(_gstr_hostname))
 }
 
-func HostnameIsNonAscii(hostname *C.gchar) C.gboolean {
-	return C._g_hostname_is_non_ascii(unsafe.Pointer(hostname))
+func HostnameIsNonAscii(hostname string) C.gboolean {
+	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
+	defer C.free(_cstr_hostname)
+	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
+	return C._g_hostname_is_non_ascii(unsafe.Pointer(_gstr_hostname))
 }
 
-func HostnameToAscii(hostname *C.gchar) string {
-	return C.GoString((*C.char)(C._g_hostname_to_ascii(unsafe.Pointer(hostname))))
+func HostnameToAscii(hostname string) string {
+	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
+	defer C.free(_cstr_hostname)
+	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
+	return C.GoString((*C.char)(C._g_hostname_to_ascii(unsafe.Pointer(_gstr_hostname))))
 }
 
-func HostnameToUnicode(hostname *C.gchar) string {
-	return C.GoString((*C.char)(C._g_hostname_to_unicode(unsafe.Pointer(hostname))))
+func HostnameToUnicode(hostname string) string {
+	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
+	defer C.free(_cstr_hostname)
+	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
+	return C.GoString((*C.char)(C._g_hostname_to_unicode(unsafe.Pointer(_gstr_hostname))))
 }
 
 func IdleAdd(function C.GSourceFunc, data C.gpointer) C.guint {
@@ -1350,12 +1560,18 @@ func IntHash(v C.gconstpointer) C.guint {
 	return C.g_int_hash(v)
 }
 
-func InternStaticString(string *C.gchar) string {
-	return C.GoString((*C.char)(C._g_intern_static_string(unsafe.Pointer(string))))
+func InternStaticString(string string) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C._g_intern_static_string(unsafe.Pointer(_gstr_string))))
 }
 
-func InternString(string *C.gchar) string {
-	return C.GoString((*C.char)(C._g_intern_string(unsafe.Pointer(string))))
+func InternString(string string) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C._g_intern_string(unsafe.Pointer(_gstr_string))))
 }
 
 func IoAddWatch(channel *C.GIOChannel, condition C.GIOCondition, _func C.GIOFunc, user_data C.gpointer) C.guint {
@@ -1386,22 +1602,37 @@ func Listenv() unsafe.Pointer {
 	return unsafe.Pointer(C.g_listenv())
 }
 
-func LocaleFromUtf8(utf8string *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_locale_from_utf8(unsafe.Pointer(utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
+func LocaleFromUtf8(utf8string string, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_utf8string := unsafe.Pointer(C.CString(utf8string))
+	defer C.free(_cstr_utf8string)
+	_gstr_utf8string := (*C.gchar)(unsafe.Pointer(_cstr_utf8string))
+	return C.GoString((*C.char)(C._g_locale_from_utf8(unsafe.Pointer(_gstr_utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func LocaleToUtf8(opsysstring *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_locale_to_utf8(unsafe.Pointer(opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
+func LocaleToUtf8(opsysstring string, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	_cstr_opsysstring := unsafe.Pointer(C.CString(opsysstring))
+	defer C.free(_cstr_opsysstring)
+	_gstr_opsysstring := (*C.gchar)(unsafe.Pointer(_cstr_opsysstring))
+	return C.GoString((*C.char)(C._g_locale_to_utf8(unsafe.Pointer(_gstr_opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
 //TODO varargs g_log
 
-func LogDefaultHandler(log_domain *C.gchar, log_level C.GLogLevelFlags, message *C.gchar, unused_data C.gpointer) {
-	C._g_log_default_handler(unsafe.Pointer(log_domain), log_level, unsafe.Pointer(message), unused_data)
+func LogDefaultHandler(log_domain string, log_level C.GLogLevelFlags, message string, unused_data C.gpointer)  {
+	_cstr_log_domain := unsafe.Pointer(C.CString(log_domain))
+	defer C.free(_cstr_log_domain)
+	_gstr_log_domain := (*C.gchar)(unsafe.Pointer(_cstr_log_domain))
+	_cstr_message := unsafe.Pointer(C.CString(message))
+	defer C.free(_cstr_message)
+	_gstr_message := (*C.gchar)(unsafe.Pointer(_cstr_message))
+	C._g_log_default_handler(unsafe.Pointer(_gstr_log_domain), log_level, unsafe.Pointer(_gstr_message), unused_data)
 }
 
-func LogRemoveHandler(log_domain *C.gchar, handler_id C.guint) {
-	C._g_log_remove_handler(unsafe.Pointer(log_domain), handler_id)
+func LogRemoveHandler(log_domain string, handler_id C.guint)  {
+	_cstr_log_domain := unsafe.Pointer(C.CString(log_domain))
+	defer C.free(_cstr_log_domain)
+	_gstr_log_domain := (*C.gchar)(unsafe.Pointer(_cstr_log_domain))
+	C._g_log_remove_handler(unsafe.Pointer(_gstr_log_domain), handler_id)
 }
 
 func LogSetAlwaysFatal(fatal_mask C.GLogLevelFlags) C.GLogLevelFlags {
@@ -1412,12 +1643,18 @@ func LogSetDefaultHandler(log_func C.GLogFunc, user_data C.gpointer) C.GLogFunc 
 	return C.g_log_set_default_handler(log_func, user_data)
 }
 
-func LogSetFatalMask(log_domain *C.gchar, fatal_mask C.GLogLevelFlags) C.GLogLevelFlags {
-	return C._g_log_set_fatal_mask(unsafe.Pointer(log_domain), fatal_mask)
+func LogSetFatalMask(log_domain string, fatal_mask C.GLogLevelFlags) C.GLogLevelFlags {
+	_cstr_log_domain := unsafe.Pointer(C.CString(log_domain))
+	defer C.free(_cstr_log_domain)
+	_gstr_log_domain := (*C.gchar)(unsafe.Pointer(_cstr_log_domain))
+	return C._g_log_set_fatal_mask(unsafe.Pointer(_gstr_log_domain), fatal_mask)
 }
 
-func LogSetHandler(log_domain *C.gchar, log_levels C.GLogLevelFlags, log_func C.GLogFunc, user_data C.gpointer) C.guint {
-	return C._g_log_set_handler(unsafe.Pointer(log_domain), log_levels, log_func, user_data)
+func LogSetHandler(log_domain string, log_levels C.GLogLevelFlags, log_func C.GLogFunc, user_data C.gpointer) C.guint {
+	_cstr_log_domain := unsafe.Pointer(C.CString(log_domain))
+	defer C.free(_cstr_log_domain)
+	_gstr_log_domain := (*C.gchar)(unsafe.Pointer(_cstr_log_domain))
+	return C._g_log_set_handler(unsafe.Pointer(_gstr_log_domain), log_levels, log_func, user_data)
 }
 
 //TODO va_list g_logv
@@ -1464,8 +1701,11 @@ func MarkupErrorQuark() C.GQuark {
 	return C.g_markup_error_quark()
 }
 
-func MarkupEscapeText(text *C.gchar, length C.gssize) string {
-	return C.GoString((*C.char)(C._g_markup_escape_text(unsafe.Pointer(text), length)))
+func MarkupEscapeText(text string, length C.gssize) string {
+	_cstr_text := unsafe.Pointer(C.CString(text))
+	defer C.free(_cstr_text)
+	_gstr_text := (*C.gchar)(unsafe.Pointer(_cstr_text))
+	return C.GoString((*C.char)(C._g_markup_escape_text(unsafe.Pointer(_gstr_text), length)))
 }
 
 //TODO varargs g_markup_printf_escaped
@@ -1476,11 +1716,11 @@ func MemIsSystemMalloc() C.gboolean {
 	return C.g_mem_is_system_malloc()
 }
 
-func MemProfile() {
+func MemProfile()  {
 	C.g_mem_profile()
 }
 
-func MemSetVtable(vtable *C.GMemVTable) {
+func MemSetVtable(vtable *C.GMemVTable)  {
 	C.g_mem_set_vtable(vtable)
 }
 
@@ -1488,36 +1728,57 @@ func Memdup(mem C.gconstpointer, byte_size C.guint) C.gpointer {
 	return C.g_memdup(mem, byte_size)
 }
 
-func MkdirWithParents(pathname *C.gchar, mode C.gint) C.gint {
-	return C._g_mkdir_with_parents(unsafe.Pointer(pathname), mode)
+func MkdirWithParents(pathname string, mode C.gint) C.gint {
+	_cstr_pathname := unsafe.Pointer(C.CString(pathname))
+	defer C.free(_cstr_pathname)
+	_gstr_pathname := (*C.gchar)(unsafe.Pointer(_cstr_pathname))
+	return C._g_mkdir_with_parents(unsafe.Pointer(_gstr_pathname), mode)
 }
 
-func Mkdtemp(tmpl *C.gchar) string {
-	return C.GoString((*C.char)(C.g_mkdtemp(tmpl)))
+func Mkdtemp(tmpl string) string {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return C.GoString((*C.char)(C.g_mkdtemp(_gstr_tmpl)))
 }
 
-func MkdtempFull(tmpl *C.gchar, mode C.gint) string {
-	return C.GoString((*C.char)(C.g_mkdtemp_full(tmpl, mode)))
+func MkdtempFull(tmpl string, mode C.gint) string {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return C.GoString((*C.char)(C.g_mkdtemp_full(_gstr_tmpl, mode)))
 }
 
-func Mkstemp(tmpl *C.gchar) C.gint {
-	return C.g_mkstemp(tmpl)
+func Mkstemp(tmpl string) C.gint {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return C.g_mkstemp(_gstr_tmpl)
 }
 
-func MkstempFull(tmpl *C.gchar, flags C.gint, mode C.gint) C.gint {
-	return C.g_mkstemp_full(tmpl, flags, mode)
+func MkstempFull(tmpl string, flags C.gint, mode C.gint) C.gint {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return C.g_mkstemp_full(_gstr_tmpl, flags, mode)
 }
 
-func NullifyPointer(nullify_location *C.gpointer) {
+func NullifyPointer(nullify_location *C.gpointer)  {
 	C.g_nullify_pointer(nullify_location)
 }
 
-func OnErrorQuery(prg_name *C.gchar) {
-	C._g_on_error_query(unsafe.Pointer(prg_name))
+func OnErrorQuery(prg_name string)  {
+	_cstr_prg_name := unsafe.Pointer(C.CString(prg_name))
+	defer C.free(_cstr_prg_name)
+	_gstr_prg_name := (*C.gchar)(unsafe.Pointer(_cstr_prg_name))
+	C._g_on_error_query(unsafe.Pointer(_gstr_prg_name))
 }
 
-func OnErrorStackTrace(prg_name *C.gchar) {
-	C._g_on_error_stack_trace(unsafe.Pointer(prg_name))
+func OnErrorStackTrace(prg_name string)  {
+	_cstr_prg_name := unsafe.Pointer(C.CString(prg_name))
+	defer C.free(_cstr_prg_name)
+	_gstr_prg_name := (*C.gchar)(unsafe.Pointer(_cstr_prg_name))
+	C._g_on_error_stack_trace(unsafe.Pointer(_gstr_prg_name))
 }
 
 //Skipped g_once_init_enter
@@ -1528,36 +1789,66 @@ func OptionErrorQuark() C.GQuark {
 	return C.g_option_error_quark()
 }
 
-func ParseDebugString(string *C.gchar, keys *C.GDebugKey, nkeys C.guint) C.guint {
-	return C._g_parse_debug_string(unsafe.Pointer(string), keys, nkeys)
+func ParseDebugString(string string, keys *C.GDebugKey, nkeys C.guint) C.guint {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_parse_debug_string(unsafe.Pointer(_gstr_string), keys, nkeys)
 }
 
-func PathGetBasename(file_name *C.gchar) string {
-	return C.GoString((*C.char)(C._g_path_get_basename(unsafe.Pointer(file_name))))
+func PathGetBasename(file_name string) string {
+	_cstr_file_name := unsafe.Pointer(C.CString(file_name))
+	defer C.free(_cstr_file_name)
+	_gstr_file_name := (*C.gchar)(unsafe.Pointer(_cstr_file_name))
+	return C.GoString((*C.char)(C._g_path_get_basename(unsafe.Pointer(_gstr_file_name))))
 }
 
-func PathGetDirname(file_name *C.gchar) string {
-	return C.GoString((*C.char)(C._g_path_get_dirname(unsafe.Pointer(file_name))))
+func PathGetDirname(file_name string) string {
+	_cstr_file_name := unsafe.Pointer(C.CString(file_name))
+	defer C.free(_cstr_file_name)
+	_gstr_file_name := (*C.gchar)(unsafe.Pointer(_cstr_file_name))
+	return C.GoString((*C.char)(C._g_path_get_dirname(unsafe.Pointer(_gstr_file_name))))
 }
 
-func PathIsAbsolute(file_name *C.gchar) C.gboolean {
-	return C._g_path_is_absolute(unsafe.Pointer(file_name))
+func PathIsAbsolute(file_name string) C.gboolean {
+	_cstr_file_name := unsafe.Pointer(C.CString(file_name))
+	defer C.free(_cstr_file_name)
+	_gstr_file_name := (*C.gchar)(unsafe.Pointer(_cstr_file_name))
+	return C._g_path_is_absolute(unsafe.Pointer(_gstr_file_name))
 }
 
-func PathSkipRoot(file_name *C.gchar) string {
-	return C.GoString((*C.char)(C._g_path_skip_root(unsafe.Pointer(file_name))))
+func PathSkipRoot(file_name string) string {
+	_cstr_file_name := unsafe.Pointer(C.CString(file_name))
+	defer C.free(_cstr_file_name)
+	_gstr_file_name := (*C.gchar)(unsafe.Pointer(_cstr_file_name))
+	return C.GoString((*C.char)(C._g_path_skip_root(unsafe.Pointer(_gstr_file_name))))
 }
 
-func PatternMatch(pspec *C.GPatternSpec, string_length C.guint, string *C.gchar, string_reversed *C.gchar) C.gboolean {
-	return C._g_pattern_match(pspec, string_length, unsafe.Pointer(string), unsafe.Pointer(string_reversed))
+func PatternMatch(pspec *C.GPatternSpec, string_length C.guint, string string, string_reversed string) C.gboolean {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	_cstr_string_reversed := unsafe.Pointer(C.CString(string_reversed))
+	defer C.free(_cstr_string_reversed)
+	_gstr_string_reversed := (*C.gchar)(unsafe.Pointer(_cstr_string_reversed))
+	return C._g_pattern_match(pspec, string_length, unsafe.Pointer(_gstr_string), unsafe.Pointer(_gstr_string_reversed))
 }
 
-func PatternMatchSimple(pattern *C.gchar, string *C.gchar) C.gboolean {
-	return C._g_pattern_match_simple(unsafe.Pointer(pattern), unsafe.Pointer(string))
+func PatternMatchSimple(pattern string, string string) C.gboolean {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_pattern_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string))
 }
 
-func PatternMatchString(pspec *C.GPatternSpec, string *C.gchar) C.gboolean {
-	return C._g_pattern_match_string(pspec, unsafe.Pointer(string))
+func PatternMatchString(pspec *C.GPatternSpec, string string) C.gboolean {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_pattern_match_string(pspec, unsafe.Pointer(_gstr_string))
 }
 
 //Skipped g_pointer_bit_lock
@@ -1580,13 +1871,13 @@ func Poll(fds *C.GPollFD, nfds C.guint, timeout C.gint) C.gint {
 
 //TODO va_list g_printf_string_upper_bound
 
-func PropagateError(dest unsafe.Pointer, src *C.GError) {
+func PropagateError(dest unsafe.Pointer, src *C.GError)  {
 	C._g_propagate_error(unsafe.Pointer(dest), src)
 }
 
 //TODO varargs g_propagate_prefixed_error
 
-func PtrArrayAdd(array *C.GPtrArray, data C.gpointer) {
+func PtrArrayAdd(array *C.GPtrArray, data C.gpointer)  {
 	C.g_ptr_array_add(array, data)
 }
 
@@ -1598,40 +1889,49 @@ func PtrArrayRemoveFast(array *C.GPtrArray, data C.gpointer) C.gboolean {
 	return C.g_ptr_array_remove_fast(array, data)
 }
 
-func PtrArrayRemoveRange(array *C.GPtrArray, index_ C.guint, length C.guint) {
+func PtrArrayRemoveRange(array *C.GPtrArray, index_ C.guint, length C.guint)  {
 	C.g_ptr_array_remove_range(array, index_, length)
 }
 
-func PtrArraySetFreeFunc(array *C.GPtrArray, element_free_func C.GDestroyNotify) {
+func PtrArraySetFreeFunc(array *C.GPtrArray, element_free_func C.GDestroyNotify)  {
 	C.g_ptr_array_set_free_func(array, element_free_func)
 }
 
-func PtrArraySetSize(array *C.GPtrArray, length C.gint) {
+func PtrArraySetSize(array *C.GPtrArray, length C.gint)  {
 	C.g_ptr_array_set_size(array, length)
 }
 
-func PtrArrayUnref(array *C.GPtrArray) {
+func PtrArrayUnref(array *C.GPtrArray)  {
 	C.g_ptr_array_unref(array)
 }
 
-func QsortWithData(pbase C.gconstpointer, total_elems C.gint, size C.gsize, compare_func C.GCompareDataFunc, user_data C.gpointer) {
+func QsortWithData(pbase C.gconstpointer, total_elems C.gint, size C.gsize, compare_func C.GCompareDataFunc, user_data C.gpointer)  {
 	C.g_qsort_with_data(pbase, total_elems, size, compare_func, user_data)
 }
 
-func QuarkFromStaticString(string *C.gchar) C.GQuark {
-	return C._g_quark_from_static_string(unsafe.Pointer(string))
+func QuarkFromStaticString(string string) C.GQuark {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_quark_from_static_string(unsafe.Pointer(_gstr_string))
 }
 
-func QuarkFromString(string *C.gchar) C.GQuark {
-	return C._g_quark_from_string(unsafe.Pointer(string))
+func QuarkFromString(string string) C.GQuark {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_quark_from_string(unsafe.Pointer(_gstr_string))
 }
 
 func QuarkToString(quark C.GQuark) string {
 	return C.GoString((*C.char)(C.g_quark_to_string(quark)))
 }
 
-func QuarkTryString(string *C.gchar) C.GQuark {
-	return C._g_quark_try_string(unsafe.Pointer(string))
+func QuarkTryString(string string) C.GQuark {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_quark_try_string(unsafe.Pointer(_gstr_string))
 }
 
 func RandomDouble() C.gdouble {
@@ -1650,7 +1950,7 @@ func RandomIntRange(begin C.gint32, end C.gint32) C.gint32 {
 	return C.g_random_int_range(begin, end)
 }
 
-func RandomSetSeed(seed C.guint32) {
+func RandomSetSeed(seed C.guint32)  {
 	C.g_random_set_seed(seed)
 }
 
@@ -1662,78 +1962,111 @@ func ReallocN(mem C.gpointer, n_blocks C.gsize, n_block_bytes C.gsize) C.gpointe
 	return C.g_realloc_n(mem, n_blocks, n_block_bytes)
 }
 
-func RegexCheckReplacement(replacement *C.gchar, has_references *C.gboolean, err unsafe.Pointer) C.gboolean {
-	return C._g_regex_check_replacement(unsafe.Pointer(replacement), has_references, unsafe.Pointer(err))
+func RegexCheckReplacement(replacement string, has_references *C.gboolean, err unsafe.Pointer) C.gboolean {
+	_cstr_replacement := unsafe.Pointer(C.CString(replacement))
+	defer C.free(_cstr_replacement)
+	_gstr_replacement := (*C.gchar)(unsafe.Pointer(_cstr_replacement))
+	return C._g_regex_check_replacement(unsafe.Pointer(_gstr_replacement), has_references, unsafe.Pointer(err))
 }
 
 func RegexErrorQuark() C.GQuark {
 	return C.g_regex_error_quark()
 }
 
-func RegexEscapeNul(string *C.gchar, length C.gint) string {
-	return C.GoString((*C.char)(C._g_regex_escape_nul(unsafe.Pointer(string), length)))
+func RegexEscapeNul(string string, length C.gint) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C._g_regex_escape_nul(unsafe.Pointer(_gstr_string), length)))
 }
 
-func RegexEscapeString(string *C.gchar, length C.gint) string {
-	return C.GoString((*C.char)(C.g_regex_escape_string(string, length)))
+func RegexEscapeString(string string, length C.gint) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C.g_regex_escape_string(_gstr_string, length)))
 }
 
-func RegexMatchSimple(pattern *C.gchar, string *C.gchar, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) C.gboolean {
-	return C._g_regex_match_simple(unsafe.Pointer(pattern), unsafe.Pointer(string), compile_options, match_options)
+func RegexMatchSimple(pattern string, string string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) C.gboolean {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_regex_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string), compile_options, match_options)
 }
 
-func RegexSplitSimple(pattern *C.gchar, string *C.gchar, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) unsafe.Pointer {
-	return unsafe.Pointer(C._g_regex_split_simple(unsafe.Pointer(pattern), unsafe.Pointer(string), compile_options, match_options))
+func RegexSplitSimple(pattern string, string string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) unsafe.Pointer {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return unsafe.Pointer(C._g_regex_split_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string), compile_options, match_options))
 }
 
-func ReloadUserSpecialDirsCache() {
+func ReloadUserSpecialDirsCache()  {
 	C.g_reload_user_special_dirs_cache()
 }
 
-func ReturnIfFailWarning(log_domain *C.char, pretty_function *C.char, expression *C.char) {
+func ReturnIfFailWarning(log_domain *C.char, pretty_function *C.char, expression *C.char)  {
 	C._g_return_if_fail_warning(unsafe.Pointer(log_domain), unsafe.Pointer(pretty_function), unsafe.Pointer(expression))
 }
 
-func Rmdir(filename *C.gchar) C.int {
-	return C._g_rmdir(unsafe.Pointer(filename))
+func Rmdir(filename string) C.int {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C._g_rmdir(unsafe.Pointer(_gstr_filename))
 }
 
-func SequenceMove(src *C.GSequenceIter, dest *C.GSequenceIter) {
+func SequenceMove(src *C.GSequenceIter, dest *C.GSequenceIter)  {
 	C.g_sequence_move(src, dest)
 }
 
-func SequenceMoveRange(dest *C.GSequenceIter, begin *C.GSequenceIter, end *C.GSequenceIter) {
+func SequenceMoveRange(dest *C.GSequenceIter, begin *C.GSequenceIter, end *C.GSequenceIter)  {
 	C.g_sequence_move_range(dest, begin, end)
 }
 
-func SequenceRemove(iter *C.GSequenceIter) {
+func SequenceRemove(iter *C.GSequenceIter)  {
 	C.g_sequence_remove(iter)
 }
 
-func SequenceRemoveRange(begin *C.GSequenceIter, end *C.GSequenceIter) {
+func SequenceRemoveRange(begin *C.GSequenceIter, end *C.GSequenceIter)  {
 	C.g_sequence_remove_range(begin, end)
 }
 
-func SequenceSet(iter *C.GSequenceIter, data C.gpointer) {
+func SequenceSet(iter *C.GSequenceIter, data C.gpointer)  {
 	C.g_sequence_set(iter, data)
 }
 
-func SequenceSwap(a *C.GSequenceIter, b *C.GSequenceIter) {
+func SequenceSwap(a *C.GSequenceIter, b *C.GSequenceIter)  {
 	C.g_sequence_swap(a, b)
 }
 
-func SetApplicationName(application_name *C.gchar) {
-	C._g_set_application_name(unsafe.Pointer(application_name))
+func SetApplicationName(application_name string)  {
+	_cstr_application_name := unsafe.Pointer(C.CString(application_name))
+	defer C.free(_cstr_application_name)
+	_gstr_application_name := (*C.gchar)(unsafe.Pointer(_cstr_application_name))
+	C._g_set_application_name(unsafe.Pointer(_gstr_application_name))
 }
 
 //TODO varargs g_set_error
 
-func SetErrorLiteral(err unsafe.Pointer, domain C.GQuark, code C.gint, message *C.gchar) {
-	C._g_set_error_literal(unsafe.Pointer(err), domain, code, unsafe.Pointer(message))
+func SetErrorLiteral(err unsafe.Pointer, domain C.GQuark, code C.gint, message string)  {
+	_cstr_message := unsafe.Pointer(C.CString(message))
+	defer C.free(_cstr_message)
+	_gstr_message := (*C.gchar)(unsafe.Pointer(_cstr_message))
+	C._g_set_error_literal(unsafe.Pointer(err), domain, code, unsafe.Pointer(_gstr_message))
 }
 
-func SetPrgname(prgname *C.gchar) {
-	C._g_set_prgname(unsafe.Pointer(prgname))
+func SetPrgname(prgname string)  {
+	_cstr_prgname := unsafe.Pointer(C.CString(prgname))
+	defer C.free(_cstr_prgname)
+	_gstr_prgname := (*C.gchar)(unsafe.Pointer(_cstr_prgname))
+	C._g_set_prgname(unsafe.Pointer(_gstr_prgname))
 }
 
 func SetPrintHandler(_func C.GPrintFunc) C.GPrintFunc {
@@ -1744,24 +2077,39 @@ func SetPrinterrHandler(_func C.GPrintFunc) C.GPrintFunc {
 	return C.g_set_printerr_handler(_func)
 }
 
-func Setenv(variable *C.gchar, value *C.gchar, overwrite C.gboolean) C.gboolean {
-	return C._g_setenv(unsafe.Pointer(variable), unsafe.Pointer(value), overwrite)
+func Setenv(variable string, value string, overwrite C.gboolean) C.gboolean {
+	_cstr_variable := unsafe.Pointer(C.CString(variable))
+	defer C.free(_cstr_variable)
+	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
+	_cstr_value := unsafe.Pointer(C.CString(value))
+	defer C.free(_cstr_value)
+	_gstr_value := (*C.gchar)(unsafe.Pointer(_cstr_value))
+	return C._g_setenv(unsafe.Pointer(_gstr_variable), unsafe.Pointer(_gstr_value), overwrite)
 }
 
 func ShellErrorQuark() C.GQuark {
 	return C.g_shell_error_quark()
 }
 
-func ShellParseArgv(command_line *C.gchar, argcp *C.gint, argvp unsafe.Pointer, err unsafe.Pointer) C.gboolean {
-	return C._g_shell_parse_argv(unsafe.Pointer(command_line), argcp, unsafe.Pointer(argvp), unsafe.Pointer(err))
+func ShellParseArgv(command_line string, argcp *C.gint, argvp unsafe.Pointer, err unsafe.Pointer) C.gboolean {
+	_cstr_command_line := unsafe.Pointer(C.CString(command_line))
+	defer C.free(_cstr_command_line)
+	_gstr_command_line := (*C.gchar)(unsafe.Pointer(_cstr_command_line))
+	return C._g_shell_parse_argv(unsafe.Pointer(_gstr_command_line), argcp, unsafe.Pointer(argvp), unsafe.Pointer(err))
 }
 
-func ShellQuote(unquoted_string *C.gchar) string {
-	return C.GoString((*C.char)(C._g_shell_quote(unsafe.Pointer(unquoted_string))))
+func ShellQuote(unquoted_string string) string {
+	_cstr_unquoted_string := unsafe.Pointer(C.CString(unquoted_string))
+	defer C.free(_cstr_unquoted_string)
+	_gstr_unquoted_string := (*C.gchar)(unsafe.Pointer(_cstr_unquoted_string))
+	return C.GoString((*C.char)(C._g_shell_quote(unsafe.Pointer(_gstr_unquoted_string))))
 }
 
-func ShellUnquote(quoted_string *C.gchar, err unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_shell_unquote(unsafe.Pointer(quoted_string), unsafe.Pointer(err))))
+func ShellUnquote(quoted_string string, err unsafe.Pointer) string {
+	_cstr_quoted_string := unsafe.Pointer(C.CString(quoted_string))
+	defer C.free(_cstr_quoted_string)
+	_gstr_quoted_string := (*C.gchar)(unsafe.Pointer(_cstr_quoted_string))
+	return C.GoString((*C.char)(C._g_shell_unquote(unsafe.Pointer(_gstr_quoted_string), unsafe.Pointer(err))))
 }
 
 func SliceAlloc(block_size C.gsize) C.gpointer {
@@ -1776,11 +2124,11 @@ func SliceCopy(block_size C.gsize, mem_block C.gconstpointer) C.gpointer {
 	return C.g_slice_copy(block_size, mem_block)
 }
 
-func SliceFree1(block_size C.gsize, mem_block C.gpointer) {
+func SliceFree1(block_size C.gsize, mem_block C.gpointer)  {
 	C.g_slice_free1(block_size, mem_block)
 }
 
-func SliceFreeChainWithOffset(block_size C.gsize, mem_chain C.gpointer, next_offset C.gsize) {
+func SliceFreeChainWithOffset(block_size C.gsize, mem_chain C.gpointer, next_offset C.gsize)  {
 	C.g_slice_free_chain_with_offset(block_size, mem_chain, next_offset)
 }
 
@@ -1804,7 +2152,7 @@ func SourceRemoveByUserData(user_data C.gpointer) C.gboolean {
 	return C.g_source_remove_by_user_data(user_data)
 }
 
-func SourceSetNameById(tag C.guint, name *C.char) {
+func SourceSetNameById(tag C.guint, name *C.char)  {
 	C._g_source_set_name_by_id(tag, unsafe.Pointer(name))
 }
 
@@ -1812,28 +2160,40 @@ func SpacedPrimesClosest(num C.guint) C.guint {
 	return C.g_spaced_primes_closest(num)
 }
 
-func SpawnAsync(working_directory *C.gchar, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, err unsafe.Pointer) C.gboolean {
-	return C._g_spawn_async(unsafe.Pointer(working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, unsafe.Pointer(err))
+func SpawnAsync(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, err unsafe.Pointer) C.gboolean {
+	_cstr_working_directory := unsafe.Pointer(C.CString(working_directory))
+	defer C.free(_cstr_working_directory)
+	_gstr_working_directory := (*C.gchar)(unsafe.Pointer(_cstr_working_directory))
+	return C._g_spawn_async(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, unsafe.Pointer(err))
 }
 
-func SpawnAsyncWithPipes(working_directory *C.gchar, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, standard_input *C.gint, standard_output *C.gint, standard_error *C.gint, err unsafe.Pointer) C.gboolean {
-	return C._g_spawn_async_with_pipes(unsafe.Pointer(working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, unsafe.Pointer(err))
+func SpawnAsyncWithPipes(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, standard_input *C.gint, standard_output *C.gint, standard_error *C.gint, err unsafe.Pointer) C.gboolean {
+	_cstr_working_directory := unsafe.Pointer(C.CString(working_directory))
+	defer C.free(_cstr_working_directory)
+	_gstr_working_directory := (*C.gchar)(unsafe.Pointer(_cstr_working_directory))
+	return C._g_spawn_async_with_pipes(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, unsafe.Pointer(err))
 }
 
 func SpawnCheckExitStatus(exit_status C.gint, err unsafe.Pointer) C.gboolean {
 	return C._g_spawn_check_exit_status(exit_status, unsafe.Pointer(err))
 }
 
-func SpawnClosePid(pid C.GPid) {
+func SpawnClosePid(pid C.GPid)  {
 	C.g_spawn_close_pid(pid)
 }
 
-func SpawnCommandLineAsync(command_line *C.gchar, err unsafe.Pointer) C.gboolean {
-	return C._g_spawn_command_line_async(unsafe.Pointer(command_line), unsafe.Pointer(err))
+func SpawnCommandLineAsync(command_line string, err unsafe.Pointer) C.gboolean {
+	_cstr_command_line := unsafe.Pointer(C.CString(command_line))
+	defer C.free(_cstr_command_line)
+	_gstr_command_line := (*C.gchar)(unsafe.Pointer(_cstr_command_line))
+	return C._g_spawn_command_line_async(unsafe.Pointer(_gstr_command_line), unsafe.Pointer(err))
 }
 
-func SpawnCommandLineSync(command_line *C.gchar, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) C.gboolean {
-	return C._g_spawn_command_line_sync(unsafe.Pointer(command_line), unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err))
+func SpawnCommandLineSync(command_line string, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) C.gboolean {
+	_cstr_command_line := unsafe.Pointer(C.CString(command_line))
+	defer C.free(_cstr_command_line)
+	_gstr_command_line := (*C.gchar)(unsafe.Pointer(_cstr_command_line))
+	return C._g_spawn_command_line_sync(unsafe.Pointer(_gstr_command_line), unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err))
 }
 
 func SpawnErrorQuark() C.GQuark {
@@ -1844,64 +2204,106 @@ func SpawnExitErrorQuark() C.GQuark {
 	return C.g_spawn_exit_error_quark()
 }
 
-func SpawnSync(working_directory *C.gchar, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) C.gboolean {
-	return C._g_spawn_sync(unsafe.Pointer(working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err))
+func SpawnSync(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) C.gboolean {
+	_cstr_working_directory := unsafe.Pointer(C.CString(working_directory))
+	defer C.free(_cstr_working_directory)
+	_gstr_working_directory := (*C.gchar)(unsafe.Pointer(_cstr_working_directory))
+	return C._g_spawn_sync(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err))
 }
 
 //TODO varargs g_sprintf
 
-func Stpcpy(dest *C.gchar, src *C.char) string {
-	return C.GoString((*C.char)(C._g_stpcpy(dest, unsafe.Pointer(src))))
+func Stpcpy(dest string, src *C.char) string {
+	_cstr_dest := unsafe.Pointer(C.CString(dest))
+	defer C.free(_cstr_dest)
+	_gstr_dest := (*C.gchar)(unsafe.Pointer(_cstr_dest))
+	return C.GoString((*C.char)(C._g_stpcpy(_gstr_dest, unsafe.Pointer(src))))
 }
 
 func StrEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
 	return C.g_str_equal(v1, v2)
 }
 
-func StrHasPrefix(str *C.gchar, prefix *C.gchar) C.gboolean {
-	return C._g_str_has_prefix(unsafe.Pointer(str), unsafe.Pointer(prefix))
+func StrHasPrefix(str string, prefix string) C.gboolean {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	_cstr_prefix := unsafe.Pointer(C.CString(prefix))
+	defer C.free(_cstr_prefix)
+	_gstr_prefix := (*C.gchar)(unsafe.Pointer(_cstr_prefix))
+	return C._g_str_has_prefix(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_prefix))
 }
 
-func StrHasSuffix(str *C.gchar, suffix *C.gchar) C.gboolean {
-	return C._g_str_has_suffix(unsafe.Pointer(str), unsafe.Pointer(suffix))
+func StrHasSuffix(str string, suffix string) C.gboolean {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	_cstr_suffix := unsafe.Pointer(C.CString(suffix))
+	defer C.free(_cstr_suffix)
+	_gstr_suffix := (*C.gchar)(unsafe.Pointer(_cstr_suffix))
+	return C._g_str_has_suffix(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_suffix))
 }
 
 func StrHash(v C.gconstpointer) C.guint {
 	return C.g_str_hash(v)
 }
 
-func Strcanon(string *C.gchar, valid_chars *C.gchar, substitutor C.gchar) string {
-	return C.GoString((*C.char)(C._g_strcanon(string, unsafe.Pointer(valid_chars), substitutor)))
+func Strcanon(string string, valid_chars string, substitutor C.gchar) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	_cstr_valid_chars := unsafe.Pointer(C.CString(valid_chars))
+	defer C.free(_cstr_valid_chars)
+	_gstr_valid_chars := (*C.gchar)(unsafe.Pointer(_cstr_valid_chars))
+	return C.GoString((*C.char)(C._g_strcanon(_gstr_string, unsafe.Pointer(_gstr_valid_chars), substitutor)))
 }
 
 //Deprecated g_strcasecmp
 
-func Strchomp(string *C.gchar) string {
-	return C.GoString((*C.char)(C.g_strchomp(string)))
+func Strchomp(string string) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C.g_strchomp(_gstr_string)))
 }
 
-func Strchug(string *C.gchar) string {
-	return C.GoString((*C.char)(C.g_strchug(string)))
+func Strchug(string string) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C.g_strchug(_gstr_string)))
 }
 
 func Strcmp0(str1 *C.char, str2 *C.char) C.int {
 	return C._g_strcmp0(unsafe.Pointer(str1), unsafe.Pointer(str2))
 }
 
-func Strcompress(source *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strcompress(unsafe.Pointer(source))))
+func Strcompress(source string) string {
+	_cstr_source := unsafe.Pointer(C.CString(source))
+	defer C.free(_cstr_source)
+	_gstr_source := (*C.gchar)(unsafe.Pointer(_cstr_source))
+	return C.GoString((*C.char)(C._g_strcompress(unsafe.Pointer(_gstr_source))))
 }
 
 //TODO varargs g_strconcat
 
-func Strdelimit(string *C.gchar, delimiters *C.gchar, new_delimiter C.gchar) string {
-	return C.GoString((*C.char)(C._g_strdelimit(string, unsafe.Pointer(delimiters), new_delimiter)))
+func Strdelimit(string string, delimiters string, new_delimiter C.gchar) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	_cstr_delimiters := unsafe.Pointer(C.CString(delimiters))
+	defer C.free(_cstr_delimiters)
+	_gstr_delimiters := (*C.gchar)(unsafe.Pointer(_cstr_delimiters))
+	return C.GoString((*C.char)(C._g_strdelimit(_gstr_string, unsafe.Pointer(_gstr_delimiters), new_delimiter)))
 }
 
 //Deprecated g_strdown
 
-func Strdup(str *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strdup(unsafe.Pointer(str))))
+func Strdup(str string) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_strdup(unsafe.Pointer(_gstr_str))))
 }
 
 //TODO varargs g_strdup_printf
@@ -1916,84 +2318,156 @@ func Strerror(errnum C.gint) string {
 	return C.GoString((*C.char)(C.g_strerror(errnum)))
 }
 
-func Strescape(source *C.gchar, exceptions *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strescape(unsafe.Pointer(source), unsafe.Pointer(exceptions))))
+func Strescape(source string, exceptions string) string {
+	_cstr_source := unsafe.Pointer(C.CString(source))
+	defer C.free(_cstr_source)
+	_gstr_source := (*C.gchar)(unsafe.Pointer(_cstr_source))
+	_cstr_exceptions := unsafe.Pointer(C.CString(exceptions))
+	defer C.free(_cstr_exceptions)
+	_gstr_exceptions := (*C.gchar)(unsafe.Pointer(_cstr_exceptions))
+	return C.GoString((*C.char)(C._g_strescape(unsafe.Pointer(_gstr_source), unsafe.Pointer(_gstr_exceptions))))
 }
 
-func Strfreev(str_array unsafe.Pointer) {
+func Strfreev(str_array unsafe.Pointer)  {
 	C._g_strfreev(unsafe.Pointer(str_array))
 }
 
-func StringNew(init *C.gchar) *C.GString {
-	return C._g_string_new(unsafe.Pointer(init))
+func StringNew(init string) *C.GString {
+	_cstr_init := unsafe.Pointer(C.CString(init))
+	defer C.free(_cstr_init)
+	_gstr_init := (*C.gchar)(unsafe.Pointer(_cstr_init))
+	return C._g_string_new(unsafe.Pointer(_gstr_init))
 }
 
-func StringNewLen(init *C.gchar, _len C.gssize) *C.GString {
-	return C._g_string_new_len(unsafe.Pointer(init), _len)
+func StringNewLen(init string, _len C.gssize) *C.GString {
+	_cstr_init := unsafe.Pointer(C.CString(init))
+	defer C.free(_cstr_init)
+	_gstr_init := (*C.gchar)(unsafe.Pointer(_cstr_init))
+	return C._g_string_new_len(unsafe.Pointer(_gstr_init), _len)
 }
 
 func StringSizedNew(dfl_size C.gsize) *C.GString {
 	return C.g_string_sized_new(dfl_size)
 }
 
-func StripContext(msgid *C.gchar, msgval *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strip_context(unsafe.Pointer(msgid), unsafe.Pointer(msgval))))
+func StripContext(msgid string, msgval string) string {
+	_cstr_msgid := unsafe.Pointer(C.CString(msgid))
+	defer C.free(_cstr_msgid)
+	_gstr_msgid := (*C.gchar)(unsafe.Pointer(_cstr_msgid))
+	_cstr_msgval := unsafe.Pointer(C.CString(msgval))
+	defer C.free(_cstr_msgval)
+	_gstr_msgval := (*C.gchar)(unsafe.Pointer(_cstr_msgval))
+	return C.GoString((*C.char)(C._g_strip_context(unsafe.Pointer(_gstr_msgid), unsafe.Pointer(_gstr_msgval))))
 }
 
 //TODO varargs g_strjoin
 
-func Strjoinv(separator *C.gchar, str_array unsafe.Pointer) string {
-	return C.GoString((*C.char)(C._g_strjoinv(unsafe.Pointer(separator), unsafe.Pointer(str_array))))
+func Strjoinv(separator string, str_array unsafe.Pointer) string {
+	_cstr_separator := unsafe.Pointer(C.CString(separator))
+	defer C.free(_cstr_separator)
+	_gstr_separator := (*C.gchar)(unsafe.Pointer(_cstr_separator))
+	return C.GoString((*C.char)(C._g_strjoinv(unsafe.Pointer(_gstr_separator), unsafe.Pointer(str_array))))
 }
 
-func Strlcat(dest *C.gchar, src *C.gchar, dest_size C.gsize) C.gsize {
-	return C._g_strlcat(dest, unsafe.Pointer(src), dest_size)
+func Strlcat(dest string, src string, dest_size C.gsize) C.gsize {
+	_cstr_dest := unsafe.Pointer(C.CString(dest))
+	defer C.free(_cstr_dest)
+	_gstr_dest := (*C.gchar)(unsafe.Pointer(_cstr_dest))
+	_cstr_src := unsafe.Pointer(C.CString(src))
+	defer C.free(_cstr_src)
+	_gstr_src := (*C.gchar)(unsafe.Pointer(_cstr_src))
+	return C._g_strlcat(_gstr_dest, unsafe.Pointer(_gstr_src), dest_size)
 }
 
-func Strlcpy(dest *C.gchar, src *C.gchar, dest_size C.gsize) C.gsize {
-	return C._g_strlcpy(dest, unsafe.Pointer(src), dest_size)
+func Strlcpy(dest string, src string, dest_size C.gsize) C.gsize {
+	_cstr_dest := unsafe.Pointer(C.CString(dest))
+	defer C.free(_cstr_dest)
+	_gstr_dest := (*C.gchar)(unsafe.Pointer(_cstr_dest))
+	_cstr_src := unsafe.Pointer(C.CString(src))
+	defer C.free(_cstr_src)
+	_gstr_src := (*C.gchar)(unsafe.Pointer(_cstr_src))
+	return C._g_strlcpy(_gstr_dest, unsafe.Pointer(_gstr_src), dest_size)
 }
 
 //Deprecated g_strncasecmp
 
-func Strndup(str *C.gchar, n C.gsize) string {
-	return C.GoString((*C.char)(C._g_strndup(unsafe.Pointer(str), n)))
+func Strndup(str string, n C.gsize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_strndup(unsafe.Pointer(_gstr_str), n)))
 }
 
 func Strnfill(length C.gsize, fill_char C.gchar) string {
 	return C.GoString((*C.char)(C.g_strnfill(length, fill_char)))
 }
 
-func Strreverse(string *C.gchar) string {
-	return C.GoString((*C.char)(C.g_strreverse(string)))
+func Strreverse(string string) string {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C.GoString((*C.char)(C.g_strreverse(_gstr_string)))
 }
 
-func Strrstr(haystack *C.gchar, needle *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strrstr(unsafe.Pointer(haystack), unsafe.Pointer(needle))))
+func Strrstr(haystack string, needle string) string {
+	_cstr_haystack := unsafe.Pointer(C.CString(haystack))
+	defer C.free(_cstr_haystack)
+	_gstr_haystack := (*C.gchar)(unsafe.Pointer(_cstr_haystack))
+	_cstr_needle := unsafe.Pointer(C.CString(needle))
+	defer C.free(_cstr_needle)
+	_gstr_needle := (*C.gchar)(unsafe.Pointer(_cstr_needle))
+	return C.GoString((*C.char)(C._g_strrstr(unsafe.Pointer(_gstr_haystack), unsafe.Pointer(_gstr_needle))))
 }
 
-func StrrstrLen(haystack *C.gchar, haystack_len C.gssize, needle *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strrstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))))
+func StrrstrLen(haystack string, haystack_len C.gssize, needle string) string {
+	_cstr_haystack := unsafe.Pointer(C.CString(haystack))
+	defer C.free(_cstr_haystack)
+	_gstr_haystack := (*C.gchar)(unsafe.Pointer(_cstr_haystack))
+	_cstr_needle := unsafe.Pointer(C.CString(needle))
+	defer C.free(_cstr_needle)
+	_gstr_needle := (*C.gchar)(unsafe.Pointer(_cstr_needle))
+	return C.GoString((*C.char)(C._g_strrstr_len(unsafe.Pointer(_gstr_haystack), haystack_len, unsafe.Pointer(_gstr_needle))))
 }
 
 func Strsignal(signum C.gint) string {
 	return C.GoString((*C.char)(C.g_strsignal(signum)))
 }
 
-func Strsplit(string *C.gchar, delimiter *C.gchar, max_tokens C.gint) unsafe.Pointer {
-	return unsafe.Pointer(C._g_strsplit(unsafe.Pointer(string), unsafe.Pointer(delimiter), max_tokens))
+func Strsplit(string string, delimiter string, max_tokens C.gint) unsafe.Pointer {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	_cstr_delimiter := unsafe.Pointer(C.CString(delimiter))
+	defer C.free(_cstr_delimiter)
+	_gstr_delimiter := (*C.gchar)(unsafe.Pointer(_cstr_delimiter))
+	return unsafe.Pointer(C._g_strsplit(unsafe.Pointer(_gstr_string), unsafe.Pointer(_gstr_delimiter), max_tokens))
 }
 
-func StrsplitSet(string *C.gchar, delimiters *C.gchar, max_tokens C.gint) unsafe.Pointer {
-	return unsafe.Pointer(C._g_strsplit_set(unsafe.Pointer(string), unsafe.Pointer(delimiters), max_tokens))
+func StrsplitSet(string string, delimiters string, max_tokens C.gint) unsafe.Pointer {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	_cstr_delimiters := unsafe.Pointer(C.CString(delimiters))
+	defer C.free(_cstr_delimiters)
+	_gstr_delimiters := (*C.gchar)(unsafe.Pointer(_cstr_delimiters))
+	return unsafe.Pointer(C._g_strsplit_set(unsafe.Pointer(_gstr_string), unsafe.Pointer(_gstr_delimiters), max_tokens))
 }
 
-func StrstrLen(haystack *C.gchar, haystack_len C.gssize, needle *C.gchar) string {
-	return C.GoString((*C.char)(C._g_strstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))))
+func StrstrLen(haystack string, haystack_len C.gssize, needle string) string {
+	_cstr_haystack := unsafe.Pointer(C.CString(haystack))
+	defer C.free(_cstr_haystack)
+	_gstr_haystack := (*C.gchar)(unsafe.Pointer(_cstr_haystack))
+	_cstr_needle := unsafe.Pointer(C.CString(needle))
+	defer C.free(_cstr_needle)
+	_gstr_needle := (*C.gchar)(unsafe.Pointer(_cstr_needle))
+	return C.GoString((*C.char)(C._g_strstr_len(unsafe.Pointer(_gstr_haystack), haystack_len, unsafe.Pointer(_gstr_needle))))
 }
 
-func Strtod(nptr *C.gchar, endptr unsafe.Pointer) C.gdouble {
-	return C._g_strtod(unsafe.Pointer(nptr), unsafe.Pointer(endptr))
+func Strtod(nptr string, endptr unsafe.Pointer) C.gdouble {
+	_cstr_nptr := unsafe.Pointer(C.CString(nptr))
+	defer C.free(_cstr_nptr)
+	_gstr_nptr := (*C.gchar)(unsafe.Pointer(_cstr_nptr))
+	return C._g_strtod(unsafe.Pointer(_gstr_nptr), unsafe.Pointer(endptr))
 }
 
 //Deprecated g_strup
@@ -2006,31 +2480,31 @@ func StrvLength(str_array unsafe.Pointer) C.guint {
 	return C._g_strv_length(unsafe.Pointer(str_array))
 }
 
-func TestAddDataFunc(testpath *C.char, test_data C.gconstpointer, test_func C.GTestDataFunc) {
+func TestAddDataFunc(testpath *C.char, test_data C.gconstpointer, test_func C.GTestDataFunc)  {
 	C._g_test_add_data_func(unsafe.Pointer(testpath), test_data, test_func)
 }
 
-func TestAddDataFuncFull(testpath *C.char, test_data C.gpointer, test_func C.GTestDataFunc, data_free_func C.GDestroyNotify) {
+func TestAddDataFuncFull(testpath *C.char, test_data C.gpointer, test_func C.GTestDataFunc, data_free_func C.GDestroyNotify)  {
 	C._g_test_add_data_func_full(unsafe.Pointer(testpath), test_data, test_func, data_free_func)
 }
 
-func TestAddFunc(testpath *C.char, test_func C.GTestFunc) {
+func TestAddFunc(testpath *C.char, test_func C.GTestFunc)  {
 	C._g_test_add_func(unsafe.Pointer(testpath), test_func)
 }
 
-func TestAddVtable(testpath *C.char, data_size C.gsize, test_data C.gconstpointer, data_setup C.GTestFixtureFunc, data_test C.GTestFixtureFunc, data_teardown C.GTestFixtureFunc) {
+func TestAddVtable(testpath *C.char, data_size C.gsize, test_data C.gconstpointer, data_setup C.GTestFixtureFunc, data_test C.GTestFixtureFunc, data_teardown C.GTestFixtureFunc)  {
 	C._g_test_add_vtable(unsafe.Pointer(testpath), data_size, test_data, data_setup, data_test, data_teardown)
 }
 
-func TestAssertExpectedMessagesInternal(domain *C.char, file *C.char, line C.int, _func *C.char) {
+func TestAssertExpectedMessagesInternal(domain *C.char, file *C.char, line C.int, _func *C.char)  {
 	C._g_test_assert_expected_messages_internal(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func))
 }
 
-func TestBug(bug_uri_snippet *C.char) {
+func TestBug(bug_uri_snippet *C.char)  {
 	C._g_test_bug(unsafe.Pointer(bug_uri_snippet))
 }
 
-func TestBugBase(uri_pattern *C.char) {
+func TestBugBase(uri_pattern *C.char)  {
 	C._g_test_bug_base(unsafe.Pointer(uri_pattern))
 }
 
@@ -2042,11 +2516,17 @@ func TestCreateSuite(suite_name *C.char) *C.GTestSuite {
 	return C._g_test_create_suite(unsafe.Pointer(suite_name))
 }
 
-func TestExpectMessage(log_domain *C.gchar, log_level C.GLogLevelFlags, pattern *C.gchar) {
-	C._g_test_expect_message(unsafe.Pointer(log_domain), log_level, unsafe.Pointer(pattern))
+func TestExpectMessage(log_domain string, log_level C.GLogLevelFlags, pattern string)  {
+	_cstr_log_domain := unsafe.Pointer(C.CString(log_domain))
+	defer C.free(_cstr_log_domain)
+	_gstr_log_domain := (*C.gchar)(unsafe.Pointer(_cstr_log_domain))
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	C._g_test_expect_message(unsafe.Pointer(_gstr_log_domain), log_level, unsafe.Pointer(_gstr_pattern))
 }
 
-func TestFail() {
+func TestFail()  {
 	C.g_test_fail()
 }
 
@@ -2056,7 +2536,7 @@ func TestGetRoot() *C.GTestSuite {
 
 //TODO varargs g_test_init
 
-func TestLogSetFatalHandler(log_func C.GTestLogFatalFunc, user_data C.gpointer) {
+func TestLogSetFatalHandler(log_func C.GTestLogFatalFunc, user_data C.gpointer)  {
 	C.g_test_log_set_fatal_handler(log_func, user_data)
 }
 
@@ -2070,11 +2550,11 @@ func TestLogTypeName(log_type C.GTestLogType) *C.char {
 
 //TODO varargs g_test_minimized_result
 
-func TestQueueDestroy(destroy_func C.GDestroyNotify, destroy_data C.gpointer) {
+func TestQueueDestroy(destroy_func C.GDestroyNotify, destroy_data C.gpointer)  {
 	C.g_test_queue_destroy(destroy_func, destroy_data)
 }
 
-func TestQueueFree(gfree_pointer C.gpointer) {
+func TestQueueFree(gfree_pointer C.gpointer)  {
 	C.g_test_queue_free(gfree_pointer)
 }
 
@@ -2110,11 +2590,11 @@ func TestTimerLast() C.double {
 	return C.g_test_timer_last()
 }
 
-func TestTimerStart() {
+func TestTimerStart()  {
 	C.g_test_timer_start()
 }
 
-func TestTrapAssertions(domain *C.char, file *C.char, line C.int, _func *C.char, assertion_flags C.guint64, pattern *C.char) {
+func TestTrapAssertions(domain *C.char, file *C.char, line C.int, _func *C.char, assertion_flags C.guint64, pattern *C.char)  {
 	C._g_test_trap_assertions(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func), assertion_flags, unsafe.Pointer(pattern))
 }
 
@@ -2134,7 +2614,7 @@ func ThreadErrorQuark() C.GQuark {
 	return C.g_thread_error_quark()
 }
 
-func ThreadExit(retval C.gpointer) {
+func ThreadExit(retval C.gpointer)  {
 	C.g_thread_exit(retval)
 }
 
@@ -2150,15 +2630,15 @@ func ThreadPoolGetNumUnusedThreads() C.guint {
 	return C.g_thread_pool_get_num_unused_threads()
 }
 
-func ThreadPoolSetMaxIdleTime(interval C.guint) {
+func ThreadPoolSetMaxIdleTime(interval C.guint)  {
 	C.g_thread_pool_set_max_idle_time(interval)
 }
 
-func ThreadPoolSetMaxUnusedThreads(max_threads C.gint) {
+func ThreadPoolSetMaxUnusedThreads(max_threads C.gint)  {
 	C.g_thread_pool_set_max_unused_threads(max_threads)
 }
 
-func ThreadPoolStopUnusedThreads() {
+func ThreadPoolStopUnusedThreads()  {
 	C.g_thread_pool_stop_unused_threads()
 }
 
@@ -2166,12 +2646,15 @@ func ThreadSelf() *C.GThread {
 	return C.g_thread_self()
 }
 
-func ThreadYield() {
+func ThreadYield()  {
 	C.g_thread_yield()
 }
 
-func TimeValFromIso8601(iso_date *C.gchar, time_ *C.GTimeVal) C.gboolean {
-	return C._g_time_val_from_iso8601(unsafe.Pointer(iso_date), time_)
+func TimeValFromIso8601(iso_date string, time_ *C.GTimeVal) C.gboolean {
+	_cstr_iso_date := unsafe.Pointer(C.CString(iso_date))
+	defer C.free(_cstr_iso_date)
+	_gstr_iso_date := (*C.gchar)(unsafe.Pointer(_cstr_iso_date))
+	return C._g_time_val_from_iso8601(unsafe.Pointer(_gstr_iso_date), time_)
 }
 
 func TimeoutAdd(interval C.guint, function C.GSourceFunc, data C.gpointer) C.guint {
@@ -2202,7 +2685,7 @@ func TrashStackHeight(stack_p unsafe.Pointer) C.guint {
 	return C._g_trash_stack_height(unsafe.Pointer(stack_p))
 }
 
-func TrashStackPush(stack_p unsafe.Pointer, data_p C.gpointer) {
+func TrashStackPush(stack_p unsafe.Pointer, data_p C.gpointer)  {
 	C._g_trash_stack_push(unsafe.Pointer(stack_p), data_p)
 }
 
@@ -2338,8 +2821,11 @@ func UnicharIszerowidth(c C.gunichar) C.gboolean {
 	return C.g_unichar_iszerowidth(c)
 }
 
-func UnicharToUtf8(c C.gunichar, outbuf *C.gchar) C.gint {
-	return C.g_unichar_to_utf8(c, outbuf)
+func UnicharToUtf8(c C.gunichar, outbuf string) C.gint {
+	_cstr_outbuf := unsafe.Pointer(C.CString(outbuf))
+	defer C.free(_cstr_outbuf)
+	_gstr_outbuf := (*C.gchar)(unsafe.Pointer(_cstr_outbuf))
+	return C.g_unichar_to_utf8(c, _gstr_outbuf)
 }
 
 func UnicharTolower(c C.gunichar) C.gunichar {
@@ -2368,7 +2854,7 @@ func UnicharXdigitValue(c C.gunichar) C.gint {
 
 //Deprecated g_unicode_canonical_decomposition
 
-func UnicodeCanonicalOrdering(string *C.gunichar, _len C.gsize) {
+func UnicodeCanonicalOrdering(string *C.gunichar, _len C.gsize)  {
 	C.g_unicode_canonical_ordering(string, _len)
 }
 
@@ -2404,20 +2890,29 @@ func UnixSignalSourceNew(signum C.gint) *C.GSource {
 	return C.g_unix_signal_source_new(signum)
 }
 
-func Unlink(filename *C.gchar) C.int {
-	return C._g_unlink(unsafe.Pointer(filename))
+func Unlink(filename string) C.int {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	return C._g_unlink(unsafe.Pointer(_gstr_filename))
 }
 
-func Unsetenv(variable *C.gchar) {
-	C._g_unsetenv(unsafe.Pointer(variable))
+func Unsetenv(variable string)  {
+	_cstr_variable := unsafe.Pointer(C.CString(variable))
+	defer C.free(_cstr_variable)
+	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
+	C._g_unsetenv(unsafe.Pointer(_gstr_variable))
 }
 
 func UriEscapeString(unescaped *C.char, reserved_chars_allowed *C.char, allow_utf8 C.gboolean) *C.char {
 	return C._g_uri_escape_string(unsafe.Pointer(unescaped), unsafe.Pointer(reserved_chars_allowed), allow_utf8)
 }
 
-func UriListExtractUris(uri_list *C.gchar) unsafe.Pointer {
-	return unsafe.Pointer(C._g_uri_list_extract_uris(unsafe.Pointer(uri_list)))
+func UriListExtractUris(uri_list string) unsafe.Pointer {
+	_cstr_uri_list := unsafe.Pointer(C.CString(uri_list))
+	defer C.free(_cstr_uri_list)
+	_gstr_uri_list := (*C.gchar)(unsafe.Pointer(_cstr_uri_list))
+	return unsafe.Pointer(C._g_uri_list_extract_uris(unsafe.Pointer(_gstr_uri_list)))
 }
 
 func UriParseScheme(uri *C.char) *C.char {
@@ -2432,7 +2927,7 @@ func UriUnescapeString(escaped_string *C.char, illegal_characters *C.char) *C.ch
 	return C._g_uri_unescape_string(unsafe.Pointer(escaped_string), unsafe.Pointer(illegal_characters))
 }
 
-func Usleep(microseconds C.gulong) {
+func Usleep(microseconds C.gulong)  {
 	C.g_usleep(microseconds)
 }
 
@@ -2444,130 +2939,241 @@ func Utf16ToUtf8(str *C.gunichar2, _len C.glong, items_read *C.glong, items_writ
 	return C.GoString((*C.char)(C._g_utf16_to_utf8(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))))
 }
 
-func Utf8Casefold(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_utf8_casefold(unsafe.Pointer(str), _len)))
+func Utf8Casefold(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_casefold(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func Utf8Collate(str1 *C.gchar, str2 *C.gchar) C.gint {
-	return C._g_utf8_collate(unsafe.Pointer(str1), unsafe.Pointer(str2))
+func Utf8Collate(str1 string, str2 string) C.gint {
+	_cstr_str1 := unsafe.Pointer(C.CString(str1))
+	defer C.free(_cstr_str1)
+	_gstr_str1 := (*C.gchar)(unsafe.Pointer(_cstr_str1))
+	_cstr_str2 := unsafe.Pointer(C.CString(str2))
+	defer C.free(_cstr_str2)
+	_gstr_str2 := (*C.gchar)(unsafe.Pointer(_cstr_str2))
+	return C._g_utf8_collate(unsafe.Pointer(_gstr_str1), unsafe.Pointer(_gstr_str2))
 }
 
-func Utf8CollateKey(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_utf8_collate_key(unsafe.Pointer(str), _len)))
+func Utf8CollateKey(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_collate_key(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func Utf8CollateKeyForFilename(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_utf8_collate_key_for_filename(unsafe.Pointer(str), _len)))
+func Utf8CollateKeyForFilename(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_collate_key_for_filename(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func Utf8FindNextChar(p *C.gchar, end *C.gchar) string {
-	return C.GoString((*C.char)(C._g_utf8_find_next_char(unsafe.Pointer(p), unsafe.Pointer(end))))
+func Utf8FindNextChar(p string, end string) string {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	_cstr_end := unsafe.Pointer(C.CString(end))
+	defer C.free(_cstr_end)
+	_gstr_end := (*C.gchar)(unsafe.Pointer(_cstr_end))
+	return C.GoString((*C.char)(C._g_utf8_find_next_char(unsafe.Pointer(_gstr_p), unsafe.Pointer(_gstr_end))))
 }
 
-func Utf8FindPrevChar(str *C.gchar, p *C.gchar) string {
-	return C.GoString((*C.char)(C._g_utf8_find_prev_char(unsafe.Pointer(str), unsafe.Pointer(p))))
+func Utf8FindPrevChar(str string, p string) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C.GoString((*C.char)(C._g_utf8_find_prev_char(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_p))))
 }
 
-func Utf8GetChar(p *C.gchar) C.gunichar {
-	return C._g_utf8_get_char(unsafe.Pointer(p))
+func Utf8GetChar(p string) C.gunichar {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C._g_utf8_get_char(unsafe.Pointer(_gstr_p))
 }
 
-func Utf8GetCharValidated(p *C.gchar, max_len C.gssize) C.gunichar {
-	return C._g_utf8_get_char_validated(unsafe.Pointer(p), max_len)
+func Utf8GetCharValidated(p string, max_len C.gssize) C.gunichar {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C._g_utf8_get_char_validated(unsafe.Pointer(_gstr_p), max_len)
 }
 
-func Utf8Normalize(str *C.gchar, _len C.gssize, mode C.GNormalizeMode) string {
-	return C.GoString((*C.char)(C._g_utf8_normalize(unsafe.Pointer(str), _len, mode)))
+func Utf8Normalize(str string, _len C.gssize, mode C.GNormalizeMode) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_normalize(unsafe.Pointer(_gstr_str), _len, mode)))
 }
 
-func Utf8OffsetToPointer(str *C.gchar, offset C.glong) string {
-	return C.GoString((*C.char)(C._g_utf8_offset_to_pointer(unsafe.Pointer(str), offset)))
+func Utf8OffsetToPointer(str string, offset C.glong) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_offset_to_pointer(unsafe.Pointer(_gstr_str), offset)))
 }
 
-func Utf8PointerToOffset(str *C.gchar, pos *C.gchar) C.glong {
-	return C._g_utf8_pointer_to_offset(unsafe.Pointer(str), unsafe.Pointer(pos))
+func Utf8PointerToOffset(str string, pos string) C.glong {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	_cstr_pos := unsafe.Pointer(C.CString(pos))
+	defer C.free(_cstr_pos)
+	_gstr_pos := (*C.gchar)(unsafe.Pointer(_cstr_pos))
+	return C._g_utf8_pointer_to_offset(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_pos))
 }
 
-func Utf8PrevChar(p *C.gchar) string {
-	return C.GoString((*C.char)(C._g_utf8_prev_char(unsafe.Pointer(p))))
+func Utf8PrevChar(p string) string {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C.GoString((*C.char)(C._g_utf8_prev_char(unsafe.Pointer(_gstr_p))))
 }
 
-func Utf8Strchr(p *C.gchar, _len C.gssize, c C.gunichar) string {
-	return C.GoString((*C.char)(C._g_utf8_strchr(unsafe.Pointer(p), _len, c)))
+func Utf8Strchr(p string, _len C.gssize, c C.gunichar) string {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C.GoString((*C.char)(C._g_utf8_strchr(unsafe.Pointer(_gstr_p), _len, c)))
 }
 
-func Utf8Strdown(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_utf8_strdown(unsafe.Pointer(str), _len)))
+func Utf8Strdown(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_strdown(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func Utf8Strlen(p *C.gchar, max C.gssize) C.glong {
-	return C._g_utf8_strlen(unsafe.Pointer(p), max)
+func Utf8Strlen(p string, max C.gssize) C.glong {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C._g_utf8_strlen(unsafe.Pointer(_gstr_p), max)
 }
 
-func Utf8Strncpy(dest *C.gchar, src *C.gchar, n C.gsize) string {
-	return C.GoString((*C.char)(C._g_utf8_strncpy(dest, unsafe.Pointer(src), n)))
+func Utf8Strncpy(dest string, src string, n C.gsize) string {
+	_cstr_dest := unsafe.Pointer(C.CString(dest))
+	defer C.free(_cstr_dest)
+	_gstr_dest := (*C.gchar)(unsafe.Pointer(_cstr_dest))
+	_cstr_src := unsafe.Pointer(C.CString(src))
+	defer C.free(_cstr_src)
+	_gstr_src := (*C.gchar)(unsafe.Pointer(_cstr_src))
+	return C.GoString((*C.char)(C._g_utf8_strncpy(_gstr_dest, unsafe.Pointer(_gstr_src), n)))
 }
 
-func Utf8Strrchr(p *C.gchar, _len C.gssize, c C.gunichar) string {
-	return C.GoString((*C.char)(C._g_utf8_strrchr(unsafe.Pointer(p), _len, c)))
+func Utf8Strrchr(p string, _len C.gssize, c C.gunichar) string {
+	_cstr_p := unsafe.Pointer(C.CString(p))
+	defer C.free(_cstr_p)
+	_gstr_p := (*C.gchar)(unsafe.Pointer(_cstr_p))
+	return C.GoString((*C.char)(C._g_utf8_strrchr(unsafe.Pointer(_gstr_p), _len, c)))
 }
 
-func Utf8Strreverse(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_utf8_strreverse(unsafe.Pointer(str), _len)))
+func Utf8Strreverse(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_strreverse(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func Utf8Strup(str *C.gchar, _len C.gssize) string {
-	return C.GoString((*C.char)(C._g_utf8_strup(unsafe.Pointer(str), _len)))
+func Utf8Strup(str string, _len C.gssize) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_strup(unsafe.Pointer(_gstr_str), _len)))
 }
 
-func Utf8Substring(str *C.gchar, start_pos C.glong, end_pos C.glong) string {
-	return C.GoString((*C.char)(C._g_utf8_substring(unsafe.Pointer(str), start_pos, end_pos)))
+func Utf8Substring(str string, start_pos C.glong, end_pos C.glong) string {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C.GoString((*C.char)(C._g_utf8_substring(unsafe.Pointer(_gstr_str), start_pos, end_pos)))
 }
 
-func Utf8ToUcs4(str *C.gchar, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gunichar {
-	return C._g_utf8_to_ucs4(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))
+func Utf8ToUcs4(str string, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gunichar {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C._g_utf8_to_ucs4(unsafe.Pointer(_gstr_str), _len, items_read, items_written, unsafe.Pointer(err))
 }
 
-func Utf8ToUcs4Fast(str *C.gchar, _len C.glong, items_written *C.glong) *C.gunichar {
-	return C._g_utf8_to_ucs4_fast(unsafe.Pointer(str), _len, items_written)
+func Utf8ToUcs4Fast(str string, _len C.glong, items_written *C.glong) *C.gunichar {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C._g_utf8_to_ucs4_fast(unsafe.Pointer(_gstr_str), _len, items_written)
 }
 
-func Utf8ToUtf16(str *C.gchar, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gunichar2 {
-	return C._g_utf8_to_utf16(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))
+func Utf8ToUtf16(str string, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gunichar2 {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C._g_utf8_to_utf16(unsafe.Pointer(_gstr_str), _len, items_read, items_written, unsafe.Pointer(err))
 }
 
-func Utf8Validate(str *C.gchar, max_len C.gssize, end unsafe.Pointer) C.gboolean {
-	return C._g_utf8_validate(str, max_len, unsafe.Pointer(end))
+func Utf8Validate(str string, max_len C.gssize, end unsafe.Pointer) C.gboolean {
+	_cstr_str := unsafe.Pointer(C.CString(str))
+	defer C.free(_cstr_str)
+	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
+	return C._g_utf8_validate(_gstr_str, max_len, unsafe.Pointer(end))
 }
 
 //Skipped g_variant_get_gtype
 
-func VariantIsObjectPath(string *C.gchar) C.gboolean {
-	return C._g_variant_is_object_path(unsafe.Pointer(string))
+func VariantIsObjectPath(string string) C.gboolean {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_variant_is_object_path(unsafe.Pointer(_gstr_string))
 }
 
-func VariantIsSignature(string *C.gchar) C.gboolean {
-	return C._g_variant_is_signature(unsafe.Pointer(string))
+func VariantIsSignature(string string) C.gboolean {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	return C._g_variant_is_signature(unsafe.Pointer(_gstr_string))
 }
 
-func VariantParse(_type *C.GVariantType, text *C.gchar, limit *C.gchar, endptr unsafe.Pointer, err unsafe.Pointer) *C.GVariant {
-	return C._g_variant_parse(unsafe.Pointer(_type), unsafe.Pointer(text), unsafe.Pointer(limit), unsafe.Pointer(endptr), unsafe.Pointer(err))
+func VariantParse(_type *C.GVariantType, text string, limit string, endptr unsafe.Pointer, err unsafe.Pointer) *C.GVariant {
+	_cstr_text := unsafe.Pointer(C.CString(text))
+	defer C.free(_cstr_text)
+	_gstr_text := (*C.gchar)(unsafe.Pointer(_cstr_text))
+	_cstr_limit := unsafe.Pointer(C.CString(limit))
+	defer C.free(_cstr_limit)
+	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
+	return C._g_variant_parse(unsafe.Pointer(_type), unsafe.Pointer(_gstr_text), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr), unsafe.Pointer(err))
 }
 
 func VariantParserGetErrorQuark() C.GQuark {
 	return C.g_variant_parser_get_error_quark()
 }
 
-func VariantTypeChecked(arg_0 *C.gchar) *C.GVariantType {
-	return C._g_variant_type_checked_(unsafe.Pointer(arg_0))
+func VariantTypeChecked(arg_0 string) *C.GVariantType {
+	_cstr_arg_0 := unsafe.Pointer(C.CString(arg_0))
+	defer C.free(_cstr_arg_0)
+	_gstr_arg_0 := (*C.gchar)(unsafe.Pointer(_cstr_arg_0))
+	return C._g_variant_type_checked_(unsafe.Pointer(_gstr_arg_0))
 }
 
-func VariantTypeStringIsValid(type_string *C.gchar) C.gboolean {
-	return C._g_variant_type_string_is_valid(unsafe.Pointer(type_string))
+func VariantTypeStringIsValid(type_string string) C.gboolean {
+	_cstr_type_string := unsafe.Pointer(C.CString(type_string))
+	defer C.free(_cstr_type_string)
+	_gstr_type_string := (*C.gchar)(unsafe.Pointer(_cstr_type_string))
+	return C._g_variant_type_string_is_valid(unsafe.Pointer(_gstr_type_string))
 }
 
-func VariantTypeStringScan(string *C.gchar, limit *C.gchar, endptr unsafe.Pointer) C.gboolean {
-	return C._g_variant_type_string_scan(unsafe.Pointer(string), unsafe.Pointer(limit), unsafe.Pointer(endptr))
+func VariantTypeStringScan(string string, limit string, endptr unsafe.Pointer) C.gboolean {
+	_cstr_string := unsafe.Pointer(C.CString(string))
+	defer C.free(_cstr_string)
+	_gstr_string := (*C.gchar)(unsafe.Pointer(_cstr_string))
+	_cstr_limit := unsafe.Pointer(C.CString(limit))
+	defer C.free(_cstr_limit)
+	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
+	return C._g_variant_type_string_scan(unsafe.Pointer(_gstr_string), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr))
 }
 
 //TODO va_list g_vasprintf
@@ -2580,7 +3186,7 @@ func VariantTypeStringScan(string *C.gchar, limit *C.gchar, endptr unsafe.Pointe
 
 //TODO va_list g_vsprintf
 
-func WarnMessage(domain *C.char, file *C.char, line C.int, _func *C.char, warnexpr *C.char) {
+func WarnMessage(domain *C.char, file *C.char, line C.int, _func *C.char, warnexpr *C.char)  {
 	C._g_warn_message(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(_func), unsafe.Pointer(warnexpr))
 }
 
