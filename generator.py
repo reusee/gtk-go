@@ -73,6 +73,8 @@ class Generator:
     out.append('\t')
     if not func.no_return:
       out.append('return ')
+    if func.return_go_type == 'unsafe.Pointer':
+      out.append('unsafe.Pointer(')
     if func.need_wrapper:
       out.append('C._%s(' % func.c_name)
       sep = None
@@ -84,9 +86,12 @@ class Generator:
           out.append('unsafe.Pointer(%s)' % param.name)
         else:
           out.append(param.name)
-      out.append(')\n}\n\n')
+      out.append(')')
     else:
-      out.append('C.%s(%s)\n}\n\n' % (func.c_name, ', '.join(param.name for param in func.parameters)))
+      out.append('C.%s(%s)' % (func.c_name, ', '.join(param.name for param in func.parameters)))
+    if func.return_go_type == 'unsafe.Pointer':
+      out.append(')')
+    out.append('\n}\n\n')
 
     self.out.write(''.join(out))
 

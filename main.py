@@ -1,3 +1,5 @@
+#!/usr/bin/env python2
+
 import sys
 sys.path.append("/usr/lib/gobject-introspection")
 from giscanner.girparser import GIRParser
@@ -13,18 +15,19 @@ class Parser:
     parser = GIRParser(False)
     parser.parse(filename)
 
+    self.skip_symbols = set()
+    skip_symbol_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'skip_symbols')
+    if os.path.exists(skip_symbol_file):
+      self.skip_symbols = set([line.strip() 
+        for line in open(skip_symbol_file, 'r').xreadlines()
+        if not line.startswith('//')
+        ])
+      self.skip_symbols = set([l for l in self.skip_symbols if l])
+
     self.namespace = parser.get_namespace()
     self.package_name = self.namespace.name.lower()
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
     self.includes = list(parser.get_c_includes())
-    deprecated_functions_file = '%s_deprecated_functions' % self.package_name
-    self.deprecated_functions = []
-    if os.path.exists(deprecated_functions_file):
-      self.deprecated_functions = [l.strip() for l in open(deprecated_functions_file, 'r').xreadlines()]
-    skip_functions_file = '%s_skip_functions' % self.package_name
-    self.skip_functions = []
-    if os.path.exists(skip_functions_file):
-      self.skip_functions = [l.strip() for l in open(skip_functions_file, 'r').xreadlines()]
 
     self.functions = []
     self.functions_need_wrapper = []
@@ -68,11 +71,11 @@ class Parser:
     info.name = name = node.name
     info.c_name = c_name = node.symbol
     info.deprecated = False
-    if not node.deprecated is None or c_name in self.deprecated_functions:
+    if not node.deprecated is None:
       info.deprecated = True
       return info
     info.skip = False
-    if c_name in self.skip_functions:
+    if c_name in self.skip_symbols:
       info.skip = True
       return info
     info.go_name = go_name = convertFuncName(name)
@@ -122,13 +125,15 @@ class Parser:
     return info
 
   def handleEnum(self, node):
-    c_enum_name = node.ctype
     for mem in node.members:
-      member_value = mem.value
-      member_symbol = mem.symbol
-      self.enum_symbols.append(member_symbol)
+      if mem.symbol in self.skip_symbols:
+        continue
+      self.enum_symbols.append(mem.symbol)
 
   def handleConstant(self, node):
+    #self.const_symbols.append((node.ctype, node.value, node.value_type.resolved))
+    if node.ctype in self.skip_symbols:
+      return
     self.const_symbols.append(node.ctype)
 
   def handleRecord(self, node):
