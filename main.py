@@ -2,46 +2,32 @@ import sys
 sys.path.append("/usr/lib/gobject-introspection")
 from giscanner.girparser import GIRParser
 from giscanner import ast
-import StringIO
+from generator import Generator
+from collections import namedtuple
 
-class Generator:
+Param = namedtuple('Param', ['name', 'type', 'is_const'])
+
+class Parser:
   def __init__(self, filename):
     parser = GIRParser(False)
     parser.parse(filename)
 
-    self.out = StringIO.StringIO()
+    self.namespace = parser.get_namespace()
+    self.package_name = self.namespace.name.lower()
+    self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
+    self.includes = list(parser.get_c_includes())
+    deprecated_functions_file = '%s_deprecated_functions' % self.package_name
+    self.deprecated_functions = [l.strip() for l in open(deprecated_functions_file, 'r').xreadlines()]
+    skip_functions_file = '%s_skip_functions' % self.package_name
+    self.skip_functions = [l.strip() for l in open(skip_functions_file, 'r').xreadlines()]
 
-    print '=> namespace'
-    namespace = parser.get_namespace()
-    print namespace.name, namespace.version
-    self.namespace = namespace
-    package_name = namespace.name.lower()
-    print >>self.out, "package %s\n" % package_name
+    self.functions = {}
 
-    print '=> pkgconfig packages'
-    pkgs = []
-    for pkg in parser.get_pkgconfig_packages():
-      pkgs.append(pkg)
-      print pkg
-    print >>self.out, "// #cgo pkg-config: %s" % ' '.join(pkgs)
-
-    print '=> includes'
-    for include in parser.get_c_includes():
-      print include
-      print >>self.out, "// #include <%s>" % include
-
-    print >>self.out, 'import "C"\n'
-
-  def write(self, f):
-    output_file = open(f, 'w')
-    output_file.write(self.out.getvalue())
-    output_file.close()
-
-  def start(self):
-    print '=> nodes'
+  def parse(self):
     for node in self.namespace.itervalues():
       if isinstance(node, ast.Function):
-        self.handleFunction(node)
+        info = self.handleFunction(node)
+        self.functions[info.name] = info
       elif isinstance(node, ast.Enum):
         self.handleEnum(node)
       elif isinstance(node, ast.Constant):
@@ -64,54 +50,61 @@ class Generator:
         print 'not handle:', type(node)
 
   def handleFunction(self, node):
-    print '-- Function', node
-
-    c_function_name = node.symbol
-    function_name = node.name
-    go_func_name = convertFuncName(function_name)
-    out = []
-    out.append('func %s(' % go_func_name)
-
-    params_str = []
-    args = []
-    for param in node.parameters:
+    info = Dict()
+    info.name = name = node.name
+    info.c_name = c_name = node.symbol
+    info.deprecated = False
+    if not node.deprecated is None or c_name in self.deprecated_functions:
+      info.deprecated = True
+      return info
+    info.skip = False
+    if c_name in self.skip_functions:
+      info.skip = True
+      return info
+    info.go_name = go_name = convertFuncName(name)
+    info.parameters = parameters = []
+    has_varargs = False
+    has_pointer_of_pointer = False
+    has_va_list = False
+    has_long_double = False
+    for i, param in enumerate(node.parameters):
       arg_name = param.argname
       if arg_name == 'type':
         arg_name = '_type'
       elif arg_name == 'func':
         arg_name = '_func'
+      elif arg_name == 'len':
+        arg_name = '_len'
+
       arg_type = param.type.ctype
-      if arg_type == '<varargs>': 
-        self.out.write("// %s not support\n\n" % c_function_name)
-        return 
+      if arg_type == '<varargs>':
+        has_varargs = True
       elif arg_type.endswith('**'):
-        self.out.write("// %s not support\n\n" % c_function_name)
-        return 
+        has_pointer_of_pointer = True
       elif arg_type == 'va_list':
-        self.out.write("// %s not support\n\n" % c_function_name)
-        return 
+        has_va_list = True
+      elif 'long double' in arg_type:
+        has_long_double = True
       else:
-        arg_type = convertTypeName(param.type.ctype)
-        params_str.append('%s %s' % (arg_name, arg_type))
-        args.append(arg_name)
-    out.append(', '.join(params_str))
-    out.append(') ')
+        if arg_name is None:
+          arg_name = 'arg_%d' % i
+        arg_type, is_const = convertTypeName(param.type.ctype)
+        parameters.append(Param(arg_name, arg_type, is_const))
+    info.has_varargs = has_varargs
+    info.has_pointer_of_pointer = has_pointer_of_pointer
+    info.has_va_list = has_va_list
+    info.has_long_double = has_long_double
 
     no_return = False
     return_type = node.retval.type.ctype
     if return_type == 'void':
-      out.append('{\n')
       no_return = True
     else:
-      return_type = convertTypeName(return_type)
-      out.append('%s {\n' % return_type)
+      return_type, _ = convertTypeName(return_type)
+    info.no_return = no_return
+    info.return_type = return_type
 
-    if no_return:
-      out.append('\tC.%s(%s)\n' % (c_function_name, ', '.join(args)))
-    else:
-      out.append('\treturn C.%s(%s)\n' % (c_function_name, ', '.join(args)))
-    out.append('}\n\n')
-    self.out.write(''.join(out))
+    return info
 
   def handleEnum(self, node):
     c_enum_name = node.ctype
@@ -128,7 +121,6 @@ class Generator:
     #print name, c_type, value
 
   def handleRecord(self, node):
-    #print dir(node)
     type_name = node.ctype
     get_type_func = node.get_type
     for constructor in node.constructors:
@@ -153,21 +145,31 @@ def convertFuncName(s):
   return ''.join(words)
 
 def convertTypeName(s):
-  print "type =>", s
-  s = s.replace('const ', '') #TODO need wrapper
-  s = s.replace('volatile ', '') #TODO need wrapper
+  s = s.replace('volatile ', '')
+  is_const = False
+  if s.startswith('const '):
+    is_const = True
+    s = s.replace('const ', '')
+  if s == 'long double':
+    s = 'longdouble'
   s = 'C.' + s
   while s.endswith('*'):
     s = '*' + s[:-1]
-  return s
+  return s, is_const
+
+class Dict(dict):
+  __getattr__ = dict.__getitem__
+  __setattr__ = dict.__setattr__
 
 def main():
   if len(sys.argv) < 2:
     print "usage: %s [gir file]" % sys.argv[0]
     sys.exit()
-  generator = Generator(sys.argv[1])
-  generator.start()
-  generator.write("out.go")
+  parser = Parser(sys.argv[1])
+  parser.parse()
+  generator = Generator(parser)
+  generator.generate()
+  generator.write("%s.go" % parser.package_name)
 
 if __name__ == '__main__':
   main()
