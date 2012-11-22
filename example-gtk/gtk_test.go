@@ -6,13 +6,13 @@ import (
   "time"
 )
 
-func TestGtk(t *testing.T) {
+func TestBasicFunc(t *testing.T) {
   Init(nil, nil)
   True()
   False()
   fmt.Printf("gtk %v.%v.%v\n", GetMajorVersion(), GetMinorVersion(), GetMicroVersion())
   go func() {
-    <-time.After(time.Second * 1)
+    <-time.After(time.Millisecond * 500)
     MainQuit()
   }()
   Main()

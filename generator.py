@@ -35,32 +35,34 @@ class Generator:
     # imports
     print >>self.out, 'import ('
     print >>self.out, '\t"unsafe"'
-    print >>self.out, ')'
+    print >>self.out, ')\n'
 
     for func in self.parser.functions:
       self.generate_function(func)
 
+    self.generate_enum_symbols()
+
   def generate_function(self, func):
     # not support yet or has problem
     if func.deprecated:
-      self.out.write('\n//Deprecated %s\n' % func.c_name)
+      self.out.write('//Deprecated %s\n\n' % func.c_name)
       return
     elif func.skip:
-      self.out.write('\n//Skipped %s\n' % func.c_name)
+      self.out.write('//Skipped %s\n\n' % func.c_name)
       return
     elif func.has_varargs:
-      self.out.write('\n//TODO varargs %s\n' % func.c_name)
+      self.out.write('//TODO varargs %s\n\n' % func.c_name)
       return
     elif func.has_va_list:
-      self.out.write('\n//TODO va_list %s\n' % func.c_name)
+      self.out.write('//TODO va_list %s\n\n' % func.c_name)
       return
     elif func.has_long_double:
-      self.out.write('\n//TODO long double %s\n' % func.c_name)
+      self.out.write('//TODO long double %s\n\n' % func.c_name)
       return
 
     out = []
     # signature
-    out.append('\nfunc %s(%s) %s{\n' % (
+    out.append('func %s(%s) %s{\n' % (
       func.go_name,
       ', '.join('%s %s' % (param.name, param.go_type) for param in func.parameters),
       '' if func.no_return else (func.return_go_type + ' ')
@@ -80,9 +82,9 @@ class Generator:
           out.append('unsafe.Pointer(%s)' % param.name)
         else:
           out.append(param.name)
-      out.append(')\n}\n')
+      out.append(')\n}\n\n')
     else:
-      out.append('C.%s(%s)\n}\n' % (func.c_name, ', '.join(param.name for param in func.parameters)))
+      out.append('C.%s(%s)\n}\n\n' % (func.c_name, ', '.join(param.name for param in func.parameters)))
 
     self.out.write(''.join(out))
 
@@ -117,6 +119,13 @@ class Generator:
         out.append(param.name)
     out.append(');\n}\n')
     self.out.write(''.join(out))
+
+  def generate_enum_symbols(self):
+    for symbol in self.parser.enum_symbols:
+      go_name = symbol
+      if symbol.startswith('GTK_'):
+        go_name = symbol[4:]
+      print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
   def write(self, f):
     output_file = open(f, 'w')

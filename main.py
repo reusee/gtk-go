@@ -28,6 +28,7 @@ class Parser:
 
     self.functions = []
     self.functions_need_wrapper = []
+    self.enum_symbols = []
 
   def parse(self):
     for node in self.namespace.itervalues():
@@ -121,11 +122,10 @@ class Parser:
 
   def handleEnum(self, node):
     c_enum_name = node.ctype
-    #print c_enum_name
     for mem in node.members:
       member_value = mem.value
       member_symbol = mem.symbol
-      #print member_symbol, member_value
+      self.enum_symbols.append(member_symbol)
 
   def handleConstant(self, node):
     value = node.value
