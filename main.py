@@ -4,8 +4,9 @@ from giscanner.girparser import GIRParser
 from giscanner import ast
 from generator import Generator
 from collections import namedtuple
+import os
 
-Param = namedtuple('Param', ['name', 'type', 'is_const'])
+Param = namedtuple('Param', ['name', 'c_type', 'go_type', 'need_cast'])
 
 class Parser:
   def __init__(self, filename):
@@ -17,17 +18,24 @@ class Parser:
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
     self.includes = list(parser.get_c_includes())
     deprecated_functions_file = '%s_deprecated_functions' % self.package_name
-    self.deprecated_functions = [l.strip() for l in open(deprecated_functions_file, 'r').xreadlines()]
+    self.deprecated_functions = []
+    if os.path.exists(deprecated_functions_file):
+      self.deprecated_functions = [l.strip() for l in open(deprecated_functions_file, 'r').xreadlines()]
     skip_functions_file = '%s_skip_functions' % self.package_name
-    self.skip_functions = [l.strip() for l in open(skip_functions_file, 'r').xreadlines()]
+    self.skip_functions = []
+    if os.path.exists(skip_functions_file):
+      self.skip_functions = [l.strip() for l in open(skip_functions_file, 'r').xreadlines()]
 
-    self.functions = {}
+    self.functions = []
+    self.functions_need_wrapper = []
 
   def parse(self):
     for node in self.namespace.itervalues():
       if isinstance(node, ast.Function):
         info = self.handleFunction(node)
-        self.functions[info.name] = info
+        self.functions.append(info)
+        if info.need_wrapper:
+          self.functions_need_wrapper.append(info)
       elif isinstance(node, ast.Enum):
         self.handleEnum(node)
       elif isinstance(node, ast.Constant):
@@ -51,6 +59,10 @@ class Parser:
 
   def handleFunction(self, node):
     info = Dict()
+    info.need_wrapper = need_wrapper = False
+    info.has_varargs = has_varargs = False
+    info.has_va_list = has_va_list = False
+    info.has_long_double = has_long_double = False
     info.name = name = node.name
     info.c_name = c_name = node.symbol
     info.deprecated = False
@@ -63,10 +75,6 @@ class Parser:
       return info
     info.go_name = go_name = convertFuncName(name)
     info.parameters = parameters = []
-    has_varargs = False
-    has_pointer_of_pointer = False
-    has_va_list = False
-    has_long_double = False
     for i, param in enumerate(node.parameters):
       arg_name = param.argname
       if arg_name == 'type':
@@ -76,33 +84,38 @@ class Parser:
       elif arg_name == 'len':
         arg_name = '_len'
 
-      arg_type = param.type.ctype
-      if arg_type == '<varargs>':
+      arg_c_type = param.type.ctype
+      if arg_c_type == '<varargs>':
         has_varargs = True
-      elif arg_type.endswith('**'):
-        has_pointer_of_pointer = True
-      elif arg_type == 'va_list':
+      elif arg_c_type == 'va_list':
         has_va_list = True
-      elif 'long double' in arg_type:
+      elif 'long double' in arg_c_type:
         has_long_double = True
       else:
         if arg_name is None:
           arg_name = 'arg_%d' % i
-        arg_type, is_const = convertTypeName(param.type.ctype)
-        parameters.append(Param(arg_name, arg_type, is_const))
+        arg_go_type, need_cast = convert_to_go_type(param.type.ctype)
+        if need_cast:
+          need_wrapper = True
+        parameters.append(Param(arg_name, arg_c_type, arg_go_type, need_cast))
+    if node.throws:
+      parameters.append(Param('err', 'GError**', 'unsafe.Pointer', True))
+      need_wrapper = True
     info.has_varargs = has_varargs
-    info.has_pointer_of_pointer = has_pointer_of_pointer
     info.has_va_list = has_va_list
     info.has_long_double = has_long_double
+    info.need_wrapper = need_wrapper and not has_varargs and not has_va_list and not has_long_double
 
     no_return = False
-    return_type = node.retval.type.ctype
-    if return_type == 'void':
+    return_c_type = node.retval.type.ctype
+    return_go_type = None
+    if return_c_type == 'void':
       no_return = True
     else:
-      return_type, _ = convertTypeName(return_type)
+      return_go_type, _ = convert_to_go_type(return_c_type)
     info.no_return = no_return
-    info.return_type = return_type
+    info.return_c_type = return_c_type
+    info.return_go_type = return_go_type
 
     return info
 
@@ -144,18 +157,22 @@ def convertFuncName(s):
   words = [w.capitalize() for w in words]
   return ''.join(words)
 
-def convertTypeName(s):
-  s = s.replace('volatile ', '')
-  is_const = False
+def convert_to_go_type(s):
+  s = s.replace('volatile ', '') 
+  need_cast = False
   if s.startswith('const '):
-    is_const = True
+    need_cast = True
     s = s.replace('const ', '')
   if s == 'long double':
     s = 'longdouble'
-  s = 'C.' + s
-  while s.endswith('*'):
+  if s.endswith('**'):
+    need_cast = True
+    s = 'unsafe.Pointer'
+  else:
+    s = 'C.' + s
+  if s.endswith('*'):
     s = '*' + s[:-1]
-  return s, is_const
+  return s, need_cast
 
 class Dict(dict):
   __getattr__ = dict.__getitem__
@@ -169,7 +186,7 @@ def main():
   parser.parse()
   generator = Generator(parser)
   generator.generate()
-  generator.write("%s.go" % parser.package_name)
+  generator.write("example-%s/%s.go" % (parser.package_name, parser.package_name))
 
 if __name__ == '__main__':
   main()
