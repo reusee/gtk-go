@@ -602,8 +602,8 @@ func Access(filename *C.gchar, mode C.int) C.int {
 	return C._g_access(unsafe.Pointer(filename), mode)
 }
 
-func ArrayFree(array *C.GArray, free_segment C.gboolean) *C.gchar {
-	return C.g_array_free(array, free_segment)
+func ArrayFree(array *C.GArray, free_segment C.gboolean) string {
+	return C.GoString((*C.char)(C.g_array_free(array, free_segment)))
 }
 
 func ArrayGetElementSize(array *C.GArray) C.guint {
@@ -622,20 +622,20 @@ func AsciiDigitValue(c C.gchar) C.gint {
 	return C.g_ascii_digit_value(c)
 }
 
-func AsciiDtostr(buffer *C.gchar, buf_len C.gint, d C.gdouble) *C.gchar {
-	return C.g_ascii_dtostr(buffer, buf_len, d)
+func AsciiDtostr(buffer *C.gchar, buf_len C.gint, d C.gdouble) string {
+	return C.GoString((*C.char)(C.g_ascii_dtostr(buffer, buf_len, d)))
 }
 
-func AsciiFormatd(buffer *C.gchar, buf_len C.gint, format *C.gchar, d C.gdouble) *C.gchar {
-	return C._g_ascii_formatd(buffer, buf_len, unsafe.Pointer(format), d)
+func AsciiFormatd(buffer *C.gchar, buf_len C.gint, format *C.gchar, d C.gdouble) string {
+	return C.GoString((*C.char)(C._g_ascii_formatd(buffer, buf_len, unsafe.Pointer(format), d)))
 }
 
 func AsciiStrcasecmp(s1 *C.gchar, s2 *C.gchar) C.gint {
 	return C._g_ascii_strcasecmp(unsafe.Pointer(s1), unsafe.Pointer(s2))
 }
 
-func AsciiStrdown(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_ascii_strdown(unsafe.Pointer(str), _len)
+func AsciiStrdown(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_ascii_strdown(unsafe.Pointer(str), _len)))
 }
 
 func AsciiStrncasecmp(s1 *C.gchar, s2 *C.gchar, n C.gsize) C.gint {
@@ -654,8 +654,8 @@ func AsciiStrtoull(nptr *C.gchar, endptr unsafe.Pointer, base C.guint) C.guint64
 	return C._g_ascii_strtoull(unsafe.Pointer(nptr), unsafe.Pointer(endptr), base)
 }
 
-func AsciiStrup(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_ascii_strup(unsafe.Pointer(str), _len)
+func AsciiStrup(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_ascii_strup(unsafe.Pointer(str), _len)))
 }
 
 func AsciiTolower(c C.gchar) C.gchar {
@@ -738,8 +738,8 @@ func Base64DecodeStep(in *C.gchar, _len C.gsize, out *C.guchar, state *C.gint, s
 	return C.g_base64_decode_step(in, _len, out, state, save)
 }
 
-func Base64Encode(data *C.guchar, _len C.gsize) *C.gchar {
-	return C.g_base64_encode(data, _len)
+func Base64Encode(data *C.guchar, _len C.gsize) string {
+	return C.GoString((*C.char)(C.g_base64_encode(data, _len)))
 }
 
 func Base64EncodeClose(break_lines C.gboolean, out *C.gchar, state *C.gint, save *C.gint) C.gsize {
@@ -782,14 +782,14 @@ func BookmarkFileErrorQuark() C.GQuark {
 
 //TODO varargs g_build_filename
 
-func BuildFilenamev(args unsafe.Pointer) *C.gchar {
-	return C._g_build_filenamev(unsafe.Pointer(args))
+func BuildFilenamev(args unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_build_filenamev(unsafe.Pointer(args))))
 }
 
 //TODO varargs g_build_path
 
-func BuildPathv(separator *C.gchar, args unsafe.Pointer) *C.gchar {
-	return C._g_build_pathv(unsafe.Pointer(separator), unsafe.Pointer(args))
+func BuildPathv(separator *C.gchar, args unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_build_pathv(unsafe.Pointer(separator), unsafe.Pointer(args))))
 }
 
 func ByteArrayFree(array *C.GByteArray, free_segment C.gboolean) *C.guint8 {
@@ -816,8 +816,8 @@ func Chdir(path *C.gchar) C.int {
 	return C._g_chdir(unsafe.Pointer(path))
 }
 
-func CheckVersion(required_major C.guint, required_minor C.guint, required_micro C.guint) *C.gchar {
-	return C.glib_check_version(required_major, required_minor, required_micro)
+func CheckVersion(required_major C.guint, required_minor C.guint, required_micro C.guint) string {
+	return C.GoString((*C.char)(C.glib_check_version(required_major, required_minor, required_micro)))
 }
 
 func ChecksumTypeGetLength(checksum_type C.GChecksumType) C.gssize {
@@ -842,40 +842,40 @@ func ClearError(err unsafe.Pointer) {
 
 //Skipped g_clear_pointer
 
-func ComputeChecksumForBytes(checksum_type C.GChecksumType, data *C.GBytes) *C.gchar {
-	return C.g_compute_checksum_for_bytes(checksum_type, data)
+func ComputeChecksumForBytes(checksum_type C.GChecksumType, data *C.GBytes) string {
+	return C.GoString((*C.char)(C.g_compute_checksum_for_bytes(checksum_type, data)))
 }
 
-func ComputeChecksumForData(checksum_type C.GChecksumType, data *C.guchar, length C.gsize) *C.gchar {
-	return C._g_compute_checksum_for_data(checksum_type, unsafe.Pointer(data), length)
+func ComputeChecksumForData(checksum_type C.GChecksumType, data *C.guchar, length C.gsize) string {
+	return C.GoString((*C.char)(C._g_compute_checksum_for_data(checksum_type, unsafe.Pointer(data), length)))
 }
 
-func ComputeChecksumForString(checksum_type C.GChecksumType, str *C.gchar, length C.gssize) *C.gchar {
-	return C._g_compute_checksum_for_string(checksum_type, unsafe.Pointer(str), length)
+func ComputeChecksumForString(checksum_type C.GChecksumType, str *C.gchar, length C.gssize) string {
+	return C.GoString((*C.char)(C._g_compute_checksum_for_string(checksum_type, unsafe.Pointer(str), length)))
 }
 
-func ComputeHmacForData(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, data *C.guchar, length C.gsize) *C.gchar {
-	return C._g_compute_hmac_for_data(digest_type, key, key_len, unsafe.Pointer(data), length)
+func ComputeHmacForData(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, data *C.guchar, length C.gsize) string {
+	return C.GoString((*C.char)(C._g_compute_hmac_for_data(digest_type, key, key_len, unsafe.Pointer(data), length)))
 }
 
-func ComputeHmacForString(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, str *C.gchar, length C.gssize) *C.gchar {
-	return C._g_compute_hmac_for_string(digest_type, key, key_len, unsafe.Pointer(str), length)
+func ComputeHmacForString(digest_type C.GChecksumType, key *C.guchar, key_len C.gsize, str *C.gchar, length C.gssize) string {
+	return C.GoString((*C.char)(C._g_compute_hmac_for_string(digest_type, key, key_len, unsafe.Pointer(str), length)))
 }
 
-func Convert(str *C.gchar, _len C.gssize, to_codeset *C.gchar, from_codeset *C.gchar, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_convert(unsafe.Pointer(str), _len, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), bytes_read, bytes_written, unsafe.Pointer(err))
+func Convert(str *C.gchar, _len C.gssize, to_codeset *C.gchar, from_codeset *C.gchar, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_convert(unsafe.Pointer(str), _len, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
 func ConvertErrorQuark() C.GQuark {
 	return C.g_convert_error_quark()
 }
 
-func ConvertWithFallback(str *C.gchar, _len C.gssize, to_codeset *C.gchar, from_codeset *C.gchar, fallback *C.gchar, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_convert_with_fallback(unsafe.Pointer(str), _len, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), unsafe.Pointer(fallback), bytes_read, bytes_written, unsafe.Pointer(err))
+func ConvertWithFallback(str *C.gchar, _len C.gssize, to_codeset *C.gchar, from_codeset *C.gchar, fallback *C.gchar, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_convert_with_fallback(unsafe.Pointer(str), _len, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), unsafe.Pointer(fallback), bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func ConvertWithIconv(str *C.gchar, _len C.gssize, converter C.GIConv, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_convert_with_iconv(unsafe.Pointer(str), _len, converter, bytes_read, bytes_written, unsafe.Pointer(err))
+func ConvertWithIconv(str *C.gchar, _len C.gssize, converter C.GIConv, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_convert_with_iconv(unsafe.Pointer(str), _len, converter, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
 func DatalistClear(datalist unsafe.Pointer) {
@@ -1002,16 +1002,16 @@ func DateValidYear(year C.GDateYear) C.gboolean {
 	return C.g_date_valid_year(year)
 }
 
-func Dcgettext(domain *C.gchar, msgid *C.gchar, category C.gint) *C.gchar {
-	return C._g_dcgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), category)
+func Dcgettext(domain *C.gchar, msgid *C.gchar, category C.gint) string {
+	return C.GoString((*C.char)(C._g_dcgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), category)))
 }
 
-func Dgettext(domain *C.gchar, msgid *C.gchar) *C.gchar {
-	return C._g_dgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid))
+func Dgettext(domain *C.gchar, msgid *C.gchar) string {
+	return C.GoString((*C.char)(C._g_dgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid))))
 }
 
-func DirMakeTmp(tmpl *C.gchar, err unsafe.Pointer) *C.gchar {
-	return C._g_dir_make_tmp(tmpl, unsafe.Pointer(err))
+func DirMakeTmp(tmpl *C.gchar, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_dir_make_tmp(tmpl, unsafe.Pointer(err))))
 }
 
 func DirectEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
@@ -1022,8 +1022,8 @@ func DirectHash(v C.gconstpointer) C.guint {
 	return C.g_direct_hash(v)
 }
 
-func Dngettext(domain *C.gchar, msgid *C.gchar, msgid_plural *C.gchar, n C.gulong) *C.gchar {
-	return C._g_dngettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), unsafe.Pointer(msgid_plural), n)
+func Dngettext(domain *C.gchar, msgid *C.gchar, msgid_plural *C.gchar, n C.gulong) string {
+	return C.GoString((*C.char)(C._g_dngettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), unsafe.Pointer(msgid_plural), n)))
 }
 
 func DoubleEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
@@ -1034,16 +1034,16 @@ func DoubleHash(v C.gconstpointer) C.guint {
 	return C.g_double_hash(v)
 }
 
-func Dpgettext(domain *C.gchar, msgctxtid *C.gchar, msgidoffset C.gsize) *C.gchar {
-	return C._g_dpgettext(unsafe.Pointer(domain), unsafe.Pointer(msgctxtid), msgidoffset)
+func Dpgettext(domain *C.gchar, msgctxtid *C.gchar, msgidoffset C.gsize) string {
+	return C.GoString((*C.char)(C._g_dpgettext(unsafe.Pointer(domain), unsafe.Pointer(msgctxtid), msgidoffset)))
 }
 
-func Dpgettext2(domain *C.gchar, context *C.gchar, msgid *C.gchar) *C.gchar {
-	return C._g_dpgettext2(unsafe.Pointer(domain), unsafe.Pointer(context), unsafe.Pointer(msgid))
+func Dpgettext2(domain *C.gchar, context *C.gchar, msgid *C.gchar) string {
+	return C.GoString((*C.char)(C._g_dpgettext2(unsafe.Pointer(domain), unsafe.Pointer(context), unsafe.Pointer(msgid))))
 }
 
-func EnvironGetenv(envp unsafe.Pointer, variable *C.gchar) *C.gchar {
-	return C._g_environ_getenv(unsafe.Pointer(envp), unsafe.Pointer(variable))
+func EnvironGetenv(envp unsafe.Pointer, variable *C.gchar) string {
+	return C.GoString((*C.char)(C._g_environ_getenv(unsafe.Pointer(envp), unsafe.Pointer(variable))))
 }
 
 func EnvironSetenv(envp unsafe.Pointer, variable *C.gchar, value *C.gchar, overwrite C.gboolean) unsafe.Pointer {
@@ -1070,8 +1070,8 @@ func FileOpenTmp(tmpl *C.gchar, name_used unsafe.Pointer, err unsafe.Pointer) C.
 	return C._g_file_open_tmp(tmpl, unsafe.Pointer(name_used), unsafe.Pointer(err))
 }
 
-func FileReadLink(filename *C.gchar, err unsafe.Pointer) *C.gchar {
-	return C._g_file_read_link(unsafe.Pointer(filename), unsafe.Pointer(err))
+func FileReadLink(filename *C.gchar, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_file_read_link(unsafe.Pointer(filename), unsafe.Pointer(err))))
 }
 
 func FileSetContents(filename *C.gchar, contents *C.gchar, length C.gssize, err unsafe.Pointer) C.gboolean {
@@ -1082,42 +1082,42 @@ func FileTest(filename *C.gchar, test C.GFileTest) C.gboolean {
 	return C._g_file_test(unsafe.Pointer(filename), test)
 }
 
-func FilenameDisplayBasename(filename *C.gchar) *C.gchar {
-	return C._g_filename_display_basename(unsafe.Pointer(filename))
+func FilenameDisplayBasename(filename *C.gchar) string {
+	return C.GoString((*C.char)(C._g_filename_display_basename(unsafe.Pointer(filename))))
 }
 
-func FilenameDisplayName(filename *C.gchar) *C.gchar {
-	return C._g_filename_display_name(unsafe.Pointer(filename))
+func FilenameDisplayName(filename *C.gchar) string {
+	return C.GoString((*C.char)(C._g_filename_display_name(unsafe.Pointer(filename))))
 }
 
-func FilenameFromUri(uri *C.gchar, hostname unsafe.Pointer, err unsafe.Pointer) *C.gchar {
-	return C._g_filename_from_uri(unsafe.Pointer(uri), unsafe.Pointer(hostname), unsafe.Pointer(err))
+func FilenameFromUri(uri *C.gchar, hostname unsafe.Pointer, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_filename_from_uri(unsafe.Pointer(uri), unsafe.Pointer(hostname), unsafe.Pointer(err))))
 }
 
-func FilenameFromUtf8(utf8string *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_filename_from_utf8(unsafe.Pointer(utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))
+func FilenameFromUtf8(utf8string *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_filename_from_utf8(unsafe.Pointer(utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func FilenameToUri(filename *C.gchar, hostname *C.gchar, err unsafe.Pointer) *C.gchar {
-	return C._g_filename_to_uri(unsafe.Pointer(filename), unsafe.Pointer(hostname), unsafe.Pointer(err))
+func FilenameToUri(filename *C.gchar, hostname *C.gchar, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_filename_to_uri(unsafe.Pointer(filename), unsafe.Pointer(hostname), unsafe.Pointer(err))))
 }
 
-func FilenameToUtf8(opsysstring *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_filename_to_utf8(unsafe.Pointer(opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))
+func FilenameToUtf8(opsysstring *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_filename_to_utf8(unsafe.Pointer(opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func FindProgramInPath(program *C.gchar) *C.gchar {
-	return C._g_find_program_in_path(unsafe.Pointer(program))
+func FindProgramInPath(program *C.gchar) string {
+	return C.GoString((*C.char)(C._g_find_program_in_path(unsafe.Pointer(program))))
 }
 
-func FormatSize(size C.guint64) *C.gchar {
-	return C.g_format_size(size)
+func FormatSize(size C.guint64) string {
+	return C.GoString((*C.char)(C.g_format_size(size)))
 }
 
 //Deprecated g_format_size_for_display
 
-func FormatSizeFull(size C.guint64, flags C.GFormatSizeFlags) *C.gchar {
-	return C.g_format_size_full(size, flags)
+func FormatSizeFull(size C.guint64, flags C.GFormatSizeFlags) string {
+	return C.GoString((*C.char)(C.g_format_size_full(size, flags)))
 }
 
 //TODO varargs g_fprintf
@@ -1126,20 +1126,20 @@ func Free(mem C.gpointer) {
 	C.g_free(mem)
 }
 
-func GetApplicationName() *C.gchar {
-	return C.g_get_application_name()
+func GetApplicationName() string {
+	return C.GoString((*C.char)(C.g_get_application_name()))
 }
 
 func GetCharset(charset unsafe.Pointer) C.gboolean {
 	return C._g_get_charset(unsafe.Pointer(charset))
 }
 
-func GetCodeset() *C.gchar {
-	return C.g_get_codeset()
+func GetCodeset() string {
+	return C.GoString((*C.char)(C.g_get_codeset()))
 }
 
-func GetCurrentDir() *C.gchar {
-	return C.g_get_current_dir()
+func GetCurrentDir() string {
+	return C.GoString((*C.char)(C.g_get_current_dir()))
 }
 
 func GetCurrentTime(result *C.GTimeVal) {
@@ -1154,12 +1154,12 @@ func GetFilenameCharsets(charsets unsafe.Pointer) C.gboolean {
 	return C._g_get_filename_charsets(unsafe.Pointer(charsets))
 }
 
-func GetHomeDir() *C.gchar {
-	return C.g_get_home_dir()
+func GetHomeDir() string {
+	return C.GoString((*C.char)(C.g_get_home_dir()))
 }
 
-func GetHostName() *C.gchar {
-	return C.g_get_host_name()
+func GetHostName() string {
+	return C.GoString((*C.char)(C.g_get_host_name()))
 }
 
 func GetLanguageNames() unsafe.Pointer {
@@ -1174,12 +1174,12 @@ func GetMonotonicTime() C.gint64 {
 	return C.g_get_monotonic_time()
 }
 
-func GetPrgname() *C.gchar {
-	return C.g_get_prgname()
+func GetPrgname() string {
+	return C.GoString((*C.char)(C.g_get_prgname()))
 }
 
-func GetRealName() *C.gchar {
-	return C.g_get_real_name()
+func GetRealName() string {
+	return C.GoString((*C.char)(C.g_get_real_name()))
 }
 
 func GetRealTime() C.gint64 {
@@ -1194,36 +1194,36 @@ func GetSystemDataDirs() unsafe.Pointer {
 	return unsafe.Pointer(C.g_get_system_data_dirs())
 }
 
-func GetTmpDir() *C.gchar {
-	return C.g_get_tmp_dir()
+func GetTmpDir() string {
+	return C.GoString((*C.char)(C.g_get_tmp_dir()))
 }
 
-func GetUserCacheDir() *C.gchar {
-	return C.g_get_user_cache_dir()
+func GetUserCacheDir() string {
+	return C.GoString((*C.char)(C.g_get_user_cache_dir()))
 }
 
-func GetUserConfigDir() *C.gchar {
-	return C.g_get_user_config_dir()
+func GetUserConfigDir() string {
+	return C.GoString((*C.char)(C.g_get_user_config_dir()))
 }
 
-func GetUserDataDir() *C.gchar {
-	return C.g_get_user_data_dir()
+func GetUserDataDir() string {
+	return C.GoString((*C.char)(C.g_get_user_data_dir()))
 }
 
-func GetUserName() *C.gchar {
-	return C.g_get_user_name()
+func GetUserName() string {
+	return C.GoString((*C.char)(C.g_get_user_name()))
 }
 
-func GetUserRuntimeDir() *C.gchar {
-	return C.g_get_user_runtime_dir()
+func GetUserRuntimeDir() string {
+	return C.GoString((*C.char)(C.g_get_user_runtime_dir()))
 }
 
-func GetUserSpecialDir(directory C.GUserDirectory) *C.gchar {
-	return C.g_get_user_special_dir(directory)
+func GetUserSpecialDir(directory C.GUserDirectory) string {
+	return C.GoString((*C.char)(C.g_get_user_special_dir(directory)))
 }
 
-func Getenv(variable *C.gchar) *C.gchar {
-	return C._g_getenv(unsafe.Pointer(variable))
+func Getenv(variable *C.gchar) string {
+	return C.GoString((*C.char)(C._g_getenv(unsafe.Pointer(variable))))
 }
 
 func HashTableAdd(hash_table *C.GHashTable, key C.gpointer) {
@@ -1310,12 +1310,12 @@ func HostnameIsNonAscii(hostname *C.gchar) C.gboolean {
 	return C._g_hostname_is_non_ascii(unsafe.Pointer(hostname))
 }
 
-func HostnameToAscii(hostname *C.gchar) *C.gchar {
-	return C._g_hostname_to_ascii(unsafe.Pointer(hostname))
+func HostnameToAscii(hostname *C.gchar) string {
+	return C.GoString((*C.char)(C._g_hostname_to_ascii(unsafe.Pointer(hostname))))
 }
 
-func HostnameToUnicode(hostname *C.gchar) *C.gchar {
-	return C._g_hostname_to_unicode(unsafe.Pointer(hostname))
+func HostnameToUnicode(hostname *C.gchar) string {
+	return C.GoString((*C.char)(C._g_hostname_to_unicode(unsafe.Pointer(hostname))))
 }
 
 func IdleAdd(function C.GSourceFunc, data C.gpointer) C.guint {
@@ -1350,12 +1350,12 @@ func IntHash(v C.gconstpointer) C.guint {
 	return C.g_int_hash(v)
 }
 
-func InternStaticString(string *C.gchar) *C.gchar {
-	return C._g_intern_static_string(unsafe.Pointer(string))
+func InternStaticString(string *C.gchar) string {
+	return C.GoString((*C.char)(C._g_intern_static_string(unsafe.Pointer(string))))
 }
 
-func InternString(string *C.gchar) *C.gchar {
-	return C._g_intern_string(unsafe.Pointer(string))
+func InternString(string *C.gchar) string {
+	return C.GoString((*C.char)(C._g_intern_string(unsafe.Pointer(string))))
 }
 
 func IoAddWatch(channel *C.GIOChannel, condition C.GIOCondition, _func C.GIOFunc, user_data C.gpointer) C.guint {
@@ -1386,12 +1386,12 @@ func Listenv() unsafe.Pointer {
 	return unsafe.Pointer(C.g_listenv())
 }
 
-func LocaleFromUtf8(utf8string *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_locale_from_utf8(unsafe.Pointer(utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))
+func LocaleFromUtf8(utf8string *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_locale_from_utf8(unsafe.Pointer(utf8string), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
-func LocaleToUtf8(opsysstring *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) *C.gchar {
-	return C._g_locale_to_utf8(unsafe.Pointer(opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))
+func LocaleToUtf8(opsysstring *C.gchar, _len C.gssize, bytes_read *C.gsize, bytes_written *C.gsize, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_locale_to_utf8(unsafe.Pointer(opsysstring), _len, bytes_read, bytes_written, unsafe.Pointer(err))))
 }
 
 //TODO varargs g_log
@@ -1464,8 +1464,8 @@ func MarkupErrorQuark() C.GQuark {
 	return C.g_markup_error_quark()
 }
 
-func MarkupEscapeText(text *C.gchar, length C.gssize) *C.gchar {
-	return C._g_markup_escape_text(unsafe.Pointer(text), length)
+func MarkupEscapeText(text *C.gchar, length C.gssize) string {
+	return C.GoString((*C.char)(C._g_markup_escape_text(unsafe.Pointer(text), length)))
 }
 
 //TODO varargs g_markup_printf_escaped
@@ -1492,12 +1492,12 @@ func MkdirWithParents(pathname *C.gchar, mode C.gint) C.gint {
 	return C._g_mkdir_with_parents(unsafe.Pointer(pathname), mode)
 }
 
-func Mkdtemp(tmpl *C.gchar) *C.gchar {
-	return C.g_mkdtemp(tmpl)
+func Mkdtemp(tmpl *C.gchar) string {
+	return C.GoString((*C.char)(C.g_mkdtemp(tmpl)))
 }
 
-func MkdtempFull(tmpl *C.gchar, mode C.gint) *C.gchar {
-	return C.g_mkdtemp_full(tmpl, mode)
+func MkdtempFull(tmpl *C.gchar, mode C.gint) string {
+	return C.GoString((*C.char)(C.g_mkdtemp_full(tmpl, mode)))
 }
 
 func Mkstemp(tmpl *C.gchar) C.gint {
@@ -1532,20 +1532,20 @@ func ParseDebugString(string *C.gchar, keys *C.GDebugKey, nkeys C.guint) C.guint
 	return C._g_parse_debug_string(unsafe.Pointer(string), keys, nkeys)
 }
 
-func PathGetBasename(file_name *C.gchar) *C.gchar {
-	return C._g_path_get_basename(unsafe.Pointer(file_name))
+func PathGetBasename(file_name *C.gchar) string {
+	return C.GoString((*C.char)(C._g_path_get_basename(unsafe.Pointer(file_name))))
 }
 
-func PathGetDirname(file_name *C.gchar) *C.gchar {
-	return C._g_path_get_dirname(unsafe.Pointer(file_name))
+func PathGetDirname(file_name *C.gchar) string {
+	return C.GoString((*C.char)(C._g_path_get_dirname(unsafe.Pointer(file_name))))
 }
 
 func PathIsAbsolute(file_name *C.gchar) C.gboolean {
 	return C._g_path_is_absolute(unsafe.Pointer(file_name))
 }
 
-func PathSkipRoot(file_name *C.gchar) *C.gchar {
-	return C._g_path_skip_root(unsafe.Pointer(file_name))
+func PathSkipRoot(file_name *C.gchar) string {
+	return C.GoString((*C.char)(C._g_path_skip_root(unsafe.Pointer(file_name))))
 }
 
 func PatternMatch(pspec *C.GPatternSpec, string_length C.guint, string *C.gchar, string_reversed *C.gchar) C.gboolean {
@@ -1626,8 +1626,8 @@ func QuarkFromString(string *C.gchar) C.GQuark {
 	return C._g_quark_from_string(unsafe.Pointer(string))
 }
 
-func QuarkToString(quark C.GQuark) *C.gchar {
-	return C.g_quark_to_string(quark)
+func QuarkToString(quark C.GQuark) string {
+	return C.GoString((*C.char)(C.g_quark_to_string(quark)))
 }
 
 func QuarkTryString(string *C.gchar) C.GQuark {
@@ -1670,12 +1670,12 @@ func RegexErrorQuark() C.GQuark {
 	return C.g_regex_error_quark()
 }
 
-func RegexEscapeNul(string *C.gchar, length C.gint) *C.gchar {
-	return C._g_regex_escape_nul(unsafe.Pointer(string), length)
+func RegexEscapeNul(string *C.gchar, length C.gint) string {
+	return C.GoString((*C.char)(C._g_regex_escape_nul(unsafe.Pointer(string), length)))
 }
 
-func RegexEscapeString(string *C.gchar, length C.gint) *C.gchar {
-	return C.g_regex_escape_string(string, length)
+func RegexEscapeString(string *C.gchar, length C.gint) string {
+	return C.GoString((*C.char)(C.g_regex_escape_string(string, length)))
 }
 
 func RegexMatchSimple(pattern *C.gchar, string *C.gchar, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) C.gboolean {
@@ -1756,12 +1756,12 @@ func ShellParseArgv(command_line *C.gchar, argcp *C.gint, argvp unsafe.Pointer, 
 	return C._g_shell_parse_argv(unsafe.Pointer(command_line), argcp, unsafe.Pointer(argvp), unsafe.Pointer(err))
 }
 
-func ShellQuote(unquoted_string *C.gchar) *C.gchar {
-	return C._g_shell_quote(unsafe.Pointer(unquoted_string))
+func ShellQuote(unquoted_string *C.gchar) string {
+	return C.GoString((*C.char)(C._g_shell_quote(unsafe.Pointer(unquoted_string))))
 }
 
-func ShellUnquote(quoted_string *C.gchar, err unsafe.Pointer) *C.gchar {
-	return C._g_shell_unquote(unsafe.Pointer(quoted_string), unsafe.Pointer(err))
+func ShellUnquote(quoted_string *C.gchar, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_shell_unquote(unsafe.Pointer(quoted_string), unsafe.Pointer(err))))
 }
 
 func SliceAlloc(block_size C.gsize) C.gpointer {
@@ -1850,8 +1850,8 @@ func SpawnSync(working_directory *C.gchar, argv unsafe.Pointer, envp unsafe.Poin
 
 //TODO varargs g_sprintf
 
-func Stpcpy(dest *C.gchar, src *C.char) *C.gchar {
-	return C._g_stpcpy(dest, unsafe.Pointer(src))
+func Stpcpy(dest *C.gchar, src *C.char) string {
+	return C.GoString((*C.char)(C._g_stpcpy(dest, unsafe.Pointer(src))))
 }
 
 func StrEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
@@ -1870,38 +1870,38 @@ func StrHash(v C.gconstpointer) C.guint {
 	return C.g_str_hash(v)
 }
 
-func Strcanon(string *C.gchar, valid_chars *C.gchar, substitutor C.gchar) *C.gchar {
-	return C._g_strcanon(string, unsafe.Pointer(valid_chars), substitutor)
+func Strcanon(string *C.gchar, valid_chars *C.gchar, substitutor C.gchar) string {
+	return C.GoString((*C.char)(C._g_strcanon(string, unsafe.Pointer(valid_chars), substitutor)))
 }
 
 //Deprecated g_strcasecmp
 
-func Strchomp(string *C.gchar) *C.gchar {
-	return C.g_strchomp(string)
+func Strchomp(string *C.gchar) string {
+	return C.GoString((*C.char)(C.g_strchomp(string)))
 }
 
-func Strchug(string *C.gchar) *C.gchar {
-	return C.g_strchug(string)
+func Strchug(string *C.gchar) string {
+	return C.GoString((*C.char)(C.g_strchug(string)))
 }
 
 func Strcmp0(str1 *C.char, str2 *C.char) C.int {
 	return C._g_strcmp0(unsafe.Pointer(str1), unsafe.Pointer(str2))
 }
 
-func Strcompress(source *C.gchar) *C.gchar {
-	return C._g_strcompress(unsafe.Pointer(source))
+func Strcompress(source *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strcompress(unsafe.Pointer(source))))
 }
 
 //TODO varargs g_strconcat
 
-func Strdelimit(string *C.gchar, delimiters *C.gchar, new_delimiter C.gchar) *C.gchar {
-	return C._g_strdelimit(string, unsafe.Pointer(delimiters), new_delimiter)
+func Strdelimit(string *C.gchar, delimiters *C.gchar, new_delimiter C.gchar) string {
+	return C.GoString((*C.char)(C._g_strdelimit(string, unsafe.Pointer(delimiters), new_delimiter)))
 }
 
 //Deprecated g_strdown
 
-func Strdup(str *C.gchar) *C.gchar {
-	return C._g_strdup(unsafe.Pointer(str))
+func Strdup(str *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strdup(unsafe.Pointer(str))))
 }
 
 //TODO varargs g_strdup_printf
@@ -1912,12 +1912,12 @@ func Strdupv(str_array unsafe.Pointer) unsafe.Pointer {
 	return unsafe.Pointer(C._g_strdupv(unsafe.Pointer(str_array)))
 }
 
-func Strerror(errnum C.gint) *C.gchar {
-	return C.g_strerror(errnum)
+func Strerror(errnum C.gint) string {
+	return C.GoString((*C.char)(C.g_strerror(errnum)))
 }
 
-func Strescape(source *C.gchar, exceptions *C.gchar) *C.gchar {
-	return C._g_strescape(unsafe.Pointer(source), unsafe.Pointer(exceptions))
+func Strescape(source *C.gchar, exceptions *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strescape(unsafe.Pointer(source), unsafe.Pointer(exceptions))))
 }
 
 func Strfreev(str_array unsafe.Pointer) {
@@ -1936,14 +1936,14 @@ func StringSizedNew(dfl_size C.gsize) *C.GString {
 	return C.g_string_sized_new(dfl_size)
 }
 
-func StripContext(msgid *C.gchar, msgval *C.gchar) *C.gchar {
-	return C._g_strip_context(unsafe.Pointer(msgid), unsafe.Pointer(msgval))
+func StripContext(msgid *C.gchar, msgval *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strip_context(unsafe.Pointer(msgid), unsafe.Pointer(msgval))))
 }
 
 //TODO varargs g_strjoin
 
-func Strjoinv(separator *C.gchar, str_array unsafe.Pointer) *C.gchar {
-	return C._g_strjoinv(unsafe.Pointer(separator), unsafe.Pointer(str_array))
+func Strjoinv(separator *C.gchar, str_array unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_strjoinv(unsafe.Pointer(separator), unsafe.Pointer(str_array))))
 }
 
 func Strlcat(dest *C.gchar, src *C.gchar, dest_size C.gsize) C.gsize {
@@ -1956,28 +1956,28 @@ func Strlcpy(dest *C.gchar, src *C.gchar, dest_size C.gsize) C.gsize {
 
 //Deprecated g_strncasecmp
 
-func Strndup(str *C.gchar, n C.gsize) *C.gchar {
-	return C._g_strndup(unsafe.Pointer(str), n)
+func Strndup(str *C.gchar, n C.gsize) string {
+	return C.GoString((*C.char)(C._g_strndup(unsafe.Pointer(str), n)))
 }
 
-func Strnfill(length C.gsize, fill_char C.gchar) *C.gchar {
-	return C.g_strnfill(length, fill_char)
+func Strnfill(length C.gsize, fill_char C.gchar) string {
+	return C.GoString((*C.char)(C.g_strnfill(length, fill_char)))
 }
 
-func Strreverse(string *C.gchar) *C.gchar {
-	return C.g_strreverse(string)
+func Strreverse(string *C.gchar) string {
+	return C.GoString((*C.char)(C.g_strreverse(string)))
 }
 
-func Strrstr(haystack *C.gchar, needle *C.gchar) *C.gchar {
-	return C._g_strrstr(unsafe.Pointer(haystack), unsafe.Pointer(needle))
+func Strrstr(haystack *C.gchar, needle *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strrstr(unsafe.Pointer(haystack), unsafe.Pointer(needle))))
 }
 
-func StrrstrLen(haystack *C.gchar, haystack_len C.gssize, needle *C.gchar) *C.gchar {
-	return C._g_strrstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))
+func StrrstrLen(haystack *C.gchar, haystack_len C.gssize, needle *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strrstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))))
 }
 
-func Strsignal(signum C.gint) *C.gchar {
-	return C.g_strsignal(signum)
+func Strsignal(signum C.gint) string {
+	return C.GoString((*C.char)(C.g_strsignal(signum)))
 }
 
 func Strsplit(string *C.gchar, delimiter *C.gchar, max_tokens C.gint) unsafe.Pointer {
@@ -1988,8 +1988,8 @@ func StrsplitSet(string *C.gchar, delimiters *C.gchar, max_tokens C.gint) unsafe
 	return unsafe.Pointer(C._g_strsplit_set(unsafe.Pointer(string), unsafe.Pointer(delimiters), max_tokens))
 }
 
-func StrstrLen(haystack *C.gchar, haystack_len C.gssize, needle *C.gchar) *C.gchar {
-	return C._g_strstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))
+func StrstrLen(haystack *C.gchar, haystack_len C.gssize, needle *C.gchar) string {
+	return C.GoString((*C.char)(C._g_strstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))))
 }
 
 func Strtod(nptr *C.gchar, endptr unsafe.Pointer) C.gdouble {
@@ -2234,8 +2234,8 @@ func Ucs4ToUtf16(str *C.gunichar, _len C.glong, items_read *C.glong, items_writt
 	return C._g_ucs4_to_utf16(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))
 }
 
-func Ucs4ToUtf8(str *C.gunichar, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gchar {
-	return C._g_ucs4_to_utf8(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))
+func Ucs4ToUtf8(str *C.gunichar, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_ucs4_to_utf8(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))))
 }
 
 func UnicharBreakType(c C.gunichar) C.GUnicodeBreakType {
@@ -2440,32 +2440,32 @@ func Utf16ToUcs4(str *C.gunichar2, _len C.glong, items_read *C.glong, items_writ
 	return C._g_utf16_to_ucs4(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))
 }
 
-func Utf16ToUtf8(str *C.gunichar2, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gchar {
-	return C._g_utf16_to_utf8(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))
+func Utf16ToUtf8(str *C.gunichar2, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) string {
+	return C.GoString((*C.char)(C._g_utf16_to_utf8(unsafe.Pointer(str), _len, items_read, items_written, unsafe.Pointer(err))))
 }
 
-func Utf8Casefold(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_utf8_casefold(unsafe.Pointer(str), _len)
+func Utf8Casefold(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_utf8_casefold(unsafe.Pointer(str), _len)))
 }
 
 func Utf8Collate(str1 *C.gchar, str2 *C.gchar) C.gint {
 	return C._g_utf8_collate(unsafe.Pointer(str1), unsafe.Pointer(str2))
 }
 
-func Utf8CollateKey(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_utf8_collate_key(unsafe.Pointer(str), _len)
+func Utf8CollateKey(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_utf8_collate_key(unsafe.Pointer(str), _len)))
 }
 
-func Utf8CollateKeyForFilename(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_utf8_collate_key_for_filename(unsafe.Pointer(str), _len)
+func Utf8CollateKeyForFilename(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_utf8_collate_key_for_filename(unsafe.Pointer(str), _len)))
 }
 
-func Utf8FindNextChar(p *C.gchar, end *C.gchar) *C.gchar {
-	return C._g_utf8_find_next_char(unsafe.Pointer(p), unsafe.Pointer(end))
+func Utf8FindNextChar(p *C.gchar, end *C.gchar) string {
+	return C.GoString((*C.char)(C._g_utf8_find_next_char(unsafe.Pointer(p), unsafe.Pointer(end))))
 }
 
-func Utf8FindPrevChar(str *C.gchar, p *C.gchar) *C.gchar {
-	return C._g_utf8_find_prev_char(unsafe.Pointer(str), unsafe.Pointer(p))
+func Utf8FindPrevChar(str *C.gchar, p *C.gchar) string {
+	return C.GoString((*C.char)(C._g_utf8_find_prev_char(unsafe.Pointer(str), unsafe.Pointer(p))))
 }
 
 func Utf8GetChar(p *C.gchar) C.gunichar {
@@ -2476,52 +2476,52 @@ func Utf8GetCharValidated(p *C.gchar, max_len C.gssize) C.gunichar {
 	return C._g_utf8_get_char_validated(unsafe.Pointer(p), max_len)
 }
 
-func Utf8Normalize(str *C.gchar, _len C.gssize, mode C.GNormalizeMode) *C.gchar {
-	return C._g_utf8_normalize(unsafe.Pointer(str), _len, mode)
+func Utf8Normalize(str *C.gchar, _len C.gssize, mode C.GNormalizeMode) string {
+	return C.GoString((*C.char)(C._g_utf8_normalize(unsafe.Pointer(str), _len, mode)))
 }
 
-func Utf8OffsetToPointer(str *C.gchar, offset C.glong) *C.gchar {
-	return C._g_utf8_offset_to_pointer(unsafe.Pointer(str), offset)
+func Utf8OffsetToPointer(str *C.gchar, offset C.glong) string {
+	return C.GoString((*C.char)(C._g_utf8_offset_to_pointer(unsafe.Pointer(str), offset)))
 }
 
 func Utf8PointerToOffset(str *C.gchar, pos *C.gchar) C.glong {
 	return C._g_utf8_pointer_to_offset(unsafe.Pointer(str), unsafe.Pointer(pos))
 }
 
-func Utf8PrevChar(p *C.gchar) *C.gchar {
-	return C._g_utf8_prev_char(unsafe.Pointer(p))
+func Utf8PrevChar(p *C.gchar) string {
+	return C.GoString((*C.char)(C._g_utf8_prev_char(unsafe.Pointer(p))))
 }
 
-func Utf8Strchr(p *C.gchar, _len C.gssize, c C.gunichar) *C.gchar {
-	return C._g_utf8_strchr(unsafe.Pointer(p), _len, c)
+func Utf8Strchr(p *C.gchar, _len C.gssize, c C.gunichar) string {
+	return C.GoString((*C.char)(C._g_utf8_strchr(unsafe.Pointer(p), _len, c)))
 }
 
-func Utf8Strdown(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_utf8_strdown(unsafe.Pointer(str), _len)
+func Utf8Strdown(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_utf8_strdown(unsafe.Pointer(str), _len)))
 }
 
 func Utf8Strlen(p *C.gchar, max C.gssize) C.glong {
 	return C._g_utf8_strlen(unsafe.Pointer(p), max)
 }
 
-func Utf8Strncpy(dest *C.gchar, src *C.gchar, n C.gsize) *C.gchar {
-	return C._g_utf8_strncpy(dest, unsafe.Pointer(src), n)
+func Utf8Strncpy(dest *C.gchar, src *C.gchar, n C.gsize) string {
+	return C.GoString((*C.char)(C._g_utf8_strncpy(dest, unsafe.Pointer(src), n)))
 }
 
-func Utf8Strrchr(p *C.gchar, _len C.gssize, c C.gunichar) *C.gchar {
-	return C._g_utf8_strrchr(unsafe.Pointer(p), _len, c)
+func Utf8Strrchr(p *C.gchar, _len C.gssize, c C.gunichar) string {
+	return C.GoString((*C.char)(C._g_utf8_strrchr(unsafe.Pointer(p), _len, c)))
 }
 
-func Utf8Strreverse(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_utf8_strreverse(unsafe.Pointer(str), _len)
+func Utf8Strreverse(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_utf8_strreverse(unsafe.Pointer(str), _len)))
 }
 
-func Utf8Strup(str *C.gchar, _len C.gssize) *C.gchar {
-	return C._g_utf8_strup(unsafe.Pointer(str), _len)
+func Utf8Strup(str *C.gchar, _len C.gssize) string {
+	return C.GoString((*C.char)(C._g_utf8_strup(unsafe.Pointer(str), _len)))
 }
 
-func Utf8Substring(str *C.gchar, start_pos C.glong, end_pos C.glong) *C.gchar {
-	return C._g_utf8_substring(unsafe.Pointer(str), start_pos, end_pos)
+func Utf8Substring(str *C.gchar, start_pos C.glong, end_pos C.glong) string {
+	return C.GoString((*C.char)(C._g_utf8_substring(unsafe.Pointer(str), start_pos, end_pos)))
 }
 
 func Utf8ToUcs4(str *C.gchar, _len C.glong, items_read *C.glong, items_written *C.glong, err unsafe.Pointer) *C.gunichar {

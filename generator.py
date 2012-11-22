@@ -64,17 +64,22 @@ class Generator:
 
     out = []
     # signature
+    mapped_return_type = func.return_go_type # type mapping
+    if mapped_return_type == '*C.gchar':
+      mapped_return_type = 'string'
     out.append('func %s(%s) %s{\n' % (
       func.go_name,
       ', '.join('%s %s' % (param.name, param.go_type) for param in func.parameters),
-      '' if func.no_return else (func.return_go_type + ' ')
+      '' if func.no_return else (mapped_return_type + ' ')
       ))
     # body
     out.append('\t')
     if not func.no_return:
       out.append('return ')
-    if func.return_go_type == 'unsafe.Pointer':
+    if func.return_go_type == 'unsafe.Pointer': # type mapping
       out.append('unsafe.Pointer(')
+    elif func.return_go_type == '*C.gchar':
+      out.append('C.GoString((*C.char)(')
     if func.need_wrapper:
       out.append('C._%s(' % func.c_name)
       sep = None
@@ -89,8 +94,10 @@ class Generator:
       out.append(')')
     else:
       out.append('C.%s(%s)' % (func.c_name, ', '.join(param.name for param in func.parameters)))
-    if func.return_go_type == 'unsafe.Pointer':
+    if func.return_go_type == 'unsafe.Pointer': # type mapping
       out.append(')')
+    elif func.return_go_type == '*C.gchar':
+      out.append('))')
     out.append('\n}\n\n')
 
     self.out.write(''.join(out))
