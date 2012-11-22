@@ -23,19 +23,14 @@ class Generator:
     # includes
     for include in self.parser.includes:
       print >>self.out, "// #include <%s>" % include
-    print >>self.out, "/*"
     # typedefs
+    print >>self.out, "/*"
     print >>self.out, "typedef long double longdouble;"
-    # wrappers
-    for func in self.parser.functions_need_wrapper:
-      self.generate_wrapper(func)
+    for orig, t in self.parser.typedefs.iteritems():
+      print >>self.out, "typedef %s %s;" % (orig, t)
     print >>self.out, "*/"
     # cgo
-    print >>self.out, 'import "C"'
-    # imports
-    print >>self.out, 'import ('
-    print >>self.out, '\t"unsafe"'
-    print >>self.out, ')\n'
+    print >>self.out, 'import "C"\n'
 
     for func in self.parser.functions:
       self.generate_function(func)
@@ -73,68 +68,29 @@ class Generator:
     out.append('\t')
     if not func.no_return:
       out.append('return ')
-    if func.need_wrapper:
-      out.append('C._%s(' % func.c_name)
-      sep = None
-      for param in func.parameters:
-        if sep != None:
-          out.append(sep)
-        sep = ', '
-        if param.need_cast:
-          out.append('unsafe.Pointer(%s)' % param.name)
-        else:
-          out.append(param.name)
-      out.append(')\n}\n\n')
-    else:
-      out.append('C.%s(%s)\n}\n\n' % (func.c_name, ', '.join(param.name for param in func.parameters)))
+    out.append('C.%s(%s)\n}\n\n' % (func.c_name, ', '.join(param.name for param in func.parameters)))
 
-    self.out.write(''.join(out))
-
-  def generate_wrapper(self, func):
-    out = []
-    out.append('%s %s(' % (
-      func.return_c_type,
-      '_' + func.c_name,
-      ))
-    sep = None
-    for param in func.parameters:
-      if sep != None:
-        out.append(sep)
-      sep = ', '
-      if param.need_cast:
-        out.append('void*')
-      else:
-        out.append(param.c_type)
-      out.append(' ' + param.name)
-    out.append(') {\n\t')
-    if not func.no_return:
-      out.append('return ')
-    out.append('%s(' % func.c_name)
-    sep = None
-    for param in func.parameters:
-      if sep != None:
-        out.append(sep)
-      sep = ', '
-      if param.need_cast:
-        out.append('(%s)(%s)' % (param.c_type, param.name))
-      else:
-        out.append(param.name)
-    out.append(');\n}\n')
     self.out.write(''.join(out))
 
   def generate_enum_symbols(self):
+    print >>self.out, "const ("
     for symbol in self.parser.enum_symbols:
       go_name = symbol
-      if symbol.startswith('GTK_'):
-        go_name = symbol[4:]
-      print >>self.out, "const %s = C.%s" % (go_name, symbol)
+      for prefix in self.parser.namespace.symbol_prefixes:
+        if symbol.startswith((prefix + '_').upper()):
+          go_name = symbol[len(prefix) + 1:]
+      print >>self.out, "\t%s = C.%s" % (go_name, symbol)
+    print >>self.out, ")"
 
   def generate_const_symbols(self):
+    print >>self.out, "const ("
     for symbol in self.parser.const_symbols:
       go_name = symbol
-      if symbol.startswith('GTK_'):
-        go_name = symbol[4:]
-      print >>self.out, "const %s = C.%s" % (go_name, symbol)
+      for prefix in self.parser.namespace.symbol_prefixes:
+        if symbol.startswith((prefix + '_').upper()):
+          go_name = symbol[len(prefix) + 1:]
+      print >>self.out, "\t%s = C.%s" % (go_name, symbol)
+    print >>self.out, ")"
 
   def write(self, f):
     output_file = open(f, 'w')

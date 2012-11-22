@@ -6,44 +6,44 @@ from generator import Generator
 from collections import namedtuple
 import os
 
-Param = namedtuple('Param', ['name', 'c_type', 'go_type', 'need_cast'])
+Param = namedtuple('Param', ['name', 'c_type', 'go_type'])
 
 class Parser:
   def __init__(self, filename):
     parser = GIRParser(False)
     parser.parse(filename)
 
+    self.skip_symbols = set()
+    skip_symbol_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'skip_symbols')
+    if os.path.exists(skip_symbol_file):
+      self.skip_symbols = set([line.strip() 
+        for line in open(skip_symbol_file, 'r').xreadlines()
+        if not line.startswith('//')
+        ])
+      self.skip_symbols = set([l for l in self.skip_symbols if l])
+
     self.namespace = parser.get_namespace()
     self.package_name = self.namespace.name.lower()
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
     self.includes = list(parser.get_c_includes())
-    deprecated_functions_file = '%s_deprecated_functions' % self.package_name
-    self.deprecated_functions = []
-    if os.path.exists(deprecated_functions_file):
-      self.deprecated_functions = [l.strip() for l in open(deprecated_functions_file, 'r').xreadlines()]
-    skip_functions_file = '%s_skip_functions' % self.package_name
-    self.skip_functions = []
-    if os.path.exists(skip_functions_file):
-      self.skip_functions = [l.strip() for l in open(skip_functions_file, 'r').xreadlines()]
 
     self.functions = []
-    self.functions_need_wrapper = []
     self.enum_symbols = []
     self.const_symbols = []
+    self.typedefs = {}
 
   def parse(self):
     for node in self.namespace.itervalues():
       if isinstance(node, ast.Function):
         info = self.handleFunction(node)
         self.functions.append(info)
-        if info.need_wrapper:
-          self.functions_need_wrapper.append(info)
       elif isinstance(node, ast.Enum):
         self.handleEnum(node)
       elif isinstance(node, ast.Constant):
         self.handleConstant(node)
       elif isinstance(node, ast.Record):
-        self.handleRecord(node)
+        #self.handleRecord(node)
+        pass
       elif isinstance(node, ast.Callback):
         pass
       elif isinstance(node, ast.Union):
@@ -61,18 +61,17 @@ class Parser:
 
   def handleFunction(self, node):
     info = Dict()
-    info.need_wrapper = need_wrapper = False
     info.has_varargs = has_varargs = False
     info.has_va_list = has_va_list = False
     info.has_long_double = has_long_double = False
     info.name = name = node.name
     info.c_name = c_name = node.symbol
     info.deprecated = False
-    if not node.deprecated is None or c_name in self.deprecated_functions:
+    if not node.deprecated is None:
       info.deprecated = True
       return info
     info.skip = False
-    if c_name in self.skip_functions:
+    if c_name in self.skip_symbols:
       info.skip = True
       return info
     info.go_name = go_name = convertFuncName(name)
@@ -96,17 +95,14 @@ class Parser:
       else:
         if arg_name is None:
           arg_name = 'arg_%d' % i
-        arg_go_type, need_cast = convert_to_go_type(param.type.ctype)
-        if need_cast:
-          need_wrapper = True
-        parameters.append(Param(arg_name, arg_c_type, arg_go_type, need_cast))
+        arg_go_type = self.convert_to_go_type(param.type.ctype)
+        parameters.append(Param(arg_name, arg_c_type, arg_go_type))
     if node.throws:
-      parameters.append(Param('err', 'GError**', 'unsafe.Pointer', True))
-      need_wrapper = True
+      parameters.append(Param('err', '_pp_GError', 'C._pp_GError'))
+      self.typedefs['GError**'] = '_pp_GError'
     info.has_varargs = has_varargs
     info.has_va_list = has_va_list
     info.has_long_double = has_long_double
-    info.need_wrapper = need_wrapper and not has_varargs and not has_va_list and not has_long_double
 
     no_return = False
     return_c_type = node.retval.type.ctype
@@ -114,7 +110,7 @@ class Parser:
     if return_c_type == 'void':
       no_return = True
     else:
-      return_go_type, _ = convert_to_go_type(return_c_type)
+      return_go_type = self.convert_to_go_type(return_c_type)
     info.no_return = no_return
     info.return_c_type = return_c_type
     info.return_go_type = return_go_type
@@ -122,55 +118,79 @@ class Parser:
     return info
 
   def handleEnum(self, node):
-    c_enum_name = node.ctype
     for mem in node.members:
-      member_value = mem.value
-      member_symbol = mem.symbol
-      self.enum_symbols.append(member_symbol)
+      if mem.symbol in self.skip_symbols:
+        continue
+      self.enum_symbols.append(mem.symbol)
 
   def handleConstant(self, node):
+    #self.const_symbols.append((node.ctype, node.value, node.value_type.resolved))
+    if node.ctype in self.skip_symbols:
+      return
     self.const_symbols.append(node.ctype)
 
   def handleRecord(self, node):
-    type_name = node.ctype
+    name = node.name
+    c_type = node.ctype
+    print name, c_type
     get_type_func = node.get_type
     for constructor in node.constructors:
       c_function_name = constructor.symbol
       name = constructor.name
       ret_type = constructor.retval.type #TODO convert to c type
-      #print ret_type
+      print '\t', ret_type
       for param in constructor.parameters:
         arg_name = param.argname
         arg_type = param.type #TODO convert to c type
-        #print arg_type
+        print arg_type
     for function in node.static_methods:
-      #print function #TODO
+      print '\t', function #TODO
       pass
     for method in node.methods:
-      #print method #TODO
+      print '\t', method #TODO
       pass
+    for field in node.fields:
+      field_name = field.name
+      print 'field name', field_name
+      field_is_private = field.private
+      print 'private', field_is_private
+      field_is_readable = field.readable
+      print 'readable', field_is_readable
+      field_is_writable = field.writable
+      print 'writable', field_is_writable
+      field_is_anonymous = field.anonymous_node
+      print 'callback', field_is_anonymous
+      if not field_is_anonymous:
+        field_c_type = field.type.ctype
+        print 'type', field_c_type
+
+  def convert_to_go_type(self, t):
+    if t == 'long double':
+      return 'longdouble'
+    t = t.replace('volatile ', '') 
+    orig_t = t
+    need_typedef = False
+    pre = ''
+    if t.startswith('const '):
+      need_typedef = True
+      pre += '_const'
+      t = t.replace('const ', '')
+    if t.endswith('*'):
+      need_typedef = True
+      pre += '_'
+      while t.endswith('*'):
+        pre += 'p'
+        t = t[:-1]
+    if need_typedef:
+      t = pre + '_' + t
+      self.typedefs[orig_t] = t
+    t = 'C.' + t
+    return t
 
 def convertFuncName(s):
   words = s.split('_')
   words = [w.capitalize() for w in words]
   return ''.join(words)
-
-def convert_to_go_type(s):
-  s = s.replace('volatile ', '') 
-  need_cast = False
-  if s.startswith('const '):
-    need_cast = True
-    s = s.replace('const ', '')
-  if s == 'long double':
-    s = 'longdouble'
-  if s.endswith('**'):
-    need_cast = True
-    s = 'unsafe.Pointer'
-  else:
-    s = 'C.' + s
-  if s.endswith('*'):
-    s = '*' + s[:-1]
-  return s, need_cast
 
 class Dict(dict):
   __getattr__ = dict.__getitem__
