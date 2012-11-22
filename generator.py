@@ -86,8 +86,8 @@ class Generator:
     mapped_return_type = func.return_go_type
     if mappings.has_key(mapped_return_type): # map return type
       mapped_return_type = mappings[mapped_return_type].mapped_type
-    out.append('%s {\n' % (
-      '' if func.no_return else mapped_return_type,
+    out.append('%s{\n' % (
+      '' if func.no_return else (mapped_return_type + ' '),
       ))
     out.extend(mapping_code)
 
