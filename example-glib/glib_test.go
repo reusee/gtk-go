@@ -19,4 +19,6 @@ func TestStringMapping(t *testing.T) {
   fmt.Printf("user runtime dir %s\n", GetUserRuntimeDir())
 
   fmt.Printf("%s\n", FilenameDisplayBasename("foo/bar"))
+  fmt.Printf("%v\n", AsciiStrcasecmp("foo", "bar"))
+  fmt.Printf("%v\n", AsciiStrcasecmp("bar", "foo"))
 }

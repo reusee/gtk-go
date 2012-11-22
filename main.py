@@ -7,6 +7,7 @@ from giscanner import ast
 from generator import Generator
 from collections import namedtuple
 import os
+from common import *
 
 Param = namedtuple('Param', ['name', 'c_type', 'go_type', 'need_cast', 'transfer'])
 
@@ -178,10 +179,6 @@ def convert_to_go_type(s):
   if s.endswith('*'):
     s = '*' + s[:-1]
   return s, need_cast
-
-class Dict(dict):
-  __getattr__ = dict.__getitem__
-  __setattr__ = dict.__setattr__
 
 def main():
   if len(sys.argv) < 2:
