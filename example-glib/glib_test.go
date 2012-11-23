@@ -56,6 +56,7 @@ func TestBase64(t *testing.T) {
   }
 }
 
-func TestAsyncQueue(t *testing.T) {
+func TestRecordConstruct(t *testing.T) {
   AsyncQueueNew()
+  TimerNew()
 }

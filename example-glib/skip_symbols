@@ -50,3 +50,6 @@ g_pointer_bit_trylock
 g_pointer_bit_unlock
 
 g_date_to_struct_tm
+
+// records
+GTestLogMsg

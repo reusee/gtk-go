@@ -32,6 +32,8 @@ class Parser:
     self.functions_need_wrapper = []
     self.enum_symbols = []
     self.const_symbols = []
+    self.construct_records = set()
+    self.type_mappings = Dict()
 
     self.exported_functions = set()
 
@@ -44,7 +46,7 @@ class Parser:
       #  print type(node).__name__, 'not handle'
       #  stop
 
-  def handleFunction(self, node, name_prefix = ''):
+  def handleFunction(self, node, cls = ''):
     info = Dict()
     info.name = node.name
     info.c_name = node.symbol
@@ -56,7 +58,8 @@ class Parser:
     if not node.deprecated is None or info.c_name in self.skip_symbols:
       info.skip = True
 
-    info.go_name = name_prefix + convert_func_name(info.name)
+    info.go_name = cls + convert_func_name(info.name)
+    info.cls = cls
     info.parameters, info.not_implement, info.need_wrapper = convert_parameters(node.parameters)
     info.need_wrapper = info.need_wrapper and not info.not_implement
 
@@ -92,6 +95,8 @@ class Parser:
     # name
     name = node.name
     c_type = node.ctype
+    self.construct_records.add((name, c_type))
+    self.map_record_type(name, c_type)
     # constructors
     for constructor in node.constructors:
       self.handleFunction(constructor, name)
@@ -102,6 +107,23 @@ class Parser:
     for method in node.methods:
       #self.handleFunction(method, name)
       pass #TODO
+
+  def map_record_type(self, name, c_type):
+    print name, c_type
+    self.type_mappings['*C.' + c_type] = Dict({
+      'mapped_type': '*' + name,
+      'mapped_name_func': lambda param: '_cp_%s_' % param.name,
+      'mapping_code_func': lambda param: '\t_cp_%s_ := (*C.%s)(%s)\n' % (
+        param.name, c_type, param.name),
+      'return_code_func': lambda exp: '''\
+\t_c_return_ := %s
+\t_go_return_ := (*%s)(_c_return_)
+\truntime.SetFinalizer(&_go_return_, func (x **%s) {
+\t\tC.g_object_unref(C.gpointer(_c_return_))
+\t})
+\treturn _go_return_
+''' % (exp, name, name,),
+    })
 
 def main():
   if len(sys.argv) < 2:

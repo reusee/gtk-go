@@ -7,6 +7,7 @@ class Generator:
   def __init__(self, parser):
     self.parser = parser
     self.out = StringIO.StringIO()
+    mappings.update(self.parser.type_mappings)
 
     self.to_go_type_funcs = set()
 
@@ -43,6 +44,7 @@ class Generator:
     # imports
     print >>self.out, 'import ('
     print >>self.out, '\t"unsafe"'
+    print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
 
     for func in self.parser.functions:
@@ -53,6 +55,8 @@ class Generator:
     self.generate_const_symbols()
 
     self.generate_to_go_type_func_codes()
+
+    self.generate_record_types()
 
   def write(self, f):
     output_file = open(f, 'w')
@@ -96,37 +100,45 @@ class Generator:
       ))
     out.extend(mapping_code)
 
-    # body
-    out.append('\t')
-    if not func.no_return:
-      out.append('return ')
+    # return expression
+    return_expression = []
     if return_type_mapping != None:
       if return_type_mapping.has_key('to_go_type_func'):
-        out.append('%s(' % mappings[func.return_go_type].to_go_type_func)
+        return_expression.append('%s(' % mappings[func.return_go_type].to_go_type_func)
         self.to_go_type_funcs.add(func.return_go_type)
       elif return_type_mapping.has_key('to_go_type_code_head'):
-        out.append(return_type_mapping.to_go_type_code_head)
+        return_expression.append(return_type_mapping.to_go_type_code_head)
     if func.need_wrapper:
-      out.append('C._%s(' % func.c_name)
+      return_expression.append('C._%s(' % func.c_name)
       sep = None
       for param in func.parameters:
         if sep != None:
-          out.append(sep)
+          return_expression.append(sep)
         sep = ', '
         if param.need_cast:
-          out.append('unsafe.Pointer(%s)' % mapped_param_name.get(param.name, param.name))
+          return_expression.append('unsafe.Pointer(%s)' % mapped_param_name.get(param.name, param.name))
         else:
-          out.append(mapped_param_name.get(param.name, param.name))
-      out.append(')')
+          return_expression.append(mapped_param_name.get(param.name, param.name))
+      return_expression.append(')')
     else:
-      out.append('C.%s(%s)' % (func.c_name, ', '.join(mapped_param_name.get(param.name, param.name)
+      return_expression.append('C.%s(%s)' % (func.c_name, ', '.join(mapped_param_name.get(param.name, param.name)
         for param in func.parameters)))
     if return_type_mapping != None:
       if return_type_mapping.has_key('to_go_type_func'):
-        out.append(')')
+        return_expression.append(')')
       elif return_type_mapping.has_key('to_go_type_code_tail'):
-        out.append(return_type_mapping.to_go_type_code_tail)
-    out.append('\n}\n\n')
+        return_expression.append(return_type_mapping.to_go_type_code_tail)
+    return_expression = ''.join(return_expression)
+
+    if return_type_mapping != None and return_type_mapping.has_key('return_code_func'):
+      out.append(return_type_mapping.return_code_func(return_expression))
+    else:
+      out.append('\t')
+      if not func.no_return:
+        out.append('return ')
+      out.append(return_expression)
+      out.append('\n')
+    out.append('}\n\n')
 
     self.out.write(''.join(out))
 
@@ -186,3 +198,9 @@ class Generator:
   def generate_macro_helpers(self):
     print >>self.out, "gboolean _true() { return TRUE; }"
     print >>self.out, "gboolean _false() { return FALSE; }"
+
+  def generate_record_types(self):
+    for name, c_type in self.parser.construct_records:
+      if c_type in self.parser.skip_symbols:
+        continue
+      print >>self.out, "type %s C.%s" % (name, c_type)
