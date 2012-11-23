@@ -15,14 +15,17 @@ mappings['*C.gchar'] = Dict({
   'mapped_type': 'string',
   'mapped_name_func': lambda param: '_gstr_' + param.name,
   'mapping_code_func': map_gchar,
-  'return_wrap_head': 'C.GoString((*C.char)(',
-  'return_wrap_tail': '))',
+  'to_go_type_func': 'gcharp2string',
+  'to_go_type_func_code': '''\
+func gcharp2string(str *C.gchar) string {
+  return C.GoString((*C.char)(str))
+}''',
 })
 
 mappings['unsafe.Pointer'] = Dict({
   'mapped_type': 'unsafe.Pointer',
   'mapped_name_func': lambda param: param.name,
   'mapping_code_func': lambda param: '',
-  'return_wrap_head': 'unsafe.Pointer(',
-  'return_wrap_tail': ')',
+  'to_go_type_code_head': 'unsafe.Pointer(',
+  'to_go_type_code_tail': ')',
 })
