@@ -27,3 +27,18 @@ func TestConstructor(t *testing.T) {
   DateNew()
   KeyFileNew()
 }
+
+func TestBool(t *testing.T) {
+  if StrHasSuffix("foo", "oo") != true {
+    t.Fail()
+  }
+  if StrHasSuffix("foo", "xx") != false {
+    t.Fail()
+  }
+  if StrHasPrefix("foo", "fo") != true {
+    t.Fail()
+  }
+  if StrHasPrefix("foo", "bar") != false {
+    t.Fail()
+  }
+}

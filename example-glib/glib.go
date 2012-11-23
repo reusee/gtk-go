@@ -9,6 +9,8 @@ package glib
 // #include <glib.h>
 /*
 typedef long double longdouble;
+gboolean _true() { return TRUE; }
+gboolean _false() { return FALSE; }
 GDateTime* _g_date_time_new_from_timeval_local(void* tv) {
 	return g_date_time_new_from_timeval_local((const GTimeVal*)(tv));
 }
@@ -773,8 +775,10 @@ func MainContextNew() *C.GMainContext {
 	return C.g_main_context_new()
 }
 
-func MainLoopNew(context *C.GMainContext, is_running C.gboolean) *C.GMainLoop {
-	return C.g_main_loop_new(context, is_running)
+func MainLoopNew(context *C.GMainContext, is_running bool) *C.GMainLoop {
+	_gbool_is_running := C._false()
+	if is_running { _gbool_is_running = C._true() }
+	return C.g_main_loop_new(context, _gbool_is_running)
 }
 
 func RegexNew(pattern string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags, err unsafe.Pointer) *C.GRegex {
@@ -823,8 +827,10 @@ func VariantNewArray(child_type *C.GVariantType, children unsafe.Pointer, n_chil
 	return C._g_variant_new_array(unsafe.Pointer(child_type), unsafe.Pointer(children), n_children)
 }
 
-func VariantNewBoolean(value C.gboolean) *C.GVariant {
-	return C.g_variant_new_boolean(value)
+func VariantNewBoolean(value bool) *C.GVariant {
+	_gbool_value := C._false()
+	if value { _gbool_value = C._true() }
+	return C.g_variant_new_boolean(_gbool_value)
 }
 
 func VariantNewByte(value C.guchar) *C.GVariant {
@@ -852,12 +858,16 @@ func VariantNewFixedArray(element_type *C.GVariantType, elements C.gconstpointer
 	return C._g_variant_new_fixed_array(unsafe.Pointer(element_type), elements, n_elements, element_size)
 }
 
-func VariantNewFromBytes(type_ *C.GVariantType, bytes *C.GBytes, trusted C.gboolean) *C.GVariant {
-	return C._g_variant_new_from_bytes(unsafe.Pointer(type_), bytes, trusted)
+func VariantNewFromBytes(type_ *C.GVariantType, bytes *C.GBytes, trusted bool) *C.GVariant {
+	_gbool_trusted := C._false()
+	if trusted { _gbool_trusted = C._true() }
+	return C._g_variant_new_from_bytes(unsafe.Pointer(type_), bytes, _gbool_trusted)
 }
 
-func VariantNewFromData(type_ *C.GVariantType, data C.gconstpointer, size C.gsize, trusted C.gboolean, notify C.GDestroyNotify, user_data C.gpointer) *C.GVariant {
-	return C._g_variant_new_from_data(unsafe.Pointer(type_), data, size, trusted, notify, user_data)
+func VariantNewFromData(type_ *C.GVariantType, data C.gconstpointer, size C.gsize, trusted bool, notify C.GDestroyNotify, user_data C.gpointer) *C.GVariant {
+	_gbool_trusted := C._false()
+	if trusted { _gbool_trusted = C._true() }
+	return C._g_variant_new_from_data(unsafe.Pointer(type_), data, size, _gbool_trusted, notify, user_data)
 }
 
 func VariantNewHandle(value C.gint32) *C.GVariant {
@@ -973,8 +983,10 @@ func Access(filename string, mode C.int) C.int {
 	return C._g_access(unsafe.Pointer(_gstr_filename), mode)
 }
 
-func ArrayFree(array *C.GArray, free_segment C.gboolean) string {
-	return gcharp2string(C.g_array_free(array, free_segment))
+func ArrayFree(array *C.GArray, free_segment bool) string {
+	_gbool_free_segment := C._false()
+	if free_segment { _gbool_free_segment = C._true() }
+	return gcharp2string(C.g_array_free(array, _gbool_free_segment))
 }
 
 func ArrayGetElementSize(array *C.GArray) C.guint {
@@ -1157,16 +1169,20 @@ func Base64Encode(data *C.guchar, len_ C.gsize) string {
 	return gcharp2string(C.g_base64_encode(data, len_))
 }
 
-func Base64EncodeClose(break_lines C.gboolean, out string, state *C.gint, save *C.gint) C.gsize {
+func Base64EncodeClose(break_lines bool, out string, state *C.gint, save *C.gint) C.gsize {
+	_gbool_break_lines := C._false()
+	if break_lines { _gbool_break_lines = C._true() }
 	_cstr_out := unsafe.Pointer(C.CString(out))
 	_gstr_out := (*C.gchar)(unsafe.Pointer(_cstr_out))
-	return C.g_base64_encode_close(break_lines, _gstr_out, state, save)
+	return C.g_base64_encode_close(_gbool_break_lines, _gstr_out, state, save)
 }
 
-func Base64EncodeStep(in *C.guchar, len_ C.gsize, break_lines C.gboolean, out string, state *C.gint, save *C.gint) C.gsize {
+func Base64EncodeStep(in *C.guchar, len_ C.gsize, break_lines bool, out string, state *C.gint, save *C.gint) C.gsize {
+	_gbool_break_lines := C._false()
+	if break_lines { _gbool_break_lines = C._true() }
 	_cstr_out := unsafe.Pointer(C.CString(out))
 	_gstr_out := (*C.gchar)(unsafe.Pointer(_cstr_out))
-	return C.g_base64_encode_step(in, len_, break_lines, _gstr_out, state, save)
+	return C.g_base64_encode_step(in, len_, _gbool_break_lines, _gstr_out, state, save)
 }
 
 //Skipped g_basename
@@ -1187,8 +1203,8 @@ func BitStorage(number C.gulong) C.guint {
 	return C.g_bit_storage(number)
 }
 
-func BitTrylock(address *C.gint, lock_bit C.gint) C.gboolean {
-	return C.g_bit_trylock(address, lock_bit)
+func BitTrylock(address *C.gint, lock_bit C.gint) bool {
+	return gboolean2bool(C.g_bit_trylock(address, lock_bit))
 }
 
 func BitUnlock(address *C.gint, lock_bit C.gint) {
@@ -1214,8 +1230,10 @@ func BuildPathv(separator string, args unsafe.Pointer) string {
 	return gcharp2string(C._g_build_pathv(unsafe.Pointer(_gstr_separator), unsafe.Pointer(args)))
 }
 
-func ByteArrayFree(array *C.GByteArray, free_segment C.gboolean) *C.guint8 {
-	return C.g_byte_array_free(array, free_segment)
+func ByteArrayFree(array *C.GByteArray, free_segment bool) *C.guint8 {
+	_gbool_free_segment := C._false()
+	if free_segment { _gbool_free_segment = C._true() }
+	return C.g_byte_array_free(array, _gbool_free_segment)
 }
 
 func ByteArrayFreeToBytes(array *C.GByteArray) *C.GBytes {
@@ -1364,8 +1382,8 @@ func DatalistIdRemoveNoNotify(datalist unsafe.Pointer, key_id C.GQuark) C.gpoint
 	return C._g_datalist_id_remove_no_notify(unsafe.Pointer(datalist), key_id)
 }
 
-func DatalistIdReplaceData(datalist unsafe.Pointer, key_id C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) C.gboolean {
-	return C._g_datalist_id_replace_data(unsafe.Pointer(datalist), key_id, oldval, newval, destroy, old_destroy)
+func DatalistIdReplaceData(datalist unsafe.Pointer, key_id C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) bool {
+	return gboolean2bool(C._g_datalist_id_replace_data(unsafe.Pointer(datalist), key_id, oldval, newval, destroy, old_destroy))
 }
 
 func DatalistIdSetDataFull(datalist unsafe.Pointer, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify) {
@@ -1416,8 +1434,8 @@ func DateGetSundayWeeksInYear(year C.GDateYear) C.guint8 {
 	return C.g_date_get_sunday_weeks_in_year(year)
 }
 
-func DateIsLeapYear(year C.GDateYear) C.gboolean {
-	return C.g_date_is_leap_year(year)
+func DateIsLeapYear(year C.GDateYear) bool {
+	return gboolean2bool(C.g_date_is_leap_year(year))
 }
 
 func DateStrftime(s string, slen C.gsize, format string, date *C.GDate) C.gsize {
@@ -1434,36 +1452,36 @@ func DateTimeCompare(dt1 C.gconstpointer, dt2 C.gconstpointer) C.gint {
 	return C.g_date_time_compare(dt1, dt2)
 }
 
-func DateTimeEqual(dt1 C.gconstpointer, dt2 C.gconstpointer) C.gboolean {
-	return C.g_date_time_equal(dt1, dt2)
+func DateTimeEqual(dt1 C.gconstpointer, dt2 C.gconstpointer) bool {
+	return gboolean2bool(C.g_date_time_equal(dt1, dt2))
 }
 
 func DateTimeHash(datetime C.gconstpointer) C.guint {
 	return C.g_date_time_hash(datetime)
 }
 
-func DateValidDay(day C.GDateDay) C.gboolean {
-	return C.g_date_valid_day(day)
+func DateValidDay(day C.GDateDay) bool {
+	return gboolean2bool(C.g_date_valid_day(day))
 }
 
-func DateValidDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) C.gboolean {
-	return C.g_date_valid_dmy(day, month, year)
+func DateValidDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) bool {
+	return gboolean2bool(C.g_date_valid_dmy(day, month, year))
 }
 
-func DateValidJulian(julian_date C.guint32) C.gboolean {
-	return C.g_date_valid_julian(julian_date)
+func DateValidJulian(julian_date C.guint32) bool {
+	return gboolean2bool(C.g_date_valid_julian(julian_date))
 }
 
-func DateValidMonth(month C.GDateMonth) C.gboolean {
-	return C.g_date_valid_month(month)
+func DateValidMonth(month C.GDateMonth) bool {
+	return gboolean2bool(C.g_date_valid_month(month))
 }
 
-func DateValidWeekday(weekday C.GDateWeekday) C.gboolean {
-	return C.g_date_valid_weekday(weekday)
+func DateValidWeekday(weekday C.GDateWeekday) bool {
+	return gboolean2bool(C.g_date_valid_weekday(weekday))
 }
 
-func DateValidYear(year C.GDateYear) C.gboolean {
-	return C.g_date_valid_year(year)
+func DateValidYear(year C.GDateYear) bool {
+	return gboolean2bool(C.g_date_valid_year(year))
 }
 
 func Dcgettext(domain string, msgid string, category C.gint) string {
@@ -1493,8 +1511,8 @@ func DirMakeTmp(tmpl string, err unsafe.Pointer) string {
 	return gcharp2string(C._g_dir_make_tmp(_gstr_tmpl, unsafe.Pointer(err)))
 }
 
-func DirectEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
-	return C.g_direct_equal(v1, v2)
+func DirectEqual(v1 C.gconstpointer, v2 C.gconstpointer) bool {
+	return gboolean2bool(C.g_direct_equal(v1, v2))
 }
 
 func DirectHash(v C.gconstpointer) C.guint {
@@ -1514,8 +1532,8 @@ func Dngettext(domain string, msgid string, msgid_plural string, n C.gulong) str
 	return gcharp2string(C._g_dngettext(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_msgid), unsafe.Pointer(_gstr_msgid_plural), n))
 }
 
-func DoubleEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
-	return C.g_double_equal(v1, v2)
+func DoubleEqual(v1 C.gconstpointer, v2 C.gconstpointer) bool {
+	return gboolean2bool(C.g_double_equal(v1, v2))
 }
 
 func DoubleHash(v C.gconstpointer) C.guint {
@@ -1552,14 +1570,16 @@ func EnvironGetenv(envp unsafe.Pointer, variable string) string {
 	return gcharp2string(C._g_environ_getenv(unsafe.Pointer(envp), unsafe.Pointer(_gstr_variable)))
 }
 
-func EnvironSetenv(envp unsafe.Pointer, variable string, value string, overwrite C.gboolean) unsafe.Pointer {
+func EnvironSetenv(envp unsafe.Pointer, variable string, value string, overwrite bool) unsafe.Pointer {
 	_cstr_variable := unsafe.Pointer(C.CString(variable))
 	defer C.free(_cstr_variable)
 	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
 	_cstr_value := unsafe.Pointer(C.CString(value))
 	defer C.free(_cstr_value)
 	_gstr_value := (*C.gchar)(unsafe.Pointer(_cstr_value))
-	return unsafe.Pointer(C._g_environ_setenv(unsafe.Pointer(envp), unsafe.Pointer(_gstr_variable), unsafe.Pointer(_gstr_value), overwrite))
+	_gbool_overwrite := C._false()
+	if overwrite { _gbool_overwrite = C._true() }
+	return unsafe.Pointer(C._g_environ_setenv(unsafe.Pointer(envp), unsafe.Pointer(_gstr_variable), unsafe.Pointer(_gstr_value), _gbool_overwrite))
 }
 
 func EnvironUnsetenv(envp unsafe.Pointer, variable string) unsafe.Pointer {
@@ -1577,11 +1597,11 @@ func FileErrorQuark() C.GQuark {
 	return C.g_file_error_quark()
 }
 
-func FileGetContents(filename string, contents unsafe.Pointer, length *C.gsize, err unsafe.Pointer) C.gboolean {
+func FileGetContents(filename string, contents unsafe.Pointer, length *C.gsize, err unsafe.Pointer) bool {
 	_cstr_filename := unsafe.Pointer(C.CString(filename))
 	defer C.free(_cstr_filename)
 	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
-	return C._g_file_get_contents(_gstr_filename, unsafe.Pointer(contents), length, unsafe.Pointer(err))
+	return gboolean2bool(C._g_file_get_contents(_gstr_filename, unsafe.Pointer(contents), length, unsafe.Pointer(err)))
 }
 
 func FileOpenTmp(tmpl string, name_used unsafe.Pointer, err unsafe.Pointer) C.gint {
@@ -1598,21 +1618,21 @@ func FileReadLink(filename string, err unsafe.Pointer) string {
 	return gcharp2string(C._g_file_read_link(unsafe.Pointer(_gstr_filename), unsafe.Pointer(err)))
 }
 
-func FileSetContents(filename string, contents string, length C.gssize, err unsafe.Pointer) C.gboolean {
+func FileSetContents(filename string, contents string, length C.gssize, err unsafe.Pointer) bool {
 	_cstr_filename := unsafe.Pointer(C.CString(filename))
 	defer C.free(_cstr_filename)
 	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
 	_cstr_contents := unsafe.Pointer(C.CString(contents))
 	defer C.free(_cstr_contents)
 	_gstr_contents := (*C.gchar)(unsafe.Pointer(_cstr_contents))
-	return C._g_file_set_contents(_gstr_filename, _gstr_contents, length, unsafe.Pointer(err))
+	return gboolean2bool(C._g_file_set_contents(_gstr_filename, _gstr_contents, length, unsafe.Pointer(err)))
 }
 
-func FileTest(filename string, test C.GFileTest) C.gboolean {
+func FileTest(filename string, test C.GFileTest) bool {
 	_cstr_filename := unsafe.Pointer(C.CString(filename))
 	defer C.free(_cstr_filename)
 	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
-	return C._g_file_test(unsafe.Pointer(_gstr_filename), test)
+	return gboolean2bool(C._g_file_test(unsafe.Pointer(_gstr_filename), test))
 }
 
 func FilenameDisplayBasename(filename string) string {
@@ -1687,8 +1707,8 @@ func GetApplicationName() string {
 	return gcharp2string(C.g_get_application_name())
 }
 
-func GetCharset(charset unsafe.Pointer) C.gboolean {
-	return C._g_get_charset(unsafe.Pointer(charset))
+func GetCharset(charset unsafe.Pointer) bool {
+	return gboolean2bool(C._g_get_charset(unsafe.Pointer(charset)))
 }
 
 func GetCodeset() string {
@@ -1707,8 +1727,8 @@ func GetEnviron() unsafe.Pointer {
 	return unsafe.Pointer(C.g_get_environ())
 }
 
-func GetFilenameCharsets(charsets unsafe.Pointer) C.gboolean {
-	return C._g_get_filename_charsets(unsafe.Pointer(charsets))
+func GetFilenameCharsets(charsets unsafe.Pointer) bool {
+	return gboolean2bool(C._g_get_filename_charsets(unsafe.Pointer(charsets)))
 }
 
 func GetHomeDir() string {
@@ -1793,8 +1813,8 @@ func HashTableAdd(hash_table *C.GHashTable, key C.gpointer) {
 	C.g_hash_table_add(hash_table, key)
 }
 
-func HashTableContains(hash_table *C.GHashTable, key C.gconstpointer) C.gboolean {
-	return C.g_hash_table_contains(hash_table, key)
+func HashTableContains(hash_table *C.GHashTable, key C.gconstpointer) bool {
+	return gboolean2bool(C.g_hash_table_contains(hash_table, key))
 }
 
 func HashTableDestroy(hash_table *C.GHashTable) {
@@ -1805,12 +1825,12 @@ func HashTableInsert(hash_table *C.GHashTable, key C.gpointer, value C.gpointer)
 	C.g_hash_table_insert(hash_table, key, value)
 }
 
-func HashTableLookupExtended(hash_table *C.GHashTable, lookup_key C.gconstpointer, orig_key *C.gpointer, value *C.gpointer) C.gboolean {
-	return C.g_hash_table_lookup_extended(hash_table, lookup_key, orig_key, value)
+func HashTableLookupExtended(hash_table *C.GHashTable, lookup_key C.gconstpointer, orig_key *C.gpointer, value *C.gpointer) bool {
+	return gboolean2bool(C.g_hash_table_lookup_extended(hash_table, lookup_key, orig_key, value))
 }
 
-func HashTableRemove(hash_table *C.GHashTable, key C.gconstpointer) C.gboolean {
-	return C.g_hash_table_remove(hash_table, key)
+func HashTableRemove(hash_table *C.GHashTable, key C.gconstpointer) bool {
+	return gboolean2bool(C.g_hash_table_remove(hash_table, key))
 }
 
 func HashTableRemoveAll(hash_table *C.GHashTable) {
@@ -1825,8 +1845,8 @@ func HashTableSize(hash_table *C.GHashTable) C.guint {
 	return C.g_hash_table_size(hash_table)
 }
 
-func HashTableSteal(hash_table *C.GHashTable, key C.gconstpointer) C.gboolean {
-	return C.g_hash_table_steal(hash_table, key)
+func HashTableSteal(hash_table *C.GHashTable, key C.gconstpointer) bool {
+	return gboolean2bool(C.g_hash_table_steal(hash_table, key))
 }
 
 func HashTableStealAll(hash_table *C.GHashTable) {
@@ -1837,8 +1857,8 @@ func HashTableUnref(hash_table *C.GHashTable) {
 	C.g_hash_table_unref(hash_table)
 }
 
-func HookDestroy(hook_list *C.GHookList, hook_id C.gulong) C.gboolean {
-	return C.g_hook_destroy(hook_list, hook_id)
+func HookDestroy(hook_list *C.GHookList, hook_id C.gulong) bool {
+	return gboolean2bool(C.g_hook_destroy(hook_list, hook_id))
 }
 
 func HookDestroyLink(hook_list *C.GHookList, hook *C.GHook) {
@@ -1861,25 +1881,25 @@ func HookUnref(hook_list *C.GHookList, hook *C.GHook) {
 	C.g_hook_unref(hook_list, hook)
 }
 
-func HostnameIsAsciiEncoded(hostname string) C.gboolean {
+func HostnameIsAsciiEncoded(hostname string) bool {
 	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
 	defer C.free(_cstr_hostname)
 	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
-	return C._g_hostname_is_ascii_encoded(unsafe.Pointer(_gstr_hostname))
+	return gboolean2bool(C._g_hostname_is_ascii_encoded(unsafe.Pointer(_gstr_hostname)))
 }
 
-func HostnameIsIpAddress(hostname string) C.gboolean {
+func HostnameIsIpAddress(hostname string) bool {
 	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
 	defer C.free(_cstr_hostname)
 	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
-	return C._g_hostname_is_ip_address(unsafe.Pointer(_gstr_hostname))
+	return gboolean2bool(C._g_hostname_is_ip_address(unsafe.Pointer(_gstr_hostname)))
 }
 
-func HostnameIsNonAscii(hostname string) C.gboolean {
+func HostnameIsNonAscii(hostname string) bool {
 	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
 	defer C.free(_cstr_hostname)
 	_gstr_hostname := (*C.gchar)(unsafe.Pointer(_cstr_hostname))
-	return C._g_hostname_is_non_ascii(unsafe.Pointer(_gstr_hostname))
+	return gboolean2bool(C._g_hostname_is_non_ascii(unsafe.Pointer(_gstr_hostname)))
 }
 
 func HostnameToAscii(hostname string) string {
@@ -1904,24 +1924,24 @@ func IdleAddFull(priority C.gint, function C.GSourceFunc, data C.gpointer, notif
 	return C.g_idle_add_full(priority, function, data, notify)
 }
 
-func IdleRemoveByData(data C.gpointer) C.gboolean {
-	return C.g_idle_remove_by_data(data)
+func IdleRemoveByData(data C.gpointer) bool {
+	return gboolean2bool(C.g_idle_remove_by_data(data))
 }
 
 func IdleSourceNew() *C.GSource {
 	return C.g_idle_source_new()
 }
 
-func Int64Equal(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
-	return C.g_int64_equal(v1, v2)
+func Int64Equal(v1 C.gconstpointer, v2 C.gconstpointer) bool {
+	return gboolean2bool(C.g_int64_equal(v1, v2))
 }
 
 func Int64Hash(v C.gconstpointer) C.guint {
 	return C.g_int64_hash(v)
 }
 
-func IntEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
-	return C.g_int_equal(v1, v2)
+func IntEqual(v1 C.gconstpointer, v2 C.gconstpointer) bool {
+	return gboolean2bool(C.g_int_equal(v1, v2))
 }
 
 func IntHash(v C.gconstpointer) C.guint {
@@ -2080,8 +2100,8 @@ func MarkupEscapeText(text string, length C.gssize) string {
 
 //TODO g_markup_vprintf_escaped
 
-func MemIsSystemMalloc() C.gboolean {
-	return C.g_mem_is_system_malloc()
+func MemIsSystemMalloc() bool {
+	return gboolean2bool(C.g_mem_is_system_malloc())
 }
 
 func MemProfile() {
@@ -2178,11 +2198,11 @@ func PathGetDirname(file_name string) string {
 	return gcharp2string(C._g_path_get_dirname(unsafe.Pointer(_gstr_file_name)))
 }
 
-func PathIsAbsolute(file_name string) C.gboolean {
+func PathIsAbsolute(file_name string) bool {
 	_cstr_file_name := unsafe.Pointer(C.CString(file_name))
 	defer C.free(_cstr_file_name)
 	_gstr_file_name := (*C.gchar)(unsafe.Pointer(_cstr_file_name))
-	return C._g_path_is_absolute(unsafe.Pointer(_gstr_file_name))
+	return gboolean2bool(C._g_path_is_absolute(unsafe.Pointer(_gstr_file_name)))
 }
 
 func PathSkipRoot(file_name string) string {
@@ -2192,31 +2212,31 @@ func PathSkipRoot(file_name string) string {
 	return gcharp2string(C._g_path_skip_root(unsafe.Pointer(_gstr_file_name)))
 }
 
-func PatternMatch(pspec *C.GPatternSpec, string_length C.guint, string_ string, string_reversed string) C.gboolean {
+func PatternMatch(pspec *C.GPatternSpec, string_length C.guint, string_ string, string_reversed string) bool {
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
 	_cstr_string_reversed := unsafe.Pointer(C.CString(string_reversed))
 	defer C.free(_cstr_string_reversed)
 	_gstr_string_reversed := (*C.gchar)(unsafe.Pointer(_cstr_string_reversed))
-	return C._g_pattern_match(pspec, string_length, unsafe.Pointer(_gstr_string_), unsafe.Pointer(_gstr_string_reversed))
+	return gboolean2bool(C._g_pattern_match(pspec, string_length, unsafe.Pointer(_gstr_string_), unsafe.Pointer(_gstr_string_reversed)))
 }
 
-func PatternMatchSimple(pattern string, string_ string) C.gboolean {
+func PatternMatchSimple(pattern string, string_ string) bool {
 	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
 	defer C.free(_cstr_pattern)
 	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return C._g_pattern_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_))
+	return gboolean2bool(C._g_pattern_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_)))
 }
 
-func PatternMatchString(pspec *C.GPatternSpec, string_ string) C.gboolean {
+func PatternMatchString(pspec *C.GPatternSpec, string_ string) bool {
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return C._g_pattern_match_string(pspec, unsafe.Pointer(_gstr_string_))
+	return gboolean2bool(C._g_pattern_match_string(pspec, unsafe.Pointer(_gstr_string_)))
 }
 
 //Skipped g_pointer_bit_lock
@@ -2249,12 +2269,12 @@ func PtrArrayAdd(array *C.GPtrArray, data C.gpointer) {
 	C.g_ptr_array_add(array, data)
 }
 
-func PtrArrayRemove(array *C.GPtrArray, data C.gpointer) C.gboolean {
-	return C.g_ptr_array_remove(array, data)
+func PtrArrayRemove(array *C.GPtrArray, data C.gpointer) bool {
+	return gboolean2bool(C.g_ptr_array_remove(array, data))
 }
 
-func PtrArrayRemoveFast(array *C.GPtrArray, data C.gpointer) C.gboolean {
-	return C.g_ptr_array_remove_fast(array, data)
+func PtrArrayRemoveFast(array *C.GPtrArray, data C.gpointer) bool {
+	return gboolean2bool(C.g_ptr_array_remove_fast(array, data))
 }
 
 func PtrArrayRemoveRange(array *C.GPtrArray, index_ C.guint, length C.guint) {
@@ -2330,11 +2350,11 @@ func ReallocN(mem C.gpointer, n_blocks C.gsize, n_block_bytes C.gsize) C.gpointe
 	return C.g_realloc_n(mem, n_blocks, n_block_bytes)
 }
 
-func RegexCheckReplacement(replacement string, has_references *C.gboolean, err unsafe.Pointer) C.gboolean {
+func RegexCheckReplacement(replacement string, has_references *C.gboolean, err unsafe.Pointer) bool {
 	_cstr_replacement := unsafe.Pointer(C.CString(replacement))
 	defer C.free(_cstr_replacement)
 	_gstr_replacement := (*C.gchar)(unsafe.Pointer(_cstr_replacement))
-	return C._g_regex_check_replacement(unsafe.Pointer(_gstr_replacement), has_references, unsafe.Pointer(err))
+	return gboolean2bool(C._g_regex_check_replacement(unsafe.Pointer(_gstr_replacement), has_references, unsafe.Pointer(err)))
 }
 
 func RegexErrorQuark() C.GQuark {
@@ -2355,14 +2375,14 @@ func RegexEscapeString(string_ string, length C.gint) string {
 	return gcharp2string(C.g_regex_escape_string(_gstr_string_, length))
 }
 
-func RegexMatchSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) C.gboolean {
+func RegexMatchSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) bool {
 	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
 	defer C.free(_cstr_pattern)
 	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return C._g_regex_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_), compile_options, match_options)
+	return gboolean2bool(C._g_regex_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_), compile_options, match_options))
 }
 
 func RegexSplitSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) unsafe.Pointer {
@@ -2445,25 +2465,27 @@ func SetPrinterrHandler(func_ C.GPrintFunc) C.GPrintFunc {
 	return C.g_set_printerr_handler(func_)
 }
 
-func Setenv(variable string, value string, overwrite C.gboolean) C.gboolean {
+func Setenv(variable string, value string, overwrite bool) bool {
 	_cstr_variable := unsafe.Pointer(C.CString(variable))
 	defer C.free(_cstr_variable)
 	_gstr_variable := (*C.gchar)(unsafe.Pointer(_cstr_variable))
 	_cstr_value := unsafe.Pointer(C.CString(value))
 	defer C.free(_cstr_value)
 	_gstr_value := (*C.gchar)(unsafe.Pointer(_cstr_value))
-	return C._g_setenv(unsafe.Pointer(_gstr_variable), unsafe.Pointer(_gstr_value), overwrite)
+	_gbool_overwrite := C._false()
+	if overwrite { _gbool_overwrite = C._true() }
+	return gboolean2bool(C._g_setenv(unsafe.Pointer(_gstr_variable), unsafe.Pointer(_gstr_value), _gbool_overwrite))
 }
 
 func ShellErrorQuark() C.GQuark {
 	return C.g_shell_error_quark()
 }
 
-func ShellParseArgv(command_line string, argcp *C.gint, argvp unsafe.Pointer, err unsafe.Pointer) C.gboolean {
+func ShellParseArgv(command_line string, argcp *C.gint, argvp unsafe.Pointer, err unsafe.Pointer) bool {
 	_cstr_command_line := unsafe.Pointer(C.CString(command_line))
 	defer C.free(_cstr_command_line)
 	_gstr_command_line := (*C.gchar)(unsafe.Pointer(_cstr_command_line))
-	return C._g_shell_parse_argv(unsafe.Pointer(_gstr_command_line), argcp, unsafe.Pointer(argvp), unsafe.Pointer(err))
+	return gboolean2bool(C._g_shell_parse_argv(unsafe.Pointer(_gstr_command_line), argcp, unsafe.Pointer(argvp), unsafe.Pointer(err)))
 }
 
 func ShellQuote(unquoted_string string) string {
@@ -2508,16 +2530,16 @@ func SliceFreeChainWithOffset(block_size C.gsize, mem_chain C.gpointer, next_off
 
 //TODO g_snprintf
 
-func SourceRemove(tag C.guint) C.gboolean {
-	return C.g_source_remove(tag)
+func SourceRemove(tag C.guint) bool {
+	return gboolean2bool(C.g_source_remove(tag))
 }
 
-func SourceRemoveByFuncsUserData(funcs *C.GSourceFuncs, user_data C.gpointer) C.gboolean {
-	return C.g_source_remove_by_funcs_user_data(funcs, user_data)
+func SourceRemoveByFuncsUserData(funcs *C.GSourceFuncs, user_data C.gpointer) bool {
+	return gboolean2bool(C.g_source_remove_by_funcs_user_data(funcs, user_data))
 }
 
-func SourceRemoveByUserData(user_data C.gpointer) C.gboolean {
-	return C.g_source_remove_by_user_data(user_data)
+func SourceRemoveByUserData(user_data C.gpointer) bool {
+	return gboolean2bool(C.g_source_remove_by_user_data(user_data))
 }
 
 func SourceSetNameById(tag C.guint, name *C.char) {
@@ -2528,40 +2550,40 @@ func SpacedPrimesClosest(num C.guint) C.guint {
 	return C.g_spaced_primes_closest(num)
 }
 
-func SpawnAsync(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, err unsafe.Pointer) C.gboolean {
+func SpawnAsync(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, err unsafe.Pointer) bool {
 	_cstr_working_directory := unsafe.Pointer(C.CString(working_directory))
 	defer C.free(_cstr_working_directory)
 	_gstr_working_directory := (*C.gchar)(unsafe.Pointer(_cstr_working_directory))
-	return C._g_spawn_async(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, unsafe.Pointer(err))
+	return gboolean2bool(C._g_spawn_async(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, unsafe.Pointer(err)))
 }
 
-func SpawnAsyncWithPipes(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, standard_input *C.gint, standard_output *C.gint, standard_error *C.gint, err unsafe.Pointer) C.gboolean {
+func SpawnAsyncWithPipes(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, child_pid *C.GPid, standard_input *C.gint, standard_output *C.gint, standard_error *C.gint, err unsafe.Pointer) bool {
 	_cstr_working_directory := unsafe.Pointer(C.CString(working_directory))
 	defer C.free(_cstr_working_directory)
 	_gstr_working_directory := (*C.gchar)(unsafe.Pointer(_cstr_working_directory))
-	return C._g_spawn_async_with_pipes(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, unsafe.Pointer(err))
+	return gboolean2bool(C._g_spawn_async_with_pipes(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, unsafe.Pointer(err)))
 }
 
-func SpawnCheckExitStatus(exit_status C.gint, err unsafe.Pointer) C.gboolean {
-	return C._g_spawn_check_exit_status(exit_status, unsafe.Pointer(err))
+func SpawnCheckExitStatus(exit_status C.gint, err unsafe.Pointer) bool {
+	return gboolean2bool(C._g_spawn_check_exit_status(exit_status, unsafe.Pointer(err)))
 }
 
 func SpawnClosePid(pid C.GPid) {
 	C.g_spawn_close_pid(pid)
 }
 
-func SpawnCommandLineAsync(command_line string, err unsafe.Pointer) C.gboolean {
+func SpawnCommandLineAsync(command_line string, err unsafe.Pointer) bool {
 	_cstr_command_line := unsafe.Pointer(C.CString(command_line))
 	defer C.free(_cstr_command_line)
 	_gstr_command_line := (*C.gchar)(unsafe.Pointer(_cstr_command_line))
-	return C._g_spawn_command_line_async(unsafe.Pointer(_gstr_command_line), unsafe.Pointer(err))
+	return gboolean2bool(C._g_spawn_command_line_async(unsafe.Pointer(_gstr_command_line), unsafe.Pointer(err)))
 }
 
-func SpawnCommandLineSync(command_line string, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) C.gboolean {
+func SpawnCommandLineSync(command_line string, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) bool {
 	_cstr_command_line := unsafe.Pointer(C.CString(command_line))
 	defer C.free(_cstr_command_line)
 	_gstr_command_line := (*C.gchar)(unsafe.Pointer(_cstr_command_line))
-	return C._g_spawn_command_line_sync(unsafe.Pointer(_gstr_command_line), unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err))
+	return gboolean2bool(C._g_spawn_command_line_sync(unsafe.Pointer(_gstr_command_line), unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err)))
 }
 
 func SpawnErrorQuark() C.GQuark {
@@ -2572,11 +2594,11 @@ func SpawnExitErrorQuark() C.GQuark {
 	return C.g_spawn_exit_error_quark()
 }
 
-func SpawnSync(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) C.gboolean {
+func SpawnSync(working_directory string, argv unsafe.Pointer, envp unsafe.Pointer, flags C.GSpawnFlags, child_setup C.GSpawnChildSetupFunc, user_data C.gpointer, standard_output unsafe.Pointer, standard_error unsafe.Pointer, exit_status *C.gint, err unsafe.Pointer) bool {
 	_cstr_working_directory := unsafe.Pointer(C.CString(working_directory))
 	defer C.free(_cstr_working_directory)
 	_gstr_working_directory := (*C.gchar)(unsafe.Pointer(_cstr_working_directory))
-	return C._g_spawn_sync(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err))
+	return gboolean2bool(C._g_spawn_sync(unsafe.Pointer(_gstr_working_directory), unsafe.Pointer(argv), unsafe.Pointer(envp), flags, child_setup, user_data, unsafe.Pointer(standard_output), unsafe.Pointer(standard_error), exit_status, unsafe.Pointer(err)))
 }
 
 //TODO g_sprintf
@@ -2588,28 +2610,28 @@ func Stpcpy(dest string, src *C.char) string {
 	return gcharp2string(C._g_stpcpy(_gstr_dest, unsafe.Pointer(src)))
 }
 
-func StrEqual(v1 C.gconstpointer, v2 C.gconstpointer) C.gboolean {
-	return C.g_str_equal(v1, v2)
+func StrEqual(v1 C.gconstpointer, v2 C.gconstpointer) bool {
+	return gboolean2bool(C.g_str_equal(v1, v2))
 }
 
-func StrHasPrefix(str string, prefix string) C.gboolean {
+func StrHasPrefix(str string, prefix string) bool {
 	_cstr_str := unsafe.Pointer(C.CString(str))
 	defer C.free(_cstr_str)
 	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
 	_cstr_prefix := unsafe.Pointer(C.CString(prefix))
 	defer C.free(_cstr_prefix)
 	_gstr_prefix := (*C.gchar)(unsafe.Pointer(_cstr_prefix))
-	return C._g_str_has_prefix(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_prefix))
+	return gboolean2bool(C._g_str_has_prefix(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_prefix)))
 }
 
-func StrHasSuffix(str string, suffix string) C.gboolean {
+func StrHasSuffix(str string, suffix string) bool {
 	_cstr_str := unsafe.Pointer(C.CString(str))
 	defer C.free(_cstr_str)
 	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
 	_cstr_suffix := unsafe.Pointer(C.CString(suffix))
 	defer C.free(_cstr_suffix)
 	_gstr_suffix := (*C.gchar)(unsafe.Pointer(_cstr_suffix))
-	return C._g_str_has_suffix(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_suffix))
+	return gboolean2bool(C._g_str_has_suffix(unsafe.Pointer(_gstr_str), unsafe.Pointer(_gstr_suffix)))
 }
 
 func StrHash(v C.gconstpointer) C.guint {
@@ -2966,16 +2988,16 @@ func TestTrapAssertions(domain *C.char, file *C.char, line C.int, func_ *C.char,
 	C._g_test_trap_assertions(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), assertion_flags, unsafe.Pointer(pattern))
 }
 
-func TestTrapFork(usec_timeout C.guint64, test_trap_flags C.GTestTrapFlags) C.gboolean {
-	return C.g_test_trap_fork(usec_timeout, test_trap_flags)
+func TestTrapFork(usec_timeout C.guint64, test_trap_flags C.GTestTrapFlags) bool {
+	return gboolean2bool(C.g_test_trap_fork(usec_timeout, test_trap_flags))
 }
 
-func TestTrapHasPassed() C.gboolean {
-	return C.g_test_trap_has_passed()
+func TestTrapHasPassed() bool {
+	return gboolean2bool(C.g_test_trap_has_passed())
 }
 
-func TestTrapReachedTimeout() C.gboolean {
-	return C.g_test_trap_reached_timeout()
+func TestTrapReachedTimeout() bool {
+	return gboolean2bool(C.g_test_trap_reached_timeout())
 }
 
 func ThreadErrorQuark() C.GQuark {
@@ -3018,11 +3040,11 @@ func ThreadYield() {
 	C.g_thread_yield()
 }
 
-func TimeValFromIso8601(iso_date string, time_ *C.GTimeVal) C.gboolean {
+func TimeValFromIso8601(iso_date string, time_ *C.GTimeVal) bool {
 	_cstr_iso_date := unsafe.Pointer(C.CString(iso_date))
 	defer C.free(_cstr_iso_date)
 	_gstr_iso_date := (*C.gchar)(unsafe.Pointer(_cstr_iso_date))
-	return C._g_time_val_from_iso8601(unsafe.Pointer(_gstr_iso_date), time_)
+	return gboolean2bool(C._g_time_val_from_iso8601(unsafe.Pointer(_gstr_iso_date), time_))
 }
 
 func TimeoutAdd(interval C.guint, function C.GSourceFunc, data C.gpointer) C.guint {
@@ -3097,96 +3119,98 @@ func UnicharCombiningClass(uc C.gunichar) C.gint {
 	return C.g_unichar_combining_class(uc)
 }
 
-func UnicharCompose(a C.gunichar, b C.gunichar, ch *C.gunichar) C.gboolean {
-	return C.g_unichar_compose(a, b, ch)
+func UnicharCompose(a C.gunichar, b C.gunichar, ch *C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_compose(a, b, ch))
 }
 
-func UnicharDecompose(ch C.gunichar, a *C.gunichar, b *C.gunichar) C.gboolean {
-	return C.g_unichar_decompose(ch, a, b)
+func UnicharDecompose(ch C.gunichar, a *C.gunichar, b *C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_decompose(ch, a, b))
 }
 
 func UnicharDigitValue(c C.gunichar) C.gint {
 	return C.g_unichar_digit_value(c)
 }
 
-func UnicharFullyDecompose(ch C.gunichar, compat C.gboolean, result *C.gunichar, result_len C.gsize) C.gsize {
-	return C.g_unichar_fully_decompose(ch, compat, result, result_len)
+func UnicharFullyDecompose(ch C.gunichar, compat bool, result *C.gunichar, result_len C.gsize) C.gsize {
+	_gbool_compat := C._false()
+	if compat { _gbool_compat = C._true() }
+	return C.g_unichar_fully_decompose(ch, _gbool_compat, result, result_len)
 }
 
-func UnicharGetMirrorChar(ch C.gunichar, mirrored_ch *C.gunichar) C.gboolean {
-	return C.g_unichar_get_mirror_char(ch, mirrored_ch)
+func UnicharGetMirrorChar(ch C.gunichar, mirrored_ch *C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_get_mirror_char(ch, mirrored_ch))
 }
 
 func UnicharGetScript(ch C.gunichar) C.GUnicodeScript {
 	return C.g_unichar_get_script(ch)
 }
 
-func UnicharIsalnum(c C.gunichar) C.gboolean {
-	return C.g_unichar_isalnum(c)
+func UnicharIsalnum(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isalnum(c))
 }
 
-func UnicharIsalpha(c C.gunichar) C.gboolean {
-	return C.g_unichar_isalpha(c)
+func UnicharIsalpha(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isalpha(c))
 }
 
-func UnicharIscntrl(c C.gunichar) C.gboolean {
-	return C.g_unichar_iscntrl(c)
+func UnicharIscntrl(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_iscntrl(c))
 }
 
-func UnicharIsdefined(c C.gunichar) C.gboolean {
-	return C.g_unichar_isdefined(c)
+func UnicharIsdefined(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isdefined(c))
 }
 
-func UnicharIsdigit(c C.gunichar) C.gboolean {
-	return C.g_unichar_isdigit(c)
+func UnicharIsdigit(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isdigit(c))
 }
 
-func UnicharIsgraph(c C.gunichar) C.gboolean {
-	return C.g_unichar_isgraph(c)
+func UnicharIsgraph(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isgraph(c))
 }
 
-func UnicharIslower(c C.gunichar) C.gboolean {
-	return C.g_unichar_islower(c)
+func UnicharIslower(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_islower(c))
 }
 
-func UnicharIsmark(c C.gunichar) C.gboolean {
-	return C.g_unichar_ismark(c)
+func UnicharIsmark(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_ismark(c))
 }
 
-func UnicharIsprint(c C.gunichar) C.gboolean {
-	return C.g_unichar_isprint(c)
+func UnicharIsprint(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isprint(c))
 }
 
-func UnicharIspunct(c C.gunichar) C.gboolean {
-	return C.g_unichar_ispunct(c)
+func UnicharIspunct(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_ispunct(c))
 }
 
-func UnicharIsspace(c C.gunichar) C.gboolean {
-	return C.g_unichar_isspace(c)
+func UnicharIsspace(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isspace(c))
 }
 
-func UnicharIstitle(c C.gunichar) C.gboolean {
-	return C.g_unichar_istitle(c)
+func UnicharIstitle(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_istitle(c))
 }
 
-func UnicharIsupper(c C.gunichar) C.gboolean {
-	return C.g_unichar_isupper(c)
+func UnicharIsupper(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isupper(c))
 }
 
-func UnicharIswide(c C.gunichar) C.gboolean {
-	return C.g_unichar_iswide(c)
+func UnicharIswide(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_iswide(c))
 }
 
-func UnicharIswideCjk(c C.gunichar) C.gboolean {
-	return C.g_unichar_iswide_cjk(c)
+func UnicharIswideCjk(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_iswide_cjk(c))
 }
 
-func UnicharIsxdigit(c C.gunichar) C.gboolean {
-	return C.g_unichar_isxdigit(c)
+func UnicharIsxdigit(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_isxdigit(c))
 }
 
-func UnicharIszerowidth(c C.gunichar) C.gboolean {
-	return C.g_unichar_iszerowidth(c)
+func UnicharIszerowidth(c C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_iszerowidth(c))
 }
 
 func UnicharToUtf8(c C.gunichar, outbuf string) C.gint {
@@ -3212,8 +3236,8 @@ func UnicharType(c C.gunichar) C.GUnicodeType {
 	return C.g_unichar_type(c)
 }
 
-func UnicharValidate(ch C.gunichar) C.gboolean {
-	return C.g_unichar_validate(ch)
+func UnicharValidate(ch C.gunichar) bool {
+	return gboolean2bool(C.g_unichar_validate(ch))
 }
 
 func UnicharXdigitValue(c C.gunichar) C.gint {
@@ -3238,12 +3262,14 @@ func UnixErrorQuark() C.GQuark {
 	return C.g_unix_error_quark()
 }
 
-func UnixOpenPipe(fds *C.gint, flags C.gint, err unsafe.Pointer) C.gboolean {
-	return C._g_unix_open_pipe(fds, flags, unsafe.Pointer(err))
+func UnixOpenPipe(fds *C.gint, flags C.gint, err unsafe.Pointer) bool {
+	return gboolean2bool(C._g_unix_open_pipe(fds, flags, unsafe.Pointer(err)))
 }
 
-func UnixSetFdNonblocking(fd C.gint, nonblock C.gboolean, err unsafe.Pointer) C.gboolean {
-	return C._g_unix_set_fd_nonblocking(fd, nonblock, unsafe.Pointer(err))
+func UnixSetFdNonblocking(fd C.gint, nonblock bool, err unsafe.Pointer) bool {
+	_gbool_nonblock := C._false()
+	if nonblock { _gbool_nonblock = C._true() }
+	return gboolean2bool(C._g_unix_set_fd_nonblocking(fd, _gbool_nonblock, unsafe.Pointer(err)))
 }
 
 func UnixSignalAdd(signum C.gint, handler C.GSourceFunc, user_data C.gpointer) C.guint {
@@ -3272,8 +3298,10 @@ func Unsetenv(variable string) {
 	C._g_unsetenv(unsafe.Pointer(_gstr_variable))
 }
 
-func UriEscapeString(unescaped *C.char, reserved_chars_allowed *C.char, allow_utf8 C.gboolean) *C.char {
-	return C._g_uri_escape_string(unsafe.Pointer(unescaped), unsafe.Pointer(reserved_chars_allowed), allow_utf8)
+func UriEscapeString(unescaped *C.char, reserved_chars_allowed *C.char, allow_utf8 bool) *C.char {
+	_gbool_allow_utf8 := C._false()
+	if allow_utf8 { _gbool_allow_utf8 = C._true() }
+	return C._g_uri_escape_string(unsafe.Pointer(unescaped), unsafe.Pointer(reserved_chars_allowed), _gbool_allow_utf8)
 }
 
 func UriListExtractUris(uri_list string) unsafe.Pointer {
@@ -3483,27 +3511,27 @@ func Utf8ToUtf16(str string, len_ C.glong, items_read *C.glong, items_written *C
 	return C._g_utf8_to_utf16(unsafe.Pointer(_gstr_str), len_, items_read, items_written, unsafe.Pointer(err))
 }
 
-func Utf8Validate(str string, max_len C.gssize, end unsafe.Pointer) C.gboolean {
+func Utf8Validate(str string, max_len C.gssize, end unsafe.Pointer) bool {
 	_cstr_str := unsafe.Pointer(C.CString(str))
 	defer C.free(_cstr_str)
 	_gstr_str := (*C.gchar)(unsafe.Pointer(_cstr_str))
-	return C._g_utf8_validate(_gstr_str, max_len, unsafe.Pointer(end))
+	return gboolean2bool(C._g_utf8_validate(_gstr_str, max_len, unsafe.Pointer(end)))
 }
 
 //Skipped g_variant_get_gtype
 
-func VariantIsObjectPath(string_ string) C.gboolean {
+func VariantIsObjectPath(string_ string) bool {
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return C._g_variant_is_object_path(unsafe.Pointer(_gstr_string_))
+	return gboolean2bool(C._g_variant_is_object_path(unsafe.Pointer(_gstr_string_)))
 }
 
-func VariantIsSignature(string_ string) C.gboolean {
+func VariantIsSignature(string_ string) bool {
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return C._g_variant_is_signature(unsafe.Pointer(_gstr_string_))
+	return gboolean2bool(C._g_variant_is_signature(unsafe.Pointer(_gstr_string_)))
 }
 
 func VariantParse(type_ *C.GVariantType, text string, limit string, endptr unsafe.Pointer, err unsafe.Pointer) *C.GVariant {
@@ -3527,21 +3555,21 @@ func VariantTypeChecked(arg_0 string) *C.GVariantType {
 	return C._g_variant_type_checked_(unsafe.Pointer(_gstr_arg_0))
 }
 
-func VariantTypeStringIsValid(type_string string) C.gboolean {
+func VariantTypeStringIsValid(type_string string) bool {
 	_cstr_type_string := unsafe.Pointer(C.CString(type_string))
 	defer C.free(_cstr_type_string)
 	_gstr_type_string := (*C.gchar)(unsafe.Pointer(_cstr_type_string))
-	return C._g_variant_type_string_is_valid(unsafe.Pointer(_gstr_type_string))
+	return gboolean2bool(C._g_variant_type_string_is_valid(unsafe.Pointer(_gstr_type_string)))
 }
 
-func VariantTypeStringScan(string_ string, limit string, endptr unsafe.Pointer) C.gboolean {
+func VariantTypeStringScan(string_ string, limit string, endptr unsafe.Pointer) bool {
 	_cstr_string_ := unsafe.Pointer(C.CString(string_))
 	defer C.free(_cstr_string_)
 	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
 	_cstr_limit := unsafe.Pointer(C.CString(limit))
 	defer C.free(_cstr_limit)
 	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
-	return C._g_variant_type_string_scan(unsafe.Pointer(_gstr_string_), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr))
+	return gboolean2bool(C._g_variant_type_string_scan(unsafe.Pointer(_gstr_string_), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr)))
 }
 
 //TODO g_vasprintf
@@ -4151,4 +4179,7 @@ const G_VA_COPY_AS_ARRAY = C.G_VA_COPY_AS_ARRAY
 const GLIB_VERSION_MIN_REQUIRED = C.GLIB_VERSION_MIN_REQUIRED
 func gcharp2string(str *C.gchar) string {
   return C.GoString((*C.char)(str))
+}
+func gboolean2bool(b C.gboolean) bool {
+  return b == C._true()
 }

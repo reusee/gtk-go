@@ -31,6 +31,8 @@ class Generator:
     print >>self.out, "/*"
     # typedefs
     print >>self.out, "typedef long double longdouble;"
+    # helper functions
+    self.generate_macro_helpers()
     # wrappers
     for func in self.parser.functions_need_wrapper:
       self.generate_wrapper(func)
@@ -50,6 +52,11 @@ class Generator:
     self.generate_const_symbols()
 
     self.generate_to_go_type_func_codes()
+
+  def write(self, f):
+    output_file = open(f, 'w')
+    output_file.write(self.out.getvalue())
+    output_file.close()
 
   def generate_function(self, func):
     # not support yet or has problem
@@ -175,7 +182,6 @@ class Generator:
         go_name = symbol[4:]
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
-  def write(self, f):
-    output_file = open(f, 'w')
-    output_file.write(self.out.getvalue())
-    output_file.close()
+  def generate_macro_helpers(self):
+    print >>self.out, "gboolean _true() { return TRUE; }"
+    print >>self.out, "gboolean _false() { return FALSE; }"
