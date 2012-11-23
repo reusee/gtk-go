@@ -3,6 +3,7 @@ package glib
 import (
   "testing"
   "fmt"
+  "bytes"
 )
 
 func TestStringMapping(t *testing.T) {
@@ -39,6 +40,18 @@ func TestBool(t *testing.T) {
     t.Fail()
   }
   if StrHasPrefix("foo", "bar") != false {
+    t.Fail()
+  }
+}
+
+func TestBase64(t *testing.T) {
+  data := []byte("hello")
+  expected := "aGVsbG8="
+  l := uint64(len(data))
+  if expected != Base64Encode(data, l) {
+    t.Fail()
+  }
+  if !bytes.Equal(data, Base64Decode(expected, &l)) {
     t.Fail()
   }
 }

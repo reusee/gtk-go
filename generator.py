@@ -19,6 +19,7 @@ class Generator:
       self.parser.pkgconfig_packages.append('gobject-2.0')
     print >>self.out, "// #cgo pkg-config: %s" % ' '.join(self.parser.pkgconfig_packages)
     # basic includes
+    print >>self.out, "// #include <string.h>"
     print >>self.out, "// #include <glib-object.h>"
     print >>self.out, "// #include <glib/gstdio.h>"
     # platform specific includes
