@@ -133,7 +133,7 @@ def main():
   parser.parse()
   generator = Generator(parser)
   generator.generate()
-  generator.write("example-%s/%s.go" % (parser.package_name, parser.package_name))
+  generator.write("%s/%s.go" % (parser.package_name, parser.package_name))
 
 if __name__ == '__main__':
   main()

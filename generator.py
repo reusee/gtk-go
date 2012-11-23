@@ -33,6 +33,7 @@ class Generator:
     print >>self.out, "/*"
     # typedefs
     print >>self.out, "typedef long double longdouble;"
+    print >>self.out, "typedef unsigned long long ulonglong;"
     # helper functions
     self.generate_macro_helpers()
     # wrappers
