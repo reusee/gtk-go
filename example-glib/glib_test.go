@@ -55,3 +55,7 @@ func TestBase64(t *testing.T) {
     t.Fail()
   }
 }
+
+func TestAsyncQueue(t *testing.T) {
+  AsyncQueueNew()
+}

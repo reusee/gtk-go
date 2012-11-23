@@ -12,20 +12,77 @@ package glib
 typedef long double longdouble;
 gboolean _true() { return TRUE; }
 gboolean _false() { return FALSE; }
+GByteArray* _g_byte_array_append(GByteArray* array, void* data, guint len_) {
+	return g_byte_array_append(array, (const guint8*)(data), len_);
+}
+GByteArray* _g_byte_array_prepend(GByteArray* array, void* data, guint len_) {
+	return g_byte_array_prepend(array, (const guint8*)(data), len_);
+}
+gsize _g_date_strftime(gchar* s, gsize slen, void* format, void* date) {
+	return g_date_strftime(s, slen, (const gchar*)(format), (const GDate*)(date));
+}
 GDateTime* _g_date_time_new_from_timeval_local(void* tv) {
 	return g_date_time_new_from_timeval_local((const GTimeVal*)(tv));
 }
 GDateTime* _g_date_time_new_from_timeval_utc(void* tv) {
 	return g_date_time_new_from_timeval_utc((const GTimeVal*)(tv));
 }
+gchar* _g_dir_make_tmp(gchar* tmpl, void* err) {
+	return g_dir_make_tmp(tmpl, (GError**)(err));
+}
+GDir* _g_dir_open(void* path, guint flags, void* err) {
+	return g_dir_open((const gchar*)(path), flags, (GError**)(err));
+}
 GError* _g_error_new_literal(GQuark domain, gint code, void* message) {
 	return g_error_new_literal(domain, code, (const gchar*)(message));
+}
+GIConv _g_iconv_open(void* to_codeset, void* from_codeset) {
+	return g_iconv_open((const gchar*)(to_codeset), (const gchar*)(from_codeset));
 }
 GIOChannel* _g_io_channel_new_file(void* filename, void* mode, void* err) {
 	return g_io_channel_new_file((const gchar*)(filename), (const gchar*)(mode), (GError**)(err));
 }
+GMappedFile* _g_mapped_file_new(void* filename, gboolean writable, void* err) {
+	return g_mapped_file_new((const gchar*)(filename), writable, (GError**)(err));
+}
+GMappedFile* _g_mapped_file_new_from_fd(gint fd, gboolean writable, void* err) {
+	return g_mapped_file_new_from_fd(fd, writable, (GError**)(err));
+}
+GMarkupParseContext* _g_markup_parse_context_new(void* parser, GMarkupParseFlags flags, gpointer user_data, GDestroyNotify user_data_dnotify) {
+	return g_markup_parse_context_new((const GMarkupParser*)(parser), flags, user_data, user_data_dnotify);
+}
+GOptionContext* _g_option_context_new(void* parameter_string) {
+	return g_option_context_new((const gchar*)(parameter_string));
+}
+GOptionGroup* _g_option_group_new(void* name, void* description, void* help_description, gpointer user_data, GDestroyNotify destroy) {
+	return g_option_group_new((const gchar*)(name), (const gchar*)(description), (const gchar*)(help_description), user_data, destroy);
+}
+GPatternSpec* _g_pattern_spec_new(void* pattern) {
+	return g_pattern_spec_new((const gchar*)(pattern));
+}
+GRand* _g_rand_new_with_seed_array(void* seed, guint seed_length) {
+	return g_rand_new_with_seed_array((const guint32*)(seed), seed_length);
+}
 GRegex* _g_regex_new(void* pattern, GRegexCompileFlags compile_options, GRegexMatchFlags match_options, void* err) {
 	return g_regex_new((const gchar*)(pattern), compile_options, match_options, (GError**)(err));
+}
+gboolean _g_regex_check_replacement(void* replacement, gboolean* has_references, void* err) {
+	return g_regex_check_replacement((const gchar*)(replacement), has_references, (GError**)(err));
+}
+gchar* _g_regex_escape_nul(void* string_, gint length) {
+	return g_regex_escape_nul((const gchar*)(string_), length);
+}
+gboolean _g_regex_match_simple(void* pattern, void* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
+	return g_regex_match_simple((const gchar*)(pattern), (const gchar*)(string_), compile_options, match_options);
+}
+gchar** _g_regex_split_simple(void* pattern, void* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
+	return g_regex_split_simple((const gchar*)(pattern), (const gchar*)(string_), compile_options, match_options);
+}
+GScanner* _g_scanner_new(void* config_templ) {
+	return g_scanner_new((const GScannerConfig*)(config_templ));
+}
+void _g_source_set_name_by_id(guint tag, void* name) {
+	g_source_set_name_by_id(tag, (const char*)(name));
 }
 GThread* _g_thread_new(void* name, GThreadFunc func_, gpointer data) {
 	return g_thread_new((const gchar*)(name), func_, data);
@@ -33,8 +90,26 @@ GThread* _g_thread_new(void* name, GThreadFunc func_, gpointer data) {
 GThread* _g_thread_try_new(void* name, GThreadFunc func_, gpointer data, void* err) {
 	return g_thread_try_new((const gchar*)(name), func_, data, (GError**)(err));
 }
+GThreadPool* _g_thread_pool_new(GFunc func_, gpointer user_data, gint max_threads, gboolean exclusive, void* err) {
+	return g_thread_pool_new(func_, user_data, max_threads, exclusive, (GError**)(err));
+}
+gboolean _g_time_val_from_iso8601(void* iso_date, GTimeVal* time_) {
+	return g_time_val_from_iso8601((const gchar*)(iso_date), time_);
+}
 GTimeZone* _g_time_zone_new(void* identifier) {
 	return g_time_zone_new((const gchar*)(identifier));
+}
+guint _g_trash_stack_height(void* stack_p) {
+	return g_trash_stack_height((GTrashStack**)(stack_p));
+}
+gpointer _g_trash_stack_peek(void* stack_p) {
+	return g_trash_stack_peek((GTrashStack**)(stack_p));
+}
+gpointer _g_trash_stack_pop(void* stack_p) {
+	return g_trash_stack_pop((GTrashStack**)(stack_p));
+}
+void _g_trash_stack_push(void* stack_p, gpointer data_p) {
+	g_trash_stack_push((GTrashStack**)(stack_p), data_p);
 }
 GVariant* _g_variant_new_array(void* child_type, void* children, gsize n_children) {
 	return g_variant_new_array((const GVariantType*)(child_type), (GVariant**)(children), n_children);
@@ -69,6 +144,15 @@ GVariant* _g_variant_new_tuple(void* children, gsize n_children) {
 GVariant* _g_variant_new_va(void* format_string, void* endptr, va_list* app) {
 	return g_variant_new_va((const gchar*)(format_string), (const gchar**)(endptr), app);
 }
+gboolean _g_variant_is_object_path(void* string_) {
+	return g_variant_is_object_path((const gchar*)(string_));
+}
+gboolean _g_variant_is_signature(void* string_) {
+	return g_variant_is_signature((const gchar*)(string_));
+}
+GVariant* _g_variant_parse(void* type_, void* text, void* limit, void* endptr, void* err) {
+	return g_variant_parse((const GVariantType*)(type_), (const gchar*)(text), (const gchar*)(limit), (const gchar**)(endptr), (GError**)(err));
+}
 GVariantBuilder* _g_variant_builder_new(void* type_) {
 	return g_variant_builder_new((const GVariantType*)(type_));
 }
@@ -83,6 +167,15 @@ GVariantType* _g_variant_type_new_dict_entry(void* key, void* value) {
 }
 GVariantType* _g_variant_type_new_maybe(void* element) {
 	return g_variant_type_new_maybe((const GVariantType*)(element));
+}
+const GVariantType* _g_variant_type_checked_(void* arg_0) {
+	return g_variant_type_checked_((const gchar*)(arg_0));
+}
+gboolean _g_variant_type_string_is_valid(void* type_string) {
+	return g_variant_type_string_is_valid((const gchar*)(type_string));
+}
+gboolean _g_variant_type_string_scan(void* string_, void* limit, void* endptr) {
+	return g_variant_type_string_scan((const gchar*)(string_), (const gchar*)(limit), (const gchar**)(endptr));
 }
 int _g_access(void* filename, int mode) {
 	return g_access((const gchar*)(filename), mode);
@@ -195,17 +288,11 @@ void _g_datalist_set_flags(void* datalist, guint flags) {
 void _g_datalist_unset_flags(void* datalist, guint flags) {
 	g_datalist_unset_flags((GData**)(datalist), flags);
 }
-gsize _g_date_strftime(gchar* s, gsize slen, void* format, void* date) {
-	return g_date_strftime(s, slen, (const gchar*)(format), (const GDate*)(date));
-}
 const gchar* _g_dcgettext(void* domain, void* msgid, gint category) {
 	return g_dcgettext((const gchar*)(domain), (const gchar*)(msgid), category);
 }
 const gchar* _g_dgettext(void* domain, void* msgid) {
 	return g_dgettext((const gchar*)(domain), (const gchar*)(msgid));
-}
-gchar* _g_dir_make_tmp(gchar* tmpl, void* err) {
-	return g_dir_make_tmp(tmpl, (GError**)(err));
 }
 const gchar* _g_dngettext(void* domain, void* msgid, void* msgid_plural, gulong n) {
 	return g_dngettext((const gchar*)(domain), (const gchar*)(msgid), (const gchar*)(msgid_plural), n);
@@ -360,18 +447,6 @@ GQuark _g_quark_from_string(void* string_) {
 GQuark _g_quark_try_string(void* string_) {
 	return g_quark_try_string((const gchar*)(string_));
 }
-gboolean _g_regex_check_replacement(void* replacement, gboolean* has_references, void* err) {
-	return g_regex_check_replacement((const gchar*)(replacement), has_references, (GError**)(err));
-}
-gchar* _g_regex_escape_nul(void* string_, gint length) {
-	return g_regex_escape_nul((const gchar*)(string_), length);
-}
-gboolean _g_regex_match_simple(void* pattern, void* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
-	return g_regex_match_simple((const gchar*)(pattern), (const gchar*)(string_), compile_options, match_options);
-}
-gchar** _g_regex_split_simple(void* pattern, void* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
-	return g_regex_split_simple((const gchar*)(pattern), (const gchar*)(string_), compile_options, match_options);
-}
 void _g_return_if_fail_warning(void* log_domain, void* pretty_function, void* expression) {
 	g_return_if_fail_warning((const char*)(log_domain), (const char*)(pretty_function), (const char*)(expression));
 }
@@ -398,9 +473,6 @@ gchar* _g_shell_quote(void* unquoted_string) {
 }
 gchar* _g_shell_unquote(void* quoted_string, void* err) {
 	return g_shell_unquote((const gchar*)(quoted_string), (GError**)(err));
-}
-void _g_source_set_name_by_id(guint tag, void* name) {
-	g_source_set_name_by_id(tag, (const char*)(name));
 }
 gboolean _g_spawn_async(void* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, GPid* child_pid, void* err) {
 	return g_spawn_async((const gchar*)(working_directory), (gchar**)(argv), (gchar**)(envp), flags, child_setup, user_data, child_pid, (GError**)(err));
@@ -528,15 +600,6 @@ void _g_test_expect_message(void* log_domain, GLogLevelFlags log_level, void* pa
 void _g_test_trap_assertions(void* domain, void* file, int line, void* func_, guint64 assertion_flags, void* pattern) {
 	g_test_trap_assertions((const char*)(domain), (const char*)(file), line, (const char*)(func_), assertion_flags, (const char*)(pattern));
 }
-gboolean _g_time_val_from_iso8601(void* iso_date, GTimeVal* time_) {
-	return g_time_val_from_iso8601((const gchar*)(iso_date), time_);
-}
-guint _g_trash_stack_height(void* stack_p) {
-	return g_trash_stack_height((GTrashStack**)(stack_p));
-}
-void _g_trash_stack_push(void* stack_p, gpointer data_p) {
-	g_trash_stack_push((GTrashStack**)(stack_p), data_p);
-}
 gunichar2* _g_ucs4_to_utf16(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
 	return g_ucs4_to_utf16((const gunichar*)(str), len_, items_read, items_written, (GError**)(err));
 }
@@ -648,24 +711,6 @@ gunichar2* _g_utf8_to_utf16(void* str, glong len_, glong* items_read, glong* ite
 gboolean _g_utf8_validate(gchar* str, gssize max_len, void* end) {
 	return g_utf8_validate(str, max_len, (const gchar**)(end));
 }
-gboolean _g_variant_is_object_path(void* string_) {
-	return g_variant_is_object_path((const gchar*)(string_));
-}
-gboolean _g_variant_is_signature(void* string_) {
-	return g_variant_is_signature((const gchar*)(string_));
-}
-GVariant* _g_variant_parse(void* type_, void* text, void* limit, void* endptr, void* err) {
-	return g_variant_parse((const GVariantType*)(type_), (const gchar*)(text), (const gchar*)(limit), (const gchar**)(endptr), (GError**)(err));
-}
-const GVariantType* _g_variant_type_checked_(void* arg_0) {
-	return g_variant_type_checked_((const gchar*)(arg_0));
-}
-gboolean _g_variant_type_string_is_valid(void* type_string) {
-	return g_variant_type_string_is_valid((const gchar*)(type_string));
-}
-gboolean _g_variant_type_string_scan(void* string_, void* limit, void* endptr) {
-	return g_variant_type_string_scan((const gchar*)(string_), (const gchar*)(limit), (const gchar**)(endptr));
-}
 void _g_warn_message(void* domain, void* file, int line, void* func_, void* warnexpr) {
 	g_warn_message((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(warnexpr));
 }
@@ -674,6 +719,190 @@ import "C"
 import (
 	"unsafe"
 )
+
+func ArrayAppendVals(array *C.GArray, data unsafe.Pointer, len_ uint) *C.GArray {
+	_gpointer_data := (C.gconstpointer)(data)
+	_guint_len_ := C.guint(len_)
+	return C.g_array_append_vals(array, _gpointer_data, _guint_len_)
+}
+
+func ArrayFree(array *C.GArray, free_segment bool) string {
+	_gbool_free_segment := C._false()
+	if free_segment { _gbool_free_segment = C._true() }
+	return gcharp2string(C.g_array_free(array, _gbool_free_segment))
+}
+
+func ArrayGetElementSize(array *C.GArray) uint {
+	return guint2uint(C.g_array_get_element_size(array))
+}
+
+func ArrayInsertVals(array *C.GArray, index_ uint, data unsafe.Pointer, len_ uint) *C.GArray {
+	_guint_index_ := C.guint(index_)
+	_gpointer_data := (C.gconstpointer)(data)
+	_guint_len_ := C.guint(len_)
+	return C.g_array_insert_vals(array, _guint_index_, _gpointer_data, _guint_len_)
+}
+
+func ArrayNew(zero_terminated bool, clear_ bool, element_size uint) *C.GArray {
+	_gbool_zero_terminated := C._false()
+	if zero_terminated { _gbool_zero_terminated = C._true() }
+	_gbool_clear_ := C._false()
+	if clear_ { _gbool_clear_ = C._true() }
+	_guint_element_size := C.guint(element_size)
+	return C.g_array_new(_gbool_zero_terminated, _gbool_clear_, _guint_element_size)
+}
+
+func ArrayPrependVals(array *C.GArray, data unsafe.Pointer, len_ uint) *C.GArray {
+	_gpointer_data := (C.gconstpointer)(data)
+	_guint_len_ := C.guint(len_)
+	return C.g_array_prepend_vals(array, _gpointer_data, _guint_len_)
+}
+
+func ArrayRef(array *C.GArray) *C.GArray {
+	return C.g_array_ref(array)
+}
+
+func ArrayRemoveIndex(array *C.GArray, index_ uint) *C.GArray {
+	_guint_index_ := C.guint(index_)
+	return C.g_array_remove_index(array, _guint_index_)
+}
+
+func ArrayRemoveIndexFast(array *C.GArray, index_ uint) *C.GArray {
+	_guint_index_ := C.guint(index_)
+	return C.g_array_remove_index_fast(array, _guint_index_)
+}
+
+func ArrayRemoveRange(array *C.GArray, index_ uint, length uint) *C.GArray {
+	_guint_index_ := C.guint(index_)
+	_guint_length := C.guint(length)
+	return C.g_array_remove_range(array, _guint_index_, _guint_length)
+}
+
+func ArraySetClearFunc(array *C.GArray, clear_func C.GDestroyNotify) {
+	C.g_array_set_clear_func(array, clear_func)
+}
+
+func ArraySetSize(array *C.GArray, length uint) *C.GArray {
+	_guint_length := C.guint(length)
+	return C.g_array_set_size(array, _guint_length)
+}
+
+func ArraySizedNew(zero_terminated bool, clear_ bool, element_size uint, reserved_size uint) *C.GArray {
+	_gbool_zero_terminated := C._false()
+	if zero_terminated { _gbool_zero_terminated = C._true() }
+	_gbool_clear_ := C._false()
+	if clear_ { _gbool_clear_ = C._true() }
+	_guint_element_size := C.guint(element_size)
+	_guint_reserved_size := C.guint(reserved_size)
+	return C.g_array_sized_new(_gbool_zero_terminated, _gbool_clear_, _guint_element_size, _guint_reserved_size)
+}
+
+func ArraySort(array *C.GArray, compare_func C.GCompareFunc) {
+	C.g_array_sort(array, compare_func)
+}
+
+func ArraySortWithData(array *C.GArray, compare_func C.GCompareDataFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_array_sort_with_data(array, compare_func, _gpointer_user_data)
+}
+
+func ArrayUnref(array *C.GArray) {
+	C.g_array_unref(array)
+}
+
+func AsyncQueueNew() *C.GAsyncQueue {
+	return C.g_async_queue_new()
+}
+
+func AsyncQueueNewFull(item_free_func C.GDestroyNotify) *C.GAsyncQueue {
+	return C.g_async_queue_new_full(item_free_func)
+}
+
+func BookmarkFileErrorQuark() C.GQuark {
+	return C.g_bookmark_file_error_quark()
+}
+
+func BookmarkFileNew() *C.GBookmarkFile {
+	return C.g_bookmark_file_new()
+}
+
+func ByteArrayAppend(array *C.GByteArray, data *uint8, len_ uint) *C.GByteArray {
+	_c_guint8_data := C.guint8(*data)
+	_cp_guint8_data := (*C.guint8)(&_c_guint8_data)
+	_guint_len_ := C.guint(len_)
+	return C._g_byte_array_append(array, unsafe.Pointer(_cp_guint8_data), _guint_len_)
+}
+
+func ByteArrayFree(array *C.GByteArray, free_segment bool) *uint8 {
+	_gbool_free_segment := C._false()
+	if free_segment { _gbool_free_segment = C._true() }
+	return guint8p2uint8p(C.g_byte_array_free(array, _gbool_free_segment))
+}
+
+func ByteArrayFreeToBytes(array *C.GByteArray) *C.GBytes {
+	return C.g_byte_array_free_to_bytes(array)
+}
+
+func ByteArrayNew() *C.GByteArray {
+	return C.g_byte_array_new()
+}
+
+func ByteArrayNewTake(data *uint8, len_ uint64) *C.GByteArray {
+	_c_guint8_data := C.guint8(*data)
+	_cp_guint8_data := (*C.guint8)(&_c_guint8_data)
+	_gsize_len_ := C.gsize(len_)
+	return C.g_byte_array_new_take(_cp_guint8_data, _gsize_len_)
+}
+
+func ByteArrayPrepend(array *C.GByteArray, data *uint8, len_ uint) *C.GByteArray {
+	_c_guint8_data := C.guint8(*data)
+	_cp_guint8_data := (*C.guint8)(&_c_guint8_data)
+	_guint_len_ := C.guint(len_)
+	return C._g_byte_array_prepend(array, unsafe.Pointer(_cp_guint8_data), _guint_len_)
+}
+
+func ByteArrayRef(array *C.GByteArray) *C.GByteArray {
+	return C.g_byte_array_ref(array)
+}
+
+func ByteArrayRemoveIndex(array *C.GByteArray, index_ uint) *C.GByteArray {
+	_guint_index_ := C.guint(index_)
+	return C.g_byte_array_remove_index(array, _guint_index_)
+}
+
+func ByteArrayRemoveIndexFast(array *C.GByteArray, index_ uint) *C.GByteArray {
+	_guint_index_ := C.guint(index_)
+	return C.g_byte_array_remove_index_fast(array, _guint_index_)
+}
+
+func ByteArrayRemoveRange(array *C.GByteArray, index_ uint, length uint) *C.GByteArray {
+	_guint_index_ := C.guint(index_)
+	_guint_length := C.guint(length)
+	return C.g_byte_array_remove_range(array, _guint_index_, _guint_length)
+}
+
+func ByteArraySetSize(array *C.GByteArray, length uint) *C.GByteArray {
+	_guint_length := C.guint(length)
+	return C.g_byte_array_set_size(array, _guint_length)
+}
+
+func ByteArraySizedNew(reserved_size uint) *C.GByteArray {
+	_guint_reserved_size := C.guint(reserved_size)
+	return C.g_byte_array_sized_new(_guint_reserved_size)
+}
+
+func ByteArraySort(array *C.GByteArray, compare_func C.GCompareFunc) {
+	C.g_byte_array_sort(array, compare_func)
+}
+
+func ByteArraySortWithData(array *C.GByteArray, compare_func C.GCompareDataFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_byte_array_sort_with_data(array, compare_func, _gpointer_user_data)
+}
+
+func ByteArrayUnref(array *C.GByteArray) {
+	C.g_byte_array_unref(array)
+}
 
 func BytesNew(data unsafe.Pointer, size uint64) *C.GBytes {
 	_gpointer_data := (C.gconstpointer)(data)
@@ -700,6 +929,14 @@ func BytesNewWithFreeFunc(data unsafe.Pointer, size uint64, free_func C.GDestroy
 	return C.g_bytes_new_with_free_func(_gpointer_data, _gsize_size, free_func, _gpointer_user_data)
 }
 
+func ChecksumNew(checksum_type C.GChecksumType) *C.GChecksum {
+	return C.g_checksum_new(checksum_type)
+}
+
+func ChecksumTypeGetLength(checksum_type C.GChecksumType) int64 {
+	return gssize2int64(C.g_checksum_type_get_length(checksum_type))
+}
+
 func DateNew() *C.GDate {
 	return C.g_date_new()
 }
@@ -711,6 +948,58 @@ func DateNewDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) *C.GDate {
 func DateNewJulian(julian_day uint32) *C.GDate {
 	_guint32_julian_day := C.guint32(julian_day)
 	return C.g_date_new_julian(_guint32_julian_day)
+}
+
+func DateGetDaysInMonth(month C.GDateMonth, year C.GDateYear) uint8 {
+	return guint82uint8(C.g_date_get_days_in_month(month, year))
+}
+
+func DateGetMondayWeeksInYear(year C.GDateYear) uint8 {
+	return guint82uint8(C.g_date_get_monday_weeks_in_year(year))
+}
+
+func DateGetSundayWeeksInYear(year C.GDateYear) uint8 {
+	return guint82uint8(C.g_date_get_sunday_weeks_in_year(year))
+}
+
+func DateIsLeapYear(year C.GDateYear) bool {
+	return gboolean2bool(C.g_date_is_leap_year(year))
+}
+
+func DateStrftime(s string, slen uint64, format string, date *C.GDate) uint64 {
+	_cstr_s := unsafe.Pointer(C.CString(s))
+	defer C.free(_cstr_s)
+	_gstr_s := (*C.gchar)(unsafe.Pointer(_cstr_s))
+	_gsize_slen := C.gsize(slen)
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	return gsize2uint64(C._g_date_strftime(_gstr_s, _gsize_slen, unsafe.Pointer(_gstr_format), unsafe.Pointer(date)))
+}
+
+func DateValidDay(day C.GDateDay) bool {
+	return gboolean2bool(C.g_date_valid_day(day))
+}
+
+func DateValidDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) bool {
+	return gboolean2bool(C.g_date_valid_dmy(day, month, year))
+}
+
+func DateValidJulian(julian_date uint32) bool {
+	_guint32_julian_date := C.guint32(julian_date)
+	return gboolean2bool(C.g_date_valid_julian(_guint32_julian_date))
+}
+
+func DateValidMonth(month C.GDateMonth) bool {
+	return gboolean2bool(C.g_date_valid_month(month))
+}
+
+func DateValidWeekday(weekday C.GDateWeekday) bool {
+	return gboolean2bool(C.g_date_valid_weekday(weekday))
+}
+
+func DateValidYear(year C.GDateYear) bool {
+	return gboolean2bool(C.g_date_valid_year(year))
 }
 
 func DateTimeNew(tz *C.GTimeZone, year int, month int, day int, hour int, minute int, seconds float64) *C.GDateTime {
@@ -773,6 +1062,38 @@ func DateTimeNewUtc(year int, month int, day int, hour int, minute int, seconds 
 	return C.g_date_time_new_utc(_gint_year, _gint_month, _gint_day, _gint_hour, _gint_minute, _gdouble_seconds)
 }
 
+func DateTimeCompare(dt1 unsafe.Pointer, dt2 unsafe.Pointer) int {
+	_gpointer_dt1 := (C.gconstpointer)(dt1)
+	_gpointer_dt2 := (C.gconstpointer)(dt2)
+	return gint2int(C.g_date_time_compare(_gpointer_dt1, _gpointer_dt2))
+}
+
+func DateTimeEqual(dt1 unsafe.Pointer, dt2 unsafe.Pointer) bool {
+	_gpointer_dt1 := (C.gconstpointer)(dt1)
+	_gpointer_dt2 := (C.gconstpointer)(dt2)
+	return gboolean2bool(C.g_date_time_equal(_gpointer_dt1, _gpointer_dt2))
+}
+
+func DateTimeHash(datetime unsafe.Pointer) uint {
+	_gpointer_datetime := (C.gconstpointer)(datetime)
+	return guint2uint(C.g_date_time_hash(_gpointer_datetime))
+}
+
+func DirMakeTmp(tmpl string, err unsafe.Pointer) string {
+	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
+	defer C.free(_cstr_tmpl)
+	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
+	return gcharp2string(C._g_dir_make_tmp(_gstr_tmpl, unsafe.Pointer(err)))
+}
+
+func DirOpen(path string, flags uint, err unsafe.Pointer) *C.GDir {
+	_cstr_path := unsafe.Pointer(C.CString(path))
+	defer C.free(_cstr_path)
+	_gstr_path := (*C.gchar)(unsafe.Pointer(_cstr_path))
+	_guint_flags := C.guint(flags)
+	return C._g_dir_open(unsafe.Pointer(_gstr_path), _guint_flags, unsafe.Pointer(err))
+}
+
 //TODO g_error_new
 
 func ErrorNewLiteral(domain C.GQuark, code int, message string) *C.GError {
@@ -784,6 +1105,209 @@ func ErrorNewLiteral(domain C.GQuark, code int, message string) *C.GError {
 }
 
 //TODO g_error_new_valist
+
+func HashTableAdd(hash_table *C.GHashTable, key unsafe.Pointer) {
+	_gpointer_key := (C.gpointer)(key)
+	C.g_hash_table_add(hash_table, _gpointer_key)
+}
+
+func HashTableContains(hash_table *C.GHashTable, key unsafe.Pointer) bool {
+	_gpointer_key := (C.gconstpointer)(key)
+	return gboolean2bool(C.g_hash_table_contains(hash_table, _gpointer_key))
+}
+
+func HashTableDestroy(hash_table *C.GHashTable) {
+	C.g_hash_table_destroy(hash_table)
+}
+
+func HashTableFind(hash_table *C.GHashTable, predicate C.GHRFunc, user_data unsafe.Pointer) unsafe.Pointer {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return unsafe.Pointer(C.g_hash_table_find(hash_table, predicate, _gpointer_user_data))
+}
+
+func HashTableForeach(hash_table *C.GHashTable, func_ C.GHFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_hash_table_foreach(hash_table, func_, _gpointer_user_data)
+}
+
+func HashTableForeachRemove(hash_table *C.GHashTable, func_ C.GHRFunc, user_data unsafe.Pointer) uint {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return guint2uint(C.g_hash_table_foreach_remove(hash_table, func_, _gpointer_user_data))
+}
+
+func HashTableForeachSteal(hash_table *C.GHashTable, func_ C.GHRFunc, user_data unsafe.Pointer) uint {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return guint2uint(C.g_hash_table_foreach_steal(hash_table, func_, _gpointer_user_data))
+}
+
+func HashTableGetKeys(hash_table *C.GHashTable) *C.GList {
+	return C.g_hash_table_get_keys(hash_table)
+}
+
+func HashTableGetValues(hash_table *C.GHashTable) *C.GList {
+	return C.g_hash_table_get_values(hash_table)
+}
+
+func HashTableInsert(hash_table *C.GHashTable, key unsafe.Pointer, value unsafe.Pointer) {
+	_gpointer_key := (C.gpointer)(key)
+	_gpointer_value := (C.gpointer)(value)
+	C.g_hash_table_insert(hash_table, _gpointer_key, _gpointer_value)
+}
+
+func HashTableLookup(hash_table *C.GHashTable, key unsafe.Pointer) unsafe.Pointer {
+	_gpointer_key := (C.gconstpointer)(key)
+	return unsafe.Pointer(C.g_hash_table_lookup(hash_table, _gpointer_key))
+}
+
+func HashTableLookupExtended(hash_table *C.GHashTable, lookup_key unsafe.Pointer, orig_key *C.gpointer, value *C.gpointer) bool {
+	_gpointer_lookup_key := (C.gconstpointer)(lookup_key)
+	return gboolean2bool(C.g_hash_table_lookup_extended(hash_table, _gpointer_lookup_key, orig_key, value))
+}
+
+func HashTableNew(hash_func C.GHashFunc, key_equal_func C.GEqualFunc) *C.GHashTable {
+	return C.g_hash_table_new(hash_func, key_equal_func)
+}
+
+func HashTableNewFull(hash_func C.GHashFunc, key_equal_func C.GEqualFunc, key_destroy_func C.GDestroyNotify, value_destroy_func C.GDestroyNotify) *C.GHashTable {
+	return C.g_hash_table_new_full(hash_func, key_equal_func, key_destroy_func, value_destroy_func)
+}
+
+func HashTableRef(hash_table *C.GHashTable) *C.GHashTable {
+	return C.g_hash_table_ref(hash_table)
+}
+
+func HashTableRemove(hash_table *C.GHashTable, key unsafe.Pointer) bool {
+	_gpointer_key := (C.gconstpointer)(key)
+	return gboolean2bool(C.g_hash_table_remove(hash_table, _gpointer_key))
+}
+
+func HashTableRemoveAll(hash_table *C.GHashTable) {
+	C.g_hash_table_remove_all(hash_table)
+}
+
+func HashTableReplace(hash_table *C.GHashTable, key unsafe.Pointer, value unsafe.Pointer) {
+	_gpointer_key := (C.gpointer)(key)
+	_gpointer_value := (C.gpointer)(value)
+	C.g_hash_table_replace(hash_table, _gpointer_key, _gpointer_value)
+}
+
+func HashTableSize(hash_table *C.GHashTable) uint {
+	return guint2uint(C.g_hash_table_size(hash_table))
+}
+
+func HashTableSteal(hash_table *C.GHashTable, key unsafe.Pointer) bool {
+	_gpointer_key := (C.gconstpointer)(key)
+	return gboolean2bool(C.g_hash_table_steal(hash_table, _gpointer_key))
+}
+
+func HashTableStealAll(hash_table *C.GHashTable) {
+	C.g_hash_table_steal_all(hash_table)
+}
+
+func HashTableUnref(hash_table *C.GHashTable) {
+	C.g_hash_table_unref(hash_table)
+}
+
+func HmacNew(digest_type C.GChecksumType, key []byte, key_len uint64) *C.GHmac {
+	_custr_key := unsafe.Pointer(C.CString(string(key)))
+	defer C.free(_custr_key)
+	_gustr_key := (*C.guchar)(unsafe.Pointer(_custr_key))
+	_gsize_key_len := C.gsize(key_len)
+	return C.g_hmac_new(digest_type, _gustr_key, _gsize_key_len)
+}
+
+func HookAlloc(hook_list *C.GHookList) *C.GHook {
+	return C.g_hook_alloc(hook_list)
+}
+
+func HookDestroy(hook_list *C.GHookList, hook_id uint64) bool {
+	_gulong_hook_id := C.gulong(hook_id)
+	return gboolean2bool(C.g_hook_destroy(hook_list, _gulong_hook_id))
+}
+
+func HookDestroyLink(hook_list *C.GHookList, hook *C.GHook) {
+	C.g_hook_destroy_link(hook_list, hook)
+}
+
+func HookFind(hook_list *C.GHookList, need_valids bool, func_ C.GHookFindFunc, data unsafe.Pointer) *C.GHook {
+	_gbool_need_valids := C._false()
+	if need_valids { _gbool_need_valids = C._true() }
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_hook_find(hook_list, _gbool_need_valids, func_, _gpointer_data)
+}
+
+func HookFindData(hook_list *C.GHookList, need_valids bool, data unsafe.Pointer) *C.GHook {
+	_gbool_need_valids := C._false()
+	if need_valids { _gbool_need_valids = C._true() }
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_hook_find_data(hook_list, _gbool_need_valids, _gpointer_data)
+}
+
+func HookFindFunc(hook_list *C.GHookList, need_valids bool, func_ unsafe.Pointer) *C.GHook {
+	_gbool_need_valids := C._false()
+	if need_valids { _gbool_need_valids = C._true() }
+	_gpointer_func_ := (C.gpointer)(func_)
+	return C.g_hook_find_func(hook_list, _gbool_need_valids, _gpointer_func_)
+}
+
+func HookFindFuncData(hook_list *C.GHookList, need_valids bool, func_ unsafe.Pointer, data unsafe.Pointer) *C.GHook {
+	_gbool_need_valids := C._false()
+	if need_valids { _gbool_need_valids = C._true() }
+	_gpointer_func_ := (C.gpointer)(func_)
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_hook_find_func_data(hook_list, _gbool_need_valids, _gpointer_func_, _gpointer_data)
+}
+
+func HookFirstValid(hook_list *C.GHookList, may_be_in_call bool) *C.GHook {
+	_gbool_may_be_in_call := C._false()
+	if may_be_in_call { _gbool_may_be_in_call = C._true() }
+	return C.g_hook_first_valid(hook_list, _gbool_may_be_in_call)
+}
+
+func HookFree(hook_list *C.GHookList, hook *C.GHook) {
+	C.g_hook_free(hook_list, hook)
+}
+
+func HookGet(hook_list *C.GHookList, hook_id uint64) *C.GHook {
+	_gulong_hook_id := C.gulong(hook_id)
+	return C.g_hook_get(hook_list, _gulong_hook_id)
+}
+
+func HookInsertBefore(hook_list *C.GHookList, sibling *C.GHook, hook *C.GHook) {
+	C.g_hook_insert_before(hook_list, sibling, hook)
+}
+
+func HookInsertSorted(hook_list *C.GHookList, hook *C.GHook, func_ C.GHookCompareFunc) {
+	C.g_hook_insert_sorted(hook_list, hook, func_)
+}
+
+func HookNextValid(hook_list *C.GHookList, hook *C.GHook, may_be_in_call bool) *C.GHook {
+	_gbool_may_be_in_call := C._false()
+	if may_be_in_call { _gbool_may_be_in_call = C._true() }
+	return C.g_hook_next_valid(hook_list, hook, _gbool_may_be_in_call)
+}
+
+func HookPrepend(hook_list *C.GHookList, hook *C.GHook) {
+	C.g_hook_prepend(hook_list, hook)
+}
+
+func HookRef(hook_list *C.GHookList, hook *C.GHook) *C.GHook {
+	return C.g_hook_ref(hook_list, hook)
+}
+
+func HookUnref(hook_list *C.GHookList, hook *C.GHook) {
+	C.g_hook_unref(hook_list, hook)
+}
+
+func IConvOpen(to_codeset string, from_codeset string) C.GIConv {
+	_cstr_to_codeset := unsafe.Pointer(C.CString(to_codeset))
+	defer C.free(_cstr_to_codeset)
+	_gstr_to_codeset := (*C.gchar)(unsafe.Pointer(_cstr_to_codeset))
+	_cstr_from_codeset := unsafe.Pointer(C.CString(from_codeset))
+	defer C.free(_cstr_from_codeset)
+	_gstr_from_codeset := (*C.gchar)(unsafe.Pointer(_cstr_from_codeset))
+	return C._g_iconv_open(unsafe.Pointer(_gstr_to_codeset), unsafe.Pointer(_gstr_from_codeset))
+}
 
 func IOChannelNewFile(filename string, mode string, err unsafe.Pointer) *C.GIOChannel {
 	_cstr_filename := unsafe.Pointer(C.CString(filename))
@@ -799,18 +1323,350 @@ func IOChannelUnixNew(fd C.int) *C.GIOChannel {
 	return C.g_io_channel_unix_new(fd)
 }
 
+func IOChannelErrorFromErrno(en int) C.GIOChannelError {
+	_gint_en := C.gint(en)
+	return C.g_io_channel_error_from_errno(_gint_en)
+}
+
+func IOChannelErrorQuark() C.GQuark {
+	return C.g_io_channel_error_quark()
+}
+
 func KeyFileNew() *C.GKeyFile {
 	return C.g_key_file_new()
+}
+
+func KeyFileErrorQuark() C.GQuark {
+	return C.g_key_file_error_quark()
+}
+
+func ListAlloc() *C.GList {
+	return C.g_list_alloc()
+}
+
+func ListAppend(list *C.GList, data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_list_append(list, _gpointer_data)
+}
+
+func ListConcat(list1 *C.GList, list2 *C.GList) *C.GList {
+	return C.g_list_concat(list1, list2)
+}
+
+func ListCopy(list *C.GList) *C.GList {
+	return C.g_list_copy(list)
+}
+
+func ListCopyDeep(list *C.GList, func_ C.GCopyFunc, user_data unsafe.Pointer) *C.GList {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C.g_list_copy_deep(list, func_, _gpointer_user_data)
+}
+
+func ListDeleteLink(list *C.GList, link_ *C.GList) *C.GList {
+	return C.g_list_delete_link(list, link_)
+}
+
+func ListFind(list *C.GList, data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_list_find(list, _gpointer_data)
+}
+
+func ListFindCustom(list *C.GList, data unsafe.Pointer, func_ C.GCompareFunc) *C.GList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_list_find_custom(list, _gpointer_data, func_)
+}
+
+func ListFirst(list *C.GList) *C.GList {
+	return C.g_list_first(list)
+}
+
+func ListForeach(list *C.GList, func_ C.GFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_list_foreach(list, func_, _gpointer_user_data)
+}
+
+func ListFree(list *C.GList) {
+	C.g_list_free(list)
+}
+
+func ListFree1(list *C.GList) {
+	C.g_list_free_1(list)
+}
+
+func ListFreeFull(list *C.GList, free_func C.GDestroyNotify) {
+	C.g_list_free_full(list, free_func)
+}
+
+func ListIndex(list *C.GList, data unsafe.Pointer) int {
+	_gpointer_data := (C.gconstpointer)(data)
+	return gint2int(C.g_list_index(list, _gpointer_data))
+}
+
+func ListInsert(list *C.GList, data unsafe.Pointer, position int) *C.GList {
+	_gpointer_data := (C.gpointer)(data)
+	_gint_position := C.gint(position)
+	return C.g_list_insert(list, _gpointer_data, _gint_position)
+}
+
+func ListInsertBefore(list *C.GList, sibling *C.GList, data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_list_insert_before(list, sibling, _gpointer_data)
+}
+
+func ListInsertSorted(list *C.GList, data unsafe.Pointer, func_ C.GCompareFunc) *C.GList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_list_insert_sorted(list, _gpointer_data, func_)
+}
+
+func ListInsertSortedWithData(list *C.GList, data unsafe.Pointer, func_ C.GCompareDataFunc, user_data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gpointer)(data)
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C.g_list_insert_sorted_with_data(list, _gpointer_data, func_, _gpointer_user_data)
+}
+
+func ListLast(list *C.GList) *C.GList {
+	return C.g_list_last(list)
+}
+
+func ListLength(list *C.GList) uint {
+	return guint2uint(C.g_list_length(list))
+}
+
+func ListNth(list *C.GList, n uint) *C.GList {
+	_guint_n := C.guint(n)
+	return C.g_list_nth(list, _guint_n)
+}
+
+func ListNthData(list *C.GList, n uint) unsafe.Pointer {
+	_guint_n := C.guint(n)
+	return unsafe.Pointer(C.g_list_nth_data(list, _guint_n))
+}
+
+func ListNthPrev(list *C.GList, n uint) *C.GList {
+	_guint_n := C.guint(n)
+	return C.g_list_nth_prev(list, _guint_n)
+}
+
+func ListPosition(list *C.GList, llink *C.GList) int {
+	return gint2int(C.g_list_position(list, llink))
+}
+
+func ListPrepend(list *C.GList, data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_list_prepend(list, _gpointer_data)
+}
+
+func ListRemove(list *C.GList, data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_list_remove(list, _gpointer_data)
+}
+
+func ListRemoveAll(list *C.GList, data unsafe.Pointer) *C.GList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_list_remove_all(list, _gpointer_data)
+}
+
+func ListRemoveLink(list *C.GList, llink *C.GList) *C.GList {
+	return C.g_list_remove_link(list, llink)
+}
+
+func ListReverse(list *C.GList) *C.GList {
+	return C.g_list_reverse(list)
+}
+
+func ListSort(list *C.GList, compare_func C.GCompareFunc) *C.GList {
+	return C.g_list_sort(list, compare_func)
+}
+
+func ListSortWithData(list *C.GList, compare_func C.GCompareDataFunc, user_data unsafe.Pointer) *C.GList {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C.g_list_sort_with_data(list, compare_func, _gpointer_user_data)
 }
 
 func MainContextNew() *C.GMainContext {
 	return C.g_main_context_new()
 }
 
+func MainContextDefault() *C.GMainContext {
+	return C.g_main_context_default()
+}
+
+func MainContextGetThreadDefault() *C.GMainContext {
+	return C.g_main_context_get_thread_default()
+}
+
+func MainContextRefThreadDefault() *C.GMainContext {
+	return C.g_main_context_ref_thread_default()
+}
+
 func MainLoopNew(context *C.GMainContext, is_running bool) *C.GMainLoop {
 	_gbool_is_running := C._false()
 	if is_running { _gbool_is_running = C._true() }
 	return C.g_main_loop_new(context, _gbool_is_running)
+}
+
+func MappedFileNew(filename string, writable bool, err unsafe.Pointer) *C.GMappedFile {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	_gbool_writable := C._false()
+	if writable { _gbool_writable = C._true() }
+	return C._g_mapped_file_new(unsafe.Pointer(_gstr_filename), _gbool_writable, unsafe.Pointer(err))
+}
+
+func MappedFileNewFromFd(fd int, writable bool, err unsafe.Pointer) *C.GMappedFile {
+	_gint_fd := C.gint(fd)
+	_gbool_writable := C._false()
+	if writable { _gbool_writable = C._true() }
+	return C._g_mapped_file_new_from_fd(_gint_fd, _gbool_writable, unsafe.Pointer(err))
+}
+
+func MarkupParseContextNew(parser *C.GMarkupParser, flags C.GMarkupParseFlags, user_data unsafe.Pointer, user_data_dnotify C.GDestroyNotify) *C.GMarkupParseContext {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C._g_markup_parse_context_new(unsafe.Pointer(parser), flags, _gpointer_user_data, user_data_dnotify)
+}
+
+func NodeNew(data unsafe.Pointer) *C.GNode {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_node_new(_gpointer_data)
+}
+
+//Skipped g_once_init_enter
+
+//Skipped g_once_init_leave
+
+func OptionContextNew(parameter_string string) *C.GOptionContext {
+	_cstr_parameter_string := unsafe.Pointer(C.CString(parameter_string))
+	defer C.free(_cstr_parameter_string)
+	_gstr_parameter_string := (*C.gchar)(unsafe.Pointer(_cstr_parameter_string))
+	return C._g_option_context_new(unsafe.Pointer(_gstr_parameter_string))
+}
+
+func OptionGroupNew(name string, description string, help_description string, user_data unsafe.Pointer, destroy C.GDestroyNotify) *C.GOptionGroup {
+	_cstr_name := unsafe.Pointer(C.CString(name))
+	defer C.free(_cstr_name)
+	_gstr_name := (*C.gchar)(unsafe.Pointer(_cstr_name))
+	_cstr_description := unsafe.Pointer(C.CString(description))
+	defer C.free(_cstr_description)
+	_gstr_description := (*C.gchar)(unsafe.Pointer(_cstr_description))
+	_cstr_help_description := unsafe.Pointer(C.CString(help_description))
+	defer C.free(_cstr_help_description)
+	_gstr_help_description := (*C.gchar)(unsafe.Pointer(_cstr_help_description))
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C._g_option_group_new(unsafe.Pointer(_gstr_name), unsafe.Pointer(_gstr_description), unsafe.Pointer(_gstr_help_description), _gpointer_user_data, destroy)
+}
+
+func PatternSpecNew(pattern string) *C.GPatternSpec {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	return C._g_pattern_spec_new(unsafe.Pointer(_gstr_pattern))
+}
+
+func PtrArrayAdd(array *C.GPtrArray, data unsafe.Pointer) {
+	_gpointer_data := (C.gpointer)(data)
+	C.g_ptr_array_add(array, _gpointer_data)
+}
+
+func PtrArrayForeach(array *C.GPtrArray, func_ C.GFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_ptr_array_foreach(array, func_, _gpointer_user_data)
+}
+
+func PtrArrayFree(array *C.GPtrArray, free_seg bool) *C.gpointer {
+	_gbool_free_seg := C._false()
+	if free_seg { _gbool_free_seg = C._true() }
+	return C.g_ptr_array_free(array, _gbool_free_seg)
+}
+
+func PtrArrayNew() *C.GPtrArray {
+	return C.g_ptr_array_new()
+}
+
+func PtrArrayNewFull(reserved_size uint, element_free_func C.GDestroyNotify) *C.GPtrArray {
+	_guint_reserved_size := C.guint(reserved_size)
+	return C.g_ptr_array_new_full(_guint_reserved_size, element_free_func)
+}
+
+func PtrArrayNewWithFreeFunc(element_free_func C.GDestroyNotify) *C.GPtrArray {
+	return C.g_ptr_array_new_with_free_func(element_free_func)
+}
+
+func PtrArrayRef(array *C.GPtrArray) *C.GPtrArray {
+	return C.g_ptr_array_ref(array)
+}
+
+func PtrArrayRemove(array *C.GPtrArray, data unsafe.Pointer) bool {
+	_gpointer_data := (C.gpointer)(data)
+	return gboolean2bool(C.g_ptr_array_remove(array, _gpointer_data))
+}
+
+func PtrArrayRemoveFast(array *C.GPtrArray, data unsafe.Pointer) bool {
+	_gpointer_data := (C.gpointer)(data)
+	return gboolean2bool(C.g_ptr_array_remove_fast(array, _gpointer_data))
+}
+
+func PtrArrayRemoveIndex(array *C.GPtrArray, index_ uint) unsafe.Pointer {
+	_guint_index_ := C.guint(index_)
+	return unsafe.Pointer(C.g_ptr_array_remove_index(array, _guint_index_))
+}
+
+func PtrArrayRemoveIndexFast(array *C.GPtrArray, index_ uint) unsafe.Pointer {
+	_guint_index_ := C.guint(index_)
+	return unsafe.Pointer(C.g_ptr_array_remove_index_fast(array, _guint_index_))
+}
+
+func PtrArrayRemoveRange(array *C.GPtrArray, index_ uint, length uint) {
+	_guint_index_ := C.guint(index_)
+	_guint_length := C.guint(length)
+	C.g_ptr_array_remove_range(array, _guint_index_, _guint_length)
+}
+
+func PtrArraySetFreeFunc(array *C.GPtrArray, element_free_func C.GDestroyNotify) {
+	C.g_ptr_array_set_free_func(array, element_free_func)
+}
+
+func PtrArraySetSize(array *C.GPtrArray, length int) {
+	_gint_length := C.gint(length)
+	C.g_ptr_array_set_size(array, _gint_length)
+}
+
+func PtrArraySizedNew(reserved_size uint) *C.GPtrArray {
+	_guint_reserved_size := C.guint(reserved_size)
+	return C.g_ptr_array_sized_new(_guint_reserved_size)
+}
+
+func PtrArraySort(array *C.GPtrArray, compare_func C.GCompareFunc) {
+	C.g_ptr_array_sort(array, compare_func)
+}
+
+func PtrArraySortWithData(array *C.GPtrArray, compare_func C.GCompareDataFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_ptr_array_sort_with_data(array, compare_func, _gpointer_user_data)
+}
+
+func PtrArrayUnref(array *C.GPtrArray) {
+	C.g_ptr_array_unref(array)
+}
+
+func QueueNew() *C.GQueue {
+	return C.g_queue_new()
+}
+
+func RandNew() *C.GRand {
+	return C.g_rand_new()
+}
+
+func RandNewWithSeed(seed uint32) *C.GRand {
+	_guint32_seed := C.guint32(seed)
+	return C.g_rand_new_with_seed(_guint32_seed)
+}
+
+func RandNewWithSeedArray(seed *uint32, seed_length uint) *C.GRand {
+	_c_guint32_seed := C.guint32(*seed)
+	_cp_guint32_seed := (*C.guint32)(&_c_guint32_seed)
+	_guint_seed_length := C.guint(seed_length)
+	return C._g_rand_new_with_seed_array(unsafe.Pointer(_cp_guint32_seed), _guint_seed_length)
 }
 
 func RegexNew(pattern string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags, err unsafe.Pointer) *C.GRegex {
@@ -820,9 +1676,280 @@ func RegexNew(pattern string, compile_options C.GRegexCompileFlags, match_option
 	return C._g_regex_new(unsafe.Pointer(_gstr_pattern), compile_options, match_options, unsafe.Pointer(err))
 }
 
+func RegexCheckReplacement(replacement string, has_references *C.gboolean, err unsafe.Pointer) bool {
+	_cstr_replacement := unsafe.Pointer(C.CString(replacement))
+	defer C.free(_cstr_replacement)
+	_gstr_replacement := (*C.gchar)(unsafe.Pointer(_cstr_replacement))
+	return gboolean2bool(C._g_regex_check_replacement(unsafe.Pointer(_gstr_replacement), has_references, unsafe.Pointer(err)))
+}
+
+func RegexErrorQuark() C.GQuark {
+	return C.g_regex_error_quark()
+}
+
+func RegexEscapeNul(string_ string, length int) string {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	_gint_length := C.gint(length)
+	return gcharp2string(C._g_regex_escape_nul(unsafe.Pointer(_gstr_string_), _gint_length))
+}
+
+func RegexEscapeString(string_ string, length int) string {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	_gint_length := C.gint(length)
+	return gcharp2string(C.g_regex_escape_string(_gstr_string_, _gint_length))
+}
+
+func RegexMatchSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) bool {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	return gboolean2bool(C._g_regex_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_), compile_options, match_options))
+}
+
+func RegexSplitSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) unsafe.Pointer {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	return unsafe.Pointer(C._g_regex_split_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_), compile_options, match_options))
+}
+
+func SListAlloc() *C.GSList {
+	return C.g_slist_alloc()
+}
+
+func SListAppend(list *C.GSList, data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_slist_append(list, _gpointer_data)
+}
+
+func SListConcat(list1 *C.GSList, list2 *C.GSList) *C.GSList {
+	return C.g_slist_concat(list1, list2)
+}
+
+func SListCopy(list *C.GSList) *C.GSList {
+	return C.g_slist_copy(list)
+}
+
+func SListCopyDeep(list *C.GSList, func_ C.GCopyFunc, user_data unsafe.Pointer) *C.GSList {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C.g_slist_copy_deep(list, func_, _gpointer_user_data)
+}
+
+func SListDeleteLink(list *C.GSList, link_ *C.GSList) *C.GSList {
+	return C.g_slist_delete_link(list, link_)
+}
+
+func SListFind(list *C.GSList, data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_slist_find(list, _gpointer_data)
+}
+
+func SListFindCustom(list *C.GSList, data unsafe.Pointer, func_ C.GCompareFunc) *C.GSList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_slist_find_custom(list, _gpointer_data, func_)
+}
+
+func SListForeach(list *C.GSList, func_ C.GFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_slist_foreach(list, func_, _gpointer_user_data)
+}
+
+func SListFree(list *C.GSList) {
+	C.g_slist_free(list)
+}
+
+func SListFree1(list *C.GSList) {
+	C.g_slist_free_1(list)
+}
+
+func SListFreeFull(list *C.GSList, free_func C.GDestroyNotify) {
+	C.g_slist_free_full(list, free_func)
+}
+
+func SListIndex(list *C.GSList, data unsafe.Pointer) int {
+	_gpointer_data := (C.gconstpointer)(data)
+	return gint2int(C.g_slist_index(list, _gpointer_data))
+}
+
+func SListInsert(list *C.GSList, data unsafe.Pointer, position int) *C.GSList {
+	_gpointer_data := (C.gpointer)(data)
+	_gint_position := C.gint(position)
+	return C.g_slist_insert(list, _gpointer_data, _gint_position)
+}
+
+func SListInsertBefore(slist *C.GSList, sibling *C.GSList, data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_slist_insert_before(slist, sibling, _gpointer_data)
+}
+
+func SListInsertSorted(list *C.GSList, data unsafe.Pointer, func_ C.GCompareFunc) *C.GSList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_slist_insert_sorted(list, _gpointer_data, func_)
+}
+
+func SListInsertSortedWithData(list *C.GSList, data unsafe.Pointer, func_ C.GCompareDataFunc, user_data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gpointer)(data)
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C.g_slist_insert_sorted_with_data(list, _gpointer_data, func_, _gpointer_user_data)
+}
+
+func SListLast(list *C.GSList) *C.GSList {
+	return C.g_slist_last(list)
+}
+
+func SListLength(list *C.GSList) uint {
+	return guint2uint(C.g_slist_length(list))
+}
+
+func SListNth(list *C.GSList, n uint) *C.GSList {
+	_guint_n := C.guint(n)
+	return C.g_slist_nth(list, _guint_n)
+}
+
+func SListNthData(list *C.GSList, n uint) unsafe.Pointer {
+	_guint_n := C.guint(n)
+	return unsafe.Pointer(C.g_slist_nth_data(list, _guint_n))
+}
+
+func SListPosition(list *C.GSList, llink *C.GSList) int {
+	return gint2int(C.g_slist_position(list, llink))
+}
+
+func SListPrepend(list *C.GSList, data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_slist_prepend(list, _gpointer_data)
+}
+
+func SListRemove(list *C.GSList, data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_slist_remove(list, _gpointer_data)
+}
+
+func SListRemoveAll(list *C.GSList, data unsafe.Pointer) *C.GSList {
+	_gpointer_data := (C.gconstpointer)(data)
+	return C.g_slist_remove_all(list, _gpointer_data)
+}
+
+func SListRemoveLink(list *C.GSList, link_ *C.GSList) *C.GSList {
+	return C.g_slist_remove_link(list, link_)
+}
+
+func SListReverse(list *C.GSList) *C.GSList {
+	return C.g_slist_reverse(list)
+}
+
+func SListSort(list *C.GSList, compare_func C.GCompareFunc) *C.GSList {
+	return C.g_slist_sort(list, compare_func)
+}
+
+func SListSortWithData(list *C.GSList, compare_func C.GCompareDataFunc, user_data unsafe.Pointer) *C.GSList {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return C.g_slist_sort_with_data(list, compare_func, _gpointer_user_data)
+}
+
+func ScannerNew(config_templ *C.GScannerConfig) *C.GScanner {
+	return C._g_scanner_new(unsafe.Pointer(config_templ))
+}
+
+func SequenceForeachRange(begin *C.GSequenceIter, end *C.GSequenceIter, func_ C.GFunc, user_data unsafe.Pointer) {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	C.g_sequence_foreach_range(begin, end, func_, _gpointer_user_data)
+}
+
+func SequenceGet(iter *C.GSequenceIter) unsafe.Pointer {
+	return unsafe.Pointer(C.g_sequence_get(iter))
+}
+
+func SequenceInsertBefore(iter *C.GSequenceIter, data unsafe.Pointer) *C.GSequenceIter {
+	_gpointer_data := (C.gpointer)(data)
+	return C.g_sequence_insert_before(iter, _gpointer_data)
+}
+
+func SequenceMove(src *C.GSequenceIter, dest *C.GSequenceIter) {
+	C.g_sequence_move(src, dest)
+}
+
+func SequenceMoveRange(dest *C.GSequenceIter, begin *C.GSequenceIter, end *C.GSequenceIter) {
+	C.g_sequence_move_range(dest, begin, end)
+}
+
+func SequenceNew(data_destroy C.GDestroyNotify) *C.GSequence {
+	return C.g_sequence_new(data_destroy)
+}
+
+func SequenceRangeGetMidpoint(begin *C.GSequenceIter, end *C.GSequenceIter) *C.GSequenceIter {
+	return C.g_sequence_range_get_midpoint(begin, end)
+}
+
+func SequenceRemove(iter *C.GSequenceIter) {
+	C.g_sequence_remove(iter)
+}
+
+func SequenceRemoveRange(begin *C.GSequenceIter, end *C.GSequenceIter) {
+	C.g_sequence_remove_range(begin, end)
+}
+
+func SequenceSet(iter *C.GSequenceIter, data unsafe.Pointer) {
+	_gpointer_data := (C.gpointer)(data)
+	C.g_sequence_set(iter, _gpointer_data)
+}
+
+func SequenceSortChanged(iter *C.GSequenceIter, cmp_func C.GCompareDataFunc, cmp_data unsafe.Pointer) {
+	_gpointer_cmp_data := (C.gpointer)(cmp_data)
+	C.g_sequence_sort_changed(iter, cmp_func, _gpointer_cmp_data)
+}
+
+func SequenceSortChangedIter(iter *C.GSequenceIter, iter_cmp C.GSequenceIterCompareFunc, cmp_data unsafe.Pointer) {
+	_gpointer_cmp_data := (C.gpointer)(cmp_data)
+	C.g_sequence_sort_changed_iter(iter, iter_cmp, _gpointer_cmp_data)
+}
+
+func SequenceSwap(a *C.GSequenceIter, b *C.GSequenceIter) {
+	C.g_sequence_swap(a, b)
+}
+
 func SourceNew(source_funcs *C.GSourceFuncs, struct_size uint) *C.GSource {
 	_guint_struct_size := C.guint(struct_size)
 	return C.g_source_new(source_funcs, _guint_struct_size)
+}
+
+func SourceRemove(tag uint) bool {
+	_guint_tag := C.guint(tag)
+	return gboolean2bool(C.g_source_remove(_guint_tag))
+}
+
+func SourceRemoveByFuncsUserData(funcs *C.GSourceFuncs, user_data unsafe.Pointer) bool {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return gboolean2bool(C.g_source_remove_by_funcs_user_data(funcs, _gpointer_user_data))
+}
+
+func SourceRemoveByUserData(user_data unsafe.Pointer) bool {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	return gboolean2bool(C.g_source_remove_by_user_data(_gpointer_user_data))
+}
+
+func SourceSetNameById(tag uint, name *C.char) {
+	_guint_tag := C.guint(tag)
+	C._g_source_set_name_by_id(_guint_tag, unsafe.Pointer(name))
+}
+
+func StringChunkNew(size uint64) *C.GStringChunk {
+	_gsize_size := C.gsize(size)
+	return C.g_string_chunk_new(_gsize_size)
+}
+
+func TestLogBufferNew() *C.GTestLogBuffer {
+	return C.g_test_log_buffer_new()
 }
 
 func ThreadNew(name string, func_ C.GThreadFunc, data unsafe.Pointer) *C.GThread {
@@ -841,6 +1968,64 @@ func ThreadTryNew(name string, func_ C.GThreadFunc, data unsafe.Pointer, err uns
 	return C._g_thread_try_new(unsafe.Pointer(_gstr_name), func_, _gpointer_data, unsafe.Pointer(err))
 }
 
+func ThreadErrorQuark() C.GQuark {
+	return C.g_thread_error_quark()
+}
+
+func ThreadExit(retval unsafe.Pointer) {
+	_gpointer_retval := (C.gpointer)(retval)
+	C.g_thread_exit(_gpointer_retval)
+}
+
+func ThreadSelf() *C.GThread {
+	return C.g_thread_self()
+}
+
+func ThreadYield() {
+	C.g_thread_yield()
+}
+
+func ThreadPoolGetMaxIdleTime() uint {
+	return guint2uint(C.g_thread_pool_get_max_idle_time())
+}
+
+func ThreadPoolGetMaxUnusedThreads() int {
+	return gint2int(C.g_thread_pool_get_max_unused_threads())
+}
+
+func ThreadPoolGetNumUnusedThreads() uint {
+	return guint2uint(C.g_thread_pool_get_num_unused_threads())
+}
+
+func ThreadPoolNew(func_ C.GFunc, user_data unsafe.Pointer, max_threads int, exclusive bool, err unsafe.Pointer) *C.GThreadPool {
+	_gpointer_user_data := (C.gpointer)(user_data)
+	_gint_max_threads := C.gint(max_threads)
+	_gbool_exclusive := C._false()
+	if exclusive { _gbool_exclusive = C._true() }
+	return C._g_thread_pool_new(func_, _gpointer_user_data, _gint_max_threads, _gbool_exclusive, unsafe.Pointer(err))
+}
+
+func ThreadPoolSetMaxIdleTime(interval uint) {
+	_guint_interval := C.guint(interval)
+	C.g_thread_pool_set_max_idle_time(_guint_interval)
+}
+
+func ThreadPoolSetMaxUnusedThreads(max_threads int) {
+	_gint_max_threads := C.gint(max_threads)
+	C.g_thread_pool_set_max_unused_threads(_gint_max_threads)
+}
+
+func ThreadPoolStopUnusedThreads() {
+	C.g_thread_pool_stop_unused_threads()
+}
+
+func TimeValFromIso8601(iso_date string, time_ *C.GTimeVal) bool {
+	_cstr_iso_date := unsafe.Pointer(C.CString(iso_date))
+	defer C.free(_cstr_iso_date)
+	_gstr_iso_date := (*C.gchar)(unsafe.Pointer(_cstr_iso_date))
+	return gboolean2bool(C._g_time_val_from_iso8601(unsafe.Pointer(_gstr_iso_date), time_))
+}
+
 func TimeZoneNew(identifier string) *C.GTimeZone {
 	_cstr_identifier := unsafe.Pointer(C.CString(identifier))
 	defer C.free(_cstr_identifier)
@@ -854,6 +2039,41 @@ func TimeZoneNewLocal() *C.GTimeZone {
 
 func TimeZoneNewUtc() *C.GTimeZone {
 	return C.g_time_zone_new_utc()
+}
+
+func TimerNew() *C.GTimer {
+	return C.g_timer_new()
+}
+
+func TrashStackHeight(stack_p unsafe.Pointer) uint {
+	return guint2uint(C._g_trash_stack_height(unsafe.Pointer(stack_p)))
+}
+
+func TrashStackPeek(stack_p unsafe.Pointer) unsafe.Pointer {
+	return unsafe.Pointer(C._g_trash_stack_peek(unsafe.Pointer(stack_p)))
+}
+
+func TrashStackPop(stack_p unsafe.Pointer) unsafe.Pointer {
+	return unsafe.Pointer(C._g_trash_stack_pop(unsafe.Pointer(stack_p)))
+}
+
+func TrashStackPush(stack_p unsafe.Pointer, data_p unsafe.Pointer) {
+	_gpointer_data_p := (C.gpointer)(data_p)
+	C._g_trash_stack_push(unsafe.Pointer(stack_p), _gpointer_data_p)
+}
+
+func TreeNew(key_compare_func C.GCompareFunc) *C.GTree {
+	return C.g_tree_new(key_compare_func)
+}
+
+func TreeNewFull(key_compare_func C.GCompareDataFunc, key_compare_data unsafe.Pointer, key_destroy_func C.GDestroyNotify, value_destroy_func C.GDestroyNotify) *C.GTree {
+	_gpointer_key_compare_data := (C.gpointer)(key_compare_data)
+	return C.g_tree_new_full(key_compare_func, _gpointer_key_compare_data, key_destroy_func, value_destroy_func)
+}
+
+func TreeNewWithData(key_compare_func C.GCompareDataFunc, key_compare_data unsafe.Pointer) *C.GTree {
+	_gpointer_key_compare_data := (C.gpointer)(key_compare_data)
+	return C.g_tree_new_with_data(key_compare_func, _gpointer_key_compare_data)
 }
 
 //TODO g_variant_new
@@ -1003,6 +2223,34 @@ func VariantNewVariant(value *C.GVariant) *C.GVariant {
 	return C.g_variant_new_variant(value)
 }
 
+func VariantIsObjectPath(string_ string) bool {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	return gboolean2bool(C._g_variant_is_object_path(unsafe.Pointer(_gstr_string_)))
+}
+
+func VariantIsSignature(string_ string) bool {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	return gboolean2bool(C._g_variant_is_signature(unsafe.Pointer(_gstr_string_)))
+}
+
+func VariantParse(type_ *C.GVariantType, text string, limit string, endptr unsafe.Pointer, err unsafe.Pointer) *C.GVariant {
+	_cstr_text := unsafe.Pointer(C.CString(text))
+	defer C.free(_cstr_text)
+	_gstr_text := (*C.gchar)(unsafe.Pointer(_cstr_text))
+	_cstr_limit := unsafe.Pointer(C.CString(limit))
+	defer C.free(_cstr_limit)
+	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
+	return C._g_variant_parse(unsafe.Pointer(type_), unsafe.Pointer(_gstr_text), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr), unsafe.Pointer(err))
+}
+
+func VariantParserGetErrorQuark() C.GQuark {
+	return C.g_variant_parser_get_error_quark()
+}
+
 func VariantBuilderNew(type_ *C.GVariantType) *C.GVariantBuilder {
 	return C._g_variant_builder_new(unsafe.Pointer(type_))
 }
@@ -1028,29 +2276,35 @@ func VariantTypeNewMaybe(element *C.GVariantType) *C.GVariantType {
 
 //Skipped g_variant_type_new_tuple
 
+func VariantTypeChecked(arg_0 string) *C.GVariantType {
+	_cstr_arg_0 := unsafe.Pointer(C.CString(arg_0))
+	defer C.free(_cstr_arg_0)
+	_gstr_arg_0 := (*C.gchar)(unsafe.Pointer(_cstr_arg_0))
+	return C._g_variant_type_checked_(unsafe.Pointer(_gstr_arg_0))
+}
+
+func VariantTypeStringIsValid(type_string string) bool {
+	_cstr_type_string := unsafe.Pointer(C.CString(type_string))
+	defer C.free(_cstr_type_string)
+	_gstr_type_string := (*C.gchar)(unsafe.Pointer(_cstr_type_string))
+	return gboolean2bool(C._g_variant_type_string_is_valid(unsafe.Pointer(_gstr_type_string)))
+}
+
+func VariantTypeStringScan(string_ string, limit string, endptr unsafe.Pointer) bool {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	_cstr_limit := unsafe.Pointer(C.CString(limit))
+	defer C.free(_cstr_limit)
+	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
+	return gboolean2bool(C._g_variant_type_string_scan(unsafe.Pointer(_gstr_string_), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr)))
+}
+
 func Access(filename string, mode C.int) C.int {
 	_cstr_filename := unsafe.Pointer(C.CString(filename))
 	defer C.free(_cstr_filename)
 	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
 	return C._g_access(unsafe.Pointer(_gstr_filename), mode)
-}
-
-func ArrayFree(array *C.GArray, free_segment bool) string {
-	_gbool_free_segment := C._false()
-	if free_segment { _gbool_free_segment = C._true() }
-	return gcharp2string(C.g_array_free(array, _gbool_free_segment))
-}
-
-func ArrayGetElementSize(array *C.GArray) uint {
-	return guint2uint(C.g_array_get_element_size(array))
-}
-
-func ArraySetClearFunc(array *C.GArray, clear_func C.GDestroyNotify) {
-	C.g_array_set_clear_func(array, clear_func)
-}
-
-func ArrayUnref(array *C.GArray) {
-	C.g_array_unref(array)
 }
 
 func AsciiDigitValue(c int8) int {
@@ -1317,10 +2571,6 @@ func BitUnlock(address *int, lock_bit int) {
 	C.g_bit_unlock(_cp_gint_address, _gint_lock_bit)
 }
 
-func BookmarkFileErrorQuark() C.GQuark {
-	return C.g_bookmark_file_error_quark()
-}
-
 //TODO g_build_filename
 
 func BuildFilenamev(args unsafe.Pointer) string {
@@ -1336,31 +2586,6 @@ func BuildPathv(separator string, args unsafe.Pointer) string {
 	return gcharp2string(C._g_build_pathv(unsafe.Pointer(_gstr_separator), unsafe.Pointer(args)))
 }
 
-func ByteArrayFree(array *C.GByteArray, free_segment bool) *uint8 {
-	_gbool_free_segment := C._false()
-	if free_segment { _gbool_free_segment = C._true() }
-	return guint8p2uint8p(C.g_byte_array_free(array, _gbool_free_segment))
-}
-
-func ByteArrayFreeToBytes(array *C.GByteArray) *C.GBytes {
-	return C.g_byte_array_free_to_bytes(array)
-}
-
-func ByteArrayNew() *C.GByteArray {
-	return C.g_byte_array_new()
-}
-
-func ByteArrayNewTake(data *uint8, len_ uint64) *C.GByteArray {
-	_c_guint8_data := C.guint8(*data)
-	_cp_guint8_data := (*C.guint8)(&_c_guint8_data)
-	_gsize_len_ := C.gsize(len_)
-	return C.g_byte_array_new_take(_cp_guint8_data, _gsize_len_)
-}
-
-func ByteArrayUnref(array *C.GByteArray) {
-	C.g_byte_array_unref(array)
-}
-
 func Chdir(path string) C.int {
 	_cstr_path := unsafe.Pointer(C.CString(path))
 	defer C.free(_cstr_path)
@@ -1373,10 +2598,6 @@ func CheckVersion(required_major uint, required_minor uint, required_micro uint)
 	_guint_required_minor := C.guint(required_minor)
 	_guint_required_micro := C.guint(required_micro)
 	return gcharp2string(C.glib_check_version(_guint_required_major, _guint_required_minor, _guint_required_micro))
-}
-
-func ChecksumTypeGetLength(checksum_type C.GChecksumType) int64 {
-	return gssize2int64(C.g_checksum_type_get_length(checksum_type))
 }
 
 func ChildWatchAdd(pid C.GPid, function C.GChildWatchFunc, data unsafe.Pointer) uint {
@@ -1584,75 +2805,6 @@ func DatasetIdSetDataFull(dataset_location unsafe.Pointer, key_id C.GQuark, data
 	C.g_dataset_id_set_data_full(_gpointer_dataset_location, key_id, _gpointer_data, destroy_func)
 }
 
-func DateGetDaysInMonth(month C.GDateMonth, year C.GDateYear) uint8 {
-	return guint82uint8(C.g_date_get_days_in_month(month, year))
-}
-
-func DateGetMondayWeeksInYear(year C.GDateYear) uint8 {
-	return guint82uint8(C.g_date_get_monday_weeks_in_year(year))
-}
-
-func DateGetSundayWeeksInYear(year C.GDateYear) uint8 {
-	return guint82uint8(C.g_date_get_sunday_weeks_in_year(year))
-}
-
-func DateIsLeapYear(year C.GDateYear) bool {
-	return gboolean2bool(C.g_date_is_leap_year(year))
-}
-
-func DateStrftime(s string, slen uint64, format string, date *C.GDate) uint64 {
-	_cstr_s := unsafe.Pointer(C.CString(s))
-	defer C.free(_cstr_s)
-	_gstr_s := (*C.gchar)(unsafe.Pointer(_cstr_s))
-	_gsize_slen := C.gsize(slen)
-	_cstr_format := unsafe.Pointer(C.CString(format))
-	defer C.free(_cstr_format)
-	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
-	return gsize2uint64(C._g_date_strftime(_gstr_s, _gsize_slen, unsafe.Pointer(_gstr_format), unsafe.Pointer(date)))
-}
-
-func DateTimeCompare(dt1 unsafe.Pointer, dt2 unsafe.Pointer) int {
-	_gpointer_dt1 := (C.gconstpointer)(dt1)
-	_gpointer_dt2 := (C.gconstpointer)(dt2)
-	return gint2int(C.g_date_time_compare(_gpointer_dt1, _gpointer_dt2))
-}
-
-func DateTimeEqual(dt1 unsafe.Pointer, dt2 unsafe.Pointer) bool {
-	_gpointer_dt1 := (C.gconstpointer)(dt1)
-	_gpointer_dt2 := (C.gconstpointer)(dt2)
-	return gboolean2bool(C.g_date_time_equal(_gpointer_dt1, _gpointer_dt2))
-}
-
-func DateTimeHash(datetime unsafe.Pointer) uint {
-	_gpointer_datetime := (C.gconstpointer)(datetime)
-	return guint2uint(C.g_date_time_hash(_gpointer_datetime))
-}
-
-func DateValidDay(day C.GDateDay) bool {
-	return gboolean2bool(C.g_date_valid_day(day))
-}
-
-func DateValidDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) bool {
-	return gboolean2bool(C.g_date_valid_dmy(day, month, year))
-}
-
-func DateValidJulian(julian_date uint32) bool {
-	_guint32_julian_date := C.guint32(julian_date)
-	return gboolean2bool(C.g_date_valid_julian(_guint32_julian_date))
-}
-
-func DateValidMonth(month C.GDateMonth) bool {
-	return gboolean2bool(C.g_date_valid_month(month))
-}
-
-func DateValidWeekday(weekday C.GDateWeekday) bool {
-	return gboolean2bool(C.g_date_valid_weekday(weekday))
-}
-
-func DateValidYear(year C.GDateYear) bool {
-	return gboolean2bool(C.g_date_valid_year(year))
-}
-
 func Dcgettext(domain string, msgid string, category int) string {
 	_cstr_domain := unsafe.Pointer(C.CString(domain))
 	defer C.free(_cstr_domain)
@@ -1672,13 +2824,6 @@ func Dgettext(domain string, msgid string) string {
 	defer C.free(_cstr_msgid)
 	_gstr_msgid := (*C.gchar)(unsafe.Pointer(_cstr_msgid))
 	return gcharp2string(C._g_dgettext(unsafe.Pointer(_gstr_domain), unsafe.Pointer(_gstr_msgid)))
-}
-
-func DirMakeTmp(tmpl string, err unsafe.Pointer) string {
-	_cstr_tmpl := unsafe.Pointer(C.CString(tmpl))
-	defer C.free(_cstr_tmpl)
-	_gstr_tmpl := (*C.gchar)(unsafe.Pointer(_cstr_tmpl))
-	return gcharp2string(C._g_dir_make_tmp(_gstr_tmpl, unsafe.Pointer(err)))
 }
 
 func DirectEqual(v1 unsafe.Pointer, v2 unsafe.Pointer) bool {
@@ -2004,88 +3149,6 @@ func Getenv(variable string) string {
 	return gcharp2string(C._g_getenv(unsafe.Pointer(_gstr_variable)))
 }
 
-func HashTableAdd(hash_table *C.GHashTable, key unsafe.Pointer) {
-	_gpointer_key := (C.gpointer)(key)
-	C.g_hash_table_add(hash_table, _gpointer_key)
-}
-
-func HashTableContains(hash_table *C.GHashTable, key unsafe.Pointer) bool {
-	_gpointer_key := (C.gconstpointer)(key)
-	return gboolean2bool(C.g_hash_table_contains(hash_table, _gpointer_key))
-}
-
-func HashTableDestroy(hash_table *C.GHashTable) {
-	C.g_hash_table_destroy(hash_table)
-}
-
-func HashTableInsert(hash_table *C.GHashTable, key unsafe.Pointer, value unsafe.Pointer) {
-	_gpointer_key := (C.gpointer)(key)
-	_gpointer_value := (C.gpointer)(value)
-	C.g_hash_table_insert(hash_table, _gpointer_key, _gpointer_value)
-}
-
-func HashTableLookupExtended(hash_table *C.GHashTable, lookup_key unsafe.Pointer, orig_key *C.gpointer, value *C.gpointer) bool {
-	_gpointer_lookup_key := (C.gconstpointer)(lookup_key)
-	return gboolean2bool(C.g_hash_table_lookup_extended(hash_table, _gpointer_lookup_key, orig_key, value))
-}
-
-func HashTableRemove(hash_table *C.GHashTable, key unsafe.Pointer) bool {
-	_gpointer_key := (C.gconstpointer)(key)
-	return gboolean2bool(C.g_hash_table_remove(hash_table, _gpointer_key))
-}
-
-func HashTableRemoveAll(hash_table *C.GHashTable) {
-	C.g_hash_table_remove_all(hash_table)
-}
-
-func HashTableReplace(hash_table *C.GHashTable, key unsafe.Pointer, value unsafe.Pointer) {
-	_gpointer_key := (C.gpointer)(key)
-	_gpointer_value := (C.gpointer)(value)
-	C.g_hash_table_replace(hash_table, _gpointer_key, _gpointer_value)
-}
-
-func HashTableSize(hash_table *C.GHashTable) uint {
-	return guint2uint(C.g_hash_table_size(hash_table))
-}
-
-func HashTableSteal(hash_table *C.GHashTable, key unsafe.Pointer) bool {
-	_gpointer_key := (C.gconstpointer)(key)
-	return gboolean2bool(C.g_hash_table_steal(hash_table, _gpointer_key))
-}
-
-func HashTableStealAll(hash_table *C.GHashTable) {
-	C.g_hash_table_steal_all(hash_table)
-}
-
-func HashTableUnref(hash_table *C.GHashTable) {
-	C.g_hash_table_unref(hash_table)
-}
-
-func HookDestroy(hook_list *C.GHookList, hook_id uint64) bool {
-	_gulong_hook_id := C.gulong(hook_id)
-	return gboolean2bool(C.g_hook_destroy(hook_list, _gulong_hook_id))
-}
-
-func HookDestroyLink(hook_list *C.GHookList, hook *C.GHook) {
-	C.g_hook_destroy_link(hook_list, hook)
-}
-
-func HookFree(hook_list *C.GHookList, hook *C.GHook) {
-	C.g_hook_free(hook_list, hook)
-}
-
-func HookInsertBefore(hook_list *C.GHookList, sibling *C.GHook, hook *C.GHook) {
-	C.g_hook_insert_before(hook_list, sibling, hook)
-}
-
-func HookPrepend(hook_list *C.GHookList, hook *C.GHook) {
-	C.g_hook_prepend(hook_list, hook)
-}
-
-func HookUnref(hook_list *C.GHookList, hook *C.GHook) {
-	C.g_hook_unref(hook_list, hook)
-}
-
 func HostnameIsAsciiEncoded(hostname string) bool {
 	_cstr_hostname := unsafe.Pointer(C.CString(hostname))
 	defer C.free(_cstr_hostname)
@@ -2188,21 +3251,8 @@ func IoAddWatchFull(channel *C.GIOChannel, priority int, condition C.GIOConditio
 	return guint2uint(C.g_io_add_watch_full(channel, _gint_priority, condition, func_, _gpointer_user_data, notify))
 }
 
-func IoChannelErrorFromErrno(en int) C.GIOChannelError {
-	_gint_en := C.gint(en)
-	return C.g_io_channel_error_from_errno(_gint_en)
-}
-
-func IoChannelErrorQuark() C.GQuark {
-	return C.g_io_channel_error_quark()
-}
-
 func IoCreateWatch(channel *C.GIOChannel, condition C.GIOCondition) *C.GSource {
 	return C.g_io_create_watch(channel, condition)
-}
-
-func KeyFileErrorQuark() C.GQuark {
-	return C.g_key_file_error_quark()
 }
 
 func Listenv() unsafe.Pointer {
@@ -2279,18 +3329,6 @@ func LogSetHandler(log_domain string, log_levels C.GLogLevelFlags, log_func C.GL
 }
 
 //TODO g_logv
-
-func MainContextDefault() *C.GMainContext {
-	return C.g_main_context_default()
-}
-
-func MainContextGetThreadDefault() *C.GMainContext {
-	return C.g_main_context_get_thread_default()
-}
-
-func MainContextRefThreadDefault() *C.GMainContext {
-	return C.g_main_context_ref_thread_default()
-}
 
 func MainCurrentSource() *C.GSource {
 	return C.g_main_current_source()
@@ -2415,10 +3453,6 @@ func OnErrorStackTrace(prg_name string) {
 	C._g_on_error_stack_trace(unsafe.Pointer(_gstr_prg_name))
 }
 
-//Skipped g_once_init_enter
-
-//Skipped g_once_init_leave
-
 func OptionErrorQuark() C.GQuark {
 	return C.g_option_error_quark()
 }
@@ -2515,40 +3549,6 @@ func PropagateError(dest unsafe.Pointer, src *C.GError) {
 
 //TODO g_propagate_prefixed_error
 
-func PtrArrayAdd(array *C.GPtrArray, data unsafe.Pointer) {
-	_gpointer_data := (C.gpointer)(data)
-	C.g_ptr_array_add(array, _gpointer_data)
-}
-
-func PtrArrayRemove(array *C.GPtrArray, data unsafe.Pointer) bool {
-	_gpointer_data := (C.gpointer)(data)
-	return gboolean2bool(C.g_ptr_array_remove(array, _gpointer_data))
-}
-
-func PtrArrayRemoveFast(array *C.GPtrArray, data unsafe.Pointer) bool {
-	_gpointer_data := (C.gpointer)(data)
-	return gboolean2bool(C.g_ptr_array_remove_fast(array, _gpointer_data))
-}
-
-func PtrArrayRemoveRange(array *C.GPtrArray, index_ uint, length uint) {
-	_guint_index_ := C.guint(index_)
-	_guint_length := C.guint(length)
-	C.g_ptr_array_remove_range(array, _guint_index_, _guint_length)
-}
-
-func PtrArraySetFreeFunc(array *C.GPtrArray, element_free_func C.GDestroyNotify) {
-	C.g_ptr_array_set_free_func(array, element_free_func)
-}
-
-func PtrArraySetSize(array *C.GPtrArray, length int) {
-	_gint_length := C.gint(length)
-	C.g_ptr_array_set_size(array, _gint_length)
-}
-
-func PtrArrayUnref(array *C.GPtrArray) {
-	C.g_ptr_array_unref(array)
-}
-
 func QsortWithData(pbase unsafe.Pointer, total_elems int, size uint64, compare_func C.GCompareDataFunc, user_data unsafe.Pointer) {
 	_gpointer_pbase := (C.gconstpointer)(pbase)
 	_gint_total_elems := C.gint(total_elems)
@@ -2620,53 +3620,6 @@ func ReallocN(mem unsafe.Pointer, n_blocks uint64, n_block_bytes uint64) unsafe.
 	return unsafe.Pointer(C.g_realloc_n(_gpointer_mem, _gsize_n_blocks, _gsize_n_block_bytes))
 }
 
-func RegexCheckReplacement(replacement string, has_references *C.gboolean, err unsafe.Pointer) bool {
-	_cstr_replacement := unsafe.Pointer(C.CString(replacement))
-	defer C.free(_cstr_replacement)
-	_gstr_replacement := (*C.gchar)(unsafe.Pointer(_cstr_replacement))
-	return gboolean2bool(C._g_regex_check_replacement(unsafe.Pointer(_gstr_replacement), has_references, unsafe.Pointer(err)))
-}
-
-func RegexErrorQuark() C.GQuark {
-	return C.g_regex_error_quark()
-}
-
-func RegexEscapeNul(string_ string, length int) string {
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	_gint_length := C.gint(length)
-	return gcharp2string(C._g_regex_escape_nul(unsafe.Pointer(_gstr_string_), _gint_length))
-}
-
-func RegexEscapeString(string_ string, length int) string {
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	_gint_length := C.gint(length)
-	return gcharp2string(C.g_regex_escape_string(_gstr_string_, _gint_length))
-}
-
-func RegexMatchSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) bool {
-	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
-	defer C.free(_cstr_pattern)
-	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return gboolean2bool(C._g_regex_match_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_), compile_options, match_options))
-}
-
-func RegexSplitSimple(pattern string, string_ string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) unsafe.Pointer {
-	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
-	defer C.free(_cstr_pattern)
-	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return unsafe.Pointer(C._g_regex_split_simple(unsafe.Pointer(_gstr_pattern), unsafe.Pointer(_gstr_string_), compile_options, match_options))
-}
-
 func ReloadUserSpecialDirsCache() {
 	C.g_reload_user_special_dirs_cache()
 }
@@ -2680,31 +3633,6 @@ func Rmdir(filename string) C.int {
 	defer C.free(_cstr_filename)
 	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
 	return C._g_rmdir(unsafe.Pointer(_gstr_filename))
-}
-
-func SequenceMove(src *C.GSequenceIter, dest *C.GSequenceIter) {
-	C.g_sequence_move(src, dest)
-}
-
-func SequenceMoveRange(dest *C.GSequenceIter, begin *C.GSequenceIter, end *C.GSequenceIter) {
-	C.g_sequence_move_range(dest, begin, end)
-}
-
-func SequenceRemove(iter *C.GSequenceIter) {
-	C.g_sequence_remove(iter)
-}
-
-func SequenceRemoveRange(begin *C.GSequenceIter, end *C.GSequenceIter) {
-	C.g_sequence_remove_range(begin, end)
-}
-
-func SequenceSet(iter *C.GSequenceIter, data unsafe.Pointer) {
-	_gpointer_data := (C.gpointer)(data)
-	C.g_sequence_set(iter, _gpointer_data)
-}
-
-func SequenceSwap(a *C.GSequenceIter, b *C.GSequenceIter) {
-	C.g_sequence_swap(a, b)
 }
 
 func SetApplicationName(application_name string) {
@@ -2814,26 +3742,6 @@ func SliceFreeChainWithOffset(block_size uint64, mem_chain unsafe.Pointer, next_
 //Skipped g_slice_set_config
 
 //TODO g_snprintf
-
-func SourceRemove(tag uint) bool {
-	_guint_tag := C.guint(tag)
-	return gboolean2bool(C.g_source_remove(_guint_tag))
-}
-
-func SourceRemoveByFuncsUserData(funcs *C.GSourceFuncs, user_data unsafe.Pointer) bool {
-	_gpointer_user_data := (C.gpointer)(user_data)
-	return gboolean2bool(C.g_source_remove_by_funcs_user_data(funcs, _gpointer_user_data))
-}
-
-func SourceRemoveByUserData(user_data unsafe.Pointer) bool {
-	_gpointer_user_data := (C.gpointer)(user_data)
-	return gboolean2bool(C.g_source_remove_by_user_data(_gpointer_user_data))
-}
-
-func SourceSetNameById(tag uint, name *C.char) {
-	_guint_tag := C.guint(tag)
-	C._g_source_set_name_by_id(_guint_tag, unsafe.Pointer(name))
-}
 
 func SpacedPrimesClosest(num uint) uint {
 	_guint_num := C.guint(num)
@@ -3335,56 +4243,6 @@ func TestTrapReachedTimeout() bool {
 	return gboolean2bool(C.g_test_trap_reached_timeout())
 }
 
-func ThreadErrorQuark() C.GQuark {
-	return C.g_thread_error_quark()
-}
-
-func ThreadExit(retval unsafe.Pointer) {
-	_gpointer_retval := (C.gpointer)(retval)
-	C.g_thread_exit(_gpointer_retval)
-}
-
-func ThreadPoolGetMaxIdleTime() uint {
-	return guint2uint(C.g_thread_pool_get_max_idle_time())
-}
-
-func ThreadPoolGetMaxUnusedThreads() int {
-	return gint2int(C.g_thread_pool_get_max_unused_threads())
-}
-
-func ThreadPoolGetNumUnusedThreads() uint {
-	return guint2uint(C.g_thread_pool_get_num_unused_threads())
-}
-
-func ThreadPoolSetMaxIdleTime(interval uint) {
-	_guint_interval := C.guint(interval)
-	C.g_thread_pool_set_max_idle_time(_guint_interval)
-}
-
-func ThreadPoolSetMaxUnusedThreads(max_threads int) {
-	_gint_max_threads := C.gint(max_threads)
-	C.g_thread_pool_set_max_unused_threads(_gint_max_threads)
-}
-
-func ThreadPoolStopUnusedThreads() {
-	C.g_thread_pool_stop_unused_threads()
-}
-
-func ThreadSelf() *C.GThread {
-	return C.g_thread_self()
-}
-
-func ThreadYield() {
-	C.g_thread_yield()
-}
-
-func TimeValFromIso8601(iso_date string, time_ *C.GTimeVal) bool {
-	_cstr_iso_date := unsafe.Pointer(C.CString(iso_date))
-	defer C.free(_cstr_iso_date)
-	_gstr_iso_date := (*C.gchar)(unsafe.Pointer(_cstr_iso_date))
-	return gboolean2bool(C._g_time_val_from_iso8601(unsafe.Pointer(_gstr_iso_date), time_))
-}
-
 func TimeoutAdd(interval uint, function C.GSourceFunc, data unsafe.Pointer) uint {
 	_guint_interval := C.guint(interval)
 	_gpointer_data := (C.gpointer)(data)
@@ -3419,15 +4277,6 @@ func TimeoutSourceNew(interval uint) *C.GSource {
 func TimeoutSourceNewSeconds(interval uint) *C.GSource {
 	_guint_interval := C.guint(interval)
 	return C.g_timeout_source_new_seconds(_guint_interval)
-}
-
-func TrashStackHeight(stack_p unsafe.Pointer) uint {
-	return guint2uint(C._g_trash_stack_height(unsafe.Pointer(stack_p)))
-}
-
-func TrashStackPush(stack_p unsafe.Pointer, data_p unsafe.Pointer) {
-	_gpointer_data_p := (C.gpointer)(data_p)
-	C._g_trash_stack_push(unsafe.Pointer(stack_p), _gpointer_data_p)
 }
 
 func TryMalloc(n_bytes uint64) unsafe.Pointer {
@@ -3944,58 +4793,6 @@ func Utf8Validate(str string, max_len int64, end unsafe.Pointer) bool {
 }
 
 //Skipped g_variant_get_gtype
-
-func VariantIsObjectPath(string_ string) bool {
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return gboolean2bool(C._g_variant_is_object_path(unsafe.Pointer(_gstr_string_)))
-}
-
-func VariantIsSignature(string_ string) bool {
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	return gboolean2bool(C._g_variant_is_signature(unsafe.Pointer(_gstr_string_)))
-}
-
-func VariantParse(type_ *C.GVariantType, text string, limit string, endptr unsafe.Pointer, err unsafe.Pointer) *C.GVariant {
-	_cstr_text := unsafe.Pointer(C.CString(text))
-	defer C.free(_cstr_text)
-	_gstr_text := (*C.gchar)(unsafe.Pointer(_cstr_text))
-	_cstr_limit := unsafe.Pointer(C.CString(limit))
-	defer C.free(_cstr_limit)
-	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
-	return C._g_variant_parse(unsafe.Pointer(type_), unsafe.Pointer(_gstr_text), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr), unsafe.Pointer(err))
-}
-
-func VariantParserGetErrorQuark() C.GQuark {
-	return C.g_variant_parser_get_error_quark()
-}
-
-func VariantTypeChecked(arg_0 string) *C.GVariantType {
-	_cstr_arg_0 := unsafe.Pointer(C.CString(arg_0))
-	defer C.free(_cstr_arg_0)
-	_gstr_arg_0 := (*C.gchar)(unsafe.Pointer(_cstr_arg_0))
-	return C._g_variant_type_checked_(unsafe.Pointer(_gstr_arg_0))
-}
-
-func VariantTypeStringIsValid(type_string string) bool {
-	_cstr_type_string := unsafe.Pointer(C.CString(type_string))
-	defer C.free(_cstr_type_string)
-	_gstr_type_string := (*C.gchar)(unsafe.Pointer(_cstr_type_string))
-	return gboolean2bool(C._g_variant_type_string_is_valid(unsafe.Pointer(_gstr_type_string)))
-}
-
-func VariantTypeStringScan(string_ string, limit string, endptr unsafe.Pointer) bool {
-	_cstr_string_ := unsafe.Pointer(C.CString(string_))
-	defer C.free(_cstr_string_)
-	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
-	_cstr_limit := unsafe.Pointer(C.CString(limit))
-	defer C.free(_cstr_limit)
-	_gstr_limit := (*C.gchar)(unsafe.Pointer(_cstr_limit))
-	return gboolean2bool(C._g_variant_type_string_scan(unsafe.Pointer(_gstr_string_), unsafe.Pointer(_gstr_limit), unsafe.Pointer(endptr)))
-}
 
 //TODO g_vasprintf
 
@@ -4602,14 +5399,11 @@ const G_URI_RESERVED_CHARS_SUBCOMPONENT_DELIMITERS = C.G_URI_RESERVED_CHARS_SUBC
 const G_USEC_PER_SEC = C.G_USEC_PER_SEC
 const G_VA_COPY_AS_ARRAY = C.G_VA_COPY_AS_ARRAY
 const GLIB_VERSION_MIN_REQUIRED = C.GLIB_VERSION_MIN_REQUIRED
+func gboolean2bool(b C.gboolean) bool {
+  return b == C._true()
+}
 func gdouble2float64(i C.gdouble) float64 {
   return float64(i)
-}
-func gucharp2byteslice(str *C.guchar) []byte {
-  return C.GoBytes(unsafe.Pointer(str), C.int(C.strlen((*C.char)(unsafe.Pointer(str)))))
-}
-func guint82uint8(i C.guint8) uint8 {
-  return uint8(i)
 }
 func gint322int32(i C.gint32) int32 {
   return int32(i)
@@ -4617,8 +5411,8 @@ func gint322int32(i C.gint32) int32 {
 func glong2int64(i C.glong) int64 {
   return int64(i)
 }
-func gboolean2bool(b C.gboolean) bool {
-  return b == C._true()
+func gssize2int64(i C.gssize) int64 {
+  return int64(i)
 }
 func gint2int(i C.gint) int {
   return int(i)
@@ -4632,6 +5426,9 @@ func gchar2int8(i C.gchar) int8 {
 }
 func gint642int64(i C.gint64) int64 {
   return int64(i)
+}
+func gucharp2byteslice(str *C.guchar) []byte {
+  return C.GoBytes(unsafe.Pointer(str), C.int(C.strlen((*C.char)(unsafe.Pointer(str)))))
 }
 func guint322uint32(i C.guint32) uint32 {
   return uint32(i)
@@ -4648,6 +5445,6 @@ func guint2uint(i C.guint) uint {
 func gsize2uint64(i C.gsize) uint64 {
   return uint64(i)
 }
-func gssize2int64(i C.gssize) int64 {
-  return int64(i)
+func guint82uint8(i C.guint8) uint8 {
+  return uint8(i)
 }

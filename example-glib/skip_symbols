@@ -48,3 +48,5 @@ g_once_init_leave
 g_pointer_bit_lock
 g_pointer_bit_trylock
 g_pointer_bit_unlock
+
+g_date_to_struct_tm

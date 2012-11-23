@@ -33,6 +33,8 @@ class Parser:
     self.enum_symbols = []
     self.const_symbols = []
 
+    self.exported_functions = set()
+
   def parse(self):
     for node in self.namespace.itervalues():
       handlerName = 'handle' + type(node).__name__
@@ -46,6 +48,9 @@ class Parser:
     info = Dict()
     info.name = node.name
     info.c_name = node.symbol
+    if info.c_name in self.exported_functions:
+      return
+    self.exported_functions.add(info.c_name)
 
     info.skip = False
     if not node.deprecated is None or info.c_name in self.skip_symbols:
@@ -92,9 +97,10 @@ class Parser:
       self.handleFunction(constructor, name)
     # static methods
     for function in node.static_methods:
-      pass #TODO
+      self.handleFunction(function, name)
     # methods
     for method in node.methods:
+      #self.handleFunction(method, name)
       pass #TODO
 
 def main():
