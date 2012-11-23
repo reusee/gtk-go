@@ -27,6 +27,7 @@ class Parser:
     self.package_name = self.namespace.name.lower()
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
     self.includes = list(parser.get_c_includes())
+    self.prefixes = self.namespace.symbol_prefixes
 
     self.functions = []
     self.functions_need_wrapper = []

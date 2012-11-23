@@ -184,15 +184,17 @@ class Generator:
   def generate_enum_symbols(self):
     for symbol in self.parser.enum_symbols:
       go_name = symbol
-      if symbol.startswith('GTK_'):
-        go_name = symbol[4:]
+      for prefix in self.parser.prefixes:
+        if symbol.startswith(prefix.upper()):
+          go_name = symbol[len(prefix) + 1:]
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
   def generate_const_symbols(self):
     for symbol in self.parser.const_symbols:
       go_name = symbol
-      if symbol.startswith('GTK_'):
-        go_name = symbol[4:]
+      for prefix in self.parser.prefixes:
+        if symbol.startswith(prefix.upper()):
+          go_name = symbol[len(prefix) + 1:]
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
   def generate_macro_helpers(self):
