@@ -9,7 +9,6 @@ package glib
 // #include <glib-unix.h>
 // #include <glib.h>
 /*
-typedef long double longdouble;
 gboolean _true() { return TRUE; }
 gboolean _false() { return FALSE; }
 GByteArray* _g_byte_array_append(GByteArray* array, void* data, guint len_) {
@@ -206,6 +205,9 @@ gchar* _g_ascii_strup(void* str, gssize len_) {
 }
 void _g_assertion_message(void* domain, void* file, int line, void* func_, void* message) {
 	g_assertion_message((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(message));
+}
+void _g_assertion_message_cmpnum(void* domain, void* file, int line, void* func_, void* expr, double arg1, void* cmp, double arg2, char numtype) {
+	g_assertion_message_cmpnum((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(expr), (long double)(arg1), (const char*)(cmp), (long double)(arg2), numtype);
 }
 void _g_assertion_message_cmpstr(void* domain, void* file, int line, void* func_, void* expr, void* arg1, void* cmp, void* arg2) {
 	g_assertion_message_cmpstr((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(expr), (const char*)(arg1), (const char*)(cmp), (const char*)(arg2));
@@ -3499,7 +3501,11 @@ func AssertionMessage(domain *C.char, file *C.char, line C.int, func_ *C.char, m
 	C._g_assertion_message(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(message))
 }
 
-//TODO g_assertion_message_cmpnum
+func AssertionMessageCmpnum(domain *C.char, file *C.char, line C.int, func_ *C.char, expr *C.char, arg1 float64, cmp *C.char, arg2 float64, numtype C.char) {
+	_double_arg1 := C.double(arg1)
+	_double_arg2 := C.double(arg2)
+	C._g_assertion_message_cmpnum(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(expr), C.double(_double_arg1), unsafe.Pointer(cmp), C.double(_double_arg2), numtype)
+}
 
 func AssertionMessageCmpstr(domain *C.char, file *C.char, line C.int, func_ *C.char, expr *C.char, arg1 *C.char, cmp *C.char, arg2 *C.char) {
 	C._g_assertion_message_cmpstr(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(expr), unsafe.Pointer(arg1), unsafe.Pointer(cmp), unsafe.Pointer(arg2))
@@ -5334,12 +5340,14 @@ func TestQueueFree(gfree_pointer unsafe.Pointer) {
 	C.g_test_queue_free(_gpointer_gfree_pointer)
 }
 
-func TestRandDouble() C.double {
-	return C.g_test_rand_double()
+func TestRandDouble() float64 {
+	return double2float64(C.g_test_rand_double())
 }
 
-func TestRandDoubleRange(range_start C.double, range_end C.double) C.double {
-	return C.g_test_rand_double_range(range_start, range_end)
+func TestRandDoubleRange(range_start float64, range_end float64) float64 {
+	_double_range_start := C.double(range_start)
+	_double_range_end := C.double(range_end)
+	return double2float64(C.g_test_rand_double_range(_double_range_start, _double_range_end))
 }
 
 func TestRandInt() int32 {
@@ -5361,12 +5369,12 @@ func TestRunSuite(suite *TestSuite) C.int {
 	return C.g_test_run_suite(_cp_suite_)
 }
 
-func TestTimerElapsed() C.double {
-	return C.g_test_timer_elapsed()
+func TestTimerElapsed() float64 {
+	return double2float64(C.g_test_timer_elapsed())
 }
 
-func TestTimerLast() C.double {
-	return C.g_test_timer_last()
+func TestTimerLast() float64 {
+	return double2float64(C.g_test_timer_last())
 }
 
 func TestTimerStart() {
@@ -6610,6 +6618,9 @@ func gsize2uint64(i C.gsize) uint64 {
 }
 func guint82uint8(i C.guint8) uint8 {
   return uint8(i)
+}
+func double2float64(i C.double) float64 {
+  return float64(i)
 }
 type SList C.GSList
 type Cond C.GCond

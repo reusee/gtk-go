@@ -30,15 +30,13 @@ def convert_parameters(parameters):
       not_implement = True
     elif c_type == 'va_list':
       not_implement = True
-    elif 'long double' in c_type:
-      not_implement = True
     else:
       if name is None:
         name = 'arg_%d' % i
-      go_type, need_cast = convert_to_go_type(param.type.ctype)
-      if need_cast:
+      go_type, cast_c_type, cast_go_type = convert_to_go_type(c_type)
+      if cast_c_type:
         need_wrapper = True
-      ret.append(Param(name, c_type, go_type, need_cast, transfer))
+      ret.append(Param(name, c_type, go_type, cast_c_type, cast_go_type, transfer))
   return ret, not_implement, need_wrapper
 
 def convert_func_name(s):
@@ -48,17 +46,21 @@ def convert_func_name(s):
 
 def convert_to_go_type(s):
   s = s.replace('volatile ', '') 
-  need_cast = False
+  cast_c_type = None
+  cast_go_type = None
   if s.startswith('const '):
-    need_cast = True
+    cast_c_type = 'void*'
+    cast_go_type = 'unsafe.Pointer'
     s = s.replace('const ', '')
-  if s == 'long double':
-    s = 'longdouble'
   if s.endswith('**'):
-    need_cast = True
-    s = 'unsafe.Pointer'
-  else:
-    s = 'C.' + s
+    cast_c_type = 'void*'
+    cast_go_type = 'unsafe.Pointer'
+    s = 'void*'
+  if s == 'long double':
+    cast_c_type = 'double'
+    cast_go_type = 'C.double'
+    s = 'double'
+  s = 'C.' + s
   if s.endswith('*'):
     s = '*' + s[:-1]
-  return s, need_cast
+  return s, cast_c_type, cast_go_type

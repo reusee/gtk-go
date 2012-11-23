@@ -31,9 +31,6 @@ class Generator:
     for include in self.parser.includes:
       print >>self.out, "// #include <%s>" % include
     print >>self.out, "/*"
-    # typedefs
-    print >>self.out, "typedef long double longdouble;"
-    print >>self.out, "typedef unsigned long long ulonglong;"
     # helper functions
     self.generate_macro_helpers()
     # wrappers
@@ -86,7 +83,8 @@ class Generator:
       if mappings.has_key(mapped_type): # map parameter type
         m = mappings[mapped_type]
         mapped_type = m.mapped_type
-        mapping_code.append(m.mapping_code_func(param))
+        if m.has_key('mapping_code_func'):
+          mapping_code.append(m.mapping_code_func(param))
         mapped_param_name[param.name] = m.mapped_name_func(param)
       out.append('%s %s' % (param.name, mapped_type))
     out.append(') ')
@@ -116,8 +114,10 @@ class Generator:
         if sep != None:
           return_expression.append(sep)
         sep = ', '
-        if param.need_cast:
-          return_expression.append('unsafe.Pointer(%s)' % mapped_param_name.get(param.name, param.name))
+        if param.cast_go_type:
+          return_expression.append('%s(%s)' % (
+            param.cast_go_type,
+            mapped_param_name.get(param.name, param.name)))
         else:
           return_expression.append(mapped_param_name.get(param.name, param.name))
       return_expression.append(')')
@@ -161,8 +161,8 @@ class Generator:
       if sep != None:
         out.append(sep)
       sep = ', '
-      if param.need_cast:
-        out.append('void*')
+      if param.cast_c_type:
+        out.append(param.cast_c_type)
       else:
         out.append(param.c_type)
       out.append(' ' + param.name)
@@ -175,7 +175,7 @@ class Generator:
       if sep != None:
         out.append(sep)
       sep = ', '
-      if param.need_cast:
+      if param.cast_c_type:
         out.append('(%s)(%s)' % (param.c_type, param.name))
       else:
         out.append(param.name)

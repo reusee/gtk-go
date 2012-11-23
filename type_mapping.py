@@ -9,6 +9,9 @@ mappings['unsafe.Pointer'] = Dict({
   'to_go_type_code_head': 'unsafe.Pointer(',
   'to_go_type_code_tail': ')',
 })
+mappings['*C.void'] = mappings['unsafe.Pointer']
+
+# glib basic types
 
 def map_bool(param):
   return '''\
@@ -186,3 +189,7 @@ mappings['*C.goffset'] = make_numeric_p_mapping('goffset', 'int64')
 
 mappings['*C.gintptr'] = make_numeric_p_mapping('gintptr', 'int64')
 mappings['*C.guintptr'] = make_numeric_p_mapping('guintptr', 'uint64')
+
+# c types
+
+mappings['C.double'] = make_numeric_mapping('double', 'float64')
