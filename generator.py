@@ -49,20 +49,11 @@ class Generator:
 
   def generate_function(self, func):
     # not support yet or has problem
-    if func.deprecated:
-      self.out.write('//Deprecated %s\n\n' % func.c_name)
-      return
-    elif func.skip:
+    if func.skip:
       self.out.write('//Skipped %s\n\n' % func.c_name)
       return
-    elif func.has_varargs:
-      self.out.write('//TODO varargs %s\n\n' % func.c_name)
-      return
-    elif func.has_va_list:
-      self.out.write('//TODO va_list %s\n\n' % func.c_name)
-      return
-    elif func.has_long_double:
-      self.out.write('//TODO long double %s\n\n' % func.c_name)
+    elif func.not_implement:
+      self.out.write('//TODO %s\n\n' % func.c_name)
       return
 
     out = []

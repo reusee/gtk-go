@@ -5,11 +5,9 @@ sys.path.append("/usr/lib/gobject-introspection")
 from giscanner.girparser import GIRParser
 from giscanner import ast
 from generator import Generator
-from collections import namedtuple
 import os
 from common import *
-
-Param = namedtuple('Param', ['name', 'c_type', 'go_type', 'need_cast', 'transfer'])
+from convert import *
 
 class Parser:
   def __init__(self, filename):
@@ -65,65 +63,30 @@ class Parser:
 
   def handleFunction(self, node):
     info = Dict()
-    info.need_wrapper = need_wrapper = False
-    info.has_varargs = has_varargs = False
-    info.has_va_list = has_va_list = False
-    info.has_long_double = has_long_double = False
     info.name = name = node.name
     info.c_name = c_name = node.symbol
-    info.deprecated = False
-    if not node.deprecated is None:
-      info.deprecated = True
-      return info
+    info.need_wrapper = False
+
     info.skip = False
-    if c_name in self.skip_symbols:
+    if not node.deprecated is None or c_name in self.skip_symbols:
       info.skip = True
       return info
-    info.go_name = go_name = convertFuncName(name)
-    info.parameters = parameters = []
-    for i, param in enumerate(node.parameters):
-      arg_name = param.argname
-      if arg_name == 'type':
-        arg_name = '_type'
-      elif arg_name == 'func':
-        arg_name = '_func'
-      elif arg_name == 'len':
-        arg_name = '_len'
 
-      transfer = param.transfer != 'none'
+    info.go_name = go_name = convert_func_name(name)
+    info.parameters, info.not_implement, info.need_wrapper = convert_parameters(node.parameters)
+    info.need_wrapper = info.need_wrapper and not info.not_implement
 
-      arg_c_type = param.type.ctype
-      if arg_c_type == '<varargs>':
-        has_varargs = True
-      elif arg_c_type == 'va_list':
-        has_va_list = True
-      elif 'long double' in arg_c_type:
-        has_long_double = True
-      else:
-        if arg_name is None:
-          arg_name = 'arg_%d' % i
-        arg_go_type, need_cast = convert_to_go_type(param.type.ctype)
-        if need_cast:
-          need_wrapper = True
-        parameters.append(Param(arg_name, arg_c_type, arg_go_type, need_cast, transfer))
     if node.throws:
-      parameters.append(Param('err', 'GError**', 'unsafe.Pointer', True, False))
-      need_wrapper = True
-    info.has_varargs = has_varargs
-    info.has_va_list = has_va_list
-    info.has_long_double = has_long_double
-    info.need_wrapper = need_wrapper and not has_varargs and not has_va_list and not has_long_double
+      info.parameters.append(Param('err', 'GError**', 'unsafe.Pointer', True, False))
+      info.need_wrapper = True
 
-    no_return = False
-    return_c_type = node.retval.type.ctype
-    return_go_type = None
-    if return_c_type == 'void':
-      no_return = True
+    info.no_return = False
+    info.return_c_type = node.retval.type.ctype
+    info.return_go_type = None
+    if info.return_c_type == 'void':
+      info.no_return = True
     else:
-      return_go_type, _ = convert_to_go_type(return_c_type)
-    info.no_return = no_return
-    info.return_c_type = return_c_type
-    info.return_go_type = return_go_type
+      info.return_go_type, _ = convert_to_go_type(info.return_c_type)
 
     return info
 
@@ -140,45 +103,24 @@ class Parser:
     self.const_symbols.append(node.ctype)
 
   def handleRecord(self, node):
-    type_name = node.ctype
-    get_type_func = node.get_type
+    # name
+    name = node.name
+    c_type = node.ctype
+    # constructors
     for constructor in node.constructors:
       c_function_name = constructor.symbol
-      name = constructor.name
-      ret_type = constructor.retval.type #TODO convert to c type
-      #print ret_type
+      function_name = constructor.name
+      return_c_type = constructor.retval.type.ctype
       for param in constructor.parameters:
         arg_name = param.argname
-        arg_type = param.type #TODO convert to c type
-        #print arg_type
+        arg_type = param.type.ctype
+      #TODO deal with parameter and return types, etc.
+    # static methods
     for function in node.static_methods:
-      #print function #TODO
-      pass
+      pass #TODO
+    # methods
     for method in node.methods:
-      #print method #TODO
-      pass
-
-def convertFuncName(s):
-  words = s.split('_')
-  words = [w.capitalize() for w in words]
-  return ''.join(words)
-
-def convert_to_go_type(s):
-  s = s.replace('volatile ', '') 
-  need_cast = False
-  if s.startswith('const '):
-    need_cast = True
-    s = s.replace('const ', '')
-  if s == 'long double':
-    s = 'longdouble'
-  if s.endswith('**'):
-    need_cast = True
-    s = 'unsafe.Pointer'
-  else:
-    s = 'C.' + s
-  if s.endswith('*'):
-    s = '*' + s[:-1]
-  return s, need_cast
+      pass #TODO
 
 def main():
   if len(sys.argv) < 2:
