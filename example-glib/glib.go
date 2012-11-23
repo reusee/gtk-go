@@ -9,6 +9,78 @@ package glib
 // #include <glib.h>
 /*
 typedef long double longdouble;
+GDateTime* _g_date_time_new_from_timeval_local(void* tv) {
+	return g_date_time_new_from_timeval_local((const GTimeVal*)(tv));
+}
+GDateTime* _g_date_time_new_from_timeval_utc(void* tv) {
+	return g_date_time_new_from_timeval_utc((const GTimeVal*)(tv));
+}
+GError* _g_error_new_literal(GQuark domain, gint code, void* message) {
+	return g_error_new_literal(domain, code, (const gchar*)(message));
+}
+GIOChannel* _g_io_channel_new_file(void* filename, void* mode, void* err) {
+	return g_io_channel_new_file((const gchar*)(filename), (const gchar*)(mode), (GError**)(err));
+}
+GRegex* _g_regex_new(void* pattern, GRegexCompileFlags compile_options, GRegexMatchFlags match_options, void* err) {
+	return g_regex_new((const gchar*)(pattern), compile_options, match_options, (GError**)(err));
+}
+GThread* _g_thread_new(void* name, GThreadFunc func_, gpointer data) {
+	return g_thread_new((const gchar*)(name), func_, data);
+}
+GThread* _g_thread_try_new(void* name, GThreadFunc func_, gpointer data, void* err) {
+	return g_thread_try_new((const gchar*)(name), func_, data, (GError**)(err));
+}
+GTimeZone* _g_time_zone_new(void* identifier) {
+	return g_time_zone_new((const gchar*)(identifier));
+}
+GVariant* _g_variant_new_array(void* child_type, void* children, gsize n_children) {
+	return g_variant_new_array((const GVariantType*)(child_type), (GVariant**)(children), n_children);
+}
+GVariant* _g_variant_new_fixed_array(void* element_type, gconstpointer elements, gsize n_elements, gsize element_size) {
+	return g_variant_new_fixed_array((const GVariantType*)(element_type), elements, n_elements, element_size);
+}
+GVariant* _g_variant_new_from_bytes(void* type_, GBytes* bytes, gboolean trusted) {
+	return g_variant_new_from_bytes((const GVariantType*)(type_), bytes, trusted);
+}
+GVariant* _g_variant_new_from_data(void* type_, gconstpointer data, gsize size, gboolean trusted, GDestroyNotify notify, gpointer user_data) {
+	return g_variant_new_from_data((const GVariantType*)(type_), data, size, trusted, notify, user_data);
+}
+GVariant* _g_variant_new_maybe(void* child_type, GVariant* child) {
+	return g_variant_new_maybe((const GVariantType*)(child_type), child);
+}
+GVariant* _g_variant_new_object_path(void* object_path) {
+	return g_variant_new_object_path((const gchar*)(object_path));
+}
+GVariant* _g_variant_new_parsed_va(void* format, va_list* app) {
+	return g_variant_new_parsed_va((const gchar*)(format), app);
+}
+GVariant* _g_variant_new_signature(void* signature) {
+	return g_variant_new_signature((const gchar*)(signature));
+}
+GVariant* _g_variant_new_string(void* string_) {
+	return g_variant_new_string((const gchar*)(string_));
+}
+GVariant* _g_variant_new_tuple(void* children, gsize n_children) {
+	return g_variant_new_tuple((GVariant**)(children), n_children);
+}
+GVariant* _g_variant_new_va(void* format_string, void* endptr, va_list* app) {
+	return g_variant_new_va((const gchar*)(format_string), (const gchar**)(endptr), app);
+}
+GVariantBuilder* _g_variant_builder_new(void* type_) {
+	return g_variant_builder_new((const GVariantType*)(type_));
+}
+GVariantType* _g_variant_type_new(void* type_string) {
+	return g_variant_type_new((const gchar*)(type_string));
+}
+GVariantType* _g_variant_type_new_array(void* element) {
+	return g_variant_type_new_array((const GVariantType*)(element));
+}
+GVariantType* _g_variant_type_new_dict_entry(void* key, void* value) {
+	return g_variant_type_new_dict_entry((const GVariantType*)(key), (const GVariantType*)(value));
+}
+GVariantType* _g_variant_type_new_maybe(void* element) {
+	return g_variant_type_new_maybe((const GVariantType*)(element));
+}
 int _g_access(void* filename, int mode) {
 	return g_access((const gchar*)(filename), mode);
 }
@@ -599,6 +671,300 @@ import "C"
 import (
 	"unsafe"
 )
+
+func BytesNew(data C.gconstpointer, size C.gsize) *C.GBytes {
+	return C.g_bytes_new(data, size)
+}
+
+func BytesNewStatic(data C.gconstpointer, size C.gsize) *C.GBytes {
+	return C.g_bytes_new_static(data, size)
+}
+
+func BytesNewTake(data C.gpointer, size C.gsize) *C.GBytes {
+	return C.g_bytes_new_take(data, size)
+}
+
+func BytesNewWithFreeFunc(data C.gconstpointer, size C.gsize, free_func C.GDestroyNotify, user_data C.gpointer) *C.GBytes {
+	return C.g_bytes_new_with_free_func(data, size, free_func, user_data)
+}
+
+func DateNew() *C.GDate {
+	return C.g_date_new()
+}
+
+func DateNewDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) *C.GDate {
+	return C.g_date_new_dmy(day, month, year)
+}
+
+func DateNewJulian(julian_day C.guint32) *C.GDate {
+	return C.g_date_new_julian(julian_day)
+}
+
+func DateTimeNew(tz *C.GTimeZone, year C.gint, month C.gint, day C.gint, hour C.gint, minute C.gint, seconds C.gdouble) *C.GDateTime {
+	return C.g_date_time_new(tz, year, month, day, hour, minute, seconds)
+}
+
+func DateTimeNewFromTimevalLocal(tv *C.GTimeVal) *C.GDateTime {
+	return C._g_date_time_new_from_timeval_local(unsafe.Pointer(tv))
+}
+
+func DateTimeNewFromTimevalUtc(tv *C.GTimeVal) *C.GDateTime {
+	return C._g_date_time_new_from_timeval_utc(unsafe.Pointer(tv))
+}
+
+func DateTimeNewFromUnixLocal(t C.gint64) *C.GDateTime {
+	return C.g_date_time_new_from_unix_local(t)
+}
+
+func DateTimeNewFromUnixUtc(t C.gint64) *C.GDateTime {
+	return C.g_date_time_new_from_unix_utc(t)
+}
+
+func DateTimeNewLocal(year C.gint, month C.gint, day C.gint, hour C.gint, minute C.gint, seconds C.gdouble) *C.GDateTime {
+	return C.g_date_time_new_local(year, month, day, hour, minute, seconds)
+}
+
+func DateTimeNewNow(tz *C.GTimeZone) *C.GDateTime {
+	return C.g_date_time_new_now(tz)
+}
+
+func DateTimeNewNowLocal() *C.GDateTime {
+	return C.g_date_time_new_now_local()
+}
+
+func DateTimeNewNowUtc() *C.GDateTime {
+	return C.g_date_time_new_now_utc()
+}
+
+func DateTimeNewUtc(year C.gint, month C.gint, day C.gint, hour C.gint, minute C.gint, seconds C.gdouble) *C.GDateTime {
+	return C.g_date_time_new_utc(year, month, day, hour, minute, seconds)
+}
+
+//TODO g_error_new
+
+func ErrorNewLiteral(domain C.GQuark, code C.gint, message string) *C.GError {
+	_cstr_message := unsafe.Pointer(C.CString(message))
+	defer C.free(_cstr_message)
+	_gstr_message := (*C.gchar)(unsafe.Pointer(_cstr_message))
+	return C._g_error_new_literal(domain, code, unsafe.Pointer(_gstr_message))
+}
+
+//TODO g_error_new_valist
+
+func IOChannelNewFile(filename string, mode string, err unsafe.Pointer) *C.GIOChannel {
+	_cstr_filename := unsafe.Pointer(C.CString(filename))
+	defer C.free(_cstr_filename)
+	_gstr_filename := (*C.gchar)(unsafe.Pointer(_cstr_filename))
+	_cstr_mode := unsafe.Pointer(C.CString(mode))
+	defer C.free(_cstr_mode)
+	_gstr_mode := (*C.gchar)(unsafe.Pointer(_cstr_mode))
+	return C._g_io_channel_new_file(unsafe.Pointer(_gstr_filename), unsafe.Pointer(_gstr_mode), unsafe.Pointer(err))
+}
+
+func IOChannelUnixNew(fd C.int) *C.GIOChannel {
+	return C.g_io_channel_unix_new(fd)
+}
+
+func KeyFileNew() *C.GKeyFile {
+	return C.g_key_file_new()
+}
+
+func MainContextNew() *C.GMainContext {
+	return C.g_main_context_new()
+}
+
+func MainLoopNew(context *C.GMainContext, is_running C.gboolean) *C.GMainLoop {
+	return C.g_main_loop_new(context, is_running)
+}
+
+func RegexNew(pattern string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags, err unsafe.Pointer) *C.GRegex {
+	_cstr_pattern := unsafe.Pointer(C.CString(pattern))
+	defer C.free(_cstr_pattern)
+	_gstr_pattern := (*C.gchar)(unsafe.Pointer(_cstr_pattern))
+	return C._g_regex_new(unsafe.Pointer(_gstr_pattern), compile_options, match_options, unsafe.Pointer(err))
+}
+
+func SourceNew(source_funcs *C.GSourceFuncs, struct_size C.guint) *C.GSource {
+	return C.g_source_new(source_funcs, struct_size)
+}
+
+func ThreadNew(name string, func_ C.GThreadFunc, data C.gpointer) *C.GThread {
+	_cstr_name := unsafe.Pointer(C.CString(name))
+	defer C.free(_cstr_name)
+	_gstr_name := (*C.gchar)(unsafe.Pointer(_cstr_name))
+	return C._g_thread_new(unsafe.Pointer(_gstr_name), func_, data)
+}
+
+func ThreadTryNew(name string, func_ C.GThreadFunc, data C.gpointer, err unsafe.Pointer) *C.GThread {
+	_cstr_name := unsafe.Pointer(C.CString(name))
+	defer C.free(_cstr_name)
+	_gstr_name := (*C.gchar)(unsafe.Pointer(_cstr_name))
+	return C._g_thread_try_new(unsafe.Pointer(_gstr_name), func_, data, unsafe.Pointer(err))
+}
+
+func TimeZoneNew(identifier string) *C.GTimeZone {
+	_cstr_identifier := unsafe.Pointer(C.CString(identifier))
+	defer C.free(_cstr_identifier)
+	_gstr_identifier := (*C.gchar)(unsafe.Pointer(_cstr_identifier))
+	return C._g_time_zone_new(unsafe.Pointer(_gstr_identifier))
+}
+
+func TimeZoneNewLocal() *C.GTimeZone {
+	return C.g_time_zone_new_local()
+}
+
+func TimeZoneNewUtc() *C.GTimeZone {
+	return C.g_time_zone_new_utc()
+}
+
+//TODO g_variant_new
+
+func VariantNewArray(child_type *C.GVariantType, children unsafe.Pointer, n_children C.gsize) *C.GVariant {
+	return C._g_variant_new_array(unsafe.Pointer(child_type), unsafe.Pointer(children), n_children)
+}
+
+func VariantNewBoolean(value C.gboolean) *C.GVariant {
+	return C.g_variant_new_boolean(value)
+}
+
+func VariantNewByte(value C.guchar) *C.GVariant {
+	return C.g_variant_new_byte(value)
+}
+
+func VariantNewBytestring(string_ string) *C.GVariant {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	return C.g_variant_new_bytestring(_gstr_string_)
+}
+
+//Skipped g_variant_new_bytestring_array
+
+func VariantNewDictEntry(key *C.GVariant, value *C.GVariant) *C.GVariant {
+	return C.g_variant_new_dict_entry(key, value)
+}
+
+func VariantNewDouble(value C.gdouble) *C.GVariant {
+	return C.g_variant_new_double(value)
+}
+
+func VariantNewFixedArray(element_type *C.GVariantType, elements C.gconstpointer, n_elements C.gsize, element_size C.gsize) *C.GVariant {
+	return C._g_variant_new_fixed_array(unsafe.Pointer(element_type), elements, n_elements, element_size)
+}
+
+func VariantNewFromBytes(type_ *C.GVariantType, bytes *C.GBytes, trusted C.gboolean) *C.GVariant {
+	return C._g_variant_new_from_bytes(unsafe.Pointer(type_), bytes, trusted)
+}
+
+func VariantNewFromData(type_ *C.GVariantType, data C.gconstpointer, size C.gsize, trusted C.gboolean, notify C.GDestroyNotify, user_data C.gpointer) *C.GVariant {
+	return C._g_variant_new_from_data(unsafe.Pointer(type_), data, size, trusted, notify, user_data)
+}
+
+func VariantNewHandle(value C.gint32) *C.GVariant {
+	return C.g_variant_new_handle(value)
+}
+
+func VariantNewInt16(value C.gint16) *C.GVariant {
+	return C.g_variant_new_int16(value)
+}
+
+func VariantNewInt32(value C.gint32) *C.GVariant {
+	return C.g_variant_new_int32(value)
+}
+
+func VariantNewInt64(value C.gint64) *C.GVariant {
+	return C.g_variant_new_int64(value)
+}
+
+func VariantNewMaybe(child_type *C.GVariantType, child *C.GVariant) *C.GVariant {
+	return C._g_variant_new_maybe(unsafe.Pointer(child_type), child)
+}
+
+func VariantNewObjectPath(object_path string) *C.GVariant {
+	_cstr_object_path := unsafe.Pointer(C.CString(object_path))
+	defer C.free(_cstr_object_path)
+	_gstr_object_path := (*C.gchar)(unsafe.Pointer(_cstr_object_path))
+	return C._g_variant_new_object_path(unsafe.Pointer(_gstr_object_path))
+}
+
+//Skipped g_variant_new_objv
+
+//TODO g_variant_new_parsed
+
+func VariantNewParsedVa(format string, app *C.va_list) *C.GVariant {
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	return C._g_variant_new_parsed_va(unsafe.Pointer(_gstr_format), app)
+}
+
+func VariantNewSignature(signature string) *C.GVariant {
+	_cstr_signature := unsafe.Pointer(C.CString(signature))
+	defer C.free(_cstr_signature)
+	_gstr_signature := (*C.gchar)(unsafe.Pointer(_cstr_signature))
+	return C._g_variant_new_signature(unsafe.Pointer(_gstr_signature))
+}
+
+func VariantNewString(string_ string) *C.GVariant {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	return C._g_variant_new_string(unsafe.Pointer(_gstr_string_))
+}
+
+//Skipped g_variant_new_strv
+
+func VariantNewTuple(children unsafe.Pointer, n_children C.gsize) *C.GVariant {
+	return C._g_variant_new_tuple(unsafe.Pointer(children), n_children)
+}
+
+func VariantNewUint16(value C.guint16) *C.GVariant {
+	return C.g_variant_new_uint16(value)
+}
+
+func VariantNewUint32(value C.guint32) *C.GVariant {
+	return C.g_variant_new_uint32(value)
+}
+
+func VariantNewUint64(value C.guint64) *C.GVariant {
+	return C.g_variant_new_uint64(value)
+}
+
+func VariantNewVa(format_string string, endptr unsafe.Pointer, app *C.va_list) *C.GVariant {
+	_cstr_format_string := unsafe.Pointer(C.CString(format_string))
+	defer C.free(_cstr_format_string)
+	_gstr_format_string := (*C.gchar)(unsafe.Pointer(_cstr_format_string))
+	return C._g_variant_new_va(unsafe.Pointer(_gstr_format_string), unsafe.Pointer(endptr), app)
+}
+
+func VariantNewVariant(value *C.GVariant) *C.GVariant {
+	return C.g_variant_new_variant(value)
+}
+
+func VariantBuilderNew(type_ *C.GVariantType) *C.GVariantBuilder {
+	return C._g_variant_builder_new(unsafe.Pointer(type_))
+}
+
+func VariantTypeNew(type_string string) *C.GVariantType {
+	_cstr_type_string := unsafe.Pointer(C.CString(type_string))
+	defer C.free(_cstr_type_string)
+	_gstr_type_string := (*C.gchar)(unsafe.Pointer(_cstr_type_string))
+	return C._g_variant_type_new(unsafe.Pointer(_gstr_type_string))
+}
+
+func VariantTypeNewArray(element *C.GVariantType) *C.GVariantType {
+	return C._g_variant_type_new_array(unsafe.Pointer(element))
+}
+
+func VariantTypeNewDictEntry(key *C.GVariantType, value *C.GVariantType) *C.GVariantType {
+	return C._g_variant_type_new_dict_entry(unsafe.Pointer(key), unsafe.Pointer(value))
+}
+
+func VariantTypeNewMaybe(element *C.GVariantType) *C.GVariantType {
+	return C._g_variant_type_new_maybe(unsafe.Pointer(element))
+}
+
+//Skipped g_variant_type_new_tuple
 
 func Access(filename string, mode C.int) C.int {
 	_cstr_filename := unsafe.Pointer(C.CString(filename))

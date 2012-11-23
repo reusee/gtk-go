@@ -42,17 +42,16 @@ class Parser:
       #  print type(node).__name__, 'not handle'
       #  stop
 
-  def handleFunction(self, node):
+  def handleFunction(self, node, name_prefix = ''):
     info = Dict()
     info.name = node.name
     info.c_name = node.symbol
 
     info.skip = False
     if not node.deprecated is None or info.c_name in self.skip_symbols:
-      print 'skip', info.c_name
       info.skip = True
 
-    info.go_name = go_name = convert_func_name(info.name)
+    info.go_name = name_prefix + convert_func_name(info.name)
     info.parameters, info.not_implement, info.need_wrapper = convert_parameters(node.parameters)
     info.need_wrapper = info.need_wrapper and not info.not_implement
 
@@ -90,13 +89,7 @@ class Parser:
     c_type = node.ctype
     # constructors
     for constructor in node.constructors:
-      c_function_name = constructor.symbol
-      function_name = constructor.name
-      return_c_type = constructor.retval.type.ctype
-      for param in constructor.parameters:
-        arg_name = param.argname
-        arg_type = param.type.ctype
-      #TODO deal with parameter and return types, etc.
+      self.handleFunction(constructor, name)
     # static methods
     for function in node.static_methods:
       pass #TODO

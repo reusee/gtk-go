@@ -22,3 +22,8 @@ func TestStringMapping(t *testing.T) {
   fmt.Printf("%v\n", AsciiStrcasecmp("foo", "bar"))
   fmt.Printf("%v\n", AsciiStrcasecmp("bar", "foo"))
 }
+
+func TestConstructor(t *testing.T) {
+  DateNew()
+  KeyFileNew()
+}

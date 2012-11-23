@@ -8,7 +8,13 @@ g_slice_set_config
 g_assert_warning
 g_variant_get_gtype
 
-// manual implement macros
+// manually implement due to go's strict pointer type checking
+g_variant_new_bytestring_array
+g_variant_new_objv
+g_variant_new_strv
+g_variant_type_new_tuple
+
+// manually implement macros
 G_SQRT2
 G_PI_4
 G_PI_2
