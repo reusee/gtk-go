@@ -12,6 +12,18 @@ package gtk
 typedef long double longdouble;
 gboolean _true() { return TRUE; }
 gboolean _false() { return FALSE; }
+GTokenType _gtk_binding_entry_add_signal_from_string(GtkBindingSet* binding_set, void* signal_desc) {
+	return gtk_binding_entry_add_signal_from_string(binding_set, (const gchar*)(signal_desc));
+}
+void _gtk_binding_entry_add_signall(GtkBindingSet* binding_set, guint keyval, GdkModifierType modifiers, void* signal_name, GSList* binding_args) {
+	gtk_binding_entry_add_signall(binding_set, keyval, modifiers, (const gchar*)(signal_name), binding_args);
+}
+GtkBindingSet* _gtk_binding_set_find(void* set_name) {
+	return gtk_binding_set_find((const gchar*)(set_name));
+}
+GtkBindingSet* _gtk_binding_set_new(void* set_name) {
+	return gtk_binding_set_new((const gchar*)(set_name));
+}
 GtkPaperSize* _gtk_paper_size_new(void* name) {
 	return gtk_paper_size_new((const gchar*)(name));
 }
@@ -44,18 +56,6 @@ void _gtk_accelerator_parse(void* accelerator, guint* accelerator_key, GdkModifi
 }
 void _gtk_accelerator_parse_with_keycode(void* accelerator, guint* accelerator_key, void* accelerator_codes, GdkModifierType* accelerator_mods) {
 	gtk_accelerator_parse_with_keycode((const gchar*)(accelerator), accelerator_key, (guint**)(accelerator_codes), accelerator_mods);
-}
-GTokenType _gtk_binding_entry_add_signal_from_string(GtkBindingSet* binding_set, void* signal_desc) {
-	return gtk_binding_entry_add_signal_from_string(binding_set, (const gchar*)(signal_desc));
-}
-void _gtk_binding_entry_add_signall(GtkBindingSet* binding_set, guint keyval, GdkModifierType modifiers, void* signal_name, GSList* binding_args) {
-	gtk_binding_entry_add_signall(binding_set, keyval, modifiers, (const gchar*)(signal_name), binding_args);
-}
-GtkBindingSet* _gtk_binding_set_find(void* set_name) {
-	return gtk_binding_set_find((const gchar*)(set_name));
-}
-GtkBindingSet* _gtk_binding_set_new(void* set_name) {
-	return gtk_binding_set_new((const gchar*)(set_name));
 }
 void _gtk_drag_set_icon_name(GdkDragContext* context, void* icon_name, gint hot_x, gint hot_y) {
 	gtk_drag_set_icon_name(context, (const gchar*)(icon_name), hot_x, hot_y);
@@ -130,54 +130,160 @@ gboolean _gtk_tree_get_row_drag_data(GtkSelectionData* selection_data, void* tre
 import "C"
 import (
 	"unsafe"
+	"runtime"
 )
 
-func BorderNew() *C.GtkBorder {
-	return C.gtk_border_new()
+//TODO gtk_binding_entry_add_signal
+
+func BindingEntryAddSignalFromString(binding_set *BindingSet, signal_desc string) C.GTokenType {
+	_cp_binding_set_ := (*C.GtkBindingSet)(binding_set)
+	_cstr_signal_desc := unsafe.Pointer(C.CString(signal_desc))
+	defer C.free(_cstr_signal_desc)
+	_gstr_signal_desc := (*C.gchar)(unsafe.Pointer(_cstr_signal_desc))
+	return C._gtk_binding_entry_add_signal_from_string(_cp_binding_set_, unsafe.Pointer(_gstr_signal_desc))
 }
 
-func GradientNewLinear(x0 float64, y0 float64, x1 float64, y1 float64) *C.GtkGradient {
+func BindingEntryAddSignall(binding_set *BindingSet, keyval uint, modifiers C.GdkModifierType, signal_name string, binding_args *C.GSList) {
+	_cp_binding_set_ := (*C.GtkBindingSet)(binding_set)
+	_guint_keyval := C.guint(keyval)
+	_cstr_signal_name := unsafe.Pointer(C.CString(signal_name))
+	defer C.free(_cstr_signal_name)
+	_gstr_signal_name := (*C.gchar)(unsafe.Pointer(_cstr_signal_name))
+	C._gtk_binding_entry_add_signall(_cp_binding_set_, _guint_keyval, modifiers, unsafe.Pointer(_gstr_signal_name), binding_args)
+}
+
+func BindingEntryRemove(binding_set *BindingSet, keyval uint, modifiers C.GdkModifierType) {
+	_cp_binding_set_ := (*C.GtkBindingSet)(binding_set)
+	_guint_keyval := C.guint(keyval)
+	C.gtk_binding_entry_remove(_cp_binding_set_, _guint_keyval, modifiers)
+}
+
+func BindingEntrySkip(binding_set *BindingSet, keyval uint, modifiers C.GdkModifierType) {
+	_cp_binding_set_ := (*C.GtkBindingSet)(binding_set)
+	_guint_keyval := C.guint(keyval)
+	C.gtk_binding_entry_skip(_cp_binding_set_, _guint_keyval, modifiers)
+}
+
+func BindingSetByClass(object_class unsafe.Pointer) *BindingSet {
+	_gpointer_object_class := (C.gpointer)(object_class)
+	_c_return_ := C.gtk_binding_set_by_class(_gpointer_object_class)
+	_go_return_ := (*BindingSet)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **BindingSet) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
+}
+
+func BindingSetFind(set_name string) *BindingSet {
+	_cstr_set_name := unsafe.Pointer(C.CString(set_name))
+	defer C.free(_cstr_set_name)
+	_gstr_set_name := (*C.gchar)(unsafe.Pointer(_cstr_set_name))
+	_c_return_ := C._gtk_binding_set_find(unsafe.Pointer(_gstr_set_name))
+	_go_return_ := (*BindingSet)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **BindingSet) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
+}
+
+func BindingSetNew(set_name string) *BindingSet {
+	_cstr_set_name := unsafe.Pointer(C.CString(set_name))
+	defer C.free(_cstr_set_name)
+	_gstr_set_name := (*C.gchar)(unsafe.Pointer(_cstr_set_name))
+	_c_return_ := C._gtk_binding_set_new(unsafe.Pointer(_gstr_set_name))
+	_go_return_ := (*BindingSet)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **BindingSet) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
+}
+
+func BorderNew() *Border {
+	_c_return_ := C.gtk_border_new()
+	_go_return_ := (*Border)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **Border) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
+}
+
+func GradientNewLinear(x0 float64, y0 float64, x1 float64, y1 float64) *Gradient {
 	_gdouble_x0 := C.gdouble(x0)
 	_gdouble_y0 := C.gdouble(y0)
 	_gdouble_x1 := C.gdouble(x1)
 	_gdouble_y1 := C.gdouble(y1)
-	return C.gtk_gradient_new_linear(_gdouble_x0, _gdouble_y0, _gdouble_x1, _gdouble_y1)
+	_c_return_ := C.gtk_gradient_new_linear(_gdouble_x0, _gdouble_y0, _gdouble_x1, _gdouble_y1)
+	_go_return_ := (*Gradient)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **Gradient) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func GradientNewRadial(x0 float64, y0 float64, radius0 float64, x1 float64, y1 float64, radius1 float64) *C.GtkGradient {
+func GradientNewRadial(x0 float64, y0 float64, radius0 float64, x1 float64, y1 float64, radius1 float64) *Gradient {
 	_gdouble_x0 := C.gdouble(x0)
 	_gdouble_y0 := C.gdouble(y0)
 	_gdouble_radius0 := C.gdouble(radius0)
 	_gdouble_x1 := C.gdouble(x1)
 	_gdouble_y1 := C.gdouble(y1)
 	_gdouble_radius1 := C.gdouble(radius1)
-	return C.gtk_gradient_new_radial(_gdouble_x0, _gdouble_y0, _gdouble_radius0, _gdouble_x1, _gdouble_y1, _gdouble_radius1)
+	_c_return_ := C.gtk_gradient_new_radial(_gdouble_x0, _gdouble_y0, _gdouble_radius0, _gdouble_x1, _gdouble_y1, _gdouble_radius1)
+	_go_return_ := (*Gradient)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **Gradient) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func IconInfoNewForPixbuf(icon_theme *C.GtkIconTheme, pixbuf *C.GdkPixbuf) *C.GtkIconInfo {
-	return C.gtk_icon_info_new_for_pixbuf(icon_theme, pixbuf)
+func IconInfoNewForPixbuf(icon_theme *C.GtkIconTheme, pixbuf *C.GdkPixbuf) *IconInfo {
+	_c_return_ := C.gtk_icon_info_new_for_pixbuf(icon_theme, pixbuf)
+	_go_return_ := (*IconInfo)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **IconInfo) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func IconSetNew() *C.GtkIconSet {
-	return C.gtk_icon_set_new()
+func IconSetNew() *IconSet {
+	_c_return_ := C.gtk_icon_set_new()
+	_go_return_ := (*IconSet)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **IconSet) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func IconSetNewFromPixbuf(pixbuf *C.GdkPixbuf) *C.GtkIconSet {
-	return C.gtk_icon_set_new_from_pixbuf(pixbuf)
+func IconSetNewFromPixbuf(pixbuf *C.GdkPixbuf) *IconSet {
+	_c_return_ := C.gtk_icon_set_new_from_pixbuf(pixbuf)
+	_go_return_ := (*IconSet)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **IconSet) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func IconSourceNew() *C.GtkIconSource {
-	return C.gtk_icon_source_new()
+func IconSourceNew() *IconSource {
+	_c_return_ := C.gtk_icon_source_new()
+	_go_return_ := (*IconSource)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **IconSource) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func PaperSizeNew(name string) *C.GtkPaperSize {
+func PaperSizeNew(name string) *PaperSize {
 	_cstr_name := unsafe.Pointer(C.CString(name))
 	defer C.free(_cstr_name)
 	_gstr_name := (*C.gchar)(unsafe.Pointer(_cstr_name))
-	return C._gtk_paper_size_new(unsafe.Pointer(_gstr_name))
+	_c_return_ := C._gtk_paper_size_new(unsafe.Pointer(_gstr_name))
+	_go_return_ := (*PaperSize)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **PaperSize) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit C.GtkUnit) *C.GtkPaperSize {
+func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit C.GtkUnit) *PaperSize {
 	_cstr_name := unsafe.Pointer(C.CString(name))
 	defer C.free(_cstr_name)
 	_gstr_name := (*C.gchar)(unsafe.Pointer(_cstr_name))
@@ -186,17 +292,27 @@ func PaperSizeNewCustom(name string, display_name string, width float64, height 
 	_gstr_display_name := (*C.gchar)(unsafe.Pointer(_cstr_display_name))
 	_gdouble_width := C.gdouble(width)
 	_gdouble_height := C.gdouble(height)
-	return C._gtk_paper_size_new_custom(unsafe.Pointer(_gstr_name), unsafe.Pointer(_gstr_display_name), _gdouble_width, _gdouble_height, unit)
+	_c_return_ := C._gtk_paper_size_new_custom(unsafe.Pointer(_gstr_name), unsafe.Pointer(_gstr_display_name), _gdouble_width, _gdouble_height, unit)
+	_go_return_ := (*PaperSize)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **PaperSize) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string, err unsafe.Pointer) *C.GtkPaperSize {
+func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string, err unsafe.Pointer) *PaperSize {
 	_cstr_group_name := unsafe.Pointer(C.CString(group_name))
 	defer C.free(_cstr_group_name)
 	_gstr_group_name := (*C.gchar)(unsafe.Pointer(_cstr_group_name))
-	return C._gtk_paper_size_new_from_key_file(key_file, unsafe.Pointer(_gstr_group_name), unsafe.Pointer(err))
+	_c_return_ := C._gtk_paper_size_new_from_key_file(key_file, unsafe.Pointer(_gstr_group_name), unsafe.Pointer(err))
+	_go_return_ := (*PaperSize)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **PaperSize) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func PaperSizeNewFromPpd(ppd_name string, ppd_display_name string, width float64, height float64) *C.GtkPaperSize {
+func PaperSizeNewFromPpd(ppd_name string, ppd_display_name string, width float64, height float64) *PaperSize {
 	_cstr_ppd_name := unsafe.Pointer(C.CString(ppd_name))
 	defer C.free(_cstr_ppd_name)
 	_gstr_ppd_name := (*C.gchar)(unsafe.Pointer(_cstr_ppd_name))
@@ -205,92 +321,212 @@ func PaperSizeNewFromPpd(ppd_name string, ppd_display_name string, width float64
 	_gstr_ppd_display_name := (*C.gchar)(unsafe.Pointer(_cstr_ppd_display_name))
 	_gdouble_width := C.gdouble(width)
 	_gdouble_height := C.gdouble(height)
-	return C._gtk_paper_size_new_from_ppd(unsafe.Pointer(_gstr_ppd_name), unsafe.Pointer(_gstr_ppd_display_name), _gdouble_width, _gdouble_height)
+	_c_return_ := C._gtk_paper_size_new_from_ppd(unsafe.Pointer(_gstr_ppd_name), unsafe.Pointer(_gstr_ppd_display_name), _gdouble_width, _gdouble_height)
+	_go_return_ := (*PaperSize)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **PaperSize) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func RequisitionNew() *C.GtkRequisition {
-	return C.gtk_requisition_new()
+func PaperSizeGetDefault() string {
+	return gcharp2string(C.gtk_paper_size_get_default())
 }
 
-func SymbolicColorNewAlpha(color *C.GtkSymbolicColor, factor float64) *C.GtkSymbolicColor {
+func PaperSizeGetPaperSizes(include_custom bool) *C.GList {
+	_gbool_include_custom := C._false()
+	if include_custom { _gbool_include_custom = C._true() }
+	return C.gtk_paper_size_get_paper_sizes(_gbool_include_custom)
+}
+
+func RequisitionNew() *Requisition {
+	_c_return_ := C.gtk_requisition_new()
+	_go_return_ := (*Requisition)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **Requisition) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
+}
+
+func SymbolicColorNewAlpha(color *SymbolicColor, factor float64) *SymbolicColor {
+	_cp_color_ := (*C.GtkSymbolicColor)(color)
 	_gdouble_factor := C.gdouble(factor)
-	return C.gtk_symbolic_color_new_alpha(color, _gdouble_factor)
+	_c_return_ := C.gtk_symbolic_color_new_alpha(_cp_color_, _gdouble_factor)
+	_go_return_ := (*SymbolicColor)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **SymbolicColor) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func SymbolicColorNewLiteral(color *C.GdkRGBA) *C.GtkSymbolicColor {
-	return C._gtk_symbolic_color_new_literal(unsafe.Pointer(color))
+func SymbolicColorNewLiteral(color *C.GdkRGBA) *SymbolicColor {
+	_c_return_ := C._gtk_symbolic_color_new_literal(unsafe.Pointer(color))
+	_go_return_ := (*SymbolicColor)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **SymbolicColor) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func SymbolicColorNewMix(color1 *C.GtkSymbolicColor, color2 *C.GtkSymbolicColor, factor float64) *C.GtkSymbolicColor {
+func SymbolicColorNewMix(color1 *SymbolicColor, color2 *SymbolicColor, factor float64) *SymbolicColor {
+	_cp_color1_ := (*C.GtkSymbolicColor)(color1)
+	_cp_color2_ := (*C.GtkSymbolicColor)(color2)
 	_gdouble_factor := C.gdouble(factor)
-	return C.gtk_symbolic_color_new_mix(color1, color2, _gdouble_factor)
+	_c_return_ := C.gtk_symbolic_color_new_mix(_cp_color1_, _cp_color2_, _gdouble_factor)
+	_go_return_ := (*SymbolicColor)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **SymbolicColor) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func SymbolicColorNewName(name string) *C.GtkSymbolicColor {
+func SymbolicColorNewName(name string) *SymbolicColor {
 	_cstr_name := unsafe.Pointer(C.CString(name))
 	defer C.free(_cstr_name)
 	_gstr_name := (*C.gchar)(unsafe.Pointer(_cstr_name))
-	return C._gtk_symbolic_color_new_name(unsafe.Pointer(_gstr_name))
+	_c_return_ := C._gtk_symbolic_color_new_name(unsafe.Pointer(_gstr_name))
+	_go_return_ := (*SymbolicColor)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **SymbolicColor) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func SymbolicColorNewShade(color *C.GtkSymbolicColor, factor float64) *C.GtkSymbolicColor {
+func SymbolicColorNewShade(color *SymbolicColor, factor float64) *SymbolicColor {
+	_cp_color_ := (*C.GtkSymbolicColor)(color)
 	_gdouble_factor := C.gdouble(factor)
-	return C.gtk_symbolic_color_new_shade(color, _gdouble_factor)
+	_c_return_ := C.gtk_symbolic_color_new_shade(_cp_color_, _gdouble_factor)
+	_go_return_ := (*SymbolicColor)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **SymbolicColor) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func SymbolicColorNewWin32(theme_class string, id int) *C.GtkSymbolicColor {
+func SymbolicColorNewWin32(theme_class string, id int) *SymbolicColor {
 	_cstr_theme_class := unsafe.Pointer(C.CString(theme_class))
 	defer C.free(_cstr_theme_class)
 	_gstr_theme_class := (*C.gchar)(unsafe.Pointer(_cstr_theme_class))
 	_gint_id := C.gint(id)
-	return C._gtk_symbolic_color_new_win32(unsafe.Pointer(_gstr_theme_class), _gint_id)
+	_c_return_ := C._gtk_symbolic_color_new_win32(unsafe.Pointer(_gstr_theme_class), _gint_id)
+	_go_return_ := (*SymbolicColor)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **SymbolicColor) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TargetEntryNew(target string, flags uint, info uint) *C.GtkTargetEntry {
+func TargetEntryNew(target string, flags uint, info uint) *TargetEntry {
 	_cstr_target := unsafe.Pointer(C.CString(target))
 	defer C.free(_cstr_target)
 	_gstr_target := (*C.gchar)(unsafe.Pointer(_cstr_target))
 	_guint_flags := C.guint(flags)
 	_guint_info := C.guint(info)
-	return C._gtk_target_entry_new(unsafe.Pointer(_gstr_target), _guint_flags, _guint_info)
+	_c_return_ := C._gtk_target_entry_new(unsafe.Pointer(_gstr_target), _guint_flags, _guint_info)
+	_go_return_ := (*TargetEntry)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TargetEntry) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TargetListNew(targets *C.GtkTargetEntry, ntargets uint) *C.GtkTargetList {
+func TargetListNew(targets *TargetEntry, ntargets uint) *TargetList {
+	_cp_targets_ := (*C.GtkTargetEntry)(targets)
 	_guint_ntargets := C.guint(ntargets)
-	return C.gtk_target_list_new(targets, _guint_ntargets)
+	_c_return_ := C.gtk_target_list_new(_cp_targets_, _guint_ntargets)
+	_go_return_ := (*TargetList)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TargetList) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TextAttributesNew() *C.GtkTextAttributes {
-	return C.gtk_text_attributes_new()
+func TextAttributesNew() *TextAttributes {
+	_c_return_ := C.gtk_text_attributes_new()
+	_go_return_ := (*TextAttributes)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TextAttributes) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TreePathNew() *C.GtkTreePath {
-	return C.gtk_tree_path_new()
+func TreePathNew() *TreePath {
+	_c_return_ := C.gtk_tree_path_new()
+	_go_return_ := (*TreePath)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TreePath) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TreePathNewFirst() *C.GtkTreePath {
-	return C.gtk_tree_path_new_first()
+func TreePathNewFirst() *TreePath {
+	_c_return_ := C.gtk_tree_path_new_first()
+	_go_return_ := (*TreePath)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TreePath) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
 //TODO gtk_tree_path_new_from_indices
 
-func TreePathNewFromString(path string) *C.GtkTreePath {
+func TreePathNewFromString(path string) *TreePath {
 	_cstr_path := unsafe.Pointer(C.CString(path))
 	defer C.free(_cstr_path)
 	_gstr_path := (*C.gchar)(unsafe.Pointer(_cstr_path))
-	return C._gtk_tree_path_new_from_string(unsafe.Pointer(_gstr_path))
+	_c_return_ := C._gtk_tree_path_new_from_string(unsafe.Pointer(_gstr_path))
+	_go_return_ := (*TreePath)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TreePath) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TreeRowReferenceNew(model *C.GtkTreeModel, path *C.GtkTreePath) *C.GtkTreeRowReference {
-	return C.gtk_tree_row_reference_new(model, path)
+func TreeRowReferenceNew(model *C.GtkTreeModel, path *TreePath) *TreeRowReference {
+	_cp_path_ := (*C.GtkTreePath)(path)
+	_c_return_ := C.gtk_tree_row_reference_new(model, _cp_path_)
+	_go_return_ := (*TreeRowReference)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TreeRowReference) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func TreeRowReferenceNewProxy(proxy *C.GObject, model *C.GtkTreeModel, path *C.GtkTreePath) *C.GtkTreeRowReference {
-	return C.gtk_tree_row_reference_new_proxy(proxy, model, path)
+func TreeRowReferenceNewProxy(proxy *C.GObject, model *C.GtkTreeModel, path *TreePath) *TreeRowReference {
+	_cp_path_ := (*C.GtkTreePath)(path)
+	_c_return_ := C.gtk_tree_row_reference_new_proxy(proxy, model, _cp_path_)
+	_go_return_ := (*TreeRowReference)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TreeRowReference) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
-func WidgetPathNew() *C.GtkWidgetPath {
-	return C.gtk_widget_path_new()
+func TreeRowReferenceDeleted(proxy *C.GObject, path *TreePath) {
+	_cp_path_ := (*C.GtkTreePath)(path)
+	C.gtk_tree_row_reference_deleted(proxy, _cp_path_)
+}
+
+func TreeRowReferenceInserted(proxy *C.GObject, path *TreePath) {
+	_cp_path_ := (*C.GtkTreePath)(path)
+	C.gtk_tree_row_reference_inserted(proxy, _cp_path_)
+}
+
+func TreeRowReferenceReordered(proxy *C.GObject, path *TreePath, iter *TreeIter, new_order *int) {
+	_cp_path_ := (*C.GtkTreePath)(path)
+	_cp_iter_ := (*C.GtkTreeIter)(iter)
+	_c_gint_new_order := C.gint(*new_order)
+	_cp_gint_new_order := (*C.gint)(&_c_gint_new_order)
+	C.gtk_tree_row_reference_reordered(proxy, _cp_path_, _cp_iter_, _cp_gint_new_order)
+}
+
+func WidgetPathNew() *WidgetPath {
+	_c_return_ := C.gtk_widget_path_new()
+	_go_return_ := (*WidgetPath)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **WidgetPath) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
 func AccelGroupsActivate(object *C.GObject, accel_key uint, accel_mods C.GdkModifierType) bool {
@@ -359,50 +595,6 @@ func AlternativeDialogButtonOrder(screen *C.GdkScreen) bool {
 	return gboolean2bool(C.gtk_alternative_dialog_button_order(screen))
 }
 
-func BindingEntryAddSignalFromString(binding_set *C.GtkBindingSet, signal_desc string) C.GTokenType {
-	_cstr_signal_desc := unsafe.Pointer(C.CString(signal_desc))
-	defer C.free(_cstr_signal_desc)
-	_gstr_signal_desc := (*C.gchar)(unsafe.Pointer(_cstr_signal_desc))
-	return C._gtk_binding_entry_add_signal_from_string(binding_set, unsafe.Pointer(_gstr_signal_desc))
-}
-
-func BindingEntryAddSignall(binding_set *C.GtkBindingSet, keyval uint, modifiers C.GdkModifierType, signal_name string, binding_args *C.GSList) {
-	_guint_keyval := C.guint(keyval)
-	_cstr_signal_name := unsafe.Pointer(C.CString(signal_name))
-	defer C.free(_cstr_signal_name)
-	_gstr_signal_name := (*C.gchar)(unsafe.Pointer(_cstr_signal_name))
-	C._gtk_binding_entry_add_signall(binding_set, _guint_keyval, modifiers, unsafe.Pointer(_gstr_signal_name), binding_args)
-}
-
-func BindingEntryRemove(binding_set *C.GtkBindingSet, keyval uint, modifiers C.GdkModifierType) {
-	_guint_keyval := C.guint(keyval)
-	C.gtk_binding_entry_remove(binding_set, _guint_keyval, modifiers)
-}
-
-func BindingEntrySkip(binding_set *C.GtkBindingSet, keyval uint, modifiers C.GdkModifierType) {
-	_guint_keyval := C.guint(keyval)
-	C.gtk_binding_entry_skip(binding_set, _guint_keyval, modifiers)
-}
-
-func BindingSetByClass(object_class unsafe.Pointer) *C.GtkBindingSet {
-	_gpointer_object_class := (C.gpointer)(object_class)
-	return C.gtk_binding_set_by_class(_gpointer_object_class)
-}
-
-func BindingSetFind(set_name string) *C.GtkBindingSet {
-	_cstr_set_name := unsafe.Pointer(C.CString(set_name))
-	defer C.free(_cstr_set_name)
-	_gstr_set_name := (*C.gchar)(unsafe.Pointer(_cstr_set_name))
-	return C._gtk_binding_set_find(unsafe.Pointer(_gstr_set_name))
-}
-
-func BindingSetNew(set_name string) *C.GtkBindingSet {
-	_cstr_set_name := unsafe.Pointer(C.CString(set_name))
-	defer C.free(_cstr_set_name)
-	_gstr_set_name := (*C.gchar)(unsafe.Pointer(_cstr_set_name))
-	return C._gtk_binding_set_new(unsafe.Pointer(_gstr_set_name))
-}
-
 func BindingsActivate(object *C.GObject, keyval uint, modifiers C.GdkModifierType) bool {
 	_guint_keyval := C.guint(keyval)
 	return gboolean2bool(C.gtk_bindings_activate(object, _guint_keyval, modifiers))
@@ -449,10 +641,11 @@ func DisableSetlocale() {
 	C.gtk_disable_setlocale()
 }
 
-func DistributeNaturalAllocation(extra_space int, n_requested_sizes uint, sizes *C.GtkRequestedSize) int {
+func DistributeNaturalAllocation(extra_space int, n_requested_sizes uint, sizes *RequestedSize) int {
 	_gint_extra_space := C.gint(extra_space)
 	_guint_n_requested_sizes := C.guint(n_requested_sizes)
-	return gint2int(C.gtk_distribute_natural_allocation(_gint_extra_space, _guint_n_requested_sizes, sizes))
+	_cp_sizes_ := (*C.GtkRequestedSize)(sizes)
+	return gint2int(C.gtk_distribute_natural_allocation(_gint_extra_space, _guint_n_requested_sizes, _cp_sizes_))
 }
 
 func DragFinish(context *C.GdkDragContext, success bool, del bool, time_ uint32) {
@@ -721,16 +914,6 @@ func MainQuit() {
 
 //Skipped gtk_paint_vline
 
-func PaperSizeGetDefault() string {
-	return gcharp2string(C.gtk_paper_size_get_default())
-}
-
-func PaperSizeGetPaperSizes(include_custom bool) *C.GList {
-	_gbool_include_custom := C._false()
-	if include_custom { _gbool_include_custom = C._true() }
-	return C.gtk_paper_size_get_paper_sizes(_gbool_include_custom)
-}
-
 func ParseArgs(argc *C.int, argv unsafe.Pointer) bool {
 	return gboolean2bool(C._gtk_parse_args(argc, unsafe.Pointer(argv)))
 }
@@ -910,8 +1093,9 @@ func RenderIcon(context *C.GtkStyleContext, cr *C.cairo_t, pixbuf *C.GdkPixbuf, 
 	C.gtk_render_icon(context, cr, pixbuf, _gdouble_x, _gdouble_y)
 }
 
-func RenderIconPixbuf(context *C.GtkStyleContext, source *C.GtkIconSource, size C.GtkIconSize) *C.GdkPixbuf {
-	return C._gtk_render_icon_pixbuf(context, unsafe.Pointer(source), size)
+func RenderIconPixbuf(context *C.GtkStyleContext, source *IconSource, size C.GtkIconSize) *C.GdkPixbuf {
+	_cp_source_ := (*C.GtkIconSource)(source)
+	return C._gtk_render_icon_pixbuf(context, unsafe.Pointer(_cp_source_), size)
 }
 
 func RenderInsertionCursor(context *C.GtkStyleContext, cr *C.cairo_t, x float64, y float64, layout *C.PangoLayout, index C.int, direction C.PangoDirection) {
@@ -968,9 +1152,10 @@ func SelectionAddTarget(widget *C.GtkWidget, selection C.GdkAtom, target C.GdkAt
 	C.gtk_selection_add_target(widget, selection, target, _guint_info)
 }
 
-func SelectionAddTargets(widget *C.GtkWidget, selection C.GdkAtom, targets *C.GtkTargetEntry, ntargets uint) {
+func SelectionAddTargets(widget *C.GtkWidget, selection C.GdkAtom, targets *TargetEntry, ntargets uint) {
+	_cp_targets_ := (*C.GtkTargetEntry)(targets)
 	_guint_ntargets := C.guint(ntargets)
-	C.gtk_selection_add_targets(widget, selection, targets, _guint_ntargets)
+	C.gtk_selection_add_targets(widget, selection, _cp_targets_, _guint_ntargets)
 }
 
 func SelectionClearTargets(widget *C.GtkWidget, selection C.GdkAtom) {
@@ -1011,25 +1196,28 @@ func ShowUri(screen *C.GdkScreen, uri string, timestamp uint32, err unsafe.Point
 	return gboolean2bool(C._gtk_show_uri(screen, unsafe.Pointer(_gstr_uri), _guint32_timestamp, unsafe.Pointer(err)))
 }
 
-func StockAdd(items *C.GtkStockItem, n_items uint) {
+func StockAdd(items *StockItem, n_items uint) {
+	_cp_items_ := (*C.GtkStockItem)(items)
 	_guint_n_items := C.guint(n_items)
-	C.gtk_stock_add(items, _guint_n_items)
+	C.gtk_stock_add(_cp_items_, _guint_n_items)
 }
 
-func StockAddStatic(items *C.GtkStockItem, n_items uint) {
+func StockAddStatic(items *StockItem, n_items uint) {
+	_cp_items_ := (*C.GtkStockItem)(items)
 	_guint_n_items := C.guint(n_items)
-	C.gtk_stock_add_static(items, _guint_n_items)
+	C.gtk_stock_add_static(_cp_items_, _guint_n_items)
 }
 
 func StockListIds() *C.GSList {
 	return C.gtk_stock_list_ids()
 }
 
-func StockLookup(stock_id string, item *C.GtkStockItem) bool {
+func StockLookup(stock_id string, item *StockItem) bool {
 	_cstr_stock_id := unsafe.Pointer(C.CString(stock_id))
 	defer C.free(_cstr_stock_id)
 	_gstr_stock_id := (*C.gchar)(unsafe.Pointer(_cstr_stock_id))
-	return gboolean2bool(C._gtk_stock_lookup(unsafe.Pointer(_gstr_stock_id), item))
+	_cp_item_ := (*C.GtkStockItem)(item)
+	return gboolean2bool(C._gtk_stock_lookup(unsafe.Pointer(_gstr_stock_id), _cp_item_))
 }
 
 func StockSetTranslateFunc(domain string, func_ C.GtkTranslateFunc, data unsafe.Pointer, notify C.GDestroyNotify) {
@@ -1040,15 +1228,22 @@ func StockSetTranslateFunc(domain string, func_ C.GtkTranslateFunc, data unsafe.
 	C._gtk_stock_set_translate_func(unsafe.Pointer(_gstr_domain), func_, _gpointer_data, notify)
 }
 
-func TargetTableFree(targets *C.GtkTargetEntry, n_targets int) {
+func TargetTableFree(targets *TargetEntry, n_targets int) {
+	_cp_targets_ := (*C.GtkTargetEntry)(targets)
 	_gint_n_targets := C.gint(n_targets)
-	C.gtk_target_table_free(targets, _gint_n_targets)
+	C.gtk_target_table_free(_cp_targets_, _gint_n_targets)
 }
 
-func TargetTableNewFromList(list *C.GtkTargetList, n_targets *int) *C.GtkTargetEntry {
+func TargetTableNewFromList(list *TargetList, n_targets *int) *TargetEntry {
+	_cp_list_ := (*C.GtkTargetList)(list)
 	_c_gint_n_targets := C.gint(*n_targets)
 	_cp_gint_n_targets := (*C.gint)(&_c_gint_n_targets)
-	return C.gtk_target_table_new_from_list(list, _cp_gint_n_targets)
+	_c_return_ := C.gtk_target_table_new_from_list(_cp_list_, _cp_gint_n_targets)
+	_go_return_ := (*TargetEntry)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **TargetEntry) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
 }
 
 func TargetsIncludeImage(targets *C.GdkAtom, n_targets int, writable bool) bool {
@@ -1153,26 +1348,15 @@ func TestWidgetSendKey(widget *C.GtkWidget, keyval uint, modifiers C.GdkModifier
 	return gboolean2bool(C.gtk_test_widget_send_key(widget, _guint_keyval, modifiers))
 }
 
-func TreeGetRowDragData(selection_data *C.GtkSelectionData, tree_model unsafe.Pointer, path unsafe.Pointer) bool {
-	return gboolean2bool(C._gtk_tree_get_row_drag_data(selection_data, unsafe.Pointer(tree_model), unsafe.Pointer(path)))
+func TreeGetRowDragData(selection_data *SelectionData, tree_model unsafe.Pointer, path unsafe.Pointer) bool {
+	_cp_selection_data_ := (*C.GtkSelectionData)(selection_data)
+	return gboolean2bool(C._gtk_tree_get_row_drag_data(_cp_selection_data_, unsafe.Pointer(tree_model), unsafe.Pointer(path)))
 }
 
-func TreeRowReferenceDeleted(proxy *C.GObject, path *C.GtkTreePath) {
-	C.gtk_tree_row_reference_deleted(proxy, path)
-}
-
-func TreeRowReferenceInserted(proxy *C.GObject, path *C.GtkTreePath) {
-	C.gtk_tree_row_reference_inserted(proxy, path)
-}
-
-func TreeRowReferenceReordered(proxy *C.GObject, path *C.GtkTreePath, iter *C.GtkTreeIter, new_order *int) {
-	_c_gint_new_order := C.gint(*new_order)
-	_cp_gint_new_order := (*C.gint)(&_c_gint_new_order)
-	C.gtk_tree_row_reference_reordered(proxy, path, iter, _cp_gint_new_order)
-}
-
-func TreeSetRowDragData(selection_data *C.GtkSelectionData, tree_model *C.GtkTreeModel, path *C.GtkTreePath) bool {
-	return gboolean2bool(C.gtk_tree_set_row_drag_data(selection_data, tree_model, path))
+func TreeSetRowDragData(selection_data *SelectionData, tree_model *C.GtkTreeModel, path *TreePath) bool {
+	_cp_selection_data_ := (*C.GtkSelectionData)(selection_data)
+	_cp_path_ := (*C.GtkTreePath)(path)
+	return gboolean2bool(C.gtk_tree_set_row_drag_data(_cp_selection_data_, tree_model, _cp_path_))
 }
 
 func True() bool {
@@ -1846,11 +2030,11 @@ const STYLE_REGION_COLUMN_HEADER = C.GTK_STYLE_REGION_COLUMN_HEADER
 const STYLE_REGION_ROW = C.GTK_STYLE_REGION_ROW
 const STYLE_REGION_TAB = C.GTK_STYLE_REGION_TAB
 const TEXT_VIEW_PRIORITY_VALIDATE = C.GTK_TEXT_VIEW_PRIORITY_VALIDATE
-func gboolean2bool(b C.gboolean) bool {
-  return b == C._true()
-}
 func gcharp2string(str *C.gchar) string {
   return C.GoString((*C.char)(str))
+}
+func gboolean2bool(b C.gboolean) bool {
+  return b == C._true()
 }
 func gint2int(i C.gint) int {
   return int(i)
@@ -1861,3 +2045,385 @@ func guint322uint32(i C.guint32) uint32 {
 func guint2uint(i C.guint) uint {
   return uint(i)
 }
+type ToolbarClass C.GtkToolbarClass
+type ListStoreClass C.GtkListStoreClass
+type InfoBarPrivate C.GtkInfoBarPrivate
+type CellRendererSpinnerPrivate C.GtkCellRendererSpinnerPrivate
+type CellRendererClass C.GtkCellRendererClass
+type RadioMenuItemClass C.GtkRadioMenuItemClass
+type OverlayClass C.GtkOverlayClass
+type FixedClass C.GtkFixedClass
+type FramePrivate C.GtkFramePrivate
+type SwitchClass C.GtkSwitchClass
+type SelectionData C.GtkSelectionData
+type MenuItemClass C.GtkMenuItemClass
+type ToggleActionClass C.GtkToggleActionClass
+type SettingsValue C.GtkSettingsValue
+type CellLayoutIface C.GtkCellLayoutIface
+type ToolItemGroupPrivate C.GtkToolItemGroupPrivate
+type TextViewClass C.GtkTextViewClass
+type FontChooserDialogPrivate C.GtkFontChooserDialogPrivate
+type HSVPrivate C.GtkHSVPrivate
+type TextAppearance C.GtkTextAppearance
+type StatusbarPrivate C.GtkStatusbarPrivate
+type InvisibleClass C.GtkInvisibleClass
+type TearoffMenuItemPrivate C.GtkTearoffMenuItemPrivate
+type FontSelectionDialogPrivate C.GtkFontSelectionDialogPrivate
+type ComboBoxPrivate C.GtkComboBoxPrivate
+type ColorButtonPrivate C.GtkColorButtonPrivate
+type CellRendererSpinClass C.GtkCellRendererSpinClass
+type RecentChooserWidgetPrivate C.GtkRecentChooserWidgetPrivate
+type ComboBoxTextPrivate C.GtkComboBoxTextPrivate
+type TreeStorePrivate C.GtkTreeStorePrivate
+type ActionClass C.GtkActionClass
+type RangePrivate C.GtkRangePrivate
+type StatusbarClass C.GtkStatusbarClass
+type ColorSelectionDialogClass C.GtkColorSelectionDialogClass
+type FontSelectionClass C.GtkFontSelectionClass
+type EditableInterface C.GtkEditableInterface
+type TextMarkClass C.GtkTextMarkClass
+type ToggleActionPrivate C.GtkToggleActionPrivate
+type CellRendererClassPrivate C.GtkCellRendererClassPrivate
+type FrameClass C.GtkFrameClass
+type ToolItemPrivate C.GtkToolItemPrivate
+type PanedClass C.GtkPanedClass
+type TableChild C.GtkTableChild
+type EntryClass C.GtkEntryClass
+type ColorChooserDialogPrivate C.GtkColorChooserDialogPrivate
+type RadioActionPrivate C.GtkRadioActionPrivate
+type CssProviderPrivate C.GtkCssProviderPrivate
+type EntryCompletionClass C.GtkEntryCompletionClass
+type BoxClass C.GtkBoxClass
+type TreeStoreClass C.GtkTreeStoreClass
+type CellRendererAccelPrivate C.GtkCellRendererAccelPrivate
+type AboutDialogPrivate C.GtkAboutDialogPrivate
+type TreeModelSortPrivate C.GtkTreeModelSortPrivate
+type ApplicationWindowPrivate C.GtkApplicationWindowPrivate
+type VScaleClass C.GtkVScaleClass
+type TreeModelIface C.GtkTreeModelIface
+type TextTagTableClass C.GtkTextTagTableClass
+type ToolButtonClass C.GtkToolButtonClass
+type ToolItemGroupClass C.GtkToolItemGroupClass
+type OverlayPrivate C.GtkOverlayPrivate
+type HandleBoxPrivate C.GtkHandleBoxPrivate
+type CellRendererAccelClass C.GtkCellRendererAccelClass
+type ColorSelectionPrivate C.GtkColorSelectionPrivate
+type HButtonBoxClass C.GtkHButtonBoxClass
+type CellRendererPrivate C.GtkCellRendererPrivate
+type AppChooserButtonPrivate C.GtkAppChooserButtonPrivate
+type CellViewClass C.GtkCellViewClass
+type NotebookPrivate C.GtkNotebookPrivate
+type BindingEntry C.GtkBindingEntry
+type ImagePrivate C.GtkImagePrivate
+type IconFactoryClass C.GtkIconFactoryClass
+type TargetList C.GtkTargetList
+type ToggleButtonClass C.GtkToggleButtonClass
+type RadioButtonPrivate C.GtkRadioButtonPrivate
+type SeparatorClass C.GtkSeparatorClass
+type NumerableIconClass C.GtkNumerableIconClass
+type ExpanderClass C.GtkExpanderClass
+type ScaleButtonClass C.GtkScaleButtonClass
+type PrintOperationPreviewIface C.GtkPrintOperationPreviewIface
+type SeparatorToolItemPrivate C.GtkSeparatorToolItemPrivate
+type MessageDialogPrivate C.GtkMessageDialogPrivate
+type ColorChooserInterface C.GtkColorChooserInterface
+type EventBoxClass C.GtkEventBoxClass
+type BinClass C.GtkBinClass
+type SeparatorMenuItemClass C.GtkSeparatorMenuItemClass
+type ActionEntry C.GtkActionEntry
+type HScaleClass C.GtkHScaleClass
+type ContainerClass C.GtkContainerClass
+type FontChooserWidgetClass C.GtkFontChooserWidgetClass
+type CheckMenuItemClass C.GtkCheckMenuItemClass
+type EventBoxPrivate C.GtkEventBoxPrivate
+type LevelBarClass C.GtkLevelBarClass
+type ActionGroupPrivate C.GtkActionGroupPrivate
+type IMContextSimplePrivate C.GtkIMContextSimplePrivate
+type LockButtonClass C.GtkLockButtonClass
+type UIManagerClass C.GtkUIManagerClass
+type CellAreaBoxClass C.GtkCellAreaBoxClass
+type ScaleClass C.GtkScaleClass
+type StatusIconClass C.GtkStatusIconClass
+type MountOperationPrivate C.GtkMountOperationPrivate
+type CellRendererSpinPrivate C.GtkCellRendererSpinPrivate
+type RecentChooserMenuPrivate C.GtkRecentChooserMenuPrivate
+type WidgetClassPrivate C.GtkWidgetClassPrivate
+type SpinnerClass C.GtkSpinnerClass
+type CellRendererTogglePrivate C.GtkCellRendererTogglePrivate
+type ToggleToolButtonPrivate C.GtkToggleToolButtonPrivate
+type MessageDialogClass C.GtkMessageDialogClass
+type VPanedClass C.GtkVPanedClass
+type ScrolledWindowClass C.GtkScrolledWindowClass
+type CellRendererTextPrivate C.GtkCellRendererTextPrivate
+type FileChooserDialogPrivate C.GtkFileChooserDialogPrivate
+type MenuShellPrivate C.GtkMenuShellPrivate
+type IMContextInfo C.GtkIMContextInfo
+type WindowGroupPrivate C.GtkWindowGroupPrivate
+type CellViewPrivate C.GtkCellViewPrivate
+type SpinButtonPrivate C.GtkSpinButtonPrivate
+type IconViewPrivate C.GtkIconViewPrivate
+type ScrollableInterface C.GtkScrollableInterface
+type ColorChooserDialogClass C.GtkColorChooserDialogClass
+type IMMulticontextPrivate C.GtkIMMulticontextPrivate
+type VScrollbarClass C.GtkVScrollbarClass
+type FileChooserWidgetClass C.GtkFileChooserWidgetClass
+type FontSelectionPrivate C.GtkFontSelectionPrivate
+type ColorChooserWidgetPrivate C.GtkColorChooserWidgetPrivate
+type TablePrivate C.GtkTablePrivate
+type VSeparatorClass C.GtkVSeparatorClass
+type ActionableInterface C.GtkActionableInterface
+type SettingsPrivate C.GtkSettingsPrivate
+type VolumeButtonClass C.GtkVolumeButtonClass
+type SizeGroupClass C.GtkSizeGroupClass
+type TreeModelFilterPrivate C.GtkTreeModelFilterPrivate
+type AccelKey C.GtkAccelKey
+type LabelSelectionInfo C.GtkLabelSelectionInfo
+type PrintOperationClass C.GtkPrintOperationClass
+type TextTagPrivate C.GtkTextTagPrivate
+type TreeSortableIface C.GtkTreeSortableIface
+type LinkButtonPrivate C.GtkLinkButtonPrivate
+type TextTagClass C.GtkTextTagClass
+type AlignmentClass C.GtkAlignmentClass
+type FontChooserWidgetPrivate C.GtkFontChooserWidgetPrivate
+type TextChildAnchorClass C.GtkTextChildAnchorClass
+type TreeViewClass C.GtkTreeViewClass
+type RecentActionPrivate C.GtkRecentActionPrivate
+type TreeSelectionPrivate C.GtkTreeSelectionPrivate
+type CellRendererComboPrivate C.GtkCellRendererComboPrivate
+type SocketClass C.GtkSocketClass
+type ToggleToolButtonClass C.GtkToggleToolButtonClass
+type AppChooserWidgetClass C.GtkAppChooserWidgetClass
+type ToggleActionEntry C.GtkToggleActionEntry
+type RecentActionClass C.GtkRecentActionClass
+type IconViewClass C.GtkIconViewClass
+type FontButtonClass C.GtkFontButtonClass
+type CalendarPrivate C.GtkCalendarPrivate
+type SeparatorToolItemClass C.GtkSeparatorToolItemClass
+type HPanedClass C.GtkHPanedClass
+type RadioButtonClass C.GtkRadioButtonClass
+type CalendarClass C.GtkCalendarClass
+type FontButtonPrivate C.GtkFontButtonPrivate
+type AccessiblePrivate C.GtkAccessiblePrivate
+type TreeSelectionClass C.GtkTreeSelectionClass
+type BuilderPrivate C.GtkBuilderPrivate
+type ToolItemClass C.GtkToolItemClass
+type Requisition C.GtkRequisition
+type CellRendererPixbufClass C.GtkCellRendererPixbufClass
+type MenuShellClass C.GtkMenuShellClass
+type MenuButtonPrivate C.GtkMenuButtonPrivate
+type SizeGroupPrivate C.GtkSizeGroupPrivate
+type SpinnerPrivate C.GtkSpinnerPrivate
+type TreeDragDestIface C.GtkTreeDragDestIface
+type AccelMapClass C.GtkAccelMapClass
+type TreeRowReference C.GtkTreeRowReference
+type TreeModelSortClass C.GtkTreeModelSortClass
+type ViewportClass C.GtkViewportClass
+type AboutDialogClass C.GtkAboutDialogClass
+type EntryBufferClass C.GtkEntryBufferClass
+type TextIter C.GtkTextIter
+type MenuBarClass C.GtkMenuBarClass
+type ViewportPrivate C.GtkViewportPrivate
+type AppChooserDialogPrivate C.GtkAppChooserDialogPrivate
+type LabelClass C.GtkLabelClass
+type EntryCompletionPrivate C.GtkEntryCompletionPrivate
+type SwitchPrivate C.GtkSwitchPrivate
+type SeparatorPrivate C.GtkSeparatorPrivate
+type AccelGroupPrivate C.GtkAccelGroupPrivate
+type CssSection C.GtkCssSection
+type MenuItemPrivate C.GtkMenuItemPrivate
+type ColorSelectionClass C.GtkColorSelectionClass
+type TextTagTablePrivate C.GtkTextTagTablePrivate
+type FileChooserDialogClass C.GtkFileChooserDialogClass
+type LinkButtonClass C.GtkLinkButtonClass
+type ThemeEngine C.GtkThemeEngine
+type ListStorePrivate C.GtkListStorePrivate
+type AccessibleClass C.GtkAccessibleClass
+type CellRendererProgressClass C.GtkCellRendererProgressClass
+type AccelGroupEntry C.GtkAccelGroupEntry
+type ContainerPrivate C.GtkContainerPrivate
+type ToolButtonPrivate C.GtkToolButtonPrivate
+type ColorButtonClass C.GtkColorButtonClass
+type ButtonPrivate C.GtkButtonPrivate
+type TextBufferPrivate C.GtkTextBufferPrivate
+type ActionPrivate C.GtkActionPrivate
+type StatusIconPrivate C.GtkStatusIconPrivate
+type MiscPrivate C.GtkMiscPrivate
+type LabelPrivate C.GtkLabelPrivate
+type ProgressBarPrivate C.GtkProgressBarPrivate
+type IconSet C.GtkIconSet
+type ToolbarPrivate C.GtkToolbarPrivate
+type TreeModelFilterClass C.GtkTreeModelFilterClass
+type RangeClass C.GtkRangeClass
+type RcStyleClass C.GtkRcStyleClass
+type AppChooserWidgetPrivate C.GtkAppChooserWidgetPrivate
+type RecentData C.GtkRecentData
+type CellAreaBoxPrivate C.GtkCellAreaBoxPrivate
+type TableRowCol C.GtkTableRowCol
+type TreeViewColumnClass C.GtkTreeViewColumnClass
+type FileChooserButtonPrivate C.GtkFileChooserButtonPrivate
+type HSVClass C.GtkHSVClass
+type ToolShellIface C.GtkToolShellIface
+type StylePropertiesPrivate C.GtkStylePropertiesPrivate
+type RcContext C.GtkRcContext
+type CheckMenuItemPrivate C.GtkCheckMenuItemPrivate
+type FixedPrivate C.GtkFixedPrivate
+type IMMulticontextClass C.GtkIMMulticontextClass
+type TextBufferClass C.GtkTextBufferClass
+type FixedChild C.GtkFixedChild
+type AccelLabelClass C.GtkAccelLabelClass
+type TreeViewColumnPrivate C.GtkTreeViewColumnPrivate
+type ImageMenuItemClass C.GtkImageMenuItemClass
+type HSeparatorClass C.GtkHSeparatorClass
+type AdjustmentClass C.GtkAdjustmentClass
+type WindowClass C.GtkWindowClass
+type VBoxClass C.GtkVBoxClass
+type VButtonBoxClass C.GtkVButtonBoxClass
+type BindingSet C.GtkBindingSet
+type BuildableIface C.GtkBuildableIface
+type RadioActionClass C.GtkRadioActionClass
+type RecentManagerClass C.GtkRecentManagerClass
+type ColorChooserWidgetClass C.GtkColorChooserWidgetClass
+type WidgetPrivate C.GtkWidgetPrivate
+type UIManagerPrivate C.GtkUIManagerPrivate
+type ApplicationClass C.GtkApplicationClass
+type RecentManagerPrivate C.GtkRecentManagerPrivate
+type CheckButtonClass C.GtkCheckButtonClass
+type ComboBoxClass C.GtkComboBoxClass
+type MenuBarPrivate C.GtkMenuBarPrivate
+type MenuToolButtonPrivate C.GtkMenuToolButtonPrivate
+type AspectFrameClass C.GtkAspectFrameClass
+type FontChooserDialogClass C.GtkFontChooserDialogClass
+type CellRendererPixbufPrivate C.GtkCellRendererPixbufPrivate
+type OffscreenWindowClass C.GtkOffscreenWindowClass
+type WidgetPath C.GtkWidgetPath
+type ThemingEngineClass C.GtkThemingEngineClass
+type StyleContextClass C.GtkStyleContextClass
+type RecentChooserIface C.GtkRecentChooserIface
+type ScaleButtonPrivate C.GtkScaleButtonPrivate
+type FileFilterInfo C.GtkFileFilterInfo
+type IconFactoryPrivate C.GtkIconFactoryPrivate
+type PageRange C.GtkPageRange
+type StyleContextPrivate C.GtkStyleContextPrivate
+type IMContextClass C.GtkIMContextClass
+type RadioMenuItemPrivate C.GtkRadioMenuItemPrivate
+type LockButtonPrivate C.GtkLockButtonPrivate
+type BuilderClass C.GtkBuilderClass
+type MountOperationClass C.GtkMountOperationClass
+type CellAreaContextClass C.GtkCellAreaContextClass
+type DialogPrivate C.GtkDialogPrivate
+type PaperSize C.GtkPaperSize
+type LevelBarPrivate C.GtkLevelBarPrivate
+type SpinButtonClass C.GtkSpinButtonClass
+type TearoffMenuItemClass C.GtkTearoffMenuItemClass
+type PlugClass C.GtkPlugClass
+type RadioToolButtonClass C.GtkRadioToolButtonClass
+type CellAreaPrivate C.GtkCellAreaPrivate
+type TreeViewPrivate C.GtkTreeViewPrivate
+type ToggleButtonPrivate C.GtkToggleButtonPrivate
+type RecentFilterInfo C.GtkRecentFilterInfo
+type IconInfo C.GtkIconInfo
+type ProgressBarClass C.GtkProgressBarClass
+type FontSelectionDialogClass C.GtkFontSelectionDialogClass
+type CellEditableIface C.GtkCellEditableIface
+type SettingsClass C.GtkSettingsClass
+type AdjustmentPrivate C.GtkAdjustmentPrivate
+type TreePath C.GtkTreePath
+type ActivatableIface C.GtkActivatableIface
+type Border C.GtkBorder
+type LayoutClass C.GtkLayoutClass
+type HBoxClass C.GtkHBoxClass
+type LayoutPrivate C.GtkLayoutPrivate
+type MiscClass C.GtkMiscClass
+type AccelLabelPrivate C.GtkAccelLabelPrivate
+type TreeIter C.GtkTreeIter
+type ToolPaletteClass C.GtkToolPaletteClass
+type Gradient C.GtkGradient
+type CellRendererComboClass C.GtkCellRendererComboClass
+type FontChooserIface C.GtkFontChooserIface
+type CellRendererTextClass C.GtkCellRendererTextClass
+type IconSource C.GtkIconSource
+type WindowPrivate C.GtkWindowPrivate
+type CssProviderClass C.GtkCssProviderClass
+type GridPrivate C.GtkGridPrivate
+type FileChooserButtonClass C.GtkFileChooserButtonClass
+type StylePropertiesClass C.GtkStylePropertiesClass
+type HScrollbarClass C.GtkHScrollbarClass
+type RecentInfo C.GtkRecentInfo
+type ButtonClass C.GtkButtonClass
+type CellAreaContextPrivate C.GtkCellAreaContextPrivate
+type OrientableIface C.GtkOrientableIface
+type SearchEntryClass C.GtkSearchEntryClass
+type ThemingEnginePrivate C.GtkThemingEnginePrivate
+type ImageClass C.GtkImageClass
+type CellRendererSpinnerClass C.GtkCellRendererSpinnerClass
+type StyleClass C.GtkStyleClass
+type ArrowClass C.GtkArrowClass
+type IconThemeClass C.GtkIconThemeClass
+type CellAreaClass C.GtkCellAreaClass
+type MenuPrivate C.GtkMenuPrivate
+type AssistantPrivate C.GtkAssistantPrivate
+type ExpanderPrivate C.GtkExpanderPrivate
+type ColorSelectionDialogPrivate C.GtkColorSelectionDialogPrivate
+type ScalePrivate C.GtkScalePrivate
+type ImageMenuItemPrivate C.GtkImageMenuItemPrivate
+type WidgetClass C.GtkWidgetClass
+type InvisiblePrivate C.GtkInvisiblePrivate
+type TextViewPrivate C.GtkTextViewPrivate
+type RecentChooserDialogClass C.GtkRecentChooserDialogClass
+type AppChooserDialogClass C.GtkAppChooserDialogClass
+type PrintOperationPrivate C.GtkPrintOperationPrivate
+type IMContextSimpleClass C.GtkIMContextSimpleClass
+type SymbolicColor C.GtkSymbolicColor
+type ComboBoxTextClass C.GtkComboBoxTextClass
+type SocketPrivate C.GtkSocketPrivate
+type MenuClass C.GtkMenuClass
+type ArrowPrivate C.GtkArrowPrivate
+type PanedPrivate C.GtkPanedPrivate
+type BinPrivate C.GtkBinPrivate
+type AccelGroupClass C.GtkAccelGroupClass
+type TextBTree C.GtkTextBTree
+type WindowGroupClass C.GtkWindowGroupClass
+type RadioActionEntry C.GtkRadioActionEntry
+type RecentChooserWidgetClass C.GtkRecentChooserWidgetClass
+type GridClass C.GtkGridClass
+type PlugPrivate C.GtkPlugPrivate
+type AlignmentPrivate C.GtkAlignmentPrivate
+type MenuToolButtonClass C.GtkMenuToolButtonClass
+type CellRendererProgressPrivate C.GtkCellRendererProgressPrivate
+type BindingSignal C.GtkBindingSignal
+type WidgetAuxInfo C.GtkWidgetAuxInfo
+type TargetEntry C.GtkTargetEntry
+type ButtonBoxClass C.GtkButtonBoxClass
+type TableClass C.GtkTableClass
+type ScrollbarClass C.GtkScrollbarClass
+type EntryPrivate C.GtkEntryPrivate
+type BindingArg C.GtkBindingArg
+type ButtonBoxPrivate C.GtkButtonBoxPrivate
+type RecentChooserDialogPrivate C.GtkRecentChooserDialogPrivate
+type WindowGeometryInfo C.GtkWindowGeometryInfo
+type InfoBarClass C.GtkInfoBarClass
+type FileChooserWidgetPrivate C.GtkFileChooserWidgetPrivate
+type AssistantClass C.GtkAssistantClass
+type ApplicationWindowClass C.GtkApplicationWindowClass
+type RecentChooserMenuClass C.GtkRecentChooserMenuClass
+type NotebookClass C.GtkNotebookClass
+type BoxPrivate C.GtkBoxPrivate
+type TreeDragSourceIface C.GtkTreeDragSourceIface
+type HandleBoxClass C.GtkHandleBoxClass
+type CellRendererToggleClass C.GtkCellRendererToggleClass
+type AppChooserButtonClass C.GtkAppChooserButtonClass
+type StockItem C.GtkStockItem
+type MenuButtonClass C.GtkMenuButtonClass
+type TextAttributes C.GtkTextAttributes
+type ApplicationPrivate C.GtkApplicationPrivate
+type DrawingAreaClass C.GtkDrawingAreaClass
+type EntryBufferPrivate C.GtkEntryBufferPrivate
+type DialogClass C.GtkDialogClass
+type RequestedSize C.GtkRequestedSize
+type AspectFramePrivate C.GtkAspectFramePrivate
+type ActionGroupClass C.GtkActionGroupClass
+type IconThemePrivate C.GtkIconThemePrivate
+type ToolPalettePrivate C.GtkToolPalettePrivate
+type ScrolledWindowPrivate C.GtkScrolledWindowPrivate
+type StyleProviderIface C.GtkStyleProviderIface
+type NumerableIconPrivate C.GtkNumerableIconPrivate

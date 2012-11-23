@@ -109,7 +109,6 @@ class Parser:
       pass #TODO
 
   def map_record_type(self, name, c_type):
-    print name, c_type
     self.type_mappings['*C.' + c_type] = Dict({
       'mapped_type': '*' + name,
       'mapped_name_func': lambda param: '_cp_%s_' % param.name,
