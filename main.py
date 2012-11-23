@@ -35,44 +35,24 @@ class Parser:
 
   def parse(self):
     for node in self.namespace.itervalues():
-      if isinstance(node, ast.Function):
-        info = self.handleFunction(node)
-        self.functions.append(info)
-        if info.need_wrapper:
-          self.functions_need_wrapper.append(info)
-      elif isinstance(node, ast.Enum):
-        self.handleEnum(node)
-      elif isinstance(node, ast.Constant):
-        self.handleConstant(node)
-      elif isinstance(node, ast.Record):
-        self.handleRecord(node)
-      elif isinstance(node, ast.Callback):
-        pass
-      elif isinstance(node, ast.Union):
-        pass
-      elif isinstance(node, ast.Alias):
-        pass
-      elif isinstance(node, ast.Bitfield):
-        pass
-      elif isinstance(node, ast.Class):
-        pass
-      elif isinstance(node, ast.Interface):
-        pass
-      else:
-        print 'not handle:', type(node)
+      handlerName = 'handle' + type(node).__name__
+      if hasattr(self, handlerName):
+        getattr(self, handlerName)(node)
+      #else:
+      #  print type(node).__name__, 'not handle'
+      #  stop
 
   def handleFunction(self, node):
     info = Dict()
-    info.name = name = node.name
-    info.c_name = c_name = node.symbol
-    info.need_wrapper = False
+    info.name = node.name
+    info.c_name = node.symbol
 
     info.skip = False
-    if not node.deprecated is None or c_name in self.skip_symbols:
+    if not node.deprecated is None or info.c_name in self.skip_symbols:
+      print 'skip', info.c_name
       info.skip = True
-      return info
 
-    info.go_name = go_name = convert_func_name(name)
+    info.go_name = go_name = convert_func_name(info.name)
     info.parameters, info.not_implement, info.need_wrapper = convert_parameters(node.parameters)
     info.need_wrapper = info.need_wrapper and not info.not_implement
 
@@ -88,7 +68,9 @@ class Parser:
     else:
       info.return_go_type, _ = convert_to_go_type(info.return_c_type)
 
-    return info
+    self.functions.append(info)
+    if info.need_wrapper:
+      self.functions_need_wrapper.append(info)
 
   def handleEnum(self, node):
     for mem in node.members:
