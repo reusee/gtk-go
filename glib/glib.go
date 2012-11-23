@@ -9,6 +9,10 @@ package glib
 // #include <glib-unix.h>
 // #include <glib.h>
 /*
+typedef struct va_list_wrap {
+  va_list v;
+} va_list_wrap;
+
 gboolean _true() { return TRUE; }
 gboolean _false() { return FALSE; }
 GByteArray* _g_byte_array_append(GByteArray* array, void* data, guint len_) {
@@ -34,6 +38,9 @@ GDir* _g_dir_open(void* path, guint flags, void* err) {
 }
 GError* _g_error_new_literal(GQuark domain, gint code, void* message) {
 	return g_error_new_literal(domain, code, (const gchar*)(message));
+}
+GError* _g_error_new_valist(GQuark domain, gint code, void* format, va_list_wrap args) {
+	return g_error_new_valist(domain, code, (const gchar*)(format), args.v);
 }
 GIConv _g_iconv_open(void* to_codeset, void* from_codeset) {
 	return g_iconv_open((const gchar*)(to_codeset), (const gchar*)(from_codeset));
@@ -401,8 +408,14 @@ GLogLevelFlags _g_log_set_fatal_mask(void* log_domain, GLogLevelFlags fatal_mask
 guint _g_log_set_handler(void* log_domain, GLogLevelFlags log_levels, GLogFunc log_func, gpointer user_data) {
 	return g_log_set_handler((const gchar*)(log_domain), log_levels, log_func, user_data);
 }
+void _g_logv(void* log_domain, GLogLevelFlags log_level, void* format, va_list_wrap args) {
+	g_logv((const gchar*)(log_domain), log_level, (const gchar*)(format), args.v);
+}
 gchar* _g_markup_escape_text(void* text, gssize length) {
 	return g_markup_escape_text((const gchar*)(text), length);
+}
+gchar* _g_markup_vprintf_escaped(void* format, va_list_wrap args) {
+	return g_markup_vprintf_escaped((const char*)(format), args.v);
 }
 gint _g_mkdir_with_parents(void* pathname, gint mode) {
 	return g_mkdir_with_parents((const gchar*)(pathname), mode);
@@ -436,6 +449,9 @@ gboolean _g_pattern_match_simple(void* pattern, void* string_) {
 }
 gboolean _g_pattern_match_string(GPatternSpec* pspec, void* string_) {
 	return g_pattern_match_string(pspec, (const gchar*)(string_));
+}
+gsize _g_printf_string_upper_bound(void* format, va_list_wrap args) {
+	return g_printf_string_upper_bound((const gchar*)(format), args.v);
 }
 void _g_propagate_error(void* dest, GError* src) {
 	g_propagate_error((GError**)(dest), src);
@@ -517,6 +533,9 @@ gchar* _g_strdelimit(gchar* string_, void* delimiters, gchar new_delimiter) {
 }
 gchar* _g_strdup(void* str) {
 	return g_strdup((const gchar*)(str));
+}
+gchar* _g_strdup_vprintf(void* format, va_list_wrap args) {
+	return g_strdup_vprintf((const gchar*)(format), args.v);
 }
 gchar** _g_strdupv(void* str_array) {
 	return g_strdupv((gchar**)(str_array));
@@ -712,6 +731,21 @@ gunichar2* _g_utf8_to_utf16(void* str, glong len_, glong* items_read, glong* ite
 }
 gboolean _g_utf8_validate(gchar* str, gssize max_len, void* end) {
 	return g_utf8_validate(str, max_len, (const gchar**)(end));
+}
+gint _g_vasprintf(void* string_, gchar* format, va_list_wrap args) {
+	return g_vasprintf((gchar**)(string_), format, args.v);
+}
+gint _g_vfprintf(FILE* file, gchar* format, va_list_wrap args) {
+	return g_vfprintf(file, format, args.v);
+}
+gint _g_vprintf(gchar* format, va_list_wrap args) {
+	return g_vprintf(format, args.v);
+}
+gint _g_vsnprintf(gchar* string_, gulong n, gchar* format, va_list_wrap args) {
+	return g_vsnprintf(string_, n, format, args.v);
+}
+gint _g_vsprintf(gchar* string_, gchar* format, va_list_wrap args) {
+	return g_vsprintf(string_, format, args.v);
 }
 void _g_warn_message(void* domain, void* file, int line, void* func_, void* warnexpr) {
 	g_warn_message((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(warnexpr));
@@ -1358,7 +1392,20 @@ func ErrorNewLiteral(domain C.GQuark, code int, message string) *Error {
 	return _go_return_
 }
 
-//TODO g_error_new_valist
+func ErrorNewValist(domain C.GQuark, code int, format string, args C.va_list) *Error {
+	_gint_code := C.gint(code)
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	_c_return_ := C._g_error_new_valist(domain, _gint_code, unsafe.Pointer(_gstr_format), _wrapped_args)
+	_go_return_ := (*Error)(_c_return_)
+	runtime.SetFinalizer(&_go_return_, func (x **Error) {
+		C.g_object_unref(C.gpointer(_c_return_))
+	})
+	return _go_return_
+}
 
 func HashTableAdd(hash_table *HashTable, key unsafe.Pointer) {
 	_cp_hash_table_ := (*C.GHashTable)(hash_table)
@@ -4440,7 +4487,17 @@ func LogSetHandler(log_domain string, log_levels C.GLogLevelFlags, log_func C.GL
 	return guint2uint(C._g_log_set_handler(unsafe.Pointer(_gstr_log_domain), log_levels, log_func, _gpointer_user_data))
 }
 
-//TODO g_logv
+func Logv(log_domain string, log_level C.GLogLevelFlags, format string, args C.va_list) {
+	_cstr_log_domain := unsafe.Pointer(C.CString(log_domain))
+	defer C.free(_cstr_log_domain)
+	_gstr_log_domain := (*C.gchar)(unsafe.Pointer(_cstr_log_domain))
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	C._g_logv(unsafe.Pointer(_gstr_log_domain), log_level, unsafe.Pointer(_gstr_format), _wrapped_args)
+}
 
 func MainCurrentSource() *Source {
 	_c_return_ := C.g_main_current_source()
@@ -4493,7 +4550,11 @@ func MarkupEscapeText(text string, length int64) string {
 
 //TODO g_markup_printf_escaped
 
-//TODO g_markup_vprintf_escaped
+func MarkupVprintfEscaped(format *C.char, args C.va_list) string {
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gcharp2string(C._g_markup_vprintf_escaped(unsafe.Pointer(format), _wrapped_args))
+}
 
 func MemIsSystemMalloc() bool {
 	return gboolean2bool(C.g_mem_is_system_malloc())
@@ -4663,7 +4724,14 @@ func Poll(fds *PollFD, nfds uint, timeout int) int {
 
 //TODO g_printf
 
-//TODO g_printf_string_upper_bound
+func PrintfStringUpperBound(format string, args C.va_list) uint64 {
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gsize2uint64(C._g_printf_string_upper_bound(unsafe.Pointer(_gstr_format), _wrapped_args))
+}
 
 func PropagateError(dest unsafe.Pointer, src *Error) {
 	_cp_src_ := (*C.GError)(src)
@@ -5038,7 +5106,14 @@ func Strdup(str string) string {
 
 //TODO g_strdup_printf
 
-//TODO g_strdup_vprintf
+func StrdupVprintf(format string, args C.va_list) string {
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gcharp2string(C._g_strdup_vprintf(unsafe.Pointer(_gstr_format), _wrapped_args))
+}
 
 func Strdupv(str_array unsafe.Pointer) unsafe.Pointer {
 	return unsafe.Pointer(C._g_strdupv(unsafe.Pointer(str_array)))
@@ -5965,15 +6040,57 @@ func Utf8Validate(str string, max_len int64, end unsafe.Pointer) bool {
 
 //Skipped g_variant_get_gtype
 
-//TODO g_vasprintf
+func Vasprintf(string_ unsafe.Pointer, format string, args C.va_list) int {
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gint2int(C._g_vasprintf(unsafe.Pointer(string_), _gstr_format, _wrapped_args))
+}
 
-//TODO g_vfprintf
+func Vfprintf(file *C.FILE, format string, args C.va_list) int {
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gint2int(C._g_vfprintf(file, _gstr_format, _wrapped_args))
+}
 
-//TODO g_vprintf
+func Vprintf(format string, args C.va_list) int {
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gint2int(C._g_vprintf(_gstr_format, _wrapped_args))
+}
 
-//TODO g_vsnprintf
+func Vsnprintf(string_ string, n uint64, format string, args C.va_list) int {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	_gulong_n := C.gulong(n)
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gint2int(C._g_vsnprintf(_gstr_string_, _gulong_n, _gstr_format, _wrapped_args))
+}
 
-//TODO g_vsprintf
+func Vsprintf(string_ string, format string, args C.va_list) int {
+	_cstr_string_ := unsafe.Pointer(C.CString(string_))
+	defer C.free(_cstr_string_)
+	_gstr_string_ := (*C.gchar)(unsafe.Pointer(_cstr_string_))
+	_cstr_format := unsafe.Pointer(C.CString(format))
+	defer C.free(_cstr_format)
+	_gstr_format := (*C.gchar)(unsafe.Pointer(_cstr_format))
+	var _wrapped_args C.va_list_wrap
+	_wrapped_args.v = args
+	return gint2int(C._g_vsprintf(_gstr_string_, _gstr_format, _wrapped_args))
+}
 
 func WarnMessage(domain *C.char, file *C.char, line C.int, func_ *C.char, warnexpr *C.char) {
 	C._g_warn_message(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(warnexpr))

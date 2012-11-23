@@ -21,6 +21,7 @@ def convert_parameters(parameters):
   need_wrapper = False
   ret = []
   for i, param in enumerate(parameters):
+    param_info = Dict()
     name = param.argname
     if is_go_word(name):
       name += '_'
@@ -28,15 +29,16 @@ def convert_parameters(parameters):
     c_type = param.type.ctype
     if c_type == '<varargs>':
       not_implement = True
-    elif c_type == 'va_list':
-      not_implement = True
     else:
       if name is None:
         name = 'arg_%d' % i
-      go_type, cast_c_type, cast_go_type = convert_to_go_type(c_type)
-      if cast_c_type:
+      convert_to_go_type(c_type, param_info)
+      if param_info.cast_c_type:
         need_wrapper = True
-      ret.append(Param(name, c_type, go_type, cast_c_type, cast_go_type, transfer))
+      param_info.name = name
+      param_info.transfer = transfer
+      param_info.c_type = c_type
+      ret.append(param_info)
   return ret, not_implement, need_wrapper
 
 def convert_func_name(s):
@@ -44,7 +46,7 @@ def convert_func_name(s):
   words = [w.capitalize() for w in words]
   return ''.join(words)
 
-def convert_to_go_type(s):
+def convert_to_go_type(s, param_info):
   s = s.replace('volatile ', '') 
   cast_c_type = None
   cast_go_type = None
@@ -57,10 +59,15 @@ def convert_to_go_type(s):
     cast_go_type = 'unsafe.Pointer'
     s = 'void*'
   if s == 'long double':
-    cast_c_type = 'double'
+    cast_c_type = 'double' #BUG will lose precision
     cast_go_type = 'C.double'
     s = 'double'
+  elif s == 'va_list':
+    cast_c_type = 'va_list_wrap'
+    param_info.c_value_func = lambda param: '%s.v' % param.name
   s = 'C.' + s
   if s.endswith('*'):
     s = '*' + s[:-1]
-  return s, cast_c_type, cast_go_type
+  param_info.go_type = s
+  param_info.cast_c_type = cast_c_type
+  param_info.cast_go_type = cast_go_type

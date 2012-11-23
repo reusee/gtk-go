@@ -65,7 +65,14 @@ class Parser:
     info.need_wrapper = info.need_wrapper and not info.not_implement
 
     if node.throws:
-      info.parameters.append(Param('err', 'GError**', 'unsafe.Pointer', 'void*', 'unsafe.Pointer', False))
+      info.parameters.append(Dict({
+        'name': 'err',
+        'c_type': 'GError**',
+        'go_type': 'unsafe.Pointer',
+        'cast_c_type': 'void*',
+        'cast_go_type': 'unsafe.Pointer',
+        'transfer': False,
+      }))
       info.need_wrapper = True
 
     info.no_return = False
@@ -74,7 +81,9 @@ class Parser:
     if info.return_c_type == 'void':
       info.no_return = True
     else:
-      info.return_go_type, _, _ = convert_to_go_type(info.return_c_type)
+      param_info = Dict()
+      convert_to_go_type(info.return_c_type, param_info)
+      info.return_go_type = param_info.go_type
 
     self.functions.append(info)
     if info.need_wrapper:

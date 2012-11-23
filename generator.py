@@ -31,7 +31,10 @@ class Generator:
     for include in self.parser.includes:
       print >>self.out, "// #include <%s>" % include
     print >>self.out, "/*"
-    # helper functions
+    # helper codes
+    for m in mappings.itervalues():
+      if m.has_key('help_code'):
+        print >>self.out, m.help_code
     self.generate_macro_helpers()
     # wrappers
     for func in self.parser.functions_need_wrapper:
@@ -152,10 +155,14 @@ class Generator:
     if func.skip:
       return
     out = []
+
+    # return type and function name
     out.append('%s %s(' % (
       func.return_c_type,
       '_' + func.c_name,
       ))
+
+    # parameters
     sep = None
     for param in func.parameters:
       if sep != None:
@@ -167,6 +174,8 @@ class Generator:
         out.append(param.c_type)
       out.append(' ' + param.name)
     out.append(') {\n\t')
+
+    # body
     if not func.no_return:
       out.append('return ')
     out.append('%s(' % func.c_name)
@@ -175,7 +184,9 @@ class Generator:
       if sep != None:
         out.append(sep)
       sep = ', '
-      if param.cast_c_type:
+      if hasattr(param, 'c_value_func'):
+        out.append(param.c_value_func(param))
+      elif param.cast_c_type:
         out.append('(%s)(%s)' % (param.c_type, param.name))
       else:
         out.append(param.name)
