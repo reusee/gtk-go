@@ -30,7 +30,7 @@ class Parser:
     self.prefixes = self.namespace.symbol_prefixes
 
     self.functions = []
-    self.functions_need_wrapper = []
+    self.functions_need_helper = []
     self.enum_symbols = []
     self.const_symbols = []
     self.construct_records = set()
@@ -47,10 +47,12 @@ class Parser:
       #  print type(node).__name__, 'not handle'
       #  stop
 
-  def handleFunction(self, node, cls = ''):
+  def handleFunction(self, node, cls = '', is_method = False, c_class = ''):
     info = Dict()
     info.name = node.name
     info.c_name = node.symbol
+    info.is_method = is_method
+    info.c_class = c_class
     if info.c_name in self.exported_functions:
       return
     self.exported_functions.add(info.c_name)
@@ -59,35 +61,54 @@ class Parser:
     if not node.deprecated is None or info.c_name in self.skip_symbols:
       info.skip = True
 
-    info.go_name = cls + convert_func_name(info.name)
+    if is_method:
+      if info.name == "":
+        info.go_name = 'New' + cls
+      else:
+        info.go_name = convert_func_name(info.name)
+    else:
+      info.go_name = cls + convert_func_name(info.name)
     info.cls = cls
-    info.parameters, info.not_implement, info.need_wrapper = convert_parameters(node.parameters)
-    info.need_wrapper = info.need_wrapper and not info.not_implement
+    print '+' * 20, node.symbol
+    info.parameters, info.not_implement, info.need_helper = convert_parameters(node.parameters)
+    info.need_helper = info.need_helper and not info.not_implement
+
+    if is_method:
+      info.parameters.insert(0, Dict({
+        'name': 'self',
+        'transfer': False,
+        'type': Dict({
+          'need_helper': False,
+          'go_type': '*%s' % cls,
+          'c_type': '%s*' % c_class,
+          'c_helper_param_type': '%s*' % c_class,
+          'c_original_type': '%s*' % c_class,
+        }),
+      }))
 
     if node.throws:
       info.parameters.append(Dict({
         'name': 'err',
-        'c_type': 'GError**',
-        'go_type': 'unsafe.Pointer',
-        'cast_c_type': 'void*',
-        'cast_go_type': 'unsafe.Pointer',
         'transfer': False,
+        'type': Dict({
+          'need_helper': False,
+          'go_type': 'unsafe.Pointer',
+          'cgo_cast_type': 'unsafe.Pointer',
+          'c_helper_param_type': 'void*',
+          'c_type': 'GError**',
+          'c_original_type': 'GError**',
+        }),
       }))
-      info.need_wrapper = True
+      info.need_helper = True
 
+    info.return_type = get_type_info(node.retval)
     info.no_return = False
-    info.return_c_type = node.retval.type.ctype
-    info.return_go_type = None
-    if info.return_c_type == 'void':
+    if info.return_type.c_type == 'void':
       info.no_return = True
-    else:
-      param_info = Dict()
-      convert_to_go_type(info.return_c_type, param_info)
-      info.return_go_type = param_info.go_type
 
     self.functions.append(info)
-    if info.need_wrapper:
-      self.functions_need_wrapper.append(info)
+    if info.need_helper and not info.skip:
+      self.functions_need_helper.append(info)
 
   def handleEnum(self, node):
     for mem in node.members:
@@ -105,6 +126,8 @@ class Parser:
     # name
     name = node.name
     c_type = node.ctype
+    if c_type in self.skip_symbols:
+      return
     self.construct_records.add((name, c_type))
     self.map_record_type(name, c_type)
     # constructors
@@ -115,8 +138,7 @@ class Parser:
       self.handleFunction(function, name)
     # methods
     for method in node.methods:
-      #self.handleFunction(method, name)
-      pass #TODO
+      self.handleFunction(method, name, True, c_type)
 
   def map_record_type(self, name, c_type):
     self.type_mappings['*C.' + c_type] = Dict({

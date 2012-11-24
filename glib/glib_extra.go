@@ -15,18 +15,18 @@ const double _G_LOG_2_BASE_10 = G_LOG_2_BASE_10;
 const double _G_LN2           = G_LN2;
 const double _G_LN10          = G_LN10;
 const gdouble _G_E             = G_E;
-GVariant* _g_variant_new_bytestring_array(void* strv, gssize length) {
-	return g_variant_new_bytestring_array((const gchar* const*)(strv), length);
-}
-GVariant* _g_variant_new_objv(void* strv, gssize length) {
-	return g_variant_new_objv((const gchar* const*)(strv), length);
-}
-GVariant* _g_variant_new_strv(void* strv, gssize length) {
-	return g_variant_new_strv((const gchar* const*)(strv), length);
-}
-GVariantType* _g_variant_type_new_tuple(void* items, gint length) {
-	return g_variant_type_new_tuple((const GVariantType* const*)(items), length);
-}
+//GVariant* _g_variant_new_bytestring_array(void* strv, gssize length) {
+//	return g_variant_new_bytestring_array((const gchar* const*)(strv), length);
+//}
+//GVariant* _g_variant_new_objv(void* strv, gssize length) {
+//	return g_variant_new_objv((const gchar* const*)(strv), length);
+//}
+//GVariant* _g_variant_new_strv(void* strv, gssize length) {
+//	return g_variant_new_strv((const gchar* const*)(strv), length);
+//}
+//GVariantType* _g_variant_type_new_tuple(void* items, gint length) {
+//	return g_variant_type_new_tuple((const GVariantType* const*)(items), length);
+//}
 */
 import "C"
 import (
@@ -45,18 +45,18 @@ var (
   E             = C._G_E
 )
 
-func VariantNewBytestringArray(strv unsafe.Pointer, length C.gssize) *C.GVariant {
-	return C._g_variant_new_bytestring_array(unsafe.Pointer(strv), length)
-}
-
-func VariantNewObjv(strv unsafe.Pointer, length C.gssize) *C.GVariant {
-	return C._g_variant_new_objv(unsafe.Pointer(strv), length)
-}
-
-func VariantNewStrv(strv unsafe.Pointer, length C.gssize) *C.GVariant {
-	return C._g_variant_new_strv(unsafe.Pointer(strv), length)
-}
-
-func VariantTypeNewTuple(items unsafe.Pointer, length C.gint) *C.GVariantType {
-	return C._g_variant_type_new_tuple(unsafe.Pointer(items), length)
-}
+//func VariantNewBytestringArray(strv unsafe.Pointer, length C.gssize) *C.GVariant {
+//	return C._g_variant_new_bytestring_array(unsafe.Pointer(strv), length)
+//}
+//
+//func VariantNewObjv(strv unsafe.Pointer, length C.gssize) *C.GVariant {
+//	return C._g_variant_new_objv(unsafe.Pointer(strv), length)
+//}
+//
+//func VariantNewStrv(strv unsafe.Pointer, length C.gssize) *C.GVariant {
+//	return C._g_variant_new_strv(unsafe.Pointer(strv), length)
+//}
+//
+//func VariantTypeNewTuple(items unsafe.Pointer, length C.gint) *C.GVariantType {
+//	return C._g_variant_type_new_tuple(unsafe.Pointer(items), length)
+//}

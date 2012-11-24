@@ -1,3 +1,12 @@
+//g_variant_new_bytestring_array
+//g_variant_new_objv
+//g_variant_new_strv
+//g_variant_type_new_tuple
+//
+//g_key_file_load_from_dirs
+//g_key_file_set_locale_string_list
+//g_key_file_set_string_list
+
 // constants
 G_WIN32_MSG_HANDLE
 
@@ -9,10 +18,10 @@ g_assert_warning
 g_variant_get_gtype
 
 // manually implement due to go's strict pointer type checking
-g_variant_new_bytestring_array
-g_variant_new_objv
-g_variant_new_strv
-g_variant_type_new_tuple
+//g_variant_new_bytestring_array
+//g_variant_new_objv
+//g_variant_new_strv
+//g_variant_type_new_tuple
 
 // manually implement macros
 G_SQRT2
@@ -51,5 +60,8 @@ g_pointer_bit_unlock
 
 g_date_to_struct_tm
 
-// records
+g_iconv
+
+// no support for long double type
 GTestLogMsg
+GTestLogBuffer
