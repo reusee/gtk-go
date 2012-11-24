@@ -127,7 +127,7 @@ class Parser:
 
 def main():
   if len(sys.argv) < 2:
-    print "usage: %s [gir file]" % sys.argv[0]
+    print "usage: %s <gir file>" % sys.argv[0]
     sys.exit()
   parser = Parser(sys.argv[1])
   parser.parse()
