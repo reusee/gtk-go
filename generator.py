@@ -48,8 +48,8 @@ class Generator:
     print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
 
-    for func in self.parser.functions:
-      self.generate_function(func)
+    #for func in self.parser.functions:
+    #  self.generate_function(func)
 
     self.generate_enum_symbols()
 
@@ -89,21 +89,21 @@ class Generator:
       if sep != None: out.append(sep)
       sep = ', '
       mapped_type = param.type.go_type
-      if mappings.has_key(mapped_type): # map parameter type
-        m = mappings[mapped_type]
-        mapped_type = m.mapped_type
-        if m.has_key('mapping_code_func'):
-          mapping_code.append(m.mapping_code_func(param))
-        mapped_param_name[param.name] = m.mapped_name_func(param)
+      #if mappings.has_key(mapped_type): # map parameter type
+      #  m = mappings[mapped_type]
+      #  mapped_type = m.mapped_type
+      #  if m.has_key('mapping_code_func'):
+      #    mapping_code.append(m.mapping_code_func(param))
+      #  mapped_param_name[param.name] = m.mapped_name_func(param)
       out.append('%s %s' % (param.name, mapped_type))
     out.append(') ')
 
     # return type
     mapped_return_type = func.return_type.go_type
     return_type_mapping = None
-    if mappings.has_key(mapped_return_type):
-      return_type_mapping = mappings[mapped_return_type]
-      mapped_return_type = return_type_mapping.mapped_type
+    #if mappings.has_key(mapped_return_type):
+    #  return_type_mapping = mappings[mapped_return_type]
+    #  mapped_return_type = return_type_mapping.mapped_type
     out.append('%s{\n' % (
       '' if func.no_return else (mapped_return_type + ' '),
       ))
@@ -111,12 +111,12 @@ class Generator:
 
     # return expression
     return_expression = []
-    if return_type_mapping != None:
-      if return_type_mapping.has_key('to_go_type_func'):
-        return_expression.append('%s(' % mappings[func.return_go_type].to_go_type_func)
-        self.to_go_type_funcs.add(func.return_go_type)
-      elif return_type_mapping.has_key('to_go_type_code_head'):
-        return_expression.append(return_type_mapping.to_go_type_code_head)
+    #if return_type_mapping != None:
+    #  if return_type_mapping.has_key('to_go_type_func'):
+    #    return_expression.append('%s(' % mappings[func.return_type.go_type].to_go_type_func)
+    #    self.to_go_type_funcs.add(func.return_type.go_type)
+    #  elif return_type_mapping.has_key('to_go_type_code_head'):
+    #    return_expression.append(return_type_mapping.to_go_type_code_head)
     if func.need_helper:
       return_expression.append('C._%s(' % func.c_name)
     else:
@@ -128,12 +128,7 @@ class Generator:
       if func.is_method and i == 0: # the self argument
         return_expression.append('(*C.%s)(self)' % func.c_class)
       else: # not a method
-        if param.type.cgo_cast_type:
-          return_expression.append('%s(%s)' % (
-            param.type.cgo_cast_type,
-            mapped_param_name.get(param.name, param.name)))
-        else:
-          return_expression.append(mapped_param_name.get(param.name, param.name))
+        return_expression.append(mapped_param_name.get(param.name, param.name))
     return_expression.append(')')
 
     if return_type_mapping != None:
@@ -173,7 +168,7 @@ class Generator:
     # parameters
     for i, param in enumerate(func.parameters):
       if i > 0: out.append(', ')
-      out.append(param.type.c_helper_param_type + ' ' + param.name)
+      out.append(param.type.c_param_type + ' ' + param.name)
     out.append(') {\n\t')
 
     # body

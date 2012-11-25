@@ -1,0 +1,194 @@
+=====> 加const且加const*
+
+(False, 'in', 'none', '<c>', 'gchar*', True, True, 'utf8', 'gchar')
+('g_key_file_set_locale_string_list', 'list')
+const gchar * const*
+
+(False, 'in', 'none', '<c>', 'gchar**', False, True, 'utf8', 'gchar*')
+('g_variant_new_bytestring_array', 'strv')
+const gchar * const *
+
+(False, 'in', 'none', '<c>', 'gchar**', False, True, 'utf8', None)
+('g_variant_new_objv', 'strv')
+const gchar * const *
+('g_variant_new_strv', 'strv')
+const gchar * const *
+
+=====> array type加const
+
+(False, 'in', 'none', '<c>', 'gchar**', True, False, 'filename', None)
+('g_key_file_load_from_dirs', 'search_dirs')
+const gchar **
+
+(False, 'in', 'none', '<c>', 'gchar*', True, False, 'guint8', None)
+('g_variant_new_bytestring', 'string')
+const gchar *
+
+(False, 'in', 'none', '<c>', 'guchar*', False, True, 'guint8', None)
+('g_base64_encode', 'data')
+const guchar *
+('g_base64_encode_step', 'in')
+const guchar *
+
+(False, 'in', 'none', '<c>', 'gchar*', False, False, 'guint8', None)
+('g_io_channel_write_chars', 'buf')
+const gchar *
+
+(False, 'in', 'none', '<c>', 'gchar*', False, True, 'utf8', 'gchar')
+('g_regex_escape_string', 'string')
+const gchar *
+('g_regex_match_all_full', 'string')
+const gchar *
+
+(False, 'in', 'none', '<c>', 'GDebugKey*', False, True, 'GLib.DebugKey', 'GDebugKey')
+('g_parse_debug_string', 'keys')
+const GDebugKey *
+
+=====> elem type加const *
+
+(False, 'in', 'none', '<c>', 'GVariant**', False, True, 'GLib.Variant', 'GVariant*')
+('g_variant_new_array', 'children')
+GVariant * const *
+('g_variant_new_tuple', 'children')
+GVariant * const *
+
+=====> elem type加*
+
+(False, 'in', 'none', '<c>', 'gint', False, True, 'gint', 'gint')
+('g_key_file_set_integer_list', 'list')
+gint *
+
+(False, 'in', 'full', '<c>', 'gpointer', False, True, 'guint8', None)
+('g_bytes_new_take', 'data')
+guint8 *
+
+(False, 'in', 'none', '<c>', 'gdouble', False, True, 'gdouble', 'gdouble')
+('g_key_file_set_double_list', 'list')
+gdouble*
+
+=====> 使用array type
+
+(False, 'in', 'none', '<c>', 'gconstpointer', False, True, 'gpointer', 'gconstpointer')
+('g_bytes_new_with_free_func', 'data')
+gconstpointer
+
+(False, 'inout', 'full', '<c>', 'gchar*', False, True, 'guint8', None)
+('g_base64_decode_inplace', 'text')
+gchar *
+
+(False, 'in', 'none', '<c>', 'gconstpointer', False, True, 'guint8', None)
+('g_bytes_new', 'data')
+gconstpointer
+('g_variant_new_from_data', 'data')
+gconstpointer
+
+(False, 'in', 'none', '<c>', 'GPollFD*', False, True, 'GLib.PollFD', 'GPollFD')
+('g_main_context_check', 'fds')
+GPollFD *
+
+(False, 'in', 'none', 'GLib.PtrArray', 'GPtrArray*', True, False, 'gpointer', 'gpointer')
+('g_ptr_array_add', 'array')
+GPtrArray *
+('g_ptr_array_foreach', 'array')
+GPtrArray *
+
+(False, 'in', 'none', 'GLib.ByteArray', 'GByteArray*', True, False, 'guint8', 'guint8')
+('g_byte_array_append', 'array')
+GByteArray *
+('g_byte_array_free', 'array')
+GByteArray *
+
+(False, 'in', 'full', 'GLib.ByteArray', 'GByteArray*', True, False, 'guint8', 'guint8')
+('g_byte_array_free_to_bytes', 'array')
+GByteArray *
+
+(False, 'inout', 'full', '<c>', 'gchar***', False, True, 'utf8', 'gchar**')
+('g_option_context_parse', 'argv')
+gchar ***
+
+(False, 'out', 'full', '<c>', 'guchar*', False, False, 'guint8', None)
+('g_base64_decode_step', 'out')
+guchar *
+
+(False, 'in', 'full', '<c>', 'gconstpointer', False, True, 'guint8', None)
+('g_bytes_new_static', 'data')
+gconstpointer
+
+(True, 'out', 'none', '<c>', 'gchar*', False, True, 'guint8', None)
+('g_io_channel_read_chars', 'buf')
+gchar *
+
+(False, 'out', 'full', '<c>', 'gchar**', False, True, 'guint8', None)
+('g_io_channel_read_to_end', 'str_return')
+('g_file_get_contents', 'contents')
+gchar **
+
+(False, 'in', 'full', '<c>', 'guint8*', False, True, 'guint8', 'guint8')
+('g_byte_array_new_take', 'data')
+guint8 *
+
+(True, 'out', 'none', '<c>', 'GPollFD*', False, True, 'GLib.PollFD', 'GPollFD')
+('g_main_context_query', 'fds')
+GPollFD *
+
+==================== 38 kinds ====================
+(False, 'in', 'none', '<c>', 'gchar*', False, True, 'guint8', None)
+('g_base64_decode_step', 'in')
+('g_file_set_contents', 'contents')
+('g_utf8_validate', 'str')
+
+(False, 'out', 'full', '<c>', 'gchar**', True, False, 'guint8', None)
+('g_spawn_command_line_sync', 'standard_output')
+('g_spawn_command_line_sync', 'standard_error')
+('g_spawn_sync', 'standard_output')
+('g_spawn_sync', 'standard_error')
+
+(False, 'out', 'full', '<c>', 'gchar*', False, False, 'guint8', None)
+('g_base64_encode_close', 'out')
+('g_base64_encode_step', 'out')
+
+(False, 'in', 'none', '<c>', 'gchar**', True, False, 'utf8', 'gchar*')
+('g_build_filenamev', 'args')
+('g_build_pathv', 'args')
+('g_environ_getenv', 'envp')
+('g_spawn_async', 'argv')
+('g_spawn_async', 'envp')
+('g_spawn_async_with_pipes', 'argv')
+('g_spawn_async_with_pipes', 'envp')
+('g_spawn_sync', 'argv')
+('g_spawn_sync', 'envp')
+
+(False, 'in', 'none', '<c>', 'GVariantType**', False, True, 'GLib.VariantType', 'GVariantType*')
+('g_variant_type_new_tuple', 'items')
+
+(False, 'in', 'none', '<c>', 'gchar*', True, True, 'utf8', None)
+('g_key_file_set_string_list', 'list')
+
+(False, 'out', 'full', '<c>', 'gchar***', True, True, 'utf8', 'gchar**')
+('g_shell_parse_argv', 'argvp')
+
+(False, 'in', 'full', '<c>', 'gchar**', True, False, 'utf8', 'gchar*')
+('g_environ_setenv', 'envp')
+('g_environ_unsetenv', 'envp')
+
+(False, 'in', 'none', '<c>', 'guchar*', False, True, 'guint8', 'guchar')
+('g_hmac_new', 'key')
+('g_hmac_update', 'data')
+('g_compute_hmac_for_data', 'key')
+('g_compute_hmac_for_string', 'key')
+
+(False, 'in', 'none', '<c>', 'gboolean', False, True, 'gboolean', 'gboolean')
+('g_key_file_set_boolean_list', 'list')
+
+(False, 'in', 'none', 'GLib.Array', 'GArray*', True, False, 'gpointer', 'gpointer')
+('g_array_append_vals', 'array')
+('g_array_free', 'array')
+('g_array_get_element_size', 'array')
+('g_array_insert_vals', 'array')
+('g_array_prepend_vals', 'array')
+('g_array_ref', 'array')
+('g_array_remove_index', 'array')
+('g_array_remove_index_fast', 'array')
+('g_array_remove_range', 'array')
+('g_array_set_clear_func', 'array')
+

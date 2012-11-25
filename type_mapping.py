@@ -194,18 +194,18 @@ mappings['*C.guintptr'] = make_numeric_p_mapping('guintptr', 'uint64')
 
 mappings['C.double'] = make_numeric_mapping('double', 'float64')
 
-mappings['C.va_list'] = Dict({
-  'help_code': '''\
-typedef struct va_list_wrap {
-  va_list v;
-} va_list_wrap;
-''',
-  'mapped_type': 'C.va_list',
-  'mapped_name_func': lambda param: '_wrapped_' + param.name,
-  'mapping_code_func': lambda param: '''\
-\tvar _wrapped_%s C.va_list_wrap
-\t_wrapped_%s.v = %s
-''' % (
-    param.name, param.name, param.name,
-  ),
-})
+#mappings['C.va_list'] = Dict({
+#  'help_code': '''\
+#typedef struct va_list_wrap {
+#  va_list v;
+#} va_list_wrap;
+#''',
+#  'mapped_type': 'C.va_list',
+#  'mapped_name_func': lambda param: '_wrapped_' + param.name,
+#  'mapping_code_func': lambda param: '''\
+#\tvar _wrapped_%s C.va_list_wrap
+#\t_wrapped_%s.v = %s
+#''' % (
+#    param.name, param.name, param.name,
+#  ),
+#})

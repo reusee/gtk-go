@@ -9,167 +9,160 @@ package glib
 // #include <glib-unix.h>
 // #include <glib.h>
 /*
-typedef struct va_list_wrap {
-  va_list v;
-} va_list_wrap;
-
 gboolean _true() { return TRUE; }
 gboolean _false() { return FALSE; }
-void _g_bookmark_file_add_application(GBookmarkFile* self, void* uri, void* name, void* exec) {
-	g_bookmark_file_add_application((GBookmarkFile*)(self), uri, name, exec);
+void _g_bookmark_file_add_application(GBookmarkFile* self, gchar* uri, gchar* name, gchar* exec) {
+	g_bookmark_file_add_application((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(name), (const gchar*)(exec));
 }
-void _g_bookmark_file_add_group(GBookmarkFile* self, void* uri, void* group) {
-	g_bookmark_file_add_group((GBookmarkFile*)(self), uri, group);
+void _g_bookmark_file_add_group(GBookmarkFile* self, gchar* uri, gchar* group) {
+	g_bookmark_file_add_group((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(group));
 }
-time_t _g_bookmark_file_get_added(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_added((GBookmarkFile*)(self), uri, (GError**)(err));
+time_t _g_bookmark_file_get_added(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_added((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-gboolean _g_bookmark_file_get_app_info(GBookmarkFile* self, void* uri, void* name, void* exec, guint* count, time_t* stamp, void* err) {
-	return g_bookmark_file_get_app_info((GBookmarkFile*)(self), uri, name, exec, count, stamp, (GError**)(err));
+gboolean _g_bookmark_file_get_app_info(GBookmarkFile* self, gchar* uri, gchar* name, void* exec, guint* count, time_t* stamp, void* err) {
+	return g_bookmark_file_get_app_info((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(name), (gchar**)(exec), count, stamp, (GError**)(err));
 }
-gchar** _g_bookmark_file_get_applications(GBookmarkFile* self, void* uri, gsize* length, void* err) {
-	return g_bookmark_file_get_applications((GBookmarkFile*)(self), uri, length, (GError**)(err));
+gchar** _g_bookmark_file_get_applications(GBookmarkFile* self, gchar* uri, gsize* length, void* err) {
+	return g_bookmark_file_get_applications((GBookmarkFile*)(self), (const gchar*)(uri), length, (GError**)(err));
 }
-gchar* _g_bookmark_file_get_description(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_description((GBookmarkFile*)(self), uri, (GError**)(err));
+gchar* _g_bookmark_file_get_description(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_description((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-gchar** _g_bookmark_file_get_groups(GBookmarkFile* self, void* uri, gsize* length, void* err) {
-	return g_bookmark_file_get_groups((GBookmarkFile*)(self), uri, length, (GError**)(err));
+gchar** _g_bookmark_file_get_groups(GBookmarkFile* self, gchar* uri, gsize* length, void* err) {
+	return g_bookmark_file_get_groups((GBookmarkFile*)(self), (const gchar*)(uri), length, (GError**)(err));
 }
-gboolean _g_bookmark_file_get_icon(GBookmarkFile* self, void* uri, void* href, void* mime_type, void* err) {
-	return g_bookmark_file_get_icon((GBookmarkFile*)(self), uri, href, mime_type, (GError**)(err));
+gboolean _g_bookmark_file_get_icon(GBookmarkFile* self, gchar* uri, void* href, void* mime_type, void* err) {
+	return g_bookmark_file_get_icon((GBookmarkFile*)(self), (const gchar*)(uri), (gchar**)(href), (gchar**)(mime_type), (GError**)(err));
 }
-gboolean _g_bookmark_file_get_is_private(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_is_private((GBookmarkFile*)(self), uri, (GError**)(err));
+gboolean _g_bookmark_file_get_is_private(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_is_private((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-gchar* _g_bookmark_file_get_mime_type(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_mime_type((GBookmarkFile*)(self), uri, (GError**)(err));
+gchar* _g_bookmark_file_get_mime_type(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_mime_type((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-time_t _g_bookmark_file_get_modified(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_modified((GBookmarkFile*)(self), uri, (GError**)(err));
+time_t _g_bookmark_file_get_modified(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_modified((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-gchar* _g_bookmark_file_get_title(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_title((GBookmarkFile*)(self), uri, (GError**)(err));
+gchar* _g_bookmark_file_get_title(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_title((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-time_t _g_bookmark_file_get_visited(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_get_visited((GBookmarkFile*)(self), uri, (GError**)(err));
+time_t _g_bookmark_file_get_visited(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_get_visited((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-gboolean _g_bookmark_file_has_application(GBookmarkFile* self, void* uri, void* name, void* err) {
-	return g_bookmark_file_has_application((GBookmarkFile*)(self), uri, name, (GError**)(err));
+gboolean _g_bookmark_file_has_application(GBookmarkFile* self, gchar* uri, gchar* name, void* err) {
+	return g_bookmark_file_has_application((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(name), (GError**)(err));
 }
-gboolean _g_bookmark_file_has_group(GBookmarkFile* self, void* uri, void* group, void* err) {
-	return g_bookmark_file_has_group((GBookmarkFile*)(self), uri, group, (GError**)(err));
+gboolean _g_bookmark_file_has_group(GBookmarkFile* self, gchar* uri, gchar* group, void* err) {
+	return g_bookmark_file_has_group((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(group), (GError**)(err));
 }
-gboolean _g_bookmark_file_has_item(GBookmarkFile* self, void* uri) {
-	return g_bookmark_file_has_item((GBookmarkFile*)(self), uri);
+gboolean _g_bookmark_file_has_item(GBookmarkFile* self, gchar* uri) {
+	return g_bookmark_file_has_item((GBookmarkFile*)(self), (const gchar*)(uri));
 }
-gboolean _g_bookmark_file_load_from_data(GBookmarkFile* self, void* data, gsize length, void* err) {
-	return g_bookmark_file_load_from_data((GBookmarkFile*)(self), data, length, (GError**)(err));
+gboolean _g_bookmark_file_load_from_data(GBookmarkFile* self, gchar* data, gsize length, void* err) {
+	return g_bookmark_file_load_from_data((GBookmarkFile*)(self), (const gchar*)(data), length, (GError**)(err));
 }
-gboolean _g_bookmark_file_load_from_data_dirs(GBookmarkFile* self, void* file, void* full_path, void* err) {
-	return g_bookmark_file_load_from_data_dirs((GBookmarkFile*)(self), file, full_path, (GError**)(err));
+gboolean _g_bookmark_file_load_from_data_dirs(GBookmarkFile* self, gchar* file, void* full_path, void* err) {
+	return g_bookmark_file_load_from_data_dirs((GBookmarkFile*)(self), (const gchar*)(file), (gchar**)(full_path), (GError**)(err));
 }
-gboolean _g_bookmark_file_load_from_file(GBookmarkFile* self, void* filename, void* err) {
-	return g_bookmark_file_load_from_file((GBookmarkFile*)(self), filename, (GError**)(err));
+gboolean _g_bookmark_file_load_from_file(GBookmarkFile* self, gchar* filename, void* err) {
+	return g_bookmark_file_load_from_file((GBookmarkFile*)(self), (const gchar*)(filename), (GError**)(err));
 }
-gboolean _g_bookmark_file_move_item(GBookmarkFile* self, void* old_uri, void* new_uri, void* err) {
-	return g_bookmark_file_move_item((GBookmarkFile*)(self), old_uri, new_uri, (GError**)(err));
+gboolean _g_bookmark_file_move_item(GBookmarkFile* self, gchar* old_uri, gchar* new_uri, void* err) {
+	return g_bookmark_file_move_item((GBookmarkFile*)(self), (const gchar*)(old_uri), (const gchar*)(new_uri), (GError**)(err));
 }
-gboolean _g_bookmark_file_remove_application(GBookmarkFile* self, void* uri, void* name, void* err) {
-	return g_bookmark_file_remove_application((GBookmarkFile*)(self), uri, name, (GError**)(err));
+gboolean _g_bookmark_file_remove_application(GBookmarkFile* self, gchar* uri, gchar* name, void* err) {
+	return g_bookmark_file_remove_application((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(name), (GError**)(err));
 }
-gboolean _g_bookmark_file_remove_group(GBookmarkFile* self, void* uri, void* group, void* err) {
-	return g_bookmark_file_remove_group((GBookmarkFile*)(self), uri, group, (GError**)(err));
+gboolean _g_bookmark_file_remove_group(GBookmarkFile* self, gchar* uri, gchar* group, void* err) {
+	return g_bookmark_file_remove_group((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(group), (GError**)(err));
 }
-gboolean _g_bookmark_file_remove_item(GBookmarkFile* self, void* uri, void* err) {
-	return g_bookmark_file_remove_item((GBookmarkFile*)(self), uri, (GError**)(err));
+gboolean _g_bookmark_file_remove_item(GBookmarkFile* self, gchar* uri, void* err) {
+	return g_bookmark_file_remove_item((GBookmarkFile*)(self), (const gchar*)(uri), (GError**)(err));
 }
-void _g_bookmark_file_set_added(GBookmarkFile* self, void* uri, time_t added) {
-	g_bookmark_file_set_added((GBookmarkFile*)(self), uri, added);
+void _g_bookmark_file_set_added(GBookmarkFile* self, gchar* uri, time_t added) {
+	g_bookmark_file_set_added((GBookmarkFile*)(self), (const gchar*)(uri), added);
 }
-gboolean _g_bookmark_file_set_app_info(GBookmarkFile* self, void* uri, void* name, void* exec, gint count, time_t stamp, void* err) {
-	return g_bookmark_file_set_app_info((GBookmarkFile*)(self), uri, name, exec, count, stamp, (GError**)(err));
+gboolean _g_bookmark_file_set_app_info(GBookmarkFile* self, gchar* uri, gchar* name, gchar* exec, gint count, time_t stamp, void* err) {
+	return g_bookmark_file_set_app_info((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(name), (const gchar*)(exec), count, stamp, (GError**)(err));
 }
-void _g_bookmark_file_set_description(GBookmarkFile* self, void* uri, void* description) {
-	g_bookmark_file_set_description((GBookmarkFile*)(self), uri, description);
+void _g_bookmark_file_set_description(GBookmarkFile* self, gchar* uri, gchar* description) {
+	g_bookmark_file_set_description((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(description));
 }
-void _g_bookmark_file_set_groups(GBookmarkFile* self, void* uri, void* groups, gsize length) {
-	g_bookmark_file_set_groups((GBookmarkFile*)(self), uri, groups, length);
+void _g_bookmark_file_set_groups(GBookmarkFile* self, gchar* uri, void* groups, gsize length) {
+	g_bookmark_file_set_groups((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar**)(groups), length);
 }
-void _g_bookmark_file_set_icon(GBookmarkFile* self, void* uri, void* href, void* mime_type) {
-	g_bookmark_file_set_icon((GBookmarkFile*)(self), uri, href, mime_type);
+void _g_bookmark_file_set_icon(GBookmarkFile* self, gchar* uri, gchar* href, gchar* mime_type) {
+	g_bookmark_file_set_icon((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(href), (const gchar*)(mime_type));
 }
-void _g_bookmark_file_set_is_private(GBookmarkFile* self, void* uri, gboolean is_private) {
-	g_bookmark_file_set_is_private((GBookmarkFile*)(self), uri, is_private);
+void _g_bookmark_file_set_is_private(GBookmarkFile* self, gchar* uri, gboolean is_private) {
+	g_bookmark_file_set_is_private((GBookmarkFile*)(self), (const gchar*)(uri), is_private);
 }
-void _g_bookmark_file_set_mime_type(GBookmarkFile* self, void* uri, void* mime_type) {
-	g_bookmark_file_set_mime_type((GBookmarkFile*)(self), uri, mime_type);
+void _g_bookmark_file_set_mime_type(GBookmarkFile* self, gchar* uri, gchar* mime_type) {
+	g_bookmark_file_set_mime_type((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(mime_type));
 }
-void _g_bookmark_file_set_modified(GBookmarkFile* self, void* uri, time_t modified) {
-	g_bookmark_file_set_modified((GBookmarkFile*)(self), uri, modified);
+void _g_bookmark_file_set_modified(GBookmarkFile* self, gchar* uri, time_t modified) {
+	g_bookmark_file_set_modified((GBookmarkFile*)(self), (const gchar*)(uri), modified);
 }
-void _g_bookmark_file_set_title(GBookmarkFile* self, void* uri, void* title) {
-	g_bookmark_file_set_title((GBookmarkFile*)(self), uri, title);
+void _g_bookmark_file_set_title(GBookmarkFile* self, gchar* uri, gchar* title) {
+	g_bookmark_file_set_title((GBookmarkFile*)(self), (const gchar*)(uri), (const gchar*)(title));
 }
-void _g_bookmark_file_set_visited(GBookmarkFile* self, void* uri, time_t visited) {
-	g_bookmark_file_set_visited((GBookmarkFile*)(self), uri, visited);
+void _g_bookmark_file_set_visited(GBookmarkFile* self, gchar* uri, time_t visited) {
+	g_bookmark_file_set_visited((GBookmarkFile*)(self), (const gchar*)(uri), visited);
 }
 gchar* _g_bookmark_file_to_data(GBookmarkFile* self, gsize* length, void* err) {
 	return g_bookmark_file_to_data((GBookmarkFile*)(self), length, (GError**)(err));
 }
-gboolean _g_bookmark_file_to_file(GBookmarkFile* self, void* filename, void* err) {
-	return g_bookmark_file_to_file((GBookmarkFile*)(self), filename, (GError**)(err));
+gboolean _g_bookmark_file_to_file(GBookmarkFile* self, gchar* filename, void* err) {
+	return g_bookmark_file_to_file((GBookmarkFile*)(self), (const gchar*)(filename), (GError**)(err));
 }
-GByteArray* _g_byte_array_append(GByteArray* array, void* data, guint len_) {
-	return g_byte_array_append(array, data, len_);
+GByteArray* _g_byte_array_append(GByteArray* array, guint8* data, guint len_) {
+	return g_byte_array_append(array, (const guint8*)(data), len_);
 }
-GByteArray* _g_byte_array_prepend(GByteArray* array, void* data, guint len_) {
-	return g_byte_array_prepend(array, data, len_);
+GByteArray* _g_byte_array_prepend(GByteArray* array, guint8* data, guint len_) {
+	return g_byte_array_prepend(array, (const guint8*)(data), len_);
 }
-void _g_checksum_update(GChecksum* self, void* data, gssize length) {
-	g_checksum_update((GChecksum*)(self), data, length);
+void _g_checksum_update(GChecksum* self, guchar* data, gssize length) {
+	g_checksum_update((GChecksum*)(self), (const guchar*)(data), length);
 }
-gsize _g_date_strftime(void* s, gsize slen, void* format, void* date) {
-	return g_date_strftime(s, slen, format, date);
+gsize _g_date_strftime(gchar* s, gsize slen, gchar* format, GDate* date) {
+	return g_date_strftime(s, slen, (const gchar*)(format), (const GDate*)(date));
 }
-void _g_date_clamp(GDate* self, void* min_date, void* max_date) {
-	g_date_clamp((GDate*)(self), min_date, max_date);
+void _g_date_clamp(GDate* self, GDate* min_date, GDate* max_date) {
+	g_date_clamp((GDate*)(self), (const GDate*)(min_date), (const GDate*)(max_date));
 }
-gint _g_date_compare(GDate* self, void* rhs) {
-	return g_date_compare((GDate*)(self), rhs);
+gint _g_date_compare(GDate* self, GDate* rhs) {
+	return g_date_compare((GDate*)(self), (const GDate*)(rhs));
 }
-gint _g_date_days_between(GDate* self, void* date2) {
-	return g_date_days_between((GDate*)(self), date2);
+gint _g_date_days_between(GDate* self, GDate* date2) {
+	return g_date_days_between((GDate*)(self), (const GDate*)(date2));
 }
-void _g_date_set_parse(GDate* self, void* str) {
-	g_date_set_parse((GDate*)(self), str);
+void _g_date_set_parse(GDate* self, gchar* str) {
+	g_date_set_parse((GDate*)(self), (const gchar*)(str));
 }
-GDateTime* _g_date_time_new_from_timeval_local(void* tv) {
-	return g_date_time_new_from_timeval_local(tv);
+GDateTime* _g_date_time_new_from_timeval_local(GTimeVal* tv) {
+	return g_date_time_new_from_timeval_local((const GTimeVal*)(tv));
 }
-GDateTime* _g_date_time_new_from_timeval_utc(void* tv) {
-	return g_date_time_new_from_timeval_utc(tv);
+GDateTime* _g_date_time_new_from_timeval_utc(GTimeVal* tv) {
+	return g_date_time_new_from_timeval_utc((const GTimeVal*)(tv));
 }
-gchar* _g_date_time_format(GDateTime* self, void* format) {
-	return g_date_time_format((GDateTime*)(self), format);
+gchar* _g_date_time_format(GDateTime* self, gchar* format) {
+	return g_date_time_format((GDateTime*)(self), (const gchar*)(format));
 }
-gchar* _g_dir_make_tmp(void* tmpl, void* err) {
+gchar* _g_dir_make_tmp(gchar* tmpl, void* err) {
 	return g_dir_make_tmp(tmpl, (GError**)(err));
 }
-GDir* _g_dir_open(void* path, guint flags, void* err) {
-	return g_dir_open(path, flags, (GError**)(err));
+GDir* _g_dir_open(gchar* path, guint flags, void* err) {
+	return g_dir_open((const gchar*)(path), flags, (GError**)(err));
 }
-GError* _g_error_new_literal(GQuark domain, gint code, void* message) {
-	return g_error_new_literal(domain, code, message);
+GError* _g_error_new_literal(GQuark domain, gint code, gchar* message) {
+	return g_error_new_literal(domain, code, (const gchar*)(message));
 }
-GError* _g_error_new_valist(GQuark domain, gint code, void* format, va_list_wrap args) {
-	return g_error_new_valist(domain, code, format, args.v);
+GIConv _g_iconv_open(gchar* to_codeset, gchar* from_codeset) {
+	return g_iconv_open((const gchar*)(to_codeset), (const gchar*)(from_codeset));
 }
-GIConv _g_iconv_open(void* to_codeset, void* from_codeset) {
-	return g_iconv_open(to_codeset, from_codeset);
-}
-GIOChannel* _g_io_channel_new_file(void* filename, void* mode, void* err) {
-	return g_io_channel_new_file(filename, mode, (GError**)(err));
+GIOChannel* _g_io_channel_new_file(gchar* filename, gchar* mode, void* err) {
+	return g_io_channel_new_file((const gchar*)(filename), (const gchar*)(mode), (GError**)(err));
 }
 GIOStatus _g_io_channel_flush(GIOChannel* self, void* err) {
 	return g_io_channel_flush((GIOChannel*)(self), (GError**)(err));
@@ -178,13 +171,13 @@ GIOStatus _g_io_channel_read_chars(GIOChannel* self, gchar* buf, gsize count, gs
 	return g_io_channel_read_chars((GIOChannel*)(self), buf, count, bytes_read, (GError**)(err));
 }
 GIOStatus _g_io_channel_read_line(GIOChannel* self, void* str_return, gsize* length, gsize* terminator_pos, void* err) {
-	return g_io_channel_read_line((GIOChannel*)(self), str_return, length, terminator_pos, (GError**)(err));
+	return g_io_channel_read_line((GIOChannel*)(self), (gchar**)(str_return), length, terminator_pos, (GError**)(err));
 }
 GIOStatus _g_io_channel_read_line_string(GIOChannel* self, GString* buffer, gsize* terminator_pos, void* err) {
 	return g_io_channel_read_line_string((GIOChannel*)(self), buffer, terminator_pos, (GError**)(err));
 }
 GIOStatus _g_io_channel_read_to_end(GIOChannel* self, void* str_return, gsize* length, void* err) {
-	return g_io_channel_read_to_end((GIOChannel*)(self), str_return, length, (GError**)(err));
+	return g_io_channel_read_to_end((GIOChannel*)(self), (gchar**)(str_return), length, (GError**)(err));
 }
 GIOStatus _g_io_channel_read_unichar(GIOChannel* self, gunichar* thechar, void* err) {
 	return g_io_channel_read_unichar((GIOChannel*)(self), thechar, (GError**)(err));
@@ -192,14 +185,14 @@ GIOStatus _g_io_channel_read_unichar(GIOChannel* self, gunichar* thechar, void* 
 GIOStatus _g_io_channel_seek_position(GIOChannel* self, gint64 offset, GSeekType type_, void* err) {
 	return g_io_channel_seek_position((GIOChannel*)(self), offset, type_, (GError**)(err));
 }
-GIOStatus _g_io_channel_set_encoding(GIOChannel* self, void* encoding, void* err) {
-	return g_io_channel_set_encoding((GIOChannel*)(self), encoding, (GError**)(err));
+GIOStatus _g_io_channel_set_encoding(GIOChannel* self, gchar* encoding, void* err) {
+	return g_io_channel_set_encoding((GIOChannel*)(self), (const gchar*)(encoding), (GError**)(err));
 }
 GIOStatus _g_io_channel_set_flags(GIOChannel* self, GIOFlags flags, void* err) {
 	return g_io_channel_set_flags((GIOChannel*)(self), flags, (GError**)(err));
 }
-void _g_io_channel_set_line_term(GIOChannel* self, void* line_term, gint length) {
-	g_io_channel_set_line_term((GIOChannel*)(self), line_term, length);
+void _g_io_channel_set_line_term(GIOChannel* self, gchar* line_term, gint length) {
+	g_io_channel_set_line_term((GIOChannel*)(self), (const gchar*)(line_term), length);
 }
 GIOStatus _g_io_channel_shutdown(GIOChannel* self, gboolean flush, void* err) {
 	return g_io_channel_shutdown((GIOChannel*)(self), flush, (GError**)(err));
@@ -210,314 +203,308 @@ GIOStatus _g_io_channel_write_chars(GIOChannel* self, gchar* buf, gssize count, 
 GIOStatus _g_io_channel_write_unichar(GIOChannel* self, gunichar thechar, void* err) {
 	return g_io_channel_write_unichar((GIOChannel*)(self), thechar, (GError**)(err));
 }
-gboolean _g_key_file_get_boolean(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_boolean((GKeyFile*)(self), group_name, key, (GError**)(err));
+gboolean _g_key_file_get_boolean(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_boolean((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gboolean* _g_key_file_get_boolean_list(GKeyFile* self, void* group_name, void* key, gsize* length, void* err) {
-	return g_key_file_get_boolean_list((GKeyFile*)(self), group_name, key, length, (GError**)(err));
+gboolean* _g_key_file_get_boolean_list(GKeyFile* self, gchar* group_name, gchar* key, gsize* length, void* err) {
+	return g_key_file_get_boolean_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), length, (GError**)(err));
 }
-gchar* _g_key_file_get_comment(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_comment((GKeyFile*)(self), group_name, key, (GError**)(err));
+gchar* _g_key_file_get_comment(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_comment((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gdouble _g_key_file_get_double(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_double((GKeyFile*)(self), group_name, key, (GError**)(err));
+gdouble _g_key_file_get_double(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_double((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gdouble* _g_key_file_get_double_list(GKeyFile* self, void* group_name, void* key, gsize* length, void* err) {
-	return g_key_file_get_double_list((GKeyFile*)(self), group_name, key, length, (GError**)(err));
+gdouble* _g_key_file_get_double_list(GKeyFile* self, gchar* group_name, gchar* key, gsize* length, void* err) {
+	return g_key_file_get_double_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), length, (GError**)(err));
 }
-gint64 _g_key_file_get_int64(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_int64((GKeyFile*)(self), group_name, key, (GError**)(err));
+gint64 _g_key_file_get_int64(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_int64((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gint _g_key_file_get_integer(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_integer((GKeyFile*)(self), group_name, key, (GError**)(err));
+gint _g_key_file_get_integer(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_integer((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gint* _g_key_file_get_integer_list(GKeyFile* self, void* group_name, void* key, gsize* length, void* err) {
-	return g_key_file_get_integer_list((GKeyFile*)(self), group_name, key, length, (GError**)(err));
+gint* _g_key_file_get_integer_list(GKeyFile* self, gchar* group_name, gchar* key, gsize* length, void* err) {
+	return g_key_file_get_integer_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), length, (GError**)(err));
 }
-gchar** _g_key_file_get_keys(GKeyFile* self, void* group_name, gsize* length, void* err) {
-	return g_key_file_get_keys((GKeyFile*)(self), group_name, length, (GError**)(err));
+gchar** _g_key_file_get_keys(GKeyFile* self, gchar* group_name, gsize* length, void* err) {
+	return g_key_file_get_keys((GKeyFile*)(self), (const gchar*)(group_name), length, (GError**)(err));
 }
-gchar* _g_key_file_get_locale_string(GKeyFile* self, void* group_name, void* key, void* locale, void* err) {
-	return g_key_file_get_locale_string((GKeyFile*)(self), group_name, key, locale, (GError**)(err));
+gchar* _g_key_file_get_locale_string(GKeyFile* self, gchar* group_name, gchar* key, gchar* locale, void* err) {
+	return g_key_file_get_locale_string((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(locale), (GError**)(err));
 }
-gchar** _g_key_file_get_locale_string_list(GKeyFile* self, void* group_name, void* key, void* locale, gsize* length, void* err) {
-	return g_key_file_get_locale_string_list((GKeyFile*)(self), group_name, key, locale, length, (GError**)(err));
+gchar** _g_key_file_get_locale_string_list(GKeyFile* self, gchar* group_name, gchar* key, gchar* locale, gsize* length, void* err) {
+	return g_key_file_get_locale_string_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(locale), length, (GError**)(err));
 }
-gchar* _g_key_file_get_string(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_string((GKeyFile*)(self), group_name, key, (GError**)(err));
+gchar* _g_key_file_get_string(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_string((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gchar** _g_key_file_get_string_list(GKeyFile* self, void* group_name, void* key, gsize* length, void* err) {
-	return g_key_file_get_string_list((GKeyFile*)(self), group_name, key, length, (GError**)(err));
+gchar** _g_key_file_get_string_list(GKeyFile* self, gchar* group_name, gchar* key, gsize* length, void* err) {
+	return g_key_file_get_string_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), length, (GError**)(err));
 }
-guint64 _g_key_file_get_uint64(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_uint64((GKeyFile*)(self), group_name, key, (GError**)(err));
+guint64 _g_key_file_get_uint64(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_uint64((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gchar* _g_key_file_get_value(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_get_value((GKeyFile*)(self), group_name, key, (GError**)(err));
+gchar* _g_key_file_get_value(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_get_value((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gboolean _g_key_file_has_group(GKeyFile* self, void* group_name) {
-	return g_key_file_has_group((GKeyFile*)(self), group_name);
+gboolean _g_key_file_has_group(GKeyFile* self, gchar* group_name) {
+	return g_key_file_has_group((GKeyFile*)(self), (const gchar*)(group_name));
 }
-gboolean _g_key_file_has_key(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_has_key((GKeyFile*)(self), group_name, key, (GError**)(err));
+gboolean _g_key_file_has_key(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_has_key((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gboolean _g_key_file_load_from_data(GKeyFile* self, void* data, gsize length, GKeyFileFlags flags, void* err) {
-	return g_key_file_load_from_data((GKeyFile*)(self), data, length, flags, (GError**)(err));
+gboolean _g_key_file_load_from_data(GKeyFile* self, gchar* data, gsize length, GKeyFileFlags flags, void* err) {
+	return g_key_file_load_from_data((GKeyFile*)(self), (const gchar*)(data), length, flags, (GError**)(err));
 }
-gboolean _g_key_file_load_from_data_dirs(GKeyFile* self, void* file, void* full_path, GKeyFileFlags flags, void* err) {
-	return g_key_file_load_from_data_dirs((GKeyFile*)(self), file, full_path, flags, (GError**)(err));
+gboolean _g_key_file_load_from_data_dirs(GKeyFile* self, gchar* file, void* full_path, GKeyFileFlags flags, void* err) {
+	return g_key_file_load_from_data_dirs((GKeyFile*)(self), file, (gchar**)(full_path), flags, (GError**)(err));
 }
-gboolean _g_key_file_load_from_dirs(GKeyFile* self, void* file, void* search_dirs, void* full_path, GKeyFileFlags flags, void* err) {
-	return g_key_file_load_from_dirs((GKeyFile*)(self), file, (const gchar**)(search_dirs), full_path, flags, (GError**)(err));
+gboolean _g_key_file_load_from_dirs(GKeyFile* self, gchar* file, void* search_dirs, void* full_path, GKeyFileFlags flags, void* err) {
+	return g_key_file_load_from_dirs((GKeyFile*)(self), file, (gchar**)(search_dirs), (gchar**)(full_path), flags, (GError**)(err));
 }
-gboolean _g_key_file_load_from_file(GKeyFile* self, void* file, GKeyFileFlags flags, void* err) {
+gboolean _g_key_file_load_from_file(GKeyFile* self, gchar* file, GKeyFileFlags flags, void* err) {
 	return g_key_file_load_from_file((GKeyFile*)(self), file, flags, (GError**)(err));
 }
-gboolean _g_key_file_remove_comment(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_remove_comment((GKeyFile*)(self), group_name, key, (GError**)(err));
+gboolean _g_key_file_remove_comment(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_remove_comment((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-gboolean _g_key_file_remove_group(GKeyFile* self, void* group_name, void* err) {
-	return g_key_file_remove_group((GKeyFile*)(self), group_name, (GError**)(err));
+gboolean _g_key_file_remove_group(GKeyFile* self, gchar* group_name, void* err) {
+	return g_key_file_remove_group((GKeyFile*)(self), (const gchar*)(group_name), (GError**)(err));
 }
-gboolean _g_key_file_remove_key(GKeyFile* self, void* group_name, void* key, void* err) {
-	return g_key_file_remove_key((GKeyFile*)(self), group_name, key, (GError**)(err));
+gboolean _g_key_file_remove_key(GKeyFile* self, gchar* group_name, gchar* key, void* err) {
+	return g_key_file_remove_key((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (GError**)(err));
 }
-void _g_key_file_set_boolean(GKeyFile* self, void* group_name, void* key, gboolean value) {
-	g_key_file_set_boolean((GKeyFile*)(self), group_name, key, value);
+void _g_key_file_set_boolean(GKeyFile* self, gchar* group_name, gchar* key, gboolean value) {
+	g_key_file_set_boolean((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), value);
 }
-void _g_key_file_set_boolean_list(GKeyFile* self, void* group_name, void* key, gboolean* list, gsize length) {
-	g_key_file_set_boolean_list((GKeyFile*)(self), group_name, key, (gboolean*)(list), length);
+void _g_key_file_set_boolean_list(GKeyFile* self, gchar* group_name, gchar* key, gboolean list, gsize length) {
+	g_key_file_set_boolean_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), list, length);
 }
-gboolean _g_key_file_set_comment(GKeyFile* self, void* group_name, void* key, void* comment, void* err) {
-	return g_key_file_set_comment((GKeyFile*)(self), group_name, key, comment, (GError**)(err));
+gboolean _g_key_file_set_comment(GKeyFile* self, gchar* group_name, gchar* key, gchar* comment, void* err) {
+	return g_key_file_set_comment((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(comment), (GError**)(err));
 }
-void _g_key_file_set_double(GKeyFile* self, void* group_name, void* key, gdouble value) {
-	g_key_file_set_double((GKeyFile*)(self), group_name, key, value);
+void _g_key_file_set_double(GKeyFile* self, gchar* group_name, gchar* key, gdouble value) {
+	g_key_file_set_double((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), value);
 }
-void _g_key_file_set_double_list(GKeyFile* self, void* group_name, void* key, gdouble* list, gsize length) {
-	g_key_file_set_double_list((GKeyFile*)(self), group_name, key, (gdouble*)(list), length);
+void _g_key_file_set_double_list(GKeyFile* self, gchar* group_name, gchar* key, gdouble list, gsize length) {
+	g_key_file_set_double_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), list, length);
 }
-void _g_key_file_set_int64(GKeyFile* self, void* group_name, void* key, gint64 value) {
-	g_key_file_set_int64((GKeyFile*)(self), group_name, key, value);
+void _g_key_file_set_int64(GKeyFile* self, gchar* group_name, gchar* key, gint64 value) {
+	g_key_file_set_int64((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), value);
 }
-void _g_key_file_set_integer(GKeyFile* self, void* group_name, void* key, gint value) {
-	g_key_file_set_integer((GKeyFile*)(self), group_name, key, value);
+void _g_key_file_set_integer(GKeyFile* self, gchar* group_name, gchar* key, gint value) {
+	g_key_file_set_integer((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), value);
 }
-void _g_key_file_set_integer_list(GKeyFile* self, void* group_name, void* key, gint* list, gsize length) {
-	g_key_file_set_integer_list((GKeyFile*)(self), group_name, key, (gint*)(list), length);
+void _g_key_file_set_integer_list(GKeyFile* self, gchar* group_name, gchar* key, gint list, gsize length) {
+	g_key_file_set_integer_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), list, length);
 }
-void _g_key_file_set_locale_string(GKeyFile* self, void* group_name, void* key, void* locale, void* string_) {
-	g_key_file_set_locale_string((GKeyFile*)(self), group_name, key, locale, string_);
+void _g_key_file_set_locale_string(GKeyFile* self, gchar* group_name, gchar* key, gchar* locale, gchar* string_) {
+	g_key_file_set_locale_string((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(locale), (const gchar*)(string_));
 }
-void _g_key_file_set_locale_string_list(GKeyFile* self, void* group_name, void* key, void* locale, gchar* list, gsize length) {
-	g_key_file_set_locale_string_list((GKeyFile*)(self), group_name, key, locale, (const gchar**)(list), length);
+void _g_key_file_set_locale_string_list(GKeyFile* self, gchar* group_name, gchar* key, gchar* locale, gchar* list, gsize length) {
+	g_key_file_set_locale_string_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(locale), list, length);
 }
-void _g_key_file_set_string(GKeyFile* self, void* group_name, void* key, void* string_) {
-	g_key_file_set_string((GKeyFile*)(self), group_name, key, string_);
+void _g_key_file_set_string(GKeyFile* self, gchar* group_name, gchar* key, gchar* string_) {
+	g_key_file_set_string((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(string_));
 }
-void _g_key_file_set_string_list(GKeyFile* self, void* group_name, void* key, gchar* list, gsize length) {
-	g_key_file_set_string_list((GKeyFile*)(self), group_name, key, (const gchar**)(list), length);
+void _g_key_file_set_string_list(GKeyFile* self, gchar* group_name, gchar* key, gchar* list, gsize length) {
+	g_key_file_set_string_list((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), list, length);
 }
-void _g_key_file_set_uint64(GKeyFile* self, void* group_name, void* key, guint64 value) {
-	g_key_file_set_uint64((GKeyFile*)(self), group_name, key, value);
+void _g_key_file_set_uint64(GKeyFile* self, gchar* group_name, gchar* key, guint64 value) {
+	g_key_file_set_uint64((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), value);
 }
-void _g_key_file_set_value(GKeyFile* self, void* group_name, void* key, void* value) {
-	g_key_file_set_value((GKeyFile*)(self), group_name, key, value);
+void _g_key_file_set_value(GKeyFile* self, gchar* group_name, gchar* key, gchar* value) {
+	g_key_file_set_value((GKeyFile*)(self), (const gchar*)(group_name), (const gchar*)(key), (const gchar*)(value));
 }
 gchar* _g_key_file_to_data(GKeyFile* self, gsize* length, void* err) {
 	return g_key_file_to_data((GKeyFile*)(self), length, (GError**)(err));
 }
-GMappedFile* _g_mapped_file_new(void* filename, gboolean writable, void* err) {
-	return g_mapped_file_new(filename, writable, (GError**)(err));
+GMappedFile* _g_mapped_file_new(gchar* filename, gboolean writable, void* err) {
+	return g_mapped_file_new((const gchar*)(filename), writable, (GError**)(err));
 }
 GMappedFile* _g_mapped_file_new_from_fd(gint fd, gboolean writable, void* err) {
 	return g_mapped_file_new_from_fd(fd, writable, (GError**)(err));
 }
-GMarkupParseContext* _g_markup_parse_context_new(void* parser, GMarkupParseFlags flags, gpointer user_data, GDestroyNotify user_data_dnotify) {
-	return g_markup_parse_context_new(parser, flags, user_data, user_data_dnotify);
+GMarkupParseContext* _g_markup_parse_context_new(GMarkupParser* parser, GMarkupParseFlags flags, gpointer user_data, GDestroyNotify user_data_dnotify) {
+	return g_markup_parse_context_new((const GMarkupParser*)(parser), flags, user_data, user_data_dnotify);
 }
 gboolean _g_markup_parse_context_end_parse(GMarkupParseContext* self, void* err) {
 	return g_markup_parse_context_end_parse((GMarkupParseContext*)(self), (GError**)(err));
 }
-gboolean _g_markup_parse_context_parse(GMarkupParseContext* self, void* text, gssize text_len, void* err) {
-	return g_markup_parse_context_parse((GMarkupParseContext*)(self), text, text_len, (GError**)(err));
+gboolean _g_markup_parse_context_parse(GMarkupParseContext* self, gchar* text, gssize text_len, void* err) {
+	return g_markup_parse_context_parse((GMarkupParseContext*)(self), (const gchar*)(text), text_len, (GError**)(err));
 }
-void _g_markup_parse_context_push(GMarkupParseContext* self, void* parser, gpointer user_data) {
-	g_markup_parse_context_push((GMarkupParseContext*)(self), parser, user_data);
+void _g_markup_parse_context_push(GMarkupParseContext* self, GMarkupParser* parser, gpointer user_data) {
+	g_markup_parse_context_push((GMarkupParseContext*)(self), (const GMarkupParser*)(parser), user_data);
 }
-gchar* _g_match_info_expand_references(GMatchInfo* self, void* string_to_expand, void* err) {
-	return g_match_info_expand_references((GMatchInfo*)(self), string_to_expand, (GError**)(err));
+gchar* _g_match_info_expand_references(GMatchInfo* self, gchar* string_to_expand, void* err) {
+	return g_match_info_expand_references((GMatchInfo*)(self), (const gchar*)(string_to_expand), (GError**)(err));
 }
-gchar* _g_match_info_fetch_named(GMatchInfo* self, void* name) {
-	return g_match_info_fetch_named((GMatchInfo*)(self), name);
+gchar* _g_match_info_fetch_named(GMatchInfo* self, gchar* name) {
+	return g_match_info_fetch_named((GMatchInfo*)(self), (const gchar*)(name));
 }
-gboolean _g_match_info_fetch_named_pos(GMatchInfo* self, void* name, gint* start_pos, gint* end_pos) {
-	return g_match_info_fetch_named_pos((GMatchInfo*)(self), name, start_pos, end_pos);
+gboolean _g_match_info_fetch_named_pos(GMatchInfo* self, gchar* name, gint* start_pos, gint* end_pos) {
+	return g_match_info_fetch_named_pos((GMatchInfo*)(self), (const gchar*)(name), start_pos, end_pos);
 }
 gboolean _g_match_info_next(GMatchInfo* self, void* err) {
 	return g_match_info_next((GMatchInfo*)(self), (GError**)(err));
 }
-GOptionContext* _g_option_context_new(void* parameter_string) {
-	return g_option_context_new(parameter_string);
+GOptionContext* _g_option_context_new(gchar* parameter_string) {
+	return g_option_context_new((const gchar*)(parameter_string));
 }
-void _g_option_context_add_main_entries(GOptionContext* self, void* entries, void* translation_domain) {
-	g_option_context_add_main_entries((GOptionContext*)(self), entries, translation_domain);
+void _g_option_context_add_main_entries(GOptionContext* self, GOptionEntry* entries, gchar* translation_domain) {
+	g_option_context_add_main_entries((GOptionContext*)(self), (const GOptionEntry*)(entries), (const gchar*)(translation_domain));
 }
 gboolean _g_option_context_parse(GOptionContext* self, gint* argc, void* argv, void* err) {
-	return g_option_context_parse((GOptionContext*)(self), argc, (const gchar**)(argv), (GError**)(err));
+	return g_option_context_parse((GOptionContext*)(self), argc, (gchar***)(argv), (GError**)(err));
 }
-void _g_option_context_set_description(GOptionContext* self, void* description) {
-	g_option_context_set_description((GOptionContext*)(self), description);
+void _g_option_context_set_description(GOptionContext* self, gchar* description) {
+	g_option_context_set_description((GOptionContext*)(self), (const gchar*)(description));
 }
-void _g_option_context_set_summary(GOptionContext* self, void* summary) {
-	g_option_context_set_summary((GOptionContext*)(self), summary);
+void _g_option_context_set_summary(GOptionContext* self, gchar* summary) {
+	g_option_context_set_summary((GOptionContext*)(self), (const gchar*)(summary));
 }
-void _g_option_context_set_translation_domain(GOptionContext* self, void* domain) {
-	g_option_context_set_translation_domain((GOptionContext*)(self), domain);
+void _g_option_context_set_translation_domain(GOptionContext* self, gchar* domain) {
+	g_option_context_set_translation_domain((GOptionContext*)(self), (const gchar*)(domain));
 }
-GOptionGroup* _g_option_group_new(void* name, void* description, void* help_description, gpointer user_data, GDestroyNotify destroy) {
-	return g_option_group_new(name, description, help_description, user_data, destroy);
+GOptionGroup* _g_option_group_new(gchar* name, gchar* description, gchar* help_description, gpointer user_data, GDestroyNotify destroy) {
+	return g_option_group_new((const gchar*)(name), (const gchar*)(description), (const gchar*)(help_description), user_data, destroy);
 }
-void _g_option_group_add_entries(GOptionGroup* self, void* entries) {
-	g_option_group_add_entries((GOptionGroup*)(self), entries);
+void _g_option_group_add_entries(GOptionGroup* self, GOptionEntry* entries) {
+	g_option_group_add_entries((GOptionGroup*)(self), (const GOptionEntry*)(entries));
 }
-void _g_option_group_set_translation_domain(GOptionGroup* self, void* domain) {
-	g_option_group_set_translation_domain((GOptionGroup*)(self), domain);
+void _g_option_group_set_translation_domain(GOptionGroup* self, gchar* domain) {
+	g_option_group_set_translation_domain((GOptionGroup*)(self), (const gchar*)(domain));
 }
-GPatternSpec* _g_pattern_spec_new(void* pattern) {
-	return g_pattern_spec_new(pattern);
+GPatternSpec* _g_pattern_spec_new(gchar* pattern) {
+	return g_pattern_spec_new((const gchar*)(pattern));
 }
-GRand* _g_rand_new_with_seed_array(void* seed, guint seed_length) {
-	return g_rand_new_with_seed_array(seed, seed_length);
+GRand* _g_rand_new_with_seed_array(guint32* seed, guint seed_length) {
+	return g_rand_new_with_seed_array((const guint32*)(seed), seed_length);
 }
-void _g_rand_set_seed_array(GRand* self, void* seed, guint seed_length) {
-	g_rand_set_seed_array((GRand*)(self), seed, seed_length);
+void _g_rand_set_seed_array(GRand* self, guint32* seed, guint seed_length) {
+	g_rand_set_seed_array((GRand*)(self), (const guint32*)(seed), seed_length);
 }
-GRegex* _g_regex_new(void* pattern, GRegexCompileFlags compile_options, GRegexMatchFlags match_options, void* err) {
-	return g_regex_new(pattern, compile_options, match_options, (GError**)(err));
+GRegex* _g_regex_new(gchar* pattern, GRegexCompileFlags compile_options, GRegexMatchFlags match_options, void* err) {
+	return g_regex_new((const gchar*)(pattern), compile_options, match_options, (GError**)(err));
 }
-gboolean _g_regex_check_replacement(void* replacement, gboolean* has_references, void* err) {
-	return g_regex_check_replacement(replacement, has_references, (GError**)(err));
+gboolean _g_regex_check_replacement(gchar* replacement, gboolean* has_references, void* err) {
+	return g_regex_check_replacement((const gchar*)(replacement), has_references, (GError**)(err));
 }
-gchar* _g_regex_escape_nul(void* string_, gint length) {
-	return g_regex_escape_nul(string_, length);
+gchar* _g_regex_escape_nul(gchar* string_, gint length) {
+	return g_regex_escape_nul((const gchar*)(string_), length);
 }
-gboolean _g_regex_match_simple(void* pattern, void* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
-	return g_regex_match_simple(pattern, string_, compile_options, match_options);
+gboolean _g_regex_match_simple(gchar* pattern, gchar* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
+	return g_regex_match_simple((const gchar*)(pattern), (const gchar*)(string_), compile_options, match_options);
 }
-gchar** _g_regex_split_simple(void* pattern, void* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
-	return g_regex_split_simple(pattern, string_, compile_options, match_options);
+gchar** _g_regex_split_simple(gchar* pattern, gchar* string_, GRegexCompileFlags compile_options, GRegexMatchFlags match_options) {
+	return g_regex_split_simple((const gchar*)(pattern), (const gchar*)(string_), compile_options, match_options);
 }
-gint _g_regex_get_string_number(GRegex* self, void* name) {
-	return g_regex_get_string_number((GRegex*)(self), name);
+gint _g_regex_get_string_number(GRegex* self, gchar* name) {
+	return g_regex_get_string_number((GRegex*)(self), (const gchar*)(name));
 }
-gboolean _g_regex_match(GRegex* self, void* string_, GRegexMatchFlags match_options, void* match_info) {
-	return g_regex_match((GRegex*)(self), string_, match_options, match_info);
+gboolean _g_regex_match(GRegex* self, gchar* string_, GRegexMatchFlags match_options, void* match_info) {
+	return g_regex_match((GRegex*)(self), (const gchar*)(string_), match_options, (GMatchInfo**)(match_info));
 }
-gboolean _g_regex_match_all(GRegex* self, void* string_, GRegexMatchFlags match_options, void* match_info) {
-	return g_regex_match_all((GRegex*)(self), string_, match_options, match_info);
+gboolean _g_regex_match_all(GRegex* self, gchar* string_, GRegexMatchFlags match_options, void* match_info) {
+	return g_regex_match_all((GRegex*)(self), (const gchar*)(string_), match_options, (GMatchInfo**)(match_info));
 }
 gboolean _g_regex_match_all_full(GRegex* self, gchar* string_, gssize string_len, gint start_position, GRegexMatchFlags match_options, void* match_info, void* err) {
-	return g_regex_match_all_full((GRegex*)(self), (const gchar**)(string_), string_len, start_position, match_options, match_info, (GError**)(err));
+	return g_regex_match_all_full((GRegex*)(self), string_, string_len, start_position, match_options, (GMatchInfo**)(match_info), (GError**)(err));
 }
 gboolean _g_regex_match_full(GRegex* self, gchar* string_, gssize string_len, gint start_position, GRegexMatchFlags match_options, void* match_info, void* err) {
-	return g_regex_match_full((GRegex*)(self), (const gchar**)(string_), string_len, start_position, match_options, match_info, (GError**)(err));
+	return g_regex_match_full((GRegex*)(self), string_, string_len, start_position, match_options, (GMatchInfo**)(match_info), (GError**)(err));
 }
-gchar* _g_regex_replace(GRegex* self, gchar* string_, gssize string_len, gint start_position, void* replacement, GRegexMatchFlags match_options, void* err) {
-	return g_regex_replace((GRegex*)(self), (const gchar**)(string_), string_len, start_position, replacement, match_options, (GError**)(err));
+gchar* _g_regex_replace(GRegex* self, gchar* string_, gssize string_len, gint start_position, gchar* replacement, GRegexMatchFlags match_options, void* err) {
+	return g_regex_replace((GRegex*)(self), string_, string_len, start_position, (const gchar*)(replacement), match_options, (GError**)(err));
 }
 gchar* _g_regex_replace_eval(GRegex* self, gchar* string_, gssize string_len, gint start_position, GRegexMatchFlags match_options, GRegexEvalCallback eval, gpointer user_data, void* err) {
-	return g_regex_replace_eval((GRegex*)(self), (const gchar**)(string_), string_len, start_position, match_options, eval, user_data, (GError**)(err));
+	return g_regex_replace_eval((GRegex*)(self), string_, string_len, start_position, match_options, eval, user_data, (GError**)(err));
 }
-gchar* _g_regex_replace_literal(GRegex* self, gchar* string_, gssize string_len, gint start_position, void* replacement, GRegexMatchFlags match_options, void* err) {
-	return g_regex_replace_literal((GRegex*)(self), (const gchar**)(string_), string_len, start_position, replacement, match_options, (GError**)(err));
+gchar* _g_regex_replace_literal(GRegex* self, gchar* string_, gssize string_len, gint start_position, gchar* replacement, GRegexMatchFlags match_options, void* err) {
+	return g_regex_replace_literal((GRegex*)(self), string_, string_len, start_position, (const gchar*)(replacement), match_options, (GError**)(err));
 }
-gchar** _g_regex_split(GRegex* self, void* string_, GRegexMatchFlags match_options) {
-	return g_regex_split((GRegex*)(self), string_, match_options);
+gchar** _g_regex_split(GRegex* self, gchar* string_, GRegexMatchFlags match_options) {
+	return g_regex_split((GRegex*)(self), (const gchar*)(string_), match_options);
 }
 gchar** _g_regex_split_full(GRegex* self, gchar* string_, gssize string_len, gint start_position, GRegexMatchFlags match_options, gint max_tokens, void* err) {
-	return g_regex_split_full((GRegex*)(self), (const gchar**)(string_), string_len, start_position, match_options, max_tokens, (GError**)(err));
+	return g_regex_split_full((GRegex*)(self), string_, string_len, start_position, match_options, max_tokens, (GError**)(err));
 }
-GScanner* _g_scanner_new(void* config_templ) {
-	return g_scanner_new(config_templ);
+GScanner* _g_scanner_new(GScannerConfig* config_templ) {
+	return g_scanner_new((const GScannerConfig*)(config_templ));
 }
-void _g_scanner_input_text(GScanner* self, void* text, guint text_len) {
-	g_scanner_input_text((GScanner*)(self), text, text_len);
+void _g_scanner_input_text(GScanner* self, gchar* text, guint text_len) {
+	g_scanner_input_text((GScanner*)(self), (const gchar*)(text), text_len);
 }
-gpointer _g_scanner_lookup_symbol(GScanner* self, void* symbol) {
-	return g_scanner_lookup_symbol((GScanner*)(self), symbol);
+gpointer _g_scanner_lookup_symbol(GScanner* self, gchar* symbol) {
+	return g_scanner_lookup_symbol((GScanner*)(self), (const gchar*)(symbol));
 }
-void _g_scanner_scope_add_symbol(GScanner* self, guint scope_id, void* symbol, gpointer value) {
-	g_scanner_scope_add_symbol((GScanner*)(self), scope_id, symbol, value);
+void _g_scanner_scope_add_symbol(GScanner* self, guint scope_id, gchar* symbol, gpointer value) {
+	g_scanner_scope_add_symbol((GScanner*)(self), scope_id, (const gchar*)(symbol), value);
 }
-gpointer _g_scanner_scope_lookup_symbol(GScanner* self, guint scope_id, void* symbol) {
-	return g_scanner_scope_lookup_symbol((GScanner*)(self), scope_id, symbol);
+gpointer _g_scanner_scope_lookup_symbol(GScanner* self, guint scope_id, gchar* symbol) {
+	return g_scanner_scope_lookup_symbol((GScanner*)(self), scope_id, (const gchar*)(symbol));
 }
-void _g_scanner_scope_remove_symbol(GScanner* self, guint scope_id, void* symbol) {
-	g_scanner_scope_remove_symbol((GScanner*)(self), scope_id, symbol);
+void _g_scanner_scope_remove_symbol(GScanner* self, guint scope_id, gchar* symbol) {
+	g_scanner_scope_remove_symbol((GScanner*)(self), scope_id, (const gchar*)(symbol));
 }
-void _g_scanner_unexp_token(GScanner* self, GTokenType expected_token, void* identifier_spec, void* symbol_spec, void* symbol_name, void* message, gint is_error) {
-	g_scanner_unexp_token((GScanner*)(self), expected_token, identifier_spec, symbol_spec, symbol_name, message, is_error);
+void _g_scanner_unexp_token(GScanner* self, GTokenType expected_token, gchar* identifier_spec, gchar* symbol_spec, gchar* symbol_name, gchar* message, gint is_error) {
+	g_scanner_unexp_token((GScanner*)(self), expected_token, (const gchar*)(identifier_spec), (const gchar*)(symbol_spec), (const gchar*)(symbol_name), (const gchar*)(message), is_error);
 }
-void _g_source_set_name_by_id(guint tag, void* name) {
-	g_source_set_name_by_id(tag, name);
+void _g_source_set_name_by_id(guint tag, char* name) {
+	g_source_set_name_by_id(tag, (const char*)(name));
 }
-void _g_source_set_name(GSource* self, void* name) {
-	g_source_set_name((GSource*)(self), name);
+void _g_source_set_name(GSource* self, char* name) {
+	g_source_set_name((GSource*)(self), (const char*)(name));
 }
-GString* _g_string_append(GString* self, void* val) {
-	return g_string_append((GString*)(self), val);
+GString* _g_string_append(GString* self, gchar* val) {
+	return g_string_append((GString*)(self), (const gchar*)(val));
 }
-GString* _g_string_append_len(GString* self, void* val, gssize len_) {
-	return g_string_append_len((GString*)(self), val, len_);
+GString* _g_string_append_len(GString* self, gchar* val, gssize len_) {
+	return g_string_append_len((GString*)(self), (const gchar*)(val), len_);
 }
-GString* _g_string_append_uri_escaped(GString* self, void* unescaped, void* reserved_chars_allowed, gboolean allow_utf8) {
-	return g_string_append_uri_escaped((GString*)(self), unescaped, reserved_chars_allowed, allow_utf8);
+GString* _g_string_append_uri_escaped(GString* self, gchar* unescaped, gchar* reserved_chars_allowed, gboolean allow_utf8) {
+	return g_string_append_uri_escaped((GString*)(self), (const gchar*)(unescaped), (const gchar*)(reserved_chars_allowed), allow_utf8);
 }
-void _g_string_append_vprintf(GString* self, void* format, va_list_wrap args) {
-	g_string_append_vprintf((GString*)(self), format, args.v);
+GString* _g_string_assign(GString* self, gchar* rval) {
+	return g_string_assign((GString*)(self), (const gchar*)(rval));
 }
-GString* _g_string_assign(GString* self, void* rval) {
-	return g_string_assign((GString*)(self), rval);
+gboolean _g_string_equal(GString* self, GString* v2) {
+	return g_string_equal((GString*)(self), (const GString*)(v2));
 }
-gboolean _g_string_equal(GString* self, void* v2) {
-	return g_string_equal((GString*)(self), v2);
+GString* _g_string_insert(GString* self, gssize pos, gchar* val) {
+	return g_string_insert((GString*)(self), pos, (const gchar*)(val));
 }
-GString* _g_string_insert(GString* self, gssize pos, void* val) {
-	return g_string_insert((GString*)(self), pos, val);
+GString* _g_string_insert_len(GString* self, gssize pos, gchar* val, gssize len_) {
+	return g_string_insert_len((GString*)(self), pos, (const gchar*)(val), len_);
 }
-GString* _g_string_insert_len(GString* self, gssize pos, void* val, gssize len_) {
-	return g_string_insert_len((GString*)(self), pos, val, len_);
+GString* _g_string_overwrite(GString* self, gsize pos, gchar* val) {
+	return g_string_overwrite((GString*)(self), pos, (const gchar*)(val));
 }
-GString* _g_string_overwrite(GString* self, gsize pos, void* val) {
-	return g_string_overwrite((GString*)(self), pos, val);
+GString* _g_string_overwrite_len(GString* self, gsize pos, gchar* val, gssize len_) {
+	return g_string_overwrite_len((GString*)(self), pos, (const gchar*)(val), len_);
 }
-GString* _g_string_overwrite_len(GString* self, gsize pos, void* val, gssize len_) {
-	return g_string_overwrite_len((GString*)(self), pos, val, len_);
+GString* _g_string_prepend(GString* self, gchar* val) {
+	return g_string_prepend((GString*)(self), (const gchar*)(val));
 }
-GString* _g_string_prepend(GString* self, void* val) {
-	return g_string_prepend((GString*)(self), val);
+GString* _g_string_prepend_len(GString* self, gchar* val, gssize len_) {
+	return g_string_prepend_len((GString*)(self), (const gchar*)(val), len_);
 }
-GString* _g_string_prepend_len(GString* self, void* val, gssize len_) {
-	return g_string_prepend_len((GString*)(self), val, len_);
+gchar* _g_string_chunk_insert(GStringChunk* self, gchar* string_) {
+	return g_string_chunk_insert((GStringChunk*)(self), (const gchar*)(string_));
 }
-void _g_string_vprintf(GString* self, void* format, va_list_wrap args) {
-	g_string_vprintf((GString*)(self), format, args.v);
+gchar* _g_string_chunk_insert_const(GStringChunk* self, gchar* string_) {
+	return g_string_chunk_insert_const((GStringChunk*)(self), (const gchar*)(string_));
 }
-gchar* _g_string_chunk_insert(GStringChunk* self, void* string_) {
-	return g_string_chunk_insert((GStringChunk*)(self), string_);
+gchar* _g_string_chunk_insert_len(GStringChunk* self, gchar* string_, gssize len_) {
+	return g_string_chunk_insert_len((GStringChunk*)(self), (const gchar*)(string_), len_);
 }
-gchar* _g_string_chunk_insert_const(GStringChunk* self, void* string_) {
-	return g_string_chunk_insert_const((GStringChunk*)(self), string_);
+GThread* _g_thread_new(gchar* name, GThreadFunc func_, gpointer data) {
+	return g_thread_new((const gchar*)(name), func_, data);
 }
-gchar* _g_string_chunk_insert_len(GStringChunk* self, void* string_, gssize len_) {
-	return g_string_chunk_insert_len((GStringChunk*)(self), string_, len_);
-}
-GThread* _g_thread_new(void* name, GThreadFunc func_, gpointer data) {
-	return g_thread_new(name, func_, data);
-}
-GThread* _g_thread_try_new(void* name, GThreadFunc func_, gpointer data, void* err) {
-	return g_thread_try_new(name, func_, data, (GError**)(err));
+GThread* _g_thread_try_new(gchar* name, GThreadFunc func_, gpointer data, void* err) {
+	return g_thread_try_new((const gchar*)(name), func_, data, (GError**)(err));
 }
 GThreadPool* _g_thread_pool_new(GFunc func_, gpointer user_data, gint max_threads, gboolean exclusive, void* err) {
 	return g_thread_pool_new(func_, user_data, max_threads, exclusive, (GError**)(err));
@@ -528,593 +515,554 @@ gboolean _g_thread_pool_push(GThreadPool* self, gpointer data, void* err) {
 gboolean _g_thread_pool_set_max_threads(GThreadPool* self, gint max_threads, void* err) {
 	return g_thread_pool_set_max_threads((GThreadPool*)(self), max_threads, (GError**)(err));
 }
-gboolean _g_time_val_from_iso8601(void* iso_date, GTimeVal* time_) {
-	return g_time_val_from_iso8601(iso_date, time_);
+gboolean _g_time_val_from_iso8601(gchar* iso_date, GTimeVal* time_) {
+	return g_time_val_from_iso8601((const gchar*)(iso_date), time_);
 }
-GTimeZone* _g_time_zone_new(void* identifier) {
-	return g_time_zone_new(identifier);
+GTimeZone* _g_time_zone_new(gchar* identifier) {
+	return g_time_zone_new((const gchar*)(identifier));
 }
 guint _g_trash_stack_height(void* stack_p) {
-	return g_trash_stack_height(stack_p);
+	return g_trash_stack_height((GTrashStack**)(stack_p));
 }
 gpointer _g_trash_stack_peek(void* stack_p) {
-	return g_trash_stack_peek(stack_p);
+	return g_trash_stack_peek((GTrashStack**)(stack_p));
 }
 gpointer _g_trash_stack_pop(void* stack_p) {
-	return g_trash_stack_pop(stack_p);
+	return g_trash_stack_pop((GTrashStack**)(stack_p));
 }
 void _g_trash_stack_push(void* stack_p, gpointer data_p) {
-	g_trash_stack_push(stack_p, data_p);
+	g_trash_stack_push((GTrashStack**)(stack_p), data_p);
 }
-GVariant* _g_variant_new_array(void* child_type, void* children, gsize n_children) {
-	return g_variant_new_array(child_type, children, n_children);
+GVariant* _g_variant_new_array(GVariantType* child_type, void* children, gsize n_children) {
+	return g_variant_new_array((const GVariantType*)(child_type), (GVariant**)(children), n_children);
 }
 GVariant* _g_variant_new_bytestring_array(void* strv, gssize length) {
-	return g_variant_new_bytestring_array((const gchar**)(strv), length);
+	return g_variant_new_bytestring_array((gchar**)(strv), length);
 }
-GVariant* _g_variant_new_fixed_array(void* element_type, gconstpointer elements, gsize n_elements, gsize element_size) {
-	return g_variant_new_fixed_array(element_type, elements, n_elements, element_size);
+GVariant* _g_variant_new_fixed_array(GVariantType* element_type, gconstpointer elements, gsize n_elements, gsize element_size) {
+	return g_variant_new_fixed_array((const GVariantType*)(element_type), elements, n_elements, element_size);
 }
-GVariant* _g_variant_new_from_bytes(void* type_, GBytes* bytes, gboolean trusted) {
-	return g_variant_new_from_bytes(type_, bytes, trusted);
+GVariant* _g_variant_new_from_bytes(GVariantType* type_, GBytes* bytes, gboolean trusted) {
+	return g_variant_new_from_bytes((const GVariantType*)(type_), bytes, trusted);
 }
-GVariant* _g_variant_new_from_data(void* type_, gconstpointer data, gsize size, gboolean trusted, GDestroyNotify notify, gpointer user_data) {
-	return g_variant_new_from_data(type_, data, size, trusted, notify, user_data);
+GVariant* _g_variant_new_from_data(GVariantType* type_, gconstpointer data, gsize size, gboolean trusted, GDestroyNotify notify, gpointer user_data) {
+	return g_variant_new_from_data((const GVariantType*)(type_), data, size, trusted, notify, user_data);
 }
-GVariant* _g_variant_new_maybe(void* child_type, GVariant* child) {
-	return g_variant_new_maybe(child_type, child);
+GVariant* _g_variant_new_maybe(GVariantType* child_type, GVariant* child) {
+	return g_variant_new_maybe((const GVariantType*)(child_type), child);
 }
-GVariant* _g_variant_new_object_path(void* object_path) {
-	return g_variant_new_object_path(object_path);
+GVariant* _g_variant_new_object_path(gchar* object_path) {
+	return g_variant_new_object_path((const gchar*)(object_path));
 }
 GVariant* _g_variant_new_objv(void* strv, gssize length) {
-	return g_variant_new_objv((const gchar**)(strv), length);
+	return g_variant_new_objv((gchar**)(strv), length);
 }
-GVariant* _g_variant_new_parsed_va(void* format, va_list* app) {
-	return g_variant_new_parsed_va(format, app);
+GVariant* _g_variant_new_parsed_va(gchar* format, va_list* app) {
+	return g_variant_new_parsed_va((const gchar*)(format), app);
 }
-GVariant* _g_variant_new_signature(void* signature) {
-	return g_variant_new_signature(signature);
+GVariant* _g_variant_new_signature(gchar* signature) {
+	return g_variant_new_signature((const gchar*)(signature));
 }
-GVariant* _g_variant_new_string(void* string_) {
-	return g_variant_new_string(string_);
+GVariant* _g_variant_new_string(gchar* string_) {
+	return g_variant_new_string((const gchar*)(string_));
 }
 GVariant* _g_variant_new_strv(void* strv, gssize length) {
-	return g_variant_new_strv((const gchar**)(strv), length);
+	return g_variant_new_strv((gchar**)(strv), length);
 }
 GVariant* _g_variant_new_tuple(void* children, gsize n_children) {
-	return g_variant_new_tuple(children, n_children);
+	return g_variant_new_tuple((GVariant**)(children), n_children);
 }
-GVariant* _g_variant_new_va(void* format_string, void* endptr, va_list* app) {
-	return g_variant_new_va(format_string, endptr, app);
+GVariant* _g_variant_new_va(gchar* format_string, void* endptr, va_list* app) {
+	return g_variant_new_va((const gchar*)(format_string), (const gchar**)(endptr), app);
 }
-gboolean _g_variant_is_object_path(void* string_) {
-	return g_variant_is_object_path(string_);
+gboolean _g_variant_is_object_path(gchar* string_) {
+	return g_variant_is_object_path((const gchar*)(string_));
 }
-gboolean _g_variant_is_signature(void* string_) {
-	return g_variant_is_signature(string_);
+gboolean _g_variant_is_signature(gchar* string_) {
+	return g_variant_is_signature((const gchar*)(string_));
 }
-GVariant* _g_variant_parse(void* type_, void* text, void* limit, void* endptr, void* err) {
-	return g_variant_parse(type_, text, limit, endptr, (GError**)(err));
+GVariant* _g_variant_parse(GVariantType* type_, gchar* text, gchar* limit, void* endptr, void* err) {
+	return g_variant_parse((const GVariantType*)(type_), (const gchar*)(text), (const gchar*)(limit), (const gchar**)(endptr), (GError**)(err));
 }
-gboolean _g_variant_check_format_string(GVariant* self, void* format_string, gboolean copy_only) {
-	return g_variant_check_format_string((GVariant*)(self), format_string, copy_only);
+gboolean _g_variant_check_format_string(GVariant* self, gchar* format_string, gboolean copy_only) {
+	return g_variant_check_format_string((GVariant*)(self), (const gchar*)(format_string), copy_only);
 }
-void _g_variant_get_va(GVariant* self, void* format_string, void* endptr, va_list* app) {
-	g_variant_get_va((GVariant*)(self), format_string, endptr, app);
+void _g_variant_get_va(GVariant* self, gchar* format_string, void* endptr, va_list* app) {
+	g_variant_get_va((GVariant*)(self), (const gchar*)(format_string), (const gchar**)(endptr), app);
 }
-gboolean _g_variant_is_of_type(GVariant* self, void* type_) {
-	return g_variant_is_of_type((GVariant*)(self), type_);
+gboolean _g_variant_is_of_type(GVariant* self, GVariantType* type_) {
+	return g_variant_is_of_type((GVariant*)(self), (const GVariantType*)(type_));
 }
-GVariant* _g_variant_lookup_value(GVariant* self, void* key, void* expected_type) {
-	return g_variant_lookup_value((GVariant*)(self), key, expected_type);
+GVariant* _g_variant_lookup_value(GVariant* self, gchar* key, GVariantType* expected_type) {
+	return g_variant_lookup_value((GVariant*)(self), (const gchar*)(key), (const GVariantType*)(expected_type));
 }
-GVariantBuilder* _g_variant_builder_new(void* type_) {
-	return g_variant_builder_new(type_);
+GVariantBuilder* _g_variant_builder_new(GVariantType* type_) {
+	return g_variant_builder_new((const GVariantType*)(type_));
 }
-void _g_variant_builder_init(GVariantBuilder* self, void* type_) {
-	g_variant_builder_init((GVariantBuilder*)(self), type_);
+void _g_variant_builder_init(GVariantBuilder* self, GVariantType* type_) {
+	g_variant_builder_init((GVariantBuilder*)(self), (const GVariantType*)(type_));
 }
-void _g_variant_builder_open(GVariantBuilder* self, void* type_) {
-	g_variant_builder_open((GVariantBuilder*)(self), type_);
+void _g_variant_builder_open(GVariantBuilder* self, GVariantType* type_) {
+	g_variant_builder_open((GVariantBuilder*)(self), (const GVariantType*)(type_));
 }
-GVariantType* _g_variant_type_new(void* type_string) {
-	return g_variant_type_new(type_string);
+GVariantType* _g_variant_type_new(gchar* type_string) {
+	return g_variant_type_new((const gchar*)(type_string));
 }
-GVariantType* _g_variant_type_new_array(void* element) {
-	return g_variant_type_new_array(element);
+GVariantType* _g_variant_type_new_array(GVariantType* element) {
+	return g_variant_type_new_array((const GVariantType*)(element));
 }
-GVariantType* _g_variant_type_new_dict_entry(void* key, void* value) {
-	return g_variant_type_new_dict_entry(key, value);
+GVariantType* _g_variant_type_new_dict_entry(GVariantType* key, GVariantType* value) {
+	return g_variant_type_new_dict_entry((const GVariantType*)(key), (const GVariantType*)(value));
 }
-GVariantType* _g_variant_type_new_maybe(void* element) {
-	return g_variant_type_new_maybe(element);
+GVariantType* _g_variant_type_new_maybe(GVariantType* element) {
+	return g_variant_type_new_maybe((const GVariantType*)(element));
 }
 GVariantType* _g_variant_type_new_tuple(void* items, gint length) {
-	return g_variant_type_new_tuple(items, length);
+	return g_variant_type_new_tuple((GVariantType**)(items), length);
 }
-const GVariantType* _g_variant_type_checked_(void* arg_0) {
-	return g_variant_type_checked_(arg_0);
+const GVariantType* _g_variant_type_checked_(gchar* arg_0) {
+	return g_variant_type_checked_((const gchar*)(arg_0));
 }
-gboolean _g_variant_type_string_is_valid(void* type_string) {
-	return g_variant_type_string_is_valid(type_string);
+gboolean _g_variant_type_string_is_valid(gchar* type_string) {
+	return g_variant_type_string_is_valid((const gchar*)(type_string));
 }
-gboolean _g_variant_type_string_scan(void* string_, void* limit, void* endptr) {
-	return g_variant_type_string_scan(string_, limit, endptr);
+gboolean _g_variant_type_string_scan(gchar* string_, gchar* limit, void* endptr) {
+	return g_variant_type_string_scan((const gchar*)(string_), (const gchar*)(limit), (const gchar**)(endptr));
 }
-gboolean _g_variant_type_is_subtype_of(GVariantType* self, void* supertype) {
-	return g_variant_type_is_subtype_of((GVariantType*)(self), supertype);
+gboolean _g_variant_type_is_subtype_of(GVariantType* self, GVariantType* supertype) {
+	return g_variant_type_is_subtype_of((GVariantType*)(self), (const GVariantType*)(supertype));
 }
-int _g_access(void* filename, int mode) {
-	return g_access(filename, mode);
+int _g_access(gchar* filename, int mode) {
+	return g_access((const gchar*)(filename), mode);
 }
-gchar* _g_ascii_dtostr(void* buffer, gint buf_len, gdouble d) {
-	return g_ascii_dtostr(buffer, buf_len, d);
+gchar* _g_ascii_formatd(gchar* buffer, gint buf_len, gchar* format, gdouble d) {
+	return g_ascii_formatd(buffer, buf_len, (const gchar*)(format), d);
 }
-gchar* _g_ascii_formatd(void* buffer, gint buf_len, void* format, gdouble d) {
-	return g_ascii_formatd(buffer, buf_len, format, d);
+gint _g_ascii_strcasecmp(gchar* s1, gchar* s2) {
+	return g_ascii_strcasecmp((const gchar*)(s1), (const gchar*)(s2));
 }
-gint _g_ascii_strcasecmp(void* s1, void* s2) {
-	return g_ascii_strcasecmp(s1, s2);
+gchar* _g_ascii_strdown(gchar* str, gssize len_) {
+	return g_ascii_strdown((const gchar*)(str), len_);
 }
-gchar* _g_ascii_strdown(void* str, gssize len_) {
-	return g_ascii_strdown(str, len_);
+gint _g_ascii_strncasecmp(gchar* s1, gchar* s2, gsize n) {
+	return g_ascii_strncasecmp((const gchar*)(s1), (const gchar*)(s2), n);
 }
-gint _g_ascii_strncasecmp(void* s1, void* s2, gsize n) {
-	return g_ascii_strncasecmp(s1, s2, n);
+gdouble _g_ascii_strtod(gchar* nptr, void* endptr) {
+	return g_ascii_strtod((const gchar*)(nptr), (gchar**)(endptr));
 }
-gdouble _g_ascii_strtod(void* nptr, void* endptr) {
-	return g_ascii_strtod(nptr, endptr);
+gint64 _g_ascii_strtoll(gchar* nptr, void* endptr, guint base) {
+	return g_ascii_strtoll((const gchar*)(nptr), (gchar**)(endptr), base);
 }
-gint64 _g_ascii_strtoll(void* nptr, void* endptr, guint base) {
-	return g_ascii_strtoll(nptr, endptr, base);
+guint64 _g_ascii_strtoull(gchar* nptr, void* endptr, guint base) {
+	return g_ascii_strtoull((const gchar*)(nptr), (gchar**)(endptr), base);
 }
-guint64 _g_ascii_strtoull(void* nptr, void* endptr, guint base) {
-	return g_ascii_strtoull(nptr, endptr, base);
+gchar* _g_ascii_strup(gchar* str, gssize len_) {
+	return g_ascii_strup((const gchar*)(str), len_);
 }
-gchar* _g_ascii_strup(void* str, gssize len_) {
-	return g_ascii_strup(str, len_);
+void _g_assertion_message(char* domain, char* file, int line, char* func_, char* message) {
+	g_assertion_message((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(message));
 }
-void _g_assertion_message(void* domain, void* file, int line, void* func_, void* message) {
-	g_assertion_message(domain, file, line, func_, message);
+void _g_assertion_message_cmpnum(char* domain, char* file, int line, char* func_, char* expr, double arg1, char* cmp, double arg2, char numtype) {
+	g_assertion_message_cmpnum((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(expr), (long double)(arg1), (const char*)(cmp), (long double)(arg2), numtype);
 }
-void _g_assertion_message_cmpnum(void* domain, void* file, int line, void* func_, void* expr, double arg1, void* cmp, double arg2, char numtype) {
-	g_assertion_message_cmpnum(domain, file, line, func_, expr, arg1, cmp, arg2, numtype);
+void _g_assertion_message_cmpstr(char* domain, char* file, int line, char* func_, char* expr, char* arg1, char* cmp, char* arg2) {
+	g_assertion_message_cmpstr((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(expr), (const char*)(arg1), (const char*)(cmp), (const char*)(arg2));
 }
-void _g_assertion_message_cmpstr(void* domain, void* file, int line, void* func_, void* expr, void* arg1, void* cmp, void* arg2) {
-	g_assertion_message_cmpstr(domain, file, line, func_, expr, arg1, cmp, arg2);
+void _g_assertion_message_error(char* domain, char* file, int line, char* func_, char* expr, GError* error_, GQuark error_domain, int error_code) {
+	g_assertion_message_error((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(expr), (const GError*)(error_), error_domain, error_code);
 }
-void _g_assertion_message_error(void* domain, void* file, int line, void* func_, void* expr, void* error_, GQuark error_domain, int error_code) {
-	g_assertion_message_error(domain, file, line, func_, expr, error_, error_domain, error_code);
+void _g_assertion_message_expr(char* domain, char* file, int line, char* func_, char* expr) {
+	g_assertion_message_expr((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(expr));
 }
-void _g_assertion_message_expr(void* domain, void* file, int line, void* func_, void* expr) {
-	g_assertion_message_expr(domain, file, line, func_, expr);
-}
-guchar* _g_base64_decode(void* text, gsize* out_len) {
-	return g_base64_decode(text, out_len);
+guchar* _g_base64_decode(gchar* text, gsize* out_len) {
+	return g_base64_decode((const gchar*)(text), out_len);
 }
 gchar* _g_build_filenamev(void* args) {
-	return g_build_filenamev((const gchar**)(args));
+	return g_build_filenamev((gchar**)(args));
 }
-gchar* _g_build_pathv(void* separator, void* args) {
-	return g_build_pathv(separator, (const gchar**)(args));
+gchar* _g_build_pathv(gchar* separator, void* args) {
+	return g_build_pathv((const gchar*)(separator), (gchar**)(args));
 }
-int _g_chdir(void* path) {
-	return g_chdir(path);
+int _g_chdir(gchar* path) {
+	return g_chdir((const gchar*)(path));
 }
 void _g_clear_error(void* err) {
 	g_clear_error((GError**)(err));
 }
-gchar* _g_compute_checksum_for_data(GChecksumType checksum_type, void* data, gsize length) {
-	return g_compute_checksum_for_data(checksum_type, data, length);
+gchar* _g_compute_checksum_for_data(GChecksumType checksum_type, guchar* data, gsize length) {
+	return g_compute_checksum_for_data(checksum_type, (const guchar*)(data), length);
 }
-gchar* _g_compute_checksum_for_string(GChecksumType checksum_type, void* str, gssize length) {
-	return g_compute_checksum_for_string(checksum_type, str, length);
+gchar* _g_compute_checksum_for_string(GChecksumType checksum_type, gchar* str, gssize length) {
+	return g_compute_checksum_for_string(checksum_type, (const gchar*)(str), length);
 }
-gchar* _g_compute_hmac_for_data(GChecksumType digest_type, guchar* key, gsize key_len, void* data, gsize length) {
-	return g_compute_hmac_for_data(digest_type, key, key_len, data, length);
+gchar* _g_compute_hmac_for_data(GChecksumType digest_type, guchar* key, gsize key_len, guchar* data, gsize length) {
+	return g_compute_hmac_for_data(digest_type, key, key_len, (const guchar*)(data), length);
 }
-gchar* _g_compute_hmac_for_string(GChecksumType digest_type, guchar* key, gsize key_len, void* str, gssize length) {
-	return g_compute_hmac_for_string(digest_type, key, key_len, str, length);
+gchar* _g_compute_hmac_for_string(GChecksumType digest_type, guchar* key, gsize key_len, gchar* str, gssize length) {
+	return g_compute_hmac_for_string(digest_type, key, key_len, (const gchar*)(str), length);
 }
-gchar* _g_convert(void* str, gssize len_, void* to_codeset, void* from_codeset, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_convert(str, len_, to_codeset, from_codeset, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_convert(gchar* str, gssize len_, gchar* to_codeset, gchar* from_codeset, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_convert((const gchar*)(str), len_, (const gchar*)(to_codeset), (const gchar*)(from_codeset), bytes_read, bytes_written, (GError**)(err));
 }
-gchar* _g_convert_with_fallback(void* str, gssize len_, void* to_codeset, void* from_codeset, void* fallback, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_convert_with_fallback(str, len_, to_codeset, from_codeset, fallback, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_convert_with_fallback(gchar* str, gssize len_, gchar* to_codeset, gchar* from_codeset, gchar* fallback, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_convert_with_fallback((const gchar*)(str), len_, (const gchar*)(to_codeset), (const gchar*)(from_codeset), (const gchar*)(fallback), bytes_read, bytes_written, (GError**)(err));
 }
-gchar* _g_convert_with_iconv(void* str, gssize len_, GIConv converter, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_convert_with_iconv(str, len_, converter, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_convert_with_iconv(gchar* str, gssize len_, GIConv converter, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_convert_with_iconv((const gchar*)(str), len_, converter, bytes_read, bytes_written, (GError**)(err));
 }
 void _g_datalist_clear(void* datalist) {
-	g_datalist_clear(datalist);
+	g_datalist_clear((GData**)(datalist));
 }
 void _g_datalist_foreach(void* datalist, GDataForeachFunc func_, gpointer user_data) {
-	g_datalist_foreach(datalist, func_, user_data);
+	g_datalist_foreach((GData**)(datalist), func_, user_data);
 }
-gpointer _g_datalist_get_data(void* datalist, void* key) {
-	return g_datalist_get_data(datalist, key);
+gpointer _g_datalist_get_data(void* datalist, gchar* key) {
+	return g_datalist_get_data((GData**)(datalist), (const gchar*)(key));
 }
 guint _g_datalist_get_flags(void* datalist) {
-	return g_datalist_get_flags(datalist);
+	return g_datalist_get_flags((GData**)(datalist));
 }
 gpointer _g_datalist_id_dup_data(void* datalist, GQuark key_id, GDuplicateFunc dup_func, gpointer user_data) {
-	return g_datalist_id_dup_data(datalist, key_id, dup_func, user_data);
+	return g_datalist_id_dup_data((GData**)(datalist), key_id, dup_func, user_data);
 }
 gpointer _g_datalist_id_get_data(void* datalist, GQuark key_id) {
-	return g_datalist_id_get_data(datalist, key_id);
+	return g_datalist_id_get_data((GData**)(datalist), key_id);
 }
 gpointer _g_datalist_id_remove_no_notify(void* datalist, GQuark key_id) {
-	return g_datalist_id_remove_no_notify(datalist, key_id);
+	return g_datalist_id_remove_no_notify((GData**)(datalist), key_id);
 }
 gboolean _g_datalist_id_replace_data(void* datalist, GQuark key_id, gpointer oldval, gpointer newval, GDestroyNotify destroy, GDestroyNotify* old_destroy) {
-	return g_datalist_id_replace_data(datalist, key_id, oldval, newval, destroy, old_destroy);
+	return g_datalist_id_replace_data((GData**)(datalist), key_id, oldval, newval, destroy, old_destroy);
 }
 void _g_datalist_id_set_data_full(void* datalist, GQuark key_id, gpointer data, GDestroyNotify destroy_func) {
-	g_datalist_id_set_data_full(datalist, key_id, data, destroy_func);
+	g_datalist_id_set_data_full((GData**)(datalist), key_id, data, destroy_func);
 }
 void _g_datalist_init(void* datalist) {
-	g_datalist_init(datalist);
+	g_datalist_init((GData**)(datalist));
 }
 void _g_datalist_set_flags(void* datalist, guint flags) {
-	g_datalist_set_flags(datalist, flags);
+	g_datalist_set_flags((GData**)(datalist), flags);
 }
 void _g_datalist_unset_flags(void* datalist, guint flags) {
-	g_datalist_unset_flags(datalist, flags);
+	g_datalist_unset_flags((GData**)(datalist), flags);
 }
-const gchar* _g_dcgettext(void* domain, void* msgid, gint category) {
-	return g_dcgettext(domain, msgid, category);
+const gchar* _g_dcgettext(gchar* domain, gchar* msgid, gint category) {
+	return g_dcgettext((const gchar*)(domain), (const gchar*)(msgid), category);
 }
-const gchar* _g_dgettext(void* domain, void* msgid) {
-	return g_dgettext(domain, msgid);
+const gchar* _g_dgettext(gchar* domain, gchar* msgid) {
+	return g_dgettext((const gchar*)(domain), (const gchar*)(msgid));
 }
-const gchar* _g_dngettext(void* domain, void* msgid, void* msgid_plural, gulong n) {
-	return g_dngettext(domain, msgid, msgid_plural, n);
+const gchar* _g_dngettext(gchar* domain, gchar* msgid, gchar* msgid_plural, gulong n) {
+	return g_dngettext((const gchar*)(domain), (const gchar*)(msgid), (const gchar*)(msgid_plural), n);
 }
-const gchar* _g_dpgettext(void* domain, void* msgctxtid, gsize msgidoffset) {
-	return g_dpgettext(domain, msgctxtid, msgidoffset);
+const gchar* _g_dpgettext(gchar* domain, gchar* msgctxtid, gsize msgidoffset) {
+	return g_dpgettext((const gchar*)(domain), (const gchar*)(msgctxtid), msgidoffset);
 }
-const gchar* _g_dpgettext2(void* domain, void* context, void* msgid) {
-	return g_dpgettext2(domain, context, msgid);
+const gchar* _g_dpgettext2(gchar* domain, gchar* context, gchar* msgid) {
+	return g_dpgettext2((const gchar*)(domain), (const gchar*)(context), (const gchar*)(msgid));
 }
-const gchar* _g_environ_getenv(void* envp, void* variable) {
-	return g_environ_getenv((const gchar**)(envp), variable);
+const gchar* _g_environ_getenv(void* envp, gchar* variable) {
+	return g_environ_getenv((gchar**)(envp), (const gchar*)(variable));
 }
-gchar** _g_environ_setenv(void* envp, void* variable, void* value, gboolean overwrite) {
-	return g_environ_setenv((const gchar**)(envp), variable, value, overwrite);
+gchar** _g_environ_setenv(void* envp, gchar* variable, gchar* value, gboolean overwrite) {
+	return g_environ_setenv((gchar**)(envp), (const gchar*)(variable), (const gchar*)(value), overwrite);
 }
-gchar** _g_environ_unsetenv(void* envp, void* variable) {
-	return g_environ_unsetenv((const gchar**)(envp), variable);
+gchar** _g_environ_unsetenv(void* envp, gchar* variable) {
+	return g_environ_unsetenv((gchar**)(envp), (const gchar*)(variable));
 }
-gboolean _g_file_get_contents(void* filename, void* contents, gsize* length, void* err) {
-	return g_file_get_contents(filename, contents, length, (GError**)(err));
+gboolean _g_file_get_contents(gchar* filename, void* contents, gsize* length, void* err) {
+	return g_file_get_contents(filename, (gchar**)(contents), length, (GError**)(err));
 }
-gint _g_file_open_tmp(void* tmpl, void* name_used, void* err) {
-	return g_file_open_tmp(tmpl, name_used, (GError**)(err));
+gint _g_file_open_tmp(gchar* tmpl, void* name_used, void* err) {
+	return g_file_open_tmp(tmpl, (gchar**)(name_used), (GError**)(err));
 }
-gchar* _g_file_read_link(void* filename, void* err) {
-	return g_file_read_link(filename, (GError**)(err));
+gchar* _g_file_read_link(gchar* filename, void* err) {
+	return g_file_read_link((const gchar*)(filename), (GError**)(err));
 }
-gboolean _g_file_set_contents(void* filename, gchar* contents, gssize length, void* err) {
+gboolean _g_file_set_contents(gchar* filename, gchar* contents, gssize length, void* err) {
 	return g_file_set_contents(filename, contents, length, (GError**)(err));
 }
-gboolean _g_file_test(void* filename, GFileTest test) {
-	return g_file_test(filename, test);
+gboolean _g_file_test(gchar* filename, GFileTest test) {
+	return g_file_test((const gchar*)(filename), test);
 }
-gchar* _g_filename_display_basename(void* filename) {
-	return g_filename_display_basename(filename);
+gchar* _g_filename_display_basename(gchar* filename) {
+	return g_filename_display_basename((const gchar*)(filename));
 }
-gchar* _g_filename_display_name(void* filename) {
-	return g_filename_display_name(filename);
+gchar* _g_filename_display_name(gchar* filename) {
+	return g_filename_display_name((const gchar*)(filename));
 }
-gchar* _g_filename_from_uri(void* uri, void* hostname, void* err) {
-	return g_filename_from_uri(uri, hostname, (GError**)(err));
+gchar* _g_filename_from_uri(gchar* uri, void* hostname, void* err) {
+	return g_filename_from_uri((const gchar*)(uri), (gchar**)(hostname), (GError**)(err));
 }
-gchar* _g_filename_from_utf8(void* utf8string, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_filename_from_utf8(utf8string, len_, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_filename_from_utf8(gchar* utf8string, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_filename_from_utf8((const gchar*)(utf8string), len_, bytes_read, bytes_written, (GError**)(err));
 }
-gchar* _g_filename_to_uri(void* filename, void* hostname, void* err) {
-	return g_filename_to_uri(filename, hostname, (GError**)(err));
+gchar* _g_filename_to_uri(gchar* filename, gchar* hostname, void* err) {
+	return g_filename_to_uri((const gchar*)(filename), (const gchar*)(hostname), (GError**)(err));
 }
-gchar* _g_filename_to_utf8(void* opsysstring, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_filename_to_utf8(opsysstring, len_, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_filename_to_utf8(gchar* opsysstring, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_filename_to_utf8((const gchar*)(opsysstring), len_, bytes_read, bytes_written, (GError**)(err));
 }
-gchar* _g_find_program_in_path(void* program) {
-	return g_find_program_in_path(program);
+gchar* _g_find_program_in_path(gchar* program) {
+	return g_find_program_in_path((const gchar*)(program));
 }
 gboolean _g_get_charset(void* charset) {
-	return g_get_charset(charset);
+	return g_get_charset((const char**)(charset));
 }
 gboolean _g_get_filename_charsets(void* charsets) {
-	return g_get_filename_charsets(charsets);
+	return g_get_filename_charsets((const gchar***)(charsets));
 }
-gchar** _g_get_locale_variants(void* locale) {
-	return g_get_locale_variants(locale);
+gchar** _g_get_locale_variants(gchar* locale) {
+	return g_get_locale_variants((const gchar*)(locale));
 }
-const gchar* _g_getenv(void* variable) {
-	return g_getenv(variable);
+const gchar* _g_getenv(gchar* variable) {
+	return g_getenv((const gchar*)(variable));
 }
-gboolean _g_hostname_is_ascii_encoded(void* hostname) {
-	return g_hostname_is_ascii_encoded(hostname);
+gboolean _g_hostname_is_ascii_encoded(gchar* hostname) {
+	return g_hostname_is_ascii_encoded((const gchar*)(hostname));
 }
-gboolean _g_hostname_is_ip_address(void* hostname) {
-	return g_hostname_is_ip_address(hostname);
+gboolean _g_hostname_is_ip_address(gchar* hostname) {
+	return g_hostname_is_ip_address((const gchar*)(hostname));
 }
-gboolean _g_hostname_is_non_ascii(void* hostname) {
-	return g_hostname_is_non_ascii(hostname);
+gboolean _g_hostname_is_non_ascii(gchar* hostname) {
+	return g_hostname_is_non_ascii((const gchar*)(hostname));
 }
-gchar* _g_hostname_to_ascii(void* hostname) {
-	return g_hostname_to_ascii(hostname);
+gchar* _g_hostname_to_ascii(gchar* hostname) {
+	return g_hostname_to_ascii((const gchar*)(hostname));
 }
-gchar* _g_hostname_to_unicode(void* hostname) {
-	return g_hostname_to_unicode(hostname);
+gchar* _g_hostname_to_unicode(gchar* hostname) {
+	return g_hostname_to_unicode((const gchar*)(hostname));
 }
-const gchar* _g_intern_static_string(void* string_) {
-	return g_intern_static_string(string_);
+const gchar* _g_intern_static_string(gchar* string_) {
+	return g_intern_static_string((const gchar*)(string_));
 }
-const gchar* _g_intern_string(void* string_) {
-	return g_intern_string(string_);
+const gchar* _g_intern_string(gchar* string_) {
+	return g_intern_string((const gchar*)(string_));
 }
-gchar* _g_locale_from_utf8(void* utf8string, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_locale_from_utf8(utf8string, len_, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_locale_from_utf8(gchar* utf8string, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_locale_from_utf8((const gchar*)(utf8string), len_, bytes_read, bytes_written, (GError**)(err));
 }
-gchar* _g_locale_to_utf8(void* opsysstring, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
-	return g_locale_to_utf8(opsysstring, len_, bytes_read, bytes_written, (GError**)(err));
+gchar* _g_locale_to_utf8(gchar* opsysstring, gssize len_, gsize* bytes_read, gsize* bytes_written, void* err) {
+	return g_locale_to_utf8((const gchar*)(opsysstring), len_, bytes_read, bytes_written, (GError**)(err));
 }
-void _g_log_default_handler(void* log_domain, GLogLevelFlags log_level, void* message, gpointer unused_data) {
-	g_log_default_handler(log_domain, log_level, message, unused_data);
+void _g_log_default_handler(gchar* log_domain, GLogLevelFlags log_level, gchar* message, gpointer unused_data) {
+	g_log_default_handler((const gchar*)(log_domain), log_level, (const gchar*)(message), unused_data);
 }
-void _g_log_remove_handler(void* log_domain, guint handler_id) {
-	g_log_remove_handler(log_domain, handler_id);
+void _g_log_remove_handler(gchar* log_domain, guint handler_id) {
+	g_log_remove_handler((const gchar*)(log_domain), handler_id);
 }
-GLogLevelFlags _g_log_set_fatal_mask(void* log_domain, GLogLevelFlags fatal_mask) {
-	return g_log_set_fatal_mask(log_domain, fatal_mask);
+GLogLevelFlags _g_log_set_fatal_mask(gchar* log_domain, GLogLevelFlags fatal_mask) {
+	return g_log_set_fatal_mask((const gchar*)(log_domain), fatal_mask);
 }
-guint _g_log_set_handler(void* log_domain, GLogLevelFlags log_levels, GLogFunc log_func, gpointer user_data) {
-	return g_log_set_handler(log_domain, log_levels, log_func, user_data);
+guint _g_log_set_handler(gchar* log_domain, GLogLevelFlags log_levels, GLogFunc log_func, gpointer user_data) {
+	return g_log_set_handler((const gchar*)(log_domain), log_levels, log_func, user_data);
 }
-void _g_logv(void* log_domain, GLogLevelFlags log_level, void* format, va_list_wrap args) {
-	g_logv(log_domain, log_level, format, args.v);
+gchar* _g_markup_escape_text(gchar* text, gssize length) {
+	return g_markup_escape_text((const gchar*)(text), length);
 }
-gchar* _g_markup_escape_text(void* text, gssize length) {
-	return g_markup_escape_text(text, length);
+gint _g_mkdir_with_parents(gchar* pathname, gint mode) {
+	return g_mkdir_with_parents((const gchar*)(pathname), mode);
 }
-gchar* _g_markup_vprintf_escaped(void* format, va_list_wrap args) {
-	return g_markup_vprintf_escaped(format, args.v);
+void _g_on_error_query(gchar* prg_name) {
+	g_on_error_query((const gchar*)(prg_name));
 }
-gint _g_mkdir_with_parents(void* pathname, gint mode) {
-	return g_mkdir_with_parents(pathname, mode);
+void _g_on_error_stack_trace(gchar* prg_name) {
+	g_on_error_stack_trace((const gchar*)(prg_name));
 }
-gchar* _g_mkdtemp(void* tmpl) {
-	return g_mkdtemp(tmpl);
+guint _g_parse_debug_string(gchar* string_, GDebugKey* keys, guint nkeys) {
+	return g_parse_debug_string((const gchar*)(string_), keys, nkeys);
 }
-gchar* _g_mkdtemp_full(void* tmpl, gint mode) {
-	return g_mkdtemp_full(tmpl, mode);
+gchar* _g_path_get_basename(gchar* file_name) {
+	return g_path_get_basename((const gchar*)(file_name));
 }
-gint _g_mkstemp(void* tmpl) {
-	return g_mkstemp(tmpl);
+gchar* _g_path_get_dirname(gchar* file_name) {
+	return g_path_get_dirname((const gchar*)(file_name));
 }
-gint _g_mkstemp_full(void* tmpl, gint flags, gint mode) {
-	return g_mkstemp_full(tmpl, flags, mode);
+gboolean _g_path_is_absolute(gchar* file_name) {
+	return g_path_is_absolute((const gchar*)(file_name));
 }
-void _g_on_error_query(void* prg_name) {
-	g_on_error_query(prg_name);
+const gchar* _g_path_skip_root(gchar* file_name) {
+	return g_path_skip_root((const gchar*)(file_name));
 }
-void _g_on_error_stack_trace(void* prg_name) {
-	g_on_error_stack_trace(prg_name);
+gboolean _g_pattern_match(GPatternSpec* pspec, guint string_length, gchar* string_, gchar* string_reversed) {
+	return g_pattern_match(pspec, string_length, (const gchar*)(string_), (const gchar*)(string_reversed));
 }
-guint _g_parse_debug_string(void* string_, GDebugKey* keys, guint nkeys) {
-	return g_parse_debug_string(string_, keys, nkeys);
+gboolean _g_pattern_match_simple(gchar* pattern, gchar* string_) {
+	return g_pattern_match_simple((const gchar*)(pattern), (const gchar*)(string_));
 }
-gchar* _g_path_get_basename(void* file_name) {
-	return g_path_get_basename(file_name);
-}
-gchar* _g_path_get_dirname(void* file_name) {
-	return g_path_get_dirname(file_name);
-}
-gboolean _g_path_is_absolute(void* file_name) {
-	return g_path_is_absolute(file_name);
-}
-const gchar* _g_path_skip_root(void* file_name) {
-	return g_path_skip_root(file_name);
-}
-gboolean _g_pattern_match(GPatternSpec* pspec, guint string_length, void* string_, void* string_reversed) {
-	return g_pattern_match(pspec, string_length, string_, string_reversed);
-}
-gboolean _g_pattern_match_simple(void* pattern, void* string_) {
-	return g_pattern_match_simple(pattern, string_);
-}
-gboolean _g_pattern_match_string(GPatternSpec* pspec, void* string_) {
-	return g_pattern_match_string(pspec, string_);
-}
-gsize _g_printf_string_upper_bound(void* format, va_list_wrap args) {
-	return g_printf_string_upper_bound(format, args.v);
+gboolean _g_pattern_match_string(GPatternSpec* pspec, gchar* string_) {
+	return g_pattern_match_string(pspec, (const gchar*)(string_));
 }
 void _g_propagate_error(void* dest, GError* src) {
-	g_propagate_error(dest, src);
+	g_propagate_error((GError**)(dest), src);
 }
-GQuark _g_quark_from_static_string(void* string_) {
-	return g_quark_from_static_string(string_);
+GQuark _g_quark_from_static_string(gchar* string_) {
+	return g_quark_from_static_string((const gchar*)(string_));
 }
-GQuark _g_quark_from_string(void* string_) {
-	return g_quark_from_string(string_);
+GQuark _g_quark_from_string(gchar* string_) {
+	return g_quark_from_string((const gchar*)(string_));
 }
-GQuark _g_quark_try_string(void* string_) {
-	return g_quark_try_string(string_);
+GQuark _g_quark_try_string(gchar* string_) {
+	return g_quark_try_string((const gchar*)(string_));
 }
-void _g_return_if_fail_warning(void* log_domain, void* pretty_function, void* expression) {
-	g_return_if_fail_warning(log_domain, pretty_function, expression);
+void _g_return_if_fail_warning(char* log_domain, char* pretty_function, char* expression) {
+	g_return_if_fail_warning((const char*)(log_domain), (const char*)(pretty_function), (const char*)(expression));
 }
-int _g_rmdir(void* filename) {
-	return g_rmdir(filename);
+int _g_rmdir(gchar* filename) {
+	return g_rmdir((const gchar*)(filename));
 }
-void _g_set_application_name(void* application_name) {
-	g_set_application_name(application_name);
+void _g_set_application_name(gchar* application_name) {
+	g_set_application_name((const gchar*)(application_name));
 }
-void _g_set_error_literal(void* err, GQuark domain, gint code, void* message) {
-	g_set_error_literal(err, domain, code, message);
+void _g_set_error_literal(void* err, GQuark domain, gint code, gchar* message) {
+	g_set_error_literal((GError**)(err), domain, code, (const gchar*)(message));
 }
-void _g_set_prgname(void* prgname) {
-	g_set_prgname(prgname);
+void _g_set_prgname(gchar* prgname) {
+	g_set_prgname((const gchar*)(prgname));
 }
-gboolean _g_setenv(void* variable, void* value, gboolean overwrite) {
-	return g_setenv(variable, value, overwrite);
+gboolean _g_setenv(gchar* variable, gchar* value, gboolean overwrite) {
+	return g_setenv((const gchar*)(variable), (const gchar*)(value), overwrite);
 }
-gboolean _g_shell_parse_argv(void* command_line, gint* argcp, void* argvp, void* err) {
-	return g_shell_parse_argv(command_line, argcp, (const gchar**)(argvp), (GError**)(err));
+gboolean _g_shell_parse_argv(gchar* command_line, gint* argcp, void* argvp, void* err) {
+	return g_shell_parse_argv((const gchar*)(command_line), argcp, (gchar***)(argvp), (GError**)(err));
 }
-gchar* _g_shell_quote(void* unquoted_string) {
-	return g_shell_quote(unquoted_string);
+gchar* _g_shell_quote(gchar* unquoted_string) {
+	return g_shell_quote((const gchar*)(unquoted_string));
 }
-gchar* _g_shell_unquote(void* quoted_string, void* err) {
-	return g_shell_unquote(quoted_string, (GError**)(err));
+gchar* _g_shell_unquote(gchar* quoted_string, void* err) {
+	return g_shell_unquote((const gchar*)(quoted_string), (GError**)(err));
 }
-gboolean _g_spawn_async(void* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, GPid* child_pid, void* err) {
-	return g_spawn_async(working_directory, (const gchar**)(argv), (const gchar**)(envp), flags, child_setup, user_data, child_pid, (GError**)(err));
+gboolean _g_spawn_async(gchar* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, GPid* child_pid, void* err) {
+	return g_spawn_async((const gchar*)(working_directory), (gchar**)(argv), (gchar**)(envp), flags, child_setup, user_data, child_pid, (GError**)(err));
 }
-gboolean _g_spawn_async_with_pipes(void* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, GPid* child_pid, gint* standard_input, gint* standard_output, gint* standard_error, void* err) {
-	return g_spawn_async_with_pipes(working_directory, (const gchar**)(argv), (const gchar**)(envp), flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, (GError**)(err));
+gboolean _g_spawn_async_with_pipes(gchar* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, GPid* child_pid, gint* standard_input, gint* standard_output, gint* standard_error, void* err) {
+	return g_spawn_async_with_pipes((const gchar*)(working_directory), (gchar**)(argv), (gchar**)(envp), flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, (GError**)(err));
 }
 gboolean _g_spawn_check_exit_status(gint exit_status, void* err) {
 	return g_spawn_check_exit_status(exit_status, (GError**)(err));
 }
-gboolean _g_spawn_command_line_async(void* command_line, void* err) {
-	return g_spawn_command_line_async(command_line, (GError**)(err));
+gboolean _g_spawn_command_line_async(gchar* command_line, void* err) {
+	return g_spawn_command_line_async((const gchar*)(command_line), (GError**)(err));
 }
-gboolean _g_spawn_command_line_sync(void* command_line, void* standard_output, void* standard_error, gint* exit_status, void* err) {
-	return g_spawn_command_line_sync(command_line, standard_output, standard_error, exit_status, (GError**)(err));
+gboolean _g_spawn_command_line_sync(gchar* command_line, void* standard_output, void* standard_error, gint* exit_status, void* err) {
+	return g_spawn_command_line_sync((const gchar*)(command_line), (gchar**)(standard_output), (gchar**)(standard_error), exit_status, (GError**)(err));
 }
-gboolean _g_spawn_sync(void* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, void* standard_output, void* standard_error, gint* exit_status, void* err) {
-	return g_spawn_sync(working_directory, (const gchar**)(argv), (const gchar**)(envp), flags, child_setup, user_data, standard_output, standard_error, exit_status, (GError**)(err));
+gboolean _g_spawn_sync(gchar* working_directory, void* argv, void* envp, GSpawnFlags flags, GSpawnChildSetupFunc child_setup, gpointer user_data, void* standard_output, void* standard_error, gint* exit_status, void* err) {
+	return g_spawn_sync((const gchar*)(working_directory), (gchar**)(argv), (gchar**)(envp), flags, child_setup, user_data, (gchar**)(standard_output), (gchar**)(standard_error), exit_status, (GError**)(err));
 }
-gchar* _g_stpcpy(void* dest, void* src) {
-	return g_stpcpy(dest, src);
+gchar* _g_stpcpy(gchar* dest, char* src) {
+	return g_stpcpy(dest, (const char*)(src));
 }
-gboolean _g_str_has_prefix(void* str, void* prefix) {
-	return g_str_has_prefix(str, prefix);
+gboolean _g_str_has_prefix(gchar* str, gchar* prefix) {
+	return g_str_has_prefix((const gchar*)(str), (const gchar*)(prefix));
 }
-gboolean _g_str_has_suffix(void* str, void* suffix) {
-	return g_str_has_suffix(str, suffix);
+gboolean _g_str_has_suffix(gchar* str, gchar* suffix) {
+	return g_str_has_suffix((const gchar*)(str), (const gchar*)(suffix));
 }
-gchar* _g_strcanon(void* string_, void* valid_chars, gchar substitutor) {
-	return g_strcanon(string_, valid_chars, substitutor);
+gchar* _g_strcanon(gchar* string_, gchar* valid_chars, gchar substitutor) {
+	return g_strcanon(string_, (const gchar*)(valid_chars), substitutor);
 }
-gchar* _g_strchomp(void* string_) {
-	return g_strchomp(string_);
+int _g_strcmp0(char* str1, char* str2) {
+	return g_strcmp0((const char*)(str1), (const char*)(str2));
 }
-gchar* _g_strchug(void* string_) {
-	return g_strchug(string_);
+gchar* _g_strcompress(gchar* source) {
+	return g_strcompress((const gchar*)(source));
 }
-int _g_strcmp0(void* str1, void* str2) {
-	return g_strcmp0(str1, str2);
+gchar* _g_strdelimit(gchar* string_, gchar* delimiters, gchar new_delimiter) {
+	return g_strdelimit(string_, (const gchar*)(delimiters), new_delimiter);
 }
-gchar* _g_strcompress(void* source) {
-	return g_strcompress(source);
-}
-gchar* _g_strdelimit(void* string_, void* delimiters, gchar new_delimiter) {
-	return g_strdelimit(string_, delimiters, new_delimiter);
-}
-gchar* _g_strdup(void* str) {
-	return g_strdup(str);
-}
-gchar* _g_strdup_vprintf(void* format, va_list_wrap args) {
-	return g_strdup_vprintf(format, args.v);
+gchar* _g_strdup(gchar* str) {
+	return g_strdup((const gchar*)(str));
 }
 gchar** _g_strdupv(void* str_array) {
-	return g_strdupv(str_array);
+	return g_strdupv((gchar**)(str_array));
 }
-gchar* _g_strescape(void* source, void* exceptions) {
-	return g_strescape(source, exceptions);
+gchar* _g_strescape(gchar* source, gchar* exceptions) {
+	return g_strescape((const gchar*)(source), (const gchar*)(exceptions));
 }
 void _g_strfreev(void* str_array) {
-	g_strfreev(str_array);
+	g_strfreev((gchar**)(str_array));
 }
-GString* _g_string_new(void* init) {
-	return g_string_new(init);
+GString* _g_string_new(gchar* init) {
+	return g_string_new((const gchar*)(init));
 }
-GString* _g_string_new_len(void* init, gssize len_) {
-	return g_string_new_len(init, len_);
+GString* _g_string_new_len(gchar* init, gssize len_) {
+	return g_string_new_len((const gchar*)(init), len_);
 }
-const gchar* _g_strip_context(void* msgid, void* msgval) {
-	return g_strip_context(msgid, msgval);
+const gchar* _g_strip_context(gchar* msgid, gchar* msgval) {
+	return g_strip_context((const gchar*)(msgid), (const gchar*)(msgval));
 }
-gchar* _g_strjoinv(void* separator, void* str_array) {
-	return g_strjoinv(separator, str_array);
+gchar* _g_strjoinv(gchar* separator, void* str_array) {
+	return g_strjoinv((const gchar*)(separator), (gchar**)(str_array));
 }
-gsize _g_strlcat(void* dest, void* src, gsize dest_size) {
-	return g_strlcat(dest, src, dest_size);
+gsize _g_strlcat(gchar* dest, gchar* src, gsize dest_size) {
+	return g_strlcat(dest, (const gchar*)(src), dest_size);
 }
-gsize _g_strlcpy(void* dest, void* src, gsize dest_size) {
-	return g_strlcpy(dest, src, dest_size);
+gsize _g_strlcpy(gchar* dest, gchar* src, gsize dest_size) {
+	return g_strlcpy(dest, (const gchar*)(src), dest_size);
 }
-gchar* _g_strndup(void* str, gsize n) {
-	return g_strndup(str, n);
+gchar* _g_strndup(gchar* str, gsize n) {
+	return g_strndup((const gchar*)(str), n);
 }
-gchar* _g_strreverse(void* string_) {
-	return g_strreverse(string_);
+gchar* _g_strrstr(gchar* haystack, gchar* needle) {
+	return g_strrstr((const gchar*)(haystack), (const gchar*)(needle));
 }
-gchar* _g_strrstr(void* haystack, void* needle) {
-	return g_strrstr(haystack, needle);
+gchar* _g_strrstr_len(gchar* haystack, gssize haystack_len, gchar* needle) {
+	return g_strrstr_len((const gchar*)(haystack), haystack_len, (const gchar*)(needle));
 }
-gchar* _g_strrstr_len(void* haystack, gssize haystack_len, void* needle) {
-	return g_strrstr_len(haystack, haystack_len, needle);
+gchar** _g_strsplit(gchar* string_, gchar* delimiter, gint max_tokens) {
+	return g_strsplit((const gchar*)(string_), (const gchar*)(delimiter), max_tokens);
 }
-gchar** _g_strsplit(void* string_, void* delimiter, gint max_tokens) {
-	return g_strsplit(string_, delimiter, max_tokens);
+gchar** _g_strsplit_set(gchar* string_, gchar* delimiters, gint max_tokens) {
+	return g_strsplit_set((const gchar*)(string_), (const gchar*)(delimiters), max_tokens);
 }
-gchar** _g_strsplit_set(void* string_, void* delimiters, gint max_tokens) {
-	return g_strsplit_set(string_, delimiters, max_tokens);
+gchar* _g_strstr_len(gchar* haystack, gssize haystack_len, gchar* needle) {
+	return g_strstr_len((const gchar*)(haystack), haystack_len, (const gchar*)(needle));
 }
-gchar* _g_strstr_len(void* haystack, gssize haystack_len, void* needle) {
-	return g_strstr_len(haystack, haystack_len, needle);
-}
-gdouble _g_strtod(void* nptr, void* endptr) {
-	return g_strtod(nptr, endptr);
+gdouble _g_strtod(gchar* nptr, void* endptr) {
+	return g_strtod((const gchar*)(nptr), (gchar**)(endptr));
 }
 guint _g_strv_length(void* str_array) {
-	return g_strv_length(str_array);
+	return g_strv_length((gchar**)(str_array));
 }
-void _g_test_add_data_func(void* testpath, gconstpointer test_data, GTestDataFunc test_func) {
-	g_test_add_data_func(testpath, test_data, test_func);
+void _g_test_add_data_func(char* testpath, gconstpointer test_data, GTestDataFunc test_func) {
+	g_test_add_data_func((const char*)(testpath), test_data, test_func);
 }
-void _g_test_add_data_func_full(void* testpath, gpointer test_data, GTestDataFunc test_func, GDestroyNotify data_free_func) {
-	g_test_add_data_func_full(testpath, test_data, test_func, data_free_func);
+void _g_test_add_data_func_full(char* testpath, gpointer test_data, GTestDataFunc test_func, GDestroyNotify data_free_func) {
+	g_test_add_data_func_full((const char*)(testpath), test_data, test_func, data_free_func);
 }
-void _g_test_add_func(void* testpath, GTestFunc test_func) {
-	g_test_add_func(testpath, test_func);
+void _g_test_add_func(char* testpath, GTestFunc test_func) {
+	g_test_add_func((const char*)(testpath), test_func);
 }
-void _g_test_add_vtable(void* testpath, gsize data_size, gconstpointer test_data, GTestFixtureFunc data_setup, GTestFixtureFunc data_test, GTestFixtureFunc data_teardown) {
-	g_test_add_vtable(testpath, data_size, test_data, data_setup, data_test, data_teardown);
+void _g_test_add_vtable(char* testpath, gsize data_size, gconstpointer test_data, GTestFixtureFunc data_setup, GTestFixtureFunc data_test, GTestFixtureFunc data_teardown) {
+	g_test_add_vtable((const char*)(testpath), data_size, test_data, data_setup, data_test, data_teardown);
 }
-void _g_test_assert_expected_messages_internal(void* domain, void* file, int line, void* func_) {
-	g_test_assert_expected_messages_internal(domain, file, line, func_);
+void _g_test_assert_expected_messages_internal(char* domain, char* file, int line, char* func_) {
+	g_test_assert_expected_messages_internal((const char*)(domain), (const char*)(file), line, (const char*)(func_));
 }
-void _g_test_bug(void* bug_uri_snippet) {
-	g_test_bug(bug_uri_snippet);
+void _g_test_bug(char* bug_uri_snippet) {
+	g_test_bug((const char*)(bug_uri_snippet));
 }
-void _g_test_bug_base(void* uri_pattern) {
-	g_test_bug_base(uri_pattern);
+void _g_test_bug_base(char* uri_pattern) {
+	g_test_bug_base((const char*)(uri_pattern));
 }
-GTestCase* _g_test_create_case(void* test_name, gsize data_size, gconstpointer test_data, GTestFixtureFunc data_setup, GTestFixtureFunc data_test, GTestFixtureFunc data_teardown) {
-	return g_test_create_case(test_name, data_size, test_data, data_setup, data_test, data_teardown);
+GTestCase* _g_test_create_case(char* test_name, gsize data_size, gconstpointer test_data, GTestFixtureFunc data_setup, GTestFixtureFunc data_test, GTestFixtureFunc data_teardown) {
+	return g_test_create_case((const char*)(test_name), data_size, test_data, data_setup, data_test, data_teardown);
 }
-GTestSuite* _g_test_create_suite(void* suite_name) {
-	return g_test_create_suite(suite_name);
+GTestSuite* _g_test_create_suite(char* suite_name) {
+	return g_test_create_suite((const char*)(suite_name));
 }
-void _g_test_expect_message(void* log_domain, GLogLevelFlags log_level, void* pattern) {
-	g_test_expect_message(log_domain, log_level, pattern);
+void _g_test_expect_message(gchar* log_domain, GLogLevelFlags log_level, gchar* pattern) {
+	g_test_expect_message((const gchar*)(log_domain), log_level, (const gchar*)(pattern));
 }
-void _g_test_trap_assertions(void* domain, void* file, int line, void* func_, guint64 assertion_flags, void* pattern) {
-	g_test_trap_assertions(domain, file, line, func_, assertion_flags, pattern);
+void _g_test_trap_assertions(char* domain, char* file, int line, char* func_, guint64 assertion_flags, char* pattern) {
+	g_test_trap_assertions((const char*)(domain), (const char*)(file), line, (const char*)(func_), assertion_flags, (const char*)(pattern));
 }
-gunichar2* _g_ucs4_to_utf16(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
-	return g_ucs4_to_utf16(str, len_, items_read, items_written, (GError**)(err));
+gunichar2* _g_ucs4_to_utf16(gunichar* str, glong len_, glong* items_read, glong* items_written, void* err) {
+	return g_ucs4_to_utf16((const gunichar*)(str), len_, items_read, items_written, (GError**)(err));
 }
-gchar* _g_ucs4_to_utf8(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
-	return g_ucs4_to_utf8(str, len_, items_read, items_written, (GError**)(err));
-}
-gint _g_unichar_to_utf8(gunichar c, void* outbuf) {
-	return g_unichar_to_utf8(c, outbuf);
+gchar* _g_ucs4_to_utf8(gunichar* str, glong len_, glong* items_read, glong* items_written, void* err) {
+	return g_ucs4_to_utf8((const gunichar*)(str), len_, items_read, items_written, (GError**)(err));
 }
 gboolean _g_unix_open_pipe(gint* fds, gint flags, void* err) {
 	return g_unix_open_pipe(fds, flags, (GError**)(err));
@@ -1122,122 +1070,107 @@ gboolean _g_unix_open_pipe(gint* fds, gint flags, void* err) {
 gboolean _g_unix_set_fd_nonblocking(gint fd, gboolean nonblock, void* err) {
 	return g_unix_set_fd_nonblocking(fd, nonblock, (GError**)(err));
 }
-int _g_unlink(void* filename) {
-	return g_unlink(filename);
+int _g_unlink(gchar* filename) {
+	return g_unlink((const gchar*)(filename));
 }
-void _g_unsetenv(void* variable) {
-	g_unsetenv(variable);
+void _g_unsetenv(gchar* variable) {
+	g_unsetenv((const gchar*)(variable));
 }
-char* _g_uri_escape_string(void* unescaped, void* reserved_chars_allowed, gboolean allow_utf8) {
-	return g_uri_escape_string(unescaped, reserved_chars_allowed, allow_utf8);
+char* _g_uri_escape_string(char* unescaped, char* reserved_chars_allowed, gboolean allow_utf8) {
+	return g_uri_escape_string((const char*)(unescaped), (const char*)(reserved_chars_allowed), allow_utf8);
 }
-gchar** _g_uri_list_extract_uris(void* uri_list) {
-	return g_uri_list_extract_uris(uri_list);
+gchar** _g_uri_list_extract_uris(gchar* uri_list) {
+	return g_uri_list_extract_uris((const gchar*)(uri_list));
 }
-char* _g_uri_parse_scheme(void* uri) {
-	return g_uri_parse_scheme(uri);
+char* _g_uri_parse_scheme(char* uri) {
+	return g_uri_parse_scheme((const char*)(uri));
 }
-char* _g_uri_unescape_segment(void* escaped_string, void* escaped_string_end, void* illegal_characters) {
-	return g_uri_unescape_segment(escaped_string, escaped_string_end, illegal_characters);
+char* _g_uri_unescape_segment(char* escaped_string, char* escaped_string_end, char* illegal_characters) {
+	return g_uri_unescape_segment((const char*)(escaped_string), (const char*)(escaped_string_end), (const char*)(illegal_characters));
 }
-char* _g_uri_unescape_string(void* escaped_string, void* illegal_characters) {
-	return g_uri_unescape_string(escaped_string, illegal_characters);
+char* _g_uri_unescape_string(char* escaped_string, char* illegal_characters) {
+	return g_uri_unescape_string((const char*)(escaped_string), (const char*)(illegal_characters));
 }
-gunichar* _g_utf16_to_ucs4(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
-	return g_utf16_to_ucs4(str, len_, items_read, items_written, (GError**)(err));
+gunichar* _g_utf16_to_ucs4(gunichar2* str, glong len_, glong* items_read, glong* items_written, void* err) {
+	return g_utf16_to_ucs4((const gunichar2*)(str), len_, items_read, items_written, (GError**)(err));
 }
-gchar* _g_utf16_to_utf8(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
-	return g_utf16_to_utf8(str, len_, items_read, items_written, (GError**)(err));
+gchar* _g_utf16_to_utf8(gunichar2* str, glong len_, glong* items_read, glong* items_written, void* err) {
+	return g_utf16_to_utf8((const gunichar2*)(str), len_, items_read, items_written, (GError**)(err));
 }
-gchar* _g_utf8_casefold(void* str, gssize len_) {
-	return g_utf8_casefold(str, len_);
+gchar* _g_utf8_casefold(gchar* str, gssize len_) {
+	return g_utf8_casefold((const gchar*)(str), len_);
 }
-gint _g_utf8_collate(void* str1, void* str2) {
-	return g_utf8_collate(str1, str2);
+gint _g_utf8_collate(gchar* str1, gchar* str2) {
+	return g_utf8_collate((const gchar*)(str1), (const gchar*)(str2));
 }
-gchar* _g_utf8_collate_key(void* str, gssize len_) {
-	return g_utf8_collate_key(str, len_);
+gchar* _g_utf8_collate_key(gchar* str, gssize len_) {
+	return g_utf8_collate_key((const gchar*)(str), len_);
 }
-gchar* _g_utf8_collate_key_for_filename(void* str, gssize len_) {
-	return g_utf8_collate_key_for_filename(str, len_);
+gchar* _g_utf8_collate_key_for_filename(gchar* str, gssize len_) {
+	return g_utf8_collate_key_for_filename((const gchar*)(str), len_);
 }
-gchar* _g_utf8_find_next_char(void* p, void* end) {
-	return g_utf8_find_next_char(p, end);
+gchar* _g_utf8_find_next_char(gchar* p, gchar* end) {
+	return g_utf8_find_next_char((const gchar*)(p), (const gchar*)(end));
 }
-gchar* _g_utf8_find_prev_char(void* str, void* p) {
-	return g_utf8_find_prev_char(str, p);
+gchar* _g_utf8_find_prev_char(gchar* str, gchar* p) {
+	return g_utf8_find_prev_char((const gchar*)(str), (const gchar*)(p));
 }
-gunichar _g_utf8_get_char(void* p) {
-	return g_utf8_get_char(p);
+gunichar _g_utf8_get_char(gchar* p) {
+	return g_utf8_get_char((const gchar*)(p));
 }
-gunichar _g_utf8_get_char_validated(void* p, gssize max_len) {
-	return g_utf8_get_char_validated(p, max_len);
+gunichar _g_utf8_get_char_validated(gchar* p, gssize max_len) {
+	return g_utf8_get_char_validated((const gchar*)(p), max_len);
 }
-gchar* _g_utf8_normalize(void* str, gssize len_, GNormalizeMode mode) {
-	return g_utf8_normalize(str, len_, mode);
+gchar* _g_utf8_normalize(gchar* str, gssize len_, GNormalizeMode mode) {
+	return g_utf8_normalize((const gchar*)(str), len_, mode);
 }
-gchar* _g_utf8_offset_to_pointer(void* str, glong offset) {
-	return g_utf8_offset_to_pointer(str, offset);
+gchar* _g_utf8_offset_to_pointer(gchar* str, glong offset) {
+	return g_utf8_offset_to_pointer((const gchar*)(str), offset);
 }
-glong _g_utf8_pointer_to_offset(void* str, void* pos) {
-	return g_utf8_pointer_to_offset(str, pos);
+glong _g_utf8_pointer_to_offset(gchar* str, gchar* pos) {
+	return g_utf8_pointer_to_offset((const gchar*)(str), (const gchar*)(pos));
 }
-gchar* _g_utf8_prev_char(void* p) {
-	return g_utf8_prev_char(p);
+gchar* _g_utf8_prev_char(gchar* p) {
+	return g_utf8_prev_char((const gchar*)(p));
 }
-gchar* _g_utf8_strchr(void* p, gssize len_, gunichar c) {
-	return g_utf8_strchr(p, len_, c);
+gchar* _g_utf8_strchr(gchar* p, gssize len_, gunichar c) {
+	return g_utf8_strchr((const gchar*)(p), len_, c);
 }
-gchar* _g_utf8_strdown(void* str, gssize len_) {
-	return g_utf8_strdown(str, len_);
+gchar* _g_utf8_strdown(gchar* str, gssize len_) {
+	return g_utf8_strdown((const gchar*)(str), len_);
 }
-glong _g_utf8_strlen(void* p, gssize max) {
-	return g_utf8_strlen(p, max);
+glong _g_utf8_strlen(gchar* p, gssize max) {
+	return g_utf8_strlen((const gchar*)(p), max);
 }
-gchar* _g_utf8_strncpy(void* dest, void* src, gsize n) {
-	return g_utf8_strncpy(dest, src, n);
+gchar* _g_utf8_strncpy(gchar* dest, gchar* src, gsize n) {
+	return g_utf8_strncpy(dest, (const gchar*)(src), n);
 }
-gchar* _g_utf8_strrchr(void* p, gssize len_, gunichar c) {
-	return g_utf8_strrchr(p, len_, c);
+gchar* _g_utf8_strrchr(gchar* p, gssize len_, gunichar c) {
+	return g_utf8_strrchr((const gchar*)(p), len_, c);
 }
-gchar* _g_utf8_strreverse(void* str, gssize len_) {
-	return g_utf8_strreverse(str, len_);
+gchar* _g_utf8_strreverse(gchar* str, gssize len_) {
+	return g_utf8_strreverse((const gchar*)(str), len_);
 }
-gchar* _g_utf8_strup(void* str, gssize len_) {
-	return g_utf8_strup(str, len_);
+gchar* _g_utf8_strup(gchar* str, gssize len_) {
+	return g_utf8_strup((const gchar*)(str), len_);
 }
-gchar* _g_utf8_substring(void* str, glong start_pos, glong end_pos) {
-	return g_utf8_substring(str, start_pos, end_pos);
+gchar* _g_utf8_substring(gchar* str, glong start_pos, glong end_pos) {
+	return g_utf8_substring((const gchar*)(str), start_pos, end_pos);
 }
-gunichar* _g_utf8_to_ucs4(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
-	return g_utf8_to_ucs4(str, len_, items_read, items_written, (GError**)(err));
+gunichar* _g_utf8_to_ucs4(gchar* str, glong len_, glong* items_read, glong* items_written, void* err) {
+	return g_utf8_to_ucs4((const gchar*)(str), len_, items_read, items_written, (GError**)(err));
 }
-gunichar* _g_utf8_to_ucs4_fast(void* str, glong len_, glong* items_written) {
-	return g_utf8_to_ucs4_fast(str, len_, items_written);
+gunichar* _g_utf8_to_ucs4_fast(gchar* str, glong len_, glong* items_written) {
+	return g_utf8_to_ucs4_fast((const gchar*)(str), len_, items_written);
 }
-gunichar2* _g_utf8_to_utf16(void* str, glong len_, glong* items_read, glong* items_written, void* err) {
-	return g_utf8_to_utf16(str, len_, items_read, items_written, (GError**)(err));
+gunichar2* _g_utf8_to_utf16(gchar* str, glong len_, glong* items_read, glong* items_written, void* err) {
+	return g_utf8_to_utf16((const gchar*)(str), len_, items_read, items_written, (GError**)(err));
 }
 gboolean _g_utf8_validate(gchar* str, gssize max_len, void* end) {
-	return g_utf8_validate(str, max_len, end);
+	return g_utf8_validate(str, max_len, (const gchar**)(end));
 }
-gint _g_vasprintf(void* string_, void* format, va_list_wrap args) {
-	return g_vasprintf(string_, format, args.v);
-}
-gint _g_vfprintf(FILE* file, void* format, va_list_wrap args) {
-	return g_vfprintf(file, format, args.v);
-}
-gint _g_vprintf(void* format, va_list_wrap args) {
-	return g_vprintf(format, args.v);
-}
-gint _g_vsnprintf(void* string_, gulong n, void* format, va_list_wrap args) {
-	return g_vsnprintf(string_, n, format, args.v);
-}
-gint _g_vsprintf(void* string_, void* format, va_list_wrap args) {
-	return g_vsprintf(string_, format, args.v);
-}
-void _g_warn_message(void* domain, void* file, int line, void* func_, void* warnexpr) {
-	g_warn_message(domain, file, line, func_, warnexpr);
+void _g_warn_message(char* domain, char* file, int line, char* func_, char* warnexpr) {
+	g_warn_message((const char*)(domain), (const char*)(file), line, (const char*)(func_), (const char*)(warnexpr));
 }
 */
 import "C"
@@ -1245,5532 +1178,6 @@ import (
 	"unsafe"
 	"runtime"
 )
-
-func ArrayAppendVals(array *CGArray, data Cgconstpointer, len_ Cguint) *CGArray {
-	return C.g_array_append_vals(array, data, len_)
-}
-
-func ArrayFree(array *CGArray, free_segment Cgboolean) *Cgchar {
-	return C.g_array_free(array, free_segment)
-}
-
-func ArrayGetElementSize(array *CGArray) Cguint {
-	return C.g_array_get_element_size(array)
-}
-
-func ArrayInsertVals(array *CGArray, index_ Cguint, data Cgconstpointer, len_ Cguint) *CGArray {
-	return C.g_array_insert_vals(array, index_, data, len_)
-}
-
-func ArrayNew(zero_terminated Cgboolean, clear_ Cgboolean, element_size Cguint) *CGArray {
-	return C.g_array_new(zero_terminated, clear_, element_size)
-}
-
-func ArrayPrependVals(array *CGArray, data Cgconstpointer, len_ Cguint) *CGArray {
-	return C.g_array_prepend_vals(array, data, len_)
-}
-
-func ArrayRef(array *CGArray) *CGArray {
-	return C.g_array_ref(array)
-}
-
-func ArrayRemoveIndex(array *CGArray, index_ Cguint) *CGArray {
-	return C.g_array_remove_index(array, index_)
-}
-
-func ArrayRemoveIndexFast(array *CGArray, index_ Cguint) *CGArray {
-	return C.g_array_remove_index_fast(array, index_)
-}
-
-func ArrayRemoveRange(array *CGArray, index_ Cguint, length Cguint) *CGArray {
-	return C.g_array_remove_range(array, index_, length)
-}
-
-func ArraySetClearFunc(array *CGArray, clear_func CGDestroyNotify) {
-	C.g_array_set_clear_func(array, clear_func)
-}
-
-func ArraySetSize(array *CGArray, length Cguint) *CGArray {
-	return C.g_array_set_size(array, length)
-}
-
-func ArraySizedNew(zero_terminated Cgboolean, clear_ Cgboolean, element_size Cguint, reserved_size Cguint) *CGArray {
-	return C.g_array_sized_new(zero_terminated, clear_, element_size, reserved_size)
-}
-
-func ArraySort(array *CGArray, compare_func CGCompareFunc) {
-	C.g_array_sort(array, compare_func)
-}
-
-func ArraySortWithData(array *CGArray, compare_func CGCompareDataFunc, user_data Cgpointer) {
-	C.g_array_sort_with_data(array, compare_func, user_data)
-}
-
-func ArrayUnref(array *CGArray) {
-	C.g_array_unref(array)
-}
-
-func AsyncQueueNew() *CGAsyncQueue {
-	return C.g_async_queue_new()
-}
-
-func AsyncQueueNewFull(item_free_func CGDestroyNotify) *CGAsyncQueue {
-	return C.g_async_queue_new_full(item_free_func)
-}
-
-func (self *AsyncQueue) Length() Cgint {
-	return C.g_async_queue_length((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) LengthUnlocked() Cgint {
-	return C.g_async_queue_length_unlocked((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) Lock() {
-	C.g_async_queue_lock((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) Pop() Cgpointer {
-	return C.g_async_queue_pop((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) PopUnlocked() Cgpointer {
-	return C.g_async_queue_pop_unlocked((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) Push(data Cgpointer) {
-	C.g_async_queue_push((*C.GAsyncQueue)(self), data)
-}
-
-func (self *AsyncQueue) PushSorted(data Cgpointer, func_ CGCompareDataFunc, user_data Cgpointer) {
-	C.g_async_queue_push_sorted((*C.GAsyncQueue)(self), data, func_, user_data)
-}
-
-func (self *AsyncQueue) PushSortedUnlocked(data Cgpointer, func_ CGCompareDataFunc, user_data Cgpointer) {
-	C.g_async_queue_push_sorted_unlocked((*C.GAsyncQueue)(self), data, func_, user_data)
-}
-
-func (self *AsyncQueue) PushUnlocked(data Cgpointer) {
-	C.g_async_queue_push_unlocked((*C.GAsyncQueue)(self), data)
-}
-
-func (self *AsyncQueue) Ref() *CGAsyncQueue {
-	return C.g_async_queue_ref((*C.GAsyncQueue)(self))
-}
-
-//Skipped g_async_queue_ref_unlocked
-
-func (self *AsyncQueue) Sort(func_ CGCompareDataFunc, user_data Cgpointer) {
-	C.g_async_queue_sort((*C.GAsyncQueue)(self), func_, user_data)
-}
-
-func (self *AsyncQueue) SortUnlocked(func_ CGCompareDataFunc, user_data Cgpointer) {
-	C.g_async_queue_sort_unlocked((*C.GAsyncQueue)(self), func_, user_data)
-}
-
-//Skipped g_async_queue_timed_pop
-
-//Skipped g_async_queue_timed_pop_unlocked
-
-func (self *AsyncQueue) TimeoutPop(timeout Cguint64) Cgpointer {
-	return C.g_async_queue_timeout_pop((*C.GAsyncQueue)(self), timeout)
-}
-
-func (self *AsyncQueue) TimeoutPopUnlocked(timeout Cguint64) Cgpointer {
-	return C.g_async_queue_timeout_pop_unlocked((*C.GAsyncQueue)(self), timeout)
-}
-
-func (self *AsyncQueue) TryPop() Cgpointer {
-	return C.g_async_queue_try_pop((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) TryPopUnlocked() Cgpointer {
-	return C.g_async_queue_try_pop_unlocked((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) Unlock() {
-	C.g_async_queue_unlock((*C.GAsyncQueue)(self))
-}
-
-func (self *AsyncQueue) Unref() {
-	C.g_async_queue_unref((*C.GAsyncQueue)(self))
-}
-
-//Skipped g_async_queue_unref_and_unlock
-
-func BookmarkFileErrorQuark() CGQuark {
-	return C.g_bookmark_file_error_quark()
-}
-
-func BookmarkFileNew() *CGBookmarkFile {
-	return C.g_bookmark_file_new()
-}
-
-func (self *BookmarkFile) AddApplication(uri *Cgchar, name *Cgchar, exec *Cgchar) {
-	C._g_bookmark_file_add_application((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(name), unsafe.Pointer(exec))
-}
-
-func (self *BookmarkFile) AddGroup(uri *Cgchar, group *Cgchar) {
-	C._g_bookmark_file_add_group((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(group))
-}
-
-func (self *BookmarkFile) Free() {
-	C.g_bookmark_file_free((*C.GBookmarkFile)(self))
-}
-
-func (self *BookmarkFile) GetAdded(uri *Cgchar, err unsafe.Pointer) Ctime_t {
-	return C._g_bookmark_file_get_added((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetAppInfo(uri *Cgchar, name *Cgchar, exec *Cgchar, count *Cguint, stamp *Ctime_t, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_get_app_info((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(name), unsafe.Pointer(exec), count, stamp, unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetApplications(uri *Cgchar, length *Cgsize, err unsafe.Pointer) Cunsafe.Pointer {
-	return C._g_bookmark_file_get_applications((*C.GBookmarkFile)(self), unsafe.Pointer(uri), length, unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetDescription(uri *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_bookmark_file_get_description((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetGroups(uri *Cgchar, length *Cgsize, err unsafe.Pointer) Cunsafe.Pointer {
-	return C._g_bookmark_file_get_groups((*C.GBookmarkFile)(self), unsafe.Pointer(uri), length, unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetIcon(uri *Cgchar, href *Cgchar, mime_type *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_get_icon((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(href), unsafe.Pointer(mime_type), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetIsPrivate(uri *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_get_is_private((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetMimeType(uri *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_bookmark_file_get_mime_type((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetModified(uri *Cgchar, err unsafe.Pointer) Ctime_t {
-	return C._g_bookmark_file_get_modified((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetSize() Cgint {
-	return C.g_bookmark_file_get_size((*C.GBookmarkFile)(self))
-}
-
-func (self *BookmarkFile) GetTitle(uri *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_bookmark_file_get_title((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) GetUris(length *Cgsize) Cunsafe.Pointer {
-	return C.g_bookmark_file_get_uris((*C.GBookmarkFile)(self), length)
-}
-
-func (self *BookmarkFile) GetVisited(uri *Cgchar, err unsafe.Pointer) Ctime_t {
-	return C._g_bookmark_file_get_visited((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) HasApplication(uri *Cgchar, name *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_has_application((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(name), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) HasGroup(uri *Cgchar, group *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_has_group((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(group), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) HasItem(uri *Cgchar) Cgboolean {
-	return C._g_bookmark_file_has_item((*C.GBookmarkFile)(self), unsafe.Pointer(uri))
-}
-
-func (self *BookmarkFile) LoadFromData(data *Cgchar, length Cgsize, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_load_from_data((*C.GBookmarkFile)(self), unsafe.Pointer(data), length, unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) LoadFromDataDirs(file *Cgchar, full_path *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_load_from_data_dirs((*C.GBookmarkFile)(self), unsafe.Pointer(file), unsafe.Pointer(full_path), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) LoadFromFile(filename *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_load_from_file((*C.GBookmarkFile)(self), unsafe.Pointer(filename), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) MoveItem(old_uri *Cgchar, new_uri *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_move_item((*C.GBookmarkFile)(self), unsafe.Pointer(old_uri), unsafe.Pointer(new_uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) RemoveApplication(uri *Cgchar, name *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_remove_application((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(name), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) RemoveGroup(uri *Cgchar, group *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_remove_group((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(group), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) RemoveItem(uri *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_remove_item((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) SetAdded(uri *Cgchar, added Ctime_t) {
-	C._g_bookmark_file_set_added((*C.GBookmarkFile)(self), unsafe.Pointer(uri), added)
-}
-
-func (self *BookmarkFile) SetAppInfo(uri *Cgchar, name *Cgchar, exec *Cgchar, count Cgint, stamp Ctime_t, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_set_app_info((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(name), unsafe.Pointer(exec), count, stamp, unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) SetDescription(uri *Cgchar, description *Cgchar) {
-	C._g_bookmark_file_set_description((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(description))
-}
-
-func (self *BookmarkFile) SetGroups(uri *Cgchar, groups *Cgchar, length Cgsize) {
-	C._g_bookmark_file_set_groups((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(groups), length)
-}
-
-func (self *BookmarkFile) SetIcon(uri *Cgchar, href *Cgchar, mime_type *Cgchar) {
-	C._g_bookmark_file_set_icon((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(href), unsafe.Pointer(mime_type))
-}
-
-func (self *BookmarkFile) SetIsPrivate(uri *Cgchar, is_private Cgboolean) {
-	C._g_bookmark_file_set_is_private((*C.GBookmarkFile)(self), unsafe.Pointer(uri), is_private)
-}
-
-func (self *BookmarkFile) SetMimeType(uri *Cgchar, mime_type *Cgchar) {
-	C._g_bookmark_file_set_mime_type((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(mime_type))
-}
-
-func (self *BookmarkFile) SetModified(uri *Cgchar, modified Ctime_t) {
-	C._g_bookmark_file_set_modified((*C.GBookmarkFile)(self), unsafe.Pointer(uri), modified)
-}
-
-func (self *BookmarkFile) SetTitle(uri *Cgchar, title *Cgchar) {
-	C._g_bookmark_file_set_title((*C.GBookmarkFile)(self), unsafe.Pointer(uri), unsafe.Pointer(title))
-}
-
-func (self *BookmarkFile) SetVisited(uri *Cgchar, visited Ctime_t) {
-	C._g_bookmark_file_set_visited((*C.GBookmarkFile)(self), unsafe.Pointer(uri), visited)
-}
-
-func (self *BookmarkFile) ToData(length *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_bookmark_file_to_data((*C.GBookmarkFile)(self), length, unsafe.Pointer(err))
-}
-
-func (self *BookmarkFile) ToFile(filename *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_bookmark_file_to_file((*C.GBookmarkFile)(self), unsafe.Pointer(filename), unsafe.Pointer(err))
-}
-
-func ByteArrayAppend(array *CGByteArray, data *Cguint8, len_ Cguint) *CGByteArray {
-	return C._g_byte_array_append(array, unsafe.Pointer(data), len_)
-}
-
-func ByteArrayFree(array *CGByteArray, free_segment Cgboolean) *Cguint8 {
-	return C.g_byte_array_free(array, free_segment)
-}
-
-func ByteArrayFreeToBytes(array *CGByteArray) *CGBytes {
-	return C.g_byte_array_free_to_bytes(array)
-}
-
-func ByteArrayNew() *CGByteArray {
-	return C.g_byte_array_new()
-}
-
-func ByteArrayNewTake(data *Cguint8, len_ Cgsize) *CGByteArray {
-	return C.g_byte_array_new_take(data, len_)
-}
-
-func ByteArrayPrepend(array *CGByteArray, data *Cguint8, len_ Cguint) *CGByteArray {
-	return C._g_byte_array_prepend(array, unsafe.Pointer(data), len_)
-}
-
-func ByteArrayRef(array *CGByteArray) *CGByteArray {
-	return C.g_byte_array_ref(array)
-}
-
-func ByteArrayRemoveIndex(array *CGByteArray, index_ Cguint) *CGByteArray {
-	return C.g_byte_array_remove_index(array, index_)
-}
-
-func ByteArrayRemoveIndexFast(array *CGByteArray, index_ Cguint) *CGByteArray {
-	return C.g_byte_array_remove_index_fast(array, index_)
-}
-
-func ByteArrayRemoveRange(array *CGByteArray, index_ Cguint, length Cguint) *CGByteArray {
-	return C.g_byte_array_remove_range(array, index_, length)
-}
-
-func ByteArraySetSize(array *CGByteArray, length Cguint) *CGByteArray {
-	return C.g_byte_array_set_size(array, length)
-}
-
-func ByteArraySizedNew(reserved_size Cguint) *CGByteArray {
-	return C.g_byte_array_sized_new(reserved_size)
-}
-
-func ByteArraySort(array *CGByteArray, compare_func CGCompareFunc) {
-	C.g_byte_array_sort(array, compare_func)
-}
-
-func ByteArraySortWithData(array *CGByteArray, compare_func CGCompareDataFunc, user_data Cgpointer) {
-	C.g_byte_array_sort_with_data(array, compare_func, user_data)
-}
-
-func ByteArrayUnref(array *CGByteArray) {
-	C.g_byte_array_unref(array)
-}
-
-func BytesNew(data Cgconstpointer, size Cgsize) *CGBytes {
-	return C.g_bytes_new(data, size)
-}
-
-func BytesNewStatic(data Cgconstpointer, size Cgsize) *CGBytes {
-	return C.g_bytes_new_static(data, size)
-}
-
-func BytesNewTake(data Cgpointer, size Cgsize) *CGBytes {
-	return C.g_bytes_new_take(data, size)
-}
-
-func BytesNewWithFreeFunc(data Cgconstpointer, size Cgsize, free_func CGDestroyNotify, user_data Cgpointer) *CGBytes {
-	return C.g_bytes_new_with_free_func(data, size, free_func, user_data)
-}
-
-func (self *Bytes) Compare(bytes2 Cgconstpointer) Cgint {
-	return C.g_bytes_compare((*C.GBytes)(self), bytes2)
-}
-
-func (self *Bytes) Equal(bytes2 Cgconstpointer) Cgboolean {
-	return C.g_bytes_equal((*C.GBytes)(self), bytes2)
-}
-
-func (self *Bytes) GetData(size *Cgsize) Cgconstpointer {
-	return C.g_bytes_get_data((*C.GBytes)(self), size)
-}
-
-func (self *Bytes) GetSize() Cgsize {
-	return C.g_bytes_get_size((*C.GBytes)(self))
-}
-
-func (self *Bytes) Hash() Cguint {
-	return C.g_bytes_hash((*C.GBytes)(self))
-}
-
-func (self *Bytes) NewFromBytes(offset Cgsize, length Cgsize) *CGBytes {
-	return C.g_bytes_new_from_bytes((*C.GBytes)(self), offset, length)
-}
-
-func (self *Bytes) Ref() *CGBytes {
-	return C.g_bytes_ref((*C.GBytes)(self))
-}
-
-func (self *Bytes) Unref() {
-	C.g_bytes_unref((*C.GBytes)(self))
-}
-
-func (self *Bytes) UnrefToArray() *CGByteArray {
-	return C.g_bytes_unref_to_array((*C.GBytes)(self))
-}
-
-func (self *Bytes) UnrefToData(size *Cgsize) Cgpointer {
-	return C.g_bytes_unref_to_data((*C.GBytes)(self), size)
-}
-
-func ChecksumNew(checksum_type CGChecksumType) *CGChecksum {
-	return C.g_checksum_new(checksum_type)
-}
-
-func ChecksumTypeGetLength(checksum_type CGChecksumType) Cgssize {
-	return C.g_checksum_type_get_length(checksum_type)
-}
-
-func (self *Checksum) Copy() *CGChecksum {
-	return C.g_checksum_copy((*C.GChecksum)(self))
-}
-
-func (self *Checksum) Free() {
-	C.g_checksum_free((*C.GChecksum)(self))
-}
-
-func (self *Checksum) GetDigest(buffer *Cguint8, digest_len *Cgsize) {
-	C.g_checksum_get_digest((*C.GChecksum)(self), buffer, digest_len)
-}
-
-func (self *Checksum) GetString() *Cgchar {
-	return C.g_checksum_get_string((*C.GChecksum)(self))
-}
-
-func (self *Checksum) Reset() {
-	C.g_checksum_reset((*C.GChecksum)(self))
-}
-
-func (self *Checksum) Update(data *Cguchar, length Cgssize) {
-	C._g_checksum_update((*C.GChecksum)(self), unsafe.Pointer(data), length)
-}
-
-func (self *Cond) Broadcast() {
-	C.g_cond_broadcast((*C.GCond)(self))
-}
-
-func (self *Cond) Clear() {
-	C.g_cond_clear((*C.GCond)(self))
-}
-
-func (self *Cond) Init() {
-	C.g_cond_init((*C.GCond)(self))
-}
-
-func (self *Cond) Signal() {
-	C.g_cond_signal((*C.GCond)(self))
-}
-
-func (self *Cond) Wait(mutex *CGMutex) {
-	C.g_cond_wait((*C.GCond)(self), mutex)
-}
-
-func (self *Cond) WaitUntil(mutex *CGMutex, end_time Cgint64) Cgboolean {
-	return C.g_cond_wait_until((*C.GCond)(self), mutex, end_time)
-}
-
-func DateNew() *CGDate {
-	return C.g_date_new()
-}
-
-func DateNewDmy(day CGDateDay, month CGDateMonth, year CGDateYear) *CGDate {
-	return C.g_date_new_dmy(day, month, year)
-}
-
-func DateNewJulian(julian_day Cguint32) *CGDate {
-	return C.g_date_new_julian(julian_day)
-}
-
-func DateGetDaysInMonth(month CGDateMonth, year CGDateYear) Cguint8 {
-	return C.g_date_get_days_in_month(month, year)
-}
-
-func DateGetMondayWeeksInYear(year CGDateYear) Cguint8 {
-	return C.g_date_get_monday_weeks_in_year(year)
-}
-
-func DateGetSundayWeeksInYear(year CGDateYear) Cguint8 {
-	return C.g_date_get_sunday_weeks_in_year(year)
-}
-
-func DateIsLeapYear(year CGDateYear) Cgboolean {
-	return C.g_date_is_leap_year(year)
-}
-
-func DateStrftime(s *Cgchar, slen Cgsize, format *Cgchar, date *CGDate) Cgsize {
-	return C._g_date_strftime(unsafe.Pointer(s), slen, unsafe.Pointer(format), unsafe.Pointer(date))
-}
-
-func DateValidDay(day CGDateDay) Cgboolean {
-	return C.g_date_valid_day(day)
-}
-
-func DateValidDmy(day CGDateDay, month CGDateMonth, year CGDateYear) Cgboolean {
-	return C.g_date_valid_dmy(day, month, year)
-}
-
-func DateValidJulian(julian_date Cguint32) Cgboolean {
-	return C.g_date_valid_julian(julian_date)
-}
-
-func DateValidMonth(month CGDateMonth) Cgboolean {
-	return C.g_date_valid_month(month)
-}
-
-func DateValidWeekday(weekday CGDateWeekday) Cgboolean {
-	return C.g_date_valid_weekday(weekday)
-}
-
-func DateValidYear(year CGDateYear) Cgboolean {
-	return C.g_date_valid_year(year)
-}
-
-func (self *Date) AddDays(n_days Cguint) {
-	C.g_date_add_days((*C.GDate)(self), n_days)
-}
-
-func (self *Date) AddMonths(n_months Cguint) {
-	C.g_date_add_months((*C.GDate)(self), n_months)
-}
-
-func (self *Date) AddYears(n_years Cguint) {
-	C.g_date_add_years((*C.GDate)(self), n_years)
-}
-
-func (self *Date) Clamp(min_date *CGDate, max_date *CGDate) {
-	C._g_date_clamp((*C.GDate)(self), unsafe.Pointer(min_date), unsafe.Pointer(max_date))
-}
-
-func (self *Date) Clear(n_dates Cguint) {
-	C.g_date_clear((*C.GDate)(self), n_dates)
-}
-
-func (self *Date) Compare(rhs *CGDate) Cgint {
-	return C._g_date_compare((*C.GDate)(self), unsafe.Pointer(rhs))
-}
-
-func (self *Date) DaysBetween(date2 *CGDate) Cgint {
-	return C._g_date_days_between((*C.GDate)(self), unsafe.Pointer(date2))
-}
-
-func (self *Date) Free() {
-	C.g_date_free((*C.GDate)(self))
-}
-
-func (self *Date) GetDay() CGDateDay {
-	return C.g_date_get_day((*C.GDate)(self))
-}
-
-func (self *Date) GetDayOfYear() Cguint {
-	return C.g_date_get_day_of_year((*C.GDate)(self))
-}
-
-func (self *Date) GetIso8601WeekOfYear() Cguint {
-	return C.g_date_get_iso8601_week_of_year((*C.GDate)(self))
-}
-
-func (self *Date) GetJulian() Cguint32 {
-	return C.g_date_get_julian((*C.GDate)(self))
-}
-
-func (self *Date) GetMondayWeekOfYear() Cguint {
-	return C.g_date_get_monday_week_of_year((*C.GDate)(self))
-}
-
-func (self *Date) GetMonth() CGDateMonth {
-	return C.g_date_get_month((*C.GDate)(self))
-}
-
-func (self *Date) GetSundayWeekOfYear() Cguint {
-	return C.g_date_get_sunday_week_of_year((*C.GDate)(self))
-}
-
-func (self *Date) GetWeekday() CGDateWeekday {
-	return C.g_date_get_weekday((*C.GDate)(self))
-}
-
-func (self *Date) GetYear() CGDateYear {
-	return C.g_date_get_year((*C.GDate)(self))
-}
-
-func (self *Date) IsFirstOfMonth() Cgboolean {
-	return C.g_date_is_first_of_month((*C.GDate)(self))
-}
-
-func (self *Date) IsLastOfMonth() Cgboolean {
-	return C.g_date_is_last_of_month((*C.GDate)(self))
-}
-
-func (self *Date) Order(date2 *CGDate) {
-	C.g_date_order((*C.GDate)(self), date2)
-}
-
-func (self *Date) SetDay(day CGDateDay) {
-	C.g_date_set_day((*C.GDate)(self), day)
-}
-
-func (self *Date) SetDmy(day CGDateDay, month CGDateMonth, y CGDateYear) {
-	C.g_date_set_dmy((*C.GDate)(self), day, month, y)
-}
-
-func (self *Date) SetJulian(julian_date Cguint32) {
-	C.g_date_set_julian((*C.GDate)(self), julian_date)
-}
-
-func (self *Date) SetMonth(month CGDateMonth) {
-	C.g_date_set_month((*C.GDate)(self), month)
-}
-
-func (self *Date) SetParse(str *Cgchar) {
-	C._g_date_set_parse((*C.GDate)(self), unsafe.Pointer(str))
-}
-
-//Skipped g_date_set_time
-
-func (self *Date) SetTimeT(timet Ctime_t) {
-	C.g_date_set_time_t((*C.GDate)(self), timet)
-}
-
-func (self *Date) SetTimeVal(timeval *CGTimeVal) {
-	C.g_date_set_time_val((*C.GDate)(self), timeval)
-}
-
-func (self *Date) SetYear(year CGDateYear) {
-	C.g_date_set_year((*C.GDate)(self), year)
-}
-
-func (self *Date) SubtractDays(n_days Cguint) {
-	C.g_date_subtract_days((*C.GDate)(self), n_days)
-}
-
-func (self *Date) SubtractMonths(n_months Cguint) {
-	C.g_date_subtract_months((*C.GDate)(self), n_months)
-}
-
-func (self *Date) SubtractYears(n_years Cguint) {
-	C.g_date_subtract_years((*C.GDate)(self), n_years)
-}
-
-//Skipped g_date_to_struct_tm
-
-func (self *Date) Valid() Cgboolean {
-	return C.g_date_valid((*C.GDate)(self))
-}
-
-func DateTimeNew(tz *CGTimeZone, year Cgint, month Cgint, day Cgint, hour Cgint, minute Cgint, seconds Cgdouble) *CGDateTime {
-	return C.g_date_time_new(tz, year, month, day, hour, minute, seconds)
-}
-
-func DateTimeNewFromTimevalLocal(tv *CGTimeVal) *CGDateTime {
-	return C._g_date_time_new_from_timeval_local(unsafe.Pointer(tv))
-}
-
-func DateTimeNewFromTimevalUtc(tv *CGTimeVal) *CGDateTime {
-	return C._g_date_time_new_from_timeval_utc(unsafe.Pointer(tv))
-}
-
-func DateTimeNewFromUnixLocal(t Cgint64) *CGDateTime {
-	return C.g_date_time_new_from_unix_local(t)
-}
-
-func DateTimeNewFromUnixUtc(t Cgint64) *CGDateTime {
-	return C.g_date_time_new_from_unix_utc(t)
-}
-
-func DateTimeNewLocal(year Cgint, month Cgint, day Cgint, hour Cgint, minute Cgint, seconds Cgdouble) *CGDateTime {
-	return C.g_date_time_new_local(year, month, day, hour, minute, seconds)
-}
-
-func DateTimeNewNow(tz *CGTimeZone) *CGDateTime {
-	return C.g_date_time_new_now(tz)
-}
-
-func DateTimeNewNowLocal() *CGDateTime {
-	return C.g_date_time_new_now_local()
-}
-
-func DateTimeNewNowUtc() *CGDateTime {
-	return C.g_date_time_new_now_utc()
-}
-
-func DateTimeNewUtc(year Cgint, month Cgint, day Cgint, hour Cgint, minute Cgint, seconds Cgdouble) *CGDateTime {
-	return C.g_date_time_new_utc(year, month, day, hour, minute, seconds)
-}
-
-func DateTimeCompare(dt1 Cgconstpointer, dt2 Cgconstpointer) Cgint {
-	return C.g_date_time_compare(dt1, dt2)
-}
-
-func DateTimeEqual(dt1 Cgconstpointer, dt2 Cgconstpointer) Cgboolean {
-	return C.g_date_time_equal(dt1, dt2)
-}
-
-func DateTimeHash(datetime Cgconstpointer) Cguint {
-	return C.g_date_time_hash(datetime)
-}
-
-func (self *DateTime) Add(timespan CGTimeSpan) *CGDateTime {
-	return C.g_date_time_add((*C.GDateTime)(self), timespan)
-}
-
-func (self *DateTime) AddDays(days Cgint) *CGDateTime {
-	return C.g_date_time_add_days((*C.GDateTime)(self), days)
-}
-
-func (self *DateTime) AddFull(years Cgint, months Cgint, days Cgint, hours Cgint, minutes Cgint, seconds Cgdouble) *CGDateTime {
-	return C.g_date_time_add_full((*C.GDateTime)(self), years, months, days, hours, minutes, seconds)
-}
-
-func (self *DateTime) AddHours(hours Cgint) *CGDateTime {
-	return C.g_date_time_add_hours((*C.GDateTime)(self), hours)
-}
-
-func (self *DateTime) AddMinutes(minutes Cgint) *CGDateTime {
-	return C.g_date_time_add_minutes((*C.GDateTime)(self), minutes)
-}
-
-func (self *DateTime) AddMonths(months Cgint) *CGDateTime {
-	return C.g_date_time_add_months((*C.GDateTime)(self), months)
-}
-
-func (self *DateTime) AddSeconds(seconds Cgdouble) *CGDateTime {
-	return C.g_date_time_add_seconds((*C.GDateTime)(self), seconds)
-}
-
-func (self *DateTime) AddWeeks(weeks Cgint) *CGDateTime {
-	return C.g_date_time_add_weeks((*C.GDateTime)(self), weeks)
-}
-
-func (self *DateTime) AddYears(years Cgint) *CGDateTime {
-	return C.g_date_time_add_years((*C.GDateTime)(self), years)
-}
-
-func (self *DateTime) Difference(begin *CGDateTime) CGTimeSpan {
-	return C.g_date_time_difference((*C.GDateTime)(self), begin)
-}
-
-func (self *DateTime) Format(format *Cgchar) *Cgchar {
-	return C._g_date_time_format((*C.GDateTime)(self), unsafe.Pointer(format))
-}
-
-func (self *DateTime) GetDayOfMonth() Cgint {
-	return C.g_date_time_get_day_of_month((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetDayOfWeek() Cgint {
-	return C.g_date_time_get_day_of_week((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetDayOfYear() Cgint {
-	return C.g_date_time_get_day_of_year((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetHour() Cgint {
-	return C.g_date_time_get_hour((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetMicrosecond() Cgint {
-	return C.g_date_time_get_microsecond((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetMinute() Cgint {
-	return C.g_date_time_get_minute((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetMonth() Cgint {
-	return C.g_date_time_get_month((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetSecond() Cgint {
-	return C.g_date_time_get_second((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetSeconds() Cgdouble {
-	return C.g_date_time_get_seconds((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetTimezoneAbbreviation() *Cgchar {
-	return C.g_date_time_get_timezone_abbreviation((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetUtcOffset() CGTimeSpan {
-	return C.g_date_time_get_utc_offset((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetWeekNumberingYear() Cgint {
-	return C.g_date_time_get_week_numbering_year((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetWeekOfYear() Cgint {
-	return C.g_date_time_get_week_of_year((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetYear() Cgint {
-	return C.g_date_time_get_year((*C.GDateTime)(self))
-}
-
-func (self *DateTime) GetYmd(year *Cgint, month *Cgint, day *Cgint) {
-	C.g_date_time_get_ymd((*C.GDateTime)(self), year, month, day)
-}
-
-func (self *DateTime) IsDaylightSavings() Cgboolean {
-	return C.g_date_time_is_daylight_savings((*C.GDateTime)(self))
-}
-
-func (self *DateTime) Ref() *CGDateTime {
-	return C.g_date_time_ref((*C.GDateTime)(self))
-}
-
-func (self *DateTime) ToLocal() *CGDateTime {
-	return C.g_date_time_to_local((*C.GDateTime)(self))
-}
-
-func (self *DateTime) ToTimeval(tv *CGTimeVal) Cgboolean {
-	return C.g_date_time_to_timeval((*C.GDateTime)(self), tv)
-}
-
-func (self *DateTime) ToTimezone(tz *CGTimeZone) *CGDateTime {
-	return C.g_date_time_to_timezone((*C.GDateTime)(self), tz)
-}
-
-func (self *DateTime) ToUnix() Cgint64 {
-	return C.g_date_time_to_unix((*C.GDateTime)(self))
-}
-
-func (self *DateTime) ToUtc() *CGDateTime {
-	return C.g_date_time_to_utc((*C.GDateTime)(self))
-}
-
-func (self *DateTime) Unref() {
-	C.g_date_time_unref((*C.GDateTime)(self))
-}
-
-func DirMakeTmp(tmpl *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_dir_make_tmp(unsafe.Pointer(tmpl), unsafe.Pointer(err))
-}
-
-func DirOpen(path *Cgchar, flags Cguint, err unsafe.Pointer) *CGDir {
-	return C._g_dir_open(unsafe.Pointer(path), flags, unsafe.Pointer(err))
-}
-
-func (self *Dir) Close() {
-	C.g_dir_close((*C.GDir)(self))
-}
-
-func (self *Dir) ReadName() *Cgchar {
-	return C.g_dir_read_name((*C.GDir)(self))
-}
-
-func (self *Dir) Rewind() {
-	C.g_dir_rewind((*C.GDir)(self))
-}
-
-//TODO g_error_new
-
-func ErrorNewLiteral(domain CGQuark, code Cgint, message *Cgchar) *CGError {
-	return C._g_error_new_literal(domain, code, unsafe.Pointer(message))
-}
-
-func ErrorNewValist(domain CGQuark, code Cgint, format *Cgchar, args Cva_list) *CGError {
-	return C._g_error_new_valist(domain, code, unsafe.Pointer(format), args)
-}
-
-func (self *Error) Copy() *CGError {
-	return C.g_error_copy((*C.GError)(self))
-}
-
-func (self *Error) Free() {
-	C.g_error_free((*C.GError)(self))
-}
-
-func (self *Error) Matches(domain CGQuark, code Cgint) Cgboolean {
-	return C.g_error_matches((*C.GError)(self), domain, code)
-}
-
-func HashTableAdd(hash_table *CGHashTable, key Cgpointer) {
-	C.g_hash_table_add(hash_table, key)
-}
-
-func HashTableContains(hash_table *CGHashTable, key Cgconstpointer) Cgboolean {
-	return C.g_hash_table_contains(hash_table, key)
-}
-
-func HashTableDestroy(hash_table *CGHashTable) {
-	C.g_hash_table_destroy(hash_table)
-}
-
-func HashTableFind(hash_table *CGHashTable, predicate CGHRFunc, user_data Cgpointer) Cgpointer {
-	return C.g_hash_table_find(hash_table, predicate, user_data)
-}
-
-func HashTableForeach(hash_table *CGHashTable, func_ CGHFunc, user_data Cgpointer) {
-	C.g_hash_table_foreach(hash_table, func_, user_data)
-}
-
-func HashTableForeachRemove(hash_table *CGHashTable, func_ CGHRFunc, user_data Cgpointer) Cguint {
-	return C.g_hash_table_foreach_remove(hash_table, func_, user_data)
-}
-
-func HashTableForeachSteal(hash_table *CGHashTable, func_ CGHRFunc, user_data Cgpointer) Cguint {
-	return C.g_hash_table_foreach_steal(hash_table, func_, user_data)
-}
-
-func HashTableGetKeys(hash_table *CGHashTable) *CGList {
-	return C.g_hash_table_get_keys(hash_table)
-}
-
-func HashTableGetValues(hash_table *CGHashTable) *CGList {
-	return C.g_hash_table_get_values(hash_table)
-}
-
-func HashTableInsert(hash_table *CGHashTable, key Cgpointer, value Cgpointer) {
-	C.g_hash_table_insert(hash_table, key, value)
-}
-
-func HashTableLookup(hash_table *CGHashTable, key Cgconstpointer) Cgpointer {
-	return C.g_hash_table_lookup(hash_table, key)
-}
-
-func HashTableLookupExtended(hash_table *CGHashTable, lookup_key Cgconstpointer, orig_key *Cgpointer, value *Cgpointer) Cgboolean {
-	return C.g_hash_table_lookup_extended(hash_table, lookup_key, orig_key, value)
-}
-
-func HashTableNew(hash_func CGHashFunc, key_equal_func CGEqualFunc) *CGHashTable {
-	return C.g_hash_table_new(hash_func, key_equal_func)
-}
-
-func HashTableNewFull(hash_func CGHashFunc, key_equal_func CGEqualFunc, key_destroy_func CGDestroyNotify, value_destroy_func CGDestroyNotify) *CGHashTable {
-	return C.g_hash_table_new_full(hash_func, key_equal_func, key_destroy_func, value_destroy_func)
-}
-
-func HashTableRef(hash_table *CGHashTable) *CGHashTable {
-	return C.g_hash_table_ref(hash_table)
-}
-
-func HashTableRemove(hash_table *CGHashTable, key Cgconstpointer) Cgboolean {
-	return C.g_hash_table_remove(hash_table, key)
-}
-
-func HashTableRemoveAll(hash_table *CGHashTable) {
-	C.g_hash_table_remove_all(hash_table)
-}
-
-func HashTableReplace(hash_table *CGHashTable, key Cgpointer, value Cgpointer) {
-	C.g_hash_table_replace(hash_table, key, value)
-}
-
-func HashTableSize(hash_table *CGHashTable) Cguint {
-	return C.g_hash_table_size(hash_table)
-}
-
-func HashTableSteal(hash_table *CGHashTable, key Cgconstpointer) Cgboolean {
-	return C.g_hash_table_steal(hash_table, key)
-}
-
-func HashTableStealAll(hash_table *CGHashTable) {
-	C.g_hash_table_steal_all(hash_table)
-}
-
-func HashTableUnref(hash_table *CGHashTable) {
-	C.g_hash_table_unref(hash_table)
-}
-
-func (self *HashTableIter) GetHashTable() *CGHashTable {
-	return C.g_hash_table_iter_get_hash_table((*C.GHashTableIter)(self))
-}
-
-func (self *HashTableIter) Init(hash_table *CGHashTable) {
-	C.g_hash_table_iter_init((*C.GHashTableIter)(self), hash_table)
-}
-
-func (self *HashTableIter) Next(key *Cgpointer, value *Cgpointer) Cgboolean {
-	return C.g_hash_table_iter_next((*C.GHashTableIter)(self), key, value)
-}
-
-func (self *HashTableIter) Remove() {
-	C.g_hash_table_iter_remove((*C.GHashTableIter)(self))
-}
-
-func (self *HashTableIter) Replace(value Cgpointer) {
-	C.g_hash_table_iter_replace((*C.GHashTableIter)(self), value)
-}
-
-func (self *HashTableIter) Steal() {
-	C.g_hash_table_iter_steal((*C.GHashTableIter)(self))
-}
-
-func HmacNew(digest_type CGChecksumType, key *Cguchar, key_len Cgsize) *CGHmac {
-	return C.g_hmac_new(digest_type, key, key_len)
-}
-
-func (self *Hmac) Copy() *CGHmac {
-	return C.g_hmac_copy((*C.GHmac)(self))
-}
-
-func (self *Hmac) GetDigest(buffer *Cguint8, digest_len *Cgsize) {
-	C.g_hmac_get_digest((*C.GHmac)(self), buffer, digest_len)
-}
-
-func (self *Hmac) GetString() *Cgchar {
-	return C.g_hmac_get_string((*C.GHmac)(self))
-}
-
-func (self *Hmac) Ref() *CGHmac {
-	return C.g_hmac_ref((*C.GHmac)(self))
-}
-
-func (self *Hmac) Unref() {
-	C.g_hmac_unref((*C.GHmac)(self))
-}
-
-func (self *Hmac) Update(data *Cguchar, length Cgssize) {
-	C.g_hmac_update((*C.GHmac)(self), data, length)
-}
-
-func HookAlloc(hook_list *CGHookList) *CGHook {
-	return C.g_hook_alloc(hook_list)
-}
-
-func HookDestroy(hook_list *CGHookList, hook_id Cgulong) Cgboolean {
-	return C.g_hook_destroy(hook_list, hook_id)
-}
-
-func HookDestroyLink(hook_list *CGHookList, hook *CGHook) {
-	C.g_hook_destroy_link(hook_list, hook)
-}
-
-func HookFind(hook_list *CGHookList, need_valids Cgboolean, func_ CGHookFindFunc, data Cgpointer) *CGHook {
-	return C.g_hook_find(hook_list, need_valids, func_, data)
-}
-
-func HookFindData(hook_list *CGHookList, need_valids Cgboolean, data Cgpointer) *CGHook {
-	return C.g_hook_find_data(hook_list, need_valids, data)
-}
-
-func HookFindFunc(hook_list *CGHookList, need_valids Cgboolean, func_ Cgpointer) *CGHook {
-	return C.g_hook_find_func(hook_list, need_valids, func_)
-}
-
-func HookFindFuncData(hook_list *CGHookList, need_valids Cgboolean, func_ Cgpointer, data Cgpointer) *CGHook {
-	return C.g_hook_find_func_data(hook_list, need_valids, func_, data)
-}
-
-func HookFirstValid(hook_list *CGHookList, may_be_in_call Cgboolean) *CGHook {
-	return C.g_hook_first_valid(hook_list, may_be_in_call)
-}
-
-func HookFree(hook_list *CGHookList, hook *CGHook) {
-	C.g_hook_free(hook_list, hook)
-}
-
-func HookGet(hook_list *CGHookList, hook_id Cgulong) *CGHook {
-	return C.g_hook_get(hook_list, hook_id)
-}
-
-func HookInsertBefore(hook_list *CGHookList, sibling *CGHook, hook *CGHook) {
-	C.g_hook_insert_before(hook_list, sibling, hook)
-}
-
-func HookInsertSorted(hook_list *CGHookList, hook *CGHook, func_ CGHookCompareFunc) {
-	C.g_hook_insert_sorted(hook_list, hook, func_)
-}
-
-func HookNextValid(hook_list *CGHookList, hook *CGHook, may_be_in_call Cgboolean) *CGHook {
-	return C.g_hook_next_valid(hook_list, hook, may_be_in_call)
-}
-
-func HookPrepend(hook_list *CGHookList, hook *CGHook) {
-	C.g_hook_prepend(hook_list, hook)
-}
-
-func HookRef(hook_list *CGHookList, hook *CGHook) *CGHook {
-	return C.g_hook_ref(hook_list, hook)
-}
-
-func HookUnref(hook_list *CGHookList, hook *CGHook) {
-	C.g_hook_unref(hook_list, hook)
-}
-
-func (self *Hook) CompareIds(sibling *CGHook) Cgint {
-	return C.g_hook_compare_ids((*C.GHook)(self), sibling)
-}
-
-func (self *HookList) Clear() {
-	C.g_hook_list_clear((*C.GHookList)(self))
-}
-
-func (self *HookList) Init(hook_size Cguint) {
-	C.g_hook_list_init((*C.GHookList)(self), hook_size)
-}
-
-func (self *HookList) Invoke(may_recurse Cgboolean) {
-	C.g_hook_list_invoke((*C.GHookList)(self), may_recurse)
-}
-
-func (self *HookList) InvokeCheck(may_recurse Cgboolean) {
-	C.g_hook_list_invoke_check((*C.GHookList)(self), may_recurse)
-}
-
-func (self *HookList) Marshal(may_recurse Cgboolean, marshaller CGHookMarshaller, marshal_data Cgpointer) {
-	C.g_hook_list_marshal((*C.GHookList)(self), may_recurse, marshaller, marshal_data)
-}
-
-func (self *HookList) MarshalCheck(may_recurse Cgboolean, marshaller CGHookCheckMarshaller, marshal_data Cgpointer) {
-	C.g_hook_list_marshal_check((*C.GHookList)(self), may_recurse, marshaller, marshal_data)
-}
-
-func IConvOpen(to_codeset *Cgchar, from_codeset *Cgchar) CGIConv {
-	return C._g_iconv_open(unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset))
-}
-
-//Skipped g_iconv
-
-func (self *IConv) Close() Cgint {
-	return C.g_iconv_close((*C.GIConv)(self))
-}
-
-func IOChannelNewFile(filename *Cgchar, mode *Cgchar, err unsafe.Pointer) *CGIOChannel {
-	return C._g_io_channel_new_file(unsafe.Pointer(filename), unsafe.Pointer(mode), unsafe.Pointer(err))
-}
-
-func IOChannelUnixNew(fd Cint) *CGIOChannel {
-	return C.g_io_channel_unix_new(fd)
-}
-
-func IOChannelErrorFromErrno(en Cgint) CGIOChannelError {
-	return C.g_io_channel_error_from_errno(en)
-}
-
-func IOChannelErrorQuark() CGQuark {
-	return C.g_io_channel_error_quark()
-}
-
-//Skipped g_io_channel_close
-
-func (self *IOChannel) Flush(err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_flush((*C.GIOChannel)(self), unsafe.Pointer(err))
-}
-
-func (self *IOChannel) GetBufferCondition() CGIOCondition {
-	return C.g_io_channel_get_buffer_condition((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) GetBufferSize() Cgsize {
-	return C.g_io_channel_get_buffer_size((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) GetBuffered() Cgboolean {
-	return C.g_io_channel_get_buffered((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) GetCloseOnUnref() Cgboolean {
-	return C.g_io_channel_get_close_on_unref((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) GetEncoding() *Cgchar {
-	return C.g_io_channel_get_encoding((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) GetFlags() CGIOFlags {
-	return C.g_io_channel_get_flags((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) GetLineTerm(length *Cgint) *Cgchar {
-	return C.g_io_channel_get_line_term((*C.GIOChannel)(self), length)
-}
-
-func (self *IOChannel) Init() {
-	C.g_io_channel_init((*C.GIOChannel)(self))
-}
-
-//Skipped g_io_channel_read
-
-func (self *IOChannel) ReadChars(buf *Cgchar, count Cgsize, bytes_read *Cgsize, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_read_chars((*C.GIOChannel)(self), buf, count, bytes_read, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) ReadLine(str_return Cunsafe.Pointer, length *Cgsize, terminator_pos *Cgsize, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_read_line((*C.GIOChannel)(self), str_return, length, terminator_pos, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) ReadLineString(buffer *CGString, terminator_pos *Cgsize, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_read_line_string((*C.GIOChannel)(self), buffer, terminator_pos, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) ReadToEnd(str_return Cunsafe.Pointer, length *Cgsize, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_read_to_end((*C.GIOChannel)(self), str_return, length, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) ReadUnichar(thechar *Cgunichar, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_read_unichar((*C.GIOChannel)(self), thechar, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) Ref() *CGIOChannel {
-	return C.g_io_channel_ref((*C.GIOChannel)(self))
-}
-
-//Skipped g_io_channel_seek
-
-func (self *IOChannel) SeekPosition(offset Cgint64, type_ CGSeekType, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_seek_position((*C.GIOChannel)(self), offset, type_, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) SetBufferSize(size Cgsize) {
-	C.g_io_channel_set_buffer_size((*C.GIOChannel)(self), size)
-}
-
-func (self *IOChannel) SetBuffered(buffered Cgboolean) {
-	C.g_io_channel_set_buffered((*C.GIOChannel)(self), buffered)
-}
-
-func (self *IOChannel) SetCloseOnUnref(do_close Cgboolean) {
-	C.g_io_channel_set_close_on_unref((*C.GIOChannel)(self), do_close)
-}
-
-func (self *IOChannel) SetEncoding(encoding *Cgchar, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_set_encoding((*C.GIOChannel)(self), unsafe.Pointer(encoding), unsafe.Pointer(err))
-}
-
-func (self *IOChannel) SetFlags(flags CGIOFlags, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_set_flags((*C.GIOChannel)(self), flags, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) SetLineTerm(line_term *Cgchar, length Cgint) {
-	C._g_io_channel_set_line_term((*C.GIOChannel)(self), unsafe.Pointer(line_term), length)
-}
-
-func (self *IOChannel) Shutdown(flush Cgboolean, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_shutdown((*C.GIOChannel)(self), flush, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) UnixGetFd() Cgint {
-	return C.g_io_channel_unix_get_fd((*C.GIOChannel)(self))
-}
-
-func (self *IOChannel) Unref() {
-	C.g_io_channel_unref((*C.GIOChannel)(self))
-}
-
-//Skipped g_io_channel_write
-
-func (self *IOChannel) WriteChars(buf *Cgchar, count Cgssize, bytes_written *Cgsize, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_write_chars((*C.GIOChannel)(self), buf, count, bytes_written, unsafe.Pointer(err))
-}
-
-func (self *IOChannel) WriteUnichar(thechar Cgunichar, err unsafe.Pointer) CGIOStatus {
-	return C._g_io_channel_write_unichar((*C.GIOChannel)(self), thechar, unsafe.Pointer(err))
-}
-
-func KeyFileNew() *CGKeyFile {
-	return C.g_key_file_new()
-}
-
-func KeyFileErrorQuark() CGQuark {
-	return C.g_key_file_error_quark()
-}
-
-func (self *KeyFile) Free() {
-	C.g_key_file_free((*C.GKeyFile)(self))
-}
-
-func (self *KeyFile) GetBoolean(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_get_boolean((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetBooleanList(group_name *Cgchar, key *Cgchar, length *Cgsize, err unsafe.Pointer) *Cgboolean {
-	return C._g_key_file_get_boolean_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetComment(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_key_file_get_comment((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetDouble(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgdouble {
-	return C._g_key_file_get_double((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetDoubleList(group_name *Cgchar, key *Cgchar, length *Cgsize, err unsafe.Pointer) *Cgdouble {
-	return C._g_key_file_get_double_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetGroups(length *Cgsize) Cunsafe.Pointer {
-	return C.g_key_file_get_groups((*C.GKeyFile)(self), length)
-}
-
-func (self *KeyFile) GetInt64(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgint64 {
-	return C._g_key_file_get_int64((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetInteger(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgint {
-	return C._g_key_file_get_integer((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetIntegerList(group_name *Cgchar, key *Cgchar, length *Cgsize, err unsafe.Pointer) *Cgint {
-	return C._g_key_file_get_integer_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetKeys(group_name *Cgchar, length *Cgsize, err unsafe.Pointer) Cunsafe.Pointer {
-	return C._g_key_file_get_keys((*C.GKeyFile)(self), unsafe.Pointer(group_name), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetLocaleString(group_name *Cgchar, key *Cgchar, locale *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_key_file_get_locale_string((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(locale), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetLocaleStringList(group_name *Cgchar, key *Cgchar, locale *Cgchar, length *Cgsize, err unsafe.Pointer) Cunsafe.Pointer {
-	return C._g_key_file_get_locale_string_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(locale), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetStartGroup() *Cgchar {
-	return C.g_key_file_get_start_group((*C.GKeyFile)(self))
-}
-
-func (self *KeyFile) GetString(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_key_file_get_string((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetStringList(group_name *Cgchar, key *Cgchar, length *Cgsize, err unsafe.Pointer) Cunsafe.Pointer {
-	return C._g_key_file_get_string_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetUint64(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cguint64 {
-	return C._g_key_file_get_uint64((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) GetValue(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_key_file_get_value((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) HasGroup(group_name *Cgchar) Cgboolean {
-	return C._g_key_file_has_group((*C.GKeyFile)(self), unsafe.Pointer(group_name))
-}
-
-func (self *KeyFile) HasKey(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_has_key((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) LoadFromData(data *Cgchar, length Cgsize, flags CGKeyFileFlags, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_load_from_data((*C.GKeyFile)(self), unsafe.Pointer(data), length, flags, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) LoadFromDataDirs(file *Cgchar, full_path Cunsafe.Pointer, flags CGKeyFileFlags, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_load_from_data_dirs((*C.GKeyFile)(self), unsafe.Pointer(file), full_path, flags, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) LoadFromDirs(file *Cgchar, search_dirs Cunsafe.Pointer, full_path Cunsafe.Pointer, flags CGKeyFileFlags, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_load_from_dirs((*C.GKeyFile)(self), unsafe.Pointer(file), search_dirs, full_path, flags, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) LoadFromFile(file *Cgchar, flags CGKeyFileFlags, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_load_from_file((*C.GKeyFile)(self), unsafe.Pointer(file), flags, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) Ref() *CGKeyFile {
-	return C.g_key_file_ref((*C.GKeyFile)(self))
-}
-
-func (self *KeyFile) RemoveComment(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_remove_comment((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) RemoveGroup(group_name *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_remove_group((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) RemoveKey(group_name *Cgchar, key *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_remove_key((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) SetBoolean(group_name *Cgchar, key *Cgchar, value Cgboolean) {
-	C._g_key_file_set_boolean((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), value)
-}
-
-func (self *KeyFile) SetBooleanList(group_name *Cgchar, key *Cgchar, list *Cgboolean, length Cgsize) {
-	C._g_key_file_set_boolean_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), list, length)
-}
-
-func (self *KeyFile) SetComment(group_name *Cgchar, key *Cgchar, comment *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_key_file_set_comment((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(comment), unsafe.Pointer(err))
-}
-
-func (self *KeyFile) SetDouble(group_name *Cgchar, key *Cgchar, value Cgdouble) {
-	C._g_key_file_set_double((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), value)
-}
-
-func (self *KeyFile) SetDoubleList(group_name *Cgchar, key *Cgchar, list *Cgdouble, length Cgsize) {
-	C._g_key_file_set_double_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), list, length)
-}
-
-func (self *KeyFile) SetInt64(group_name *Cgchar, key *Cgchar, value Cgint64) {
-	C._g_key_file_set_int64((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), value)
-}
-
-func (self *KeyFile) SetInteger(group_name *Cgchar, key *Cgchar, value Cgint) {
-	C._g_key_file_set_integer((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), value)
-}
-
-func (self *KeyFile) SetIntegerList(group_name *Cgchar, key *Cgchar, list *Cgint, length Cgsize) {
-	C._g_key_file_set_integer_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), list, length)
-}
-
-func (self *KeyFile) SetListSeparator(separator Cgchar) {
-	C.g_key_file_set_list_separator((*C.GKeyFile)(self), separator)
-}
-
-func (self *KeyFile) SetLocaleString(group_name *Cgchar, key *Cgchar, locale *Cgchar, string_ *Cgchar) {
-	C._g_key_file_set_locale_string((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(locale), unsafe.Pointer(string_))
-}
-
-func (self *KeyFile) SetLocaleStringList(group_name *Cgchar, key *Cgchar, locale *Cgchar, list *Cgchar, length Cgsize) {
-	C._g_key_file_set_locale_string_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(locale), list, length)
-}
-
-func (self *KeyFile) SetString(group_name *Cgchar, key *Cgchar, string_ *Cgchar) {
-	C._g_key_file_set_string((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(string_))
-}
-
-func (self *KeyFile) SetStringList(group_name *Cgchar, key *Cgchar, list *Cgchar, length Cgsize) {
-	C._g_key_file_set_string_list((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), list, length)
-}
-
-func (self *KeyFile) SetUint64(group_name *Cgchar, key *Cgchar, value Cguint64) {
-	C._g_key_file_set_uint64((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), value)
-}
-
-func (self *KeyFile) SetValue(group_name *Cgchar, key *Cgchar, value *Cgchar) {
-	C._g_key_file_set_value((*C.GKeyFile)(self), unsafe.Pointer(group_name), unsafe.Pointer(key), unsafe.Pointer(value))
-}
-
-func (self *KeyFile) ToData(length *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_key_file_to_data((*C.GKeyFile)(self), length, unsafe.Pointer(err))
-}
-
-func (self *KeyFile) Unref() {
-	C.g_key_file_unref((*C.GKeyFile)(self))
-}
-
-func ListAlloc() *CGList {
-	return C.g_list_alloc()
-}
-
-func ListAppend(list *CGList, data Cgpointer) *CGList {
-	return C.g_list_append(list, data)
-}
-
-func ListConcat(list1 *CGList, list2 *CGList) *CGList {
-	return C.g_list_concat(list1, list2)
-}
-
-func ListCopy(list *CGList) *CGList {
-	return C.g_list_copy(list)
-}
-
-func ListCopyDeep(list *CGList, func_ CGCopyFunc, user_data Cgpointer) *CGList {
-	return C.g_list_copy_deep(list, func_, user_data)
-}
-
-func ListDeleteLink(list *CGList, link_ *CGList) *CGList {
-	return C.g_list_delete_link(list, link_)
-}
-
-func ListFind(list *CGList, data Cgconstpointer) *CGList {
-	return C.g_list_find(list, data)
-}
-
-func ListFindCustom(list *CGList, data Cgconstpointer, func_ CGCompareFunc) *CGList {
-	return C.g_list_find_custom(list, data, func_)
-}
-
-func ListFirst(list *CGList) *CGList {
-	return C.g_list_first(list)
-}
-
-func ListForeach(list *CGList, func_ CGFunc, user_data Cgpointer) {
-	C.g_list_foreach(list, func_, user_data)
-}
-
-func ListFree(list *CGList) {
-	C.g_list_free(list)
-}
-
-func ListFree1(list *CGList) {
-	C.g_list_free_1(list)
-}
-
-func ListFreeFull(list *CGList, free_func CGDestroyNotify) {
-	C.g_list_free_full(list, free_func)
-}
-
-func ListIndex(list *CGList, data Cgconstpointer) Cgint {
-	return C.g_list_index(list, data)
-}
-
-func ListInsert(list *CGList, data Cgpointer, position Cgint) *CGList {
-	return C.g_list_insert(list, data, position)
-}
-
-func ListInsertBefore(list *CGList, sibling *CGList, data Cgpointer) *CGList {
-	return C.g_list_insert_before(list, sibling, data)
-}
-
-func ListInsertSorted(list *CGList, data Cgpointer, func_ CGCompareFunc) *CGList {
-	return C.g_list_insert_sorted(list, data, func_)
-}
-
-func ListInsertSortedWithData(list *CGList, data Cgpointer, func_ CGCompareDataFunc, user_data Cgpointer) *CGList {
-	return C.g_list_insert_sorted_with_data(list, data, func_, user_data)
-}
-
-func ListLast(list *CGList) *CGList {
-	return C.g_list_last(list)
-}
-
-func ListLength(list *CGList) Cguint {
-	return C.g_list_length(list)
-}
-
-func ListNth(list *CGList, n Cguint) *CGList {
-	return C.g_list_nth(list, n)
-}
-
-func ListNthData(list *CGList, n Cguint) Cgpointer {
-	return C.g_list_nth_data(list, n)
-}
-
-func ListNthPrev(list *CGList, n Cguint) *CGList {
-	return C.g_list_nth_prev(list, n)
-}
-
-func ListPosition(list *CGList, llink *CGList) Cgint {
-	return C.g_list_position(list, llink)
-}
-
-func ListPrepend(list *CGList, data Cgpointer) *CGList {
-	return C.g_list_prepend(list, data)
-}
-
-func ListRemove(list *CGList, data Cgconstpointer) *CGList {
-	return C.g_list_remove(list, data)
-}
-
-func ListRemoveAll(list *CGList, data Cgconstpointer) *CGList {
-	return C.g_list_remove_all(list, data)
-}
-
-func ListRemoveLink(list *CGList, llink *CGList) *CGList {
-	return C.g_list_remove_link(list, llink)
-}
-
-func ListReverse(list *CGList) *CGList {
-	return C.g_list_reverse(list)
-}
-
-func ListSort(list *CGList, compare_func CGCompareFunc) *CGList {
-	return C.g_list_sort(list, compare_func)
-}
-
-func ListSortWithData(list *CGList, compare_func CGCompareDataFunc, user_data Cgpointer) *CGList {
-	return C.g_list_sort_with_data(list, compare_func, user_data)
-}
-
-func MainContextNew() *CGMainContext {
-	return C.g_main_context_new()
-}
-
-func MainContextDefault() *CGMainContext {
-	return C.g_main_context_default()
-}
-
-func MainContextGetThreadDefault() *CGMainContext {
-	return C.g_main_context_get_thread_default()
-}
-
-func MainContextRefThreadDefault() *CGMainContext {
-	return C.g_main_context_ref_thread_default()
-}
-
-func (self *MainContext) Acquire() Cgboolean {
-	return C.g_main_context_acquire((*C.GMainContext)(self))
-}
-
-func (self *MainContext) AddPoll(fd *CGPollFD, priority Cgint) {
-	C.g_main_context_add_poll((*C.GMainContext)(self), fd, priority)
-}
-
-func (self *MainContext) Check(max_priority Cgint, fds *CGPollFD, n_fds Cgint) Cgint {
-	return C.g_main_context_check((*C.GMainContext)(self), max_priority, fds, n_fds)
-}
-
-func (self *MainContext) Dispatch() {
-	C.g_main_context_dispatch((*C.GMainContext)(self))
-}
-
-func (self *MainContext) FindSourceByFuncsUserData(funcs *CGSourceFuncs, user_data Cgpointer) *CGSource {
-	return C.g_main_context_find_source_by_funcs_user_data((*C.GMainContext)(self), funcs, user_data)
-}
-
-func (self *MainContext) FindSourceById(source_id Cguint) *CGSource {
-	return C.g_main_context_find_source_by_id((*C.GMainContext)(self), source_id)
-}
-
-func (self *MainContext) FindSourceByUserData(user_data Cgpointer) *CGSource {
-	return C.g_main_context_find_source_by_user_data((*C.GMainContext)(self), user_data)
-}
-
-func (self *MainContext) GetPollFunc() CGPollFunc {
-	return C.g_main_context_get_poll_func((*C.GMainContext)(self))
-}
-
-func (self *MainContext) Invoke(function CGSourceFunc, data Cgpointer) {
-	C.g_main_context_invoke((*C.GMainContext)(self), function, data)
-}
-
-func (self *MainContext) InvokeFull(priority Cgint, function CGSourceFunc, data Cgpointer, notify CGDestroyNotify) {
-	C.g_main_context_invoke_full((*C.GMainContext)(self), priority, function, data, notify)
-}
-
-func (self *MainContext) IsOwner() Cgboolean {
-	return C.g_main_context_is_owner((*C.GMainContext)(self))
-}
-
-func (self *MainContext) Iteration(may_block Cgboolean) Cgboolean {
-	return C.g_main_context_iteration((*C.GMainContext)(self), may_block)
-}
-
-func (self *MainContext) Pending() Cgboolean {
-	return C.g_main_context_pending((*C.GMainContext)(self))
-}
-
-func (self *MainContext) PopThreadDefault() {
-	C.g_main_context_pop_thread_default((*C.GMainContext)(self))
-}
-
-func (self *MainContext) Prepare(priority *Cgint) Cgboolean {
-	return C.g_main_context_prepare((*C.GMainContext)(self), priority)
-}
-
-func (self *MainContext) PushThreadDefault() {
-	C.g_main_context_push_thread_default((*C.GMainContext)(self))
-}
-
-func (self *MainContext) Query(max_priority Cgint, timeout_ *Cgint, fds *CGPollFD, n_fds Cgint) Cgint {
-	return C.g_main_context_query((*C.GMainContext)(self), max_priority, timeout_, fds, n_fds)
-}
-
-func (self *MainContext) Ref() *CGMainContext {
-	return C.g_main_context_ref((*C.GMainContext)(self))
-}
-
-func (self *MainContext) Release() {
-	C.g_main_context_release((*C.GMainContext)(self))
-}
-
-func (self *MainContext) RemovePoll(fd *CGPollFD) {
-	C.g_main_context_remove_poll((*C.GMainContext)(self), fd)
-}
-
-func (self *MainContext) SetPollFunc(func_ CGPollFunc) {
-	C.g_main_context_set_poll_func((*C.GMainContext)(self), func_)
-}
-
-func (self *MainContext) Unref() {
-	C.g_main_context_unref((*C.GMainContext)(self))
-}
-
-func (self *MainContext) Wait(cond *CGCond, mutex *CGMutex) Cgboolean {
-	return C.g_main_context_wait((*C.GMainContext)(self), cond, mutex)
-}
-
-func (self *MainContext) Wakeup() {
-	C.g_main_context_wakeup((*C.GMainContext)(self))
-}
-
-func MainLoopNew(context *CGMainContext, is_running Cgboolean) *CGMainLoop {
-	return C.g_main_loop_new(context, is_running)
-}
-
-func (self *MainLoop) GetContext() *CGMainContext {
-	return C.g_main_loop_get_context((*C.GMainLoop)(self))
-}
-
-func (self *MainLoop) IsRunning() Cgboolean {
-	return C.g_main_loop_is_running((*C.GMainLoop)(self))
-}
-
-func (self *MainLoop) Quit() {
-	C.g_main_loop_quit((*C.GMainLoop)(self))
-}
-
-func (self *MainLoop) Ref() *CGMainLoop {
-	return C.g_main_loop_ref((*C.GMainLoop)(self))
-}
-
-func (self *MainLoop) Run() {
-	C.g_main_loop_run((*C.GMainLoop)(self))
-}
-
-func (self *MainLoop) Unref() {
-	C.g_main_loop_unref((*C.GMainLoop)(self))
-}
-
-func MappedFileNew(filename *Cgchar, writable Cgboolean, err unsafe.Pointer) *CGMappedFile {
-	return C._g_mapped_file_new(unsafe.Pointer(filename), writable, unsafe.Pointer(err))
-}
-
-func MappedFileNewFromFd(fd Cgint, writable Cgboolean, err unsafe.Pointer) *CGMappedFile {
-	return C._g_mapped_file_new_from_fd(fd, writable, unsafe.Pointer(err))
-}
-
-//Skipped g_mapped_file_free
-
-func (self *MappedFile) GetBytes() *CGBytes {
-	return C.g_mapped_file_get_bytes((*C.GMappedFile)(self))
-}
-
-func (self *MappedFile) GetContents() *Cgchar {
-	return C.g_mapped_file_get_contents((*C.GMappedFile)(self))
-}
-
-func (self *MappedFile) GetLength() Cgsize {
-	return C.g_mapped_file_get_length((*C.GMappedFile)(self))
-}
-
-func (self *MappedFile) Ref() *CGMappedFile {
-	return C.g_mapped_file_ref((*C.GMappedFile)(self))
-}
-
-func (self *MappedFile) Unref() {
-	C.g_mapped_file_unref((*C.GMappedFile)(self))
-}
-
-func MarkupParseContextNew(parser *CGMarkupParser, flags CGMarkupParseFlags, user_data Cgpointer, user_data_dnotify CGDestroyNotify) *CGMarkupParseContext {
-	return C._g_markup_parse_context_new(unsafe.Pointer(parser), flags, user_data, user_data_dnotify)
-}
-
-func (self *MarkupParseContext) EndParse(err unsafe.Pointer) Cgboolean {
-	return C._g_markup_parse_context_end_parse((*C.GMarkupParseContext)(self), unsafe.Pointer(err))
-}
-
-func (self *MarkupParseContext) Free() {
-	C.g_markup_parse_context_free((*C.GMarkupParseContext)(self))
-}
-
-func (self *MarkupParseContext) GetElement() *Cgchar {
-	return C.g_markup_parse_context_get_element((*C.GMarkupParseContext)(self))
-}
-
-func (self *MarkupParseContext) GetElementStack() *CGSList {
-	return C.g_markup_parse_context_get_element_stack((*C.GMarkupParseContext)(self))
-}
-
-func (self *MarkupParseContext) GetPosition(line_number *Cgint, char_number *Cgint) {
-	C.g_markup_parse_context_get_position((*C.GMarkupParseContext)(self), line_number, char_number)
-}
-
-func (self *MarkupParseContext) GetUserData() Cgpointer {
-	return C.g_markup_parse_context_get_user_data((*C.GMarkupParseContext)(self))
-}
-
-func (self *MarkupParseContext) Parse(text *Cgchar, text_len Cgssize, err unsafe.Pointer) Cgboolean {
-	return C._g_markup_parse_context_parse((*C.GMarkupParseContext)(self), unsafe.Pointer(text), text_len, unsafe.Pointer(err))
-}
-
-func (self *MarkupParseContext) Pop() Cgpointer {
-	return C.g_markup_parse_context_pop((*C.GMarkupParseContext)(self))
-}
-
-func (self *MarkupParseContext) Push(parser *CGMarkupParser, user_data Cgpointer) {
-	C._g_markup_parse_context_push((*C.GMarkupParseContext)(self), unsafe.Pointer(parser), user_data)
-}
-
-func (self *MatchInfo) ExpandReferences(string_to_expand *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_match_info_expand_references((*C.GMatchInfo)(self), unsafe.Pointer(string_to_expand), unsafe.Pointer(err))
-}
-
-func (self *MatchInfo) Fetch(match_num Cgint) *Cgchar {
-	return C.g_match_info_fetch((*C.GMatchInfo)(self), match_num)
-}
-
-func (self *MatchInfo) FetchAll() Cunsafe.Pointer {
-	return C.g_match_info_fetch_all((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) FetchNamed(name *Cgchar) *Cgchar {
-	return C._g_match_info_fetch_named((*C.GMatchInfo)(self), unsafe.Pointer(name))
-}
-
-func (self *MatchInfo) FetchNamedPos(name *Cgchar, start_pos *Cgint, end_pos *Cgint) Cgboolean {
-	return C._g_match_info_fetch_named_pos((*C.GMatchInfo)(self), unsafe.Pointer(name), start_pos, end_pos)
-}
-
-func (self *MatchInfo) FetchPos(match_num Cgint, start_pos *Cgint, end_pos *Cgint) Cgboolean {
-	return C.g_match_info_fetch_pos((*C.GMatchInfo)(self), match_num, start_pos, end_pos)
-}
-
-func (self *MatchInfo) Free() {
-	C.g_match_info_free((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) GetMatchCount() Cgint {
-	return C.g_match_info_get_match_count((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) GetRegex() *CGRegex {
-	return C.g_match_info_get_regex((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) GetString() *Cgchar {
-	return C.g_match_info_get_string((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) IsPartialMatch() Cgboolean {
-	return C.g_match_info_is_partial_match((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) Matches() Cgboolean {
-	return C.g_match_info_matches((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) Next(err unsafe.Pointer) Cgboolean {
-	return C._g_match_info_next((*C.GMatchInfo)(self), unsafe.Pointer(err))
-}
-
-func (self *MatchInfo) Ref() *CGMatchInfo {
-	return C.g_match_info_ref((*C.GMatchInfo)(self))
-}
-
-func (self *MatchInfo) Unref() {
-	C.g_match_info_unref((*C.GMatchInfo)(self))
-}
-
-func NodeNew(data Cgpointer) *CGNode {
-	return C.g_node_new(data)
-}
-
-func (self *Node) ChildIndex(data Cgpointer) Cgint {
-	return C.g_node_child_index((*C.GNode)(self), data)
-}
-
-func (self *Node) ChildPosition(child *CGNode) Cgint {
-	return C.g_node_child_position((*C.GNode)(self), child)
-}
-
-func (self *Node) ChildrenForeach(flags CGTraverseFlags, func_ CGNodeForeachFunc, data Cgpointer) {
-	C.g_node_children_foreach((*C.GNode)(self), flags, func_, data)
-}
-
-func (self *Node) Copy() *CGNode {
-	return C.g_node_copy((*C.GNode)(self))
-}
-
-func (self *Node) CopyDeep(copy_func CGCopyFunc, data Cgpointer) *CGNode {
-	return C.g_node_copy_deep((*C.GNode)(self), copy_func, data)
-}
-
-func (self *Node) Depth() Cguint {
-	return C.g_node_depth((*C.GNode)(self))
-}
-
-func (self *Node) Destroy() {
-	C.g_node_destroy((*C.GNode)(self))
-}
-
-func (self *Node) Find(order CGTraverseType, flags CGTraverseFlags, data Cgpointer) *CGNode {
-	return C.g_node_find((*C.GNode)(self), order, flags, data)
-}
-
-func (self *Node) FindChild(flags CGTraverseFlags, data Cgpointer) *CGNode {
-	return C.g_node_find_child((*C.GNode)(self), flags, data)
-}
-
-func (self *Node) FirstSibling() *CGNode {
-	return C.g_node_first_sibling((*C.GNode)(self))
-}
-
-func (self *Node) GetRoot() *CGNode {
-	return C.g_node_get_root((*C.GNode)(self))
-}
-
-func (self *Node) Insert(position Cgint, node *CGNode) *CGNode {
-	return C.g_node_insert((*C.GNode)(self), position, node)
-}
-
-func (self *Node) InsertAfter(sibling *CGNode, node *CGNode) *CGNode {
-	return C.g_node_insert_after((*C.GNode)(self), sibling, node)
-}
-
-func (self *Node) InsertBefore(sibling *CGNode, node *CGNode) *CGNode {
-	return C.g_node_insert_before((*C.GNode)(self), sibling, node)
-}
-
-func (self *Node) IsAncestor(descendant *CGNode) Cgboolean {
-	return C.g_node_is_ancestor((*C.GNode)(self), descendant)
-}
-
-func (self *Node) LastChild() *CGNode {
-	return C.g_node_last_child((*C.GNode)(self))
-}
-
-func (self *Node) LastSibling() *CGNode {
-	return C.g_node_last_sibling((*C.GNode)(self))
-}
-
-func (self *Node) MaxHeight() Cguint {
-	return C.g_node_max_height((*C.GNode)(self))
-}
-
-func (self *Node) NChildren() Cguint {
-	return C.g_node_n_children((*C.GNode)(self))
-}
-
-func (self *Node) NNodes(flags CGTraverseFlags) Cguint {
-	return C.g_node_n_nodes((*C.GNode)(self), flags)
-}
-
-func (self *Node) NthChild(n Cguint) *CGNode {
-	return C.g_node_nth_child((*C.GNode)(self), n)
-}
-
-func (self *Node) Prepend(node *CGNode) *CGNode {
-	return C.g_node_prepend((*C.GNode)(self), node)
-}
-
-func (self *Node) ReverseChildren() {
-	C.g_node_reverse_children((*C.GNode)(self))
-}
-
-func (self *Node) Traverse(order CGTraverseType, flags CGTraverseFlags, max_depth Cgint, func_ CGNodeTraverseFunc, data Cgpointer) {
-	C.g_node_traverse((*C.GNode)(self), order, flags, max_depth, func_, data)
-}
-
-func (self *Node) Unlink() {
-	C.g_node_unlink((*C.GNode)(self))
-}
-
-//Skipped g_once_init_enter
-
-//Skipped g_once_init_leave
-
-func (self *Once) Impl(func_ CGThreadFunc, arg Cgpointer) Cgpointer {
-	return C.g_once_impl((*C.GOnce)(self), func_, arg)
-}
-
-func OptionContextNew(parameter_string *Cgchar) *CGOptionContext {
-	return C._g_option_context_new(unsafe.Pointer(parameter_string))
-}
-
-func (self *OptionContext) AddGroup(group *CGOptionGroup) {
-	C.g_option_context_add_group((*C.GOptionContext)(self), group)
-}
-
-func (self *OptionContext) AddMainEntries(entries *CGOptionEntry, translation_domain *Cgchar) {
-	C._g_option_context_add_main_entries((*C.GOptionContext)(self), unsafe.Pointer(entries), unsafe.Pointer(translation_domain))
-}
-
-func (self *OptionContext) Free() {
-	C.g_option_context_free((*C.GOptionContext)(self))
-}
-
-func (self *OptionContext) GetDescription() *Cgchar {
-	return C.g_option_context_get_description((*C.GOptionContext)(self))
-}
-
-func (self *OptionContext) GetHelp(main_help Cgboolean, group *CGOptionGroup) *Cgchar {
-	return C.g_option_context_get_help((*C.GOptionContext)(self), main_help, group)
-}
-
-func (self *OptionContext) GetHelpEnabled() Cgboolean {
-	return C.g_option_context_get_help_enabled((*C.GOptionContext)(self))
-}
-
-func (self *OptionContext) GetIgnoreUnknownOptions() Cgboolean {
-	return C.g_option_context_get_ignore_unknown_options((*C.GOptionContext)(self))
-}
-
-func (self *OptionContext) GetMainGroup() *CGOptionGroup {
-	return C.g_option_context_get_main_group((*C.GOptionContext)(self))
-}
-
-func (self *OptionContext) GetSummary() *Cgchar {
-	return C.g_option_context_get_summary((*C.GOptionContext)(self))
-}
-
-func (self *OptionContext) Parse(argc *Cgint, argv Cunsafe.Pointer, err unsafe.Pointer) Cgboolean {
-	return C._g_option_context_parse((*C.GOptionContext)(self), argc, argv, unsafe.Pointer(err))
-}
-
-func (self *OptionContext) SetDescription(description *Cgchar) {
-	C._g_option_context_set_description((*C.GOptionContext)(self), unsafe.Pointer(description))
-}
-
-func (self *OptionContext) SetHelpEnabled(help_enabled Cgboolean) {
-	C.g_option_context_set_help_enabled((*C.GOptionContext)(self), help_enabled)
-}
-
-func (self *OptionContext) SetIgnoreUnknownOptions(ignore_unknown Cgboolean) {
-	C.g_option_context_set_ignore_unknown_options((*C.GOptionContext)(self), ignore_unknown)
-}
-
-func (self *OptionContext) SetMainGroup(group *CGOptionGroup) {
-	C.g_option_context_set_main_group((*C.GOptionContext)(self), group)
-}
-
-func (self *OptionContext) SetSummary(summary *Cgchar) {
-	C._g_option_context_set_summary((*C.GOptionContext)(self), unsafe.Pointer(summary))
-}
-
-func (self *OptionContext) SetTranslateFunc(func_ CGTranslateFunc, data Cgpointer, destroy_notify CGDestroyNotify) {
-	C.g_option_context_set_translate_func((*C.GOptionContext)(self), func_, data, destroy_notify)
-}
-
-func (self *OptionContext) SetTranslationDomain(domain *Cgchar) {
-	C._g_option_context_set_translation_domain((*C.GOptionContext)(self), unsafe.Pointer(domain))
-}
-
-func OptionGroupNew(name *Cgchar, description *Cgchar, help_description *Cgchar, user_data Cgpointer, destroy CGDestroyNotify) *CGOptionGroup {
-	return C._g_option_group_new(unsafe.Pointer(name), unsafe.Pointer(description), unsafe.Pointer(help_description), user_data, destroy)
-}
-
-func (self *OptionGroup) AddEntries(entries *CGOptionEntry) {
-	C._g_option_group_add_entries((*C.GOptionGroup)(self), unsafe.Pointer(entries))
-}
-
-func (self *OptionGroup) Free() {
-	C.g_option_group_free((*C.GOptionGroup)(self))
-}
-
-func (self *OptionGroup) SetErrorHook(error_func CGOptionErrorFunc) {
-	C.g_option_group_set_error_hook((*C.GOptionGroup)(self), error_func)
-}
-
-func (self *OptionGroup) SetParseHooks(pre_parse_func CGOptionParseFunc, post_parse_func CGOptionParseFunc) {
-	C.g_option_group_set_parse_hooks((*C.GOptionGroup)(self), pre_parse_func, post_parse_func)
-}
-
-func (self *OptionGroup) SetTranslateFunc(func_ CGTranslateFunc, data Cgpointer, destroy_notify CGDestroyNotify) {
-	C.g_option_group_set_translate_func((*C.GOptionGroup)(self), func_, data, destroy_notify)
-}
-
-func (self *OptionGroup) SetTranslationDomain(domain *Cgchar) {
-	C._g_option_group_set_translation_domain((*C.GOptionGroup)(self), unsafe.Pointer(domain))
-}
-
-func PatternSpecNew(pattern *Cgchar) *CGPatternSpec {
-	return C._g_pattern_spec_new(unsafe.Pointer(pattern))
-}
-
-func (self *PatternSpec) Equal(pspec2 *CGPatternSpec) Cgboolean {
-	return C.g_pattern_spec_equal((*C.GPatternSpec)(self), pspec2)
-}
-
-func (self *PatternSpec) Free() {
-	C.g_pattern_spec_free((*C.GPatternSpec)(self))
-}
-
-func (self *Private) Get() Cgpointer {
-	return C.g_private_get((*C.GPrivate)(self))
-}
-
-func (self *Private) Replace(value Cgpointer) {
-	C.g_private_replace((*C.GPrivate)(self), value)
-}
-
-func (self *Private) Set(value Cgpointer) {
-	C.g_private_set((*C.GPrivate)(self), value)
-}
-
-func PtrArrayAdd(array *CGPtrArray, data Cgpointer) {
-	C.g_ptr_array_add(array, data)
-}
-
-func PtrArrayForeach(array *CGPtrArray, func_ CGFunc, user_data Cgpointer) {
-	C.g_ptr_array_foreach(array, func_, user_data)
-}
-
-func PtrArrayFree(array *CGPtrArray, free_seg Cgboolean) *Cgpointer {
-	return C.g_ptr_array_free(array, free_seg)
-}
-
-func PtrArrayNew() *CGPtrArray {
-	return C.g_ptr_array_new()
-}
-
-func PtrArrayNewFull(reserved_size Cguint, element_free_func CGDestroyNotify) *CGPtrArray {
-	return C.g_ptr_array_new_full(reserved_size, element_free_func)
-}
-
-func PtrArrayNewWithFreeFunc(element_free_func CGDestroyNotify) *CGPtrArray {
-	return C.g_ptr_array_new_with_free_func(element_free_func)
-}
-
-func PtrArrayRef(array *CGPtrArray) *CGPtrArray {
-	return C.g_ptr_array_ref(array)
-}
-
-func PtrArrayRemove(array *CGPtrArray, data Cgpointer) Cgboolean {
-	return C.g_ptr_array_remove(array, data)
-}
-
-func PtrArrayRemoveFast(array *CGPtrArray, data Cgpointer) Cgboolean {
-	return C.g_ptr_array_remove_fast(array, data)
-}
-
-func PtrArrayRemoveIndex(array *CGPtrArray, index_ Cguint) Cgpointer {
-	return C.g_ptr_array_remove_index(array, index_)
-}
-
-func PtrArrayRemoveIndexFast(array *CGPtrArray, index_ Cguint) Cgpointer {
-	return C.g_ptr_array_remove_index_fast(array, index_)
-}
-
-func PtrArrayRemoveRange(array *CGPtrArray, index_ Cguint, length Cguint) {
-	C.g_ptr_array_remove_range(array, index_, length)
-}
-
-func PtrArraySetFreeFunc(array *CGPtrArray, element_free_func CGDestroyNotify) {
-	C.g_ptr_array_set_free_func(array, element_free_func)
-}
-
-func PtrArraySetSize(array *CGPtrArray, length Cgint) {
-	C.g_ptr_array_set_size(array, length)
-}
-
-func PtrArraySizedNew(reserved_size Cguint) *CGPtrArray {
-	return C.g_ptr_array_sized_new(reserved_size)
-}
-
-func PtrArraySort(array *CGPtrArray, compare_func CGCompareFunc) {
-	C.g_ptr_array_sort(array, compare_func)
-}
-
-func PtrArraySortWithData(array *CGPtrArray, compare_func CGCompareDataFunc, user_data Cgpointer) {
-	C.g_ptr_array_sort_with_data(array, compare_func, user_data)
-}
-
-func PtrArrayUnref(array *CGPtrArray) {
-	C.g_ptr_array_unref(array)
-}
-
-func QueueNew() *CGQueue {
-	return C.g_queue_new()
-}
-
-func (self *Queue) Clear() {
-	C.g_queue_clear((*C.GQueue)(self))
-}
-
-func (self *Queue) Copy() *CGQueue {
-	return C.g_queue_copy((*C.GQueue)(self))
-}
-
-func (self *Queue) DeleteLink(link_ *CGList) {
-	C.g_queue_delete_link((*C.GQueue)(self), link_)
-}
-
-func (self *Queue) Find(data Cgconstpointer) *CGList {
-	return C.g_queue_find((*C.GQueue)(self), data)
-}
-
-func (self *Queue) FindCustom(data Cgconstpointer, func_ CGCompareFunc) *CGList {
-	return C.g_queue_find_custom((*C.GQueue)(self), data, func_)
-}
-
-func (self *Queue) Foreach(func_ CGFunc, user_data Cgpointer) {
-	C.g_queue_foreach((*C.GQueue)(self), func_, user_data)
-}
-
-func (self *Queue) Free() {
-	C.g_queue_free((*C.GQueue)(self))
-}
-
-func (self *Queue) FreeFull(free_func CGDestroyNotify) {
-	C.g_queue_free_full((*C.GQueue)(self), free_func)
-}
-
-func (self *Queue) GetLength() Cguint {
-	return C.g_queue_get_length((*C.GQueue)(self))
-}
-
-func (self *Queue) Index(data Cgconstpointer) Cgint {
-	return C.g_queue_index((*C.GQueue)(self), data)
-}
-
-func (self *Queue) Init() {
-	C.g_queue_init((*C.GQueue)(self))
-}
-
-func (self *Queue) InsertAfter(sibling *CGList, data Cgpointer) {
-	C.g_queue_insert_after((*C.GQueue)(self), sibling, data)
-}
-
-func (self *Queue) InsertBefore(sibling *CGList, data Cgpointer) {
-	C.g_queue_insert_before((*C.GQueue)(self), sibling, data)
-}
-
-func (self *Queue) InsertSorted(data Cgpointer, func_ CGCompareDataFunc, user_data Cgpointer) {
-	C.g_queue_insert_sorted((*C.GQueue)(self), data, func_, user_data)
-}
-
-func (self *Queue) IsEmpty() Cgboolean {
-	return C.g_queue_is_empty((*C.GQueue)(self))
-}
-
-func (self *Queue) LinkIndex(link_ *CGList) Cgint {
-	return C.g_queue_link_index((*C.GQueue)(self), link_)
-}
-
-func (self *Queue) PeekHead() Cgpointer {
-	return C.g_queue_peek_head((*C.GQueue)(self))
-}
-
-func (self *Queue) PeekHeadLink() *CGList {
-	return C.g_queue_peek_head_link((*C.GQueue)(self))
-}
-
-func (self *Queue) PeekNth(n Cguint) Cgpointer {
-	return C.g_queue_peek_nth((*C.GQueue)(self), n)
-}
-
-func (self *Queue) PeekNthLink(n Cguint) *CGList {
-	return C.g_queue_peek_nth_link((*C.GQueue)(self), n)
-}
-
-func (self *Queue) PeekTail() Cgpointer {
-	return C.g_queue_peek_tail((*C.GQueue)(self))
-}
-
-func (self *Queue) PeekTailLink() *CGList {
-	return C.g_queue_peek_tail_link((*C.GQueue)(self))
-}
-
-func (self *Queue) PopHead() Cgpointer {
-	return C.g_queue_pop_head((*C.GQueue)(self))
-}
-
-func (self *Queue) PopHeadLink() *CGList {
-	return C.g_queue_pop_head_link((*C.GQueue)(self))
-}
-
-func (self *Queue) PopNth(n Cguint) Cgpointer {
-	return C.g_queue_pop_nth((*C.GQueue)(self), n)
-}
-
-func (self *Queue) PopNthLink(n Cguint) *CGList {
-	return C.g_queue_pop_nth_link((*C.GQueue)(self), n)
-}
-
-func (self *Queue) PopTail() Cgpointer {
-	return C.g_queue_pop_tail((*C.GQueue)(self))
-}
-
-func (self *Queue) PopTailLink() *CGList {
-	return C.g_queue_pop_tail_link((*C.GQueue)(self))
-}
-
-func (self *Queue) PushHead(data Cgpointer) {
-	C.g_queue_push_head((*C.GQueue)(self), data)
-}
-
-func (self *Queue) PushHeadLink(link_ *CGList) {
-	C.g_queue_push_head_link((*C.GQueue)(self), link_)
-}
-
-func (self *Queue) PushNth(data Cgpointer, n Cgint) {
-	C.g_queue_push_nth((*C.GQueue)(self), data, n)
-}
-
-func (self *Queue) PushNthLink(n Cgint, link_ *CGList) {
-	C.g_queue_push_nth_link((*C.GQueue)(self), n, link_)
-}
-
-func (self *Queue) PushTail(data Cgpointer) {
-	C.g_queue_push_tail((*C.GQueue)(self), data)
-}
-
-func (self *Queue) PushTailLink(link_ *CGList) {
-	C.g_queue_push_tail_link((*C.GQueue)(self), link_)
-}
-
-func (self *Queue) Remove(data Cgconstpointer) Cgboolean {
-	return C.g_queue_remove((*C.GQueue)(self), data)
-}
-
-func (self *Queue) RemoveAll(data Cgconstpointer) Cguint {
-	return C.g_queue_remove_all((*C.GQueue)(self), data)
-}
-
-func (self *Queue) Reverse() {
-	C.g_queue_reverse((*C.GQueue)(self))
-}
-
-func (self *Queue) Sort(compare_func CGCompareDataFunc, user_data Cgpointer) {
-	C.g_queue_sort((*C.GQueue)(self), compare_func, user_data)
-}
-
-func (self *Queue) Unlink(link_ *CGList) {
-	C.g_queue_unlink((*C.GQueue)(self), link_)
-}
-
-func (self *RWLock) Clear() {
-	C.g_rw_lock_clear((*C.GRWLock)(self))
-}
-
-func (self *RWLock) Init() {
-	C.g_rw_lock_init((*C.GRWLock)(self))
-}
-
-func (self *RWLock) ReaderLock() {
-	C.g_rw_lock_reader_lock((*C.GRWLock)(self))
-}
-
-func (self *RWLock) ReaderTrylock() Cgboolean {
-	return C.g_rw_lock_reader_trylock((*C.GRWLock)(self))
-}
-
-func (self *RWLock) ReaderUnlock() {
-	C.g_rw_lock_reader_unlock((*C.GRWLock)(self))
-}
-
-func (self *RWLock) WriterLock() {
-	C.g_rw_lock_writer_lock((*C.GRWLock)(self))
-}
-
-func (self *RWLock) WriterTrylock() Cgboolean {
-	return C.g_rw_lock_writer_trylock((*C.GRWLock)(self))
-}
-
-func (self *RWLock) WriterUnlock() {
-	C.g_rw_lock_writer_unlock((*C.GRWLock)(self))
-}
-
-func RandNew() *CGRand {
-	return C.g_rand_new()
-}
-
-func RandNewWithSeed(seed Cguint32) *CGRand {
-	return C.g_rand_new_with_seed(seed)
-}
-
-func RandNewWithSeedArray(seed *Cguint32, seed_length Cguint) *CGRand {
-	return C._g_rand_new_with_seed_array(unsafe.Pointer(seed), seed_length)
-}
-
-func (self *Rand) Copy() *CGRand {
-	return C.g_rand_copy((*C.GRand)(self))
-}
-
-func (self *Rand) Double() Cgdouble {
-	return C.g_rand_double((*C.GRand)(self))
-}
-
-func (self *Rand) DoubleRange(begin Cgdouble, end Cgdouble) Cgdouble {
-	return C.g_rand_double_range((*C.GRand)(self), begin, end)
-}
-
-func (self *Rand) Free() {
-	C.g_rand_free((*C.GRand)(self))
-}
-
-func (self *Rand) Int() Cguint32 {
-	return C.g_rand_int((*C.GRand)(self))
-}
-
-func (self *Rand) IntRange(begin Cgint32, end Cgint32) Cgint32 {
-	return C.g_rand_int_range((*C.GRand)(self), begin, end)
-}
-
-func (self *Rand) SetSeed(seed Cguint32) {
-	C.g_rand_set_seed((*C.GRand)(self), seed)
-}
-
-func (self *Rand) SetSeedArray(seed *Cguint32, seed_length Cguint) {
-	C._g_rand_set_seed_array((*C.GRand)(self), unsafe.Pointer(seed), seed_length)
-}
-
-func (self *RecMutex) Clear() {
-	C.g_rec_mutex_clear((*C.GRecMutex)(self))
-}
-
-func (self *RecMutex) Init() {
-	C.g_rec_mutex_init((*C.GRecMutex)(self))
-}
-
-func (self *RecMutex) Lock() {
-	C.g_rec_mutex_lock((*C.GRecMutex)(self))
-}
-
-func (self *RecMutex) Trylock() Cgboolean {
-	return C.g_rec_mutex_trylock((*C.GRecMutex)(self))
-}
-
-func (self *RecMutex) Unlock() {
-	C.g_rec_mutex_unlock((*C.GRecMutex)(self))
-}
-
-func RegexNew(pattern *Cgchar, compile_options CGRegexCompileFlags, match_options CGRegexMatchFlags, err unsafe.Pointer) *CGRegex {
-	return C._g_regex_new(unsafe.Pointer(pattern), compile_options, match_options, unsafe.Pointer(err))
-}
-
-func RegexCheckReplacement(replacement *Cgchar, has_references *Cgboolean, err unsafe.Pointer) Cgboolean {
-	return C._g_regex_check_replacement(unsafe.Pointer(replacement), has_references, unsafe.Pointer(err))
-}
-
-func RegexErrorQuark() CGQuark {
-	return C.g_regex_error_quark()
-}
-
-func RegexEscapeNul(string_ *Cgchar, length Cgint) *Cgchar {
-	return C._g_regex_escape_nul(unsafe.Pointer(string_), length)
-}
-
-func RegexEscapeString(string_ *Cgchar, length Cgint) *Cgchar {
-	return C.g_regex_escape_string(string_, length)
-}
-
-func RegexMatchSimple(pattern *Cgchar, string_ *Cgchar, compile_options CGRegexCompileFlags, match_options CGRegexMatchFlags) Cgboolean {
-	return C._g_regex_match_simple(unsafe.Pointer(pattern), unsafe.Pointer(string_), compile_options, match_options)
-}
-
-func RegexSplitSimple(pattern *Cgchar, string_ *Cgchar, compile_options CGRegexCompileFlags, match_options CGRegexMatchFlags) Cunsafe.Pointer {
-	return C._g_regex_split_simple(unsafe.Pointer(pattern), unsafe.Pointer(string_), compile_options, match_options)
-}
-
-func (self *Regex) GetCaptureCount() Cgint {
-	return C.g_regex_get_capture_count((*C.GRegex)(self))
-}
-
-func (self *Regex) GetCompileFlags() CGRegexCompileFlags {
-	return C.g_regex_get_compile_flags((*C.GRegex)(self))
-}
-
-func (self *Regex) GetHasCrOrLf() Cgboolean {
-	return C.g_regex_get_has_cr_or_lf((*C.GRegex)(self))
-}
-
-func (self *Regex) GetMatchFlags() CGRegexMatchFlags {
-	return C.g_regex_get_match_flags((*C.GRegex)(self))
-}
-
-func (self *Regex) GetMaxBackref() Cgint {
-	return C.g_regex_get_max_backref((*C.GRegex)(self))
-}
-
-func (self *Regex) GetPattern() *Cgchar {
-	return C.g_regex_get_pattern((*C.GRegex)(self))
-}
-
-func (self *Regex) GetStringNumber(name *Cgchar) Cgint {
-	return C._g_regex_get_string_number((*C.GRegex)(self), unsafe.Pointer(name))
-}
-
-func (self *Regex) Match(string_ *Cgchar, match_options CGRegexMatchFlags, match_info Cunsafe.Pointer) Cgboolean {
-	return C._g_regex_match((*C.GRegex)(self), unsafe.Pointer(string_), match_options, match_info)
-}
-
-func (self *Regex) MatchAll(string_ *Cgchar, match_options CGRegexMatchFlags, match_info Cunsafe.Pointer) Cgboolean {
-	return C._g_regex_match_all((*C.GRegex)(self), unsafe.Pointer(string_), match_options, match_info)
-}
-
-func (self *Regex) MatchAllFull(string_ *Cgchar, string_len Cgssize, start_position Cgint, match_options CGRegexMatchFlags, match_info Cunsafe.Pointer, err unsafe.Pointer) Cgboolean {
-	return C._g_regex_match_all_full((*C.GRegex)(self), string_, string_len, start_position, match_options, match_info, unsafe.Pointer(err))
-}
-
-func (self *Regex) MatchFull(string_ *Cgchar, string_len Cgssize, start_position Cgint, match_options CGRegexMatchFlags, match_info Cunsafe.Pointer, err unsafe.Pointer) Cgboolean {
-	return C._g_regex_match_full((*C.GRegex)(self), string_, string_len, start_position, match_options, match_info, unsafe.Pointer(err))
-}
-
-func (self *Regex) Ref() *CGRegex {
-	return C.g_regex_ref((*C.GRegex)(self))
-}
-
-func (self *Regex) Replace(string_ *Cgchar, string_len Cgssize, start_position Cgint, replacement *Cgchar, match_options CGRegexMatchFlags, err unsafe.Pointer) *Cgchar {
-	return C._g_regex_replace((*C.GRegex)(self), string_, string_len, start_position, unsafe.Pointer(replacement), match_options, unsafe.Pointer(err))
-}
-
-func (self *Regex) ReplaceEval(string_ *Cgchar, string_len Cgssize, start_position Cgint, match_options CGRegexMatchFlags, eval CGRegexEvalCallback, user_data Cgpointer, err unsafe.Pointer) *Cgchar {
-	return C._g_regex_replace_eval((*C.GRegex)(self), string_, string_len, start_position, match_options, eval, user_data, unsafe.Pointer(err))
-}
-
-func (self *Regex) ReplaceLiteral(string_ *Cgchar, string_len Cgssize, start_position Cgint, replacement *Cgchar, match_options CGRegexMatchFlags, err unsafe.Pointer) *Cgchar {
-	return C._g_regex_replace_literal((*C.GRegex)(self), string_, string_len, start_position, unsafe.Pointer(replacement), match_options, unsafe.Pointer(err))
-}
-
-func (self *Regex) Split(string_ *Cgchar, match_options CGRegexMatchFlags) Cunsafe.Pointer {
-	return C._g_regex_split((*C.GRegex)(self), unsafe.Pointer(string_), match_options)
-}
-
-func (self *Regex) SplitFull(string_ *Cgchar, string_len Cgssize, start_position Cgint, match_options CGRegexMatchFlags, max_tokens Cgint, err unsafe.Pointer) Cunsafe.Pointer {
-	return C._g_regex_split_full((*C.GRegex)(self), string_, string_len, start_position, match_options, max_tokens, unsafe.Pointer(err))
-}
-
-func (self *Regex) Unref() {
-	C.g_regex_unref((*C.GRegex)(self))
-}
-
-func SListAlloc() *CGSList {
-	return C.g_slist_alloc()
-}
-
-func SListAppend(list *CGSList, data Cgpointer) *CGSList {
-	return C.g_slist_append(list, data)
-}
-
-func SListConcat(list1 *CGSList, list2 *CGSList) *CGSList {
-	return C.g_slist_concat(list1, list2)
-}
-
-func SListCopy(list *CGSList) *CGSList {
-	return C.g_slist_copy(list)
-}
-
-func SListCopyDeep(list *CGSList, func_ CGCopyFunc, user_data Cgpointer) *CGSList {
-	return C.g_slist_copy_deep(list, func_, user_data)
-}
-
-func SListDeleteLink(list *CGSList, link_ *CGSList) *CGSList {
-	return C.g_slist_delete_link(list, link_)
-}
-
-func SListFind(list *CGSList, data Cgconstpointer) *CGSList {
-	return C.g_slist_find(list, data)
-}
-
-func SListFindCustom(list *CGSList, data Cgconstpointer, func_ CGCompareFunc) *CGSList {
-	return C.g_slist_find_custom(list, data, func_)
-}
-
-func SListForeach(list *CGSList, func_ CGFunc, user_data Cgpointer) {
-	C.g_slist_foreach(list, func_, user_data)
-}
-
-func SListFree(list *CGSList) {
-	C.g_slist_free(list)
-}
-
-func SListFree1(list *CGSList) {
-	C.g_slist_free_1(list)
-}
-
-func SListFreeFull(list *CGSList, free_func CGDestroyNotify) {
-	C.g_slist_free_full(list, free_func)
-}
-
-func SListIndex(list *CGSList, data Cgconstpointer) Cgint {
-	return C.g_slist_index(list, data)
-}
-
-func SListInsert(list *CGSList, data Cgpointer, position Cgint) *CGSList {
-	return C.g_slist_insert(list, data, position)
-}
-
-func SListInsertBefore(slist *CGSList, sibling *CGSList, data Cgpointer) *CGSList {
-	return C.g_slist_insert_before(slist, sibling, data)
-}
-
-func SListInsertSorted(list *CGSList, data Cgpointer, func_ CGCompareFunc) *CGSList {
-	return C.g_slist_insert_sorted(list, data, func_)
-}
-
-func SListInsertSortedWithData(list *CGSList, data Cgpointer, func_ CGCompareDataFunc, user_data Cgpointer) *CGSList {
-	return C.g_slist_insert_sorted_with_data(list, data, func_, user_data)
-}
-
-func SListLast(list *CGSList) *CGSList {
-	return C.g_slist_last(list)
-}
-
-func SListLength(list *CGSList) Cguint {
-	return C.g_slist_length(list)
-}
-
-func SListNth(list *CGSList, n Cguint) *CGSList {
-	return C.g_slist_nth(list, n)
-}
-
-func SListNthData(list *CGSList, n Cguint) Cgpointer {
-	return C.g_slist_nth_data(list, n)
-}
-
-func SListPosition(list *CGSList, llink *CGSList) Cgint {
-	return C.g_slist_position(list, llink)
-}
-
-func SListPrepend(list *CGSList, data Cgpointer) *CGSList {
-	return C.g_slist_prepend(list, data)
-}
-
-func SListRemove(list *CGSList, data Cgconstpointer) *CGSList {
-	return C.g_slist_remove(list, data)
-}
-
-func SListRemoveAll(list *CGSList, data Cgconstpointer) *CGSList {
-	return C.g_slist_remove_all(list, data)
-}
-
-func SListRemoveLink(list *CGSList, link_ *CGSList) *CGSList {
-	return C.g_slist_remove_link(list, link_)
-}
-
-func SListReverse(list *CGSList) *CGSList {
-	return C.g_slist_reverse(list)
-}
-
-func SListSort(list *CGSList, compare_func CGCompareFunc) *CGSList {
-	return C.g_slist_sort(list, compare_func)
-}
-
-func SListSortWithData(list *CGSList, compare_func CGCompareDataFunc, user_data Cgpointer) *CGSList {
-	return C.g_slist_sort_with_data(list, compare_func, user_data)
-}
-
-func ScannerNew(config_templ *CGScannerConfig) *CGScanner {
-	return C._g_scanner_new(unsafe.Pointer(config_templ))
-}
-
-func (self *Scanner) CurLine() Cguint {
-	return C.g_scanner_cur_line((*C.GScanner)(self))
-}
-
-func (self *Scanner) CurPosition() Cguint {
-	return C.g_scanner_cur_position((*C.GScanner)(self))
-}
-
-func (self *Scanner) CurToken() CGTokenType {
-	return C.g_scanner_cur_token((*C.GScanner)(self))
-}
-
-func (self *Scanner) CurValue() CGTokenValue {
-	return C.g_scanner_cur_value((*C.GScanner)(self))
-}
-
-func (self *Scanner) Destroy() {
-	C.g_scanner_destroy((*C.GScanner)(self))
-}
-
-func (self *Scanner) Eof() Cgboolean {
-	return C.g_scanner_eof((*C.GScanner)(self))
-}
-
-//TODO g_scanner_error
-
-func (self *Scanner) GetNextToken() CGTokenType {
-	return C.g_scanner_get_next_token((*C.GScanner)(self))
-}
-
-func (self *Scanner) InputFile(input_fd Cgint) {
-	C.g_scanner_input_file((*C.GScanner)(self), input_fd)
-}
-
-func (self *Scanner) InputText(text *Cgchar, text_len Cguint) {
-	C._g_scanner_input_text((*C.GScanner)(self), unsafe.Pointer(text), text_len)
-}
-
-func (self *Scanner) LookupSymbol(symbol *Cgchar) Cgpointer {
-	return C._g_scanner_lookup_symbol((*C.GScanner)(self), unsafe.Pointer(symbol))
-}
-
-func (self *Scanner) PeekNextToken() CGTokenType {
-	return C.g_scanner_peek_next_token((*C.GScanner)(self))
-}
-
-func (self *Scanner) ScopeAddSymbol(scope_id Cguint, symbol *Cgchar, value Cgpointer) {
-	C._g_scanner_scope_add_symbol((*C.GScanner)(self), scope_id, unsafe.Pointer(symbol), value)
-}
-
-func (self *Scanner) ScopeForeachSymbol(scope_id Cguint, func_ CGHFunc, user_data Cgpointer) {
-	C.g_scanner_scope_foreach_symbol((*C.GScanner)(self), scope_id, func_, user_data)
-}
-
-func (self *Scanner) ScopeLookupSymbol(scope_id Cguint, symbol *Cgchar) Cgpointer {
-	return C._g_scanner_scope_lookup_symbol((*C.GScanner)(self), scope_id, unsafe.Pointer(symbol))
-}
-
-func (self *Scanner) ScopeRemoveSymbol(scope_id Cguint, symbol *Cgchar) {
-	C._g_scanner_scope_remove_symbol((*C.GScanner)(self), scope_id, unsafe.Pointer(symbol))
-}
-
-func (self *Scanner) SetScope(scope_id Cguint) Cguint {
-	return C.g_scanner_set_scope((*C.GScanner)(self), scope_id)
-}
-
-func (self *Scanner) SyncFileOffset() {
-	C.g_scanner_sync_file_offset((*C.GScanner)(self))
-}
-
-func (self *Scanner) UnexpToken(expected_token CGTokenType, identifier_spec *Cgchar, symbol_spec *Cgchar, symbol_name *Cgchar, message *Cgchar, is_error Cgint) {
-	C._g_scanner_unexp_token((*C.GScanner)(self), expected_token, unsafe.Pointer(identifier_spec), unsafe.Pointer(symbol_spec), unsafe.Pointer(symbol_name), unsafe.Pointer(message), is_error)
-}
-
-//TODO g_scanner_warn
-
-func SequenceForeachRange(begin *CGSequenceIter, end *CGSequenceIter, func_ CGFunc, user_data Cgpointer) {
-	C.g_sequence_foreach_range(begin, end, func_, user_data)
-}
-
-func SequenceGet(iter *CGSequenceIter) Cgpointer {
-	return C.g_sequence_get(iter)
-}
-
-func SequenceInsertBefore(iter *CGSequenceIter, data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_insert_before(iter, data)
-}
-
-func SequenceMove(src *CGSequenceIter, dest *CGSequenceIter) {
-	C.g_sequence_move(src, dest)
-}
-
-func SequenceMoveRange(dest *CGSequenceIter, begin *CGSequenceIter, end *CGSequenceIter) {
-	C.g_sequence_move_range(dest, begin, end)
-}
-
-func SequenceNew(data_destroy CGDestroyNotify) *CGSequence {
-	return C.g_sequence_new(data_destroy)
-}
-
-func SequenceRangeGetMidpoint(begin *CGSequenceIter, end *CGSequenceIter) *CGSequenceIter {
-	return C.g_sequence_range_get_midpoint(begin, end)
-}
-
-func SequenceRemove(iter *CGSequenceIter) {
-	C.g_sequence_remove(iter)
-}
-
-func SequenceRemoveRange(begin *CGSequenceIter, end *CGSequenceIter) {
-	C.g_sequence_remove_range(begin, end)
-}
-
-func SequenceSet(iter *CGSequenceIter, data Cgpointer) {
-	C.g_sequence_set(iter, data)
-}
-
-func SequenceSortChanged(iter *CGSequenceIter, cmp_func CGCompareDataFunc, cmp_data Cgpointer) {
-	C.g_sequence_sort_changed(iter, cmp_func, cmp_data)
-}
-
-func SequenceSortChangedIter(iter *CGSequenceIter, iter_cmp CGSequenceIterCompareFunc, cmp_data Cgpointer) {
-	C.g_sequence_sort_changed_iter(iter, iter_cmp, cmp_data)
-}
-
-func SequenceSwap(a *CGSequenceIter, b *CGSequenceIter) {
-	C.g_sequence_swap(a, b)
-}
-
-func (self *Sequence) Append(data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_append((*C.GSequence)(self), data)
-}
-
-func (self *Sequence) Foreach(func_ CGFunc, user_data Cgpointer) {
-	C.g_sequence_foreach((*C.GSequence)(self), func_, user_data)
-}
-
-func (self *Sequence) Free() {
-	C.g_sequence_free((*C.GSequence)(self))
-}
-
-func (self *Sequence) GetBeginIter() *CGSequenceIter {
-	return C.g_sequence_get_begin_iter((*C.GSequence)(self))
-}
-
-func (self *Sequence) GetEndIter() *CGSequenceIter {
-	return C.g_sequence_get_end_iter((*C.GSequence)(self))
-}
-
-func (self *Sequence) GetIterAtPos(pos Cgint) *CGSequenceIter {
-	return C.g_sequence_get_iter_at_pos((*C.GSequence)(self), pos)
-}
-
-func (self *Sequence) GetLength() Cgint {
-	return C.g_sequence_get_length((*C.GSequence)(self))
-}
-
-func (self *Sequence) InsertSorted(data Cgpointer, cmp_func CGCompareDataFunc, cmp_data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_insert_sorted((*C.GSequence)(self), data, cmp_func, cmp_data)
-}
-
-func (self *Sequence) InsertSortedIter(data Cgpointer, iter_cmp CGSequenceIterCompareFunc, cmp_data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_insert_sorted_iter((*C.GSequence)(self), data, iter_cmp, cmp_data)
-}
-
-func (self *Sequence) Lookup(data Cgpointer, cmp_func CGCompareDataFunc, cmp_data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_lookup((*C.GSequence)(self), data, cmp_func, cmp_data)
-}
-
-func (self *Sequence) LookupIter(data Cgpointer, iter_cmp CGSequenceIterCompareFunc, cmp_data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_lookup_iter((*C.GSequence)(self), data, iter_cmp, cmp_data)
-}
-
-func (self *Sequence) Prepend(data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_prepend((*C.GSequence)(self), data)
-}
-
-func (self *Sequence) Search(data Cgpointer, cmp_func CGCompareDataFunc, cmp_data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_search((*C.GSequence)(self), data, cmp_func, cmp_data)
-}
-
-func (self *Sequence) SearchIter(data Cgpointer, iter_cmp CGSequenceIterCompareFunc, cmp_data Cgpointer) *CGSequenceIter {
-	return C.g_sequence_search_iter((*C.GSequence)(self), data, iter_cmp, cmp_data)
-}
-
-func (self *Sequence) Sort(cmp_func CGCompareDataFunc, cmp_data Cgpointer) {
-	C.g_sequence_sort((*C.GSequence)(self), cmp_func, cmp_data)
-}
-
-func (self *Sequence) SortIter(cmp_func CGSequenceIterCompareFunc, cmp_data Cgpointer) {
-	C.g_sequence_sort_iter((*C.GSequence)(self), cmp_func, cmp_data)
-}
-
-func (self *SequenceIter) Compare(b *CGSequenceIter) Cgint {
-	return C.g_sequence_iter_compare((*C.GSequenceIter)(self), b)
-}
-
-func (self *SequenceIter) GetPosition() Cgint {
-	return C.g_sequence_iter_get_position((*C.GSequenceIter)(self))
-}
-
-func (self *SequenceIter) GetSequence() *CGSequence {
-	return C.g_sequence_iter_get_sequence((*C.GSequenceIter)(self))
-}
-
-func (self *SequenceIter) IsBegin() Cgboolean {
-	return C.g_sequence_iter_is_begin((*C.GSequenceIter)(self))
-}
-
-func (self *SequenceIter) IsEnd() Cgboolean {
-	return C.g_sequence_iter_is_end((*C.GSequenceIter)(self))
-}
-
-func (self *SequenceIter) Move(delta Cgint) *CGSequenceIter {
-	return C.g_sequence_iter_move((*C.GSequenceIter)(self), delta)
-}
-
-func (self *SequenceIter) Next() *CGSequenceIter {
-	return C.g_sequence_iter_next((*C.GSequenceIter)(self))
-}
-
-func (self *SequenceIter) Prev() *CGSequenceIter {
-	return C.g_sequence_iter_prev((*C.GSequenceIter)(self))
-}
-
-func SourceNew(source_funcs *CGSourceFuncs, struct_size Cguint) *CGSource {
-	return C.g_source_new(source_funcs, struct_size)
-}
-
-func SourceRemove(tag Cguint) Cgboolean {
-	return C.g_source_remove(tag)
-}
-
-func SourceRemoveByFuncsUserData(funcs *CGSourceFuncs, user_data Cgpointer) Cgboolean {
-	return C.g_source_remove_by_funcs_user_data(funcs, user_data)
-}
-
-func SourceRemoveByUserData(user_data Cgpointer) Cgboolean {
-	return C.g_source_remove_by_user_data(user_data)
-}
-
-func SourceSetNameById(tag Cguint, name *Cgchar) {
-	C._g_source_set_name_by_id(tag, unsafe.Pointer(name))
-}
-
-func (self *Source) AddChildSource(child_source *CGSource) {
-	C.g_source_add_child_source((*C.GSource)(self), child_source)
-}
-
-func (self *Source) AddPoll(fd *CGPollFD) {
-	C.g_source_add_poll((*C.GSource)(self), fd)
-}
-
-func (self *Source) Attach(context *CGMainContext) Cguint {
-	return C.g_source_attach((*C.GSource)(self), context)
-}
-
-func (self *Source) Destroy() {
-	C.g_source_destroy((*C.GSource)(self))
-}
-
-func (self *Source) GetCanRecurse() Cgboolean {
-	return C.g_source_get_can_recurse((*C.GSource)(self))
-}
-
-func (self *Source) GetContext() *CGMainContext {
-	return C.g_source_get_context((*C.GSource)(self))
-}
-
-//Skipped g_source_get_current_time
-
-func (self *Source) GetId() Cguint {
-	return C.g_source_get_id((*C.GSource)(self))
-}
-
-func (self *Source) GetName() *Cgchar {
-	return C.g_source_get_name((*C.GSource)(self))
-}
-
-func (self *Source) GetPriority() Cgint {
-	return C.g_source_get_priority((*C.GSource)(self))
-}
-
-func (self *Source) GetTime() Cgint64 {
-	return C.g_source_get_time((*C.GSource)(self))
-}
-
-func (self *Source) IsDestroyed() Cgboolean {
-	return C.g_source_is_destroyed((*C.GSource)(self))
-}
-
-func (self *Source) Ref() *CGSource {
-	return C.g_source_ref((*C.GSource)(self))
-}
-
-func (self *Source) RemoveChildSource(child_source *CGSource) {
-	C.g_source_remove_child_source((*C.GSource)(self), child_source)
-}
-
-func (self *Source) RemovePoll(fd *CGPollFD) {
-	C.g_source_remove_poll((*C.GSource)(self), fd)
-}
-
-func (self *Source) SetCallback(func_ CGSourceFunc, data Cgpointer, notify CGDestroyNotify) {
-	C.g_source_set_callback((*C.GSource)(self), func_, data, notify)
-}
-
-func (self *Source) SetCallbackIndirect(callback_data Cgpointer, callback_funcs *CGSourceCallbackFuncs) {
-	C.g_source_set_callback_indirect((*C.GSource)(self), callback_data, callback_funcs)
-}
-
-func (self *Source) SetCanRecurse(can_recurse Cgboolean) {
-	C.g_source_set_can_recurse((*C.GSource)(self), can_recurse)
-}
-
-func (self *Source) SetFuncs(funcs *CGSourceFuncs) {
-	C.g_source_set_funcs((*C.GSource)(self), funcs)
-}
-
-func (self *Source) SetName(name *Cgchar) {
-	C._g_source_set_name((*C.GSource)(self), unsafe.Pointer(name))
-}
-
-func (self *Source) SetPriority(priority Cgint) {
-	C.g_source_set_priority((*C.GSource)(self), priority)
-}
-
-func (self *Source) Unref() {
-	C.g_source_unref((*C.GSource)(self))
-}
-
-func (self *String) Append(val *Cgchar) *CGString {
-	return C._g_string_append((*C.GString)(self), unsafe.Pointer(val))
-}
-
-func (self *String) AppendC(c Cgchar) *CGString {
-	return C.g_string_append_c((*C.GString)(self), c)
-}
-
-func (self *String) AppendLen(val *Cgchar, len_ Cgssize) *CGString {
-	return C._g_string_append_len((*C.GString)(self), unsafe.Pointer(val), len_)
-}
-
-//TODO g_string_append_printf
-
-func (self *String) AppendUnichar(wc Cgunichar) *CGString {
-	return C.g_string_append_unichar((*C.GString)(self), wc)
-}
-
-func (self *String) AppendUriEscaped(unescaped *Cgchar, reserved_chars_allowed *Cgchar, allow_utf8 Cgboolean) *CGString {
-	return C._g_string_append_uri_escaped((*C.GString)(self), unsafe.Pointer(unescaped), unsafe.Pointer(reserved_chars_allowed), allow_utf8)
-}
-
-func (self *String) AppendVprintf(format *Cgchar, args Cva_list) {
-	C._g_string_append_vprintf((*C.GString)(self), unsafe.Pointer(format), args)
-}
-
-func (self *String) AsciiDown() *CGString {
-	return C.g_string_ascii_down((*C.GString)(self))
-}
-
-func (self *String) AsciiUp() *CGString {
-	return C.g_string_ascii_up((*C.GString)(self))
-}
-
-func (self *String) Assign(rval *Cgchar) *CGString {
-	return C._g_string_assign((*C.GString)(self), unsafe.Pointer(rval))
-}
-
-//Skipped g_string_down
-
-func (self *String) Equal(v2 *CGString) Cgboolean {
-	return C._g_string_equal((*C.GString)(self), unsafe.Pointer(v2))
-}
-
-func (self *String) Erase(pos Cgssize, len_ Cgssize) *CGString {
-	return C.g_string_erase((*C.GString)(self), pos, len_)
-}
-
-func (self *String) Free(free_segment Cgboolean) *Cgchar {
-	return C.g_string_free((*C.GString)(self), free_segment)
-}
-
-func (self *String) FreeToBytes() *CGBytes {
-	return C.g_string_free_to_bytes((*C.GString)(self))
-}
-
-func (self *String) Hash() Cguint {
-	return C.g_string_hash((*C.GString)(self))
-}
-
-func (self *String) Insert(pos Cgssize, val *Cgchar) *CGString {
-	return C._g_string_insert((*C.GString)(self), pos, unsafe.Pointer(val))
-}
-
-func (self *String) InsertC(pos Cgssize, c Cgchar) *CGString {
-	return C.g_string_insert_c((*C.GString)(self), pos, c)
-}
-
-func (self *String) InsertLen(pos Cgssize, val *Cgchar, len_ Cgssize) *CGString {
-	return C._g_string_insert_len((*C.GString)(self), pos, unsafe.Pointer(val), len_)
-}
-
-func (self *String) InsertUnichar(pos Cgssize, wc Cgunichar) *CGString {
-	return C.g_string_insert_unichar((*C.GString)(self), pos, wc)
-}
-
-func (self *String) Overwrite(pos Cgsize, val *Cgchar) *CGString {
-	return C._g_string_overwrite((*C.GString)(self), pos, unsafe.Pointer(val))
-}
-
-func (self *String) OverwriteLen(pos Cgsize, val *Cgchar, len_ Cgssize) *CGString {
-	return C._g_string_overwrite_len((*C.GString)(self), pos, unsafe.Pointer(val), len_)
-}
-
-func (self *String) Prepend(val *Cgchar) *CGString {
-	return C._g_string_prepend((*C.GString)(self), unsafe.Pointer(val))
-}
-
-func (self *String) PrependC(c Cgchar) *CGString {
-	return C.g_string_prepend_c((*C.GString)(self), c)
-}
-
-func (self *String) PrependLen(val *Cgchar, len_ Cgssize) *CGString {
-	return C._g_string_prepend_len((*C.GString)(self), unsafe.Pointer(val), len_)
-}
-
-func (self *String) PrependUnichar(wc Cgunichar) *CGString {
-	return C.g_string_prepend_unichar((*C.GString)(self), wc)
-}
-
-//TODO g_string_printf
-
-func (self *String) SetSize(len_ Cgsize) *CGString {
-	return C.g_string_set_size((*C.GString)(self), len_)
-}
-
-func (self *String) Truncate(len_ Cgsize) *CGString {
-	return C.g_string_truncate((*C.GString)(self), len_)
-}
-
-//Skipped g_string_up
-
-func (self *String) Vprintf(format *Cgchar, args Cva_list) {
-	C._g_string_vprintf((*C.GString)(self), unsafe.Pointer(format), args)
-}
-
-func StringChunkNew(size Cgsize) *CGStringChunk {
-	return C.g_string_chunk_new(size)
-}
-
-func (self *StringChunk) Clear() {
-	C.g_string_chunk_clear((*C.GStringChunk)(self))
-}
-
-func (self *StringChunk) Free() {
-	C.g_string_chunk_free((*C.GStringChunk)(self))
-}
-
-func (self *StringChunk) Insert(string_ *Cgchar) *Cgchar {
-	return C._g_string_chunk_insert((*C.GStringChunk)(self), unsafe.Pointer(string_))
-}
-
-func (self *StringChunk) InsertConst(string_ *Cgchar) *Cgchar {
-	return C._g_string_chunk_insert_const((*C.GStringChunk)(self), unsafe.Pointer(string_))
-}
-
-func (self *StringChunk) InsertLen(string_ *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_string_chunk_insert_len((*C.GStringChunk)(self), unsafe.Pointer(string_), len_)
-}
-
-func (self *TestSuite) Add(test_case *CGTestCase) {
-	C.g_test_suite_add((*C.GTestSuite)(self), test_case)
-}
-
-func (self *TestSuite) AddSuite(nestedsuite *CGTestSuite) {
-	C.g_test_suite_add_suite((*C.GTestSuite)(self), nestedsuite)
-}
-
-func ThreadNew(name *Cgchar, func_ CGThreadFunc, data Cgpointer) *CGThread {
-	return C._g_thread_new(unsafe.Pointer(name), func_, data)
-}
-
-func ThreadTryNew(name *Cgchar, func_ CGThreadFunc, data Cgpointer, err unsafe.Pointer) *CGThread {
-	return C._g_thread_try_new(unsafe.Pointer(name), func_, data, unsafe.Pointer(err))
-}
-
-func ThreadErrorQuark() CGQuark {
-	return C.g_thread_error_quark()
-}
-
-func ThreadExit(retval Cgpointer) {
-	C.g_thread_exit(retval)
-}
-
-func ThreadSelf() *CGThread {
-	return C.g_thread_self()
-}
-
-func ThreadYield() {
-	C.g_thread_yield()
-}
-
-func (self *Thread) Join() Cgpointer {
-	return C.g_thread_join((*C.GThread)(self))
-}
-
-func (self *Thread) Ref() *CGThread {
-	return C.g_thread_ref((*C.GThread)(self))
-}
-
-func (self *Thread) Unref() {
-	C.g_thread_unref((*C.GThread)(self))
-}
-
-func ThreadPoolGetMaxIdleTime() Cguint {
-	return C.g_thread_pool_get_max_idle_time()
-}
-
-func ThreadPoolGetMaxUnusedThreads() Cgint {
-	return C.g_thread_pool_get_max_unused_threads()
-}
-
-func ThreadPoolGetNumUnusedThreads() Cguint {
-	return C.g_thread_pool_get_num_unused_threads()
-}
-
-func ThreadPoolNew(func_ CGFunc, user_data Cgpointer, max_threads Cgint, exclusive Cgboolean, err unsafe.Pointer) *CGThreadPool {
-	return C._g_thread_pool_new(func_, user_data, max_threads, exclusive, unsafe.Pointer(err))
-}
-
-func ThreadPoolSetMaxIdleTime(interval Cguint) {
-	C.g_thread_pool_set_max_idle_time(interval)
-}
-
-func ThreadPoolSetMaxUnusedThreads(max_threads Cgint) {
-	C.g_thread_pool_set_max_unused_threads(max_threads)
-}
-
-func ThreadPoolStopUnusedThreads() {
-	C.g_thread_pool_stop_unused_threads()
-}
-
-func (self *ThreadPool) Free(immediate Cgboolean, wait_ Cgboolean) {
-	C.g_thread_pool_free((*C.GThreadPool)(self), immediate, wait_)
-}
-
-func (self *ThreadPool) GetMaxThreads() Cgint {
-	return C.g_thread_pool_get_max_threads((*C.GThreadPool)(self))
-}
-
-func (self *ThreadPool) GetNumThreads() Cguint {
-	return C.g_thread_pool_get_num_threads((*C.GThreadPool)(self))
-}
-
-func (self *ThreadPool) Push(data Cgpointer, err unsafe.Pointer) Cgboolean {
-	return C._g_thread_pool_push((*C.GThreadPool)(self), data, unsafe.Pointer(err))
-}
-
-func (self *ThreadPool) SetMaxThreads(max_threads Cgint, err unsafe.Pointer) Cgboolean {
-	return C._g_thread_pool_set_max_threads((*C.GThreadPool)(self), max_threads, unsafe.Pointer(err))
-}
-
-func (self *ThreadPool) SetSortFunction(func_ CGCompareDataFunc, user_data Cgpointer) {
-	C.g_thread_pool_set_sort_function((*C.GThreadPool)(self), func_, user_data)
-}
-
-func (self *ThreadPool) Unprocessed() Cguint {
-	return C.g_thread_pool_unprocessed((*C.GThreadPool)(self))
-}
-
-func TimeValFromIso8601(iso_date *Cgchar, time_ *CGTimeVal) Cgboolean {
-	return C._g_time_val_from_iso8601(unsafe.Pointer(iso_date), time_)
-}
-
-func (self *TimeVal) Add(microseconds Cglong) {
-	C.g_time_val_add((*C.GTimeVal)(self), microseconds)
-}
-
-func (self *TimeVal) ToIso8601() *Cgchar {
-	return C.g_time_val_to_iso8601((*C.GTimeVal)(self))
-}
-
-func TimeZoneNew(identifier *Cgchar) *CGTimeZone {
-	return C._g_time_zone_new(unsafe.Pointer(identifier))
-}
-
-func TimeZoneNewLocal() *CGTimeZone {
-	return C.g_time_zone_new_local()
-}
-
-func TimeZoneNewUtc() *CGTimeZone {
-	return C.g_time_zone_new_utc()
-}
-
-func (self *TimeZone) AdjustTime(type_ CGTimeType, time_ *Cgint64) Cgint {
-	return C.g_time_zone_adjust_time((*C.GTimeZone)(self), type_, time_)
-}
-
-func (self *TimeZone) FindInterval(type_ CGTimeType, time_ Cgint64) Cgint {
-	return C.g_time_zone_find_interval((*C.GTimeZone)(self), type_, time_)
-}
-
-func (self *TimeZone) GetAbbreviation(interval Cgint) *Cgchar {
-	return C.g_time_zone_get_abbreviation((*C.GTimeZone)(self), interval)
-}
-
-func (self *TimeZone) GetOffset(interval Cgint) Cgint32 {
-	return C.g_time_zone_get_offset((*C.GTimeZone)(self), interval)
-}
-
-func (self *TimeZone) IsDst(interval Cgint) Cgboolean {
-	return C.g_time_zone_is_dst((*C.GTimeZone)(self), interval)
-}
-
-func (self *TimeZone) Ref() *CGTimeZone {
-	return C.g_time_zone_ref((*C.GTimeZone)(self))
-}
-
-func (self *TimeZone) Unref() {
-	C.g_time_zone_unref((*C.GTimeZone)(self))
-}
-
-func TimerNew() *CGTimer {
-	return C.g_timer_new()
-}
-
-func (self *Timer) Continue() {
-	C.g_timer_continue((*C.GTimer)(self))
-}
-
-func (self *Timer) Destroy() {
-	C.g_timer_destroy((*C.GTimer)(self))
-}
-
-func (self *Timer) Elapsed(microseconds *Cgulong) Cgdouble {
-	return C.g_timer_elapsed((*C.GTimer)(self), microseconds)
-}
-
-func (self *Timer) Reset() {
-	C.g_timer_reset((*C.GTimer)(self))
-}
-
-func (self *Timer) Start() {
-	C.g_timer_start((*C.GTimer)(self))
-}
-
-func (self *Timer) Stop() {
-	C.g_timer_stop((*C.GTimer)(self))
-}
-
-func TrashStackHeight(stack_p Cunsafe.Pointer) Cguint {
-	return C._g_trash_stack_height(stack_p)
-}
-
-func TrashStackPeek(stack_p Cunsafe.Pointer) Cgpointer {
-	return C._g_trash_stack_peek(stack_p)
-}
-
-func TrashStackPop(stack_p Cunsafe.Pointer) Cgpointer {
-	return C._g_trash_stack_pop(stack_p)
-}
-
-func TrashStackPush(stack_p Cunsafe.Pointer, data_p Cgpointer) {
-	C._g_trash_stack_push(stack_p, data_p)
-}
-
-func TreeNew(key_compare_func CGCompareFunc) *CGTree {
-	return C.g_tree_new(key_compare_func)
-}
-
-func TreeNewFull(key_compare_func CGCompareDataFunc, key_compare_data Cgpointer, key_destroy_func CGDestroyNotify, value_destroy_func CGDestroyNotify) *CGTree {
-	return C.g_tree_new_full(key_compare_func, key_compare_data, key_destroy_func, value_destroy_func)
-}
-
-func TreeNewWithData(key_compare_func CGCompareDataFunc, key_compare_data Cgpointer) *CGTree {
-	return C.g_tree_new_with_data(key_compare_func, key_compare_data)
-}
-
-func (self *Tree) Destroy() {
-	C.g_tree_destroy((*C.GTree)(self))
-}
-
-func (self *Tree) Foreach(func_ CGTraverseFunc, user_data Cgpointer) {
-	C.g_tree_foreach((*C.GTree)(self), func_, user_data)
-}
-
-func (self *Tree) Height() Cgint {
-	return C.g_tree_height((*C.GTree)(self))
-}
-
-func (self *Tree) Insert(key Cgpointer, value Cgpointer) {
-	C.g_tree_insert((*C.GTree)(self), key, value)
-}
-
-func (self *Tree) Lookup(key Cgconstpointer) Cgpointer {
-	return C.g_tree_lookup((*C.GTree)(self), key)
-}
-
-func (self *Tree) LookupExtended(lookup_key Cgconstpointer, orig_key *Cgpointer, value *Cgpointer) Cgboolean {
-	return C.g_tree_lookup_extended((*C.GTree)(self), lookup_key, orig_key, value)
-}
-
-func (self *Tree) Nnodes() Cgint {
-	return C.g_tree_nnodes((*C.GTree)(self))
-}
-
-func (self *Tree) Ref() *CGTree {
-	return C.g_tree_ref((*C.GTree)(self))
-}
-
-func (self *Tree) Remove(key Cgconstpointer) Cgboolean {
-	return C.g_tree_remove((*C.GTree)(self), key)
-}
-
-func (self *Tree) Replace(key Cgpointer, value Cgpointer) {
-	C.g_tree_replace((*C.GTree)(self), key, value)
-}
-
-func (self *Tree) Search(search_func CGCompareFunc, user_data Cgconstpointer) Cgpointer {
-	return C.g_tree_search((*C.GTree)(self), search_func, user_data)
-}
-
-func (self *Tree) Steal(key Cgconstpointer) Cgboolean {
-	return C.g_tree_steal((*C.GTree)(self), key)
-}
-
-//Skipped g_tree_traverse
-
-func (self *Tree) Unref() {
-	C.g_tree_unref((*C.GTree)(self))
-}
-
-//TODO g_variant_new
-
-func VariantNewArray(child_type *CGVariantType, children Cunsafe.Pointer, n_children Cgsize) *CGVariant {
-	return C._g_variant_new_array(unsafe.Pointer(child_type), children, n_children)
-}
-
-func VariantNewBoolean(value Cgboolean) *CGVariant {
-	return C.g_variant_new_boolean(value)
-}
-
-func VariantNewByte(value Cguchar) *CGVariant {
-	return C.g_variant_new_byte(value)
-}
-
-func VariantNewBytestring(string_ *Cgchar) *CGVariant {
-	return C.g_variant_new_bytestring(string_)
-}
-
-func VariantNewBytestringArray(strv Cunsafe.Pointer, length Cgssize) *CGVariant {
-	return C._g_variant_new_bytestring_array(strv, length)
-}
-
-func VariantNewDictEntry(key *CGVariant, value *CGVariant) *CGVariant {
-	return C.g_variant_new_dict_entry(key, value)
-}
-
-func VariantNewDouble(value Cgdouble) *CGVariant {
-	return C.g_variant_new_double(value)
-}
-
-func VariantNewFixedArray(element_type *CGVariantType, elements Cgconstpointer, n_elements Cgsize, element_size Cgsize) *CGVariant {
-	return C._g_variant_new_fixed_array(unsafe.Pointer(element_type), elements, n_elements, element_size)
-}
-
-func VariantNewFromBytes(type_ *CGVariantType, bytes *CGBytes, trusted Cgboolean) *CGVariant {
-	return C._g_variant_new_from_bytes(unsafe.Pointer(type_), bytes, trusted)
-}
-
-func VariantNewFromData(type_ *CGVariantType, data Cgconstpointer, size Cgsize, trusted Cgboolean, notify CGDestroyNotify, user_data Cgpointer) *CGVariant {
-	return C._g_variant_new_from_data(unsafe.Pointer(type_), data, size, trusted, notify, user_data)
-}
-
-func VariantNewHandle(value Cgint32) *CGVariant {
-	return C.g_variant_new_handle(value)
-}
-
-func VariantNewInt16(value Cgint16) *CGVariant {
-	return C.g_variant_new_int16(value)
-}
-
-func VariantNewInt32(value Cgint32) *CGVariant {
-	return C.g_variant_new_int32(value)
-}
-
-func VariantNewInt64(value Cgint64) *CGVariant {
-	return C.g_variant_new_int64(value)
-}
-
-func VariantNewMaybe(child_type *CGVariantType, child *CGVariant) *CGVariant {
-	return C._g_variant_new_maybe(unsafe.Pointer(child_type), child)
-}
-
-func VariantNewObjectPath(object_path *Cgchar) *CGVariant {
-	return C._g_variant_new_object_path(unsafe.Pointer(object_path))
-}
-
-func VariantNewObjv(strv Cunsafe.Pointer, length Cgssize) *CGVariant {
-	return C._g_variant_new_objv(strv, length)
-}
-
-//TODO g_variant_new_parsed
-
-func VariantNewParsedVa(format *Cgchar, app *Cva_list) *CGVariant {
-	return C._g_variant_new_parsed_va(unsafe.Pointer(format), app)
-}
-
-func VariantNewSignature(signature *Cgchar) *CGVariant {
-	return C._g_variant_new_signature(unsafe.Pointer(signature))
-}
-
-func VariantNewString(string_ *Cgchar) *CGVariant {
-	return C._g_variant_new_string(unsafe.Pointer(string_))
-}
-
-func VariantNewStrv(strv Cunsafe.Pointer, length Cgssize) *CGVariant {
-	return C._g_variant_new_strv(strv, length)
-}
-
-func VariantNewTuple(children Cunsafe.Pointer, n_children Cgsize) *CGVariant {
-	return C._g_variant_new_tuple(children, n_children)
-}
-
-func VariantNewUint16(value Cguint16) *CGVariant {
-	return C.g_variant_new_uint16(value)
-}
-
-func VariantNewUint32(value Cguint32) *CGVariant {
-	return C.g_variant_new_uint32(value)
-}
-
-func VariantNewUint64(value Cguint64) *CGVariant {
-	return C.g_variant_new_uint64(value)
-}
-
-func VariantNewVa(format_string *Cgchar, endptr *Cgchar, app *Cva_list) *CGVariant {
-	return C._g_variant_new_va(unsafe.Pointer(format_string), unsafe.Pointer(endptr), app)
-}
-
-func VariantNewVariant(value *CGVariant) *CGVariant {
-	return C.g_variant_new_variant(value)
-}
-
-func VariantIsObjectPath(string_ *Cgchar) Cgboolean {
-	return C._g_variant_is_object_path(unsafe.Pointer(string_))
-}
-
-func VariantIsSignature(string_ *Cgchar) Cgboolean {
-	return C._g_variant_is_signature(unsafe.Pointer(string_))
-}
-
-func VariantParse(type_ *CGVariantType, text *Cgchar, limit *Cgchar, endptr *Cgchar, err unsafe.Pointer) *CGVariant {
-	return C._g_variant_parse(unsafe.Pointer(type_), unsafe.Pointer(text), unsafe.Pointer(limit), unsafe.Pointer(endptr), unsafe.Pointer(err))
-}
-
-func VariantParserGetErrorQuark() CGQuark {
-	return C.g_variant_parser_get_error_quark()
-}
-
-func (self *Variant) Byteswap() *CGVariant {
-	return C.g_variant_byteswap((*C.GVariant)(self))
-}
-
-func (self *Variant) CheckFormatString(format_string *Cgchar, copy_only Cgboolean) Cgboolean {
-	return C._g_variant_check_format_string((*C.GVariant)(self), unsafe.Pointer(format_string), copy_only)
-}
-
-func (self *Variant) Classify() CGVariantClass {
-	return C.g_variant_classify((*C.GVariant)(self))
-}
-
-func (self *Variant) Compare(two Cgconstpointer) Cgint {
-	return C.g_variant_compare((*C.GVariant)(self), two)
-}
-
-func (self *Variant) DupBytestring(length *Cgsize) *Cgchar {
-	return C.g_variant_dup_bytestring((*C.GVariant)(self), length)
-}
-
-func (self *Variant) DupBytestringArray(length *Cgsize) Cunsafe.Pointer {
-	return C.g_variant_dup_bytestring_array((*C.GVariant)(self), length)
-}
-
-func (self *Variant) DupObjv(length *Cgsize) Cunsafe.Pointer {
-	return C.g_variant_dup_objv((*C.GVariant)(self), length)
-}
-
-func (self *Variant) DupString(length *Cgsize) *Cgchar {
-	return C.g_variant_dup_string((*C.GVariant)(self), length)
-}
-
-func (self *Variant) DupStrv(length *Cgsize) Cunsafe.Pointer {
-	return C.g_variant_dup_strv((*C.GVariant)(self), length)
-}
-
-func (self *Variant) Equal(two Cgconstpointer) Cgboolean {
-	return C.g_variant_equal((*C.GVariant)(self), two)
-}
-
-//TODO g_variant_get
-
-func (self *Variant) GetBoolean() Cgboolean {
-	return C.g_variant_get_boolean((*C.GVariant)(self))
-}
-
-func (self *Variant) GetByte() Cguchar {
-	return C.g_variant_get_byte((*C.GVariant)(self))
-}
-
-func (self *Variant) GetBytestring() *Cgchar {
-	return C.g_variant_get_bytestring((*C.GVariant)(self))
-}
-
-func (self *Variant) GetBytestringArray(length *Cgsize) Cunsafe.Pointer {
-	return C.g_variant_get_bytestring_array((*C.GVariant)(self), length)
-}
-
-//TODO g_variant_get_child
-
-func (self *Variant) GetChildValue(index_ Cgsize) *CGVariant {
-	return C.g_variant_get_child_value((*C.GVariant)(self), index_)
-}
-
-func (self *Variant) GetData() Cgconstpointer {
-	return C.g_variant_get_data((*C.GVariant)(self))
-}
-
-func (self *Variant) GetDataAsBytes() *CGBytes {
-	return C.g_variant_get_data_as_bytes((*C.GVariant)(self))
-}
-
-func (self *Variant) GetDouble() Cgdouble {
-	return C.g_variant_get_double((*C.GVariant)(self))
-}
-
-func (self *Variant) GetFixedArray(n_elements *Cgsize, element_size Cgsize) Cgconstpointer {
-	return C.g_variant_get_fixed_array((*C.GVariant)(self), n_elements, element_size)
-}
-
-func (self *Variant) GetHandle() Cgint32 {
-	return C.g_variant_get_handle((*C.GVariant)(self))
-}
-
-func (self *Variant) GetInt16() Cgint16 {
-	return C.g_variant_get_int16((*C.GVariant)(self))
-}
-
-func (self *Variant) GetInt32() Cgint32 {
-	return C.g_variant_get_int32((*C.GVariant)(self))
-}
-
-func (self *Variant) GetInt64() Cgint64 {
-	return C.g_variant_get_int64((*C.GVariant)(self))
-}
-
-func (self *Variant) GetMaybe() *CGVariant {
-	return C.g_variant_get_maybe((*C.GVariant)(self))
-}
-
-func (self *Variant) GetNormalForm() *CGVariant {
-	return C.g_variant_get_normal_form((*C.GVariant)(self))
-}
-
-func (self *Variant) GetObjv(length *Cgsize) Cunsafe.Pointer {
-	return C.g_variant_get_objv((*C.GVariant)(self), length)
-}
-
-func (self *Variant) GetSize() Cgsize {
-	return C.g_variant_get_size((*C.GVariant)(self))
-}
-
-func (self *Variant) GetString(length *Cgsize) *Cgchar {
-	return C.g_variant_get_string((*C.GVariant)(self), length)
-}
-
-func (self *Variant) GetStrv(length *Cgsize) Cunsafe.Pointer {
-	return C.g_variant_get_strv((*C.GVariant)(self), length)
-}
-
-func (self *Variant) GetType() *CGVariantType {
-	return C.g_variant_get_type((*C.GVariant)(self))
-}
-
-func (self *Variant) GetTypeString() *Cgchar {
-	return C.g_variant_get_type_string((*C.GVariant)(self))
-}
-
-func (self *Variant) GetUint16() Cguint16 {
-	return C.g_variant_get_uint16((*C.GVariant)(self))
-}
-
-func (self *Variant) GetUint32() Cguint32 {
-	return C.g_variant_get_uint32((*C.GVariant)(self))
-}
-
-func (self *Variant) GetUint64() Cguint64 {
-	return C.g_variant_get_uint64((*C.GVariant)(self))
-}
-
-func (self *Variant) GetVa(format_string *Cgchar, endptr *Cgchar, app *Cva_list) {
-	C._g_variant_get_va((*C.GVariant)(self), unsafe.Pointer(format_string), unsafe.Pointer(endptr), app)
-}
-
-func (self *Variant) GetVariant() *CGVariant {
-	return C.g_variant_get_variant((*C.GVariant)(self))
-}
-
-func (self *Variant) Hash() Cguint {
-	return C.g_variant_hash((*C.GVariant)(self))
-}
-
-func (self *Variant) IsContainer() Cgboolean {
-	return C.g_variant_is_container((*C.GVariant)(self))
-}
-
-func (self *Variant) IsFloating() Cgboolean {
-	return C.g_variant_is_floating((*C.GVariant)(self))
-}
-
-func (self *Variant) IsNormalForm() Cgboolean {
-	return C.g_variant_is_normal_form((*C.GVariant)(self))
-}
-
-func (self *Variant) IsOfType(type_ *CGVariantType) Cgboolean {
-	return C._g_variant_is_of_type((*C.GVariant)(self), unsafe.Pointer(type_))
-}
-
-func (self *Variant) IterNew() *CGVariantIter {
-	return C.g_variant_iter_new((*C.GVariant)(self))
-}
-
-//TODO g_variant_lookup
-
-func (self *Variant) LookupValue(key *Cgchar, expected_type *CGVariantType) *CGVariant {
-	return C._g_variant_lookup_value((*C.GVariant)(self), unsafe.Pointer(key), unsafe.Pointer(expected_type))
-}
-
-func (self *Variant) NChildren() Cgsize {
-	return C.g_variant_n_children((*C.GVariant)(self))
-}
-
-func (self *Variant) Print(type_annotate Cgboolean) *Cgchar {
-	return C.g_variant_print((*C.GVariant)(self), type_annotate)
-}
-
-func (self *Variant) PrintString(string_ *CGString, type_annotate Cgboolean) *CGString {
-	return C.g_variant_print_string((*C.GVariant)(self), string_, type_annotate)
-}
-
-func (self *Variant) Ref() *CGVariant {
-	return C.g_variant_ref((*C.GVariant)(self))
-}
-
-func (self *Variant) RefSink() *CGVariant {
-	return C.g_variant_ref_sink((*C.GVariant)(self))
-}
-
-func (self *Variant) Store(data Cgpointer) {
-	C.g_variant_store((*C.GVariant)(self), data)
-}
-
-func (self *Variant) TakeRef() *CGVariant {
-	return C.g_variant_take_ref((*C.GVariant)(self))
-}
-
-func (self *Variant) Unref() {
-	C.g_variant_unref((*C.GVariant)(self))
-}
-
-func VariantBuilderNew(type_ *CGVariantType) *CGVariantBuilder {
-	return C._g_variant_builder_new(unsafe.Pointer(type_))
-}
-
-//TODO g_variant_builder_add
-
-//TODO g_variant_builder_add_parsed
-
-func (self *VariantBuilder) AddValue(value *CGVariant) {
-	C.g_variant_builder_add_value((*C.GVariantBuilder)(self), value)
-}
-
-func (self *VariantBuilder) Clear() {
-	C.g_variant_builder_clear((*C.GVariantBuilder)(self))
-}
-
-func (self *VariantBuilder) Close() {
-	C.g_variant_builder_close((*C.GVariantBuilder)(self))
-}
-
-func (self *VariantBuilder) End() *CGVariant {
-	return C.g_variant_builder_end((*C.GVariantBuilder)(self))
-}
-
-func (self *VariantBuilder) Init(type_ *CGVariantType) {
-	C._g_variant_builder_init((*C.GVariantBuilder)(self), unsafe.Pointer(type_))
-}
-
-func (self *VariantBuilder) Open(type_ *CGVariantType) {
-	C._g_variant_builder_open((*C.GVariantBuilder)(self), unsafe.Pointer(type_))
-}
-
-func (self *VariantBuilder) Ref() *CGVariantBuilder {
-	return C.g_variant_builder_ref((*C.GVariantBuilder)(self))
-}
-
-func (self *VariantBuilder) Unref() {
-	C.g_variant_builder_unref((*C.GVariantBuilder)(self))
-}
-
-func (self *VariantIter) Copy() *CGVariantIter {
-	return C.g_variant_iter_copy((*C.GVariantIter)(self))
-}
-
-func (self *VariantIter) Free() {
-	C.g_variant_iter_free((*C.GVariantIter)(self))
-}
-
-func (self *VariantIter) Init(value *CGVariant) Cgsize {
-	return C.g_variant_iter_init((*C.GVariantIter)(self), value)
-}
-
-//TODO g_variant_iter_loop
-
-func (self *VariantIter) NChildren() Cgsize {
-	return C.g_variant_iter_n_children((*C.GVariantIter)(self))
-}
-
-//TODO g_variant_iter_next
-
-func (self *VariantIter) NextValue() *CGVariant {
-	return C.g_variant_iter_next_value((*C.GVariantIter)(self))
-}
-
-func VariantTypeNew(type_string *Cgchar) *CGVariantType {
-	return C._g_variant_type_new(unsafe.Pointer(type_string))
-}
-
-func VariantTypeNewArray(element *CGVariantType) *CGVariantType {
-	return C._g_variant_type_new_array(unsafe.Pointer(element))
-}
-
-func VariantTypeNewDictEntry(key *CGVariantType, value *CGVariantType) *CGVariantType {
-	return C._g_variant_type_new_dict_entry(unsafe.Pointer(key), unsafe.Pointer(value))
-}
-
-func VariantTypeNewMaybe(element *CGVariantType) *CGVariantType {
-	return C._g_variant_type_new_maybe(unsafe.Pointer(element))
-}
-
-func VariantTypeNewTuple(items Cunsafe.Pointer, length Cgint) *CGVariantType {
-	return C._g_variant_type_new_tuple(items, length)
-}
-
-func VariantTypeChecked(arg_0 *Cgchar) *CGVariantType {
-	return C._g_variant_type_checked_(unsafe.Pointer(arg_0))
-}
-
-func VariantTypeStringIsValid(type_string *Cgchar) Cgboolean {
-	return C._g_variant_type_string_is_valid(unsafe.Pointer(type_string))
-}
-
-func VariantTypeStringScan(string_ *Cgchar, limit *Cgchar, endptr Cunsafe.Pointer) Cgboolean {
-	return C._g_variant_type_string_scan(unsafe.Pointer(string_), unsafe.Pointer(limit), unsafe.Pointer(endptr))
-}
-
-func (self *VariantType) Copy() *CGVariantType {
-	return C.g_variant_type_copy((*C.GVariantType)(self))
-}
-
-func (self *VariantType) DupString() *Cgchar {
-	return C.g_variant_type_dup_string((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Element() *CGVariantType {
-	return C.g_variant_type_element((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Equal(type2 Cgconstpointer) Cgboolean {
-	return C.g_variant_type_equal((*C.GVariantType)(self), type2)
-}
-
-func (self *VariantType) First() *CGVariantType {
-	return C.g_variant_type_first((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Free() {
-	C.g_variant_type_free((*C.GVariantType)(self))
-}
-
-func (self *VariantType) GetStringLength() Cgsize {
-	return C.g_variant_type_get_string_length((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Hash() Cguint {
-	return C.g_variant_type_hash((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsArray() Cgboolean {
-	return C.g_variant_type_is_array((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsBasic() Cgboolean {
-	return C.g_variant_type_is_basic((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsContainer() Cgboolean {
-	return C.g_variant_type_is_container((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsDefinite() Cgboolean {
-	return C.g_variant_type_is_definite((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsDictEntry() Cgboolean {
-	return C.g_variant_type_is_dict_entry((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsMaybe() Cgboolean {
-	return C.g_variant_type_is_maybe((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsSubtypeOf(supertype *CGVariantType) Cgboolean {
-	return C._g_variant_type_is_subtype_of((*C.GVariantType)(self), unsafe.Pointer(supertype))
-}
-
-func (self *VariantType) IsTuple() Cgboolean {
-	return C.g_variant_type_is_tuple((*C.GVariantType)(self))
-}
-
-func (self *VariantType) IsVariant() Cgboolean {
-	return C.g_variant_type_is_variant((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Key() *CGVariantType {
-	return C.g_variant_type_key((*C.GVariantType)(self))
-}
-
-func (self *VariantType) NItems() Cgsize {
-	return C.g_variant_type_n_items((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Next() *CGVariantType {
-	return C.g_variant_type_next((*C.GVariantType)(self))
-}
-
-func (self *VariantType) PeekString() *Cgchar {
-	return C.g_variant_type_peek_string((*C.GVariantType)(self))
-}
-
-func (self *VariantType) Value() *CGVariantType {
-	return C.g_variant_type_value((*C.GVariantType)(self))
-}
-
-func Access(filename *Cgchar, mode Cint) Cint {
-	return C._g_access(unsafe.Pointer(filename), mode)
-}
-
-func AsciiDigitValue(c Cgchar) Cgint {
-	return C.g_ascii_digit_value(c)
-}
-
-func AsciiDtostr(buffer *Cgchar, buf_len Cgint, d Cgdouble) *Cgchar {
-	return C._g_ascii_dtostr(unsafe.Pointer(buffer), buf_len, d)
-}
-
-func AsciiFormatd(buffer *Cgchar, buf_len Cgint, format *Cgchar, d Cgdouble) *Cgchar {
-	return C._g_ascii_formatd(unsafe.Pointer(buffer), buf_len, unsafe.Pointer(format), d)
-}
-
-func AsciiStrcasecmp(s1 *Cgchar, s2 *Cgchar) Cgint {
-	return C._g_ascii_strcasecmp(unsafe.Pointer(s1), unsafe.Pointer(s2))
-}
-
-func AsciiStrdown(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_ascii_strdown(unsafe.Pointer(str), len_)
-}
-
-func AsciiStrncasecmp(s1 *Cgchar, s2 *Cgchar, n Cgsize) Cgint {
-	return C._g_ascii_strncasecmp(unsafe.Pointer(s1), unsafe.Pointer(s2), n)
-}
-
-func AsciiStrtod(nptr *Cgchar, endptr *Cgchar) Cgdouble {
-	return C._g_ascii_strtod(unsafe.Pointer(nptr), unsafe.Pointer(endptr))
-}
-
-func AsciiStrtoll(nptr *Cgchar, endptr *Cgchar, base Cguint) Cgint64 {
-	return C._g_ascii_strtoll(unsafe.Pointer(nptr), unsafe.Pointer(endptr), base)
-}
-
-func AsciiStrtoull(nptr *Cgchar, endptr *Cgchar, base Cguint) Cguint64 {
-	return C._g_ascii_strtoull(unsafe.Pointer(nptr), unsafe.Pointer(endptr), base)
-}
-
-func AsciiStrup(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_ascii_strup(unsafe.Pointer(str), len_)
-}
-
-func AsciiTolower(c Cgchar) Cgchar {
-	return C.g_ascii_tolower(c)
-}
-
-func AsciiToupper(c Cgchar) Cgchar {
-	return C.g_ascii_toupper(c)
-}
-
-func AsciiXdigitValue(c Cgchar) Cgint {
-	return C.g_ascii_xdigit_value(c)
-}
-
-//Skipped g_assert_warning
-
-func AssertionMessage(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, message *Cgchar) {
-	C._g_assertion_message(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(message))
-}
-
-func AssertionMessageCmpnum(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, expr *Cgchar, arg1 Cdouble, cmp *Cgchar, arg2 Cdouble, numtype Cchar) {
-	C._g_assertion_message_cmpnum(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(expr), arg1, unsafe.Pointer(cmp), arg2, numtype)
-}
-
-func AssertionMessageCmpstr(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, expr *Cgchar, arg1 *Cgchar, cmp *Cgchar, arg2 *Cgchar) {
-	C._g_assertion_message_cmpstr(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(expr), unsafe.Pointer(arg1), unsafe.Pointer(cmp), unsafe.Pointer(arg2))
-}
-
-func AssertionMessageError(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, expr *Cgchar, error_ *CGError, error_domain CGQuark, error_code Cint) {
-	C._g_assertion_message_error(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(expr), unsafe.Pointer(error_), error_domain, error_code)
-}
-
-func AssertionMessageExpr(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, expr *Cgchar) {
-	C._g_assertion_message_expr(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(expr))
-}
-
-//Skipped g_atexit
-
-//Skipped g_atomic_int_add
-
-//Skipped g_atomic_int_and
-
-//Skipped g_atomic_int_compare_and_exchange
-
-//Skipped g_atomic_int_dec_and_test
-
-//Skipped g_atomic_int_exchange_and_add
-
-//Skipped g_atomic_int_get
-
-//Skipped g_atomic_int_inc
-
-//Skipped g_atomic_int_or
-
-//Skipped g_atomic_int_set
-
-//Skipped g_atomic_int_xor
-
-//Skipped g_atomic_pointer_add
-
-//Skipped g_atomic_pointer_and
-
-//Skipped g_atomic_pointer_compare_and_exchange
-
-//Skipped g_atomic_pointer_get
-
-//Skipped g_atomic_pointer_or
-
-//Skipped g_atomic_pointer_set
-
-//Skipped g_atomic_pointer_xor
-
-func Base64Decode(text *Cgchar, out_len *Cgsize) *Cguchar {
-	return C._g_base64_decode(unsafe.Pointer(text), out_len)
-}
-
-func Base64DecodeInplace(text *Cgchar, out_len *Cgsize) *Cguchar {
-	return C.g_base64_decode_inplace(text, out_len)
-}
-
-func Base64DecodeStep(in *Cgchar, len_ Cgsize, out *Cguchar, state *Cgint, save *Cguint) Cgsize {
-	return C.g_base64_decode_step(in, len_, out, state, save)
-}
-
-func Base64Encode(data *Cguchar, len_ Cgsize) *Cgchar {
-	return C.g_base64_encode(data, len_)
-}
-
-func Base64EncodeClose(break_lines Cgboolean, out *Cgchar, state *Cgint, save *Cgint) Cgsize {
-	return C.g_base64_encode_close(break_lines, out, state, save)
-}
-
-func Base64EncodeStep(in *Cguchar, len_ Cgsize, break_lines Cgboolean, out *Cgchar, state *Cgint, save *Cgint) Cgsize {
-	return C.g_base64_encode_step(in, len_, break_lines, out, state, save)
-}
-
-//Skipped g_basename
-
-func BitLock(address *Cgint, lock_bit Cgint) {
-	C.g_bit_lock(address, lock_bit)
-}
-
-func BitNthLsf(mask Cgulong, nth_bit Cgint) Cgint {
-	return C.g_bit_nth_lsf(mask, nth_bit)
-}
-
-func BitNthMsf(mask Cgulong, nth_bit Cgint) Cgint {
-	return C.g_bit_nth_msf(mask, nth_bit)
-}
-
-func BitStorage(number Cgulong) Cguint {
-	return C.g_bit_storage(number)
-}
-
-func BitTrylock(address *Cgint, lock_bit Cgint) Cgboolean {
-	return C.g_bit_trylock(address, lock_bit)
-}
-
-func BitUnlock(address *Cgint, lock_bit Cgint) {
-	C.g_bit_unlock(address, lock_bit)
-}
-
-//TODO g_build_filename
-
-func BuildFilenamev(args Cunsafe.Pointer) *Cgchar {
-	return C._g_build_filenamev(args)
-}
-
-//TODO g_build_path
-
-func BuildPathv(separator *Cgchar, args Cunsafe.Pointer) *Cgchar {
-	return C._g_build_pathv(unsafe.Pointer(separator), args)
-}
-
-func Chdir(path *Cgchar) Cint {
-	return C._g_chdir(unsafe.Pointer(path))
-}
-
-func CheckVersion(required_major Cguint, required_minor Cguint, required_micro Cguint) *Cgchar {
-	return C.glib_check_version(required_major, required_minor, required_micro)
-}
-
-func ChildWatchAdd(pid CGPid, function CGChildWatchFunc, data Cgpointer) Cguint {
-	return C.g_child_watch_add(pid, function, data)
-}
-
-func ChildWatchAddFull(priority Cgint, pid CGPid, function CGChildWatchFunc, data Cgpointer, notify CGDestroyNotify) Cguint {
-	return C.g_child_watch_add_full(priority, pid, function, data, notify)
-}
-
-func ChildWatchSourceNew(pid CGPid) *CGSource {
-	return C.g_child_watch_source_new(pid)
-}
-
-func ClearError(err unsafe.Pointer) {
-	C._g_clear_error(unsafe.Pointer(err))
-}
-
-//Skipped g_clear_pointer
-
-func ComputeChecksumForBytes(checksum_type CGChecksumType, data *CGBytes) *Cgchar {
-	return C.g_compute_checksum_for_bytes(checksum_type, data)
-}
-
-func ComputeChecksumForData(checksum_type CGChecksumType, data *Cguchar, length Cgsize) *Cgchar {
-	return C._g_compute_checksum_for_data(checksum_type, unsafe.Pointer(data), length)
-}
-
-func ComputeChecksumForString(checksum_type CGChecksumType, str *Cgchar, length Cgssize) *Cgchar {
-	return C._g_compute_checksum_for_string(checksum_type, unsafe.Pointer(str), length)
-}
-
-func ComputeHmacForData(digest_type CGChecksumType, key *Cguchar, key_len Cgsize, data *Cguchar, length Cgsize) *Cgchar {
-	return C._g_compute_hmac_for_data(digest_type, key, key_len, unsafe.Pointer(data), length)
-}
-
-func ComputeHmacForString(digest_type CGChecksumType, key *Cguchar, key_len Cgsize, str *Cgchar, length Cgssize) *Cgchar {
-	return C._g_compute_hmac_for_string(digest_type, key, key_len, unsafe.Pointer(str), length)
-}
-
-func Convert(str *Cgchar, len_ Cgssize, to_codeset *Cgchar, from_codeset *Cgchar, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_convert(unsafe.Pointer(str), len_, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-func ConvertErrorQuark() CGQuark {
-	return C.g_convert_error_quark()
-}
-
-func ConvertWithFallback(str *Cgchar, len_ Cgssize, to_codeset *Cgchar, from_codeset *Cgchar, fallback *Cgchar, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_convert_with_fallback(unsafe.Pointer(str), len_, unsafe.Pointer(to_codeset), unsafe.Pointer(from_codeset), unsafe.Pointer(fallback), bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-func ConvertWithIconv(str *Cgchar, len_ Cgssize, converter CGIConv, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_convert_with_iconv(unsafe.Pointer(str), len_, converter, bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-func DatalistClear(datalist Cunsafe.Pointer) {
-	C._g_datalist_clear(datalist)
-}
-
-func DatalistForeach(datalist Cunsafe.Pointer, func_ CGDataForeachFunc, user_data Cgpointer) {
-	C._g_datalist_foreach(datalist, func_, user_data)
-}
-
-func DatalistGetData(datalist Cunsafe.Pointer, key *Cgchar) Cgpointer {
-	return C._g_datalist_get_data(datalist, unsafe.Pointer(key))
-}
-
-func DatalistGetFlags(datalist Cunsafe.Pointer) Cguint {
-	return C._g_datalist_get_flags(datalist)
-}
-
-func DatalistIdDupData(datalist Cunsafe.Pointer, key_id CGQuark, dup_func CGDuplicateFunc, user_data Cgpointer) Cgpointer {
-	return C._g_datalist_id_dup_data(datalist, key_id, dup_func, user_data)
-}
-
-func DatalistIdGetData(datalist Cunsafe.Pointer, key_id CGQuark) Cgpointer {
-	return C._g_datalist_id_get_data(datalist, key_id)
-}
-
-func DatalistIdRemoveNoNotify(datalist Cunsafe.Pointer, key_id CGQuark) Cgpointer {
-	return C._g_datalist_id_remove_no_notify(datalist, key_id)
-}
-
-func DatalistIdReplaceData(datalist Cunsafe.Pointer, key_id CGQuark, oldval Cgpointer, newval Cgpointer, destroy CGDestroyNotify, old_destroy *CGDestroyNotify) Cgboolean {
-	return C._g_datalist_id_replace_data(datalist, key_id, oldval, newval, destroy, old_destroy)
-}
-
-func DatalistIdSetDataFull(datalist Cunsafe.Pointer, key_id CGQuark, data Cgpointer, destroy_func CGDestroyNotify) {
-	C._g_datalist_id_set_data_full(datalist, key_id, data, destroy_func)
-}
-
-func DatalistInit(datalist Cunsafe.Pointer) {
-	C._g_datalist_init(datalist)
-}
-
-func DatalistSetFlags(datalist Cunsafe.Pointer, flags Cguint) {
-	C._g_datalist_set_flags(datalist, flags)
-}
-
-func DatalistUnsetFlags(datalist Cunsafe.Pointer, flags Cguint) {
-	C._g_datalist_unset_flags(datalist, flags)
-}
-
-func DatasetDestroy(dataset_location Cgconstpointer) {
-	C.g_dataset_destroy(dataset_location)
-}
-
-func DatasetForeach(dataset_location Cgconstpointer, func_ CGDataForeachFunc, user_data Cgpointer) {
-	C.g_dataset_foreach(dataset_location, func_, user_data)
-}
-
-func DatasetIdGetData(dataset_location Cgconstpointer, key_id CGQuark) Cgpointer {
-	return C.g_dataset_id_get_data(dataset_location, key_id)
-}
-
-func DatasetIdRemoveNoNotify(dataset_location Cgconstpointer, key_id CGQuark) Cgpointer {
-	return C.g_dataset_id_remove_no_notify(dataset_location, key_id)
-}
-
-func DatasetIdSetDataFull(dataset_location Cgconstpointer, key_id CGQuark, data Cgpointer, destroy_func CGDestroyNotify) {
-	C.g_dataset_id_set_data_full(dataset_location, key_id, data, destroy_func)
-}
-
-func Dcgettext(domain *Cgchar, msgid *Cgchar, category Cgint) *Cgchar {
-	return C._g_dcgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), category)
-}
-
-func Dgettext(domain *Cgchar, msgid *Cgchar) *Cgchar {
-	return C._g_dgettext(unsafe.Pointer(domain), unsafe.Pointer(msgid))
-}
-
-func DirectEqual(v1 Cgconstpointer, v2 Cgconstpointer) Cgboolean {
-	return C.g_direct_equal(v1, v2)
-}
-
-func DirectHash(v Cgconstpointer) Cguint {
-	return C.g_direct_hash(v)
-}
-
-func Dngettext(domain *Cgchar, msgid *Cgchar, msgid_plural *Cgchar, n Cgulong) *Cgchar {
-	return C._g_dngettext(unsafe.Pointer(domain), unsafe.Pointer(msgid), unsafe.Pointer(msgid_plural), n)
-}
-
-func DoubleEqual(v1 Cgconstpointer, v2 Cgconstpointer) Cgboolean {
-	return C.g_double_equal(v1, v2)
-}
-
-func DoubleHash(v Cgconstpointer) Cguint {
-	return C.g_double_hash(v)
-}
-
-func Dpgettext(domain *Cgchar, msgctxtid *Cgchar, msgidoffset Cgsize) *Cgchar {
-	return C._g_dpgettext(unsafe.Pointer(domain), unsafe.Pointer(msgctxtid), msgidoffset)
-}
-
-func Dpgettext2(domain *Cgchar, context *Cgchar, msgid *Cgchar) *Cgchar {
-	return C._g_dpgettext2(unsafe.Pointer(domain), unsafe.Pointer(context), unsafe.Pointer(msgid))
-}
-
-func EnvironGetenv(envp Cunsafe.Pointer, variable *Cgchar) *Cgchar {
-	return C._g_environ_getenv(envp, unsafe.Pointer(variable))
-}
-
-func EnvironSetenv(envp Cunsafe.Pointer, variable *Cgchar, value *Cgchar, overwrite Cgboolean) Cunsafe.Pointer {
-	return C._g_environ_setenv(envp, unsafe.Pointer(variable), unsafe.Pointer(value), overwrite)
-}
-
-func EnvironUnsetenv(envp Cunsafe.Pointer, variable *Cgchar) Cunsafe.Pointer {
-	return C._g_environ_unsetenv(envp, unsafe.Pointer(variable))
-}
-
-func FileErrorFromErrno(err_no Cgint) CGFileError {
-	return C.g_file_error_from_errno(err_no)
-}
-
-func FileErrorQuark() CGQuark {
-	return C.g_file_error_quark()
-}
-
-func FileGetContents(filename *Cgchar, contents Cunsafe.Pointer, length *Cgsize, err unsafe.Pointer) Cgboolean {
-	return C._g_file_get_contents(unsafe.Pointer(filename), contents, length, unsafe.Pointer(err))
-}
-
-func FileOpenTmp(tmpl *Cgchar, name_used Cunsafe.Pointer, err unsafe.Pointer) Cgint {
-	return C._g_file_open_tmp(unsafe.Pointer(tmpl), name_used, unsafe.Pointer(err))
-}
-
-func FileReadLink(filename *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_file_read_link(unsafe.Pointer(filename), unsafe.Pointer(err))
-}
-
-func FileSetContents(filename *Cgchar, contents *Cgchar, length Cgssize, err unsafe.Pointer) Cgboolean {
-	return C._g_file_set_contents(unsafe.Pointer(filename), contents, length, unsafe.Pointer(err))
-}
-
-func FileTest(filename *Cgchar, test CGFileTest) Cgboolean {
-	return C._g_file_test(unsafe.Pointer(filename), test)
-}
-
-func FilenameDisplayBasename(filename *Cgchar) *Cgchar {
-	return C._g_filename_display_basename(unsafe.Pointer(filename))
-}
-
-func FilenameDisplayName(filename *Cgchar) *Cgchar {
-	return C._g_filename_display_name(unsafe.Pointer(filename))
-}
-
-func FilenameFromUri(uri *Cgchar, hostname Cunsafe.Pointer, err unsafe.Pointer) *Cgchar {
-	return C._g_filename_from_uri(unsafe.Pointer(uri), hostname, unsafe.Pointer(err))
-}
-
-func FilenameFromUtf8(utf8string *Cgchar, len_ Cgssize, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_filename_from_utf8(unsafe.Pointer(utf8string), len_, bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-func FilenameToUri(filename *Cgchar, hostname *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_filename_to_uri(unsafe.Pointer(filename), unsafe.Pointer(hostname), unsafe.Pointer(err))
-}
-
-func FilenameToUtf8(opsysstring *Cgchar, len_ Cgssize, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_filename_to_utf8(unsafe.Pointer(opsysstring), len_, bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-func FindProgramInPath(program *Cgchar) *Cgchar {
-	return C._g_find_program_in_path(unsafe.Pointer(program))
-}
-
-func FormatSize(size Cguint64) *Cgchar {
-	return C.g_format_size(size)
-}
-
-//Skipped g_format_size_for_display
-
-func FormatSizeFull(size Cguint64, flags CGFormatSizeFlags) *Cgchar {
-	return C.g_format_size_full(size, flags)
-}
-
-//TODO g_fprintf
-
-func Free(mem Cgpointer) {
-	C.g_free(mem)
-}
-
-func GetApplicationName() *Cgchar {
-	return C.g_get_application_name()
-}
-
-func GetCharset(charset *Cgchar) Cgboolean {
-	return C._g_get_charset(unsafe.Pointer(charset))
-}
-
-func GetCodeset() *Cgchar {
-	return C.g_get_codeset()
-}
-
-func GetCurrentDir() *Cgchar {
-	return C.g_get_current_dir()
-}
-
-func GetCurrentTime(result *CGTimeVal) {
-	C.g_get_current_time(result)
-}
-
-func GetEnviron() Cunsafe.Pointer {
-	return C.g_get_environ()
-}
-
-func GetFilenameCharsets(charsets *Cgchar) Cgboolean {
-	return C._g_get_filename_charsets(unsafe.Pointer(charsets))
-}
-
-func GetHomeDir() *Cgchar {
-	return C.g_get_home_dir()
-}
-
-func GetHostName() *Cgchar {
-	return C.g_get_host_name()
-}
-
-func GetLanguageNames() Cunsafe.Pointer {
-	return C.g_get_language_names()
-}
-
-func GetLocaleVariants(locale *Cgchar) Cunsafe.Pointer {
-	return C._g_get_locale_variants(unsafe.Pointer(locale))
-}
-
-func GetMonotonicTime() Cgint64 {
-	return C.g_get_monotonic_time()
-}
-
-func GetPrgname() *Cgchar {
-	return C.g_get_prgname()
-}
-
-func GetRealName() *Cgchar {
-	return C.g_get_real_name()
-}
-
-func GetRealTime() Cgint64 {
-	return C.g_get_real_time()
-}
-
-func GetSystemConfigDirs() Cunsafe.Pointer {
-	return C.g_get_system_config_dirs()
-}
-
-func GetSystemDataDirs() Cunsafe.Pointer {
-	return C.g_get_system_data_dirs()
-}
-
-func GetTmpDir() *Cgchar {
-	return C.g_get_tmp_dir()
-}
-
-func GetUserCacheDir() *Cgchar {
-	return C.g_get_user_cache_dir()
-}
-
-func GetUserConfigDir() *Cgchar {
-	return C.g_get_user_config_dir()
-}
-
-func GetUserDataDir() *Cgchar {
-	return C.g_get_user_data_dir()
-}
-
-func GetUserName() *Cgchar {
-	return C.g_get_user_name()
-}
-
-func GetUserRuntimeDir() *Cgchar {
-	return C.g_get_user_runtime_dir()
-}
-
-func GetUserSpecialDir(directory CGUserDirectory) *Cgchar {
-	return C.g_get_user_special_dir(directory)
-}
-
-func Getenv(variable *Cgchar) *Cgchar {
-	return C._g_getenv(unsafe.Pointer(variable))
-}
-
-func HostnameIsAsciiEncoded(hostname *Cgchar) Cgboolean {
-	return C._g_hostname_is_ascii_encoded(unsafe.Pointer(hostname))
-}
-
-func HostnameIsIpAddress(hostname *Cgchar) Cgboolean {
-	return C._g_hostname_is_ip_address(unsafe.Pointer(hostname))
-}
-
-func HostnameIsNonAscii(hostname *Cgchar) Cgboolean {
-	return C._g_hostname_is_non_ascii(unsafe.Pointer(hostname))
-}
-
-func HostnameToAscii(hostname *Cgchar) *Cgchar {
-	return C._g_hostname_to_ascii(unsafe.Pointer(hostname))
-}
-
-func HostnameToUnicode(hostname *Cgchar) *Cgchar {
-	return C._g_hostname_to_unicode(unsafe.Pointer(hostname))
-}
-
-func IdleAdd(function CGSourceFunc, data Cgpointer) Cguint {
-	return C.g_idle_add(function, data)
-}
-
-func IdleAddFull(priority Cgint, function CGSourceFunc, data Cgpointer, notify CGDestroyNotify) Cguint {
-	return C.g_idle_add_full(priority, function, data, notify)
-}
-
-func IdleRemoveByData(data Cgpointer) Cgboolean {
-	return C.g_idle_remove_by_data(data)
-}
-
-func IdleSourceNew() *CGSource {
-	return C.g_idle_source_new()
-}
-
-func Int64Equal(v1 Cgconstpointer, v2 Cgconstpointer) Cgboolean {
-	return C.g_int64_equal(v1, v2)
-}
-
-func Int64Hash(v Cgconstpointer) Cguint {
-	return C.g_int64_hash(v)
-}
-
-func IntEqual(v1 Cgconstpointer, v2 Cgconstpointer) Cgboolean {
-	return C.g_int_equal(v1, v2)
-}
-
-func IntHash(v Cgconstpointer) Cguint {
-	return C.g_int_hash(v)
-}
-
-func InternStaticString(string_ *Cgchar) *Cgchar {
-	return C._g_intern_static_string(unsafe.Pointer(string_))
-}
-
-func InternString(string_ *Cgchar) *Cgchar {
-	return C._g_intern_string(unsafe.Pointer(string_))
-}
-
-func IoAddWatch(channel *CGIOChannel, condition CGIOCondition, func_ CGIOFunc, user_data Cgpointer) Cguint {
-	return C.g_io_add_watch(channel, condition, func_, user_data)
-}
-
-func IoAddWatchFull(channel *CGIOChannel, priority Cgint, condition CGIOCondition, func_ CGIOFunc, user_data Cgpointer, notify CGDestroyNotify) Cguint {
-	return C.g_io_add_watch_full(channel, priority, condition, func_, user_data, notify)
-}
-
-func IoCreateWatch(channel *CGIOChannel, condition CGIOCondition) *CGSource {
-	return C.g_io_create_watch(channel, condition)
-}
-
-func Listenv() Cunsafe.Pointer {
-	return C.g_listenv()
-}
-
-func LocaleFromUtf8(utf8string *Cgchar, len_ Cgssize, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_locale_from_utf8(unsafe.Pointer(utf8string), len_, bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-func LocaleToUtf8(opsysstring *Cgchar, len_ Cgssize, bytes_read *Cgsize, bytes_written *Cgsize, err unsafe.Pointer) *Cgchar {
-	return C._g_locale_to_utf8(unsafe.Pointer(opsysstring), len_, bytes_read, bytes_written, unsafe.Pointer(err))
-}
-
-//TODO g_log
-
-func LogDefaultHandler(log_domain *Cgchar, log_level CGLogLevelFlags, message *Cgchar, unused_data Cgpointer) {
-	C._g_log_default_handler(unsafe.Pointer(log_domain), log_level, unsafe.Pointer(message), unused_data)
-}
-
-func LogRemoveHandler(log_domain *Cgchar, handler_id Cguint) {
-	C._g_log_remove_handler(unsafe.Pointer(log_domain), handler_id)
-}
-
-func LogSetAlwaysFatal(fatal_mask CGLogLevelFlags) CGLogLevelFlags {
-	return C.g_log_set_always_fatal(fatal_mask)
-}
-
-func LogSetDefaultHandler(log_func CGLogFunc, user_data Cgpointer) CGLogFunc {
-	return C.g_log_set_default_handler(log_func, user_data)
-}
-
-func LogSetFatalMask(log_domain *Cgchar, fatal_mask CGLogLevelFlags) CGLogLevelFlags {
-	return C._g_log_set_fatal_mask(unsafe.Pointer(log_domain), fatal_mask)
-}
-
-func LogSetHandler(log_domain *Cgchar, log_levels CGLogLevelFlags, log_func CGLogFunc, user_data Cgpointer) Cguint {
-	return C._g_log_set_handler(unsafe.Pointer(log_domain), log_levels, log_func, user_data)
-}
-
-func Logv(log_domain *Cgchar, log_level CGLogLevelFlags, format *Cgchar, args Cva_list) {
-	C._g_logv(unsafe.Pointer(log_domain), log_level, unsafe.Pointer(format), args)
-}
-
-func MainCurrentSource() *CGSource {
-	return C.g_main_current_source()
-}
-
-func MainDepth() Cgint {
-	return C.g_main_depth()
-}
-
-func Malloc(n_bytes Cgsize) Cgpointer {
-	return C.g_malloc(n_bytes)
-}
-
-func Malloc0(n_bytes Cgsize) Cgpointer {
-	return C.g_malloc0(n_bytes)
-}
-
-func Malloc0N(n_blocks Cgsize, n_block_bytes Cgsize) Cgpointer {
-	return C.g_malloc0_n(n_blocks, n_block_bytes)
-}
-
-func MallocN(n_blocks Cgsize, n_block_bytes Cgsize) Cgpointer {
-	return C.g_malloc_n(n_blocks, n_block_bytes)
-}
-
-//TODO g_markup_collect_attributes
-
-func MarkupErrorQuark() CGQuark {
-	return C.g_markup_error_quark()
-}
-
-func MarkupEscapeText(text *Cgchar, length Cgssize) *Cgchar {
-	return C._g_markup_escape_text(unsafe.Pointer(text), length)
-}
-
-//TODO g_markup_printf_escaped
-
-func MarkupVprintfEscaped(format *Cgchar, args Cva_list) *Cgchar {
-	return C._g_markup_vprintf_escaped(unsafe.Pointer(format), args)
-}
-
-func MemIsSystemMalloc() Cgboolean {
-	return C.g_mem_is_system_malloc()
-}
-
-func MemProfile() {
-	C.g_mem_profile()
-}
-
-func MemSetVtable(vtable *CGMemVTable) {
-	C.g_mem_set_vtable(vtable)
-}
-
-func Memdup(mem Cgconstpointer, byte_size Cguint) Cgpointer {
-	return C.g_memdup(mem, byte_size)
-}
-
-func MkdirWithParents(pathname *Cgchar, mode Cgint) Cgint {
-	return C._g_mkdir_with_parents(unsafe.Pointer(pathname), mode)
-}
-
-func Mkdtemp(tmpl *Cgchar) *Cgchar {
-	return C._g_mkdtemp(unsafe.Pointer(tmpl))
-}
-
-func MkdtempFull(tmpl *Cgchar, mode Cgint) *Cgchar {
-	return C._g_mkdtemp_full(unsafe.Pointer(tmpl), mode)
-}
-
-func Mkstemp(tmpl *Cgchar) Cgint {
-	return C._g_mkstemp(unsafe.Pointer(tmpl))
-}
-
-func MkstempFull(tmpl *Cgchar, flags Cgint, mode Cgint) Cgint {
-	return C._g_mkstemp_full(unsafe.Pointer(tmpl), flags, mode)
-}
-
-func NullifyPointer(nullify_location *Cgpointer) {
-	C.g_nullify_pointer(nullify_location)
-}
-
-func OnErrorQuery(prg_name *Cgchar) {
-	C._g_on_error_query(unsafe.Pointer(prg_name))
-}
-
-func OnErrorStackTrace(prg_name *Cgchar) {
-	C._g_on_error_stack_trace(unsafe.Pointer(prg_name))
-}
-
-func OptionErrorQuark() CGQuark {
-	return C.g_option_error_quark()
-}
-
-func ParseDebugString(string_ *Cgchar, keys *CGDebugKey, nkeys Cguint) Cguint {
-	return C._g_parse_debug_string(unsafe.Pointer(string_), keys, nkeys)
-}
-
-func PathGetBasename(file_name *Cgchar) *Cgchar {
-	return C._g_path_get_basename(unsafe.Pointer(file_name))
-}
-
-func PathGetDirname(file_name *Cgchar) *Cgchar {
-	return C._g_path_get_dirname(unsafe.Pointer(file_name))
-}
-
-func PathIsAbsolute(file_name *Cgchar) Cgboolean {
-	return C._g_path_is_absolute(unsafe.Pointer(file_name))
-}
-
-func PathSkipRoot(file_name *Cgchar) *Cgchar {
-	return C._g_path_skip_root(unsafe.Pointer(file_name))
-}
-
-func PatternMatch(pspec *CGPatternSpec, string_length Cguint, string_ *Cgchar, string_reversed *Cgchar) Cgboolean {
-	return C._g_pattern_match(pspec, string_length, unsafe.Pointer(string_), unsafe.Pointer(string_reversed))
-}
-
-func PatternMatchSimple(pattern *Cgchar, string_ *Cgchar) Cgboolean {
-	return C._g_pattern_match_simple(unsafe.Pointer(pattern), unsafe.Pointer(string_))
-}
-
-func PatternMatchString(pspec *CGPatternSpec, string_ *Cgchar) Cgboolean {
-	return C._g_pattern_match_string(pspec, unsafe.Pointer(string_))
-}
-
-//Skipped g_pointer_bit_lock
-
-//Skipped g_pointer_bit_trylock
-
-//Skipped g_pointer_bit_unlock
-
-func Poll(fds *CGPollFD, nfds Cguint, timeout Cgint) Cgint {
-	return C.g_poll(fds, nfds, timeout)
-}
-
-//TODO g_prefix_error
-
-//TODO g_print
-
-//TODO g_printerr
-
-//TODO g_printf
-
-func PrintfStringUpperBound(format *Cgchar, args Cva_list) Cgsize {
-	return C._g_printf_string_upper_bound(unsafe.Pointer(format), args)
-}
-
-func PropagateError(dest Cunsafe.Pointer, src *CGError) {
-	C._g_propagate_error(dest, src)
-}
-
-//TODO g_propagate_prefixed_error
-
-func QsortWithData(pbase Cgconstpointer, total_elems Cgint, size Cgsize, compare_func CGCompareDataFunc, user_data Cgpointer) {
-	C.g_qsort_with_data(pbase, total_elems, size, compare_func, user_data)
-}
-
-func QuarkFromStaticString(string_ *Cgchar) CGQuark {
-	return C._g_quark_from_static_string(unsafe.Pointer(string_))
-}
-
-func QuarkFromString(string_ *Cgchar) CGQuark {
-	return C._g_quark_from_string(unsafe.Pointer(string_))
-}
-
-func QuarkToString(quark CGQuark) *Cgchar {
-	return C.g_quark_to_string(quark)
-}
-
-func QuarkTryString(string_ *Cgchar) CGQuark {
-	return C._g_quark_try_string(unsafe.Pointer(string_))
-}
-
-func RandomDouble() Cgdouble {
-	return C.g_random_double()
-}
-
-func RandomDoubleRange(begin Cgdouble, end Cgdouble) Cgdouble {
-	return C.g_random_double_range(begin, end)
-}
-
-func RandomInt() Cguint32 {
-	return C.g_random_int()
-}
-
-func RandomIntRange(begin Cgint32, end Cgint32) Cgint32 {
-	return C.g_random_int_range(begin, end)
-}
-
-func RandomSetSeed(seed Cguint32) {
-	C.g_random_set_seed(seed)
-}
-
-func Realloc(mem Cgpointer, n_bytes Cgsize) Cgpointer {
-	return C.g_realloc(mem, n_bytes)
-}
-
-func ReallocN(mem Cgpointer, n_blocks Cgsize, n_block_bytes Cgsize) Cgpointer {
-	return C.g_realloc_n(mem, n_blocks, n_block_bytes)
-}
-
-func ReloadUserSpecialDirsCache() {
-	C.g_reload_user_special_dirs_cache()
-}
-
-func ReturnIfFailWarning(log_domain *Cgchar, pretty_function *Cgchar, expression *Cgchar) {
-	C._g_return_if_fail_warning(unsafe.Pointer(log_domain), unsafe.Pointer(pretty_function), unsafe.Pointer(expression))
-}
-
-func Rmdir(filename *Cgchar) Cint {
-	return C._g_rmdir(unsafe.Pointer(filename))
-}
-
-func SetApplicationName(application_name *Cgchar) {
-	C._g_set_application_name(unsafe.Pointer(application_name))
-}
-
-//TODO g_set_error
-
-func SetErrorLiteral(err Cunsafe.Pointer, domain CGQuark, code Cgint, message *Cgchar) {
-	C._g_set_error_literal(err, domain, code, unsafe.Pointer(message))
-}
-
-func SetPrgname(prgname *Cgchar) {
-	C._g_set_prgname(unsafe.Pointer(prgname))
-}
-
-func SetPrintHandler(func_ CGPrintFunc) CGPrintFunc {
-	return C.g_set_print_handler(func_)
-}
-
-func SetPrinterrHandler(func_ CGPrintFunc) CGPrintFunc {
-	return C.g_set_printerr_handler(func_)
-}
-
-func Setenv(variable *Cgchar, value *Cgchar, overwrite Cgboolean) Cgboolean {
-	return C._g_setenv(unsafe.Pointer(variable), unsafe.Pointer(value), overwrite)
-}
-
-func ShellErrorQuark() CGQuark {
-	return C.g_shell_error_quark()
-}
-
-func ShellParseArgv(command_line *Cgchar, argcp *Cgint, argvp Cunsafe.Pointer, err unsafe.Pointer) Cgboolean {
-	return C._g_shell_parse_argv(unsafe.Pointer(command_line), argcp, argvp, unsafe.Pointer(err))
-}
-
-func ShellQuote(unquoted_string *Cgchar) *Cgchar {
-	return C._g_shell_quote(unsafe.Pointer(unquoted_string))
-}
-
-func ShellUnquote(quoted_string *Cgchar, err unsafe.Pointer) *Cgchar {
-	return C._g_shell_unquote(unsafe.Pointer(quoted_string), unsafe.Pointer(err))
-}
-
-func SliceAlloc(block_size Cgsize) Cgpointer {
-	return C.g_slice_alloc(block_size)
-}
-
-func SliceAlloc0(block_size Cgsize) Cgpointer {
-	return C.g_slice_alloc0(block_size)
-}
-
-func SliceCopy(block_size Cgsize, mem_block Cgconstpointer) Cgpointer {
-	return C.g_slice_copy(block_size, mem_block)
-}
-
-func SliceFree1(block_size Cgsize, mem_block Cgpointer) {
-	C.g_slice_free1(block_size, mem_block)
-}
-
-func SliceFreeChainWithOffset(block_size Cgsize, mem_chain Cgpointer, next_offset Cgsize) {
-	C.g_slice_free_chain_with_offset(block_size, mem_chain, next_offset)
-}
-
-//Skipped g_slice_get_config
-
-//Skipped g_slice_get_config_state
-
-//Skipped g_slice_set_config
-
-//TODO g_snprintf
-
-func SpacedPrimesClosest(num Cguint) Cguint {
-	return C.g_spaced_primes_closest(num)
-}
-
-func SpawnAsync(working_directory *Cgchar, argv Cunsafe.Pointer, envp Cunsafe.Pointer, flags CGSpawnFlags, child_setup CGSpawnChildSetupFunc, user_data Cgpointer, child_pid *CGPid, err unsafe.Pointer) Cgboolean {
-	return C._g_spawn_async(unsafe.Pointer(working_directory), argv, envp, flags, child_setup, user_data, child_pid, unsafe.Pointer(err))
-}
-
-func SpawnAsyncWithPipes(working_directory *Cgchar, argv Cunsafe.Pointer, envp Cunsafe.Pointer, flags CGSpawnFlags, child_setup CGSpawnChildSetupFunc, user_data Cgpointer, child_pid *CGPid, standard_input *Cgint, standard_output *Cgint, standard_error *Cgint, err unsafe.Pointer) Cgboolean {
-	return C._g_spawn_async_with_pipes(unsafe.Pointer(working_directory), argv, envp, flags, child_setup, user_data, child_pid, standard_input, standard_output, standard_error, unsafe.Pointer(err))
-}
-
-func SpawnCheckExitStatus(exit_status Cgint, err unsafe.Pointer) Cgboolean {
-	return C._g_spawn_check_exit_status(exit_status, unsafe.Pointer(err))
-}
-
-func SpawnClosePid(pid CGPid) {
-	C.g_spawn_close_pid(pid)
-}
-
-func SpawnCommandLineAsync(command_line *Cgchar, err unsafe.Pointer) Cgboolean {
-	return C._g_spawn_command_line_async(unsafe.Pointer(command_line), unsafe.Pointer(err))
-}
-
-func SpawnCommandLineSync(command_line *Cgchar, standard_output Cunsafe.Pointer, standard_error Cunsafe.Pointer, exit_status *Cgint, err unsafe.Pointer) Cgboolean {
-	return C._g_spawn_command_line_sync(unsafe.Pointer(command_line), standard_output, standard_error, exit_status, unsafe.Pointer(err))
-}
-
-func SpawnErrorQuark() CGQuark {
-	return C.g_spawn_error_quark()
-}
-
-func SpawnExitErrorQuark() CGQuark {
-	return C.g_spawn_exit_error_quark()
-}
-
-func SpawnSync(working_directory *Cgchar, argv Cunsafe.Pointer, envp Cunsafe.Pointer, flags CGSpawnFlags, child_setup CGSpawnChildSetupFunc, user_data Cgpointer, standard_output Cunsafe.Pointer, standard_error Cunsafe.Pointer, exit_status *Cgint, err unsafe.Pointer) Cgboolean {
-	return C._g_spawn_sync(unsafe.Pointer(working_directory), argv, envp, flags, child_setup, user_data, standard_output, standard_error, exit_status, unsafe.Pointer(err))
-}
-
-//TODO g_sprintf
-
-func Stpcpy(dest *Cgchar, src *Cgchar) *Cgchar {
-	return C._g_stpcpy(unsafe.Pointer(dest), unsafe.Pointer(src))
-}
-
-func StrEqual(v1 Cgconstpointer, v2 Cgconstpointer) Cgboolean {
-	return C.g_str_equal(v1, v2)
-}
-
-func StrHasPrefix(str *Cgchar, prefix *Cgchar) Cgboolean {
-	return C._g_str_has_prefix(unsafe.Pointer(str), unsafe.Pointer(prefix))
-}
-
-func StrHasSuffix(str *Cgchar, suffix *Cgchar) Cgboolean {
-	return C._g_str_has_suffix(unsafe.Pointer(str), unsafe.Pointer(suffix))
-}
-
-func StrHash(v Cgconstpointer) Cguint {
-	return C.g_str_hash(v)
-}
-
-func Strcanon(string_ *Cgchar, valid_chars *Cgchar, substitutor Cgchar) *Cgchar {
-	return C._g_strcanon(unsafe.Pointer(string_), unsafe.Pointer(valid_chars), substitutor)
-}
-
-//Skipped g_strcasecmp
-
-func Strchomp(string_ *Cgchar) *Cgchar {
-	return C._g_strchomp(unsafe.Pointer(string_))
-}
-
-func Strchug(string_ *Cgchar) *Cgchar {
-	return C._g_strchug(unsafe.Pointer(string_))
-}
-
-func Strcmp0(str1 *Cgchar, str2 *Cgchar) Cint {
-	return C._g_strcmp0(unsafe.Pointer(str1), unsafe.Pointer(str2))
-}
-
-func Strcompress(source *Cgchar) *Cgchar {
-	return C._g_strcompress(unsafe.Pointer(source))
-}
-
-//TODO g_strconcat
-
-func Strdelimit(string_ *Cgchar, delimiters *Cgchar, new_delimiter Cgchar) *Cgchar {
-	return C._g_strdelimit(unsafe.Pointer(string_), unsafe.Pointer(delimiters), new_delimiter)
-}
-
-//Skipped g_strdown
-
-func Strdup(str *Cgchar) *Cgchar {
-	return C._g_strdup(unsafe.Pointer(str))
-}
-
-//TODO g_strdup_printf
-
-func StrdupVprintf(format *Cgchar, args Cva_list) *Cgchar {
-	return C._g_strdup_vprintf(unsafe.Pointer(format), args)
-}
-
-func Strdupv(str_array *Cgchar) Cunsafe.Pointer {
-	return C._g_strdupv(unsafe.Pointer(str_array))
-}
-
-func Strerror(errnum Cgint) *Cgchar {
-	return C.g_strerror(errnum)
-}
-
-func Strescape(source *Cgchar, exceptions *Cgchar) *Cgchar {
-	return C._g_strescape(unsafe.Pointer(source), unsafe.Pointer(exceptions))
-}
-
-func Strfreev(str_array *Cgchar) {
-	C._g_strfreev(unsafe.Pointer(str_array))
-}
-
-func StringNew(init *Cgchar) *CGString {
-	return C._g_string_new(unsafe.Pointer(init))
-}
-
-func StringNewLen(init *Cgchar, len_ Cgssize) *CGString {
-	return C._g_string_new_len(unsafe.Pointer(init), len_)
-}
-
-func StringSizedNew(dfl_size Cgsize) *CGString {
-	return C.g_string_sized_new(dfl_size)
-}
-
-func StripContext(msgid *Cgchar, msgval *Cgchar) *Cgchar {
-	return C._g_strip_context(unsafe.Pointer(msgid), unsafe.Pointer(msgval))
-}
-
-//TODO g_strjoin
-
-func Strjoinv(separator *Cgchar, str_array *Cgchar) *Cgchar {
-	return C._g_strjoinv(unsafe.Pointer(separator), unsafe.Pointer(str_array))
-}
-
-func Strlcat(dest *Cgchar, src *Cgchar, dest_size Cgsize) Cgsize {
-	return C._g_strlcat(unsafe.Pointer(dest), unsafe.Pointer(src), dest_size)
-}
-
-func Strlcpy(dest *Cgchar, src *Cgchar, dest_size Cgsize) Cgsize {
-	return C._g_strlcpy(unsafe.Pointer(dest), unsafe.Pointer(src), dest_size)
-}
-
-//Skipped g_strncasecmp
-
-func Strndup(str *Cgchar, n Cgsize) *Cgchar {
-	return C._g_strndup(unsafe.Pointer(str), n)
-}
-
-func Strnfill(length Cgsize, fill_char Cgchar) *Cgchar {
-	return C.g_strnfill(length, fill_char)
-}
-
-func Strreverse(string_ *Cgchar) *Cgchar {
-	return C._g_strreverse(unsafe.Pointer(string_))
-}
-
-func Strrstr(haystack *Cgchar, needle *Cgchar) *Cgchar {
-	return C._g_strrstr(unsafe.Pointer(haystack), unsafe.Pointer(needle))
-}
-
-func StrrstrLen(haystack *Cgchar, haystack_len Cgssize, needle *Cgchar) *Cgchar {
-	return C._g_strrstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))
-}
-
-func Strsignal(signum Cgint) *Cgchar {
-	return C.g_strsignal(signum)
-}
-
-func Strsplit(string_ *Cgchar, delimiter *Cgchar, max_tokens Cgint) Cunsafe.Pointer {
-	return C._g_strsplit(unsafe.Pointer(string_), unsafe.Pointer(delimiter), max_tokens)
-}
-
-func StrsplitSet(string_ *Cgchar, delimiters *Cgchar, max_tokens Cgint) Cunsafe.Pointer {
-	return C._g_strsplit_set(unsafe.Pointer(string_), unsafe.Pointer(delimiters), max_tokens)
-}
-
-func StrstrLen(haystack *Cgchar, haystack_len Cgssize, needle *Cgchar) *Cgchar {
-	return C._g_strstr_len(unsafe.Pointer(haystack), haystack_len, unsafe.Pointer(needle))
-}
-
-func Strtod(nptr *Cgchar, endptr *Cgchar) Cgdouble {
-	return C._g_strtod(unsafe.Pointer(nptr), unsafe.Pointer(endptr))
-}
-
-//Skipped g_strup
-
-func StrvGetType() CGType {
-	return C.g_strv_get_type()
-}
-
-func StrvLength(str_array *Cgchar) Cguint {
-	return C._g_strv_length(unsafe.Pointer(str_array))
-}
-
-func TestAddDataFunc(testpath *Cgchar, test_data Cgconstpointer, test_func CGTestDataFunc) {
-	C._g_test_add_data_func(unsafe.Pointer(testpath), test_data, test_func)
-}
-
-func TestAddDataFuncFull(testpath *Cgchar, test_data Cgpointer, test_func CGTestDataFunc, data_free_func CGDestroyNotify) {
-	C._g_test_add_data_func_full(unsafe.Pointer(testpath), test_data, test_func, data_free_func)
-}
-
-func TestAddFunc(testpath *Cgchar, test_func CGTestFunc) {
-	C._g_test_add_func(unsafe.Pointer(testpath), test_func)
-}
-
-func TestAddVtable(testpath *Cgchar, data_size Cgsize, test_data Cgconstpointer, data_setup CGTestFixtureFunc, data_test CGTestFixtureFunc, data_teardown CGTestFixtureFunc) {
-	C._g_test_add_vtable(unsafe.Pointer(testpath), data_size, test_data, data_setup, data_test, data_teardown)
-}
-
-func TestAssertExpectedMessagesInternal(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar) {
-	C._g_test_assert_expected_messages_internal(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_))
-}
-
-func TestBug(bug_uri_snippet *Cgchar) {
-	C._g_test_bug(unsafe.Pointer(bug_uri_snippet))
-}
-
-func TestBugBase(uri_pattern *Cgchar) {
-	C._g_test_bug_base(unsafe.Pointer(uri_pattern))
-}
-
-func TestCreateCase(test_name *Cgchar, data_size Cgsize, test_data Cgconstpointer, data_setup CGTestFixtureFunc, data_test CGTestFixtureFunc, data_teardown CGTestFixtureFunc) *CGTestCase {
-	return C._g_test_create_case(unsafe.Pointer(test_name), data_size, test_data, data_setup, data_test, data_teardown)
-}
-
-func TestCreateSuite(suite_name *Cgchar) *CGTestSuite {
-	return C._g_test_create_suite(unsafe.Pointer(suite_name))
-}
-
-func TestExpectMessage(log_domain *Cgchar, log_level CGLogLevelFlags, pattern *Cgchar) {
-	C._g_test_expect_message(unsafe.Pointer(log_domain), log_level, unsafe.Pointer(pattern))
-}
-
-func TestFail() {
-	C.g_test_fail()
-}
-
-func TestGetRoot() *CGTestSuite {
-	return C.g_test_get_root()
-}
-
-//TODO g_test_init
-
-func TestLogSetFatalHandler(log_func CGTestLogFatalFunc, user_data Cgpointer) {
-	C.g_test_log_set_fatal_handler(log_func, user_data)
-}
-
-func TestLogTypeName(log_type CGTestLogType) *Cgchar {
-	return C.g_test_log_type_name(log_type)
-}
-
-//TODO g_test_maximized_result
-
-//TODO g_test_message
-
-//TODO g_test_minimized_result
-
-func TestQueueDestroy(destroy_func CGDestroyNotify, destroy_data Cgpointer) {
-	C.g_test_queue_destroy(destroy_func, destroy_data)
-}
-
-func TestQueueFree(gfree_pointer Cgpointer) {
-	C.g_test_queue_free(gfree_pointer)
-}
-
-func TestRandDouble() Cdouble {
-	return C.g_test_rand_double()
-}
-
-func TestRandDoubleRange(range_start Cdouble, range_end Cdouble) Cdouble {
-	return C.g_test_rand_double_range(range_start, range_end)
-}
-
-func TestRandInt() Cgint32 {
-	return C.g_test_rand_int()
-}
-
-func TestRandIntRange(begin Cgint32, end Cgint32) Cgint32 {
-	return C.g_test_rand_int_range(begin, end)
-}
-
-func TestRun() Cint {
-	return C.g_test_run()
-}
-
-func TestRunSuite(suite *CGTestSuite) Cint {
-	return C.g_test_run_suite(suite)
-}
-
-func TestTimerElapsed() Cdouble {
-	return C.g_test_timer_elapsed()
-}
-
-func TestTimerLast() Cdouble {
-	return C.g_test_timer_last()
-}
-
-func TestTimerStart() {
-	C.g_test_timer_start()
-}
-
-func TestTrapAssertions(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, assertion_flags Cguint64, pattern *Cgchar) {
-	C._g_test_trap_assertions(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), assertion_flags, unsafe.Pointer(pattern))
-}
-
-func TestTrapFork(usec_timeout Cguint64, test_trap_flags CGTestTrapFlags) Cgboolean {
-	return C.g_test_trap_fork(usec_timeout, test_trap_flags)
-}
-
-func TestTrapHasPassed() Cgboolean {
-	return C.g_test_trap_has_passed()
-}
-
-func TestTrapReachedTimeout() Cgboolean {
-	return C.g_test_trap_reached_timeout()
-}
-
-func TimeoutAdd(interval Cguint, function CGSourceFunc, data Cgpointer) Cguint {
-	return C.g_timeout_add(interval, function, data)
-}
-
-func TimeoutAddFull(priority Cgint, interval Cguint, function CGSourceFunc, data Cgpointer, notify CGDestroyNotify) Cguint {
-	return C.g_timeout_add_full(priority, interval, function, data, notify)
-}
-
-func TimeoutAddSeconds(interval Cguint, function CGSourceFunc, data Cgpointer) Cguint {
-	return C.g_timeout_add_seconds(interval, function, data)
-}
-
-func TimeoutAddSecondsFull(priority Cgint, interval Cguint, function CGSourceFunc, data Cgpointer, notify CGDestroyNotify) Cguint {
-	return C.g_timeout_add_seconds_full(priority, interval, function, data, notify)
-}
-
-func TimeoutSourceNew(interval Cguint) *CGSource {
-	return C.g_timeout_source_new(interval)
-}
-
-func TimeoutSourceNewSeconds(interval Cguint) *CGSource {
-	return C.g_timeout_source_new_seconds(interval)
-}
-
-func TryMalloc(n_bytes Cgsize) Cgpointer {
-	return C.g_try_malloc(n_bytes)
-}
-
-func TryMalloc0(n_bytes Cgsize) Cgpointer {
-	return C.g_try_malloc0(n_bytes)
-}
-
-func TryMalloc0N(n_blocks Cgsize, n_block_bytes Cgsize) Cgpointer {
-	return C.g_try_malloc0_n(n_blocks, n_block_bytes)
-}
-
-func TryMallocN(n_blocks Cgsize, n_block_bytes Cgsize) Cgpointer {
-	return C.g_try_malloc_n(n_blocks, n_block_bytes)
-}
-
-func TryRealloc(mem Cgpointer, n_bytes Cgsize) Cgpointer {
-	return C.g_try_realloc(mem, n_bytes)
-}
-
-func TryReallocN(mem Cgpointer, n_blocks Cgsize, n_block_bytes Cgsize) Cgpointer {
-	return C.g_try_realloc_n(mem, n_blocks, n_block_bytes)
-}
-
-func Ucs4ToUtf16(str *Cgunichar, len_ Cglong, items_read *Cglong, items_written *Cglong, err unsafe.Pointer) *Cgunichar2 {
-	return C._g_ucs4_to_utf16(unsafe.Pointer(str), len_, items_read, items_written, unsafe.Pointer(err))
-}
-
-func Ucs4ToUtf8(str *Cgunichar, len_ Cglong, items_read *Cglong, items_written *Cglong, err unsafe.Pointer) *Cgchar {
-	return C._g_ucs4_to_utf8(unsafe.Pointer(str), len_, items_read, items_written, unsafe.Pointer(err))
-}
-
-func UnicharBreakType(c Cgunichar) CGUnicodeBreakType {
-	return C.g_unichar_break_type(c)
-}
-
-func UnicharCombiningClass(uc Cgunichar) Cgint {
-	return C.g_unichar_combining_class(uc)
-}
-
-func UnicharCompose(a Cgunichar, b Cgunichar, ch *Cgunichar) Cgboolean {
-	return C.g_unichar_compose(a, b, ch)
-}
-
-func UnicharDecompose(ch Cgunichar, a *Cgunichar, b *Cgunichar) Cgboolean {
-	return C.g_unichar_decompose(ch, a, b)
-}
-
-func UnicharDigitValue(c Cgunichar) Cgint {
-	return C.g_unichar_digit_value(c)
-}
-
-func UnicharFullyDecompose(ch Cgunichar, compat Cgboolean, result *Cgunichar, result_len Cgsize) Cgsize {
-	return C.g_unichar_fully_decompose(ch, compat, result, result_len)
-}
-
-func UnicharGetMirrorChar(ch Cgunichar, mirrored_ch *Cgunichar) Cgboolean {
-	return C.g_unichar_get_mirror_char(ch, mirrored_ch)
-}
-
-func UnicharGetScript(ch Cgunichar) CGUnicodeScript {
-	return C.g_unichar_get_script(ch)
-}
-
-func UnicharIsalnum(c Cgunichar) Cgboolean {
-	return C.g_unichar_isalnum(c)
-}
-
-func UnicharIsalpha(c Cgunichar) Cgboolean {
-	return C.g_unichar_isalpha(c)
-}
-
-func UnicharIscntrl(c Cgunichar) Cgboolean {
-	return C.g_unichar_iscntrl(c)
-}
-
-func UnicharIsdefined(c Cgunichar) Cgboolean {
-	return C.g_unichar_isdefined(c)
-}
-
-func UnicharIsdigit(c Cgunichar) Cgboolean {
-	return C.g_unichar_isdigit(c)
-}
-
-func UnicharIsgraph(c Cgunichar) Cgboolean {
-	return C.g_unichar_isgraph(c)
-}
-
-func UnicharIslower(c Cgunichar) Cgboolean {
-	return C.g_unichar_islower(c)
-}
-
-func UnicharIsmark(c Cgunichar) Cgboolean {
-	return C.g_unichar_ismark(c)
-}
-
-func UnicharIsprint(c Cgunichar) Cgboolean {
-	return C.g_unichar_isprint(c)
-}
-
-func UnicharIspunct(c Cgunichar) Cgboolean {
-	return C.g_unichar_ispunct(c)
-}
-
-func UnicharIsspace(c Cgunichar) Cgboolean {
-	return C.g_unichar_isspace(c)
-}
-
-func UnicharIstitle(c Cgunichar) Cgboolean {
-	return C.g_unichar_istitle(c)
-}
-
-func UnicharIsupper(c Cgunichar) Cgboolean {
-	return C.g_unichar_isupper(c)
-}
-
-func UnicharIswide(c Cgunichar) Cgboolean {
-	return C.g_unichar_iswide(c)
-}
-
-func UnicharIswideCjk(c Cgunichar) Cgboolean {
-	return C.g_unichar_iswide_cjk(c)
-}
-
-func UnicharIsxdigit(c Cgunichar) Cgboolean {
-	return C.g_unichar_isxdigit(c)
-}
-
-func UnicharIszerowidth(c Cgunichar) Cgboolean {
-	return C.g_unichar_iszerowidth(c)
-}
-
-func UnicharToUtf8(c Cgunichar, outbuf *Cgchar) Cgint {
-	return C._g_unichar_to_utf8(c, unsafe.Pointer(outbuf))
-}
-
-func UnicharTolower(c Cgunichar) Cgunichar {
-	return C.g_unichar_tolower(c)
-}
-
-func UnicharTotitle(c Cgunichar) Cgunichar {
-	return C.g_unichar_totitle(c)
-}
-
-func UnicharToupper(c Cgunichar) Cgunichar {
-	return C.g_unichar_toupper(c)
-}
-
-func UnicharType(c Cgunichar) CGUnicodeType {
-	return C.g_unichar_type(c)
-}
-
-func UnicharValidate(ch Cgunichar) Cgboolean {
-	return C.g_unichar_validate(ch)
-}
-
-func UnicharXdigitValue(c Cgunichar) Cgint {
-	return C.g_unichar_xdigit_value(c)
-}
-
-//Skipped g_unicode_canonical_decomposition
-
-func UnicodeCanonicalOrdering(string_ *Cgunichar, len_ Cgsize) {
-	C.g_unicode_canonical_ordering(string_, len_)
-}
-
-func UnicodeScriptFromIso15924(iso15924 Cguint32) CGUnicodeScript {
-	return C.g_unicode_script_from_iso15924(iso15924)
-}
-
-func UnicodeScriptToIso15924(script CGUnicodeScript) Cguint32 {
-	return C.g_unicode_script_to_iso15924(script)
-}
-
-func UnixErrorQuark() CGQuark {
-	return C.g_unix_error_quark()
-}
-
-func UnixOpenPipe(fds *Cgint, flags Cgint, err unsafe.Pointer) Cgboolean {
-	return C._g_unix_open_pipe(fds, flags, unsafe.Pointer(err))
-}
-
-func UnixSetFdNonblocking(fd Cgint, nonblock Cgboolean, err unsafe.Pointer) Cgboolean {
-	return C._g_unix_set_fd_nonblocking(fd, nonblock, unsafe.Pointer(err))
-}
-
-func UnixSignalAdd(signum Cgint, handler CGSourceFunc, user_data Cgpointer) Cguint {
-	return C.g_unix_signal_add(signum, handler, user_data)
-}
-
-func UnixSignalAddFull(priority Cgint, signum Cgint, handler CGSourceFunc, user_data Cgpointer, notify CGDestroyNotify) Cguint {
-	return C.g_unix_signal_add_full(priority, signum, handler, user_data, notify)
-}
-
-func UnixSignalSourceNew(signum Cgint) *CGSource {
-	return C.g_unix_signal_source_new(signum)
-}
-
-func Unlink(filename *Cgchar) Cint {
-	return C._g_unlink(unsafe.Pointer(filename))
-}
-
-func Unsetenv(variable *Cgchar) {
-	C._g_unsetenv(unsafe.Pointer(variable))
-}
-
-func UriEscapeString(unescaped *Cgchar, reserved_chars_allowed *Cgchar, allow_utf8 Cgboolean) *Cchar {
-	return C._g_uri_escape_string(unsafe.Pointer(unescaped), unsafe.Pointer(reserved_chars_allowed), allow_utf8)
-}
-
-func UriListExtractUris(uri_list *Cgchar) Cunsafe.Pointer {
-	return C._g_uri_list_extract_uris(unsafe.Pointer(uri_list))
-}
-
-func UriParseScheme(uri *Cgchar) *Cchar {
-	return C._g_uri_parse_scheme(unsafe.Pointer(uri))
-}
-
-func UriUnescapeSegment(escaped_string *Cgchar, escaped_string_end *Cgchar, illegal_characters *Cgchar) *Cchar {
-	return C._g_uri_unescape_segment(unsafe.Pointer(escaped_string), unsafe.Pointer(escaped_string_end), unsafe.Pointer(illegal_characters))
-}
-
-func UriUnescapeString(escaped_string *Cgchar, illegal_characters *Cgchar) *Cchar {
-	return C._g_uri_unescape_string(unsafe.Pointer(escaped_string), unsafe.Pointer(illegal_characters))
-}
-
-func Usleep(microseconds Cgulong) {
-	C.g_usleep(microseconds)
-}
-
-func Utf16ToUcs4(str *Cgunichar2, len_ Cglong, items_read *Cglong, items_written *Cglong, err unsafe.Pointer) *Cgunichar {
-	return C._g_utf16_to_ucs4(unsafe.Pointer(str), len_, items_read, items_written, unsafe.Pointer(err))
-}
-
-func Utf16ToUtf8(str *Cgunichar2, len_ Cglong, items_read *Cglong, items_written *Cglong, err unsafe.Pointer) *Cgchar {
-	return C._g_utf16_to_utf8(unsafe.Pointer(str), len_, items_read, items_written, unsafe.Pointer(err))
-}
-
-func Utf8Casefold(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_utf8_casefold(unsafe.Pointer(str), len_)
-}
-
-func Utf8Collate(str1 *Cgchar, str2 *Cgchar) Cgint {
-	return C._g_utf8_collate(unsafe.Pointer(str1), unsafe.Pointer(str2))
-}
-
-func Utf8CollateKey(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_utf8_collate_key(unsafe.Pointer(str), len_)
-}
-
-func Utf8CollateKeyForFilename(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_utf8_collate_key_for_filename(unsafe.Pointer(str), len_)
-}
-
-func Utf8FindNextChar(p *Cgchar, end *Cgchar) *Cgchar {
-	return C._g_utf8_find_next_char(unsafe.Pointer(p), unsafe.Pointer(end))
-}
-
-func Utf8FindPrevChar(str *Cgchar, p *Cgchar) *Cgchar {
-	return C._g_utf8_find_prev_char(unsafe.Pointer(str), unsafe.Pointer(p))
-}
-
-func Utf8GetChar(p *Cgchar) Cgunichar {
-	return C._g_utf8_get_char(unsafe.Pointer(p))
-}
-
-func Utf8GetCharValidated(p *Cgchar, max_len Cgssize) Cgunichar {
-	return C._g_utf8_get_char_validated(unsafe.Pointer(p), max_len)
-}
-
-func Utf8Normalize(str *Cgchar, len_ Cgssize, mode CGNormalizeMode) *Cgchar {
-	return C._g_utf8_normalize(unsafe.Pointer(str), len_, mode)
-}
-
-func Utf8OffsetToPointer(str *Cgchar, offset Cglong) *Cgchar {
-	return C._g_utf8_offset_to_pointer(unsafe.Pointer(str), offset)
-}
-
-func Utf8PointerToOffset(str *Cgchar, pos *Cgchar) Cglong {
-	return C._g_utf8_pointer_to_offset(unsafe.Pointer(str), unsafe.Pointer(pos))
-}
-
-func Utf8PrevChar(p *Cgchar) *Cgchar {
-	return C._g_utf8_prev_char(unsafe.Pointer(p))
-}
-
-func Utf8Strchr(p *Cgchar, len_ Cgssize, c Cgunichar) *Cgchar {
-	return C._g_utf8_strchr(unsafe.Pointer(p), len_, c)
-}
-
-func Utf8Strdown(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_utf8_strdown(unsafe.Pointer(str), len_)
-}
-
-func Utf8Strlen(p *Cgchar, max Cgssize) Cglong {
-	return C._g_utf8_strlen(unsafe.Pointer(p), max)
-}
-
-func Utf8Strncpy(dest *Cgchar, src *Cgchar, n Cgsize) *Cgchar {
-	return C._g_utf8_strncpy(unsafe.Pointer(dest), unsafe.Pointer(src), n)
-}
-
-func Utf8Strrchr(p *Cgchar, len_ Cgssize, c Cgunichar) *Cgchar {
-	return C._g_utf8_strrchr(unsafe.Pointer(p), len_, c)
-}
-
-func Utf8Strreverse(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_utf8_strreverse(unsafe.Pointer(str), len_)
-}
-
-func Utf8Strup(str *Cgchar, len_ Cgssize) *Cgchar {
-	return C._g_utf8_strup(unsafe.Pointer(str), len_)
-}
-
-func Utf8Substring(str *Cgchar, start_pos Cglong, end_pos Cglong) *Cgchar {
-	return C._g_utf8_substring(unsafe.Pointer(str), start_pos, end_pos)
-}
-
-func Utf8ToUcs4(str *Cgchar, len_ Cglong, items_read *Cglong, items_written *Cglong, err unsafe.Pointer) *Cgunichar {
-	return C._g_utf8_to_ucs4(unsafe.Pointer(str), len_, items_read, items_written, unsafe.Pointer(err))
-}
-
-func Utf8ToUcs4Fast(str *Cgchar, len_ Cglong, items_written *Cglong) *Cgunichar {
-	return C._g_utf8_to_ucs4_fast(unsafe.Pointer(str), len_, items_written)
-}
-
-func Utf8ToUtf16(str *Cgchar, len_ Cglong, items_read *Cglong, items_written *Cglong, err unsafe.Pointer) *Cgunichar2 {
-	return C._g_utf8_to_utf16(unsafe.Pointer(str), len_, items_read, items_written, unsafe.Pointer(err))
-}
-
-func Utf8Validate(str *Cgchar, max_len Cgssize, end Cunsafe.Pointer) Cgboolean {
-	return C._g_utf8_validate(str, max_len, unsafe.Pointer(end))
-}
-
-//Skipped g_variant_get_gtype
-
-func Vasprintf(string_ *Cgchar, format *Cgchar, args Cva_list) Cgint {
-	return C._g_vasprintf(unsafe.Pointer(string_), unsafe.Pointer(format), args)
-}
-
-func Vfprintf(file *CFILE, format *Cgchar, args Cva_list) Cgint {
-	return C._g_vfprintf(file, unsafe.Pointer(format), args)
-}
-
-func Vprintf(format *Cgchar, args Cva_list) Cgint {
-	return C._g_vprintf(unsafe.Pointer(format), args)
-}
-
-func Vsnprintf(string_ *Cgchar, n Cgulong, format *Cgchar, args Cva_list) Cgint {
-	return C._g_vsnprintf(unsafe.Pointer(string_), n, unsafe.Pointer(format), args)
-}
-
-func Vsprintf(string_ *Cgchar, format *Cgchar, args Cva_list) Cgint {
-	return C._g_vsprintf(unsafe.Pointer(string_), unsafe.Pointer(format), args)
-}
-
-func WarnMessage(domain *Cgchar, file *Cgchar, line Cint, func_ *Cgchar, warnexpr *Cgchar) {
-	C._g_warn_message(unsafe.Pointer(domain), unsafe.Pointer(file), line, unsafe.Pointer(func_), unsafe.Pointer(warnexpr))
-}
 
 const BOOKMARK_FILE_ERROR_INVALID_URI = C.G_BOOKMARK_FILE_ERROR_INVALID_URI
 const BOOKMARK_FILE_ERROR_INVALID_VALUE = C.G_BOOKMARK_FILE_ERROR_INVALID_VALUE
