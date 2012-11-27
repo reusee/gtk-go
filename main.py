@@ -62,14 +62,12 @@ class Parser:
     if func.c_name in self.exported_functions:
       return
     self.exported_functions.add(func.c_name)
-    func.name = node.name
+    func.name = self.convert_func_name(node.name)
     if is_method:
       if func.name == "":
-        func.go_name = 'New' + gi_class
-      else:
-        func.go_name = self.convert_func_name(func.name)
+        func.name = 'New' + gi_class
     else:
-      func.go_name = gi_class + self.convert_func_name(func.name)
+      func.name = gi_class + func.name
 
     # class
     func.is_method = is_method
@@ -82,7 +80,6 @@ class Parser:
     func.c_parameters = []
     if is_method:
       value = Value.selfValue(c_class)
-      func.parameters.append(value)
       func.c_parameters.append(value)
     func.extra_returns = []
     for i, param in enumerate(node.parameters):

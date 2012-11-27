@@ -59,3 +59,10 @@ func TestRecordConstruct(t *testing.T) {
   AsyncQueueNew()
   TimerNew()
 }
+
+func TestDateTime(t *testing.T) {
+  now := DateTimeNewNowLocal()
+  fmt.Printf("%v\n", now)
+  var year, month, day int
+  now.GetYmd(&year, &month, &day)
+}

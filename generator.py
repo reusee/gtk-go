@@ -39,75 +39,74 @@ class Generator:
     print >>self.out, 'import "C"'
     # imports
     print >>self.out, 'import ('
-    #print >>self.out, '\t"unsafe"'
+    print >>self.out, '\t"unsafe"'
     #print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
 
-    #for func in self.parser.functions:
-    #  self.generate_function(func)
+    for func in self.parser.functions:
+      if func.skip: continue
+      self.generate_function(func)
     self.generate_enum_symbols()
     self.generate_const_symbols()
     self.generate_record_types()
+
+  def generate_function(self, func):
+    out = []
+
+    # receiver and name
+    if func.is_method:
+      out.append('func (_self_ *%s) %s(' % (func.gi_class, func.name))
+    else:
+      out.append('func %s(' % func.name)
+
+    # parameters
+    for i, param in enumerate(func.parameters):
+      if i > 0: out.append(', ')
+      out.append('%s %s' % (param.name, param.go_type))
+    out.append(') ')
+
+    # return values
+    out.append('(')
+    strs = []
+    if func.return_value.c_type != 'void':
+      strs.append('_return_ %s' % func.return_value.go_type)
+    for ret in func.extra_returns:
+      strs.append('%s %s' % (ret.name, ret.out_go_type))
+    out.append('%s) {\n' % ', ' .join(strs))
+
+    # body
+    return_expression = []
+    if func.need_helper:
+      return_expression.append('C._%s(' % func.c_name)
+    else:
+      return_expression.append('C.%s(' % func.c_name)
+    for i, param in enumerate(func.c_parameters):
+      if i > 0: return_expression.append(', ')
+      if param.go_type == 'unsafe.Pointer':
+        return_expression.append('unsafe.Pointer(')
+      else:
+        return_expression.append('(%s)(' % param.go_type)
+      if param in func.extra_returns:
+        return_expression.append('&')
+      return_expression.append('%s)' % param.name)
+    return_expression.append(')')
+    if func.return_value.go_type == 'unsafe.Pointer':
+      return_expression.insert(0, 'unsafe.Pointer(')
+      return_expression.append(')')
+
+    out.append('\t')
+    if func.return_value.c_type != 'void':
+      out.append('_return_ = ')
+    out.append(''.join(return_expression))
+    out.append('\n')
+
+    out.append('\treturn\n}\n')
+    print >>self.out, ''.join(out)
 
   def write(self, f):
     output_file = open(f, 'w')
     output_file.write(self.out.getvalue())
     output_file.close()
-
-  def generate_function(self, func):
-    # not support yet or has problem
-    if func.skip:
-      self.out.write('//Skipped %s\n\n' % func.c_name)
-      return
-    elif func.not_implement:
-      self.out.write('//FIXME %s\n\n' % func.c_name)
-      return
-
-    out = []
-
-    # signature
-    if func.is_method:
-      out.append('func (self *%s) %s(' % (func.cls, func.go_name))
-    else:
-      out.append('func %s(' % func.go_name)
-
-    # parameter
-    for i, param in enumerate(func.parameters):
-      if i > 0: out.append(', ')
-      out.append('%s %s' % (param.name, param.go_type))
-    out.append(')')
-
-    # return type
-    for i, ret in enumerate(func.returns):
-      if ret.c_type == 'void':
-        if i > 0: out.append(') {\n')
-        break
-      if i == 0: out.append(' (')
-      else: out.append(', ')
-      out.append('%s %s' % (ret.name, ret.go_type))
-      if i == len(func.returns) - 1:
-        out.append(') {\n')
-
-    # return expression
-    return_expression = []
-
-    if func.need_helper:
-      return_expression.append('C._%s(' % func.c_name)
-    else:
-      return_expression.append('C.%s(' % func.c_name)
-
-    for i, param in enumerate(func.origin_params):
-      if i > 0: return_expression.append(', ')
-      return_expression.append(param.name)
-    return_expression.append(')')
-
-    if func.void_return:
-      out.append('\t%s\n' % ''.join(return_expression))
-    else:
-      out.append('\t__return__ = %s\n' % ''.join(return_expression))
-
-    out.append('\treturn\n}\n\n')
-    self.out.write(''.join(out))
 
   def generate_helper(self, func):
     out = []

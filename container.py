@@ -73,6 +73,10 @@ class Value:
     if self.go_type.endswith('*'):
       self.go_type = '*' + self.go_type[:-1]
 
+    self.out_go_type = self.go_type # used in out param
+    if self.out_go_type.startswith('*'):
+      self.out_go_type = self.out_go_type[1:]
+
   _name_serial_ = 0
   @classmethod
   def GiveName(cls):
@@ -88,6 +92,7 @@ class Value:
     value.name = '_self_'
     value.c_type = c_class + '*'
     value.go_type = '*C.' + c_class
+    value.out_go_type = 'C.' + c_class
     return value
 
   @classmethod
@@ -99,4 +104,5 @@ class Value:
     value.name = '_error_'
     value.c_type = 'void*'
     value.go_type = 'unsafe.Pointer'
+    value.out_go_type = 'unsafe.Pointer'
     return value
