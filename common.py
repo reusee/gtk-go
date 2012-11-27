@@ -1,8 +1,6 @@
 class Dict(dict):
-  def __getattr__(self, k):
-    return dict.get(self, k, None)
-  def __getitem__(self, k):
-    return dict.get(self, k, None)
+  __getattr__ = dict.__getitem__
+  __getitem__ = dict.__getitem__
   def __setattr__(self, k, v):
     dict.__setitem__(self, k, v)
     dict.__setattr__(self, k, v)
@@ -18,8 +16,6 @@ def test_dict():
   d['bar'] = 'bar'
   assert d.bar == 'bar'
   assert d['bar'] == 'bar'
-  assert d.Foo == None
-  assert d['Bar'] == None
   d = Dict({
     'foo': 'foo',
     'bar': 'bar',

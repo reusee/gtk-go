@@ -3,11 +3,10 @@
 import sys
 sys.path.append("/usr/lib/gobject-introspection")
 from giscanner.girparser import GIRParser
-from giscanner import ast
 from generator import Generator
 import os
 from common import *
-from convert import *
+from container import *
 
 class Parser:
   def __init__(self, filename):
@@ -41,19 +40,11 @@ class Parser:
     self.prefixes = self.namespace.symbol_prefixes
 
     self.functions = []
-    self.functions_need_helper = []
     self.enum_symbols = []
     self.const_symbols = []
     self.construct_records = set()
-    self.type_mappings = Dict()
 
     self.exported_functions = set()
-
-    self._cur_nodeA = None
-    self._cur_nodeB = None
-    self._cur_nodeC = None
-    self._kinds = set()
-    self._kind_example = {}
 
   def parse(self):
     for node in self.namespace.itervalues():
@@ -64,71 +55,59 @@ class Parser:
       #  print type(node).__name__, 'not handle'
       #  stop
 
-    #print (' %d kinds ' % len(self._kinds)).center(50, '=')
-    #for kind in self._kinds:
-    #  print kind
-    #  print '\n'.join(str(x) for x in self._kind_example[kind][:10])
-    #  print
-
-  def handleFunction(self, node, cls = '', is_method = False, c_class = ''):
-    self._cur_nodeA = node
-    info = Dict()
-    info.name = node.name
-    info.c_name = node.symbol
-    info.is_method = is_method
-    info.c_class = c_class
-    if info.c_name in self.exported_functions:
+  def handleFunction(self, node, gi_class = '', is_method = False, c_class = ''):
+    func = Function()
+    # name
+    func.c_name = node.symbol
+    if func.c_name in self.exported_functions:
       return
-    self.exported_functions.add(info.c_name)
-
-    info.skip = False
-    if not node.deprecated is None or info.c_name in self.skip_symbols:
-      info.skip = True
-
+    self.exported_functions.add(func.c_name)
+    func.name = node.name
     if is_method:
-      if info.name == "":
-        info.go_name = 'New' + cls
+      if func.name == "":
+        func.go_name = 'New' + gi_class
       else:
-        info.go_name = self.convert_func_name(info.name)
+        func.go_name = self.convert_func_name(func.name)
     else:
-      info.go_name = cls + self.convert_func_name(info.name)
-    info.cls = cls
-    info.parameters, info.not_implement, info.need_helper = self.convert_parameters(node.parameters)
-    info.need_helper = info.need_helper and not info.skip
+      func.go_name = gi_class + self.convert_func_name(func.name)
 
+    # class
+    func.is_method = is_method
+    func.c_class = c_class
+    func.gi_class = gi_class
+
+    # ins and outs
+    func.return_value = Value(node.retval)
+    func.parameters = []
+    func.c_parameters = []
     if is_method:
-      info.parameters.insert(0, Dict({
-        'name': 'self',
-        'transfer': False,
-        'type': Dict({
-          'need_helper': False,
-          'go_type': '*%s' % cls,
-          'c_type': '%s*' % c_class,
-        }),
-      }))
-
+      value = Value.selfValue(c_class)
+      func.parameters.append(value)
+      func.c_parameters.append(value)
+    func.extra_returns = []
+    for i, param in enumerate(node.parameters):
+      value = Value(param)
+      if 'in' in param.direction:
+        func.parameters.append(value)
+      if 'out' in param.direction:
+        func.extra_returns.append(value)
+      func.c_parameters.append(value)
     if node.throws:
-      info.parameters.append(Dict({
-        'name': 'err',
-        'transfer': False,
-        'type': Dict({
-          'need_helper': False,
-          'go_type': 'unsafe.Pointer',
-          'c_type': 'void*',
-        }),
-      }))
-      info.need_helper = True
+      value = Value.errValue()
+      func.extra_returns.append(value)
+      func.c_parameters.append(value)
 
-    info.return_type = self.get_type_info(node.retval)
-    info.no_return = False
-    if info.return_type.c_type == 'void':
-      info.no_return = True
+    func.need_helper = False
+    if func.is_method:
+      func.need_helper = True
+    func.need_helper |= any(value.need_helper for value in func.parameters)
+    func.need_helper |= any(value.need_helper for value in func.extra_returns)
 
-    if is_method:
-      info.need_helper = True
-    self.functions.append(info)
-    if info.need_helper and not info.not_implement and not info.skip:
-      self.functions_need_helper.append(info)
+    func.skip = node.deprecated is not None or func.c_name in self.skip_symbols
+    func.skip |= any(value.not_implement for value in func.parameters)
+    func.skip |= any(value.not_implement for value in func.extra_returns)
+
+    self.functions.append(func)
 
   def handleEnum(self, node):
     for mem in node.members:
@@ -149,105 +128,20 @@ class Parser:
     if c_type in self.skip_symbols:
       return
     self.construct_records.add((name, c_type))
-    self.map_record_type(name, c_type)
     # constructors
     for constructor in node.constructors:
-      self._cur_nodeA = constructor
       self.handleFunction(constructor, name)
     # static methods
     for function in node.static_methods:
-      self._cur_nodeA = function
       self.handleFunction(function, name)
     # methods
     for method in node.methods:
-      self._cur_nodeA = method
       self.handleFunction(method, name, True, c_type)
-
-  def map_record_type(self, name, c_type):
-    self.type_mappings['*C.' + c_type] = Dict({
-      'mapped_type': '*' + name,
-      'mapped_name_func': lambda param: '_cp_%s_' % param.name,
-      'mapping_code_func': lambda param: '\t_cp_%s_ := (*C.%s)(%s)\n' % (
-        param.name, c_type, param.name),
-      'return_code_func': lambda exp: '''\
-\t_c_return_ := %s
-\t_go_return_ := (*%s)(_c_return_)
-\truntime.SetFinalizer(&_go_return_, func (x **%s) {
-\t\tC.g_object_unref(C.gpointer(_c_return_))
-\t})
-\treturn _go_return_
-''' % (exp, name, name,),
-    })
 
   def convert_func_name(self, s):
     words = s.split('_')
     words = [w.capitalize() for w in words]
     return ''.join(words)
-
-  def convert_parameters(self, parameters):
-    not_implement = False
-    need_helper = False
-    params = []
-    for i, param in enumerate(parameters):
-      name = param.argname
-      param_info = Dict({
-        'transfer': param.transfer != 'none',
-        'type': self.get_type_info(param),
-        'direction': param.direction,
-      })
-      not_implement = param_info.type.not_implement or not_implement
-      if is_go_word(name):
-        name += '_'
-      if name is None:
-        name = 'arg_%d' % i
-      if param_info.type.need_helper:
-        need_helper = True
-      param_info.name = name
-      params.append(param_info)
-
-    return params, not_implement, need_helper
-
-  def get_type_info(self, param):
-    t = param.type
-    # go_type and c_type are the same, or strictlly compatible
-    c_type = t.ctype
-    not_implement = False
-    need_helper = False
-
-    if isinstance(t, ast.Array) and isinstance(param, ast.Parameter):
-      not_implement = True
-    if c_type in [
-        '<varargs>',
-        'va_list',
-        ]:
-      not_implement = True
-
-    c_type = c_type.replace('volatile ', '')
-    go_type = c_type
-    if c_type.startswith('const '):
-      need_helper = True
-      c_type = c_type.replace('const ', '')
-      go_type = c_type
-    if c_type.endswith('**'):
-      need_helper = True
-      c_type = 'void*'
-      go_type = 'unsafe.Pointer'
-    if c_type == 'long double': #BUG will lose precision
-      need_helper = True
-      c_type = 'double'
-      go_type = 'double'
-
-    if go_type != 'unsafe.Pointer':
-      go_type = 'C.' + go_type
-    if go_type.endswith('*'):
-      go_type = '*' + go_type[:-1]
-
-    return Dict({
-      'need_helper': True,
-      'not_implement': not_implement,
-      'c_type': c_type,
-      'go_type': go_type,
-    })
 
 def main():
   if len(sys.argv) < 2:

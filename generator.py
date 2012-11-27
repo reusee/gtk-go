@@ -1,13 +1,11 @@
 import StringIO
 import platform
-from type_mapping import mappings
 import time
 
 class Generator:
   def __init__(self, parser):
     self.parser = parser
     self.out = StringIO.StringIO()
-    mappings.update(self.parser.type_mappings)
 
     self.to_go_type_funcs = set()
 
@@ -31,32 +29,24 @@ class Generator:
     for include in self.parser.includes:
       print >>self.out, "// #include <%s>" % include
     print >>self.out, "/*"
-    # helper codes
-    for m in mappings.itervalues():
-      if m.help_code:
-        print >>self.out, m.help_code
-    self.generate_macro_helpers()
     # wrappers
-    for func in self.parser.functions_need_helper:
-      self.generate_wrapper(func)
+    for func in self.parser.functions:
+      if func.skip: continue
+      if not func.need_helper: continue
+      self.generate_helper(func)
     print >>self.out, "*/"
     # cgo
     print >>self.out, 'import "C"'
     # imports
     print >>self.out, 'import ('
-    print >>self.out, '\t"unsafe"'
-    print >>self.out, '\t"runtime"'
+    #print >>self.out, '\t"unsafe"'
+    #print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
 
-    for func in self.parser.functions:
-      self.generate_function(func)
-
+    #for func in self.parser.functions:
+    #  self.generate_function(func)
     self.generate_enum_symbols()
-
     self.generate_const_symbols()
-
-    self.generate_to_go_type_func_codes()
-
     self.generate_record_types()
 
   def write(self, f):
@@ -74,6 +64,7 @@ class Generator:
       return
 
     out = []
+
     # signature
     if func.is_method:
       out.append('func (self *%s) %s(' % (func.cls, func.go_name))
@@ -81,84 +72,44 @@ class Generator:
       out.append('func %s(' % func.go_name)
 
     # parameter
-    mapping_code = []
-    mapped_param_name = {}
-    sep = None
-    parameters = func.parameters
-    if func.is_method: # skip the self param
-      parameters = parameters[1:]
-    for param in parameters:
-      if sep != None: out.append(sep)
-      sep = ', '
-      mapped_type = param.type.go_type
-      if mappings.get(mapped_type, False):
-        m = mappings[mapped_type]
-        mapped_type = m.mapped_type
-        if m.mapping_code_func:
-          mapping_code.append(m.mapping_code_func(param))
-        mapped_param_name[param.name] = m.mapped_name_func(param)
-      out.append('%s %s' % (param.name, mapped_type))
-    out.append(') ')
+    for i, param in enumerate(func.parameters):
+      if i > 0: out.append(', ')
+      out.append('%s %s' % (param.name, param.go_type))
+    out.append(')')
 
     # return type
-    mapped_return_type = func.return_type.go_type
-    return_type_mapping = None
-    if mappings.get(mapped_return_type, False):
-      return_type_mapping = mappings[mapped_return_type]
-      mapped_return_type = return_type_mapping.mapped_type
-    out.append('%s{\n' % (
-      '' if func.no_return else (mapped_return_type + ' '),
-      ))
-    out.extend(mapping_code)
+    for i, ret in enumerate(func.returns):
+      if ret.c_type == 'void':
+        if i > 0: out.append(') {\n')
+        break
+      if i == 0: out.append(' (')
+      else: out.append(', ')
+      out.append('%s %s' % (ret.name, ret.go_type))
+      if i == len(func.returns) - 1:
+        out.append(') {\n')
 
     # return expression
     return_expression = []
-    if return_type_mapping != None:
-      if return_type_mapping.to_go_type_func:
-        return_expression.append('%s(' % mappings[func.return_type.go_type].to_go_type_func)
-        self.to_go_type_funcs.add(func.return_type.go_type)
-      elif return_type_mapping.to_go_type_code_head:
-        return_expression.append(return_type_mapping.to_go_type_code_head)
+
     if func.need_helper:
       return_expression.append('C._%s(' % func.c_name)
     else:
       return_expression.append('C.%s(' % func.c_name)
 
-    for i, param in enumerate(func.parameters):
-      if i > 0:
-        return_expression.append(', ')
-      if func.is_method and i == 0: # the self argument
-        return_expression.append('(*C.%s)(self)' % func.c_class)
-      else: # not a method
-        return_expression.append(mapped_param_name.get(param.name, param.name))
+    for i, param in enumerate(func.origin_params):
+      if i > 0: return_expression.append(', ')
+      return_expression.append(param.name)
     return_expression.append(')')
 
-    if return_type_mapping != None:
-      if return_type_mapping.to_go_type_func:
-        return_expression.append(')')
-      elif return_type_mapping.to_go_type_code_tail:
-        return_expression.append(return_type_mapping.to_go_type_code_tail)
-    return_expression = ''.join(return_expression)
-
-    # some type mapping use its own return statement
-    if return_type_mapping != None and return_type_mapping.return_code_func:
-      out.append(return_type_mapping.return_code_func(return_expression))
+    if func.void_return:
+      out.append('\t%s\n' % ''.join(return_expression))
     else:
-      out.append('\t')
-      if not func.no_return:
-        out.append('return ')
-      out.append(return_expression)
-      out.append('\n')
-    out.append('}\n\n')
+      out.append('\t__return__ = %s\n' % ''.join(return_expression))
 
+    out.append('\treturn\n}\n\n')
     self.out.write(''.join(out))
 
-  def generate_to_go_type_func_codes(self):
-    for t in self.to_go_type_funcs:
-      self.out.write(mappings[t].to_go_type_func_code)
-      self.out.write('\n')
-
-  def generate_wrapper(self, func):
+  def generate_helper(self, func):
     out = []
     spec = self.parser.func_spec[func.c_name]
 
@@ -169,20 +120,18 @@ class Generator:
       ))
 
     # parameters
-    for i, param in enumerate(func.parameters):
+    for i, param in enumerate(func.c_parameters):
       if i > 0: out.append(', ')
-      out.append(param.type.c_type + ' ' + param.name)
+      out.append(param.c_type + ' ' + param.name)
     out.append(') {\n\t')
 
     # body
-    if not func.no_return:
+    if spec.return_type != 'void':
       out.append('return ')
     out.append('%s(' % func.c_name)
-    for i, param in enumerate(func.parameters):
+    for i, param in enumerate(func.c_parameters):
       if i > 0: out.append(', ')
-      if param.type.c_helper_value_func:
-        out.append(param.type.c_helper_value_func(param))
-      elif spec.arg_types[i] != param.type.c_type:
+      if spec.arg_types[i] != param.c_type:
         out.append('(%s)(%s)' % (spec.arg_types[i], param.name))
       else:
         out.append(param.name)
