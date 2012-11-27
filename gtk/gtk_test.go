@@ -7,7 +7,7 @@ import (
 )
 
 func TestBasicFunc(t *testing.T) {
-  Init(nil, nil)
+  //Init(nil, nil)
   True()
   False()
   fmt.Printf("gtk %v.%v.%v\n", GetMajorVersion(), GetMinorVersion(), GetMicroVersion())
