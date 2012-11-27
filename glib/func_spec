@@ -1690,5 +1690,787 @@ g_mutex_free|void|GMutex *
 g_cond_new|GCond *
 g_cond_free|void|GCond *
 g_cond_timed_wait|gboolean|GCond *|GMutex *|GTimeVal *
+access|int|const char *|int
+faccessat|int|int|const char *|int|int
+lseek|__off_t|int|__off_t|int
+close|int|int
+read|ssize_t|int|void *|size_t
+write|ssize_t|int|const void *|size_t
+pread|ssize_t|int|void *|size_t|__off_t
+pwrite|ssize_t|int|const void *|size_t|__off_t
+pipe|int|int [2]
+alarm|unsigned int|unsigned int
+sleep|unsigned int|unsigned int
+ualarm|__useconds_t|__useconds_t|__useconds_t
+usleep|int|__useconds_t
+pause|int
+chown|int|const char *|__uid_t|__gid_t
+fchown|int|int|__uid_t|__gid_t
+lchown|int|const char *|__uid_t|__gid_t
+fchownat|int|int|const char *|__uid_t|__gid_t|int
+chdir|int|const char *
+fchdir|int|int
+getcwd|char *|char *|size_t
+getwd|char *|char *
+dup|int|int
+dup2|int|int|int
+execve|int|const char *|char *const []|char *const []
+fexecve|int|int|char *const []|char *const []
+execv|int|const char *|char *const []
+execle|int|const char *|const char *
+execl|int|const char *|const char *
+execvp|int|const char *|char *const []
+execlp|int|const char *|const char *
+nice|int|int
+_exit|void|int
+pathconf|long|const char *|int
+fpathconf|long|int|int
+sysconf|long|int
+confstr|size_t|int|char *|size_t
+getpid|__pid_t
+getppid|__pid_t
+getpgrp|__pid_t
+__getpgid|__pid_t|__pid_t
+getpgid|__pid_t|__pid_t
+setpgid|int|__pid_t|__pid_t
+setpgrp|int
+setsid|__pid_t
+getsid|__pid_t|__pid_t
+getuid|__uid_t
+geteuid|__uid_t
+getgid|__gid_t
+getegid|__gid_t
+getgroups|int|int|__gid_t []
+setuid|int|__uid_t
+setreuid|int|__uid_t|__uid_t
+seteuid|int|__uid_t
+setgid|int|__gid_t
+setregid|int|__gid_t|__gid_t
+setegid|int|__gid_t
+fork|__pid_t
+vfork|__pid_t
+ttyname|char *|int
+ttyname_r|int|int|char *|size_t
+isatty|int|int
+ttyslot|int
+link|int|const char *|const char *
+linkat|int|int|const char *|int|const char *|int
+symlink|int|const char *|const char *
+readlink|ssize_t|const char *restrict|char *restrict|size_t
+symlinkat|int|const char *|int|const char *
+readlinkat|ssize_t|int|const char *restrict|char *restrict|size_t
+unlink|int|const char *
+unlinkat|int|int|const char *|int
+rmdir|int|const char *
+tcgetpgrp|__pid_t|int
+tcsetpgrp|int|int|__pid_t
+getlogin|char *
+getlogin_r|int|char *|size_t
+setlogin|int|const char *
+getopt|int|int|char *const *|const char *
+gethostname|int|char *|size_t
+sethostname|int|const char *|size_t
+sethostid|int|long
+getdomainname|int|char *|size_t
+setdomainname|int|const char *|size_t
+vhangup|int
+revoke|int|const char *
+profil|int|unsigned short *|size_t|size_t|unsigned int
+acct|int|const char *
+getusershell|char *
+endusershell|void
+setusershell|void
+daemon|int|int|int
+chroot|int|const char *
+getpass|char *|const char *
+fsync|int|int
+gethostid|long
+sync|void
+getpagesize|int
+getdtablesize|int
+truncate|int|const char *|__off_t
+ftruncate|int|int|__off_t
+brk|int|void *
+sbrk|void *|intptr_t
+syscall|long|long
+lockf|int|int|int|__off_t
+fdatasync|int|int
+__errno_location|int *
+wait|__pid_t|__WAIT_STATUS
+waitpid|__pid_t|__pid_t|int *|int
+waitid|int|idtype_t|__id_t|siginfo_t *|int
+wait3|__pid_t|__WAIT_STATUS|int|struct rusage *
+wait4|__pid_t|__pid_t|__WAIT_STATUS|int|struct rusage *
+__ctype_get_mb_cur_max|size_t
+atof|double|const char *
+atoi|int|const char *
+atol|long|const char *
+atoll|long long|const char *
+strtod|double|const char *restrict|char **restrict
+strtof|float|const char *restrict|char **restrict
+strtold|long double|const char *restrict|char **restrict
+strtol|long|const char *restrict|char **restrict|int
+strtoul|unsigned long|const char *restrict|char **restrict|int
+strtoq|long long|const char *restrict|char **restrict|int
+strtouq|unsigned long long|const char *restrict|char **restrict|int
+strtoll|long long|const char *restrict|char **restrict|int
+strtoull|unsigned long long|const char *restrict|char **restrict|int
+l64a|char *|long
+a64l|long|const char *
+select|int|int|fd_set *restrict|fd_set *restrict|fd_set *restrict|struct timeval *restrict
+pselect|int|int|fd_set *restrict|fd_set *restrict|fd_set *restrict|const struct timespec *restrict|const __sigset_t *restrict
+gnu_dev_major|unsigned int|unsigned long long
+gnu_dev_minor|unsigned int|unsigned long long
+gnu_dev_makedev|unsigned long long|unsigned int|unsigned int
+random|long
+srandom|void|unsigned int
+initstate|char *|unsigned int|char *|size_t
+setstate|char *|char *
+random_r|int|struct random_data *restrict|int32_t *restrict
+srandom_r|int|unsigned int|struct random_data *
+initstate_r|int|unsigned int|char *restrict|size_t|struct random_data *restrict
+setstate_r|int|char *restrict|struct random_data *restrict
+rand|int
+srand|void|unsigned int
+rand_r|int|unsigned int *
+drand48|double
+erand48|double|unsigned short [3]
+lrand48|long
+nrand48|long|unsigned short [3]
+mrand48|long
+jrand48|long|unsigned short [3]
+srand48|void|long
+seed48|unsigned short *|unsigned short [3]
+lcong48|void|unsigned short [7]
+drand48_r|int|struct drand48_data *restrict|double *restrict
+erand48_r|int|unsigned short [3]|struct drand48_data *restrict|double *restrict
+lrand48_r|int|struct drand48_data *restrict|long *restrict
+nrand48_r|int|unsigned short [3]|struct drand48_data *restrict|long *restrict
+mrand48_r|int|struct drand48_data *restrict|long *restrict
+jrand48_r|int|unsigned short [3]|struct drand48_data *restrict|long *restrict
+srand48_r|int|long|struct drand48_data *
+seed48_r|int|unsigned short [3]|struct drand48_data *
+lcong48_r|int|unsigned short [7]|struct drand48_data *
+malloc|void *|size_t
+calloc|void *|size_t|size_t
+realloc|void *|void *|size_t
+free|void|void *
+cfree|void|void *
+alloca|void *|size_t
+valloc|void *|size_t
+posix_memalign|int|void **|size_t|size_t
+abort|void
+atexit|int|void (*)(void)
+on_exit|int|void (*)(int, void *)|void *
+exit|void|int
+_Exit|void|int
+getenv|char *|const char *
+__secure_getenv|char *|const char *
+putenv|int|char *
+setenv|int|const char *|const char *|int
+unsetenv|int|const char *
+clearenv|int
+mktemp|char *|char *
+mkstemp|int|char *
+mkstemps|int|char *|int
+mkdtemp|char *|char *
+system|int|const char *
+realpath|char *|const char *restrict|char *restrict
+bsearch|void *|const void *|const void *|size_t|size_t|__compar_fn_t
+qsort|void|void *|size_t|size_t|__compar_fn_t
+abs|int|int
+labs|long|long
+llabs|long long|long long
+div|div_t|int|int
+ldiv|ldiv_t|long|long
+lldiv|lldiv_t|long long|long long
+ecvt|char *|double|int|int *restrict|int *restrict
+fcvt|char *|double|int|int *restrict|int *restrict
+gcvt|char *|double|int|char *
+qecvt|char *|long double|int|int *restrict|int *restrict
+qfcvt|char *|long double|int|int *restrict|int *restrict
+qgcvt|char *|long double|int|char *
+ecvt_r|int|double|int|int *restrict|int *restrict|char *restrict|size_t
+fcvt_r|int|double|int|int *restrict|int *restrict|char *restrict|size_t
+qecvt_r|int|long double|int|int *restrict|int *restrict|char *restrict|size_t
+qfcvt_r|int|long double|int|int *restrict|int *restrict|char *restrict|size_t
+mblen|int|const char *|size_t
+mbtowc|int|wchar_t *restrict|const char *restrict|size_t
+wctomb|int|char *|wchar_t
+mbstowcs|size_t|wchar_t *restrict|const char *restrict|size_t
+wcstombs|size_t|char *restrict|const wchar_t *restrict|size_t
+rpmatch|int|const char *
+getsubopt|int|char **restrict|char *const *restrict|char **restrict
+getloadavg|int|double []|int
+fcntl|int|int|int
+open|int|const char *|int
+openat|int|int|const char *|int
+creat|int|const char *|__mode_t
+posix_fadvise|int|int|__off_t|__off_t|int
+posix_fallocate|int|int|__off_t|__off_t
+g_unix_error_quark|GQuark
+g_unix_open_pipe|gboolean|gint *|gint|GError **
+g_unix_set_fd_nonblocking|gboolean|gint|gboolean|GError **
+g_unix_signal_source_new|GSource *|gint
+g_unix_signal_add_full|guint|gint|gint|GSourceFunc|gpointer|GDestroyNotify
+g_unix_signal_add|guint|gint|GSourceFunc|gpointer
+g_type_init|void
+g_type_init_with_debug_flags|void|GTypeDebugFlags
+g_type_name|const gchar *|GType
+g_type_qname|GQuark|GType
+g_type_from_name|GType|const gchar *
+g_type_parent|GType|GType
+g_type_depth|guint|GType
+g_type_next_base|GType|GType|GType
+g_type_is_a|gboolean|GType|GType
+g_type_class_ref|gpointer|GType
+g_type_class_peek|gpointer|GType
+g_type_class_peek_static|gpointer|GType
+g_type_class_unref|void|gpointer
+g_type_class_peek_parent|gpointer|gpointer
+g_type_interface_peek|gpointer|gpointer|GType
+g_type_interface_peek_parent|gpointer|gpointer
+g_type_default_interface_ref|gpointer|GType
+g_type_default_interface_peek|gpointer|GType
+g_type_default_interface_unref|void|gpointer
+g_type_children|GType *|GType|guint *
+g_type_interfaces|GType *|GType|guint *
+g_type_set_qdata|void|GType|GQuark|gpointer
+g_type_get_qdata|gpointer|GType|GQuark
+g_type_query|void|GType|GTypeQuery *
+g_type_register_static|GType|GType|const gchar *|const GTypeInfo *|GTypeFlags
+g_type_register_static_simple|GType|GType|const gchar *|guint|GClassInitFunc|guint|GInstanceInitFunc|GTypeFlags
+g_type_register_dynamic|GType|GType|const gchar *|GTypePlugin *|GTypeFlags
+g_type_register_fundamental|GType|GType|const gchar *|const GTypeInfo *|const GTypeFundamentalInfo *|GTypeFlags
+g_type_add_interface_static|void|GType|GType|const GInterfaceInfo *
+g_type_add_interface_dynamic|void|GType|GType|GTypePlugin *
+g_type_interface_add_prerequisite|void|GType|GType
+g_type_interface_prerequisites|GType *|GType|guint *
+g_type_class_add_private|void|gpointer|gsize
+g_type_instance_get_private|gpointer|GTypeInstance *|GType
+g_type_add_class_private|void|GType|gsize
+g_type_class_get_private|gpointer|GTypeClass *|GType
+g_type_ensure|void|GType
+g_type_get_plugin|GTypePlugin *|GType
+g_type_interface_get_plugin|GTypePlugin *|GType|GType
+g_type_fundamental_next|GType
+g_type_fundamental|GType|GType
+g_type_create_instance|GTypeInstance *|GType
+g_type_free_instance|void|GTypeInstance *
+g_type_add_class_cache_func|void|gpointer|GTypeClassCacheFunc
+g_type_remove_class_cache_func|void|gpointer|GTypeClassCacheFunc
+g_type_class_unref_uncached|void|gpointer
+g_type_add_interface_check|void|gpointer|GTypeInterfaceCheckFunc
+g_type_remove_interface_check|void|gpointer|GTypeInterfaceCheckFunc
+g_type_value_table_peek|GTypeValueTable *|GType
+g_type_check_instance|gboolean|GTypeInstance *
+g_type_check_instance_cast|GTypeInstance *|GTypeInstance *|GType
+g_type_check_instance_is_a|gboolean|GTypeInstance *|GType
+g_type_check_class_cast|GTypeClass *|GTypeClass *|GType
+g_type_check_class_is_a|gboolean|GTypeClass *|GType
+g_type_check_is_value_type|gboolean|GType
+g_type_check_value|gboolean|GValue *
+g_type_check_value_holds|gboolean|GValue *|GType
+g_type_test_flags|gboolean|GType|guint
+g_type_name_from_instance|const gchar *|GTypeInstance *
+g_type_name_from_class|const gchar *|GTypeClass *
+g_value_init|GValue *|GValue *|GType
+g_value_copy|void|const GValue *|GValue *
+g_value_reset|GValue *|GValue *
+g_value_unset|void|GValue *
+g_value_set_instance|void|GValue *|gpointer
+g_value_fits_pointer|gboolean|const GValue *
+g_value_peek_pointer|gpointer|const GValue *
+g_value_type_compatible|gboolean|GType|GType
+g_value_type_transformable|gboolean|GType|GType
+g_value_transform|gboolean|const GValue *|GValue *
+g_value_register_transform_func|void|GType|GType|GValueTransform
+g_param_spec_ref|GParamSpec *|GParamSpec *
+g_param_spec_unref|void|GParamSpec *
+g_param_spec_sink|void|GParamSpec *
+g_param_spec_ref_sink|GParamSpec *|GParamSpec *
+g_param_spec_get_qdata|gpointer|GParamSpec *|GQuark
+g_param_spec_set_qdata|void|GParamSpec *|GQuark|gpointer
+g_param_spec_set_qdata_full|void|GParamSpec *|GQuark|gpointer|GDestroyNotify
+g_param_spec_steal_qdata|gpointer|GParamSpec *|GQuark
+g_param_spec_get_redirect_target|GParamSpec *|GParamSpec *
+g_param_value_set_default|void|GParamSpec *|GValue *
+g_param_value_defaults|gboolean|GParamSpec *|GValue *
+g_param_value_validate|gboolean|GParamSpec *|GValue *
+g_param_value_convert|gboolean|GParamSpec *|const GValue *|GValue *|gboolean
+g_param_values_cmp|gint|GParamSpec *|const GValue *|const GValue *
+g_param_spec_get_name|const gchar *|GParamSpec *
+g_param_spec_get_nick|const gchar *|GParamSpec *
+g_param_spec_get_blurb|const gchar *|GParamSpec *
+g_value_set_param|void|GValue *|GParamSpec *
+g_value_get_param|GParamSpec *|const GValue *
+g_value_dup_param|GParamSpec *|const GValue *
+g_value_take_param|void|GValue *|GParamSpec *
+g_value_set_param_take_ownership|void|GValue *|GParamSpec *
+g_param_type_register_static|GType|const gchar *|const GParamSpecTypeInfo *
+_g_param_type_register_static_constant|GType|const gchar *|const GParamSpecTypeInfo *|GType
+g_param_spec_internal|gpointer|GType|const gchar *|const gchar *|const gchar *|GParamFlags
+g_param_spec_pool_new|GParamSpecPool *|gboolean
+g_param_spec_pool_insert|void|GParamSpecPool *|GParamSpec *|GType
+g_param_spec_pool_remove|void|GParamSpecPool *|GParamSpec *
+g_param_spec_pool_lookup|GParamSpec *|GParamSpecPool *|const gchar *|GType|gboolean
+g_param_spec_pool_list_owned|GList *|GParamSpecPool *|GType
+g_param_spec_pool_list|GParamSpec **|GParamSpecPool *|GType|guint *
+g_cclosure_new|GClosure *|GCallback|gpointer|GClosureNotify
+g_cclosure_new_swap|GClosure *|GCallback|gpointer|GClosureNotify
+g_signal_type_cclosure_new|GClosure *|GType|guint
+g_closure_ref|GClosure *|GClosure *
+g_closure_sink|void|GClosure *
+g_closure_unref|void|GClosure *
+g_closure_new_simple|GClosure *|guint|gpointer
+g_closure_add_finalize_notifier|void|GClosure *|gpointer|GClosureNotify
+g_closure_remove_finalize_notifier|void|GClosure *|gpointer|GClosureNotify
+g_closure_add_invalidate_notifier|void|GClosure *|gpointer|GClosureNotify
+g_closure_remove_invalidate_notifier|void|GClosure *|gpointer|GClosureNotify
+g_closure_add_marshal_guards|void|GClosure *|gpointer|GClosureNotify|gpointer|GClosureNotify
+g_closure_set_marshal|void|GClosure *|GClosureMarshal
+g_closure_set_meta_marshal|void|GClosure *|gpointer|GClosureMarshal
+g_closure_invalidate|void|GClosure *
+g_closure_invoke|void|GClosure *|GValue *|guint|const GValue *|gpointer
+g_cclosure_marshal_generic|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_generic_va|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__VOID|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__VOIDv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__BOOLEAN|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__BOOLEANv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__CHAR|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__CHARv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__UCHAR|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__UCHARv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__INT|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__INTv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__UINT|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__UINTv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__LONG|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__LONGv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__ULONG|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__ULONGv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__ENUM|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__ENUMv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__FLAGS|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__FLAGSv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__FLOAT|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__FLOATv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__DOUBLE|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__DOUBLEv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__STRING|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__STRINGv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__PARAM|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__PARAMv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__BOXED|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__BOXEDv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__POINTER|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__POINTERv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__OBJECT|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__OBJECTv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__VARIANT|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__VARIANTv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_VOID__UINT_POINTER|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_VOID__UINT_POINTERv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_BOOLEAN__FLAGS|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_BOOLEAN__FLAGSv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_STRING__OBJECT_POINTER|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_STRING__OBJECT_POINTERv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_cclosure_marshal_BOOLEAN__BOXED_BOXED|void|GClosure *|GValue *|guint|const GValue *|gpointer|gpointer
+g_cclosure_marshal_BOOLEAN__BOXED_BOXEDv|void|GClosure *|GValue *|gpointer|va_list|gpointer|int|GType *
+g_signal_newv|guint|const gchar *|GType|GSignalFlags|GClosure *|GSignalAccumulator|gpointer|GSignalCMarshaller|GType|guint|GType *
+g_signal_new_valist|guint|const gchar *|GType|GSignalFlags|GClosure *|GSignalAccumulator|gpointer|GSignalCMarshaller|GType|guint|va_list
+g_signal_new|guint|const gchar *|GType|GSignalFlags|guint|GSignalAccumulator|gpointer|GSignalCMarshaller|GType|guint
+g_signal_new_class_handler|guint|const gchar *|GType|GSignalFlags|GCallback|GSignalAccumulator|gpointer|GSignalCMarshaller|GType|guint
+g_signal_set_va_marshaller|void|guint|GType|GSignalCVaMarshaller
+g_signal_emitv|void|const GValue *|guint|GQuark|GValue *
+g_signal_emit_valist|void|gpointer|guint|GQuark|va_list
+g_signal_emit|void|gpointer|guint|GQuark
+g_signal_emit_by_name|void|gpointer|const gchar *
+g_signal_lookup|guint|const gchar *|GType
+g_signal_name|const gchar *|guint
+g_signal_query|void|guint|GSignalQuery *
+g_signal_list_ids|guint *|GType|guint *
+g_signal_parse_name|gboolean|const gchar *|GType|guint *|GQuark *|gboolean
+g_signal_get_invocation_hint|GSignalInvocationHint *|gpointer
+g_signal_stop_emission|void|gpointer|guint|GQuark
+g_signal_stop_emission_by_name|void|gpointer|const gchar *
+g_signal_add_emission_hook|gulong|guint|GQuark|GSignalEmissionHook|gpointer|GDestroyNotify
+g_signal_remove_emission_hook|void|guint|gulong
+g_signal_has_handler_pending|gboolean|gpointer|guint|GQuark|gboolean
+g_signal_connect_closure_by_id|gulong|gpointer|guint|GQuark|GClosure *|gboolean
+g_signal_connect_closure|gulong|gpointer|const gchar *|GClosure *|gboolean
+g_signal_connect_data|gulong|gpointer|const gchar *|GCallback|gpointer|GClosureNotify|GConnectFlags
+g_signal_handler_block|void|gpointer|gulong
+g_signal_handler_unblock|void|gpointer|gulong
+g_signal_handler_disconnect|void|gpointer|gulong
+g_signal_handler_is_connected|gboolean|gpointer|gulong
+g_signal_handler_find|gulong|gpointer|GSignalMatchType|guint|GQuark|GClosure *|gpointer|gpointer
+g_signal_handlers_block_matched|guint|gpointer|GSignalMatchType|guint|GQuark|GClosure *|gpointer|gpointer
+g_signal_handlers_unblock_matched|guint|gpointer|GSignalMatchType|guint|GQuark|GClosure *|gpointer|gpointer
+g_signal_handlers_disconnect_matched|guint|gpointer|GSignalMatchType|guint|GQuark|GClosure *|gpointer|gpointer
+g_signal_override_class_closure|void|guint|GType|GClosure *
+g_signal_override_class_handler|void|const gchar *|GType|GCallback
+g_signal_chain_from_overridden|void|const GValue *|GValue *
+g_signal_chain_from_overridden_handler|void|gpointer
+g_signal_accumulator_true_handled|gboolean|GSignalInvocationHint *|GValue *|const GValue *|gpointer
+g_signal_accumulator_first_wins|gboolean|GSignalInvocationHint *|GValue *|const GValue *|gpointer
+g_signal_handlers_destroy|void|gpointer
+_g_signals_destroy|void|GType
+g_date_get_type|GType
+g_strv_get_type|GType
+g_gstring_get_type|GType
+g_hash_table_get_type|GType
+g_array_get_type|GType
+g_byte_array_get_type|GType
+g_ptr_array_get_type|GType
+g_bytes_get_type|GType
+g_variant_type_get_gtype|GType
+g_regex_get_type|GType
+g_match_info_get_type|GType
+g_error_get_type|GType
+g_date_time_get_type|GType
+g_time_zone_get_type|GType
+g_io_channel_get_type|GType
+g_io_condition_get_type|GType
+g_variant_builder_get_type|GType
+g_key_file_get_type|GType
+g_main_loop_get_type|GType
+g_main_context_get_type|GType
+g_source_get_type|GType
+g_pollfd_get_type|GType
+g_thread_get_type|GType
+g_variant_get_gtype|GType
+g_boxed_copy|gpointer|GType|gconstpointer
+g_boxed_free|void|GType|gpointer
+g_value_set_boxed|void|GValue *|gconstpointer
+g_value_set_static_boxed|void|GValue *|gconstpointer
+g_value_take_boxed|void|GValue *|gconstpointer
+g_value_set_boxed_take_ownership|void|GValue *|gconstpointer
+g_value_get_boxed|gpointer|const GValue *
+g_value_dup_boxed|gpointer|const GValue *
+g_boxed_type_register_static|GType|const gchar *|GBoxedCopyFunc|GBoxedFreeFunc
+g_closure_get_type|GType
+g_value_get_type|GType
+g_initially_unowned_get_type|GType
+g_object_class_install_property|void|GObjectClass *|guint|GParamSpec *
+g_object_class_find_property|GParamSpec *|GObjectClass *|const gchar *
+g_object_class_list_properties|GParamSpec **|GObjectClass *|guint *
+g_object_class_override_property|void|GObjectClass *|guint|const gchar *
+g_object_class_install_properties|void|GObjectClass *|guint|GParamSpec **
+g_object_interface_install_property|void|gpointer|GParamSpec *
+g_object_interface_find_property|GParamSpec *|gpointer|const gchar *
+g_object_interface_list_properties|GParamSpec **|gpointer|guint *
+g_object_get_type|GType
+g_object_new|gpointer|GType|const gchar *
+g_object_newv|gpointer|GType|guint|GParameter *
+g_object_new_valist|GObject *|GType|const gchar *|va_list
+g_object_set|void|gpointer|const gchar *
+g_object_get|void|gpointer|const gchar *
+g_object_connect|gpointer|gpointer|const gchar *
+g_object_disconnect|void|gpointer|const gchar *
+g_object_set_valist|void|GObject *|const gchar *|va_list
+g_object_get_valist|void|GObject *|const gchar *|va_list
+g_object_set_property|void|GObject *|const gchar *|const GValue *
+g_object_get_property|void|GObject *|const gchar *|GValue *
+g_object_freeze_notify|void|GObject *
+g_object_notify|void|GObject *|const gchar *
+g_object_notify_by_pspec|void|GObject *|GParamSpec *
+g_object_thaw_notify|void|GObject *
+g_object_is_floating|gboolean|gpointer
+g_object_ref_sink|gpointer|gpointer
+g_object_ref|gpointer|gpointer
+g_object_unref|void|gpointer
+g_object_weak_ref|void|GObject *|GWeakNotify|gpointer
+g_object_weak_unref|void|GObject *|GWeakNotify|gpointer
+g_object_add_weak_pointer|void|GObject *|gpointer *
+g_object_remove_weak_pointer|void|GObject *|gpointer *
+g_object_add_toggle_ref|void|GObject *|GToggleNotify|gpointer
+g_object_remove_toggle_ref|void|GObject *|GToggleNotify|gpointer
+g_object_get_qdata|gpointer|GObject *|GQuark
+g_object_set_qdata|void|GObject *|GQuark|gpointer
+g_object_set_qdata_full|void|GObject *|GQuark|gpointer|GDestroyNotify
+g_object_steal_qdata|gpointer|GObject *|GQuark
+g_object_dup_qdata|gpointer|GObject *|GQuark|GDuplicateFunc|gpointer
+g_object_replace_qdata|gboolean|GObject *|GQuark|gpointer|gpointer|GDestroyNotify|GDestroyNotify *
+g_object_get_data|gpointer|GObject *|const gchar *
+g_object_set_data|void|GObject *|const gchar *|gpointer
+g_object_set_data_full|void|GObject *|const gchar *|gpointer|GDestroyNotify
+g_object_steal_data|gpointer|GObject *|const gchar *
+g_object_dup_data|gpointer|GObject *|const gchar *|GDuplicateFunc|gpointer
+g_object_replace_data|gboolean|GObject *|const gchar *|gpointer|gpointer|GDestroyNotify|GDestroyNotify *
+g_object_watch_closure|void|GObject *|GClosure *
+g_cclosure_new_object|GClosure *|GCallback|GObject *
+g_cclosure_new_object_swap|GClosure *|GCallback|GObject *
+g_closure_new_object|GClosure *|guint|GObject *
+g_value_set_object|void|GValue *|gpointer
+g_value_get_object|gpointer|const GValue *
+g_value_dup_object|gpointer|const GValue *
+g_signal_connect_object|gulong|gpointer|const gchar *|GCallback|gpointer|GConnectFlags
+g_object_force_floating|void|GObject *
+g_object_run_dispose|void|GObject *
+g_value_take_object|void|GValue *|gpointer
+g_value_set_object_take_ownership|void|GValue *|gpointer
+g_object_compat_control|gsize|gsize|gpointer
+g_clear_object|void|volatile GObject **
+g_weak_ref_init|void|GWeakRef *|gpointer
+g_weak_ref_clear|void|GWeakRef *
+g_weak_ref_get|gpointer|GWeakRef *
+g_weak_ref_set|void|GWeakRef *|gpointer
+g_binding_flags_get_type|GType
+g_binding_get_type|GType
+g_binding_get_flags|GBindingFlags|GBinding *
+g_binding_get_source|GObject *|GBinding *
+g_binding_get_target|GObject *|GBinding *
+g_binding_get_source_property|const gchar *|GBinding *
+g_binding_get_target_property|const gchar *|GBinding *
+g_object_bind_property|GBinding *|gpointer|const gchar *|gpointer|const gchar *|GBindingFlags
+g_object_bind_property_full|GBinding *|gpointer|const gchar *|gpointer|const gchar *|GBindingFlags|GBindingTransformFunc|GBindingTransformFunc|gpointer|GDestroyNotify
+g_object_bind_property_with_closures|GBinding *|gpointer|const gchar *|gpointer|const gchar *|GBindingFlags|GClosure *|GClosure *
+g_enum_get_value|GEnumValue *|GEnumClass *|gint
+g_enum_get_value_by_name|GEnumValue *|GEnumClass *|const gchar *
+g_enum_get_value_by_nick|GEnumValue *|GEnumClass *|const gchar *
+g_flags_get_first_value|GFlagsValue *|GFlagsClass *|guint
+g_flags_get_value_by_name|GFlagsValue *|GFlagsClass *|const gchar *
+g_flags_get_value_by_nick|GFlagsValue *|GFlagsClass *|const gchar *
+g_value_set_enum|void|GValue *|gint
+g_value_get_enum|gint|const GValue *
+g_value_set_flags|void|GValue *|guint
+g_value_get_flags|guint|const GValue *
+g_enum_register_static|GType|const gchar *|const GEnumValue *
+g_flags_register_static|GType|const gchar *|const GFlagsValue *
+g_enum_complete_type_info|void|GType|GTypeInfo *|const GEnumValue *
+g_flags_complete_type_info|void|GType|GTypeInfo *|const GFlagsValue *
+g_param_spec_char|GParamSpec *|const gchar *|const gchar *|const gchar *|gint8|gint8|gint8|GParamFlags
+g_param_spec_uchar|GParamSpec *|const gchar *|const gchar *|const gchar *|guint8|guint8|guint8|GParamFlags
+g_param_spec_boolean|GParamSpec *|const gchar *|const gchar *|const gchar *|gboolean|GParamFlags
+g_param_spec_int|GParamSpec *|const gchar *|const gchar *|const gchar *|gint|gint|gint|GParamFlags
+g_param_spec_uint|GParamSpec *|const gchar *|const gchar *|const gchar *|guint|guint|guint|GParamFlags
+g_param_spec_long|GParamSpec *|const gchar *|const gchar *|const gchar *|glong|glong|glong|GParamFlags
+g_param_spec_ulong|GParamSpec *|const gchar *|const gchar *|const gchar *|gulong|gulong|gulong|GParamFlags
+g_param_spec_int64|GParamSpec *|const gchar *|const gchar *|const gchar *|gint64|gint64|gint64|GParamFlags
+g_param_spec_uint64|GParamSpec *|const gchar *|const gchar *|const gchar *|guint64|guint64|guint64|GParamFlags
+g_param_spec_unichar|GParamSpec *|const gchar *|const gchar *|const gchar *|gunichar|GParamFlags
+g_param_spec_enum|GParamSpec *|const gchar *|const gchar *|const gchar *|GType|gint|GParamFlags
+g_param_spec_flags|GParamSpec *|const gchar *|const gchar *|const gchar *|GType|guint|GParamFlags
+g_param_spec_float|GParamSpec *|const gchar *|const gchar *|const gchar *|gfloat|gfloat|gfloat|GParamFlags
+g_param_spec_double|GParamSpec *|const gchar *|const gchar *|const gchar *|gdouble|gdouble|gdouble|GParamFlags
+g_param_spec_string|GParamSpec *|const gchar *|const gchar *|const gchar *|const gchar *|GParamFlags
+g_param_spec_param|GParamSpec *|const gchar *|const gchar *|const gchar *|GType|GParamFlags
+g_param_spec_boxed|GParamSpec *|const gchar *|const gchar *|const gchar *|GType|GParamFlags
+g_param_spec_pointer|GParamSpec *|const gchar *|const gchar *|const gchar *|GParamFlags
+g_param_spec_value_array|GParamSpec *|const gchar *|const gchar *|const gchar *|GParamSpec *|GParamFlags
+g_param_spec_object|GParamSpec *|const gchar *|const gchar *|const gchar *|GType|GParamFlags
+g_param_spec_override|GParamSpec *|const gchar *|GParamSpec *
+g_param_spec_gtype|GParamSpec *|const gchar *|const gchar *|const gchar *|GType|GParamFlags
+g_param_spec_variant|GParamSpec *|const gchar *|const gchar *|const gchar *|const GVariantType *|GVariant *|GParamFlags
+g_source_set_closure|void|GSource *|GClosure *
+g_source_set_dummy_callback|void|GSource *
+g_type_module_get_type|GType
+g_type_module_use|gboolean|GTypeModule *
+g_type_module_unuse|void|GTypeModule *
+g_type_module_set_name|void|GTypeModule *|const gchar *
+g_type_module_register_type|GType|GTypeModule *|GType|const gchar *|const GTypeInfo *|GTypeFlags
+g_type_module_add_interface|void|GTypeModule *|GType|GType|const GInterfaceInfo *
+g_type_module_register_enum|GType|GTypeModule *|const gchar *|const GEnumValue *
+g_type_module_register_flags|GType|GTypeModule *|const gchar *|const GFlagsValue *
+g_type_plugin_get_type|GType
+g_type_plugin_use|void|GTypePlugin *
+g_type_plugin_unuse|void|GTypePlugin *
+g_type_plugin_complete_type_info|void|GTypePlugin *|GType|GTypeInfo *|GTypeValueTable *
+g_type_plugin_complete_interface_info|void|GTypePlugin *|GType|GType|GInterfaceInfo *
+g_value_array_get_type|GType
+g_value_array_get_nth|GValue *|GValueArray *|guint
+g_value_array_new|GValueArray *|guint
+g_value_array_free|void|GValueArray *
+g_value_array_copy|GValueArray *|const GValueArray *
+g_value_array_prepend|GValueArray *|GValueArray *|const GValue *
+g_value_array_append|GValueArray *|GValueArray *|const GValue *
+g_value_array_insert|GValueArray *|GValueArray *|guint|const GValue *
+g_value_array_remove|GValueArray *|GValueArray *|guint
+g_value_array_sort|GValueArray *|GValueArray *|GCompareFunc
+g_value_array_sort_with_data|GValueArray *|GValueArray *|GCompareDataFunc|gpointer
+g_value_set_char|void|GValue *|gchar
+g_value_get_char|gchar|const GValue *
+g_value_set_schar|void|GValue *|gint8
+g_value_get_schar|gint8|const GValue *
+g_value_set_uchar|void|GValue *|guchar
+g_value_get_uchar|guchar|const GValue *
+g_value_set_boolean|void|GValue *|gboolean
+g_value_get_boolean|gboolean|const GValue *
+g_value_set_int|void|GValue *|gint
+g_value_get_int|gint|const GValue *
+g_value_set_uint|void|GValue *|guint
+g_value_get_uint|guint|const GValue *
+g_value_set_long|void|GValue *|glong
+g_value_get_long|glong|const GValue *
+g_value_set_ulong|void|GValue *|gulong
+g_value_get_ulong|gulong|const GValue *
+g_value_set_int64|void|GValue *|gint64
+g_value_get_int64|gint64|const GValue *
+g_value_set_uint64|void|GValue *|guint64
+g_value_get_uint64|guint64|const GValue *
+g_value_set_float|void|GValue *|gfloat
+g_value_get_float|gfloat|const GValue *
+g_value_set_double|void|GValue *|gdouble
+g_value_get_double|gdouble|const GValue *
+g_value_set_string|void|GValue *|const gchar *
+g_value_set_static_string|void|GValue *|const gchar *
+g_value_get_string|const gchar *|const GValue *
+g_value_dup_string|gchar *|const GValue *
+g_value_set_pointer|void|GValue *|gpointer
+g_value_get_pointer|gpointer|const GValue *
+g_gtype_get_type|GType
+g_value_set_gtype|void|GValue *|GType
+g_value_get_gtype|GType|const GValue *
+g_value_set_variant|void|GValue *|GVariant *
+g_value_take_variant|void|GValue *|GVariant *
+g_value_get_variant|GVariant *|const GValue *
+g_value_dup_variant|GVariant *|const GValue *
+g_pointer_type_register_static|GType|const gchar *
+g_strdup_value_contents|gchar *|const GValue *
+g_value_take_string|void|GValue *|gchar *
+g_value_set_string_take_ownership|void|GValue *|gchar *
+__underflow|int|_IO_FILE *
+__uflow|int|_IO_FILE *
+__overflow|int|_IO_FILE *|int
+_IO_getc|int|_IO_FILE *
+_IO_putc|int|int|_IO_FILE *
+_IO_feof|int|_IO_FILE *
+_IO_ferror|int|_IO_FILE *
+_IO_peekc_locked|int|_IO_FILE *
+_IO_flockfile|void|_IO_FILE *
+_IO_funlockfile|void|_IO_FILE *
+_IO_ftrylockfile|int|_IO_FILE *
+_IO_vfscanf|int|_IO_FILE *restrict|const char *restrict|__gnuc_va_list|int *restrict
+_IO_vfprintf|int|_IO_FILE *restrict|const char *restrict|__gnuc_va_list
+_IO_padn|__ssize_t|_IO_FILE *|int|__ssize_t
+_IO_sgetn|size_t|_IO_FILE *|void *|size_t
+_IO_seekoff|__off64_t|_IO_FILE *|__off64_t|int|int
+_IO_seekpos|__off64_t|_IO_FILE *|__off64_t|int
+_IO_free_backup_area|void|_IO_FILE *
+remove|int|const char *
+rename|int|const char *|const char *
+renameat|int|int|const char *|int|const char *
+tmpfile|FILE *
+tmpnam|char *|char *
+tmpnam_r|char *|char *
+tempnam|char *|const char *|const char *
+fclose|int|FILE *
+fflush|int|FILE *
+fflush_unlocked|int|FILE *
+fopen|FILE *|const char *restrict|const char *restrict
+freopen|FILE *|const char *restrict|const char *restrict|FILE *restrict
+fdopen|FILE *|int|const char *
+fmemopen|FILE *|void *|size_t|const char *
+open_memstream|FILE *|char **|size_t *
+setbuf|void|FILE *restrict|char *restrict
+setvbuf|int|FILE *restrict|char *restrict|int|size_t
+setbuffer|void|FILE *restrict|char *restrict|size_t
+setlinebuf|void|FILE *
+fprintf|int|FILE *restrict|const char *restrict
+printf|int|const char *restrict
+sprintf|int|char *restrict|const char *restrict
+vfprintf|int|FILE *restrict|const char *restrict|__gnuc_va_list
+vprintf|int|const char *restrict|__gnuc_va_list
+vsprintf|int|char *restrict|const char *restrict|__gnuc_va_list
+snprintf|int|char *restrict|size_t|const char *restrict
+vsnprintf|int|char *restrict|size_t|const char *restrict|__gnuc_va_list
+vdprintf|int|int|const char *restrict|__gnuc_va_list
+dprintf|int|int|const char *restrict
+fscanf|int|FILE *restrict|const char *restrict
+scanf|int|const char *restrict
+sscanf|int|const char *restrict|const char *restrict
+fscanf|int|FILE *restrict|const char *restrict
+scanf|int|const char *restrict
+sscanf|int|const char *restrict|const char *restrict
+vfscanf|int|FILE *restrict|const char *restrict|__gnuc_va_list
+vscanf|int|const char *restrict|__gnuc_va_list
+vsscanf|int|const char *restrict|const char *restrict|__gnuc_va_list
+vfscanf|int|FILE *restrict|const char *restrict|__gnuc_va_list
+vscanf|int|const char *restrict|__gnuc_va_list
+vsscanf|int|const char *restrict|const char *restrict|__gnuc_va_list
+fgetc|int|FILE *
+getc|int|FILE *
+getchar|int
+getc_unlocked|int|FILE *
+getchar_unlocked|int
+fgetc_unlocked|int|FILE *
+fputc|int|int|FILE *
+putc|int|int|FILE *
+putchar|int|int
+fputc_unlocked|int|int|FILE *
+putc_unlocked|int|int|FILE *
+putchar_unlocked|int|int
+getw|int|FILE *
+putw|int|int|FILE *
+fgets|char *|char *restrict|int|FILE *restrict
+gets|char *|char *
+__getdelim|__ssize_t|char **restrict|size_t *restrict|int|FILE *restrict
+getdelim|__ssize_t|char **restrict|size_t *restrict|int|FILE *restrict
+getline|__ssize_t|char **restrict|size_t *restrict|FILE *restrict
+fputs|int|const char *restrict|FILE *restrict
+puts|int|const char *
+ungetc|int|int|FILE *
+fread|size_t|void *restrict|size_t|size_t|FILE *restrict
+fwrite|size_t|const void *restrict|size_t|size_t|FILE *restrict
+fread_unlocked|size_t|void *restrict|size_t|size_t|FILE *restrict
+fwrite_unlocked|size_t|const void *restrict|size_t|size_t|FILE *restrict
+fseek|int|FILE *|long|int
+ftell|long|FILE *
+rewind|void|FILE *
+fseeko|int|FILE *|__off_t|int
+ftello|__off_t|FILE *
+fgetpos|int|FILE *restrict|fpos_t *restrict
+fsetpos|int|FILE *|const fpos_t *
+clearerr|void|FILE *
+feof|int|FILE *
+ferror|int|FILE *
+clearerr_unlocked|void|FILE *
+feof_unlocked|int|FILE *
+ferror_unlocked|int|FILE *
+perror|void|const char *
+fileno|int|FILE *
+fileno_unlocked|int|FILE *
+popen|FILE *|const char *|const char *
+pclose|int|FILE *
+ctermid|char *|char *
+flockfile|void|FILE *
+ftrylockfile|int|FILE *
+funlockfile|void|FILE *
+g_printf|gint|const gchar *
+g_fprintf|gint|FILE *|const gchar *
+g_sprintf|gint|gchar *|const gchar *
+g_vprintf|gint|const gchar *|va_list
+g_vfprintf|gint|FILE *|const gchar *|va_list
+g_vsprintf|gint|gchar *|const gchar *|va_list
+g_vasprintf|gint|gchar **|const gchar *|va_list
+stat|int|const char *restrict|struct stat *restrict
+fstat|int|int|struct stat *
+fstatat|int|int|const char *restrict|struct stat *restrict|int
+lstat|int|const char *restrict|struct stat *restrict
+chmod|int|const char *|__mode_t
+lchmod|int|const char *|__mode_t
+fchmod|int|int|__mode_t
+fchmodat|int|int|const char *|__mode_t|int
+umask|__mode_t|__mode_t
+mkdir|int|const char *|__mode_t
+mkdirat|int|int|const char *|__mode_t
+mknod|int|const char *|__mode_t|__dev_t
+mknodat|int|int|const char *|__mode_t|__dev_t
+mkfifo|int|const char *|__mode_t
+mkfifoat|int|int|const char *|__mode_t
+utimensat|int|int|const char *|const struct timespec [2]|int
+futimens|int|int|const struct timespec [2]
+__fxstat|int|int|int|struct stat *
+__xstat|int|int|const char *|struct stat *
+__lxstat|int|int|const char *|struct stat *
+__fxstatat|int|int|int|const char *|struct stat *|int
+__xmknod|int|int|const char *|__mode_t|__dev_t *
+__xmknodat|int|int|int|const char *|__mode_t|__dev_t *
+g_access|int|const gchar *|int
+g_chdir|int|const gchar *
+g_unlink|int|const gchar *
+g_rmdir|int|const gchar *
 __builtin_bswap32|uint32_t|uint32_t
 __builtin_bswap64|uint64_t|uint64_t

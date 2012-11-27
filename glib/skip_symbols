@@ -1,12 +1,3 @@
-//g_variant_new_bytestring_array
-//g_variant_new_objv
-//g_variant_new_strv
-//g_variant_type_new_tuple
-//
-//g_key_file_load_from_dirs
-//g_key_file_set_locale_string_list
-//g_key_file_set_string_list
-
 // constants
 G_WIN32_MSG_HANDLE
 
@@ -16,12 +7,6 @@ g_slice_get_config
 g_slice_set_config
 g_assert_warning
 g_variant_get_gtype
-
-// manually implement due to go's strict pointer type checking
-//g_variant_new_bytestring_array
-//g_variant_new_objv
-//g_variant_new_strv
-//g_variant_type_new_tuple
 
 // manually implement macros
 G_SQRT2
@@ -35,15 +20,6 @@ G_LN10
 G_E
 
 // failed to compile
-g_atomic_int_add
-g_atomic_int_and
-g_atomic_int_compare_and_exchange
-g_atomic_int_dec_and_test
-g_atomic_int_get
-g_atomic_int_inc
-g_atomic_int_or
-g_atomic_int_set
-g_atomic_int_xor
 g_atomic_pointer_add
 g_atomic_pointer_and
 g_atomic_pointer_compare_and_exchange
@@ -58,10 +34,10 @@ g_pointer_bit_lock
 g_pointer_bit_trylock
 g_pointer_bit_unlock
 
+GIConv
+
 g_date_to_struct_tm
 
-g_iconv
-
-// no support for long double type
-GTestLogMsg
+// double long not support in go
 GTestLogBuffer
+GTestLogMsg

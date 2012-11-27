@@ -23,6 +23,17 @@ class Parser:
         ])
       self.skip_symbols = set([l for l in self.skip_symbols if l])
 
+    self.func_spec = {}
+    func_spec_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'func_spec')
+    for line in open(func_spec_file, 'r').xreadlines():
+      fields = line.strip().split('|')
+      func_name, return_type = fields[:2]
+      arg_types = fields[2:]
+      self.func_spec[func_name] = Dict({
+        'return_type': return_type,
+        'arg_types': arg_types,
+      })
+
     self.namespace = parser.get_namespace()
     self.package_name = self.namespace.name.lower()
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
@@ -93,8 +104,6 @@ class Parser:
           'need_helper': False,
           'go_type': '*%s' % cls,
           'c_type': '%s*' % c_class,
-          'c_param_type': '%s*' % c_class,
-          'c_original_type': '%s*' % c_class,
         }),
       }))
 
@@ -105,9 +114,7 @@ class Parser:
         'type': Dict({
           'need_helper': False,
           'go_type': 'unsafe.Pointer',
-          'c_param_type': 'void*',
-          'c_type': 'GError**',
-          'c_original_type': 'GError**',
+          'c_type': 'void*',
         }),
       }))
       info.need_helper = True
@@ -117,8 +124,10 @@ class Parser:
     if info.return_type.c_type == 'void':
       info.no_return = True
 
+    if is_method:
+      info.need_helper = True
     self.functions.append(info)
-    if info.need_helper and not info.not_implement:
+    if info.need_helper and not info.not_implement and not info.skip:
       self.functions_need_helper.append(info)
 
   def handleEnum(self, node):
@@ -200,14 +209,13 @@ class Parser:
 
   def get_type_info(self, param):
     t = param.type
-    # go_type and c_param_type are the same, or strictlly compatible
-    c_original_type = c_type = c_param_type = go_type = t.ctype
+    # go_type and c_type are the same, or strictlly compatible
+    c_type = t.ctype
     not_implement = False
     need_helper = False
 
     if isinstance(t, ast.Array) and isinstance(param, ast.Parameter):
       not_implement = True
-      #self.collect_array_type_info(param)
     if c_type in [
         '<varargs>',
         'va_list',
@@ -215,19 +223,19 @@ class Parser:
       not_implement = True
 
     c_type = c_type.replace('volatile ', '')
+    go_type = c_type
     if c_type.startswith('const '):
       need_helper = True
       c_type = c_type.replace('const ', '')
-    c_param_type = c_type
-    go_type = c_type
+      go_type = c_type
     if c_type.endswith('**'):
       need_helper = True
+      c_type = 'void*'
       go_type = 'unsafe.Pointer'
-      c_param_type = 'void*'
-    if go_type == 'long double': #BUG will lose precision
+    if c_type == 'long double': #BUG will lose precision
       need_helper = True
+      c_type = 'double'
       go_type = 'double'
-      c_param_type = 'double'
 
     if go_type != 'unsafe.Pointer':
       go_type = 'C.' + go_type
@@ -235,45 +243,11 @@ class Parser:
       go_type = '*' + go_type[:-1]
 
     return Dict({
-      'need_helper': need_helper,
+      'need_helper': True,
       'not_implement': not_implement,
       'c_type': c_type,
       'go_type': go_type,
-      'c_param_type': c_param_type,
-      'c_original_type': c_original_type,
     })
-
-  def collect_array_type_info(self, param):
-    print (' %s ' % self._cur_nodeA.symbol).center(50, '-')
-    ary = param.type
-    elem = param.type.element_type
-    print 'name:', param.argname
-    print 'caller_allocates:', param.caller_allocates
-    print 'direction:', param.direction
-    print 'transfer:', param.transfer
-    print 
-    print 'array type:', ary.array_type
-    print 'array ctype:', ary.ctype
-    print 'array zeroterm:', ary.zeroterminated
-    print 'array length param:', ary.length_param_name
-    print
-    print 'elem resolved:', elem.resolved
-    print 'elem ctype:', elem.ctype
-
-    kind = (
-      param.caller_allocates,
-      param.direction,
-      param.transfer,
-      ary.array_type,
-      ary.ctype,
-      ary.zeroterminated,
-      ary.length_param_name != None,
-      elem.resolved,
-      elem.ctype,
-      )
-    self._kinds.add(kind)
-    self._kind_example.setdefault(kind, [])
-    self._kind_example[kind].append((self._cur_nodeA.symbol, param.argname))
 
 def main():
   if len(sys.argv) < 2:

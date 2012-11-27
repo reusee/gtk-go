@@ -79,6 +79,8 @@ class Generator:
       out.append('func (self *%s) %s(' % (func.cls, func.go_name))
     else:
       out.append('func %s(' % func.go_name)
+
+    # parameter
     mapping_code = []
     mapped_param_name = {}
     sep = None
@@ -158,17 +160,18 @@ class Generator:
 
   def generate_wrapper(self, func):
     out = []
+    spec = self.parser.func_spec[func.c_name]
 
     # return type and function name
     out.append('%s %s(' % (
-      func.return_type.c_original_type,
+      spec.return_type,
       '_' + func.c_name,
       ))
 
     # parameters
     for i, param in enumerate(func.parameters):
       if i > 0: out.append(', ')
-      out.append(param.type.c_param_type + ' ' + param.name)
+      out.append(param.type.c_type + ' ' + param.name)
     out.append(') {\n\t')
 
     # body
@@ -179,8 +182,8 @@ class Generator:
       if i > 0: out.append(', ')
       if param.type.c_helper_value_func:
         out.append(param.type.c_helper_value_func(param))
-      elif param.type.c_original_type and param.type.c_original_type != param.type.c_param_type:
-        out.append('(%s)(%s)' % (param.type.c_original_type, param.name))
+      elif spec.arg_types[i] != param.type.c_type:
+        out.append('(%s)(%s)' % (spec.arg_types[i], param.name))
       else:
         out.append(param.name)
     out.append(');\n}\n')
