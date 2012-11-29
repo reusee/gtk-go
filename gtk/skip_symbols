@@ -1,1 +1,6 @@
 _GtkRcProperty
+
+gtk_init
+gtk_init_check
+gtk_init_with_args
+gtk_parse_args

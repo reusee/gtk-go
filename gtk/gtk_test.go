@@ -4,10 +4,11 @@ import (
   "testing"
   "fmt"
   "time"
+  "os"
 )
 
 func TestBasicFunc(t *testing.T) {
-  //Init(nil, nil)
+  Init(os.Args)
   True()
   False()
   fmt.Printf("gtk %v.%v.%v\n", GetMajorVersion(), GetMinorVersion(), GetMicroVersion())
