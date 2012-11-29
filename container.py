@@ -50,8 +50,8 @@ class Value:
     if 'out' in gi_container.direction and isinstance(gi_container, ast.Parameter):
       self.is_basic_out_param = gi_container.type.is_equiv(ast.BASIC_GIR_TYPES)
 
-    #if isinstance(gi_container.type, ast.Array) and isinstance(gi_container, ast.Parameter):
-    #  self.not_implement = True
+    if isinstance(gi_container.type, ast.Array) and isinstance(gi_container, ast.Parameter):
+      self.not_implement = True
     if gi_container.direction == 'inout':
       self.not_implement = True
     if self.c_type in ['<varargs>', 'va_list']:
