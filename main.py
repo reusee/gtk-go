@@ -163,6 +163,9 @@ class Parser:
   def handleInterface(self, interface):
     pass #TODO
 
+  def handleUnion(self, union):
+    pass #TODO
+
 def main():
   if len(sys.argv) < 2:
     print "usage: %s <gir file>" % sys.argv[0]
