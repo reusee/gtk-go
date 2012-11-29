@@ -4,6 +4,7 @@ class Mapping:
     self.go_type = None
 
     self.param_mapping_code = None
+    self.return_mapping_code = None
 
 PARAM_MAPPINGS = {}
 
@@ -20,14 +21,16 @@ RETURN_MAPPINGS = {}
 m = Mapping()
 m.cgo_type = 'C.gboolean'
 m.go_type = 'bool'
-m.return_mapping_code = lambda param: '\t_return_ = _cgo_return_ == C.glibtrue()\n'
+m.param_mapping_code = lambda param: '\tvar _cgo_of_%s_ C.gboolean\n' % param.name
+m.return_mapping_code = lambda param: '\t%s = %s == C.glibtrue()\n' % (param.name, param.mapped_cgo_name)
 RETURN_MAPPINGS[m.cgo_type] = m
 
 def make_numeric_return_mapping(cgo_type, go_type):
   m = Mapping()
   m.cgo_type = cgo_type
   m.go_type = go_type
-  m.return_mapping_code = lambda param: '\t_return_ = %s(_cgo_return_)\n' % go_type
+  m.param_mapping_code = lambda param: '\tvar _cgo_of_%s_ %s\n' % (param.name, param.go_type[1:])
+  m.return_mapping_code = lambda param: '\t%s = %s(%s)\n' % (param.name, go_type, param.mapped_cgo_name)
   RETURN_MAPPINGS[m.cgo_type] = m
 
 make_numeric_return_mapping('C.gchar', 'int8')

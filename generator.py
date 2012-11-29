@@ -62,6 +62,12 @@ class Generator:
     for param in func.parameters:
       if PARAM_MAPPINGS.get(param.go_type, False):
         param.mapping = PARAM_MAPPINGS[param.go_type]
+    for ret in func.extra_returns:
+      key = ret.go_type
+      if ret.is_basic_out_param:
+        key = key[1:]
+      if RETURN_MAPPINGS.get(key, False):
+        ret.mapping = RETURN_MAPPINGS[key]
 
     # receiver and name
     if func.is_method:
@@ -81,14 +87,22 @@ class Generator:
     if func.return_value.c_type != 'void':
       strs.append('_return_ %s' % func.return_value.mapped_go_type)
     for ret in func.extra_returns:
-      strs.append('%s %s' % (ret.name, 
-        ret.go_type[1:] if ret.is_basic_out_param else ret.go_type))
+      t = ret.mapped_go_type
+      if ret.is_basic_out_param:
+        if t.startswith('*'):
+          t = t[1:]
+      strs.append('%s %s' % (ret.name, t))
     out.append('%s) {\n' % ', ' .join(strs))
 
     # type conversion codes
     for param in func.parameters:
       if param.mapping:
         out.append(param.mapping.param_mapping_code(param))
+    for ret in func.extra_returns:
+      if ret.caller_allocates:
+        continue
+      elif ret.mapping:
+        out.append(ret.mapping.param_mapping_code(ret))
 
     # caller allocates
     for ret in func.extra_returns:
@@ -124,17 +138,22 @@ class Generator:
     # return statement
     if func.return_value.c_type != 'void':
       if func.return_value.mapping:
-        out.append('\t_cgo_return_ := %s\n' % ''.join(call_exp))
+        out.append('\t_cgo_of__return__ := %s\n' % ''.join(call_exp))
         out.append(func.return_value.mapping.return_mapping_code(func.return_value))
       else:
         out.append('\t_return_ = %s\n' % ''.join(call_exp))
     else:
       out.append('\t%s\n' % ''.join(call_exp))
 
-    # dereference
+    # dereference and extra returns
     for ret in func.extra_returns:
       if ret.caller_allocates:
-        out.append('\t%s = &%s\n' % (ret.name, ret.allocated_var_name))
+        if ret.is_basic_out_param:
+          out.append('\t%s = &%s\n' % (ret.name, ret.allocated_var_name))
+        else:
+          out.append('\t%s = (%s)(&%s)\n' % (ret.name, ret.mapped_go_type, ret.allocated_var_name))
+      elif ret.mapping:
+        out.append(ret.mapping.return_mapping_code(ret))
 
     out.append('\treturn\n}\n')
     print >>self.out, ''.join(out)
@@ -202,7 +221,7 @@ class Generator:
       m = Mapping()
       m.cgo_type = '*C.' + c_type
       m.go_type = '*' + name
-      m.return_mapping_code = lambda ret: '\t_return_ = (%s)(_cgo_return_)\n' % ret.mapping.go_type
+      m.return_mapping_code = lambda ret: '\t_return_ = (%s)(_cgo_of__return__)\n' % ret.mapping.go_type
       RETURN_MAPPINGS[m.cgo_type] = m
       m.param_mapping_code = lambda param: '\t%s := (%s)(%s)\n' % (
           param.mapped_cgo_name, param.go_type, param.name)
