@@ -5,6 +5,7 @@ import (
   "fmt"
   "time"
   "os"
+  "unsafe"
 )
 
 func TestBasicFunc(t *testing.T) {
@@ -18,4 +19,15 @@ func TestBasicFunc(t *testing.T) {
   }()
   Main()
   fmt.Printf("gtk main quit\n")
+}
+
+func TestBasicWindow(t *testing.T) {
+  Init(os.Args)
+  window := WindowNew(WINDOW_TOPLEVEL)
+  (*Widget)(unsafe.Pointer(window)).Show()
+  go func() {
+    <-time.After(time.Millisecond * 500)
+    MainQuit()
+  }()
+  Main()
 }

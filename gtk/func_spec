@@ -9331,5 +9331,568 @@ gtk_vscrollbar_get_type|GType
 gtk_vscrollbar_new|GtkWidget *|GtkAdjustment *
 gtk_vseparator_get_type|GType
 gtk_vseparator_new|GtkWidget *
+_Xmblen|int|char *|int
+XLoadQueryFont|XFontStruct *|Display *|const char *
+XQueryFont|XFontStruct *|Display *|XID
+XGetMotionEvents|XTimeCoord *|Display *|Window|Time|Time|int *
+XDeleteModifiermapEntry|XModifierKeymap *|XModifierKeymap *|KeyCode|int
+XGetModifierMapping|XModifierKeymap *|Display *
+XInsertModifiermapEntry|XModifierKeymap *|XModifierKeymap *|KeyCode|int
+XNewModifiermap|XModifierKeymap *|int
+XCreateImage|XImage *|Display *|Visual *|unsigned int|int|int|char *|unsigned int|unsigned int|int|int
+XInitImage|int|XImage *
+XGetImage|XImage *|Display *|Drawable|int|int|unsigned int|unsigned int|unsigned long|int
+XGetSubImage|XImage *|Display *|Drawable|int|int|unsigned int|unsigned int|unsigned long|int|XImage *|int|int
+XOpenDisplay|Display *|const char *
+XrmInitialize|void
+XFetchBytes|char *|Display *|int *
+XFetchBuffer|char *|Display *|int *|int
+XGetAtomName|char *|Display *|Atom
+XGetAtomNames|int|Display *|Atom *|int|char **
+XGetDefault|char *|Display *|const char *|const char *
+XDisplayName|char *|const char *
+XKeysymToString|char *|KeySym
+XSynchronize|int (*)(Display *)|Display *|int
+XSetAfterFunction|int (*)(Display *)|Display *|int (*)(Display *)
+XInternAtom|Atom|Display *|const char *|int
+XInternAtoms|int|Display *|char **|int|int|Atom *
+XCopyColormapAndFree|Colormap|Display *|Colormap
+XCreateColormap|Colormap|Display *|Window|Visual *|int
+XCreatePixmapCursor|Cursor|Display *|Pixmap|Pixmap|XColor *|XColor *|unsigned int|unsigned int
+XCreateGlyphCursor|Cursor|Display *|Font|Font|unsigned int|unsigned int|const XColor *|const XColor *
+XCreateFontCursor|Cursor|Display *|unsigned int
+XLoadFont|Font|Display *|const char *
+XCreateGC|GC|Display *|Drawable|unsigned long|XGCValues *
+XGContextFromGC|GContext|GC
+XFlushGC|void|Display *|GC
+XCreatePixmap|Pixmap|Display *|Drawable|unsigned int|unsigned int|unsigned int
+XCreateBitmapFromData|Pixmap|Display *|Drawable|const char *|unsigned int|unsigned int
+XCreatePixmapFromBitmapData|Pixmap|Display *|Drawable|char *|unsigned int|unsigned int|unsigned long|unsigned long|unsigned int
+XCreateSimpleWindow|Window|Display *|Window|int|int|unsigned int|unsigned int|unsigned int|unsigned long|unsigned long
+XGetSelectionOwner|Window|Display *|Atom
+XCreateWindow|Window|Display *|Window|int|int|unsigned int|unsigned int|unsigned int|int|unsigned int|Visual *|unsigned long|XSetWindowAttributes *
+XListInstalledColormaps|Colormap *|Display *|Window|int *
+XListFonts|char **|Display *|const char *|int|int *
+XListFontsWithInfo|char **|Display *|const char *|int|int *|XFontStruct **
+XGetFontPath|char **|Display *|int *
+XListExtensions|char **|Display *|int *
+XListProperties|Atom *|Display *|Window|int *
+XListHosts|XHostAddress *|Display *|int *|int *
+XKeycodeToKeysym|KeySym|Display *|KeyCode|int
+XLookupKeysym|KeySym|XKeyEvent *|int
+XGetKeyboardMapping|KeySym *|Display *|KeyCode|int|int *
+XStringToKeysym|KeySym|const char *
+XMaxRequestSize|long|Display *
+XExtendedMaxRequestSize|long|Display *
+XResourceManagerString|char *|Display *
+XScreenResourceString|char *|Screen *
+XDisplayMotionBufferSize|unsigned long|Display *
+XVisualIDFromVisual|VisualID|Visual *
+XInitThreads|int
+XLockDisplay|void|Display *
+XUnlockDisplay|void|Display *
+XInitExtension|XExtCodes *|Display *|const char *
+XAddExtension|XExtCodes *|Display *
+XFindOnExtensionList|XExtData *|XExtData **|int
+XEHeadOfExtensionList|XExtData **|XEDataObject
+XRootWindow|Window|Display *|int
+XDefaultRootWindow|Window|Display *
+XRootWindowOfScreen|Window|Screen *
+XDefaultVisual|Visual *|Display *|int
+XDefaultVisualOfScreen|Visual *|Screen *
+XDefaultGC|GC|Display *|int
+XDefaultGCOfScreen|GC|Screen *
+XBlackPixel|unsigned long|Display *|int
+XWhitePixel|unsigned long|Display *|int
+XAllPlanes|unsigned long
+XBlackPixelOfScreen|unsigned long|Screen *
+XWhitePixelOfScreen|unsigned long|Screen *
+XNextRequest|unsigned long|Display *
+XLastKnownRequestProcessed|unsigned long|Display *
+XServerVendor|char *|Display *
+XDisplayString|char *|Display *
+XDefaultColormap|Colormap|Display *|int
+XDefaultColormapOfScreen|Colormap|Screen *
+XDisplayOfScreen|Display *|Screen *
+XScreenOfDisplay|Screen *|Display *|int
+XDefaultScreenOfDisplay|Screen *|Display *
+XEventMaskOfScreen|long|Screen *
+XScreenNumberOfScreen|int|Screen *
+XSetErrorHandler|XErrorHandler|XErrorHandler
+XSetIOErrorHandler|XIOErrorHandler|XIOErrorHandler
+XListPixmapFormats|XPixmapFormatValues *|Display *|int *
+XListDepths|int *|Display *|int|int *
+XReconfigureWMWindow|int|Display *|Window|int|unsigned int|XWindowChanges *
+XGetWMProtocols|int|Display *|Window|Atom **|int *
+XSetWMProtocols|int|Display *|Window|Atom *|int
+XIconifyWindow|int|Display *|Window|int
+XWithdrawWindow|int|Display *|Window|int
+XGetCommand|int|Display *|Window|char ***|int *
+XGetWMColormapWindows|int|Display *|Window|Window **|int *
+XSetWMColormapWindows|int|Display *|Window|Window *|int
+XFreeStringList|void|char **
+XSetTransientForHint|int|Display *|Window|Window
+XActivateScreenSaver|int|Display *
+XAddHost|int|Display *|XHostAddress *
+XAddHosts|int|Display *|XHostAddress *|int
+XAddToExtensionList|int|struct _XExtData **|XExtData *
+XAddToSaveSet|int|Display *|Window
+XAllocColor|int|Display *|Colormap|XColor *
+XAllocColorCells|int|Display *|Colormap|int|unsigned long *|unsigned int|unsigned long *|unsigned int
+XAllocColorPlanes|int|Display *|Colormap|int|unsigned long *|int|int|int|int|unsigned long *|unsigned long *|unsigned long *
+XAllocNamedColor|int|Display *|Colormap|const char *|XColor *|XColor *
+XAllowEvents|int|Display *|int|Time
+XAutoRepeatOff|int|Display *
+XAutoRepeatOn|int|Display *
+XBell|int|Display *|int
+XBitmapBitOrder|int|Display *
+XBitmapPad|int|Display *
+XBitmapUnit|int|Display *
+XCellsOfScreen|int|Screen *
+XChangeActivePointerGrab|int|Display *|unsigned int|Cursor|Time
+XChangeGC|int|Display *|GC|unsigned long|XGCValues *
+XChangeKeyboardControl|int|Display *|unsigned long|XKeyboardControl *
+XChangeKeyboardMapping|int|Display *|int|int|KeySym *|int
+XChangePointerControl|int|Display *|int|int|int|int|int
+XChangeProperty|int|Display *|Window|Atom|Atom|int|int|const unsigned char *|int
+XChangeSaveSet|int|Display *|Window|int
+XChangeWindowAttributes|int|Display *|Window|unsigned long|XSetWindowAttributes *
+XCheckIfEvent|int|Display *|XEvent *|int (*)(Display *, XEvent *, XPointer)|XPointer
+XCheckMaskEvent|int|Display *|long|XEvent *
+XCheckTypedEvent|int|Display *|int|XEvent *
+XCheckTypedWindowEvent|int|Display *|Window|int|XEvent *
+XCheckWindowEvent|int|Display *|Window|long|XEvent *
+XCirculateSubwindows|int|Display *|Window|int
+XCirculateSubwindowsDown|int|Display *|Window
+XCirculateSubwindowsUp|int|Display *|Window
+XClearArea|int|Display *|Window|int|int|unsigned int|unsigned int|int
+XClearWindow|int|Display *|Window
+XCloseDisplay|int|Display *
+XConfigureWindow|int|Display *|Window|unsigned int|XWindowChanges *
+XConnectionNumber|int|Display *
+XConvertSelection|int|Display *|Atom|Atom|Atom|Window|Time
+XCopyArea|int|Display *|Drawable|Drawable|GC|int|int|unsigned int|unsigned int|int|int
+XCopyGC|int|Display *|GC|unsigned long|GC
+XCopyPlane|int|Display *|Drawable|Drawable|GC|int|int|unsigned int|unsigned int|int|int|unsigned long
+XDefaultDepth|int|Display *|int
+XDefaultDepthOfScreen|int|Screen *
+XDefaultScreen|int|Display *
+XDefineCursor|int|Display *|Window|Cursor
+XDeleteProperty|int|Display *|Window|Atom
+XDestroyWindow|int|Display *|Window
+XDestroySubwindows|int|Display *|Window
+XDoesBackingStore|int|Screen *
+XDoesSaveUnders|int|Screen *
+XDisableAccessControl|int|Display *
+XDisplayCells|int|Display *|int
+XDisplayHeight|int|Display *|int
+XDisplayHeightMM|int|Display *|int
+XDisplayKeycodes|int|Display *|int *|int *
+XDisplayPlanes|int|Display *|int
+XDisplayWidth|int|Display *|int
+XDisplayWidthMM|int|Display *|int
+XDrawArc|int|Display *|Drawable|GC|int|int|unsigned int|unsigned int|int|int
+XDrawArcs|int|Display *|Drawable|GC|XArc *|int
+XDrawImageString|int|Display *|Drawable|GC|int|int|const char *|int
+XDrawImageString16|int|Display *|Drawable|GC|int|int|const XChar2b *|int
+XDrawLine|int|Display *|Drawable|GC|int|int|int|int
+XDrawLines|int|Display *|Drawable|GC|XPoint *|int|int
+XDrawPoint|int|Display *|Drawable|GC|int|int
+XDrawPoints|int|Display *|Drawable|GC|XPoint *|int|int
+XDrawRectangle|int|Display *|Drawable|GC|int|int|unsigned int|unsigned int
+XDrawRectangles|int|Display *|Drawable|GC|XRectangle *|int
+XDrawSegments|int|Display *|Drawable|GC|XSegment *|int
+XDrawString|int|Display *|Drawable|GC|int|int|const char *|int
+XDrawString16|int|Display *|Drawable|GC|int|int|const XChar2b *|int
+XDrawText|int|Display *|Drawable|GC|int|int|XTextItem *|int
+XDrawText16|int|Display *|Drawable|GC|int|int|XTextItem16 *|int
+XEnableAccessControl|int|Display *
+XEventsQueued|int|Display *|int
+XFetchName|int|Display *|Window|char **
+XFillArc|int|Display *|Drawable|GC|int|int|unsigned int|unsigned int|int|int
+XFillArcs|int|Display *|Drawable|GC|XArc *|int
+XFillPolygon|int|Display *|Drawable|GC|XPoint *|int|int|int
+XFillRectangle|int|Display *|Drawable|GC|int|int|unsigned int|unsigned int
+XFillRectangles|int|Display *|Drawable|GC|XRectangle *|int
+XFlush|int|Display *
+XForceScreenSaver|int|Display *|int
+XFree|int|void *
+XFreeColormap|int|Display *|Colormap
+XFreeColors|int|Display *|Colormap|unsigned long *|int|unsigned long
+XFreeCursor|int|Display *|Cursor
+XFreeExtensionList|int|char **
+XFreeFont|int|Display *|XFontStruct *
+XFreeFontInfo|int|char **|XFontStruct *|int
+XFreeFontNames|int|char **
+XFreeFontPath|int|char **
+XFreeGC|int|Display *|GC
+XFreeModifiermap|int|XModifierKeymap *
+XFreePixmap|int|Display *|Pixmap
+XGeometry|int|Display *|int|const char *|const char *|unsigned int|unsigned int|unsigned int|int|int|int *|int *|int *|int *
+XGetErrorDatabaseText|int|Display *|const char *|const char *|const char *|char *|int
+XGetErrorText|int|Display *|int|char *|int
+XGetFontProperty|int|XFontStruct *|Atom|unsigned long *
+XGetGCValues|int|Display *|GC|unsigned long|XGCValues *
+XGetGeometry|int|Display *|Drawable|Window *|int *|int *|unsigned int *|unsigned int *|unsigned int *|unsigned int *
+XGetIconName|int|Display *|Window|char **
+XGetInputFocus|int|Display *|Window *|int *
+XGetKeyboardControl|int|Display *|XKeyboardState *
+XGetPointerControl|int|Display *|int *|int *|int *
+XGetPointerMapping|int|Display *|unsigned char *|int
+XGetScreenSaver|int|Display *|int *|int *|int *|int *
+XGetTransientForHint|int|Display *|Window|Window *
+XGetWindowProperty|int|Display *|Window|Atom|long|long|int|Atom|Atom *|int *|unsigned long *|unsigned long *|unsigned char **
+XGetWindowAttributes|int|Display *|Window|XWindowAttributes *
+XGrabButton|int|Display *|unsigned int|unsigned int|Window|int|unsigned int|int|int|Window|Cursor
+XGrabKey|int|Display *|int|unsigned int|Window|int|int|int
+XGrabKeyboard|int|Display *|Window|int|int|int|Time
+XGrabPointer|int|Display *|Window|int|unsigned int|int|int|Window|Cursor|Time
+XGrabServer|int|Display *
+XHeightMMOfScreen|int|Screen *
+XHeightOfScreen|int|Screen *
+XIfEvent|int|Display *|XEvent *|int (*)(Display *, XEvent *, XPointer)|XPointer
+XImageByteOrder|int|Display *
+XInstallColormap|int|Display *|Colormap
+XKeysymToKeycode|KeyCode|Display *|KeySym
+XKillClient|int|Display *|XID
+XLookupColor|int|Display *|Colormap|const char *|XColor *|XColor *
+XLowerWindow|int|Display *|Window
+XMapRaised|int|Display *|Window
+XMapSubwindows|int|Display *|Window
+XMapWindow|int|Display *|Window
+XMaskEvent|int|Display *|long|XEvent *
+XMaxCmapsOfScreen|int|Screen *
+XMinCmapsOfScreen|int|Screen *
+XMoveResizeWindow|int|Display *|Window|int|int|unsigned int|unsigned int
+XMoveWindow|int|Display *|Window|int|int
+XNextEvent|int|Display *|XEvent *
+XNoOp|int|Display *
+XParseColor|int|Display *|Colormap|const char *|XColor *
+XParseGeometry|int|const char *|int *|int *|unsigned int *|unsigned int *
+XPeekEvent|int|Display *|XEvent *
+XPeekIfEvent|int|Display *|XEvent *|int (*)(Display *, XEvent *, XPointer)|XPointer
+XPending|int|Display *
+XPlanesOfScreen|int|Screen *
+XProtocolRevision|int|Display *
+XProtocolVersion|int|Display *
+XPutBackEvent|int|Display *|XEvent *
+XPutImage|int|Display *|Drawable|GC|XImage *|int|int|int|int|unsigned int|unsigned int
+XQLength|int|Display *
+XQueryBestCursor|int|Display *|Drawable|unsigned int|unsigned int|unsigned int *|unsigned int *
+XQueryBestSize|int|Display *|int|Drawable|unsigned int|unsigned int|unsigned int *|unsigned int *
+XQueryBestStipple|int|Display *|Drawable|unsigned int|unsigned int|unsigned int *|unsigned int *
+XQueryBestTile|int|Display *|Drawable|unsigned int|unsigned int|unsigned int *|unsigned int *
+XQueryColor|int|Display *|Colormap|XColor *
+XQueryColors|int|Display *|Colormap|XColor *|int
+XQueryExtension|int|Display *|const char *|int *|int *|int *
+XQueryKeymap|int|Display *|char [32]
+XQueryPointer|int|Display *|Window|Window *|Window *|int *|int *|int *|int *|unsigned int *
+XQueryTextExtents|int|Display *|XID|const char *|int|int *|int *|int *|XCharStruct *
+XQueryTextExtents16|int|Display *|XID|const XChar2b *|int|int *|int *|int *|XCharStruct *
+XQueryTree|int|Display *|Window|Window *|Window *|Window **|unsigned int *
+XRaiseWindow|int|Display *|Window
+XReadBitmapFile|int|Display *|Drawable|const char *|unsigned int *|unsigned int *|Pixmap *|int *|int *
+XReadBitmapFileData|int|const char *|unsigned int *|unsigned int *|unsigned char **|int *|int *
+XRebindKeysym|int|Display *|KeySym|KeySym *|int|const unsigned char *|int
+XRecolorCursor|int|Display *|Cursor|XColor *|XColor *
+XRefreshKeyboardMapping|int|XMappingEvent *
+XRemoveFromSaveSet|int|Display *|Window
+XRemoveHost|int|Display *|XHostAddress *
+XRemoveHosts|int|Display *|XHostAddress *|int
+XReparentWindow|int|Display *|Window|Window|int|int
+XResetScreenSaver|int|Display *
+XResizeWindow|int|Display *|Window|unsigned int|unsigned int
+XRestackWindows|int|Display *|Window *|int
+XRotateBuffers|int|Display *|int
+XRotateWindowProperties|int|Display *|Window|Atom *|int|int
+XScreenCount|int|Display *
+XSelectInput|int|Display *|Window|long
+XSendEvent|int|Display *|Window|int|long|XEvent *
+XSetAccessControl|int|Display *|int
+XSetArcMode|int|Display *|GC|int
+XSetBackground|int|Display *|GC|unsigned long
+XSetClipMask|int|Display *|GC|Pixmap
+XSetClipOrigin|int|Display *|GC|int|int
+XSetClipRectangles|int|Display *|GC|int|int|XRectangle *|int|int
+XSetCloseDownMode|int|Display *|int
+XSetCommand|int|Display *|Window|char **|int
+XSetDashes|int|Display *|GC|int|const char *|int
+XSetFillRule|int|Display *|GC|int
+XSetFillStyle|int|Display *|GC|int
+XSetFont|int|Display *|GC|Font
+XSetFontPath|int|Display *|char **|int
+XSetForeground|int|Display *|GC|unsigned long
+XSetFunction|int|Display *|GC|int
+XSetGraphicsExposures|int|Display *|GC|int
+XSetIconName|int|Display *|Window|const char *
+XSetInputFocus|int|Display *|Window|int|Time
+XSetLineAttributes|int|Display *|GC|unsigned int|int|int|int
+XSetModifierMapping|int|Display *|XModifierKeymap *
+XSetPlaneMask|int|Display *|GC|unsigned long
+XSetPointerMapping|int|Display *|const unsigned char *|int
+XSetScreenSaver|int|Display *|int|int|int|int
+XSetSelectionOwner|int|Display *|Atom|Window|Time
+XSetState|int|Display *|GC|unsigned long|unsigned long|int|unsigned long
+XSetStipple|int|Display *|GC|Pixmap
+XSetSubwindowMode|int|Display *|GC|int
+XSetTSOrigin|int|Display *|GC|int|int
+XSetTile|int|Display *|GC|Pixmap
+XSetWindowBackground|int|Display *|Window|unsigned long
+XSetWindowBackgroundPixmap|int|Display *|Window|Pixmap
+XSetWindowBorder|int|Display *|Window|unsigned long
+XSetWindowBorderPixmap|int|Display *|Window|Pixmap
+XSetWindowBorderWidth|int|Display *|Window|unsigned int
+XSetWindowColormap|int|Display *|Window|Colormap
+XStoreBuffer|int|Display *|const char *|int|int
+XStoreBytes|int|Display *|const char *|int
+XStoreColor|int|Display *|Colormap|XColor *
+XStoreColors|int|Display *|Colormap|XColor *|int
+XStoreName|int|Display *|Window|const char *
+XStoreNamedColor|int|Display *|Colormap|const char *|unsigned long|int
+XSync|int|Display *|int
+XTextExtents|int|XFontStruct *|const char *|int|int *|int *|int *|XCharStruct *
+XTextExtents16|int|XFontStruct *|const XChar2b *|int|int *|int *|int *|XCharStruct *
+XTextWidth|int|XFontStruct *|const char *|int
+XTextWidth16|int|XFontStruct *|const XChar2b *|int
+XTranslateCoordinates|int|Display *|Window|Window|int|int|int *|int *|Window *
+XUndefineCursor|int|Display *|Window
+XUngrabButton|int|Display *|unsigned int|unsigned int|Window
+XUngrabKey|int|Display *|int|unsigned int|Window
+XUngrabKeyboard|int|Display *|Time
+XUngrabPointer|int|Display *|Time
+XUngrabServer|int|Display *
+XUninstallColormap|int|Display *|Colormap
+XUnloadFont|int|Display *|Font
+XUnmapSubwindows|int|Display *|Window
+XUnmapWindow|int|Display *|Window
+XVendorRelease|int|Display *
+XWarpPointer|int|Display *|Window|Window|int|int|unsigned int|unsigned int|int|int
+XWidthMMOfScreen|int|Screen *
+XWidthOfScreen|int|Screen *
+XWindowEvent|int|Display *|Window|long|XEvent *
+XWriteBitmapFile|int|Display *|const char *|Pixmap|unsigned int|unsigned int|int|int
+XSupportsLocale|int
+XSetLocaleModifiers|char *|const char *
+XOpenOM|XOM|Display *|struct _XrmHashBucketRec *|const char *|const char *
+XCloseOM|int|XOM
+XSetOMValues|char *|XOM
+XGetOMValues|char *|XOM
+XDisplayOfOM|Display *|XOM
+XLocaleOfOM|char *|XOM
+XCreateOC|XOC|XOM
+XDestroyOC|void|XOC
+XOMOfOC|XOM|XOC
+XSetOCValues|char *|XOC
+XGetOCValues|char *|XOC
+XCreateFontSet|XFontSet|Display *|const char *|char ***|int *|char **
+XFreeFontSet|void|Display *|XFontSet
+XFontsOfFontSet|int|XFontSet|XFontStruct ***|char ***
+XBaseFontNameListOfFontSet|char *|XFontSet
+XLocaleOfFontSet|char *|XFontSet
+XContextDependentDrawing|int|XFontSet
+XDirectionalDependentDrawing|int|XFontSet
+XContextualDrawing|int|XFontSet
+XExtentsOfFontSet|XFontSetExtents *|XFontSet
+XmbTextEscapement|int|XFontSet|const char *|int
+XwcTextEscapement|int|XFontSet|const wchar_t *|int
+Xutf8TextEscapement|int|XFontSet|const char *|int
+XmbTextExtents|int|XFontSet|const char *|int|XRectangle *|XRectangle *
+XwcTextExtents|int|XFontSet|const wchar_t *|int|XRectangle *|XRectangle *
+Xutf8TextExtents|int|XFontSet|const char *|int|XRectangle *|XRectangle *
+XmbTextPerCharExtents|int|XFontSet|const char *|int|XRectangle *|XRectangle *|int|int *|XRectangle *|XRectangle *
+XwcTextPerCharExtents|int|XFontSet|const wchar_t *|int|XRectangle *|XRectangle *|int|int *|XRectangle *|XRectangle *
+Xutf8TextPerCharExtents|int|XFontSet|const char *|int|XRectangle *|XRectangle *|int|int *|XRectangle *|XRectangle *
+XmbDrawText|void|Display *|Drawable|GC|int|int|XmbTextItem *|int
+XwcDrawText|void|Display *|Drawable|GC|int|int|XwcTextItem *|int
+Xutf8DrawText|void|Display *|Drawable|GC|int|int|XmbTextItem *|int
+XmbDrawString|void|Display *|Drawable|XFontSet|GC|int|int|const char *|int
+XwcDrawString|void|Display *|Drawable|XFontSet|GC|int|int|const wchar_t *|int
+Xutf8DrawString|void|Display *|Drawable|XFontSet|GC|int|int|const char *|int
+XmbDrawImageString|void|Display *|Drawable|XFontSet|GC|int|int|const char *|int
+XwcDrawImageString|void|Display *|Drawable|XFontSet|GC|int|int|const wchar_t *|int
+Xutf8DrawImageString|void|Display *|Drawable|XFontSet|GC|int|int|const char *|int
+XOpenIM|XIM|Display *|struct _XrmHashBucketRec *|char *|char *
+XCloseIM|int|XIM
+XGetIMValues|char *|XIM
+XSetIMValues|char *|XIM
+XDisplayOfIM|Display *|XIM
+XLocaleOfIM|char *|XIM
+XCreateIC|XIC|XIM
+XDestroyIC|void|XIC
+XSetICFocus|void|XIC
+XUnsetICFocus|void|XIC
+XwcResetIC|wchar_t *|XIC
+XmbResetIC|char *|XIC
+Xutf8ResetIC|char *|XIC
+XSetICValues|char *|XIC
+XGetICValues|char *|XIC
+XIMOfIC|XIM|XIC
+XFilterEvent|int|XEvent *|Window
+XmbLookupString|int|XIC|XKeyPressedEvent *|char *|int|KeySym *|int *
+XwcLookupString|int|XIC|XKeyPressedEvent *|wchar_t *|int|KeySym *|int *
+Xutf8LookupString|int|XIC|XKeyPressedEvent *|char *|int|KeySym *|int *
+XVaCreateNestedList|XVaNestedList|int
+XRegisterIMInstantiateCallback|int|Display *|struct _XrmHashBucketRec *|char *|char *|XIDProc|XPointer
+XUnregisterIMInstantiateCallback|int|Display *|struct _XrmHashBucketRec *|char *|char *|XIDProc|XPointer
+XInternalConnectionNumbers|int|Display *|int **|int *
+XProcessInternalConnection|void|Display *|int
+XAddConnectionWatch|int|Display *|XConnectionWatchProc|XPointer
+XRemoveConnectionWatch|void|Display *|XConnectionWatchProc|XPointer
+XSetAuthorization|void|char *|int|char *|int
+_Xmbtowc|int|wchar_t *|char *|int
+_Xwctomb|int|char *|wchar_t
+XGetEventData|int|Display *|XGenericEventCookie *
+XFreeEventData|void|Display *|XGenericEventCookie *
+XAllocClassHint|XClassHint *
+XAllocIconSize|XIconSize *
+XAllocSizeHints|XSizeHints *
+XAllocStandardColormap|XStandardColormap *
+XAllocWMHints|XWMHints *
+XClipBox|int|Region|XRectangle *
+XCreateRegion|Region
+XDefaultString|const char *
+XDeleteContext|int|Display *|XID|XContext
+XDestroyRegion|int|Region
+XEmptyRegion|int|Region
+XEqualRegion|int|Region|Region
+XFindContext|int|Display *|XID|XContext|XPointer *
+XGetClassHint|int|Display *|Window|XClassHint *
+XGetIconSizes|int|Display *|Window|XIconSize **|int *
+XGetNormalHints|int|Display *|Window|XSizeHints *
+XGetRGBColormaps|int|Display *|Window|XStandardColormap **|int *|Atom
+XGetSizeHints|int|Display *|Window|XSizeHints *|Atom
+XGetStandardColormap|int|Display *|Window|XStandardColormap *|Atom
+XGetTextProperty|int|Display *|Window|XTextProperty *|Atom
+XGetVisualInfo|XVisualInfo *|Display *|long|XVisualInfo *|int *
+XGetWMClientMachine|int|Display *|Window|XTextProperty *
+XGetWMHints|XWMHints *|Display *|Window
+XGetWMIconName|int|Display *|Window|XTextProperty *
+XGetWMName|int|Display *|Window|XTextProperty *
+XGetWMNormalHints|int|Display *|Window|XSizeHints *|long *
+XGetWMSizeHints|int|Display *|Window|XSizeHints *|long *|Atom
+XGetZoomHints|int|Display *|Window|XSizeHints *
+XIntersectRegion|int|Region|Region|Region
+XConvertCase|void|KeySym|KeySym *|KeySym *
+XLookupString|int|XKeyEvent *|char *|int|KeySym *|XComposeStatus *
+XMatchVisualInfo|int|Display *|int|int|int|XVisualInfo *
+XOffsetRegion|int|Region|int|int
+XPointInRegion|int|Region|int|int
+XPolygonRegion|Region|XPoint *|int|int
+XRectInRegion|int|Region|int|int|unsigned int|unsigned int
+XSaveContext|int|Display *|XID|XContext|const char *
+XSetClassHint|int|Display *|Window|XClassHint *
+XSetIconSizes|int|Display *|Window|XIconSize *|int
+XSetNormalHints|int|Display *|Window|XSizeHints *
+XSetRGBColormaps|void|Display *|Window|XStandardColormap *|int|Atom
+XSetSizeHints|int|Display *|Window|XSizeHints *|Atom
+XSetStandardProperties|int|Display *|Window|const char *|const char *|Pixmap|char **|int|XSizeHints *
+XSetTextProperty|void|Display *|Window|XTextProperty *|Atom
+XSetWMClientMachine|void|Display *|Window|XTextProperty *
+XSetWMHints|int|Display *|Window|XWMHints *
+XSetWMIconName|void|Display *|Window|XTextProperty *
+XSetWMName|void|Display *|Window|XTextProperty *
+XSetWMNormalHints|void|Display *|Window|XSizeHints *
+XSetWMProperties|void|Display *|Window|XTextProperty *|XTextProperty *|char **|int|XSizeHints *|XWMHints *|XClassHint *
+XmbSetWMProperties|void|Display *|Window|const char *|const char *|char **|int|XSizeHints *|XWMHints *|XClassHint *
+Xutf8SetWMProperties|void|Display *|Window|const char *|const char *|char **|int|XSizeHints *|XWMHints *|XClassHint *
+XSetWMSizeHints|void|Display *|Window|XSizeHints *|Atom
+XSetRegion|int|Display *|GC|Region
+XSetStandardColormap|void|Display *|Window|XStandardColormap *|Atom
+XSetZoomHints|int|Display *|Window|XSizeHints *
+XShrinkRegion|int|Region|int|int
+XStringListToTextProperty|int|char **|int|XTextProperty *
+XSubtractRegion|int|Region|Region|Region
+XmbTextListToTextProperty|int|Display *|char **|int|XICCEncodingStyle|XTextProperty *
+XwcTextListToTextProperty|int|Display *|wchar_t **|int|XICCEncodingStyle|XTextProperty *
+Xutf8TextListToTextProperty|int|Display *|char **|int|XICCEncodingStyle|XTextProperty *
+XwcFreeStringList|void|wchar_t **
+XTextPropertyToStringList|int|XTextProperty *|char ***|int *
+XmbTextPropertyToTextList|int|Display *|const XTextProperty *|char ***|int *
+XwcTextPropertyToTextList|int|Display *|const XTextProperty *|wchar_t ***|int *
+Xutf8TextPropertyToTextList|int|Display *|const XTextProperty *|char ***|int *
+XUnionRectWithRegion|int|XRectangle *|Region|Region
+XUnionRegion|int|Region|Region|Region
+XWMGeometry|int|Display *|int|const char *|const char *|unsigned int|XSizeHints *|int *|int *|int *|int *|int *
+XXorRegion|int|Region|Region|Region
+gdk_x11_app_launch_context_get_type|GType
+gdk_x11_cursor_get_type|GType
+gdk_x11_cursor_get_xdisplay|Display *|GdkCursor *
+gdk_x11_cursor_get_xcursor|Cursor|GdkCursor *
+gdk_x11_device_get_id|gint|GdkDevice *
+gdk_x11_device_core_get_type|GType
+gdk_x11_device_xi2_get_type|GType
+gdk_x11_device_manager_lookup|GdkDevice *|GdkDeviceManager *|gint
+gdk_x11_device_manager_core_get_type|GType
+gdk_x11_device_manager_xi2_get_type|GType
+gdk_x11_display_get_type|GType
+gdk_x11_display_get_xdisplay|Display *|GdkDisplay *
+gdk_x11_display_get_user_time|guint32|GdkDisplay *
+gdk_x11_display_get_startup_notification_id|const gchar *|GdkDisplay *
+gdk_x11_display_set_startup_notification_id|void|GdkDisplay *|const gchar *
+gdk_x11_display_set_cursor_theme|void|GdkDisplay *|const gchar *|const gint
+gdk_x11_display_broadcast_startup_message|void|GdkDisplay *|const char *
+gdk_x11_lookup_xdisplay|GdkDisplay *|Display *
+gdk_x11_display_grab|void|GdkDisplay *
+gdk_x11_display_ungrab|void|GdkDisplay *
+gdk_x11_display_error_trap_push|void|GdkDisplay *
+gdk_x11_display_error_trap_pop|gint|GdkDisplay *
+gdk_x11_display_error_trap_pop_ignored|void|GdkDisplay *
+gdk_x11_register_standard_event_type|void|GdkDisplay *|gint|gint
+gdk_x11_set_sm_client_id|void|const gchar *
+gdk_x11_display_manager_get_type|GType
+gdk_x11_drag_context_get_type|GType
+gdk_x11_keymap_get_type|GType
+gdk_x11_keymap_get_group_for_state|gint|GdkKeymap *|guint
+gdk_x11_keymap_key_is_modifier|gboolean|GdkKeymap *|guint
+gdk_x11_atom_to_xatom_for_display|Atom|GdkDisplay *|GdkAtom
+gdk_x11_xatom_to_atom_for_display|GdkAtom|GdkDisplay *|Atom
+gdk_x11_get_xatom_by_name_for_display|Atom|GdkDisplay *|const gchar *
+gdk_x11_get_xatom_name_for_display|const gchar *|GdkDisplay *|Atom
+gdk_x11_atom_to_xatom|Atom|GdkAtom
+gdk_x11_xatom_to_atom|GdkAtom|Atom
+gdk_x11_get_xatom_by_name|Atom|const gchar *
+gdk_x11_get_xatom_name|const gchar *|Atom
+gdk_x11_screen_get_type|GType
+gdk_x11_screen_get_xscreen|Screen *|GdkScreen *
+gdk_x11_screen_get_screen_number|int|GdkScreen *
+gdk_x11_screen_get_window_manager_name|const char *|GdkScreen *
+gdk_x11_get_default_screen|gint
+gdk_x11_screen_supports_net_wm_hint|gboolean|GdkScreen *|GdkAtom
+gdk_x11_screen_get_monitor_output|XID|GdkScreen *|gint
+gdk_x11_display_text_property_to_text_list|gint|GdkDisplay *|GdkAtom|gint|const guchar *|gint|gchar ***
+gdk_x11_free_text_list|void|gchar **
+gdk_x11_display_string_to_compound_text|gint|GdkDisplay *|const gchar *|GdkAtom *|gint *|guchar **|gint *
+gdk_x11_display_utf8_to_compound_text|gboolean|GdkDisplay *|const gchar *|GdkAtom *|gint *|guchar **|gint *
+gdk_x11_free_compound_text|void|guchar *
+gdk_x11_get_default_root_xwindow|Window
+gdk_x11_get_default_xdisplay|Display *
+gdk_x11_grab_server|void
+gdk_x11_ungrab_server|void
+gdk_x11_visual_get_type|GType
+gdk_x11_visual_get_xvisual|Visual *|GdkVisual *
+gdk_x11_screen_lookup_visual|GdkVisual *|GdkScreen *|VisualID
+gdk_x11_window_get_type|GType
+gdk_x11_window_get_xid|Window|GdkWindow *
+gdk_x11_window_set_user_time|void|GdkWindow *|guint32
+gdk_x11_window_set_utf8_property|void|GdkWindow *|const gchar *|const gchar *
+gdk_x11_window_set_theme_variant|void|GdkWindow *|char *
+gdk_x11_window_set_hide_titlebar_when_maximized|void|GdkWindow *|gboolean
+gdk_x11_window_move_to_current_desktop|void|GdkWindow *
+gdk_x11_get_server_time|guint32|GdkWindow *
+gdk_x11_window_foreign_new_for_display|GdkWindow *|GdkDisplay *|Window
+gdk_x11_window_lookup_for_display|GdkWindow *|GdkDisplay *|Window
+gtk_socket_get_type|GType
+gtk_socket_new|GtkWidget *
+gtk_socket_add_id|void|GtkSocket *|Window
+gtk_socket_get_id|Window|GtkSocket *
+gtk_socket_get_plug_window|GdkWindow *|GtkSocket *
+gtk_plug_get_type|GType
+gtk_plug_construct|void|GtkPlug *|Window
+gtk_plug_new|GtkWidget *|Window
+gtk_plug_construct_for_display|void|GtkPlug *|GdkDisplay *|Window
+gtk_plug_new_for_display|GtkWidget *|GdkDisplay *|Window
+gtk_plug_get_id|Window|GtkPlug *
+gtk_plug_get_embedded|gboolean|GtkPlug *
+gtk_plug_get_socket_window|GdkWindow *|GtkPlug *
 __builtin_bswap32|uint32_t|uint32_t
 __builtin_bswap64|uint64_t|uint64_t

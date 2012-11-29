@@ -28,6 +28,8 @@ class Parser:
       fields = line.strip().split('|')
       func_name, return_type = fields[:2]
       arg_types = fields[2:]
+      for i, t in enumerate(arg_types):
+        arg_types[i] = t.replace('[]', '*')
       self.func_spec[func_name] = Dict({
         'return_type': return_type,
         'arg_types': arg_types,
@@ -51,9 +53,9 @@ class Parser:
       handlerName = 'handle' + type(node).__name__
       if hasattr(self, handlerName):
         getattr(self, handlerName)(node)
-      #else:
-      #  print type(node).__name__, 'not handle'
-      #  stop
+      else:
+        print type(node).__name__, 'not handle'
+        stop
 
   def handleFunction(self, node, gi_class = '', is_method = False, c_class = ''):
     func = Function()
@@ -106,6 +108,11 @@ class Parser:
 
     self.functions.append(func)
 
+  def convert_func_name(self, s):
+    words = s.split('_')
+    words = [w.capitalize() for w in words]
+    return ''.join(words)
+
   def handleEnum(self, node):
     for mem in node.members:
       if mem.symbol in self.skip_symbols:
@@ -135,10 +142,26 @@ class Parser:
     for method in node.methods:
       self.handleFunction(method, name, True, c_type)
 
-  def convert_func_name(self, s):
-    words = s.split('_')
-    words = [w.capitalize() for w in words]
-    return ''.join(words)
+  def handleAlias(self, alias):
+    pass
+
+  def handleClass(self, cls):
+    self.handleRecord(cls)
+    #print cls #TODO
+    #for k in dir(cls):
+    #  if k.startswith('_'): continue
+    #  print k.ljust(20, ' '), getattr(cls, k)
+    #print '=' * 30
+
+  def handleBitfield(self, bitfield):
+    for member in bitfield.members:
+      self.enum_symbols.append(member.symbol)
+
+  def handleCallback(self, callback):
+    pass #TODO
+
+  def handleInterface(self, interface):
+    pass #TODO
 
 def main():
   if len(sys.argv) < 2:
