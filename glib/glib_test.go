@@ -3,6 +3,7 @@ package glib
 import (
   "testing"
   "fmt"
+  "time"
 )
 
 func TestStringMapping(t *testing.T) {
@@ -19,8 +20,13 @@ func TestStringMapping(t *testing.T) {
   fmt.Printf("user runtime dir %s\n", GetUserRuntimeDir())
 
   fmt.Printf("%s\n", FilenameDisplayBasename("foo/bar"))
-  fmt.Printf("%v\n", AsciiStrcasecmp("foo", "bar"))
-  fmt.Printf("%v\n", AsciiStrcasecmp("bar", "foo"))
+
+  if AsciiStrcasecmp("foo", "bar") <= 0 {
+    t.Fail()
+  }
+  if AsciiStrcasecmp("bar", "foo") >= 0 {
+    t.Fail()
+  }
 }
 
 func TestConstructor(t *testing.T) {
@@ -62,7 +68,22 @@ func TestRecordConstruct(t *testing.T) {
 
 func TestDateTime(t *testing.T) {
   now := DateTimeNewNowLocal()
-  fmt.Printf("%v\n", now)
-  var year, month, day int
-  now.GetYmd(&year, &month, &day)
+  y, m, d := now.GetYmd()
+  expectedNow := time.Now()
+  if fmt.Sprintf("%d-%d-%d", y, m, d) != fmt.Sprintf("%d-%d-%d",
+    expectedNow.Year(), expectedNow.Month(), expectedNow.Day()) {
+    t.Fail()
+  }
+}
+
+func TestCallerAllocatesOutParam(t *testing.T) {
+  ok, timeVal := TimeValFromIso8601("1994-11-05T08:15:30-05:00")
+  if !ok {
+    t.Fail()
+  }
+  dateTime := DateTimeNewFromTimevalLocal((*TimeVal)(timeVal))
+  y, m, d := dateTime.GetYmd()
+  if fmt.Sprintf("%d-%d-%d", y, m, d) != "1994-11-5" {
+    t.Fail()
+  }
 }

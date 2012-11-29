@@ -1,6 +1,7 @@
 import StringIO
 import platform
 import time
+from mapping import RETURN_MAPPINGS, PARAM_MAPPINGS, Mapping
 
 class Generator:
   def __init__(self, parser):
@@ -34,6 +35,8 @@ class Generator:
       if func.skip: continue
       if not func.need_helper: continue
       self.generate_helper(func)
+    # helper functions
+    print >>self.out, 'gboolean glibtrue() { return TRUE; }'
     print >>self.out, "*/"
     # cgo
     print >>self.out, 'import "C"'
@@ -43,15 +46,22 @@ class Generator:
     #print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
 
+    self.generate_record_types()
     for func in self.parser.functions:
       if func.skip: continue
       self.generate_function(func)
     self.generate_enum_symbols()
     self.generate_const_symbols()
-    self.generate_record_types()
 
   def generate_function(self, func):
     out = []
+
+    # type mapping
+    if RETURN_MAPPINGS.get(func.return_value.go_type, False):
+      func.return_value.mapping = RETURN_MAPPINGS[func.return_value.go_type]
+    for param in func.parameters:
+      if PARAM_MAPPINGS.get(param.go_type, False):
+        param.mapping = PARAM_MAPPINGS[param.go_type]
 
     # receiver and name
     if func.is_method:
@@ -62,43 +72,69 @@ class Generator:
     # parameters
     for i, param in enumerate(func.parameters):
       if i > 0: out.append(', ')
-      out.append('%s %s' % (param.name, param.go_type))
+      out.append('%s %s' % (param.name, param.mapped_go_type))
     out.append(') ')
 
     # return values
     out.append('(')
     strs = []
     if func.return_value.c_type != 'void':
-      strs.append('_return_ %s' % func.return_value.go_type)
+      strs.append('_return_ %s' % func.return_value.mapped_go_type)
     for ret in func.extra_returns:
-      strs.append('%s %s' % (ret.name, ret.out_go_type))
+      strs.append('%s %s' % (ret.name, 
+        ret.go_type[1:] if ret.is_basic_out_param else ret.go_type))
     out.append('%s) {\n' % ', ' .join(strs))
 
-    # body
-    return_expression = []
-    if func.need_helper:
-      return_expression.append('C._%s(' % func.c_name)
-    else:
-      return_expression.append('C.%s(' % func.c_name)
-    for i, param in enumerate(func.c_parameters):
-      if i > 0: return_expression.append(', ')
-      if param.go_type == 'unsafe.Pointer':
-        return_expression.append('unsafe.Pointer(')
-      else:
-        return_expression.append('(%s)(' % param.go_type)
-      if param in func.extra_returns:
-        return_expression.append('&')
-      return_expression.append('%s)' % param.name)
-    return_expression.append(')')
-    if func.return_value.go_type == 'unsafe.Pointer':
-      return_expression.insert(0, 'unsafe.Pointer(')
-      return_expression.append(')')
+    # type conversion codes
+    for param in func.parameters:
+      if param.mapping:
+        out.append(param.mapping.param_mapping_code(param))
 
-    out.append('\t')
+    # caller allocates
+    for ret in func.extra_returns:
+      if ret.caller_allocates:
+        allocated_var_name = '_allocated_%s_' % ret.name
+        out.append('\tvar %s %s\n' % (allocated_var_name, ret.go_type[1:]))
+        ret.allocated_var_name = allocated_var_name
+
+    # call exception
+    call_exp = []
+    if func.need_helper:
+      call_exp.append('C._%s(' % func.c_name)
+    else:
+      call_exp.append('C.%s(' % func.c_name)
+    for i, param in enumerate(func.c_parameters):
+      if i > 0: call_exp.append(', ')
+      if param.go_type == 'unsafe.Pointer':
+        call_exp.append('unsafe.Pointer(')
+      else:
+        call_exp.append('(%s)(' % param.go_type)
+      if param.is_basic_out_param: # pass a pointer
+        call_exp.append('&')
+      if param.caller_allocates: # use allocated_name
+        call_exp.append('&%s' % param.allocated_var_name)
+      else:
+        call_exp.append('%s' % param.mapped_cgo_name)
+      call_exp.append(')')
+    call_exp.append(')')
+    if func.return_value.go_type == 'unsafe.Pointer':
+      call_exp.insert(0, 'unsafe.Pointer(')
+      call_exp.append(')')
+
+    # return statement
     if func.return_value.c_type != 'void':
-      out.append('_return_ = ')
-    out.append(''.join(return_expression))
-    out.append('\n')
+      if func.return_value.mapping:
+        out.append('\t_cgo_return_ := %s\n' % ''.join(call_exp))
+        out.append(func.return_value.mapping.return_mapping_code(func.return_value))
+      else:
+        out.append('\t_return_ = %s\n' % ''.join(call_exp))
+    else:
+      out.append('\t%s\n' % ''.join(call_exp))
+
+    # dereference
+    for ret in func.extra_returns:
+      if ret.caller_allocates:
+        out.append('\t%s = &%s\n' % (ret.name, ret.allocated_var_name))
 
     out.append('\treturn\n}\n')
     print >>self.out, ''.join(out)
@@ -162,3 +198,12 @@ class Generator:
       if c_type in self.parser.skip_symbols:
         continue
       print >>self.out, "type %s C.%s" % (name, c_type)
+      # mapping
+      m = Mapping()
+      m.cgo_type = '*C.' + c_type
+      m.go_type = '*' + name
+      m.return_mapping_code = lambda ret: '\t_return_ = (%s)(_cgo_return_)\n' % ret.mapping.go_type
+      RETURN_MAPPINGS[m.cgo_type] = m
+      m.param_mapping_code = lambda param: '\t%s := (%s)(%s)\n' % (
+          param.mapped_cgo_name, param.go_type, param.name)
+      PARAM_MAPPINGS[m.cgo_type] = m

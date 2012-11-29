@@ -23,12 +23,14 @@ class Value:
   def __init__(self, gi_container = None):
     self.need_helper = False
     self.not_implement = False
+    self.mapping = None
+    self.is_basic_out_param = False
+    self.caller_allocates = False
 
     if gi_container is None: return
 
     self.transfer = gi_container.transfer != 'none'
     self.direction = gi_container.direction
-    self.caller_allocates = False
 
     if isinstance(gi_container, ast.Parameter):
       self.caller_allocates = gi_container.caller_allocates
@@ -44,6 +46,9 @@ class Value:
 
   def ParseTypeInfo(self, gi_container):
     self.c_type = gi_container.type.ctype
+
+    if 'out' in gi_container.direction and isinstance(gi_container, ast.Parameter):
+      self.is_basic_out_param = gi_container.type.is_equiv(ast.BASIC_GIR_TYPES)
 
     if isinstance(gi_container.type, ast.Array) and isinstance(gi_container, ast.Parameter):
       self.not_implement = True
@@ -76,6 +81,24 @@ class Value:
     self.out_go_type = self.go_type # used in out param
     if self.out_go_type.startswith('*'):
       self.out_go_type = self.out_go_type[1:]
+
+  @property
+  def mapped_go_type(self):
+    if self.mapping:
+      return self.mapping.go_type
+    return self.go_type
+
+  @property
+  def mapped_out_go_type(self):
+    if self.mapping:
+      return self.out_go_type
+    return self.go_type
+
+  @property
+  def mapped_cgo_name(self):
+    if self.mapping:
+      return '_cgo_of_%s_' % self.name
+    return self.name
 
   _name_serial_ = 0
   @classmethod

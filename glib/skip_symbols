@@ -50,3 +50,5 @@ g_date_to_struct_tm
 // double long not support in go
 GTestLogBuffer
 GTestLogMsg
+
+g_main_context_query
