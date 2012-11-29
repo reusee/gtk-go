@@ -53,17 +53,17 @@ func TestBool(t *testing.T) {
   }
 }
 
-//func TestBase64(t *testing.T) {
-//  data := []byte("hello")
-//  expected := "aGVsbG8="
-//  l := uint64(len(data))
-//  if expected != Base64Encode(data, l) {
-//    t.Fail()
-//  }
-//  if !bytes.Equal(data, Base64Decode(expected, &l)) {
-//    t.Fail()
-//  }
-//}
+func TestBase64(t *testing.T) {
+  data := []byte("hello")
+  expected := "aGVsbG8="
+  l := uint64(len(data))
+  if expected != Base64Encode(data, l) {
+    t.Fail()
+  }
+  if !bytes.Equal(data, Base64Decode(expected, &l)) {
+    t.Fail()
+  }
+}
 
 func TestRecordConstruct(t *testing.T) {
   AsyncQueueNew()
