@@ -111,7 +111,7 @@ class Generator:
         out.append('\tvar %s %s\n' % (allocated_var_name, ret.go_type[1:]))
         ret.allocated_var_name = allocated_var_name
 
-    # call exception
+    # call expression
     call_exp = []
     if func.need_helper:
       call_exp.append('C._%s(' % func.c_name)
