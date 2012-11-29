@@ -37,6 +37,7 @@ class Generator:
       self.generate_helper(func)
     # helper functions
     print >>self.out, 'gboolean glibtrue() { return TRUE; }'
+    print >>self.out, 'gboolean glibfalse() { return FALSE; }'
     print >>self.out, "*/"
     # cgo
     print >>self.out, 'import "C"'

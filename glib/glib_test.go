@@ -87,3 +87,12 @@ func TestCallerAllocatesOutParam(t *testing.T) {
     t.Fail()
   }
 }
+
+func TestParameterTypeMapping(t *testing.T) {
+  year := 1987
+  dateTime := DateTimeNewLocal(year, 7, 14, 18, 20, 35)
+  y, m, d := dateTime.GetYmd()
+  if y != 1987 || m != 7 || d != 14 {
+    t.Fail()
+  }
+}
