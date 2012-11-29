@@ -9,13 +9,18 @@ class Mapping:
     self.param_mapping_code = None
     self.return_mapping_code = None
 
+# string
+
 m = Mapping()
 m.cgo_type = '*C.gchar'
 m.go_type = 'string'
 m.param_mapping_code = lambda param: '''\
 \t%s := (*C.gchar)(unsafe.Pointer(C.CString(%s)))
 ''' % (param.mapped_cgo_name, param.name)
+m.return_mapping_code = lambda param: '\t%s = C.GoString((*C.char)(%s))\n' % (
+    param.name, param.mapped_cgo_name)
 PARAM_MAPPINGS[m.cgo_type] = m
+RETURN_MAPPINGS[m.cgo_type] = m
 
 # boolean
 

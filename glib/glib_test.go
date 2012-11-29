@@ -4,22 +4,26 @@ import (
   "testing"
   "fmt"
   "time"
+  "os"
+  "os/user"
 )
 
 func TestStringMapping(t *testing.T) {
-  fmt.Printf("current dir%s\n", GetCurrentDir())
-  fmt.Printf("codeset %s\n", GetCodeset())
-  fmt.Printf("home dir %s\n", GetHomeDir())
-  fmt.Printf("host name %s\n", GetHostName())
-  fmt.Printf("real name %s\n", GetRealName())
-  fmt.Printf("tmp dir %s\n", GetTmpDir())
-  fmt.Printf("user cache dir %s\n", GetUserCacheDir())
-  fmt.Printf("user config dir %s\n", GetUserConfigDir())
-  fmt.Printf("user data dir %s\n", GetUserDataDir())
-  fmt.Printf("user name %s\n", GetUserName())
-  fmt.Printf("user runtime dir %s\n", GetUserRuntimeDir())
-
-  fmt.Printf("%s\n", FilenameDisplayBasename("foo/bar"))
+  cwd, _ := os.Getwd()
+  if GetCurrentDir() != cwd {
+    t.Fail()
+  }
+  usr, _ := user.Current()
+  if GetHomeDir() != usr.HomeDir {
+    t.Fail()
+  }
+  hostname, _ := os.Hostname()
+  if GetHostName() != hostname {
+    t.Fail()
+  }
+  if FilenameDisplayBasename("foo/bar/baz") != "baz" {
+    t.Fail()
+  }
 
   if AsciiStrcasecmp("foo", "bar") <= 0 {
     t.Fail()
