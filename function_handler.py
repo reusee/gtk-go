@@ -18,6 +18,7 @@ def handleFunction(parser, function, klass = None):
       make_constructor_return_go_type,
       map_glib_numeric_parameters_to_go_type,
       map_glib_numeric_returns_to_go_type,
+      map_string_parameters,
   ]
 
   for processor in processors:
@@ -234,3 +235,17 @@ def map_glib_numeric_returns_to_go_type(parser, generator, function, klass):
         ret.go_return_name))
       ret.go_return_name = '_go_%s_' % ret.go_return_name
       ret.go_return_type = numeric_mapping[ret.go_return_type]
+
+def map_string_parameters(parser, generator, function, klass):
+  for param in generator.go_parameters:
+    if param.gir_param_info.type.resolved in ['filename', 'utf8']:
+      generator.statements_before_cgo_call.extend([
+        '_cstring_%s_ := C.CString(%s)' % (param.go_parameter_name, param.go_parameter_name),
+        '_cgo_%s_ := (%s)(unsafe.Pointer(_cstring_%s_))' % (
+          param.go_parameter_name, param.go_parameter_type, param.go_parameter_name),
+        ])
+      if param.gir_param_info.transfer == 'none':
+        generator.statements_before_cgo_call.append(
+            'defer C.free(unsafe.Pointer(_cstring_%s_))' % param.go_parameter_name)
+      param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
+      param.go_parameter_type = 'string'
