@@ -24,9 +24,14 @@ func TestBasicFunc(t *testing.T) {
 func TestBasicWindow(t *testing.T) {
   Init(os.Args)
   window := WindowNew(WINDOW_TOPLEVEL)
+
+  button := ButtonNewWithLabel("Hello, world!")
+  (*Container)(unsafe.Pointer(window)).Add(button)
+  (*Widget)(unsafe.Pointer(button)).Show()
+
   (*Widget)(unsafe.Pointer(window)).Show()
   go func() {
-    <-time.After(time.Millisecond * 500)
+    <-time.After(time.Millisecond * 3000)
     MainQuit()
   }()
   Main()

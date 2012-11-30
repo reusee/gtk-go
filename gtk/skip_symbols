@@ -32,3 +32,4 @@ gtk_hsv_set_color
 gtk_hsv_set_metrics
 gtk_style_get_style_property
 gtk_hsv_new
+gtk_style_get_valist

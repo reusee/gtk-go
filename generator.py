@@ -30,11 +30,10 @@ class Generator:
     for include in self.parser.includes:
       print >>self.out, "// #include <%s>" % include
     print >>self.out, "/*"
-    # wrappers
-    for func in self.parser.functions:
-      if func.skip: continue
-      if not func.need_helper: continue
-      self.generate_helper(func)
+    # c functions
+    for generator in self.parser.functions:
+      if generator.has_c_func:
+        print >>self.out, generator.generate_c_func()
     # helper functions
     print >>self.out, 'gboolean glibtrue() { return TRUE; }'
     print >>self.out, 'gboolean glibfalse() { return FALSE; }'
@@ -48,9 +47,8 @@ class Generator:
     print >>self.out, ')\n'
 
     self.generate_record_types()
-    for func in self.parser.functions:
-      if func.skip: continue
-      self.generate_function(func)
+    for generator in self.parser.functions:
+      print >>self.out, generator.generate_go_func()
     self.generate_enum_symbols()
     self.generate_const_symbols()
 

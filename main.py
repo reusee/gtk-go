@@ -7,6 +7,7 @@ from generator import Generator
 import os
 from common import *
 from container import *
+from function_handler import handleFunction
 
 class Parser:
   def __init__(self, filename):
@@ -57,61 +58,11 @@ class Parser:
         print type(node).__name__, 'not handle'
         stop
 
-  def handleFunction(self, node, gi_class = '', is_method = False, c_class = ''):
-    func = Function()
-    # name
-    func.c_name = node.symbol
-    if func.c_name in self.exported_functions:
-      return
-    self.exported_functions.add(func.c_name)
-    func.name = self.convert_func_name(node.name)
-    if is_method:
-      if func.name == "":
-        func.name = 'New' + gi_class
-    else:
-      func.name = gi_class + func.name
-
-    # class
-    func.is_method = is_method
-    func.c_class = c_class
-    func.gi_class = gi_class
-
-    # ins and outs
-    func.return_value = Value(node.retval)
-    func.parameters = []
-    func.c_parameters = []
-    if is_method:
-      value = Value.selfValue(c_class)
-      func.c_parameters.append(value)
-    func.extra_returns = []
-    for i, param in enumerate(node.parameters):
-      value = Value(param)
-      if 'in' in param.direction:
-        func.parameters.append(value)
-      if 'out' in param.direction:
-        func.extra_returns.append(value)
-      func.c_parameters.append(value)
-    if node.throws:
-      value = Value.errValue()
-      func.extra_returns.append(value)
-      func.c_parameters.append(value)
-
-    func.need_helper = False
-    if func.is_method:
-      func.need_helper = True
-    func.need_helper |= any(value.need_helper for value in func.parameters)
-    func.need_helper |= any(value.need_helper for value in func.extra_returns)
-
-    func.skip = node.deprecated is not None or func.c_name in self.skip_symbols
-    func.skip |= any(value.not_implement for value in func.parameters)
-    func.skip |= any(value.not_implement for value in func.extra_returns)
-
-    self.functions.append(func)
-
-  def convert_func_name(self, s):
-    words = s.split('_')
-    words = [w.capitalize() for w in words]
-    return ''.join(words)
+  def handleFunction(self, *args):
+    generator = handleFunction(self, *args)
+    if generator:
+      self.functions.append(generator)
+      self.exported_functions.add(generator.lib_func_name)
 
   def handleEnum(self, node):
     for mem in node.members:
@@ -134,13 +85,13 @@ class Parser:
     self.construct_records.add((name, c_type))
     # constructors
     for constructor in node.constructors:
-      self.handleFunction(constructor, name)
+      self.handleFunction(constructor, node)
     # static methods
     for function in node.static_methods:
-      self.handleFunction(function, name)
+      self.handleFunction(function, node)
     # methods
     for method in node.methods:
-      self.handleFunction(method, name, True, c_type)
+      self.handleFunction(method, node)
 
   def handleAlias(self, alias):
     pass

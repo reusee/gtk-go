@@ -52,3 +52,5 @@ GTestLogBuffer
 GTestLogMsg
 
 g_main_context_query
+
+g_variant_type_checked_
