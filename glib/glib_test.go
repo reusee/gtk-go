@@ -31,6 +31,14 @@ func TestStringMapping(t *testing.T) {
   if AsciiStrcasecmp("bar", "foo") >= 0 {
     t.Fail()
   }
+
+  if Utf8Strlen("hello啊大家", 32) != 8 {
+    t.Fail()
+  }
+
+  if Utf8Strdown("HELLO", 32) != "hello" {
+    t.Fail()
+  }
 }
 
 func TestConstructor(t *testing.T) {
@@ -38,20 +46,20 @@ func TestConstructor(t *testing.T) {
   KeyFileNew()
 }
 
-func TestBool(t *testing.T) {
-  if StrHasSuffix("foo", "oo") != true {
-    t.Fail()
-  }
-  if StrHasSuffix("foo", "xx") != false {
-    t.Fail()
-  }
-  if StrHasPrefix("foo", "fo") != true {
-    t.Fail()
-  }
-  if StrHasPrefix("foo", "bar") != false {
-    t.Fail()
-  }
-}
+//func TestBool(t *testing.T) {
+//  if StrHasSuffix("foo", "oo") != true {
+//    t.Fail()
+//  }
+//  if StrHasSuffix("foo", "xx") != false {
+//    t.Fail()
+//  }
+//  if StrHasPrefix("foo", "fo") != true {
+//    t.Fail()
+//  }
+//  if StrHasPrefix("foo", "bar") != false {
+//    t.Fail()
+//  }
+//}
 
 //func TestBase64(t *testing.T) {
 //  data := []byte("hello")
@@ -80,17 +88,17 @@ func TestDateTime(t *testing.T) {
   }
 }
 
-func TestCallerAllocatesOutParam(t *testing.T) {
-  ok, timeVal := TimeValFromIso8601("1994-11-05T08:15:30-05:00")
-  if !ok {
-    t.Fail()
-  }
-  dateTime := DateTimeNewFromTimevalLocal((*TimeVal)(timeVal))
-  y, m, d := dateTime.GetYmd()
-  if fmt.Sprintf("%d-%d-%d", y, m, d) != "1994-11-5" {
-    t.Fail()
-  }
-}
+//func TestCallerAllocatesOutParam(t *testing.T) {
+//  ok, timeVal := TimeValFromIso8601("1994-11-05T08:15:30-05:00")
+//  if !ok {
+//    t.Fail()
+//  }
+//  dateTime := DateTimeNewFromTimevalLocal((*TimeVal)(timeVal))
+//  y, m, d := dateTime.GetYmd()
+//  if fmt.Sprintf("%d-%d-%d", y, m, d) != "1994-11-5" {
+//    t.Fail()
+//  }
+//}
 
 func TestParameterTypeMapping(t *testing.T) {
   year := 1987

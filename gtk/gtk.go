@@ -2602,8 +2602,14 @@ func AboutDialogNew() (_return_ *AboutDialog) {
 	return
 }
 
-func (_self_ *AboutDialog) AddCreditSection(section_name *C.gchar, people unsafe.Pointer) () {
-	C._gtk_about_dialog_add_credit_section((*C.GtkAboutDialog)(_self_), section_name, people)
+func (_self_ *AboutDialog) AddCreditSection(section_name string, people string) () {
+	_cstring_section_name_ := C.CString(section_name)
+	_cgo_section_name_ := (*C.gchar)(unsafe.Pointer(_cstring_section_name_))
+	defer C.free(unsafe.Pointer(_cstring_section_name_))
+	_cstring_people_ := C.CString(people)
+	_cgo_people_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_people_))
+	defer C.free(unsafe.Pointer(_cstring_people_))
+	C._gtk_about_dialog_add_credit_section((*C.GtkAboutDialog)(_self_), _cgo_section_name_, _cgo_people_)
 	return
 }
 
@@ -2617,13 +2623,17 @@ func (_self_ *AboutDialog) GetAuthors() (_return_ unsafe.Pointer) {
 	return
 }
 
-func (_self_ *AboutDialog) GetComments() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetComments() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_comments((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AboutDialog) GetCopyright() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetCopyright() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_copyright((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -2632,8 +2642,10 @@ func (_self_ *AboutDialog) GetDocumenters() (_return_ unsafe.Pointer) {
 	return
 }
 
-func (_self_ *AboutDialog) GetLicense() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetLicense() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_license((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -2647,33 +2659,45 @@ func (_self_ *AboutDialog) GetLogo() (_return_ *C.GdkPixbuf) {
 	return
 }
 
-func (_self_ *AboutDialog) GetLogoIconName() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetLogoIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_logo_icon_name((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AboutDialog) GetProgramName() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetProgramName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_program_name((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AboutDialog) GetTranslatorCredits() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetTranslatorCredits() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_translator_credits((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AboutDialog) GetVersion() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetVersion() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_version((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AboutDialog) GetWebsite() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetWebsite() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_website((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AboutDialog) GetWebsiteLabel() (_return_ *C.gchar) {
+func (_self_ *AboutDialog) GetWebsiteLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_about_dialog_get_website_label((*C.GtkAboutDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -2682,18 +2706,27 @@ func (_self_ *AboutDialog) GetWrapLicense() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *AboutDialog) SetComments(comments *C.gchar) () {
-	C._gtk_about_dialog_set_comments((*C.GtkAboutDialog)(_self_), comments)
+func (_self_ *AboutDialog) SetComments(comments string) () {
+	_cstring_comments_ := C.CString(comments)
+	_cgo_comments_ := (*C.gchar)(unsafe.Pointer(_cstring_comments_))
+	defer C.free(unsafe.Pointer(_cstring_comments_))
+	C._gtk_about_dialog_set_comments((*C.GtkAboutDialog)(_self_), _cgo_comments_)
 	return
 }
 
-func (_self_ *AboutDialog) SetCopyright(copyright *C.gchar) () {
-	C._gtk_about_dialog_set_copyright((*C.GtkAboutDialog)(_self_), copyright)
+func (_self_ *AboutDialog) SetCopyright(copyright string) () {
+	_cstring_copyright_ := C.CString(copyright)
+	_cgo_copyright_ := (*C.gchar)(unsafe.Pointer(_cstring_copyright_))
+	defer C.free(unsafe.Pointer(_cstring_copyright_))
+	C._gtk_about_dialog_set_copyright((*C.GtkAboutDialog)(_self_), _cgo_copyright_)
 	return
 }
 
-func (_self_ *AboutDialog) SetLicense(license *C.gchar) () {
-	C._gtk_about_dialog_set_license((*C.GtkAboutDialog)(_self_), license)
+func (_self_ *AboutDialog) SetLicense(license string) () {
+	_cstring_license_ := C.CString(license)
+	_cgo_license_ := (*C.gchar)(unsafe.Pointer(_cstring_license_))
+	defer C.free(unsafe.Pointer(_cstring_license_))
+	C._gtk_about_dialog_set_license((*C.GtkAboutDialog)(_self_), _cgo_license_)
 	return
 }
 
@@ -2707,33 +2740,51 @@ func (_self_ *AboutDialog) SetLogo(logo *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *AboutDialog) SetLogoIconName(icon_name *C.gchar) () {
-	C._gtk_about_dialog_set_logo_icon_name((*C.GtkAboutDialog)(_self_), icon_name)
+func (_self_ *AboutDialog) SetLogoIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_about_dialog_set_logo_icon_name((*C.GtkAboutDialog)(_self_), _cgo_icon_name_)
 	return
 }
 
-func (_self_ *AboutDialog) SetProgramName(name *C.gchar) () {
-	C._gtk_about_dialog_set_program_name((*C.GtkAboutDialog)(_self_), name)
+func (_self_ *AboutDialog) SetProgramName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_about_dialog_set_program_name((*C.GtkAboutDialog)(_self_), _cgo_name_)
 	return
 }
 
-func (_self_ *AboutDialog) SetTranslatorCredits(translator_credits *C.gchar) () {
-	C._gtk_about_dialog_set_translator_credits((*C.GtkAboutDialog)(_self_), translator_credits)
+func (_self_ *AboutDialog) SetTranslatorCredits(translator_credits string) () {
+	_cstring_translator_credits_ := C.CString(translator_credits)
+	_cgo_translator_credits_ := (*C.gchar)(unsafe.Pointer(_cstring_translator_credits_))
+	defer C.free(unsafe.Pointer(_cstring_translator_credits_))
+	C._gtk_about_dialog_set_translator_credits((*C.GtkAboutDialog)(_self_), _cgo_translator_credits_)
 	return
 }
 
-func (_self_ *AboutDialog) SetVersion(version *C.gchar) () {
-	C._gtk_about_dialog_set_version((*C.GtkAboutDialog)(_self_), version)
+func (_self_ *AboutDialog) SetVersion(version string) () {
+	_cstring_version_ := C.CString(version)
+	_cgo_version_ := (*C.gchar)(unsafe.Pointer(_cstring_version_))
+	defer C.free(unsafe.Pointer(_cstring_version_))
+	C._gtk_about_dialog_set_version((*C.GtkAboutDialog)(_self_), _cgo_version_)
 	return
 }
 
-func (_self_ *AboutDialog) SetWebsite(website *C.gchar) () {
-	C._gtk_about_dialog_set_website((*C.GtkAboutDialog)(_self_), website)
+func (_self_ *AboutDialog) SetWebsite(website string) () {
+	_cstring_website_ := C.CString(website)
+	_cgo_website_ := (*C.gchar)(unsafe.Pointer(_cstring_website_))
+	defer C.free(unsafe.Pointer(_cstring_website_))
+	C._gtk_about_dialog_set_website((*C.GtkAboutDialog)(_self_), _cgo_website_)
 	return
 }
 
-func (_self_ *AboutDialog) SetWebsiteLabel(website_label *C.gchar) () {
-	C._gtk_about_dialog_set_website_label((*C.GtkAboutDialog)(_self_), website_label)
+func (_self_ *AboutDialog) SetWebsiteLabel(website_label string) () {
+	_cstring_website_label_ := C.CString(website_label)
+	_cgo_website_label_ := (*C.gchar)(unsafe.Pointer(_cstring_website_label_))
+	defer C.free(unsafe.Pointer(_cstring_website_label_))
+	C._gtk_about_dialog_set_website_label((*C.GtkAboutDialog)(_self_), _cgo_website_label_)
 	return
 }
 
@@ -2766,8 +2817,11 @@ func (_self_ *AccelGroup) Connect(accel_key uint, accel_mods C.GdkModifierType, 
 	return
 }
 
-func (_self_ *AccelGroup) ConnectByPath(accel_path *C.gchar, closure *C.GClosure) () {
-	C._gtk_accel_group_connect_by_path((*C.GtkAccelGroup)(_self_), accel_path, closure)
+func (_self_ *AccelGroup) ConnectByPath(accel_path string, closure *C.GClosure) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_accel_group_connect_by_path((*C.GtkAccelGroup)(_self_), _cgo_accel_path_, closure)
 	return
 }
 
@@ -2815,9 +2869,12 @@ func (_self_ *AccelGroup) Unlock() () {
 	return
 }
 
-func AccelLabelNew(string_ *C.gchar) (_return_ *AccelLabel) {
+func AccelLabelNew(string_ string) (_return_ *AccelLabel) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_accel_label_new(string_)
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	_cgo_return_ = C._gtk_accel_label_new(_cgo_string__)
 	_return_ = (*AccelLabel)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -2855,20 +2912,29 @@ func (_self_ *AccelLabel) SetAccelWidget(accel_widget *C.GtkWidget) () {
 	return
 }
 
-func AccelMapAddEntry(accel_path *C.gchar, accel_key uint, accel_mods C.GdkModifierType) () {
+func AccelMapAddEntry(accel_path string, accel_key uint, accel_mods C.GdkModifierType) () {
 	_cgo_accel_key_ := (C.guint)(accel_key)
-	C._gtk_accel_map_add_entry(accel_path, _cgo_accel_key_, accel_mods)
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_accel_map_add_entry(_cgo_accel_path_, _cgo_accel_key_, accel_mods)
 	return
 }
 
-func AccelMapAddFilter(filter_pattern *C.gchar) () {
-	C._gtk_accel_map_add_filter(filter_pattern)
+func AccelMapAddFilter(filter_pattern string) () {
+	_cstring_filter_pattern_ := C.CString(filter_pattern)
+	_cgo_filter_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_filter_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_filter_pattern_))
+	C._gtk_accel_map_add_filter(_cgo_filter_pattern_)
 	return
 }
 
-func AccelMapChangeEntry(accel_path *C.gchar, accel_key uint, accel_mods C.GdkModifierType, replace C.gboolean) (_return_ C.gboolean) {
+func AccelMapChangeEntry(accel_path string, accel_key uint, accel_mods C.GdkModifierType, replace C.gboolean) (_return_ C.gboolean) {
 	_cgo_accel_key_ := (C.guint)(accel_key)
-	_return_ = C._gtk_accel_map_change_entry(accel_path, _cgo_accel_key_, accel_mods, replace)
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	_return_ = C._gtk_accel_map_change_entry(_cgo_accel_path_, _cgo_accel_key_, accel_mods, replace)
 	return
 }
 
@@ -2887,8 +2953,11 @@ func AccelMapGet() (_return_ *C.GtkAccelMap) {
 	return
 }
 
-func AccelMapLoad(file_name *C.gchar) () {
-	C._gtk_accel_map_load(file_name)
+func AccelMapLoad(file_name string) () {
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	C._gtk_accel_map_load(_cgo_file_name_)
 	return
 }
 
@@ -2903,18 +2972,27 @@ func AccelMapLoadScanner(scanner *C.GScanner) () {
 	return
 }
 
-func AccelMapLockPath(accel_path *C.gchar) () {
-	C._gtk_accel_map_lock_path(accel_path)
+func AccelMapLockPath(accel_path string) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_accel_map_lock_path(_cgo_accel_path_)
 	return
 }
 
-func AccelMapLookupEntry(accel_path *C.gchar) (_return_ C.gboolean, key *C.GtkAccelKey) {
-	_return_ = C._gtk_accel_map_lookup_entry(accel_path, key)
+func AccelMapLookupEntry(accel_path string) (_return_ C.gboolean, key *C.GtkAccelKey) {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	_return_ = C._gtk_accel_map_lookup_entry(_cgo_accel_path_, key)
 	return
 }
 
-func AccelMapSave(file_name *C.gchar) () {
-	C._gtk_accel_map_save(file_name)
+func AccelMapSave(file_name string) () {
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	C._gtk_accel_map_save(_cgo_file_name_)
 	return
 }
 
@@ -2924,8 +3002,11 @@ func AccelMapSaveFd(fd int) () {
 	return
 }
 
-func AccelMapUnlockPath(accel_path *C.gchar) () {
-	C._gtk_accel_map_unlock_path(accel_path)
+func AccelMapUnlockPath(accel_path string) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_accel_map_unlock_path(_cgo_accel_path_)
 	return
 }
 
@@ -2939,9 +3020,21 @@ func (_self_ *Accessible) SetWidget(widget *C.GtkWidget) () {
 	return
 }
 
-func ActionNew(name *C.gchar, label *C.gchar, tooltip *C.gchar, stock_id *C.gchar) (_return_ *Action) {
+func ActionNew(name string, label string, tooltip string, stock_id string) (_return_ *Action) {
 	var _cgo_return_ *C.GtkAction
-	_cgo_return_ = C._gtk_action_new(name, label, tooltip, stock_id)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
 	_return_ = (*Action)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -2991,8 +3084,10 @@ func (_self_ *Action) GetAccelClosure() (_return_ *C.GClosure) {
 	return
 }
 
-func (_self_ *Action) GetAccelPath() (_return_ *C.gchar) {
+func (_self_ *Action) GetAccelPath() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_accel_path((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3006,8 +3101,10 @@ func (_self_ *Action) GetGicon() (_return_ *C.GIcon) {
 	return
 }
 
-func (_self_ *Action) GetIconName() (_return_ *C.gchar) {
+func (_self_ *Action) GetIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_icon_name((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3016,13 +3113,17 @@ func (_self_ *Action) GetIsImportant() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Action) GetLabel() (_return_ *C.gchar) {
+func (_self_ *Action) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_label((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetName() (_return_ *C.gchar) {
+func (_self_ *Action) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_name((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3036,18 +3137,24 @@ func (_self_ *Action) GetSensitive() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Action) GetShortLabel() (_return_ *C.gchar) {
+func (_self_ *Action) GetShortLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_short_label((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetStockId() (_return_ *C.gchar) {
+func (_self_ *Action) GetStockId() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_stock_id((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetTooltip() (_return_ *C.gchar) {
+func (_self_ *Action) GetTooltip() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_tooltip((*C.GtkAction)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3081,8 +3188,11 @@ func (_self_ *Action) SetAccelGroup(accel_group *C.GtkAccelGroup) () {
 	return
 }
 
-func (_self_ *Action) SetAccelPath(accel_path *C.gchar) () {
-	C._gtk_action_set_accel_path((*C.GtkAction)(_self_), accel_path)
+func (_self_ *Action) SetAccelPath(accel_path string) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_action_set_accel_path((*C.GtkAction)(_self_), _cgo_accel_path_)
 	return
 }
 
@@ -3096,8 +3206,11 @@ func (_self_ *Action) SetGicon(icon *C.GIcon) () {
 	return
 }
 
-func (_self_ *Action) SetIconName(icon_name *C.gchar) () {
-	C._gtk_action_set_icon_name((*C.GtkAction)(_self_), icon_name)
+func (_self_ *Action) SetIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_action_set_icon_name((*C.GtkAction)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -3106,8 +3219,11 @@ func (_self_ *Action) SetIsImportant(is_important C.gboolean) () {
 	return
 }
 
-func (_self_ *Action) SetLabel(label *C.gchar) () {
-	C._gtk_action_set_label((*C.GtkAction)(_self_), label)
+func (_self_ *Action) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_action_set_label((*C.GtkAction)(_self_), _cgo_label_)
 	return
 }
 
@@ -3116,18 +3232,27 @@ func (_self_ *Action) SetSensitive(sensitive C.gboolean) () {
 	return
 }
 
-func (_self_ *Action) SetShortLabel(short_label *C.gchar) () {
-	C._gtk_action_set_short_label((*C.GtkAction)(_self_), short_label)
+func (_self_ *Action) SetShortLabel(short_label string) () {
+	_cstring_short_label_ := C.CString(short_label)
+	_cgo_short_label_ := (*C.gchar)(unsafe.Pointer(_cstring_short_label_))
+	defer C.free(unsafe.Pointer(_cstring_short_label_))
+	C._gtk_action_set_short_label((*C.GtkAction)(_self_), _cgo_short_label_)
 	return
 }
 
-func (_self_ *Action) SetStockId(stock_id *C.gchar) () {
-	C._gtk_action_set_stock_id((*C.GtkAction)(_self_), stock_id)
+func (_self_ *Action) SetStockId(stock_id string) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_action_set_stock_id((*C.GtkAction)(_self_), _cgo_stock_id_)
 	return
 }
 
-func (_self_ *Action) SetTooltip(tooltip *C.gchar) () {
-	C._gtk_action_set_tooltip((*C.GtkAction)(_self_), tooltip)
+func (_self_ *Action) SetTooltip(tooltip string) () {
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	C._gtk_action_set_tooltip((*C.GtkAction)(_self_), _cgo_tooltip_)
 	return
 }
 
@@ -3151,9 +3276,12 @@ func (_self_ *Action) UnblockActivate() () {
 	return
 }
 
-func ActionGroupNew(name *C.gchar) (_return_ *ActionGroup) {
+func ActionGroupNew(name string) (_return_ *ActionGroup) {
 	var _cgo_return_ *C.GtkActionGroup
-	_cgo_return_ = C._gtk_action_group_new(name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cgo_return_ = C._gtk_action_group_new(_cgo_name_)
 	_return_ = (*ActionGroup)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -3163,8 +3291,11 @@ func (_self_ *ActionGroup) AddAction(action *C.GtkAction) () {
 	return
 }
 
-func (_self_ *ActionGroup) AddActionWithAccel(action *C.GtkAction, accelerator *C.gchar) () {
-	C._gtk_action_group_add_action_with_accel((*C.GtkActionGroup)(_self_), action, accelerator)
+func (_self_ *ActionGroup) AddActionWithAccel(action *C.GtkAction, accelerator string) () {
+	_cstring_accelerator_ := C.CString(accelerator)
+	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
+	defer C.free(unsafe.Pointer(_cstring_accelerator_))
+	C._gtk_action_group_add_action_with_accel((*C.GtkActionGroup)(_self_), action, _cgo_accelerator_)
 	return
 }
 
@@ -3173,13 +3304,18 @@ func (_self_ *ActionGroup) GetAccelGroup() (_return_ *C.GtkAccelGroup) {
 	return
 }
 
-func (_self_ *ActionGroup) GetAction(action_name *C.gchar) (_return_ *C.GtkAction) {
-	_return_ = C._gtk_action_group_get_action((*C.GtkActionGroup)(_self_), action_name)
+func (_self_ *ActionGroup) GetAction(action_name string) (_return_ *C.GtkAction) {
+	_cstring_action_name_ := C.CString(action_name)
+	_cgo_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_action_name_))
+	defer C.free(unsafe.Pointer(_cstring_action_name_))
+	_return_ = C._gtk_action_group_get_action((*C.GtkActionGroup)(_self_), _cgo_action_name_)
 	return
 }
 
-func (_self_ *ActionGroup) GetName() (_return_ *C.gchar) {
+func (_self_ *ActionGroup) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_action_group_get_name((*C.GtkActionGroup)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3218,8 +3354,11 @@ func (_self_ *ActionGroup) SetTranslateFunc(func_ C.GtkTranslateFunc, data C.gpo
 	return
 }
 
-func (_self_ *ActionGroup) SetTranslationDomain(domain *C.gchar) () {
-	C._gtk_action_group_set_translation_domain((*C.GtkActionGroup)(_self_), domain)
+func (_self_ *ActionGroup) SetTranslationDomain(domain string) () {
+	_cstring_domain_ := C.CString(domain)
+	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
+	defer C.free(unsafe.Pointer(_cstring_domain_))
+	C._gtk_action_group_set_translation_domain((*C.GtkActionGroup)(_self_), _cgo_domain_)
 	return
 }
 
@@ -3228,8 +3367,13 @@ func (_self_ *ActionGroup) SetVisible(visible C.gboolean) () {
 	return
 }
 
-func (_self_ *ActionGroup) TranslateString(string_ *C.gchar) (_return_ *C.gchar) {
-	_return_ = C._gtk_action_group_translate_string((*C.GtkActionGroup)(_self_), string_)
+func (_self_ *ActionGroup) TranslateString(string_ string) (_go__return__ string) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ *C.gchar
+	_return_ = C._gtk_action_group_translate_string((*C.GtkActionGroup)(_self_), _cgo_string__)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3401,15 +3545,24 @@ func (_self_ *Alignment) SetPadding(padding_top uint, padding_bottom uint, paddi
 	return
 }
 
-func AppChooserButtonNew(content_type *C.gchar) (_return_ *AppChooserButton) {
+func AppChooserButtonNew(content_type string) (_return_ *AppChooserButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_app_chooser_button_new(content_type)
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_cgo_return_ = C._gtk_app_chooser_button_new(_cgo_content_type_)
 	_return_ = (*AppChooserButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *AppChooserButton) AppendCustomItem(name *C.gchar, label *C.gchar, icon *C.GIcon) () {
-	C._gtk_app_chooser_button_append_custom_item((*C.GtkAppChooserButton)(_self_), name, label, icon)
+func (_self_ *AppChooserButton) AppendCustomItem(name string, label string, icon *C.GIcon) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_app_chooser_button_append_custom_item((*C.GtkAppChooserButton)(_self_), _cgo_name_, _cgo_label_, icon)
 	return
 }
 
@@ -3418,8 +3571,10 @@ func (_self_ *AppChooserButton) AppendSeparator() () {
 	return
 }
 
-func (_self_ *AppChooserButton) GetHeading() (_return_ *C.gchar) {
+func (_self_ *AppChooserButton) GetHeading() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_app_chooser_button_get_heading((*C.GtkAppChooserButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3433,13 +3588,19 @@ func (_self_ *AppChooserButton) GetShowDialogItem() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *AppChooserButton) SetActiveCustomItem(name *C.gchar) () {
-	C._gtk_app_chooser_button_set_active_custom_item((*C.GtkAppChooserButton)(_self_), name)
+func (_self_ *AppChooserButton) SetActiveCustomItem(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_app_chooser_button_set_active_custom_item((*C.GtkAppChooserButton)(_self_), _cgo_name_)
 	return
 }
 
-func (_self_ *AppChooserButton) SetHeading(heading *C.gchar) () {
-	C._gtk_app_chooser_button_set_heading((*C.GtkAppChooserButton)(_self_), heading)
+func (_self_ *AppChooserButton) SetHeading(heading string) () {
+	_cstring_heading_ := C.CString(heading)
+	_cgo_heading_ := (*C.gchar)(unsafe.Pointer(_cstring_heading_))
+	defer C.free(unsafe.Pointer(_cstring_heading_))
+	C._gtk_app_chooser_button_set_heading((*C.GtkAppChooserButton)(_self_), _cgo_heading_)
 	return
 }
 
@@ -3460,15 +3621,20 @@ func AppChooserDialogNew(parent *C.GtkWindow, flags C.GtkDialogFlags, file *C.GF
 	return
 }
 
-func AppChooserDialogNewForContentType(parent *C.GtkWindow, flags C.GtkDialogFlags, content_type *C.gchar) (_return_ *AppChooserDialog) {
+func AppChooserDialogNewForContentType(parent *C.GtkWindow, flags C.GtkDialogFlags, content_type string) (_return_ *AppChooserDialog) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_app_chooser_dialog_new_for_content_type(parent, flags, content_type)
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_cgo_return_ = C._gtk_app_chooser_dialog_new_for_content_type(parent, flags, _cgo_content_type_)
 	_return_ = (*AppChooserDialog)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *AppChooserDialog) GetHeading() (_return_ *C.gchar) {
+func (_self_ *AppChooserDialog) GetHeading() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_app_chooser_dialog_get_heading((*C.GtkAppChooserDialog)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3477,20 +3643,28 @@ func (_self_ *AppChooserDialog) GetWidget() (_return_ *C.GtkWidget) {
 	return
 }
 
-func (_self_ *AppChooserDialog) SetHeading(heading *C.gchar) () {
-	C._gtk_app_chooser_dialog_set_heading((*C.GtkAppChooserDialog)(_self_), heading)
+func (_self_ *AppChooserDialog) SetHeading(heading string) () {
+	_cstring_heading_ := C.CString(heading)
+	_cgo_heading_ := (*C.gchar)(unsafe.Pointer(_cstring_heading_))
+	defer C.free(unsafe.Pointer(_cstring_heading_))
+	C._gtk_app_chooser_dialog_set_heading((*C.GtkAppChooserDialog)(_self_), _cgo_heading_)
 	return
 }
 
-func AppChooserWidgetNew(content_type *C.gchar) (_return_ *AppChooserWidget) {
+func AppChooserWidgetNew(content_type string) (_return_ *AppChooserWidget) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_app_chooser_widget_new(content_type)
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_cgo_return_ = C._gtk_app_chooser_widget_new(_cgo_content_type_)
 	_return_ = (*AppChooserWidget)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *AppChooserWidget) GetDefaultText() (_return_ *C.gchar) {
+func (_self_ *AppChooserWidget) GetDefaultText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_app_chooser_widget_get_default_text((*C.GtkAppChooserWidget)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3519,8 +3693,11 @@ func (_self_ *AppChooserWidget) GetShowRecommended() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *AppChooserWidget) SetDefaultText(text *C.gchar) () {
-	C._gtk_app_chooser_widget_set_default_text((*C.GtkAppChooserWidget)(_self_), text)
+func (_self_ *AppChooserWidget) SetDefaultText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_app_chooser_widget_set_default_text((*C.GtkAppChooserWidget)(_self_), _cgo_text_)
 	return
 }
 
@@ -3549,15 +3726,24 @@ func (_self_ *AppChooserWidget) SetShowRecommended(setting C.gboolean) () {
 	return
 }
 
-func ApplicationNew(application_id *C.gchar, flags C.GApplicationFlags) (_return_ *Application) {
+func ApplicationNew(application_id string, flags C.GApplicationFlags) (_return_ *Application) {
 	var _cgo_return_ *C.GtkApplication
-	_cgo_return_ = C._gtk_application_new(application_id, flags)
+	_cstring_application_id_ := C.CString(application_id)
+	_cgo_application_id_ := (*C.gchar)(unsafe.Pointer(_cstring_application_id_))
+	defer C.free(unsafe.Pointer(_cstring_application_id_))
+	_cgo_return_ = C._gtk_application_new(_cgo_application_id_, flags)
 	_return_ = (*Application)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *Application) AddAccelerator(accelerator *C.gchar, action_name *C.gchar, parameter *C.GVariant) () {
-	C._gtk_application_add_accelerator((*C.GtkApplication)(_self_), accelerator, action_name, parameter)
+func (_self_ *Application) AddAccelerator(accelerator string, action_name string, parameter *C.GVariant) () {
+	_cstring_accelerator_ := C.CString(accelerator)
+	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
+	defer C.free(unsafe.Pointer(_cstring_accelerator_))
+	_cstring_action_name_ := C.CString(action_name)
+	_cgo_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_action_name_))
+	defer C.free(unsafe.Pointer(_cstring_action_name_))
+	C._gtk_application_add_accelerator((*C.GtkApplication)(_self_), _cgo_accelerator_, _cgo_action_name_, parameter)
 	return
 }
 
@@ -3592,9 +3778,12 @@ func (_self_ *Application) GetWindows() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *Application) Inhibit(window *C.GtkWindow, flags C.GtkApplicationInhibitFlags, reason *C.gchar) (_go__return__ uint) {
+func (_self_ *Application) Inhibit(window *C.GtkWindow, flags C.GtkApplicationInhibitFlags, reason string) (_go__return__ uint) {
 	var _return_ C.guint
-	_return_ = C._gtk_application_inhibit((*C.GtkApplication)(_self_), window, flags, reason)
+	_cstring_reason_ := C.CString(reason)
+	_cgo_reason_ := (*C.gchar)(unsafe.Pointer(_cstring_reason_))
+	defer C.free(unsafe.Pointer(_cstring_reason_))
+	_return_ = C._gtk_application_inhibit((*C.GtkApplication)(_self_), window, flags, _cgo_reason_)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -3604,8 +3793,11 @@ func (_self_ *Application) IsInhibited(flags C.GtkApplicationInhibitFlags) (_ret
 	return
 }
 
-func (_self_ *Application) RemoveAccelerator(action_name *C.gchar, parameter *C.GVariant) () {
-	C._gtk_application_remove_accelerator((*C.GtkApplication)(_self_), action_name, parameter)
+func (_self_ *Application) RemoveAccelerator(action_name string, parameter *C.GVariant) () {
+	_cstring_action_name_ := C.CString(action_name)
+	_cgo_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_action_name_))
+	defer C.free(unsafe.Pointer(_cstring_action_name_))
+	C._gtk_application_remove_accelerator((*C.GtkApplication)(_self_), _cgo_action_name_, parameter)
 	return
 }
 
@@ -3666,12 +3858,15 @@ func (_self_ *Arrow) Set(arrow_type C.GtkArrowType, shadow_type C.GtkShadowType)
 	return
 }
 
-func AspectFrameNew(label *C.gchar, xalign float64, yalign float64, ratio float64, obey_child C.gboolean) (_return_ *AspectFrame) {
+func AspectFrameNew(label string, xalign float64, yalign float64, ratio float64, obey_child C.gboolean) (_return_ *AspectFrame) {
 	var _cgo_return_ *C.GtkWidget
 	_cgo_xalign_ := (C.gfloat)(xalign)
 	_cgo_yalign_ := (C.gfloat)(yalign)
 	_cgo_ratio_ := (C.gfloat)(ratio)
-	_cgo_return_ = C._gtk_aspect_frame_new(label, _cgo_xalign_, _cgo_yalign_, _cgo_ratio_, obey_child)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_aspect_frame_new(_cgo_label_, _cgo_xalign_, _cgo_yalign_, _cgo_ratio_, obey_child)
 	_return_ = (*AspectFrame)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -3733,8 +3928,10 @@ func (_self_ *Assistant) GetPageComplete(page *C.GtkWidget) (_return_ C.gboolean
 	return
 }
 
-func (_self_ *Assistant) GetPageTitle(page *C.GtkWidget) (_return_ *C.gchar) {
+func (_self_ *Assistant) GetPageTitle(page *C.GtkWidget) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_assistant_get_page_title((*C.GtkAssistant)(_self_), page)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -3795,8 +3992,11 @@ func (_self_ *Assistant) SetPageComplete(page *C.GtkWidget, complete C.gboolean)
 	return
 }
 
-func (_self_ *Assistant) SetPageTitle(page *C.GtkWidget, title *C.gchar) () {
-	C._gtk_assistant_set_page_title((*C.GtkAssistant)(_self_), page, title)
+func (_self_ *Assistant) SetPageTitle(page *C.GtkWidget, title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_assistant_set_page_title((*C.GtkAssistant)(_self_), page, _cgo_title_)
 	return
 }
 
@@ -3815,14 +4015,20 @@ func (_self_ *Bin) GetChild() (_return_ *C.GtkWidget) {
 	return
 }
 
-func BindingEntryAddSignalFromString(binding_set *C.GtkBindingSet, signal_desc *C.gchar) (_return_ C.GTokenType) {
-	_return_ = C._gtk_binding_entry_add_signal_from_string(binding_set, signal_desc)
+func BindingEntryAddSignalFromString(binding_set *C.GtkBindingSet, signal_desc string) (_return_ C.GTokenType) {
+	_cstring_signal_desc_ := C.CString(signal_desc)
+	_cgo_signal_desc_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_desc_))
+	defer C.free(unsafe.Pointer(_cstring_signal_desc_))
+	_return_ = C._gtk_binding_entry_add_signal_from_string(binding_set, _cgo_signal_desc_)
 	return
 }
 
-func BindingEntryAddSignall(binding_set *C.GtkBindingSet, keyval uint, modifiers C.GdkModifierType, signal_name *C.gchar, binding_args *C.GSList) () {
+func BindingEntryAddSignall(binding_set *C.GtkBindingSet, keyval uint, modifiers C.GdkModifierType, signal_name string, binding_args *C.GSList) () {
 	_cgo_keyval_ := (C.guint)(keyval)
-	C._gtk_binding_entry_add_signall(binding_set, _cgo_keyval_, modifiers, signal_name, binding_args)
+	_cstring_signal_name_ := C.CString(signal_name)
+	_cgo_signal_name_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_name_))
+	defer C.free(unsafe.Pointer(_cstring_signal_name_))
+	C._gtk_binding_entry_add_signall(binding_set, _cgo_keyval_, modifiers, _cgo_signal_name_, binding_args)
 	return
 }
 
@@ -3843,13 +4049,19 @@ func BindingSetByClass(object_class C.gpointer) (_return_ *C.GtkBindingSet) {
 	return
 }
 
-func BindingSetFind(set_name *C.gchar) (_return_ *C.GtkBindingSet) {
-	_return_ = C._gtk_binding_set_find(set_name)
+func BindingSetFind(set_name string) (_return_ *C.GtkBindingSet) {
+	_cstring_set_name_ := C.CString(set_name)
+	_cgo_set_name_ := (*C.gchar)(unsafe.Pointer(_cstring_set_name_))
+	defer C.free(unsafe.Pointer(_cstring_set_name_))
+	_return_ = C._gtk_binding_set_find(_cgo_set_name_)
 	return
 }
 
-func BindingSetNew(set_name *C.gchar) (_return_ *C.GtkBindingSet) {
-	_return_ = C._gtk_binding_set_new(set_name)
+func BindingSetNew(set_name string) (_return_ *C.GtkBindingSet) {
+	_cstring_set_name_ := C.CString(set_name)
+	_cgo_set_name_ := (*C.gchar)(unsafe.Pointer(_cstring_set_name_))
+	defer C.free(unsafe.Pointer(_cstring_set_name_))
+	_return_ = C._gtk_binding_set_new(_cgo_set_name_)
 	return
 }
 
@@ -3945,24 +4157,33 @@ func BuilderNew() (_return_ *Builder) {
 	return
 }
 
-func (_self_ *Builder) AddFromFile(filename *C.gchar) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Builder) AddFromFile(filename string) (_go__return__ uint, _error_ unsafe.Pointer) {
 	var _return_ C.guint
-	_return_ = C._gtk_builder_add_from_file((*C.GtkBuilder)(_self_), filename, _error_)
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_return_ = C._gtk_builder_add_from_file((*C.GtkBuilder)(_self_), _cgo_filename_, _error_)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Builder) AddFromResource(resource_path *C.gchar) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Builder) AddFromResource(resource_path string) (_go__return__ uint, _error_ unsafe.Pointer) {
 	var _return_ C.guint
-	_return_ = C._gtk_builder_add_from_resource((*C.GtkBuilder)(_self_), resource_path, _error_)
+	_cstring_resource_path_ := C.CString(resource_path)
+	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
+	defer C.free(unsafe.Pointer(_cstring_resource_path_))
+	_return_ = C._gtk_builder_add_from_resource((*C.GtkBuilder)(_self_), _cgo_resource_path_, _error_)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Builder) AddFromString(buffer *C.gchar, length uint64) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Builder) AddFromString(buffer string, length uint64) (_go__return__ uint, _error_ unsafe.Pointer) {
 	_cgo_length_ := (C.gsize)(length)
 	var _return_ C.guint
-	_return_ = C._gtk_builder_add_from_string((*C.GtkBuilder)(_self_), buffer, _cgo_length_, _error_)
+	_cstring_buffer_ := C.CString(buffer)
+	_cgo_buffer_ := (*C.gchar)(unsafe.Pointer(_cstring_buffer_))
+	defer C.free(unsafe.Pointer(_cstring_buffer_))
+	_return_ = C._gtk_builder_add_from_string((*C.GtkBuilder)(_self_), _cgo_buffer_, _cgo_length_, _error_)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -3977,8 +4198,11 @@ func (_self_ *Builder) ConnectSignalsFull(func_ C.GtkBuilderConnectFunc, user_da
 	return
 }
 
-func (_self_ *Builder) GetObject(name *C.gchar) (_return_ *C.GObject) {
-	_return_ = C._gtk_builder_get_object((*C.GtkBuilder)(_self_), name)
+func (_self_ *Builder) GetObject(name string) (_return_ *C.GObject) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_builder_get_object((*C.GtkBuilder)(_self_), _cgo_name_)
 	return
 }
 
@@ -3987,28 +4211,42 @@ func (_self_ *Builder) GetObjects() (_return_ *C.GSList) {
 	return
 }
 
-func (_self_ *Builder) GetTranslationDomain() (_return_ *C.gchar) {
+func (_self_ *Builder) GetTranslationDomain() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_builder_get_translation_domain((*C.GtkBuilder)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Builder) GetTypeFromName(type_name *C.char) (_return_ C.GType) {
-	_return_ = C._gtk_builder_get_type_from_name((*C.GtkBuilder)(_self_), type_name)
+func (_self_ *Builder) GetTypeFromName(type_name string) (_return_ C.GType) {
+	_cstring_type_name_ := C.CString(type_name)
+	_cgo_type_name_ := (*C.char)(unsafe.Pointer(_cstring_type_name_))
+	defer C.free(unsafe.Pointer(_cstring_type_name_))
+	_return_ = C._gtk_builder_get_type_from_name((*C.GtkBuilder)(_self_), _cgo_type_name_)
 	return
 }
 
-func (_self_ *Builder) SetTranslationDomain(domain *C.gchar) () {
-	C._gtk_builder_set_translation_domain((*C.GtkBuilder)(_self_), domain)
+func (_self_ *Builder) SetTranslationDomain(domain string) () {
+	_cstring_domain_ := C.CString(domain)
+	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
+	defer C.free(unsafe.Pointer(_cstring_domain_))
+	C._gtk_builder_set_translation_domain((*C.GtkBuilder)(_self_), _cgo_domain_)
 	return
 }
 
-func (_self_ *Builder) ValueFromString(pspec *C.GParamSpec, string_ *C.gchar) (_return_ C.gboolean, value *C.GValue, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_builder_value_from_string((*C.GtkBuilder)(_self_), pspec, string_, value, _error_)
+func (_self_ *Builder) ValueFromString(pspec *C.GParamSpec, string_ string) (_return_ C.gboolean, value *C.GValue, _error_ unsafe.Pointer) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	_return_ = C._gtk_builder_value_from_string((*C.GtkBuilder)(_self_), pspec, _cgo_string__, value, _error_)
 	return
 }
 
-func (_self_ *Builder) ValueFromStringType(type_ C.GType, string_ *C.gchar) (_return_ C.gboolean, value *C.GValue, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_builder_value_from_string_type((*C.GtkBuilder)(_self_), type_, string_, value, _error_)
+func (_self_ *Builder) ValueFromStringType(type_ C.GType, string_ string) (_return_ C.gboolean, value *C.GValue, _error_ unsafe.Pointer) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	_return_ = C._gtk_builder_value_from_string_type((*C.GtkBuilder)(_self_), type_, _cgo_string__, value, _error_)
 	return
 }
 
@@ -4019,23 +4257,32 @@ func ButtonNew() (_return_ *Button) {
 	return
 }
 
-func ButtonNewFromStock(stock_id *C.gchar) (_return_ *Button) {
+func ButtonNewFromStock(stock_id string) (_return_ *Button) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_button_new_from_stock(stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_button_new_from_stock(_cgo_stock_id_)
 	_return_ = (*Button)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ButtonNewWithLabel(label *C.gchar) (_return_ *Button) {
+func ButtonNewWithLabel(label string) (_return_ *Button) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_button_new_with_label(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_button_new_with_label(_cgo_label_)
 	_return_ = (*Button)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ButtonNewWithMnemonic(label *C.gchar) (_return_ *Button) {
+func ButtonNewWithMnemonic(label string) (_return_ *Button) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_button_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_button_new_with_mnemonic(_cgo_label_)
 	_return_ = (*Button)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -4079,8 +4326,10 @@ func (_self_ *Button) GetImagePosition() (_return_ C.GtkPositionType) {
 	return
 }
 
-func (_self_ *Button) GetLabel() (_return_ *C.gchar) {
+func (_self_ *Button) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_button_get_label((*C.GtkButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -4126,8 +4375,11 @@ func (_self_ *Button) SetImagePosition(position C.GtkPositionType) () {
 	return
 }
 
-func (_self_ *Button) SetLabel(label *C.gchar) () {
-	C._gtk_button_set_label((*C.GtkButton)(_self_), label)
+func (_self_ *Button) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_button_set_label((*C.GtkButton)(_self_), _cgo_label_)
 	return
 }
 
@@ -4303,24 +4555,36 @@ func (_self_ *CellArea) ApplyAttributes(tree_model *C.GtkTreeModel, iter *C.GtkT
 	return
 }
 
-func (_self_ *CellArea) AttributeConnect(renderer *C.GtkCellRenderer, attribute *C.gchar, column int) () {
+func (_self_ *CellArea) AttributeConnect(renderer *C.GtkCellRenderer, attribute string, column int) () {
 	_cgo_column_ := (C.gint)(column)
-	C._gtk_cell_area_attribute_connect((*C.GtkCellArea)(_self_), renderer, attribute, _cgo_column_)
+	_cstring_attribute_ := C.CString(attribute)
+	_cgo_attribute_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_))
+	C._gtk_cell_area_attribute_connect((*C.GtkCellArea)(_self_), renderer, _cgo_attribute_, _cgo_column_)
 	return
 }
 
-func (_self_ *CellArea) AttributeDisconnect(renderer *C.GtkCellRenderer, attribute *C.gchar) () {
-	C._gtk_cell_area_attribute_disconnect((*C.GtkCellArea)(_self_), renderer, attribute)
+func (_self_ *CellArea) AttributeDisconnect(renderer *C.GtkCellRenderer, attribute string) () {
+	_cstring_attribute_ := C.CString(attribute)
+	_cgo_attribute_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_))
+	C._gtk_cell_area_attribute_disconnect((*C.GtkCellArea)(_self_), renderer, _cgo_attribute_)
 	return
 }
 
-func (_self_ *CellArea) CellGetProperty(renderer *C.GtkCellRenderer, property_name *C.gchar, value *C.GValue) () {
-	C._gtk_cell_area_cell_get_property((*C.GtkCellArea)(_self_), renderer, property_name, value)
+func (_self_ *CellArea) CellGetProperty(renderer *C.GtkCellRenderer, property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_cell_area_cell_get_property((*C.GtkCellArea)(_self_), renderer, _cgo_property_name_, value)
 	return
 }
 
-func (_self_ *CellArea) CellSetProperty(renderer *C.GtkCellRenderer, property_name *C.gchar, value *C.GValue) () {
-	C._gtk_cell_area_cell_set_property((*C.GtkCellArea)(_self_), renderer, property_name, value)
+func (_self_ *CellArea) CellSetProperty(renderer *C.GtkCellRenderer, property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_cell_area_cell_set_property((*C.GtkCellArea)(_self_), renderer, _cgo_property_name_, value)
 	return
 }
 
@@ -4368,8 +4632,10 @@ func (_self_ *CellArea) GetCellAtPosition(context *C.GtkCellAreaContext, widget 
 	return
 }
 
-func (_self_ *CellArea) GetCurrentPathString() (_return_ *C.gchar) {
+func (_self_ *CellArea) GetCurrentPathString() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_cell_area_get_current_path_string((*C.GtkCellArea)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -4526,8 +4792,11 @@ func (_self_ *CellAreaBox) SetSpacing(spacing int) () {
 	return
 }
 
-func (_self_ *CellAreaClass) FindCellProperty(property_name *C.gchar) (_return_ *C.GParamSpec) {
-	_return_ = C._gtk_cell_area_class_find_cell_property((*C.GtkCellAreaClass)(_self_), property_name)
+func (_self_ *CellAreaClass) FindCellProperty(property_name string) (_return_ *C.GParamSpec) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_cell_area_class_find_cell_property((*C.GtkCellAreaClass)(_self_), _cgo_property_name_)
 	return
 }
 
@@ -4622,8 +4891,11 @@ func (_self_ *CellAreaContext) Reset() () {
 	return
 }
 
-func (_self_ *CellRenderer) Activate(event *C.GdkEvent, widget *C.GtkWidget, path *C.gchar, background_area *C.GdkRectangle, cell_area *C.GdkRectangle, flags C.GtkCellRendererState) (_return_ C.gboolean) {
-	_return_ = C._gtk_cell_renderer_activate((*C.GtkCellRenderer)(_self_), event, widget, path, background_area, cell_area, flags)
+func (_self_ *CellRenderer) Activate(event *C.GdkEvent, widget *C.GtkWidget, path string, background_area *C.GdkRectangle, cell_area *C.GdkRectangle, flags C.GtkCellRendererState) (_return_ C.gboolean) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._gtk_cell_renderer_activate((*C.GtkCellRenderer)(_self_), event, widget, _cgo_path_, background_area, cell_area, flags)
 	return
 }
 
@@ -4763,8 +5035,11 @@ func (_self_ *CellRenderer) SetVisible(visible C.gboolean) () {
 	return
 }
 
-func (_self_ *CellRenderer) StartEditing(event *C.GdkEvent, widget *C.GtkWidget, path *C.gchar, background_area *C.GdkRectangle, cell_area *C.GdkRectangle, flags C.GtkCellRendererState) (_return_ *C.GtkCellEditable) {
-	_return_ = C._gtk_cell_renderer_start_editing((*C.GtkCellRenderer)(_self_), event, widget, path, background_area, cell_area, flags)
+func (_self_ *CellRenderer) StartEditing(event *C.GdkEvent, widget *C.GtkWidget, path string, background_area *C.GdkRectangle, cell_area *C.GdkRectangle, flags C.GtkCellRendererState) (_return_ *C.GtkCellEditable) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._gtk_cell_renderer_start_editing((*C.GtkCellRenderer)(_self_), event, widget, _cgo_path_, background_area, cell_area, flags)
 	return
 }
 
@@ -4879,9 +5154,12 @@ func CellViewNewWithContext(area *C.GtkCellArea, context *C.GtkCellAreaContext) 
 	return
 }
 
-func CellViewNewWithMarkup(markup *C.gchar) (_return_ *CellView) {
+func CellViewNewWithMarkup(markup string) (_return_ *CellView) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_cell_view_new_with_markup(markup)
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	_cgo_return_ = C._gtk_cell_view_new_with_markup(_cgo_markup_)
 	_return_ = (*CellView)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -4893,9 +5171,12 @@ func CellViewNewWithPixbuf(pixbuf *C.GdkPixbuf) (_return_ *CellView) {
 	return
 }
 
-func CellViewNewWithText(text *C.gchar) (_return_ *CellView) {
+func CellViewNewWithText(text string) (_return_ *CellView) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_cell_view_new_with_text(text)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	_cgo_return_ = C._gtk_cell_view_new_with_text(_cgo_text_)
 	_return_ = (*CellView)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -4952,16 +5233,22 @@ func CheckButtonNew() (_return_ *CheckButton) {
 	return
 }
 
-func CheckButtonNewWithLabel(label *C.gchar) (_return_ *CheckButton) {
+func CheckButtonNewWithLabel(label string) (_return_ *CheckButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_check_button_new_with_label(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_check_button_new_with_label(_cgo_label_)
 	_return_ = (*CheckButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func CheckButtonNewWithMnemonic(label *C.gchar) (_return_ *CheckButton) {
+func CheckButtonNewWithMnemonic(label string) (_return_ *CheckButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_check_button_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_check_button_new_with_mnemonic(_cgo_label_)
 	_return_ = (*CheckButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -4973,16 +5260,22 @@ func CheckMenuItemNew() (_return_ *CheckMenuItem) {
 	return
 }
 
-func CheckMenuItemNewWithLabel(label *C.gchar) (_return_ *CheckMenuItem) {
+func CheckMenuItemNewWithLabel(label string) (_return_ *CheckMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_check_menu_item_new_with_label(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_check_menu_item_new_with_label(_cgo_label_)
 	_return_ = (*CheckMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func CheckMenuItemNewWithMnemonic(label *C.gchar) (_return_ *CheckMenuItem) {
+func CheckMenuItemNewWithMnemonic(label string) (_return_ *CheckMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_check_menu_item_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_check_menu_item_new_with_mnemonic(_cgo_label_)
 	_return_ = (*CheckMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -5082,9 +5375,12 @@ func (_self_ *Clipboard) SetImage(pixbuf *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *Clipboard) SetText(text *C.gchar, len_ int) () {
+func (_self_ *Clipboard) SetText(text string, len_ int) () {
 	_cgo_len__ := (C.gint)(len_)
-	C._gtk_clipboard_set_text((*C.GtkClipboard)(_self_), text, _cgo_len__)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_clipboard_set_text((*C.GtkClipboard)(_self_), _cgo_text_, _cgo_len__)
 	return
 }
 
@@ -5110,8 +5406,10 @@ func (_self_ *Clipboard) WaitForRichText(buffer *C.GtkTextBuffer) (_return_ *C.g
 	return
 }
 
-func (_self_ *Clipboard) WaitForText() (_return_ *C.gchar) {
+func (_self_ *Clipboard) WaitForText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_clipboard_wait_for_text((*C.GtkClipboard)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5159,19 +5457,27 @@ func ColorButtonNewWithRgba(rgba *C.GdkRGBA) (_return_ *ColorButton) {
 	return
 }
 
-func (_self_ *ColorButton) GetTitle() (_return_ *C.gchar) {
+func (_self_ *ColorButton) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_color_button_get_title((*C.GtkColorButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *ColorButton) SetTitle(title *C.gchar) () {
-	C._gtk_color_button_set_title((*C.GtkColorButton)(_self_), title)
+func (_self_ *ColorButton) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_color_button_set_title((*C.GtkColorButton)(_self_), _cgo_title_)
 	return
 }
 
-func ColorChooserDialogNew(title *C.gchar, parent *C.GtkWindow) (_return_ *ColorChooserDialog) {
+func ColorChooserDialogNew(title string, parent *C.GtkWindow) (_return_ *ColorChooserDialog) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_color_chooser_dialog_new(title, parent)
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	_cgo_return_ = C._gtk_color_chooser_dialog_new(_cgo_title_, parent)
 	_return_ = (*ColorChooserDialog)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -5232,8 +5538,10 @@ func (_self_ *ComboBox) GetActive() (_go__return__ int) {
 	return
 }
 
-func (_self_ *ComboBox) GetActiveId() (_return_ *C.gchar) {
+func (_self_ *ComboBox) GetActiveId() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_combo_box_get_active_id((*C.GtkComboBox)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5310,8 +5618,10 @@ func (_self_ *ComboBox) GetRowSpanColumn() (_go__return__ int) {
 	return
 }
 
-func (_self_ *ComboBox) GetTitle() (_return_ *C.gchar) {
+func (_self_ *ComboBox) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_combo_box_get_title((*C.GtkComboBox)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5343,8 +5653,11 @@ func (_self_ *ComboBox) SetActive(index_ int) () {
 	return
 }
 
-func (_self_ *ComboBox) SetActiveId(active_id *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_combo_box_set_active_id((*C.GtkComboBox)(_self_), active_id)
+func (_self_ *ComboBox) SetActiveId(active_id string) (_return_ C.gboolean) {
+	_cstring_active_id_ := C.CString(active_id)
+	_cgo_active_id_ := (*C.gchar)(unsafe.Pointer(_cstring_active_id_))
+	defer C.free(unsafe.Pointer(_cstring_active_id_))
+	_return_ = C._gtk_combo_box_set_active_id((*C.GtkComboBox)(_self_), _cgo_active_id_)
 	return
 }
 
@@ -5407,8 +5720,11 @@ func (_self_ *ComboBox) SetRowSpanColumn(row_span int) () {
 	return
 }
 
-func (_self_ *ComboBox) SetTitle(title *C.gchar) () {
-	C._gtk_combo_box_set_title((*C.GtkComboBox)(_self_), title)
+func (_self_ *ComboBox) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_combo_box_set_title((*C.GtkComboBox)(_self_), _cgo_title_)
 	return
 }
 
@@ -5432,40 +5748,69 @@ func ComboBoxTextNewWithEntry() (_return_ *ComboBoxText) {
 	return
 }
 
-func (_self_ *ComboBoxText) Append(id *C.gchar, text *C.gchar) () {
-	C._gtk_combo_box_text_append((*C.GtkComboBoxText)(_self_), id, text)
+func (_self_ *ComboBoxText) Append(id string, text string) () {
+	_cstring_id_ := C.CString(id)
+	_cgo_id_ := (*C.gchar)(unsafe.Pointer(_cstring_id_))
+	defer C.free(unsafe.Pointer(_cstring_id_))
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_combo_box_text_append((*C.GtkComboBoxText)(_self_), _cgo_id_, _cgo_text_)
 	return
 }
 
-func (_self_ *ComboBoxText) AppendText(text *C.gchar) () {
-	C._gtk_combo_box_text_append_text((*C.GtkComboBoxText)(_self_), text)
+func (_self_ *ComboBoxText) AppendText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_combo_box_text_append_text((*C.GtkComboBoxText)(_self_), _cgo_text_)
 	return
 }
 
-func (_self_ *ComboBoxText) GetActiveText() (_return_ *C.gchar) {
+func (_self_ *ComboBoxText) GetActiveText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_combo_box_text_get_active_text((*C.GtkComboBoxText)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *ComboBoxText) Insert(position int, id *C.gchar, text *C.gchar) () {
+func (_self_ *ComboBoxText) Insert(position int, id string, text string) () {
 	_cgo_position_ := (C.gint)(position)
-	C._gtk_combo_box_text_insert((*C.GtkComboBoxText)(_self_), _cgo_position_, id, text)
+	_cstring_id_ := C.CString(id)
+	_cgo_id_ := (*C.gchar)(unsafe.Pointer(_cstring_id_))
+	defer C.free(unsafe.Pointer(_cstring_id_))
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_combo_box_text_insert((*C.GtkComboBoxText)(_self_), _cgo_position_, _cgo_id_, _cgo_text_)
 	return
 }
 
-func (_self_ *ComboBoxText) InsertText(position int, text *C.gchar) () {
+func (_self_ *ComboBoxText) InsertText(position int, text string) () {
 	_cgo_position_ := (C.gint)(position)
-	C._gtk_combo_box_text_insert_text((*C.GtkComboBoxText)(_self_), _cgo_position_, text)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_combo_box_text_insert_text((*C.GtkComboBoxText)(_self_), _cgo_position_, _cgo_text_)
 	return
 }
 
-func (_self_ *ComboBoxText) Prepend(id *C.gchar, text *C.gchar) () {
-	C._gtk_combo_box_text_prepend((*C.GtkComboBoxText)(_self_), id, text)
+func (_self_ *ComboBoxText) Prepend(id string, text string) () {
+	_cstring_id_ := C.CString(id)
+	_cgo_id_ := (*C.gchar)(unsafe.Pointer(_cstring_id_))
+	defer C.free(unsafe.Pointer(_cstring_id_))
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_combo_box_text_prepend((*C.GtkComboBoxText)(_self_), _cgo_id_, _cgo_text_)
 	return
 }
 
-func (_self_ *ComboBoxText) PrependText(text *C.gchar) () {
-	C._gtk_combo_box_text_prepend_text((*C.GtkComboBoxText)(_self_), text)
+func (_self_ *ComboBoxText) PrependText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_combo_box_text_prepend_text((*C.GtkComboBoxText)(_self_), _cgo_text_)
 	return
 }
 
@@ -5490,18 +5835,27 @@ func (_self_ *Container) CheckResize() () {
 	return
 }
 
-func (_self_ *Container) ChildGetProperty(child *C.GtkWidget, property_name *C.gchar, value *C.GValue) () {
-	C._gtk_container_child_get_property((*C.GtkContainer)(_self_), child, property_name, value)
+func (_self_ *Container) ChildGetProperty(child *C.GtkWidget, property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_container_child_get_property((*C.GtkContainer)(_self_), child, _cgo_property_name_, value)
 	return
 }
 
-func (_self_ *Container) ChildNotify(child *C.GtkWidget, child_property *C.gchar) () {
-	C._gtk_container_child_notify((*C.GtkContainer)(_self_), child, child_property)
+func (_self_ *Container) ChildNotify(child *C.GtkWidget, child_property string) () {
+	_cstring_child_property_ := C.CString(child_property)
+	_cgo_child_property_ := (*C.gchar)(unsafe.Pointer(_cstring_child_property_))
+	defer C.free(unsafe.Pointer(_cstring_child_property_))
+	C._gtk_container_child_notify((*C.GtkContainer)(_self_), child, _cgo_child_property_)
 	return
 }
 
-func (_self_ *Container) ChildSetProperty(child *C.GtkWidget, property_name *C.gchar, value *C.GValue) () {
-	C._gtk_container_child_set_property((*C.GtkContainer)(_self_), child, property_name, value)
+func (_self_ *Container) ChildSetProperty(child *C.GtkWidget, property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_container_child_set_property((*C.GtkContainer)(_self_), child, _cgo_property_name_, value)
 	return
 }
 
@@ -5618,8 +5972,11 @@ func (_self_ *Container) UnsetFocusChain() () {
 	return
 }
 
-func (_self_ *ContainerClass) FindChildProperty(property_name *C.gchar) (_return_ *C.GParamSpec) {
-	_return_ = C._gtk_container_class_find_child_property((*C.GtkContainerClass)(_self_), property_name)
+func (_self_ *ContainerClass) FindChildProperty(property_name string) (_return_ *C.GParamSpec) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_container_class_find_child_property((*C.GtkContainerClass)(_self_), _cgo_property_name_)
 	return
 }
 
@@ -5653,8 +6010,14 @@ func CssProviderGetDefault() (_return_ *C.GtkCssProvider) {
 	return
 }
 
-func CssProviderGetNamed(name *C.gchar, variant *C.gchar) (_return_ *C.GtkCssProvider) {
-	_return_ = C._gtk_css_provider_get_named(name, variant)
+func CssProviderGetNamed(name string, variant string) (_return_ *C.GtkCssProvider) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_variant_ := C.CString(variant)
+	_cgo_variant_ := (*C.gchar)(unsafe.Pointer(_cstring_variant_))
+	defer C.free(unsafe.Pointer(_cstring_variant_))
+	_return_ = C._gtk_css_provider_get_named(_cgo_name_, _cgo_variant_)
 	return
 }
 
@@ -5663,13 +6026,18 @@ func (_self_ *CssProvider) LoadFromFile(file *C.GFile) (_return_ C.gboolean, _er
 	return
 }
 
-func (_self_ *CssProvider) LoadFromPath(path *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_css_provider_load_from_path((*C.GtkCssProvider)(_self_), path, _error_)
+func (_self_ *CssProvider) LoadFromPath(path string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._gtk_css_provider_load_from_path((*C.GtkCssProvider)(_self_), _cgo_path_, _error_)
 	return
 }
 
-func (_self_ *CssProvider) ToString() (_return_ *C.char) {
+func (_self_ *CssProvider) ToString() (_go__return__ string) {
+	var _return_ *C.char
 	_return_ = C.gtk_css_provider_to_string((*C.GtkCssProvider)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5739,9 +6107,12 @@ func (_self_ *Dialog) AddActionWidget(child *C.GtkWidget, response_id int) () {
 	return
 }
 
-func (_self_ *Dialog) AddButton(button_text *C.gchar, response_id int) (_return_ *C.GtkWidget) {
+func (_self_ *Dialog) AddButton(button_text string, response_id int) (_return_ *C.GtkWidget) {
 	_cgo_response_id_ := (C.gint)(response_id)
-	_return_ = C._gtk_dialog_add_button((*C.GtkDialog)(_self_), button_text, _cgo_response_id_)
+	_cstring_button_text_ := C.CString(button_text)
+	_cgo_button_text_ := (*C.gchar)(unsafe.Pointer(_cstring_button_text_))
+	defer C.free(unsafe.Pointer(_cstring_button_text_))
+	_return_ = C._gtk_dialog_add_button((*C.GtkDialog)(_self_), _cgo_button_text_, _cgo_response_id_)
 	return
 }
 
@@ -5882,8 +6253,10 @@ func (_self_ *Entry) GetIconGicon(icon_pos C.GtkEntryIconPosition) (_return_ *C.
 	return
 }
 
-func (_self_ *Entry) GetIconName(icon_pos C.GtkEntryIconPosition) (_return_ *C.gchar) {
+func (_self_ *Entry) GetIconName(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_entry_get_icon_name((*C.GtkEntry)(_self_), icon_pos)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5897,8 +6270,10 @@ func (_self_ *Entry) GetIconSensitive(icon_pos C.GtkEntryIconPosition) (_return_
 	return
 }
 
-func (_self_ *Entry) GetIconStock(icon_pos C.GtkEntryIconPosition) (_return_ *C.gchar) {
+func (_self_ *Entry) GetIconStock(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_entry_get_icon_stock((*C.GtkEntry)(_self_), icon_pos)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5907,13 +6282,17 @@ func (_self_ *Entry) GetIconStorageType(icon_pos C.GtkEntryIconPosition) (_retur
 	return
 }
 
-func (_self_ *Entry) GetIconTooltipMarkup(icon_pos C.GtkEntryIconPosition) (_return_ *C.gchar) {
+func (_self_ *Entry) GetIconTooltipMarkup(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_entry_get_icon_tooltip_markup((*C.GtkEntry)(_self_), icon_pos)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Entry) GetIconTooltipText(icon_pos C.GtkEntryIconPosition) (_return_ *C.gchar) {
+func (_self_ *Entry) GetIconTooltipText(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_entry_get_icon_tooltip_text((*C.GtkEntry)(_self_), icon_pos)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5958,8 +6337,10 @@ func (_self_ *Entry) GetOverwriteMode() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Entry) GetPlaceholderText() (_return_ *C.gchar) {
+func (_self_ *Entry) GetPlaceholderText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_entry_get_placeholder_text((*C.GtkEntry)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -5977,8 +6358,10 @@ func (_self_ *Entry) GetProgressPulseStep() (_go__return__ float64) {
 	return
 }
 
-func (_self_ *Entry) GetText() (_return_ *C.gchar) {
+func (_self_ *Entry) GetText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_entry_get_text((*C.GtkEntry)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6080,8 +6463,11 @@ func (_self_ *Entry) SetIconFromGicon(icon_pos C.GtkEntryIconPosition, icon *C.G
 	return
 }
 
-func (_self_ *Entry) SetIconFromIconName(icon_pos C.GtkEntryIconPosition, icon_name *C.gchar) () {
-	C._gtk_entry_set_icon_from_icon_name((*C.GtkEntry)(_self_), icon_pos, icon_name)
+func (_self_ *Entry) SetIconFromIconName(icon_pos C.GtkEntryIconPosition, icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_entry_set_icon_from_icon_name((*C.GtkEntry)(_self_), icon_pos, _cgo_icon_name_)
 	return
 }
 
@@ -6090,8 +6476,11 @@ func (_self_ *Entry) SetIconFromPixbuf(icon_pos C.GtkEntryIconPosition, pixbuf *
 	return
 }
 
-func (_self_ *Entry) SetIconFromStock(icon_pos C.GtkEntryIconPosition, stock_id *C.gchar) () {
-	C._gtk_entry_set_icon_from_stock((*C.GtkEntry)(_self_), icon_pos, stock_id)
+func (_self_ *Entry) SetIconFromStock(icon_pos C.GtkEntryIconPosition, stock_id string) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_entry_set_icon_from_stock((*C.GtkEntry)(_self_), icon_pos, _cgo_stock_id_)
 	return
 }
 
@@ -6100,13 +6489,19 @@ func (_self_ *Entry) SetIconSensitive(icon_pos C.GtkEntryIconPosition, sensitive
 	return
 }
 
-func (_self_ *Entry) SetIconTooltipMarkup(icon_pos C.GtkEntryIconPosition, tooltip *C.gchar) () {
-	C._gtk_entry_set_icon_tooltip_markup((*C.GtkEntry)(_self_), icon_pos, tooltip)
+func (_self_ *Entry) SetIconTooltipMarkup(icon_pos C.GtkEntryIconPosition, tooltip string) () {
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	C._gtk_entry_set_icon_tooltip_markup((*C.GtkEntry)(_self_), icon_pos, _cgo_tooltip_)
 	return
 }
 
-func (_self_ *Entry) SetIconTooltipText(icon_pos C.GtkEntryIconPosition, tooltip *C.gchar) () {
-	C._gtk_entry_set_icon_tooltip_text((*C.GtkEntry)(_self_), icon_pos, tooltip)
+func (_self_ *Entry) SetIconTooltipText(icon_pos C.GtkEntryIconPosition, tooltip string) () {
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	C._gtk_entry_set_icon_tooltip_text((*C.GtkEntry)(_self_), icon_pos, _cgo_tooltip_)
 	return
 }
 
@@ -6136,8 +6531,11 @@ func (_self_ *Entry) SetOverwriteMode(overwrite C.gboolean) () {
 	return
 }
 
-func (_self_ *Entry) SetPlaceholderText(text *C.gchar) () {
-	C._gtk_entry_set_placeholder_text((*C.GtkEntry)(_self_), text)
+func (_self_ *Entry) SetPlaceholderText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_entry_set_placeholder_text((*C.GtkEntry)(_self_), _cgo_text_)
 	return
 }
 
@@ -6153,8 +6551,11 @@ func (_self_ *Entry) SetProgressPulseStep(fraction float64) () {
 	return
 }
 
-func (_self_ *Entry) SetText(text *C.gchar) () {
-	C._gtk_entry_set_text((*C.GtkEntry)(_self_), text)
+func (_self_ *Entry) SetText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_entry_set_text((*C.GtkEntry)(_self_), _cgo_text_)
 	return
 }
 
@@ -6182,10 +6583,13 @@ func (_self_ *Entry) UnsetInvisibleChar() () {
 	return
 }
 
-func EntryBufferNew(initial_chars *C.gchar, n_initial_chars int) (_return_ *EntryBuffer) {
+func EntryBufferNew(initial_chars string, n_initial_chars int) (_return_ *EntryBuffer) {
 	var _cgo_return_ *C.GtkEntryBuffer
 	_cgo_n_initial_chars_ := (C.gint)(n_initial_chars)
-	_cgo_return_ = C._gtk_entry_buffer_new(initial_chars, _cgo_n_initial_chars_)
+	_cstring_initial_chars_ := C.CString(initial_chars)
+	_cgo_initial_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_initial_chars_))
+	defer C.free(unsafe.Pointer(_cstring_initial_chars_))
+	_cgo_return_ = C._gtk_entry_buffer_new(_cgo_initial_chars_, _cgo_n_initial_chars_)
 	_return_ = (*EntryBuffer)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -6206,10 +6610,13 @@ func (_self_ *EntryBuffer) EmitDeletedText(position uint, n_chars uint) () {
 	return
 }
 
-func (_self_ *EntryBuffer) EmitInsertedText(position uint, chars *C.gchar, n_chars uint) () {
+func (_self_ *EntryBuffer) EmitInsertedText(position uint, chars string, n_chars uint) () {
 	_cgo_position_ := (C.guint)(position)
 	_cgo_n_chars_ := (C.guint)(n_chars)
-	C._gtk_entry_buffer_emit_inserted_text((*C.GtkEntryBuffer)(_self_), _cgo_position_, chars, _cgo_n_chars_)
+	_cstring_chars_ := C.CString(chars)
+	_cgo_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_chars_))
+	defer C.free(unsafe.Pointer(_cstring_chars_))
+	C._gtk_entry_buffer_emit_inserted_text((*C.GtkEntryBuffer)(_self_), _cgo_position_, _cgo_chars_, _cgo_n_chars_)
 	return
 }
 
@@ -6234,16 +6641,21 @@ func (_self_ *EntryBuffer) GetMaxLength() (_go__return__ int) {
 	return
 }
 
-func (_self_ *EntryBuffer) GetText() (_return_ *C.gchar) {
+func (_self_ *EntryBuffer) GetText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_entry_buffer_get_text((*C.GtkEntryBuffer)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *EntryBuffer) InsertText(position uint, chars *C.gchar, n_chars int) (_go__return__ uint) {
+func (_self_ *EntryBuffer) InsertText(position uint, chars string, n_chars int) (_go__return__ uint) {
 	_cgo_position_ := (C.guint)(position)
 	_cgo_n_chars_ := (C.gint)(n_chars)
 	var _return_ C.guint
-	_return_ = C._gtk_entry_buffer_insert_text((*C.GtkEntryBuffer)(_self_), _cgo_position_, chars, _cgo_n_chars_)
+	_cstring_chars_ := C.CString(chars)
+	_cgo_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_chars_))
+	defer C.free(unsafe.Pointer(_cstring_chars_))
+	_return_ = C._gtk_entry_buffer_insert_text((*C.GtkEntryBuffer)(_self_), _cgo_position_, _cgo_chars_, _cgo_n_chars_)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -6254,9 +6666,12 @@ func (_self_ *EntryBuffer) SetMaxLength(max_length int) () {
 	return
 }
 
-func (_self_ *EntryBuffer) SetText(chars *C.gchar, n_chars int) () {
+func (_self_ *EntryBuffer) SetText(chars string, n_chars int) () {
 	_cgo_n_chars_ := (C.gint)(n_chars)
-	C._gtk_entry_buffer_set_text((*C.GtkEntryBuffer)(_self_), chars, _cgo_n_chars_)
+	_cstring_chars_ := C.CString(chars)
+	_cgo_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_chars_))
+	defer C.free(unsafe.Pointer(_cstring_chars_))
+	C._gtk_entry_buffer_set_text((*C.GtkEntryBuffer)(_self_), _cgo_chars_, _cgo_n_chars_)
 	return
 }
 
@@ -6279,8 +6694,13 @@ func (_self_ *EntryCompletion) Complete() () {
 	return
 }
 
-func (_self_ *EntryCompletion) ComputePrefix(key *C.char) (_return_ *C.gchar) {
-	_return_ = C._gtk_entry_completion_compute_prefix((*C.GtkEntryCompletion)(_self_), key)
+func (_self_ *EntryCompletion) ComputePrefix(key string) (_go__return__ string) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.char)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	var _return_ *C.gchar
+	_return_ = C._gtk_entry_completion_compute_prefix((*C.GtkEntryCompletion)(_self_), _cgo_key_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6290,8 +6710,10 @@ func (_self_ *EntryCompletion) DeleteAction(index_ int) () {
 	return
 }
 
-func (_self_ *EntryCompletion) GetCompletionPrefix() (_return_ *C.gchar) {
+func (_self_ *EntryCompletion) GetCompletionPrefix() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_entry_completion_get_completion_prefix((*C.GtkEntryCompletion)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6344,15 +6766,21 @@ func (_self_ *EntryCompletion) GetTextColumn() (_go__return__ int) {
 	return
 }
 
-func (_self_ *EntryCompletion) InsertActionMarkup(index_ int, markup *C.gchar) () {
+func (_self_ *EntryCompletion) InsertActionMarkup(index_ int, markup string) () {
 	_cgo_index__ := (C.gint)(index_)
-	C._gtk_entry_completion_insert_action_markup((*C.GtkEntryCompletion)(_self_), _cgo_index__, markup)
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_entry_completion_insert_action_markup((*C.GtkEntryCompletion)(_self_), _cgo_index__, _cgo_markup_)
 	return
 }
 
-func (_self_ *EntryCompletion) InsertActionText(index_ int, text *C.gchar) () {
+func (_self_ *EntryCompletion) InsertActionText(index_ int, text string) () {
 	_cgo_index__ := (C.gint)(index_)
-	C._gtk_entry_completion_insert_action_text((*C.GtkEntryCompletion)(_self_), _cgo_index__, text)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_entry_completion_insert_action_text((*C.GtkEntryCompletion)(_self_), _cgo_index__, _cgo_text_)
 	return
 }
 
@@ -6435,16 +6863,22 @@ func (_self_ *EventBox) SetVisibleWindow(visible_window C.gboolean) () {
 	return
 }
 
-func ExpanderNew(label *C.gchar) (_return_ *Expander) {
+func ExpanderNew(label string) (_return_ *Expander) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_expander_new(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_expander_new(_cgo_label_)
 	_return_ = (*Expander)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ExpanderNewWithMnemonic(label *C.gchar) (_return_ *Expander) {
+func ExpanderNewWithMnemonic(label string) (_return_ *Expander) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_expander_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_expander_new_with_mnemonic(_cgo_label_)
 	_return_ = (*Expander)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -6454,8 +6888,10 @@ func (_self_ *Expander) GetExpanded() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Expander) GetLabel() (_return_ *C.gchar) {
+func (_self_ *Expander) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_expander_get_label((*C.GtkExpander)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6496,8 +6932,11 @@ func (_self_ *Expander) SetExpanded(expanded C.gboolean) () {
 	return
 }
 
-func (_self_ *Expander) SetLabel(label *C.gchar) () {
-	C._gtk_expander_set_label((*C.GtkExpander)(_self_), label)
+func (_self_ *Expander) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_expander_set_label((*C.GtkExpander)(_self_), _cgo_label_)
 	return
 }
 
@@ -6532,9 +6971,12 @@ func (_self_ *Expander) SetUseUnderline(use_underline C.gboolean) () {
 	return
 }
 
-func FileChooserButtonNew(title *C.gchar, action C.GtkFileChooserAction) (_return_ *FileChooserButton) {
+func FileChooserButtonNew(title string, action C.GtkFileChooserAction) (_return_ *FileChooserButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_file_chooser_button_new(title, action)
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	_cgo_return_ = C._gtk_file_chooser_button_new(_cgo_title_, action)
 	_return_ = (*FileChooserButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -6551,8 +6993,10 @@ func (_self_ *FileChooserButton) GetFocusOnClick() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *FileChooserButton) GetTitle() (_return_ *C.gchar) {
+func (_self_ *FileChooserButton) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_file_chooser_button_get_title((*C.GtkFileChooserButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6568,8 +7012,11 @@ func (_self_ *FileChooserButton) SetFocusOnClick(focus_on_click C.gboolean) () {
 	return
 }
 
-func (_self_ *FileChooserButton) SetTitle(title *C.gchar) () {
-	C._gtk_file_chooser_button_set_title((*C.GtkFileChooserButton)(_self_), title)
+func (_self_ *FileChooserButton) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_file_chooser_button_set_title((*C.GtkFileChooserButton)(_self_), _cgo_title_)
 	return
 }
 
@@ -6598,13 +7045,19 @@ func (_self_ *FileFilter) AddCustom(needed C.GtkFileFilterFlags, func_ C.GtkFile
 	return
 }
 
-func (_self_ *FileFilter) AddMimeType(mime_type *C.gchar) () {
-	C._gtk_file_filter_add_mime_type((*C.GtkFileFilter)(_self_), mime_type)
+func (_self_ *FileFilter) AddMimeType(mime_type string) () {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	C._gtk_file_filter_add_mime_type((*C.GtkFileFilter)(_self_), _cgo_mime_type_)
 	return
 }
 
-func (_self_ *FileFilter) AddPattern(pattern *C.gchar) () {
-	C._gtk_file_filter_add_pattern((*C.GtkFileFilter)(_self_), pattern)
+func (_self_ *FileFilter) AddPattern(pattern string) () {
+	_cstring_pattern_ := C.CString(pattern)
+	_cgo_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_pattern_))
+	C._gtk_file_filter_add_pattern((*C.GtkFileFilter)(_self_), _cgo_pattern_)
 	return
 }
 
@@ -6618,8 +7071,10 @@ func (_self_ *FileFilter) Filter(filter_info *C.GtkFileFilterInfo) (_return_ C.g
 	return
 }
 
-func (_self_ *FileFilter) GetName() (_return_ *C.gchar) {
+func (_self_ *FileFilter) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_file_filter_get_name((*C.GtkFileFilter)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6628,8 +7083,11 @@ func (_self_ *FileFilter) GetNeeded() (_return_ C.GtkFileFilterFlags) {
 	return
 }
 
-func (_self_ *FileFilter) SetName(name *C.gchar) () {
-	C._gtk_file_filter_set_name((*C.GtkFileFilter)(_self_), name)
+func (_self_ *FileFilter) SetName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_file_filter_set_name((*C.GtkFileFilter)(_self_), _cgo_name_)
 	return
 }
 
@@ -6661,15 +7119,20 @@ func FontButtonNew() (_return_ *FontButton) {
 	return
 }
 
-func FontButtonNewWithFont(fontname *C.gchar) (_return_ *FontButton) {
+func FontButtonNewWithFont(fontname string) (_return_ *FontButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_font_button_new_with_font(fontname)
+	_cstring_fontname_ := C.CString(fontname)
+	_cgo_fontname_ := (*C.gchar)(unsafe.Pointer(_cstring_fontname_))
+	defer C.free(unsafe.Pointer(_cstring_fontname_))
+	_cgo_return_ = C._gtk_font_button_new_with_font(_cgo_fontname_)
 	_return_ = (*FontButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *FontButton) GetFontName() (_return_ *C.gchar) {
+func (_self_ *FontButton) GetFontName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_font_button_get_font_name((*C.GtkFontButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6683,8 +7146,10 @@ func (_self_ *FontButton) GetShowStyle() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *FontButton) GetTitle() (_return_ *C.gchar) {
+func (_self_ *FontButton) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_font_button_get_title((*C.GtkFontButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6698,8 +7163,11 @@ func (_self_ *FontButton) GetUseSize() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *FontButton) SetFontName(fontname *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_font_button_set_font_name((*C.GtkFontButton)(_self_), fontname)
+func (_self_ *FontButton) SetFontName(fontname string) (_return_ C.gboolean) {
+	_cstring_fontname_ := C.CString(fontname)
+	_cgo_fontname_ := (*C.gchar)(unsafe.Pointer(_cstring_fontname_))
+	defer C.free(unsafe.Pointer(_cstring_fontname_))
+	_return_ = C._gtk_font_button_set_font_name((*C.GtkFontButton)(_self_), _cgo_fontname_)
 	return
 }
 
@@ -6713,8 +7181,11 @@ func (_self_ *FontButton) SetShowStyle(show_style C.gboolean) () {
 	return
 }
 
-func (_self_ *FontButton) SetTitle(title *C.gchar) () {
-	C._gtk_font_button_set_title((*C.GtkFontButton)(_self_), title)
+func (_self_ *FontButton) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_font_button_set_title((*C.GtkFontButton)(_self_), _cgo_title_)
 	return
 }
 
@@ -6728,9 +7199,12 @@ func (_self_ *FontButton) SetUseSize(use_size C.gboolean) () {
 	return
 }
 
-func FontChooserDialogNew(title *C.gchar, parent *C.GtkWindow) (_return_ *FontChooserDialog) {
+func FontChooserDialogNew(title string, parent *C.GtkWindow) (_return_ *FontChooserDialog) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_font_chooser_dialog_new(title, parent)
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	_cgo_return_ = C._gtk_font_chooser_dialog_new(_cgo_title_, parent)
 	_return_ = (*FontChooserDialog)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -6742,15 +7216,20 @@ func FontChooserWidgetNew() (_return_ *FontChooserWidget) {
 	return
 }
 
-func FrameNew(label *C.gchar) (_return_ *Frame) {
+func FrameNew(label string) (_return_ *Frame) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_frame_new(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_frame_new(_cgo_label_)
 	_return_ = (*Frame)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *Frame) GetLabel() (_return_ *C.gchar) {
+func (_self_ *Frame) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_frame_get_label((*C.GtkFrame)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -6773,8 +7252,11 @@ func (_self_ *Frame) GetShadowType() (_return_ C.GtkShadowType) {
 	return
 }
 
-func (_self_ *Frame) SetLabel(label *C.gchar) () {
-	C._gtk_frame_set_label((*C.GtkFrame)(_self_), label)
+func (_self_ *Frame) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_frame_set_label((*C.GtkFrame)(_self_), _cgo_label_)
 	return
 }
 
@@ -6840,8 +7322,10 @@ func (_self_ *Gradient) ResolveForContext(context *C.GtkStyleContext) (_return_ 
 	return
 }
 
-func (_self_ *Gradient) ToString() (_return_ *C.char) {
+func (_self_ *Gradient) ToString() (_go__return__ string) {
+	var _return_ *C.char
 	_return_ = C.gtk_gradient_to_string((*C.GtkGradient)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -7008,10 +7492,13 @@ func (_self_ *IMContext) SetCursorLocation(area *C.GdkRectangle) () {
 	return
 }
 
-func (_self_ *IMContext) SetSurrounding(text *C.gchar, len_ int, cursor_index int) () {
+func (_self_ *IMContext) SetSurrounding(text string, len_ int, cursor_index int) () {
 	_cgo_len__ := (C.gint)(len_)
 	_cgo_cursor_index_ := (C.gint)(cursor_index)
-	C._gtk_im_context_set_surrounding((*C.GtkIMContext)(_self_), text, _cgo_len__, _cgo_cursor_index_)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_im_context_set_surrounding((*C.GtkIMContext)(_self_), _cgo_text_, _cgo_len__, _cgo_cursor_index_)
 	return
 }
 
@@ -7046,13 +7533,18 @@ func (_self_ *IMMulticontext) AppendMenuitems(menushell *C.GtkMenuShell) () {
 	return
 }
 
-func (_self_ *IMMulticontext) GetContextId() (_return_ *C.char) {
+func (_self_ *IMMulticontext) GetContextId() (_go__return__ string) {
+	var _return_ *C.char
 	_return_ = C._gtk_im_multicontext_get_context_id((*C.GtkIMMulticontext)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *IMMulticontext) SetContextId(context_id *C.char) () {
-	C._gtk_im_multicontext_set_context_id((*C.GtkIMMulticontext)(_self_), context_id)
+func (_self_ *IMMulticontext) SetContextId(context_id string) () {
+	_cstring_context_id_ := C.CString(context_id)
+	_cgo_context_id_ := (*C.char)(unsafe.Pointer(_cstring_context_id_))
+	defer C.free(unsafe.Pointer(_cstring_context_id_))
+	C._gtk_im_multicontext_set_context_id((*C.GtkIMMulticontext)(_self_), _cgo_context_id_)
 	return
 }
 
@@ -7063,13 +7555,19 @@ func IconFactoryNew() (_return_ *IconFactory) {
 	return
 }
 
-func IconFactoryLookupDefault(stock_id *C.gchar) (_return_ *C.GtkIconSet) {
-	_return_ = C._gtk_icon_factory_lookup_default(stock_id)
+func IconFactoryLookupDefault(stock_id string) (_return_ *C.GtkIconSet) {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_return_ = C._gtk_icon_factory_lookup_default(_cgo_stock_id_)
 	return
 }
 
-func (_self_ *IconFactory) Add(stock_id *C.gchar, icon_set *C.GtkIconSet) () {
-	C._gtk_icon_factory_add((*C.GtkIconFactory)(_self_), stock_id, icon_set)
+func (_self_ *IconFactory) Add(stock_id string, icon_set *C.GtkIconSet) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_icon_factory_add((*C.GtkIconFactory)(_self_), _cgo_stock_id_, icon_set)
 	return
 }
 
@@ -7078,8 +7576,11 @@ func (_self_ *IconFactory) AddDefault() () {
 	return
 }
 
-func (_self_ *IconFactory) Lookup(stock_id *C.gchar) (_return_ *C.GtkIconSet) {
-	_return_ = C._gtk_icon_factory_lookup((*C.GtkIconFactory)(_self_), stock_id)
+func (_self_ *IconFactory) Lookup(stock_id string) (_return_ *C.GtkIconSet) {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_return_ = C._gtk_icon_factory_lookup((*C.GtkIconFactory)(_self_), _cgo_stock_id_)
 	return
 }
 
@@ -7117,8 +7618,10 @@ func (_self_ *IconInfo) GetBuiltinPixbuf() (_return_ *C.GdkPixbuf) {
 	return
 }
 
-func (_self_ *IconInfo) GetDisplayName() (_return_ *C.gchar) {
+func (_self_ *IconInfo) GetDisplayName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_icon_info_get_display_name((*C.GtkIconInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -7127,8 +7630,10 @@ func (_self_ *IconInfo) GetEmbeddedRect() (_return_ C.gboolean, rectangle *C.Gdk
 	return
 }
 
-func (_self_ *IconInfo) GetFilename() (_return_ *C.gchar) {
+func (_self_ *IconInfo) GetFilename() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_icon_info_get_filename((*C.GtkIconInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -7218,13 +7723,17 @@ func (_self_ *IconSource) GetDirectionWildcarded() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *IconSource) GetFilename() (_return_ *C.gchar) {
+func (_self_ *IconSource) GetFilename() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_icon_source_get_filename((*C.GtkIconSource)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *IconSource) GetIconName() (_return_ *C.gchar) {
+func (_self_ *IconSource) GetIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_icon_source_get_icon_name((*C.GtkIconSource)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -7263,13 +7772,19 @@ func (_self_ *IconSource) SetDirectionWildcarded(setting C.gboolean) () {
 	return
 }
 
-func (_self_ *IconSource) SetFilename(filename *C.gchar) () {
-	C._gtk_icon_source_set_filename((*C.GtkIconSource)(_self_), filename)
+func (_self_ *IconSource) SetFilename(filename string) () {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	C._gtk_icon_source_set_filename((*C.GtkIconSource)(_self_), _cgo_filename_)
 	return
 }
 
-func (_self_ *IconSource) SetIconName(icon_name *C.gchar) () {
-	C._gtk_icon_source_set_icon_name((*C.GtkIconSource)(_self_), icon_name)
+func (_self_ *IconSource) SetIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_icon_source_set_icon_name((*C.GtkIconSource)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -7305,9 +7820,12 @@ func IconThemeNew() (_return_ *IconTheme) {
 	return
 }
 
-func IconThemeAddBuiltinIcon(icon_name *C.gchar, size int, pixbuf *C.GdkPixbuf) () {
+func IconThemeAddBuiltinIcon(icon_name string, size int, pixbuf *C.GdkPixbuf) () {
 	_cgo_size_ := (C.gint)(size)
-	C._gtk_icon_theme_add_builtin_icon(icon_name, _cgo_size_, pixbuf)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_icon_theme_add_builtin_icon(_cgo_icon_name_, _cgo_size_, pixbuf)
 	return
 }
 
@@ -7321,23 +7839,34 @@ func IconThemeGetForScreen(screen *C.GdkScreen) (_return_ *C.GtkIconTheme) {
 	return
 }
 
-func (_self_ *IconTheme) AppendSearchPath(path *C.gchar) () {
-	C._gtk_icon_theme_append_search_path((*C.GtkIconTheme)(_self_), path)
+func (_self_ *IconTheme) AppendSearchPath(path string) () {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	C._gtk_icon_theme_append_search_path((*C.GtkIconTheme)(_self_), _cgo_path_)
 	return
 }
 
-func (_self_ *IconTheme) GetExampleIconName() (_return_ *C.char) {
+func (_self_ *IconTheme) GetExampleIconName() (_go__return__ string) {
+	var _return_ *C.char
 	_return_ = C.gtk_icon_theme_get_example_icon_name((*C.GtkIconTheme)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *IconTheme) GetIconSizes(icon_name *C.gchar) (_return_ *C.gint) {
-	_return_ = C._gtk_icon_theme_get_icon_sizes((*C.GtkIconTheme)(_self_), icon_name)
+func (_self_ *IconTheme) GetIconSizes(icon_name string) (_return_ *C.gint) {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	_return_ = C._gtk_icon_theme_get_icon_sizes((*C.GtkIconTheme)(_self_), _cgo_icon_name_)
 	return
 }
 
-func (_self_ *IconTheme) HasIcon(icon_name *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_icon_theme_has_icon((*C.GtkIconTheme)(_self_), icon_name)
+func (_self_ *IconTheme) HasIcon(icon_name string) (_return_ C.gboolean) {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	_return_ = C._gtk_icon_theme_has_icon((*C.GtkIconTheme)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -7346,14 +7875,20 @@ func (_self_ *IconTheme) ListContexts() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *IconTheme) ListIcons(context *C.gchar) (_return_ *C.GList) {
-	_return_ = C._gtk_icon_theme_list_icons((*C.GtkIconTheme)(_self_), context)
+func (_self_ *IconTheme) ListIcons(context string) (_return_ *C.GList) {
+	_cstring_context_ := C.CString(context)
+	_cgo_context_ := (*C.gchar)(unsafe.Pointer(_cstring_context_))
+	defer C.free(unsafe.Pointer(_cstring_context_))
+	_return_ = C._gtk_icon_theme_list_icons((*C.GtkIconTheme)(_self_), _cgo_context_)
 	return
 }
 
-func (_self_ *IconTheme) LoadIcon(icon_name *C.gchar, size int, flags C.GtkIconLookupFlags) (_return_ *C.GdkPixbuf, _error_ unsafe.Pointer) {
+func (_self_ *IconTheme) LoadIcon(icon_name string, size int, flags C.GtkIconLookupFlags) (_return_ *C.GdkPixbuf, _error_ unsafe.Pointer) {
 	_cgo_size_ := (C.gint)(size)
-	_return_ = C._gtk_icon_theme_load_icon((*C.GtkIconTheme)(_self_), icon_name, _cgo_size_, flags, _error_)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	_return_ = C._gtk_icon_theme_load_icon((*C.GtkIconTheme)(_self_), _cgo_icon_name_, _cgo_size_, flags, _error_)
 	return
 }
 
@@ -7363,14 +7898,20 @@ func (_self_ *IconTheme) LookupByGicon(icon *C.GIcon, size int, flags C.GtkIconL
 	return
 }
 
-func (_self_ *IconTheme) LookupIcon(icon_name *C.gchar, size int, flags C.GtkIconLookupFlags) (_return_ *C.GtkIconInfo) {
+func (_self_ *IconTheme) LookupIcon(icon_name string, size int, flags C.GtkIconLookupFlags) (_return_ *C.GtkIconInfo) {
 	_cgo_size_ := (C.gint)(size)
-	_return_ = C._gtk_icon_theme_lookup_icon((*C.GtkIconTheme)(_self_), icon_name, _cgo_size_, flags)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	_return_ = C._gtk_icon_theme_lookup_icon((*C.GtkIconTheme)(_self_), _cgo_icon_name_, _cgo_size_, flags)
 	return
 }
 
-func (_self_ *IconTheme) PrependSearchPath(path *C.gchar) () {
-	C._gtk_icon_theme_prepend_search_path((*C.GtkIconTheme)(_self_), path)
+func (_self_ *IconTheme) PrependSearchPath(path string) () {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	C._gtk_icon_theme_prepend_search_path((*C.GtkIconTheme)(_self_), _cgo_path_)
 	return
 }
 
@@ -7379,8 +7920,11 @@ func (_self_ *IconTheme) RescanIfNeeded() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *IconTheme) SetCustomTheme(theme_name *C.gchar) () {
-	C._gtk_icon_theme_set_custom_theme((*C.GtkIconTheme)(_self_), theme_name)
+func (_self_ *IconTheme) SetCustomTheme(theme_name string) () {
+	_cstring_theme_name_ := C.CString(theme_name)
+	_cgo_theme_name_ := (*C.gchar)(unsafe.Pointer(_cstring_theme_name_))
+	defer C.free(unsafe.Pointer(_cstring_theme_name_))
+	C._gtk_icon_theme_set_custom_theme((*C.GtkIconTheme)(_self_), _cgo_theme_name_)
 	return
 }
 
@@ -7755,9 +8299,12 @@ func ImageNewFromAnimation(animation *C.GdkPixbufAnimation) (_return_ *Image) {
 	return
 }
 
-func ImageNewFromFile(filename *C.gchar) (_return_ *Image) {
+func ImageNewFromFile(filename string) (_return_ *Image) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_new_from_file(filename)
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_cgo_return_ = C._gtk_image_new_from_file(_cgo_filename_)
 	_return_ = (*Image)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -7769,9 +8316,12 @@ func ImageNewFromGicon(icon *C.GIcon, size C.GtkIconSize) (_return_ *Image) {
 	return
 }
 
-func ImageNewFromIconName(icon_name *C.gchar, size C.GtkIconSize) (_return_ *Image) {
+func ImageNewFromIconName(icon_name string, size C.GtkIconSize) (_return_ *Image) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_new_from_icon_name(icon_name, size)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	_cgo_return_ = C._gtk_image_new_from_icon_name(_cgo_icon_name_, size)
 	_return_ = (*Image)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -7790,16 +8340,22 @@ func ImageNewFromPixbuf(pixbuf *C.GdkPixbuf) (_return_ *Image) {
 	return
 }
 
-func ImageNewFromResource(resource_path *C.gchar) (_return_ *Image) {
+func ImageNewFromResource(resource_path string) (_return_ *Image) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_new_from_resource(resource_path)
+	_cstring_resource_path_ := C.CString(resource_path)
+	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
+	defer C.free(unsafe.Pointer(_cstring_resource_path_))
+	_cgo_return_ = C._gtk_image_new_from_resource(_cgo_resource_path_)
 	_return_ = (*Image)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ImageNewFromStock(stock_id *C.gchar, size C.GtkIconSize) (_return_ *Image) {
+func ImageNewFromStock(stock_id string, size C.GtkIconSize) (_return_ *Image) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_new_from_stock(stock_id, size)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_image_new_from_stock(_cgo_stock_id_, size)
 	_return_ = (*Image)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -7856,8 +8412,11 @@ func (_self_ *Image) SetFromAnimation(animation *C.GdkPixbufAnimation) () {
 	return
 }
 
-func (_self_ *Image) SetFromFile(filename *C.gchar) () {
-	C._gtk_image_set_from_file((*C.GtkImage)(_self_), filename)
+func (_self_ *Image) SetFromFile(filename string) () {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	C._gtk_image_set_from_file((*C.GtkImage)(_self_), _cgo_filename_)
 	return
 }
 
@@ -7866,8 +8425,11 @@ func (_self_ *Image) SetFromGicon(icon *C.GIcon, size C.GtkIconSize) () {
 	return
 }
 
-func (_self_ *Image) SetFromIconName(icon_name *C.gchar, size C.GtkIconSize) () {
-	C._gtk_image_set_from_icon_name((*C.GtkImage)(_self_), icon_name, size)
+func (_self_ *Image) SetFromIconName(icon_name string, size C.GtkIconSize) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_image_set_from_icon_name((*C.GtkImage)(_self_), _cgo_icon_name_, size)
 	return
 }
 
@@ -7881,13 +8443,19 @@ func (_self_ *Image) SetFromPixbuf(pixbuf *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *Image) SetFromResource(resource_path *C.gchar) () {
-	C._gtk_image_set_from_resource((*C.GtkImage)(_self_), resource_path)
+func (_self_ *Image) SetFromResource(resource_path string) () {
+	_cstring_resource_path_ := C.CString(resource_path)
+	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
+	defer C.free(unsafe.Pointer(_cstring_resource_path_))
+	C._gtk_image_set_from_resource((*C.GtkImage)(_self_), _cgo_resource_path_)
 	return
 }
 
-func (_self_ *Image) SetFromStock(stock_id *C.gchar, size C.GtkIconSize) () {
-	C._gtk_image_set_from_stock((*C.GtkImage)(_self_), stock_id, size)
+func (_self_ *Image) SetFromStock(stock_id string, size C.GtkIconSize) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_image_set_from_stock((*C.GtkImage)(_self_), _cgo_stock_id_, size)
 	return
 }
 
@@ -7904,23 +8472,32 @@ func ImageMenuItemNew() (_return_ *ImageMenuItem) {
 	return
 }
 
-func ImageMenuItemNewFromStock(stock_id *C.gchar, accel_group *C.GtkAccelGroup) (_return_ *ImageMenuItem) {
+func ImageMenuItemNewFromStock(stock_id string, accel_group *C.GtkAccelGroup) (_return_ *ImageMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_menu_item_new_from_stock(stock_id, accel_group)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_image_menu_item_new_from_stock(_cgo_stock_id_, accel_group)
 	_return_ = (*ImageMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ImageMenuItemNewWithLabel(label *C.gchar) (_return_ *ImageMenuItem) {
+func ImageMenuItemNewWithLabel(label string) (_return_ *ImageMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_menu_item_new_with_label(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_image_menu_item_new_with_label(_cgo_label_)
 	_return_ = (*ImageMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ImageMenuItemNewWithMnemonic(label *C.gchar) (_return_ *ImageMenuItem) {
+func ImageMenuItemNewWithMnemonic(label string) (_return_ *ImageMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_image_menu_item_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_image_menu_item_new_with_mnemonic(_cgo_label_)
 	_return_ = (*ImageMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -7973,9 +8550,12 @@ func (_self_ *InfoBar) AddActionWidget(child *C.GtkWidget, response_id int) () {
 	return
 }
 
-func (_self_ *InfoBar) AddButton(button_text *C.gchar, response_id int) (_return_ *C.GtkWidget) {
+func (_self_ *InfoBar) AddButton(button_text string, response_id int) (_return_ *C.GtkWidget) {
 	_cgo_response_id_ := (C.gint)(response_id)
-	_return_ = C._gtk_info_bar_add_button((*C.GtkInfoBar)(_self_), button_text, _cgo_response_id_)
+	_cstring_button_text_ := C.CString(button_text)
+	_cgo_button_text_ := (*C.gchar)(unsafe.Pointer(_cstring_button_text_))
+	defer C.free(unsafe.Pointer(_cstring_button_text_))
+	_return_ = C._gtk_info_bar_add_button((*C.GtkInfoBar)(_self_), _cgo_button_text_, _cgo_response_id_)
 	return
 }
 
@@ -8041,16 +8621,22 @@ func (_self_ *Invisible) SetScreen(screen *C.GdkScreen) () {
 	return
 }
 
-func LabelNew(str *C.gchar) (_return_ *Label) {
+func LabelNew(str string) (_return_ *Label) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_label_new(str)
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	_cgo_return_ = C._gtk_label_new(_cgo_str_)
 	_return_ = (*Label)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func LabelNewWithMnemonic(str *C.gchar) (_return_ *Label) {
+func LabelNewWithMnemonic(str string) (_return_ *Label) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_label_new_with_mnemonic(str)
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	_cgo_return_ = C._gtk_label_new_with_mnemonic(_cgo_str_)
 	_return_ = (*Label)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -8067,8 +8653,10 @@ func (_self_ *Label) GetAttributes() (_return_ *C.PangoAttrList) {
 	return
 }
 
-func (_self_ *Label) GetCurrentUri() (_return_ *C.gchar) {
+func (_self_ *Label) GetCurrentUri() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_label_get_current_uri((*C.GtkLabel)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8082,8 +8670,10 @@ func (_self_ *Label) GetJustify() (_return_ C.GtkJustification) {
 	return
 }
 
-func (_self_ *Label) GetLabel() (_return_ *C.gchar) {
+func (_self_ *Label) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_label_get_label((*C.GtkLabel)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8149,8 +8739,10 @@ func (_self_ *Label) GetSingleLineMode() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Label) GetText() (_return_ *C.gchar) {
+func (_self_ *Label) GetText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_label_get_text((*C.GtkLabel)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8204,8 +8796,11 @@ func (_self_ *Label) SetJustify(jtype C.GtkJustification) () {
 	return
 }
 
-func (_self_ *Label) SetLabel(str *C.gchar) () {
-	C._gtk_label_set_label((*C.GtkLabel)(_self_), str)
+func (_self_ *Label) SetLabel(str string) () {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	C._gtk_label_set_label((*C.GtkLabel)(_self_), _cgo_str_)
 	return
 }
 
@@ -8219,13 +8814,19 @@ func (_self_ *Label) SetLineWrapMode(wrap_mode C.PangoWrapMode) () {
 	return
 }
 
-func (_self_ *Label) SetMarkup(str *C.gchar) () {
-	C._gtk_label_set_markup((*C.GtkLabel)(_self_), str)
+func (_self_ *Label) SetMarkup(str string) () {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	C._gtk_label_set_markup((*C.GtkLabel)(_self_), _cgo_str_)
 	return
 }
 
-func (_self_ *Label) SetMarkupWithMnemonic(str *C.gchar) () {
-	C._gtk_label_set_markup_with_mnemonic((*C.GtkLabel)(_self_), str)
+func (_self_ *Label) SetMarkupWithMnemonic(str string) () {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	C._gtk_label_set_markup_with_mnemonic((*C.GtkLabel)(_self_), _cgo_str_)
 	return
 }
 
@@ -8240,8 +8841,11 @@ func (_self_ *Label) SetMnemonicWidget(widget *C.GtkWidget) () {
 	return
 }
 
-func (_self_ *Label) SetPattern(pattern *C.gchar) () {
-	C._gtk_label_set_pattern((*C.GtkLabel)(_self_), pattern)
+func (_self_ *Label) SetPattern(pattern string) () {
+	_cstring_pattern_ := C.CString(pattern)
+	_cgo_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_pattern_))
+	C._gtk_label_set_pattern((*C.GtkLabel)(_self_), _cgo_pattern_)
 	return
 }
 
@@ -8255,13 +8859,19 @@ func (_self_ *Label) SetSingleLineMode(single_line_mode C.gboolean) () {
 	return
 }
 
-func (_self_ *Label) SetText(str *C.gchar) () {
-	C._gtk_label_set_text((*C.GtkLabel)(_self_), str)
+func (_self_ *Label) SetText(str string) () {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	C._gtk_label_set_text((*C.GtkLabel)(_self_), _cgo_str_)
 	return
 }
 
-func (_self_ *Label) SetTextWithMnemonic(str *C.gchar) () {
-	C._gtk_label_set_text_with_mnemonic((*C.GtkLabel)(_self_), str)
+func (_self_ *Label) SetTextWithMnemonic(str string) () {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	C._gtk_label_set_text_with_mnemonic((*C.GtkLabel)(_self_), _cgo_str_)
 	return
 }
 
@@ -8344,9 +8954,12 @@ func LevelBarNewForInterval(min_value float64, max_value float64) (_return_ *Lev
 	return
 }
 
-func (_self_ *LevelBar) AddOffsetValue(name *C.gchar, value float64) () {
+func (_self_ *LevelBar) AddOffsetValue(name string, value float64) () {
 	_cgo_value_ := (C.gdouble)(value)
-	C._gtk_level_bar_add_offset_value((*C.GtkLevelBar)(_self_), name, _cgo_value_)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_level_bar_add_offset_value((*C.GtkLevelBar)(_self_), _cgo_name_, _cgo_value_)
 	return
 }
 
@@ -8369,9 +8982,12 @@ func (_self_ *LevelBar) GetMode() (_return_ C.GtkLevelBarMode) {
 	return
 }
 
-func (_self_ *LevelBar) GetOffsetValue(name *C.gchar) (_return_ C.gboolean, _go_value_ float64) {
+func (_self_ *LevelBar) GetOffsetValue(name string) (_return_ C.gboolean, _go_value_ float64) {
 	var value C.gdouble
-	_return_ = C._gtk_level_bar_get_offset_value((*C.GtkLevelBar)(_self_), name, &value)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_level_bar_get_offset_value((*C.GtkLevelBar)(_self_), _cgo_name_, &value)
 	_go_value_ = (float64)(value)
 	return
 }
@@ -8383,8 +8999,11 @@ func (_self_ *LevelBar) GetValue() (_go__return__ float64) {
 	return
 }
 
-func (_self_ *LevelBar) RemoveOffsetValue(name *C.gchar) () {
-	C._gtk_level_bar_remove_offset_value((*C.GtkLevelBar)(_self_), name)
+func (_self_ *LevelBar) RemoveOffsetValue(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_level_bar_remove_offset_value((*C.GtkLevelBar)(_self_), _cgo_name_)
 	return
 }
 
@@ -8411,22 +9030,33 @@ func (_self_ *LevelBar) SetValue(value float64) () {
 	return
 }
 
-func LinkButtonNew(uri *C.gchar) (_return_ *LinkButton) {
+func LinkButtonNew(uri string) (_return_ *LinkButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_link_button_new(uri)
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_cgo_return_ = C._gtk_link_button_new(_cgo_uri_)
 	_return_ = (*LinkButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func LinkButtonNewWithLabel(uri *C.gchar, label *C.gchar) (_return_ *LinkButton) {
+func LinkButtonNewWithLabel(uri string, label string) (_return_ *LinkButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_link_button_new_with_label(uri, label)
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_link_button_new_with_label(_cgo_uri_, _cgo_label_)
 	_return_ = (*LinkButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *LinkButton) GetUri() (_return_ *C.gchar) {
+func (_self_ *LinkButton) GetUri() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_link_button_get_uri((*C.GtkLinkButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8435,8 +9065,11 @@ func (_self_ *LinkButton) GetVisited() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *LinkButton) SetUri(uri *C.gchar) () {
-	C._gtk_link_button_set_uri((*C.GtkLinkButton)(_self_), uri)
+func (_self_ *LinkButton) SetUri(uri string) () {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	C._gtk_link_button_set_uri((*C.GtkLinkButton)(_self_), _cgo_uri_)
 	return
 }
 
@@ -8567,8 +9200,10 @@ func (_self_ *Menu) GetAccelGroup() (_return_ *C.GtkAccelGroup) {
 	return
 }
 
-func (_self_ *Menu) GetAccelPath() (_return_ *C.gchar) {
+func (_self_ *Menu) GetAccelPath() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_menu_get_accel_path((*C.GtkMenu)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8599,8 +9234,10 @@ func (_self_ *Menu) GetTearoffState() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Menu) GetTitle() (_return_ *C.gchar) {
+func (_self_ *Menu) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_menu_get_title((*C.GtkMenu)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8639,8 +9276,11 @@ func (_self_ *Menu) SetAccelGroup(accel_group *C.GtkAccelGroup) () {
 	return
 }
 
-func (_self_ *Menu) SetAccelPath(accel_path *C.gchar) () {
-	C._gtk_menu_set_accel_path((*C.GtkMenu)(_self_), accel_path)
+func (_self_ *Menu) SetAccelPath(accel_path string) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_menu_set_accel_path((*C.GtkMenu)(_self_), _cgo_accel_path_)
 	return
 }
 
@@ -8671,8 +9311,11 @@ func (_self_ *Menu) SetTearoffState(torn_off C.gboolean) () {
 	return
 }
 
-func (_self_ *Menu) SetTitle(title *C.gchar) () {
-	C._gtk_menu_set_title((*C.GtkMenu)(_self_), title)
+func (_self_ *Menu) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_menu_set_title((*C.GtkMenu)(_self_), _cgo_title_)
 	return
 }
 
@@ -8764,16 +9407,22 @@ func MenuItemNew() (_return_ *MenuItem) {
 	return
 }
 
-func MenuItemNewWithLabel(label *C.gchar) (_return_ *MenuItem) {
+func MenuItemNewWithLabel(label string) (_return_ *MenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_menu_item_new_with_label(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_menu_item_new_with_label(_cgo_label_)
 	_return_ = (*MenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func MenuItemNewWithMnemonic(label *C.gchar) (_return_ *MenuItem) {
+func MenuItemNewWithMnemonic(label string) (_return_ *MenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_menu_item_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_menu_item_new_with_mnemonic(_cgo_label_)
 	_return_ = (*MenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -8788,13 +9437,17 @@ func (_self_ *MenuItem) Deselect() () {
 	return
 }
 
-func (_self_ *MenuItem) GetAccelPath() (_return_ *C.gchar) {
+func (_self_ *MenuItem) GetAccelPath() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_menu_item_get_accel_path((*C.GtkMenuItem)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *MenuItem) GetLabel() (_return_ *C.gchar) {
+func (_self_ *MenuItem) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_menu_item_get_label((*C.GtkMenuItem)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -8818,13 +9471,19 @@ func (_self_ *MenuItem) Select() () {
 	return
 }
 
-func (_self_ *MenuItem) SetAccelPath(accel_path *C.gchar) () {
-	C._gtk_menu_item_set_accel_path((*C.GtkMenuItem)(_self_), accel_path)
+func (_self_ *MenuItem) SetAccelPath(accel_path string) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_menu_item_set_accel_path((*C.GtkMenuItem)(_self_), _cgo_accel_path_)
 	return
 }
 
-func (_self_ *MenuItem) SetLabel(label *C.gchar) () {
-	C._gtk_menu_item_set_label((*C.GtkMenuItem)(_self_), label)
+func (_self_ *MenuItem) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_menu_item_set_label((*C.GtkMenuItem)(_self_), _cgo_label_)
 	return
 }
 
@@ -8864,8 +9523,11 @@ func (_self_ *MenuShell) Append(child *C.GtkWidget) () {
 	return
 }
 
-func (_self_ *MenuShell) BindModel(model *C.GMenuModel, action_namespace *C.gchar, with_separators C.gboolean) () {
-	C._gtk_menu_shell_bind_model((*C.GtkMenuShell)(_self_), model, action_namespace, with_separators)
+func (_self_ *MenuShell) BindModel(model *C.GMenuModel, action_namespace string, with_separators C.gboolean) () {
+	_cstring_action_namespace_ := C.CString(action_namespace)
+	_cgo_action_namespace_ := (*C.gchar)(unsafe.Pointer(_cstring_action_namespace_))
+	defer C.free(unsafe.Pointer(_cstring_action_namespace_))
+	C._gtk_menu_shell_bind_model((*C.GtkMenuShell)(_self_), model, _cgo_action_namespace_, with_separators)
 	return
 }
 
@@ -8925,16 +9587,22 @@ func (_self_ *MenuShell) SetTakeFocus(take_focus C.gboolean) () {
 	return
 }
 
-func MenuToolButtonNew(icon_widget *C.GtkWidget, label *C.gchar) (_return_ *MenuToolButton) {
+func MenuToolButtonNew(icon_widget *C.GtkWidget, label string) (_return_ *MenuToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_menu_tool_button_new(icon_widget, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_menu_tool_button_new(icon_widget, _cgo_label_)
 	_return_ = (*MenuToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func MenuToolButtonNewFromStock(stock_id *C.gchar) (_return_ *MenuToolButton) {
+func MenuToolButtonNewFromStock(stock_id string) (_return_ *MenuToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_menu_tool_button_new_from_stock(stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_menu_tool_button_new_from_stock(_cgo_stock_id_)
 	_return_ = (*MenuToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -8944,13 +9612,19 @@ func (_self_ *MenuToolButton) GetMenu() (_return_ *C.GtkWidget) {
 	return
 }
 
-func (_self_ *MenuToolButton) SetArrowTooltipMarkup(markup *C.gchar) () {
-	C._gtk_menu_tool_button_set_arrow_tooltip_markup((*C.GtkMenuToolButton)(_self_), markup)
+func (_self_ *MenuToolButton) SetArrowTooltipMarkup(markup string) () {
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_menu_tool_button_set_arrow_tooltip_markup((*C.GtkMenuToolButton)(_self_), _cgo_markup_)
 	return
 }
 
-func (_self_ *MenuToolButton) SetArrowTooltipText(text *C.gchar) () {
-	C._gtk_menu_tool_button_set_arrow_tooltip_text((*C.GtkMenuToolButton)(_self_), text)
+func (_self_ *MenuToolButton) SetArrowTooltipText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_menu_tool_button_set_arrow_tooltip_text((*C.GtkMenuToolButton)(_self_), _cgo_text_)
 	return
 }
 
@@ -8974,8 +9648,11 @@ func (_self_ *MessageDialog) SetImage(image *C.GtkWidget) () {
 	return
 }
 
-func (_self_ *MessageDialog) SetMarkup(str *C.gchar) () {
-	C._gtk_message_dialog_set_markup((*C.GtkMessageDialog)(_self_), str)
+func (_self_ *MessageDialog) SetMarkup(str string) () {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	C._gtk_message_dialog_set_markup((*C.GtkMessageDialog)(_self_), _cgo_str_)
 	return
 }
 
@@ -9076,8 +9753,10 @@ func (_self_ *Notebook) GetCurrentPage() (_go__return__ int) {
 	return
 }
 
-func (_self_ *Notebook) GetGroupName() (_return_ *C.gchar) {
+func (_self_ *Notebook) GetGroupName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_notebook_get_group_name((*C.GtkNotebook)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9086,8 +9765,10 @@ func (_self_ *Notebook) GetMenuLabel(child *C.GtkWidget) (_return_ *C.GtkWidget)
 	return
 }
 
-func (_self_ *Notebook) GetMenuLabelText(child *C.GtkWidget) (_return_ *C.gchar) {
+func (_self_ *Notebook) GetMenuLabelText(child *C.GtkWidget) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_notebook_get_menu_label_text((*C.GtkNotebook)(_self_), child)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9129,8 +9810,10 @@ func (_self_ *Notebook) GetTabLabel(child *C.GtkWidget) (_return_ *C.GtkWidget) 
 	return
 }
 
-func (_self_ *Notebook) GetTabLabelText(child *C.GtkWidget) (_return_ *C.gchar) {
+func (_self_ *Notebook) GetTabLabelText(child *C.GtkWidget) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_notebook_get_tab_label_text((*C.GtkNotebook)(_self_), child)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9224,8 +9907,11 @@ func (_self_ *Notebook) SetCurrentPage(page_num int) () {
 	return
 }
 
-func (_self_ *Notebook) SetGroupName(group_name *C.gchar) () {
-	C._gtk_notebook_set_group_name((*C.GtkNotebook)(_self_), group_name)
+func (_self_ *Notebook) SetGroupName(group_name string) () {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	C._gtk_notebook_set_group_name((*C.GtkNotebook)(_self_), _cgo_group_name_)
 	return
 }
 
@@ -9234,8 +9920,11 @@ func (_self_ *Notebook) SetMenuLabel(child *C.GtkWidget, menu_label *C.GtkWidget
 	return
 }
 
-func (_self_ *Notebook) SetMenuLabelText(child *C.GtkWidget, menu_text *C.gchar) () {
-	C._gtk_notebook_set_menu_label_text((*C.GtkNotebook)(_self_), child, menu_text)
+func (_self_ *Notebook) SetMenuLabelText(child *C.GtkWidget, menu_text string) () {
+	_cstring_menu_text_ := C.CString(menu_text)
+	_cgo_menu_text_ := (*C.gchar)(unsafe.Pointer(_cstring_menu_text_))
+	defer C.free(unsafe.Pointer(_cstring_menu_text_))
+	C._gtk_notebook_set_menu_label_text((*C.GtkNotebook)(_self_), child, _cgo_menu_text_)
 	return
 }
 
@@ -9264,8 +9953,11 @@ func (_self_ *Notebook) SetTabLabel(child *C.GtkWidget, tab_label *C.GtkWidget) 
 	return
 }
 
-func (_self_ *Notebook) SetTabLabelText(child *C.GtkWidget, tab_text *C.gchar) () {
-	C._gtk_notebook_set_tab_label_text((*C.GtkNotebook)(_self_), child, tab_text)
+func (_self_ *Notebook) SetTabLabelText(child *C.GtkWidget, tab_text string) () {
+	_cstring_tab_text_ := C.CString(tab_text)
+	_cgo_tab_text_ := (*C.gchar)(unsafe.Pointer(_cstring_tab_text_))
+	defer C.free(unsafe.Pointer(_cstring_tab_text_))
+	C._gtk_notebook_set_tab_label_text((*C.GtkNotebook)(_self_), child, _cgo_tab_text_)
 	return
 }
 
@@ -9294,8 +9986,10 @@ func (_self_ *NumerableIcon) GetBackgroundGicon() (_return_ *C.GIcon) {
 	return
 }
 
-func (_self_ *NumerableIcon) GetBackgroundIconName() (_return_ *C.gchar) {
+func (_self_ *NumerableIcon) GetBackgroundIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_numerable_icon_get_background_icon_name((*C.GtkNumerableIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9306,8 +10000,10 @@ func (_self_ *NumerableIcon) GetCount() (_go__return__ int) {
 	return
 }
 
-func (_self_ *NumerableIcon) GetLabel() (_return_ *C.gchar) {
+func (_self_ *NumerableIcon) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_numerable_icon_get_label((*C.GtkNumerableIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9321,8 +10017,11 @@ func (_self_ *NumerableIcon) SetBackgroundGicon(icon *C.GIcon) () {
 	return
 }
 
-func (_self_ *NumerableIcon) SetBackgroundIconName(icon_name *C.gchar) () {
-	C._gtk_numerable_icon_set_background_icon_name((*C.GtkNumerableIcon)(_self_), icon_name)
+func (_self_ *NumerableIcon) SetBackgroundIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_numerable_icon_set_background_icon_name((*C.GtkNumerableIcon)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -9332,8 +10031,11 @@ func (_self_ *NumerableIcon) SetCount(count int) () {
 	return
 }
 
-func (_self_ *NumerableIcon) SetLabel(label *C.gchar) () {
-	C._gtk_numerable_icon_set_label((*C.GtkNumerableIcon)(_self_), label)
+func (_self_ *NumerableIcon) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_numerable_icon_set_label((*C.GtkNumerableIcon)(_self_), _cgo_label_)
 	return
 }
 
@@ -9378,16 +10080,22 @@ func PageSetupNew() (_return_ *PageSetup) {
 	return
 }
 
-func PageSetupNewFromFile(file_name *C.gchar) (_return_ *PageSetup, _error_ unsafe.Pointer) {
+func PageSetupNewFromFile(file_name string) (_return_ *PageSetup, _error_ unsafe.Pointer) {
 	var _cgo_return_ *C.GtkPageSetup
-	_cgo_return_ = C._gtk_page_setup_new_from_file(file_name, _error_)
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	_cgo_return_ = C._gtk_page_setup_new_from_file(_cgo_file_name_, _error_)
 	_return_ = (*PageSetup)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func PageSetupNewFromKeyFile(key_file *C.GKeyFile, group_name *C.gchar) (_return_ *PageSetup, _error_ unsafe.Pointer) {
+func PageSetupNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_return_ *PageSetup, _error_ unsafe.Pointer) {
 	var _cgo_return_ *C.GtkPageSetup
-	_cgo_return_ = C._gtk_page_setup_new_from_key_file(key_file, group_name, _error_)
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_cgo_return_ = C._gtk_page_setup_new_from_key_file(key_file, _cgo_group_name_, _error_)
 	_return_ = (*PageSetup)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -9463,13 +10171,19 @@ func (_self_ *PageSetup) GetTopMargin(unit C.GtkUnit) (_go__return__ float64) {
 	return
 }
 
-func (_self_ *PageSetup) LoadFile(file_name *C.char) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_page_setup_load_file((*C.GtkPageSetup)(_self_), file_name, _error_)
+func (_self_ *PageSetup) LoadFile(file_name string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.char)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	_return_ = C._gtk_page_setup_load_file((*C.GtkPageSetup)(_self_), _cgo_file_name_, _error_)
 	return
 }
 
-func (_self_ *PageSetup) LoadKeyFile(key_file *C.GKeyFile, group_name *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_page_setup_load_key_file((*C.GtkPageSetup)(_self_), key_file, group_name, _error_)
+func (_self_ *PageSetup) LoadKeyFile(key_file *C.GKeyFile, group_name string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_return_ = C._gtk_page_setup_load_key_file((*C.GtkPageSetup)(_self_), key_file, _cgo_group_name_, _error_)
 	return
 }
 
@@ -9512,13 +10226,19 @@ func (_self_ *PageSetup) SetTopMargin(margin float64, unit C.GtkUnit) () {
 	return
 }
 
-func (_self_ *PageSetup) ToFile(file_name *C.char) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_page_setup_to_file((*C.GtkPageSetup)(_self_), file_name, _error_)
+func (_self_ *PageSetup) ToFile(file_name string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.char)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	_return_ = C._gtk_page_setup_to_file((*C.GtkPageSetup)(_self_), _cgo_file_name_, _error_)
 	return
 }
 
-func (_self_ *PageSetup) ToKeyFile(key_file *C.GKeyFile, group_name *C.gchar) () {
-	C._gtk_page_setup_to_key_file((*C.GtkPageSetup)(_self_), key_file, group_name)
+func (_self_ *PageSetup) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	C._gtk_page_setup_to_key_file((*C.GtkPageSetup)(_self_), key_file, _cgo_group_name_)
 	return
 }
 
@@ -9577,40 +10297,60 @@ func (_self_ *Paned) SetPosition(position int) () {
 	return
 }
 
-func PaperSizeNew(name *C.gchar) (_return_ *PaperSize) {
+func PaperSizeNew(name string) (_return_ *PaperSize) {
 	var _cgo_return_ *C.GtkPaperSize
-	_cgo_return_ = C._gtk_paper_size_new(name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cgo_return_ = C._gtk_paper_size_new(_cgo_name_)
 	_return_ = (*PaperSize)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func PaperSizeNewCustom(name *C.gchar, display_name *C.gchar, width float64, height float64, unit C.GtkUnit) (_return_ *PaperSize) {
-	var _cgo_return_ *C.GtkPaperSize
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	_cgo_return_ = C._gtk_paper_size_new_custom(name, display_name, _cgo_width_, _cgo_height_, unit)
-	_return_ = (*PaperSize)(unsafe.Pointer(_cgo_return_))
-	return
-}
-
-func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name *C.gchar) (_return_ *PaperSize, _error_ unsafe.Pointer) {
-	var _cgo_return_ *C.GtkPaperSize
-	_cgo_return_ = C._gtk_paper_size_new_from_key_file(key_file, group_name, _error_)
-	_return_ = (*PaperSize)(unsafe.Pointer(_cgo_return_))
-	return
-}
-
-func PaperSizeNewFromPpd(ppd_name *C.gchar, ppd_display_name *C.gchar, width float64, height float64) (_return_ *PaperSize) {
+func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit C.GtkUnit) (_return_ *PaperSize) {
 	var _cgo_return_ *C.GtkPaperSize
 	_cgo_width_ := (C.gdouble)(width)
 	_cgo_height_ := (C.gdouble)(height)
-	_cgo_return_ = C._gtk_paper_size_new_from_ppd(ppd_name, ppd_display_name, _cgo_width_, _cgo_height_)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_display_name_ := C.CString(display_name)
+	_cgo_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_display_name_))
+	defer C.free(unsafe.Pointer(_cstring_display_name_))
+	_cgo_return_ = C._gtk_paper_size_new_custom(_cgo_name_, _cgo_display_name_, _cgo_width_, _cgo_height_, unit)
 	_return_ = (*PaperSize)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func PaperSizeGetDefault() (_return_ *C.gchar) {
+func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_return_ *PaperSize, _error_ unsafe.Pointer) {
+	var _cgo_return_ *C.GtkPaperSize
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_cgo_return_ = C._gtk_paper_size_new_from_key_file(key_file, _cgo_group_name_, _error_)
+	_return_ = (*PaperSize)(unsafe.Pointer(_cgo_return_))
+	return
+}
+
+func PaperSizeNewFromPpd(ppd_name string, ppd_display_name string, width float64, height float64) (_return_ *PaperSize) {
+	var _cgo_return_ *C.GtkPaperSize
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	_cstring_ppd_name_ := C.CString(ppd_name)
+	_cgo_ppd_name_ := (*C.gchar)(unsafe.Pointer(_cstring_ppd_name_))
+	defer C.free(unsafe.Pointer(_cstring_ppd_name_))
+	_cstring_ppd_display_name_ := C.CString(ppd_display_name)
+	_cgo_ppd_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_ppd_display_name_))
+	defer C.free(unsafe.Pointer(_cstring_ppd_display_name_))
+	_cgo_return_ = C._gtk_paper_size_new_from_ppd(_cgo_ppd_name_, _cgo_ppd_display_name_, _cgo_width_, _cgo_height_)
+	_return_ = (*PaperSize)(unsafe.Pointer(_cgo_return_))
+	return
+}
+
+func PaperSizeGetDefault() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_paper_size_get_default()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9657,8 +10397,10 @@ func (_self_ *PaperSize) GetDefaultTopMargin(unit C.GtkUnit) (_go__return__ floa
 	return
 }
 
-func (_self_ *PaperSize) GetDisplayName() (_return_ *C.gchar) {
+func (_self_ *PaperSize) GetDisplayName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_paper_size_get_display_name((*C.GtkPaperSize)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9669,13 +10411,17 @@ func (_self_ *PaperSize) GetHeight(unit C.GtkUnit) (_go__return__ float64) {
 	return
 }
 
-func (_self_ *PaperSize) GetName() (_return_ *C.gchar) {
+func (_self_ *PaperSize) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_paper_size_get_name((*C.GtkPaperSize)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *PaperSize) GetPpdName() (_return_ *C.gchar) {
+func (_self_ *PaperSize) GetPpdName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_paper_size_get_ppd_name((*C.GtkPaperSize)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9703,8 +10449,11 @@ func (_self_ *PaperSize) SetSize(width float64, height float64, unit C.GtkUnit) 
 	return
 }
 
-func (_self_ *PaperSize) ToKeyFile(key_file *C.GKeyFile, group_name *C.gchar) () {
-	C._gtk_paper_size_to_key_file((*C.GtkPaperSize)(_self_), key_file, group_name)
+func (_self_ *PaperSize) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	C._gtk_paper_size_to_key_file((*C.GtkPaperSize)(_self_), key_file, _cgo_group_name_)
 	return
 }
 
@@ -9872,8 +10621,10 @@ func (_self_ *PrintOperation) GetStatus() (_return_ C.GtkPrintStatus) {
 	return
 }
 
-func (_self_ *PrintOperation) GetStatusString() (_return_ *C.gchar) {
+func (_self_ *PrintOperation) GetStatusString() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_operation_get_status_string((*C.GtkPrintOperation)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -9903,8 +10654,11 @@ func (_self_ *PrintOperation) SetCurrentPage(current_page int) () {
 	return
 }
 
-func (_self_ *PrintOperation) SetCustomTabLabel(label *C.gchar) () {
-	C._gtk_print_operation_set_custom_tab_label((*C.GtkPrintOperation)(_self_), label)
+func (_self_ *PrintOperation) SetCustomTabLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_print_operation_set_custom_tab_label((*C.GtkPrintOperation)(_self_), _cgo_label_)
 	return
 }
 
@@ -9923,8 +10677,11 @@ func (_self_ *PrintOperation) SetEmbedPageSetup(embed C.gboolean) () {
 	return
 }
 
-func (_self_ *PrintOperation) SetExportFilename(filename *C.gchar) () {
-	C._gtk_print_operation_set_export_filename((*C.GtkPrintOperation)(_self_), filename)
+func (_self_ *PrintOperation) SetExportFilename(filename string) () {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	C._gtk_print_operation_set_export_filename((*C.GtkPrintOperation)(_self_), _cgo_filename_)
 	return
 }
 
@@ -9933,8 +10690,11 @@ func (_self_ *PrintOperation) SetHasSelection(has_selection C.gboolean) () {
 	return
 }
 
-func (_self_ *PrintOperation) SetJobName(job_name *C.gchar) () {
-	C._gtk_print_operation_set_job_name((*C.GtkPrintOperation)(_self_), job_name)
+func (_self_ *PrintOperation) SetJobName(job_name string) () {
+	_cstring_job_name_ := C.CString(job_name)
+	_cgo_job_name_ := (*C.gchar)(unsafe.Pointer(_cstring_job_name_))
+	defer C.free(unsafe.Pointer(_cstring_job_name_))
+	C._gtk_print_operation_set_job_name((*C.GtkPrintOperation)(_self_), _cgo_job_name_)
 	return
 }
 
@@ -9981,16 +10741,22 @@ func PrintSettingsNew() (_return_ *PrintSettings) {
 	return
 }
 
-func PrintSettingsNewFromFile(file_name *C.gchar) (_return_ *PrintSettings, _error_ unsafe.Pointer) {
+func PrintSettingsNewFromFile(file_name string) (_return_ *PrintSettings, _error_ unsafe.Pointer) {
 	var _cgo_return_ *C.GtkPrintSettings
-	_cgo_return_ = C._gtk_print_settings_new_from_file(file_name, _error_)
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	_cgo_return_ = C._gtk_print_settings_new_from_file(_cgo_file_name_, _error_)
 	_return_ = (*PrintSettings)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func PrintSettingsNewFromKeyFile(key_file *C.GKeyFile, group_name *C.gchar) (_return_ *PrintSettings, _error_ unsafe.Pointer) {
+func PrintSettingsNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_return_ *PrintSettings, _error_ unsafe.Pointer) {
 	var _cgo_return_ *C.GtkPrintSettings
-	_cgo_return_ = C._gtk_print_settings_new_from_key_file(key_file, group_name, _error_)
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_cgo_return_ = C._gtk_print_settings_new_from_key_file(key_file, _cgo_group_name_, _error_)
 	_return_ = (*PrintSettings)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10005,13 +10771,21 @@ func (_self_ *PrintSettings) Foreach(func_ C.GtkPrintSettingsFunc, user_data C.g
 	return
 }
 
-func (_self_ *PrintSettings) Get(key *C.gchar) (_return_ *C.gchar) {
-	_return_ = C._gtk_print_settings_get((*C.GtkPrintSettings)(_self_), key)
+func (_self_ *PrintSettings) Get(key string) (_go__return__ string) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	var _return_ *C.gchar
+	_return_ = C._gtk_print_settings_get((*C.GtkPrintSettings)(_self_), _cgo_key_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *PrintSettings) GetBool(key *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_print_settings_get_bool((*C.GtkPrintSettings)(_self_), key)
+func (_self_ *PrintSettings) GetBool(key string) (_return_ C.gboolean) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_get_bool((*C.GtkPrintSettings)(_self_), _cgo_key_)
 	return
 }
 
@@ -10020,27 +10794,37 @@ func (_self_ *PrintSettings) GetCollate() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *PrintSettings) GetDefaultSource() (_return_ *C.gchar) {
+func (_self_ *PrintSettings) GetDefaultSource() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_settings_get_default_source((*C.GtkPrintSettings)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *PrintSettings) GetDither() (_return_ *C.gchar) {
+func (_self_ *PrintSettings) GetDither() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_settings_get_dither((*C.GtkPrintSettings)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *PrintSettings) GetDouble(key *C.gchar) (_go__return__ float64) {
+func (_self_ *PrintSettings) GetDouble(key string) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C._gtk_print_settings_get_double((*C.GtkPrintSettings)(_self_), key)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_get_double((*C.GtkPrintSettings)(_self_), _cgo_key_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PrintSettings) GetDoubleWithDefault(key *C.gchar, def float64) (_go__return__ float64) {
+func (_self_ *PrintSettings) GetDoubleWithDefault(key string, def float64) (_go__return__ float64) {
 	_cgo_def_ := (C.gdouble)(def)
 	var _return_ C.gdouble
-	_return_ = C._gtk_print_settings_get_double_with_default((*C.GtkPrintSettings)(_self_), key, _cgo_def_)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_get_double_with_default((*C.GtkPrintSettings)(_self_), _cgo_key_, _cgo_def_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -10050,35 +10834,48 @@ func (_self_ *PrintSettings) GetDuplex() (_return_ C.GtkPrintDuplex) {
 	return
 }
 
-func (_self_ *PrintSettings) GetFinishings() (_return_ *C.gchar) {
+func (_self_ *PrintSettings) GetFinishings() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_settings_get_finishings((*C.GtkPrintSettings)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *PrintSettings) GetInt(key *C.gchar) (_go__return__ int) {
+func (_self_ *PrintSettings) GetInt(key string) (_go__return__ int) {
 	var _return_ C.gint
-	_return_ = C._gtk_print_settings_get_int((*C.GtkPrintSettings)(_self_), key)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_get_int((*C.GtkPrintSettings)(_self_), _cgo_key_)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *PrintSettings) GetIntWithDefault(key *C.gchar, def int) (_go__return__ int) {
+func (_self_ *PrintSettings) GetIntWithDefault(key string, def int) (_go__return__ int) {
 	_cgo_def_ := (C.gint)(def)
 	var _return_ C.gint
-	_return_ = C._gtk_print_settings_get_int_with_default((*C.GtkPrintSettings)(_self_), key, _cgo_def_)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_get_int_with_default((*C.GtkPrintSettings)(_self_), _cgo_key_, _cgo_def_)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *PrintSettings) GetLength(key *C.gchar, unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PrintSettings) GetLength(key string, unit C.GtkUnit) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C._gtk_print_settings_get_length((*C.GtkPrintSettings)(_self_), key, unit)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_get_length((*C.GtkPrintSettings)(_self_), _cgo_key_, unit)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PrintSettings) GetMediaType() (_return_ *C.gchar) {
+func (_self_ *PrintSettings) GetMediaType() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_settings_get_media_type((*C.GtkPrintSettings)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -10106,8 +10903,10 @@ func (_self_ *PrintSettings) GetOrientation() (_return_ C.GtkPageOrientation) {
 	return
 }
 
-func (_self_ *PrintSettings) GetOutputBin() (_return_ *C.gchar) {
+func (_self_ *PrintSettings) GetOutputBin() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_settings_get_output_bin((*C.GtkPrintSettings)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -10147,8 +10946,10 @@ func (_self_ *PrintSettings) GetPrintPages() (_return_ C.GtkPrintPages) {
 	return
 }
 
-func (_self_ *PrintSettings) GetPrinter() (_return_ *C.gchar) {
+func (_self_ *PrintSettings) GetPrinter() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_print_settings_get_printer((*C.GtkPrintSettings)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -10202,28 +11003,46 @@ func (_self_ *PrintSettings) GetUseColor() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *PrintSettings) HasKey(key *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_print_settings_has_key((*C.GtkPrintSettings)(_self_), key)
+func (_self_ *PrintSettings) HasKey(key string) (_return_ C.gboolean) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._gtk_print_settings_has_key((*C.GtkPrintSettings)(_self_), _cgo_key_)
 	return
 }
 
-func (_self_ *PrintSettings) LoadFile(file_name *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_print_settings_load_file((*C.GtkPrintSettings)(_self_), file_name, _error_)
+func (_self_ *PrintSettings) LoadFile(file_name string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	_return_ = C._gtk_print_settings_load_file((*C.GtkPrintSettings)(_self_), _cgo_file_name_, _error_)
 	return
 }
 
-func (_self_ *PrintSettings) LoadKeyFile(key_file *C.GKeyFile, group_name *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_print_settings_load_key_file((*C.GtkPrintSettings)(_self_), key_file, group_name, _error_)
+func (_self_ *PrintSettings) LoadKeyFile(key_file *C.GKeyFile, group_name string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_return_ = C._gtk_print_settings_load_key_file((*C.GtkPrintSettings)(_self_), key_file, _cgo_group_name_, _error_)
 	return
 }
 
-func (_self_ *PrintSettings) Set(key *C.gchar, value *C.gchar) () {
-	C._gtk_print_settings_set((*C.GtkPrintSettings)(_self_), key, value)
+func (_self_ *PrintSettings) Set(key string, value string) () {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_cstring_value_ := C.CString(value)
+	_cgo_value_ := (*C.gchar)(unsafe.Pointer(_cstring_value_))
+	defer C.free(unsafe.Pointer(_cstring_value_))
+	C._gtk_print_settings_set((*C.GtkPrintSettings)(_self_), _cgo_key_, _cgo_value_)
 	return
 }
 
-func (_self_ *PrintSettings) SetBool(key *C.gchar, value C.gboolean) () {
-	C._gtk_print_settings_set_bool((*C.GtkPrintSettings)(_self_), key, value)
+func (_self_ *PrintSettings) SetBool(key string, value C.gboolean) () {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._gtk_print_settings_set_bool((*C.GtkPrintSettings)(_self_), _cgo_key_, value)
 	return
 }
 
@@ -10232,19 +11051,28 @@ func (_self_ *PrintSettings) SetCollate(collate C.gboolean) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetDefaultSource(default_source *C.gchar) () {
-	C._gtk_print_settings_set_default_source((*C.GtkPrintSettings)(_self_), default_source)
+func (_self_ *PrintSettings) SetDefaultSource(default_source string) () {
+	_cstring_default_source_ := C.CString(default_source)
+	_cgo_default_source_ := (*C.gchar)(unsafe.Pointer(_cstring_default_source_))
+	defer C.free(unsafe.Pointer(_cstring_default_source_))
+	C._gtk_print_settings_set_default_source((*C.GtkPrintSettings)(_self_), _cgo_default_source_)
 	return
 }
 
-func (_self_ *PrintSettings) SetDither(dither *C.gchar) () {
-	C._gtk_print_settings_set_dither((*C.GtkPrintSettings)(_self_), dither)
+func (_self_ *PrintSettings) SetDither(dither string) () {
+	_cstring_dither_ := C.CString(dither)
+	_cgo_dither_ := (*C.gchar)(unsafe.Pointer(_cstring_dither_))
+	defer C.free(unsafe.Pointer(_cstring_dither_))
+	C._gtk_print_settings_set_dither((*C.GtkPrintSettings)(_self_), _cgo_dither_)
 	return
 }
 
-func (_self_ *PrintSettings) SetDouble(key *C.gchar, value float64) () {
+func (_self_ *PrintSettings) SetDouble(key string, value float64) () {
 	_cgo_value_ := (C.gdouble)(value)
-	C._gtk_print_settings_set_double((*C.GtkPrintSettings)(_self_), key, _cgo_value_)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._gtk_print_settings_set_double((*C.GtkPrintSettings)(_self_), _cgo_key_, _cgo_value_)
 	return
 }
 
@@ -10253,25 +11081,37 @@ func (_self_ *PrintSettings) SetDuplex(duplex C.GtkPrintDuplex) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetFinishings(finishings *C.gchar) () {
-	C._gtk_print_settings_set_finishings((*C.GtkPrintSettings)(_self_), finishings)
+func (_self_ *PrintSettings) SetFinishings(finishings string) () {
+	_cstring_finishings_ := C.CString(finishings)
+	_cgo_finishings_ := (*C.gchar)(unsafe.Pointer(_cstring_finishings_))
+	defer C.free(unsafe.Pointer(_cstring_finishings_))
+	C._gtk_print_settings_set_finishings((*C.GtkPrintSettings)(_self_), _cgo_finishings_)
 	return
 }
 
-func (_self_ *PrintSettings) SetInt(key *C.gchar, value int) () {
+func (_self_ *PrintSettings) SetInt(key string, value int) () {
 	_cgo_value_ := (C.gint)(value)
-	C._gtk_print_settings_set_int((*C.GtkPrintSettings)(_self_), key, _cgo_value_)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._gtk_print_settings_set_int((*C.GtkPrintSettings)(_self_), _cgo_key_, _cgo_value_)
 	return
 }
 
-func (_self_ *PrintSettings) SetLength(key *C.gchar, value float64, unit C.GtkUnit) () {
+func (_self_ *PrintSettings) SetLength(key string, value float64, unit C.GtkUnit) () {
 	_cgo_value_ := (C.gdouble)(value)
-	C._gtk_print_settings_set_length((*C.GtkPrintSettings)(_self_), key, _cgo_value_, unit)
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._gtk_print_settings_set_length((*C.GtkPrintSettings)(_self_), _cgo_key_, _cgo_value_, unit)
 	return
 }
 
-func (_self_ *PrintSettings) SetMediaType(media_type *C.gchar) () {
-	C._gtk_print_settings_set_media_type((*C.GtkPrintSettings)(_self_), media_type)
+func (_self_ *PrintSettings) SetMediaType(media_type string) () {
+	_cstring_media_type_ := C.CString(media_type)
+	_cgo_media_type_ := (*C.gchar)(unsafe.Pointer(_cstring_media_type_))
+	defer C.free(unsafe.Pointer(_cstring_media_type_))
+	C._gtk_print_settings_set_media_type((*C.GtkPrintSettings)(_self_), _cgo_media_type_)
 	return
 }
 
@@ -10297,8 +11137,11 @@ func (_self_ *PrintSettings) SetOrientation(orientation C.GtkPageOrientation) ()
 	return
 }
 
-func (_self_ *PrintSettings) SetOutputBin(output_bin *C.gchar) () {
-	C._gtk_print_settings_set_output_bin((*C.GtkPrintSettings)(_self_), output_bin)
+func (_self_ *PrintSettings) SetOutputBin(output_bin string) () {
+	_cstring_output_bin_ := C.CString(output_bin)
+	_cgo_output_bin_ := (*C.gchar)(unsafe.Pointer(_cstring_output_bin_))
+	defer C.free(unsafe.Pointer(_cstring_output_bin_))
+	C._gtk_print_settings_set_output_bin((*C.GtkPrintSettings)(_self_), _cgo_output_bin_)
 	return
 }
 
@@ -10329,8 +11172,11 @@ func (_self_ *PrintSettings) SetPrintPages(pages C.GtkPrintPages) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetPrinter(printer *C.gchar) () {
-	C._gtk_print_settings_set_printer((*C.GtkPrintSettings)(_self_), printer)
+func (_self_ *PrintSettings) SetPrinter(printer string) () {
+	_cstring_printer_ := C.CString(printer)
+	_cgo_printer_ := (*C.gchar)(unsafe.Pointer(_cstring_printer_))
+	defer C.free(unsafe.Pointer(_cstring_printer_))
+	C._gtk_print_settings_set_printer((*C.GtkPrintSettings)(_self_), _cgo_printer_)
 	return
 }
 
@@ -10374,18 +11220,27 @@ func (_self_ *PrintSettings) SetUseColor(use_color C.gboolean) () {
 	return
 }
 
-func (_self_ *PrintSettings) ToFile(file_name *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_print_settings_to_file((*C.GtkPrintSettings)(_self_), file_name, _error_)
+func (_self_ *PrintSettings) ToFile(file_name string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_file_name_ := C.CString(file_name)
+	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
+	defer C.free(unsafe.Pointer(_cstring_file_name_))
+	_return_ = C._gtk_print_settings_to_file((*C.GtkPrintSettings)(_self_), _cgo_file_name_, _error_)
 	return
 }
 
-func (_self_ *PrintSettings) ToKeyFile(key_file *C.GKeyFile, group_name *C.gchar) () {
-	C._gtk_print_settings_to_key_file((*C.GtkPrintSettings)(_self_), key_file, group_name)
+func (_self_ *PrintSettings) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	C._gtk_print_settings_to_key_file((*C.GtkPrintSettings)(_self_), key_file, _cgo_group_name_)
 	return
 }
 
-func (_self_ *PrintSettings) Unset(key *C.gchar) () {
-	C._gtk_print_settings_unset((*C.GtkPrintSettings)(_self_), key)
+func (_self_ *PrintSettings) Unset(key string) () {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._gtk_print_settings_unset((*C.GtkPrintSettings)(_self_), _cgo_key_)
 	return
 }
 
@@ -10425,8 +11280,10 @@ func (_self_ *ProgressBar) GetShowText() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *ProgressBar) GetText() (_return_ *C.gchar) {
+func (_self_ *ProgressBar) GetText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_progress_bar_get_text((*C.GtkProgressBar)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -10462,15 +11319,30 @@ func (_self_ *ProgressBar) SetShowText(show_text C.gboolean) () {
 	return
 }
 
-func (_self_ *ProgressBar) SetText(text *C.gchar) () {
-	C._gtk_progress_bar_set_text((*C.GtkProgressBar)(_self_), text)
+func (_self_ *ProgressBar) SetText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_progress_bar_set_text((*C.GtkProgressBar)(_self_), _cgo_text_)
 	return
 }
 
-func RadioActionNew(name *C.gchar, label *C.gchar, tooltip *C.gchar, stock_id *C.gchar, value int) (_return_ *RadioAction) {
+func RadioActionNew(name string, label string, tooltip string, stock_id string, value int) (_return_ *RadioAction) {
 	var _cgo_return_ *C.GtkRadioAction
 	_cgo_value_ := (C.gint)(value)
-	_cgo_return_ = C._gtk_radio_action_new(name, label, tooltip, stock_id, _cgo_value_)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_radio_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_, _cgo_value_)
 	_return_ = (*RadioAction)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10517,30 +11389,42 @@ func RadioButtonNewFromWidget(radio_group_member *C.GtkRadioButton) (_return_ *R
 	return
 }
 
-func RadioButtonNewWithLabel(group *C.GSList, label *C.gchar) (_return_ *RadioButton) {
+func RadioButtonNewWithLabel(group *C.GSList, label string) (_return_ *RadioButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_button_new_with_label(group, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_button_new_with_label(group, _cgo_label_)
 	_return_ = (*RadioButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RadioButtonNewWithLabelFromWidget(radio_group_member *C.GtkRadioButton, label *C.gchar) (_return_ *RadioButton) {
+func RadioButtonNewWithLabelFromWidget(radio_group_member *C.GtkRadioButton, label string) (_return_ *RadioButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_button_new_with_label_from_widget(radio_group_member, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_button_new_with_label_from_widget(radio_group_member, _cgo_label_)
 	_return_ = (*RadioButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RadioButtonNewWithMnemonic(group *C.GSList, label *C.gchar) (_return_ *RadioButton) {
+func RadioButtonNewWithMnemonic(group *C.GSList, label string) (_return_ *RadioButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_button_new_with_mnemonic(group, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_button_new_with_mnemonic(group, _cgo_label_)
 	_return_ = (*RadioButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RadioButtonNewWithMnemonicFromWidget(radio_group_member *C.GtkRadioButton, label *C.gchar) (_return_ *RadioButton) {
+func RadioButtonNewWithMnemonicFromWidget(radio_group_member *C.GtkRadioButton, label string) (_return_ *RadioButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_button_new_with_mnemonic_from_widget(radio_group_member, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_button_new_with_mnemonic_from_widget(radio_group_member, _cgo_label_)
 	_return_ = (*RadioButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10574,30 +11458,42 @@ func RadioMenuItemNewFromWidget(group *C.GtkRadioMenuItem) (_return_ *RadioMenuI
 	return
 }
 
-func RadioMenuItemNewWithLabel(group *C.GSList, label *C.gchar) (_return_ *RadioMenuItem) {
+func RadioMenuItemNewWithLabel(group *C.GSList, label string) (_return_ *RadioMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_menu_item_new_with_label(group, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_menu_item_new_with_label(group, _cgo_label_)
 	_return_ = (*RadioMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RadioMenuItemNewWithLabelFromWidget(group *C.GtkRadioMenuItem, label *C.gchar) (_return_ *RadioMenuItem) {
+func RadioMenuItemNewWithLabelFromWidget(group *C.GtkRadioMenuItem, label string) (_return_ *RadioMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_menu_item_new_with_label_from_widget(group, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_menu_item_new_with_label_from_widget(group, _cgo_label_)
 	_return_ = (*RadioMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RadioMenuItemNewWithMnemonic(group *C.GSList, label *C.gchar) (_return_ *RadioMenuItem) {
+func RadioMenuItemNewWithMnemonic(group *C.GSList, label string) (_return_ *RadioMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_menu_item_new_with_mnemonic(group, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_menu_item_new_with_mnemonic(group, _cgo_label_)
 	_return_ = (*RadioMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RadioMenuItemNewWithMnemonicFromWidget(group *C.GtkRadioMenuItem, label *C.gchar) (_return_ *RadioMenuItem) {
+func RadioMenuItemNewWithMnemonicFromWidget(group *C.GtkRadioMenuItem, label string) (_return_ *RadioMenuItem) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_radio_menu_item_new_with_mnemonic_from_widget(group, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_radio_menu_item_new_with_mnemonic_from_widget(group, _cgo_label_)
 	_return_ = (*RadioMenuItem)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10619,9 +11515,12 @@ func RadioToolButtonNew(group *C.GSList) (_return_ *RadioToolButton) {
 	return
 }
 
-func RadioToolButtonNewFromStock(group *C.GSList, stock_id *C.gchar) (_return_ *RadioToolButton) {
+func RadioToolButtonNewFromStock(group *C.GSList, stock_id string) (_return_ *RadioToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_radio_tool_button_new_from_stock(group, stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_radio_tool_button_new_from_stock(group, _cgo_stock_id_)
 	_return_ = (*RadioToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10633,9 +11532,12 @@ func RadioToolButtonNewFromWidget(group *C.GtkRadioToolButton) (_return_ *RadioT
 	return
 }
 
-func RadioToolButtonNewWithStockFromWidget(group *C.GtkRadioToolButton, stock_id *C.gchar) (_return_ *RadioToolButton) {
+func RadioToolButtonNewWithStockFromWidget(group *C.GtkRadioToolButton, stock_id string) (_return_ *RadioToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_radio_tool_button_new_with_stock_from_widget(group, stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_radio_tool_button_new_with_stock_from_widget(group, _cgo_stock_id_)
 	_return_ = (*RadioToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10810,16 +11712,40 @@ func (_self_ *Range) SetValue(value float64) () {
 	return
 }
 
-func RecentActionNew(name *C.gchar, label *C.gchar, tooltip *C.gchar, stock_id *C.gchar) (_return_ *RecentAction) {
+func RecentActionNew(name string, label string, tooltip string, stock_id string) (_return_ *RecentAction) {
 	var _cgo_return_ *C.GtkAction
-	_cgo_return_ = C._gtk_recent_action_new(name, label, tooltip, stock_id)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_recent_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
 	_return_ = (*RecentAction)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func RecentActionNewForManager(name *C.gchar, label *C.gchar, tooltip *C.gchar, stock_id *C.gchar, manager *C.GtkRecentManager) (_return_ *RecentAction) {
+func RecentActionNewForManager(name string, label string, tooltip string, stock_id string, manager *C.GtkRecentManager) (_return_ *RecentAction) {
 	var _cgo_return_ *C.GtkAction
-	_cgo_return_ = C._gtk_recent_action_new_for_manager(name, label, tooltip, stock_id, manager)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_recent_action_new_for_manager(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_, manager)
 	_return_ = (*RecentAction)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -10885,8 +11811,11 @@ func (_self_ *RecentFilter) AddAge(days int) () {
 	return
 }
 
-func (_self_ *RecentFilter) AddApplication(application *C.gchar) () {
-	C._gtk_recent_filter_add_application((*C.GtkRecentFilter)(_self_), application)
+func (_self_ *RecentFilter) AddApplication(application string) () {
+	_cstring_application_ := C.CString(application)
+	_cgo_application_ := (*C.gchar)(unsafe.Pointer(_cstring_application_))
+	defer C.free(unsafe.Pointer(_cstring_application_))
+	C._gtk_recent_filter_add_application((*C.GtkRecentFilter)(_self_), _cgo_application_)
 	return
 }
 
@@ -10895,18 +11824,27 @@ func (_self_ *RecentFilter) AddCustom(needed C.GtkRecentFilterFlags, func_ C.Gtk
 	return
 }
 
-func (_self_ *RecentFilter) AddGroup(group *C.gchar) () {
-	C._gtk_recent_filter_add_group((*C.GtkRecentFilter)(_self_), group)
+func (_self_ *RecentFilter) AddGroup(group string) () {
+	_cstring_group_ := C.CString(group)
+	_cgo_group_ := (*C.gchar)(unsafe.Pointer(_cstring_group_))
+	defer C.free(unsafe.Pointer(_cstring_group_))
+	C._gtk_recent_filter_add_group((*C.GtkRecentFilter)(_self_), _cgo_group_)
 	return
 }
 
-func (_self_ *RecentFilter) AddMimeType(mime_type *C.gchar) () {
-	C._gtk_recent_filter_add_mime_type((*C.GtkRecentFilter)(_self_), mime_type)
+func (_self_ *RecentFilter) AddMimeType(mime_type string) () {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	C._gtk_recent_filter_add_mime_type((*C.GtkRecentFilter)(_self_), _cgo_mime_type_)
 	return
 }
 
-func (_self_ *RecentFilter) AddPattern(pattern *C.gchar) () {
-	C._gtk_recent_filter_add_pattern((*C.GtkRecentFilter)(_self_), pattern)
+func (_self_ *RecentFilter) AddPattern(pattern string) () {
+	_cstring_pattern_ := C.CString(pattern)
+	_cgo_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_pattern_))
+	C._gtk_recent_filter_add_pattern((*C.GtkRecentFilter)(_self_), _cgo_pattern_)
 	return
 }
 
@@ -10920,8 +11858,10 @@ func (_self_ *RecentFilter) Filter(filter_info *C.GtkRecentFilterInfo) (_return_
 	return
 }
 
-func (_self_ *RecentFilter) GetName() (_return_ *C.gchar) {
+func (_self_ *RecentFilter) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_recent_filter_get_name((*C.GtkRecentFilter)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -10930,13 +11870,19 @@ func (_self_ *RecentFilter) GetNeeded() (_return_ C.GtkRecentFilterFlags) {
 	return
 }
 
-func (_self_ *RecentFilter) SetName(name *C.gchar) () {
-	C._gtk_recent_filter_set_name((*C.GtkRecentFilter)(_self_), name)
+func (_self_ *RecentFilter) SetName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_recent_filter_set_name((*C.GtkRecentFilter)(_self_), _cgo_name_)
 	return
 }
 
-func (_self_ *RecentInfo) CreateAppInfo(app_name *C.gchar) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_recent_info_create_app_info((*C.GtkRecentInfo)(_self_), app_name, _error_)
+func (_self_ *RecentInfo) CreateAppInfo(app_name string) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
+	_cstring_app_name_ := C.CString(app_name)
+	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
+	defer C.free(unsafe.Pointer(_cstring_app_name_))
+	_return_ = C._gtk_recent_info_create_app_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, _error_)
 	return
 }
 
@@ -10957,9 +11903,12 @@ func (_self_ *RecentInfo) GetAge() (_go__return__ int) {
 	return
 }
 
-func (_self_ *RecentInfo) GetApplicationInfo(app_name *C.gchar) (_return_ C.gboolean, app_exec unsafe.Pointer, _go_count_ uint, time_ C.time_t) {
+func (_self_ *RecentInfo) GetApplicationInfo(app_name string) (_return_ C.gboolean, app_exec unsafe.Pointer, _go_count_ uint, time_ C.time_t) {
 	var count C.guint
-	_return_ = C._gtk_recent_info_get_application_info((*C.GtkRecentInfo)(_self_), app_name, app_exec, &count, &time_)
+	_cstring_app_name_ := C.CString(app_name)
+	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
+	defer C.free(unsafe.Pointer(_cstring_app_name_))
+	_return_ = C._gtk_recent_info_get_application_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, app_exec, &count, &time_)
 	_go_count_ = (uint)(count)
 	return
 }
@@ -10971,13 +11920,17 @@ func (_self_ *RecentInfo) GetApplications() (_return_ unsafe.Pointer, _go_length
 	return
 }
 
-func (_self_ *RecentInfo) GetDescription() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) GetDescription() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_recent_info_get_description((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *RecentInfo) GetDisplayName() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) GetDisplayName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_recent_info_get_display_name((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -10999,8 +11952,10 @@ func (_self_ *RecentInfo) GetIcon(size int) (_return_ *C.GdkPixbuf) {
 	return
 }
 
-func (_self_ *RecentInfo) GetMimeType() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) GetMimeType() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_recent_info_get_mime_type((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11014,18 +11969,24 @@ func (_self_ *RecentInfo) GetPrivateHint() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *RecentInfo) GetShortName() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) GetShortName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_recent_info_get_short_name((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *RecentInfo) GetUri() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) GetUri() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_recent_info_get_uri((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *RecentInfo) GetUriDisplay() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) GetUriDisplay() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_recent_info_get_uri_display((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11034,13 +11995,19 @@ func (_self_ *RecentInfo) GetVisited() (_return_ C.time_t) {
 	return
 }
 
-func (_self_ *RecentInfo) HasApplication(app_name *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_recent_info_has_application((*C.GtkRecentInfo)(_self_), app_name)
+func (_self_ *RecentInfo) HasApplication(app_name string) (_return_ C.gboolean) {
+	_cstring_app_name_ := C.CString(app_name)
+	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
+	defer C.free(unsafe.Pointer(_cstring_app_name_))
+	_return_ = C._gtk_recent_info_has_application((*C.GtkRecentInfo)(_self_), _cgo_app_name_)
 	return
 }
 
-func (_self_ *RecentInfo) HasGroup(group_name *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_recent_info_has_group((*C.GtkRecentInfo)(_self_), group_name)
+func (_self_ *RecentInfo) HasGroup(group_name string) (_return_ C.gboolean) {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_return_ = C._gtk_recent_info_has_group((*C.GtkRecentInfo)(_self_), _cgo_group_name_)
 	return
 }
 
@@ -11049,8 +12016,10 @@ func (_self_ *RecentInfo) IsLocal() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *RecentInfo) LastApplication() (_return_ *C.gchar) {
+func (_self_ *RecentInfo) LastApplication() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_recent_info_last_application((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11081,13 +12050,19 @@ func RecentManagerGetDefault() (_return_ *C.GtkRecentManager) {
 	return
 }
 
-func (_self_ *RecentManager) AddFull(uri *C.gchar, recent_data *C.GtkRecentData) (_return_ C.gboolean) {
-	_return_ = C._gtk_recent_manager_add_full((*C.GtkRecentManager)(_self_), uri, recent_data)
+func (_self_ *RecentManager) AddFull(uri string, recent_data *C.GtkRecentData) (_return_ C.gboolean) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._gtk_recent_manager_add_full((*C.GtkRecentManager)(_self_), _cgo_uri_, recent_data)
 	return
 }
 
-func (_self_ *RecentManager) AddItem(uri *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_recent_manager_add_item((*C.GtkRecentManager)(_self_), uri)
+func (_self_ *RecentManager) AddItem(uri string) (_return_ C.gboolean) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._gtk_recent_manager_add_item((*C.GtkRecentManager)(_self_), _cgo_uri_)
 	return
 }
 
@@ -11096,18 +12071,30 @@ func (_self_ *RecentManager) GetItems() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *RecentManager) HasItem(uri *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_recent_manager_has_item((*C.GtkRecentManager)(_self_), uri)
+func (_self_ *RecentManager) HasItem(uri string) (_return_ C.gboolean) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._gtk_recent_manager_has_item((*C.GtkRecentManager)(_self_), _cgo_uri_)
 	return
 }
 
-func (_self_ *RecentManager) LookupItem(uri *C.gchar) (_return_ *C.GtkRecentInfo, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_recent_manager_lookup_item((*C.GtkRecentManager)(_self_), uri, _error_)
+func (_self_ *RecentManager) LookupItem(uri string) (_return_ *C.GtkRecentInfo, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._gtk_recent_manager_lookup_item((*C.GtkRecentManager)(_self_), _cgo_uri_, _error_)
 	return
 }
 
-func (_self_ *RecentManager) MoveItem(uri *C.gchar, new_uri *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_recent_manager_move_item((*C.GtkRecentManager)(_self_), uri, new_uri, _error_)
+func (_self_ *RecentManager) MoveItem(uri string, new_uri string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_cstring_new_uri_ := C.CString(new_uri)
+	_cgo_new_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_new_uri_))
+	defer C.free(unsafe.Pointer(_cstring_new_uri_))
+	_return_ = C._gtk_recent_manager_move_item((*C.GtkRecentManager)(_self_), _cgo_uri_, _cgo_new_uri_, _error_)
 	return
 }
 
@@ -11118,8 +12105,11 @@ func (_self_ *RecentManager) PurgeItems() (_go__return__ int, _error_ unsafe.Poi
 	return
 }
 
-func (_self_ *RecentManager) RemoveItem(uri *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_recent_manager_remove_item((*C.GtkRecentManager)(_self_), uri, _error_)
+func (_self_ *RecentManager) RemoveItem(uri string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._gtk_recent_manager_remove_item((*C.GtkRecentManager)(_self_), _cgo_uri_, _error_)
 	return
 }
 
@@ -11157,9 +12147,12 @@ func ScaleNewWithRange(orientation C.GtkOrientation, min float64, max float64, s
 	return
 }
 
-func (_self_ *Scale) AddMark(value float64, position C.GtkPositionType, markup *C.gchar) () {
+func (_self_ *Scale) AddMark(value float64, position C.GtkPositionType, markup string) () {
 	_cgo_value_ := (C.gdouble)(value)
-	C._gtk_scale_add_mark((*C.GtkScale)(_self_), _cgo_value_, position, markup)
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_scale_add_mark((*C.GtkScale)(_self_), _cgo_value_, position, _cgo_markup_)
 	return
 }
 
@@ -11461,8 +12454,10 @@ func (_self_ *SelectionData) GetTarget() (_return_ C.GdkAtom) {
 	return
 }
 
-func (_self_ *SelectionData) GetText() (_return_ *C.guchar) {
+func (_self_ *SelectionData) GetText() (_go__return__ string) {
+	var _return_ *C.guchar
 	_return_ = C._gtk_selection_data_get_text((*C.GtkSelectionData)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11476,9 +12471,12 @@ func (_self_ *SelectionData) SetPixbuf(pixbuf *C.GdkPixbuf) (_return_ C.gboolean
 	return
 }
 
-func (_self_ *SelectionData) SetText(str *C.gchar, len_ int) (_return_ C.gboolean) {
+func (_self_ *SelectionData) SetText(str string, len_ int) (_return_ C.gboolean) {
 	_cgo_len__ := (C.gint)(len_)
-	_return_ = C._gtk_selection_data_set_text((*C.GtkSelectionData)(_self_), str, _cgo_len__)
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	_return_ = C._gtk_selection_data_set_text((*C.GtkSelectionData)(_self_), _cgo_str_, _cgo_len__)
 	return
 }
 
@@ -11553,25 +12551,49 @@ func SettingsInstallPropertyParser(pspec *C.GParamSpec, parser C.GtkRcPropertyPa
 	return
 }
 
-func (_self_ *Settings) SetDoubleProperty(name *C.gchar, v_double float64, origin *C.gchar) () {
+func (_self_ *Settings) SetDoubleProperty(name string, v_double float64, origin string) () {
 	_cgo_v_double_ := (C.gdouble)(v_double)
-	C._gtk_settings_set_double_property((*C.GtkSettings)(_self_), name, _cgo_v_double_, origin)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_origin_ := C.CString(origin)
+	_cgo_origin_ := (*C.gchar)(unsafe.Pointer(_cstring_origin_))
+	defer C.free(unsafe.Pointer(_cstring_origin_))
+	C._gtk_settings_set_double_property((*C.GtkSettings)(_self_), _cgo_name_, _cgo_v_double_, _cgo_origin_)
 	return
 }
 
-func (_self_ *Settings) SetLongProperty(name *C.gchar, v_long int64, origin *C.gchar) () {
+func (_self_ *Settings) SetLongProperty(name string, v_long int64, origin string) () {
 	_cgo_v_long_ := (C.glong)(v_long)
-	C._gtk_settings_set_long_property((*C.GtkSettings)(_self_), name, _cgo_v_long_, origin)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_origin_ := C.CString(origin)
+	_cgo_origin_ := (*C.gchar)(unsafe.Pointer(_cstring_origin_))
+	defer C.free(unsafe.Pointer(_cstring_origin_))
+	C._gtk_settings_set_long_property((*C.GtkSettings)(_self_), _cgo_name_, _cgo_v_long_, _cgo_origin_)
 	return
 }
 
-func (_self_ *Settings) SetPropertyValue(name *C.gchar, svalue *C.GtkSettingsValue) () {
-	C._gtk_settings_set_property_value((*C.GtkSettings)(_self_), name, svalue)
+func (_self_ *Settings) SetPropertyValue(name string, svalue *C.GtkSettingsValue) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_settings_set_property_value((*C.GtkSettings)(_self_), _cgo_name_, svalue)
 	return
 }
 
-func (_self_ *Settings) SetStringProperty(name *C.gchar, v_string *C.gchar, origin *C.gchar) () {
-	C._gtk_settings_set_string_property((*C.GtkSettings)(_self_), name, v_string, origin)
+func (_self_ *Settings) SetStringProperty(name string, v_string string, origin string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_v_string_ := C.CString(v_string)
+	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
+	defer C.free(unsafe.Pointer(_cstring_v_string_))
+	_cstring_origin_ := C.CString(origin)
+	_cgo_origin_ := (*C.gchar)(unsafe.Pointer(_cstring_origin_))
+	defer C.free(unsafe.Pointer(_cstring_origin_))
+	C._gtk_settings_set_string_property((*C.GtkSettings)(_self_), _cgo_name_, _cgo_v_string_, _cgo_origin_)
 	return
 }
 
@@ -11815,9 +12837,12 @@ func StatusIconNew() (_return_ *StatusIcon) {
 	return
 }
 
-func StatusIconNewFromFile(filename *C.gchar) (_return_ *StatusIcon) {
+func StatusIconNewFromFile(filename string) (_return_ *StatusIcon) {
 	var _cgo_return_ *C.GtkStatusIcon
-	_cgo_return_ = C._gtk_status_icon_new_from_file(filename)
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_cgo_return_ = C._gtk_status_icon_new_from_file(_cgo_filename_)
 	_return_ = (*StatusIcon)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -11829,9 +12854,12 @@ func StatusIconNewFromGicon(icon *C.GIcon) (_return_ *StatusIcon) {
 	return
 }
 
-func StatusIconNewFromIconName(icon_name *C.gchar) (_return_ *StatusIcon) {
+func StatusIconNewFromIconName(icon_name string) (_return_ *StatusIcon) {
 	var _cgo_return_ *C.GtkStatusIcon
-	_cgo_return_ = C._gtk_status_icon_new_from_icon_name(icon_name)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	_cgo_return_ = C._gtk_status_icon_new_from_icon_name(_cgo_icon_name_)
 	_return_ = (*StatusIcon)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -11843,9 +12871,12 @@ func StatusIconNewFromPixbuf(pixbuf *C.GdkPixbuf) (_return_ *StatusIcon) {
 	return
 }
 
-func StatusIconNewFromStock(stock_id *C.gchar) (_return_ *StatusIcon) {
+func StatusIconNewFromStock(stock_id string) (_return_ *StatusIcon) {
 	var _cgo_return_ *C.GtkStatusIcon
-	_cgo_return_ = C._gtk_status_icon_new_from_stock(stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_status_icon_new_from_stock(_cgo_stock_id_)
 	_return_ = (*StatusIcon)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -11874,8 +12905,10 @@ func (_self_ *StatusIcon) GetHasTooltip() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *StatusIcon) GetIconName() (_return_ *C.gchar) {
+func (_self_ *StatusIcon) GetIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_status_icon_get_icon_name((*C.GtkStatusIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11896,8 +12929,10 @@ func (_self_ *StatusIcon) GetSize() (_go__return__ int) {
 	return
 }
 
-func (_self_ *StatusIcon) GetStock() (_return_ *C.gchar) {
+func (_self_ *StatusIcon) GetStock() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_status_icon_get_stock((*C.GtkStatusIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11906,18 +12941,24 @@ func (_self_ *StatusIcon) GetStorageType() (_return_ C.GtkImageType) {
 	return
 }
 
-func (_self_ *StatusIcon) GetTitle() (_return_ *C.gchar) {
+func (_self_ *StatusIcon) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_status_icon_get_title((*C.GtkStatusIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *StatusIcon) GetTooltipMarkup() (_return_ *C.gchar) {
+func (_self_ *StatusIcon) GetTooltipMarkup() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_status_icon_get_tooltip_markup((*C.GtkStatusIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *StatusIcon) GetTooltipText() (_return_ *C.gchar) {
+func (_self_ *StatusIcon) GetTooltipText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_status_icon_get_tooltip_text((*C.GtkStatusIcon)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -11938,8 +12979,11 @@ func (_self_ *StatusIcon) IsEmbedded() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *StatusIcon) SetFromFile(filename *C.gchar) () {
-	C._gtk_status_icon_set_from_file((*C.GtkStatusIcon)(_self_), filename)
+func (_self_ *StatusIcon) SetFromFile(filename string) () {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	C._gtk_status_icon_set_from_file((*C.GtkStatusIcon)(_self_), _cgo_filename_)
 	return
 }
 
@@ -11948,8 +12992,11 @@ func (_self_ *StatusIcon) SetFromGicon(icon *C.GIcon) () {
 	return
 }
 
-func (_self_ *StatusIcon) SetFromIconName(icon_name *C.gchar) () {
-	C._gtk_status_icon_set_from_icon_name((*C.GtkStatusIcon)(_self_), icon_name)
+func (_self_ *StatusIcon) SetFromIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_status_icon_set_from_icon_name((*C.GtkStatusIcon)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -11958,8 +13005,11 @@ func (_self_ *StatusIcon) SetFromPixbuf(pixbuf *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *StatusIcon) SetFromStock(stock_id *C.gchar) () {
-	C._gtk_status_icon_set_from_stock((*C.GtkStatusIcon)(_self_), stock_id)
+func (_self_ *StatusIcon) SetFromStock(stock_id string) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_status_icon_set_from_stock((*C.GtkStatusIcon)(_self_), _cgo_stock_id_)
 	return
 }
 
@@ -11968,8 +13018,11 @@ func (_self_ *StatusIcon) SetHasTooltip(has_tooltip C.gboolean) () {
 	return
 }
 
-func (_self_ *StatusIcon) SetName(name *C.gchar) () {
-	C._gtk_status_icon_set_name((*C.GtkStatusIcon)(_self_), name)
+func (_self_ *StatusIcon) SetName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_status_icon_set_name((*C.GtkStatusIcon)(_self_), _cgo_name_)
 	return
 }
 
@@ -11978,18 +13031,27 @@ func (_self_ *StatusIcon) SetScreen(screen *C.GdkScreen) () {
 	return
 }
 
-func (_self_ *StatusIcon) SetTitle(title *C.gchar) () {
-	C._gtk_status_icon_set_title((*C.GtkStatusIcon)(_self_), title)
+func (_self_ *StatusIcon) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_status_icon_set_title((*C.GtkStatusIcon)(_self_), _cgo_title_)
 	return
 }
 
-func (_self_ *StatusIcon) SetTooltipMarkup(markup *C.gchar) () {
-	C._gtk_status_icon_set_tooltip_markup((*C.GtkStatusIcon)(_self_), markup)
+func (_self_ *StatusIcon) SetTooltipMarkup(markup string) () {
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_status_icon_set_tooltip_markup((*C.GtkStatusIcon)(_self_), _cgo_markup_)
 	return
 }
 
-func (_self_ *StatusIcon) SetTooltipText(text *C.gchar) () {
-	C._gtk_status_icon_set_tooltip_text((*C.GtkStatusIcon)(_self_), text)
+func (_self_ *StatusIcon) SetTooltipText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_status_icon_set_tooltip_text((*C.GtkStatusIcon)(_self_), _cgo_text_)
 	return
 }
 
@@ -12005,9 +13067,12 @@ func StatusbarNew() (_return_ *Statusbar) {
 	return
 }
 
-func (_self_ *Statusbar) GetContextId(context_description *C.gchar) (_go__return__ uint) {
+func (_self_ *Statusbar) GetContextId(context_description string) (_go__return__ uint) {
 	var _return_ C.guint
-	_return_ = C._gtk_statusbar_get_context_id((*C.GtkStatusbar)(_self_), context_description)
+	_cstring_context_description_ := C.CString(context_description)
+	_cgo_context_description_ := (*C.gchar)(unsafe.Pointer(_cstring_context_description_))
+	defer C.free(unsafe.Pointer(_cstring_context_description_))
+	_return_ = C._gtk_statusbar_get_context_id((*C.GtkStatusbar)(_self_), _cgo_context_description_)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -12023,10 +13088,13 @@ func (_self_ *Statusbar) Pop(context_id uint) () {
 	return
 }
 
-func (_self_ *Statusbar) Push(context_id uint, text *C.gchar) (_go__return__ uint) {
+func (_self_ *Statusbar) Push(context_id uint, text string) (_go__return__ uint) {
 	_cgo_context_id_ := (C.guint)(context_id)
 	var _return_ C.guint
-	_return_ = C._gtk_statusbar_push((*C.GtkStatusbar)(_self_), _cgo_context_id_, text)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	_return_ = C._gtk_statusbar_push((*C.GtkStatusbar)(_self_), _cgo_context_id_, _cgo_text_)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -12082,8 +13150,11 @@ func StyleContextResetWidgets(screen *C.GdkScreen) () {
 	return
 }
 
-func (_self_ *StyleContext) AddClass(class_name *C.gchar) () {
-	C._gtk_style_context_add_class((*C.GtkStyleContext)(_self_), class_name)
+func (_self_ *StyleContext) AddClass(class_name string) () {
+	_cstring_class_name_ := C.CString(class_name)
+	_cgo_class_name_ := (*C.gchar)(unsafe.Pointer(_cstring_class_name_))
+	defer C.free(unsafe.Pointer(_cstring_class_name_))
+	C._gtk_style_context_add_class((*C.GtkStyleContext)(_self_), _cgo_class_name_)
 	return
 }
 
@@ -12093,8 +13164,11 @@ func (_self_ *StyleContext) AddProvider(provider *C.GtkStyleProvider, priority u
 	return
 }
 
-func (_self_ *StyleContext) AddRegion(region_name *C.gchar, flags C.GtkRegionFlags) () {
-	C._gtk_style_context_add_region((*C.GtkStyleContext)(_self_), region_name, flags)
+func (_self_ *StyleContext) AddRegion(region_name string, flags C.GtkRegionFlags) () {
+	_cstring_region_name_ := C.CString(region_name)
+	_cgo_region_name_ := (*C.gchar)(unsafe.Pointer(_cstring_region_name_))
+	defer C.free(unsafe.Pointer(_cstring_region_name_))
+	C._gtk_style_context_add_region((*C.GtkStyleContext)(_self_), _cgo_region_name_, flags)
 	return
 }
 
@@ -12153,8 +13227,11 @@ func (_self_ *StyleContext) GetPath() (_return_ *C.GtkWidgetPath) {
 	return
 }
 
-func (_self_ *StyleContext) GetProperty(property *C.gchar, state C.GtkStateFlags) (value *C.GValue) {
-	C._gtk_style_context_get_property((*C.GtkStyleContext)(_self_), property, state, value)
+func (_self_ *StyleContext) GetProperty(property string, state C.GtkStateFlags) (value *C.GValue) {
+	_cstring_property_ := C.CString(property)
+	_cgo_property_ := (*C.gchar)(unsafe.Pointer(_cstring_property_))
+	defer C.free(unsafe.Pointer(_cstring_property_))
+	C._gtk_style_context_get_property((*C.GtkStyleContext)(_self_), _cgo_property_, state, value)
 	return
 }
 
@@ -12163,8 +13240,11 @@ func (_self_ *StyleContext) GetScreen() (_return_ *C.GdkScreen) {
 	return
 }
 
-func (_self_ *StyleContext) GetSection(property *C.gchar) (_return_ *C.GtkCssSection) {
-	_return_ = C._gtk_style_context_get_section((*C.GtkStyleContext)(_self_), property)
+func (_self_ *StyleContext) GetSection(property string) (_return_ *C.GtkCssSection) {
+	_cstring_property_ := C.CString(property)
+	_cgo_property_ := (*C.gchar)(unsafe.Pointer(_cstring_property_))
+	defer C.free(unsafe.Pointer(_cstring_property_))
+	_return_ = C._gtk_style_context_get_section((*C.GtkStyleContext)(_self_), _cgo_property_)
 	return
 }
 
@@ -12173,18 +13253,27 @@ func (_self_ *StyleContext) GetState() (_return_ C.GtkStateFlags) {
 	return
 }
 
-func (_self_ *StyleContext) GetStyleProperty(property_name *C.gchar, value *C.GValue) () {
-	C._gtk_style_context_get_style_property((*C.GtkStyleContext)(_self_), property_name, value)
+func (_self_ *StyleContext) GetStyleProperty(property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_style_context_get_style_property((*C.GtkStyleContext)(_self_), _cgo_property_name_, value)
 	return
 }
 
-func (_self_ *StyleContext) HasClass(class_name *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_style_context_has_class((*C.GtkStyleContext)(_self_), class_name)
+func (_self_ *StyleContext) HasClass(class_name string) (_return_ C.gboolean) {
+	_cstring_class_name_ := C.CString(class_name)
+	_cgo_class_name_ := (*C.gchar)(unsafe.Pointer(_cstring_class_name_))
+	defer C.free(unsafe.Pointer(_cstring_class_name_))
+	_return_ = C._gtk_style_context_has_class((*C.GtkStyleContext)(_self_), _cgo_class_name_)
 	return
 }
 
-func (_self_ *StyleContext) HasRegion(region_name *C.gchar) (_return_ C.gboolean, flags_return *C.GtkRegionFlags) {
-	_return_ = C._gtk_style_context_has_region((*C.GtkStyleContext)(_self_), region_name, flags_return)
+func (_self_ *StyleContext) HasRegion(region_name string) (_return_ C.gboolean, flags_return *C.GtkRegionFlags) {
+	_cstring_region_name_ := C.CString(region_name)
+	_cgo_region_name_ := (*C.gchar)(unsafe.Pointer(_cstring_region_name_))
+	defer C.free(unsafe.Pointer(_cstring_region_name_))
+	_return_ = C._gtk_style_context_has_region((*C.GtkStyleContext)(_self_), _cgo_region_name_, flags_return)
 	return
 }
 
@@ -12203,18 +13292,27 @@ func (_self_ *StyleContext) ListRegions() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *StyleContext) LookupColor(color_name *C.gchar) (_return_ C.gboolean, color *C.GdkRGBA) {
-	_return_ = C._gtk_style_context_lookup_color((*C.GtkStyleContext)(_self_), color_name, color)
+func (_self_ *StyleContext) LookupColor(color_name string) (_return_ C.gboolean, color *C.GdkRGBA) {
+	_cstring_color_name_ := C.CString(color_name)
+	_cgo_color_name_ := (*C.gchar)(unsafe.Pointer(_cstring_color_name_))
+	defer C.free(unsafe.Pointer(_cstring_color_name_))
+	_return_ = C._gtk_style_context_lookup_color((*C.GtkStyleContext)(_self_), _cgo_color_name_, color)
 	return
 }
 
-func (_self_ *StyleContext) LookupIconSet(stock_id *C.gchar) (_return_ *C.GtkIconSet) {
-	_return_ = C._gtk_style_context_lookup_icon_set((*C.GtkStyleContext)(_self_), stock_id)
+func (_self_ *StyleContext) LookupIconSet(stock_id string) (_return_ *C.GtkIconSet) {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_return_ = C._gtk_style_context_lookup_icon_set((*C.GtkStyleContext)(_self_), _cgo_stock_id_)
 	return
 }
 
-func (_self_ *StyleContext) RemoveClass(class_name *C.gchar) () {
-	C._gtk_style_context_remove_class((*C.GtkStyleContext)(_self_), class_name)
+func (_self_ *StyleContext) RemoveClass(class_name string) () {
+	_cstring_class_name_ := C.CString(class_name)
+	_cgo_class_name_ := (*C.gchar)(unsafe.Pointer(_cstring_class_name_))
+	defer C.free(unsafe.Pointer(_cstring_class_name_))
+	C._gtk_style_context_remove_class((*C.GtkStyleContext)(_self_), _cgo_class_name_)
 	return
 }
 
@@ -12223,8 +13321,11 @@ func (_self_ *StyleContext) RemoveProvider(provider *C.GtkStyleProvider) () {
 	return
 }
 
-func (_self_ *StyleContext) RemoveRegion(region_name *C.gchar) () {
-	C._gtk_style_context_remove_region((*C.GtkStyleContext)(_self_), region_name)
+func (_self_ *StyleContext) RemoveRegion(region_name string) () {
+	_cstring_region_name_ := C.CString(region_name)
+	_cgo_region_name_ := (*C.gchar)(unsafe.Pointer(_cstring_region_name_))
+	defer C.free(unsafe.Pointer(_cstring_region_name_))
+	C._gtk_style_context_remove_region((*C.GtkStyleContext)(_self_), _cgo_region_name_)
 	return
 }
 
@@ -12280,8 +13381,11 @@ func StylePropertiesNew() (_return_ *StyleProperties) {
 	return
 }
 
-func StylePropertiesLookupProperty(property_name *C.gchar) (_return_ C.gboolean, parse_func *C.GtkStylePropertyParser, pspec unsafe.Pointer) {
-	_return_ = C._gtk_style_properties_lookup_property(property_name, parse_func, pspec)
+func StylePropertiesLookupProperty(property_name string) (_return_ C.gboolean, parse_func *C.GtkStylePropertyParser, pspec unsafe.Pointer) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_style_properties_lookup_property(_cgo_property_name_, parse_func, pspec)
 	return
 }
 
@@ -12295,18 +13399,27 @@ func (_self_ *StyleProperties) Clear() () {
 	return
 }
 
-func (_self_ *StyleProperties) GetProperty(property *C.gchar, state C.GtkStateFlags) (_return_ C.gboolean, value *C.GValue) {
-	_return_ = C._gtk_style_properties_get_property((*C.GtkStyleProperties)(_self_), property, state, value)
+func (_self_ *StyleProperties) GetProperty(property string, state C.GtkStateFlags) (_return_ C.gboolean, value *C.GValue) {
+	_cstring_property_ := C.CString(property)
+	_cgo_property_ := (*C.gchar)(unsafe.Pointer(_cstring_property_))
+	defer C.free(unsafe.Pointer(_cstring_property_))
+	_return_ = C._gtk_style_properties_get_property((*C.GtkStyleProperties)(_self_), _cgo_property_, state, value)
 	return
 }
 
-func (_self_ *StyleProperties) LookupColor(name *C.gchar) (_return_ *C.GtkSymbolicColor) {
-	_return_ = C._gtk_style_properties_lookup_color((*C.GtkStyleProperties)(_self_), name)
+func (_self_ *StyleProperties) LookupColor(name string) (_return_ *C.GtkSymbolicColor) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_style_properties_lookup_color((*C.GtkStyleProperties)(_self_), _cgo_name_)
 	return
 }
 
-func (_self_ *StyleProperties) MapColor(name *C.gchar, color *C.GtkSymbolicColor) () {
-	C._gtk_style_properties_map_color((*C.GtkStyleProperties)(_self_), name, color)
+func (_self_ *StyleProperties) MapColor(name string, color *C.GtkSymbolicColor) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_style_properties_map_color((*C.GtkStyleProperties)(_self_), _cgo_name_, color)
 	return
 }
 
@@ -12315,13 +13428,19 @@ func (_self_ *StyleProperties) Merge(props_to_merge *C.GtkStyleProperties, repla
 	return
 }
 
-func (_self_ *StyleProperties) SetProperty(property *C.gchar, state C.GtkStateFlags, value *C.GValue) () {
-	C._gtk_style_properties_set_property((*C.GtkStyleProperties)(_self_), property, state, value)
+func (_self_ *StyleProperties) SetProperty(property string, state C.GtkStateFlags, value *C.GValue) () {
+	_cstring_property_ := C.CString(property)
+	_cgo_property_ := (*C.gchar)(unsafe.Pointer(_cstring_property_))
+	defer C.free(unsafe.Pointer(_cstring_property_))
+	C._gtk_style_properties_set_property((*C.GtkStyleProperties)(_self_), _cgo_property_, state, value)
 	return
 }
 
-func (_self_ *StyleProperties) UnsetProperty(property *C.gchar, state C.GtkStateFlags) () {
-	C._gtk_style_properties_unset_property((*C.GtkStyleProperties)(_self_), property, state)
+func (_self_ *StyleProperties) UnsetProperty(property string, state C.GtkStateFlags) () {
+	_cstring_property_ := C.CString(property)
+	_cgo_property_ := (*C.gchar)(unsafe.Pointer(_cstring_property_))
+	defer C.free(unsafe.Pointer(_cstring_property_))
+	C._gtk_style_properties_unset_property((*C.GtkStyleProperties)(_self_), _cgo_property_, state)
 	return
 }
 
@@ -12365,9 +13484,12 @@ func SymbolicColorNewMix(color1 *C.GtkSymbolicColor, color2 *C.GtkSymbolicColor,
 	return
 }
 
-func SymbolicColorNewName(name *C.gchar) (_return_ *SymbolicColor) {
+func SymbolicColorNewName(name string) (_return_ *SymbolicColor) {
 	var _cgo_return_ *C.GtkSymbolicColor
-	_cgo_return_ = C._gtk_symbolic_color_new_name(name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cgo_return_ = C._gtk_symbolic_color_new_name(_cgo_name_)
 	_return_ = (*SymbolicColor)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -12380,10 +13502,13 @@ func SymbolicColorNewShade(color *C.GtkSymbolicColor, factor float64) (_return_ 
 	return
 }
 
-func SymbolicColorNewWin32(theme_class *C.gchar, id int) (_return_ *SymbolicColor) {
+func SymbolicColorNewWin32(theme_class string, id int) (_return_ *SymbolicColor) {
 	var _cgo_return_ *C.GtkSymbolicColor
 	_cgo_id_ := (C.gint)(id)
-	_cgo_return_ = C._gtk_symbolic_color_new_win32(theme_class, _cgo_id_)
+	_cstring_theme_class_ := C.CString(theme_class)
+	_cgo_theme_class_ := (*C.gchar)(unsafe.Pointer(_cstring_theme_class_))
+	defer C.free(unsafe.Pointer(_cstring_theme_class_))
+	_cgo_return_ = C._gtk_symbolic_color_new_win32(_cgo_theme_class_, _cgo_id_)
 	_return_ = (*SymbolicColor)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -12398,8 +13523,10 @@ func (_self_ *SymbolicColor) Resolve(props *C.GtkStyleProperties) (_return_ C.gb
 	return
 }
 
-func (_self_ *SymbolicColor) ToString() (_return_ *C.char) {
+func (_self_ *SymbolicColor) ToString() (_go__return__ string) {
+	var _return_ *C.char
 	_return_ = C.gtk_symbolic_color_to_string((*C.GtkSymbolicColor)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -12408,11 +13535,14 @@ func (_self_ *SymbolicColor) Unref() () {
 	return
 }
 
-func TargetEntryNew(target *C.gchar, flags uint, info uint) (_return_ *TargetEntry) {
+func TargetEntryNew(target string, flags uint, info uint) (_return_ *TargetEntry) {
 	var _cgo_return_ *C.GtkTargetEntry
 	_cgo_flags_ := (C.guint)(flags)
 	_cgo_info_ := (C.guint)(info)
-	_cgo_return_ = C._gtk_target_entry_new(target, _cgo_flags_, _cgo_info_)
+	_cstring_target_ := C.CString(target)
+	_cgo_target_ := (*C.gchar)(unsafe.Pointer(_cstring_target_))
+	defer C.free(unsafe.Pointer(_cstring_target_))
+	_cgo_return_ = C._gtk_target_entry_new(_cgo_target_, _cgo_flags_, _cgo_info_)
 	_return_ = (*TargetEntry)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -12527,8 +13657,11 @@ func (_self_ *TextBuffer) ApplyTag(tag *C.GtkTextTag, start *C.GtkTextIter, end 
 	return
 }
 
-func (_self_ *TextBuffer) ApplyTagByName(name *C.gchar, start *C.GtkTextIter, end *C.GtkTextIter) () {
-	C._gtk_text_buffer_apply_tag_by_name((*C.GtkTextBuffer)(_self_), name, start, end)
+func (_self_ *TextBuffer) ApplyTagByName(name string, start *C.GtkTextIter, end *C.GtkTextIter) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_text_buffer_apply_tag_by_name((*C.GtkTextBuffer)(_self_), _cgo_name_, start, end)
 	return
 }
 
@@ -12552,8 +13685,11 @@ func (_self_ *TextBuffer) CreateChildAnchor(iter *C.GtkTextIter) (_return_ *C.Gt
 	return
 }
 
-func (_self_ *TextBuffer) CreateMark(mark_name *C.gchar, where *C.GtkTextIter, left_gravity C.gboolean) (_return_ *C.GtkTextMark) {
-	_return_ = C._gtk_text_buffer_create_mark((*C.GtkTextBuffer)(_self_), mark_name, where, left_gravity)
+func (_self_ *TextBuffer) CreateMark(mark_name string, where *C.GtkTextIter, left_gravity C.gboolean) (_return_ *C.GtkTextMark) {
+	_cstring_mark_name_ := C.CString(mark_name)
+	_cgo_mark_name_ := (*C.gchar)(unsafe.Pointer(_cstring_mark_name_))
+	defer C.free(unsafe.Pointer(_cstring_mark_name_))
+	_return_ = C._gtk_text_buffer_create_mark((*C.GtkTextBuffer)(_self_), _cgo_mark_name_, where, left_gravity)
 	return
 }
 
@@ -12577,8 +13713,11 @@ func (_self_ *TextBuffer) DeleteMark(mark *C.GtkTextMark) () {
 	return
 }
 
-func (_self_ *TextBuffer) DeleteMarkByName(name *C.gchar) () {
-	C._gtk_text_buffer_delete_mark_by_name((*C.GtkTextBuffer)(_self_), name)
+func (_self_ *TextBuffer) DeleteMarkByName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_text_buffer_delete_mark_by_name((*C.GtkTextBuffer)(_self_), _cgo_name_)
 	return
 }
 
@@ -12684,8 +13823,11 @@ func (_self_ *TextBuffer) GetLineCount() (_go__return__ int) {
 	return
 }
 
-func (_self_ *TextBuffer) GetMark(name *C.gchar) (_return_ *C.GtkTextMark) {
-	_return_ = C._gtk_text_buffer_get_mark((*C.GtkTextBuffer)(_self_), name)
+func (_self_ *TextBuffer) GetMark(name string) (_return_ *C.GtkTextMark) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_text_buffer_get_mark((*C.GtkTextBuffer)(_self_), _cgo_name_)
 	return
 }
 
@@ -12716,8 +13858,10 @@ func (_self_ *TextBuffer) GetSerializeFormats() (_return_ *C.GdkAtom, _go_n_form
 	return
 }
 
-func (_self_ *TextBuffer) GetSlice(start *C.GtkTextIter, end *C.GtkTextIter, include_hidden_chars C.gboolean) (_return_ *C.gchar) {
+func (_self_ *TextBuffer) GetSlice(start *C.GtkTextIter, end *C.GtkTextIter, include_hidden_chars C.gboolean) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_buffer_get_slice((*C.GtkTextBuffer)(_self_), start, end, include_hidden_chars)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -12731,20 +13875,28 @@ func (_self_ *TextBuffer) GetTagTable() (_return_ *C.GtkTextTagTable) {
 	return
 }
 
-func (_self_ *TextBuffer) GetText(start *C.GtkTextIter, end *C.GtkTextIter, include_hidden_chars C.gboolean) (_return_ *C.gchar) {
+func (_self_ *TextBuffer) GetText(start *C.GtkTextIter, end *C.GtkTextIter, include_hidden_chars C.gboolean) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_buffer_get_text((*C.GtkTextBuffer)(_self_), start, end, include_hidden_chars)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *TextBuffer) Insert(iter *C.GtkTextIter, text *C.gchar, len_ int) () {
+func (_self_ *TextBuffer) Insert(iter *C.GtkTextIter, text string, len_ int) () {
 	_cgo_len__ := (C.gint)(len_)
-	C._gtk_text_buffer_insert((*C.GtkTextBuffer)(_self_), iter, text, _cgo_len__)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_text_buffer_insert((*C.GtkTextBuffer)(_self_), iter, _cgo_text_, _cgo_len__)
 	return
 }
 
-func (_self_ *TextBuffer) InsertAtCursor(text *C.gchar, len_ int) () {
+func (_self_ *TextBuffer) InsertAtCursor(text string, len_ int) () {
 	_cgo_len__ := (C.gint)(len_)
-	C._gtk_text_buffer_insert_at_cursor((*C.GtkTextBuffer)(_self_), text, _cgo_len__)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_text_buffer_insert_at_cursor((*C.GtkTextBuffer)(_self_), _cgo_text_, _cgo_len__)
 	return
 }
 
@@ -12753,15 +13905,21 @@ func (_self_ *TextBuffer) InsertChildAnchor(iter *C.GtkTextIter, anchor *C.GtkTe
 	return
 }
 
-func (_self_ *TextBuffer) InsertInteractive(iter *C.GtkTextIter, text *C.gchar, len_ int, default_editable C.gboolean) (_return_ C.gboolean) {
+func (_self_ *TextBuffer) InsertInteractive(iter *C.GtkTextIter, text string, len_ int, default_editable C.gboolean) (_return_ C.gboolean) {
 	_cgo_len__ := (C.gint)(len_)
-	_return_ = C._gtk_text_buffer_insert_interactive((*C.GtkTextBuffer)(_self_), iter, text, _cgo_len__, default_editable)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	_return_ = C._gtk_text_buffer_insert_interactive((*C.GtkTextBuffer)(_self_), iter, _cgo_text_, _cgo_len__, default_editable)
 	return
 }
 
-func (_self_ *TextBuffer) InsertInteractiveAtCursor(text *C.gchar, len_ int, default_editable C.gboolean) (_return_ C.gboolean) {
+func (_self_ *TextBuffer) InsertInteractiveAtCursor(text string, len_ int, default_editable C.gboolean) (_return_ C.gboolean) {
 	_cgo_len__ := (C.gint)(len_)
-	_return_ = C._gtk_text_buffer_insert_interactive_at_cursor((*C.GtkTextBuffer)(_self_), text, _cgo_len__, default_editable)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	_return_ = C._gtk_text_buffer_insert_interactive_at_cursor((*C.GtkTextBuffer)(_self_), _cgo_text_, _cgo_len__, default_editable)
 	return
 }
 
@@ -12785,8 +13943,11 @@ func (_self_ *TextBuffer) MoveMark(mark *C.GtkTextMark, where *C.GtkTextIter) ()
 	return
 }
 
-func (_self_ *TextBuffer) MoveMarkByName(name *C.gchar, where *C.GtkTextIter) () {
-	C._gtk_text_buffer_move_mark_by_name((*C.GtkTextBuffer)(_self_), name, where)
+func (_self_ *TextBuffer) MoveMarkByName(name string, where *C.GtkTextIter) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_text_buffer_move_mark_by_name((*C.GtkTextBuffer)(_self_), _cgo_name_, where)
 	return
 }
 
@@ -12800,23 +13961,35 @@ func (_self_ *TextBuffer) PlaceCursor(where *C.GtkTextIter) () {
 	return
 }
 
-func (_self_ *TextBuffer) RegisterDeserializeFormat(mime_type *C.gchar, function C.GtkTextBufferDeserializeFunc, user_data C.gpointer, user_data_destroy C.GDestroyNotify) (_return_ C.GdkAtom) {
-	_return_ = C._gtk_text_buffer_register_deserialize_format((*C.GtkTextBuffer)(_self_), mime_type, function, user_data, user_data_destroy)
+func (_self_ *TextBuffer) RegisterDeserializeFormat(mime_type string, function C.GtkTextBufferDeserializeFunc, user_data C.gpointer, user_data_destroy C.GDestroyNotify) (_return_ C.GdkAtom) {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	_return_ = C._gtk_text_buffer_register_deserialize_format((*C.GtkTextBuffer)(_self_), _cgo_mime_type_, function, user_data, user_data_destroy)
 	return
 }
 
-func (_self_ *TextBuffer) RegisterDeserializeTagset(tagset_name *C.gchar) (_return_ C.GdkAtom) {
-	_return_ = C._gtk_text_buffer_register_deserialize_tagset((*C.GtkTextBuffer)(_self_), tagset_name)
+func (_self_ *TextBuffer) RegisterDeserializeTagset(tagset_name string) (_return_ C.GdkAtom) {
+	_cstring_tagset_name_ := C.CString(tagset_name)
+	_cgo_tagset_name_ := (*C.gchar)(unsafe.Pointer(_cstring_tagset_name_))
+	defer C.free(unsafe.Pointer(_cstring_tagset_name_))
+	_return_ = C._gtk_text_buffer_register_deserialize_tagset((*C.GtkTextBuffer)(_self_), _cgo_tagset_name_)
 	return
 }
 
-func (_self_ *TextBuffer) RegisterSerializeFormat(mime_type *C.gchar, function C.GtkTextBufferSerializeFunc, user_data C.gpointer, user_data_destroy C.GDestroyNotify) (_return_ C.GdkAtom) {
-	_return_ = C._gtk_text_buffer_register_serialize_format((*C.GtkTextBuffer)(_self_), mime_type, function, user_data, user_data_destroy)
+func (_self_ *TextBuffer) RegisterSerializeFormat(mime_type string, function C.GtkTextBufferSerializeFunc, user_data C.gpointer, user_data_destroy C.GDestroyNotify) (_return_ C.GdkAtom) {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	_return_ = C._gtk_text_buffer_register_serialize_format((*C.GtkTextBuffer)(_self_), _cgo_mime_type_, function, user_data, user_data_destroy)
 	return
 }
 
-func (_self_ *TextBuffer) RegisterSerializeTagset(tagset_name *C.gchar) (_return_ C.GdkAtom) {
-	_return_ = C._gtk_text_buffer_register_serialize_tagset((*C.GtkTextBuffer)(_self_), tagset_name)
+func (_self_ *TextBuffer) RegisterSerializeTagset(tagset_name string) (_return_ C.GdkAtom) {
+	_cstring_tagset_name_ := C.CString(tagset_name)
+	_cgo_tagset_name_ := (*C.gchar)(unsafe.Pointer(_cstring_tagset_name_))
+	defer C.free(unsafe.Pointer(_cstring_tagset_name_))
+	_return_ = C._gtk_text_buffer_register_serialize_tagset((*C.GtkTextBuffer)(_self_), _cgo_tagset_name_)
 	return
 }
 
@@ -12835,8 +14008,11 @@ func (_self_ *TextBuffer) RemoveTag(tag *C.GtkTextTag, start *C.GtkTextIter, end
 	return
 }
 
-func (_self_ *TextBuffer) RemoveTagByName(name *C.gchar, start *C.GtkTextIter, end *C.GtkTextIter) () {
-	C._gtk_text_buffer_remove_tag_by_name((*C.GtkTextBuffer)(_self_), name, start, end)
+func (_self_ *TextBuffer) RemoveTagByName(name string, start *C.GtkTextIter, end *C.GtkTextIter) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_text_buffer_remove_tag_by_name((*C.GtkTextBuffer)(_self_), _cgo_name_, start, end)
 	return
 }
 
@@ -12857,9 +14033,12 @@ func (_self_ *TextBuffer) SetModified(setting C.gboolean) () {
 	return
 }
 
-func (_self_ *TextBuffer) SetText(text *C.gchar, len_ int) () {
+func (_self_ *TextBuffer) SetText(text string, len_ int) () {
 	_cgo_len__ := (C.gint)(len_)
-	C._gtk_text_buffer_set_text((*C.GtkTextBuffer)(_self_), text, _cgo_len__)
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_text_buffer_set_text((*C.GtkTextBuffer)(_self_), _cgo_text_, _cgo_len__)
 	return
 }
 
@@ -12933,8 +14112,11 @@ func (_self_ *TextIter) BackwardLines(count int) (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *TextIter) BackwardSearch(str *C.gchar, flags C.GtkTextSearchFlags, limit *C.GtkTextIter) (_return_ C.gboolean, match_start *C.GtkTextIter, match_end *C.GtkTextIter) {
-	_return_ = C._gtk_text_iter_backward_search((*C.GtkTextIter)(_self_), str, flags, match_start, match_end, limit)
+func (_self_ *TextIter) BackwardSearch(str string, flags C.GtkTextSearchFlags, limit *C.GtkTextIter) (_return_ C.gboolean, match_start *C.GtkTextIter, match_end *C.GtkTextIter) {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	_return_ = C._gtk_text_iter_backward_search((*C.GtkTextIter)(_self_), _cgo_str_, flags, match_start, match_end, limit)
 	return
 }
 
@@ -13088,8 +14270,11 @@ func (_self_ *TextIter) ForwardLines(count int) (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *TextIter) ForwardSearch(str *C.gchar, flags C.GtkTextSearchFlags, limit *C.GtkTextIter) (_return_ C.gboolean, match_start *C.GtkTextIter, match_end *C.GtkTextIter) {
-	_return_ = C._gtk_text_iter_forward_search((*C.GtkTextIter)(_self_), str, flags, match_start, match_end, limit)
+func (_self_ *TextIter) ForwardSearch(str string, flags C.GtkTextSearchFlags, limit *C.GtkTextIter) (_return_ C.gboolean, match_start *C.GtkTextIter, match_end *C.GtkTextIter) {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	_return_ = C._gtk_text_iter_forward_search((*C.GtkTextIter)(_self_), _cgo_str_, flags, match_start, match_end, limit)
 	return
 }
 
@@ -13245,8 +14430,10 @@ func (_self_ *TextIter) GetPixbuf() (_return_ *C.GdkPixbuf) {
 	return
 }
 
-func (_self_ *TextIter) GetSlice(end *C.GtkTextIter) (_return_ *C.gchar) {
+func (_self_ *TextIter) GetSlice(end *C.GtkTextIter) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_iter_get_slice((*C.GtkTextIter)(_self_), end)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -13255,8 +14442,10 @@ func (_self_ *TextIter) GetTags() (_return_ *C.GSList) {
 	return
 }
 
-func (_self_ *TextIter) GetText(end *C.GtkTextIter) (_return_ *C.gchar) {
+func (_self_ *TextIter) GetText(end *C.GtkTextIter) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_iter_get_text((*C.GtkTextIter)(_self_), end)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -13279,13 +14468,17 @@ func (_self_ *TextIter) GetVisibleLineOffset() (_go__return__ int) {
 	return
 }
 
-func (_self_ *TextIter) GetVisibleSlice(end *C.GtkTextIter) (_return_ *C.gchar) {
+func (_self_ *TextIter) GetVisibleSlice(end *C.GtkTextIter) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_iter_get_visible_slice((*C.GtkTextIter)(_self_), end)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *TextIter) GetVisibleText(end *C.GtkTextIter) (_return_ *C.gchar) {
+func (_self_ *TextIter) GetVisibleText(end *C.GtkTextIter) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_iter_get_visible_text((*C.GtkTextIter)(_self_), end)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -13385,9 +14578,12 @@ func (_self_ *TextIter) TogglesTag(tag *C.GtkTextTag) (_return_ C.gboolean) {
 	return
 }
 
-func TextMarkNew(name *C.gchar, left_gravity C.gboolean) (_return_ *TextMark) {
+func TextMarkNew(name string, left_gravity C.gboolean) (_return_ *TextMark) {
 	var _cgo_return_ *C.GtkTextMark
-	_cgo_return_ = C._gtk_text_mark_new(name, left_gravity)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cgo_return_ = C._gtk_text_mark_new(_cgo_name_, left_gravity)
 	_return_ = (*TextMark)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -13407,8 +14603,10 @@ func (_self_ *TextMark) GetLeftGravity() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *TextMark) GetName() (_return_ *C.gchar) {
+func (_self_ *TextMark) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_text_mark_get_name((*C.GtkTextMark)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -13422,9 +14620,12 @@ func (_self_ *TextMark) SetVisible(setting C.gboolean) () {
 	return
 }
 
-func TextTagNew(name *C.gchar) (_return_ *TextTag) {
+func TextTagNew(name string) (_return_ *TextTag) {
 	var _cgo_return_ *C.GtkTextTag
-	_cgo_return_ = C._gtk_text_tag_new(name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cgo_return_ = C._gtk_text_tag_new(_cgo_name_)
 	_return_ = (*TextTag)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -13471,8 +14672,11 @@ func (_self_ *TextTagTable) GetSize() (_go__return__ int) {
 	return
 }
 
-func (_self_ *TextTagTable) Lookup(name *C.gchar) (_return_ *C.GtkTextTag) {
-	_return_ = C._gtk_text_tag_table_lookup((*C.GtkTextTagTable)(_self_), name)
+func (_self_ *TextTagTable) Lookup(name string) (_return_ *C.GtkTextTag) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_text_tag_table_lookup((*C.GtkTextTagTable)(_self_), _cgo_name_)
 	return
 }
 
@@ -13862,13 +15066,19 @@ func (_self_ *TextView) WindowToBufferCoords(win C.GtkTextWindowType, window_x i
 	return
 }
 
-func ThemingEngineLoad(name *C.gchar) (_return_ *C.GtkThemingEngine) {
-	_return_ = C._gtk_theming_engine_load(name)
+func ThemingEngineLoad(name string) (_return_ *C.GtkThemingEngine) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_theming_engine_load(_cgo_name_)
 	return
 }
 
-func ThemingEngineRegisterProperty(name_space *C.gchar, parse_func C.GtkStylePropertyParser, pspec *C.GParamSpec) () {
-	C._gtk_theming_engine_register_property(name_space, parse_func, pspec)
+func ThemingEngineRegisterProperty(name_space string, parse_func C.GtkStylePropertyParser, pspec *C.GParamSpec) () {
+	_cstring_name_space_ := C.CString(name_space)
+	_cgo_name_space_ := (*C.gchar)(unsafe.Pointer(_cstring_name_space_))
+	defer C.free(unsafe.Pointer(_cstring_name_space_))
+	C._gtk_theming_engine_register_property(_cgo_name_space_, parse_func, pspec)
 	return
 }
 
@@ -13922,8 +15132,11 @@ func (_self_ *ThemingEngine) GetPath() (_return_ *C.GtkWidgetPath) {
 	return
 }
 
-func (_self_ *ThemingEngine) GetProperty(property *C.gchar, state C.GtkStateFlags) (value *C.GValue) {
-	C._gtk_theming_engine_get_property((*C.GtkThemingEngine)(_self_), property, state, value)
+func (_self_ *ThemingEngine) GetProperty(property string, state C.GtkStateFlags) (value *C.GValue) {
+	_cstring_property_ := C.CString(property)
+	_cgo_property_ := (*C.gchar)(unsafe.Pointer(_cstring_property_))
+	defer C.free(unsafe.Pointer(_cstring_property_))
+	C._gtk_theming_engine_get_property((*C.GtkThemingEngine)(_self_), _cgo_property_, state, value)
 	return
 }
 
@@ -13937,29 +15150,53 @@ func (_self_ *ThemingEngine) GetState() (_return_ C.GtkStateFlags) {
 	return
 }
 
-func (_self_ *ThemingEngine) GetStyleProperty(property_name *C.gchar, value *C.GValue) () {
-	C._gtk_theming_engine_get_style_property((*C.GtkThemingEngine)(_self_), property_name, value)
+func (_self_ *ThemingEngine) GetStyleProperty(property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_theming_engine_get_style_property((*C.GtkThemingEngine)(_self_), _cgo_property_name_, value)
 	return
 }
 
-func (_self_ *ThemingEngine) HasClass(style_class *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_theming_engine_has_class((*C.GtkThemingEngine)(_self_), style_class)
+func (_self_ *ThemingEngine) HasClass(style_class string) (_return_ C.gboolean) {
+	_cstring_style_class_ := C.CString(style_class)
+	_cgo_style_class_ := (*C.gchar)(unsafe.Pointer(_cstring_style_class_))
+	defer C.free(unsafe.Pointer(_cstring_style_class_))
+	_return_ = C._gtk_theming_engine_has_class((*C.GtkThemingEngine)(_self_), _cgo_style_class_)
 	return
 }
 
-func (_self_ *ThemingEngine) HasRegion(style_region *C.gchar) (_return_ C.gboolean, flags *C.GtkRegionFlags) {
-	_return_ = C._gtk_theming_engine_has_region((*C.GtkThemingEngine)(_self_), style_region, flags)
+func (_self_ *ThemingEngine) HasRegion(style_region string) (_return_ C.gboolean, flags *C.GtkRegionFlags) {
+	_cstring_style_region_ := C.CString(style_region)
+	_cgo_style_region_ := (*C.gchar)(unsafe.Pointer(_cstring_style_region_))
+	defer C.free(unsafe.Pointer(_cstring_style_region_))
+	_return_ = C._gtk_theming_engine_has_region((*C.GtkThemingEngine)(_self_), _cgo_style_region_, flags)
 	return
 }
 
-func (_self_ *ThemingEngine) LookupColor(color_name *C.gchar) (_return_ C.gboolean, color *C.GdkRGBA) {
-	_return_ = C._gtk_theming_engine_lookup_color((*C.GtkThemingEngine)(_self_), color_name, color)
+func (_self_ *ThemingEngine) LookupColor(color_name string) (_return_ C.gboolean, color *C.GdkRGBA) {
+	_cstring_color_name_ := C.CString(color_name)
+	_cgo_color_name_ := (*C.gchar)(unsafe.Pointer(_cstring_color_name_))
+	defer C.free(unsafe.Pointer(_cstring_color_name_))
+	_return_ = C._gtk_theming_engine_lookup_color((*C.GtkThemingEngine)(_self_), _cgo_color_name_, color)
 	return
 }
 
-func ToggleActionNew(name *C.gchar, label *C.gchar, tooltip *C.gchar, stock_id *C.gchar) (_return_ *ToggleAction) {
+func ToggleActionNew(name string, label string, tooltip string, stock_id string) (_return_ *ToggleAction) {
 	var _cgo_return_ *C.GtkToggleAction
-	_cgo_return_ = C._gtk_toggle_action_new(name, label, tooltip, stock_id)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cstring_tooltip_ := C.CString(tooltip)
+	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
+	defer C.free(unsafe.Pointer(_cstring_tooltip_))
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_toggle_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
 	_return_ = (*ToggleAction)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -13996,16 +15233,22 @@ func ToggleButtonNew() (_return_ *ToggleButton) {
 	return
 }
 
-func ToggleButtonNewWithLabel(label *C.gchar) (_return_ *ToggleButton) {
+func ToggleButtonNewWithLabel(label string) (_return_ *ToggleButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_toggle_button_new_with_label(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_toggle_button_new_with_label(_cgo_label_)
 	_return_ = (*ToggleButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ToggleButtonNewWithMnemonic(label *C.gchar) (_return_ *ToggleButton) {
+func ToggleButtonNewWithMnemonic(label string) (_return_ *ToggleButton) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_toggle_button_new_with_mnemonic(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_toggle_button_new_with_mnemonic(_cgo_label_)
 	_return_ = (*ToggleButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -14052,9 +15295,12 @@ func ToggleToolButtonNew() (_return_ *ToggleToolButton) {
 	return
 }
 
-func ToggleToolButtonNewFromStock(stock_id *C.gchar) (_return_ *ToggleToolButton) {
+func ToggleToolButtonNewFromStock(stock_id string) (_return_ *ToggleToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_toggle_tool_button_new_from_stock(stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_toggle_tool_button_new_from_stock(_cgo_stock_id_)
 	_return_ = (*ToggleToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -14069,22 +15315,30 @@ func (_self_ *ToggleToolButton) SetActive(is_active C.gboolean) () {
 	return
 }
 
-func ToolButtonNew(icon_widget *C.GtkWidget, label *C.gchar) (_return_ *ToolButton) {
+func ToolButtonNew(icon_widget *C.GtkWidget, label string) (_return_ *ToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_tool_button_new(icon_widget, label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_tool_button_new(icon_widget, _cgo_label_)
 	_return_ = (*ToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func ToolButtonNewFromStock(stock_id *C.gchar) (_return_ *ToolButton) {
+func ToolButtonNewFromStock(stock_id string) (_return_ *ToolButton) {
 	var _cgo_return_ *C.GtkToolItem
-	_cgo_return_ = C._gtk_tool_button_new_from_stock(stock_id)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_cgo_return_ = C._gtk_tool_button_new_from_stock(_cgo_stock_id_)
 	_return_ = (*ToolButton)(unsafe.Pointer(_cgo_return_))
 	return
 }
 
-func (_self_ *ToolButton) GetIconName() (_return_ *C.gchar) {
+func (_self_ *ToolButton) GetIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_tool_button_get_icon_name((*C.GtkToolButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -14093,8 +15347,10 @@ func (_self_ *ToolButton) GetIconWidget() (_return_ *C.GtkWidget) {
 	return
 }
 
-func (_self_ *ToolButton) GetLabel() (_return_ *C.gchar) {
+func (_self_ *ToolButton) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_tool_button_get_label((*C.GtkToolButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -14103,8 +15359,10 @@ func (_self_ *ToolButton) GetLabelWidget() (_return_ *C.GtkWidget) {
 	return
 }
 
-func (_self_ *ToolButton) GetStockId() (_return_ *C.gchar) {
+func (_self_ *ToolButton) GetStockId() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_tool_button_get_stock_id((*C.GtkToolButton)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -14113,8 +15371,11 @@ func (_self_ *ToolButton) GetUseUnderline() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *ToolButton) SetIconName(icon_name *C.gchar) () {
-	C._gtk_tool_button_set_icon_name((*C.GtkToolButton)(_self_), icon_name)
+func (_self_ *ToolButton) SetIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_tool_button_set_icon_name((*C.GtkToolButton)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -14123,8 +15384,11 @@ func (_self_ *ToolButton) SetIconWidget(icon_widget *C.GtkWidget) () {
 	return
 }
 
-func (_self_ *ToolButton) SetLabel(label *C.gchar) () {
-	C._gtk_tool_button_set_label((*C.GtkToolButton)(_self_), label)
+func (_self_ *ToolButton) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_tool_button_set_label((*C.GtkToolButton)(_self_), _cgo_label_)
 	return
 }
 
@@ -14133,8 +15397,11 @@ func (_self_ *ToolButton) SetLabelWidget(label_widget *C.GtkWidget) () {
 	return
 }
 
-func (_self_ *ToolButton) SetStockId(stock_id *C.gchar) () {
-	C._gtk_tool_button_set_stock_id((*C.GtkToolButton)(_self_), stock_id)
+func (_self_ *ToolButton) SetStockId(stock_id string) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_tool_button_set_stock_id((*C.GtkToolButton)(_self_), _cgo_stock_id_)
 	return
 }
 
@@ -14180,8 +15447,11 @@ func (_self_ *ToolItem) GetOrientation() (_return_ C.GtkOrientation) {
 	return
 }
 
-func (_self_ *ToolItem) GetProxyMenuItem(menu_item_id *C.gchar) (_return_ *C.GtkWidget) {
-	_return_ = C._gtk_tool_item_get_proxy_menu_item((*C.GtkToolItem)(_self_), menu_item_id)
+func (_self_ *ToolItem) GetProxyMenuItem(menu_item_id string) (_return_ *C.GtkWidget) {
+	_cstring_menu_item_id_ := C.CString(menu_item_id)
+	_cgo_menu_item_id_ := (*C.gchar)(unsafe.Pointer(_cstring_menu_item_id_))
+	defer C.free(unsafe.Pointer(_cstring_menu_item_id_))
+	_return_ = C._gtk_tool_item_get_proxy_menu_item((*C.GtkToolItem)(_self_), _cgo_menu_item_id_)
 	return
 }
 
@@ -14252,18 +15522,27 @@ func (_self_ *ToolItem) SetIsImportant(is_important C.gboolean) () {
 	return
 }
 
-func (_self_ *ToolItem) SetProxyMenuItem(menu_item_id *C.gchar, menu_item *C.GtkWidget) () {
-	C._gtk_tool_item_set_proxy_menu_item((*C.GtkToolItem)(_self_), menu_item_id, menu_item)
+func (_self_ *ToolItem) SetProxyMenuItem(menu_item_id string, menu_item *C.GtkWidget) () {
+	_cstring_menu_item_id_ := C.CString(menu_item_id)
+	_cgo_menu_item_id_ := (*C.gchar)(unsafe.Pointer(_cstring_menu_item_id_))
+	defer C.free(unsafe.Pointer(_cstring_menu_item_id_))
+	C._gtk_tool_item_set_proxy_menu_item((*C.GtkToolItem)(_self_), _cgo_menu_item_id_, menu_item)
 	return
 }
 
-func (_self_ *ToolItem) SetTooltipMarkup(markup *C.gchar) () {
-	C._gtk_tool_item_set_tooltip_markup((*C.GtkToolItem)(_self_), markup)
+func (_self_ *ToolItem) SetTooltipMarkup(markup string) () {
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_tool_item_set_tooltip_markup((*C.GtkToolItem)(_self_), _cgo_markup_)
 	return
 }
 
-func (_self_ *ToolItem) SetTooltipText(text *C.gchar) () {
-	C._gtk_tool_item_set_tooltip_text((*C.GtkToolItem)(_self_), text)
+func (_self_ *ToolItem) SetTooltipText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_tool_item_set_tooltip_text((*C.GtkToolItem)(_self_), _cgo_text_)
 	return
 }
 
@@ -14287,9 +15566,12 @@ func (_self_ *ToolItem) ToolbarReconfigured() () {
 	return
 }
 
-func ToolItemGroupNew(label *C.gchar) (_return_ *ToolItemGroup) {
+func ToolItemGroupNew(label string) (_return_ *ToolItemGroup) {
 	var _cgo_return_ *C.GtkWidget
-	_cgo_return_ = C._gtk_tool_item_group_new(label)
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	_cgo_return_ = C._gtk_tool_item_group_new(_cgo_label_)
 	_return_ = (*ToolItemGroup)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -14323,8 +15605,10 @@ func (_self_ *ToolItemGroup) GetItemPosition(item *C.GtkToolItem) (_go__return__
 	return
 }
 
-func (_self_ *ToolItemGroup) GetLabel() (_return_ *C.gchar) {
+func (_self_ *ToolItemGroup) GetLabel() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_tool_item_group_get_label((*C.GtkToolItemGroup)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -14373,8 +15657,11 @@ func (_self_ *ToolItemGroup) SetItemPosition(item *C.GtkToolItem, position int) 
 	return
 }
 
-func (_self_ *ToolItemGroup) SetLabel(label *C.gchar) () {
-	C._gtk_tool_item_group_set_label((*C.GtkToolItemGroup)(_self_), label)
+func (_self_ *ToolItemGroup) SetLabel(label string) () {
+	_cstring_label_ := C.CString(label)
+	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
+	defer C.free(unsafe.Pointer(_cstring_label_))
+	C._gtk_tool_item_group_set_label((*C.GtkToolItemGroup)(_self_), _cgo_label_)
 	return
 }
 
@@ -14605,23 +15892,35 @@ func (_self_ *Tooltip) SetIconFromGicon(gicon *C.GIcon, size C.GtkIconSize) () {
 	return
 }
 
-func (_self_ *Tooltip) SetIconFromIconName(icon_name *C.gchar, size C.GtkIconSize) () {
-	C._gtk_tooltip_set_icon_from_icon_name((*C.GtkTooltip)(_self_), icon_name, size)
+func (_self_ *Tooltip) SetIconFromIconName(icon_name string, size C.GtkIconSize) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_tooltip_set_icon_from_icon_name((*C.GtkTooltip)(_self_), _cgo_icon_name_, size)
 	return
 }
 
-func (_self_ *Tooltip) SetIconFromStock(stock_id *C.gchar, size C.GtkIconSize) () {
-	C._gtk_tooltip_set_icon_from_stock((*C.GtkTooltip)(_self_), stock_id, size)
+func (_self_ *Tooltip) SetIconFromStock(stock_id string, size C.GtkIconSize) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_tooltip_set_icon_from_stock((*C.GtkTooltip)(_self_), _cgo_stock_id_, size)
 	return
 }
 
-func (_self_ *Tooltip) SetMarkup(markup *C.gchar) () {
-	C._gtk_tooltip_set_markup((*C.GtkTooltip)(_self_), markup)
+func (_self_ *Tooltip) SetMarkup(markup string) () {
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_tooltip_set_markup((*C.GtkTooltip)(_self_), _cgo_markup_)
 	return
 }
 
-func (_self_ *Tooltip) SetText(text *C.gchar) () {
-	C._gtk_tooltip_set_text((*C.GtkTooltip)(_self_), text)
+func (_self_ *Tooltip) SetText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_tooltip_set_text((*C.GtkTooltip)(_self_), _cgo_text_)
 	return
 }
 
@@ -14740,9 +16039,12 @@ func TreePathNewFirst() (_return_ *TreePath) {
 	return
 }
 
-func TreePathNewFromString(path *C.gchar) (_return_ *TreePath) {
+func TreePathNewFromString(path string) (_return_ *TreePath) {
 	var _cgo_return_ *C.GtkTreePath
-	_cgo_return_ = C._gtk_tree_path_new_from_string(path)
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_cgo_return_ = C._gtk_tree_path_new_from_string(_cgo_path_)
 	_return_ = (*TreePath)(unsafe.Pointer(_cgo_return_))
 	return
 }
@@ -14820,8 +16122,10 @@ func (_self_ *TreePath) Prev() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *TreePath) ToString() (_return_ *C.gchar) {
+func (_self_ *TreePath) ToString() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_tree_path_to_string((*C.GtkTreePath)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -15377,10 +16681,13 @@ func (_self_ *TreeView) InsertColumn(column *C.GtkTreeViewColumn, position int) 
 	return
 }
 
-func (_self_ *TreeView) InsertColumnWithDataFunc(position int, title *C.gchar, cell *C.GtkCellRenderer, func_ C.GtkTreeCellDataFunc, data C.gpointer, dnotify C.GDestroyNotify) (_go__return__ int) {
+func (_self_ *TreeView) InsertColumnWithDataFunc(position int, title string, cell *C.GtkCellRenderer, func_ C.GtkTreeCellDataFunc, data C.gpointer, dnotify C.GDestroyNotify) (_go__return__ int) {
 	_cgo_position_ := (C.gint)(position)
 	var _return_ C.gint
-	_return_ = C._gtk_tree_view_insert_column_with_data_func((*C.GtkTreeView)(_self_), _cgo_position_, title, cell, func_, data, dnotify)
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	_return_ = C._gtk_tree_view_insert_column_with_data_func((*C.GtkTreeView)(_self_), _cgo_position_, _cgo_title_, cell, func_, data, dnotify)
 	_go__return__ = (int)(_return_)
 	return
 }
@@ -15604,9 +16911,12 @@ func TreeViewColumnNewWithArea(area *C.GtkCellArea) (_return_ *TreeViewColumn) {
 	return
 }
 
-func (_self_ *TreeViewColumn) AddAttribute(cell_renderer *C.GtkCellRenderer, attribute *C.gchar, column int) () {
+func (_self_ *TreeViewColumn) AddAttribute(cell_renderer *C.GtkCellRenderer, attribute string, column int) () {
 	_cgo_column_ := (C.gint)(column)
-	C._gtk_tree_view_column_add_attribute((*C.GtkTreeViewColumn)(_self_), cell_renderer, attribute, _cgo_column_)
+	_cstring_attribute_ := C.CString(attribute)
+	_cgo_attribute_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_))
+	C._gtk_tree_view_column_add_attribute((*C.GtkTreeViewColumn)(_self_), cell_renderer, _cgo_attribute_, _cgo_column_)
 	return
 }
 
@@ -15744,8 +17054,10 @@ func (_self_ *TreeViewColumn) GetSpacing() (_go__return__ int) {
 	return
 }
 
-func (_self_ *TreeViewColumn) GetTitle() (_return_ *C.gchar) {
+func (_self_ *TreeViewColumn) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_tree_view_column_get_title((*C.GtkTreeViewColumn)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -15869,8 +17181,11 @@ func (_self_ *TreeViewColumn) SetSpacing(spacing int) () {
 	return
 }
 
-func (_self_ *TreeViewColumn) SetTitle(title *C.gchar) () {
-	C._gtk_tree_view_column_set_title((*C.GtkTreeViewColumn)(_self_), title)
+func (_self_ *TreeViewColumn) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_tree_view_column_set_title((*C.GtkTreeViewColumn)(_self_), _cgo_title_)
 	return
 }
 
@@ -15891,30 +17206,48 @@ func UIManagerNew() (_return_ *UIManager) {
 	return
 }
 
-func (_self_ *UIManager) AddUi(merge_id uint, path *C.gchar, name *C.gchar, action *C.gchar, type_ C.GtkUIManagerItemType, top C.gboolean) () {
+func (_self_ *UIManager) AddUi(merge_id uint, path string, name string, action string, type_ C.GtkUIManagerItemType, top C.gboolean) () {
 	_cgo_merge_id_ := (C.guint)(merge_id)
-	C._gtk_ui_manager_add_ui((*C.GtkUIManager)(_self_), _cgo_merge_id_, path, name, action, type_, top)
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_action_ := C.CString(action)
+	_cgo_action_ := (*C.gchar)(unsafe.Pointer(_cstring_action_))
+	defer C.free(unsafe.Pointer(_cstring_action_))
+	C._gtk_ui_manager_add_ui((*C.GtkUIManager)(_self_), _cgo_merge_id_, _cgo_path_, _cgo_name_, _cgo_action_, type_, top)
 	return
 }
 
-func (_self_ *UIManager) AddUiFromFile(filename *C.gchar) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *UIManager) AddUiFromFile(filename string) (_go__return__ uint, _error_ unsafe.Pointer) {
 	var _return_ C.guint
-	_return_ = C._gtk_ui_manager_add_ui_from_file((*C.GtkUIManager)(_self_), filename, _error_)
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_return_ = C._gtk_ui_manager_add_ui_from_file((*C.GtkUIManager)(_self_), _cgo_filename_, _error_)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *UIManager) AddUiFromResource(resource_path *C.gchar) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *UIManager) AddUiFromResource(resource_path string) (_go__return__ uint, _error_ unsafe.Pointer) {
 	var _return_ C.guint
-	_return_ = C._gtk_ui_manager_add_ui_from_resource((*C.GtkUIManager)(_self_), resource_path, _error_)
+	_cstring_resource_path_ := C.CString(resource_path)
+	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
+	defer C.free(unsafe.Pointer(_cstring_resource_path_))
+	_return_ = C._gtk_ui_manager_add_ui_from_resource((*C.GtkUIManager)(_self_), _cgo_resource_path_, _error_)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *UIManager) AddUiFromString(buffer *C.gchar, length int64) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *UIManager) AddUiFromString(buffer string, length int64) (_go__return__ uint, _error_ unsafe.Pointer) {
 	_cgo_length_ := (C.gssize)(length)
 	var _return_ C.guint
-	_return_ = C._gtk_ui_manager_add_ui_from_string((*C.GtkUIManager)(_self_), buffer, _cgo_length_, _error_)
+	_cstring_buffer_ := C.CString(buffer)
+	_cgo_buffer_ := (*C.gchar)(unsafe.Pointer(_cstring_buffer_))
+	defer C.free(unsafe.Pointer(_cstring_buffer_))
+	_return_ = C._gtk_ui_manager_add_ui_from_string((*C.GtkUIManager)(_self_), _cgo_buffer_, _cgo_length_, _error_)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -15929,8 +17262,11 @@ func (_self_ *UIManager) GetAccelGroup() (_return_ *C.GtkAccelGroup) {
 	return
 }
 
-func (_self_ *UIManager) GetAction(path *C.gchar) (_return_ *C.GtkAction) {
-	_return_ = C._gtk_ui_manager_get_action((*C.GtkUIManager)(_self_), path)
+func (_self_ *UIManager) GetAction(path string) (_return_ *C.GtkAction) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._gtk_ui_manager_get_action((*C.GtkUIManager)(_self_), _cgo_path_)
 	return
 }
 
@@ -15944,13 +17280,18 @@ func (_self_ *UIManager) GetToplevels(types C.GtkUIManagerItemType) (_return_ *C
 	return
 }
 
-func (_self_ *UIManager) GetUi() (_return_ *C.gchar) {
+func (_self_ *UIManager) GetUi() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_ui_manager_get_ui((*C.GtkUIManager)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *UIManager) GetWidget(path *C.gchar) (_return_ *C.GtkWidget) {
-	_return_ = C._gtk_ui_manager_get_widget((*C.GtkUIManager)(_self_), path)
+func (_self_ *UIManager) GetWidget(path string) (_return_ *C.GtkWidget) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._gtk_ui_manager_get_widget((*C.GtkUIManager)(_self_), _cgo_path_)
 	return
 }
 
@@ -16037,9 +17378,12 @@ func (_self_ *Widget) Activate() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Widget) AddAccelerator(accel_signal *C.gchar, accel_group *C.GtkAccelGroup, accel_key uint, accel_mods C.GdkModifierType, accel_flags C.GtkAccelFlags) () {
+func (_self_ *Widget) AddAccelerator(accel_signal string, accel_group *C.GtkAccelGroup, accel_key uint, accel_mods C.GdkModifierType, accel_flags C.GtkAccelFlags) () {
 	_cgo_accel_key_ := (C.guint)(accel_key)
-	C._gtk_widget_add_accelerator((*C.GtkWidget)(_self_), accel_signal, accel_group, _cgo_accel_key_, accel_mods, accel_flags)
+	_cstring_accel_signal_ := C.CString(accel_signal)
+	_cgo_accel_signal_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_signal_))
+	defer C.free(unsafe.Pointer(_cstring_accel_signal_))
+	C._gtk_widget_add_accelerator((*C.GtkWidget)(_self_), _cgo_accel_signal_, accel_group, _cgo_accel_key_, accel_mods, accel_flags)
 	return
 }
 
@@ -16070,8 +17414,11 @@ func (_self_ *Widget) ChildFocus(direction C.GtkDirectionType) (_return_ C.gbool
 	return
 }
 
-func (_self_ *Widget) ChildNotify(child_property *C.gchar) () {
-	C._gtk_widget_child_notify((*C.GtkWidget)(_self_), child_property)
+func (_self_ *Widget) ChildNotify(child_property string) () {
+	_cstring_child_property_ := C.CString(child_property)
+	_cgo_child_property_ := (*C.gchar)(unsafe.Pointer(_cstring_child_property_))
+	defer C.free(unsafe.Pointer(_cstring_child_property_))
+	C._gtk_widget_child_notify((*C.GtkWidget)(_self_), _cgo_child_property_)
 	return
 }
 
@@ -16085,8 +17432,11 @@ func (_self_ *Widget) CreatePangoContext() (_return_ *C.PangoContext) {
 	return
 }
 
-func (_self_ *Widget) CreatePangoLayout(text *C.gchar) (_return_ *C.PangoLayout) {
-	_return_ = C._gtk_widget_create_pango_layout((*C.GtkWidget)(_self_), text)
+func (_self_ *Widget) CreatePangoLayout(text string) (_return_ *C.PangoLayout) {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	_return_ = C._gtk_widget_create_pango_layout((*C.GtkWidget)(_self_), _cgo_text_)
 	return
 }
 
@@ -16201,8 +17551,11 @@ func (_self_ *Widget) DragSourceSetIconGicon(icon *C.GIcon) () {
 	return
 }
 
-func (_self_ *Widget) DragSourceSetIconName(icon_name *C.gchar) () {
-	C._gtk_drag_source_set_icon_name((*C.GtkWidget)(_self_), icon_name)
+func (_self_ *Widget) DragSourceSetIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_drag_source_set_icon_name((*C.GtkWidget)(_self_), _cgo_icon_name_)
 	return
 }
 
@@ -16211,8 +17564,11 @@ func (_self_ *Widget) DragSourceSetIconPixbuf(pixbuf *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *Widget) DragSourceSetIconStock(stock_id *C.gchar) () {
-	C._gtk_drag_source_set_icon_stock((*C.GtkWidget)(_self_), stock_id)
+func (_self_ *Widget) DragSourceSetIconStock(stock_id string) () {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_drag_source_set_icon_stock((*C.GtkWidget)(_self_), _cgo_stock_id_)
 	return
 }
 
@@ -16301,8 +17657,10 @@ func (_self_ *Widget) GetClipboard(selection C.GdkAtom) (_return_ *C.GtkClipboar
 	return
 }
 
-func (_self_ *Widget) GetCompositeName() (_return_ *C.gchar) {
+func (_self_ *Widget) GetCompositeName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_widget_get_composite_name((*C.GtkWidget)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -16401,8 +17759,10 @@ func (_self_ *Widget) GetModifierMask(intent C.GdkModifierIntent) (_return_ C.Gd
 	return
 }
 
-func (_self_ *Widget) GetName() (_return_ *C.gchar) {
+func (_self_ *Widget) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_widget_get_name((*C.GtkWidget)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -16533,13 +17893,17 @@ func (_self_ *Widget) GetSupportMultidevice() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Widget) GetTooltipMarkup() (_return_ *C.gchar) {
+func (_self_ *Widget) GetTooltipMarkup() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_widget_get_tooltip_markup((*C.GtkWidget)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Widget) GetTooltipText() (_return_ *C.gchar) {
+func (_self_ *Widget) GetTooltipText() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_widget_get_tooltip_text((*C.GtkWidget)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -16648,8 +18012,11 @@ func (_self_ *Widget) InputShapeCombineRegion(region *C.cairo_region_t) () {
 	return
 }
 
-func (_self_ *Widget) InsertActionGroup(name *C.gchar, group *C.GActionGroup) () {
-	C._gtk_widget_insert_action_group((*C.GtkWidget)(_self_), name, group)
+func (_self_ *Widget) InsertActionGroup(name string, group *C.GActionGroup) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_insert_action_group((*C.GtkWidget)(_self_), _cgo_name_, group)
 	return
 }
 
@@ -16733,8 +18100,11 @@ func (_self_ *Widget) OverrideFont(font_desc *C.PangoFontDescription) () {
 	return
 }
 
-func (_self_ *Widget) OverrideSymbolicColor(name *C.gchar, color *C.GdkRGBA) () {
-	C._gtk_widget_override_symbolic_color((*C.GtkWidget)(_self_), name, color)
+func (_self_ *Widget) OverrideSymbolicColor(name string, color *C.GdkRGBA) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_override_symbolic_color((*C.GtkWidget)(_self_), _cgo_name_, color)
 	return
 }
 
@@ -16793,8 +18163,11 @@ func (_self_ *Widget) RemoveMnemonicLabel(label *C.GtkWidget) () {
 	return
 }
 
-func (_self_ *Widget) RenderIconPixbuf(stock_id *C.gchar, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
-	_return_ = C._gtk_widget_render_icon_pixbuf((*C.GtkWidget)(_self_), stock_id, size)
+func (_self_ *Widget) RenderIconPixbuf(stock_id string, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_return_ = C._gtk_widget_render_icon_pixbuf((*C.GtkWidget)(_self_), _cgo_stock_id_, size)
 	return
 }
 
@@ -16820,8 +18193,11 @@ func (_self_ *Widget) SendFocusChange(event *C.GdkEvent) (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Widget) SetAccelPath(accel_path *C.gchar, accel_group *C.GtkAccelGroup) () {
-	C._gtk_widget_set_accel_path((*C.GtkWidget)(_self_), accel_path, accel_group)
+func (_self_ *Widget) SetAccelPath(accel_path string, accel_group *C.GtkAccelGroup) () {
+	_cstring_accel_path_ := C.CString(accel_path)
+	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
+	defer C.free(unsafe.Pointer(_cstring_accel_path_))
+	C._gtk_widget_set_accel_path((*C.GtkWidget)(_self_), _cgo_accel_path_, accel_group)
 	return
 }
 
@@ -16850,8 +18226,11 @@ func (_self_ *Widget) SetChildVisible(is_visible C.gboolean) () {
 	return
 }
 
-func (_self_ *Widget) SetCompositeName(name *C.gchar) () {
-	C._gtk_widget_set_composite_name((*C.GtkWidget)(_self_), name)
+func (_self_ *Widget) SetCompositeName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_set_composite_name((*C.GtkWidget)(_self_), _cgo_name_)
 	return
 }
 
@@ -16935,8 +18314,11 @@ func (_self_ *Widget) SetMarginTop(margin int) () {
 	return
 }
 
-func (_self_ *Widget) SetName(name *C.gchar) () {
-	C._gtk_widget_set_name((*C.GtkWidget)(_self_), name)
+func (_self_ *Widget) SetName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_set_name((*C.GtkWidget)(_self_), _cgo_name_)
 	return
 }
 
@@ -16992,13 +18374,19 @@ func (_self_ *Widget) SetSupportMultidevice(support_multidevice C.gboolean) () {
 	return
 }
 
-func (_self_ *Widget) SetTooltipMarkup(markup *C.gchar) () {
-	C._gtk_widget_set_tooltip_markup((*C.GtkWidget)(_self_), markup)
+func (_self_ *Widget) SetTooltipMarkup(markup string) () {
+	_cstring_markup_ := C.CString(markup)
+	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
+	defer C.free(unsafe.Pointer(_cstring_markup_))
+	C._gtk_widget_set_tooltip_markup((*C.GtkWidget)(_self_), _cgo_markup_)
 	return
 }
 
-func (_self_ *Widget) SetTooltipText(text *C.gchar) () {
-	C._gtk_widget_set_tooltip_text((*C.GtkWidget)(_self_), text)
+func (_self_ *Widget) SetTooltipText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_widget_set_tooltip_text((*C.GtkWidget)(_self_), _cgo_text_)
 	return
 }
 
@@ -17062,8 +18450,11 @@ func (_self_ *Widget) SizeAllocate(allocation *C.GtkAllocation) () {
 	return
 }
 
-func (_self_ *Widget) StyleGetProperty(property_name *C.gchar, value *C.GValue) () {
-	C._gtk_widget_style_get_property((*C.GtkWidget)(_self_), property_name, value)
+func (_self_ *Widget) StyleGetProperty(property_name string, value *C.GValue) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._gtk_widget_style_get_property((*C.GtkWidget)(_self_), _cgo_property_name_, value)
 	return
 }
 
@@ -17108,8 +18499,11 @@ func (_self_ *Widget) UnsetStateFlags(flags C.GtkStateFlags) () {
 	return
 }
 
-func (_self_ *WidgetClass) FindStyleProperty(property_name *C.gchar) (_return_ *C.GParamSpec) {
-	_return_ = C._gtk_widget_class_find_style_property((*C.GtkWidgetClass)(_self_), property_name)
+func (_self_ *WidgetClass) FindStyleProperty(property_name string) (_return_ *C.GParamSpec) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_widget_class_find_style_property((*C.GtkWidgetClass)(_self_), _cgo_property_name_)
 	return
 }
 
@@ -17194,15 +18588,21 @@ func (_self_ *WidgetPath) IsType(type_ C.GType) (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *WidgetPath) IterAddClass(pos int, name *C.gchar) () {
+func (_self_ *WidgetPath) IterAddClass(pos int, name string) () {
 	_cgo_pos_ := (C.gint)(pos)
-	C._gtk_widget_path_iter_add_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_add_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
 	return
 }
 
-func (_self_ *WidgetPath) IterAddRegion(pos int, name *C.gchar, flags C.GtkRegionFlags) () {
+func (_self_ *WidgetPath) IterAddRegion(pos int, name string, flags C.GtkRegionFlags) () {
 	_cgo_pos_ := (C.gint)(pos)
-	C._gtk_widget_path_iter_add_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, name, flags)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_add_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_, flags)
 	return
 }
 
@@ -17218,9 +18618,11 @@ func (_self_ *WidgetPath) IterClearRegions(pos int) () {
 	return
 }
 
-func (_self_ *WidgetPath) IterGetName(pos int) (_return_ *C.gchar) {
+func (_self_ *WidgetPath) IterGetName(pos int) (_go__return__ string) {
 	_cgo_pos_ := (C.gint)(pos)
+	var _return_ *C.gchar
 	_return_ = C._gtk_widget_path_iter_get_name((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -17244,15 +18646,21 @@ func (_self_ *WidgetPath) IterGetSiblings(pos int) (_return_ *C.GtkWidgetPath) {
 	return
 }
 
-func (_self_ *WidgetPath) IterHasClass(pos int, name *C.gchar) (_return_ C.gboolean) {
+func (_self_ *WidgetPath) IterHasClass(pos int, name string) (_return_ C.gboolean) {
 	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_has_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_widget_path_iter_has_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
 	return
 }
 
-func (_self_ *WidgetPath) IterHasName(pos int, name *C.gchar) (_return_ C.gboolean) {
+func (_self_ *WidgetPath) IterHasName(pos int, name string) (_return_ C.gboolean) {
 	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_has_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_widget_path_iter_has_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
 	return
 }
 
@@ -17274,9 +18682,12 @@ func (_self_ *WidgetPath) IterHasQregion(pos int, qname C.GQuark) (_return_ C.gb
 	return
 }
 
-func (_self_ *WidgetPath) IterHasRegion(pos int, name *C.gchar) (_return_ C.gboolean, flags *C.GtkRegionFlags) {
+func (_self_ *WidgetPath) IterHasRegion(pos int, name string) (_return_ C.gboolean, flags *C.GtkRegionFlags) {
 	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_has_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, name, flags)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_widget_path_iter_has_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_, flags)
 	return
 }
 
@@ -17292,21 +18703,30 @@ func (_self_ *WidgetPath) IterListRegions(pos int) (_return_ *C.GSList) {
 	return
 }
 
-func (_self_ *WidgetPath) IterRemoveClass(pos int, name *C.gchar) () {
+func (_self_ *WidgetPath) IterRemoveClass(pos int, name string) () {
 	_cgo_pos_ := (C.gint)(pos)
-	C._gtk_widget_path_iter_remove_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_remove_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
 	return
 }
 
-func (_self_ *WidgetPath) IterRemoveRegion(pos int, name *C.gchar) () {
+func (_self_ *WidgetPath) IterRemoveRegion(pos int, name string) () {
 	_cgo_pos_ := (C.gint)(pos)
-	C._gtk_widget_path_iter_remove_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_remove_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
 	return
 }
 
-func (_self_ *WidgetPath) IterSetName(pos int, name *C.gchar) () {
+func (_self_ *WidgetPath) IterSetName(pos int, name string) () {
 	_cgo_pos_ := (C.gint)(pos)
-	C._gtk_widget_path_iter_set_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, name)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_set_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
 	return
 }
 
@@ -17333,8 +18753,10 @@ func (_self_ *WidgetPath) Ref() (_return_ *C.GtkWidgetPath) {
 	return
 }
 
-func (_self_ *WidgetPath) ToString() (_return_ *C.char) {
+func (_self_ *WidgetPath) ToString() (_go__return__ string) {
+	var _return_ *C.char
 	_return_ = C._gtk_widget_path_to_string((*C.GtkWidgetPath)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -17355,8 +18777,10 @@ func WindowGetDefaultIconList() (_return_ *C.GList) {
 	return
 }
 
-func WindowGetDefaultIconName() (_return_ *C.gchar) {
+func WindowGetDefaultIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_default_icon_name()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -17375,8 +18799,11 @@ func WindowSetDefaultIcon(icon *C.GdkPixbuf) () {
 	return
 }
 
-func WindowSetDefaultIconFromFile(filename *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_window_set_default_icon_from_file(filename, _error_)
+func WindowSetDefaultIconFromFile(filename string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_return_ = C._gtk_window_set_default_icon_from_file(_cgo_filename_, _error_)
 	return
 }
 
@@ -17385,8 +18812,11 @@ func WindowSetDefaultIconList(list *C.GList) () {
 	return
 }
 
-func WindowSetDefaultIconName(name *C.gchar) () {
-	C._gtk_window_set_default_icon_name(name)
+func WindowSetDefaultIconName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_window_set_default_icon_name(_cgo_name_)
 	return
 }
 
@@ -17533,8 +18963,10 @@ func (_self_ *Window) GetIconList() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *Window) GetIconName() (_return_ *C.gchar) {
+func (_self_ *Window) GetIconName() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_icon_name((*C.GtkWindow)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -17579,8 +19011,10 @@ func (_self_ *Window) GetResizeGripArea() (_return_ C.gboolean, rect *C.GdkRecta
 	return
 }
 
-func (_self_ *Window) GetRole() (_return_ *C.gchar) {
+func (_self_ *Window) GetRole() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_role((*C.GtkWindow)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -17608,8 +19042,10 @@ func (_self_ *Window) GetSkipTaskbarHint() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Window) GetTitle() (_return_ *C.gchar) {
+func (_self_ *Window) GetTitle() (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_title((*C.GtkWindow)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -17671,8 +19107,11 @@ func (_self_ *Window) Move(x int, y int) () {
 	return
 }
 
-func (_self_ *Window) ParseGeometry(geometry *C.gchar) (_return_ C.gboolean) {
-	_return_ = C._gtk_window_parse_geometry((*C.GtkWindow)(_self_), geometry)
+func (_self_ *Window) ParseGeometry(geometry string) (_return_ C.gboolean) {
+	_cstring_geometry_ := C.CString(geometry)
+	_cgo_geometry_ := (*C.gchar)(unsafe.Pointer(_cstring_geometry_))
+	defer C.free(unsafe.Pointer(_cstring_geometry_))
+	_return_ = C._gtk_window_parse_geometry((*C.GtkWindow)(_self_), _cgo_geometry_)
 	return
 }
 
@@ -17821,8 +19260,11 @@ func (_self_ *Window) SetIcon(icon *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *Window) SetIconFromFile(filename *C.gchar) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_window_set_icon_from_file((*C.GtkWindow)(_self_), filename, _error_)
+func (_self_ *Window) SetIconFromFile(filename string) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_return_ = C._gtk_window_set_icon_from_file((*C.GtkWindow)(_self_), _cgo_filename_, _error_)
 	return
 }
 
@@ -17831,8 +19273,11 @@ func (_self_ *Window) SetIconList(list *C.GList) () {
 	return
 }
 
-func (_self_ *Window) SetIconName(name *C.gchar) () {
-	C._gtk_window_set_icon_name((*C.GtkWindow)(_self_), name)
+func (_self_ *Window) SetIconName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_window_set_icon_name((*C.GtkWindow)(_self_), _cgo_name_)
 	return
 }
 
@@ -17877,8 +19322,11 @@ func (_self_ *Window) SetResizable(resizable C.gboolean) () {
 	return
 }
 
-func (_self_ *Window) SetRole(role *C.gchar) () {
-	C._gtk_window_set_role((*C.GtkWindow)(_self_), role)
+func (_self_ *Window) SetRole(role string) () {
+	_cstring_role_ := C.CString(role)
+	_cgo_role_ := (*C.gchar)(unsafe.Pointer(_cstring_role_))
+	defer C.free(unsafe.Pointer(_cstring_role_))
+	C._gtk_window_set_role((*C.GtkWindow)(_self_), _cgo_role_)
 	return
 }
 
@@ -17897,13 +19345,19 @@ func (_self_ *Window) SetSkipTaskbarHint(setting C.gboolean) () {
 	return
 }
 
-func (_self_ *Window) SetStartupId(startup_id *C.gchar) () {
-	C._gtk_window_set_startup_id((*C.GtkWindow)(_self_), startup_id)
+func (_self_ *Window) SetStartupId(startup_id string) () {
+	_cstring_startup_id_ := C.CString(startup_id)
+	_cgo_startup_id_ := (*C.gchar)(unsafe.Pointer(_cstring_startup_id_))
+	defer C.free(unsafe.Pointer(_cstring_startup_id_))
+	C._gtk_window_set_startup_id((*C.GtkWindow)(_self_), _cgo_startup_id_)
 	return
 }
 
-func (_self_ *Window) SetTitle(title *C.gchar) () {
-	C._gtk_window_set_title((*C.GtkWindow)(_self_), title)
+func (_self_ *Window) SetTitle(title string) () {
+	_cstring_title_ := C.CString(title)
+	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
+	defer C.free(unsafe.Pointer(_cstring_title_))
+	C._gtk_window_set_title((*C.GtkWindow)(_self_), _cgo_title_)
 	return
 }
 
@@ -17922,8 +19376,14 @@ func (_self_ *Window) SetUrgencyHint(setting C.gboolean) () {
 	return
 }
 
-func (_self_ *Window) SetWmclass(wmclass_name *C.gchar, wmclass_class *C.gchar) () {
-	C._gtk_window_set_wmclass((*C.GtkWindow)(_self_), wmclass_name, wmclass_class)
+func (_self_ *Window) SetWmclass(wmclass_name string, wmclass_class string) () {
+	_cstring_wmclass_name_ := C.CString(wmclass_name)
+	_cgo_wmclass_name_ := (*C.gchar)(unsafe.Pointer(_cstring_wmclass_name_))
+	defer C.free(unsafe.Pointer(_cstring_wmclass_name_))
+	_cstring_wmclass_class_ := C.CString(wmclass_class)
+	_cgo_wmclass_class_ := (*C.gchar)(unsafe.Pointer(_cstring_wmclass_class_))
+	defer C.free(unsafe.Pointer(_cstring_wmclass_class_))
+	C._gtk_window_set_wmclass((*C.GtkWindow)(_self_), _cgo_wmclass_name_, _cgo_wmclass_class_)
 	return
 }
 
@@ -17995,42 +19455,56 @@ func AcceleratorGetDefaultModMask() (_return_ C.GdkModifierType) {
 	return
 }
 
-func AcceleratorGetLabel(accelerator_key uint, accelerator_mods C.GdkModifierType) (_return_ *C.gchar) {
+func AcceleratorGetLabel(accelerator_key uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
 	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
+	var _return_ *C.gchar
 	_return_ = C.gtk_accelerator_get_label(_cgo_accelerator_key_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func AcceleratorGetLabelWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_return_ *C.gchar) {
+func AcceleratorGetLabelWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
 	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
 	_cgo_keycode_ := (C.guint)(keycode)
+	var _return_ *C.gchar
 	_return_ = C.gtk_accelerator_get_label_with_keycode(display, _cgo_accelerator_key_, _cgo_keycode_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func AcceleratorName(accelerator_key uint, accelerator_mods C.GdkModifierType) (_return_ *C.gchar) {
+func AcceleratorName(accelerator_key uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
 	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
+	var _return_ *C.gchar
 	_return_ = C.gtk_accelerator_name(_cgo_accelerator_key_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func AcceleratorNameWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_return_ *C.gchar) {
+func AcceleratorNameWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
 	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
 	_cgo_keycode_ := (C.guint)(keycode)
+	var _return_ *C.gchar
 	_return_ = C.gtk_accelerator_name_with_keycode(display, _cgo_accelerator_key_, _cgo_keycode_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func AcceleratorParse(accelerator *C.gchar) (_go_accelerator_key_ uint, accelerator_mods *C.GdkModifierType) {
+func AcceleratorParse(accelerator string) (_go_accelerator_key_ uint, accelerator_mods *C.GdkModifierType) {
 	var accelerator_key C.guint
-	C._gtk_accelerator_parse(accelerator, &accelerator_key, accelerator_mods)
+	_cstring_accelerator_ := C.CString(accelerator)
+	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
+	defer C.free(unsafe.Pointer(_cstring_accelerator_))
+	C._gtk_accelerator_parse(_cgo_accelerator_, &accelerator_key, accelerator_mods)
 	_go_accelerator_key_ = (uint)(accelerator_key)
 	return
 }
 
-func AcceleratorParseWithKeycode(accelerator *C.gchar) (_go_accelerator_key_ uint, accelerator_codes unsafe.Pointer, accelerator_mods *C.GdkModifierType) {
+func AcceleratorParseWithKeycode(accelerator string) (_go_accelerator_key_ uint, accelerator_codes unsafe.Pointer, accelerator_mods *C.GdkModifierType) {
 	var accelerator_key C.guint
-	C._gtk_accelerator_parse_with_keycode(accelerator, &accelerator_key, accelerator_codes, accelerator_mods)
+	_cstring_accelerator_ := C.CString(accelerator)
+	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
+	defer C.free(unsafe.Pointer(_cstring_accelerator_))
+	C._gtk_accelerator_parse_with_keycode(_cgo_accelerator_, &accelerator_key, accelerator_codes, accelerator_mods)
 	_go_accelerator_key_ = (uint)(accelerator_key)
 	return
 }
@@ -18077,11 +19551,13 @@ func CairoTransformToWindow(cr *C.cairo_t, widget *C.GtkWidget, window *C.GdkWin
 	return
 }
 
-func CheckVersion(required_major uint, required_minor uint, required_micro uint) (_return_ *C.gchar) {
+func CheckVersion(required_major uint, required_minor uint, required_micro uint) (_go__return__ string) {
 	_cgo_required_major_ := (C.guint)(required_major)
 	_cgo_required_minor_ := (C.guint)(required_minor)
 	_cgo_required_micro_ := (C.guint)(required_micro)
+	var _return_ *C.gchar
 	_return_ = C._gtk_check_version(_cgo_required_major_, _cgo_required_minor_, _cgo_required_micro_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -18137,10 +19613,13 @@ func DragSetIconGicon(context *C.GdkDragContext, icon *C.GIcon, hot_x int, hot_y
 	return
 }
 
-func DragSetIconName(context *C.GdkDragContext, icon_name *C.gchar, hot_x int, hot_y int) () {
+func DragSetIconName(context *C.GdkDragContext, icon_name string, hot_x int, hot_y int) () {
 	_cgo_hot_x_ := (C.gint)(hot_x)
 	_cgo_hot_y_ := (C.gint)(hot_y)
-	C._gtk_drag_set_icon_name(context, icon_name, _cgo_hot_x_, _cgo_hot_y_)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_drag_set_icon_name(context, _cgo_icon_name_, _cgo_hot_x_, _cgo_hot_y_)
 	return
 }
 
@@ -18151,10 +19630,13 @@ func DragSetIconPixbuf(context *C.GdkDragContext, pixbuf *C.GdkPixbuf, hot_x int
 	return
 }
 
-func DragSetIconStock(context *C.GdkDragContext, stock_id *C.gchar, hot_x int, hot_y int) () {
+func DragSetIconStock(context *C.GdkDragContext, stock_id string, hot_x int, hot_y int) () {
 	_cgo_hot_x_ := (C.gint)(hot_x)
 	_cgo_hot_y_ := (C.gint)(hot_y)
-	C._gtk_drag_set_icon_stock(context, stock_id, _cgo_hot_x_, _cgo_hot_y_)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_drag_set_icon_stock(context, _cgo_stock_id_, _cgo_hot_x_, _cgo_hot_y_)
 	return
 }
 
@@ -18269,13 +19751,18 @@ func GrabGetCurrent() (_return_ *C.GtkWidget) {
 	return
 }
 
-func IconSizeFromName(name *C.gchar) (_return_ C.GtkIconSize) {
-	_return_ = C._gtk_icon_size_from_name(name)
+func IconSizeFromName(name string) (_return_ C.GtkIconSize) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_icon_size_from_name(_cgo_name_)
 	return
 }
 
-func IconSizeGetName(size C.GtkIconSize) (_return_ *C.gchar) {
+func IconSizeGetName(size C.GtkIconSize) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C._gtk_icon_size_get_name(size)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
@@ -18297,15 +19784,21 @@ func IconSizeLookupForSettings(settings *C.GtkSettings, size C.GtkIconSize) (_re
 	return
 }
 
-func IconSizeRegister(name *C.gchar, width int, height int) (_return_ C.GtkIconSize) {
+func IconSizeRegister(name string, width int, height int) (_return_ C.GtkIconSize) {
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
-	_return_ = C._gtk_icon_size_register(name, _cgo_width_, _cgo_height_)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_icon_size_register(_cgo_name_, _cgo_width_, _cgo_height_)
 	return
 }
 
-func IconSizeRegisterAlias(alias *C.gchar, target C.GtkIconSize) () {
-	C._gtk_icon_size_register_alias(alias, target)
+func IconSizeRegisterAlias(alias string, target C.GtkIconSize) () {
+	_cstring_alias_ := C.CString(alias)
+	_cgo_alias_ := (*C.gchar)(unsafe.Pointer(_cstring_alias_))
+	defer C.free(unsafe.Pointer(_cstring_alias_))
+	C._gtk_icon_size_register_alias(_cgo_alias_, target)
 	return
 }
 
@@ -18600,9 +20093,12 @@ func SetDebugFlags(flags uint) () {
 	return
 }
 
-func ShowUri(screen *C.GdkScreen, uri *C.gchar, timestamp uint32) (_return_ C.gboolean, _error_ unsafe.Pointer) {
+func ShowUri(screen *C.GdkScreen, uri string, timestamp uint32) (_return_ C.gboolean, _error_ unsafe.Pointer) {
 	_cgo_timestamp_ := (C.guint32)(timestamp)
-	_return_ = C._gtk_show_uri(screen, uri, _cgo_timestamp_, _error_)
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._gtk_show_uri(screen, _cgo_uri_, _cgo_timestamp_, _error_)
 	return
 }
 
@@ -18611,13 +20107,19 @@ func StockListIds() (_return_ *C.GSList) {
 	return
 }
 
-func StockLookup(stock_id *C.gchar) (_return_ C.gboolean, item *C.GtkStockItem) {
-	_return_ = C._gtk_stock_lookup(stock_id, item)
+func StockLookup(stock_id string) (_return_ C.gboolean, item *C.GtkStockItem) {
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	_return_ = C._gtk_stock_lookup(_cgo_stock_id_, item)
 	return
 }
 
-func StockSetTranslateFunc(domain *C.gchar, func_ C.GtkTranslateFunc, data C.gpointer, notify C.GDestroyNotify) () {
-	C._gtk_stock_set_translate_func(domain, func_, data, notify)
+func StockSetTranslateFunc(domain string, func_ C.GtkTranslateFunc, data C.gpointer, notify C.GDestroyNotify) () {
+	_cstring_domain_ := C.CString(domain)
+	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
+	defer C.free(unsafe.Pointer(_cstring_domain_))
+	C._gtk_stock_set_translate_func(_cgo_domain_, func_, data, notify)
 	return
 }
 
@@ -18628,13 +20130,22 @@ func TargetTableNewFromList(list *C.GtkTargetList) (_return_ *C.GtkTargetEntry, 
 	return
 }
 
-func TestCreateSimpleWindow(window_title *C.gchar, dialog_text *C.gchar) (_return_ *C.GtkWidget) {
-	_return_ = C._gtk_test_create_simple_window(window_title, dialog_text)
+func TestCreateSimpleWindow(window_title string, dialog_text string) (_return_ *C.GtkWidget) {
+	_cstring_window_title_ := C.CString(window_title)
+	_cgo_window_title_ := (*C.gchar)(unsafe.Pointer(_cstring_window_title_))
+	defer C.free(unsafe.Pointer(_cstring_window_title_))
+	_cstring_dialog_text_ := C.CString(dialog_text)
+	_cgo_dialog_text_ := (*C.gchar)(unsafe.Pointer(_cstring_dialog_text_))
+	defer C.free(unsafe.Pointer(_cstring_dialog_text_))
+	_return_ = C._gtk_test_create_simple_window(_cgo_window_title_, _cgo_dialog_text_)
 	return
 }
 
-func TestFindLabel(widget *C.GtkWidget, label_pattern *C.gchar) (_return_ *C.GtkWidget) {
-	_return_ = C._gtk_test_find_label(widget, label_pattern)
+func TestFindLabel(widget *C.GtkWidget, label_pattern string) (_return_ *C.GtkWidget) {
+	_cstring_label_pattern_ := C.CString(label_pattern)
+	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
+	_return_ = C._gtk_test_find_label(widget, _cgo_label_pattern_)
 	return
 }
 
@@ -18643,8 +20154,11 @@ func TestFindSibling(base_widget *C.GtkWidget, widget_type C.GType) (_return_ *C
 	return
 }
 
-func TestFindWidget(widget *C.GtkWidget, label_pattern *C.gchar, widget_type C.GType) (_return_ *C.GtkWidget) {
-	_return_ = C._gtk_test_find_widget(widget, label_pattern, widget_type)
+func TestFindWidget(widget *C.GtkWidget, label_pattern string, widget_type C.GType) (_return_ *C.GtkWidget) {
+	_cstring_label_pattern_ := C.CString(label_pattern)
+	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
+	_return_ = C._gtk_test_find_widget(widget, _cgo_label_pattern_, widget_type)
 	return
 }
 
@@ -18676,13 +20190,18 @@ func TestSpinButtonClick(spinner *C.GtkSpinButton, button uint, upwards C.gboole
 	return
 }
 
-func TestTextGet(widget *C.GtkWidget) (_return_ *C.gchar) {
+func TestTextGet(widget *C.GtkWidget) (_go__return__ string) {
+	var _return_ *C.gchar
 	_return_ = C.gtk_test_text_get(widget)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func TestTextSet(widget *C.GtkWidget, string_ *C.gchar) () {
-	C._gtk_test_text_set(widget, string_)
+func TestTextSet(widget *C.GtkWidget, string_ string) () {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	C._gtk_test_text_set(widget, _cgo_string__)
 	return
 }
 
