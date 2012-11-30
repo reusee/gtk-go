@@ -35,22 +35,40 @@ class MyVisitor : public clang::RecursiveASTVisitor<MyVisitor> {
     bool VisitFunctionDecl(clang::FunctionDecl *func) {
       clang::DeclarationName name_info = func->getNameInfo().getName();
       string name = name_info.getAsString();
-      cout << name;
+      cout << "  '" << name << "': Spec(" << endl;
 
       clang::QualType ret_type = func->getResultType();
       string ret_type_str = ret_type.getAsString();
-      cout << "|" << ret_type_str;
+      cout << "    return_type = '" << ret_type_str << "'," << endl;
 
+      cout << "    parameters = [" << endl;
       for (clang::FunctionDecl::param_iterator pi = func->param_begin(), end = func->param_end();
           pi != end; ++pi) {
         clang::QualType param_type = (*pi)->getOriginalType();
         string param_type_str = param_type.getAsString();
-        cout << "|" << param_type_str;
-      }
 
-      cout << endl;
+        clang::IdentifierInfo* name_id = (*pi)->getIdentifier();
+
+        cout << "      Param(" << endl;
+        cout << "        type = '" << param_type_str << "'," << endl;
+        cout << "        name = '";
+        if (name_id != NULL) {
+          cout << name_id->getName().str();
+        }
+        cout << "'," << endl;
+        cout << "      )," << endl;
+      }
+      cout << "    ]," << endl;
+
+      cout << "  )," << endl;
       return true;
     }
+
+    //bool VisitParmVarDecl(clang::ParmVarDecl *D) {
+    //  cout << "YES" << endl;
+    //  cout << D->getOriginalType().getAsString() << endl;
+    //  return true;
+    //}
 };
 
 class MyASTConsumer : public clang::ASTConsumer {
@@ -168,7 +186,14 @@ int main(int argc, char* argv[]) {
   ci.getPreprocessor().EnterMainSourceFile();
   ci.getDiagnosticClient().BeginSourceFile(ci.getLangOpts(), &ci.getPreprocessor());
 
+  cout << "\
+from collections import namedtuple\n\
+Spec = namedtuple('Spec', ['return_type', 'parameters'])\n\
+Param = namedtuple('Param', ['name', 'type'])\n\
+";
+  cout << "func_specs = {" << endl;
   clang::ParseAST(ci.getPreprocessor(), astConsumer, ci.getASTContext());
+  cout << "}";
 
   ci.getDiagnosticClient().EndSourceFile();
   //ci.getASTContext().Idents.PrintStats();
