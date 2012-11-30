@@ -1,6 +1,6 @@
 class Value:
   def __init__(self):
-    self.gir_param_info = None
+    self.gir_info = None
 
     self.c_return_type = None
 
@@ -16,6 +16,8 @@ class Value:
 
     self.receiver_name = '_self_'
     self.receiver_type = None
+
+    self.cgo_argument = None
 
 class FunctionGenerator:
   def __init__(self):

@@ -19,6 +19,7 @@ def handleFunction(parser, function, klass = None):
       map_glib_numeric_parameters_to_go_type,
       map_glib_numeric_returns_to_go_type,
       map_string_parameters,
+      map_string_returns,
   ]
 
   for processor in processors:
@@ -120,6 +121,7 @@ def collect_go_func_info(parser, generator, function, klass):
     value = generator.c_return_value
     value.go_return_name = '_return_'
     value.go_return_type = convert_to_cgo_type(value.c_return_type)
+    value.gir_info = function.retval
     generator.go_returns.append(value)
 
   # go parameter names and types and cgo arguments
@@ -128,7 +130,7 @@ def collect_go_func_info(parser, generator, function, klass):
     values = values[1:]
   for i, param in enumerate(function.parameters):
     value = values[i]
-    value.gir_param_info = param
+    value.gir_info = param
     name = value.c_parameter_name
     if is_go_word(name):
       name += '_'
@@ -173,8 +175,9 @@ def convert_to_cgo_type(c_type):
 
 def dereference_basic_type_out_param(parser, generator, function, klass):
   for ret in generator.go_returns:
-    if ret.gir_param_info and ret.gir_param_info.type.is_equiv(ast.BASIC_GIR_TYPES):
+    if ret.gir_info and ret.gir_info.type.is_equiv(ast.BASIC_GIR_TYPES):
       if ret.go_return_type[0] != '*': continue
+      if not isinstance(ret.gir_info, ast.Parameter): continue
       ret.go_return_type = ret.go_return_type[1:]
       ret.cgo_argument = '&' + ret.cgo_argument
 
@@ -238,14 +241,27 @@ def map_glib_numeric_returns_to_go_type(parser, generator, function, klass):
 
 def map_string_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
-    if param.gir_param_info.type.resolved in ['filename', 'utf8']:
+    if param.gir_info.type.resolved in ['filename', 'utf8']:
       generator.statements_before_cgo_call.extend([
         '_cstring_%s_ := C.CString(%s)' % (param.go_parameter_name, param.go_parameter_name),
         '_cgo_%s_ := (%s)(unsafe.Pointer(_cstring_%s_))' % (
           param.go_parameter_name, param.go_parameter_type, param.go_parameter_name),
         ])
-      if param.gir_param_info.transfer == 'none':
+      if param.gir_info.transfer == 'none':
         generator.statements_before_cgo_call.append(
             'defer C.free(unsafe.Pointer(_cstring_%s_))' % param.go_parameter_name)
       param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
       param.go_parameter_type = 'string'
+
+def map_string_returns(parser, generator, function, klass):
+  for ret in generator.go_returns:
+    if ret.gir_info is None: continue
+    if ret.gir_info.type.resolved in ['filename', 'utf8']:
+      if ret.go_return_type == 'unsafe.Pointer': continue 
+      print ret.go_return_type, function.name
+      generator.statements_before_cgo_call.append('var %s %s' % (
+        ret.go_return_name, ret.go_return_type))
+      generator.statements_after_cgo_call.append('_go_%s_ = C.GoString((*C.char)(unsafe.Pointer(%s)))'
+          % (ret.go_return_name, ret.go_return_name))
+      ret.go_return_name = '_go_%s_' % ret.go_return_name
+      ret.go_return_type = 'string'
