@@ -48,20 +48,11 @@ gchar * _gtk_about_dialog_get_website(GtkAboutDialog * _self_) {
 gchar * _gtk_about_dialog_get_website_label(GtkAboutDialog * _self_) {
 	return (gchar *)gtk_about_dialog_get_website_label(_self_);
 }
-void _gtk_about_dialog_set_artists(GtkAboutDialog * _self_, void * artists) {
-	(void)gtk_about_dialog_set_artists(_self_, (const gchar **)(artists));
-}
-void _gtk_about_dialog_set_authors(GtkAboutDialog * _self_, void * authors) {
-	(void)gtk_about_dialog_set_authors(_self_, (const gchar **)(authors));
-}
 void _gtk_about_dialog_set_comments(GtkAboutDialog * _self_, gchar * comments) {
 	(void)gtk_about_dialog_set_comments(_self_, (const gchar *)(comments));
 }
 void _gtk_about_dialog_set_copyright(GtkAboutDialog * _self_, gchar * copyright) {
 	(void)gtk_about_dialog_set_copyright(_self_, (const gchar *)(copyright));
-}
-void _gtk_about_dialog_set_documenters(GtkAboutDialog * _self_, void * documenters) {
-	(void)gtk_about_dialog_set_documenters(_self_, (const gchar **)(documenters));
 }
 void _gtk_about_dialog_set_license(GtkAboutDialog * _self_, gchar * license) {
 	(void)gtk_about_dialog_set_license(_self_, (const gchar *)(license));
@@ -162,24 +153,6 @@ GtkActionGroup * _gtk_action_group_new(gchar * name) {
 void _gtk_action_group_add_action_with_accel(GtkActionGroup * _self_, GtkAction * action, gchar * accelerator) {
 	(void)gtk_action_group_add_action_with_accel(_self_, action, (const gchar *)(accelerator));
 }
-void _gtk_action_group_add_actions(GtkActionGroup * _self_, GtkActionEntry * entries, guint n_entries, gpointer user_data) {
-	(void)gtk_action_group_add_actions(_self_, (const GtkActionEntry *)(entries), n_entries, user_data);
-}
-void _gtk_action_group_add_actions_full(GtkActionGroup * _self_, GtkActionEntry * entries, guint n_entries, gpointer user_data, GDestroyNotify destroy) {
-	(void)gtk_action_group_add_actions_full(_self_, (const GtkActionEntry *)(entries), n_entries, user_data, destroy);
-}
-void _gtk_action_group_add_radio_actions(GtkActionGroup * _self_, GtkRadioActionEntry * entries, guint n_entries, gint value, GCallback on_change, gpointer user_data) {
-	(void)gtk_action_group_add_radio_actions(_self_, (const GtkRadioActionEntry *)(entries), n_entries, value, on_change, user_data);
-}
-void _gtk_action_group_add_radio_actions_full(GtkActionGroup * _self_, GtkRadioActionEntry * entries, guint n_entries, gint value, GCallback on_change, gpointer user_data, GDestroyNotify destroy) {
-	(void)gtk_action_group_add_radio_actions_full(_self_, (const GtkRadioActionEntry *)(entries), n_entries, value, on_change, user_data, destroy);
-}
-void _gtk_action_group_add_toggle_actions(GtkActionGroup * _self_, GtkToggleActionEntry * entries, guint n_entries, gpointer user_data) {
-	(void)gtk_action_group_add_toggle_actions(_self_, (const GtkToggleActionEntry *)(entries), n_entries, user_data);
-}
-void _gtk_action_group_add_toggle_actions_full(GtkActionGroup * _self_, GtkToggleActionEntry * entries, guint n_entries, gpointer user_data, GDestroyNotify destroy) {
-	(void)gtk_action_group_add_toggle_actions_full(_self_, (const GtkToggleActionEntry *)(entries), n_entries, user_data, destroy);
-}
 GtkAction * _gtk_action_group_get_action(GtkActionGroup * _self_, gchar * action_name) {
 	return (GtkAction *)gtk_action_group_get_action(_self_, (const gchar *)(action_name));
 }
@@ -261,23 +234,14 @@ GtkBindingSet * _gtk_binding_set_new(gchar * set_name) {
 GtkBorder * _gtk_border_copy(GtkBorder * _self_) {
 	return (GtkBorder *)gtk_border_copy((const GtkBorder *)(_self_));
 }
-guint _gtk_builder_add_from_file(GtkBuilder * _self_, gchar * filename, void * _error_) {
-	return (guint)gtk_builder_add_from_file(_self_, (const gchar *)(filename), (GError **)(_error_));
+guint _gtk_builder_add_from_file(GtkBuilder * _self_, gchar * filename, void * error) {
+	return (guint)gtk_builder_add_from_file(_self_, (const gchar *)(filename), (GError **)(error));
 }
-guint _gtk_builder_add_from_resource(GtkBuilder * _self_, gchar * resource_path, void * _error_) {
-	return (guint)gtk_builder_add_from_resource(_self_, (const gchar *)(resource_path), (GError **)(_error_));
+guint _gtk_builder_add_from_resource(GtkBuilder * _self_, gchar * resource_path, void * error) {
+	return (guint)gtk_builder_add_from_resource(_self_, (const gchar *)(resource_path), (GError **)(error));
 }
-guint _gtk_builder_add_from_string(GtkBuilder * _self_, gchar * buffer, gsize length, void * _error_) {
-	return (guint)gtk_builder_add_from_string(_self_, (const gchar *)(buffer), length, (GError **)(_error_));
-}
-guint _gtk_builder_add_objects_from_file(GtkBuilder * _self_, gchar * filename, void * object_ids, void * _error_) {
-	return (guint)gtk_builder_add_objects_from_file(_self_, (const gchar *)(filename), (gchar **)(object_ids), (GError **)(_error_));
-}
-guint _gtk_builder_add_objects_from_resource(GtkBuilder * _self_, gchar * resource_path, void * object_ids, void * _error_) {
-	return (guint)gtk_builder_add_objects_from_resource(_self_, (const gchar *)(resource_path), (gchar **)(object_ids), (GError **)(_error_));
-}
-guint _gtk_builder_add_objects_from_string(GtkBuilder * _self_, gchar * buffer, gsize length, void * object_ids, void * _error_) {
-	return (guint)gtk_builder_add_objects_from_string(_self_, (const gchar *)(buffer), length, (gchar **)(object_ids), (GError **)(_error_));
+guint _gtk_builder_add_from_string(GtkBuilder * _self_, gchar * buffer, gsize length, void * error) {
+	return (guint)gtk_builder_add_from_string(_self_, (const gchar *)(buffer), length, (GError **)(error));
 }
 GObject * _gtk_builder_get_object(GtkBuilder * _self_, gchar * name) {
 	return (GObject *)gtk_builder_get_object(_self_, (const gchar *)(name));
@@ -291,11 +255,11 @@ GType _gtk_builder_get_type_from_name(GtkBuilder * _self_, char * type_name) {
 void _gtk_builder_set_translation_domain(GtkBuilder * _self_, gchar * domain) {
 	(void)gtk_builder_set_translation_domain(_self_, (const gchar *)(domain));
 }
-gboolean _gtk_builder_value_from_string(GtkBuilder * _self_, GParamSpec * pspec, gchar * string, GValue * value, void * _error_) {
-	return (gboolean)gtk_builder_value_from_string(_self_, pspec, (const gchar *)(string), value, (GError **)(_error_));
+gboolean _gtk_builder_value_from_string(GtkBuilder * _self_, GParamSpec * pspec, gchar * string, GValue * value, void * error) {
+	return (gboolean)gtk_builder_value_from_string(_self_, pspec, (const gchar *)(string), value, (GError **)(error));
 }
-gboolean _gtk_builder_value_from_string_type(GtkBuilder * _self_, GType type, gchar * string, GValue * value, void * _error_) {
-	return (gboolean)gtk_builder_value_from_string_type(_self_, type, (const gchar *)(string), value, (GError **)(_error_));
+gboolean _gtk_builder_value_from_string_type(GtkBuilder * _self_, GType type, gchar * string, GValue * value, void * error) {
+	return (gboolean)gtk_builder_value_from_string_type(_self_, type, (const gchar *)(string), value, (GError **)(error));
 }
 GtkWidget * _gtk_button_new_from_stock(gchar * stock_id) {
 	return (GtkWidget *)gtk_button_new_from_stock((const gchar *)(stock_id));
@@ -393,20 +357,8 @@ GtkWidget * _gtk_check_menu_item_new_with_label(gchar * label) {
 GtkWidget * _gtk_check_menu_item_new_with_mnemonic(gchar * label) {
 	return (GtkWidget *)gtk_check_menu_item_new_with_mnemonic((const gchar *)(label));
 }
-void _gtk_clipboard_set_can_store(GtkClipboard * _self_, GtkTargetEntry * targets, gint n_targets) {
-	(void)gtk_clipboard_set_can_store(_self_, (const GtkTargetEntry *)(targets), n_targets);
-}
 void _gtk_clipboard_set_text(GtkClipboard * _self_, gchar * text, gint len) {
 	(void)gtk_clipboard_set_text(_self_, (const gchar *)(text), len);
-}
-gboolean _gtk_clipboard_set_with_data(GtkClipboard * _self_, GtkTargetEntry * targets, guint n_targets, GtkClipboardGetFunc get_func, GtkClipboardClearFunc clear_func, gpointer user_data) {
-	return (gboolean)gtk_clipboard_set_with_data(_self_, (const GtkTargetEntry *)(targets), n_targets, get_func, clear_func, user_data);
-}
-gboolean _gtk_clipboard_set_with_owner(GtkClipboard * _self_, GtkTargetEntry * targets, guint n_targets, GtkClipboardGetFunc get_func, GtkClipboardClearFunc clear_func, GObject * owner) {
-	return (gboolean)gtk_clipboard_set_with_owner(_self_, (const GtkTargetEntry *)(targets), n_targets, get_func, clear_func, owner);
-}
-gboolean _gtk_clipboard_wait_for_targets(GtkClipboard * _self_, void * targets, gint * n_targets) {
-	return (gboolean)gtk_clipboard_wait_for_targets(_self_, (GdkAtom **)(targets), n_targets);
 }
 void * _gtk_clipboard_wait_for_uris(GtkClipboard * _self_) {
 	return (void *)gtk_clipboard_wait_for_uris(_self_);
@@ -474,14 +426,11 @@ void * _gtk_container_class_list_child_properties(GtkContainerClass * _self_, gu
 GtkCssProvider * _gtk_css_provider_get_named(gchar * name, gchar * variant) {
 	return (GtkCssProvider *)gtk_css_provider_get_named((const gchar *)(name), (const gchar *)(variant));
 }
-gboolean _gtk_css_provider_load_from_data(GtkCssProvider * _self_, gchar * data, gssize length, void * _error_) {
-	return (gboolean)gtk_css_provider_load_from_data(_self_, (const gchar *)(data), length, (GError **)(_error_));
+gboolean _gtk_css_provider_load_from_file(GtkCssProvider * _self_, GFile * file, void * error) {
+	return (gboolean)gtk_css_provider_load_from_file(_self_, file, (GError **)(error));
 }
-gboolean _gtk_css_provider_load_from_file(GtkCssProvider * _self_, GFile * file, void * _error_) {
-	return (gboolean)gtk_css_provider_load_from_file(_self_, file, (GError **)(_error_));
-}
-gboolean _gtk_css_provider_load_from_path(GtkCssProvider * _self_, gchar * path, void * _error_) {
-	return (gboolean)gtk_css_provider_load_from_path(_self_, (const gchar *)(path), (GError **)(_error_));
+gboolean _gtk_css_provider_load_from_path(GtkCssProvider * _self_, gchar * path, void * error) {
+	return (gboolean)gtk_css_provider_load_from_path(_self_, (const gchar *)(path), (GError **)(error));
 }
 guint _gtk_css_section_get_end_line(GtkCssSection * _self_) {
 	return (guint)gtk_css_section_get_end_line((const GtkCssSection *)(_self_));
@@ -657,29 +606,23 @@ void _gtk_icon_factory_add(GtkIconFactory * _self_, gchar * stock_id, GtkIconSet
 GtkIconSet * _gtk_icon_factory_lookup(GtkIconFactory * _self_, gchar * stock_id) {
 	return (GtkIconSet *)gtk_icon_factory_lookup(_self_, (const gchar *)(stock_id));
 }
-gboolean _gtk_icon_info_get_attach_points(GtkIconInfo * _self_, void * points, gint * n_points) {
-	return (gboolean)gtk_icon_info_get_attach_points(_self_, (GdkPoint **)(points), n_points);
-}
 gchar * _gtk_icon_info_get_display_name(GtkIconInfo * _self_) {
 	return (gchar *)gtk_icon_info_get_display_name(_self_);
 }
 gchar * _gtk_icon_info_get_filename(GtkIconInfo * _self_) {
 	return (gchar *)gtk_icon_info_get_filename(_self_);
 }
-GdkPixbuf * _gtk_icon_info_load_icon(GtkIconInfo * _self_, void * _error_) {
-	return (GdkPixbuf *)gtk_icon_info_load_icon(_self_, (GError **)(_error_));
+GdkPixbuf * _gtk_icon_info_load_icon(GtkIconInfo * _self_, void * error) {
+	return (GdkPixbuf *)gtk_icon_info_load_icon(_self_, (GError **)(error));
 }
-GdkPixbuf * _gtk_icon_info_load_symbolic(GtkIconInfo * _self_, GdkRGBA * fg, GdkRGBA * success_color, GdkRGBA * warning_color, GdkRGBA * error_color, gboolean * was_symbolic, void * _error_) {
-	return (GdkPixbuf *)gtk_icon_info_load_symbolic(_self_, (const GdkRGBA *)(fg), (const GdkRGBA *)(success_color), (const GdkRGBA *)(warning_color), (const GdkRGBA *)(error_color), was_symbolic, (GError **)(_error_));
+GdkPixbuf * _gtk_icon_info_load_symbolic(GtkIconInfo * _self_, GdkRGBA * fg, GdkRGBA * success_color, GdkRGBA * warning_color, GdkRGBA * error_color, gboolean * was_symbolic, void * error) {
+	return (GdkPixbuf *)gtk_icon_info_load_symbolic(_self_, (const GdkRGBA *)(fg), (const GdkRGBA *)(success_color), (const GdkRGBA *)(warning_color), (const GdkRGBA *)(error_color), was_symbolic, (GError **)(error));
 }
-GdkPixbuf * _gtk_icon_info_load_symbolic_for_context(GtkIconInfo * _self_, GtkStyleContext * context, gboolean * was_symbolic, void * _error_) {
-	return (GdkPixbuf *)gtk_icon_info_load_symbolic_for_context(_self_, context, was_symbolic, (GError **)(_error_));
+GdkPixbuf * _gtk_icon_info_load_symbolic_for_context(GtkIconInfo * _self_, GtkStyleContext * context, gboolean * was_symbolic, void * error) {
+	return (GdkPixbuf *)gtk_icon_info_load_symbolic_for_context(_self_, context, was_symbolic, (GError **)(error));
 }
 void _gtk_icon_set_add_source(GtkIconSet * _self_, GtkIconSource * source) {
 	(void)gtk_icon_set_add_source(_self_, (const GtkIconSource *)(source));
-}
-void _gtk_icon_set_get_sizes(GtkIconSet * _self_, void * sizes, gint * n_sizes) {
-	(void)gtk_icon_set_get_sizes(_self_, (GtkIconSize **)(sizes), n_sizes);
 }
 GtkIconSource * _gtk_icon_source_copy(GtkIconSource * _self_) {
 	return (GtkIconSource *)gtk_icon_source_copy((const GtkIconSource *)(_self_));
@@ -723,14 +666,8 @@ void _gtk_icon_theme_add_builtin_icon(gchar * icon_name, gint size, GdkPixbuf * 
 void _gtk_icon_theme_append_search_path(GtkIconTheme * _self_, gchar * path) {
 	(void)gtk_icon_theme_append_search_path(_self_, (const gchar *)(path));
 }
-GtkIconInfo * _gtk_icon_theme_choose_icon(GtkIconTheme * _self_, void * icon_names, gint size, GtkIconLookupFlags flags) {
-	return (GtkIconInfo *)gtk_icon_theme_choose_icon(_self_, (const gchar **)(icon_names), size, flags);
-}
 gint * _gtk_icon_theme_get_icon_sizes(GtkIconTheme * _self_, gchar * icon_name) {
 	return (gint *)gtk_icon_theme_get_icon_sizes(_self_, (const gchar *)(icon_name));
-}
-void _gtk_icon_theme_get_search_path(GtkIconTheme * _self_, void * path, gint * n_elements) {
-	(void)gtk_icon_theme_get_search_path(_self_, (gchar ***)(path), n_elements);
 }
 gboolean _gtk_icon_theme_has_icon(GtkIconTheme * _self_, gchar * icon_name) {
 	return (gboolean)gtk_icon_theme_has_icon(_self_, (const gchar *)(icon_name));
@@ -738,8 +675,8 @@ gboolean _gtk_icon_theme_has_icon(GtkIconTheme * _self_, gchar * icon_name) {
 GList * _gtk_icon_theme_list_icons(GtkIconTheme * _self_, gchar * context) {
 	return (GList *)gtk_icon_theme_list_icons(_self_, (const gchar *)(context));
 }
-GdkPixbuf * _gtk_icon_theme_load_icon(GtkIconTheme * _self_, gchar * icon_name, gint size, GtkIconLookupFlags flags, void * _error_) {
-	return (GdkPixbuf *)gtk_icon_theme_load_icon(_self_, (const gchar *)(icon_name), size, flags, (GError **)(_error_));
+GdkPixbuf * _gtk_icon_theme_load_icon(GtkIconTheme * _self_, gchar * icon_name, gint size, GtkIconLookupFlags flags, void * error) {
+	return (GdkPixbuf *)gtk_icon_theme_load_icon(_self_, (const gchar *)(icon_name), size, flags, (GError **)(error));
 }
 GtkIconInfo * _gtk_icon_theme_lookup_icon(GtkIconTheme * _self_, gchar * icon_name, gint size, GtkIconLookupFlags flags) {
 	return (GtkIconInfo *)gtk_icon_theme_lookup_icon(_self_, (const gchar *)(icon_name), size, flags);
@@ -749,15 +686,6 @@ void _gtk_icon_theme_prepend_search_path(GtkIconTheme * _self_, gchar * path) {
 }
 void _gtk_icon_theme_set_custom_theme(GtkIconTheme * _self_, gchar * theme_name) {
 	(void)gtk_icon_theme_set_custom_theme(_self_, (const gchar *)(theme_name));
-}
-void _gtk_icon_theme_set_search_path(GtkIconTheme * _self_, void * path, gint n_elements) {
-	(void)gtk_icon_theme_set_search_path(_self_, (const gchar **)(path), n_elements);
-}
-void _gtk_icon_view_enable_model_drag_dest(GtkIconView * _self_, GtkTargetEntry * targets, gint n_targets, GdkDragAction actions) {
-	(void)gtk_icon_view_enable_model_drag_dest(_self_, (const GtkTargetEntry *)(targets), n_targets, actions);
-}
-void _gtk_icon_view_enable_model_drag_source(GtkIconView * _self_, GdkModifierType start_button_mask, GtkTargetEntry * targets, gint n_targets, GdkDragAction actions) {
-	(void)gtk_icon_view_enable_model_drag_source(_self_, start_button_mask, (const GtkTargetEntry *)(targets), n_targets, actions);
 }
 gboolean _gtk_icon_view_get_cursor(GtkIconView * _self_, void * path, void * cell) {
 	return (gboolean)gtk_icon_view_get_cursor(_self_, (GtkTreePath **)(path), (GtkCellRenderer **)(cell));
@@ -954,20 +882,20 @@ void _gtk_numerable_icon_set_background_icon_name(GtkNumerableIcon * _self_, gch
 void _gtk_numerable_icon_set_label(GtkNumerableIcon * _self_, gchar * label) {
 	(void)gtk_numerable_icon_set_label(_self_, (const gchar *)(label));
 }
-GtkPageSetup * _gtk_page_setup_new_from_file(gchar * file_name, void * _error_) {
-	return (GtkPageSetup *)gtk_page_setup_new_from_file((const gchar *)(file_name), (GError **)(_error_));
+GtkPageSetup * _gtk_page_setup_new_from_file(gchar * file_name, void * error) {
+	return (GtkPageSetup *)gtk_page_setup_new_from_file((const gchar *)(file_name), (GError **)(error));
 }
-GtkPageSetup * _gtk_page_setup_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * _error_) {
-	return (GtkPageSetup *)gtk_page_setup_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(_error_));
+GtkPageSetup * _gtk_page_setup_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * error) {
+	return (GtkPageSetup *)gtk_page_setup_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(error));
 }
-gboolean _gtk_page_setup_load_file(GtkPageSetup * _self_, char * file_name, void * _error_) {
-	return (gboolean)gtk_page_setup_load_file(_self_, (const char *)(file_name), (GError **)(_error_));
+gboolean _gtk_page_setup_load_file(GtkPageSetup * _self_, char * file_name, void * error) {
+	return (gboolean)gtk_page_setup_load_file(_self_, (const char *)(file_name), (GError **)(error));
 }
-gboolean _gtk_page_setup_load_key_file(GtkPageSetup * _self_, GKeyFile * key_file, gchar * group_name, void * _error_) {
-	return (gboolean)gtk_page_setup_load_key_file(_self_, key_file, (const gchar *)(group_name), (GError **)(_error_));
+gboolean _gtk_page_setup_load_key_file(GtkPageSetup * _self_, GKeyFile * key_file, gchar * group_name, void * error) {
+	return (gboolean)gtk_page_setup_load_key_file(_self_, key_file, (const gchar *)(group_name), (GError **)(error));
 }
-gboolean _gtk_page_setup_to_file(GtkPageSetup * _self_, char * file_name, void * _error_) {
-	return (gboolean)gtk_page_setup_to_file(_self_, (const char *)(file_name), (GError **)(_error_));
+gboolean _gtk_page_setup_to_file(GtkPageSetup * _self_, char * file_name, void * error) {
+	return (gboolean)gtk_page_setup_to_file(_self_, (const char *)(file_name), (GError **)(error));
 }
 void _gtk_page_setup_to_key_file(GtkPageSetup * _self_, GKeyFile * key_file, gchar * group_name) {
 	(void)gtk_page_setup_to_key_file(_self_, key_file, (const gchar *)(group_name));
@@ -978,8 +906,8 @@ GtkPaperSize * _gtk_paper_size_new(gchar * name) {
 GtkPaperSize * _gtk_paper_size_new_custom(gchar * name, gchar * display_name, gdouble width, gdouble height, GtkUnit unit) {
 	return (GtkPaperSize *)gtk_paper_size_new_custom((const gchar *)(name), (const gchar *)(display_name), width, height, unit);
 }
-GtkPaperSize * _gtk_paper_size_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * _error_) {
-	return (GtkPaperSize *)gtk_paper_size_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(_error_));
+GtkPaperSize * _gtk_paper_size_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * error) {
+	return (GtkPaperSize *)gtk_paper_size_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(error));
 }
 GtkPaperSize * _gtk_paper_size_new_from_ppd(gchar * ppd_name, gchar * ppd_display_name, gdouble width, gdouble height) {
 	return (GtkPaperSize *)gtk_paper_size_new_from_ppd((const gchar *)(ppd_name), (const gchar *)(ppd_display_name), width, height);
@@ -999,14 +927,14 @@ gchar * _gtk_paper_size_get_ppd_name(GtkPaperSize * _self_) {
 void _gtk_paper_size_to_key_file(GtkPaperSize * _self_, GKeyFile * key_file, gchar * group_name) {
 	(void)gtk_paper_size_to_key_file(_self_, key_file, (const gchar *)(group_name));
 }
-void _gtk_print_operation_get_error(GtkPrintOperation * _self_, void * _error_) {
-	(void)gtk_print_operation_get_error(_self_, (GError **)(_error_));
+void _gtk_print_operation_get_error(GtkPrintOperation * _self_, void * error) {
+	(void)gtk_print_operation_get_error(_self_, (GError **)(error));
 }
 gchar * _gtk_print_operation_get_status_string(GtkPrintOperation * _self_) {
 	return (gchar *)gtk_print_operation_get_status_string(_self_);
 }
-GtkPrintOperationResult _gtk_print_operation_run(GtkPrintOperation * _self_, GtkPrintOperationAction action, GtkWindow * parent, void * _error_) {
-	return (GtkPrintOperationResult)gtk_print_operation_run(_self_, action, parent, (GError **)(_error_));
+GtkPrintOperationResult _gtk_print_operation_run(GtkPrintOperation * _self_, GtkPrintOperationAction action, GtkWindow * parent, void * error) {
+	return (GtkPrintOperationResult)gtk_print_operation_run(_self_, action, parent, (GError **)(error));
 }
 void _gtk_print_operation_set_custom_tab_label(GtkPrintOperation * _self_, gchar * label) {
 	(void)gtk_print_operation_set_custom_tab_label(_self_, (const gchar *)(label));
@@ -1017,11 +945,11 @@ void _gtk_print_operation_set_export_filename(GtkPrintOperation * _self_, gchar 
 void _gtk_print_operation_set_job_name(GtkPrintOperation * _self_, gchar * job_name) {
 	(void)gtk_print_operation_set_job_name(_self_, (const gchar *)(job_name));
 }
-GtkPrintSettings * _gtk_print_settings_new_from_file(gchar * file_name, void * _error_) {
-	return (GtkPrintSettings *)gtk_print_settings_new_from_file((const gchar *)(file_name), (GError **)(_error_));
+GtkPrintSettings * _gtk_print_settings_new_from_file(gchar * file_name, void * error) {
+	return (GtkPrintSettings *)gtk_print_settings_new_from_file((const gchar *)(file_name), (GError **)(error));
 }
-GtkPrintSettings * _gtk_print_settings_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * _error_) {
-	return (GtkPrintSettings *)gtk_print_settings_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(_error_));
+GtkPrintSettings * _gtk_print_settings_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * error) {
+	return (GtkPrintSettings *)gtk_print_settings_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(error));
 }
 gchar * _gtk_print_settings_get(GtkPrintSettings * _self_, gchar * key) {
 	return (gchar *)gtk_print_settings_get(_self_, (const gchar *)(key));
@@ -1065,11 +993,11 @@ gchar * _gtk_print_settings_get_printer(GtkPrintSettings * _self_) {
 gboolean _gtk_print_settings_has_key(GtkPrintSettings * _self_, gchar * key) {
 	return (gboolean)gtk_print_settings_has_key(_self_, (const gchar *)(key));
 }
-gboolean _gtk_print_settings_load_file(GtkPrintSettings * _self_, gchar * file_name, void * _error_) {
-	return (gboolean)gtk_print_settings_load_file(_self_, (const gchar *)(file_name), (GError **)(_error_));
+gboolean _gtk_print_settings_load_file(GtkPrintSettings * _self_, gchar * file_name, void * error) {
+	return (gboolean)gtk_print_settings_load_file(_self_, (const gchar *)(file_name), (GError **)(error));
 }
-gboolean _gtk_print_settings_load_key_file(GtkPrintSettings * _self_, GKeyFile * key_file, gchar * group_name, void * _error_) {
-	return (gboolean)gtk_print_settings_load_key_file(_self_, key_file, (const gchar *)(group_name), (GError **)(_error_));
+gboolean _gtk_print_settings_load_key_file(GtkPrintSettings * _self_, GKeyFile * key_file, gchar * group_name, void * error) {
+	return (gboolean)gtk_print_settings_load_key_file(_self_, key_file, (const gchar *)(group_name), (GError **)(error));
 }
 void _gtk_print_settings_set(GtkPrintSettings * _self_, gchar * key, gchar * value) {
 	(void)gtk_print_settings_set(_self_, (const gchar *)(key), (const gchar *)(value));
@@ -1104,8 +1032,8 @@ void _gtk_print_settings_set_output_bin(GtkPrintSettings * _self_, gchar * outpu
 void _gtk_print_settings_set_printer(GtkPrintSettings * _self_, gchar * printer) {
 	(void)gtk_print_settings_set_printer(_self_, (const gchar *)(printer));
 }
-gboolean _gtk_print_settings_to_file(GtkPrintSettings * _self_, gchar * file_name, void * _error_) {
-	return (gboolean)gtk_print_settings_to_file(_self_, (const gchar *)(file_name), (GError **)(_error_));
+gboolean _gtk_print_settings_to_file(GtkPrintSettings * _self_, gchar * file_name, void * error) {
+	return (gboolean)gtk_print_settings_to_file(_self_, (const gchar *)(file_name), (GError **)(error));
 }
 void _gtk_print_settings_to_key_file(GtkPrintSettings * _self_, GKeyFile * key_file, gchar * group_name) {
 	(void)gtk_print_settings_to_key_file(_self_, key_file, (const gchar *)(group_name));
@@ -1179,8 +1107,8 @@ gchar * _gtk_recent_filter_get_name(GtkRecentFilter * _self_) {
 void _gtk_recent_filter_set_name(GtkRecentFilter * _self_, gchar * name) {
 	(void)gtk_recent_filter_set_name(_self_, (const gchar *)(name));
 }
-GAppInfo * _gtk_recent_info_create_app_info(GtkRecentInfo * _self_, gchar * app_name, void * _error_) {
-	return (GAppInfo *)gtk_recent_info_create_app_info(_self_, (const gchar *)(app_name), (GError **)(_error_));
+GAppInfo * _gtk_recent_info_create_app_info(GtkRecentInfo * _self_, gchar * app_name, void * error) {
+	return (GAppInfo *)gtk_recent_info_create_app_info(_self_, (const gchar *)(app_name), (GError **)(error));
 }
 gboolean _gtk_recent_info_get_application_info(GtkRecentInfo * _self_, gchar * app_name, void * app_exec, guint * count, time_t * time_) {
 	return (gboolean)gtk_recent_info_get_application_info(_self_, (const gchar *)(app_name), (const gchar **)(app_exec), count, time_);
@@ -1218,29 +1146,23 @@ gboolean _gtk_recent_manager_add_item(GtkRecentManager * _self_, gchar * uri) {
 gboolean _gtk_recent_manager_has_item(GtkRecentManager * _self_, gchar * uri) {
 	return (gboolean)gtk_recent_manager_has_item(_self_, (const gchar *)(uri));
 }
-GtkRecentInfo * _gtk_recent_manager_lookup_item(GtkRecentManager * _self_, gchar * uri, void * _error_) {
-	return (GtkRecentInfo *)gtk_recent_manager_lookup_item(_self_, (const gchar *)(uri), (GError **)(_error_));
+GtkRecentInfo * _gtk_recent_manager_lookup_item(GtkRecentManager * _self_, gchar * uri, void * error) {
+	return (GtkRecentInfo *)gtk_recent_manager_lookup_item(_self_, (const gchar *)(uri), (GError **)(error));
 }
-gboolean _gtk_recent_manager_move_item(GtkRecentManager * _self_, gchar * uri, gchar * new_uri, void * _error_) {
-	return (gboolean)gtk_recent_manager_move_item(_self_, (const gchar *)(uri), (const gchar *)(new_uri), (GError **)(_error_));
+gboolean _gtk_recent_manager_move_item(GtkRecentManager * _self_, gchar * uri, gchar * new_uri, void * error) {
+	return (gboolean)gtk_recent_manager_move_item(_self_, (const gchar *)(uri), (const gchar *)(new_uri), (GError **)(error));
 }
-gint _gtk_recent_manager_purge_items(GtkRecentManager * _self_, void * _error_) {
-	return (gint)gtk_recent_manager_purge_items(_self_, (GError **)(_error_));
+gint _gtk_recent_manager_purge_items(GtkRecentManager * _self_, void * error) {
+	return (gint)gtk_recent_manager_purge_items(_self_, (GError **)(error));
 }
-gboolean _gtk_recent_manager_remove_item(GtkRecentManager * _self_, gchar * uri, void * _error_) {
-	return (gboolean)gtk_recent_manager_remove_item(_self_, (const gchar *)(uri), (GError **)(_error_));
+gboolean _gtk_recent_manager_remove_item(GtkRecentManager * _self_, gchar * uri, void * error) {
+	return (gboolean)gtk_recent_manager_remove_item(_self_, (const gchar *)(uri), (GError **)(error));
 }
 GtkRequisition * _gtk_requisition_copy(GtkRequisition * _self_) {
 	return (GtkRequisition *)gtk_requisition_copy((const GtkRequisition *)(_self_));
 }
 void _gtk_scale_add_mark(GtkScale * _self_, gdouble value, GtkPositionType position, gchar * markup) {
 	(void)gtk_scale_add_mark(_self_, value, position, (const gchar *)(markup));
-}
-GtkWidget * _gtk_scale_button_new(GtkIconSize size, gdouble min, gdouble max, gdouble step, void * icons) {
-	return (GtkWidget *)gtk_scale_button_new(size, min, max, step, (const gchar **)(icons));
-}
-void _gtk_scale_button_set_icons(GtkScaleButton * _self_, void * icons) {
-	(void)gtk_scale_button_set_icons(_self_, (const gchar **)(icons));
 }
 GtkSelectionData * _gtk_selection_data_copy(GtkSelectionData * _self_) {
 	return (GtkSelectionData *)gtk_selection_data_copy((const GtkSelectionData *)(_self_));
@@ -1272,23 +1194,14 @@ GdkAtom _gtk_selection_data_get_selection(GtkSelectionData * _self_) {
 GdkAtom _gtk_selection_data_get_target(GtkSelectionData * _self_) {
 	return (GdkAtom)gtk_selection_data_get_target((const GtkSelectionData *)(_self_));
 }
-gboolean _gtk_selection_data_get_targets(GtkSelectionData * _self_, void * targets, gint * n_atoms) {
-	return (gboolean)gtk_selection_data_get_targets((const GtkSelectionData *)(_self_), (GdkAtom **)(targets), n_atoms);
-}
 guchar * _gtk_selection_data_get_text(GtkSelectionData * _self_) {
 	return (guchar *)gtk_selection_data_get_text((const GtkSelectionData *)(_self_));
 }
 void * _gtk_selection_data_get_uris(GtkSelectionData * _self_) {
 	return (void *)gtk_selection_data_get_uris((const GtkSelectionData *)(_self_));
 }
-void _gtk_selection_data_set(GtkSelectionData * _self_, GdkAtom type, gint format, guchar * data, gint length) {
-	(void)gtk_selection_data_set(_self_, type, format, (const guchar *)(data), length);
-}
 gboolean _gtk_selection_data_set_text(GtkSelectionData * _self_, gchar * str, gint len) {
 	return (gboolean)gtk_selection_data_set_text(_self_, (const gchar *)(str), len);
-}
-gboolean _gtk_selection_data_set_uris(GtkSelectionData * _self_, void * uris) {
-	return (gboolean)gtk_selection_data_set_uris(_self_, (gchar **)(uris));
 }
 gboolean _gtk_selection_data_targets_include_image(GtkSelectionData * _self_, gboolean writable) {
 	return (gboolean)gtk_selection_data_targets_include_image((const GtkSelectionData *)(_self_), writable);
@@ -1437,12 +1350,6 @@ GtkSymbolicColor * _gtk_symbolic_color_new_win32(gchar * theme_class, gint id) {
 GtkTargetEntry * _gtk_target_entry_new(gchar * target, guint flags, guint info) {
 	return (GtkTargetEntry *)gtk_target_entry_new((const gchar *)(target), flags, info);
 }
-GtkTargetList * _gtk_target_list_new(GtkTargetEntry * targets, guint ntargets) {
-	return (GtkTargetList *)gtk_target_list_new((const GtkTargetEntry *)(targets), ntargets);
-}
-void _gtk_target_list_add_table(GtkTargetList * _self_, GtkTargetEntry * targets, guint ntargets) {
-	(void)gtk_target_list_add_table(_self_, (const GtkTargetEntry *)(targets), ntargets);
-}
 void _gtk_text_buffer_add_mark(GtkTextBuffer * _self_, GtkTextMark * mark, GtkTextIter * where) {
 	(void)gtk_text_buffer_add_mark(_self_, mark, (const GtkTextIter *)(where));
 }
@@ -1457,9 +1364,6 @@ GtkTextMark * _gtk_text_buffer_create_mark(GtkTextBuffer * _self_, gchar * mark_
 }
 void _gtk_text_buffer_delete_mark_by_name(GtkTextBuffer * _self_, gchar * name) {
 	(void)gtk_text_buffer_delete_mark_by_name(_self_, (const gchar *)(name));
-}
-gboolean _gtk_text_buffer_deserialize(GtkTextBuffer * _self_, GtkTextBuffer * content_buffer, GdkAtom format, GtkTextIter * iter, guint8 * data, gsize length, void * _error_) {
-	return (gboolean)gtk_text_buffer_deserialize(_self_, content_buffer, format, iter, (const guint8 *)(data), length, (GError **)(_error_));
 }
 GtkTextMark * _gtk_text_buffer_get_mark(GtkTextBuffer * _self_, gchar * name) {
 	return (GtkTextMark *)gtk_text_buffer_get_mark(_self_, (const gchar *)(name));
@@ -1818,12 +1722,6 @@ gboolean _gtk_tree_selection_get_selected(GtkTreeSelection * _self_, void * mode
 GList * _gtk_tree_selection_get_selected_rows(GtkTreeSelection * _self_, void * model) {
 	return (GList *)gtk_tree_selection_get_selected_rows(_self_, (GtkTreeModel **)(model));
 }
-void _gtk_tree_view_enable_model_drag_dest(GtkTreeView * _self_, GtkTargetEntry * targets, gint n_targets, GdkDragAction actions) {
-	(void)gtk_tree_view_enable_model_drag_dest(_self_, (const GtkTargetEntry *)(targets), n_targets, actions);
-}
-void _gtk_tree_view_enable_model_drag_source(GtkTreeView * _self_, GdkModifierType start_button_mask, GtkTargetEntry * targets, gint n_targets, GdkDragAction actions) {
-	(void)gtk_tree_view_enable_model_drag_source(_self_, start_button_mask, (const GtkTargetEntry *)(targets), n_targets, actions);
-}
 void _gtk_tree_view_get_cursor(GtkTreeView * _self_, void * path, void * focus_column) {
 	(void)gtk_tree_view_get_cursor(_self_, (GtkTreePath **)(path), (GtkTreeViewColumn **)(focus_column));
 }
@@ -1860,14 +1758,14 @@ void _gtk_tree_view_column_set_title(GtkTreeViewColumn * _self_, gchar * title) 
 void _gtk_ui_manager_add_ui(GtkUIManager * _self_, guint merge_id, gchar * path, gchar * name, gchar * action, GtkUIManagerItemType type, gboolean top) {
 	(void)gtk_ui_manager_add_ui(_self_, merge_id, (const gchar *)(path), (const gchar *)(name), (const gchar *)(action), type, top);
 }
-guint _gtk_ui_manager_add_ui_from_file(GtkUIManager * _self_, gchar * filename, void * _error_) {
-	return (guint)gtk_ui_manager_add_ui_from_file(_self_, (const gchar *)(filename), (GError **)(_error_));
+guint _gtk_ui_manager_add_ui_from_file(GtkUIManager * _self_, gchar * filename, void * error) {
+	return (guint)gtk_ui_manager_add_ui_from_file(_self_, (const gchar *)(filename), (GError **)(error));
 }
-guint _gtk_ui_manager_add_ui_from_resource(GtkUIManager * _self_, gchar * resource_path, void * _error_) {
-	return (guint)gtk_ui_manager_add_ui_from_resource(_self_, (const gchar *)(resource_path), (GError **)(_error_));
+guint _gtk_ui_manager_add_ui_from_resource(GtkUIManager * _self_, gchar * resource_path, void * error) {
+	return (guint)gtk_ui_manager_add_ui_from_resource(_self_, (const gchar *)(resource_path), (GError **)(error));
 }
-guint _gtk_ui_manager_add_ui_from_string(GtkUIManager * _self_, gchar * buffer, gssize length, void * _error_) {
-	return (guint)gtk_ui_manager_add_ui_from_string(_self_, (const gchar *)(buffer), length, (GError **)(_error_));
+guint _gtk_ui_manager_add_ui_from_string(GtkUIManager * _self_, gchar * buffer, gssize length, void * error) {
+	return (guint)gtk_ui_manager_add_ui_from_string(_self_, (const gchar *)(buffer), length, (GError **)(error));
 }
 GtkAction * _gtk_ui_manager_get_action(GtkUIManager * _self_, gchar * path) {
 	return (GtkAction *)gtk_ui_manager_get_action(_self_, (const gchar *)(path));
@@ -1883,12 +1781,6 @@ void _gtk_widget_child_notify(GtkWidget * _self_, gchar * child_property) {
 }
 PangoLayout * _gtk_widget_create_pango_layout(GtkWidget * _self_, gchar * text) {
 	return (PangoLayout *)gtk_widget_create_pango_layout(_self_, (const gchar *)(text));
-}
-void _gtk_drag_dest_set(GtkWidget * _self_, GtkDestDefaults flags, GtkTargetEntry * targets, gint n_targets, GdkDragAction actions) {
-	(void)gtk_drag_dest_set(_self_, flags, (const GtkTargetEntry *)(targets), n_targets, actions);
-}
-void _gtk_drag_source_set(GtkWidget * _self_, GdkModifierType start_button_mask, GtkTargetEntry * targets, gint n_targets, GdkDragAction actions) {
-	(void)gtk_drag_source_set(_self_, start_button_mask, (const GtkTargetEntry *)(targets), n_targets, actions);
 }
 void _gtk_drag_source_set_icon_name(GtkWidget * _self_, gchar * icon_name) {
 	(void)gtk_drag_source_set_icon_name(_self_, (const gchar *)(icon_name));
@@ -2028,8 +1920,8 @@ char * _gtk_widget_path_to_string(GtkWidgetPath * _self_) {
 gchar * _gtk_window_get_default_icon_name() {
 	return (gchar *)gtk_window_get_default_icon_name();
 }
-gboolean _gtk_window_set_default_icon_from_file(gchar * filename, void * _error_) {
-	return (gboolean)gtk_window_set_default_icon_from_file((const gchar *)(filename), (GError **)(_error_));
+gboolean _gtk_window_set_default_icon_from_file(gchar * filename, void * err) {
+	return (gboolean)gtk_window_set_default_icon_from_file((const gchar *)(filename), (GError **)(err));
 }
 void _gtk_window_set_default_icon_name(gchar * name) {
 	(void)gtk_window_set_default_icon_name((const gchar *)(name));
@@ -2046,8 +1938,8 @@ gchar * _gtk_window_get_title(GtkWindow * _self_) {
 gboolean _gtk_window_parse_geometry(GtkWindow * _self_, gchar * geometry) {
 	return (gboolean)gtk_window_parse_geometry(_self_, (const gchar *)(geometry));
 }
-gboolean _gtk_window_set_icon_from_file(GtkWindow * _self_, gchar * filename, void * _error_) {
-	return (gboolean)gtk_window_set_icon_from_file(_self_, (const gchar *)(filename), (GError **)(_error_));
+gboolean _gtk_window_set_icon_from_file(GtkWindow * _self_, gchar * filename, void * err) {
+	return (gboolean)gtk_window_set_icon_from_file(_self_, (const gchar *)(filename), (GError **)(err));
 }
 void _gtk_window_set_icon_name(GtkWindow * _self_, gchar * name) {
 	(void)gtk_window_set_icon_name(_self_, (const gchar *)(name));
@@ -2109,17 +2001,8 @@ gboolean _gtk_rc_property_parse_requisition(GParamSpec * pspec, GString * gstrin
 GdkPixbuf * _gtk_render_icon_pixbuf(GtkStyleContext * context, GtkIconSource * source, GtkIconSize size) {
 	return (GdkPixbuf *)gtk_render_icon_pixbuf(context, (const GtkIconSource *)(source), size);
 }
-void _gtk_selection_add_targets(GtkWidget * widget, GdkAtom selection, GtkTargetEntry * targets, guint ntargets) {
-	(void)gtk_selection_add_targets(widget, selection, (const GtkTargetEntry *)(targets), ntargets);
-}
-gboolean _gtk_show_uri(GdkScreen * screen, gchar * uri, guint32 timestamp, void * _error_) {
-	return (gboolean)gtk_show_uri(screen, (const gchar *)(uri), timestamp, (GError **)(_error_));
-}
-void _gtk_stock_add(GtkStockItem * items, guint n_items) {
-	(void)gtk_stock_add((const GtkStockItem *)(items), n_items);
-}
-void _gtk_stock_add_static(GtkStockItem * items, guint n_items) {
-	(void)gtk_stock_add_static((const GtkStockItem *)(items), n_items);
+gboolean _gtk_show_uri(GdkScreen * screen, gchar * uri, guint32 timestamp, void * error) {
+	return (gboolean)gtk_show_uri(screen, (const gchar *)(uri), timestamp, (GError **)(error));
 }
 gboolean _gtk_stock_lookup(gchar * stock_id, GtkStockItem * item) {
 	return (gboolean)gtk_stock_lookup((const gchar *)(stock_id), item);
@@ -2797,16 +2680,6 @@ func (_self_ *AboutDialog) GetWrapLicense() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *AboutDialog) SetArtists(artists unsafe.Pointer) () {
-	C._gtk_about_dialog_set_artists((*C.GtkAboutDialog)(_self_), artists)
-	return
-}
-
-func (_self_ *AboutDialog) SetAuthors(authors unsafe.Pointer) () {
-	C._gtk_about_dialog_set_authors((*C.GtkAboutDialog)(_self_), authors)
-	return
-}
-
 func (_self_ *AboutDialog) SetComments(comments *C.gchar) () {
 	C._gtk_about_dialog_set_comments((*C.GtkAboutDialog)(_self_), comments)
 	return
@@ -2814,11 +2687,6 @@ func (_self_ *AboutDialog) SetComments(comments *C.gchar) () {
 
 func (_self_ *AboutDialog) SetCopyright(copyright *C.gchar) () {
 	C._gtk_about_dialog_set_copyright((*C.GtkAboutDialog)(_self_), copyright)
-	return
-}
-
-func (_self_ *AboutDialog) SetDocumenters(documenters unsafe.Pointer) () {
-	C._gtk_about_dialog_set_documenters((*C.GtkAboutDialog)(_self_), documenters)
 	return
 }
 
@@ -3274,36 +3142,6 @@ func (_self_ *ActionGroup) AddAction(action *C.GtkAction) () {
 
 func (_self_ *ActionGroup) AddActionWithAccel(action *C.GtkAction, accelerator *C.gchar) () {
 	C._gtk_action_group_add_action_with_accel((*C.GtkActionGroup)(_self_), action, accelerator)
-	return
-}
-
-func (_self_ *ActionGroup) AddActions(entries *C.GtkActionEntry, n_entries C.guint, user_data C.gpointer) () {
-	C._gtk_action_group_add_actions((*C.GtkActionGroup)(_self_), entries, n_entries, user_data)
-	return
-}
-
-func (_self_ *ActionGroup) AddActionsFull(entries *C.GtkActionEntry, n_entries C.guint, user_data C.gpointer, destroy C.GDestroyNotify) () {
-	C._gtk_action_group_add_actions_full((*C.GtkActionGroup)(_self_), entries, n_entries, user_data, destroy)
-	return
-}
-
-func (_self_ *ActionGroup) AddRadioActions(entries *C.GtkRadioActionEntry, n_entries C.guint, value C.gint, on_change C.GCallback, user_data C.gpointer) () {
-	C._gtk_action_group_add_radio_actions((*C.GtkActionGroup)(_self_), entries, n_entries, value, on_change, user_data)
-	return
-}
-
-func (_self_ *ActionGroup) AddRadioActionsFull(entries *C.GtkRadioActionEntry, n_entries C.guint, value C.gint, on_change C.GCallback, user_data C.gpointer, destroy C.GDestroyNotify) () {
-	C._gtk_action_group_add_radio_actions_full((*C.GtkActionGroup)(_self_), entries, n_entries, value, on_change, user_data, destroy)
-	return
-}
-
-func (_self_ *ActionGroup) AddToggleActions(entries *C.GtkToggleActionEntry, n_entries C.guint, user_data C.gpointer) () {
-	C._gtk_action_group_add_toggle_actions((*C.GtkActionGroup)(_self_), entries, n_entries, user_data)
-	return
-}
-
-func (_self_ *ActionGroup) AddToggleActionsFull(entries *C.GtkToggleActionEntry, n_entries C.guint, user_data C.gpointer, destroy C.GDestroyNotify) () {
-	C._gtk_action_group_add_toggle_actions_full((*C.GtkActionGroup)(_self_), entries, n_entries, user_data, destroy)
 	return
 }
 
@@ -3974,21 +3812,6 @@ func (_self_ *Builder) AddFromResource(resource_path *C.gchar) (_return_ C.guint
 
 func (_self_ *Builder) AddFromString(buffer *C.gchar, length C.gsize) (_return_ C.guint, _error_ unsafe.Pointer) {
 	_return_ = C._gtk_builder_add_from_string((*C.GtkBuilder)(_self_), buffer, length, _error_)
-	return
-}
-
-func (_self_ *Builder) AddObjectsFromFile(filename *C.gchar, object_ids unsafe.Pointer) (_return_ C.guint, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_builder_add_objects_from_file((*C.GtkBuilder)(_self_), filename, object_ids, _error_)
-	return
-}
-
-func (_self_ *Builder) AddObjectsFromResource(resource_path *C.gchar, object_ids unsafe.Pointer) (_return_ C.guint, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_builder_add_objects_from_resource((*C.GtkBuilder)(_self_), resource_path, object_ids, _error_)
-	return
-}
-
-func (_self_ *Builder) AddObjectsFromString(buffer *C.gchar, length C.gsize, object_ids unsafe.Pointer) (_return_ C.guint, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_builder_add_objects_from_string((*C.GtkBuilder)(_self_), buffer, length, object_ids, _error_)
 	return
 }
 
@@ -4927,11 +4750,6 @@ func (_self_ *Clipboard) RequestUris(callback C.GtkClipboardURIReceivedFunc, use
 	return
 }
 
-func (_self_ *Clipboard) SetCanStore(targets *C.GtkTargetEntry, n_targets C.gint) () {
-	C._gtk_clipboard_set_can_store((*C.GtkClipboard)(_self_), targets, n_targets)
-	return
-}
-
 func (_self_ *Clipboard) SetImage(pixbuf *C.GdkPixbuf) () {
 	C.gtk_clipboard_set_image((*C.GtkClipboard)(_self_), pixbuf)
 	return
@@ -4939,16 +4757,6 @@ func (_self_ *Clipboard) SetImage(pixbuf *C.GdkPixbuf) () {
 
 func (_self_ *Clipboard) SetText(text *C.gchar, len_ C.gint) () {
 	C._gtk_clipboard_set_text((*C.GtkClipboard)(_self_), text, len_)
-	return
-}
-
-func (_self_ *Clipboard) SetWithData(targets *C.GtkTargetEntry, n_targets C.guint, get_func C.GtkClipboardGetFunc, clear_func C.GtkClipboardClearFunc, user_data C.gpointer) (_return_ C.gboolean) {
-	_return_ = C._gtk_clipboard_set_with_data((*C.GtkClipboard)(_self_), targets, n_targets, get_func, clear_func, user_data)
-	return
-}
-
-func (_self_ *Clipboard) SetWithOwner(targets *C.GtkTargetEntry, n_targets C.guint, get_func C.GtkClipboardGetFunc, clear_func C.GtkClipboardClearFunc, owner *C.GObject) (_return_ C.gboolean) {
-	_return_ = C._gtk_clipboard_set_with_owner((*C.GtkClipboard)(_self_), targets, n_targets, get_func, clear_func, owner)
 	return
 }
 
@@ -4969,11 +4777,6 @@ func (_self_ *Clipboard) WaitForImage() (_return_ *C.GdkPixbuf) {
 
 func (_self_ *Clipboard) WaitForRichText(buffer *C.GtkTextBuffer) (_return_ *C.guint8, format *C.GdkAtom, length *C.gsize) {
 	_return_ = C.gtk_clipboard_wait_for_rich_text((*C.GtkClipboard)(_self_), buffer, format, length)
-	return
-}
-
-func (_self_ *Clipboard) WaitForTargets() (_return_ C.gboolean, targets unsafe.Pointer, n_targets *C.gint) {
-	_return_ = C._gtk_clipboard_wait_for_targets((*C.GtkClipboard)(_self_), targets, n_targets)
 	return
 }
 
@@ -5472,11 +5275,6 @@ func CssProviderGetNamed(name *C.gchar, variant *C.gchar) (_return_ *C.GtkCssPro
 	return
 }
 
-func (_self_ *CssProvider) LoadFromData(data *C.gchar, length C.gssize) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_css_provider_load_from_data((*C.GtkCssProvider)(_self_), data, length, _error_)
-	return
-}
-
 func (_self_ *CssProvider) LoadFromFile(file *C.GFile) (_return_ C.gboolean, _error_ unsafe.Pointer) {
 	_return_ = C._gtk_css_provider_load_from_file((*C.GtkCssProvider)(_self_), file, _error_)
 	return
@@ -5579,11 +5377,6 @@ func (_self_ *Dialog) Response(response_id C.gint) () {
 
 func (_self_ *Dialog) Run() (_return_ C.gint) {
 	_return_ = C.gtk_dialog_run((*C.GtkDialog)(_self_))
-	return
-}
-
-func (_self_ *Dialog) SetAlternativeButtonOrderFromArray(n_params C.gint, new_order *C.gint) () {
-	C.gtk_dialog_set_alternative_button_order_from_array((*C.GtkDialog)(_self_), n_params, new_order)
 	return
 }
 
@@ -6732,11 +6525,6 @@ func (_self_ *IconInfo) Free() () {
 	return
 }
 
-func (_self_ *IconInfo) GetAttachPoints() (_return_ C.gboolean, points unsafe.Pointer, n_points *C.gint) {
-	_return_ = C._gtk_icon_info_get_attach_points((*C.GtkIconInfo)(_self_), points, n_points)
-	return
-}
-
 func (_self_ *IconInfo) GetBaseSize() (_return_ C.gint) {
 	_return_ = C.gtk_icon_info_get_base_size((*C.GtkIconInfo)(_self_))
 	return
@@ -6799,11 +6587,6 @@ func (_self_ *IconSet) AddSource(source *C.GtkIconSource) () {
 
 func (_self_ *IconSet) Copy() (_return_ *C.GtkIconSet) {
 	_return_ = C.gtk_icon_set_copy((*C.GtkIconSet)(_self_))
-	return
-}
-
-func (_self_ *IconSet) GetSizes() (sizes unsafe.Pointer, n_sizes *C.gint) {
-	C._gtk_icon_set_get_sizes((*C.GtkIconSet)(_self_), sizes, n_sizes)
 	return
 }
 
@@ -6952,11 +6735,6 @@ func (_self_ *IconTheme) AppendSearchPath(path *C.gchar) () {
 	return
 }
 
-func (_self_ *IconTheme) ChooseIcon(icon_names unsafe.Pointer, size C.gint, flags C.GtkIconLookupFlags) (_return_ *C.GtkIconInfo) {
-	_return_ = C._gtk_icon_theme_choose_icon((*C.GtkIconTheme)(_self_), icon_names, size, flags)
-	return
-}
-
 func (_self_ *IconTheme) GetExampleIconName() (_return_ *C.char) {
 	_return_ = C.gtk_icon_theme_get_example_icon_name((*C.GtkIconTheme)(_self_))
 	return
@@ -6964,11 +6742,6 @@ func (_self_ *IconTheme) GetExampleIconName() (_return_ *C.char) {
 
 func (_self_ *IconTheme) GetIconSizes(icon_name *C.gchar) (_return_ *C.gint) {
 	_return_ = C._gtk_icon_theme_get_icon_sizes((*C.GtkIconTheme)(_self_), icon_name)
-	return
-}
-
-func (_self_ *IconTheme) GetSearchPath() (path unsafe.Pointer, n_elements *C.gint) {
-	C._gtk_icon_theme_get_search_path((*C.GtkIconTheme)(_self_), path, n_elements)
 	return
 }
 
@@ -7022,11 +6795,6 @@ func (_self_ *IconTheme) SetScreen(screen *C.GdkScreen) () {
 	return
 }
 
-func (_self_ *IconTheme) SetSearchPath(path unsafe.Pointer, n_elements C.gint) () {
-	C._gtk_icon_theme_set_search_path((*C.GtkIconTheme)(_self_), path, n_elements)
-	return
-}
-
 func IconViewNew() (_return_ *C.GtkWidget) {
 	_return_ = C.gtk_icon_view_new()
 	return
@@ -7049,16 +6817,6 @@ func (_self_ *IconView) ConvertWidgetToBinWindowCoords(wx C.gint, wy C.gint) (bx
 
 func (_self_ *IconView) CreateDragIcon(path *C.GtkTreePath) (_return_ *C.cairo_surface_t) {
 	_return_ = C.gtk_icon_view_create_drag_icon((*C.GtkIconView)(_self_), path)
-	return
-}
-
-func (_self_ *IconView) EnableModelDragDest(targets *C.GtkTargetEntry, n_targets C.gint, actions C.GdkDragAction) () {
-	C._gtk_icon_view_enable_model_drag_dest((*C.GtkIconView)(_self_), targets, n_targets, actions)
-	return
-}
-
-func (_self_ *IconView) EnableModelDragSource(start_button_mask C.GdkModifierType, targets *C.GtkTargetEntry, n_targets C.gint, actions C.GdkDragAction) () {
-	C._gtk_icon_view_enable_model_drag_source((*C.GtkIconView)(_self_), start_button_mask, targets, n_targets, actions)
 	return
 }
 
@@ -7937,11 +7695,6 @@ func (_self_ *LinkButton) SetVisited(visited C.gboolean) () {
 	return
 }
 
-func ListStoreNewv(n_columns C.gint, types *C.GType) (_return_ *C.GtkListStore) {
-	_return_ = C.gtk_list_store_newv(n_columns, types)
-	return
-}
-
 func (_self_ *ListStore) Append() (iter *C.GtkTreeIter) {
 	C.gtk_list_store_append((*C.GtkListStore)(_self_), iter)
 	return
@@ -7964,11 +7717,6 @@ func (_self_ *ListStore) InsertAfter(sibling *C.GtkTreeIter) (iter *C.GtkTreeIte
 
 func (_self_ *ListStore) InsertBefore(sibling *C.GtkTreeIter) (iter *C.GtkTreeIter) {
 	C.gtk_list_store_insert_before((*C.GtkListStore)(_self_), iter, sibling)
-	return
-}
-
-func (_self_ *ListStore) InsertWithValuesv(position C.gint, columns *C.gint, values *C.GValue, n_values C.gint) (iter *C.GtkTreeIter) {
-	C.gtk_list_store_insert_with_valuesv((*C.GtkListStore)(_self_), iter, position, columns, values, n_values)
 	return
 }
 
@@ -7997,23 +7745,8 @@ func (_self_ *ListStore) Remove(iter *C.GtkTreeIter) (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *ListStore) Reorder(new_order *C.gint) () {
-	C.gtk_list_store_reorder((*C.GtkListStore)(_self_), new_order)
-	return
-}
-
-func (_self_ *ListStore) SetColumnTypes(n_columns C.gint, types *C.GType) () {
-	C.gtk_list_store_set_column_types((*C.GtkListStore)(_self_), n_columns, types)
-	return
-}
-
 func (_self_ *ListStore) SetValue(iter *C.GtkTreeIter, column C.gint, value *C.GValue) () {
 	C.gtk_list_store_set_value((*C.GtkListStore)(_self_), iter, column, value)
-	return
-}
-
-func (_self_ *ListStore) SetValuesv(iter *C.GtkTreeIter, columns *C.gint, values *C.GValue, n_values C.gint) () {
-	C.gtk_list_store_set_valuesv((*C.GtkListStore)(_self_), iter, columns, values, n_values)
 	return
 }
 
@@ -9607,11 +9340,6 @@ func (_self_ *PrintSettings) SetOutputBin(output_bin *C.gchar) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetPageRanges(page_ranges *C.GtkPageRange, num_ranges C.gint) () {
-	C.gtk_print_settings_set_page_ranges((*C.GtkPrintSettings)(_self_), page_ranges, num_ranges)
-	return
-}
-
 func (_self_ *PrintSettings) SetPageSet(page_set C.GtkPageSet) () {
 	C.gtk_print_settings_set_page_set((*C.GtkPrintSettings)(_self_), page_set)
 	return
@@ -10417,11 +10145,6 @@ func (_self_ *Scale) SetValuePos(pos C.GtkPositionType) () {
 	return
 }
 
-func ScaleButtonNew(size C.GtkIconSize, min C.gdouble, max C.gdouble, step C.gdouble, icons unsafe.Pointer) (_return_ *C.GtkWidget) {
-	_return_ = C._gtk_scale_button_new(size, min, max, step, icons)
-	return
-}
-
 func (_self_ *ScaleButton) GetAdjustment() (_return_ *C.GtkAdjustment) {
 	_return_ = C.gtk_scale_button_get_adjustment((*C.GtkScaleButton)(_self_))
 	return
@@ -10449,11 +10172,6 @@ func (_self_ *ScaleButton) GetValue() (_return_ C.gdouble) {
 
 func (_self_ *ScaleButton) SetAdjustment(adjustment *C.GtkAdjustment) () {
 	C.gtk_scale_button_set_adjustment((*C.GtkScaleButton)(_self_), adjustment)
-	return
-}
-
-func (_self_ *ScaleButton) SetIcons(icons unsafe.Pointer) () {
-	C._gtk_scale_button_set_icons((*C.GtkScaleButton)(_self_), icons)
 	return
 }
 
@@ -10642,11 +10360,6 @@ func (_self_ *SelectionData) GetTarget() (_return_ C.GdkAtom) {
 	return
 }
 
-func (_self_ *SelectionData) GetTargets() (_return_ C.gboolean, targets unsafe.Pointer, n_atoms *C.gint) {
-	_return_ = C._gtk_selection_data_get_targets((*C.GtkSelectionData)(_self_), targets, n_atoms)
-	return
-}
-
 func (_self_ *SelectionData) GetText() (_return_ *C.guchar) {
 	_return_ = C._gtk_selection_data_get_text((*C.GtkSelectionData)(_self_))
 	return
@@ -10657,11 +10370,6 @@ func (_self_ *SelectionData) GetUris() (_return_ unsafe.Pointer) {
 	return
 }
 
-func (_self_ *SelectionData) Set(type_ C.GdkAtom, format C.gint, data *C.guchar, length C.gint) () {
-	C._gtk_selection_data_set((*C.GtkSelectionData)(_self_), type_, format, data, length)
-	return
-}
-
 func (_self_ *SelectionData) SetPixbuf(pixbuf *C.GdkPixbuf) (_return_ C.gboolean) {
 	_return_ = C.gtk_selection_data_set_pixbuf((*C.GtkSelectionData)(_self_), pixbuf)
 	return
@@ -10669,11 +10377,6 @@ func (_self_ *SelectionData) SetPixbuf(pixbuf *C.GdkPixbuf) (_return_ C.gboolean
 
 func (_self_ *SelectionData) SetText(str *C.gchar, len_ C.gint) (_return_ C.gboolean) {
 	_return_ = C._gtk_selection_data_set_text((*C.GtkSelectionData)(_self_), str, len_)
-	return
-}
-
-func (_self_ *SelectionData) SetUris(uris unsafe.Pointer) (_return_ C.gboolean) {
-	_return_ = C._gtk_selection_data_set_uris((*C.GtkSelectionData)(_self_), uris)
 	return
 }
 
@@ -11517,11 +11220,6 @@ func (_self_ *TargetEntry) Free() () {
 	return
 }
 
-func TargetListNew(targets *C.GtkTargetEntry, ntargets C.guint) (_return_ *C.GtkTargetList) {
-	_return_ = C._gtk_target_list_new(targets, ntargets)
-	return
-}
-
 func (_self_ *TargetList) Add(target C.GdkAtom, flags C.guint, info C.guint) () {
 	C.gtk_target_list_add((*C.GtkTargetList)(_self_), target, flags, info)
 	return
@@ -11534,11 +11232,6 @@ func (_self_ *TargetList) AddImageTargets(info C.guint, writable C.gboolean) () 
 
 func (_self_ *TargetList) AddRichTextTargets(info C.guint, deserializable C.gboolean, buffer *C.GtkTextBuffer) () {
 	C.gtk_target_list_add_rich_text_targets((*C.GtkTargetList)(_self_), info, deserializable, buffer)
-	return
-}
-
-func (_self_ *TargetList) AddTable(targets *C.GtkTargetEntry, ntargets C.guint) () {
-	C._gtk_target_list_add_table((*C.GtkTargetList)(_self_), targets, ntargets)
 	return
 }
 
@@ -11674,11 +11367,6 @@ func (_self_ *TextBuffer) DeleteMarkByName(name *C.gchar) () {
 
 func (_self_ *TextBuffer) DeleteSelection(interactive C.gboolean, default_editable C.gboolean) (_return_ C.gboolean) {
 	_return_ = C.gtk_text_buffer_delete_selection((*C.GtkTextBuffer)(_self_), interactive, default_editable)
-	return
-}
-
-func (_self_ *TextBuffer) Deserialize(content_buffer *C.GtkTextBuffer, format C.GdkAtom, iter *C.GtkTextIter, data *C.guint8, length C.gsize) (_return_ C.gboolean, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_text_buffer_deserialize((*C.GtkTextBuffer)(_self_), content_buffer, format, iter, data, length, _error_)
 	return
 }
 
@@ -13582,11 +13270,6 @@ func (_self_ *TreeModelFilter) Refilter() () {
 	return
 }
 
-func (_self_ *TreeModelFilter) SetModifyFunc(n_columns C.gint, types *C.GType, func_ C.GtkTreeModelFilterModifyFunc, data C.gpointer, destroy C.GDestroyNotify) () {
-	C.gtk_tree_model_filter_set_modify_func((*C.GtkTreeModelFilter)(_self_), n_columns, types, func_, data, destroy)
-	return
-}
-
 func (_self_ *TreeModelFilter) SetVisibleColumn(column C.gint) () {
 	C.gtk_tree_model_filter_set_visible_column((*C.GtkTreeModelFilter)(_self_), column)
 	return
@@ -13877,11 +13560,6 @@ func (_self_ *TreeSelection) UnselectRange(start_path *C.GtkTreePath, end_path *
 	return
 }
 
-func TreeStoreNewv(n_columns C.gint, types *C.GType) (_return_ *C.GtkTreeStore) {
-	_return_ = C.gtk_tree_store_newv(n_columns, types)
-	return
-}
-
 func (_self_ *TreeStore) Append(parent *C.GtkTreeIter) (iter *C.GtkTreeIter) {
 	C.gtk_tree_store_append((*C.GtkTreeStore)(_self_), iter, parent)
 	return
@@ -13904,11 +13582,6 @@ func (_self_ *TreeStore) InsertAfter(parent *C.GtkTreeIter, sibling *C.GtkTreeIt
 
 func (_self_ *TreeStore) InsertBefore(parent *C.GtkTreeIter, sibling *C.GtkTreeIter) (iter *C.GtkTreeIter) {
 	C.gtk_tree_store_insert_before((*C.GtkTreeStore)(_self_), iter, parent, sibling)
-	return
-}
-
-func (_self_ *TreeStore) InsertWithValuesv(parent *C.GtkTreeIter, position C.gint, columns *C.gint, values *C.GValue, n_values C.gint) (iter *C.GtkTreeIter) {
-	C.gtk_tree_store_insert_with_valuesv((*C.GtkTreeStore)(_self_), iter, parent, position, columns, values, n_values)
 	return
 }
 
@@ -13947,23 +13620,8 @@ func (_self_ *TreeStore) Remove(iter *C.GtkTreeIter) (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *TreeStore) Reorder(parent *C.GtkTreeIter, new_order *C.gint) () {
-	C.gtk_tree_store_reorder((*C.GtkTreeStore)(_self_), parent, new_order)
-	return
-}
-
-func (_self_ *TreeStore) SetColumnTypes(n_columns C.gint, types *C.GType) () {
-	C.gtk_tree_store_set_column_types((*C.GtkTreeStore)(_self_), n_columns, types)
-	return
-}
-
 func (_self_ *TreeStore) SetValue(iter *C.GtkTreeIter, column C.gint, value *C.GValue) () {
 	C.gtk_tree_store_set_value((*C.GtkTreeStore)(_self_), iter, column, value)
-	return
-}
-
-func (_self_ *TreeStore) SetValuesv(iter *C.GtkTreeIter, columns *C.gint, values *C.GValue, n_values C.gint) () {
-	C.gtk_tree_store_set_valuesv((*C.GtkTreeStore)(_self_), iter, columns, values, n_values)
 	return
 }
 
@@ -14034,16 +13692,6 @@ func (_self_ *TreeView) ConvertWidgetToTreeCoords(wx C.gint, wy C.gint) (tx *C.g
 
 func (_self_ *TreeView) CreateRowDragIcon(path *C.GtkTreePath) (_return_ *C.cairo_surface_t) {
 	_return_ = C.gtk_tree_view_create_row_drag_icon((*C.GtkTreeView)(_self_), path)
-	return
-}
-
-func (_self_ *TreeView) EnableModelDragDest(targets *C.GtkTargetEntry, n_targets C.gint, actions C.GdkDragAction) () {
-	C._gtk_tree_view_enable_model_drag_dest((*C.GtkTreeView)(_self_), targets, n_targets, actions)
-	return
-}
-
-func (_self_ *TreeView) EnableModelDragSource(start_button_mask C.GdkModifierType, targets *C.GtkTargetEntry, n_targets C.gint, actions C.GdkDragAction) () {
-	C._gtk_tree_view_enable_model_drag_source((*C.GtkTreeView)(_self_), start_button_mask, targets, n_targets, actions)
 	return
 }
 
@@ -14922,11 +14570,6 @@ func (_self_ *Widget) DragDestGetTrackMotion() (_return_ C.gboolean) {
 	return
 }
 
-func (_self_ *Widget) DragDestSet(flags C.GtkDestDefaults, targets *C.GtkTargetEntry, n_targets C.gint, actions C.GdkDragAction) () {
-	C._gtk_drag_dest_set((*C.GtkWidget)(_self_), flags, targets, n_targets, actions)
-	return
-}
-
 func (_self_ *Widget) DragDestSetProxy(proxy_window *C.GdkWindow, protocol C.GdkDragProtocol, use_coordinates C.gboolean) () {
 	C.gtk_drag_dest_set_proxy((*C.GtkWidget)(_self_), proxy_window, protocol, use_coordinates)
 	return
@@ -14974,11 +14617,6 @@ func (_self_ *Widget) DragSourceAddUriTargets() () {
 
 func (_self_ *Widget) DragSourceGetTargetList() (_return_ *C.GtkTargetList) {
 	_return_ = C.gtk_drag_source_get_target_list((*C.GtkWidget)(_self_))
-	return
-}
-
-func (_self_ *Widget) DragSourceSet(start_button_mask C.GdkModifierType, targets *C.GtkTargetEntry, n_targets C.gint, actions C.GdkDragAction) () {
-	C._gtk_drag_source_set((*C.GtkWidget)(_self_), start_button_mask, targets, n_targets, actions)
 	return
 }
 
@@ -17097,11 +16735,6 @@ func SelectionAddTarget(widget *C.GtkWidget, selection C.GdkAtom, target C.GdkAt
 	return
 }
 
-func SelectionAddTargets(widget *C.GtkWidget, selection C.GdkAtom, targets *C.GtkTargetEntry, ntargets C.guint) () {
-	C._gtk_selection_add_targets(widget, selection, targets, ntargets)
-	return
-}
-
 func SelectionClearTargets(widget *C.GtkWidget, selection C.GdkAtom) () {
 	C.gtk_selection_clear_targets(widget, selection)
 	return
@@ -17137,16 +16770,6 @@ func ShowUri(screen *C.GdkScreen, uri *C.gchar, timestamp C.guint32) (_return_ C
 	return
 }
 
-func StockAdd(items *C.GtkStockItem, n_items C.guint) () {
-	C._gtk_stock_add(items, n_items)
-	return
-}
-
-func StockAddStatic(items *C.GtkStockItem, n_items C.guint) () {
-	C._gtk_stock_add_static(items, n_items)
-	return
-}
-
 func StockListIds() (_return_ *C.GSList) {
 	_return_ = C.gtk_stock_list_ids()
 	return
@@ -17162,33 +16785,8 @@ func StockSetTranslateFunc(domain *C.gchar, func_ C.GtkTranslateFunc, data C.gpo
 	return
 }
 
-func TargetTableFree(targets *C.GtkTargetEntry, n_targets C.gint) () {
-	C.gtk_target_table_free(targets, n_targets)
-	return
-}
-
 func TargetTableNewFromList(list *C.GtkTargetList) (_return_ *C.GtkTargetEntry, n_targets *C.gint) {
 	_return_ = C.gtk_target_table_new_from_list(list, n_targets)
-	return
-}
-
-func TargetsIncludeImage(targets *C.GdkAtom, n_targets C.gint, writable C.gboolean) (_return_ C.gboolean) {
-	_return_ = C.gtk_targets_include_image(targets, n_targets, writable)
-	return
-}
-
-func TargetsIncludeRichText(targets *C.GdkAtom, n_targets C.gint, buffer *C.GtkTextBuffer) (_return_ C.gboolean) {
-	_return_ = C.gtk_targets_include_rich_text(targets, n_targets, buffer)
-	return
-}
-
-func TargetsIncludeText(targets *C.GdkAtom, n_targets C.gint) (_return_ C.gboolean) {
-	_return_ = C.gtk_targets_include_text(targets, n_targets)
-	return
-}
-
-func TargetsIncludeUri(targets *C.GdkAtom, n_targets C.gint) (_return_ C.gboolean) {
-	_return_ = C.gtk_targets_include_uri(targets, n_targets)
 	return
 }
 

@@ -8,6 +8,7 @@ import os
 from common import *
 from container import *
 from function_handler import handleFunction
+import imp
 
 class Parser:
   def __init__(self, filename):
@@ -24,17 +25,9 @@ class Parser:
       self.skip_symbols = set([l for l in self.skip_symbols if l])
 
     self.func_spec = {}
-    func_spec_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'func_spec')
-    for line in open(func_spec_file, 'r').xreadlines():
-      fields = line.strip().split('|')
-      func_name, return_type = fields[:2]
-      arg_types = fields[2:]
-      for i, t in enumerate(arg_types):
-        arg_types[i] = t.replace('[]', '*')
-      self.func_spec[func_name] = Dict({
-        'return_type': return_type,
-        'arg_types': arg_types,
-      })
+    func_spec_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'func_spec.py')
+    func_spec_module = imp.load_source('func_spec', func_spec_file)
+    self.func_spec = func_spec_module.func_specs
 
     self.namespace = parser.get_namespace()
     self.package_name = self.namespace.name.lower()

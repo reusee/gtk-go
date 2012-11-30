@@ -52,144 +52,10 @@ class Generator:
     self.generate_enum_symbols()
     self.generate_const_symbols()
 
-  def generate_function(self, func):
-    out = []
-
-    # type mapping
-    if RETURN_MAPPINGS.get(func.return_value.go_type, False):
-      func.return_value.mapping = RETURN_MAPPINGS[func.return_value.go_type]
-    for param in func.parameters:
-      if PARAM_MAPPINGS.get(param.go_type, False):
-        param.mapping = PARAM_MAPPINGS[param.go_type]
-    for ret in func.extra_returns:
-      key = ret.go_type
-      if ret.is_basic_out_param:
-        key = key[1:]
-      if RETURN_MAPPINGS.get(key, False):
-        ret.mapping = RETURN_MAPPINGS[key]
-
-    # receiver and name
-    if func.is_method:
-      out.append('func (_self_ *%s) %s(' % (func.gi_class, func.name))
-    else:
-      out.append('func %s(' % func.name)
-
-    # parameters
-    for i, param in enumerate(func.parameters):
-      if i > 0: out.append(', ')
-      out.append('%s %s' % (param.name, param.mapped_go_type))
-    out.append(') ')
-
-    # return values
-    out.append('(')
-    strs = []
-    if func.return_value.c_type != 'void':
-      strs.append('_return_ %s' % func.return_value.mapped_go_type)
-    for ret in func.extra_returns:
-      t = ret.mapped_go_type
-      if ret.is_basic_out_param:
-        if t.startswith('*'):
-          t = t[1:]
-      strs.append('%s %s' % (ret.name, t))
-    out.append('%s) {\n' % ', ' .join(strs))
-
-    # type conversion codes
-    for param in func.parameters:
-      if param.mapping:
-        out.append(param.mapping.param_mapping_code(param))
-    for ret in func.extra_returns:
-      if ret.caller_allocates:
-        continue
-      elif ret.mapping:
-        out.append(ret.mapping.param_mapping_code(ret))
-
-    # caller allocates
-    for ret in func.extra_returns:
-      if ret.caller_allocates:
-        allocated_var_name = '_allocated_%s_' % ret.name
-        out.append('\tvar %s %s\n' % (allocated_var_name, ret.go_type[1:]))
-        ret.allocated_var_name = allocated_var_name
-
-    # call expression
-    call_exp = []
-    if func.need_helper:
-      call_exp.append('C._%s(' % func.c_name)
-    else:
-      call_exp.append('C.%s(' % func.c_name)
-    for i, param in enumerate(func.c_parameters):
-      if i > 0: call_exp.append(', ')
-      if param.go_type == 'unsafe.Pointer':
-        call_exp.append('unsafe.Pointer(')
-      else:
-        call_exp.append('(%s)(' % param.go_type)
-      if param.is_basic_out_param: # pass a pointer
-        call_exp.append('&')
-      if param.caller_allocates: # use allocated_name
-        call_exp.append('&%s' % param.allocated_var_name)
-      else:
-        call_exp.append('%s' % param.mapped_cgo_name)
-      call_exp.append(')')
-    call_exp.append(')')
-    if func.return_value.go_type == 'unsafe.Pointer':
-      call_exp.insert(0, 'unsafe.Pointer(')
-      call_exp.append(')')
-
-    # return statement
-    if func.return_value.c_type != 'void':
-      if func.return_value.mapping:
-        out.append('\t_cgo_of__return__ := %s\n' % ''.join(call_exp))
-        out.append(func.return_value.mapping.return_mapping_code(func.return_value))
-      else:
-        out.append('\t_return_ = %s\n' % ''.join(call_exp))
-    else:
-      out.append('\t%s\n' % ''.join(call_exp))
-
-    # dereference and extra returns
-    for ret in func.extra_returns:
-      if ret.caller_allocates:
-        if ret.is_basic_out_param:
-          out.append('\t%s = &%s\n' % (ret.name, ret.allocated_var_name))
-        else:
-          out.append('\t%s = (%s)(&%s)\n' % (ret.name, ret.mapped_go_type, ret.allocated_var_name))
-      elif ret.mapping:
-        out.append(ret.mapping.return_mapping_code(ret))
-
-    out.append('\treturn\n}\n')
-    print >>self.out, ''.join(out)
-
   def write(self, f):
     output_file = open(f, 'w')
     output_file.write(self.out.getvalue())
     output_file.close()
-
-  def generate_helper(self, func):
-    out = []
-    spec = self.parser.func_spec[func.c_name]
-
-    # return type and function name
-    out.append('%s %s(' % (
-      spec.return_type,
-      '_' + func.c_name,
-      ))
-
-    # parameters
-    for i, param in enumerate(func.c_parameters):
-      if i > 0: out.append(', ')
-      out.append(param.c_type + ' ' + param.name)
-    out.append(') {\n\t')
-
-    # body
-    if spec.return_type != 'void':
-      out.append('return ')
-    out.append('%s(' % func.c_name)
-    for i, param in enumerate(func.c_parameters):
-      if i > 0: out.append(', ')
-      if spec.arg_types[i] != param.c_type:
-        out.append('(%s)(%s)' % (spec.arg_types[i], param.name))
-      else:
-        out.append(param.name)
-    out.append(');\n}\n')
-    self.out.write(''.join(out))
 
   def generate_enum_symbols(self):
     for symbol in self.parser.enum_symbols:
@@ -207,21 +73,8 @@ class Generator:
           go_name = symbol[len(prefix) + 1:]
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
-  def generate_macro_helpers(self):
-    print >>self.out, "gboolean _true() { return TRUE; }"
-    print >>self.out, "gboolean _false() { return FALSE; }"
-
   def generate_record_types(self):
     for name, c_type in self.parser.construct_records:
       if c_type in self.parser.skip_symbols:
         continue
       print >>self.out, "type %s C.%s" % (name, c_type)
-      # mapping
-      m = Mapping()
-      m.cgo_type = '*C.' + c_type
-      m.go_type = '*' + name
-      m.return_mapping_code = lambda ret: '\t_return_ = (%s)(_cgo_of__return__)\n' % ret.mapping.go_type
-      RETURN_MAPPINGS[m.cgo_type] = m
-      m.param_mapping_code = lambda param: '\t%s := (%s)(%s)\n' % (
-          param.mapped_cgo_name, param.go_type, param.name)
-      PARAM_MAPPINGS[m.cgo_type] = m

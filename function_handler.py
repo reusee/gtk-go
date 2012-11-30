@@ -33,6 +33,8 @@ def check_skip(parser, generator, function, klass):
       generator.skip = True
     if param.type.resolved == 'va_list':
       generator.skip = True
+    if param.type.resolved == '<array>':
+      generator.skip = True
     if param.direction == 'inout':
       generator.skip = True
 
@@ -52,35 +54,29 @@ def collect_c_func_info(parser, generator, function, klass):
   c_func_name = function.symbol
   lib_func_spec = parser.func_spec[c_func_name]
   generator.lib_func_spec = lib_func_spec
-  generator.c_func_return_type = convert_to_cgo_capatible_type(lib_func_spec.return_type)
-  if generator.c_func_return_type != lib_func_spec.return_type:
+  c_return_value = Value()
+  generator.c_return_value = c_return_value
+  c_return_value.c_return_type = convert_to_cgo_capatible_type(lib_func_spec.return_type)
+  if generator.c_return_value.c_return_type != lib_func_spec.return_type:
     generator.has_c_func = True
 
-  # has_c_func, c_parameter_types
-  for i, arg_type in enumerate(lib_func_spec.arg_types):
+  # has_c_func, c_parameters, c_arguments
+  for i, param in enumerate(lib_func_spec.parameters):
+    value = Value()
     if function.is_method and i == 0: # use class type instead of spec type
-      t = klass.ctype + ' *'
+      value.c_parameter_type = klass.ctype + ' *'
+      value.c_parameter_name = '_self_'
     else:
-      t = convert_to_cgo_capatible_type(arg_type)
-    if t != arg_type:
+      value.c_parameter_type = convert_to_cgo_capatible_type(param.type)
+      value.c_parameter_name = param.name
+    if value.c_parameter_type != param.type:
       generator.has_c_func = True
-    generator.c_parameter_types.append(t)
-
-  # c_parameter_names
-  if klass and function.is_method: # method_function
-    generator.c_parameter_names.append(generator.receiver_name)
-  for i, param in enumerate(function.parameters): # function.parameters does not have _self_ and error 
-    generator.c_parameter_names.append(param.argname)
-  if function.throws:
-    generator.c_parameter_names.append('_error_')
-
-  # c_arguments
-  assert len(generator.c_parameter_names) == len(generator.c_parameter_types)
-  for i, name in enumerate(generator.c_parameter_names):
-    if generator.c_parameter_types[i] != lib_func_spec.arg_types[i]:
-      generator.c_arguments.append('(%s)(%s)' % (lib_func_spec.arg_types[i], name))
+    if value.c_parameter_type != param.type:
+      value.c_argument = '(%s)(%s)' % (param.type, value.c_parameter_name)
     else:
-      generator.c_arguments.append(name)
+      value.c_argument = value.c_parameter_name
+    generator.c_parameters.append(value)
+    generator.c_arguments.append(value)
 
   # c_func_name
   if generator.has_c_func:
@@ -95,7 +91,10 @@ def collect_go_func_info(parser, generator, function, klass):
   # receiver
   if function.is_method:
     generator.has_receiver = True
-    generator.receiver_type = '*' + klass.gi_name.split('.')[-1]
+    value = generator.c_parameters[0]
+    value.receiver_name = '_self_'
+    value.receiver_type = '*' + klass.gi_name.split('.')[-1]
+    generator.receiver = value
 
   # go func name
   generator.go_func_name = ''.join(x.capitalize() 
@@ -108,37 +107,49 @@ def collect_go_func_info(parser, generator, function, klass):
   # go return
   generator.cgo_has_return = generator.c_has_return
   if generator.cgo_has_return:
-    generator.go_return_names.append('_return_')
-    generator.go_return_types.append(convert_to_cgo_type(generator.c_func_return_type))
+    value = generator.c_return_value
+    value.go_return_name = '_return_'
+    value.go_return_type = convert_to_cgo_type(value.c_return_type)
+    generator.go_returns.append(value)
 
-  # go parameter names and types
-  types = generator.c_parameter_types
-  if function.is_method:
-    types = types[1:] # skip the _self_
+  # go parameter names and types and cgo arguments
+  values = generator.c_parameters
+  if function.is_method: # because function.parameters does not contain _self_ param
+    values = values[1:]
   for i, param in enumerate(function.parameters):
-    name = param.argname
+    value = values[i]
+    name = value.c_parameter_name
     if is_go_word(name):
       name += '_'
     if param.direction == 'in':
-      generator.go_parameter_names.append(name)
-      generator.go_parameter_types.append(convert_to_cgo_type(types[i]))
+      value.go_parameter_name = name
+      value.go_parameter_type = convert_to_cgo_type(value.c_parameter_type)
+      generator.go_parameters.append(value)
     elif param.direction == 'out':
-      generator.go_return_names.append(name)
-      generator.go_return_types.append(convert_to_cgo_type(types[i]))
-    generator.cgo_arguments.append(name)
+      value.go_return_name = name
+      value.go_return_type = convert_to_cgo_type(value.c_parameter_type)
+      generator.go_returns.append(value)
+    value.cgo_argument = name
+    generator.cgo_arguments.append(value)
+
   if function.throws:
-    generator.go_return_names.append('_error_')
-    generator.go_return_types.append('unsafe.Pointer')
+    value = values[-1]
+    value.go_return_name = '_error_'
+    value.go_return_type = 'unsafe.Pointer'
+    value.cgo_argument = value.go_return_name
+    generator.go_returns.append(value)
+    generator.cgo_arguments.append(value)
+
+  if function.is_method:
+    value = generator.c_parameters[0]
+    value.cgo_argument = '(%s)(%s)' % (
+        convert_to_cgo_type(value.c_parameter_type),
+        generator.receiver.receiver_name)
+    generator.cgo_arguments.insert(0, value)
 
   # cgo call
   generator.cgo_return_lvalue = '_return_'
   generator.cgo_func_name = 'C.' + generator.c_func_name
-  if function.is_method:
-    generator.cgo_arguments.insert(0, '(%s)(%s)' % (
-      convert_to_cgo_type(generator.c_parameter_types[0]),
-      generator.receiver_name))
-  if function.throws:
-    generator.cgo_arguments.append('_error_')
 
 def convert_to_cgo_type(c_type):
   c_type = c_type.replace('volatile', '')
