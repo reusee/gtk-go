@@ -1,5 +1,7 @@
 class Value:
   def __init__(self):
+    self.gir_param_info = None
+
     self.c_return_type = None
 
     self.c_parameter_name = None

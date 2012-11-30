@@ -1,3 +1,4 @@
+from giscanner import ast
 from function_generator import *
 from common import *
 
@@ -6,9 +7,17 @@ def handleFunction(parser, function, klass = None):
 
   processors = [
       debug,
+
+      # basic
       check_skip,
       collect_c_func_info,
       collect_go_func_info,
+
+      # tunning
+      dereference_basic_type_out_param,
+      make_constructor_return_go_type,
+      map_glib_numeric_parameters_to_go_type,
+      map_glib_numeric_returns_to_go_type,
   ]
 
   for processor in processors:
@@ -118,6 +127,7 @@ def collect_go_func_info(parser, generator, function, klass):
     values = values[1:]
   for i, param in enumerate(function.parameters):
     value = values[i]
+    value.gir_param_info = param
     name = value.c_parameter_name
     if is_go_word(name):
       name += '_'
@@ -159,3 +169,68 @@ def convert_to_cgo_type(c_type):
   if c_type.endswith('*'):
     cgo_type = '*' + cgo_type[:-1]
   return cgo_type.strip()
+
+def dereference_basic_type_out_param(parser, generator, function, klass):
+  for ret in generator.go_returns:
+    if ret.gir_param_info and ret.gir_param_info.type.is_equiv(ast.BASIC_GIR_TYPES):
+      if ret.go_return_type[0] != '*': continue
+      ret.go_return_type = ret.go_return_type[1:]
+      ret.cgo_argument = '&' + ret.cgo_argument
+
+def make_constructor_return_go_type(parser, generator, function, klass):
+  if function.is_constructor:
+    generator.statements_before_cgo_call.append('var _cgo_return_ %s' 
+        % generator.c_return_value.go_return_type)
+    generator.c_return_value.go_return_type = '*' + klass.gi_name.split('.')[-1]
+    generator.cgo_return_lvalue = '_cgo_return_'
+    generator.statements_after_cgo_call.append('_return_ = (%s)(unsafe.Pointer(_cgo_return_))'
+        % generator.c_return_value.go_return_type)
+
+numeric_mapping = {
+  'C.gchar': 'int8',
+  'C.guchar': 'byte',
+
+  'C.gint': 'int',
+  'C.guint': 'uint',
+  'C.gshort': 'int',
+  'C.gushort': 'uint',
+  'C.glong': 'int64',
+  'C.gulong': 'uint64',
+  'C.gint8': 'int8',
+  'C.guint8': 'uint8',
+  'C.gint16': 'int16',
+  'C.guint16': 'uint16',
+  'C.gint32': 'int32',
+  'C.guint32': 'uint32',
+  'C.gint64': 'int64',
+  'C.guint64': 'uint64',
+
+  'C.gfloat': 'float64',
+  'C.gdouble': 'float64',
+  'C.gsize': 'uint64',
+  'C.gssize': 'int64',
+  'C.goffset': 'int64',
+
+  'C.gintptr': 'int64',
+  'C.guintptr': 'uint64',
+}
+
+def map_glib_numeric_parameters_to_go_type(parser, generator, function, klass):
+  for param in generator.go_parameters:
+    if param.go_parameter_type in numeric_mapping:
+      generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s)' % (
+        param.go_parameter_name, param.go_parameter_type, param.go_parameter_name))
+      param.go_parameter_type = numeric_mapping[param.go_parameter_type]
+      param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
+
+def map_glib_numeric_returns_to_go_type(parser, generator, function, klass):
+  for ret in generator.go_returns:
+    if ret.go_return_type in numeric_mapping:
+      generator.statements_before_cgo_call.append('var %s %s' % (
+        ret.go_return_name, ret.go_return_type))
+      generator.statements_after_cgo_call.append('_go_%s_ = (%s)(%s)' % (
+        ret.go_return_name,
+        numeric_mapping[ret.go_return_type],
+        ret.go_return_name))
+      ret.go_return_name = '_go_%s_' % ret.go_return_name
+      ret.go_return_type = numeric_mapping[ret.go_return_type]

@@ -6,7 +6,6 @@ from giscanner.girparser import GIRParser
 from generator import Generator
 import os
 from common import *
-from container import *
 from function_handler import handleFunction
 import imp
 

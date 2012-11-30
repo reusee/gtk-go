@@ -42,5 +42,11 @@ def is_go_word(w): # neither c keyword
   'cap', 'copy', 'len',
     ])
 
+def dump(o):
+  print (' %s ' % (o)).center(100, '=')
+  for k in dir(o):
+    if k.startswith('__'): continue
+    print k.ljust(30, ' '), getattr(o, k)
+
 if __name__ == '__main__':
   test_dict()
