@@ -1,3 +1,6 @@
+// type and func name conflict
+gtk_accel_map_foreach
+
 _GtkRcProperty
 
 gtk_init
