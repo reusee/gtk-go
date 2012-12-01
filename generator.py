@@ -1,7 +1,6 @@
 import StringIO
 import platform
 import time
-from mapping import RETURN_MAPPINGS, PARAM_MAPPINGS, Mapping
 
 class Generator:
   def __init__(self, parser):
