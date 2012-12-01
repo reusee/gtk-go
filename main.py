@@ -104,11 +104,7 @@ class Parser:
 
   def handleClass(self, cls):
     self.handleRecord(cls)
-    #print cls #TODO
-    #for k in dir(cls):
-    #  if k.startswith('_'): continue
-    #  print k.ljust(20, ' '), getattr(cls, k)
-    #print '=' * 30
+    #TODO
 
   def handleBitfield(self, bitfield):
     self.gi_types.add((bitfield.name, bitfield.ctype))

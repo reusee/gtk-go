@@ -1,31 +1,3 @@
-class Dict(dict):
-  __getattr__ = dict.__getitem__
-  __getitem__ = dict.__getitem__
-  def __setattr__(self, k, v):
-    dict.__setitem__(self, k, v)
-    dict.__setattr__(self, k, v)
-  def __setitem__(self, k, v):
-    dict.__setitem__(self, k, v)
-    dict.__setattr__(self, k, v)
-
-def test_dict():
-  d = Dict()
-  d.foo = 'foo'
-  assert d['foo'] == 'foo'
-  assert d.foo == 'foo'
-  d['bar'] = 'bar'
-  assert d.bar == 'bar'
-  assert d['bar'] == 'bar'
-  d = Dict({
-    'foo': 'foo',
-    'bar': 'bar',
-  })
-  assert d.foo == 'foo'
-  assert d['foo'] == 'foo'
-  assert d.bar == 'bar'
-  assert d['bar'] == 'bar'
-  assert d.get('FOO', '') == ''
-
 def is_go_word(w): # neither c keyword
   return w in set([
   # keywords
