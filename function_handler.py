@@ -191,9 +191,10 @@ def dereference_basic_type_out_param(parser, generator, function, klass):
 def map_record_and_class_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.gir_info.type.target_giname is None: continue
-    gi_type = param.gir_info.type.target_giname.split('.')[-1]
-    if gi_type in parser.gi_value_types: continue # do not map value types
-    generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s)' % (
+    gi_scope, gi_type = param.gir_info.type.target_giname.split('.')
+    if gi_scope.lower() != parser.package_name: continue
+    if gi_type not in parser.gi_reference_types: continue # do not map value types
+    generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(unsafe.Pointer(%s))' % (
       param.go_parameter_name, param.go_parameter_type, param.go_parameter_name))
     param.go_parameter_type = '*' + gi_type
     param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
@@ -202,8 +203,9 @@ def map_record_and_class_returns(parser, generator, function, klass):
   for ret in generator.go_returns:
     if ret.gir_info is None: continue
     if ret.gir_info.type.target_giname is None: continue
-    gi_type = ret.gir_info.type.target_giname.split('.')[-1]
-    if gi_type in parser.gi_value_types: continue # do not map value types
+    gi_scope, gi_type = ret.gir_info.type.target_giname.split('.')
+    if gi_scope.lower() != parser.package_name: continue
+    if gi_type not in parser.gi_reference_types: continue # do not map value types
     if isinstance(ret.gir_info, ast.Parameter):
       allocate_type = None
       convert_operant = None
@@ -218,16 +220,16 @@ def map_record_and_class_returns(parser, generator, function, klass):
         ret.cgo_argument = 'unsafe.Pointer(&_allocated_%s_)' % ret.go_return_name
       generator.statements_before_cgo_call.append('var _allocated_%s_ %s' % (
         ret.go_return_name, allocate_type))
-      generator.statements_after_cgo_call.append('%s = (%s)(%s)' % (
+      generator.statements_after_cgo_call.append('%s = (%s)(unsafe.Pointer(%s))' % (
         ret.go_return_name,
-        '*' + ret.gir_info.type.target_giname.split('.')[-1],
+        '*' + gi_type,
         convert_operant))
-      ret.go_return_type = '*' + ret.gir_info.type.target_giname.split('.')[-1]
+      ret.go_return_type = '*' + gi_type
     elif isinstance(ret.gir_info, ast.Return):
-      mapped_ret_type = '*' + ret.gir_info.type.target_giname.split('.')[-1]
+      mapped_ret_type = '*' + gi_type
       generator.statements_before_cgo_call.append('var %s %s' % (
         ret.go_return_name, ret.go_return_type))
-      generator.statements_after_cgo_call.append('_go_%s_ = (%s)(%s)' % (
+      generator.statements_after_cgo_call.append('_go_%s_ = (%s)(unsafe.Pointer(%s))' % (
         ret.go_return_name, mapped_ret_type, ret.go_return_name))
       ret.go_return_name = '_go_%s_' % ret.go_return_name
       ret.go_return_type = mapped_ret_type
