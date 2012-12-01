@@ -15,11 +15,14 @@ def handleFunction(parser, function, klass = None):
 
       # tunning
       dereference_basic_type_out_param,
-      make_constructor_return_go_type,
-      map_glib_numeric_parameters_to_go_type,
-      map_glib_numeric_returns_to_go_type,
+      map_record_and_class_parameters,
+      map_record_and_class_returns,
+      map_glib_numeric_parameters,
+      map_glib_numeric_returns,
       map_string_parameters,
       map_string_returns,
+      map_boolean_parameters,
+      map_boolean_returns,
   ]
 
   for processor in processors:
@@ -47,6 +50,8 @@ def check_skip(parser, generator, function, klass):
     if param.type.resolved == '<array>':
       generator.skip = True
     if param.direction == 'inout':
+      generator.skip = True
+    if param.type.ctype in parser.skip_symbols:
       generator.skip = True
 
 def convert_to_cgo_capatible_type(t):
@@ -110,6 +115,8 @@ def collect_go_func_info(parser, generator, function, klass):
   # go func name
   generator.go_func_name = ''.join(x.capitalize() 
       for x in function.name.split('_'))
+  if generator.go_func_name == '':
+    generator.go_func_name = 'New'
   if function.is_constructor:
     generator.go_func_name = klass.gi_name.split('.')[-1] + generator.go_func_name
   elif klass and not function.is_constructor and not function.is_method: # class or record static function
@@ -181,14 +188,49 @@ def dereference_basic_type_out_param(parser, generator, function, klass):
       ret.go_return_type = ret.go_return_type[1:]
       ret.cgo_argument = '&' + ret.cgo_argument
 
-def make_constructor_return_go_type(parser, generator, function, klass):
-  if function.is_constructor:
-    generator.statements_before_cgo_call.append('var _cgo_return_ %s' 
-        % generator.c_return_value.go_return_type)
-    generator.c_return_value.go_return_type = '*' + klass.gi_name.split('.')[-1]
-    generator.cgo_return_lvalue = '_cgo_return_'
-    generator.statements_after_cgo_call.append('_return_ = (%s)(unsafe.Pointer(_cgo_return_))'
-        % generator.c_return_value.go_return_type)
+def map_record_and_class_parameters(parser, generator, function, klass):
+  for param in generator.go_parameters:
+    if param.gir_info.type.target_giname is None: continue
+    gi_type = param.gir_info.type.target_giname.split('.')[-1]
+    if gi_type in parser.gi_value_types: continue # do not map value types
+    generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s)' % (
+      param.go_parameter_name, param.go_parameter_type, param.go_parameter_name))
+    param.go_parameter_type = '*' + gi_type
+    param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
+
+def map_record_and_class_returns(parser, generator, function, klass):
+  for ret in generator.go_returns:
+    if ret.gir_info is None: continue
+    if ret.gir_info.type.target_giname is None: continue
+    gi_type = ret.gir_info.type.target_giname.split('.')[-1]
+    if gi_type in parser.gi_value_types: continue # do not map value types
+    if isinstance(ret.gir_info, ast.Parameter):
+      allocate_type = None
+      convert_operant = None
+      if ret.gir_info.caller_allocates:
+        allocate_type = ret.go_return_type[1:]
+        convert_operant = '&_allocated_%s_' % ret.go_return_name
+        ret.cgo_argument = '&_allocated_%s_' % ret.go_return_name
+      else: 
+        assert ret.go_return_type == 'unsafe.Pointer'
+        allocate_type = convert_to_cgo_type(ret.gir_info.type.ctype[:-1])
+        convert_operant = '_allocated_%s_' % ret.go_return_name
+        ret.cgo_argument = 'unsafe.Pointer(&_allocated_%s_)' % ret.go_return_name
+      generator.statements_before_cgo_call.append('var _allocated_%s_ %s' % (
+        ret.go_return_name, allocate_type))
+      generator.statements_after_cgo_call.append('%s = (%s)(%s)' % (
+        ret.go_return_name,
+        '*' + ret.gir_info.type.target_giname.split('.')[-1],
+        convert_operant))
+      ret.go_return_type = '*' + ret.gir_info.type.target_giname.split('.')[-1]
+    elif isinstance(ret.gir_info, ast.Return):
+      mapped_ret_type = '*' + ret.gir_info.type.target_giname.split('.')[-1]
+      generator.statements_before_cgo_call.append('var %s %s' % (
+        ret.go_return_name, ret.go_return_type))
+      generator.statements_after_cgo_call.append('_go_%s_ = (%s)(%s)' % (
+        ret.go_return_name, mapped_ret_type, ret.go_return_name))
+      ret.go_return_name = '_go_%s_' % ret.go_return_name
+      ret.go_return_type = mapped_ret_type
 
 numeric_mapping = {
   'C.gchar': 'int8',
@@ -219,7 +261,7 @@ numeric_mapping = {
   'C.guintptr': 'uint64',
 }
 
-def map_glib_numeric_parameters_to_go_type(parser, generator, function, klass):
+def map_glib_numeric_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.go_parameter_type in numeric_mapping:
       generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s)' % (
@@ -227,7 +269,7 @@ def map_glib_numeric_parameters_to_go_type(parser, generator, function, klass):
       param.go_parameter_type = numeric_mapping[param.go_parameter_type]
       param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
 
-def map_glib_numeric_returns_to_go_type(parser, generator, function, klass):
+def map_glib_numeric_returns(parser, generator, function, klass):
   for ret in generator.go_returns:
     if ret.go_return_type in numeric_mapping:
       generator.statements_before_cgo_call.append('var %s %s' % (
@@ -258,10 +300,28 @@ def map_string_returns(parser, generator, function, klass):
     if ret.gir_info is None: continue
     if ret.gir_info.type.resolved in ['filename', 'utf8']:
       if ret.go_return_type == 'unsafe.Pointer': continue 
-      print ret.go_return_type, function.name
       generator.statements_before_cgo_call.append('var %s %s' % (
         ret.go_return_name, ret.go_return_type))
       generator.statements_after_cgo_call.append('_go_%s_ = C.GoString((*C.char)(unsafe.Pointer(%s)))'
           % (ret.go_return_name, ret.go_return_name))
       ret.go_return_name = '_go_%s_' % ret.go_return_name
       ret.go_return_type = 'string'
+
+def map_boolean_parameters(parser, generator, function, klass):
+  for param in generator.go_parameters:
+    if param.go_parameter_type == 'C.gboolean':
+      generator.statements_before_cgo_call.extend([
+        '_cgo_%s_ := C.glibfalse()' % param.go_parameter_name,
+        'if %s { _cgo_%s_ = C.glibtrue() }' % (param.go_parameter_name, param.go_parameter_name),
+        ])
+      param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
+      param.go_parameter_type = 'bool'
+
+def map_boolean_returns(parser, generator, function, klass):
+  for ret in generator.go_returns:
+    if ret.go_return_type == 'C.gboolean':
+      generator.statements_before_cgo_call.append('var %s C.gboolean' % ret.go_return_name)
+      generator.statements_after_cgo_call.append('_go_%s_ = %s == C.glibtrue()' 
+          % (ret.go_return_name, ret.go_return_name))
+      ret.go_return_name = '_go_%s_' % ret.go_return_name
+      ret.go_return_type = 'bool'

@@ -74,7 +74,7 @@ class Generator:
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
   def generate_record_types(self):
-    for name, c_type in self.parser.construct_records:
+    for name, c_type in self.parser.gi_types:
       if c_type in self.parser.skip_symbols:
         continue
       print >>self.out, "type %s C.%s" % (name, c_type)

@@ -37,9 +37,14 @@ class Parser:
     self.functions = []
     self.enum_symbols = []
     self.const_symbols = []
-    self.construct_records = set()
+
+    self.gi_types = set()
+    self.gi_value_types = set()
+    self.gi_reference_types = set()
 
     self.exported_functions = set()
+
+    self.functions_to_handle = []
 
   def parse(self):
     for node in self.namespace.itervalues():
@@ -49,14 +54,21 @@ class Parser:
       else:
         print type(node).__name__, 'not handle'
         stop
+    for args in self.functions_to_handle:
+      self._handleFunction(*args)
 
   def handleFunction(self, *args):
+    self.functions_to_handle.append(args)
+
+  def _handleFunction(self, *args):
     generator = handleFunction(self, *args)
     if generator:
       self.functions.append(generator)
       self.exported_functions.add(generator.lib_func_name)
 
   def handleEnum(self, node):
+    self.gi_types.add((node.name, node.ctype))
+    self.gi_value_types.add(node.name)
     for mem in node.members:
       if mem.symbol in self.skip_symbols:
         continue
@@ -74,7 +86,8 @@ class Parser:
     c_type = node.ctype
     if c_type in self.skip_symbols:
       return
-    self.construct_records.add((name, c_type))
+    self.gi_types.add((name, c_type))
+    self.gi_reference_types.add(name)
     # constructors
     for constructor in node.constructors:
       self.handleFunction(constructor, node)
@@ -86,7 +99,8 @@ class Parser:
       self.handleFunction(method, node)
 
   def handleAlias(self, alias):
-    pass
+    self.gi_types.add((alias.name, alias.ctype))
+    self.gi_value_types.add(alias.name)
 
   def handleClass(self, cls):
     self.handleRecord(cls)
@@ -97,16 +111,22 @@ class Parser:
     #print '=' * 30
 
   def handleBitfield(self, bitfield):
+    self.gi_types.add((bitfield.name, bitfield.ctype))
+    self.gi_value_types.add(bitfield.name)
     for member in bitfield.members:
       self.enum_symbols.append(member.symbol)
 
   def handleCallback(self, callback):
+    self.gi_types.add((callback.name, callback.ctype))
+    self.gi_value_types.add(callback.name)
     pass #TODO
 
   def handleInterface(self, interface):
     pass #TODO
 
   def handleUnion(self, union):
+    self.gi_types.add((union.name, union.ctype))
+    self.gi_value_types.add(union.name)
     pass #TODO
 
 def main():
