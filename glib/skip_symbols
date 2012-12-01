@@ -1,3 +1,10 @@
+// need to rename
+g_hook_find_func
+g_file_test
+
+// fixme
+GIConv
+
 // constants
 G_WIN32_MSG_HANDLE
 
@@ -42,8 +49,6 @@ g_once_init_leave
 g_pointer_bit_lock
 g_pointer_bit_trylock
 g_pointer_bit_unlock
-
-GIConv
 
 g_date_to_struct_tm
 
