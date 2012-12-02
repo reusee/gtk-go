@@ -5,7 +5,6 @@ import (
   "fmt"
   "time"
   "os"
-  "unsafe"
 )
 
 func TestBasicFunc(t *testing.T) {
@@ -26,10 +25,10 @@ func TestBasicWindow(t *testing.T) {
   window := WindowNew(WINDOW_TOPLEVEL)
 
   button := ButtonNewWithLabel("Hello, world!")
-  (*Container)(unsafe.Pointer(window)).Add(button)
-  (*Widget)(unsafe.Pointer(button)).Show()
+  window.Add(button)
+  button.Show()
 
-  (*Widget)(unsafe.Pointer(window)).Show()
+  window.Show()
   go func() {
     <-time.After(time.Millisecond * 3000)
     MainQuit()
