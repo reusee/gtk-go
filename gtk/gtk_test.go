@@ -30,8 +30,16 @@ func TestBasicWindow(t *testing.T) {
 
   window.Show()
   go func() {
-    <-time.After(time.Millisecond * 3000)
-    MainQuit()
+    ticker := time.NewTicker(time.Millisecond * 50)
+    countDown := time.After(time.Millisecond * 5000)
+    for {
+      select {
+      case <-countDown:
+        MainQuit()
+      case <-ticker.C:
+        button.SetLabel(fmt.Sprintf("%d", time.Now().UnixNano()))
+      }
+    }
   }()
   Main()
 }

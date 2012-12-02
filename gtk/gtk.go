@@ -2425,6 +2425,7 @@ type SizeGroupKind interface {
 }
 func (self SizeGroup) _IsSizeGroup () {}
 func (self SizeGroup) _getValue() unsafe.Pointer { return self._value_ }
+func ToSizeGroup(value unsafe.Pointer) SizeGroup { return SizeGroup{value} }
 type OffscreenWindow struct { Window }
 type OffscreenWindowKind interface {
   _IsOffscreenWindow()
@@ -2432,6 +2433,7 @@ type OffscreenWindowKind interface {
 }
 func (self OffscreenWindow) _IsOffscreenWindow () {}
 func (self OffscreenWindow) _getValue() unsafe.Pointer { return self._value_ }
+func ToOffscreenWindow(value unsafe.Pointer) OffscreenWindow { return OffscreenWindow{Window{Bin{Container{Widget{value}}}}} }
 type Action struct { _value_ unsafe.Pointer }
 type ActionKind interface {
   _IsAction()
@@ -2439,6 +2441,7 @@ type ActionKind interface {
 }
 func (self Action) _IsAction () {}
 func (self Action) _getValue() unsafe.Pointer { return self._value_ }
+func ToAction(value unsafe.Pointer) Action { return Action{value} }
 type TreeModelFilter struct { _value_ unsafe.Pointer }
 type TreeModelFilterKind interface {
   _IsTreeModelFilter()
@@ -2446,6 +2449,7 @@ type TreeModelFilterKind interface {
 }
 func (self TreeModelFilter) _IsTreeModelFilter () {}
 func (self TreeModelFilter) _getValue() unsafe.Pointer { return self._value_ }
+func ToTreeModelFilter(value unsafe.Pointer) TreeModelFilter { return TreeModelFilter{value} }
 type AspectFrame struct { Frame }
 type AspectFrameKind interface {
   _IsAspectFrame()
@@ -2453,6 +2457,7 @@ type AspectFrameKind interface {
 }
 func (self AspectFrame) _IsAspectFrame () {}
 func (self AspectFrame) _getValue() unsafe.Pointer { return self._value_ }
+func ToAspectFrame(value unsafe.Pointer) AspectFrame { return AspectFrame{Frame{Bin{Container{Widget{value}}}}} }
 type RecentChooserMenu struct { Menu }
 type RecentChooserMenuKind interface {
   _IsRecentChooserMenu()
@@ -2460,6 +2465,7 @@ type RecentChooserMenuKind interface {
 }
 func (self RecentChooserMenu) _IsRecentChooserMenu () {}
 func (self RecentChooserMenu) _getValue() unsafe.Pointer { return self._value_ }
+func ToRecentChooserMenu(value unsafe.Pointer) RecentChooserMenu { return RecentChooserMenu{Menu{MenuShell{Container{Widget{value}}}}} }
 type FontButton struct { Button }
 type FontButtonKind interface {
   _IsFontButton()
@@ -2467,6 +2473,7 @@ type FontButtonKind interface {
 }
 func (self FontButton) _IsFontButton () {}
 func (self FontButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToFontButton(value unsafe.Pointer) FontButton { return FontButton{Button{Bin{Container{Widget{value}}}}} }
 type FontChooserDialog struct { Dialog }
 type FontChooserDialogKind interface {
   _IsFontChooserDialog()
@@ -2474,6 +2481,7 @@ type FontChooserDialogKind interface {
 }
 func (self FontChooserDialog) _IsFontChooserDialog () {}
 func (self FontChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToFontChooserDialog(value unsafe.Pointer) FontChooserDialog { return FontChooserDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type MenuBar struct { MenuShell }
 type MenuBarKind interface {
   _IsMenuBar()
@@ -2481,6 +2489,7 @@ type MenuBarKind interface {
 }
 func (self MenuBar) _IsMenuBar () {}
 func (self MenuBar) _getValue() unsafe.Pointer { return self._value_ }
+func ToMenuBar(value unsafe.Pointer) MenuBar { return MenuBar{MenuShell{Container{Widget{value}}}} }
 type Bin struct { Container }
 type BinKind interface {
   _IsBin()
@@ -2488,6 +2497,7 @@ type BinKind interface {
 }
 func (self Bin) _IsBin () {}
 func (self Bin) _getValue() unsafe.Pointer { return self._value_ }
+func ToBin(value unsafe.Pointer) Bin { return Bin{Container{Widget{value}}} }
 type Widget struct { _value_ unsafe.Pointer }
 type WidgetKind interface {
   _IsWidget()
@@ -2495,6 +2505,7 @@ type WidgetKind interface {
 }
 func (self Widget) _IsWidget () {}
 func (self Widget) _getValue() unsafe.Pointer { return self._value_ }
+func ToWidget(value unsafe.Pointer) Widget { return Widget{value} }
 type NumerableIcon struct { _value_ unsafe.Pointer }
 type NumerableIconKind interface {
   _IsNumerableIcon()
@@ -2502,6 +2513,7 @@ type NumerableIconKind interface {
 }
 func (self NumerableIcon) _IsNumerableIcon () {}
 func (self NumerableIcon) _getValue() unsafe.Pointer { return self._value_ }
+func ToNumerableIcon(value unsafe.Pointer) NumerableIcon { return NumerableIcon{value} }
 type ActionGroup struct { _value_ unsafe.Pointer }
 type ActionGroupKind interface {
   _IsActionGroup()
@@ -2509,6 +2521,7 @@ type ActionGroupKind interface {
 }
 func (self ActionGroup) _IsActionGroup () {}
 func (self ActionGroup) _getValue() unsafe.Pointer { return self._value_ }
+func ToActionGroup(value unsafe.Pointer) ActionGroup { return ActionGroup{value} }
 type CellAreaBox struct { CellArea }
 type CellAreaBoxKind interface {
   _IsCellAreaBox()
@@ -2516,6 +2529,7 @@ type CellAreaBoxKind interface {
 }
 func (self CellAreaBox) _IsCellAreaBox () {}
 func (self CellAreaBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellAreaBox(value unsafe.Pointer) CellAreaBox { return CellAreaBox{CellArea{value}} }
 type CellRendererToggle struct { CellRenderer }
 type CellRendererToggleKind interface {
   _IsCellRendererToggle()
@@ -2523,6 +2537,7 @@ type CellRendererToggleKind interface {
 }
 func (self CellRendererToggle) _IsCellRendererToggle () {}
 func (self CellRendererToggle) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererToggle(value unsafe.Pointer) CellRendererToggle { return CellRendererToggle{CellRenderer{value}} }
 type SearchEntry struct { Entry }
 type SearchEntryKind interface {
   _IsSearchEntry()
@@ -2530,6 +2545,7 @@ type SearchEntryKind interface {
 }
 func (self SearchEntry) _IsSearchEntry () {}
 func (self SearchEntry) _getValue() unsafe.Pointer { return self._value_ }
+func ToSearchEntry(value unsafe.Pointer) SearchEntry { return SearchEntry{Entry{Widget{value}}} }
 type HSeparator struct { Separator }
 type HSeparatorKind interface {
   _IsHSeparator()
@@ -2537,6 +2553,7 @@ type HSeparatorKind interface {
 }
 func (self HSeparator) _IsHSeparator () {}
 func (self HSeparator) _getValue() unsafe.Pointer { return self._value_ }
+func ToHSeparator(value unsafe.Pointer) HSeparator { return HSeparator{Separator{Widget{value}}} }
 type HSV struct { Widget }
 type HSVKind interface {
   _IsHSV()
@@ -2544,6 +2561,7 @@ type HSVKind interface {
 }
 func (self HSV) _IsHSV () {}
 func (self HSV) _getValue() unsafe.Pointer { return self._value_ }
+func ToHSV(value unsafe.Pointer) HSV { return HSV{Widget{value}} }
 type TreeView struct { Container }
 type TreeViewKind interface {
   _IsTreeView()
@@ -2551,6 +2569,7 @@ type TreeViewKind interface {
 }
 func (self TreeView) _IsTreeView () {}
 func (self TreeView) _getValue() unsafe.Pointer { return self._value_ }
+func ToTreeView(value unsafe.Pointer) TreeView { return TreeView{Container{Widget{value}}} }
 type Plug struct { Window }
 type PlugKind interface {
   _IsPlug()
@@ -2558,6 +2577,7 @@ type PlugKind interface {
 }
 func (self Plug) _IsPlug () {}
 func (self Plug) _getValue() unsafe.Pointer { return self._value_ }
+func ToPlug(value unsafe.Pointer) Plug { return Plug{Window{Bin{Container{Widget{value}}}}} }
 type ColorChooserDialog struct { Dialog }
 type ColorChooserDialogKind interface {
   _IsColorChooserDialog()
@@ -2565,6 +2585,7 @@ type ColorChooserDialogKind interface {
 }
 func (self ColorChooserDialog) _IsColorChooserDialog () {}
 func (self ColorChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToColorChooserDialog(value unsafe.Pointer) ColorChooserDialog { return ColorChooserDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type PrintContext struct { _value_ unsafe.Pointer }
 type PrintContextKind interface {
   _IsPrintContext()
@@ -2572,6 +2593,7 @@ type PrintContextKind interface {
 }
 func (self PrintContext) _IsPrintContext () {}
 func (self PrintContext) _getValue() unsafe.Pointer { return self._value_ }
+func ToPrintContext(value unsafe.Pointer) PrintContext { return PrintContext{value} }
 type SeparatorToolItem struct { ToolItem }
 type SeparatorToolItemKind interface {
   _IsSeparatorToolItem()
@@ -2579,6 +2601,7 @@ type SeparatorToolItemKind interface {
 }
 func (self SeparatorToolItem) _IsSeparatorToolItem () {}
 func (self SeparatorToolItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToSeparatorToolItem(value unsafe.Pointer) SeparatorToolItem { return SeparatorToolItem{ToolItem{Bin{Container{Widget{value}}}}} }
 type MenuButton struct { ToggleButton }
 type MenuButtonKind interface {
   _IsMenuButton()
@@ -2586,6 +2609,7 @@ type MenuButtonKind interface {
 }
 func (self MenuButton) _IsMenuButton () {}
 func (self MenuButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToMenuButton(value unsafe.Pointer) MenuButton { return MenuButton{ToggleButton{Button{Bin{Container{Widget{value}}}}}} }
 type HScrollbar struct { Scrollbar }
 type HScrollbarKind interface {
   _IsHScrollbar()
@@ -2593,6 +2617,7 @@ type HScrollbarKind interface {
 }
 func (self HScrollbar) _IsHScrollbar () {}
 func (self HScrollbar) _getValue() unsafe.Pointer { return self._value_ }
+func ToHScrollbar(value unsafe.Pointer) HScrollbar { return HScrollbar{Scrollbar{Range{Widget{value}}}} }
 type Paned struct { Container }
 type PanedKind interface {
   _IsPaned()
@@ -2600,6 +2625,7 @@ type PanedKind interface {
 }
 func (self Paned) _IsPaned () {}
 func (self Paned) _getValue() unsafe.Pointer { return self._value_ }
+func ToPaned(value unsafe.Pointer) Paned { return Paned{Container{Widget{value}}} }
 type CellRendererCombo struct { CellRendererText }
 type CellRendererComboKind interface {
   _IsCellRendererCombo()
@@ -2607,6 +2633,7 @@ type CellRendererComboKind interface {
 }
 func (self CellRendererCombo) _IsCellRendererCombo () {}
 func (self CellRendererCombo) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererCombo(value unsafe.Pointer) CellRendererCombo { return CellRendererCombo{CellRendererText{CellRenderer{value}}} }
 type HandleBox struct { Bin }
 type HandleBoxKind interface {
   _IsHandleBox()
@@ -2614,6 +2641,7 @@ type HandleBoxKind interface {
 }
 func (self HandleBox) _IsHandleBox () {}
 func (self HandleBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToHandleBox(value unsafe.Pointer) HandleBox { return HandleBox{Bin{Container{Widget{value}}}} }
 type IMContextSimple struct { IMContext }
 type IMContextSimpleKind interface {
   _IsIMContextSimple()
@@ -2621,6 +2649,7 @@ type IMContextSimpleKind interface {
 }
 func (self IMContextSimple) _IsIMContextSimple () {}
 func (self IMContextSimple) _getValue() unsafe.Pointer { return self._value_ }
+func ToIMContextSimple(value unsafe.Pointer) IMContextSimple { return IMContextSimple{IMContext{value}} }
 type Scrollbar struct { Range }
 type ScrollbarKind interface {
   _IsScrollbar()
@@ -2628,6 +2657,7 @@ type ScrollbarKind interface {
 }
 func (self Scrollbar) _IsScrollbar () {}
 func (self Scrollbar) _getValue() unsafe.Pointer { return self._value_ }
+func ToScrollbar(value unsafe.Pointer) Scrollbar { return Scrollbar{Range{Widget{value}}} }
 type Arrow struct { Misc }
 type ArrowKind interface {
   _IsArrow()
@@ -2635,6 +2665,7 @@ type ArrowKind interface {
 }
 func (self Arrow) _IsArrow () {}
 func (self Arrow) _getValue() unsafe.Pointer { return self._value_ }
+func ToArrow(value unsafe.Pointer) Arrow { return Arrow{Misc{Widget{value}}} }
 type CellArea struct { _value_ unsafe.Pointer }
 type CellAreaKind interface {
   _IsCellArea()
@@ -2642,6 +2673,7 @@ type CellAreaKind interface {
 }
 func (self CellArea) _IsCellArea () {}
 func (self CellArea) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellArea(value unsafe.Pointer) CellArea { return CellArea{value} }
 type Fixed struct { Container }
 type FixedKind interface {
   _IsFixed()
@@ -2649,6 +2681,7 @@ type FixedKind interface {
 }
 func (self Fixed) _IsFixed () {}
 func (self Fixed) _getValue() unsafe.Pointer { return self._value_ }
+func ToFixed(value unsafe.Pointer) Fixed { return Fixed{Container{Widget{value}}} }
 type MessageDialog struct { Dialog }
 type MessageDialogKind interface {
   _IsMessageDialog()
@@ -2656,6 +2689,7 @@ type MessageDialogKind interface {
 }
 func (self MessageDialog) _IsMessageDialog () {}
 func (self MessageDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToMessageDialog(value unsafe.Pointer) MessageDialog { return MessageDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type ButtonBox struct { Box }
 type ButtonBoxKind interface {
   _IsButtonBox()
@@ -2663,6 +2697,7 @@ type ButtonBoxKind interface {
 }
 func (self ButtonBox) _IsButtonBox () {}
 func (self ButtonBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToButtonBox(value unsafe.Pointer) ButtonBox { return ButtonBox{Box{Container{Widget{value}}}} }
 type ColorButton struct { Button }
 type ColorButtonKind interface {
   _IsColorButton()
@@ -2670,6 +2705,7 @@ type ColorButtonKind interface {
 }
 func (self ColorButton) _IsColorButton () {}
 func (self ColorButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToColorButton(value unsafe.Pointer) ColorButton { return ColorButton{Button{Bin{Container{Widget{value}}}}} }
 type LockButton struct { Button }
 type LockButtonKind interface {
   _IsLockButton()
@@ -2677,6 +2713,7 @@ type LockButtonKind interface {
 }
 func (self LockButton) _IsLockButton () {}
 func (self LockButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToLockButton(value unsafe.Pointer) LockButton { return LockButton{Button{Bin{Container{Widget{value}}}}} }
 type RecentAction struct { Action }
 type RecentActionKind interface {
   _IsRecentAction()
@@ -2684,6 +2721,7 @@ type RecentActionKind interface {
 }
 func (self RecentAction) _IsRecentAction () {}
 func (self RecentAction) _getValue() unsafe.Pointer { return self._value_ }
+func ToRecentAction(value unsafe.Pointer) RecentAction { return RecentAction{Action{value}} }
 type IMMulticontext struct { IMContext }
 type IMMulticontextKind interface {
   _IsIMMulticontext()
@@ -2691,6 +2729,7 @@ type IMMulticontextKind interface {
 }
 func (self IMMulticontext) _IsIMMulticontext () {}
 func (self IMMulticontext) _getValue() unsafe.Pointer { return self._value_ }
+func ToIMMulticontext(value unsafe.Pointer) IMMulticontext { return IMMulticontext{IMContext{value}} }
 type MountOperation struct { _value_ unsafe.Pointer }
 type MountOperationKind interface {
   _IsMountOperation()
@@ -2698,6 +2737,7 @@ type MountOperationKind interface {
 }
 func (self MountOperation) _IsMountOperation () {}
 func (self MountOperation) _getValue() unsafe.Pointer { return self._value_ }
+func ToMountOperation(value unsafe.Pointer) MountOperation { return MountOperation{value} }
 type MenuItem struct { Bin }
 type MenuItemKind interface {
   _IsMenuItem()
@@ -2705,6 +2745,7 @@ type MenuItemKind interface {
 }
 func (self MenuItem) _IsMenuItem () {}
 func (self MenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToMenuItem(value unsafe.Pointer) MenuItem { return MenuItem{Bin{Container{Widget{value}}}} }
 type Adjustment struct { _value_ unsafe.Pointer }
 type AdjustmentKind interface {
   _IsAdjustment()
@@ -2712,6 +2753,7 @@ type AdjustmentKind interface {
 }
 func (self Adjustment) _IsAdjustment () {}
 func (self Adjustment) _getValue() unsafe.Pointer { return self._value_ }
+func ToAdjustment(value unsafe.Pointer) Adjustment { return Adjustment{value} }
 type CellRendererSpin struct { CellRendererText }
 type CellRendererSpinKind interface {
   _IsCellRendererSpin()
@@ -2719,6 +2761,7 @@ type CellRendererSpinKind interface {
 }
 func (self CellRendererSpin) _IsCellRendererSpin () {}
 func (self CellRendererSpin) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererSpin(value unsafe.Pointer) CellRendererSpin { return CellRendererSpin{CellRendererText{CellRenderer{value}}} }
 type TextView struct { Container }
 type TextViewKind interface {
   _IsTextView()
@@ -2726,6 +2769,7 @@ type TextViewKind interface {
 }
 func (self TextView) _IsTextView () {}
 func (self TextView) _getValue() unsafe.Pointer { return self._value_ }
+func ToTextView(value unsafe.Pointer) TextView { return TextView{Container{Widget{value}}} }
 type EventBox struct { Bin }
 type EventBoxKind interface {
   _IsEventBox()
@@ -2733,6 +2777,7 @@ type EventBoxKind interface {
 }
 func (self EventBox) _IsEventBox () {}
 func (self EventBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToEventBox(value unsafe.Pointer) EventBox { return EventBox{Bin{Container{Widget{value}}}} }
 type ScaleButton struct { Button }
 type ScaleButtonKind interface {
   _IsScaleButton()
@@ -2740,6 +2785,7 @@ type ScaleButtonKind interface {
 }
 func (self ScaleButton) _IsScaleButton () {}
 func (self ScaleButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToScaleButton(value unsafe.Pointer) ScaleButton { return ScaleButton{Button{Bin{Container{Widget{value}}}}} }
 type Label struct { Misc }
 type LabelKind interface {
   _IsLabel()
@@ -2747,6 +2793,7 @@ type LabelKind interface {
 }
 func (self Label) _IsLabel () {}
 func (self Label) _getValue() unsafe.Pointer { return self._value_ }
+func ToLabel(value unsafe.Pointer) Label { return Label{Misc{Widget{value}}} }
 type Application struct { _value_ unsafe.Pointer }
 type ApplicationKind interface {
   _IsApplication()
@@ -2754,6 +2801,7 @@ type ApplicationKind interface {
 }
 func (self Application) _IsApplication () {}
 func (self Application) _getValue() unsafe.Pointer { return self._value_ }
+func ToApplication(value unsafe.Pointer) Application { return Application{value} }
 type VolumeButton struct { ScaleButton }
 type VolumeButtonKind interface {
   _IsVolumeButton()
@@ -2761,6 +2809,7 @@ type VolumeButtonKind interface {
 }
 func (self VolumeButton) _IsVolumeButton () {}
 func (self VolumeButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToVolumeButton(value unsafe.Pointer) VolumeButton { return VolumeButton{ScaleButton{Button{Bin{Container{Widget{value}}}}}} }
 type Clipboard struct { _value_ unsafe.Pointer }
 type ClipboardKind interface {
   _IsClipboard()
@@ -2768,6 +2817,7 @@ type ClipboardKind interface {
 }
 func (self Clipboard) _IsClipboard () {}
 func (self Clipboard) _getValue() unsafe.Pointer { return self._value_ }
+func ToClipboard(value unsafe.Pointer) Clipboard { return Clipboard{value} }
 type IconTheme struct { _value_ unsafe.Pointer }
 type IconThemeKind interface {
   _IsIconTheme()
@@ -2775,6 +2825,7 @@ type IconThemeKind interface {
 }
 func (self IconTheme) _IsIconTheme () {}
 func (self IconTheme) _getValue() unsafe.Pointer { return self._value_ }
+func ToIconTheme(value unsafe.Pointer) IconTheme { return IconTheme{value} }
 type TearoffMenuItem struct { MenuItem }
 type TearoffMenuItemKind interface {
   _IsTearoffMenuItem()
@@ -2782,6 +2833,7 @@ type TearoffMenuItemKind interface {
 }
 func (self TearoffMenuItem) _IsTearoffMenuItem () {}
 func (self TearoffMenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToTearoffMenuItem(value unsafe.Pointer) TearoffMenuItem { return TearoffMenuItem{MenuItem{Bin{Container{Widget{value}}}}} }
 type EntryCompletion struct { _value_ unsafe.Pointer }
 type EntryCompletionKind interface {
   _IsEntryCompletion()
@@ -2789,6 +2841,7 @@ type EntryCompletionKind interface {
 }
 func (self EntryCompletion) _IsEntryCompletion () {}
 func (self EntryCompletion) _getValue() unsafe.Pointer { return self._value_ }
+func ToEntryCompletion(value unsafe.Pointer) EntryCompletion { return EntryCompletion{value} }
 type AppChooserWidget struct { Box }
 type AppChooserWidgetKind interface {
   _IsAppChooserWidget()
@@ -2796,6 +2849,7 @@ type AppChooserWidgetKind interface {
 }
 func (self AppChooserWidget) _IsAppChooserWidget () {}
 func (self AppChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
+func ToAppChooserWidget(value unsafe.Pointer) AppChooserWidget { return AppChooserWidget{Box{Container{Widget{value}}}} }
 type ComboBox struct { Bin }
 type ComboBoxKind interface {
   _IsComboBox()
@@ -2803,6 +2857,7 @@ type ComboBoxKind interface {
 }
 func (self ComboBox) _IsComboBox () {}
 func (self ComboBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToComboBox(value unsafe.Pointer) ComboBox { return ComboBox{Bin{Container{Widget{value}}}} }
 type ListStore struct { _value_ unsafe.Pointer }
 type ListStoreKind interface {
   _IsListStore()
@@ -2810,6 +2865,7 @@ type ListStoreKind interface {
 }
 func (self ListStore) _IsListStore () {}
 func (self ListStore) _getValue() unsafe.Pointer { return self._value_ }
+func ToListStore(value unsafe.Pointer) ListStore { return ListStore{value} }
 type Statusbar struct { Box }
 type StatusbarKind interface {
   _IsStatusbar()
@@ -2817,6 +2873,7 @@ type StatusbarKind interface {
 }
 func (self Statusbar) _IsStatusbar () {}
 func (self Statusbar) _getValue() unsafe.Pointer { return self._value_ }
+func ToStatusbar(value unsafe.Pointer) Statusbar { return Statusbar{Box{Container{Widget{value}}}} }
 type ScrolledWindow struct { Bin }
 type ScrolledWindowKind interface {
   _IsScrolledWindow()
@@ -2824,6 +2881,7 @@ type ScrolledWindowKind interface {
 }
 func (self ScrolledWindow) _IsScrolledWindow () {}
 func (self ScrolledWindow) _getValue() unsafe.Pointer { return self._value_ }
+func ToScrolledWindow(value unsafe.Pointer) ScrolledWindow { return ScrolledWindow{Bin{Container{Widget{value}}}} }
 type RecentManager struct { _value_ unsafe.Pointer }
 type RecentManagerKind interface {
   _IsRecentManager()
@@ -2831,6 +2889,7 @@ type RecentManagerKind interface {
 }
 func (self RecentManager) _IsRecentManager () {}
 func (self RecentManager) _getValue() unsafe.Pointer { return self._value_ }
+func ToRecentManager(value unsafe.Pointer) RecentManager { return RecentManager{value} }
 type Grid struct { Container }
 type GridKind interface {
   _IsGrid()
@@ -2838,6 +2897,7 @@ type GridKind interface {
 }
 func (self Grid) _IsGrid () {}
 func (self Grid) _getValue() unsafe.Pointer { return self._value_ }
+func ToGrid(value unsafe.Pointer) Grid { return Grid{Container{Widget{value}}} }
 type ToggleAction struct { Action }
 type ToggleActionKind interface {
   _IsToggleAction()
@@ -2845,6 +2905,7 @@ type ToggleActionKind interface {
 }
 func (self ToggleAction) _IsToggleAction () {}
 func (self ToggleAction) _getValue() unsafe.Pointer { return self._value_ }
+func ToToggleAction(value unsafe.Pointer) ToggleAction { return ToggleAction{Action{value}} }
 type FontSelectionDialog struct { Dialog }
 type FontSelectionDialogKind interface {
   _IsFontSelectionDialog()
@@ -2852,6 +2913,7 @@ type FontSelectionDialogKind interface {
 }
 func (self FontSelectionDialog) _IsFontSelectionDialog () {}
 func (self FontSelectionDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToFontSelectionDialog(value unsafe.Pointer) FontSelectionDialog { return FontSelectionDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type Builder struct { _value_ unsafe.Pointer }
 type BuilderKind interface {
   _IsBuilder()
@@ -2859,6 +2921,7 @@ type BuilderKind interface {
 }
 func (self Builder) _IsBuilder () {}
 func (self Builder) _getValue() unsafe.Pointer { return self._value_ }
+func ToBuilder(value unsafe.Pointer) Builder { return Builder{value} }
 type Viewport struct { Bin }
 type ViewportKind interface {
   _IsViewport()
@@ -2866,6 +2929,7 @@ type ViewportKind interface {
 }
 func (self Viewport) _IsViewport () {}
 func (self Viewport) _getValue() unsafe.Pointer { return self._value_ }
+func ToViewport(value unsafe.Pointer) Viewport { return Viewport{Bin{Container{Widget{value}}}} }
 type Box struct { Container }
 type BoxKind interface {
   _IsBox()
@@ -2873,6 +2937,7 @@ type BoxKind interface {
 }
 func (self Box) _IsBox () {}
 func (self Box) _getValue() unsafe.Pointer { return self._value_ }
+func ToBox(value unsafe.Pointer) Box { return Box{Container{Widget{value}}} }
 type EntryBuffer struct { _value_ unsafe.Pointer }
 type EntryBufferKind interface {
   _IsEntryBuffer()
@@ -2880,6 +2945,7 @@ type EntryBufferKind interface {
 }
 func (self EntryBuffer) _IsEntryBuffer () {}
 func (self EntryBuffer) _getValue() unsafe.Pointer { return self._value_ }
+func ToEntryBuffer(value unsafe.Pointer) EntryBuffer { return EntryBuffer{value} }
 type AccelMap struct { _value_ unsafe.Pointer }
 type AccelMapKind interface {
   _IsAccelMap()
@@ -2887,6 +2953,7 @@ type AccelMapKind interface {
 }
 func (self AccelMap) _IsAccelMap () {}
 func (self AccelMap) _getValue() unsafe.Pointer { return self._value_ }
+func ToAccelMap(value unsafe.Pointer) AccelMap { return AccelMap{value} }
 type Settings struct { _value_ unsafe.Pointer }
 type SettingsKind interface {
   _IsSettings()
@@ -2894,6 +2961,7 @@ type SettingsKind interface {
 }
 func (self Settings) _IsSettings () {}
 func (self Settings) _getValue() unsafe.Pointer { return self._value_ }
+func ToSettings(value unsafe.Pointer) Settings { return Settings{value} }
 type FileFilter struct { _value_ unsafe.Pointer }
 type FileFilterKind interface {
   _IsFileFilter()
@@ -2901,6 +2969,7 @@ type FileFilterKind interface {
 }
 func (self FileFilter) _IsFileFilter () {}
 func (self FileFilter) _getValue() unsafe.Pointer { return self._value_ }
+func ToFileFilter(value unsafe.Pointer) FileFilter { return FileFilter{value} }
 type VPaned struct { Paned }
 type VPanedKind interface {
   _IsVPaned()
@@ -2908,6 +2977,7 @@ type VPanedKind interface {
 }
 func (self VPaned) _IsVPaned () {}
 func (self VPaned) _getValue() unsafe.Pointer { return self._value_ }
+func ToVPaned(value unsafe.Pointer) VPaned { return VPaned{Paned{Container{Widget{value}}}} }
 type ColorSelectionDialog struct { Dialog }
 type ColorSelectionDialogKind interface {
   _IsColorSelectionDialog()
@@ -2915,6 +2985,7 @@ type ColorSelectionDialogKind interface {
 }
 func (self ColorSelectionDialog) _IsColorSelectionDialog () {}
 func (self ColorSelectionDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToColorSelectionDialog(value unsafe.Pointer) ColorSelectionDialog { return ColorSelectionDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type Range struct { Widget }
 type RangeKind interface {
   _IsRange()
@@ -2922,6 +2993,7 @@ type RangeKind interface {
 }
 func (self Range) _IsRange () {}
 func (self Range) _getValue() unsafe.Pointer { return self._value_ }
+func ToRange(value unsafe.Pointer) Range { return Range{Widget{value}} }
 type CellRendererText struct { CellRenderer }
 type CellRendererTextKind interface {
   _IsCellRendererText()
@@ -2929,6 +3001,7 @@ type CellRendererTextKind interface {
 }
 func (self CellRendererText) _IsCellRendererText () {}
 func (self CellRendererText) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererText(value unsafe.Pointer) CellRendererText { return CellRendererText{CellRenderer{value}} }
 type CellRenderer struct { _value_ unsafe.Pointer }
 type CellRendererKind interface {
   _IsCellRenderer()
@@ -2936,6 +3009,7 @@ type CellRendererKind interface {
 }
 func (self CellRenderer) _IsCellRenderer () {}
 func (self CellRenderer) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRenderer(value unsafe.Pointer) CellRenderer { return CellRenderer{value} }
 type Expander struct { Bin }
 type ExpanderKind interface {
   _IsExpander()
@@ -2943,6 +3017,7 @@ type ExpanderKind interface {
 }
 func (self Expander) _IsExpander () {}
 func (self Expander) _getValue() unsafe.Pointer { return self._value_ }
+func ToExpander(value unsafe.Pointer) Expander { return Expander{Bin{Container{Widget{value}}}} }
 type HBox struct { Box }
 type HBoxKind interface {
   _IsHBox()
@@ -2950,6 +3025,7 @@ type HBoxKind interface {
 }
 func (self HBox) _IsHBox () {}
 func (self HBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToHBox(value unsafe.Pointer) HBox { return HBox{Box{Container{Widget{value}}}} }
 type Accessible struct { _value_ unsafe.Pointer }
 type AccessibleKind interface {
   _IsAccessible()
@@ -2957,6 +3033,7 @@ type AccessibleKind interface {
 }
 func (self Accessible) _IsAccessible () {}
 func (self Accessible) _getValue() unsafe.Pointer { return self._value_ }
+func ToAccessible(value unsafe.Pointer) Accessible { return Accessible{value} }
 type TextBuffer struct { _value_ unsafe.Pointer }
 type TextBufferKind interface {
   _IsTextBuffer()
@@ -2964,6 +3041,7 @@ type TextBufferKind interface {
 }
 func (self TextBuffer) _IsTextBuffer () {}
 func (self TextBuffer) _getValue() unsafe.Pointer { return self._value_ }
+func ToTextBuffer(value unsafe.Pointer) TextBuffer { return TextBuffer{value} }
 type HScale struct { Scale }
 type HScaleKind interface {
   _IsHScale()
@@ -2971,6 +3049,7 @@ type HScaleKind interface {
 }
 func (self HScale) _IsHScale () {}
 func (self HScale) _getValue() unsafe.Pointer { return self._value_ }
+func ToHScale(value unsafe.Pointer) HScale { return HScale{Scale{Range{Widget{value}}}} }
 type Image struct { Misc }
 type ImageKind interface {
   _IsImage()
@@ -2978,6 +3057,7 @@ type ImageKind interface {
 }
 func (self Image) _IsImage () {}
 func (self Image) _getValue() unsafe.Pointer { return self._value_ }
+func ToImage(value unsafe.Pointer) Image { return Image{Misc{Widget{value}}} }
 type IconView struct { Container }
 type IconViewKind interface {
   _IsIconView()
@@ -2985,6 +3065,7 @@ type IconViewKind interface {
 }
 func (self IconView) _IsIconView () {}
 func (self IconView) _getValue() unsafe.Pointer { return self._value_ }
+func ToIconView(value unsafe.Pointer) IconView { return IconView{Container{Widget{value}}} }
 type RadioButton struct { CheckButton }
 type RadioButtonKind interface {
   _IsRadioButton()
@@ -2992,6 +3073,7 @@ type RadioButtonKind interface {
 }
 func (self RadioButton) _IsRadioButton () {}
 func (self RadioButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToRadioButton(value unsafe.Pointer) RadioButton { return RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{value}}}}}}} }
 type ProgressBar struct { Widget }
 type ProgressBarKind interface {
   _IsProgressBar()
@@ -2999,6 +3081,7 @@ type ProgressBarKind interface {
 }
 func (self ProgressBar) _IsProgressBar () {}
 func (self ProgressBar) _getValue() unsafe.Pointer { return self._value_ }
+func ToProgressBar(value unsafe.Pointer) ProgressBar { return ProgressBar{Widget{value}} }
 type StyleContext struct { _value_ unsafe.Pointer }
 type StyleContextKind interface {
   _IsStyleContext()
@@ -3006,6 +3089,7 @@ type StyleContextKind interface {
 }
 func (self StyleContext) _IsStyleContext () {}
 func (self StyleContext) _getValue() unsafe.Pointer { return self._value_ }
+func ToStyleContext(value unsafe.Pointer) StyleContext { return StyleContext{value} }
 type Separator struct { Widget }
 type SeparatorKind interface {
   _IsSeparator()
@@ -3013,6 +3097,7 @@ type SeparatorKind interface {
 }
 func (self Separator) _IsSeparator () {}
 func (self Separator) _getValue() unsafe.Pointer { return self._value_ }
+func ToSeparator(value unsafe.Pointer) Separator { return Separator{Widget{value}} }
 type Layout struct { Container }
 type LayoutKind interface {
   _IsLayout()
@@ -3020,6 +3105,7 @@ type LayoutKind interface {
 }
 func (self Layout) _IsLayout () {}
 func (self Layout) _getValue() unsafe.Pointer { return self._value_ }
+func ToLayout(value unsafe.Pointer) Layout { return Layout{Container{Widget{value}}} }
 type LevelBar struct { Widget }
 type LevelBarKind interface {
   _IsLevelBar()
@@ -3027,6 +3113,7 @@ type LevelBarKind interface {
 }
 func (self LevelBar) _IsLevelBar () {}
 func (self LevelBar) _getValue() unsafe.Pointer { return self._value_ }
+func ToLevelBar(value unsafe.Pointer) LevelBar { return LevelBar{Widget{value}} }
 type Alignment struct { Bin }
 type AlignmentKind interface {
   _IsAlignment()
@@ -3034,6 +3121,7 @@ type AlignmentKind interface {
 }
 func (self Alignment) _IsAlignment () {}
 func (self Alignment) _getValue() unsafe.Pointer { return self._value_ }
+func ToAlignment(value unsafe.Pointer) Alignment { return Alignment{Bin{Container{Widget{value}}}} }
 type Style struct { _value_ unsafe.Pointer }
 type StyleKind interface {
   _IsStyle()
@@ -3041,6 +3129,7 @@ type StyleKind interface {
 }
 func (self Style) _IsStyle () {}
 func (self Style) _getValue() unsafe.Pointer { return self._value_ }
+func ToStyle(value unsafe.Pointer) Style { return Style{value} }
 type ThemingEngine struct { _value_ unsafe.Pointer }
 type ThemingEngineKind interface {
   _IsThemingEngine()
@@ -3048,6 +3137,7 @@ type ThemingEngineKind interface {
 }
 func (self ThemingEngine) _IsThemingEngine () {}
 func (self ThemingEngine) _getValue() unsafe.Pointer { return self._value_ }
+func ToThemingEngine(value unsafe.Pointer) ThemingEngine { return ThemingEngine{value} }
 type StyleProperties struct { _value_ unsafe.Pointer }
 type StylePropertiesKind interface {
   _IsStyleProperties()
@@ -3055,6 +3145,7 @@ type StylePropertiesKind interface {
 }
 func (self StyleProperties) _IsStyleProperties () {}
 func (self StyleProperties) _getValue() unsafe.Pointer { return self._value_ }
+func ToStyleProperties(value unsafe.Pointer) StyleProperties { return StyleProperties{value} }
 type VSeparator struct { Separator }
 type VSeparatorKind interface {
   _IsVSeparator()
@@ -3062,6 +3153,7 @@ type VSeparatorKind interface {
 }
 func (self VSeparator) _IsVSeparator () {}
 func (self VSeparator) _getValue() unsafe.Pointer { return self._value_ }
+func ToVSeparator(value unsafe.Pointer) VSeparator { return VSeparator{Separator{Widget{value}}} }
 type TextMark struct { _value_ unsafe.Pointer }
 type TextMarkKind interface {
   _IsTextMark()
@@ -3069,6 +3161,7 @@ type TextMarkKind interface {
 }
 func (self TextMark) _IsTextMark () {}
 func (self TextMark) _getValue() unsafe.Pointer { return self._value_ }
+func ToTextMark(value unsafe.Pointer) TextMark { return TextMark{value} }
 type Spinner struct { Widget }
 type SpinnerKind interface {
   _IsSpinner()
@@ -3076,6 +3169,7 @@ type SpinnerKind interface {
 }
 func (self Spinner) _IsSpinner () {}
 func (self Spinner) _getValue() unsafe.Pointer { return self._value_ }
+func ToSpinner(value unsafe.Pointer) Spinner { return Spinner{Widget{value}} }
 type Scale struct { Range }
 type ScaleKind interface {
   _IsScale()
@@ -3083,6 +3177,7 @@ type ScaleKind interface {
 }
 func (self Scale) _IsScale () {}
 func (self Scale) _getValue() unsafe.Pointer { return self._value_ }
+func ToScale(value unsafe.Pointer) Scale { return Scale{Range{Widget{value}}} }
 type LinkButton struct { Button }
 type LinkButtonKind interface {
   _IsLinkButton()
@@ -3090,6 +3185,7 @@ type LinkButtonKind interface {
 }
 func (self LinkButton) _IsLinkButton () {}
 func (self LinkButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToLinkButton(value unsafe.Pointer) LinkButton { return LinkButton{Button{Bin{Container{Widget{value}}}}} }
 type FileChooserWidget struct { Box }
 type FileChooserWidgetKind interface {
   _IsFileChooserWidget()
@@ -3097,6 +3193,7 @@ type FileChooserWidgetKind interface {
 }
 func (self FileChooserWidget) _IsFileChooserWidget () {}
 func (self FileChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
+func ToFileChooserWidget(value unsafe.Pointer) FileChooserWidget { return FileChooserWidget{Box{Container{Widget{value}}}} }
 type TreeSelection struct { _value_ unsafe.Pointer }
 type TreeSelectionKind interface {
   _IsTreeSelection()
@@ -3104,6 +3201,7 @@ type TreeSelectionKind interface {
 }
 func (self TreeSelection) _IsTreeSelection () {}
 func (self TreeSelection) _getValue() unsafe.Pointer { return self._value_ }
+func ToTreeSelection(value unsafe.Pointer) TreeSelection { return TreeSelection{value} }
 type AppChooserDialog struct { Dialog }
 type AppChooserDialogKind interface {
   _IsAppChooserDialog()
@@ -3111,6 +3209,7 @@ type AppChooserDialogKind interface {
 }
 func (self AppChooserDialog) _IsAppChooserDialog () {}
 func (self AppChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToAppChooserDialog(value unsafe.Pointer) AppChooserDialog { return AppChooserDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type CellView struct { Widget }
 type CellViewKind interface {
   _IsCellView()
@@ -3118,6 +3217,7 @@ type CellViewKind interface {
 }
 func (self CellView) _IsCellView () {}
 func (self CellView) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellView(value unsafe.Pointer) CellView { return CellView{Widget{value}} }
 type MenuShell struct { Container }
 type MenuShellKind interface {
   _IsMenuShell()
@@ -3125,6 +3225,7 @@ type MenuShellKind interface {
 }
 func (self MenuShell) _IsMenuShell () {}
 func (self MenuShell) _getValue() unsafe.Pointer { return self._value_ }
+func ToMenuShell(value unsafe.Pointer) MenuShell { return MenuShell{Container{Widget{value}}} }
 type TextChildAnchor struct { _value_ unsafe.Pointer }
 type TextChildAnchorKind interface {
   _IsTextChildAnchor()
@@ -3132,6 +3233,7 @@ type TextChildAnchorKind interface {
 }
 func (self TextChildAnchor) _IsTextChildAnchor () {}
 func (self TextChildAnchor) _getValue() unsafe.Pointer { return self._value_ }
+func ToTextChildAnchor(value unsafe.Pointer) TextChildAnchor { return TextChildAnchor{value} }
 type Assistant struct { Window }
 type AssistantKind interface {
   _IsAssistant()
@@ -3139,6 +3241,7 @@ type AssistantKind interface {
 }
 func (self Assistant) _IsAssistant () {}
 func (self Assistant) _getValue() unsafe.Pointer { return self._value_ }
+func ToAssistant(value unsafe.Pointer) Assistant { return Assistant{Window{Bin{Container{Widget{value}}}}} }
 type FileChooserButton struct { Box }
 type FileChooserButtonKind interface {
   _IsFileChooserButton()
@@ -3146,6 +3249,7 @@ type FileChooserButtonKind interface {
 }
 func (self FileChooserButton) _IsFileChooserButton () {}
 func (self FileChooserButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToFileChooserButton(value unsafe.Pointer) FileChooserButton { return FileChooserButton{Box{Container{Widget{value}}}} }
 type StatusIcon struct { _value_ unsafe.Pointer }
 type StatusIconKind interface {
   _IsStatusIcon()
@@ -3153,6 +3257,7 @@ type StatusIconKind interface {
 }
 func (self StatusIcon) _IsStatusIcon () {}
 func (self StatusIcon) _getValue() unsafe.Pointer { return self._value_ }
+func ToStatusIcon(value unsafe.Pointer) StatusIcon { return StatusIcon{value} }
 type AppChooserButton struct { ComboBox }
 type AppChooserButtonKind interface {
   _IsAppChooserButton()
@@ -3160,6 +3265,7 @@ type AppChooserButtonKind interface {
 }
 func (self AppChooserButton) _IsAppChooserButton () {}
 func (self AppChooserButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToAppChooserButton(value unsafe.Pointer) AppChooserButton { return AppChooserButton{ComboBox{Bin{Container{Widget{value}}}}} }
 type VBox struct { Box }
 type VBoxKind interface {
   _IsVBox()
@@ -3167,6 +3273,7 @@ type VBoxKind interface {
 }
 func (self VBox) _IsVBox () {}
 func (self VBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToVBox(value unsafe.Pointer) VBox { return VBox{Box{Container{Widget{value}}}} }
 type Notebook struct { Container }
 type NotebookKind interface {
   _IsNotebook()
@@ -3174,6 +3281,7 @@ type NotebookKind interface {
 }
 func (self Notebook) _IsNotebook () {}
 func (self Notebook) _getValue() unsafe.Pointer { return self._value_ }
+func ToNotebook(value unsafe.Pointer) Notebook { return Notebook{Container{Widget{value}}} }
 type ToolButton struct { ToolItem }
 type ToolButtonKind interface {
   _IsToolButton()
@@ -3181,6 +3289,7 @@ type ToolButtonKind interface {
 }
 func (self ToolButton) _IsToolButton () {}
 func (self ToolButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToToolButton(value unsafe.Pointer) ToolButton { return ToolButton{ToolItem{Bin{Container{Widget{value}}}}} }
 type FontChooserWidget struct { Box }
 type FontChooserWidgetKind interface {
   _IsFontChooserWidget()
@@ -3188,6 +3297,7 @@ type FontChooserWidgetKind interface {
 }
 func (self FontChooserWidget) _IsFontChooserWidget () {}
 func (self FontChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
+func ToFontChooserWidget(value unsafe.Pointer) FontChooserWidget { return FontChooserWidget{Box{Container{Widget{value}}}} }
 type CellRendererSpinner struct { CellRenderer }
 type CellRendererSpinnerKind interface {
   _IsCellRendererSpinner()
@@ -3195,6 +3305,7 @@ type CellRendererSpinnerKind interface {
 }
 func (self CellRendererSpinner) _IsCellRendererSpinner () {}
 func (self CellRendererSpinner) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererSpinner(value unsafe.Pointer) CellRendererSpinner { return CellRendererSpinner{CellRenderer{value}} }
 type ToolPalette struct { Container }
 type ToolPaletteKind interface {
   _IsToolPalette()
@@ -3202,6 +3313,7 @@ type ToolPaletteKind interface {
 }
 func (self ToolPalette) _IsToolPalette () {}
 func (self ToolPalette) _getValue() unsafe.Pointer { return self._value_ }
+func ToToolPalette(value unsafe.Pointer) ToolPalette { return ToolPalette{Container{Widget{value}}} }
 type CellRendererPixbuf struct { CellRenderer }
 type CellRendererPixbufKind interface {
   _IsCellRendererPixbuf()
@@ -3209,6 +3321,7 @@ type CellRendererPixbufKind interface {
 }
 func (self CellRendererPixbuf) _IsCellRendererPixbuf () {}
 func (self CellRendererPixbuf) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererPixbuf(value unsafe.Pointer) CellRendererPixbuf { return CellRendererPixbuf{CellRenderer{value}} }
 type TextTagTable struct { _value_ unsafe.Pointer }
 type TextTagTableKind interface {
   _IsTextTagTable()
@@ -3216,6 +3329,7 @@ type TextTagTableKind interface {
 }
 func (self TextTagTable) _IsTextTagTable () {}
 func (self TextTagTable) _getValue() unsafe.Pointer { return self._value_ }
+func ToTextTagTable(value unsafe.Pointer) TextTagTable { return TextTagTable{value} }
 type PrintSettings struct { _value_ unsafe.Pointer }
 type PrintSettingsKind interface {
   _IsPrintSettings()
@@ -3223,6 +3337,7 @@ type PrintSettingsKind interface {
 }
 func (self PrintSettings) _IsPrintSettings () {}
 func (self PrintSettings) _getValue() unsafe.Pointer { return self._value_ }
+func ToPrintSettings(value unsafe.Pointer) PrintSettings { return PrintSettings{value} }
 type CheckMenuItem struct { MenuItem }
 type CheckMenuItemKind interface {
   _IsCheckMenuItem()
@@ -3230,6 +3345,7 @@ type CheckMenuItemKind interface {
 }
 func (self CheckMenuItem) _IsCheckMenuItem () {}
 func (self CheckMenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToCheckMenuItem(value unsafe.Pointer) CheckMenuItem { return CheckMenuItem{MenuItem{Bin{Container{Widget{value}}}}} }
 type IconFactory struct { _value_ unsafe.Pointer }
 type IconFactoryKind interface {
   _IsIconFactory()
@@ -3237,6 +3353,7 @@ type IconFactoryKind interface {
 }
 func (self IconFactory) _IsIconFactory () {}
 func (self IconFactory) _getValue() unsafe.Pointer { return self._value_ }
+func ToIconFactory(value unsafe.Pointer) IconFactory { return IconFactory{value} }
 type CheckButton struct { ToggleButton }
 type CheckButtonKind interface {
   _IsCheckButton()
@@ -3244,6 +3361,7 @@ type CheckButtonKind interface {
 }
 func (self CheckButton) _IsCheckButton () {}
 func (self CheckButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToCheckButton(value unsafe.Pointer) CheckButton { return CheckButton{ToggleButton{Button{Bin{Container{Widget{value}}}}}} }
 type ComboBoxText struct { ComboBox }
 type ComboBoxTextKind interface {
   _IsComboBoxText()
@@ -3251,6 +3369,7 @@ type ComboBoxTextKind interface {
 }
 func (self ComboBoxText) _IsComboBoxText () {}
 func (self ComboBoxText) _getValue() unsafe.Pointer { return self._value_ }
+func ToComboBoxText(value unsafe.Pointer) ComboBoxText { return ComboBoxText{ComboBox{Bin{Container{Widget{value}}}}} }
 type Switch struct { Widget }
 type SwitchKind interface {
   _IsSwitch()
@@ -3258,6 +3377,7 @@ type SwitchKind interface {
 }
 func (self Switch) _IsSwitch () {}
 func (self Switch) _getValue() unsafe.Pointer { return self._value_ }
+func ToSwitch(value unsafe.Pointer) Switch { return Switch{Widget{value}} }
 type InfoBar struct { Box }
 type InfoBarKind interface {
   _IsInfoBar()
@@ -3265,6 +3385,7 @@ type InfoBarKind interface {
 }
 func (self InfoBar) _IsInfoBar () {}
 func (self InfoBar) _getValue() unsafe.Pointer { return self._value_ }
+func ToInfoBar(value unsafe.Pointer) InfoBar { return InfoBar{Box{Container{Widget{value}}}} }
 type Tooltip struct { _value_ unsafe.Pointer }
 type TooltipKind interface {
   _IsTooltip()
@@ -3272,6 +3393,7 @@ type TooltipKind interface {
 }
 func (self Tooltip) _IsTooltip () {}
 func (self Tooltip) _getValue() unsafe.Pointer { return self._value_ }
+func ToTooltip(value unsafe.Pointer) Tooltip { return Tooltip{value} }
 type Dialog struct { Window }
 type DialogKind interface {
   _IsDialog()
@@ -3279,6 +3401,7 @@ type DialogKind interface {
 }
 func (self Dialog) _IsDialog () {}
 func (self Dialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToDialog(value unsafe.Pointer) Dialog { return Dialog{Window{Bin{Container{Widget{value}}}}} }
 type CellRendererProgress struct { CellRenderer }
 type CellRendererProgressKind interface {
   _IsCellRendererProgress()
@@ -3286,6 +3409,7 @@ type CellRendererProgressKind interface {
 }
 func (self CellRendererProgress) _IsCellRendererProgress () {}
 func (self CellRendererProgress) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererProgress(value unsafe.Pointer) CellRendererProgress { return CellRendererProgress{CellRenderer{value}} }
 type MenuToolButton struct { ToolButton }
 type MenuToolButtonKind interface {
   _IsMenuToolButton()
@@ -3293,6 +3417,7 @@ type MenuToolButtonKind interface {
 }
 func (self MenuToolButton) _IsMenuToolButton () {}
 func (self MenuToolButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToMenuToolButton(value unsafe.Pointer) MenuToolButton { return MenuToolButton{ToolButton{ToolItem{Bin{Container{Widget{value}}}}}} }
 type UIManager struct { _value_ unsafe.Pointer }
 type UIManagerKind interface {
   _IsUIManager()
@@ -3300,6 +3425,7 @@ type UIManagerKind interface {
 }
 func (self UIManager) _IsUIManager () {}
 func (self UIManager) _getValue() unsafe.Pointer { return self._value_ }
+func ToUIManager(value unsafe.Pointer) UIManager { return UIManager{value} }
 type TreeViewColumn struct { _value_ unsafe.Pointer }
 type TreeViewColumnKind interface {
   _IsTreeViewColumn()
@@ -3307,6 +3433,7 @@ type TreeViewColumnKind interface {
 }
 func (self TreeViewColumn) _IsTreeViewColumn () {}
 func (self TreeViewColumn) _getValue() unsafe.Pointer { return self._value_ }
+func ToTreeViewColumn(value unsafe.Pointer) TreeViewColumn { return TreeViewColumn{value} }
 type AccelGroup struct { _value_ unsafe.Pointer }
 type AccelGroupKind interface {
   _IsAccelGroup()
@@ -3314,6 +3441,7 @@ type AccelGroupKind interface {
 }
 func (self AccelGroup) _IsAccelGroup () {}
 func (self AccelGroup) _getValue() unsafe.Pointer { return self._value_ }
+func ToAccelGroup(value unsafe.Pointer) AccelGroup { return AccelGroup{value} }
 type ToolItemGroup struct { Container }
 type ToolItemGroupKind interface {
   _IsToolItemGroup()
@@ -3321,6 +3449,7 @@ type ToolItemGroupKind interface {
 }
 func (self ToolItemGroup) _IsToolItemGroup () {}
 func (self ToolItemGroup) _getValue() unsafe.Pointer { return self._value_ }
+func ToToolItemGroup(value unsafe.Pointer) ToolItemGroup { return ToolItemGroup{Container{Widget{value}}} }
 type IMContext struct { _value_ unsafe.Pointer }
 type IMContextKind interface {
   _IsIMContext()
@@ -3328,6 +3457,7 @@ type IMContextKind interface {
 }
 func (self IMContext) _IsIMContext () {}
 func (self IMContext) _getValue() unsafe.Pointer { return self._value_ }
+func ToIMContext(value unsafe.Pointer) IMContext { return IMContext{value} }
 type VButtonBox struct { ButtonBox }
 type VButtonBoxKind interface {
   _IsVButtonBox()
@@ -3335,6 +3465,7 @@ type VButtonBoxKind interface {
 }
 func (self VButtonBox) _IsVButtonBox () {}
 func (self VButtonBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToVButtonBox(value unsafe.Pointer) VButtonBox { return VButtonBox{ButtonBox{Box{Container{Widget{value}}}}} }
 type TextTag struct { _value_ unsafe.Pointer }
 type TextTagKind interface {
   _IsTextTag()
@@ -3342,6 +3473,7 @@ type TextTagKind interface {
 }
 func (self TextTag) _IsTextTag () {}
 func (self TextTag) _getValue() unsafe.Pointer { return self._value_ }
+func ToTextTag(value unsafe.Pointer) TextTag { return TextTag{value} }
 type Frame struct { Bin }
 type FrameKind interface {
   _IsFrame()
@@ -3349,6 +3481,7 @@ type FrameKind interface {
 }
 func (self Frame) _IsFrame () {}
 func (self Frame) _getValue() unsafe.Pointer { return self._value_ }
+func ToFrame(value unsafe.Pointer) Frame { return Frame{Bin{Container{Widget{value}}}} }
 type Misc struct { Widget }
 type MiscKind interface {
   _IsMisc()
@@ -3356,6 +3489,7 @@ type MiscKind interface {
 }
 func (self Misc) _IsMisc () {}
 func (self Misc) _getValue() unsafe.Pointer { return self._value_ }
+func ToMisc(value unsafe.Pointer) Misc { return Misc{Widget{value}} }
 type HButtonBox struct { ButtonBox }
 type HButtonBoxKind interface {
   _IsHButtonBox()
@@ -3363,6 +3497,7 @@ type HButtonBoxKind interface {
 }
 func (self HButtonBox) _IsHButtonBox () {}
 func (self HButtonBox) _getValue() unsafe.Pointer { return self._value_ }
+func ToHButtonBox(value unsafe.Pointer) HButtonBox { return HButtonBox{ButtonBox{Box{Container{Widget{value}}}}} }
 type WindowGroup struct { _value_ unsafe.Pointer }
 type WindowGroupKind interface {
   _IsWindowGroup()
@@ -3370,6 +3505,7 @@ type WindowGroupKind interface {
 }
 func (self WindowGroup) _IsWindowGroup () {}
 func (self WindowGroup) _getValue() unsafe.Pointer { return self._value_ }
+func ToWindowGroup(value unsafe.Pointer) WindowGroup { return WindowGroup{value} }
 type AccelLabel struct { Label }
 type AccelLabelKind interface {
   _IsAccelLabel()
@@ -3377,6 +3513,7 @@ type AccelLabelKind interface {
 }
 func (self AccelLabel) _IsAccelLabel () {}
 func (self AccelLabel) _getValue() unsafe.Pointer { return self._value_ }
+func ToAccelLabel(value unsafe.Pointer) AccelLabel { return AccelLabel{Label{Misc{Widget{value}}}} }
 type ToggleToolButton struct { ToolButton }
 type ToggleToolButtonKind interface {
   _IsToggleToolButton()
@@ -3384,6 +3521,7 @@ type ToggleToolButtonKind interface {
 }
 func (self ToggleToolButton) _IsToggleToolButton () {}
 func (self ToggleToolButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToToggleToolButton(value unsafe.Pointer) ToggleToolButton { return ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{value}}}}}} }
 type ToolItem struct { Bin }
 type ToolItemKind interface {
   _IsToolItem()
@@ -3391,6 +3529,7 @@ type ToolItemKind interface {
 }
 func (self ToolItem) _IsToolItem () {}
 func (self ToolItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToToolItem(value unsafe.Pointer) ToolItem { return ToolItem{Bin{Container{Widget{value}}}} }
 type VScale struct { Scale }
 type VScaleKind interface {
   _IsVScale()
@@ -3398,6 +3537,7 @@ type VScaleKind interface {
 }
 func (self VScale) _IsVScale () {}
 func (self VScale) _getValue() unsafe.Pointer { return self._value_ }
+func ToVScale(value unsafe.Pointer) VScale { return VScale{Scale{Range{Widget{value}}}} }
 type Container struct { Widget }
 type ContainerKind interface {
   _IsContainer()
@@ -3405,6 +3545,7 @@ type ContainerKind interface {
 }
 func (self Container) _IsContainer () {}
 func (self Container) _getValue() unsafe.Pointer { return self._value_ }
+func ToContainer(value unsafe.Pointer) Container { return Container{Widget{value}} }
 type Overlay struct { Bin }
 type OverlayKind interface {
   _IsOverlay()
@@ -3412,6 +3553,7 @@ type OverlayKind interface {
 }
 func (self Overlay) _IsOverlay () {}
 func (self Overlay) _getValue() unsafe.Pointer { return self._value_ }
+func ToOverlay(value unsafe.Pointer) Overlay { return Overlay{Bin{Container{Widget{value}}}} }
 type Menu struct { MenuShell }
 type MenuKind interface {
   _IsMenu()
@@ -3419,6 +3561,7 @@ type MenuKind interface {
 }
 func (self Menu) _IsMenu () {}
 func (self Menu) _getValue() unsafe.Pointer { return self._value_ }
+func ToMenu(value unsafe.Pointer) Menu { return Menu{MenuShell{Container{Widget{value}}}} }
 type SpinButton struct { Entry }
 type SpinButtonKind interface {
   _IsSpinButton()
@@ -3426,6 +3569,7 @@ type SpinButtonKind interface {
 }
 func (self SpinButton) _IsSpinButton () {}
 func (self SpinButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToSpinButton(value unsafe.Pointer) SpinButton { return SpinButton{Entry{Widget{value}}} }
 type Window struct { Bin }
 type WindowKind interface {
   _IsWindow()
@@ -3433,6 +3577,7 @@ type WindowKind interface {
 }
 func (self Window) _IsWindow () {}
 func (self Window) _getValue() unsafe.Pointer { return self._value_ }
+func ToWindow(value unsafe.Pointer) Window { return Window{Bin{Container{Widget{value}}}} }
 type TreeModelSort struct { _value_ unsafe.Pointer }
 type TreeModelSortKind interface {
   _IsTreeModelSort()
@@ -3440,6 +3585,7 @@ type TreeModelSortKind interface {
 }
 func (self TreeModelSort) _IsTreeModelSort () {}
 func (self TreeModelSort) _getValue() unsafe.Pointer { return self._value_ }
+func ToTreeModelSort(value unsafe.Pointer) TreeModelSort { return TreeModelSort{value} }
 type Socket struct { Container }
 type SocketKind interface {
   _IsSocket()
@@ -3447,6 +3593,7 @@ type SocketKind interface {
 }
 func (self Socket) _IsSocket () {}
 func (self Socket) _getValue() unsafe.Pointer { return self._value_ }
+func ToSocket(value unsafe.Pointer) Socket { return Socket{Container{Widget{value}}} }
 type RecentFilter struct { _value_ unsafe.Pointer }
 type RecentFilterKind interface {
   _IsRecentFilter()
@@ -3454,6 +3601,7 @@ type RecentFilterKind interface {
 }
 func (self RecentFilter) _IsRecentFilter () {}
 func (self RecentFilter) _getValue() unsafe.Pointer { return self._value_ }
+func ToRecentFilter(value unsafe.Pointer) RecentFilter { return RecentFilter{value} }
 type TreeStore struct { _value_ unsafe.Pointer }
 type TreeStoreKind interface {
   _IsTreeStore()
@@ -3461,6 +3609,7 @@ type TreeStoreKind interface {
 }
 func (self TreeStore) _IsTreeStore () {}
 func (self TreeStore) _getValue() unsafe.Pointer { return self._value_ }
+func ToTreeStore(value unsafe.Pointer) TreeStore { return TreeStore{value} }
 type RadioToolButton struct { ToggleToolButton }
 type RadioToolButtonKind interface {
   _IsRadioToolButton()
@@ -3468,6 +3617,7 @@ type RadioToolButtonKind interface {
 }
 func (self RadioToolButton) _IsRadioToolButton () {}
 func (self RadioToolButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToRadioToolButton(value unsafe.Pointer) RadioToolButton { return RadioToolButton{ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{value}}}}}}} }
 type RecentChooserDialog struct { Dialog }
 type RecentChooserDialogKind interface {
   _IsRecentChooserDialog()
@@ -3475,6 +3625,7 @@ type RecentChooserDialogKind interface {
 }
 func (self RecentChooserDialog) _IsRecentChooserDialog () {}
 func (self RecentChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToRecentChooserDialog(value unsafe.Pointer) RecentChooserDialog { return RecentChooserDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type ToggleButton struct { Button }
 type ToggleButtonKind interface {
   _IsToggleButton()
@@ -3482,6 +3633,7 @@ type ToggleButtonKind interface {
 }
 func (self ToggleButton) _IsToggleButton () {}
 func (self ToggleButton) _getValue() unsafe.Pointer { return self._value_ }
+func ToToggleButton(value unsafe.Pointer) ToggleButton { return ToggleButton{Button{Bin{Container{Widget{value}}}}} }
 type ColorChooserWidget struct { Box }
 type ColorChooserWidgetKind interface {
   _IsColorChooserWidget()
@@ -3489,6 +3641,7 @@ type ColorChooserWidgetKind interface {
 }
 func (self ColorChooserWidget) _IsColorChooserWidget () {}
 func (self ColorChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
+func ToColorChooserWidget(value unsafe.Pointer) ColorChooserWidget { return ColorChooserWidget{Box{Container{Widget{value}}}} }
 type ApplicationWindow struct { Window }
 type ApplicationWindowKind interface {
   _IsApplicationWindow()
@@ -3496,6 +3649,7 @@ type ApplicationWindowKind interface {
 }
 func (self ApplicationWindow) _IsApplicationWindow () {}
 func (self ApplicationWindow) _getValue() unsafe.Pointer { return self._value_ }
+func ToApplicationWindow(value unsafe.Pointer) ApplicationWindow { return ApplicationWindow{Window{Bin{Container{Widget{value}}}}} }
 type Invisible struct { Widget }
 type InvisibleKind interface {
   _IsInvisible()
@@ -3503,6 +3657,7 @@ type InvisibleKind interface {
 }
 func (self Invisible) _IsInvisible () {}
 func (self Invisible) _getValue() unsafe.Pointer { return self._value_ }
+func ToInvisible(value unsafe.Pointer) Invisible { return Invisible{Widget{value}} }
 type RecentChooserWidget struct { Box }
 type RecentChooserWidgetKind interface {
   _IsRecentChooserWidget()
@@ -3510,6 +3665,7 @@ type RecentChooserWidgetKind interface {
 }
 func (self RecentChooserWidget) _IsRecentChooserWidget () {}
 func (self RecentChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
+func ToRecentChooserWidget(value unsafe.Pointer) RecentChooserWidget { return RecentChooserWidget{Box{Container{Widget{value}}}} }
 type SeparatorMenuItem struct { MenuItem }
 type SeparatorMenuItemKind interface {
   _IsSeparatorMenuItem()
@@ -3517,6 +3673,7 @@ type SeparatorMenuItemKind interface {
 }
 func (self SeparatorMenuItem) _IsSeparatorMenuItem () {}
 func (self SeparatorMenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToSeparatorMenuItem(value unsafe.Pointer) SeparatorMenuItem { return SeparatorMenuItem{MenuItem{Bin{Container{Widget{value}}}}} }
 type Toolbar struct { Container }
 type ToolbarKind interface {
   _IsToolbar()
@@ -3524,6 +3681,7 @@ type ToolbarKind interface {
 }
 func (self Toolbar) _IsToolbar () {}
 func (self Toolbar) _getValue() unsafe.Pointer { return self._value_ }
+func ToToolbar(value unsafe.Pointer) Toolbar { return Toolbar{Container{Widget{value}}} }
 type RadioAction struct { ToggleAction }
 type RadioActionKind interface {
   _IsRadioAction()
@@ -3531,6 +3689,7 @@ type RadioActionKind interface {
 }
 func (self RadioAction) _IsRadioAction () {}
 func (self RadioAction) _getValue() unsafe.Pointer { return self._value_ }
+func ToRadioAction(value unsafe.Pointer) RadioAction { return RadioAction{ToggleAction{Action{value}}} }
 type DrawingArea struct { Widget }
 type DrawingAreaKind interface {
   _IsDrawingArea()
@@ -3538,6 +3697,7 @@ type DrawingAreaKind interface {
 }
 func (self DrawingArea) _IsDrawingArea () {}
 func (self DrawingArea) _getValue() unsafe.Pointer { return self._value_ }
+func ToDrawingArea(value unsafe.Pointer) DrawingArea { return DrawingArea{Widget{value}} }
 type VScrollbar struct { Scrollbar }
 type VScrollbarKind interface {
   _IsVScrollbar()
@@ -3545,6 +3705,7 @@ type VScrollbarKind interface {
 }
 func (self VScrollbar) _IsVScrollbar () {}
 func (self VScrollbar) _getValue() unsafe.Pointer { return self._value_ }
+func ToVScrollbar(value unsafe.Pointer) VScrollbar { return VScrollbar{Scrollbar{Range{Widget{value}}}} }
 type AboutDialog struct { Dialog }
 type AboutDialogKind interface {
   _IsAboutDialog()
@@ -3552,6 +3713,7 @@ type AboutDialogKind interface {
 }
 func (self AboutDialog) _IsAboutDialog () {}
 func (self AboutDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToAboutDialog(value unsafe.Pointer) AboutDialog { return AboutDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type CssProvider struct { _value_ unsafe.Pointer }
 type CssProviderKind interface {
   _IsCssProvider()
@@ -3559,6 +3721,7 @@ type CssProviderKind interface {
 }
 func (self CssProvider) _IsCssProvider () {}
 func (self CssProvider) _getValue() unsafe.Pointer { return self._value_ }
+func ToCssProvider(value unsafe.Pointer) CssProvider { return CssProvider{value} }
 type Button struct { Bin }
 type ButtonKind interface {
   _IsButton()
@@ -3566,6 +3729,7 @@ type ButtonKind interface {
 }
 func (self Button) _IsButton () {}
 func (self Button) _getValue() unsafe.Pointer { return self._value_ }
+func ToButton(value unsafe.Pointer) Button { return Button{Bin{Container{Widget{value}}}} }
 type ImageMenuItem struct { MenuItem }
 type ImageMenuItemKind interface {
   _IsImageMenuItem()
@@ -3573,6 +3737,7 @@ type ImageMenuItemKind interface {
 }
 func (self ImageMenuItem) _IsImageMenuItem () {}
 func (self ImageMenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToImageMenuItem(value unsafe.Pointer) ImageMenuItem { return ImageMenuItem{MenuItem{Bin{Container{Widget{value}}}}} }
 type FontSelection struct { Box }
 type FontSelectionKind interface {
   _IsFontSelection()
@@ -3580,6 +3745,7 @@ type FontSelectionKind interface {
 }
 func (self FontSelection) _IsFontSelection () {}
 func (self FontSelection) _getValue() unsafe.Pointer { return self._value_ }
+func ToFontSelection(value unsafe.Pointer) FontSelection { return FontSelection{Box{Container{Widget{value}}}} }
 type RadioMenuItem struct { CheckMenuItem }
 type RadioMenuItemKind interface {
   _IsRadioMenuItem()
@@ -3587,6 +3753,7 @@ type RadioMenuItemKind interface {
 }
 func (self RadioMenuItem) _IsRadioMenuItem () {}
 func (self RadioMenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func ToRadioMenuItem(value unsafe.Pointer) RadioMenuItem { return RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{value}}}}}} }
 type Entry struct { Widget }
 type EntryKind interface {
   _IsEntry()
@@ -3594,6 +3761,7 @@ type EntryKind interface {
 }
 func (self Entry) _IsEntry () {}
 func (self Entry) _getValue() unsafe.Pointer { return self._value_ }
+func ToEntry(value unsafe.Pointer) Entry { return Entry{Widget{value}} }
 type HPaned struct { Paned }
 type HPanedKind interface {
   _IsHPaned()
@@ -3601,6 +3769,7 @@ type HPanedKind interface {
 }
 func (self HPaned) _IsHPaned () {}
 func (self HPaned) _getValue() unsafe.Pointer { return self._value_ }
+func ToHPaned(value unsafe.Pointer) HPaned { return HPaned{Paned{Container{Widget{value}}}} }
 type Calendar struct { Widget }
 type CalendarKind interface {
   _IsCalendar()
@@ -3608,6 +3777,7 @@ type CalendarKind interface {
 }
 func (self Calendar) _IsCalendar () {}
 func (self Calendar) _getValue() unsafe.Pointer { return self._value_ }
+func ToCalendar(value unsafe.Pointer) Calendar { return Calendar{Widget{value}} }
 type FileChooserDialog struct { Dialog }
 type FileChooserDialogKind interface {
   _IsFileChooserDialog()
@@ -3615,6 +3785,7 @@ type FileChooserDialogKind interface {
 }
 func (self FileChooserDialog) _IsFileChooserDialog () {}
 func (self FileChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
+func ToFileChooserDialog(value unsafe.Pointer) FileChooserDialog { return FileChooserDialog{Dialog{Window{Bin{Container{Widget{value}}}}}} }
 type CellAreaContext struct { _value_ unsafe.Pointer }
 type CellAreaContextKind interface {
   _IsCellAreaContext()
@@ -3622,6 +3793,7 @@ type CellAreaContextKind interface {
 }
 func (self CellAreaContext) _IsCellAreaContext () {}
 func (self CellAreaContext) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellAreaContext(value unsafe.Pointer) CellAreaContext { return CellAreaContext{value} }
 type RcStyle struct { _value_ unsafe.Pointer }
 type RcStyleKind interface {
   _IsRcStyle()
@@ -3629,6 +3801,7 @@ type RcStyleKind interface {
 }
 func (self RcStyle) _IsRcStyle () {}
 func (self RcStyle) _getValue() unsafe.Pointer { return self._value_ }
+func ToRcStyle(value unsafe.Pointer) RcStyle { return RcStyle{value} }
 type PrintOperation struct { _value_ unsafe.Pointer }
 type PrintOperationKind interface {
   _IsPrintOperation()
@@ -3636,6 +3809,7 @@ type PrintOperationKind interface {
 }
 func (self PrintOperation) _IsPrintOperation () {}
 func (self PrintOperation) _getValue() unsafe.Pointer { return self._value_ }
+func ToPrintOperation(value unsafe.Pointer) PrintOperation { return PrintOperation{value} }
 type CellRendererAccel struct { CellRendererText }
 type CellRendererAccelKind interface {
   _IsCellRendererAccel()
@@ -3643,6 +3817,7 @@ type CellRendererAccelKind interface {
 }
 func (self CellRendererAccel) _IsCellRendererAccel () {}
 func (self CellRendererAccel) _getValue() unsafe.Pointer { return self._value_ }
+func ToCellRendererAccel(value unsafe.Pointer) CellRendererAccel { return CellRendererAccel{CellRendererText{CellRenderer{value}}} }
 type Table struct { Container }
 type TableKind interface {
   _IsTable()
@@ -3650,6 +3825,7 @@ type TableKind interface {
 }
 func (self Table) _IsTable () {}
 func (self Table) _getValue() unsafe.Pointer { return self._value_ }
+func ToTable(value unsafe.Pointer) Table { return Table{Container{Widget{value}}} }
 type PageSetup struct { _value_ unsafe.Pointer }
 type PageSetupKind interface {
   _IsPageSetup()
@@ -3657,10 +3833,11 @@ type PageSetupKind interface {
 }
 func (self PageSetup) _IsPageSetup () {}
 func (self PageSetup) _getValue() unsafe.Pointer { return self._value_ }
+func ToPageSetup(value unsafe.Pointer) PageSetup { return PageSetup{value} }
 func AboutDialogNew() (_go__return__ AboutDialog) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_about_dialog_new()
-	_go__return__ = AboutDialog{Dialog{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToAboutDialog(unsafe.Pointer(_return_))
 	return
 }
 
@@ -3862,14 +4039,14 @@ func (_self_ *AboutDialog) SetWrapLicense(wrap_license bool) () {
 func AccelGroupNew() (_go__return__ AccelGroup) {
 	var _return_ *C.GtkAccelGroup
 	_return_ = C.gtk_accel_group_new()
-	_go__return__ = AccelGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToAccelGroup(unsafe.Pointer(_return_))
 	return
 }
 
 func AccelGroupFromAccelClosure(closure *C.GClosure) (_go__return__ AccelGroup) {
 	var _return_ *C.GtkAccelGroup
 	_return_ = C.gtk_accel_group_from_accel_closure(closure)
-	_go__return__ = AccelGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToAccelGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -3953,14 +4130,14 @@ func AccelLabelNew(string_ string) (_go__return__ AccelLabel) {
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	_return_ = C._gtk_accel_label_new(_cgo_string__)
-	_go__return__ = AccelLabel{Label{Misc{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToAccelLabel(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *AccelLabel) GetAccelWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_accel_label_get_accel_widget((*C.GtkAccelLabel)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4033,7 +4210,7 @@ func AccelMapForeachUnfiltered(data C.gpointer, foreach_func C.GtkAccelMapForeac
 func AccelMapGet() (_go__return__ AccelMap) {
 	var _return_ *C.GtkAccelMap
 	_return_ = C.gtk_accel_map_get()
-	_go__return__ = AccelMap{unsafe.Pointer(_return_)}
+	_go__return__ = ToAccelMap(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4101,7 +4278,7 @@ func AccelMapUnlockPath(accel_path string) () {
 func (_self_ *Accessible) GetWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_accessible_get_widget((*C.GtkAccessible)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4126,7 +4303,7 @@ func ActionNew(name string, label string, tooltip string, stock_id string) (_go_
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
-	_go__return__ = Action{unsafe.Pointer(_return_)}
+	_go__return__ = ToAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4148,28 +4325,28 @@ func (_self_ *Action) ConnectAccelerator() () {
 func (_self_ *Action) CreateIcon(icon_size C.GtkIconSize) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_icon((*C.GtkAction)(_self_._value_), icon_size)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Action) CreateMenu() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_menu((*C.GtkAction)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Action) CreateMenuItem() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_menu_item((*C.GtkAction)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Action) CreateToolItem() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_tool_item((*C.GtkAction)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4410,7 +4587,7 @@ func ActionGroupNew(name string) (_go__return__ ActionGroup) {
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._gtk_action_group_new(_cgo_name_)
-	_go__return__ = ActionGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToActionGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4432,7 +4609,7 @@ func (_self_ *ActionGroup) AddActionWithAccel(action ActionKind, accelerator str
 func (_self_ *ActionGroup) GetAccelGroup() (_go__return__ AccelGroup) {
 	var _return_ *C.GtkAccelGroup
 	_return_ = C.gtk_action_group_get_accel_group((*C.GtkActionGroup)(_self_._value_))
-	_go__return__ = AccelGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToAccelGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4442,7 +4619,7 @@ func (_self_ *ActionGroup) GetAction(action_name string) (_go__return__ Action) 
 	_cgo_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_action_name_))
 	defer C.free(unsafe.Pointer(_cstring_action_name_))
 	_return_ = C._gtk_action_group_get_action((*C.GtkActionGroup)(_self_._value_), _cgo_action_name_)
-	_go__return__ = Action{unsafe.Pointer(_return_)}
+	_go__return__ = ToAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4530,7 +4707,7 @@ func AdjustmentNew(value float64, lower float64, upper float64, step_increment f
 	_cgo_page_increment_ := (C.gdouble)(page_increment)
 	_cgo_page_size_ := (C.gdouble)(page_size)
 	_return_ = C.gtk_adjustment_new(_cgo_value_, _cgo_lower_, _cgo_upper_, _cgo_step_increment_, _cgo_page_increment_, _cgo_page_size_)
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4654,7 +4831,7 @@ func AlignmentNew(xalign float64, yalign float64, xscale float64, yscale float64
 	_cgo_xscale_ := (C.gfloat)(xscale)
 	_cgo_yscale_ := (C.gfloat)(yscale)
 	_return_ = C.gtk_alignment_new(_cgo_xalign_, _cgo_yalign_, _cgo_xscale_, _cgo_yscale_)
-	_go__return__ = Alignment{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToAlignment(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4695,7 +4872,7 @@ func AppChooserButtonNew(content_type string) (_go__return__ AppChooserButton) {
 	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	_return_ = C._gtk_app_chooser_button_new(_cgo_content_type_)
-	_go__return__ = AppChooserButton{ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToAppChooserButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4770,7 +4947,7 @@ func AppChooserDialogNew(parent WindowKind, flags C.GtkDialogFlags, file *C.GFil
 	_cgo_parent_ := (*C.GtkWindow)(parent._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_app_chooser_dialog_new(_cgo_parent_, flags, file)
-	_go__return__ = AppChooserDialog{Dialog{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToAppChooserDialog(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4781,7 +4958,7 @@ func AppChooserDialogNewForContentType(parent WindowKind, flags C.GtkDialogFlags
 	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	_return_ = C._gtk_app_chooser_dialog_new_for_content_type(_cgo_parent_, flags, _cgo_content_type_)
-	_go__return__ = AppChooserDialog{Dialog{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToAppChooserDialog(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4795,7 +4972,7 @@ func (_self_ *AppChooserDialog) GetHeading() (_go__return__ string) {
 func (_self_ *AppChooserDialog) GetWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_app_chooser_dialog_get_widget((*C.GtkAppChooserDialog)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4813,7 +4990,7 @@ func AppChooserWidgetNew(content_type string) (_go__return__ AppChooserWidget) {
 	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	_return_ = C._gtk_app_chooser_widget_new(_cgo_content_type_)
-	_go__return__ = AppChooserWidget{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToAppChooserWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4908,7 +5085,7 @@ func ApplicationNew(application_id string, flags C.GApplicationFlags) (_go__retu
 	_cgo_application_id_ := (*C.gchar)(unsafe.Pointer(_cstring_application_id_))
 	defer C.free(unsafe.Pointer(_cstring_application_id_))
 	_return_ = C._gtk_application_new(_cgo_application_id_, flags)
-	_go__return__ = Application{unsafe.Pointer(_return_)}
+	_go__return__ = ToApplication(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4932,7 +5109,7 @@ func (_self_ *Application) AddWindow(window WindowKind) () {
 func (_self_ *Application) GetActiveWindow() (_go__return__ Window) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_application_get_active_window((*C.GtkApplication)(_self_._value_))
-	_go__return__ = Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -4950,7 +5127,7 @@ func (_self_ *Application) GetWindowById(id uint) (_go__return__ Window) {
 	var _return_ *C.GtkWindow
 	_cgo_id_ := (C.guint)(id)
 	_return_ = C.gtk_application_get_window_by_id((*C.GtkApplication)(_self_._value_), _cgo_id_)
-	_go__return__ = Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5011,7 +5188,7 @@ func ApplicationWindowNew(application ApplicationKind) (_go__return__ Applicatio
 	_cgo_application_ := (*C.GtkApplication)(application._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_application_window_new(_cgo_application_)
-	_go__return__ = ApplicationWindow{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToApplicationWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5039,7 +5216,7 @@ func (_self_ *ApplicationWindow) SetShowMenubar(show_menubar bool) () {
 func ArrowNew(arrow_type C.GtkArrowType, shadow_type C.GtkShadowType) (_go__return__ Arrow) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_arrow_new(arrow_type, shadow_type)
-	_go__return__ = Arrow{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToArrow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5059,7 +5236,7 @@ func AspectFrameNew(label string, xalign float64, yalign float64, ratio float64,
 	_cgo_obey_child_ := C.glibfalse()
 	if obey_child { _cgo_obey_child_ = C.glibtrue() }
 	_return_ = C._gtk_aspect_frame_new(_cgo_label_, _cgo_xalign_, _cgo_yalign_, _cgo_ratio_, _cgo_obey_child_)
-	_go__return__ = AspectFrame{Frame{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToAspectFrame(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5076,7 +5253,7 @@ func (_self_ *AspectFrame) Set(xalign float64, yalign float64, ratio float64, ob
 func AssistantNew() (_go__return__ Assistant) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_assistant_new()
-	_go__return__ = Assistant{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToAssistant(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5117,7 +5294,7 @@ func (_self_ *Assistant) GetNthPage(page_num int) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_cgo_page_num_ := (C.gint)(page_num)
 	_return_ = C.gtk_assistant_get_nth_page((*C.GtkAssistant)(_self_._value_), _cgo_page_num_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5224,7 +5401,7 @@ func (_self_ *Assistant) UpdateButtonsState() () {
 func (_self_ *Bin) GetChild() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_bin_get_child((*C.GtkBin)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5319,7 +5496,7 @@ func BoxNew(orientation C.GtkOrientation, spacing int) (_go__return__ Box) {
 	var _return_ *C.GtkWidget
 	_cgo_spacing_ := (C.gint)(spacing)
 	_return_ = C.gtk_box_new(orientation, _cgo_spacing_)
-	_go__return__ = Box{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5405,7 +5582,7 @@ func (_self_ *Box) SetSpacing(spacing int) () {
 func BuilderNew() (_go__return__ Builder) {
 	var _return_ *C.GtkBuilder
 	_return_ = C.gtk_builder_new()
-	_go__return__ = Builder{unsafe.Pointer(_return_)}
+	_go__return__ = ToBuilder(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5509,7 +5686,7 @@ func (_self_ *Builder) ValueFromStringType(type_ C.GType, string_ string) (_go__
 func ButtonNew() (_go__return__ Button) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_button_new()
-	_go__return__ = Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5519,7 +5696,7 @@ func ButtonNewFromStock(stock_id string) (_go__return__ Button) {
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_button_new_from_stock(_cgo_stock_id_)
-	_go__return__ = Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5529,7 +5706,7 @@ func ButtonNewWithLabel(label string) (_go__return__ Button) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_button_new_with_label(_cgo_label_)
-	_go__return__ = Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5539,7 +5716,7 @@ func ButtonNewWithMnemonic(label string) (_go__return__ Button) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_button_new_with_mnemonic(_cgo_label_)
-	_go__return__ = Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5579,7 +5756,7 @@ func (_self_ *Button) GetFocusOnClick() (_go__return__ bool) {
 func (_self_ *Button) GetImage() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_button_get_image((*C.GtkButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5676,7 +5853,7 @@ func (_self_ *Button) SetUseUnderline(use_underline bool) () {
 func ButtonBoxNew(orientation C.GtkOrientation) (_go__return__ ButtonBox) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_button_box_new(orientation)
-	_go__return__ = ButtonBox{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToButtonBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5725,7 +5902,7 @@ func (_self_ *ButtonBox) SetLayout(layout_style C.GtkButtonBoxStyle) () {
 func CalendarNew() (_go__return__ Calendar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_calendar_new()
-	_go__return__ = Calendar{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCalendar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5903,14 +6080,14 @@ func (_self_ *CellArea) CopyContext(context CellAreaContextKind) (_go__return__ 
 	_cgo_context_ := (*C.GtkCellAreaContext)(context._getValue())
 	var _return_ *C.GtkCellAreaContext
 	_return_ = C.gtk_cell_area_copy_context((*C.GtkCellArea)(_self_._value_), _cgo_context_)
-	_go__return__ = CellAreaContext{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellAreaContext(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *CellArea) CreateContext() (_go__return__ CellAreaContext) {
 	var _return_ *C.GtkCellAreaContext
 	_return_ = C.gtk_cell_area_create_context((*C.GtkCellArea)(_self_._value_))
-	_go__return__ = CellAreaContext{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellAreaContext(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5957,7 +6134,7 @@ func (_self_ *CellArea) GetCellAtPosition(context CellAreaContextKind, widget Wi
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_return_ = C._gtk_cell_area_get_cell_at_position((*C.GtkCellArea)(_self_._value_), _cgo_context_, _cgo_widget_, cell_area, _cgo_x_, _cgo_y_, alloc_area)
-	_go__return__ = CellRenderer{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellRenderer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5976,14 +6153,14 @@ func (_self_ *CellArea) GetEditWidget() (_return_ *C.GtkCellEditable) {
 func (_self_ *CellArea) GetEditedCell() (_go__return__ CellRenderer) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_area_get_edited_cell((*C.GtkCellArea)(_self_._value_))
-	_go__return__ = CellRenderer{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellRenderer(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *CellArea) GetFocusCell() (_go__return__ CellRenderer) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_area_get_focus_cell((*C.GtkCellArea)(_self_._value_))
-	_go__return__ = CellRenderer{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellRenderer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5991,7 +6168,7 @@ func (_self_ *CellArea) GetFocusFromSibling(renderer CellRendererKind) (_go__ret
 	_cgo_renderer_ := (*C.GtkCellRenderer)(renderer._getValue())
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_area_get_focus_from_sibling((*C.GtkCellArea)(_self_._value_), _cgo_renderer_)
-	_go__return__ = CellRenderer{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellRenderer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6132,7 +6309,7 @@ func (_self_ *CellArea) StopEditing(canceled bool) () {
 func CellAreaBoxNew() (_go__return__ CellAreaBox) {
 	var _return_ *C.GtkCellArea
 	_return_ = C.gtk_cell_area_box_new()
-	_go__return__ = CellAreaBox{CellArea{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellAreaBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6213,7 +6390,7 @@ func (_self_ *CellAreaContext) GetAllocation() (_go_width_ int, _go_height_ int)
 func (_self_ *CellAreaContext) GetArea() (_go__return__ CellArea) {
 	var _return_ *C.GtkCellArea
 	_return_ = C.gtk_cell_area_context_get_area((*C.GtkCellAreaContext)(_self_._value_))
-	_go__return__ = CellArea{unsafe.Pointer(_return_)}
+	_go__return__ = ToCellArea(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6462,49 +6639,49 @@ func (_self_ *CellRenderer) StopEditing(canceled bool) () {
 func CellRendererAccelNew() (_go__return__ CellRendererAccel) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_accel_new()
-	_go__return__ = CellRendererAccel{CellRendererText{CellRenderer{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToCellRendererAccel(unsafe.Pointer(_return_))
 	return
 }
 
 func CellRendererComboNew() (_go__return__ CellRendererCombo) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_combo_new()
-	_go__return__ = CellRendererCombo{CellRendererText{CellRenderer{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToCellRendererCombo(unsafe.Pointer(_return_))
 	return
 }
 
 func CellRendererPixbufNew() (_go__return__ CellRendererPixbuf) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_pixbuf_new()
-	_go__return__ = CellRendererPixbuf{CellRenderer{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellRendererPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
 func CellRendererProgressNew() (_go__return__ CellRendererProgress) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_progress_new()
-	_go__return__ = CellRendererProgress{CellRenderer{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellRendererProgress(unsafe.Pointer(_return_))
 	return
 }
 
 func CellRendererSpinNew() (_go__return__ CellRendererSpin) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_spin_new()
-	_go__return__ = CellRendererSpin{CellRendererText{CellRenderer{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToCellRendererSpin(unsafe.Pointer(_return_))
 	return
 }
 
 func CellRendererSpinnerNew() (_go__return__ CellRendererSpinner) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_spinner_new()
-	_go__return__ = CellRendererSpinner{CellRenderer{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellRendererSpinner(unsafe.Pointer(_return_))
 	return
 }
 
 func CellRendererTextNew() (_go__return__ CellRendererText) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_text_new()
-	_go__return__ = CellRendererText{CellRenderer{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellRendererText(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6517,7 +6694,7 @@ func (_self_ *CellRendererText) SetFixedHeightFromFont(number_of_rows int) () {
 func CellRendererToggleNew() (_go__return__ CellRendererToggle) {
 	var _return_ *C.GtkCellRenderer
 	_return_ = C.gtk_cell_renderer_toggle_new()
-	_go__return__ = CellRendererToggle{CellRenderer{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellRendererToggle(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6566,7 +6743,7 @@ func (_self_ *CellRendererToggle) SetRadio(radio bool) () {
 func CellViewNew() (_go__return__ CellView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_cell_view_new()
-	_go__return__ = CellView{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6575,7 +6752,7 @@ func CellViewNewWithContext(area CellAreaKind, context CellAreaContextKind) (_go
 	_cgo_context_ := (*C.GtkCellAreaContext)(context._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_cell_view_new_with_context(_cgo_area_, _cgo_context_)
-	_go__return__ = CellView{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6585,14 +6762,14 @@ func CellViewNewWithMarkup(markup string) (_go__return__ CellView) {
 	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
 	defer C.free(unsafe.Pointer(_cstring_markup_))
 	_return_ = C._gtk_cell_view_new_with_markup(_cgo_markup_)
-	_go__return__ = CellView{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellView(unsafe.Pointer(_return_))
 	return
 }
 
 func CellViewNewWithPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ CellView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_cell_view_new_with_pixbuf(pixbuf)
-	_go__return__ = CellView{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6602,7 +6779,7 @@ func CellViewNewWithText(text string) (_go__return__ CellView) {
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
 	defer C.free(unsafe.Pointer(_cstring_text_))
 	_return_ = C._gtk_cell_view_new_with_text(_cgo_text_)
-	_go__return__ = CellView{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToCellView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6665,7 +6842,7 @@ func (_self_ *CellView) SetModel(model *C.GtkTreeModel) () {
 func CheckButtonNew() (_go__return__ CheckButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_check_button_new()
-	_go__return__ = CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToCheckButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6675,7 +6852,7 @@ func CheckButtonNewWithLabel(label string) (_go__return__ CheckButton) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_check_button_new_with_label(_cgo_label_)
-	_go__return__ = CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToCheckButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6685,14 +6862,14 @@ func CheckButtonNewWithMnemonic(label string) (_go__return__ CheckButton) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_check_button_new_with_mnemonic(_cgo_label_)
-	_go__return__ = CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToCheckButton(unsafe.Pointer(_return_))
 	return
 }
 
 func CheckMenuItemNew() (_go__return__ CheckMenuItem) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_check_menu_item_new()
-	_go__return__ = CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToCheckMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6702,7 +6879,7 @@ func CheckMenuItemNewWithLabel(label string) (_go__return__ CheckMenuItem) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_check_menu_item_new_with_label(_cgo_label_)
-	_go__return__ = CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToCheckMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6712,7 +6889,7 @@ func CheckMenuItemNewWithMnemonic(label string) (_go__return__ CheckMenuItem) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_check_menu_item_new_with_mnemonic(_cgo_label_)
-	_go__return__ = CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToCheckMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6766,14 +6943,14 @@ func (_self_ *CheckMenuItem) Toggled() () {
 func ClipboardGet(selection C.GdkAtom) (_go__return__ Clipboard) {
 	var _return_ *C.GtkClipboard
 	_return_ = C.gtk_clipboard_get(selection)
-	_go__return__ = Clipboard{unsafe.Pointer(_return_)}
+	_go__return__ = ToClipboard(unsafe.Pointer(_return_))
 	return
 }
 
 func ClipboardGetForDisplay(display *C.GdkDisplay, selection C.GdkAtom) (_go__return__ Clipboard) {
 	var _return_ *C.GtkClipboard
 	_return_ = C.gtk_clipboard_get_for_display(display, selection)
-	_go__return__ = Clipboard{unsafe.Pointer(_return_)}
+	_go__return__ = ToClipboard(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6913,14 +7090,14 @@ func (_self_ *Clipboard) WaitIsUrisAvailable() (_go__return__ bool) {
 func ColorButtonNew() (_go__return__ ColorButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_color_button_new()
-	_go__return__ = ColorButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToColorButton(unsafe.Pointer(_return_))
 	return
 }
 
 func ColorButtonNewWithRgba(rgba *C.GdkRGBA) (_go__return__ ColorButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C._gtk_color_button_new_with_rgba(rgba)
-	_go__return__ = ColorButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToColorButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6946,21 +7123,21 @@ func ColorChooserDialogNew(title string, parent WindowKind) (_go__return__ Color
 	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
 	defer C.free(unsafe.Pointer(_cstring_title_))
 	_return_ = C._gtk_color_chooser_dialog_new(_cgo_title_, _cgo_parent_)
-	_go__return__ = ColorChooserDialog{Dialog{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToColorChooserDialog(unsafe.Pointer(_return_))
 	return
 }
 
 func ColorChooserWidgetNew() (_go__return__ ColorChooserWidget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_color_chooser_widget_new()
-	_go__return__ = ColorChooserWidget{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToColorChooserWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func ComboBoxNew() (_go__return__ ComboBox) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_new()
-	_go__return__ = ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6968,7 +7145,7 @@ func ComboBoxNewWithArea(area CellAreaKind) (_go__return__ ComboBox) {
 	_cgo_area_ := (*C.GtkCellArea)(area._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_new_with_area(_cgo_area_)
-	_go__return__ = ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6976,28 +7153,28 @@ func ComboBoxNewWithAreaAndEntry(area CellAreaKind) (_go__return__ ComboBox) {
 	_cgo_area_ := (*C.GtkCellArea)(area._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_new_with_area_and_entry(_cgo_area_)
-	_go__return__ = ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
 func ComboBoxNewWithEntry() (_go__return__ ComboBox) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_new_with_entry()
-	_go__return__ = ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
 func ComboBoxNewWithModel(model *C.GtkTreeModel) (_go__return__ ComboBox) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_new_with_model(model)
-	_go__return__ = ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
 func ComboBoxNewWithModelAndEntry(model *C.GtkTreeModel) (_go__return__ ComboBox) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_new_with_model_and_entry(model)
-	_go__return__ = ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7228,14 +7405,14 @@ func (_self_ *ComboBox) SetWrapWidth(width int) () {
 func ComboBoxTextNew() (_go__return__ ComboBoxText) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_text_new()
-	_go__return__ = ComboBoxText{ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToComboBoxText(unsafe.Pointer(_return_))
 	return
 }
 
 func ComboBoxTextNewWithEntry() (_go__return__ ComboBoxText) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_combo_box_text_new_with_entry()
-	_go__return__ = ComboBoxText{ComboBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToComboBoxText(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7391,21 +7568,21 @@ func (_self_ *Container) GetFocusChain() (_go__return__ bool, focusable_widgets 
 func (_self_ *Container) GetFocusChild() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_container_get_focus_child((*C.GtkContainer)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Container) GetFocusHadjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_container_get_focus_hadjustment((*C.GtkContainer)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Container) GetFocusVadjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_container_get_focus_vadjustment((*C.GtkContainer)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7514,14 +7691,14 @@ func (_self_ *ContainerClass) ListChildProperties() (_return_ unsafe.Pointer, _g
 func CssProviderNew() (_go__return__ CssProvider) {
 	var _return_ *C.GtkCssProvider
 	_return_ = C.gtk_css_provider_new()
-	_go__return__ = CssProvider{unsafe.Pointer(_return_)}
+	_go__return__ = ToCssProvider(unsafe.Pointer(_return_))
 	return
 }
 
 func CssProviderGetDefault() (_go__return__ CssProvider) {
 	var _return_ *C.GtkCssProvider
 	_return_ = C.gtk_css_provider_get_default()
-	_go__return__ = CssProvider{unsafe.Pointer(_return_)}
+	_go__return__ = ToCssProvider(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7534,7 +7711,7 @@ func CssProviderGetNamed(name string, variant string) (_go__return__ CssProvider
 	_cgo_variant_ := (*C.gchar)(unsafe.Pointer(_cstring_variant_))
 	defer C.free(unsafe.Pointer(_cstring_variant_))
 	_return_ = C._gtk_css_provider_get_named(_cgo_name_, _cgo_variant_)
-	_go__return__ = CssProvider{unsafe.Pointer(_return_)}
+	_go__return__ = ToCssProvider(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7622,7 +7799,7 @@ func (_self_ *CssSection) Unref() () {
 func DialogNew() (_go__return__ Dialog) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_dialog_new()
-	_go__return__ = Dialog{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToDialog(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7640,21 +7817,21 @@ func (_self_ *Dialog) AddButton(button_text string, response_id int) (_go__retur
 	_cgo_button_text_ := (*C.gchar)(unsafe.Pointer(_cstring_button_text_))
 	defer C.free(unsafe.Pointer(_cstring_button_text_))
 	_return_ = C._gtk_dialog_add_button((*C.GtkDialog)(_self_._value_), _cgo_button_text_, _cgo_response_id_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Dialog) GetActionArea() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_dialog_get_action_area((*C.GtkDialog)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Dialog) GetContentArea() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_dialog_get_content_area((*C.GtkDialog)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7670,7 +7847,7 @@ func (_self_ *Dialog) GetWidgetForResponse(response_id int) (_go__return__ Widge
 	var _return_ *C.GtkWidget
 	_cgo_response_id_ := (C.gint)(response_id)
 	_return_ = C.gtk_dialog_get_widget_for_response((*C.GtkDialog)(_self_._value_), _cgo_response_id_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7704,14 +7881,14 @@ func (_self_ *Dialog) SetResponseSensitive(response_id int, setting bool) () {
 func DrawingAreaNew() (_go__return__ DrawingArea) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_drawing_area_new()
-	_go__return__ = DrawingArea{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToDrawingArea(unsafe.Pointer(_return_))
 	return
 }
 
 func EntryNew() (_go__return__ Entry) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_entry_new()
-	_go__return__ = Entry{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToEntry(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7719,7 +7896,7 @@ func EntryNewWithBuffer(buffer EntryBufferKind) (_go__return__ Entry) {
 	_cgo_buffer_ := (*C.GtkEntryBuffer)(buffer._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_entry_new_with_buffer(_cgo_buffer_)
-	_go__return__ = Entry{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToEntry(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7745,14 +7922,14 @@ func (_self_ *Entry) GetAttributes() (_return_ *C.PangoAttrList) {
 func (_self_ *Entry) GetBuffer() (_go__return__ EntryBuffer) {
 	var _return_ *C.GtkEntryBuffer
 	_return_ = C.gtk_entry_get_buffer((*C.GtkEntry)(_self_._value_))
-	_go__return__ = EntryBuffer{unsafe.Pointer(_return_)}
+	_go__return__ = ToEntryBuffer(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Entry) GetCompletion() (_go__return__ EntryCompletion) {
 	var _return_ *C.GtkEntryCompletion
 	_return_ = C.gtk_entry_get_completion((*C.GtkEntry)(_self_._value_))
-	_go__return__ = EntryCompletion{unsafe.Pointer(_return_)}
+	_go__return__ = ToEntryCompletion(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7766,7 +7943,7 @@ func (_self_ *Entry) GetCurrentIconDragSource() (_go__return__ int) {
 func (_self_ *Entry) GetCursorHadjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_entry_get_cursor_hadjustment((*C.GtkEntry)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8164,7 +8341,7 @@ func EntryBufferNew(initial_chars string, n_initial_chars int) (_go__return__ En
 	_cgo_initial_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_initial_chars_))
 	defer C.free(unsafe.Pointer(_cstring_initial_chars_))
 	_return_ = C._gtk_entry_buffer_new(_cgo_initial_chars_, _cgo_n_initial_chars_)
-	_go__return__ = EntryBuffer{unsafe.Pointer(_return_)}
+	_go__return__ = ToEntryBuffer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8252,7 +8429,7 @@ func (_self_ *EntryBuffer) SetText(chars string, n_chars int) () {
 func EntryCompletionNew() (_go__return__ EntryCompletion) {
 	var _return_ *C.GtkEntryCompletion
 	_return_ = C.gtk_entry_completion_new()
-	_go__return__ = EntryCompletion{unsafe.Pointer(_return_)}
+	_go__return__ = ToEntryCompletion(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8260,7 +8437,7 @@ func EntryCompletionNewWithArea(area CellAreaKind) (_go__return__ EntryCompletio
 	_cgo_area_ := (*C.GtkCellArea)(area._getValue())
 	var _return_ *C.GtkEntryCompletion
 	_return_ = C.gtk_entry_completion_new_with_area(_cgo_area_)
-	_go__return__ = EntryCompletion{unsafe.Pointer(_return_)}
+	_go__return__ = ToEntryCompletion(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8295,7 +8472,7 @@ func (_self_ *EntryCompletion) GetCompletionPrefix() (_go__return__ string) {
 func (_self_ *EntryCompletion) GetEntry() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_entry_completion_get_entry((*C.GtkEntryCompletion)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8436,7 +8613,7 @@ func (_self_ *EntryCompletion) SetTextColumn(column int) () {
 func EventBoxNew() (_go__return__ EventBox) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_event_box_new()
-	_go__return__ = EventBox{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToEventBox(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8474,7 +8651,7 @@ func ExpanderNew(label string) (_go__return__ Expander) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_expander_new(_cgo_label_)
-	_go__return__ = Expander{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToExpander(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8484,7 +8661,7 @@ func ExpanderNewWithMnemonic(label string) (_go__return__ Expander) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_expander_new_with_mnemonic(_cgo_label_)
-	_go__return__ = Expander{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToExpander(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8512,7 +8689,7 @@ func (_self_ *Expander) GetLabelFill() (_go__return__ bool) {
 func (_self_ *Expander) GetLabelWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_expander_get_label_widget((*C.GtkExpander)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8605,7 +8782,7 @@ func FileChooserButtonNew(title string, action C.GtkFileChooserAction) (_go__ret
 	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
 	defer C.free(unsafe.Pointer(_cstring_title_))
 	_return_ = C._gtk_file_chooser_button_new(_cgo_title_, action)
-	_go__return__ = FileChooserButton{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToFileChooserButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8613,7 +8790,7 @@ func FileChooserButtonNewWithDialog(dialog WidgetKind) (_go__return__ FileChoose
 	_cgo_dialog_ := (*C.GtkWidget)(dialog._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_file_chooser_button_new_with_dialog(_cgo_dialog_)
-	_go__return__ = FileChooserButton{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToFileChooserButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8662,14 +8839,14 @@ func (_self_ *FileChooserButton) SetWidthChars(n_chars int) () {
 func FileChooserWidgetNew(action C.GtkFileChooserAction) (_go__return__ FileChooserWidget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_file_chooser_widget_new(action)
-	_go__return__ = FileChooserWidget{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToFileChooserWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func FileFilterNew() (_go__return__ FileFilter) {
 	var _return_ *C.GtkFileFilter
 	_return_ = C.gtk_file_filter_new()
-	_go__return__ = FileFilter{unsafe.Pointer(_return_)}
+	_go__return__ = ToFileFilter(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8730,7 +8907,7 @@ func (_self_ *FileFilter) SetName(name string) () {
 func FixedNew() (_go__return__ Fixed) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_fixed_new()
-	_go__return__ = Fixed{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToFixed(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8753,7 +8930,7 @@ func (_self_ *Fixed) Put(widget WidgetKind, x int, y int) () {
 func FontButtonNew() (_go__return__ FontButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_font_button_new()
-	_go__return__ = FontButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToFontButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8763,7 +8940,7 @@ func FontButtonNewWithFont(fontname string) (_go__return__ FontButton) {
 	_cgo_fontname_ := (*C.gchar)(unsafe.Pointer(_cstring_fontname_))
 	defer C.free(unsafe.Pointer(_cstring_fontname_))
 	_return_ = C._gtk_font_button_new_with_font(_cgo_fontname_)
-	_go__return__ = FontButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToFontButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8862,14 +9039,14 @@ func FontChooserDialogNew(title string, parent WindowKind) (_go__return__ FontCh
 	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
 	defer C.free(unsafe.Pointer(_cstring_title_))
 	_return_ = C._gtk_font_chooser_dialog_new(_cgo_title_, _cgo_parent_)
-	_go__return__ = FontChooserDialog{Dialog{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToFontChooserDialog(unsafe.Pointer(_return_))
 	return
 }
 
 func FontChooserWidgetNew() (_go__return__ FontChooserWidget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_font_chooser_widget_new()
-	_go__return__ = FontChooserWidget{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToFontChooserWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8879,7 +9056,7 @@ func FrameNew(label string) (_go__return__ Frame) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_frame_new(_cgo_label_)
-	_go__return__ = Frame{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToFrame(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8902,7 +9079,7 @@ func (_self_ *Frame) GetLabelAlign() (_go_xalign_ float64, _go_yalign_ float64) 
 func (_self_ *Frame) GetLabelWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_frame_get_label_widget((*C.GtkFrame)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9004,7 +9181,7 @@ func (_self_ *Gradient) Unref() () {
 func GridNew() (_go__return__ Grid) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_grid_new()
-	_go__return__ = Grid{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToGrid(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9032,7 +9209,7 @@ func (_self_ *Grid) GetChildAt(left int, top int) (_go__return__ Widget) {
 	_cgo_left_ := (C.gint)(left)
 	_cgo_top_ := (C.gint)(top)
 	_return_ = C.gtk_grid_get_child_at((*C.GtkGrid)(_self_._value_), _cgo_left_, _cgo_top_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9199,7 +9376,7 @@ func (_self_ *IMContext) SetUsePreedit(use_preedit bool) () {
 func IMContextSimpleNew() (_go__return__ IMContextSimple) {
 	var _return_ *C.GtkIMContext
 	_return_ = C.gtk_im_context_simple_new()
-	_go__return__ = IMContextSimple{IMContext{unsafe.Pointer(_return_)}}
+	_go__return__ = ToIMContextSimple(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9213,7 +9390,7 @@ func (_self_ *IMContextSimple) AddTable(data *C.guint16, max_seq_len int, n_seqs
 func IMMulticontextNew() (_go__return__ IMMulticontext) {
 	var _return_ *C.GtkIMContext
 	_return_ = C.gtk_im_multicontext_new()
-	_go__return__ = IMMulticontext{IMContext{unsafe.Pointer(_return_)}}
+	_go__return__ = ToIMMulticontext(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9241,7 +9418,7 @@ func (_self_ *IMMulticontext) SetContextId(context_id string) () {
 func IconFactoryNew() (_go__return__ IconFactory) {
 	var _return_ *C.GtkIconFactory
 	_return_ = C.gtk_icon_factory_new()
-	_go__return__ = IconFactory{unsafe.Pointer(_return_)}
+	_go__return__ = ToIconFactory(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9543,7 +9720,7 @@ func (_self_ *IconSource) SetStateWildcarded(setting bool) () {
 func IconThemeNew() (_go__return__ IconTheme) {
 	var _return_ *C.GtkIconTheme
 	_return_ = C.gtk_icon_theme_new()
-	_go__return__ = IconTheme{unsafe.Pointer(_return_)}
+	_go__return__ = ToIconTheme(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9559,14 +9736,14 @@ func IconThemeAddBuiltinIcon(icon_name string, size int, pixbuf *C.GdkPixbuf) ()
 func IconThemeGetDefault() (_go__return__ IconTheme) {
 	var _return_ *C.GtkIconTheme
 	_return_ = C.gtk_icon_theme_get_default()
-	_go__return__ = IconTheme{unsafe.Pointer(_return_)}
+	_go__return__ = ToIconTheme(unsafe.Pointer(_return_))
 	return
 }
 
 func IconThemeGetForScreen(screen *C.GdkScreen) (_go__return__ IconTheme) {
 	var _return_ *C.GtkIconTheme
 	_return_ = C.gtk_icon_theme_get_for_screen(screen)
-	_go__return__ = IconTheme{unsafe.Pointer(_return_)}
+	_go__return__ = ToIconTheme(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9675,7 +9852,7 @@ func (_self_ *IconTheme) SetScreen(screen *C.GdkScreen) () {
 func IconViewNew() (_go__return__ IconView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_icon_view_new()
-	_go__return__ = IconView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToIconView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9683,14 +9860,14 @@ func IconViewNewWithArea(area CellAreaKind) (_go__return__ IconView) {
 	_cgo_area_ := (*C.GtkCellArea)(area._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_icon_view_new_with_area(_cgo_area_)
-	_go__return__ = IconView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToIconView(unsafe.Pointer(_return_))
 	return
 }
 
 func IconViewNewWithModel(model *C.GtkTreeModel) (_go__return__ IconView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_icon_view_new_with_model(model)
-	_go__return__ = IconView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToIconView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10084,14 +10261,14 @@ func (_self_ *IconView) UnsetModelDragSource() () {
 func ImageNew() (_go__return__ Image) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new()
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
 func ImageNewFromAnimation(animation *C.GdkPixbufAnimation) (_go__return__ Image) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_animation(animation)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10101,14 +10278,14 @@ func ImageNewFromFile(filename string) (_go__return__ Image) {
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_return_ = C._gtk_image_new_from_file(_cgo_filename_)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
 func ImageNewFromGicon(icon *C.GIcon, size C.GtkIconSize) (_go__return__ Image) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_gicon(icon, size)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10118,7 +10295,7 @@ func ImageNewFromIconName(icon_name string, size C.GtkIconSize) (_go__return__ I
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
 	_return_ = C._gtk_image_new_from_icon_name(_cgo_icon_name_, size)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10126,14 +10303,14 @@ func ImageNewFromIconSet(icon_set *IconSet, size C.GtkIconSize) (_go__return__ I
 	_cgo_icon_set_ := (*C.GtkIconSet)(unsafe.Pointer(icon_set))
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_icon_set(_cgo_icon_set_, size)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
 func ImageNewFromPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ Image) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_pixbuf(pixbuf)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10143,7 +10320,7 @@ func ImageNewFromResource(resource_path string) (_go__return__ Image) {
 	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
 	_return_ = C._gtk_image_new_from_resource(_cgo_resource_path_)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10153,7 +10330,7 @@ func ImageNewFromStock(stock_id string, size C.GtkIconSize) (_go__return__ Image
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_image_new_from_stock(_cgo_stock_id_, size)
-	_go__return__ = Image{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10268,7 +10445,7 @@ func (_self_ *Image) SetPixelSize(pixel_size int) () {
 func ImageMenuItemNew() (_go__return__ ImageMenuItem) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_menu_item_new()
-	_go__return__ = ImageMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToImageMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10279,7 +10456,7 @@ func ImageMenuItemNewFromStock(stock_id string, accel_group AccelGroupKind) (_go
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_image_menu_item_new_from_stock(_cgo_stock_id_, _cgo_accel_group_)
-	_go__return__ = ImageMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToImageMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10289,7 +10466,7 @@ func ImageMenuItemNewWithLabel(label string) (_go__return__ ImageMenuItem) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_image_menu_item_new_with_label(_cgo_label_)
-	_go__return__ = ImageMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToImageMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10299,7 +10476,7 @@ func ImageMenuItemNewWithMnemonic(label string) (_go__return__ ImageMenuItem) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_image_menu_item_new_with_mnemonic(_cgo_label_)
-	_go__return__ = ImageMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToImageMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10313,7 +10490,7 @@ func (_self_ *ImageMenuItem) GetAlwaysShowImage() (_go__return__ bool) {
 func (_self_ *ImageMenuItem) GetImage() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_menu_item_get_image((*C.GtkImageMenuItem)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10353,7 +10530,7 @@ func (_self_ *ImageMenuItem) SetUseStock(use_stock bool) () {
 func InfoBarNew() (_go__return__ InfoBar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_info_bar_new()
-	_go__return__ = InfoBar{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToInfoBar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10371,21 +10548,21 @@ func (_self_ *InfoBar) AddButton(button_text string, response_id int) (_go__retu
 	_cgo_button_text_ := (*C.gchar)(unsafe.Pointer(_cstring_button_text_))
 	defer C.free(unsafe.Pointer(_cstring_button_text_))
 	_return_ = C._gtk_info_bar_add_button((*C.GtkInfoBar)(_self_._value_), _cgo_button_text_, _cgo_response_id_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *InfoBar) GetActionArea() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_info_bar_get_action_area((*C.GtkInfoBar)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *InfoBar) GetContentArea() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_info_bar_get_content_area((*C.GtkInfoBar)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10422,14 +10599,14 @@ func (_self_ *InfoBar) SetResponseSensitive(response_id int, setting bool) () {
 func InvisibleNew() (_go__return__ Invisible) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_invisible_new()
-	_go__return__ = Invisible{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToInvisible(unsafe.Pointer(_return_))
 	return
 }
 
 func InvisibleNewForScreen(screen *C.GdkScreen) (_go__return__ Invisible) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_invisible_new_for_screen(screen)
-	_go__return__ = Invisible{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToInvisible(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10449,7 +10626,7 @@ func LabelNew(str string) (_go__return__ Label) {
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
 	_return_ = C._gtk_label_new(_cgo_str_)
-	_go__return__ = Label{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToLabel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10459,7 +10636,7 @@ func LabelNewWithMnemonic(str string) (_go__return__ Label) {
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
 	_return_ = C._gtk_label_new_with_mnemonic(_cgo_str_)
-	_go__return__ = Label{Misc{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToLabel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10542,7 +10719,7 @@ func (_self_ *Label) GetMnemonicKeyval() (_go__return__ uint) {
 func (_self_ *Label) GetMnemonicWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_label_get_mnemonic_widget((*C.GtkLabel)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10752,7 +10929,7 @@ func LayoutNew(hadjustment AdjustmentKind, vadjustment AdjustmentKind) (_go__ret
 	_cgo_vadjustment_ := (*C.GtkAdjustment)(vadjustment._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_layout_new(_cgo_hadjustment_, _cgo_vadjustment_)
-	_go__return__ = Layout{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToLayout(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10796,7 +10973,7 @@ func (_self_ *Layout) SetSize(width uint, height uint) () {
 func LevelBarNew() (_go__return__ LevelBar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_level_bar_new()
-	_go__return__ = LevelBar{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToLevelBar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10805,7 +10982,7 @@ func LevelBarNewForInterval(min_value float64, max_value float64) (_go__return__
 	_cgo_min_value_ := (C.gdouble)(min_value)
 	_cgo_max_value_ := (C.gdouble)(max_value)
 	_return_ = C.gtk_level_bar_new_for_interval(_cgo_min_value_, _cgo_max_value_)
-	_go__return__ = LevelBar{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToLevelBar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10893,7 +11070,7 @@ func LinkButtonNew(uri string) (_go__return__ LinkButton) {
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	_return_ = C._gtk_link_button_new(_cgo_uri_)
-	_go__return__ = LinkButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToLinkButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10906,7 +11083,7 @@ func LinkButtonNewWithLabel(uri string, label string) (_go__return__ LinkButton)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_link_button_new_with_label(_cgo_uri_, _cgo_label_)
-	_go__return__ = LinkButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToLinkButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11029,7 +11206,7 @@ func (_self_ *ListStore) Swap(a *TreeIter, b *TreeIter) () {
 func LockButtonNew(permission *C.GPermission) (_go__return__ LockButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_lock_button_new(permission)
-	_go__return__ = LockButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToLockButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11046,14 +11223,14 @@ func (_self_ *LockButton) SetPermission(permission *C.GPermission) () {
 func MenuNew() (_go__return__ Menu) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_new()
-	_go__return__ = Menu{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenu(unsafe.Pointer(_return_))
 	return
 }
 
 func MenuNewFromModel(model *C.GMenuModel) (_go__return__ Menu) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_new_from_model(model)
-	_go__return__ = Menu{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenu(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11087,7 +11264,7 @@ func (_self_ *Menu) Detach() () {
 func (_self_ *Menu) GetAccelGroup() (_go__return__ AccelGroup) {
 	var _return_ *C.GtkAccelGroup
 	_return_ = C.gtk_menu_get_accel_group((*C.GtkMenu)(_self_._value_))
-	_go__return__ = AccelGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToAccelGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11101,14 +11278,14 @@ func (_self_ *Menu) GetAccelPath() (_go__return__ string) {
 func (_self_ *Menu) GetActive() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_get_active((*C.GtkMenu)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Menu) GetAttachWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_get_attach_widget((*C.GtkMenu)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11231,14 +11408,14 @@ func (_self_ *Menu) SetTitle(title string) () {
 func MenuBarNew() (_go__return__ MenuBar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_bar_new()
-	_go__return__ = MenuBar{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenuBar(unsafe.Pointer(_return_))
 	return
 }
 
 func MenuBarNewFromModel(model *C.GMenuModel) (_go__return__ MenuBar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_bar_new_from_model(model)
-	_go__return__ = MenuBar{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenuBar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11265,14 +11442,14 @@ func (_self_ *MenuBar) SetPackDirection(pack_dir C.GtkPackDirection) () {
 func MenuButtonNew() (_go__return__ MenuButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_button_new()
-	_go__return__ = MenuButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToMenuButton(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *MenuButton) GetAlignWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_button_get_align_widget((*C.GtkMenuButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11289,7 +11466,7 @@ func (_self_ *MenuButton) GetMenuModel() (_return_ *C.GMenuModel) {
 func (_self_ *MenuButton) GetPopup() (_go__return__ Menu) {
 	var _return_ *C.GtkMenu
 	_return_ = C.gtk_menu_button_get_popup((*C.GtkMenuButton)(_self_._value_))
-	_go__return__ = Menu{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenu(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11318,7 +11495,7 @@ func (_self_ *MenuButton) SetPopup(popup WidgetKind) () {
 func MenuItemNew() (_go__return__ MenuItem) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_item_new()
-	_go__return__ = MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11328,7 +11505,7 @@ func MenuItemNewWithLabel(label string) (_go__return__ MenuItem) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_menu_item_new_with_label(_cgo_label_)
-	_go__return__ = MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11338,7 +11515,7 @@ func MenuItemNewWithMnemonic(label string) (_go__return__ MenuItem) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_menu_item_new_with_mnemonic(_cgo_label_)
-	_go__return__ = MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11376,7 +11553,7 @@ func (_self_ *MenuItem) GetReserveIndicator() (_go__return__ bool) {
 func (_self_ *MenuItem) GetSubmenu() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_item_get_submenu((*C.GtkMenuItem)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11481,14 +11658,14 @@ func (_self_ *MenuShell) Deselect() () {
 func (_self_ *MenuShell) GetParentShell() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_shell_get_parent_shell((*C.GtkMenuShell)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *MenuShell) GetSelectedItem() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_shell_get_selected_item((*C.GtkMenuShell)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11539,7 +11716,7 @@ func MenuToolButtonNew(icon_widget WidgetKind, label string) (_go__return__ Menu
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_menu_tool_button_new(_cgo_icon_widget_, _cgo_label_)
-	_go__return__ = MenuToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToMenuToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11549,14 +11726,14 @@ func MenuToolButtonNewFromStock(stock_id string) (_go__return__ MenuToolButton) 
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_menu_tool_button_new_from_stock(_cgo_stock_id_)
-	_go__return__ = MenuToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToMenuToolButton(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *MenuToolButton) GetMenu() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_menu_tool_button_get_menu((*C.GtkMenuToolButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11585,14 +11762,14 @@ func (_self_ *MenuToolButton) SetMenu(menu WidgetKind) () {
 func (_self_ *MessageDialog) GetImage() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_message_dialog_get_image((*C.GtkMessageDialog)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *MessageDialog) GetMessageArea() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_message_dialog_get_message_area((*C.GtkMessageDialog)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11651,7 +11828,7 @@ func MountOperationNew(parent WindowKind) (_return_ *C.GMountOperation) {
 func (_self_ *MountOperation) GetParent() (_go__return__ Window) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_mount_operation_get_parent((*C.GtkMountOperation)(_self_._value_))
-	_go__return__ = Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11681,7 +11858,7 @@ func (_self_ *MountOperation) SetScreen(screen *C.GdkScreen) () {
 func NotebookNew() (_go__return__ Notebook) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_notebook_new()
-	_go__return__ = Notebook{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToNotebook(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11707,7 +11884,7 @@ func (_self_ *Notebook) AppendPageMenu(child WidgetKind, tab_label WidgetKind, m
 func (_self_ *Notebook) GetActionWidget(pack_type C.GtkPackType) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_notebook_get_action_widget((*C.GtkNotebook)(_self_._value_), pack_type)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11729,7 +11906,7 @@ func (_self_ *Notebook) GetMenuLabel(child WidgetKind) (_go__return__ Widget) {
 	_cgo_child_ := (*C.GtkWidget)(child._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_notebook_get_menu_label((*C.GtkNotebook)(_self_._value_), _cgo_child_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11752,7 +11929,7 @@ func (_self_ *Notebook) GetNthPage(page_num int) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_cgo_page_num_ := (C.gint)(page_num)
 	_return_ = C.gtk_notebook_get_nth_page((*C.GtkNotebook)(_self_._value_), _cgo_page_num_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -11789,7 +11966,7 @@ func (_self_ *Notebook) GetTabLabel(child WidgetKind) (_go__return__ Widget) {
 	_cgo_child_ := (*C.GtkWidget)(child._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_notebook_get_tab_label((*C.GtkNotebook)(_self_._value_), _cgo_child_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12029,7 +12206,7 @@ func (_self_ *NumerableIcon) GetLabel() (_go__return__ string) {
 func (_self_ *NumerableIcon) GetStyleContext() (_go__return__ StyleContext) {
 	var _return_ *C.GtkStyleContext
 	_return_ = C.gtk_numerable_icon_get_style_context((*C.GtkNumerableIcon)(_self_._value_))
-	_go__return__ = StyleContext{unsafe.Pointer(_return_)}
+	_go__return__ = ToStyleContext(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12069,7 +12246,7 @@ func (_self_ *NumerableIcon) SetStyleContext(style StyleContextKind) () {
 func OffscreenWindowNew() (_go__return__ OffscreenWindow) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_offscreen_window_new()
-	_go__return__ = OffscreenWindow{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToOffscreenWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12086,7 +12263,7 @@ func (_self_ *OffscreenWindow) GetSurface() (_return_ *C.cairo_surface_t) {
 func OverlayNew() (_go__return__ Overlay) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_overlay_new()
-	_go__return__ = Overlay{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToOverlay(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12099,7 +12276,7 @@ func (_self_ *Overlay) AddOverlay(widget WidgetKind) () {
 func PageSetupNew() (_go__return__ PageSetup) {
 	var _return_ *C.GtkPageSetup
 	_return_ = C.gtk_page_setup_new()
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12109,7 +12286,7 @@ func PageSetupNewFromFile(file_name string) (_go__return__ PageSetup, _error_ un
 	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	_return_ = C._gtk_page_setup_new_from_file(_cgo_file_name_, _error_)
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12119,14 +12296,14 @@ func PageSetupNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__retu
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	_return_ = C._gtk_page_setup_new_from_key_file(key_file, _cgo_group_name_, _error_)
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *PageSetup) Copy() (_go__return__ PageSetup) {
 	var _return_ *C.GtkPageSetup
 	_return_ = C.gtk_page_setup_copy((*C.GtkPageSetup)(_self_._value_))
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12280,7 +12457,7 @@ func (_self_ *PageSetup) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
 func PanedNew(orientation C.GtkOrientation) (_go__return__ Paned) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_paned_new(orientation)
-	_go__return__ = Paned{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToPaned(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12299,14 +12476,14 @@ func (_self_ *Paned) Add2(child WidgetKind) () {
 func (_self_ *Paned) GetChild1() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_paned_get_child1((*C.GtkPaned)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Paned) GetChild2() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_paned_get_child2((*C.GtkPaned)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12520,14 +12697,14 @@ func (_self_ *PaperSize) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
 func PlugNew(socket_id C.Window) (_go__return__ Plug) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_plug_new(socket_id)
-	_go__return__ = Plug{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToPlug(unsafe.Pointer(_return_))
 	return
 }
 
 func PlugNewForDisplay(display *C.GdkDisplay, socket_id C.Window) (_go__return__ Plug) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_plug_new_for_display(display, socket_id)
-	_go__return__ = Plug{Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToPlug(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12612,7 +12789,7 @@ func (_self_ *PrintContext) GetHeight() (_go__return__ float64) {
 func (_self_ *PrintContext) GetPageSetup() (_go__return__ PageSetup) {
 	var _return_ *C.GtkPageSetup
 	_return_ = C.gtk_print_context_get_page_setup((*C.GtkPrintContext)(_self_._value_))
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12636,7 +12813,7 @@ func (_self_ *PrintContext) SetCairoContext(cr *C.cairo_t, dpi_x C.double, dpi_y
 func PrintOperationNew() (_go__return__ PrintOperation) {
 	var _return_ *C.GtkPrintOperation
 	_return_ = C.gtk_print_operation_new()
-	_go__return__ = PrintOperation{unsafe.Pointer(_return_)}
+	_go__return__ = ToPrintOperation(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12653,7 +12830,7 @@ func (_self_ *PrintOperation) DrawPageFinish() () {
 func (_self_ *PrintOperation) GetDefaultPageSetup() (_go__return__ PageSetup) {
 	var _return_ *C.GtkPageSetup
 	_return_ = C.gtk_print_operation_get_default_page_setup((*C.GtkPrintOperation)(_self_._value_))
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12686,7 +12863,7 @@ func (_self_ *PrintOperation) GetNPagesToPrint() (_go__return__ int) {
 func (_self_ *PrintOperation) GetPrintSettings() (_go__return__ PrintSettings) {
 	var _return_ *C.GtkPrintSettings
 	_return_ = C.gtk_print_operation_get_print_settings((*C.GtkPrintOperation)(_self_._value_))
-	_go__return__ = PrintSettings{unsafe.Pointer(_return_)}
+	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12832,7 +13009,7 @@ func (_self_ *PrintOperation) SetUseFullPage(full_page bool) () {
 func PrintSettingsNew() (_go__return__ PrintSettings) {
 	var _return_ *C.GtkPrintSettings
 	_return_ = C.gtk_print_settings_new()
-	_go__return__ = PrintSettings{unsafe.Pointer(_return_)}
+	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12842,7 +13019,7 @@ func PrintSettingsNewFromFile(file_name string) (_go__return__ PrintSettings, _e
 	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	_return_ = C._gtk_print_settings_new_from_file(_cgo_file_name_, _error_)
-	_go__return__ = PrintSettings{unsafe.Pointer(_return_)}
+	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12852,14 +13029,14 @@ func PrintSettingsNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	_return_ = C._gtk_print_settings_new_from_key_file(key_file, _cgo_group_name_, _error_)
-	_go__return__ = PrintSettings{unsafe.Pointer(_return_)}
+	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *PrintSettings) Copy() (_go__return__ PrintSettings) {
 	var _return_ *C.GtkPrintSettings
 	_return_ = C.gtk_print_settings_copy((*C.GtkPrintSettings)(_self_._value_))
-	_go__return__ = PrintSettings{unsafe.Pointer(_return_)}
+	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13371,7 +13548,7 @@ func (_self_ *PrintSettings) Unset(key string) () {
 func ProgressBarNew() (_go__return__ ProgressBar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_progress_bar_new()
-	_go__return__ = ProgressBar{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToProgressBar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13475,7 +13652,7 @@ func RadioActionNew(name string, label string, tooltip string, stock_id string, 
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_radio_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_, _cgo_value_)
-	_go__return__ = RadioAction{ToggleAction{Action{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToRadioAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13511,7 +13688,7 @@ func (_self_ *RadioAction) SetGroup(group *C.GSList) () {
 func RadioButtonNew(group *C.GSList) (_go__return__ RadioButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_radio_button_new(group)
-	_go__return__ = RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13519,7 +13696,7 @@ func RadioButtonNewFromWidget(radio_group_member RadioButtonKind) (_go__return__
 	_cgo_radio_group_member_ := (*C.GtkRadioButton)(radio_group_member._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_radio_button_new_from_widget(_cgo_radio_group_member_)
-	_go__return__ = RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13529,7 +13706,7 @@ func RadioButtonNewWithLabel(group *C.GSList, label string) (_go__return__ Radio
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_button_new_with_label(group, _cgo_label_)
-	_go__return__ = RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13540,7 +13717,7 @@ func RadioButtonNewWithLabelFromWidget(radio_group_member RadioButtonKind, label
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_button_new_with_label_from_widget(_cgo_radio_group_member_, _cgo_label_)
-	_go__return__ = RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13550,7 +13727,7 @@ func RadioButtonNewWithMnemonic(group *C.GSList, label string) (_go__return__ Ra
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_button_new_with_mnemonic(group, _cgo_label_)
-	_go__return__ = RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13561,7 +13738,7 @@ func RadioButtonNewWithMnemonicFromWidget(radio_group_member RadioButtonKind, la
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_button_new_with_mnemonic_from_widget(_cgo_radio_group_member_, _cgo_label_)
-	_go__return__ = RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13584,7 +13761,7 @@ func (_self_ *RadioButton) SetGroup(group *C.GSList) () {
 func RadioMenuItemNew(group *C.GSList) (_go__return__ RadioMenuItem) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_radio_menu_item_new(group)
-	_go__return__ = RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToRadioMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13592,7 +13769,7 @@ func RadioMenuItemNewFromWidget(group RadioMenuItemKind) (_go__return__ RadioMen
 	_cgo_group_ := (*C.GtkRadioMenuItem)(group._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_radio_menu_item_new_from_widget(_cgo_group_)
-	_go__return__ = RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToRadioMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13602,7 +13779,7 @@ func RadioMenuItemNewWithLabel(group *C.GSList, label string) (_go__return__ Rad
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_menu_item_new_with_label(group, _cgo_label_)
-	_go__return__ = RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToRadioMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13613,7 +13790,7 @@ func RadioMenuItemNewWithLabelFromWidget(group RadioMenuItemKind, label string) 
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_menu_item_new_with_label_from_widget(_cgo_group_, _cgo_label_)
-	_go__return__ = RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToRadioMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13623,7 +13800,7 @@ func RadioMenuItemNewWithMnemonic(group *C.GSList, label string) (_go__return__ 
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_menu_item_new_with_mnemonic(group, _cgo_label_)
-	_go__return__ = RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToRadioMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13634,7 +13811,7 @@ func RadioMenuItemNewWithMnemonicFromWidget(group RadioMenuItemKind, label strin
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_radio_menu_item_new_with_mnemonic_from_widget(_cgo_group_, _cgo_label_)
-	_go__return__ = RadioMenuItem{CheckMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToRadioMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13651,7 +13828,7 @@ func (_self_ *RadioMenuItem) SetGroup(group *C.GSList) () {
 func RadioToolButtonNew(group *C.GSList) (_go__return__ RadioToolButton) {
 	var _return_ *C.GtkToolItem
 	_return_ = C.gtk_radio_tool_button_new(group)
-	_go__return__ = RadioToolButton{ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13661,7 +13838,7 @@ func RadioToolButtonNewFromStock(group *C.GSList, stock_id string) (_go__return_
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_radio_tool_button_new_from_stock(group, _cgo_stock_id_)
-	_go__return__ = RadioToolButton{ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13669,7 +13846,7 @@ func RadioToolButtonNewFromWidget(group RadioToolButtonKind) (_go__return__ Radi
 	_cgo_group_ := (*C.GtkRadioToolButton)(group._getValue())
 	var _return_ *C.GtkToolItem
 	_return_ = C.gtk_radio_tool_button_new_from_widget(_cgo_group_)
-	_go__return__ = RadioToolButton{ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13680,7 +13857,7 @@ func RadioToolButtonNewWithStockFromWidget(group RadioToolButtonKind, stock_id s
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_radio_tool_button_new_with_stock_from_widget(_cgo_group_, _cgo_stock_id_)
-	_go__return__ = RadioToolButton{ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}}
+	_go__return__ = ToRadioToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13697,7 +13874,7 @@ func (_self_ *RadioToolButton) SetGroup(group *C.GSList) () {
 func (_self_ *Range) GetAdjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_range_get_adjustment((*C.GtkRange)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13892,7 +14069,7 @@ func RecentActionNew(name string, label string, tooltip string, stock_id string)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_recent_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
-	_go__return__ = RecentAction{Action{unsafe.Pointer(_return_)}}
+	_go__return__ = ToRecentAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13912,7 +14089,7 @@ func RecentActionNewForManager(name string, label string, tooltip string, stock_
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_recent_action_new_for_manager(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_, _cgo_manager_)
-	_go__return__ = RecentAction{Action{unsafe.Pointer(_return_)}}
+	_go__return__ = ToRecentAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13933,7 +14110,7 @@ func (_self_ *RecentAction) SetShowNumbers(show_numbers bool) () {
 func RecentChooserMenuNew() (_go__return__ RecentChooserMenu) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_recent_chooser_menu_new()
-	_go__return__ = RecentChooserMenu{Menu{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToRecentChooserMenu(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13941,7 +14118,7 @@ func RecentChooserMenuNewForManager(manager RecentManagerKind) (_go__return__ Re
 	_cgo_manager_ := (*C.GtkRecentManager)(manager._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_recent_chooser_menu_new_for_manager(_cgo_manager_)
-	_go__return__ = RecentChooserMenu{Menu{MenuShell{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToRecentChooserMenu(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13962,7 +14139,7 @@ func (_self_ *RecentChooserMenu) SetShowNumbers(show_numbers bool) () {
 func RecentChooserWidgetNew() (_go__return__ RecentChooserWidget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_recent_chooser_widget_new()
-	_go__return__ = RecentChooserWidget{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToRecentChooserWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -13970,14 +14147,14 @@ func RecentChooserWidgetNewForManager(manager RecentManagerKind) (_go__return__ 
 	_cgo_manager_ := (*C.GtkRecentManager)(manager._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_recent_chooser_widget_new_for_manager(_cgo_manager_)
-	_go__return__ = RecentChooserWidget{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToRecentChooserWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func RecentFilterNew() (_go__return__ RecentFilter) {
 	var _return_ *C.GtkRecentFilter
 	_return_ = C.gtk_recent_filter_new()
-	_go__return__ = RecentFilter{unsafe.Pointer(_return_)}
+	_go__return__ = ToRecentFilter(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14237,14 +14414,14 @@ func (_self_ *RecentInfo) Unref() () {
 func RecentManagerNew() (_go__return__ RecentManager) {
 	var _return_ *C.GtkRecentManager
 	_return_ = C.gtk_recent_manager_new()
-	_go__return__ = RecentManager{unsafe.Pointer(_return_)}
+	_go__return__ = ToRecentManager(unsafe.Pointer(_return_))
 	return
 }
 
 func RecentManagerGetDefault() (_go__return__ RecentManager) {
 	var _return_ *C.GtkRecentManager
 	_return_ = C.gtk_recent_manager_get_default()
-	_go__return__ = RecentManager{unsafe.Pointer(_return_)}
+	_go__return__ = ToRecentManager(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14347,7 +14524,7 @@ func ScaleNew(orientation C.GtkOrientation, adjustment AdjustmentKind) (_go__ret
 	_cgo_adjustment_ := (*C.GtkAdjustment)(adjustment._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scale_new(orientation, _cgo_adjustment_)
-	_go__return__ = Scale{Range{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToScale(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14357,7 +14534,7 @@ func ScaleNewWithRange(orientation C.GtkOrientation, min float64, max float64, s
 	_cgo_max_ := (C.gdouble)(max)
 	_cgo_step_ := (C.gdouble)(step)
 	_return_ = C.gtk_scale_new_with_range(orientation, _cgo_min_, _cgo_max_, _cgo_step_)
-	_go__return__ = Scale{Range{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToScale(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14443,28 +14620,28 @@ func (_self_ *Scale) SetValuePos(pos C.GtkPositionType) () {
 func (_self_ *ScaleButton) GetAdjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_scale_button_get_adjustment((*C.GtkScaleButton)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *ScaleButton) GetMinusButton() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scale_button_get_minus_button((*C.GtkScaleButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *ScaleButton) GetPlusButton() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scale_button_get_plus_button((*C.GtkScaleButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *ScaleButton) GetPopup() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scale_button_get_popup((*C.GtkScaleButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14491,7 +14668,7 @@ func ScrollbarNew(orientation C.GtkOrientation, adjustment AdjustmentKind) (_go_
 	_cgo_adjustment_ := (*C.GtkAdjustment)(adjustment._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scrollbar_new(orientation, _cgo_adjustment_)
-	_go__return__ = Scrollbar{Range{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToScrollbar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14500,7 +14677,7 @@ func ScrolledWindowNew(hadjustment AdjustmentKind, vadjustment AdjustmentKind) (
 	_cgo_vadjustment_ := (*C.GtkAdjustment)(vadjustment._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scrolled_window_new(_cgo_hadjustment_, _cgo_vadjustment_)
-	_go__return__ = ScrolledWindow{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToScrolledWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14520,14 +14697,14 @@ func (_self_ *ScrolledWindow) GetCaptureButtonPress() (_go__return__ bool) {
 func (_self_ *ScrolledWindow) GetHadjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_scrolled_window_get_hadjustment((*C.GtkScrolledWindow)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *ScrolledWindow) GetHscrollbar() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scrolled_window_get_hscrollbar((*C.GtkScrolledWindow)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14570,14 +14747,14 @@ func (_self_ *ScrolledWindow) GetShadowType() (_return_ C.GtkShadowType) {
 func (_self_ *ScrolledWindow) GetVadjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_scrolled_window_get_vadjustment((*C.GtkScrolledWindow)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *ScrolledWindow) GetVscrollbar() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_scrolled_window_get_vscrollbar((*C.GtkScrolledWindow)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14642,7 +14819,7 @@ func (_self_ *ScrolledWindow) UnsetPlacement() () {
 func SearchEntryNew() (_go__return__ SearchEntry) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_search_entry_new()
-	_go__return__ = SearchEntry{Entry{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToSearchEntry(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14773,21 +14950,21 @@ func (_self_ *SelectionData) TargetsIncludeUri() (_go__return__ bool) {
 func SeparatorNew(orientation C.GtkOrientation) (_go__return__ Separator) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_separator_new(orientation)
-	_go__return__ = Separator{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToSeparator(unsafe.Pointer(_return_))
 	return
 }
 
 func SeparatorMenuItemNew() (_go__return__ SeparatorMenuItem) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_separator_menu_item_new()
-	_go__return__ = SeparatorMenuItem{MenuItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToSeparatorMenuItem(unsafe.Pointer(_return_))
 	return
 }
 
 func SeparatorToolItemNew() (_go__return__ SeparatorToolItem) {
 	var _return_ *C.GtkToolItem
 	_return_ = C.gtk_separator_tool_item_new()
-	_go__return__ = SeparatorToolItem{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToSeparatorToolItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14808,14 +14985,14 @@ func (_self_ *SeparatorToolItem) SetDraw(draw bool) () {
 func SettingsGetDefault() (_go__return__ Settings) {
 	var _return_ *C.GtkSettings
 	_return_ = C.gtk_settings_get_default()
-	_go__return__ = Settings{unsafe.Pointer(_return_)}
+	_go__return__ = ToSettings(unsafe.Pointer(_return_))
 	return
 }
 
 func SettingsGetForScreen(screen *C.GdkScreen) (_go__return__ Settings) {
 	var _return_ *C.GtkSettings
 	_return_ = C.gtk_settings_get_for_screen(screen)
-	_go__return__ = Settings{unsafe.Pointer(_return_)}
+	_go__return__ = ToSettings(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14879,7 +15056,7 @@ func (_self_ *Settings) SetStringProperty(name string, v_string string, origin s
 func SizeGroupNew(mode C.GtkSizeGroupMode) (_go__return__ SizeGroup) {
 	var _return_ *C.GtkSizeGroup
 	_return_ = C.gtk_size_group_new(mode)
-	_go__return__ = SizeGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToSizeGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14927,7 +15104,7 @@ func (_self_ *SizeGroup) SetMode(mode C.GtkSizeGroupMode) () {
 func SocketNew() (_go__return__ Socket) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_socket_new()
-	_go__return__ = Socket{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToSocket(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14952,7 +15129,7 @@ func SpinButtonNew(adjustment AdjustmentKind, climb_rate float64, digits uint) (
 	_cgo_climb_rate_ := (C.gdouble)(climb_rate)
 	_cgo_digits_ := (C.guint)(digits)
 	_return_ = C.gtk_spin_button_new(_cgo_adjustment_, _cgo_climb_rate_, _cgo_digits_)
-	_go__return__ = SpinButton{Entry{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToSpinButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14962,7 +15139,7 @@ func SpinButtonNewWithRange(min float64, max float64, step float64) (_go__return
 	_cgo_max_ := (C.gdouble)(max)
 	_cgo_step_ := (C.gdouble)(step)
 	_return_ = C.gtk_spin_button_new_with_range(_cgo_min_, _cgo_max_, _cgo_step_)
-	_go__return__ = SpinButton{Entry{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToSpinButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -14977,7 +15154,7 @@ func (_self_ *SpinButton) Configure(adjustment AdjustmentKind, climb_rate float6
 func (_self_ *SpinButton) GetAdjustment() (_go__return__ Adjustment) {
 	var _return_ *C.GtkAdjustment
 	_return_ = C.gtk_spin_button_get_adjustment((*C.GtkSpinButton)(_self_._value_))
-	_go__return__ = Adjustment{unsafe.Pointer(_return_)}
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15118,7 +15295,7 @@ func (_self_ *SpinButton) Update() () {
 func SpinnerNew() (_go__return__ Spinner) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_spinner_new()
-	_go__return__ = Spinner{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToSpinner(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15135,7 +15312,7 @@ func (_self_ *Spinner) Stop() () {
 func StatusIconNew() (_go__return__ StatusIcon) {
 	var _return_ *C.GtkStatusIcon
 	_return_ = C.gtk_status_icon_new()
-	_go__return__ = StatusIcon{unsafe.Pointer(_return_)}
+	_go__return__ = ToStatusIcon(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15145,14 +15322,14 @@ func StatusIconNewFromFile(filename string) (_go__return__ StatusIcon) {
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_return_ = C._gtk_status_icon_new_from_file(_cgo_filename_)
-	_go__return__ = StatusIcon{unsafe.Pointer(_return_)}
+	_go__return__ = ToStatusIcon(unsafe.Pointer(_return_))
 	return
 }
 
 func StatusIconNewFromGicon(icon *C.GIcon) (_go__return__ StatusIcon) {
 	var _return_ *C.GtkStatusIcon
 	_return_ = C.gtk_status_icon_new_from_gicon(icon)
-	_go__return__ = StatusIcon{unsafe.Pointer(_return_)}
+	_go__return__ = ToStatusIcon(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15162,14 +15339,14 @@ func StatusIconNewFromIconName(icon_name string) (_go__return__ StatusIcon) {
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
 	_return_ = C._gtk_status_icon_new_from_icon_name(_cgo_icon_name_)
-	_go__return__ = StatusIcon{unsafe.Pointer(_return_)}
+	_go__return__ = ToStatusIcon(unsafe.Pointer(_return_))
 	return
 }
 
 func StatusIconNewFromPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ StatusIcon) {
 	var _return_ *C.GtkStatusIcon
 	_return_ = C.gtk_status_icon_new_from_pixbuf(pixbuf)
-	_go__return__ = StatusIcon{unsafe.Pointer(_return_)}
+	_go__return__ = ToStatusIcon(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15179,7 +15356,7 @@ func StatusIconNewFromStock(stock_id string) (_go__return__ StatusIcon) {
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_status_icon_new_from_stock(_cgo_stock_id_)
-	_go__return__ = StatusIcon{unsafe.Pointer(_return_)}
+	_go__return__ = ToStatusIcon(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15381,7 +15558,7 @@ func (_self_ *StatusIcon) SetVisible(visible bool) () {
 func StatusbarNew() (_go__return__ Statusbar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_statusbar_new()
-	_go__return__ = Statusbar{Box{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToStatusbar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15398,7 +15575,7 @@ func (_self_ *Statusbar) GetContextId(context_description string) (_go__return__
 func (_self_ *Statusbar) GetMessageArea() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_statusbar_get_message_area((*C.GtkStatusbar)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15454,7 +15631,7 @@ func (_self_ *Style) HasContext() (_go__return__ bool) {
 func StyleContextNew() (_go__return__ StyleContext) {
 	var _return_ *C.GtkStyleContext
 	_return_ = C.gtk_style_context_new()
-	_go__return__ = StyleContext{unsafe.Pointer(_return_)}
+	_go__return__ = ToStyleContext(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15550,7 +15727,7 @@ func (_self_ *StyleContext) GetPadding(state C.GtkStateFlags) (padding *Border) 
 func (_self_ *StyleContext) GetParent() (_go__return__ StyleContext) {
 	var _return_ *C.GtkStyleContext
 	_return_ = C.gtk_style_context_get_parent((*C.GtkStyleContext)(_self_._value_))
-	_go__return__ = StyleContext{unsafe.Pointer(_return_)}
+	_go__return__ = ToStyleContext(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15723,7 +15900,7 @@ func (_self_ *StyleContext) SetState(flags C.GtkStateFlags) () {
 func StylePropertiesNew() (_go__return__ StyleProperties) {
 	var _return_ *C.GtkStyleProperties
 	_return_ = C.gtk_style_properties_new()
-	_go__return__ = StyleProperties{unsafe.Pointer(_return_)}
+	_go__return__ = ToStyleProperties(unsafe.Pointer(_return_))
 	return
 }
 
@@ -15803,7 +15980,7 @@ func (_self_ *StyleProperties) UnsetProperty(property string, state C.GtkStateFl
 func SwitchNew() (_go__return__ Switch) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_switch_new()
-	_go__return__ = Switch{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToSwitch(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16024,7 +16201,7 @@ func TextBufferNew(table TextTagTableKind) (_go__return__ TextBuffer) {
 	_cgo_table_ := (*C.GtkTextTagTable)(table._getValue())
 	var _return_ *C.GtkTextBuffer
 	_return_ = C.gtk_text_buffer_new(_cgo_table_)
-	_go__return__ = TextBuffer{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextBuffer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16086,7 +16263,7 @@ func (_self_ *TextBuffer) CreateChildAnchor(iter *TextIter) (_go__return__ TextC
 	_cgo_iter_ := (*C.GtkTextIter)(unsafe.Pointer(iter))
 	var _return_ *C.GtkTextChildAnchor
 	_return_ = C.gtk_text_buffer_create_child_anchor((*C.GtkTextBuffer)(_self_._value_), _cgo_iter_)
-	_go__return__ = TextChildAnchor{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextChildAnchor(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16099,7 +16276,7 @@ func (_self_ *TextBuffer) CreateMark(mark_name string, where *TextIter, left_gra
 	_cgo_left_gravity_ := C.glibfalse()
 	if left_gravity { _cgo_left_gravity_ = C.glibtrue() }
 	_return_ = C._gtk_text_buffer_create_mark((*C.GtkTextBuffer)(_self_._value_), _cgo_mark_name_, _cgo_where_, _cgo_left_gravity_)
-	_go__return__ = TextMark{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextMark(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16220,7 +16397,7 @@ func (_self_ *TextBuffer) GetHasSelection() (_go__return__ bool) {
 func (_self_ *TextBuffer) GetInsert() (_go__return__ TextMark) {
 	var _return_ *C.GtkTextMark
 	_return_ = C.gtk_text_buffer_get_insert((*C.GtkTextBuffer)(_self_._value_))
-	_go__return__ = TextMark{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextMark(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16287,7 +16464,7 @@ func (_self_ *TextBuffer) GetMark(name string) (_go__return__ TextMark) {
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._gtk_text_buffer_get_mark((*C.GtkTextBuffer)(_self_._value_), _cgo_name_)
-	_go__return__ = TextMark{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextMark(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16308,7 +16485,7 @@ func (_self_ *TextBuffer) GetPasteTargetList() (_go__return__ *TargetList) {
 func (_self_ *TextBuffer) GetSelectionBound() (_go__return__ TextMark) {
 	var _return_ *C.GtkTextMark
 	_return_ = C.gtk_text_buffer_get_selection_bound((*C.GtkTextBuffer)(_self_._value_))
-	_go__return__ = TextMark{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextMark(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16351,7 +16528,7 @@ func (_self_ *TextBuffer) GetStartIter() (iter *TextIter) {
 func (_self_ *TextBuffer) GetTagTable() (_go__return__ TextTagTable) {
 	var _return_ *C.GtkTextTagTable
 	_return_ = C.gtk_text_buffer_get_tag_table((*C.GtkTextBuffer)(_self_._value_))
-	_go__return__ = TextTagTable{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextTagTable(unsafe.Pointer(_return_))
 	return
 }
 
@@ -16585,7 +16762,7 @@ func (_self_ *TextBuffer) UnregisterSerializeFormat(format C.GdkAtom) () {
 func TextChildAnchorNew() (_go__return__ TextChildAnchor) {
 	var _return_ *C.GtkTextChildAnchor
 	_return_ = C.gtk_text_child_anchor_new()
-	_go__return__ = TextChildAnchor{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextChildAnchor(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17016,7 +17193,7 @@ func (_self_ *TextIter) GetAttributes() (_go__return__ bool, values *TextAttribu
 func (_self_ *TextIter) GetBuffer() (_go__return__ TextBuffer) {
 	var _return_ *C.GtkTextBuffer
 	_return_ = C._gtk_text_iter_get_buffer((*C.GtkTextIter)(_self_))
-	_go__return__ = TextBuffer{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextBuffer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17042,7 +17219,7 @@ func (_self_ *TextIter) GetCharsInLine() (_go__return__ int) {
 func (_self_ *TextIter) GetChildAnchor() (_go__return__ TextChildAnchor) {
 	var _return_ *C.GtkTextChildAnchor
 	_return_ = C._gtk_text_iter_get_child_anchor((*C.GtkTextIter)(_self_))
-	_go__return__ = TextChildAnchor{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextChildAnchor(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17278,14 +17455,14 @@ func TextMarkNew(name string, left_gravity bool) (_go__return__ TextMark) {
 	_cgo_left_gravity_ := C.glibfalse()
 	if left_gravity { _cgo_left_gravity_ = C.glibtrue() }
 	_return_ = C._gtk_text_mark_new(_cgo_name_, _cgo_left_gravity_)
-	_go__return__ = TextMark{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextMark(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *TextMark) GetBuffer() (_go__return__ TextBuffer) {
 	var _return_ *C.GtkTextBuffer
 	_return_ = C.gtk_text_mark_get_buffer((*C.GtkTextMark)(_self_._value_))
-	_go__return__ = TextBuffer{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextBuffer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17330,7 +17507,7 @@ func TextTagNew(name string) (_go__return__ TextTag) {
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._gtk_text_tag_new(_cgo_name_)
-	_go__return__ = TextTag{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextTag(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17358,7 +17535,7 @@ func (_self_ *TextTag) SetPriority(priority int) () {
 func TextTagTableNew() (_go__return__ TextTagTable) {
 	var _return_ *C.GtkTextTagTable
 	_return_ = C.gtk_text_tag_table_new()
-	_go__return__ = TextTagTable{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextTagTable(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17386,7 +17563,7 @@ func (_self_ *TextTagTable) Lookup(name string) (_go__return__ TextTag) {
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._gtk_text_tag_table_lookup((*C.GtkTextTagTable)(_self_._value_), _cgo_name_)
-	_go__return__ = TextTag{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextTag(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17399,7 +17576,7 @@ func (_self_ *TextTagTable) Remove(tag TextTagKind) () {
 func TextViewNew() (_go__return__ TextView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_text_view_new()
-	_go__return__ = TextView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToTextView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17407,7 +17584,7 @@ func TextViewNewWithBuffer(buffer TextBufferKind) (_go__return__ TextView) {
 	_cgo_buffer_ := (*C.GtkTextBuffer)(buffer._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_text_view_new_with_buffer(_cgo_buffer_)
-	_go__return__ = TextView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToTextView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17486,7 +17663,7 @@ func (_self_ *TextView) GetBorderWindowSize(type_ C.GtkTextWindowType) (_go__ret
 func (_self_ *TextView) GetBuffer() (_go__return__ TextBuffer) {
 	var _return_ *C.GtkTextBuffer
 	_return_ = C.gtk_text_view_get_buffer((*C.GtkTextView)(_self_._value_))
-	_go__return__ = TextBuffer{unsafe.Pointer(_return_)}
+	_go__return__ = ToTextBuffer(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17852,7 +18029,7 @@ func ThemingEngineLoad(name string) (_go__return__ ThemingEngine) {
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._gtk_theming_engine_load(_cgo_name_)
-	_go__return__ = ThemingEngine{unsafe.Pointer(_return_)}
+	_go__return__ = ToThemingEngine(unsafe.Pointer(_return_))
 	return
 }
 
@@ -17993,7 +18170,7 @@ func ToggleActionNew(name string, label string, tooltip string, stock_id string)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_toggle_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
-	_go__return__ = ToggleAction{Action{unsafe.Pointer(_return_)}}
+	_go__return__ = ToToggleAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18033,7 +18210,7 @@ func (_self_ *ToggleAction) Toggled() () {
 func ToggleButtonNew() (_go__return__ ToggleButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_toggle_button_new()
-	_go__return__ = ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToToggleButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18043,7 +18220,7 @@ func ToggleButtonNewWithLabel(label string) (_go__return__ ToggleButton) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_toggle_button_new_with_label(_cgo_label_)
-	_go__return__ = ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToToggleButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18053,7 +18230,7 @@ func ToggleButtonNewWithMnemonic(label string) (_go__return__ ToggleButton) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_toggle_button_new_with_mnemonic(_cgo_label_)
-	_go__return__ = ToggleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToToggleButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18107,7 +18284,7 @@ func (_self_ *ToggleButton) Toggled() () {
 func ToggleToolButtonNew() (_go__return__ ToggleToolButton) {
 	var _return_ *C.GtkToolItem
 	_return_ = C.gtk_toggle_tool_button_new()
-	_go__return__ = ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToToggleToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18117,7 +18294,7 @@ func ToggleToolButtonNewFromStock(stock_id string) (_go__return__ ToggleToolButt
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_toggle_tool_button_new_from_stock(_cgo_stock_id_)
-	_go__return__ = ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToToggleToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18142,7 +18319,7 @@ func ToolButtonNew(icon_widget WidgetKind, label string) (_go__return__ ToolButt
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_tool_button_new(_cgo_icon_widget_, _cgo_label_)
-	_go__return__ = ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18152,7 +18329,7 @@ func ToolButtonNewFromStock(stock_id string) (_go__return__ ToolButton) {
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_tool_button_new_from_stock(_cgo_stock_id_)
-	_go__return__ = ToolButton{ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}
+	_go__return__ = ToToolButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18166,7 +18343,7 @@ func (_self_ *ToolButton) GetIconName() (_go__return__ string) {
 func (_self_ *ToolButton) GetIconWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tool_button_get_icon_widget((*C.GtkToolButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18180,7 +18357,7 @@ func (_self_ *ToolButton) GetLabel() (_go__return__ string) {
 func (_self_ *ToolButton) GetLabelWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tool_button_get_label_widget((*C.GtkToolButton)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18244,7 +18421,7 @@ func (_self_ *ToolButton) SetUseUnderline(use_underline bool) () {
 func ToolItemNew() (_go__return__ ToolItem) {
 	var _return_ *C.GtkToolItem
 	_return_ = C.gtk_tool_item_new()
-	_go__return__ = ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToToolItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18290,7 +18467,7 @@ func (_self_ *ToolItem) GetProxyMenuItem(menu_item_id string) (_go__return__ Wid
 	_cgo_menu_item_id_ := (*C.gchar)(unsafe.Pointer(_cstring_menu_item_id_))
 	defer C.free(unsafe.Pointer(_cstring_menu_item_id_))
 	_return_ = C._gtk_tool_item_get_proxy_menu_item((*C.GtkToolItem)(_self_._value_), _cgo_menu_item_id_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18314,7 +18491,7 @@ func (_self_ *ToolItem) GetTextOrientation() (_return_ C.GtkOrientation) {
 func (_self_ *ToolItem) GetTextSizeGroup() (_go__return__ SizeGroup) {
 	var _return_ *C.GtkSizeGroup
 	_return_ = C.gtk_tool_item_get_text_size_group((*C.GtkToolItem)(_self_._value_))
-	_go__return__ = SizeGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToSizeGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18352,7 +18529,7 @@ func (_self_ *ToolItem) RebuildMenu() () {
 func (_self_ *ToolItem) RetrieveProxyMenuItem() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tool_item_retrieve_proxy_menu_item((*C.GtkToolItem)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18434,7 +18611,7 @@ func ToolItemGroupNew(label string) (_go__return__ ToolItemGroup) {
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
 	_return_ = C._gtk_tool_item_group_new(_cgo_label_)
-	_go__return__ = ToolItemGroup{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToToolItemGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18450,7 +18627,7 @@ func (_self_ *ToolItemGroup) GetDropItem(x int, y int) (_go__return__ ToolItem) 
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_return_ = C.gtk_tool_item_group_get_drop_item((*C.GtkToolItemGroup)(_self_._value_), _cgo_x_, _cgo_y_)
-	_go__return__ = ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToToolItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18482,7 +18659,7 @@ func (_self_ *ToolItemGroup) GetLabel() (_go__return__ string) {
 func (_self_ *ToolItemGroup) GetLabelWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tool_item_group_get_label_widget((*C.GtkToolItemGroup)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18497,7 +18674,7 @@ func (_self_ *ToolItemGroup) GetNthItem(index uint) (_go__return__ ToolItem) {
 	var _return_ *C.GtkToolItem
 	_cgo_index_ := (C.guint)(index)
 	_return_ = C.gtk_tool_item_group_get_nth_item((*C.GtkToolItemGroup)(_self_._value_), _cgo_index_)
-	_go__return__ = ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToToolItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18549,7 +18726,7 @@ func (_self_ *ToolItemGroup) SetLabelWidget(label_widget WidgetKind) () {
 func ToolPaletteNew() (_go__return__ ToolPalette) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tool_palette_new()
-	_go__return__ = ToolPalette{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToToolPalette(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18577,7 +18754,7 @@ func (_self_ *ToolPalette) GetDragItem(selection *SelectionData) (_go__return__ 
 	_cgo_selection_ := (*C.GtkSelectionData)(unsafe.Pointer(selection))
 	var _return_ *C.GtkWidget
 	_return_ = C._gtk_tool_palette_get_drag_item((*C.GtkToolPalette)(_self_._value_), _cgo_selection_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18586,7 +18763,7 @@ func (_self_ *ToolPalette) GetDropGroup(x int, y int) (_go__return__ ToolItemGro
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_return_ = C.gtk_tool_palette_get_drop_group((*C.GtkToolPalette)(_self_._value_), _cgo_x_, _cgo_y_)
-	_go__return__ = ToolItemGroup{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToToolItemGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18595,7 +18772,7 @@ func (_self_ *ToolPalette) GetDropItem(x int, y int) (_go__return__ ToolItem) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_return_ = C.gtk_tool_palette_get_drop_item((*C.GtkToolPalette)(_self_._value_), _cgo_x_, _cgo_y_)
-	_go__return__ = ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToToolItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18684,7 +18861,7 @@ func (_self_ *ToolPalette) UnsetStyle() () {
 func ToolbarNew() (_go__return__ Toolbar) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_toolbar_new()
-	_go__return__ = Toolbar{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToToolbar(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18721,7 +18898,7 @@ func (_self_ *Toolbar) GetNthItem(n int) (_go__return__ ToolItem) {
 	var _return_ *C.GtkToolItem
 	_cgo_n_ := (C.gint)(n)
 	_return_ = C.gtk_toolbar_get_nth_item((*C.GtkToolbar)(_self_._value_), _cgo_n_)
-	_go__return__ = ToolItem{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToToolItem(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19192,7 +19369,7 @@ func (_self_ *TreeSelection) GetSelectedRows() (_return_ *C.GList, model unsafe.
 func (_self_ *TreeSelection) GetTreeView() (_go__return__ TreeView) {
 	var _return_ *C.GtkTreeView
 	_return_ = C.gtk_tree_selection_get_tree_view((*C.GtkTreeSelection)(_self_._value_))
-	_go__return__ = TreeView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToTreeView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19392,14 +19569,14 @@ func (_self_ *TreeStore) Swap(a *TreeIter, b *TreeIter) () {
 func TreeViewNew() (_go__return__ TreeView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tree_view_new()
-	_go__return__ = TreeView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToTreeView(unsafe.Pointer(_return_))
 	return
 }
 
 func TreeViewNewWithModel(model *C.GtkTreeModel) (_go__return__ TreeView) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tree_view_new_with_model(model)
-	_go__return__ = TreeView{Container{Widget{unsafe.Pointer(_return_)}}}
+	_go__return__ = ToTreeView(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19545,7 +19722,7 @@ func (_self_ *TreeView) GetColumn(n int) (_go__return__ TreeViewColumn) {
 	var _return_ *C.GtkTreeViewColumn
 	_cgo_n_ := (C.gint)(n)
 	_return_ = C.gtk_tree_view_get_column((*C.GtkTreeView)(_self_._value_), _cgo_n_)
-	_go__return__ = TreeViewColumn{unsafe.Pointer(_return_)}
+	_go__return__ = ToTreeViewColumn(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19598,7 +19775,7 @@ func (_self_ *TreeView) GetEnableTreeLines() (_go__return__ bool) {
 func (_self_ *TreeView) GetExpanderColumn() (_go__return__ TreeViewColumn) {
 	var _return_ *C.GtkTreeViewColumn
 	_return_ = C.gtk_tree_view_get_expander_column((*C.GtkTreeView)(_self_._value_))
-	_go__return__ = TreeViewColumn{unsafe.Pointer(_return_)}
+	_go__return__ = ToTreeViewColumn(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19714,7 +19891,7 @@ func (_self_ *TreeView) GetSearchColumn() (_go__return__ int) {
 func (_self_ *TreeView) GetSearchEntry() (_go__return__ Entry) {
 	var _return_ *C.GtkEntry
 	_return_ = C.gtk_tree_view_get_search_entry((*C.GtkTreeView)(_self_._value_))
-	_go__return__ = Entry{Widget{unsafe.Pointer(_return_)}}
+	_go__return__ = ToEntry(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19731,7 +19908,7 @@ func (_self_ *TreeView) GetSearchPositionFunc() (_return_ C.GtkTreeViewSearchPos
 func (_self_ *TreeView) GetSelection() (_go__return__ TreeSelection) {
 	var _return_ *C.GtkTreeSelection
 	_return_ = C.gtk_tree_view_get_selection((*C.GtkTreeView)(_self_._value_))
-	_go__return__ = TreeSelection{unsafe.Pointer(_return_)}
+	_go__return__ = ToTreeSelection(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20054,7 +20231,7 @@ func (_self_ *TreeView) UnsetRowsDragSource() () {
 func TreeViewColumnNew() (_go__return__ TreeViewColumn) {
 	var _return_ *C.GtkTreeViewColumn
 	_return_ = C.gtk_tree_view_column_new()
-	_go__return__ = TreeViewColumn{unsafe.Pointer(_return_)}
+	_go__return__ = ToTreeViewColumn(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20062,7 +20239,7 @@ func TreeViewColumnNewWithArea(area CellAreaKind) (_go__return__ TreeViewColumn)
 	_cgo_area_ := (*C.GtkCellArea)(area._getValue())
 	var _return_ *C.GtkTreeViewColumn
 	_return_ = C.gtk_tree_view_column_new_with_area(_cgo_area_)
-	_go__return__ = TreeViewColumn{unsafe.Pointer(_return_)}
+	_go__return__ = ToTreeViewColumn(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20150,7 +20327,7 @@ func (_self_ *TreeViewColumn) GetAlignment() (_go__return__ float64) {
 func (_self_ *TreeViewColumn) GetButton() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tree_view_column_get_button((*C.GtkTreeViewColumn)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20244,7 +20421,7 @@ func (_self_ *TreeViewColumn) GetTitle() (_go__return__ string) {
 func (_self_ *TreeViewColumn) GetTreeView() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tree_view_column_get_tree_view((*C.GtkTreeViewColumn)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20258,7 +20435,7 @@ func (_self_ *TreeViewColumn) GetVisible() (_go__return__ bool) {
 func (_self_ *TreeViewColumn) GetWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_tree_view_column_get_widget((*C.GtkTreeViewColumn)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20408,7 +20585,7 @@ func (_self_ *TreeViewColumn) SetWidget(widget WidgetKind) () {
 func UIManagerNew() (_go__return__ UIManager) {
 	var _return_ *C.GtkUIManager
 	_return_ = C.gtk_ui_manager_new()
-	_go__return__ = UIManager{unsafe.Pointer(_return_)}
+	_go__return__ = ToUIManager(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20468,7 +20645,7 @@ func (_self_ *UIManager) EnsureUpdate() () {
 func (_self_ *UIManager) GetAccelGroup() (_go__return__ AccelGroup) {
 	var _return_ *C.GtkAccelGroup
 	_return_ = C.gtk_ui_manager_get_accel_group((*C.GtkUIManager)(_self_._value_))
-	_go__return__ = AccelGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToAccelGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20478,7 +20655,7 @@ func (_self_ *UIManager) GetAction(path string) (_go__return__ Action) {
 	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	_return_ = C._gtk_ui_manager_get_action((*C.GtkUIManager)(_self_._value_), _cgo_path_)
-	_go__return__ = Action{unsafe.Pointer(_return_)}
+	_go__return__ = ToAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20505,7 +20682,7 @@ func (_self_ *UIManager) GetWidget(path string) (_go__return__ Widget) {
 	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	_return_ = C._gtk_ui_manager_get_widget((*C.GtkUIManager)(_self_._value_), _cgo_path_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20540,7 +20717,7 @@ func ViewportNew(hadjustment AdjustmentKind, vadjustment AdjustmentKind) (_go__r
 	_cgo_vadjustment_ := (*C.GtkAdjustment)(vadjustment._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_viewport_new(_cgo_hadjustment_, _cgo_vadjustment_)
-	_go__return__ = Viewport{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToViewport(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20567,7 +20744,7 @@ func (_self_ *Viewport) SetShadowType(type_ C.GtkShadowType) () {
 func VolumeButtonNew() (_go__return__ VolumeButton) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_volume_button_new()
-	_go__return__ = VolumeButton{ScaleButton{Button{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}}}
+	_go__return__ = ToVolumeButton(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20878,7 +21055,7 @@ func (_self_ *Widget) GetAllocation() (allocation *C.GtkAllocation) {
 func (_self_ *Widget) GetAncestor(widget_type C.GType) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_widget_get_ancestor((*C.GtkWidget)(_self_._value_), widget_type)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20913,7 +21090,7 @@ func (_self_ *Widget) GetChildVisible() (_go__return__ bool) {
 func (_self_ *Widget) GetClipboard(selection C.GdkAtom) (_go__return__ Clipboard) {
 	var _return_ *C.GtkClipboard
 	_return_ = C.gtk_widget_get_clipboard((*C.GtkWidget)(_self_._value_), selection)
-	_go__return__ = Clipboard{unsafe.Pointer(_return_)}
+	_go__return__ = ToClipboard(unsafe.Pointer(_return_))
 	return
 }
 
@@ -21055,7 +21232,7 @@ func (_self_ *Widget) GetPangoContext() (_return_ *C.PangoContext) {
 func (_self_ *Widget) GetParent() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_widget_get_parent((*C.GtkWidget)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -21157,7 +21334,7 @@ func (_self_ *Widget) GetSensitive() (_go__return__ bool) {
 func (_self_ *Widget) GetSettings() (_go__return__ Settings) {
 	var _return_ *C.GtkSettings
 	_return_ = C.gtk_widget_get_settings((*C.GtkWidget)(_self_._value_))
-	_go__return__ = Settings{unsafe.Pointer(_return_)}
+	_go__return__ = ToSettings(unsafe.Pointer(_return_))
 	return
 }
 
@@ -21178,7 +21355,7 @@ func (_self_ *Widget) GetStateFlags() (_return_ C.GtkStateFlags) {
 func (_self_ *Widget) GetStyleContext() (_go__return__ StyleContext) {
 	var _return_ *C.GtkStyleContext
 	_return_ = C.gtk_widget_get_style_context((*C.GtkWidget)(_self_._value_))
-	_go__return__ = StyleContext{unsafe.Pointer(_return_)}
+	_go__return__ = ToStyleContext(unsafe.Pointer(_return_))
 	return
 }
 
@@ -21206,14 +21383,14 @@ func (_self_ *Widget) GetTooltipText() (_go__return__ string) {
 func (_self_ *Widget) GetTooltipWindow() (_go__return__ Window) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_widget_get_tooltip_window((*C.GtkWidget)(_self_._value_))
-	_go__return__ = Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToWindow(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Widget) GetToplevel() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_widget_get_toplevel((*C.GtkWidget)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22188,7 +22365,7 @@ func (_self_ *WidgetPath) Unref() () {
 func WindowNew(type_ C.GtkWindowType) (_go__return__ Window) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_new(type_)
-	_go__return__ = Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22316,14 +22493,14 @@ func (_self_ *Window) GetAcceptFocus() (_go__return__ bool) {
 func (_self_ *Window) GetApplication() (_go__return__ Application) {
 	var _return_ *C.GtkApplication
 	_return_ = C.gtk_window_get_application((*C.GtkWindow)(_self_._value_))
-	_go__return__ = Application{unsafe.Pointer(_return_)}
+	_go__return__ = ToApplication(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *Window) GetAttachedTo() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_get_attached_to((*C.GtkWindow)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22346,7 +22523,7 @@ func (_self_ *Window) GetDefaultSize() (_go_width_ int, _go_height_ int) {
 func (_self_ *Window) GetDefaultWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_get_default_widget((*C.GtkWindow)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22367,7 +22544,7 @@ func (_self_ *Window) GetDestroyWithParent() (_go__return__ bool) {
 func (_self_ *Window) GetFocus() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_get_focus((*C.GtkWindow)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22393,7 +22570,7 @@ func (_self_ *Window) GetGravity() (_return_ C.GdkGravity) {
 func (_self_ *Window) GetGroup() (_go__return__ WindowGroup) {
 	var _return_ *C.GtkWindowGroup
 	_return_ = C.gtk_window_get_group((*C.GtkWindow)(_self_._value_))
-	_go__return__ = WindowGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToWindowGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22522,7 +22699,7 @@ func (_self_ *Window) GetTitle() (_go__return__ string) {
 func (_self_ *Window) GetTransientFor() (_go__return__ Window) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_window_get_transient_for((*C.GtkWindow)(_self_._value_))
-	_go__return__ = Window{Bin{Container{Widget{unsafe.Pointer(_return_)}}}}
+	_go__return__ = ToWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22942,7 +23119,7 @@ func (_self_ *Window) Unstick() () {
 func WindowGroupNew() (_go__return__ WindowGroup) {
 	var _return_ *C.GtkWindowGroup
 	_return_ = C.gtk_window_group_new()
-	_go__return__ = WindowGroup{unsafe.Pointer(_return_)}
+	_go__return__ = ToWindowGroup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -22955,14 +23132,14 @@ func (_self_ *WindowGroup) AddWindow(window WindowKind) () {
 func (_self_ *WindowGroup) GetCurrentDeviceGrab(device *C.GdkDevice) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_group_get_current_device_grab((*C.GtkWindowGroup)(_self_._value_), device)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
 func (_self_ *WindowGroup) GetCurrentGrab() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_group_get_current_grab((*C.GtkWindowGroup)(_self_._value_))
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23159,7 +23336,7 @@ func DragFinish(context *C.GdkDragContext, success bool, del bool, time_ uint32)
 func DragGetSourceWidget(context *C.GdkDragContext) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_drag_get_source_widget(context)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23280,7 +23457,7 @@ func GetDefaultLanguage() (_return_ *C.PangoLanguage) {
 func GetEventWidget(event *C.GdkEvent) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_get_event_widget(event)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23322,7 +23499,7 @@ func GetOptionGroup(open_default_display bool) (_return_ *C.GOptionGroup) {
 func GrabGetCurrent() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_grab_get_current()
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23436,7 +23613,7 @@ func PrintRunPageSetupDialog(parent WindowKind, page_setup PageSetupKind, settin
 	_cgo_settings_ := (*C.GtkPrintSettings)(settings._getValue())
 	var _return_ *C.GtkPageSetup
 	_return_ = C.gtk_print_run_page_setup_dialog(_cgo_parent_, _cgo_page_setup_, _cgo_settings_)
-	_go__return__ = PageSetup{unsafe.Pointer(_return_)}
+	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23781,7 +23958,7 @@ func TestCreateSimpleWindow(window_title string, dialog_text string) (_go__retur
 	_cgo_dialog_text_ := (*C.gchar)(unsafe.Pointer(_cstring_dialog_text_))
 	defer C.free(unsafe.Pointer(_cstring_dialog_text_))
 	_return_ = C._gtk_test_create_simple_window(_cgo_window_title_, _cgo_dialog_text_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23792,7 +23969,7 @@ func TestFindLabel(widget WidgetKind, label_pattern string) (_go__return__ Widge
 	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
 	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
 	_return_ = C._gtk_test_find_label(_cgo_widget_, _cgo_label_pattern_)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23800,7 +23977,7 @@ func TestFindSibling(base_widget WidgetKind, widget_type C.GType) (_go__return__
 	_cgo_base_widget_ := (*C.GtkWidget)(base_widget._getValue())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_test_find_sibling(_cgo_base_widget_, widget_type)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
@@ -23811,7 +23988,7 @@ func TestFindWidget(widget WidgetKind, label_pattern string, widget_type C.GType
 	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
 	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
 	_return_ = C._gtk_test_find_widget(_cgo_widget_, _cgo_label_pattern_, widget_type)
-	_go__return__ = Widget{unsafe.Pointer(_return_)}
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
