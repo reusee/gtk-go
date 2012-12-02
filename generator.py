@@ -81,12 +81,17 @@ class Generator:
         print >>self.out, 'type %s struct { %s }' % (name, field)
       else:
         print >>self.out, 'type %s struct { _value_ unsafe.Pointer }' % name
+      family_tree = self.parser.get_family_tree(name)
       print >>self.out, '''\
 type {klass}Kind interface {{
   _Is{klass}()
   _getValue() unsafe.Pointer
 }}
 func (self {klass}) _Is{klass} () {{}}
-func (self {klass}) _getValue() unsafe.Pointer {{ return self._value_ }}\
+func (self {klass}) _getValue() unsafe.Pointer {{ return self._value_ }}
+func To{klass}(value unsafe.Pointer) {klass} {{ return {types}value{braces} }}\
 '''.format(
-    klass = name)
+    klass = name,
+    types = ''.join('%s{' % t for t in family_tree),
+    braces = '}' * len(family_tree),
+    )

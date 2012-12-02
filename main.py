@@ -100,13 +100,17 @@ class Parser:
     name = node.name
     c_type = node.ctype
     if c_type in self.skip_symbols: return
-    scope, parent = node.parent.resolved.split('.')
-    if scope.lower() != self.package_name:
+    if not node.parent:
       self.class_types[name] = 'unsafe.Pointer'
       self.class_parents[name] = True
     else:
-      self.class_types[name] = parent
-      self.class_parents[name] = parent
+      scope, parent = node.parent.resolved.split('.')
+      if scope.lower() != self.package_name:
+        self.class_types[name] = 'unsafe.Pointer'
+        self.class_parents[name] = True
+      else:
+        self.class_types[name] = parent
+        self.class_parents[name] = parent
     self._handleCompositeType(node)
 
   def handleAlias(self, alias):
@@ -124,6 +128,14 @@ class Parser:
 
   def handleUnion(self, union):
     pass #TODO
+
+  def get_family_tree(self, t):
+    ret = [t]
+    t = self.class_parents[t]
+    while t != True:
+      ret.append(t)
+      t = self.class_parents[t]
+    return ret
 
 def main():
   if len(sys.argv) < 2:

@@ -261,19 +261,8 @@ def map_record_and_class_returns(parser, generator, function, klass):
           ret.go_return_type = klass.name
         else:
           ret.go_return_type = gi_type
-        t = ret.go_return_type
-        ret_expr = '%s{' % t
-        n = 1
-        parent = parser.class_parents[t]
-        while parent != True:
-          t = parent
-          ret_expr += '%s{' % t
-          parent = parser.class_parents[t]
-          n += 1
-        ret_expr += 'unsafe.Pointer(_return_)'
-        ret_expr += '}' * n
-        generator.statements_after_cgo_call.append('_go_%s_ = %s' % (
-          ret.go_return_name, ret_expr))
+        generator.statements_after_cgo_call.append('_go_%s_ = To%s(unsafe.Pointer(_return_))' % (
+          ret.go_return_name, ret.go_return_type))
         ret.go_return_name = '_go_%s_' % ret.go_return_name
 
 numeric_mapping = {
