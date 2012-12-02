@@ -38,9 +38,9 @@ class Parser:
     self.enum_symbols = []
     self.const_symbols = []
 
-    self.record_types = set()
-    self.class_types = set()
-    self.types_to_map = set()
+    self.record_types = {}
+    self.class_types = {}
+    self.class_parents = {}
 
     self.exported_functions = set()
 
@@ -90,22 +90,24 @@ class Parser:
       self.handleFunction(method, node)
 
   def handleRecord(self, node):
-    # name
     name = node.name
     c_type = node.ctype
     if c_type in self.skip_symbols: return
-    self.types_to_map.add((name, c_type))
-    self.record_types.add(name)
+    self.record_types[name] = c_type
     self._handleCompositeType(node)
 
   def handleClass(self, node):
-    self._handleCompositeType(node)
-    #TODO construct go structs
     name = node.name
     c_type = node.ctype
     if c_type in self.skip_symbols: return
-    self.types_to_map.add((name, c_type))
-    self.class_types.add(name)
+    scope, parent = node.parent.resolved.split('.')
+    if scope.lower() != self.package_name:
+      self.class_types[name] = 'unsafe.Pointer'
+      self.class_parents[name] = True
+    else:
+      self.class_types[name] = parent
+      self.class_parents[name] = parent
+    self._handleCompositeType(node)
 
   def handleAlias(self, alias):
     pass

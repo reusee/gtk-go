@@ -73,6 +73,20 @@ class Generator:
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
   def generate_types(self):
-    for name, c_type in self.parser.types_to_map:
-      if c_type in self.parser.skip_symbols: continue
+    for name, c_type in self.parser.record_types.iteritems():
       print >>self.out, "type %s C.%s" % (name, c_type)
+
+    for name, field in self.parser.class_types.iteritems():
+      if field != 'unsafe.Pointer':
+        print >>self.out, 'type %s struct { %s }' % (name, field)
+      else:
+        print >>self.out, 'type %s struct { _value_ unsafe.Pointer }' % name
+      print >>self.out, '''\
+type {klass}Kind interface {{
+  _Is{klass}()
+  _getValue() unsafe.Pointer
+}}
+func (self {klass}) _Is{klass} () {{}}
+func (self {klass}) _getValue() unsafe.Pointer {{ return self._value_ }}\
+'''.format(
+    klass = name)

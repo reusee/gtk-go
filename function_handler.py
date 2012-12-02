@@ -160,11 +160,16 @@ def collect_go_func_info(parser, generator, function, klass):
     generator.go_returns.append(value)
     generator.cgo_arguments.append(value)
 
-  if function.is_method:
+  if function.is_method: # _self_ param
     value = generator.c_parameters[0]
-    value.cgo_argument = '(%s)(%s)' % (
-        convert_to_cgo_type(value.c_parameter_type),
-        generator.receiver.receiver_name)
+    if klass.name in parser.class_types:
+      value.cgo_argument = '(%s)(%s._value_)' % (
+          convert_to_cgo_type(value.c_parameter_type),
+          generator.receiver.receiver_name)
+    elif klass.name in parser.record_types:
+      value.cgo_argument = '(%s)(%s)' % (
+          convert_to_cgo_type(value.c_parameter_type),
+          generator.receiver.receiver_name)
     generator.cgo_arguments.insert(0, value)
 
   # cgo call
@@ -194,11 +199,18 @@ def map_record_and_class_parameters(parser, generator, function, klass):
     if param.gir_info.type.target_giname is None: continue
     gi_scope, gi_type = param.gir_info.type.target_giname.split('.')
     if gi_scope.lower() != parser.package_name: continue
-    if gi_type not in parser.record_types.union(parser.class_types): continue
+    if gi_type not in parser.record_types and gi_type not in parser.class_types: continue
 
-    generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(unsafe.Pointer(%s))' % (
-      param.go_parameter_name, param.go_parameter_type, param.go_parameter_name))
-    param.go_parameter_type = '*' + gi_type
+    if gi_type in parser.record_types:
+      generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(unsafe.Pointer(%s))' % (
+        param.go_parameter_name, param.go_parameter_type, param.go_parameter_name))
+      param.go_parameter_type = '*' + gi_type
+    elif gi_type in parser.class_types:
+      generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s._getValue())' % (
+        param.go_parameter_name,
+        convert_to_cgo_type(param.c_parameter_type),
+        param.go_parameter_name))
+      param.go_parameter_type = gi_type + 'Kind'
     param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
 
 def map_record_and_class_returns(parser, generator, function, klass):
@@ -207,9 +219,10 @@ def map_record_and_class_returns(parser, generator, function, klass):
     if ret.gir_info.type.target_giname is None: continue
     gi_scope, gi_type = ret.gir_info.type.target_giname.split('.')
     if gi_scope.lower() != parser.package_name: continue
-    if gi_type not in parser.record_types.union(parser.class_types): continue
+    if gi_type not in parser.record_types and gi_type not in parser.class_types: continue
 
     if isinstance(ret.gir_info, ast.Parameter) and ret.gir_info.caller_allocates:
+      assert(gi_type not in parser.class_types)
       generator.statements_before_cgo_call.append('var _allocated_%s_ %s' % (
         ret.go_return_name, ret.go_return_type[1:]))
       generator.statements_after_cgo_call.append('%s = (%s)(unsafe.Pointer(%s))' % (
@@ -221,6 +234,7 @@ def map_record_and_class_returns(parser, generator, function, klass):
 
     elif isinstance(ret.gir_info, ast.Parameter) and not ret.gir_info.caller_allocates:
       assert ret.go_return_type == 'unsafe.Pointer'
+      #assert(gi_type not in parser.class_types) #TODO
       generator.statements_before_cgo_call.append('var _allocated_%s_ %s' % (
         ret.go_return_name, convert_to_cgo_type(ret.gir_info.type.ctype[:-1])))
       generator.statements_after_cgo_call.append('%s = (%s)(unsafe.Pointer(%s))' % (
@@ -231,13 +245,36 @@ def map_record_and_class_returns(parser, generator, function, klass):
       ret.cgo_argument = 'unsafe.Pointer(&_allocated_%s_)' % ret.go_return_name
 
     elif isinstance(ret.gir_info, ast.Return):
-      mapped_ret_type = '*' + gi_type
-      generator.statements_before_cgo_call.append('var %s %s' % (
-        ret.go_return_name, ret.go_return_type))
-      generator.statements_after_cgo_call.append('_go_%s_ = (%s)(unsafe.Pointer(%s))' % (
-        ret.go_return_name, mapped_ret_type, ret.go_return_name))
-      ret.go_return_name = '_go_%s_' % ret.go_return_name
-      ret.go_return_type = mapped_ret_type
+      if gi_type in parser.record_types:
+        mapped_ret_type = '*' + gi_type
+        generator.statements_before_cgo_call.append('var %s %s' % (
+          ret.go_return_name, ret.go_return_type))
+        generator.statements_after_cgo_call.append('_go_%s_ = (%s)(unsafe.Pointer(%s))' % (
+          ret.go_return_name, mapped_ret_type, ret.go_return_name))
+        ret.go_return_name = '_go_%s_' % ret.go_return_name
+        ret.go_return_type = mapped_ret_type
+      elif gi_type in parser.class_types:
+        generator.statements_before_cgo_call.append('var %s %s' % (
+          ret.go_return_name,
+          convert_to_cgo_type(ret.c_return_type)))
+        if function.is_constructor:
+          ret.go_return_type = klass.name
+        else:
+          ret.go_return_type = gi_type
+        t = ret.go_return_type
+        ret_expr = '%s{' % t
+        n = 1
+        parent = parser.class_parents[t]
+        while parent != True:
+          t = parent
+          ret_expr += '%s{' % t
+          parent = parser.class_parents[t]
+          n += 1
+        ret_expr += 'unsafe.Pointer(_return_)'
+        ret_expr += '}' * n
+        generator.statements_after_cgo_call.append('_go_%s_ = %s' % (
+          ret.go_return_name, ret_expr))
+        ret.go_return_name = '_go_%s_' % ret.go_return_name
 
 numeric_mapping = {
   'C.gchar': 'int8',
