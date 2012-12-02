@@ -1,6 +1,7 @@
 import StringIO
 import platform
 import time
+import os
 
 class Generator:
   def __init__(self, parser):
@@ -16,6 +17,8 @@ class Generator:
     # pkg-config packages
     if 'gobject-2.0' not in self.parser.pkgconfig_packages:
       self.parser.pkgconfig_packages.append('gobject-2.0')
+    if 'gtk+-3.0' not in self.parser.pkgconfig_packages:
+      self.parser.pkgconfig_packages.append('gtk+-3.0')
     print >>self.out, "// #cgo pkg-config: %s" % ' '.join(self.parser.pkgconfig_packages)
     # basic includes
     print >>self.out, "// #include <string.h>"
@@ -51,7 +54,10 @@ class Generator:
     self.generate_enum_symbols()
     self.generate_const_symbols()
 
-  def write(self, f):
+    self.write()
+
+  def write(self):
+    f = os.path.join(self.parser.path, '%s.go' % self.parser.package_name)
     output_file = open(f, 'w')
     output_file.write(self.out.getvalue())
     output_file.close()

@@ -14,8 +14,10 @@ class Parser:
     parser = GIRParser(False)
     parser.parse(filename)
 
+    self.path = os.path.dirname(os.path.abspath(filename))
+
     self.skip_symbols = set()
-    skip_symbol_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'skip_symbols')
+    skip_symbol_file = os.path.join(self.path, 'skip_symbols')
     if os.path.exists(skip_symbol_file):
       self.skip_symbols = set([line.strip() 
         for line in open(skip_symbol_file, 'r').xreadlines()
@@ -24,7 +26,7 @@ class Parser:
       self.skip_symbols = set([l for l in self.skip_symbols if l])
 
     self.func_spec = {}
-    func_spec_file = os.path.join(os.path.dirname(os.path.abspath(filename)), 'func_spec.py')
+    func_spec_file = os.path.join(self.path, 'func_spec.py')
     func_spec_module = imp.load_source('func_spec', func_spec_file)
     self.func_spec = func_spec_module.func_specs
 
@@ -145,7 +147,6 @@ def main():
   parser.parse()
   generator = Generator(parser)
   generator.generate()
-  generator.write("%s/%s.go" % (parser.package_name, parser.package_name))
 
 if __name__ == '__main__':
   main()
