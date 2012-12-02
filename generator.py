@@ -45,7 +45,7 @@ class Generator:
     #print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
 
-    self.generate_record_types()
+    self.generate_types()
     for generator in self.parser.functions:
       print >>self.out, generator.generate_go_func()
     self.generate_enum_symbols()
@@ -72,8 +72,7 @@ class Generator:
           go_name = symbol[len(prefix) + 1:]
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
-  def generate_record_types(self):
-    for name, c_type in self.parser.gi_types:
-      if c_type in self.parser.skip_symbols:
-        continue
+  def generate_types(self):
+    for name, c_type in self.parser.types_to_map:
+      if c_type in self.parser.skip_symbols: continue
       print >>self.out, "type %s C.%s" % (name, c_type)

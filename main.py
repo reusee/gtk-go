@@ -38,9 +38,9 @@ class Parser:
     self.enum_symbols = []
     self.const_symbols = []
 
-    self.gi_types = set()
-    self.gi_value_types = set()
-    self.gi_reference_types = set()
+    self.record_types = set()
+    self.class_types = set()
+    self.types_to_map = set()
 
     self.exported_functions = set()
 
@@ -67,8 +67,6 @@ class Parser:
       self.exported_functions.add(generator.lib_func_name)
 
   def handleEnum(self, node):
-    self.gi_types.add((node.name, node.ctype))
-    self.gi_value_types.add(node.name)
     for mem in node.members:
       if mem.symbol in self.skip_symbols:
         continue
@@ -80,14 +78,7 @@ class Parser:
       return
     self.const_symbols.append(node.ctype)
 
-  def handleRecord(self, node):
-    # name
-    name = node.name
-    c_type = node.ctype
-    if c_type in self.skip_symbols:
-      return
-    self.gi_types.add((name, c_type))
-    self.gi_reference_types.add(name)
+  def _handleCompositeType(self, node):
     # constructors
     for constructor in node.constructors:
       self.handleFunction(constructor, node)
@@ -98,31 +89,38 @@ class Parser:
     for method in node.methods:
       self.handleFunction(method, node)
 
-  def handleAlias(self, alias):
-    self.gi_types.add((alias.name, alias.ctype))
-    self.gi_value_types.add(alias.name)
+  def handleRecord(self, node):
+    # name
+    name = node.name
+    c_type = node.ctype
+    if c_type in self.skip_symbols: return
+    self.types_to_map.add((name, c_type))
+    self.record_types.add(name)
+    self._handleCompositeType(node)
 
-  def handleClass(self, cls):
-    self.handleRecord(cls)
-    #TODO
+  def handleClass(self, node):
+    self._handleCompositeType(node)
+    #TODO construct go structs
+    name = node.name
+    c_type = node.ctype
+    if c_type in self.skip_symbols: return
+    self.types_to_map.add((name, c_type))
+    self.class_types.add(name)
+
+  def handleAlias(self, alias):
+    pass
 
   def handleBitfield(self, bitfield):
-    self.gi_types.add((bitfield.name, bitfield.ctype))
-    self.gi_value_types.add(bitfield.name)
     for member in bitfield.members:
       self.enum_symbols.append(member.symbol)
 
   def handleCallback(self, callback):
-    self.gi_types.add((callback.name, callback.ctype))
-    self.gi_value_types.add(callback.name)
     pass #TODO
 
   def handleInterface(self, interface):
     pass #TODO
 
   def handleUnion(self, union):
-    self.gi_types.add((union.name, union.ctype))
-    self.gi_value_types.add(union.name)
     pass #TODO
 
 def main():
