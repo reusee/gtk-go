@@ -1479,89 +1479,87 @@ gunichar2 * _g_utf8_to_utf16(gchar * str, glong len, glong * items_read, glong *
 void _g_warn_message(char * domain, char * file, int line, char * func, char * warnexpr) {
 	(void)g_warn_message((const char *)(domain), (const char *)(file), line, (const char *)(func), (const char *)(warnexpr));
 }
-gboolean glibtrue() { return TRUE; }
-gboolean glibfalse() { return FALSE; }
 */
 import "C"
 import (
 	"unsafe"
 )
 
-type ByteArray C.GByteArray
-type Regex C.GRegex
-type SList C.GSList
-type StringChunk C.GStringChunk
-type Variant C.GVariant
-type MarkupParser C.GMarkupParser
-type StatBuf C.GStatBuf
-type DateTime C.GDateTime
-type Source C.GSource
-type Tree C.GTree
-type TrashStack C.GTrashStack
-type SourceCallbackFuncs C.GSourceCallbackFuncs
-type TimeZone C.GTimeZone
-type MatchInfo C.GMatchInfo
-type HashTableIter C.GHashTableIter
-type MemVTable C.GMemVTable
-type Node C.GNode
-type TestSuite C.GTestSuite
-type DebugKey C.GDebugKey
-type String C.GString
-type MainContext C.GMainContext
-type SourcePrivate C.GSourcePrivate
-type ThreadPool C.GThreadPool
-type TestConfig C.GTestConfig
-type OptionContext C.GOptionContext
-type IOFuncs C.GIOFuncs
-type TimeVal C.GTimeVal
-type TestCase C.GTestCase
-type VariantBuilder C.GVariantBuilder
-type HookList C.GHookList
-type OptionEntry C.GOptionEntry
-type MainLoop C.GMainLoop
-type Date C.GDate
-type PatternSpec C.GPatternSpec
-type RecMutex C.GRecMutex
-type IOChannel C.GIOChannel
-type SourceFuncs C.GSourceFuncs
-type PtrArray C.GPtrArray
-type MappedFile C.GMappedFile
-type Thread C.GThread
-type VariantType C.GVariantType
-type Checksum C.GChecksum
-type List C.GList
-type Timer C.GTimer
-type Queue C.GQueue
-type AsyncQueue C.GAsyncQueue
-type HashTable C.GHashTable
-type Error C.GError
-type SequenceIter C.GSequenceIter
-type VariantIter C.GVariantIter
-type OptionGroup C.GOptionGroup
-type MarkupParseContext C.GMarkupParseContext
-type Hmac C.GHmac
-type Dir C.GDir
-type Once C.GOnce
-type Rand C.GRand
-type RWLock C.GRWLock
-type Scanner C.GScanner
-type Data C.GData
-type KeyFile C.GKeyFile
-type Sequence C.GSequence
-type ScannerConfig C.GScannerConfig
-type Private C.GPrivate
-type Bytes C.GBytes
-type Hook C.GHook
-type PollFD C.GPollFD
-type Cond C.GCond
-type Array C.GArray
-type BookmarkFile C.GBookmarkFile
+type GLibVariantIter C.GVariantIter
+type GLibSourceCallbackFuncs C.GSourceCallbackFuncs
+type GLibMatchInfo C.GMatchInfo
+type GLibKeyFile C.GKeyFile
+type GLibHookList C.GHookList
+type GLibOptionEntry C.GOptionEntry
+type GLibMainContext C.GMainContext
+type GLibCond C.GCond
+type GLibTimeVal C.GTimeVal
+type GLibSequenceIter C.GSequenceIter
+type GLibHashTableIter C.GHashTableIter
+type GLibTrashStack C.GTrashStack
+type GLibSourceFuncs C.GSourceFuncs
+type GLibThreadPool C.GThreadPool
+type GLibRegex C.GRegex
+type GLibArray C.GArray
+type GLibAsyncQueue C.GAsyncQueue
+type GLibList C.GList
+type GLibDir C.GDir
+type GLibRand C.GRand
+type GLibVariantType C.GVariantType
+type GLibPollFD C.GPollFD
+type GLibHmac C.GHmac
+type GLibIOFuncs C.GIOFuncs
+type GLibOnce C.GOnce
+type GLibNode C.GNode
+type GLibHook C.GHook
+type GLibPtrArray C.GPtrArray
+type GLibPatternSpec C.GPatternSpec
+type GLibSList C.GSList
+type GLibSource C.GSource
+type GLibChecksum C.GChecksum
+type GLibMemVTable C.GMemVTable
+type GLibScannerConfig C.GScannerConfig
+type GLibDateTime C.GDateTime
+type GLibTree C.GTree
+type GLibVariantBuilder C.GVariantBuilder
+type GLibVariant C.GVariant
+type GLibHashTable C.GHashTable
+type GLibMainLoop C.GMainLoop
+type GLibString C.GString
+type GLibIOChannel C.GIOChannel
+type GLibOptionContext C.GOptionContext
+type GLibTimer C.GTimer
+type GLibSequence C.GSequence
+type GLibQueue C.GQueue
+type GLibRWLock C.GRWLock
+type GLibOptionGroup C.GOptionGroup
+type GLibMarkupParser C.GMarkupParser
+type GLibTestCase C.GTestCase
+type GLibStringChunk C.GStringChunk
+type GLibMarkupParseContext C.GMarkupParseContext
+type GLibThread C.GThread
+type GLibBookmarkFile C.GBookmarkFile
+type GLibError C.GError
+type GLibByteArray C.GByteArray
+type GLibTestConfig C.GTestConfig
+type GLibScanner C.GScanner
+type GLibRecMutex C.GRecMutex
+type GLibDate C.GDate
+type GLibSourcePrivate C.GSourcePrivate
+type GLibData C.GData
+type GLibMappedFile C.GMappedFile
+type GLibPrivate C.GPrivate
+type GLibTestSuite C.GTestSuite
+type GLibTimeZone C.GTimeZone
+type GLibDebugKey C.GDebugKey
+type GLibBytes C.GBytes
+type GLibStatBuf C.GStatBuf
 func ArrayNew(zero_terminated bool, clear_ bool, element_size uint) (_return_ *C.GArray) {
 	_cgo_element_size_ := (C.guint)(element_size)
-	_cgo_zero_terminated_ := C.glibfalse()
-	if zero_terminated { _cgo_zero_terminated_ = C.glibtrue() }
-	_cgo_clear__ := C.glibfalse()
-	if clear_ { _cgo_clear__ = C.glibtrue() }
+	_cgo_zero_terminated_ := (C.gboolean)(C.FALSE)
+	if zero_terminated { _cgo_zero_terminated_ = (C.gboolean)(C.TRUE) }
+	_cgo_clear__ := (C.gboolean)(C.FALSE)
+	if clear_ { _cgo_clear__ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_array_new(_cgo_zero_terminated_, _cgo_clear__, _cgo_element_size_)
 	return
 }
@@ -1569,122 +1567,122 @@ func ArrayNew(zero_terminated bool, clear_ bool, element_size uint) (_return_ *C
 func ArraySizedNew(zero_terminated bool, clear_ bool, element_size uint, reserved_size uint) (_return_ *C.GArray) {
 	_cgo_element_size_ := (C.guint)(element_size)
 	_cgo_reserved_size_ := (C.guint)(reserved_size)
-	_cgo_zero_terminated_ := C.glibfalse()
-	if zero_terminated { _cgo_zero_terminated_ = C.glibtrue() }
-	_cgo_clear__ := C.glibfalse()
-	if clear_ { _cgo_clear__ = C.glibtrue() }
+	_cgo_zero_terminated_ := (C.gboolean)(C.FALSE)
+	if zero_terminated { _cgo_zero_terminated_ = (C.gboolean)(C.TRUE) }
+	_cgo_clear__ := (C.gboolean)(C.FALSE)
+	if clear_ { _cgo_clear__ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_array_sized_new(_cgo_zero_terminated_, _cgo_clear__, _cgo_element_size_, _cgo_reserved_size_)
 	return
 }
 
-func AsyncQueueNew() (_go__return__ *AsyncQueue) {
+func AsyncQueueNew() (_go__return__ *GLibAsyncQueue) {
 	var _return_ *C.GAsyncQueue
 	_return_ = C.g_async_queue_new()
-	_go__return__ = (*AsyncQueue)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibAsyncQueue)(unsafe.Pointer(_return_))
 	return
 }
 
-func AsyncQueueNewFull(item_free_func C.GDestroyNotify) (_go__return__ *AsyncQueue) {
+func AsyncQueueNewFull(item_free_func C.GDestroyNotify) (_go__return__ *GLibAsyncQueue) {
 	var _return_ *C.GAsyncQueue
 	_return_ = C.g_async_queue_new_full(item_free_func)
-	_go__return__ = (*AsyncQueue)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibAsyncQueue)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *AsyncQueue) Length() (_go__return__ int) {
+func (_self_ *GLibAsyncQueue) Length() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_async_queue_length((*C.GAsyncQueue)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *AsyncQueue) LengthUnlocked() (_go__return__ int) {
+func (_self_ *GLibAsyncQueue) LengthUnlocked() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_async_queue_length_unlocked((*C.GAsyncQueue)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *AsyncQueue) Lock() () {
+func (_self_ *GLibAsyncQueue) Lock() () {
 	C.g_async_queue_lock((*C.GAsyncQueue)(_self_))
 	return
 }
 
-func (_self_ *AsyncQueue) Pop() (_return_ C.gpointer) {
+func (_self_ *GLibAsyncQueue) Pop() (_return_ C.gpointer) {
 	_return_ = C.g_async_queue_pop((*C.GAsyncQueue)(_self_))
 	return
 }
 
-func (_self_ *AsyncQueue) PopUnlocked() (_return_ C.gpointer) {
+func (_self_ *GLibAsyncQueue) PopUnlocked() (_return_ C.gpointer) {
 	_return_ = C.g_async_queue_pop_unlocked((*C.GAsyncQueue)(_self_))
 	return
 }
 
-func (_self_ *AsyncQueue) Push(data C.gpointer) () {
+func (_self_ *GLibAsyncQueue) Push(data C.gpointer) () {
 	C.g_async_queue_push((*C.GAsyncQueue)(_self_), data)
 	return
 }
 
-func (_self_ *AsyncQueue) PushSorted(data C.gpointer, func_ C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibAsyncQueue) PushSorted(data C.gpointer, func_ C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_async_queue_push_sorted((*C.GAsyncQueue)(_self_), data, func_, user_data)
 	return
 }
 
-func (_self_ *AsyncQueue) PushSortedUnlocked(data C.gpointer, func_ C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibAsyncQueue) PushSortedUnlocked(data C.gpointer, func_ C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_async_queue_push_sorted_unlocked((*C.GAsyncQueue)(_self_), data, func_, user_data)
 	return
 }
 
-func (_self_ *AsyncQueue) PushUnlocked(data C.gpointer) () {
+func (_self_ *GLibAsyncQueue) PushUnlocked(data C.gpointer) () {
 	C.g_async_queue_push_unlocked((*C.GAsyncQueue)(_self_), data)
 	return
 }
 
-func (_self_ *AsyncQueue) Ref() (_go__return__ *AsyncQueue) {
+func (_self_ *GLibAsyncQueue) Ref() (_go__return__ *GLibAsyncQueue) {
 	var _return_ *C.GAsyncQueue
 	_return_ = C.g_async_queue_ref((*C.GAsyncQueue)(_self_))
-	_go__return__ = (*AsyncQueue)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibAsyncQueue)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *AsyncQueue) Sort(func_ C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibAsyncQueue) Sort(func_ C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_async_queue_sort((*C.GAsyncQueue)(_self_), func_, user_data)
 	return
 }
 
-func (_self_ *AsyncQueue) SortUnlocked(func_ C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibAsyncQueue) SortUnlocked(func_ C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_async_queue_sort_unlocked((*C.GAsyncQueue)(_self_), func_, user_data)
 	return
 }
 
-func (_self_ *AsyncQueue) TimeoutPop(timeout uint64) (_return_ C.gpointer) {
+func (_self_ *GLibAsyncQueue) TimeoutPop(timeout uint64) (_return_ C.gpointer) {
 	_cgo_timeout_ := (C.guint64)(timeout)
 	_return_ = C.g_async_queue_timeout_pop((*C.GAsyncQueue)(_self_), _cgo_timeout_)
 	return
 }
 
-func (_self_ *AsyncQueue) TimeoutPopUnlocked(timeout uint64) (_return_ C.gpointer) {
+func (_self_ *GLibAsyncQueue) TimeoutPopUnlocked(timeout uint64) (_return_ C.gpointer) {
 	_cgo_timeout_ := (C.guint64)(timeout)
 	_return_ = C.g_async_queue_timeout_pop_unlocked((*C.GAsyncQueue)(_self_), _cgo_timeout_)
 	return
 }
 
-func (_self_ *AsyncQueue) TryPop() (_return_ C.gpointer) {
+func (_self_ *GLibAsyncQueue) TryPop() (_return_ C.gpointer) {
 	_return_ = C.g_async_queue_try_pop((*C.GAsyncQueue)(_self_))
 	return
 }
 
-func (_self_ *AsyncQueue) TryPopUnlocked() (_return_ C.gpointer) {
+func (_self_ *GLibAsyncQueue) TryPopUnlocked() (_return_ C.gpointer) {
 	_return_ = C.g_async_queue_try_pop_unlocked((*C.GAsyncQueue)(_self_))
 	return
 }
 
-func (_self_ *AsyncQueue) Unlock() () {
+func (_self_ *GLibAsyncQueue) Unlock() () {
 	C.g_async_queue_unlock((*C.GAsyncQueue)(_self_))
 	return
 }
 
-func (_self_ *AsyncQueue) Unref() () {
+func (_self_ *GLibAsyncQueue) Unref() () {
 	C.g_async_queue_unref((*C.GAsyncQueue)(_self_))
 	return
 }
@@ -1694,14 +1692,14 @@ func BookmarkFileErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func BookmarkFileNew() (_go__return__ *BookmarkFile) {
+func BookmarkFileNew() (_go__return__ *GLibBookmarkFile) {
 	var _return_ *C.GBookmarkFile
 	_return_ = C.g_bookmark_file_new()
-	_go__return__ = (*BookmarkFile)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibBookmarkFile)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *BookmarkFile) AddApplication(uri string, name string, exec string) () {
+func (_self_ *GLibBookmarkFile) AddApplication(uri string, name string, exec string) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1715,7 +1713,7 @@ func (_self_ *BookmarkFile) AddApplication(uri string, name string, exec string)
 	return
 }
 
-func (_self_ *BookmarkFile) AddGroup(uri string, group string) () {
+func (_self_ *GLibBookmarkFile) AddGroup(uri string, group string) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1726,12 +1724,12 @@ func (_self_ *BookmarkFile) AddGroup(uri string, group string) () {
 	return
 }
 
-func (_self_ *BookmarkFile) Free() () {
+func (_self_ *GLibBookmarkFile) Free() () {
 	C.g_bookmark_file_free((*C.GBookmarkFile)(_self_))
 	return
 }
 
-func (_self_ *BookmarkFile) GetAdded(uri string) (_return_ C.time_t, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetAdded(uri string) (_return_ C.time_t, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1739,7 +1737,7 @@ func (_self_ *BookmarkFile) GetAdded(uri string) (_return_ C.time_t, _error_ uns
 	return
 }
 
-func (_self_ *BookmarkFile) GetAppInfo(uri string, name string, exec string, count *C.guint, stamp *C.time_t) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetAppInfo(uri string, name string, exec string, count *C.guint, stamp *C.time_t) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1751,11 +1749,11 @@ func (_self_ *BookmarkFile) GetAppInfo(uri string, name string, exec string, cou
 	defer C.free(unsafe.Pointer(_cstring_exec_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_get_app_info((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_name_, _cgo_exec_, count, stamp, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) GetApplications(uri string, length *C.gsize) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetApplications(uri string, length *C.gsize) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1763,7 +1761,7 @@ func (_self_ *BookmarkFile) GetApplications(uri string, length *C.gsize) (_retur
 	return
 }
 
-func (_self_ *BookmarkFile) GetDescription(uri string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetDescription(uri string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1773,7 +1771,7 @@ func (_self_ *BookmarkFile) GetDescription(uri string) (_go__return__ string, _e
 	return
 }
 
-func (_self_ *BookmarkFile) GetGroups(uri string, length *C.gsize) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetGroups(uri string, length *C.gsize) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1781,7 +1779,7 @@ func (_self_ *BookmarkFile) GetGroups(uri string, length *C.gsize) (_return_ uns
 	return
 }
 
-func (_self_ *BookmarkFile) GetIcon(uri string, href string, mime_type string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetIcon(uri string, href string, mime_type string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1793,21 +1791,21 @@ func (_self_ *BookmarkFile) GetIcon(uri string, href string, mime_type string) (
 	defer C.free(unsafe.Pointer(_cstring_mime_type_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_get_icon((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_href_, _cgo_mime_type_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) GetIsPrivate(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetIsPrivate(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_get_is_private((*C.GBookmarkFile)(_self_), _cgo_uri_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) GetMimeType(uri string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetMimeType(uri string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1817,7 +1815,7 @@ func (_self_ *BookmarkFile) GetMimeType(uri string) (_go__return__ string, _erro
 	return
 }
 
-func (_self_ *BookmarkFile) GetModified(uri string) (_return_ C.time_t, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetModified(uri string) (_return_ C.time_t, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1825,14 +1823,14 @@ func (_self_ *BookmarkFile) GetModified(uri string) (_return_ C.time_t, _error_ 
 	return
 }
 
-func (_self_ *BookmarkFile) GetSize() (_go__return__ int) {
+func (_self_ *GLibBookmarkFile) GetSize() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_bookmark_file_get_size((*C.GBookmarkFile)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *BookmarkFile) GetTitle(uri string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetTitle(uri string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1842,12 +1840,12 @@ func (_self_ *BookmarkFile) GetTitle(uri string) (_go__return__ string, _error_ 
 	return
 }
 
-func (_self_ *BookmarkFile) GetUris(length *C.gsize) (_return_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetUris(length *C.gsize) (_return_ unsafe.Pointer) {
 	_return_ = C._g_bookmark_file_get_uris((*C.GBookmarkFile)(_self_), length)
 	return
 }
 
-func (_self_ *BookmarkFile) GetVisited(uri string) (_return_ C.time_t, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) GetVisited(uri string) (_return_ C.time_t, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1855,7 +1853,7 @@ func (_self_ *BookmarkFile) GetVisited(uri string) (_return_ C.time_t, _error_ u
 	return
 }
 
-func (_self_ *BookmarkFile) HasApplication(uri string, name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) HasApplication(uri string, name string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1864,11 +1862,11 @@ func (_self_ *BookmarkFile) HasApplication(uri string, name string) (_go__return
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_has_application((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_name_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) HasGroup(uri string, group string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) HasGroup(uri string, group string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1877,32 +1875,32 @@ func (_self_ *BookmarkFile) HasGroup(uri string, group string) (_go__return__ bo
 	defer C.free(unsafe.Pointer(_cstring_group_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_has_group((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_group_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) HasItem(uri string) (_go__return__ bool) {
+func (_self_ *GLibBookmarkFile) HasItem(uri string) (_go__return__ bool) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_has_item((*C.GBookmarkFile)(_self_), _cgo_uri_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) LoadFromData(data string, length uint64) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) LoadFromData(data string, length uint64) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_length_ := (C.gsize)(length)
 	_cstring_data_ := C.CString(data)
 	_cgo_data_ := (*C.gchar)(unsafe.Pointer(_cstring_data_))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_load_from_data((*C.GBookmarkFile)(_self_), _cgo_data_, _cgo_length_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) LoadFromDataDirs(file string, full_path string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) LoadFromDataDirs(file string, full_path string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_file_ := C.CString(file)
 	_cgo_file_ := (*C.gchar)(unsafe.Pointer(_cstring_file_))
 	defer C.free(unsafe.Pointer(_cstring_file_))
@@ -1911,21 +1909,21 @@ func (_self_ *BookmarkFile) LoadFromDataDirs(file string, full_path string) (_go
 	defer C.free(unsafe.Pointer(_cstring_full_path_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_load_from_data_dirs((*C.GBookmarkFile)(_self_), _cgo_file_, _cgo_full_path_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) LoadFromFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) LoadFromFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_load_from_file((*C.GBookmarkFile)(_self_), _cgo_filename_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) MoveItem(old_uri string, new_uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) MoveItem(old_uri string, new_uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_old_uri_ := C.CString(old_uri)
 	_cgo_old_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_old_uri_))
 	defer C.free(unsafe.Pointer(_cstring_old_uri_))
@@ -1934,11 +1932,11 @@ func (_self_ *BookmarkFile) MoveItem(old_uri string, new_uri string) (_go__retur
 	defer C.free(unsafe.Pointer(_cstring_new_uri_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_move_item((*C.GBookmarkFile)(_self_), _cgo_old_uri_, _cgo_new_uri_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) RemoveApplication(uri string, name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) RemoveApplication(uri string, name string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1947,11 +1945,11 @@ func (_self_ *BookmarkFile) RemoveApplication(uri string, name string) (_go__ret
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_remove_application((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_name_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) RemoveGroup(uri string, group string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) RemoveGroup(uri string, group string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1960,21 +1958,21 @@ func (_self_ *BookmarkFile) RemoveGroup(uri string, group string) (_go__return__
 	defer C.free(unsafe.Pointer(_cstring_group_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_remove_group((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_group_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) RemoveItem(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) RemoveItem(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_remove_item((*C.GBookmarkFile)(_self_), _cgo_uri_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) SetAdded(uri string, added C.time_t) () {
+func (_self_ *GLibBookmarkFile) SetAdded(uri string, added C.time_t) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -1982,7 +1980,7 @@ func (_self_ *BookmarkFile) SetAdded(uri string, added C.time_t) () {
 	return
 }
 
-func (_self_ *BookmarkFile) SetAppInfo(uri string, name string, exec string, count int, stamp C.time_t) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) SetAppInfo(uri string, name string, exec string, count int, stamp C.time_t) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_count_ := (C.gint)(count)
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
@@ -1995,11 +1993,11 @@ func (_self_ *BookmarkFile) SetAppInfo(uri string, name string, exec string, cou
 	defer C.free(unsafe.Pointer(_cstring_exec_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_set_app_info((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_name_, _cgo_exec_, _cgo_count_, stamp, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *BookmarkFile) SetDescription(uri string, description string) () {
+func (_self_ *GLibBookmarkFile) SetDescription(uri string, description string) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2010,7 +2008,7 @@ func (_self_ *BookmarkFile) SetDescription(uri string, description string) () {
 	return
 }
 
-func (_self_ *BookmarkFile) SetGroups(uri string, groups string, length uint64) () {
+func (_self_ *GLibBookmarkFile) SetGroups(uri string, groups string, length uint64) () {
 	_cgo_length_ := (C.gsize)(length)
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
@@ -2022,7 +2020,7 @@ func (_self_ *BookmarkFile) SetGroups(uri string, groups string, length uint64) 
 	return
 }
 
-func (_self_ *BookmarkFile) SetIcon(uri string, href string, mime_type string) () {
+func (_self_ *GLibBookmarkFile) SetIcon(uri string, href string, mime_type string) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2036,17 +2034,17 @@ func (_self_ *BookmarkFile) SetIcon(uri string, href string, mime_type string) (
 	return
 }
 
-func (_self_ *BookmarkFile) SetIsPrivate(uri string, is_private bool) () {
+func (_self_ *GLibBookmarkFile) SetIsPrivate(uri string, is_private bool) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
-	_cgo_is_private_ := C.glibfalse()
-	if is_private { _cgo_is_private_ = C.glibtrue() }
+	_cgo_is_private_ := (C.gboolean)(C.FALSE)
+	if is_private { _cgo_is_private_ = (C.gboolean)(C.TRUE) }
 	C._g_bookmark_file_set_is_private((*C.GBookmarkFile)(_self_), _cgo_uri_, _cgo_is_private_)
 	return
 }
 
-func (_self_ *BookmarkFile) SetMimeType(uri string, mime_type string) () {
+func (_self_ *GLibBookmarkFile) SetMimeType(uri string, mime_type string) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2057,7 +2055,7 @@ func (_self_ *BookmarkFile) SetMimeType(uri string, mime_type string) () {
 	return
 }
 
-func (_self_ *BookmarkFile) SetModified(uri string, modified C.time_t) () {
+func (_self_ *GLibBookmarkFile) SetModified(uri string, modified C.time_t) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2065,7 +2063,7 @@ func (_self_ *BookmarkFile) SetModified(uri string, modified C.time_t) () {
 	return
 }
 
-func (_self_ *BookmarkFile) SetTitle(uri string, title string) () {
+func (_self_ *GLibBookmarkFile) SetTitle(uri string, title string) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2076,7 +2074,7 @@ func (_self_ *BookmarkFile) SetTitle(uri string, title string) () {
 	return
 }
 
-func (_self_ *BookmarkFile) SetVisited(uri string, visited C.time_t) () {
+func (_self_ *GLibBookmarkFile) SetVisited(uri string, visited C.time_t) () {
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2084,20 +2082,20 @@ func (_self_ *BookmarkFile) SetVisited(uri string, visited C.time_t) () {
 	return
 }
 
-func (_self_ *BookmarkFile) ToData(length *C.gsize) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) ToData(length *C.gsize) (_go__return__ string, _error_ unsafe.Pointer) {
 	var _return_ *C.gchar
 	_return_ = C._g_bookmark_file_to_data((*C.GBookmarkFile)(_self_), length, _error_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *BookmarkFile) ToFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibBookmarkFile) ToFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	var _return_ C.gboolean
 	_return_ = C._g_bookmark_file_to_file((*C.GBookmarkFile)(_self_), _cgo_filename_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -2112,7 +2110,7 @@ func ByteArraySizedNew(reserved_size uint) (_return_ *C.GByteArray) {
 	return
 }
 
-func (_self_ *Bytes) Compare(bytes2 *Bytes) (_go__return__ int) {
+func (_self_ *GLibBytes) Compare(bytes2 *GLibBytes) (_go__return__ int) {
 	_cgo_bytes2_ := (C.gpointer)(unsafe.Pointer(bytes2))
 	var _return_ C.gint
 	_return_ = C._g_bytes_compare((*C.GBytes)(_self_), _cgo_bytes2_)
@@ -2120,70 +2118,70 @@ func (_self_ *Bytes) Compare(bytes2 *Bytes) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Bytes) Equal(bytes2 *Bytes) (_go__return__ bool) {
+func (_self_ *GLibBytes) Equal(bytes2 *GLibBytes) (_go__return__ bool) {
 	_cgo_bytes2_ := (C.gpointer)(unsafe.Pointer(bytes2))
 	var _return_ C.gboolean
 	_return_ = C._g_bytes_equal((*C.GBytes)(_self_), _cgo_bytes2_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Bytes) GetData() (_return_ C.gpointer, _go_size_ uint64) {
+func (_self_ *GLibBytes) GetData() (_return_ C.gpointer, _go_size_ uint64) {
 	var size C.gsize
 	_return_ = C._g_bytes_get_data((*C.GBytes)(_self_), &size)
 	_go_size_ = (uint64)(size)
 	return
 }
 
-func (_self_ *Bytes) GetSize() (_go__return__ uint64) {
+func (_self_ *GLibBytes) GetSize() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C.g_bytes_get_size((*C.GBytes)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *Bytes) Hash() (_go__return__ uint) {
+func (_self_ *GLibBytes) Hash() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_bytes_hash((*C.GBytes)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Bytes) NewFromBytes(offset uint64, length uint64) (_go__return__ *Bytes) {
+func (_self_ *GLibBytes) NewFromBytes(offset uint64, length uint64) (_go__return__ *GLibBytes) {
 	var _return_ *C.GBytes
 	_cgo_offset_ := (C.gsize)(offset)
 	_cgo_length_ := (C.gsize)(length)
 	_return_ = C.g_bytes_new_from_bytes((*C.GBytes)(_self_), _cgo_offset_, _cgo_length_)
-	_go__return__ = (*Bytes)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibBytes)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Bytes) Ref() (_go__return__ *Bytes) {
+func (_self_ *GLibBytes) Ref() (_go__return__ *GLibBytes) {
 	var _return_ *C.GBytes
 	_return_ = C.g_bytes_ref((*C.GBytes)(_self_))
-	_go__return__ = (*Bytes)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibBytes)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Bytes) Unref() () {
+func (_self_ *GLibBytes) Unref() () {
 	C.g_bytes_unref((*C.GBytes)(_self_))
 	return
 }
 
-func (_self_ *Bytes) UnrefToArray() (_return_ *C.GByteArray) {
+func (_self_ *GLibBytes) UnrefToArray() (_return_ *C.GByteArray) {
 	_return_ = C.g_bytes_unref_to_array((*C.GBytes)(_self_))
 	return
 }
 
-func (_self_ *Bytes) UnrefToData(size *C.gsize) (_return_ C.gpointer) {
+func (_self_ *GLibBytes) UnrefToData(size *C.gsize) (_return_ C.gpointer) {
 	_return_ = C.g_bytes_unref_to_data((*C.GBytes)(_self_), size)
 	return
 }
 
-func ChecksumNew(checksum_type C.GChecksumType) (_go__return__ *Checksum) {
+func ChecksumNew(checksum_type C.GChecksumType) (_go__return__ *GLibChecksum) {
 	var _return_ *C.GChecksum
 	_return_ = C.g_checksum_new(checksum_type)
-	_go__return__ = (*Checksum)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibChecksum)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2194,93 +2192,93 @@ func ChecksumTypeGetLength(checksum_type C.GChecksumType) (_go__return__ int64) 
 	return
 }
 
-func (_self_ *Checksum) Copy() (_go__return__ *Checksum) {
+func (_self_ *GLibChecksum) Copy() (_go__return__ *GLibChecksum) {
 	var _return_ *C.GChecksum
 	_return_ = C._g_checksum_copy((*C.GChecksum)(_self_))
-	_go__return__ = (*Checksum)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibChecksum)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Checksum) Free() () {
+func (_self_ *GLibChecksum) Free() () {
 	C.g_checksum_free((*C.GChecksum)(_self_))
 	return
 }
 
-func (_self_ *Checksum) GetDigest(buffer *C.guint8, digest_len *C.gsize) () {
+func (_self_ *GLibChecksum) GetDigest(buffer *C.guint8, digest_len *C.gsize) () {
 	C.g_checksum_get_digest((*C.GChecksum)(_self_), buffer, digest_len)
 	return
 }
 
-func (_self_ *Checksum) GetString() (_go__return__ string) {
+func (_self_ *GLibChecksum) GetString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_checksum_get_string((*C.GChecksum)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Checksum) Reset() () {
+func (_self_ *GLibChecksum) Reset() () {
 	C.g_checksum_reset((*C.GChecksum)(_self_))
 	return
 }
 
-func (_self_ *Checksum) Update(data *C.guchar, length int64) () {
+func (_self_ *GLibChecksum) Update(data *C.guchar, length int64) () {
 	_cgo_length_ := (C.gssize)(length)
 	C._g_checksum_update((*C.GChecksum)(_self_), data, _cgo_length_)
 	return
 }
 
-func (_self_ *Cond) Broadcast() () {
+func (_self_ *GLibCond) Broadcast() () {
 	C.g_cond_broadcast((*C.GCond)(_self_))
 	return
 }
 
-func (_self_ *Cond) Clear() () {
+func (_self_ *GLibCond) Clear() () {
 	C.g_cond_clear((*C.GCond)(_self_))
 	return
 }
 
-func (_self_ *Cond) Init() () {
+func (_self_ *GLibCond) Init() () {
 	C.g_cond_init((*C.GCond)(_self_))
 	return
 }
 
-func (_self_ *Cond) Signal() () {
+func (_self_ *GLibCond) Signal() () {
 	C.g_cond_signal((*C.GCond)(_self_))
 	return
 }
 
-func (_self_ *Cond) Wait(mutex *C.GMutex) () {
+func (_self_ *GLibCond) Wait(mutex *C.GMutex) () {
 	C.g_cond_wait((*C.GCond)(_self_), mutex)
 	return
 }
 
-func (_self_ *Cond) WaitUntil(mutex *C.GMutex, end_time int64) (_go__return__ bool) {
+func (_self_ *GLibCond) WaitUntil(mutex *C.GMutex, end_time int64) (_go__return__ bool) {
 	_cgo_end_time_ := (C.gint64)(end_time)
 	var _return_ C.gboolean
 	_return_ = C.g_cond_wait_until((*C.GCond)(_self_), mutex, _cgo_end_time_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func DateNew() (_go__return__ *Date) {
+func DateNew() (_go__return__ *GLibDate) {
 	var _return_ *C.GDate
 	_return_ = C.g_date_new()
-	_go__return__ = (*Date)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDate)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateNewDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) (_go__return__ *Date) {
+func DateNewDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) (_go__return__ *GLibDate) {
 	var _return_ *C.GDate
 	_return_ = C.g_date_new_dmy(day, month, year)
-	_go__return__ = (*Date)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDate)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateNewJulian(julian_day uint32) (_go__return__ *Date) {
+func DateNewJulian(julian_day uint32) (_go__return__ *GLibDate) {
 	var _return_ *C.GDate
 	_cgo_julian_day_ := (C.guint32)(julian_day)
 	_return_ = C.g_date_new_julian(_cgo_julian_day_)
-	_go__return__ = (*Date)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDate)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2308,11 +2306,11 @@ func DateGetSundayWeeksInYear(year C.GDateYear) (_go__return__ uint8) {
 func DateIsLeapYear(year C.GDateYear) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_is_leap_year(year)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func DateStrftime(s string, slen uint64, format string, date *Date) (_go__return__ uint64) {
+func DateStrftime(s string, slen uint64, format string, date *GLibDate) (_go__return__ uint64) {
 	_cgo_date_ := (*C.GDate)(unsafe.Pointer(date))
 	_cgo_slen_ := (C.gsize)(slen)
 	var _return_ C.gsize
@@ -2330,14 +2328,14 @@ func DateStrftime(s string, slen uint64, format string, date *Date) (_go__return
 func DateValidDay(day C.GDateDay) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_valid_day(day)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func DateValidDmy(day C.GDateDay, month C.GDateMonth, year C.GDateYear) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_valid_dmy(day, month, year)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -2345,63 +2343,63 @@ func DateValidJulian(julian_date uint32) (_go__return__ bool) {
 	_cgo_julian_date_ := (C.guint32)(julian_date)
 	var _return_ C.gboolean
 	_return_ = C.g_date_valid_julian(_cgo_julian_date_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func DateValidMonth(month C.GDateMonth) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_valid_month(month)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func DateValidWeekday(weekday C.GDateWeekday) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_valid_weekday(weekday)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func DateValidYear(year C.GDateYear) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_valid_year(year)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Date) AddDays(n_days uint) () {
+func (_self_ *GLibDate) AddDays(n_days uint) () {
 	_cgo_n_days_ := (C.guint)(n_days)
 	C.g_date_add_days((*C.GDate)(_self_), _cgo_n_days_)
 	return
 }
 
-func (_self_ *Date) AddMonths(n_months uint) () {
+func (_self_ *GLibDate) AddMonths(n_months uint) () {
 	_cgo_n_months_ := (C.guint)(n_months)
 	C.g_date_add_months((*C.GDate)(_self_), _cgo_n_months_)
 	return
 }
 
-func (_self_ *Date) AddYears(n_years uint) () {
+func (_self_ *GLibDate) AddYears(n_years uint) () {
 	_cgo_n_years_ := (C.guint)(n_years)
 	C.g_date_add_years((*C.GDate)(_self_), _cgo_n_years_)
 	return
 }
 
-func (_self_ *Date) Clamp(min_date *Date, max_date *Date) () {
+func (_self_ *GLibDate) Clamp(min_date *GLibDate, max_date *GLibDate) () {
 	_cgo_min_date_ := (*C.GDate)(unsafe.Pointer(min_date))
 	_cgo_max_date_ := (*C.GDate)(unsafe.Pointer(max_date))
 	C._g_date_clamp((*C.GDate)(_self_), _cgo_min_date_, _cgo_max_date_)
 	return
 }
 
-func (_self_ *Date) Clear(n_dates uint) () {
+func (_self_ *GLibDate) Clear(n_dates uint) () {
 	_cgo_n_dates_ := (C.guint)(n_dates)
 	C.g_date_clear((*C.GDate)(_self_), _cgo_n_dates_)
 	return
 }
 
-func (_self_ *Date) Compare(rhs *Date) (_go__return__ int) {
+func (_self_ *GLibDate) Compare(rhs *GLibDate) (_go__return__ int) {
 	_cgo_rhs_ := (*C.GDate)(unsafe.Pointer(rhs))
 	var _return_ C.gint
 	_return_ = C._g_date_compare((*C.GDate)(_self_), _cgo_rhs_)
@@ -2409,7 +2407,7 @@ func (_self_ *Date) Compare(rhs *Date) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Date) DaysBetween(date2 *Date) (_go__return__ int) {
+func (_self_ *GLibDate) DaysBetween(date2 *GLibDate) (_go__return__ int) {
 	_cgo_date2_ := (*C.GDate)(unsafe.Pointer(date2))
 	var _return_ C.gint
 	_return_ = C._g_date_days_between((*C.GDate)(_self_), _cgo_date2_)
@@ -2417,108 +2415,108 @@ func (_self_ *Date) DaysBetween(date2 *Date) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Date) Free() () {
+func (_self_ *GLibDate) Free() () {
 	C.g_date_free((*C.GDate)(_self_))
 	return
 }
 
-func (_self_ *Date) GetDay() (_return_ C.GDateDay) {
+func (_self_ *GLibDate) GetDay() (_return_ C.GDateDay) {
 	_return_ = C._g_date_get_day((*C.GDate)(_self_))
 	return
 }
 
-func (_self_ *Date) GetDayOfYear() (_go__return__ uint) {
+func (_self_ *GLibDate) GetDayOfYear() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_date_get_day_of_year((*C.GDate)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Date) GetIso8601WeekOfYear() (_go__return__ uint) {
+func (_self_ *GLibDate) GetIso8601WeekOfYear() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_date_get_iso8601_week_of_year((*C.GDate)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Date) GetJulian() (_go__return__ uint32) {
+func (_self_ *GLibDate) GetJulian() (_go__return__ uint32) {
 	var _return_ C.guint32
 	_return_ = C._g_date_get_julian((*C.GDate)(_self_))
 	_go__return__ = (uint32)(_return_)
 	return
 }
 
-func (_self_ *Date) GetMondayWeekOfYear() (_go__return__ uint) {
+func (_self_ *GLibDate) GetMondayWeekOfYear() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_date_get_monday_week_of_year((*C.GDate)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Date) GetMonth() (_return_ C.GDateMonth) {
+func (_self_ *GLibDate) GetMonth() (_return_ C.GDateMonth) {
 	_return_ = C._g_date_get_month((*C.GDate)(_self_))
 	return
 }
 
-func (_self_ *Date) GetSundayWeekOfYear() (_go__return__ uint) {
+func (_self_ *GLibDate) GetSundayWeekOfYear() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_date_get_sunday_week_of_year((*C.GDate)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Date) GetWeekday() (_return_ C.GDateWeekday) {
+func (_self_ *GLibDate) GetWeekday() (_return_ C.GDateWeekday) {
 	_return_ = C._g_date_get_weekday((*C.GDate)(_self_))
 	return
 }
 
-func (_self_ *Date) GetYear() (_return_ C.GDateYear) {
+func (_self_ *GLibDate) GetYear() (_return_ C.GDateYear) {
 	_return_ = C._g_date_get_year((*C.GDate)(_self_))
 	return
 }
 
-func (_self_ *Date) IsFirstOfMonth() (_go__return__ bool) {
+func (_self_ *GLibDate) IsFirstOfMonth() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_date_is_first_of_month((*C.GDate)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Date) IsLastOfMonth() (_go__return__ bool) {
+func (_self_ *GLibDate) IsLastOfMonth() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_date_is_last_of_month((*C.GDate)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Date) Order(date2 *Date) () {
+func (_self_ *GLibDate) Order(date2 *GLibDate) () {
 	_cgo_date2_ := (*C.GDate)(unsafe.Pointer(date2))
 	C.g_date_order((*C.GDate)(_self_), _cgo_date2_)
 	return
 }
 
-func (_self_ *Date) SetDay(day C.GDateDay) () {
+func (_self_ *GLibDate) SetDay(day C.GDateDay) () {
 	C.g_date_set_day((*C.GDate)(_self_), day)
 	return
 }
 
-func (_self_ *Date) SetDmy(day C.GDateDay, month C.GDateMonth, y C.GDateYear) () {
+func (_self_ *GLibDate) SetDmy(day C.GDateDay, month C.GDateMonth, y C.GDateYear) () {
 	C.g_date_set_dmy((*C.GDate)(_self_), day, month, y)
 	return
 }
 
-func (_self_ *Date) SetJulian(julian_date uint32) () {
+func (_self_ *GLibDate) SetJulian(julian_date uint32) () {
 	_cgo_julian_date_ := (C.guint32)(julian_date)
 	C.g_date_set_julian((*C.GDate)(_self_), _cgo_julian_date_)
 	return
 }
 
-func (_self_ *Date) SetMonth(month C.GDateMonth) () {
+func (_self_ *GLibDate) SetMonth(month C.GDateMonth) () {
 	C.g_date_set_month((*C.GDate)(_self_), month)
 	return
 }
 
-func (_self_ *Date) SetParse(str string) () {
+func (_self_ *GLibDate) SetParse(str string) () {
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
@@ -2526,48 +2524,48 @@ func (_self_ *Date) SetParse(str string) () {
 	return
 }
 
-func (_self_ *Date) SetTimeT(timet C.time_t) () {
+func (_self_ *GLibDate) SetTimeT(timet C.time_t) () {
 	C.g_date_set_time_t((*C.GDate)(_self_), timet)
 	return
 }
 
-func (_self_ *Date) SetTimeVal(timeval *TimeVal) () {
+func (_self_ *GLibDate) SetTimeVal(timeval *GLibTimeVal) () {
 	_cgo_timeval_ := (*C.GTimeVal)(unsafe.Pointer(timeval))
 	C.g_date_set_time_val((*C.GDate)(_self_), _cgo_timeval_)
 	return
 }
 
-func (_self_ *Date) SetYear(year C.GDateYear) () {
+func (_self_ *GLibDate) SetYear(year C.GDateYear) () {
 	C.g_date_set_year((*C.GDate)(_self_), year)
 	return
 }
 
-func (_self_ *Date) SubtractDays(n_days uint) () {
+func (_self_ *GLibDate) SubtractDays(n_days uint) () {
 	_cgo_n_days_ := (C.guint)(n_days)
 	C.g_date_subtract_days((*C.GDate)(_self_), _cgo_n_days_)
 	return
 }
 
-func (_self_ *Date) SubtractMonths(n_months uint) () {
+func (_self_ *GLibDate) SubtractMonths(n_months uint) () {
 	_cgo_n_months_ := (C.guint)(n_months)
 	C.g_date_subtract_months((*C.GDate)(_self_), _cgo_n_months_)
 	return
 }
 
-func (_self_ *Date) SubtractYears(n_years uint) () {
+func (_self_ *GLibDate) SubtractYears(n_years uint) () {
 	_cgo_n_years_ := (C.guint)(n_years)
 	C.g_date_subtract_years((*C.GDate)(_self_), _cgo_n_years_)
 	return
 }
 
-func (_self_ *Date) Valid() (_go__return__ bool) {
+func (_self_ *GLibDate) Valid() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_date_valid((*C.GDate)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func DateTimeNew(tz *TimeZone, year int, month int, day int, hour int, minute int, seconds float64) (_go__return__ *DateTime) {
+func DateTimeNew(tz *GLibTimeZone, year int, month int, day int, hour int, minute int, seconds float64) (_go__return__ *GLibDateTime) {
 	_cgo_tz_ := (*C.GTimeZone)(unsafe.Pointer(tz))
 	var _return_ *C.GDateTime
 	_cgo_year_ := (C.gint)(year)
@@ -2577,43 +2575,43 @@ func DateTimeNew(tz *TimeZone, year int, month int, day int, hour int, minute in
 	_cgo_minute_ := (C.gint)(minute)
 	_cgo_seconds_ := (C.gdouble)(seconds)
 	_return_ = C.g_date_time_new(_cgo_tz_, _cgo_year_, _cgo_month_, _cgo_day_, _cgo_hour_, _cgo_minute_, _cgo_seconds_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewFromTimevalLocal(tv *TimeVal) (_go__return__ *DateTime) {
+func DateTimeNewFromTimevalLocal(tv *GLibTimeVal) (_go__return__ *GLibDateTime) {
 	_cgo_tv_ := (*C.GTimeVal)(unsafe.Pointer(tv))
 	var _return_ *C.GDateTime
 	_return_ = C._g_date_time_new_from_timeval_local(_cgo_tv_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewFromTimevalUtc(tv *TimeVal) (_go__return__ *DateTime) {
+func DateTimeNewFromTimevalUtc(tv *GLibTimeVal) (_go__return__ *GLibDateTime) {
 	_cgo_tv_ := (*C.GTimeVal)(unsafe.Pointer(tv))
 	var _return_ *C.GDateTime
 	_return_ = C._g_date_time_new_from_timeval_utc(_cgo_tv_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewFromUnixLocal(t int64) (_go__return__ *DateTime) {
+func DateTimeNewFromUnixLocal(t int64) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_t_ := (C.gint64)(t)
 	_return_ = C.g_date_time_new_from_unix_local(_cgo_t_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewFromUnixUtc(t int64) (_go__return__ *DateTime) {
+func DateTimeNewFromUnixUtc(t int64) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_t_ := (C.gint64)(t)
 	_return_ = C.g_date_time_new_from_unix_utc(_cgo_t_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewLocal(year int, month int, day int, hour int, minute int, seconds float64) (_go__return__ *DateTime) {
+func DateTimeNewLocal(year int, month int, day int, hour int, minute int, seconds float64) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_year_ := (C.gint)(year)
 	_cgo_month_ := (C.gint)(month)
@@ -2622,33 +2620,33 @@ func DateTimeNewLocal(year int, month int, day int, hour int, minute int, second
 	_cgo_minute_ := (C.gint)(minute)
 	_cgo_seconds_ := (C.gdouble)(seconds)
 	_return_ = C.g_date_time_new_local(_cgo_year_, _cgo_month_, _cgo_day_, _cgo_hour_, _cgo_minute_, _cgo_seconds_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewNow(tz *TimeZone) (_go__return__ *DateTime) {
+func DateTimeNewNow(tz *GLibTimeZone) (_go__return__ *GLibDateTime) {
 	_cgo_tz_ := (*C.GTimeZone)(unsafe.Pointer(tz))
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_new_now(_cgo_tz_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewNowLocal() (_go__return__ *DateTime) {
+func DateTimeNewNowLocal() (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_new_now_local()
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewNowUtc() (_go__return__ *DateTime) {
+func DateTimeNewNowUtc() (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_new_now_utc()
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func DateTimeNewUtc(year int, month int, day int, hour int, minute int, seconds float64) (_go__return__ *DateTime) {
+func DateTimeNewUtc(year int, month int, day int, hour int, minute int, seconds float64) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_year_ := (C.gint)(year)
 	_cgo_month_ := (C.gint)(month)
@@ -2657,7 +2655,7 @@ func DateTimeNewUtc(year int, month int, day int, hour int, minute int, seconds 
 	_cgo_minute_ := (C.gint)(minute)
 	_cgo_seconds_ := (C.gdouble)(seconds)
 	_return_ = C.g_date_time_new_utc(_cgo_year_, _cgo_month_, _cgo_day_, _cgo_hour_, _cgo_minute_, _cgo_seconds_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2671,7 +2669,7 @@ func DateTimeCompare(dt1 C.gpointer, dt2 C.gpointer) (_go__return__ int) {
 func DateTimeEqual(dt1 C.gpointer, dt2 C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_date_time_equal(dt1, dt2)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -2682,22 +2680,22 @@ func DateTimeHash(datetime C.gpointer) (_go__return__ uint) {
 	return
 }
 
-func (_self_ *DateTime) Add(timespan C.GTimeSpan) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) Add(timespan C.GTimeSpan) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_add((*C.GDateTime)(_self_), timespan)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddDays(days int) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddDays(days int) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_days_ := (C.gint)(days)
 	_return_ = C.g_date_time_add_days((*C.GDateTime)(_self_), _cgo_days_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddFull(years int, months int, days int, hours int, minutes int, seconds float64) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddFull(years int, months int, days int, hours int, minutes int, seconds float64) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_years_ := (C.gint)(years)
 	_cgo_months_ := (C.gint)(months)
@@ -2706,65 +2704,65 @@ func (_self_ *DateTime) AddFull(years int, months int, days int, hours int, minu
 	_cgo_minutes_ := (C.gint)(minutes)
 	_cgo_seconds_ := (C.gdouble)(seconds)
 	_return_ = C.g_date_time_add_full((*C.GDateTime)(_self_), _cgo_years_, _cgo_months_, _cgo_days_, _cgo_hours_, _cgo_minutes_, _cgo_seconds_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddHours(hours int) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddHours(hours int) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_hours_ := (C.gint)(hours)
 	_return_ = C.g_date_time_add_hours((*C.GDateTime)(_self_), _cgo_hours_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddMinutes(minutes int) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddMinutes(minutes int) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_minutes_ := (C.gint)(minutes)
 	_return_ = C.g_date_time_add_minutes((*C.GDateTime)(_self_), _cgo_minutes_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddMonths(months int) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddMonths(months int) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_months_ := (C.gint)(months)
 	_return_ = C.g_date_time_add_months((*C.GDateTime)(_self_), _cgo_months_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddSeconds(seconds float64) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddSeconds(seconds float64) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_seconds_ := (C.gdouble)(seconds)
 	_return_ = C.g_date_time_add_seconds((*C.GDateTime)(_self_), _cgo_seconds_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddWeeks(weeks int) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddWeeks(weeks int) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_weeks_ := (C.gint)(weeks)
 	_return_ = C.g_date_time_add_weeks((*C.GDateTime)(_self_), _cgo_weeks_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) AddYears(years int) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) AddYears(years int) (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_cgo_years_ := (C.gint)(years)
 	_return_ = C.g_date_time_add_years((*C.GDateTime)(_self_), _cgo_years_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) Difference(begin *DateTime) (_return_ C.GTimeSpan) {
+func (_self_ *GLibDateTime) Difference(begin *GLibDateTime) (_return_ C.GTimeSpan) {
 	_cgo_begin_ := (*C.GDateTime)(unsafe.Pointer(begin))
 	_return_ = C.g_date_time_difference((*C.GDateTime)(_self_), _cgo_begin_)
 	return
 }
 
-func (_self_ *DateTime) Format(format string) (_go__return__ string) {
+func (_self_ *GLibDateTime) Format(format string) (_go__return__ string) {
 	_cstring_format_ := C.CString(format)
 	_cgo_format_ := (*C.gchar)(unsafe.Pointer(_cstring_format_))
 	defer C.free(unsafe.Pointer(_cstring_format_))
@@ -2774,103 +2772,103 @@ func (_self_ *DateTime) Format(format string) (_go__return__ string) {
 	return
 }
 
-func (_self_ *DateTime) GetDayOfMonth() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetDayOfMonth() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_day_of_month((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetDayOfWeek() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetDayOfWeek() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_day_of_week((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetDayOfYear() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetDayOfYear() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_day_of_year((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetHour() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetHour() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_hour((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetMicrosecond() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetMicrosecond() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_microsecond((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetMinute() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetMinute() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_minute((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetMonth() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetMonth() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_month((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetSecond() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetSecond() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_second((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetSeconds() (_go__return__ float64) {
+func (_self_ *GLibDateTime) GetSeconds() (_go__return__ float64) {
 	var _return_ C.gdouble
 	_return_ = C.g_date_time_get_seconds((*C.GDateTime)(_self_))
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetTimezoneAbbreviation() (_go__return__ string) {
+func (_self_ *GLibDateTime) GetTimezoneAbbreviation() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_date_time_get_timezone_abbreviation((*C.GDateTime)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *DateTime) GetUtcOffset() (_return_ C.GTimeSpan) {
+func (_self_ *GLibDateTime) GetUtcOffset() (_return_ C.GTimeSpan) {
 	_return_ = C.g_date_time_get_utc_offset((*C.GDateTime)(_self_))
 	return
 }
 
-func (_self_ *DateTime) GetWeekNumberingYear() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetWeekNumberingYear() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_week_numbering_year((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetWeekOfYear() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetWeekOfYear() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_week_of_year((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetYear() (_go__return__ int) {
+func (_self_ *GLibDateTime) GetYear() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_date_time_get_year((*C.GDateTime)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *DateTime) GetYmd() (_go_year_ int, _go_month_ int, _go_day_ int) {
+func (_self_ *GLibDateTime) GetYmd() (_go_year_ int, _go_month_ int, _go_day_ int) {
 	var year C.gint
 	var month C.gint
 	var day C.gint
@@ -2881,58 +2879,58 @@ func (_self_ *DateTime) GetYmd() (_go_year_ int, _go_month_ int, _go_day_ int) {
 	return
 }
 
-func (_self_ *DateTime) IsDaylightSavings() (_go__return__ bool) {
+func (_self_ *GLibDateTime) IsDaylightSavings() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_date_time_is_daylight_savings((*C.GDateTime)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DateTime) Ref() (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) Ref() (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_ref((*C.GDateTime)(_self_))
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) ToLocal() (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) ToLocal() (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_to_local((*C.GDateTime)(_self_))
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) ToTimeval(tv *TimeVal) (_go__return__ bool) {
+func (_self_ *GLibDateTime) ToTimeval(tv *GLibTimeVal) (_go__return__ bool) {
 	_cgo_tv_ := (*C.GTimeVal)(unsafe.Pointer(tv))
 	var _return_ C.gboolean
 	_return_ = C.g_date_time_to_timeval((*C.GDateTime)(_self_), _cgo_tv_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DateTime) ToTimezone(tz *TimeZone) (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) ToTimezone(tz *GLibTimeZone) (_go__return__ *GLibDateTime) {
 	_cgo_tz_ := (*C.GTimeZone)(unsafe.Pointer(tz))
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_to_timezone((*C.GDateTime)(_self_), _cgo_tz_)
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) ToUnix() (_go__return__ int64) {
+func (_self_ *GLibDateTime) ToUnix() (_go__return__ int64) {
 	var _return_ C.gint64
 	_return_ = C.g_date_time_to_unix((*C.GDateTime)(_self_))
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *DateTime) ToUtc() (_go__return__ *DateTime) {
+func (_self_ *GLibDateTime) ToUtc() (_go__return__ *GLibDateTime) {
 	var _return_ *C.GDateTime
 	_return_ = C.g_date_time_to_utc((*C.GDateTime)(_self_))
-	_go__return__ = (*DateTime)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDateTime)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DateTime) Unref() () {
+func (_self_ *GLibDateTime) Unref() () {
 	C.g_date_time_unref((*C.GDateTime)(_self_))
 	return
 }
@@ -2947,62 +2945,62 @@ func DirMakeTmp(tmpl string) (_go__return__ string, _error_ unsafe.Pointer) {
 	return
 }
 
-func DirOpen(path string, flags uint) (_go__return__ *Dir, _error_ unsafe.Pointer) {
+func DirOpen(path string, flags uint) (_go__return__ *GLibDir, _error_ unsafe.Pointer) {
 	var _return_ *C.GDir
 	_cgo_flags_ := (C.guint)(flags)
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	_return_ = C._g_dir_open(_cgo_path_, _cgo_flags_, _error_)
-	_go__return__ = (*Dir)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibDir)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Dir) Close() () {
+func (_self_ *GLibDir) Close() () {
 	C.g_dir_close((*C.GDir)(_self_))
 	return
 }
 
-func (_self_ *Dir) ReadName() (_go__return__ string) {
+func (_self_ *GLibDir) ReadName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_dir_read_name((*C.GDir)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Dir) Rewind() () {
+func (_self_ *GLibDir) Rewind() () {
 	C.g_dir_rewind((*C.GDir)(_self_))
 	return
 }
 
-func ErrorNewLiteral(domain C.GQuark, code int, message string) (_go__return__ *Error) {
+func ErrorNewLiteral(domain C.GQuark, code int, message string) (_go__return__ *GLibError) {
 	var _return_ *C.GError
 	_cgo_code_ := (C.gint)(code)
 	_cstring_message_ := C.CString(message)
 	_cgo_message_ := (*C.gchar)(unsafe.Pointer(_cstring_message_))
 	defer C.free(unsafe.Pointer(_cstring_message_))
 	_return_ = C._g_error_new_literal(domain, _cgo_code_, _cgo_message_)
-	_go__return__ = (*Error)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibError)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Error) Copy() (_go__return__ *Error) {
+func (_self_ *GLibError) Copy() (_go__return__ *GLibError) {
 	var _return_ *C.GError
 	_return_ = C._g_error_copy((*C.GError)(_self_))
-	_go__return__ = (*Error)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibError)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Error) Free() () {
+func (_self_ *GLibError) Free() () {
 	C.g_error_free((*C.GError)(_self_))
 	return
 }
 
-func (_self_ *Error) Matches(domain C.GQuark, code int) (_go__return__ bool) {
+func (_self_ *GLibError) Matches(domain C.GQuark, code int) (_go__return__ bool) {
 	_cgo_code_ := (C.gint)(code)
 	var _return_ C.gboolean
 	_return_ = C._g_error_matches((*C.GError)(_self_), domain, _cgo_code_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -3014,7 +3012,7 @@ func HashTableAdd(hash_table *C.GHashTable, key C.gpointer) () {
 func HashTableContains(hash_table *C.GHashTable, key C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_hash_table_contains(hash_table, key)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -3070,7 +3068,7 @@ func HashTableLookup(hash_table *C.GHashTable, key C.gpointer) (_return_ C.gpoin
 func HashTableLookupExtended(hash_table *C.GHashTable, lookup_key C.gpointer, orig_key *C.gpointer, value *C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_hash_table_lookup_extended(hash_table, lookup_key, orig_key, value)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -3092,7 +3090,7 @@ func HashTableRef(hash_table *C.GHashTable) (_return_ *C.GHashTable) {
 func HashTableRemove(hash_table *C.GHashTable, key C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_hash_table_remove(hash_table, key)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -3116,7 +3114,7 @@ func HashTableSize(hash_table *C.GHashTable) (_go__return__ uint) {
 func HashTableSteal(hash_table *C.GHashTable, key C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_hash_table_steal(hash_table, key)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -3130,150 +3128,150 @@ func HashTableUnref(hash_table *C.GHashTable) () {
 	return
 }
 
-func (_self_ *HashTableIter) GetHashTable() (_return_ *C.GHashTable) {
+func (_self_ *GLibHashTableIter) GetHashTable() (_return_ *C.GHashTable) {
 	_return_ = C.g_hash_table_iter_get_hash_table((*C.GHashTableIter)(_self_))
 	return
 }
 
-func (_self_ *HashTableIter) Init(hash_table *C.GHashTable) () {
+func (_self_ *GLibHashTableIter) Init(hash_table *C.GHashTable) () {
 	C.g_hash_table_iter_init((*C.GHashTableIter)(_self_), hash_table)
 	return
 }
 
-func (_self_ *HashTableIter) Next(key *C.gpointer, value *C.gpointer) (_go__return__ bool) {
+func (_self_ *GLibHashTableIter) Next(key *C.gpointer, value *C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_hash_table_iter_next((*C.GHashTableIter)(_self_), key, value)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *HashTableIter) Remove() () {
+func (_self_ *GLibHashTableIter) Remove() () {
 	C.g_hash_table_iter_remove((*C.GHashTableIter)(_self_))
 	return
 }
 
-func (_self_ *HashTableIter) Replace(value C.gpointer) () {
+func (_self_ *GLibHashTableIter) Replace(value C.gpointer) () {
 	C.g_hash_table_iter_replace((*C.GHashTableIter)(_self_), value)
 	return
 }
 
-func (_self_ *HashTableIter) Steal() () {
+func (_self_ *GLibHashTableIter) Steal() () {
 	C.g_hash_table_iter_steal((*C.GHashTableIter)(_self_))
 	return
 }
 
-func (_self_ *Hmac) Copy() (_go__return__ *Hmac) {
+func (_self_ *GLibHmac) Copy() (_go__return__ *GLibHmac) {
 	var _return_ *C.GHmac
 	_return_ = C._g_hmac_copy((*C.GHmac)(_self_))
-	_go__return__ = (*Hmac)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHmac)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Hmac) GetDigest(buffer *C.guint8, digest_len *C.gsize) () {
+func (_self_ *GLibHmac) GetDigest(buffer *C.guint8, digest_len *C.gsize) () {
 	C.g_hmac_get_digest((*C.GHmac)(_self_), buffer, digest_len)
 	return
 }
 
-func (_self_ *Hmac) GetString() (_go__return__ string) {
+func (_self_ *GLibHmac) GetString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_hmac_get_string((*C.GHmac)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Hmac) Ref() (_go__return__ *Hmac) {
+func (_self_ *GLibHmac) Ref() (_go__return__ *GLibHmac) {
 	var _return_ *C.GHmac
 	_return_ = C.g_hmac_ref((*C.GHmac)(_self_))
-	_go__return__ = (*Hmac)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHmac)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Hmac) Unref() () {
+func (_self_ *GLibHmac) Unref() () {
 	C.g_hmac_unref((*C.GHmac)(_self_))
 	return
 }
 
-func HookAlloc(hook_list *HookList) (_go__return__ *Hook) {
+func HookAlloc(hook_list *GLibHookList) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	var _return_ *C.GHook
 	_return_ = C.g_hook_alloc(_cgo_hook_list_)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookDestroy(hook_list *HookList, hook_id uint64) (_go__return__ bool) {
+func HookDestroy(hook_list *GLibHookList, hook_id uint64) (_go__return__ bool) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_id_ := (C.gulong)(hook_id)
 	var _return_ C.gboolean
 	_return_ = C.g_hook_destroy(_cgo_hook_list_, _cgo_hook_id_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func HookDestroyLink(hook_list *HookList, hook *Hook) () {
+func HookDestroyLink(hook_list *GLibHookList, hook *GLibHook) () {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	C.g_hook_destroy_link(_cgo_hook_list_, _cgo_hook_)
 	return
 }
 
-func HookFind(hook_list *HookList, need_valids bool, func_ C.GHookFindFunc, data C.gpointer) (_go__return__ *Hook) {
+func HookFind(hook_list *GLibHookList, need_valids bool, func_ C.GHookFindFunc, data C.gpointer) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	var _return_ *C.GHook
-	_cgo_need_valids_ := C.glibfalse()
-	if need_valids { _cgo_need_valids_ = C.glibtrue() }
+	_cgo_need_valids_ := (C.gboolean)(C.FALSE)
+	if need_valids { _cgo_need_valids_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_hook_find(_cgo_hook_list_, _cgo_need_valids_, func_, data)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookFindData(hook_list *HookList, need_valids bool, data C.gpointer) (_go__return__ *Hook) {
+func HookFindData(hook_list *GLibHookList, need_valids bool, data C.gpointer) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	var _return_ *C.GHook
-	_cgo_need_valids_ := C.glibfalse()
-	if need_valids { _cgo_need_valids_ = C.glibtrue() }
+	_cgo_need_valids_ := (C.gboolean)(C.FALSE)
+	if need_valids { _cgo_need_valids_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_hook_find_data(_cgo_hook_list_, _cgo_need_valids_, data)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookFindFuncData(hook_list *HookList, need_valids bool, func_ C.gpointer, data C.gpointer) (_go__return__ *Hook) {
+func HookFindFuncData(hook_list *GLibHookList, need_valids bool, func_ C.gpointer, data C.gpointer) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	var _return_ *C.GHook
-	_cgo_need_valids_ := C.glibfalse()
-	if need_valids { _cgo_need_valids_ = C.glibtrue() }
+	_cgo_need_valids_ := (C.gboolean)(C.FALSE)
+	if need_valids { _cgo_need_valids_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_hook_find_func_data(_cgo_hook_list_, _cgo_need_valids_, func_, data)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookFirstValid(hook_list *HookList, may_be_in_call bool) (_go__return__ *Hook) {
+func HookFirstValid(hook_list *GLibHookList, may_be_in_call bool) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	var _return_ *C.GHook
-	_cgo_may_be_in_call_ := C.glibfalse()
-	if may_be_in_call { _cgo_may_be_in_call_ = C.glibtrue() }
+	_cgo_may_be_in_call_ := (C.gboolean)(C.FALSE)
+	if may_be_in_call { _cgo_may_be_in_call_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_hook_first_valid(_cgo_hook_list_, _cgo_may_be_in_call_)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookFree(hook_list *HookList, hook *Hook) () {
+func HookFree(hook_list *GLibHookList, hook *GLibHook) () {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	C.g_hook_free(_cgo_hook_list_, _cgo_hook_)
 	return
 }
 
-func HookGet(hook_list *HookList, hook_id uint64) (_go__return__ *Hook) {
+func HookGet(hook_list *GLibHookList, hook_id uint64) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	var _return_ *C.GHook
 	_cgo_hook_id_ := (C.gulong)(hook_id)
 	_return_ = C.g_hook_get(_cgo_hook_list_, _cgo_hook_id_)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookInsertBefore(hook_list *HookList, sibling *Hook, hook *Hook) () {
+func HookInsertBefore(hook_list *GLibHookList, sibling *GLibHook, hook *GLibHook) () {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_sibling_ := (*C.GHook)(unsafe.Pointer(sibling))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
@@ -3281,48 +3279,48 @@ func HookInsertBefore(hook_list *HookList, sibling *Hook, hook *Hook) () {
 	return
 }
 
-func HookInsertSorted(hook_list *HookList, hook *Hook, func_ C.GHookCompareFunc) () {
+func HookInsertSorted(hook_list *GLibHookList, hook *GLibHook, func_ C.GHookCompareFunc) () {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	C.g_hook_insert_sorted(_cgo_hook_list_, _cgo_hook_, func_)
 	return
 }
 
-func HookNextValid(hook_list *HookList, hook *Hook, may_be_in_call bool) (_go__return__ *Hook) {
+func HookNextValid(hook_list *GLibHookList, hook *GLibHook, may_be_in_call bool) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	var _return_ *C.GHook
-	_cgo_may_be_in_call_ := C.glibfalse()
-	if may_be_in_call { _cgo_may_be_in_call_ = C.glibtrue() }
+	_cgo_may_be_in_call_ := (C.gboolean)(C.FALSE)
+	if may_be_in_call { _cgo_may_be_in_call_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_hook_next_valid(_cgo_hook_list_, _cgo_hook_, _cgo_may_be_in_call_)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookPrepend(hook_list *HookList, hook *Hook) () {
+func HookPrepend(hook_list *GLibHookList, hook *GLibHook) () {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	C.g_hook_prepend(_cgo_hook_list_, _cgo_hook_)
 	return
 }
 
-func HookRef(hook_list *HookList, hook *Hook) (_go__return__ *Hook) {
+func HookRef(hook_list *GLibHookList, hook *GLibHook) (_go__return__ *GLibHook) {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	var _return_ *C.GHook
 	_return_ = C.g_hook_ref(_cgo_hook_list_, _cgo_hook_)
-	_go__return__ = (*Hook)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibHook)(unsafe.Pointer(_return_))
 	return
 }
 
-func HookUnref(hook_list *HookList, hook *Hook) () {
+func HookUnref(hook_list *GLibHookList, hook *GLibHook) () {
 	_cgo_hook_list_ := (*C.GHookList)(unsafe.Pointer(hook_list))
 	_cgo_hook_ := (*C.GHook)(unsafe.Pointer(hook))
 	C.g_hook_unref(_cgo_hook_list_, _cgo_hook_)
 	return
 }
 
-func (_self_ *Hook) CompareIds(sibling *Hook) (_go__return__ int) {
+func (_self_ *GLibHook) CompareIds(sibling *GLibHook) (_go__return__ int) {
 	_cgo_sibling_ := (*C.GHook)(unsafe.Pointer(sibling))
 	var _return_ C.gint
 	_return_ = C.g_hook_compare_ids((*C.GHook)(_self_), _cgo_sibling_)
@@ -3330,46 +3328,46 @@ func (_self_ *Hook) CompareIds(sibling *Hook) (_go__return__ int) {
 	return
 }
 
-func (_self_ *HookList) Clear() () {
+func (_self_ *GLibHookList) Clear() () {
 	C.g_hook_list_clear((*C.GHookList)(_self_))
 	return
 }
 
-func (_self_ *HookList) Init(hook_size uint) () {
+func (_self_ *GLibHookList) Init(hook_size uint) () {
 	_cgo_hook_size_ := (C.guint)(hook_size)
 	C.g_hook_list_init((*C.GHookList)(_self_), _cgo_hook_size_)
 	return
 }
 
-func (_self_ *HookList) Invoke(may_recurse bool) () {
-	_cgo_may_recurse_ := C.glibfalse()
-	if may_recurse { _cgo_may_recurse_ = C.glibtrue() }
+func (_self_ *GLibHookList) Invoke(may_recurse bool) () {
+	_cgo_may_recurse_ := (C.gboolean)(C.FALSE)
+	if may_recurse { _cgo_may_recurse_ = (C.gboolean)(C.TRUE) }
 	C.g_hook_list_invoke((*C.GHookList)(_self_), _cgo_may_recurse_)
 	return
 }
 
-func (_self_ *HookList) InvokeCheck(may_recurse bool) () {
-	_cgo_may_recurse_ := C.glibfalse()
-	if may_recurse { _cgo_may_recurse_ = C.glibtrue() }
+func (_self_ *GLibHookList) InvokeCheck(may_recurse bool) () {
+	_cgo_may_recurse_ := (C.gboolean)(C.FALSE)
+	if may_recurse { _cgo_may_recurse_ = (C.gboolean)(C.TRUE) }
 	C.g_hook_list_invoke_check((*C.GHookList)(_self_), _cgo_may_recurse_)
 	return
 }
 
-func (_self_ *HookList) Marshal(may_recurse bool, marshaller C.GHookMarshaller, marshal_data C.gpointer) () {
-	_cgo_may_recurse_ := C.glibfalse()
-	if may_recurse { _cgo_may_recurse_ = C.glibtrue() }
+func (_self_ *GLibHookList) Marshal(may_recurse bool, marshaller C.GHookMarshaller, marshal_data C.gpointer) () {
+	_cgo_may_recurse_ := (C.gboolean)(C.FALSE)
+	if may_recurse { _cgo_may_recurse_ = (C.gboolean)(C.TRUE) }
 	C.g_hook_list_marshal((*C.GHookList)(_self_), _cgo_may_recurse_, marshaller, marshal_data)
 	return
 }
 
-func (_self_ *HookList) MarshalCheck(may_recurse bool, marshaller C.GHookCheckMarshaller, marshal_data C.gpointer) () {
-	_cgo_may_recurse_ := C.glibfalse()
-	if may_recurse { _cgo_may_recurse_ = C.glibtrue() }
+func (_self_ *GLibHookList) MarshalCheck(may_recurse bool, marshaller C.GHookCheckMarshaller, marshal_data C.gpointer) () {
+	_cgo_may_recurse_ := (C.gboolean)(C.FALSE)
+	if may_recurse { _cgo_may_recurse_ = (C.gboolean)(C.TRUE) }
 	C.g_hook_list_marshal_check((*C.GHookList)(_self_), _cgo_may_recurse_, marshaller, marshal_data)
 	return
 }
 
-func IOChannelNewFile(filename string, mode string) (_go__return__ *IOChannel, _error_ unsafe.Pointer) {
+func IOChannelNewFile(filename string, mode string) (_go__return__ *GLibIOChannel, _error_ unsafe.Pointer) {
 	var _return_ *C.GIOChannel
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
@@ -3378,14 +3376,14 @@ func IOChannelNewFile(filename string, mode string) (_go__return__ *IOChannel, _
 	_cgo_mode_ := (*C.gchar)(unsafe.Pointer(_cstring_mode_))
 	defer C.free(unsafe.Pointer(_cstring_mode_))
 	_return_ = C._g_io_channel_new_file(_cgo_filename_, _cgo_mode_, _error_)
-	_go__return__ = (*IOChannel)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibIOChannel)(unsafe.Pointer(_return_))
 	return
 }
 
-func IOChannelUnixNew(fd C.int) (_go__return__ *IOChannel) {
+func IOChannelUnixNew(fd C.int) (_go__return__ *GLibIOChannel) {
 	var _return_ *C.GIOChannel
 	_return_ = C.g_io_channel_unix_new(fd)
-	_go__return__ = (*IOChannel)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibIOChannel)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -3400,62 +3398,62 @@ func IOChannelErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func (_self_ *IOChannel) Flush() (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) Flush() (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_return_ = C._g_io_channel_flush((*C.GIOChannel)(_self_), _error_)
 	return
 }
 
-func (_self_ *IOChannel) GetBufferCondition() (_return_ C.GIOCondition) {
+func (_self_ *GLibIOChannel) GetBufferCondition() (_return_ C.GIOCondition) {
 	_return_ = C.g_io_channel_get_buffer_condition((*C.GIOChannel)(_self_))
 	return
 }
 
-func (_self_ *IOChannel) GetBufferSize() (_go__return__ uint64) {
+func (_self_ *GLibIOChannel) GetBufferSize() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C.g_io_channel_get_buffer_size((*C.GIOChannel)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *IOChannel) GetBuffered() (_go__return__ bool) {
+func (_self_ *GLibIOChannel) GetBuffered() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_io_channel_get_buffered((*C.GIOChannel)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *IOChannel) GetCloseOnUnref() (_go__return__ bool) {
+func (_self_ *GLibIOChannel) GetCloseOnUnref() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_io_channel_get_close_on_unref((*C.GIOChannel)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *IOChannel) GetEncoding() (_go__return__ string) {
+func (_self_ *GLibIOChannel) GetEncoding() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_io_channel_get_encoding((*C.GIOChannel)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *IOChannel) GetFlags() (_return_ C.GIOFlags) {
+func (_self_ *GLibIOChannel) GetFlags() (_return_ C.GIOFlags) {
 	_return_ = C.g_io_channel_get_flags((*C.GIOChannel)(_self_))
 	return
 }
 
-func (_self_ *IOChannel) GetLineTerm(length *C.gint) (_go__return__ string) {
+func (_self_ *GLibIOChannel) GetLineTerm(length *C.gint) (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_io_channel_get_line_term((*C.GIOChannel)(_self_), length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *IOChannel) Init() () {
+func (_self_ *GLibIOChannel) Init() () {
 	C.g_io_channel_init((*C.GIOChannel)(_self_))
 	return
 }
 
-func (_self_ *IOChannel) ReadLine() (_return_ C.GIOStatus, str_return unsafe.Pointer, _go_length_ uint64, _go_terminator_pos_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) ReadLine() (_return_ C.GIOStatus, str_return unsafe.Pointer, _go_length_ uint64, _go_terminator_pos_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	var terminator_pos C.gsize
 	_return_ = C._g_io_channel_read_line((*C.GIOChannel)(_self_), str_return, &length, &terminator_pos, _error_)
@@ -3464,51 +3462,51 @@ func (_self_ *IOChannel) ReadLine() (_return_ C.GIOStatus, str_return unsafe.Poi
 	return
 }
 
-func (_self_ *IOChannel) ReadLineString(buffer *String, terminator_pos *C.gsize) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) ReadLineString(buffer *GLibString, terminator_pos *C.gsize) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_cgo_buffer_ := (*C.GString)(unsafe.Pointer(buffer))
 	_return_ = C._g_io_channel_read_line_string((*C.GIOChannel)(_self_), _cgo_buffer_, terminator_pos, _error_)
 	return
 }
 
-func (_self_ *IOChannel) ReadUnichar(thechar *C.gunichar) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) ReadUnichar(thechar *C.gunichar) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_return_ = C._g_io_channel_read_unichar((*C.GIOChannel)(_self_), thechar, _error_)
 	return
 }
 
-func (_self_ *IOChannel) Ref() (_go__return__ *IOChannel) {
+func (_self_ *GLibIOChannel) Ref() (_go__return__ *GLibIOChannel) {
 	var _return_ *C.GIOChannel
 	_return_ = C.g_io_channel_ref((*C.GIOChannel)(_self_))
-	_go__return__ = (*IOChannel)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibIOChannel)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *IOChannel) SeekPosition(offset int64, type_ C.GSeekType) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) SeekPosition(offset int64, type_ C.GSeekType) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_cgo_offset_ := (C.gint64)(offset)
 	_return_ = C._g_io_channel_seek_position((*C.GIOChannel)(_self_), _cgo_offset_, type_, _error_)
 	return
 }
 
-func (_self_ *IOChannel) SetBufferSize(size uint64) () {
+func (_self_ *GLibIOChannel) SetBufferSize(size uint64) () {
 	_cgo_size_ := (C.gsize)(size)
 	C.g_io_channel_set_buffer_size((*C.GIOChannel)(_self_), _cgo_size_)
 	return
 }
 
-func (_self_ *IOChannel) SetBuffered(buffered bool) () {
-	_cgo_buffered_ := C.glibfalse()
-	if buffered { _cgo_buffered_ = C.glibtrue() }
+func (_self_ *GLibIOChannel) SetBuffered(buffered bool) () {
+	_cgo_buffered_ := (C.gboolean)(C.FALSE)
+	if buffered { _cgo_buffered_ = (C.gboolean)(C.TRUE) }
 	C.g_io_channel_set_buffered((*C.GIOChannel)(_self_), _cgo_buffered_)
 	return
 }
 
-func (_self_ *IOChannel) SetCloseOnUnref(do_close bool) () {
-	_cgo_do_close_ := C.glibfalse()
-	if do_close { _cgo_do_close_ = C.glibtrue() }
+func (_self_ *GLibIOChannel) SetCloseOnUnref(do_close bool) () {
+	_cgo_do_close_ := (C.gboolean)(C.FALSE)
+	if do_close { _cgo_do_close_ = (C.gboolean)(C.TRUE) }
 	C.g_io_channel_set_close_on_unref((*C.GIOChannel)(_self_), _cgo_do_close_)
 	return
 }
 
-func (_self_ *IOChannel) SetEncoding(encoding string) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) SetEncoding(encoding string) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_cstring_encoding_ := C.CString(encoding)
 	_cgo_encoding_ := (*C.gchar)(unsafe.Pointer(_cstring_encoding_))
 	defer C.free(unsafe.Pointer(_cstring_encoding_))
@@ -3516,12 +3514,12 @@ func (_self_ *IOChannel) SetEncoding(encoding string) (_return_ C.GIOStatus, _er
 	return
 }
 
-func (_self_ *IOChannel) SetFlags(flags C.GIOFlags) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) SetFlags(flags C.GIOFlags) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_return_ = C._g_io_channel_set_flags((*C.GIOChannel)(_self_), flags, _error_)
 	return
 }
 
-func (_self_ *IOChannel) SetLineTerm(line_term string, length int) () {
+func (_self_ *GLibIOChannel) SetLineTerm(line_term string, length int) () {
 	_cgo_length_ := (C.gint)(length)
 	_cstring_line_term_ := C.CString(line_term)
 	_cgo_line_term_ := (*C.gchar)(unsafe.Pointer(_cstring_line_term_))
@@ -3530,34 +3528,34 @@ func (_self_ *IOChannel) SetLineTerm(line_term string, length int) () {
 	return
 }
 
-func (_self_ *IOChannel) Shutdown(flush bool) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
-	_cgo_flush_ := C.glibfalse()
-	if flush { _cgo_flush_ = C.glibtrue() }
+func (_self_ *GLibIOChannel) Shutdown(flush bool) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+	_cgo_flush_ := (C.gboolean)(C.FALSE)
+	if flush { _cgo_flush_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_io_channel_shutdown((*C.GIOChannel)(_self_), _cgo_flush_, _error_)
 	return
 }
 
-func (_self_ *IOChannel) UnixGetFd() (_go__return__ int) {
+func (_self_ *GLibIOChannel) UnixGetFd() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_io_channel_unix_get_fd((*C.GIOChannel)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *IOChannel) Unref() () {
+func (_self_ *GLibIOChannel) Unref() () {
 	C.g_io_channel_unref((*C.GIOChannel)(_self_))
 	return
 }
 
-func (_self_ *IOChannel) WriteUnichar(thechar C.gunichar) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
+func (_self_ *GLibIOChannel) WriteUnichar(thechar C.gunichar) (_return_ C.GIOStatus, _error_ unsafe.Pointer) {
 	_return_ = C._g_io_channel_write_unichar((*C.GIOChannel)(_self_), thechar, _error_)
 	return
 }
 
-func KeyFileNew() (_go__return__ *KeyFile) {
+func KeyFileNew() (_go__return__ *GLibKeyFile) {
 	var _return_ *C.GKeyFile
 	_return_ = C.g_key_file_new()
-	_go__return__ = (*KeyFile)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibKeyFile)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -3566,12 +3564,12 @@ func KeyFileErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func (_self_ *KeyFile) Free() () {
+func (_self_ *GLibKeyFile) Free() () {
 	C.g_key_file_free((*C.GKeyFile)(_self_))
 	return
 }
 
-func (_self_ *KeyFile) GetBoolean(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetBoolean(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3580,11 +3578,11 @@ func (_self_ *KeyFile) GetBoolean(group_name string, key string) (_go__return__ 
 	defer C.free(unsafe.Pointer(_cstring_key_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_get_boolean((*C.GKeyFile)(_self_), _cgo_group_name_, _cgo_key_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) GetBooleanList(group_name string, key string) (_return_ *C.gboolean, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetBooleanList(group_name string, key string) (_return_ *C.gboolean, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3597,7 +3595,7 @@ func (_self_ *KeyFile) GetBooleanList(group_name string, key string) (_return_ *
 	return
 }
 
-func (_self_ *KeyFile) GetComment(group_name string, key string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetComment(group_name string, key string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3610,7 +3608,7 @@ func (_self_ *KeyFile) GetComment(group_name string, key string) (_go__return__ 
 	return
 }
 
-func (_self_ *KeyFile) GetDouble(group_name string, key string) (_go__return__ float64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetDouble(group_name string, key string) (_go__return__ float64, _error_ unsafe.Pointer) {
 	var _return_ C.gdouble
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3623,7 +3621,7 @@ func (_self_ *KeyFile) GetDouble(group_name string, key string) (_go__return__ f
 	return
 }
 
-func (_self_ *KeyFile) GetDoubleList(group_name string, key string) (_return_ *C.gdouble, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetDoubleList(group_name string, key string) (_return_ *C.gdouble, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3636,14 +3634,14 @@ func (_self_ *KeyFile) GetDoubleList(group_name string, key string) (_return_ *C
 	return
 }
 
-func (_self_ *KeyFile) GetGroups() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibKeyFile) GetGroups() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_key_file_get_groups((*C.GKeyFile)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *KeyFile) GetInt64(group_name string, key string) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetInt64(group_name string, key string) (_go__return__ int64, _error_ unsafe.Pointer) {
 	var _return_ C.gint64
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3656,7 +3654,7 @@ func (_self_ *KeyFile) GetInt64(group_name string, key string) (_go__return__ in
 	return
 }
 
-func (_self_ *KeyFile) GetInteger(group_name string, key string) (_go__return__ int, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetInteger(group_name string, key string) (_go__return__ int, _error_ unsafe.Pointer) {
 	var _return_ C.gint
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3669,7 +3667,7 @@ func (_self_ *KeyFile) GetInteger(group_name string, key string) (_go__return__ 
 	return
 }
 
-func (_self_ *KeyFile) GetIntegerList(group_name string, key string) (_return_ *C.gint, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetIntegerList(group_name string, key string) (_return_ *C.gint, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3682,7 +3680,7 @@ func (_self_ *KeyFile) GetIntegerList(group_name string, key string) (_return_ *
 	return
 }
 
-func (_self_ *KeyFile) GetKeys(group_name string) (_return_ unsafe.Pointer, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetKeys(group_name string) (_return_ unsafe.Pointer, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3692,7 +3690,7 @@ func (_self_ *KeyFile) GetKeys(group_name string) (_return_ unsafe.Pointer, _go_
 	return
 }
 
-func (_self_ *KeyFile) GetLocaleString(group_name string, key string, locale string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetLocaleString(group_name string, key string, locale string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3708,7 +3706,7 @@ func (_self_ *KeyFile) GetLocaleString(group_name string, key string, locale str
 	return
 }
 
-func (_self_ *KeyFile) GetLocaleStringList(group_name string, key string, locale string) (_return_ unsafe.Pointer, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetLocaleStringList(group_name string, key string, locale string) (_return_ unsafe.Pointer, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3724,14 +3722,14 @@ func (_self_ *KeyFile) GetLocaleStringList(group_name string, key string, locale
 	return
 }
 
-func (_self_ *KeyFile) GetStartGroup() (_go__return__ string) {
+func (_self_ *GLibKeyFile) GetStartGroup() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.g_key_file_get_start_group((*C.GKeyFile)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *KeyFile) GetString(group_name string, key string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetString(group_name string, key string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3744,7 +3742,7 @@ func (_self_ *KeyFile) GetString(group_name string, key string) (_go__return__ s
 	return
 }
 
-func (_self_ *KeyFile) GetStringList(group_name string, key string) (_return_ unsafe.Pointer, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetStringList(group_name string, key string) (_return_ unsafe.Pointer, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3757,7 +3755,7 @@ func (_self_ *KeyFile) GetStringList(group_name string, key string) (_return_ un
 	return
 }
 
-func (_self_ *KeyFile) GetUint64(group_name string, key string) (_go__return__ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetUint64(group_name string, key string) (_go__return__ uint64, _error_ unsafe.Pointer) {
 	var _return_ C.guint64
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3770,7 +3768,7 @@ func (_self_ *KeyFile) GetUint64(group_name string, key string) (_go__return__ u
 	return
 }
 
-func (_self_ *KeyFile) GetValue(group_name string, key string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) GetValue(group_name string, key string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3783,17 +3781,17 @@ func (_self_ *KeyFile) GetValue(group_name string, key string) (_go__return__ st
 	return
 }
 
-func (_self_ *KeyFile) HasGroup(group_name string) (_go__return__ bool) {
+func (_self_ *GLibKeyFile) HasGroup(group_name string) (_go__return__ bool) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_has_group((*C.GKeyFile)(_self_), _cgo_group_name_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) HasKey(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) HasKey(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3802,49 +3800,49 @@ func (_self_ *KeyFile) HasKey(group_name string, key string) (_go__return__ bool
 	defer C.free(unsafe.Pointer(_cstring_key_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_has_key((*C.GKeyFile)(_self_), _cgo_group_name_, _cgo_key_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) LoadFromData(data string, length uint64, flags C.GKeyFileFlags) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) LoadFromData(data string, length uint64, flags C.GKeyFileFlags) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_length_ := (C.gsize)(length)
 	_cstring_data_ := C.CString(data)
 	_cgo_data_ := (*C.gchar)(unsafe.Pointer(_cstring_data_))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_load_from_data((*C.GKeyFile)(_self_), _cgo_data_, _cgo_length_, flags, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) LoadFromDataDirs(file string, flags C.GKeyFileFlags) (_go__return__ bool, full_path unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) LoadFromDataDirs(file string, flags C.GKeyFileFlags) (_go__return__ bool, full_path unsafe.Pointer, _error_ unsafe.Pointer) {
 	_cstring_file_ := C.CString(file)
 	_cgo_file_ := (*C.gchar)(unsafe.Pointer(_cstring_file_))
 	defer C.free(unsafe.Pointer(_cstring_file_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_load_from_data_dirs((*C.GKeyFile)(_self_), _cgo_file_, full_path, flags, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) LoadFromFile(file string, flags C.GKeyFileFlags) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) LoadFromFile(file string, flags C.GKeyFileFlags) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_file_ := C.CString(file)
 	_cgo_file_ := (*C.gchar)(unsafe.Pointer(_cstring_file_))
 	defer C.free(unsafe.Pointer(_cstring_file_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_load_from_file((*C.GKeyFile)(_self_), _cgo_file_, flags, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) Ref() (_go__return__ *KeyFile) {
+func (_self_ *GLibKeyFile) Ref() (_go__return__ *GLibKeyFile) {
 	var _return_ *C.GKeyFile
 	_return_ = C.g_key_file_ref((*C.GKeyFile)(_self_))
-	_go__return__ = (*KeyFile)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibKeyFile)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *KeyFile) RemoveComment(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) RemoveComment(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3853,21 +3851,21 @@ func (_self_ *KeyFile) RemoveComment(group_name string, key string) (_go__return
 	defer C.free(unsafe.Pointer(_cstring_key_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_remove_comment((*C.GKeyFile)(_self_), _cgo_group_name_, _cgo_key_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) RemoveGroup(group_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) RemoveGroup(group_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_remove_group((*C.GKeyFile)(_self_), _cgo_group_name_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) RemoveKey(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) RemoveKey(group_name string, key string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3876,24 +3874,24 @@ func (_self_ *KeyFile) RemoveKey(group_name string, key string) (_go__return__ b
 	defer C.free(unsafe.Pointer(_cstring_key_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_remove_key((*C.GKeyFile)(_self_), _cgo_group_name_, _cgo_key_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) SetBoolean(group_name string, key string, value bool) () {
+func (_self_ *GLibKeyFile) SetBoolean(group_name string, key string, value bool) () {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
-	_cgo_value_ := C.glibfalse()
-	if value { _cgo_value_ = C.glibtrue() }
+	_cgo_value_ := (C.gboolean)(C.FALSE)
+	if value { _cgo_value_ = (C.gboolean)(C.TRUE) }
 	C._g_key_file_set_boolean((*C.GKeyFile)(_self_), _cgo_group_name_, _cgo_key_, _cgo_value_)
 	return
 }
 
-func (_self_ *KeyFile) SetComment(group_name string, key string, comment string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) SetComment(group_name string, key string, comment string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3905,11 +3903,11 @@ func (_self_ *KeyFile) SetComment(group_name string, key string, comment string)
 	defer C.free(unsafe.Pointer(_cstring_comment_))
 	var _return_ C.gboolean
 	_return_ = C._g_key_file_set_comment((*C.GKeyFile)(_self_), _cgo_group_name_, _cgo_key_, _cgo_comment_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *KeyFile) SetDouble(group_name string, key string, value float64) () {
+func (_self_ *GLibKeyFile) SetDouble(group_name string, key string, value float64) () {
 	_cgo_value_ := (C.gdouble)(value)
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3921,7 +3919,7 @@ func (_self_ *KeyFile) SetDouble(group_name string, key string, value float64) (
 	return
 }
 
-func (_self_ *KeyFile) SetInt64(group_name string, key string, value int64) () {
+func (_self_ *GLibKeyFile) SetInt64(group_name string, key string, value int64) () {
 	_cgo_value_ := (C.gint64)(value)
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3933,7 +3931,7 @@ func (_self_ *KeyFile) SetInt64(group_name string, key string, value int64) () {
 	return
 }
 
-func (_self_ *KeyFile) SetInteger(group_name string, key string, value int) () {
+func (_self_ *GLibKeyFile) SetInteger(group_name string, key string, value int) () {
 	_cgo_value_ := (C.gint)(value)
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3945,13 +3943,13 @@ func (_self_ *KeyFile) SetInteger(group_name string, key string, value int) () {
 	return
 }
 
-func (_self_ *KeyFile) SetListSeparator(separator int8) () {
+func (_self_ *GLibKeyFile) SetListSeparator(separator int8) () {
 	_cgo_separator_ := (C.gchar)(separator)
 	C.g_key_file_set_list_separator((*C.GKeyFile)(_self_), _cgo_separator_)
 	return
 }
 
-func (_self_ *KeyFile) SetLocaleString(group_name string, key string, locale string, string_ string) () {
+func (_self_ *GLibKeyFile) SetLocaleString(group_name string, key string, locale string, string_ string) () {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3968,7 +3966,7 @@ func (_self_ *KeyFile) SetLocaleString(group_name string, key string, locale str
 	return
 }
 
-func (_self_ *KeyFile) SetString(group_name string, key string, string_ string) () {
+func (_self_ *GLibKeyFile) SetString(group_name string, key string, string_ string) () {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -3982,7 +3980,7 @@ func (_self_ *KeyFile) SetString(group_name string, key string, string_ string) 
 	return
 }
 
-func (_self_ *KeyFile) SetUint64(group_name string, key string, value uint64) () {
+func (_self_ *GLibKeyFile) SetUint64(group_name string, key string, value uint64) () {
 	_cgo_value_ := (C.guint64)(value)
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
@@ -3994,7 +3992,7 @@ func (_self_ *KeyFile) SetUint64(group_name string, key string, value uint64) ()
 	return
 }
 
-func (_self_ *KeyFile) SetValue(group_name string, key string, value string) () {
+func (_self_ *GLibKeyFile) SetValue(group_name string, key string, value string) () {
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
@@ -4008,7 +4006,7 @@ func (_self_ *KeyFile) SetValue(group_name string, key string, value string) () 
 	return
 }
 
-func (_self_ *KeyFile) ToData() (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *GLibKeyFile) ToData() (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
 	var length C.gsize
 	var _return_ *C.gchar
 	_return_ = C._g_key_file_to_data((*C.GKeyFile)(_self_), &length, _error_)
@@ -4017,7 +4015,7 @@ func (_self_ *KeyFile) ToData() (_go__return__ string, _go_length_ uint64, _erro
 	return
 }
 
-func (_self_ *KeyFile) Unref() () {
+func (_self_ *GLibKeyFile) Unref() () {
 	C.g_key_file_unref((*C.GKeyFile)(_self_))
 	return
 }
@@ -4187,339 +4185,339 @@ func ListSortWithData(list *C.GList, compare_func C.GCompareDataFunc, user_data 
 	return
 }
 
-func MainContextNew() (_go__return__ *MainContext) {
+func MainContextNew() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_main_context_new()
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func MainContextDefault() (_go__return__ *MainContext) {
+func MainContextDefault() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_main_context_default()
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func MainContextGetThreadDefault() (_go__return__ *MainContext) {
+func MainContextGetThreadDefault() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_main_context_get_thread_default()
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func MainContextRefThreadDefault() (_go__return__ *MainContext) {
+func MainContextRefThreadDefault() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_main_context_ref_thread_default()
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainContext) Acquire() (_go__return__ bool) {
+func (_self_ *GLibMainContext) Acquire() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_main_context_acquire((*C.GMainContext)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainContext) AddPoll(fd *PollFD, priority int) () {
+func (_self_ *GLibMainContext) AddPoll(fd *GLibPollFD, priority int) () {
 	_cgo_fd_ := (*C.GPollFD)(unsafe.Pointer(fd))
 	_cgo_priority_ := (C.gint)(priority)
 	C.g_main_context_add_poll((*C.GMainContext)(_self_), _cgo_fd_, _cgo_priority_)
 	return
 }
 
-func (_self_ *MainContext) Dispatch() () {
+func (_self_ *GLibMainContext) Dispatch() () {
 	C.g_main_context_dispatch((*C.GMainContext)(_self_))
 	return
 }
 
-func (_self_ *MainContext) FindSourceByFuncsUserData(funcs *SourceFuncs, user_data C.gpointer) (_go__return__ *Source) {
+func (_self_ *GLibMainContext) FindSourceByFuncsUserData(funcs *GLibSourceFuncs, user_data C.gpointer) (_go__return__ *GLibSource) {
 	_cgo_funcs_ := (*C.GSourceFuncs)(unsafe.Pointer(funcs))
 	var _return_ *C.GSource
 	_return_ = C.g_main_context_find_source_by_funcs_user_data((*C.GMainContext)(_self_), _cgo_funcs_, user_data)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainContext) FindSourceById(source_id uint) (_go__return__ *Source) {
+func (_self_ *GLibMainContext) FindSourceById(source_id uint) (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_cgo_source_id_ := (C.guint)(source_id)
 	_return_ = C.g_main_context_find_source_by_id((*C.GMainContext)(_self_), _cgo_source_id_)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainContext) FindSourceByUserData(user_data C.gpointer) (_go__return__ *Source) {
+func (_self_ *GLibMainContext) FindSourceByUserData(user_data C.gpointer) (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_return_ = C.g_main_context_find_source_by_user_data((*C.GMainContext)(_self_), user_data)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainContext) GetPollFunc() (_return_ C.GPollFunc) {
+func (_self_ *GLibMainContext) GetPollFunc() (_return_ C.GPollFunc) {
 	_return_ = C.g_main_context_get_poll_func((*C.GMainContext)(_self_))
 	return
 }
 
-func (_self_ *MainContext) Invoke(function C.GSourceFunc, data C.gpointer) () {
+func (_self_ *GLibMainContext) Invoke(function C.GSourceFunc, data C.gpointer) () {
 	C.g_main_context_invoke((*C.GMainContext)(_self_), function, data)
 	return
 }
 
-func (_self_ *MainContext) InvokeFull(priority int, function C.GSourceFunc, data C.gpointer, notify C.GDestroyNotify) () {
+func (_self_ *GLibMainContext) InvokeFull(priority int, function C.GSourceFunc, data C.gpointer, notify C.GDestroyNotify) () {
 	_cgo_priority_ := (C.gint)(priority)
 	C.g_main_context_invoke_full((*C.GMainContext)(_self_), _cgo_priority_, function, data, notify)
 	return
 }
 
-func (_self_ *MainContext) IsOwner() (_go__return__ bool) {
+func (_self_ *GLibMainContext) IsOwner() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_main_context_is_owner((*C.GMainContext)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainContext) Iteration(may_block bool) (_go__return__ bool) {
-	_cgo_may_block_ := C.glibfalse()
-	if may_block { _cgo_may_block_ = C.glibtrue() }
+func (_self_ *GLibMainContext) Iteration(may_block bool) (_go__return__ bool) {
+	_cgo_may_block_ := (C.gboolean)(C.FALSE)
+	if may_block { _cgo_may_block_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
 	_return_ = C.g_main_context_iteration((*C.GMainContext)(_self_), _cgo_may_block_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainContext) Pending() (_go__return__ bool) {
+func (_self_ *GLibMainContext) Pending() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_main_context_pending((*C.GMainContext)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainContext) PopThreadDefault() () {
+func (_self_ *GLibMainContext) PopThreadDefault() () {
 	C.g_main_context_pop_thread_default((*C.GMainContext)(_self_))
 	return
 }
 
-func (_self_ *MainContext) Prepare(priority *C.gint) (_go__return__ bool) {
+func (_self_ *GLibMainContext) Prepare(priority *C.gint) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_main_context_prepare((*C.GMainContext)(_self_), priority)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainContext) PushThreadDefault() () {
+func (_self_ *GLibMainContext) PushThreadDefault() () {
 	C.g_main_context_push_thread_default((*C.GMainContext)(_self_))
 	return
 }
 
-func (_self_ *MainContext) Ref() (_go__return__ *MainContext) {
+func (_self_ *GLibMainContext) Ref() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_main_context_ref((*C.GMainContext)(_self_))
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainContext) Release() () {
+func (_self_ *GLibMainContext) Release() () {
 	C.g_main_context_release((*C.GMainContext)(_self_))
 	return
 }
 
-func (_self_ *MainContext) RemovePoll(fd *PollFD) () {
+func (_self_ *GLibMainContext) RemovePoll(fd *GLibPollFD) () {
 	_cgo_fd_ := (*C.GPollFD)(unsafe.Pointer(fd))
 	C.g_main_context_remove_poll((*C.GMainContext)(_self_), _cgo_fd_)
 	return
 }
 
-func (_self_ *MainContext) SetPollFunc(func_ C.GPollFunc) () {
+func (_self_ *GLibMainContext) SetPollFunc(func_ C.GPollFunc) () {
 	C.g_main_context_set_poll_func((*C.GMainContext)(_self_), func_)
 	return
 }
 
-func (_self_ *MainContext) Unref() () {
+func (_self_ *GLibMainContext) Unref() () {
 	C.g_main_context_unref((*C.GMainContext)(_self_))
 	return
 }
 
-func (_self_ *MainContext) Wait(cond *Cond, mutex *C.GMutex) (_go__return__ bool) {
+func (_self_ *GLibMainContext) Wait(cond *GLibCond, mutex *C.GMutex) (_go__return__ bool) {
 	_cgo_cond_ := (*C.GCond)(unsafe.Pointer(cond))
 	var _return_ C.gboolean
 	_return_ = C.g_main_context_wait((*C.GMainContext)(_self_), _cgo_cond_, mutex)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainContext) Wakeup() () {
+func (_self_ *GLibMainContext) Wakeup() () {
 	C.g_main_context_wakeup((*C.GMainContext)(_self_))
 	return
 }
 
-func MainLoopNew(context *MainContext, is_running bool) (_go__return__ *MainLoop) {
+func MainLoopNew(context *GLibMainContext, is_running bool) (_go__return__ *GLibMainLoop) {
 	_cgo_context_ := (*C.GMainContext)(unsafe.Pointer(context))
 	var _return_ *C.GMainLoop
-	_cgo_is_running_ := C.glibfalse()
-	if is_running { _cgo_is_running_ = C.glibtrue() }
+	_cgo_is_running_ := (C.gboolean)(C.FALSE)
+	if is_running { _cgo_is_running_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_main_loop_new(_cgo_context_, _cgo_is_running_)
-	_go__return__ = (*MainLoop)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainLoop)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainLoop) GetContext() (_go__return__ *MainContext) {
+func (_self_ *GLibMainLoop) GetContext() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_main_loop_get_context((*C.GMainLoop)(_self_))
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainLoop) IsRunning() (_go__return__ bool) {
+func (_self_ *GLibMainLoop) IsRunning() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_main_loop_is_running((*C.GMainLoop)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MainLoop) Quit() () {
+func (_self_ *GLibMainLoop) Quit() () {
 	C.g_main_loop_quit((*C.GMainLoop)(_self_))
 	return
 }
 
-func (_self_ *MainLoop) Ref() (_go__return__ *MainLoop) {
+func (_self_ *GLibMainLoop) Ref() (_go__return__ *GLibMainLoop) {
 	var _return_ *C.GMainLoop
 	_return_ = C.g_main_loop_ref((*C.GMainLoop)(_self_))
-	_go__return__ = (*MainLoop)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainLoop)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MainLoop) Run() () {
+func (_self_ *GLibMainLoop) Run() () {
 	C.g_main_loop_run((*C.GMainLoop)(_self_))
 	return
 }
 
-func (_self_ *MainLoop) Unref() () {
+func (_self_ *GLibMainLoop) Unref() () {
 	C.g_main_loop_unref((*C.GMainLoop)(_self_))
 	return
 }
 
-func MappedFileNew(filename string, writable bool) (_go__return__ *MappedFile, _error_ unsafe.Pointer) {
+func MappedFileNew(filename string, writable bool) (_go__return__ *GLibMappedFile, _error_ unsafe.Pointer) {
 	var _return_ *C.GMappedFile
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_cgo_writable_ := C.glibfalse()
-	if writable { _cgo_writable_ = C.glibtrue() }
+	_cgo_writable_ := (C.gboolean)(C.FALSE)
+	if writable { _cgo_writable_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_mapped_file_new(_cgo_filename_, _cgo_writable_, _error_)
-	_go__return__ = (*MappedFile)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMappedFile)(unsafe.Pointer(_return_))
 	return
 }
 
-func MappedFileNewFromFd(fd int, writable bool) (_go__return__ *MappedFile, _error_ unsafe.Pointer) {
+func MappedFileNewFromFd(fd int, writable bool) (_go__return__ *GLibMappedFile, _error_ unsafe.Pointer) {
 	var _return_ *C.GMappedFile
 	_cgo_fd_ := (C.gint)(fd)
-	_cgo_writable_ := C.glibfalse()
-	if writable { _cgo_writable_ = C.glibtrue() }
+	_cgo_writable_ := (C.gboolean)(C.FALSE)
+	if writable { _cgo_writable_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_mapped_file_new_from_fd(_cgo_fd_, _cgo_writable_, _error_)
-	_go__return__ = (*MappedFile)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMappedFile)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MappedFile) GetBytes() (_go__return__ *Bytes) {
+func (_self_ *GLibMappedFile) GetBytes() (_go__return__ *GLibBytes) {
 	var _return_ *C.GBytes
 	_return_ = C.g_mapped_file_get_bytes((*C.GMappedFile)(_self_))
-	_go__return__ = (*Bytes)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibBytes)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MappedFile) GetContents() (_go__return__ string) {
+func (_self_ *GLibMappedFile) GetContents() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.g_mapped_file_get_contents((*C.GMappedFile)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *MappedFile) GetLength() (_go__return__ uint64) {
+func (_self_ *GLibMappedFile) GetLength() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C.g_mapped_file_get_length((*C.GMappedFile)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *MappedFile) Ref() (_go__return__ *MappedFile) {
+func (_self_ *GLibMappedFile) Ref() (_go__return__ *GLibMappedFile) {
 	var _return_ *C.GMappedFile
 	_return_ = C.g_mapped_file_ref((*C.GMappedFile)(_self_))
-	_go__return__ = (*MappedFile)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMappedFile)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MappedFile) Unref() () {
+func (_self_ *GLibMappedFile) Unref() () {
 	C.g_mapped_file_unref((*C.GMappedFile)(_self_))
 	return
 }
 
-func MarkupParseContextNew(parser *MarkupParser, flags C.GMarkupParseFlags, user_data C.gpointer, user_data_dnotify C.GDestroyNotify) (_go__return__ *MarkupParseContext) {
+func MarkupParseContextNew(parser *GLibMarkupParser, flags C.GMarkupParseFlags, user_data C.gpointer, user_data_dnotify C.GDestroyNotify) (_go__return__ *GLibMarkupParseContext) {
 	_cgo_parser_ := (*C.GMarkupParser)(unsafe.Pointer(parser))
 	var _return_ *C.GMarkupParseContext
 	_return_ = C._g_markup_parse_context_new(_cgo_parser_, flags, user_data, user_data_dnotify)
-	_go__return__ = (*MarkupParseContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMarkupParseContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MarkupParseContext) EndParse() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibMarkupParseContext) EndParse() (_go__return__ bool, _error_ unsafe.Pointer) {
 	var _return_ C.gboolean
 	_return_ = C._g_markup_parse_context_end_parse((*C.GMarkupParseContext)(_self_), _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MarkupParseContext) Free() () {
+func (_self_ *GLibMarkupParseContext) Free() () {
 	C.g_markup_parse_context_free((*C.GMarkupParseContext)(_self_))
 	return
 }
 
-func (_self_ *MarkupParseContext) GetElement() (_go__return__ string) {
+func (_self_ *GLibMarkupParseContext) GetElement() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_markup_parse_context_get_element((*C.GMarkupParseContext)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *MarkupParseContext) GetElementStack() (_return_ *C.GSList) {
+func (_self_ *GLibMarkupParseContext) GetElementStack() (_return_ *C.GSList) {
 	_return_ = C._g_markup_parse_context_get_element_stack((*C.GMarkupParseContext)(_self_))
 	return
 }
 
-func (_self_ *MarkupParseContext) GetPosition(line_number *C.gint, char_number *C.gint) () {
+func (_self_ *GLibMarkupParseContext) GetPosition(line_number *C.gint, char_number *C.gint) () {
 	C.g_markup_parse_context_get_position((*C.GMarkupParseContext)(_self_), line_number, char_number)
 	return
 }
 
-func (_self_ *MarkupParseContext) GetUserData() (_return_ C.gpointer) {
+func (_self_ *GLibMarkupParseContext) GetUserData() (_return_ C.gpointer) {
 	_return_ = C.g_markup_parse_context_get_user_data((*C.GMarkupParseContext)(_self_))
 	return
 }
 
-func (_self_ *MarkupParseContext) Parse(text string, text_len int64) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibMarkupParseContext) Parse(text string, text_len int64) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_text_len_ := (C.gssize)(text_len)
 	_cstring_text_ := C.CString(text)
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
 	defer C.free(unsafe.Pointer(_cstring_text_))
 	var _return_ C.gboolean
 	_return_ = C._g_markup_parse_context_parse((*C.GMarkupParseContext)(_self_), _cgo_text_, _cgo_text_len_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MarkupParseContext) Pop() (_return_ C.gpointer) {
+func (_self_ *GLibMarkupParseContext) Pop() (_return_ C.gpointer) {
 	_return_ = C.g_markup_parse_context_pop((*C.GMarkupParseContext)(_self_))
 	return
 }
 
-func (_self_ *MarkupParseContext) Push(parser *MarkupParser, user_data C.gpointer) () {
+func (_self_ *GLibMarkupParseContext) Push(parser *GLibMarkupParser, user_data C.gpointer) () {
 	_cgo_parser_ := (*C.GMarkupParser)(unsafe.Pointer(parser))
 	C._g_markup_parse_context_push((*C.GMarkupParseContext)(_self_), _cgo_parser_, user_data)
 	return
 }
 
-func (_self_ *MatchInfo) ExpandReferences(string_to_expand string) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *GLibMatchInfo) ExpandReferences(string_to_expand string) (_go__return__ string, _error_ unsafe.Pointer) {
 	_cstring_string_to_expand_ := C.CString(string_to_expand)
 	_cgo_string_to_expand_ := (*C.gchar)(unsafe.Pointer(_cstring_string_to_expand_))
 	defer C.free(unsafe.Pointer(_cstring_string_to_expand_))
@@ -4529,7 +4527,7 @@ func (_self_ *MatchInfo) ExpandReferences(string_to_expand string) (_go__return_
 	return
 }
 
-func (_self_ *MatchInfo) Fetch(match_num int) (_go__return__ string) {
+func (_self_ *GLibMatchInfo) Fetch(match_num int) (_go__return__ string) {
 	_cgo_match_num_ := (C.gint)(match_num)
 	var _return_ *C.gchar
 	_return_ = C._g_match_info_fetch((*C.GMatchInfo)(_self_), _cgo_match_num_)
@@ -4537,12 +4535,12 @@ func (_self_ *MatchInfo) Fetch(match_num int) (_go__return__ string) {
 	return
 }
 
-func (_self_ *MatchInfo) FetchAll() (_return_ unsafe.Pointer) {
+func (_self_ *GLibMatchInfo) FetchAll() (_return_ unsafe.Pointer) {
 	_return_ = C._g_match_info_fetch_all((*C.GMatchInfo)(_self_))
 	return
 }
 
-func (_self_ *MatchInfo) FetchNamed(name string) (_go__return__ string) {
+func (_self_ *GLibMatchInfo) FetchNamed(name string) (_go__return__ string) {
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -4552,7 +4550,7 @@ func (_self_ *MatchInfo) FetchNamed(name string) (_go__return__ string) {
 	return
 }
 
-func (_self_ *MatchInfo) FetchNamedPos(name string) (_go__return__ bool, _go_start_pos_ int, _go_end_pos_ int) {
+func (_self_ *GLibMatchInfo) FetchNamedPos(name string) (_go__return__ bool, _go_start_pos_ int, _go_end_pos_ int) {
 	var start_pos C.gint
 	var end_pos C.gint
 	_cstring_name_ := C.CString(name)
@@ -4562,11 +4560,11 @@ func (_self_ *MatchInfo) FetchNamedPos(name string) (_go__return__ bool, _go_sta
 	_return_ = C._g_match_info_fetch_named_pos((*C.GMatchInfo)(_self_), _cgo_name_, &start_pos, &end_pos)
 	_go_start_pos_ = (int)(start_pos)
 	_go_end_pos_ = (int)(end_pos)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MatchInfo) FetchPos(match_num int) (_go__return__ bool, _go_start_pos_ int, _go_end_pos_ int) {
+func (_self_ *GLibMatchInfo) FetchPos(match_num int) (_go__return__ bool, _go_start_pos_ int, _go_end_pos_ int) {
 	_cgo_match_num_ := (C.gint)(match_num)
 	var start_pos C.gint
 	var end_pos C.gint
@@ -4574,84 +4572,84 @@ func (_self_ *MatchInfo) FetchPos(match_num int) (_go__return__ bool, _go_start_
 	_return_ = C._g_match_info_fetch_pos((*C.GMatchInfo)(_self_), _cgo_match_num_, &start_pos, &end_pos)
 	_go_start_pos_ = (int)(start_pos)
 	_go_end_pos_ = (int)(end_pos)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MatchInfo) Free() () {
+func (_self_ *GLibMatchInfo) Free() () {
 	C.g_match_info_free((*C.GMatchInfo)(_self_))
 	return
 }
 
-func (_self_ *MatchInfo) GetMatchCount() (_go__return__ int) {
+func (_self_ *GLibMatchInfo) GetMatchCount() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C._g_match_info_get_match_count((*C.GMatchInfo)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *MatchInfo) GetRegex() (_go__return__ *Regex) {
+func (_self_ *GLibMatchInfo) GetRegex() (_go__return__ *GLibRegex) {
 	var _return_ *C.GRegex
 	_return_ = C._g_match_info_get_regex((*C.GMatchInfo)(_self_))
-	_go__return__ = (*Regex)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRegex)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MatchInfo) GetString() (_go__return__ string) {
+func (_self_ *GLibMatchInfo) GetString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_match_info_get_string((*C.GMatchInfo)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *MatchInfo) IsPartialMatch() (_go__return__ bool) {
+func (_self_ *GLibMatchInfo) IsPartialMatch() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_match_info_is_partial_match((*C.GMatchInfo)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MatchInfo) Matches() (_go__return__ bool) {
+func (_self_ *GLibMatchInfo) Matches() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_match_info_matches((*C.GMatchInfo)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MatchInfo) Next() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibMatchInfo) Next() (_go__return__ bool, _error_ unsafe.Pointer) {
 	var _return_ C.gboolean
 	_return_ = C._g_match_info_next((*C.GMatchInfo)(_self_), _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *MatchInfo) Ref() (_go__return__ *MatchInfo) {
+func (_self_ *GLibMatchInfo) Ref() (_go__return__ *GLibMatchInfo) {
 	var _return_ *C.GMatchInfo
 	_return_ = C.g_match_info_ref((*C.GMatchInfo)(_self_))
-	_go__return__ = (*MatchInfo)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMatchInfo)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *MatchInfo) Unref() () {
+func (_self_ *GLibMatchInfo) Unref() () {
 	C.g_match_info_unref((*C.GMatchInfo)(_self_))
 	return
 }
 
-func NodeNew(data C.gpointer) (_go__return__ *Node) {
+func NodeNew(data C.gpointer) (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_new(data)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) ChildIndex(data C.gpointer) (_go__return__ int) {
+func (_self_ *GLibNode) ChildIndex(data C.gpointer) (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_node_child_index((*C.GNode)(_self_), data)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Node) ChildPosition(child *Node) (_go__return__ int) {
+func (_self_ *GLibNode) ChildPosition(child *GLibNode) (_go__return__ int) {
 	_cgo_child_ := (*C.GNode)(unsafe.Pointer(child))
 	var _return_ C.gint
 	_return_ = C.g_node_child_position((*C.GNode)(_self_), _cgo_child_)
@@ -4659,189 +4657,189 @@ func (_self_ *Node) ChildPosition(child *Node) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Node) ChildrenForeach(flags C.GTraverseFlags, func_ C.GNodeForeachFunc, data C.gpointer) () {
+func (_self_ *GLibNode) ChildrenForeach(flags C.GTraverseFlags, func_ C.GNodeForeachFunc, data C.gpointer) () {
 	C.g_node_children_foreach((*C.GNode)(_self_), flags, func_, data)
 	return
 }
 
-func (_self_ *Node) Copy() (_go__return__ *Node) {
+func (_self_ *GLibNode) Copy() (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_copy((*C.GNode)(_self_))
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) CopyDeep(copy_func C.GCopyFunc, data C.gpointer) (_go__return__ *Node) {
+func (_self_ *GLibNode) CopyDeep(copy_func C.GCopyFunc, data C.gpointer) (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_copy_deep((*C.GNode)(_self_), copy_func, data)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) Depth() (_go__return__ uint) {
+func (_self_ *GLibNode) Depth() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_node_depth((*C.GNode)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Node) Destroy() () {
+func (_self_ *GLibNode) Destroy() () {
 	C.g_node_destroy((*C.GNode)(_self_))
 	return
 }
 
-func (_self_ *Node) Find(order C.GTraverseType, flags C.GTraverseFlags, data C.gpointer) (_go__return__ *Node) {
+func (_self_ *GLibNode) Find(order C.GTraverseType, flags C.GTraverseFlags, data C.gpointer) (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_find((*C.GNode)(_self_), order, flags, data)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) FindChild(flags C.GTraverseFlags, data C.gpointer) (_go__return__ *Node) {
+func (_self_ *GLibNode) FindChild(flags C.GTraverseFlags, data C.gpointer) (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_find_child((*C.GNode)(_self_), flags, data)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) FirstSibling() (_go__return__ *Node) {
+func (_self_ *GLibNode) FirstSibling() (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_first_sibling((*C.GNode)(_self_))
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) GetRoot() (_go__return__ *Node) {
+func (_self_ *GLibNode) GetRoot() (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_get_root((*C.GNode)(_self_))
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) Insert(position int, node *Node) (_go__return__ *Node) {
+func (_self_ *GLibNode) Insert(position int, node *GLibNode) (_go__return__ *GLibNode) {
 	_cgo_node_ := (*C.GNode)(unsafe.Pointer(node))
 	var _return_ *C.GNode
 	_cgo_position_ := (C.gint)(position)
 	_return_ = C.g_node_insert((*C.GNode)(_self_), _cgo_position_, _cgo_node_)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) InsertAfter(sibling *Node, node *Node) (_go__return__ *Node) {
+func (_self_ *GLibNode) InsertAfter(sibling *GLibNode, node *GLibNode) (_go__return__ *GLibNode) {
 	_cgo_sibling_ := (*C.GNode)(unsafe.Pointer(sibling))
 	_cgo_node_ := (*C.GNode)(unsafe.Pointer(node))
 	var _return_ *C.GNode
 	_return_ = C.g_node_insert_after((*C.GNode)(_self_), _cgo_sibling_, _cgo_node_)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) InsertBefore(sibling *Node, node *Node) (_go__return__ *Node) {
+func (_self_ *GLibNode) InsertBefore(sibling *GLibNode, node *GLibNode) (_go__return__ *GLibNode) {
 	_cgo_sibling_ := (*C.GNode)(unsafe.Pointer(sibling))
 	_cgo_node_ := (*C.GNode)(unsafe.Pointer(node))
 	var _return_ *C.GNode
 	_return_ = C.g_node_insert_before((*C.GNode)(_self_), _cgo_sibling_, _cgo_node_)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) IsAncestor(descendant *Node) (_go__return__ bool) {
+func (_self_ *GLibNode) IsAncestor(descendant *GLibNode) (_go__return__ bool) {
 	_cgo_descendant_ := (*C.GNode)(unsafe.Pointer(descendant))
 	var _return_ C.gboolean
 	_return_ = C.g_node_is_ancestor((*C.GNode)(_self_), _cgo_descendant_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Node) LastChild() (_go__return__ *Node) {
+func (_self_ *GLibNode) LastChild() (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_last_child((*C.GNode)(_self_))
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) LastSibling() (_go__return__ *Node) {
+func (_self_ *GLibNode) LastSibling() (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_return_ = C.g_node_last_sibling((*C.GNode)(_self_))
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) MaxHeight() (_go__return__ uint) {
+func (_self_ *GLibNode) MaxHeight() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_node_max_height((*C.GNode)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Node) NChildren() (_go__return__ uint) {
+func (_self_ *GLibNode) NChildren() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_node_n_children((*C.GNode)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Node) NNodes(flags C.GTraverseFlags) (_go__return__ uint) {
+func (_self_ *GLibNode) NNodes(flags C.GTraverseFlags) (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_node_n_nodes((*C.GNode)(_self_), flags)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Node) NthChild(n uint) (_go__return__ *Node) {
+func (_self_ *GLibNode) NthChild(n uint) (_go__return__ *GLibNode) {
 	var _return_ *C.GNode
 	_cgo_n_ := (C.guint)(n)
 	_return_ = C.g_node_nth_child((*C.GNode)(_self_), _cgo_n_)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) Prepend(node *Node) (_go__return__ *Node) {
+func (_self_ *GLibNode) Prepend(node *GLibNode) (_go__return__ *GLibNode) {
 	_cgo_node_ := (*C.GNode)(unsafe.Pointer(node))
 	var _return_ *C.GNode
 	_return_ = C.g_node_prepend((*C.GNode)(_self_), _cgo_node_)
-	_go__return__ = (*Node)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibNode)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Node) ReverseChildren() () {
+func (_self_ *GLibNode) ReverseChildren() () {
 	C.g_node_reverse_children((*C.GNode)(_self_))
 	return
 }
 
-func (_self_ *Node) Traverse(order C.GTraverseType, flags C.GTraverseFlags, max_depth int, func_ C.GNodeTraverseFunc, data C.gpointer) () {
+func (_self_ *GLibNode) Traverse(order C.GTraverseType, flags C.GTraverseFlags, max_depth int, func_ C.GNodeTraverseFunc, data C.gpointer) () {
 	_cgo_max_depth_ := (C.gint)(max_depth)
 	C.g_node_traverse((*C.GNode)(_self_), order, flags, _cgo_max_depth_, func_, data)
 	return
 }
 
-func (_self_ *Node) Unlink() () {
+func (_self_ *GLibNode) Unlink() () {
 	C.g_node_unlink((*C.GNode)(_self_))
 	return
 }
 
-func (_self_ *Once) Impl(func_ C.GThreadFunc, arg C.gpointer) (_return_ C.gpointer) {
+func (_self_ *GLibOnce) Impl(func_ C.GThreadFunc, arg C.gpointer) (_return_ C.gpointer) {
 	_return_ = C.g_once_impl((*C.GOnce)(_self_), func_, arg)
 	return
 }
 
-func OptionContextNew(parameter_string string) (_go__return__ *OptionContext) {
+func OptionContextNew(parameter_string string) (_go__return__ *GLibOptionContext) {
 	var _return_ *C.GOptionContext
 	_cstring_parameter_string_ := C.CString(parameter_string)
 	_cgo_parameter_string_ := (*C.gchar)(unsafe.Pointer(_cstring_parameter_string_))
 	defer C.free(unsafe.Pointer(_cstring_parameter_string_))
 	_return_ = C._g_option_context_new(_cgo_parameter_string_)
-	_go__return__ = (*OptionContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibOptionContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *OptionContext) AddGroup(group *OptionGroup) () {
+func (_self_ *GLibOptionContext) AddGroup(group *GLibOptionGroup) () {
 	_cgo_group_ := (*C.GOptionGroup)(unsafe.Pointer(group))
 	C.g_option_context_add_group((*C.GOptionContext)(_self_), _cgo_group_)
 	return
 }
 
-func (_self_ *OptionContext) AddMainEntries(entries *OptionEntry, translation_domain string) () {
+func (_self_ *GLibOptionContext) AddMainEntries(entries *GLibOptionEntry, translation_domain string) () {
 	_cgo_entries_ := (*C.GOptionEntry)(unsafe.Pointer(entries))
 	_cstring_translation_domain_ := C.CString(translation_domain)
 	_cgo_translation_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_translation_domain_))
@@ -4850,57 +4848,57 @@ func (_self_ *OptionContext) AddMainEntries(entries *OptionEntry, translation_do
 	return
 }
 
-func (_self_ *OptionContext) Free() () {
+func (_self_ *GLibOptionContext) Free() () {
 	C.g_option_context_free((*C.GOptionContext)(_self_))
 	return
 }
 
-func (_self_ *OptionContext) GetDescription() (_go__return__ string) {
+func (_self_ *GLibOptionContext) GetDescription() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_option_context_get_description((*C.GOptionContext)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *OptionContext) GetHelp(main_help bool, group *OptionGroup) (_go__return__ string) {
+func (_self_ *GLibOptionContext) GetHelp(main_help bool, group *GLibOptionGroup) (_go__return__ string) {
 	_cgo_group_ := (*C.GOptionGroup)(unsafe.Pointer(group))
 	var _return_ *C.gchar
-	_cgo_main_help_ := C.glibfalse()
-	if main_help { _cgo_main_help_ = C.glibtrue() }
+	_cgo_main_help_ := (C.gboolean)(C.FALSE)
+	if main_help { _cgo_main_help_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_option_context_get_help((*C.GOptionContext)(_self_), _cgo_main_help_, _cgo_group_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *OptionContext) GetHelpEnabled() (_go__return__ bool) {
+func (_self_ *GLibOptionContext) GetHelpEnabled() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_option_context_get_help_enabled((*C.GOptionContext)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *OptionContext) GetIgnoreUnknownOptions() (_go__return__ bool) {
+func (_self_ *GLibOptionContext) GetIgnoreUnknownOptions() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_option_context_get_ignore_unknown_options((*C.GOptionContext)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *OptionContext) GetMainGroup() (_go__return__ *OptionGroup) {
+func (_self_ *GLibOptionContext) GetMainGroup() (_go__return__ *GLibOptionGroup) {
 	var _return_ *C.GOptionGroup
 	_return_ = C.g_option_context_get_main_group((*C.GOptionContext)(_self_))
-	_go__return__ = (*OptionGroup)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibOptionGroup)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *OptionContext) GetSummary() (_go__return__ string) {
+func (_self_ *GLibOptionContext) GetSummary() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_option_context_get_summary((*C.GOptionContext)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *OptionContext) SetDescription(description string) () {
+func (_self_ *GLibOptionContext) SetDescription(description string) () {
 	_cstring_description_ := C.CString(description)
 	_cgo_description_ := (*C.gchar)(unsafe.Pointer(_cstring_description_))
 	defer C.free(unsafe.Pointer(_cstring_description_))
@@ -4908,27 +4906,27 @@ func (_self_ *OptionContext) SetDescription(description string) () {
 	return
 }
 
-func (_self_ *OptionContext) SetHelpEnabled(help_enabled bool) () {
-	_cgo_help_enabled_ := C.glibfalse()
-	if help_enabled { _cgo_help_enabled_ = C.glibtrue() }
+func (_self_ *GLibOptionContext) SetHelpEnabled(help_enabled bool) () {
+	_cgo_help_enabled_ := (C.gboolean)(C.FALSE)
+	if help_enabled { _cgo_help_enabled_ = (C.gboolean)(C.TRUE) }
 	C.g_option_context_set_help_enabled((*C.GOptionContext)(_self_), _cgo_help_enabled_)
 	return
 }
 
-func (_self_ *OptionContext) SetIgnoreUnknownOptions(ignore_unknown bool) () {
-	_cgo_ignore_unknown_ := C.glibfalse()
-	if ignore_unknown { _cgo_ignore_unknown_ = C.glibtrue() }
+func (_self_ *GLibOptionContext) SetIgnoreUnknownOptions(ignore_unknown bool) () {
+	_cgo_ignore_unknown_ := (C.gboolean)(C.FALSE)
+	if ignore_unknown { _cgo_ignore_unknown_ = (C.gboolean)(C.TRUE) }
 	C.g_option_context_set_ignore_unknown_options((*C.GOptionContext)(_self_), _cgo_ignore_unknown_)
 	return
 }
 
-func (_self_ *OptionContext) SetMainGroup(group *OptionGroup) () {
+func (_self_ *GLibOptionContext) SetMainGroup(group *GLibOptionGroup) () {
 	_cgo_group_ := (*C.GOptionGroup)(unsafe.Pointer(group))
 	C.g_option_context_set_main_group((*C.GOptionContext)(_self_), _cgo_group_)
 	return
 }
 
-func (_self_ *OptionContext) SetSummary(summary string) () {
+func (_self_ *GLibOptionContext) SetSummary(summary string) () {
 	_cstring_summary_ := C.CString(summary)
 	_cgo_summary_ := (*C.gchar)(unsafe.Pointer(_cstring_summary_))
 	defer C.free(unsafe.Pointer(_cstring_summary_))
@@ -4936,12 +4934,12 @@ func (_self_ *OptionContext) SetSummary(summary string) () {
 	return
 }
 
-func (_self_ *OptionContext) SetTranslateFunc(func_ C.GTranslateFunc, data C.gpointer, destroy_notify C.GDestroyNotify) () {
+func (_self_ *GLibOptionContext) SetTranslateFunc(func_ C.GTranslateFunc, data C.gpointer, destroy_notify C.GDestroyNotify) () {
 	C.g_option_context_set_translate_func((*C.GOptionContext)(_self_), func_, data, destroy_notify)
 	return
 }
 
-func (_self_ *OptionContext) SetTranslationDomain(domain string) () {
+func (_self_ *GLibOptionContext) SetTranslationDomain(domain string) () {
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
 	defer C.free(unsafe.Pointer(_cstring_domain_))
@@ -4949,7 +4947,7 @@ func (_self_ *OptionContext) SetTranslationDomain(domain string) () {
 	return
 }
 
-func OptionGroupNew(name string, description string, help_description string, user_data C.gpointer, destroy C.GDestroyNotify) (_go__return__ *OptionGroup) {
+func OptionGroupNew(name string, description string, help_description string, user_data C.gpointer, destroy C.GDestroyNotify) (_go__return__ *GLibOptionGroup) {
 	var _return_ *C.GOptionGroup
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -4961,37 +4959,37 @@ func OptionGroupNew(name string, description string, help_description string, us
 	_cgo_help_description_ := (*C.gchar)(unsafe.Pointer(_cstring_help_description_))
 	defer C.free(unsafe.Pointer(_cstring_help_description_))
 	_return_ = C._g_option_group_new(_cgo_name_, _cgo_description_, _cgo_help_description_, user_data, destroy)
-	_go__return__ = (*OptionGroup)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibOptionGroup)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *OptionGroup) AddEntries(entries *OptionEntry) () {
+func (_self_ *GLibOptionGroup) AddEntries(entries *GLibOptionEntry) () {
 	_cgo_entries_ := (*C.GOptionEntry)(unsafe.Pointer(entries))
 	C._g_option_group_add_entries((*C.GOptionGroup)(_self_), _cgo_entries_)
 	return
 }
 
-func (_self_ *OptionGroup) Free() () {
+func (_self_ *GLibOptionGroup) Free() () {
 	C.g_option_group_free((*C.GOptionGroup)(_self_))
 	return
 }
 
-func (_self_ *OptionGroup) SetErrorHook(error_func C.GOptionErrorFunc) () {
+func (_self_ *GLibOptionGroup) SetErrorHook(error_func C.GOptionErrorFunc) () {
 	C.g_option_group_set_error_hook((*C.GOptionGroup)(_self_), error_func)
 	return
 }
 
-func (_self_ *OptionGroup) SetParseHooks(pre_parse_func C.GOptionParseFunc, post_parse_func C.GOptionParseFunc) () {
+func (_self_ *GLibOptionGroup) SetParseHooks(pre_parse_func C.GOptionParseFunc, post_parse_func C.GOptionParseFunc) () {
 	C.g_option_group_set_parse_hooks((*C.GOptionGroup)(_self_), pre_parse_func, post_parse_func)
 	return
 }
 
-func (_self_ *OptionGroup) SetTranslateFunc(func_ C.GTranslateFunc, data C.gpointer, destroy_notify C.GDestroyNotify) () {
+func (_self_ *GLibOptionGroup) SetTranslateFunc(func_ C.GTranslateFunc, data C.gpointer, destroy_notify C.GDestroyNotify) () {
 	C.g_option_group_set_translate_func((*C.GOptionGroup)(_self_), func_, data, destroy_notify)
 	return
 }
 
-func (_self_ *OptionGroup) SetTranslationDomain(domain string) () {
+func (_self_ *GLibOptionGroup) SetTranslationDomain(domain string) () {
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
 	defer C.free(unsafe.Pointer(_cstring_domain_))
@@ -4999,40 +4997,40 @@ func (_self_ *OptionGroup) SetTranslationDomain(domain string) () {
 	return
 }
 
-func PatternSpecNew(pattern string) (_go__return__ *PatternSpec) {
+func PatternSpecNew(pattern string) (_go__return__ *GLibPatternSpec) {
 	var _return_ *C.GPatternSpec
 	_cstring_pattern_ := C.CString(pattern)
 	_cgo_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_pattern_))
 	defer C.free(unsafe.Pointer(_cstring_pattern_))
 	_return_ = C._g_pattern_spec_new(_cgo_pattern_)
-	_go__return__ = (*PatternSpec)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibPatternSpec)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *PatternSpec) Equal(pspec2 *PatternSpec) (_go__return__ bool) {
+func (_self_ *GLibPatternSpec) Equal(pspec2 *GLibPatternSpec) (_go__return__ bool) {
 	_cgo_pspec2_ := (*C.GPatternSpec)(unsafe.Pointer(pspec2))
 	var _return_ C.gboolean
 	_return_ = C.g_pattern_spec_equal((*C.GPatternSpec)(_self_), _cgo_pspec2_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *PatternSpec) Free() () {
+func (_self_ *GLibPatternSpec) Free() () {
 	C.g_pattern_spec_free((*C.GPatternSpec)(_self_))
 	return
 }
 
-func (_self_ *Private) Get() (_return_ C.gpointer) {
+func (_self_ *GLibPrivate) Get() (_return_ C.gpointer) {
 	_return_ = C.g_private_get((*C.GPrivate)(_self_))
 	return
 }
 
-func (_self_ *Private) Replace(value C.gpointer) () {
+func (_self_ *GLibPrivate) Replace(value C.gpointer) () {
 	C.g_private_replace((*C.GPrivate)(_self_), value)
 	return
 }
 
-func (_self_ *Private) Set(value C.gpointer) () {
+func (_self_ *GLibPrivate) Set(value C.gpointer) () {
 	C.g_private_set((*C.GPrivate)(_self_), value)
 	return
 }
@@ -5059,310 +5057,310 @@ func PtrArraySizedNew(reserved_size uint) (_return_ *C.GPtrArray) {
 	return
 }
 
-func QueueNew() (_go__return__ *Queue) {
+func QueueNew() (_go__return__ *GLibQueue) {
 	var _return_ *C.GQueue
 	_return_ = C.g_queue_new()
-	_go__return__ = (*Queue)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibQueue)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Queue) Clear() () {
+func (_self_ *GLibQueue) Clear() () {
 	C.g_queue_clear((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) Copy() (_go__return__ *Queue) {
+func (_self_ *GLibQueue) Copy() (_go__return__ *GLibQueue) {
 	var _return_ *C.GQueue
 	_return_ = C.g_queue_copy((*C.GQueue)(_self_))
-	_go__return__ = (*Queue)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibQueue)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Queue) DeleteLink(link_ *C.GList) () {
+func (_self_ *GLibQueue) DeleteLink(link_ *C.GList) () {
 	C.g_queue_delete_link((*C.GQueue)(_self_), link_)
 	return
 }
 
-func (_self_ *Queue) Find(data C.gpointer) (_return_ *C.GList) {
+func (_self_ *GLibQueue) Find(data C.gpointer) (_return_ *C.GList) {
 	_return_ = C._g_queue_find((*C.GQueue)(_self_), data)
 	return
 }
 
-func (_self_ *Queue) FindCustom(data C.gpointer, func_ C.GCompareFunc) (_return_ *C.GList) {
+func (_self_ *GLibQueue) FindCustom(data C.gpointer, func_ C.GCompareFunc) (_return_ *C.GList) {
 	_return_ = C._g_queue_find_custom((*C.GQueue)(_self_), data, func_)
 	return
 }
 
-func (_self_ *Queue) Foreach(func_ C.GFunc, user_data C.gpointer) () {
+func (_self_ *GLibQueue) Foreach(func_ C.GFunc, user_data C.gpointer) () {
 	C.g_queue_foreach((*C.GQueue)(_self_), func_, user_data)
 	return
 }
 
-func (_self_ *Queue) Free() () {
+func (_self_ *GLibQueue) Free() () {
 	C.g_queue_free((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) FreeFull(free_func C.GDestroyNotify) () {
+func (_self_ *GLibQueue) FreeFull(free_func C.GDestroyNotify) () {
 	C.g_queue_free_full((*C.GQueue)(_self_), free_func)
 	return
 }
 
-func (_self_ *Queue) GetLength() (_go__return__ uint) {
+func (_self_ *GLibQueue) GetLength() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_queue_get_length((*C.GQueue)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Queue) Index(data C.gpointer) (_go__return__ int) {
+func (_self_ *GLibQueue) Index(data C.gpointer) (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C._g_queue_index((*C.GQueue)(_self_), data)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Queue) Init() () {
+func (_self_ *GLibQueue) Init() () {
 	C.g_queue_init((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) InsertAfter(sibling *C.GList, data C.gpointer) () {
+func (_self_ *GLibQueue) InsertAfter(sibling *C.GList, data C.gpointer) () {
 	C.g_queue_insert_after((*C.GQueue)(_self_), sibling, data)
 	return
 }
 
-func (_self_ *Queue) InsertBefore(sibling *C.GList, data C.gpointer) () {
+func (_self_ *GLibQueue) InsertBefore(sibling *C.GList, data C.gpointer) () {
 	C.g_queue_insert_before((*C.GQueue)(_self_), sibling, data)
 	return
 }
 
-func (_self_ *Queue) InsertSorted(data C.gpointer, func_ C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibQueue) InsertSorted(data C.gpointer, func_ C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_queue_insert_sorted((*C.GQueue)(_self_), data, func_, user_data)
 	return
 }
 
-func (_self_ *Queue) IsEmpty() (_go__return__ bool) {
+func (_self_ *GLibQueue) IsEmpty() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_queue_is_empty((*C.GQueue)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Queue) LinkIndex(link_ *C.GList) (_go__return__ int) {
+func (_self_ *GLibQueue) LinkIndex(link_ *C.GList) (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_queue_link_index((*C.GQueue)(_self_), link_)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Queue) PeekHead() (_return_ C.gpointer) {
+func (_self_ *GLibQueue) PeekHead() (_return_ C.gpointer) {
 	_return_ = C.g_queue_peek_head((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PeekHeadLink() (_return_ *C.GList) {
+func (_self_ *GLibQueue) PeekHeadLink() (_return_ *C.GList) {
 	_return_ = C.g_queue_peek_head_link((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PeekNth(n uint) (_return_ C.gpointer) {
+func (_self_ *GLibQueue) PeekNth(n uint) (_return_ C.gpointer) {
 	_cgo_n_ := (C.guint)(n)
 	_return_ = C.g_queue_peek_nth((*C.GQueue)(_self_), _cgo_n_)
 	return
 }
 
-func (_self_ *Queue) PeekNthLink(n uint) (_return_ *C.GList) {
+func (_self_ *GLibQueue) PeekNthLink(n uint) (_return_ *C.GList) {
 	_cgo_n_ := (C.guint)(n)
 	_return_ = C.g_queue_peek_nth_link((*C.GQueue)(_self_), _cgo_n_)
 	return
 }
 
-func (_self_ *Queue) PeekTail() (_return_ C.gpointer) {
+func (_self_ *GLibQueue) PeekTail() (_return_ C.gpointer) {
 	_return_ = C.g_queue_peek_tail((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PeekTailLink() (_return_ *C.GList) {
+func (_self_ *GLibQueue) PeekTailLink() (_return_ *C.GList) {
 	_return_ = C.g_queue_peek_tail_link((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PopHead() (_return_ C.gpointer) {
+func (_self_ *GLibQueue) PopHead() (_return_ C.gpointer) {
 	_return_ = C.g_queue_pop_head((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PopHeadLink() (_return_ *C.GList) {
+func (_self_ *GLibQueue) PopHeadLink() (_return_ *C.GList) {
 	_return_ = C.g_queue_pop_head_link((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PopNth(n uint) (_return_ C.gpointer) {
+func (_self_ *GLibQueue) PopNth(n uint) (_return_ C.gpointer) {
 	_cgo_n_ := (C.guint)(n)
 	_return_ = C.g_queue_pop_nth((*C.GQueue)(_self_), _cgo_n_)
 	return
 }
 
-func (_self_ *Queue) PopNthLink(n uint) (_return_ *C.GList) {
+func (_self_ *GLibQueue) PopNthLink(n uint) (_return_ *C.GList) {
 	_cgo_n_ := (C.guint)(n)
 	_return_ = C.g_queue_pop_nth_link((*C.GQueue)(_self_), _cgo_n_)
 	return
 }
 
-func (_self_ *Queue) PopTail() (_return_ C.gpointer) {
+func (_self_ *GLibQueue) PopTail() (_return_ C.gpointer) {
 	_return_ = C.g_queue_pop_tail((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PopTailLink() (_return_ *C.GList) {
+func (_self_ *GLibQueue) PopTailLink() (_return_ *C.GList) {
 	_return_ = C.g_queue_pop_tail_link((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) PushHead(data C.gpointer) () {
+func (_self_ *GLibQueue) PushHead(data C.gpointer) () {
 	C.g_queue_push_head((*C.GQueue)(_self_), data)
 	return
 }
 
-func (_self_ *Queue) PushHeadLink(link_ *C.GList) () {
+func (_self_ *GLibQueue) PushHeadLink(link_ *C.GList) () {
 	C.g_queue_push_head_link((*C.GQueue)(_self_), link_)
 	return
 }
 
-func (_self_ *Queue) PushNth(data C.gpointer, n int) () {
+func (_self_ *GLibQueue) PushNth(data C.gpointer, n int) () {
 	_cgo_n_ := (C.gint)(n)
 	C.g_queue_push_nth((*C.GQueue)(_self_), data, _cgo_n_)
 	return
 }
 
-func (_self_ *Queue) PushNthLink(n int, link_ *C.GList) () {
+func (_self_ *GLibQueue) PushNthLink(n int, link_ *C.GList) () {
 	_cgo_n_ := (C.gint)(n)
 	C.g_queue_push_nth_link((*C.GQueue)(_self_), _cgo_n_, link_)
 	return
 }
 
-func (_self_ *Queue) PushTail(data C.gpointer) () {
+func (_self_ *GLibQueue) PushTail(data C.gpointer) () {
 	C.g_queue_push_tail((*C.GQueue)(_self_), data)
 	return
 }
 
-func (_self_ *Queue) PushTailLink(link_ *C.GList) () {
+func (_self_ *GLibQueue) PushTailLink(link_ *C.GList) () {
 	C.g_queue_push_tail_link((*C.GQueue)(_self_), link_)
 	return
 }
 
-func (_self_ *Queue) Remove(data C.gpointer) (_go__return__ bool) {
+func (_self_ *GLibQueue) Remove(data C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_queue_remove((*C.GQueue)(_self_), data)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Queue) RemoveAll(data C.gpointer) (_go__return__ uint) {
+func (_self_ *GLibQueue) RemoveAll(data C.gpointer) (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_queue_remove_all((*C.GQueue)(_self_), data)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Queue) Reverse() () {
+func (_self_ *GLibQueue) Reverse() () {
 	C.g_queue_reverse((*C.GQueue)(_self_))
 	return
 }
 
-func (_self_ *Queue) Sort(compare_func C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibQueue) Sort(compare_func C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_queue_sort((*C.GQueue)(_self_), compare_func, user_data)
 	return
 }
 
-func (_self_ *Queue) Unlink(link_ *C.GList) () {
+func (_self_ *GLibQueue) Unlink(link_ *C.GList) () {
 	C.g_queue_unlink((*C.GQueue)(_self_), link_)
 	return
 }
 
-func (_self_ *RWLock) Clear() () {
+func (_self_ *GLibRWLock) Clear() () {
 	C.g_rw_lock_clear((*C.GRWLock)(_self_))
 	return
 }
 
-func (_self_ *RWLock) Init() () {
+func (_self_ *GLibRWLock) Init() () {
 	C.g_rw_lock_init((*C.GRWLock)(_self_))
 	return
 }
 
-func (_self_ *RWLock) ReaderLock() () {
+func (_self_ *GLibRWLock) ReaderLock() () {
 	C.g_rw_lock_reader_lock((*C.GRWLock)(_self_))
 	return
 }
 
-func (_self_ *RWLock) ReaderTrylock() (_go__return__ bool) {
+func (_self_ *GLibRWLock) ReaderTrylock() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_rw_lock_reader_trylock((*C.GRWLock)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RWLock) ReaderUnlock() () {
+func (_self_ *GLibRWLock) ReaderUnlock() () {
 	C.g_rw_lock_reader_unlock((*C.GRWLock)(_self_))
 	return
 }
 
-func (_self_ *RWLock) WriterLock() () {
+func (_self_ *GLibRWLock) WriterLock() () {
 	C.g_rw_lock_writer_lock((*C.GRWLock)(_self_))
 	return
 }
 
-func (_self_ *RWLock) WriterTrylock() (_go__return__ bool) {
+func (_self_ *GLibRWLock) WriterTrylock() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_rw_lock_writer_trylock((*C.GRWLock)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RWLock) WriterUnlock() () {
+func (_self_ *GLibRWLock) WriterUnlock() () {
 	C.g_rw_lock_writer_unlock((*C.GRWLock)(_self_))
 	return
 }
 
-func RandNew() (_go__return__ *Rand) {
+func RandNew() (_go__return__ *GLibRand) {
 	var _return_ *C.GRand
 	_return_ = C.g_rand_new()
-	_go__return__ = (*Rand)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRand)(unsafe.Pointer(_return_))
 	return
 }
 
-func RandNewWithSeed(seed uint32) (_go__return__ *Rand) {
+func RandNewWithSeed(seed uint32) (_go__return__ *GLibRand) {
 	var _return_ *C.GRand
 	_cgo_seed_ := (C.guint32)(seed)
 	_return_ = C.g_rand_new_with_seed(_cgo_seed_)
-	_go__return__ = (*Rand)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRand)(unsafe.Pointer(_return_))
 	return
 }
 
-func RandNewWithSeedArray(seed *C.guint32, seed_length uint) (_go__return__ *Rand) {
+func RandNewWithSeedArray(seed *C.guint32, seed_length uint) (_go__return__ *GLibRand) {
 	var _return_ *C.GRand
 	_cgo_seed_length_ := (C.guint)(seed_length)
 	_return_ = C._g_rand_new_with_seed_array(seed, _cgo_seed_length_)
-	_go__return__ = (*Rand)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRand)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Rand) Copy() (_go__return__ *Rand) {
+func (_self_ *GLibRand) Copy() (_go__return__ *GLibRand) {
 	var _return_ *C.GRand
 	_return_ = C.g_rand_copy((*C.GRand)(_self_))
-	_go__return__ = (*Rand)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRand)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Rand) Double() (_go__return__ float64) {
+func (_self_ *GLibRand) Double() (_go__return__ float64) {
 	var _return_ C.gdouble
 	_return_ = C.g_rand_double((*C.GRand)(_self_))
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *Rand) DoubleRange(begin float64, end float64) (_go__return__ float64) {
+func (_self_ *GLibRand) DoubleRange(begin float64, end float64) (_go__return__ float64) {
 	_cgo_begin_ := (C.gdouble)(begin)
 	_cgo_end_ := (C.gdouble)(end)
 	var _return_ C.gdouble
@@ -5371,19 +5369,19 @@ func (_self_ *Rand) DoubleRange(begin float64, end float64) (_go__return__ float
 	return
 }
 
-func (_self_ *Rand) Free() () {
+func (_self_ *GLibRand) Free() () {
 	C.g_rand_free((*C.GRand)(_self_))
 	return
 }
 
-func (_self_ *Rand) Int() (_go__return__ uint32) {
+func (_self_ *GLibRand) Int() (_go__return__ uint32) {
 	var _return_ C.guint32
 	_return_ = C.g_rand_int((*C.GRand)(_self_))
 	_go__return__ = (uint32)(_return_)
 	return
 }
 
-func (_self_ *Rand) IntRange(begin int32, end int32) (_go__return__ int32) {
+func (_self_ *GLibRand) IntRange(begin int32, end int32) (_go__return__ int32) {
 	_cgo_begin_ := (C.gint32)(begin)
 	_cgo_end_ := (C.gint32)(end)
 	var _return_ C.gint32
@@ -5392,52 +5390,52 @@ func (_self_ *Rand) IntRange(begin int32, end int32) (_go__return__ int32) {
 	return
 }
 
-func (_self_ *Rand) SetSeed(seed uint32) () {
+func (_self_ *GLibRand) SetSeed(seed uint32) () {
 	_cgo_seed_ := (C.guint32)(seed)
 	C.g_rand_set_seed((*C.GRand)(_self_), _cgo_seed_)
 	return
 }
 
-func (_self_ *Rand) SetSeedArray(seed *C.guint32, seed_length uint) () {
+func (_self_ *GLibRand) SetSeedArray(seed *C.guint32, seed_length uint) () {
 	_cgo_seed_length_ := (C.guint)(seed_length)
 	C._g_rand_set_seed_array((*C.GRand)(_self_), seed, _cgo_seed_length_)
 	return
 }
 
-func (_self_ *RecMutex) Clear() () {
+func (_self_ *GLibRecMutex) Clear() () {
 	C.g_rec_mutex_clear((*C.GRecMutex)(_self_))
 	return
 }
 
-func (_self_ *RecMutex) Init() () {
+func (_self_ *GLibRecMutex) Init() () {
 	C.g_rec_mutex_init((*C.GRecMutex)(_self_))
 	return
 }
 
-func (_self_ *RecMutex) Lock() () {
+func (_self_ *GLibRecMutex) Lock() () {
 	C.g_rec_mutex_lock((*C.GRecMutex)(_self_))
 	return
 }
 
-func (_self_ *RecMutex) Trylock() (_go__return__ bool) {
+func (_self_ *GLibRecMutex) Trylock() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_rec_mutex_trylock((*C.GRecMutex)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RecMutex) Unlock() () {
+func (_self_ *GLibRecMutex) Unlock() () {
 	C.g_rec_mutex_unlock((*C.GRecMutex)(_self_))
 	return
 }
 
-func RegexNew(pattern string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) (_go__return__ *Regex, _error_ unsafe.Pointer) {
+func RegexNew(pattern string, compile_options C.GRegexCompileFlags, match_options C.GRegexMatchFlags) (_go__return__ *GLibRegex, _error_ unsafe.Pointer) {
 	var _return_ *C.GRegex
 	_cstring_pattern_ := C.CString(pattern)
 	_cgo_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_pattern_))
 	defer C.free(unsafe.Pointer(_cstring_pattern_))
 	_return_ = C._g_regex_new(_cgo_pattern_, compile_options, match_options, _error_)
-	_go__return__ = (*Regex)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRegex)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5448,8 +5446,8 @@ func RegexCheckReplacement(replacement string) (_go__return__ bool, _go_has_refe
 	var _return_ C.gboolean
 	var has_references C.gboolean
 	_return_ = C._g_regex_check_replacement(_cgo_replacement_, &has_references, _error_)
-	_go__return__ = _return_ == C.glibtrue()
-	_go_has_references_ = has_references == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	_go_has_references_ = has_references == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -5478,7 +5476,7 @@ func RegexMatchSimple(pattern string, string_ string, compile_options C.GRegexCo
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_regex_match_simple(_cgo_pattern_, _cgo_string__, compile_options, match_options)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -5493,45 +5491,45 @@ func RegexSplitSimple(pattern string, string_ string, compile_options C.GRegexCo
 	return
 }
 
-func (_self_ *Regex) GetCaptureCount() (_go__return__ int) {
+func (_self_ *GLibRegex) GetCaptureCount() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C._g_regex_get_capture_count((*C.GRegex)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Regex) GetCompileFlags() (_return_ C.GRegexCompileFlags) {
+func (_self_ *GLibRegex) GetCompileFlags() (_return_ C.GRegexCompileFlags) {
 	_return_ = C._g_regex_get_compile_flags((*C.GRegex)(_self_))
 	return
 }
 
-func (_self_ *Regex) GetHasCrOrLf() (_go__return__ bool) {
+func (_self_ *GLibRegex) GetHasCrOrLf() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_regex_get_has_cr_or_lf((*C.GRegex)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Regex) GetMatchFlags() (_return_ C.GRegexMatchFlags) {
+func (_self_ *GLibRegex) GetMatchFlags() (_return_ C.GRegexMatchFlags) {
 	_return_ = C._g_regex_get_match_flags((*C.GRegex)(_self_))
 	return
 }
 
-func (_self_ *Regex) GetMaxBackref() (_go__return__ int) {
+func (_self_ *GLibRegex) GetMaxBackref() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C._g_regex_get_max_backref((*C.GRegex)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Regex) GetPattern() (_go__return__ string) {
+func (_self_ *GLibRegex) GetPattern() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_regex_get_pattern((*C.GRegex)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Regex) GetStringNumber(name string) (_go__return__ int) {
+func (_self_ *GLibRegex) GetStringNumber(name string) (_go__return__ int) {
 	var _return_ C.gint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -5541,38 +5539,38 @@ func (_self_ *Regex) GetStringNumber(name string) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Regex) Match(string_ string, match_options C.GRegexMatchFlags) (_go__return__ bool, match_info *MatchInfo) {
+func (_self_ *GLibRegex) Match(string_ string, match_options C.GRegexMatchFlags) (_go__return__ bool, match_info *GLibMatchInfo) {
 	var _allocated_match_info_ *C.GMatchInfo
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_regex_match((*C.GRegex)(_self_), _cgo_string__, match_options, unsafe.Pointer(&_allocated_match_info_))
-	match_info = (*MatchInfo)(unsafe.Pointer(_allocated_match_info_))
-	_go__return__ = _return_ == C.glibtrue()
+	match_info = (*GLibMatchInfo)(unsafe.Pointer(_allocated_match_info_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Regex) MatchAll(string_ string, match_options C.GRegexMatchFlags) (_go__return__ bool, match_info *MatchInfo) {
+func (_self_ *GLibRegex) MatchAll(string_ string, match_options C.GRegexMatchFlags) (_go__return__ bool, match_info *GLibMatchInfo) {
 	var _allocated_match_info_ *C.GMatchInfo
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_regex_match_all((*C.GRegex)(_self_), _cgo_string__, match_options, unsafe.Pointer(&_allocated_match_info_))
-	match_info = (*MatchInfo)(unsafe.Pointer(_allocated_match_info_))
-	_go__return__ = _return_ == C.glibtrue()
+	match_info = (*GLibMatchInfo)(unsafe.Pointer(_allocated_match_info_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Regex) Ref() (_go__return__ *Regex) {
+func (_self_ *GLibRegex) Ref() (_go__return__ *GLibRegex) {
 	var _return_ *C.GRegex
 	_return_ = C.g_regex_ref((*C.GRegex)(_self_))
-	_go__return__ = (*Regex)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibRegex)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Regex) Split(string_ string, match_options C.GRegexMatchFlags) (_return_ unsafe.Pointer) {
+func (_self_ *GLibRegex) Split(string_ string, match_options C.GRegexMatchFlags) (_return_ unsafe.Pointer) {
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
@@ -5580,7 +5578,7 @@ func (_self_ *Regex) Split(string_ string, match_options C.GRegexMatchFlags) (_r
 	return
 }
 
-func (_self_ *Regex) Unref() () {
+func (_self_ *GLibRegex) Unref() () {
 	C.g_regex_unref((*C.GRegex)(_self_))
 	return
 }
@@ -5739,62 +5737,62 @@ func SListSortWithData(list *C.GSList, compare_func C.GCompareDataFunc, user_dat
 	return
 }
 
-func ScannerNew(config_templ *ScannerConfig) (_go__return__ *Scanner) {
+func ScannerNew(config_templ *GLibScannerConfig) (_go__return__ *GLibScanner) {
 	_cgo_config_templ_ := (*C.GScannerConfig)(unsafe.Pointer(config_templ))
 	var _return_ *C.GScanner
 	_return_ = C._g_scanner_new(_cgo_config_templ_)
-	_go__return__ = (*Scanner)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibScanner)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Scanner) CurLine() (_go__return__ uint) {
+func (_self_ *GLibScanner) CurLine() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_scanner_cur_line((*C.GScanner)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Scanner) CurPosition() (_go__return__ uint) {
+func (_self_ *GLibScanner) CurPosition() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_scanner_cur_position((*C.GScanner)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Scanner) CurToken() (_return_ C.GTokenType) {
+func (_self_ *GLibScanner) CurToken() (_return_ C.GTokenType) {
 	_return_ = C.g_scanner_cur_token((*C.GScanner)(_self_))
 	return
 }
 
-func (_self_ *Scanner) CurValue() (_return_ C.GTokenValue) {
+func (_self_ *GLibScanner) CurValue() (_return_ C.GTokenValue) {
 	_return_ = C.g_scanner_cur_value((*C.GScanner)(_self_))
 	return
 }
 
-func (_self_ *Scanner) Destroy() () {
+func (_self_ *GLibScanner) Destroy() () {
 	C.g_scanner_destroy((*C.GScanner)(_self_))
 	return
 }
 
-func (_self_ *Scanner) Eof() (_go__return__ bool) {
+func (_self_ *GLibScanner) Eof() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_scanner_eof((*C.GScanner)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Scanner) GetNextToken() (_return_ C.GTokenType) {
+func (_self_ *GLibScanner) GetNextToken() (_return_ C.GTokenType) {
 	_return_ = C.g_scanner_get_next_token((*C.GScanner)(_self_))
 	return
 }
 
-func (_self_ *Scanner) InputFile(input_fd int) () {
+func (_self_ *GLibScanner) InputFile(input_fd int) () {
 	_cgo_input_fd_ := (C.gint)(input_fd)
 	C.g_scanner_input_file((*C.GScanner)(_self_), _cgo_input_fd_)
 	return
 }
 
-func (_self_ *Scanner) InputText(text string, text_len uint) () {
+func (_self_ *GLibScanner) InputText(text string, text_len uint) () {
 	_cgo_text_len_ := (C.guint)(text_len)
 	_cstring_text_ := C.CString(text)
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
@@ -5803,7 +5801,7 @@ func (_self_ *Scanner) InputText(text string, text_len uint) () {
 	return
 }
 
-func (_self_ *Scanner) LookupSymbol(symbol string) (_return_ C.gpointer) {
+func (_self_ *GLibScanner) LookupSymbol(symbol string) (_return_ C.gpointer) {
 	_cstring_symbol_ := C.CString(symbol)
 	_cgo_symbol_ := (*C.gchar)(unsafe.Pointer(_cstring_symbol_))
 	defer C.free(unsafe.Pointer(_cstring_symbol_))
@@ -5811,12 +5809,12 @@ func (_self_ *Scanner) LookupSymbol(symbol string) (_return_ C.gpointer) {
 	return
 }
 
-func (_self_ *Scanner) PeekNextToken() (_return_ C.GTokenType) {
+func (_self_ *GLibScanner) PeekNextToken() (_return_ C.GTokenType) {
 	_return_ = C.g_scanner_peek_next_token((*C.GScanner)(_self_))
 	return
 }
 
-func (_self_ *Scanner) ScopeAddSymbol(scope_id uint, symbol string, value C.gpointer) () {
+func (_self_ *GLibScanner) ScopeAddSymbol(scope_id uint, symbol string, value C.gpointer) () {
 	_cgo_scope_id_ := (C.guint)(scope_id)
 	_cstring_symbol_ := C.CString(symbol)
 	_cgo_symbol_ := (*C.gchar)(unsafe.Pointer(_cstring_symbol_))
@@ -5825,13 +5823,13 @@ func (_self_ *Scanner) ScopeAddSymbol(scope_id uint, symbol string, value C.gpoi
 	return
 }
 
-func (_self_ *Scanner) ScopeForeachSymbol(scope_id uint, func_ C.GHFunc, user_data C.gpointer) () {
+func (_self_ *GLibScanner) ScopeForeachSymbol(scope_id uint, func_ C.GHFunc, user_data C.gpointer) () {
 	_cgo_scope_id_ := (C.guint)(scope_id)
 	C.g_scanner_scope_foreach_symbol((*C.GScanner)(_self_), _cgo_scope_id_, func_, user_data)
 	return
 }
 
-func (_self_ *Scanner) ScopeLookupSymbol(scope_id uint, symbol string) (_return_ C.gpointer) {
+func (_self_ *GLibScanner) ScopeLookupSymbol(scope_id uint, symbol string) (_return_ C.gpointer) {
 	_cgo_scope_id_ := (C.guint)(scope_id)
 	_cstring_symbol_ := C.CString(symbol)
 	_cgo_symbol_ := (*C.gchar)(unsafe.Pointer(_cstring_symbol_))
@@ -5840,7 +5838,7 @@ func (_self_ *Scanner) ScopeLookupSymbol(scope_id uint, symbol string) (_return_
 	return
 }
 
-func (_self_ *Scanner) ScopeRemoveSymbol(scope_id uint, symbol string) () {
+func (_self_ *GLibScanner) ScopeRemoveSymbol(scope_id uint, symbol string) () {
 	_cgo_scope_id_ := (C.guint)(scope_id)
 	_cstring_symbol_ := C.CString(symbol)
 	_cgo_symbol_ := (*C.gchar)(unsafe.Pointer(_cstring_symbol_))
@@ -5849,7 +5847,7 @@ func (_self_ *Scanner) ScopeRemoveSymbol(scope_id uint, symbol string) () {
 	return
 }
 
-func (_self_ *Scanner) SetScope(scope_id uint) (_go__return__ uint) {
+func (_self_ *GLibScanner) SetScope(scope_id uint) (_go__return__ uint) {
 	_cgo_scope_id_ := (C.guint)(scope_id)
 	var _return_ C.guint
 	_return_ = C.g_scanner_set_scope((*C.GScanner)(_self_), _cgo_scope_id_)
@@ -5857,12 +5855,12 @@ func (_self_ *Scanner) SetScope(scope_id uint) (_go__return__ uint) {
 	return
 }
 
-func (_self_ *Scanner) SyncFileOffset() () {
+func (_self_ *GLibScanner) SyncFileOffset() () {
 	C.g_scanner_sync_file_offset((*C.GScanner)(_self_))
 	return
 }
 
-func (_self_ *Scanner) UnexpToken(expected_token C.GTokenType, identifier_spec string, symbol_spec string, symbol_name string, message string, is_error int) () {
+func (_self_ *GLibScanner) UnexpToken(expected_token C.GTokenType, identifier_spec string, symbol_spec string, symbol_name string, message string, is_error int) () {
 	_cgo_is_error_ := (C.gint)(is_error)
 	_cstring_identifier_spec_ := C.CString(identifier_spec)
 	_cgo_identifier_spec_ := (*C.gchar)(unsafe.Pointer(_cstring_identifier_spec_))
@@ -5880,35 +5878,35 @@ func (_self_ *Scanner) UnexpToken(expected_token C.GTokenType, identifier_spec s
 	return
 }
 
-func SequenceForeachRange(begin *SequenceIter, end *SequenceIter, func_ C.GFunc, user_data C.gpointer) () {
+func SequenceForeachRange(begin *GLibSequenceIter, end *GLibSequenceIter, func_ C.GFunc, user_data C.gpointer) () {
 	_cgo_begin_ := (*C.GSequenceIter)(unsafe.Pointer(begin))
 	_cgo_end_ := (*C.GSequenceIter)(unsafe.Pointer(end))
 	C.g_sequence_foreach_range(_cgo_begin_, _cgo_end_, func_, user_data)
 	return
 }
 
-func SequenceGet(iter *SequenceIter) (_return_ C.gpointer) {
+func SequenceGet(iter *GLibSequenceIter) (_return_ C.gpointer) {
 	_cgo_iter_ := (*C.GSequenceIter)(unsafe.Pointer(iter))
 	_return_ = C.g_sequence_get(_cgo_iter_)
 	return
 }
 
-func SequenceInsertBefore(iter *SequenceIter, data C.gpointer) (_go__return__ *SequenceIter) {
+func SequenceInsertBefore(iter *GLibSequenceIter, data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	_cgo_iter_ := (*C.GSequenceIter)(unsafe.Pointer(iter))
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_insert_before(_cgo_iter_, data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func SequenceMove(src *SequenceIter, dest *SequenceIter) () {
+func SequenceMove(src *GLibSequenceIter, dest *GLibSequenceIter) () {
 	_cgo_src_ := (*C.GSequenceIter)(unsafe.Pointer(src))
 	_cgo_dest_ := (*C.GSequenceIter)(unsafe.Pointer(dest))
 	C.g_sequence_move(_cgo_src_, _cgo_dest_)
 	return
 }
 
-func SequenceMoveRange(dest *SequenceIter, begin *SequenceIter, end *SequenceIter) () {
+func SequenceMoveRange(dest *GLibSequenceIter, begin *GLibSequenceIter, end *GLibSequenceIter) () {
 	_cgo_dest_ := (*C.GSequenceIter)(unsafe.Pointer(dest))
 	_cgo_begin_ := (*C.GSequenceIter)(unsafe.Pointer(begin))
 	_cgo_end_ := (*C.GSequenceIter)(unsafe.Pointer(end))
@@ -5916,166 +5914,166 @@ func SequenceMoveRange(dest *SequenceIter, begin *SequenceIter, end *SequenceIte
 	return
 }
 
-func SequenceNew(data_destroy C.GDestroyNotify) (_go__return__ *Sequence) {
+func SequenceNew(data_destroy C.GDestroyNotify) (_go__return__ *GLibSequence) {
 	var _return_ *C.GSequence
 	_return_ = C.g_sequence_new(data_destroy)
-	_go__return__ = (*Sequence)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequence)(unsafe.Pointer(_return_))
 	return
 }
 
-func SequenceRangeGetMidpoint(begin *SequenceIter, end *SequenceIter) (_go__return__ *SequenceIter) {
+func SequenceRangeGetMidpoint(begin *GLibSequenceIter, end *GLibSequenceIter) (_go__return__ *GLibSequenceIter) {
 	_cgo_begin_ := (*C.GSequenceIter)(unsafe.Pointer(begin))
 	_cgo_end_ := (*C.GSequenceIter)(unsafe.Pointer(end))
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_range_get_midpoint(_cgo_begin_, _cgo_end_)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func SequenceRemove(iter *SequenceIter) () {
+func SequenceRemove(iter *GLibSequenceIter) () {
 	_cgo_iter_ := (*C.GSequenceIter)(unsafe.Pointer(iter))
 	C.g_sequence_remove(_cgo_iter_)
 	return
 }
 
-func SequenceRemoveRange(begin *SequenceIter, end *SequenceIter) () {
+func SequenceRemoveRange(begin *GLibSequenceIter, end *GLibSequenceIter) () {
 	_cgo_begin_ := (*C.GSequenceIter)(unsafe.Pointer(begin))
 	_cgo_end_ := (*C.GSequenceIter)(unsafe.Pointer(end))
 	C.g_sequence_remove_range(_cgo_begin_, _cgo_end_)
 	return
 }
 
-func SequenceSet(iter *SequenceIter, data C.gpointer) () {
+func SequenceSet(iter *GLibSequenceIter, data C.gpointer) () {
 	_cgo_iter_ := (*C.GSequenceIter)(unsafe.Pointer(iter))
 	C.g_sequence_set(_cgo_iter_, data)
 	return
 }
 
-func SequenceSortChanged(iter *SequenceIter, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) () {
+func SequenceSortChanged(iter *GLibSequenceIter, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) () {
 	_cgo_iter_ := (*C.GSequenceIter)(unsafe.Pointer(iter))
 	C.g_sequence_sort_changed(_cgo_iter_, cmp_func, cmp_data)
 	return
 }
 
-func SequenceSortChangedIter(iter *SequenceIter, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) () {
+func SequenceSortChangedIter(iter *GLibSequenceIter, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) () {
 	_cgo_iter_ := (*C.GSequenceIter)(unsafe.Pointer(iter))
 	C.g_sequence_sort_changed_iter(_cgo_iter_, iter_cmp, cmp_data)
 	return
 }
 
-func SequenceSwap(a *SequenceIter, b *SequenceIter) () {
+func SequenceSwap(a *GLibSequenceIter, b *GLibSequenceIter) () {
 	_cgo_a_ := (*C.GSequenceIter)(unsafe.Pointer(a))
 	_cgo_b_ := (*C.GSequenceIter)(unsafe.Pointer(b))
 	C.g_sequence_swap(_cgo_a_, _cgo_b_)
 	return
 }
 
-func (_self_ *Sequence) Append(data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) Append(data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_append((*C.GSequence)(_self_), data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) Foreach(func_ C.GFunc, user_data C.gpointer) () {
+func (_self_ *GLibSequence) Foreach(func_ C.GFunc, user_data C.gpointer) () {
 	C.g_sequence_foreach((*C.GSequence)(_self_), func_, user_data)
 	return
 }
 
-func (_self_ *Sequence) Free() () {
+func (_self_ *GLibSequence) Free() () {
 	C.g_sequence_free((*C.GSequence)(_self_))
 	return
 }
 
-func (_self_ *Sequence) GetBeginIter() (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) GetBeginIter() (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_get_begin_iter((*C.GSequence)(_self_))
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) GetEndIter() (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) GetEndIter() (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_get_end_iter((*C.GSequence)(_self_))
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) GetIterAtPos(pos int) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) GetIterAtPos(pos int) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_cgo_pos_ := (C.gint)(pos)
 	_return_ = C.g_sequence_get_iter_at_pos((*C.GSequence)(_self_), _cgo_pos_)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) GetLength() (_go__return__ int) {
+func (_self_ *GLibSequence) GetLength() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_sequence_get_length((*C.GSequence)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Sequence) InsertSorted(data C.gpointer, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) InsertSorted(data C.gpointer, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_insert_sorted((*C.GSequence)(_self_), data, cmp_func, cmp_data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) InsertSortedIter(data C.gpointer, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) InsertSortedIter(data C.gpointer, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_insert_sorted_iter((*C.GSequence)(_self_), data, iter_cmp, cmp_data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) Lookup(data C.gpointer, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) Lookup(data C.gpointer, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_lookup((*C.GSequence)(_self_), data, cmp_func, cmp_data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) LookupIter(data C.gpointer, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) LookupIter(data C.gpointer, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_lookup_iter((*C.GSequence)(_self_), data, iter_cmp, cmp_data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) Prepend(data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) Prepend(data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_prepend((*C.GSequence)(_self_), data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) Search(data C.gpointer, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) Search(data C.gpointer, cmp_func C.GCompareDataFunc, cmp_data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_search((*C.GSequence)(_self_), data, cmp_func, cmp_data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) SearchIter(data C.gpointer, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequence) SearchIter(data C.gpointer, iter_cmp C.GSequenceIterCompareFunc, cmp_data C.gpointer) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_search_iter((*C.GSequence)(_self_), data, iter_cmp, cmp_data)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Sequence) Sort(cmp_func C.GCompareDataFunc, cmp_data C.gpointer) () {
+func (_self_ *GLibSequence) Sort(cmp_func C.GCompareDataFunc, cmp_data C.gpointer) () {
 	C.g_sequence_sort((*C.GSequence)(_self_), cmp_func, cmp_data)
 	return
 }
 
-func (_self_ *Sequence) SortIter(cmp_func C.GSequenceIterCompareFunc, cmp_data C.gpointer) () {
+func (_self_ *GLibSequence) SortIter(cmp_func C.GSequenceIterCompareFunc, cmp_data C.gpointer) () {
 	C.g_sequence_sort_iter((*C.GSequence)(_self_), cmp_func, cmp_data)
 	return
 }
 
-func (_self_ *SequenceIter) Compare(b *SequenceIter) (_go__return__ int) {
+func (_self_ *GLibSequenceIter) Compare(b *GLibSequenceIter) (_go__return__ int) {
 	_cgo_b_ := (*C.GSequenceIter)(unsafe.Pointer(b))
 	var _return_ C.gint
 	_return_ = C.g_sequence_iter_compare((*C.GSequenceIter)(_self_), _cgo_b_)
@@ -6083,62 +6081,62 @@ func (_self_ *SequenceIter) Compare(b *SequenceIter) (_go__return__ int) {
 	return
 }
 
-func (_self_ *SequenceIter) GetPosition() (_go__return__ int) {
+func (_self_ *GLibSequenceIter) GetPosition() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_sequence_iter_get_position((*C.GSequenceIter)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *SequenceIter) GetSequence() (_go__return__ *Sequence) {
+func (_self_ *GLibSequenceIter) GetSequence() (_go__return__ *GLibSequence) {
 	var _return_ *C.GSequence
 	_return_ = C.g_sequence_iter_get_sequence((*C.GSequenceIter)(_self_))
-	_go__return__ = (*Sequence)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequence)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SequenceIter) IsBegin() (_go__return__ bool) {
+func (_self_ *GLibSequenceIter) IsBegin() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_sequence_iter_is_begin((*C.GSequenceIter)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *SequenceIter) IsEnd() (_go__return__ bool) {
+func (_self_ *GLibSequenceIter) IsEnd() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_sequence_iter_is_end((*C.GSequenceIter)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *SequenceIter) Move(delta int) (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequenceIter) Move(delta int) (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_cgo_delta_ := (C.gint)(delta)
 	_return_ = C.g_sequence_iter_move((*C.GSequenceIter)(_self_), _cgo_delta_)
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SequenceIter) Next() (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequenceIter) Next() (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_iter_next((*C.GSequenceIter)(_self_))
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SequenceIter) Prev() (_go__return__ *SequenceIter) {
+func (_self_ *GLibSequenceIter) Prev() (_go__return__ *GLibSequenceIter) {
 	var _return_ *C.GSequenceIter
 	_return_ = C.g_sequence_iter_prev((*C.GSequenceIter)(_self_))
-	_go__return__ = (*SequenceIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSequenceIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func SourceNew(source_funcs *SourceFuncs, struct_size uint) (_go__return__ *Source) {
+func SourceNew(source_funcs *GLibSourceFuncs, struct_size uint) (_go__return__ *GLibSource) {
 	_cgo_source_funcs_ := (*C.GSourceFuncs)(unsafe.Pointer(source_funcs))
 	var _return_ *C.GSource
 	_cgo_struct_size_ := (C.guint)(struct_size)
 	_return_ = C.g_source_new(_cgo_source_funcs_, _cgo_struct_size_)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6146,22 +6144,22 @@ func SourceRemove(tag uint) (_go__return__ bool) {
 	_cgo_tag_ := (C.guint)(tag)
 	var _return_ C.gboolean
 	_return_ = C.g_source_remove(_cgo_tag_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func SourceRemoveByFuncsUserData(funcs *SourceFuncs, user_data C.gpointer) (_go__return__ bool) {
+func SourceRemoveByFuncsUserData(funcs *GLibSourceFuncs, user_data C.gpointer) (_go__return__ bool) {
 	_cgo_funcs_ := (*C.GSourceFuncs)(unsafe.Pointer(funcs))
 	var _return_ C.gboolean
 	_return_ = C.g_source_remove_by_funcs_user_data(_cgo_funcs_, user_data)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func SourceRemoveByUserData(user_data C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_source_remove_by_user_data(user_data)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -6174,19 +6172,19 @@ func SourceSetNameById(tag uint, name string) () {
 	return
 }
 
-func (_self_ *Source) AddChildSource(child_source *Source) () {
+func (_self_ *GLibSource) AddChildSource(child_source *GLibSource) () {
 	_cgo_child_source_ := (*C.GSource)(unsafe.Pointer(child_source))
 	C.g_source_add_child_source((*C.GSource)(_self_), _cgo_child_source_)
 	return
 }
 
-func (_self_ *Source) AddPoll(fd *PollFD) () {
+func (_self_ *GLibSource) AddPoll(fd *GLibPollFD) () {
 	_cgo_fd_ := (*C.GPollFD)(unsafe.Pointer(fd))
 	C.g_source_add_poll((*C.GSource)(_self_), _cgo_fd_)
 	return
 }
 
-func (_self_ *Source) Attach(context *MainContext) (_go__return__ uint) {
+func (_self_ *GLibSource) Attach(context *GLibMainContext) (_go__return__ uint) {
 	_cgo_context_ := (*C.GMainContext)(unsafe.Pointer(context))
 	var _return_ C.guint
 	_return_ = C.g_source_attach((*C.GSource)(_self_), _cgo_context_)
@@ -6194,104 +6192,104 @@ func (_self_ *Source) Attach(context *MainContext) (_go__return__ uint) {
 	return
 }
 
-func (_self_ *Source) Destroy() () {
+func (_self_ *GLibSource) Destroy() () {
 	C.g_source_destroy((*C.GSource)(_self_))
 	return
 }
 
-func (_self_ *Source) GetCanRecurse() (_go__return__ bool) {
+func (_self_ *GLibSource) GetCanRecurse() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_source_get_can_recurse((*C.GSource)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Source) GetContext() (_go__return__ *MainContext) {
+func (_self_ *GLibSource) GetContext() (_go__return__ *GLibMainContext) {
 	var _return_ *C.GMainContext
 	_return_ = C.g_source_get_context((*C.GSource)(_self_))
-	_go__return__ = (*MainContext)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibMainContext)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Source) GetId() (_go__return__ uint) {
+func (_self_ *GLibSource) GetId() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_source_get_id((*C.GSource)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Source) GetName() (_go__return__ string) {
+func (_self_ *GLibSource) GetName() (_go__return__ string) {
 	var _return_ *C.char
 	_return_ = C._g_source_get_name((*C.GSource)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Source) GetPriority() (_go__return__ int) {
+func (_self_ *GLibSource) GetPriority() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_source_get_priority((*C.GSource)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Source) GetTime() (_go__return__ int64) {
+func (_self_ *GLibSource) GetTime() (_go__return__ int64) {
 	var _return_ C.gint64
 	_return_ = C.g_source_get_time((*C.GSource)(_self_))
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *Source) IsDestroyed() (_go__return__ bool) {
+func (_self_ *GLibSource) IsDestroyed() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_source_is_destroyed((*C.GSource)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Source) Ref() (_go__return__ *Source) {
+func (_self_ *GLibSource) Ref() (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_return_ = C.g_source_ref((*C.GSource)(_self_))
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Source) RemoveChildSource(child_source *Source) () {
+func (_self_ *GLibSource) RemoveChildSource(child_source *GLibSource) () {
 	_cgo_child_source_ := (*C.GSource)(unsafe.Pointer(child_source))
 	C.g_source_remove_child_source((*C.GSource)(_self_), _cgo_child_source_)
 	return
 }
 
-func (_self_ *Source) RemovePoll(fd *PollFD) () {
+func (_self_ *GLibSource) RemovePoll(fd *GLibPollFD) () {
 	_cgo_fd_ := (*C.GPollFD)(unsafe.Pointer(fd))
 	C.g_source_remove_poll((*C.GSource)(_self_), _cgo_fd_)
 	return
 }
 
-func (_self_ *Source) SetCallback(func_ C.GSourceFunc, data C.gpointer, notify C.GDestroyNotify) () {
+func (_self_ *GLibSource) SetCallback(func_ C.GSourceFunc, data C.gpointer, notify C.GDestroyNotify) () {
 	C.g_source_set_callback((*C.GSource)(_self_), func_, data, notify)
 	return
 }
 
-func (_self_ *Source) SetCallbackIndirect(callback_data C.gpointer, callback_funcs *SourceCallbackFuncs) () {
+func (_self_ *GLibSource) SetCallbackIndirect(callback_data C.gpointer, callback_funcs *GLibSourceCallbackFuncs) () {
 	_cgo_callback_funcs_ := (*C.GSourceCallbackFuncs)(unsafe.Pointer(callback_funcs))
 	C.g_source_set_callback_indirect((*C.GSource)(_self_), callback_data, _cgo_callback_funcs_)
 	return
 }
 
-func (_self_ *Source) SetCanRecurse(can_recurse bool) () {
-	_cgo_can_recurse_ := C.glibfalse()
-	if can_recurse { _cgo_can_recurse_ = C.glibtrue() }
+func (_self_ *GLibSource) SetCanRecurse(can_recurse bool) () {
+	_cgo_can_recurse_ := (C.gboolean)(C.FALSE)
+	if can_recurse { _cgo_can_recurse_ = (C.gboolean)(C.TRUE) }
 	C.g_source_set_can_recurse((*C.GSource)(_self_), _cgo_can_recurse_)
 	return
 }
 
-func (_self_ *Source) SetFuncs(funcs *SourceFuncs) () {
+func (_self_ *GLibSource) SetFuncs(funcs *GLibSourceFuncs) () {
 	_cgo_funcs_ := (*C.GSourceFuncs)(unsafe.Pointer(funcs))
 	C.g_source_set_funcs((*C.GSource)(_self_), _cgo_funcs_)
 	return
 }
 
-func (_self_ *Source) SetName(name string) () {
+func (_self_ *GLibSource) SetName(name string) () {
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -6299,54 +6297,54 @@ func (_self_ *Source) SetName(name string) () {
 	return
 }
 
-func (_self_ *Source) SetPriority(priority int) () {
+func (_self_ *GLibSource) SetPriority(priority int) () {
 	_cgo_priority_ := (C.gint)(priority)
 	C.g_source_set_priority((*C.GSource)(_self_), _cgo_priority_)
 	return
 }
 
-func (_self_ *Source) Unref() () {
+func (_self_ *GLibSource) Unref() () {
 	C.g_source_unref((*C.GSource)(_self_))
 	return
 }
 
-func (_self_ *String) Append(val string) (_go__return__ *String) {
+func (_self_ *GLibString) Append(val string) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cstring_val_ := C.CString(val)
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_append((*C.GString)(_self_), _cgo_val_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) AppendC(c int8) (_go__return__ *String) {
+func (_self_ *GLibString) AppendC(c int8) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_c_ := (C.gchar)(c)
 	_return_ = C.g_string_append_c((*C.GString)(_self_), _cgo_c_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) AppendLen(val string, len_ int64) (_go__return__ *String) {
+func (_self_ *GLibString) AppendLen(val string, len_ int64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_len__ := (C.gssize)(len_)
 	_cstring_val_ := C.CString(val)
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_append_len((*C.GString)(_self_), _cgo_val_, _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) AppendUnichar(wc C.gunichar) (_go__return__ *String) {
+func (_self_ *GLibString) AppendUnichar(wc C.gunichar) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_return_ = C.g_string_append_unichar((*C.GString)(_self_), wc)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) AppendUriEscaped(unescaped string, reserved_chars_allowed string, allow_utf8 bool) (_go__return__ *String) {
+func (_self_ *GLibString) AppendUriEscaped(unescaped string, reserved_chars_allowed string, allow_utf8 bool) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cstring_unescaped_ := C.CString(unescaped)
 	_cgo_unescaped_ := (*C.gchar)(unsafe.Pointer(_cstring_unescaped_))
@@ -6354,98 +6352,98 @@ func (_self_ *String) AppendUriEscaped(unescaped string, reserved_chars_allowed 
 	_cstring_reserved_chars_allowed_ := C.CString(reserved_chars_allowed)
 	_cgo_reserved_chars_allowed_ := (*C.gchar)(unsafe.Pointer(_cstring_reserved_chars_allowed_))
 	defer C.free(unsafe.Pointer(_cstring_reserved_chars_allowed_))
-	_cgo_allow_utf8_ := C.glibfalse()
-	if allow_utf8 { _cgo_allow_utf8_ = C.glibtrue() }
+	_cgo_allow_utf8_ := (C.gboolean)(C.FALSE)
+	if allow_utf8 { _cgo_allow_utf8_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_string_append_uri_escaped((*C.GString)(_self_), _cgo_unescaped_, _cgo_reserved_chars_allowed_, _cgo_allow_utf8_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) AsciiDown() (_go__return__ *String) {
+func (_self_ *GLibString) AsciiDown() (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_return_ = C.g_string_ascii_down((*C.GString)(_self_))
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) AsciiUp() (_go__return__ *String) {
+func (_self_ *GLibString) AsciiUp() (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_return_ = C.g_string_ascii_up((*C.GString)(_self_))
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Assign(rval string) (_go__return__ *String) {
+func (_self_ *GLibString) Assign(rval string) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cstring_rval_ := C.CString(rval)
 	_cgo_rval_ := (*C.gchar)(unsafe.Pointer(_cstring_rval_))
 	defer C.free(unsafe.Pointer(_cstring_rval_))
 	_return_ = C._g_string_assign((*C.GString)(_self_), _cgo_rval_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Equal(v2 *String) (_go__return__ bool) {
+func (_self_ *GLibString) Equal(v2 *GLibString) (_go__return__ bool) {
 	_cgo_v2_ := (*C.GString)(unsafe.Pointer(v2))
 	var _return_ C.gboolean
 	_return_ = C._g_string_equal((*C.GString)(_self_), _cgo_v2_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *String) Erase(pos int64, len_ int64) (_go__return__ *String) {
+func (_self_ *GLibString) Erase(pos int64, len_ int64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gssize)(pos)
 	_cgo_len__ := (C.gssize)(len_)
 	_return_ = C.g_string_erase((*C.GString)(_self_), _cgo_pos_, _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Free(free_segment bool) (_go__return__ string) {
+func (_self_ *GLibString) Free(free_segment bool) (_go__return__ string) {
 	var _return_ *C.gchar
-	_cgo_free_segment_ := C.glibfalse()
-	if free_segment { _cgo_free_segment_ = C.glibtrue() }
+	_cgo_free_segment_ := (C.gboolean)(C.FALSE)
+	if free_segment { _cgo_free_segment_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_string_free((*C.GString)(_self_), _cgo_free_segment_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *String) FreeToBytes() (_go__return__ *Bytes) {
+func (_self_ *GLibString) FreeToBytes() (_go__return__ *GLibBytes) {
 	var _return_ *C.GBytes
 	_return_ = C.g_string_free_to_bytes((*C.GString)(_self_))
-	_go__return__ = (*Bytes)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibBytes)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Hash() (_go__return__ uint) {
+func (_self_ *GLibString) Hash() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_string_hash((*C.GString)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *String) Insert(pos int64, val string) (_go__return__ *String) {
+func (_self_ *GLibString) Insert(pos int64, val string) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gssize)(pos)
 	_cstring_val_ := C.CString(val)
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_insert((*C.GString)(_self_), _cgo_pos_, _cgo_val_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) InsertC(pos int64, c int8) (_go__return__ *String) {
+func (_self_ *GLibString) InsertC(pos int64, c int8) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gssize)(pos)
 	_cgo_c_ := (C.gchar)(c)
 	_return_ = C.g_string_insert_c((*C.GString)(_self_), _cgo_pos_, _cgo_c_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) InsertLen(pos int64, val string, len_ int64) (_go__return__ *String) {
+func (_self_ *GLibString) InsertLen(pos int64, val string, len_ int64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gssize)(pos)
 	_cgo_len__ := (C.gssize)(len_)
@@ -6453,30 +6451,30 @@ func (_self_ *String) InsertLen(pos int64, val string, len_ int64) (_go__return_
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_insert_len((*C.GString)(_self_), _cgo_pos_, _cgo_val_, _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) InsertUnichar(pos int64, wc C.gunichar) (_go__return__ *String) {
+func (_self_ *GLibString) InsertUnichar(pos int64, wc C.gunichar) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gssize)(pos)
 	_return_ = C.g_string_insert_unichar((*C.GString)(_self_), _cgo_pos_, wc)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Overwrite(pos uint64, val string) (_go__return__ *String) {
+func (_self_ *GLibString) Overwrite(pos uint64, val string) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gsize)(pos)
 	_cstring_val_ := C.CString(val)
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_overwrite((*C.GString)(_self_), _cgo_pos_, _cgo_val_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) OverwriteLen(pos uint64, val string, len_ int64) (_go__return__ *String) {
+func (_self_ *GLibString) OverwriteLen(pos uint64, val string, len_ int64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_pos_ := (C.gsize)(pos)
 	_cgo_len__ := (C.gssize)(len_)
@@ -6484,81 +6482,81 @@ func (_self_ *String) OverwriteLen(pos uint64, val string, len_ int64) (_go__ret
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_overwrite_len((*C.GString)(_self_), _cgo_pos_, _cgo_val_, _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Prepend(val string) (_go__return__ *String) {
+func (_self_ *GLibString) Prepend(val string) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cstring_val_ := C.CString(val)
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_prepend((*C.GString)(_self_), _cgo_val_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) PrependC(c int8) (_go__return__ *String) {
+func (_self_ *GLibString) PrependC(c int8) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_c_ := (C.gchar)(c)
 	_return_ = C.g_string_prepend_c((*C.GString)(_self_), _cgo_c_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) PrependLen(val string, len_ int64) (_go__return__ *String) {
+func (_self_ *GLibString) PrependLen(val string, len_ int64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_len__ := (C.gssize)(len_)
 	_cstring_val_ := C.CString(val)
 	_cgo_val_ := (*C.gchar)(unsafe.Pointer(_cstring_val_))
 	defer C.free(unsafe.Pointer(_cstring_val_))
 	_return_ = C._g_string_prepend_len((*C.GString)(_self_), _cgo_val_, _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) PrependUnichar(wc C.gunichar) (_go__return__ *String) {
+func (_self_ *GLibString) PrependUnichar(wc C.gunichar) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_return_ = C.g_string_prepend_unichar((*C.GString)(_self_), wc)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) SetSize(len_ uint64) (_go__return__ *String) {
+func (_self_ *GLibString) SetSize(len_ uint64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_len__ := (C.gsize)(len_)
 	_return_ = C.g_string_set_size((*C.GString)(_self_), _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *String) Truncate(len_ uint64) (_go__return__ *String) {
+func (_self_ *GLibString) Truncate(len_ uint64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_len__ := (C.gsize)(len_)
 	_return_ = C.g_string_truncate((*C.GString)(_self_), _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func StringChunkNew(size uint64) (_go__return__ *StringChunk) {
+func StringChunkNew(size uint64) (_go__return__ *GLibStringChunk) {
 	var _return_ *C.GStringChunk
 	_cgo_size_ := (C.gsize)(size)
 	_return_ = C.g_string_chunk_new(_cgo_size_)
-	_go__return__ = (*StringChunk)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibStringChunk)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *StringChunk) Clear() () {
+func (_self_ *GLibStringChunk) Clear() () {
 	C.g_string_chunk_clear((*C.GStringChunk)(_self_))
 	return
 }
 
-func (_self_ *StringChunk) Free() () {
+func (_self_ *GLibStringChunk) Free() () {
 	C.g_string_chunk_free((*C.GStringChunk)(_self_))
 	return
 }
 
-func (_self_ *StringChunk) Insert(string_ string) (_go__return__ string) {
+func (_self_ *GLibStringChunk) Insert(string_ string) (_go__return__ string) {
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
@@ -6568,7 +6566,7 @@ func (_self_ *StringChunk) Insert(string_ string) (_go__return__ string) {
 	return
 }
 
-func (_self_ *StringChunk) InsertConst(string_ string) (_go__return__ string) {
+func (_self_ *GLibStringChunk) InsertConst(string_ string) (_go__return__ string) {
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
@@ -6578,7 +6576,7 @@ func (_self_ *StringChunk) InsertConst(string_ string) (_go__return__ string) {
 	return
 }
 
-func (_self_ *StringChunk) InsertLen(string_ string, len_ int64) (_go__return__ string) {
+func (_self_ *GLibStringChunk) InsertLen(string_ string, len_ int64) (_go__return__ string) {
 	_cgo_len__ := (C.gssize)(len_)
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
@@ -6589,35 +6587,35 @@ func (_self_ *StringChunk) InsertLen(string_ string, len_ int64) (_go__return__ 
 	return
 }
 
-func (_self_ *TestSuite) Add(test_case *TestCase) () {
+func (_self_ *GLibTestSuite) Add(test_case *GLibTestCase) () {
 	_cgo_test_case_ := (*C.GTestCase)(unsafe.Pointer(test_case))
 	C.g_test_suite_add((*C.GTestSuite)(_self_), _cgo_test_case_)
 	return
 }
 
-func (_self_ *TestSuite) AddSuite(nestedsuite *TestSuite) () {
+func (_self_ *GLibTestSuite) AddSuite(nestedsuite *GLibTestSuite) () {
 	_cgo_nestedsuite_ := (*C.GTestSuite)(unsafe.Pointer(nestedsuite))
 	C.g_test_suite_add_suite((*C.GTestSuite)(_self_), _cgo_nestedsuite_)
 	return
 }
 
-func ThreadNew(name string, func_ C.GThreadFunc, data C.gpointer) (_go__return__ *Thread) {
+func ThreadNew(name string, func_ C.GThreadFunc, data C.gpointer) (_go__return__ *GLibThread) {
 	var _return_ *C.GThread
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._g_thread_new(_cgo_name_, func_, data)
-	_go__return__ = (*Thread)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibThread)(unsafe.Pointer(_return_))
 	return
 }
 
-func ThreadTryNew(name string, func_ C.GThreadFunc, data C.gpointer) (_go__return__ *Thread, _error_ unsafe.Pointer) {
+func ThreadTryNew(name string, func_ C.GThreadFunc, data C.gpointer) (_go__return__ *GLibThread, _error_ unsafe.Pointer) {
 	var _return_ *C.GThread
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._g_thread_try_new(_cgo_name_, func_, data, _error_)
-	_go__return__ = (*Thread)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibThread)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6631,10 +6629,10 @@ func ThreadExit(retval C.gpointer) () {
 	return
 }
 
-func ThreadSelf() (_go__return__ *Thread) {
+func ThreadSelf() (_go__return__ *GLibThread) {
 	var _return_ *C.GThread
 	_return_ = C.g_thread_self()
-	_go__return__ = (*Thread)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibThread)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6643,19 +6641,19 @@ func ThreadYield() () {
 	return
 }
 
-func (_self_ *Thread) Join() (_return_ C.gpointer) {
+func (_self_ *GLibThread) Join() (_return_ C.gpointer) {
 	_return_ = C.g_thread_join((*C.GThread)(_self_))
 	return
 }
 
-func (_self_ *Thread) Ref() (_go__return__ *Thread) {
+func (_self_ *GLibThread) Ref() (_go__return__ *GLibThread) {
 	var _return_ *C.GThread
 	_return_ = C.g_thread_ref((*C.GThread)(_self_))
-	_go__return__ = (*Thread)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibThread)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Thread) Unref() () {
+func (_self_ *GLibThread) Unref() () {
 	C.g_thread_unref((*C.GThread)(_self_))
 	return
 }
@@ -6681,13 +6679,13 @@ func ThreadPoolGetNumUnusedThreads() (_go__return__ uint) {
 	return
 }
 
-func ThreadPoolNew(func_ C.GFunc, user_data C.gpointer, max_threads int, exclusive bool) (_go__return__ *ThreadPool, _error_ unsafe.Pointer) {
+func ThreadPoolNew(func_ C.GFunc, user_data C.gpointer, max_threads int, exclusive bool) (_go__return__ *GLibThreadPool, _error_ unsafe.Pointer) {
 	var _return_ *C.GThreadPool
 	_cgo_max_threads_ := (C.gint)(max_threads)
-	_cgo_exclusive_ := C.glibfalse()
-	if exclusive { _cgo_exclusive_ = C.glibtrue() }
+	_cgo_exclusive_ := (C.gboolean)(C.FALSE)
+	if exclusive { _cgo_exclusive_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_thread_pool_new(func_, user_data, _cgo_max_threads_, _cgo_exclusive_, _error_)
-	_go__return__ = (*ThreadPool)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibThreadPool)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6708,113 +6706,113 @@ func ThreadPoolStopUnusedThreads() () {
 	return
 }
 
-func (_self_ *ThreadPool) Free(immediate bool, wait_ bool) () {
-	_cgo_immediate_ := C.glibfalse()
-	if immediate { _cgo_immediate_ = C.glibtrue() }
-	_cgo_wait__ := C.glibfalse()
-	if wait_ { _cgo_wait__ = C.glibtrue() }
+func (_self_ *GLibThreadPool) Free(immediate bool, wait_ bool) () {
+	_cgo_immediate_ := (C.gboolean)(C.FALSE)
+	if immediate { _cgo_immediate_ = (C.gboolean)(C.TRUE) }
+	_cgo_wait__ := (C.gboolean)(C.FALSE)
+	if wait_ { _cgo_wait__ = (C.gboolean)(C.TRUE) }
 	C.g_thread_pool_free((*C.GThreadPool)(_self_), _cgo_immediate_, _cgo_wait__)
 	return
 }
 
-func (_self_ *ThreadPool) GetMaxThreads() (_go__return__ int) {
+func (_self_ *GLibThreadPool) GetMaxThreads() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_thread_pool_get_max_threads((*C.GThreadPool)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *ThreadPool) GetNumThreads() (_go__return__ uint) {
+func (_self_ *GLibThreadPool) GetNumThreads() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_thread_pool_get_num_threads((*C.GThreadPool)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *ThreadPool) Push(data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibThreadPool) Push(data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
 	var _return_ C.gboolean
 	_return_ = C._g_thread_pool_push((*C.GThreadPool)(_self_), data, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ThreadPool) SetMaxThreads(max_threads int) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GLibThreadPool) SetMaxThreads(max_threads int) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_max_threads_ := (C.gint)(max_threads)
 	var _return_ C.gboolean
 	_return_ = C._g_thread_pool_set_max_threads((*C.GThreadPool)(_self_), _cgo_max_threads_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ThreadPool) SetSortFunction(func_ C.GCompareDataFunc, user_data C.gpointer) () {
+func (_self_ *GLibThreadPool) SetSortFunction(func_ C.GCompareDataFunc, user_data C.gpointer) () {
 	C.g_thread_pool_set_sort_function((*C.GThreadPool)(_self_), func_, user_data)
 	return
 }
 
-func (_self_ *ThreadPool) Unprocessed() (_go__return__ uint) {
+func (_self_ *GLibThreadPool) Unprocessed() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.g_thread_pool_unprocessed((*C.GThreadPool)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func TimeValFromIso8601(iso_date string) (_go__return__ bool, time_ *TimeVal) {
+func TimeValFromIso8601(iso_date string) (_go__return__ bool, time_ *GLibTimeVal) {
 	var _allocated_time__ C.GTimeVal
 	_cstring_iso_date_ := C.CString(iso_date)
 	_cgo_iso_date_ := (*C.gchar)(unsafe.Pointer(_cstring_iso_date_))
 	defer C.free(unsafe.Pointer(_cstring_iso_date_))
 	var _return_ C.gboolean
 	_return_ = C._g_time_val_from_iso8601(_cgo_iso_date_, &_allocated_time__)
-	time_ = (*TimeVal)(unsafe.Pointer(&_allocated_time__))
-	_go__return__ = _return_ == C.glibtrue()
+	time_ = (*GLibTimeVal)(unsafe.Pointer(&_allocated_time__))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *TimeVal) Add(microseconds int64) () {
+func (_self_ *GLibTimeVal) Add(microseconds int64) () {
 	_cgo_microseconds_ := (C.glong)(microseconds)
 	C.g_time_val_add((*C.GTimeVal)(_self_), _cgo_microseconds_)
 	return
 }
 
-func (_self_ *TimeVal) ToIso8601() (_go__return__ string) {
+func (_self_ *GLibTimeVal) ToIso8601() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.g_time_val_to_iso8601((*C.GTimeVal)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func TimeZoneNew(identifier string) (_go__return__ *TimeZone) {
+func TimeZoneNew(identifier string) (_go__return__ *GLibTimeZone) {
 	var _return_ *C.GTimeZone
 	_cstring_identifier_ := C.CString(identifier)
 	_cgo_identifier_ := (*C.gchar)(unsafe.Pointer(_cstring_identifier_))
 	defer C.free(unsafe.Pointer(_cstring_identifier_))
 	_return_ = C._g_time_zone_new(_cgo_identifier_)
-	_go__return__ = (*TimeZone)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTimeZone)(unsafe.Pointer(_return_))
 	return
 }
 
-func TimeZoneNewLocal() (_go__return__ *TimeZone) {
+func TimeZoneNewLocal() (_go__return__ *GLibTimeZone) {
 	var _return_ *C.GTimeZone
 	_return_ = C.g_time_zone_new_local()
-	_go__return__ = (*TimeZone)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTimeZone)(unsafe.Pointer(_return_))
 	return
 }
 
-func TimeZoneNewUtc() (_go__return__ *TimeZone) {
+func TimeZoneNewUtc() (_go__return__ *GLibTimeZone) {
 	var _return_ *C.GTimeZone
 	_return_ = C.g_time_zone_new_utc()
-	_go__return__ = (*TimeZone)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTimeZone)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *TimeZone) AdjustTime(type_ C.GTimeType, time_ *C.gint64) (_go__return__ int) {
+func (_self_ *GLibTimeZone) AdjustTime(type_ C.GTimeType, time_ *C.gint64) (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_time_zone_adjust_time((*C.GTimeZone)(_self_), type_, time_)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *TimeZone) FindInterval(type_ C.GTimeType, time_ int64) (_go__return__ int) {
+func (_self_ *GLibTimeZone) FindInterval(type_ C.GTimeType, time_ int64) (_go__return__ int) {
 	_cgo_time__ := (C.gint64)(time_)
 	var _return_ C.gint
 	_return_ = C.g_time_zone_find_interval((*C.GTimeZone)(_self_), type_, _cgo_time__)
@@ -6822,7 +6820,7 @@ func (_self_ *TimeZone) FindInterval(type_ C.GTimeType, time_ int64) (_go__retur
 	return
 }
 
-func (_self_ *TimeZone) GetAbbreviation(interval int) (_go__return__ string) {
+func (_self_ *GLibTimeZone) GetAbbreviation(interval int) (_go__return__ string) {
 	_cgo_interval_ := (C.gint)(interval)
 	var _return_ *C.gchar
 	_return_ = C._g_time_zone_get_abbreviation((*C.GTimeZone)(_self_), _cgo_interval_)
@@ -6830,7 +6828,7 @@ func (_self_ *TimeZone) GetAbbreviation(interval int) (_go__return__ string) {
 	return
 }
 
-func (_self_ *TimeZone) GetOffset(interval int) (_go__return__ int32) {
+func (_self_ *GLibTimeZone) GetOffset(interval int) (_go__return__ int32) {
 	_cgo_interval_ := (C.gint)(interval)
 	var _return_ C.gint32
 	_return_ = C.g_time_zone_get_offset((*C.GTimeZone)(_self_), _cgo_interval_)
@@ -6838,66 +6836,66 @@ func (_self_ *TimeZone) GetOffset(interval int) (_go__return__ int32) {
 	return
 }
 
-func (_self_ *TimeZone) IsDst(interval int) (_go__return__ bool) {
+func (_self_ *GLibTimeZone) IsDst(interval int) (_go__return__ bool) {
 	_cgo_interval_ := (C.gint)(interval)
 	var _return_ C.gboolean
 	_return_ = C.g_time_zone_is_dst((*C.GTimeZone)(_self_), _cgo_interval_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *TimeZone) Ref() (_go__return__ *TimeZone) {
+func (_self_ *GLibTimeZone) Ref() (_go__return__ *GLibTimeZone) {
 	var _return_ *C.GTimeZone
 	_return_ = C.g_time_zone_ref((*C.GTimeZone)(_self_))
-	_go__return__ = (*TimeZone)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTimeZone)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *TimeZone) Unref() () {
+func (_self_ *GLibTimeZone) Unref() () {
 	C.g_time_zone_unref((*C.GTimeZone)(_self_))
 	return
 }
 
-func TimerNew() (_go__return__ *Timer) {
+func TimerNew() (_go__return__ *GLibTimer) {
 	var _return_ *C.GTimer
 	_return_ = C.g_timer_new()
-	_go__return__ = (*Timer)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTimer)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Timer) Continue() () {
+func (_self_ *GLibTimer) Continue() () {
 	C.g_timer_continue((*C.GTimer)(_self_))
 	return
 }
 
-func (_self_ *Timer) Destroy() () {
+func (_self_ *GLibTimer) Destroy() () {
 	C.g_timer_destroy((*C.GTimer)(_self_))
 	return
 }
 
-func (_self_ *Timer) Elapsed(microseconds *C.gulong) (_go__return__ float64) {
+func (_self_ *GLibTimer) Elapsed(microseconds *C.gulong) (_go__return__ float64) {
 	var _return_ C.gdouble
 	_return_ = C.g_timer_elapsed((*C.GTimer)(_self_), microseconds)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *Timer) Reset() () {
+func (_self_ *GLibTimer) Reset() () {
 	C.g_timer_reset((*C.GTimer)(_self_))
 	return
 }
 
-func (_self_ *Timer) Start() () {
+func (_self_ *GLibTimer) Start() () {
 	C.g_timer_start((*C.GTimer)(_self_))
 	return
 }
 
-func (_self_ *Timer) Stop() () {
+func (_self_ *GLibTimer) Stop() () {
 	C.g_timer_stop((*C.GTimer)(_self_))
 	return
 }
 
-func TrashStackHeight(stack_p *TrashStack) (_go__return__ uint) {
+func TrashStackHeight(stack_p *GLibTrashStack) (_go__return__ uint) {
 	_cgo_stack_p_ := (unsafe.Pointer)(unsafe.Pointer(stack_p))
 	var _return_ C.guint
 	_return_ = C._g_trash_stack_height(_cgo_stack_p_)
@@ -6905,277 +6903,277 @@ func TrashStackHeight(stack_p *TrashStack) (_go__return__ uint) {
 	return
 }
 
-func TrashStackPeek(stack_p *TrashStack) (_return_ C.gpointer) {
+func TrashStackPeek(stack_p *GLibTrashStack) (_return_ C.gpointer) {
 	_cgo_stack_p_ := (unsafe.Pointer)(unsafe.Pointer(stack_p))
 	_return_ = C._g_trash_stack_peek(_cgo_stack_p_)
 	return
 }
 
-func TrashStackPop(stack_p *TrashStack) (_return_ C.gpointer) {
+func TrashStackPop(stack_p *GLibTrashStack) (_return_ C.gpointer) {
 	_cgo_stack_p_ := (unsafe.Pointer)(unsafe.Pointer(stack_p))
 	_return_ = C._g_trash_stack_pop(_cgo_stack_p_)
 	return
 }
 
-func TrashStackPush(stack_p *TrashStack, data_p C.gpointer) () {
+func TrashStackPush(stack_p *GLibTrashStack, data_p C.gpointer) () {
 	_cgo_stack_p_ := (unsafe.Pointer)(unsafe.Pointer(stack_p))
 	C._g_trash_stack_push(_cgo_stack_p_, data_p)
 	return
 }
 
-func TreeNew(key_compare_func C.GCompareFunc) (_go__return__ *Tree) {
+func TreeNew(key_compare_func C.GCompareFunc) (_go__return__ *GLibTree) {
 	var _return_ *C.GTree
 	_return_ = C.g_tree_new(key_compare_func)
-	_go__return__ = (*Tree)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTree)(unsafe.Pointer(_return_))
 	return
 }
 
-func TreeNewFull(key_compare_func C.GCompareDataFunc, key_compare_data C.gpointer, key_destroy_func C.GDestroyNotify, value_destroy_func C.GDestroyNotify) (_go__return__ *Tree) {
+func TreeNewFull(key_compare_func C.GCompareDataFunc, key_compare_data C.gpointer, key_destroy_func C.GDestroyNotify, value_destroy_func C.GDestroyNotify) (_go__return__ *GLibTree) {
 	var _return_ *C.GTree
 	_return_ = C.g_tree_new_full(key_compare_func, key_compare_data, key_destroy_func, value_destroy_func)
-	_go__return__ = (*Tree)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTree)(unsafe.Pointer(_return_))
 	return
 }
 
-func TreeNewWithData(key_compare_func C.GCompareDataFunc, key_compare_data C.gpointer) (_go__return__ *Tree) {
+func TreeNewWithData(key_compare_func C.GCompareDataFunc, key_compare_data C.gpointer) (_go__return__ *GLibTree) {
 	var _return_ *C.GTree
 	_return_ = C.g_tree_new_with_data(key_compare_func, key_compare_data)
-	_go__return__ = (*Tree)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTree)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Tree) Destroy() () {
+func (_self_ *GLibTree) Destroy() () {
 	C.g_tree_destroy((*C.GTree)(_self_))
 	return
 }
 
-func (_self_ *Tree) Foreach(func_ C.GTraverseFunc, user_data C.gpointer) () {
+func (_self_ *GLibTree) Foreach(func_ C.GTraverseFunc, user_data C.gpointer) () {
 	C.g_tree_foreach((*C.GTree)(_self_), func_, user_data)
 	return
 }
 
-func (_self_ *Tree) Height() (_go__return__ int) {
+func (_self_ *GLibTree) Height() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_tree_height((*C.GTree)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Tree) Insert(key C.gpointer, value C.gpointer) () {
+func (_self_ *GLibTree) Insert(key C.gpointer, value C.gpointer) () {
 	C.g_tree_insert((*C.GTree)(_self_), key, value)
 	return
 }
 
-func (_self_ *Tree) Lookup(key C.gpointer) (_return_ C.gpointer) {
+func (_self_ *GLibTree) Lookup(key C.gpointer) (_return_ C.gpointer) {
 	_return_ = C._g_tree_lookup((*C.GTree)(_self_), key)
 	return
 }
 
-func (_self_ *Tree) LookupExtended(lookup_key C.gpointer, orig_key *C.gpointer, value *C.gpointer) (_go__return__ bool) {
+func (_self_ *GLibTree) LookupExtended(lookup_key C.gpointer, orig_key *C.gpointer, value *C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_tree_lookup_extended((*C.GTree)(_self_), lookup_key, orig_key, value)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Tree) Nnodes() (_go__return__ int) {
+func (_self_ *GLibTree) Nnodes() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.g_tree_nnodes((*C.GTree)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Tree) Ref() (_go__return__ *Tree) {
+func (_self_ *GLibTree) Ref() (_go__return__ *GLibTree) {
 	var _return_ *C.GTree
 	_return_ = C.g_tree_ref((*C.GTree)(_self_))
-	_go__return__ = (*Tree)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTree)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Tree) Remove(key C.gpointer) (_go__return__ bool) {
+func (_self_ *GLibTree) Remove(key C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_tree_remove((*C.GTree)(_self_), key)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Tree) Replace(key C.gpointer, value C.gpointer) () {
+func (_self_ *GLibTree) Replace(key C.gpointer, value C.gpointer) () {
 	C.g_tree_replace((*C.GTree)(_self_), key, value)
 	return
 }
 
-func (_self_ *Tree) Search(search_func C.GCompareFunc, user_data C.gpointer) (_return_ C.gpointer) {
+func (_self_ *GLibTree) Search(search_func C.GCompareFunc, user_data C.gpointer) (_return_ C.gpointer) {
 	_return_ = C._g_tree_search((*C.GTree)(_self_), search_func, user_data)
 	return
 }
 
-func (_self_ *Tree) Steal(key C.gpointer) (_go__return__ bool) {
+func (_self_ *GLibTree) Steal(key C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_tree_steal((*C.GTree)(_self_), key)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Tree) Unref() () {
+func (_self_ *GLibTree) Unref() () {
 	C.g_tree_unref((*C.GTree)(_self_))
 	return
 }
 
-func VariantNewBoolean(value bool) (_go__return__ *Variant) {
+func VariantNewBoolean(value bool) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
-	_cgo_value_ := C.glibfalse()
-	if value { _cgo_value_ = C.glibtrue() }
+	_cgo_value_ := (C.gboolean)(C.FALSE)
+	if value { _cgo_value_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_variant_new_boolean(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewByte(value byte) (_go__return__ *Variant) {
+func VariantNewByte(value byte) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.guchar)(value)
 	_return_ = C.g_variant_new_byte(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewDictEntry(key *Variant, value *Variant) (_go__return__ *Variant) {
+func VariantNewDictEntry(key *GLibVariant, value *GLibVariant) (_go__return__ *GLibVariant) {
 	_cgo_key_ := (*C.GVariant)(unsafe.Pointer(key))
 	_cgo_value_ := (*C.GVariant)(unsafe.Pointer(value))
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_new_dict_entry(_cgo_key_, _cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewDouble(value float64) (_go__return__ *Variant) {
+func VariantNewDouble(value float64) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.gdouble)(value)
 	_return_ = C.g_variant_new_double(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewFixedArray(element_type *VariantType, elements C.gpointer, n_elements uint64, element_size uint64) (_go__return__ *Variant) {
+func VariantNewFixedArray(element_type *GLibVariantType, elements C.gpointer, n_elements uint64, element_size uint64) (_go__return__ *GLibVariant) {
 	_cgo_element_type_ := (*C.GVariantType)(unsafe.Pointer(element_type))
 	var _return_ *C.GVariant
 	_cgo_n_elements_ := (C.gsize)(n_elements)
 	_cgo_element_size_ := (C.gsize)(element_size)
 	_return_ = C._g_variant_new_fixed_array(_cgo_element_type_, elements, _cgo_n_elements_, _cgo_element_size_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewFromBytes(type_ *VariantType, bytes *Bytes, trusted bool) (_go__return__ *Variant) {
+func VariantNewFromBytes(type_ *GLibVariantType, bytes *GLibBytes, trusted bool) (_go__return__ *GLibVariant) {
 	_cgo_type__ := (*C.GVariantType)(unsafe.Pointer(type_))
 	_cgo_bytes_ := (*C.GBytes)(unsafe.Pointer(bytes))
 	var _return_ *C.GVariant
-	_cgo_trusted_ := C.glibfalse()
-	if trusted { _cgo_trusted_ = C.glibtrue() }
+	_cgo_trusted_ := (C.gboolean)(C.FALSE)
+	if trusted { _cgo_trusted_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_variant_new_from_bytes(_cgo_type__, _cgo_bytes_, _cgo_trusted_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewHandle(value int32) (_go__return__ *Variant) {
+func VariantNewHandle(value int32) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.gint32)(value)
 	_return_ = C.g_variant_new_handle(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewInt16(value int16) (_go__return__ *Variant) {
+func VariantNewInt16(value int16) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.gint16)(value)
 	_return_ = C.g_variant_new_int16(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewInt32(value int32) (_go__return__ *Variant) {
+func VariantNewInt32(value int32) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.gint32)(value)
 	_return_ = C.g_variant_new_int32(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewInt64(value int64) (_go__return__ *Variant) {
+func VariantNewInt64(value int64) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.gint64)(value)
 	_return_ = C.g_variant_new_int64(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewMaybe(child_type *VariantType, child *Variant) (_go__return__ *Variant) {
+func VariantNewMaybe(child_type *GLibVariantType, child *GLibVariant) (_go__return__ *GLibVariant) {
 	_cgo_child_type_ := (*C.GVariantType)(unsafe.Pointer(child_type))
 	_cgo_child_ := (*C.GVariant)(unsafe.Pointer(child))
 	var _return_ *C.GVariant
 	_return_ = C._g_variant_new_maybe(_cgo_child_type_, _cgo_child_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewObjectPath(object_path string) (_go__return__ *Variant) {
+func VariantNewObjectPath(object_path string) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
 	_return_ = C._g_variant_new_object_path(_cgo_object_path_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewSignature(signature string) (_go__return__ *Variant) {
+func VariantNewSignature(signature string) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cstring_signature_ := C.CString(signature)
 	_cgo_signature_ := (*C.gchar)(unsafe.Pointer(_cstring_signature_))
 	defer C.free(unsafe.Pointer(_cstring_signature_))
 	_return_ = C._g_variant_new_signature(_cgo_signature_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewString(string_ string) (_go__return__ *Variant) {
+func VariantNewString(string_ string) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	_return_ = C._g_variant_new_string(_cgo_string__)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewUint16(value uint16) (_go__return__ *Variant) {
+func VariantNewUint16(value uint16) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.guint16)(value)
 	_return_ = C.g_variant_new_uint16(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewUint32(value uint32) (_go__return__ *Variant) {
+func VariantNewUint32(value uint32) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.guint32)(value)
 	_return_ = C.g_variant_new_uint32(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewUint64(value uint64) (_go__return__ *Variant) {
+func VariantNewUint64(value uint64) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_value_ := (C.guint64)(value)
 	_return_ = C.g_variant_new_uint64(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantNewVariant(value *Variant) (_go__return__ *Variant) {
+func VariantNewVariant(value *GLibVariant) (_go__return__ *GLibVariant) {
 	_cgo_value_ := (*C.GVariant)(unsafe.Pointer(value))
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_new_variant(_cgo_value_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7185,7 +7183,7 @@ func VariantIsObjectPath(string_ string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_is_object_path(_cgo_string__)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -7195,11 +7193,11 @@ func VariantIsSignature(string_ string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_is_signature(_cgo_string__)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func VariantParse(type_ *VariantType, text string, limit string, endptr string) (_go__return__ *Variant, _error_ unsafe.Pointer) {
+func VariantParse(type_ *GLibVariantType, text string, limit string, endptr string) (_go__return__ *GLibVariant, _error_ unsafe.Pointer) {
 	_cgo_type__ := (*C.GVariantType)(unsafe.Pointer(type_))
 	var _return_ *C.GVariant
 	_cstring_text_ := C.CString(text)
@@ -7212,7 +7210,7 @@ func VariantParse(type_ *VariantType, text string, limit string, endptr string) 
 	_cgo_endptr_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_endptr_))
 	defer C.free(unsafe.Pointer(_cstring_endptr_))
 	_return_ = C._g_variant_parse(_cgo_type__, _cgo_text_, _cgo_limit_, _cgo_endptr_, _error_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7221,31 +7219,31 @@ func VariantParserGetErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func (_self_ *Variant) Byteswap() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) Byteswap() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_byteswap((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) CheckFormatString(format_string string, copy_only bool) (_go__return__ bool) {
+func (_self_ *GLibVariant) CheckFormatString(format_string string, copy_only bool) (_go__return__ bool) {
 	_cstring_format_string_ := C.CString(format_string)
 	_cgo_format_string_ := (*C.gchar)(unsafe.Pointer(_cstring_format_string_))
 	defer C.free(unsafe.Pointer(_cstring_format_string_))
-	_cgo_copy_only_ := C.glibfalse()
-	if copy_only { _cgo_copy_only_ = C.glibtrue() }
+	_cgo_copy_only_ := (C.gboolean)(C.FALSE)
+	if copy_only { _cgo_copy_only_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
 	_return_ = C._g_variant_check_format_string((*C.GVariant)(_self_), _cgo_format_string_, _cgo_copy_only_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) Classify() (_return_ C.GVariantClass) {
+func (_self_ *GLibVariant) Classify() (_return_ C.GVariantClass) {
 	_return_ = C.g_variant_classify((*C.GVariant)(_self_))
 	return
 }
 
-func (_self_ *Variant) Compare(two *Variant) (_go__return__ int) {
+func (_self_ *GLibVariant) Compare(two *GLibVariant) (_go__return__ int) {
 	_cgo_two_ := (C.gpointer)(unsafe.Pointer(two))
 	var _return_ C.gint
 	_return_ = C._g_variant_compare((*C.GVariant)(_self_), _cgo_two_)
@@ -7253,28 +7251,28 @@ func (_self_ *Variant) Compare(two *Variant) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Variant) DupBytestring() (_return_ *C.gchar, _go_length_ uint64) {
+func (_self_ *GLibVariant) DupBytestring() (_return_ *C.gchar, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C.g_variant_dup_bytestring((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) DupBytestringArray() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibVariant) DupBytestringArray() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_variant_dup_bytestring_array((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) DupObjv() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibVariant) DupObjv() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_variant_dup_objv((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) DupString() (_go__return__ string, _go_length_ uint64) {
+func (_self_ *GLibVariant) DupString() (_go__return__ string, _go_length_ uint64) {
 	var length C.gsize
 	var _return_ *C.gchar
 	_return_ = C.g_variant_dup_string((*C.GVariant)(_self_), &length)
@@ -7283,75 +7281,75 @@ func (_self_ *Variant) DupString() (_go__return__ string, _go_length_ uint64) {
 	return
 }
 
-func (_self_ *Variant) DupStrv() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibVariant) DupStrv() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_variant_dup_strv((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) Equal(two *Variant) (_go__return__ bool) {
+func (_self_ *GLibVariant) Equal(two *GLibVariant) (_go__return__ bool) {
 	_cgo_two_ := (C.gpointer)(unsafe.Pointer(two))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_equal((*C.GVariant)(_self_), _cgo_two_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) GetBoolean() (_go__return__ bool) {
+func (_self_ *GLibVariant) GetBoolean() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_variant_get_boolean((*C.GVariant)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) GetByte() (_go__return__ byte) {
+func (_self_ *GLibVariant) GetByte() (_go__return__ byte) {
 	var _return_ C.guchar
 	_return_ = C.g_variant_get_byte((*C.GVariant)(_self_))
 	_go__return__ = (byte)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetBytestring() (_return_ *C.gchar) {
+func (_self_ *GLibVariant) GetBytestring() (_return_ *C.gchar) {
 	_return_ = C._g_variant_get_bytestring((*C.GVariant)(_self_))
 	return
 }
 
-func (_self_ *Variant) GetBytestringArray() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibVariant) GetBytestringArray() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_variant_get_bytestring_array((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) GetChildValue(index_ uint64) (_go__return__ *Variant) {
+func (_self_ *GLibVariant) GetChildValue(index_ uint64) (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_cgo_index__ := (C.gsize)(index_)
 	_return_ = C.g_variant_get_child_value((*C.GVariant)(_self_), _cgo_index__)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) GetData() (_return_ C.gpointer) {
+func (_self_ *GLibVariant) GetData() (_return_ C.gpointer) {
 	_return_ = C._g_variant_get_data((*C.GVariant)(_self_))
 	return
 }
 
-func (_self_ *Variant) GetDataAsBytes() (_go__return__ *Bytes) {
+func (_self_ *GLibVariant) GetDataAsBytes() (_go__return__ *GLibBytes) {
 	var _return_ *C.GBytes
 	_return_ = C.g_variant_get_data_as_bytes((*C.GVariant)(_self_))
-	_go__return__ = (*Bytes)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibBytes)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) GetDouble() (_go__return__ float64) {
+func (_self_ *GLibVariant) GetDouble() (_go__return__ float64) {
 	var _return_ C.gdouble
 	_return_ = C.g_variant_get_double((*C.GVariant)(_self_))
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetFixedArray(element_size uint64) (_return_ C.gpointer, _go_n_elements_ uint64) {
+func (_self_ *GLibVariant) GetFixedArray(element_size uint64) (_return_ C.gpointer, _go_n_elements_ uint64) {
 	_cgo_element_size_ := (C.gsize)(element_size)
 	var n_elements C.gsize
 	_return_ = C._g_variant_get_fixed_array((*C.GVariant)(_self_), &n_elements, _cgo_element_size_)
@@ -7359,63 +7357,63 @@ func (_self_ *Variant) GetFixedArray(element_size uint64) (_return_ C.gpointer, 
 	return
 }
 
-func (_self_ *Variant) GetHandle() (_go__return__ int32) {
+func (_self_ *GLibVariant) GetHandle() (_go__return__ int32) {
 	var _return_ C.gint32
 	_return_ = C.g_variant_get_handle((*C.GVariant)(_self_))
 	_go__return__ = (int32)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetInt16() (_go__return__ int16) {
+func (_self_ *GLibVariant) GetInt16() (_go__return__ int16) {
 	var _return_ C.gint16
 	_return_ = C.g_variant_get_int16((*C.GVariant)(_self_))
 	_go__return__ = (int16)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetInt32() (_go__return__ int32) {
+func (_self_ *GLibVariant) GetInt32() (_go__return__ int32) {
 	var _return_ C.gint32
 	_return_ = C.g_variant_get_int32((*C.GVariant)(_self_))
 	_go__return__ = (int32)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetInt64() (_go__return__ int64) {
+func (_self_ *GLibVariant) GetInt64() (_go__return__ int64) {
 	var _return_ C.gint64
 	_return_ = C.g_variant_get_int64((*C.GVariant)(_self_))
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetMaybe() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) GetMaybe() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_get_maybe((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) GetNormalForm() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) GetNormalForm() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_get_normal_form((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) GetObjv() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibVariant) GetObjv() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_variant_get_objv((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) GetSize() (_go__return__ uint64) {
+func (_self_ *GLibVariant) GetSize() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C.g_variant_get_size((*C.GVariant)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetString() (_go__return__ string, _go_length_ uint64) {
+func (_self_ *GLibVariant) GetString() (_go__return__ string, _go_length_ uint64) {
 	var length C.gsize
 	var _return_ *C.gchar
 	_return_ = C._g_variant_get_string((*C.GVariant)(_self_), &length)
@@ -7424,234 +7422,234 @@ func (_self_ *Variant) GetString() (_go__return__ string, _go_length_ uint64) {
 	return
 }
 
-func (_self_ *Variant) GetStrv() (_return_ unsafe.Pointer, _go_length_ uint64) {
+func (_self_ *GLibVariant) GetStrv() (_return_ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
 	_return_ = C._g_variant_get_strv((*C.GVariant)(_self_), &length)
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *Variant) GetType() (_go__return__ *VariantType) {
+func (_self_ *GLibVariant) GetType() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_get_type((*C.GVariant)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) GetTypeString() (_go__return__ string) {
+func (_self_ *GLibVariant) GetTypeString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_variant_get_type_string((*C.GVariant)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Variant) GetUint16() (_go__return__ uint16) {
+func (_self_ *GLibVariant) GetUint16() (_go__return__ uint16) {
 	var _return_ C.guint16
 	_return_ = C.g_variant_get_uint16((*C.GVariant)(_self_))
 	_go__return__ = (uint16)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetUint32() (_go__return__ uint32) {
+func (_self_ *GLibVariant) GetUint32() (_go__return__ uint32) {
 	var _return_ C.guint32
 	_return_ = C.g_variant_get_uint32((*C.GVariant)(_self_))
 	_go__return__ = (uint32)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetUint64() (_go__return__ uint64) {
+func (_self_ *GLibVariant) GetUint64() (_go__return__ uint64) {
 	var _return_ C.guint64
 	_return_ = C.g_variant_get_uint64((*C.GVariant)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *Variant) GetVariant() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) GetVariant() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_get_variant((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) Hash() (_go__return__ uint) {
+func (_self_ *GLibVariant) Hash() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_variant_hash((*C.GVariant)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Variant) IsContainer() (_go__return__ bool) {
+func (_self_ *GLibVariant) IsContainer() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_variant_is_container((*C.GVariant)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) IsFloating() (_go__return__ bool) {
+func (_self_ *GLibVariant) IsFloating() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_variant_is_floating((*C.GVariant)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) IsNormalForm() (_go__return__ bool) {
+func (_self_ *GLibVariant) IsNormalForm() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_variant_is_normal_form((*C.GVariant)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) IsOfType(type_ *VariantType) (_go__return__ bool) {
+func (_self_ *GLibVariant) IsOfType(type_ *GLibVariantType) (_go__return__ bool) {
 	_cgo_type__ := (*C.GVariantType)(unsafe.Pointer(type_))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_is_of_type((*C.GVariant)(_self_), _cgo_type__)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Variant) IterNew() (_go__return__ *VariantIter) {
+func (_self_ *GLibVariant) IterNew() (_go__return__ *GLibVariantIter) {
 	var _return_ *C.GVariantIter
 	_return_ = C.g_variant_iter_new((*C.GVariant)(_self_))
-	_go__return__ = (*VariantIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) LookupValue(key string, expected_type *VariantType) (_go__return__ *Variant) {
+func (_self_ *GLibVariant) LookupValue(key string, expected_type *GLibVariantType) (_go__return__ *GLibVariant) {
 	_cgo_expected_type_ := (*C.GVariantType)(unsafe.Pointer(expected_type))
 	var _return_ *C.GVariant
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
 	_return_ = C._g_variant_lookup_value((*C.GVariant)(_self_), _cgo_key_, _cgo_expected_type_)
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) NChildren() (_go__return__ uint64) {
+func (_self_ *GLibVariant) NChildren() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C.g_variant_n_children((*C.GVariant)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *Variant) Print(type_annotate bool) (_go__return__ string) {
+func (_self_ *GLibVariant) Print(type_annotate bool) (_go__return__ string) {
 	var _return_ *C.gchar
-	_cgo_type_annotate_ := C.glibfalse()
-	if type_annotate { _cgo_type_annotate_ = C.glibtrue() }
+	_cgo_type_annotate_ := (C.gboolean)(C.FALSE)
+	if type_annotate { _cgo_type_annotate_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_variant_print((*C.GVariant)(_self_), _cgo_type_annotate_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Variant) PrintString(string_ *String, type_annotate bool) (_go__return__ *String) {
+func (_self_ *GLibVariant) PrintString(string_ *GLibString, type_annotate bool) (_go__return__ *GLibString) {
 	_cgo_string__ := (*C.GString)(unsafe.Pointer(string_))
 	var _return_ *C.GString
-	_cgo_type_annotate_ := C.glibfalse()
-	if type_annotate { _cgo_type_annotate_ = C.glibtrue() }
+	_cgo_type_annotate_ := (C.gboolean)(C.FALSE)
+	if type_annotate { _cgo_type_annotate_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_variant_print_string((*C.GVariant)(_self_), _cgo_string__, _cgo_type_annotate_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) Ref() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) Ref() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_ref((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) RefSink() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) RefSink() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_ref_sink((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) Store(data C.gpointer) () {
+func (_self_ *GLibVariant) Store(data C.gpointer) () {
 	C.g_variant_store((*C.GVariant)(_self_), data)
 	return
 }
 
-func (_self_ *Variant) TakeRef() (_go__return__ *Variant) {
+func (_self_ *GLibVariant) TakeRef() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_take_ref((*C.GVariant)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Variant) Unref() () {
+func (_self_ *GLibVariant) Unref() () {
 	C.g_variant_unref((*C.GVariant)(_self_))
 	return
 }
 
-func VariantBuilderNew(type_ *VariantType) (_go__return__ *VariantBuilder) {
+func VariantBuilderNew(type_ *GLibVariantType) (_go__return__ *GLibVariantBuilder) {
 	_cgo_type__ := (*C.GVariantType)(unsafe.Pointer(type_))
 	var _return_ *C.GVariantBuilder
 	_return_ = C._g_variant_builder_new(_cgo_type__)
-	_go__return__ = (*VariantBuilder)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantBuilder)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantBuilder) AddValue(value *Variant) () {
+func (_self_ *GLibVariantBuilder) AddValue(value *GLibVariant) () {
 	_cgo_value_ := (*C.GVariant)(unsafe.Pointer(value))
 	C.g_variant_builder_add_value((*C.GVariantBuilder)(_self_), _cgo_value_)
 	return
 }
 
-func (_self_ *VariantBuilder) Clear() () {
+func (_self_ *GLibVariantBuilder) Clear() () {
 	C.g_variant_builder_clear((*C.GVariantBuilder)(_self_))
 	return
 }
 
-func (_self_ *VariantBuilder) Close() () {
+func (_self_ *GLibVariantBuilder) Close() () {
 	C.g_variant_builder_close((*C.GVariantBuilder)(_self_))
 	return
 }
 
-func (_self_ *VariantBuilder) End() (_go__return__ *Variant) {
+func (_self_ *GLibVariantBuilder) End() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_builder_end((*C.GVariantBuilder)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantBuilder) Init(type_ *VariantType) () {
+func (_self_ *GLibVariantBuilder) Init(type_ *GLibVariantType) () {
 	_cgo_type__ := (*C.GVariantType)(unsafe.Pointer(type_))
 	C._g_variant_builder_init((*C.GVariantBuilder)(_self_), _cgo_type__)
 	return
 }
 
-func (_self_ *VariantBuilder) Open(type_ *VariantType) () {
+func (_self_ *GLibVariantBuilder) Open(type_ *GLibVariantType) () {
 	_cgo_type__ := (*C.GVariantType)(unsafe.Pointer(type_))
 	C._g_variant_builder_open((*C.GVariantBuilder)(_self_), _cgo_type__)
 	return
 }
 
-func (_self_ *VariantBuilder) Ref() (_go__return__ *VariantBuilder) {
+func (_self_ *GLibVariantBuilder) Ref() (_go__return__ *GLibVariantBuilder) {
 	var _return_ *C.GVariantBuilder
 	_return_ = C.g_variant_builder_ref((*C.GVariantBuilder)(_self_))
-	_go__return__ = (*VariantBuilder)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantBuilder)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantBuilder) Unref() () {
+func (_self_ *GLibVariantBuilder) Unref() () {
 	C.g_variant_builder_unref((*C.GVariantBuilder)(_self_))
 	return
 }
 
-func (_self_ *VariantIter) Copy() (_go__return__ *VariantIter) {
+func (_self_ *GLibVariantIter) Copy() (_go__return__ *GLibVariantIter) {
 	var _return_ *C.GVariantIter
 	_return_ = C.g_variant_iter_copy((*C.GVariantIter)(_self_))
-	_go__return__ = (*VariantIter)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantIter)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantIter) Free() () {
+func (_self_ *GLibVariantIter) Free() () {
 	C.g_variant_iter_free((*C.GVariantIter)(_self_))
 	return
 }
 
-func (_self_ *VariantIter) Init(value *Variant) (_go__return__ uint64) {
+func (_self_ *GLibVariantIter) Init(value *GLibVariant) (_go__return__ uint64) {
 	_cgo_value_ := (*C.GVariant)(unsafe.Pointer(value))
 	var _return_ C.gsize
 	_return_ = C.g_variant_iter_init((*C.GVariantIter)(_self_), _cgo_value_)
@@ -7659,52 +7657,52 @@ func (_self_ *VariantIter) Init(value *Variant) (_go__return__ uint64) {
 	return
 }
 
-func (_self_ *VariantIter) NChildren() (_go__return__ uint64) {
+func (_self_ *GLibVariantIter) NChildren() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C.g_variant_iter_n_children((*C.GVariantIter)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *VariantIter) NextValue() (_go__return__ *Variant) {
+func (_self_ *GLibVariantIter) NextValue() (_go__return__ *GLibVariant) {
 	var _return_ *C.GVariant
 	_return_ = C.g_variant_iter_next_value((*C.GVariantIter)(_self_))
-	_go__return__ = (*Variant)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariant)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantTypeNew(type_string string) (_go__return__ *VariantType) {
+func VariantTypeNew(type_string string) (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_cstring_type_string_ := C.CString(type_string)
 	_cgo_type_string_ := (*C.gchar)(unsafe.Pointer(_cstring_type_string_))
 	defer C.free(unsafe.Pointer(_cstring_type_string_))
 	_return_ = C._g_variant_type_new(_cgo_type_string_)
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantTypeNewArray(element *VariantType) (_go__return__ *VariantType) {
+func VariantTypeNewArray(element *GLibVariantType) (_go__return__ *GLibVariantType) {
 	_cgo_element_ := (*C.GVariantType)(unsafe.Pointer(element))
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_new_array(_cgo_element_)
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantTypeNewDictEntry(key *VariantType, value *VariantType) (_go__return__ *VariantType) {
+func VariantTypeNewDictEntry(key *GLibVariantType, value *GLibVariantType) (_go__return__ *GLibVariantType) {
 	_cgo_key_ := (*C.GVariantType)(unsafe.Pointer(key))
 	_cgo_value_ := (*C.GVariantType)(unsafe.Pointer(value))
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_new_dict_entry(_cgo_key_, _cgo_value_)
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func VariantTypeNewMaybe(element *VariantType) (_go__return__ *VariantType) {
+func VariantTypeNewMaybe(element *GLibVariantType) (_go__return__ *GLibVariantType) {
 	_cgo_element_ := (*C.GVariantType)(unsafe.Pointer(element))
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_new_maybe(_cgo_element_)
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7714,7 +7712,7 @@ func VariantTypeStringIsValid(type_string string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_type_string_))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_string_is_valid(_cgo_type_string_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -7727,161 +7725,161 @@ func VariantTypeStringScan(string_ string, limit string) (_go__return__ bool, en
 	defer C.free(unsafe.Pointer(_cstring_limit_))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_string_scan(_cgo_string__, _cgo_limit_, endptr)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) Copy() (_go__return__ *VariantType) {
+func (_self_ *GLibVariantType) Copy() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_copy((*C.GVariantType)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantType) DupString() (_go__return__ string) {
+func (_self_ *GLibVariantType) DupString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_variant_type_dup_string((*C.GVariantType)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *VariantType) Element() (_go__return__ *VariantType) {
+func (_self_ *GLibVariantType) Element() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_element((*C.GVariantType)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantType) Equal(type2 *VariantType) (_go__return__ bool) {
+func (_self_ *GLibVariantType) Equal(type2 *GLibVariantType) (_go__return__ bool) {
 	_cgo_type2_ := (C.gpointer)(unsafe.Pointer(type2))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_equal((*C.GVariantType)(_self_), _cgo_type2_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) First() (_go__return__ *VariantType) {
+func (_self_ *GLibVariantType) First() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_first((*C.GVariantType)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantType) Free() () {
+func (_self_ *GLibVariantType) Free() () {
 	C.g_variant_type_free((*C.GVariantType)(_self_))
 	return
 }
 
-func (_self_ *VariantType) GetStringLength() (_go__return__ uint64) {
+func (_self_ *GLibVariantType) GetStringLength() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C._g_variant_type_get_string_length((*C.GVariantType)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *VariantType) Hash() (_go__return__ uint) {
+func (_self_ *GLibVariantType) Hash() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_variant_type_hash((*C.GVariantType)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *VariantType) IsArray() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsArray() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_array((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsBasic() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsBasic() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_basic((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsContainer() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsContainer() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_container((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsDefinite() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsDefinite() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_definite((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsDictEntry() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsDictEntry() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_dict_entry((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsMaybe() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsMaybe() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_maybe((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsSubtypeOf(supertype *VariantType) (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsSubtypeOf(supertype *GLibVariantType) (_go__return__ bool) {
 	_cgo_supertype_ := (*C.GVariantType)(unsafe.Pointer(supertype))
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_subtype_of((*C.GVariantType)(_self_), _cgo_supertype_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsTuple() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsTuple() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_tuple((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) IsVariant() (_go__return__ bool) {
+func (_self_ *GLibVariantType) IsVariant() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_variant_type_is_variant((*C.GVariantType)(_self_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *VariantType) Key() (_go__return__ *VariantType) {
+func (_self_ *GLibVariantType) Key() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_key((*C.GVariantType)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantType) NItems() (_go__return__ uint64) {
+func (_self_ *GLibVariantType) NItems() (_go__return__ uint64) {
 	var _return_ C.gsize
 	_return_ = C._g_variant_type_n_items((*C.GVariantType)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *VariantType) Next() (_go__return__ *VariantType) {
+func (_self_ *GLibVariantType) Next() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_next((*C.GVariantType)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *VariantType) PeekString() (_go__return__ string) {
+func (_self_ *GLibVariantType) PeekString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_variant_type_peek_string((*C.GVariantType)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *VariantType) Value() (_go__return__ *VariantType) {
+func (_self_ *GLibVariantType) Value() (_go__return__ *GLibVariantType) {
 	var _return_ *C.GVariantType
 	_return_ = C._g_variant_type_value((*C.GVariantType)(_self_))
-	_go__return__ = (*VariantType)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibVariantType)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8105,7 +8103,7 @@ func AssertionMessageCmpstr(domain string, file string, line C.int, func_ string
 	return
 }
 
-func AssertionMessageError(domain string, file string, line C.int, func_ string, expr string, error_ *Error, error_domain C.GQuark, error_code C.int) () {
+func AssertionMessageError(domain string, file string, line C.int, func_ string, expr string, error_ *GLibError, error_domain C.GQuark, error_code C.int) () {
 	_cgo_error__ := (*C.GError)(unsafe.Pointer(error_))
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.char)(unsafe.Pointer(_cstring_domain_))
@@ -8186,7 +8184,7 @@ func BitTrylock(address *C. gint, lock_bit int) (_go__return__ bool) {
 	_cgo_lock_bit_ := (C.gint)(lock_bit)
 	var _return_ C.gboolean
 	_return_ = C.g_bit_trylock(address, _cgo_lock_bit_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8229,10 +8227,10 @@ func ChildWatchAddFull(priority int, pid C.GPid, function C.GChildWatchFunc, dat
 	return
 }
 
-func ChildWatchSourceNew(pid C.GPid) (_go__return__ *Source) {
+func ChildWatchSourceNew(pid C.GPid) (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_return_ = C.g_child_watch_source_new(pid)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8241,7 +8239,7 @@ func ClearError() (_error_ unsafe.Pointer) {
 	return
 }
 
-func ComputeChecksumForBytes(checksum_type C.GChecksumType, data *Bytes) (_go__return__ string) {
+func ComputeChecksumForBytes(checksum_type C.GChecksumType, data *GLibBytes) (_go__return__ string) {
 	_cgo_data_ := (*C.GBytes)(unsafe.Pointer(data))
 	var _return_ *C.gchar
 	_return_ = C.g_compute_checksum_for_bytes(checksum_type, _cgo_data_)
@@ -8314,19 +8312,19 @@ func ConvertWithFallback(str string, len_ int64, to_codeset string, from_codeset
 	return
 }
 
-func DatalistClear(datalist *Data) () {
+func DatalistClear(datalist *GLibData) () {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	C._g_datalist_clear(_cgo_datalist_)
 	return
 }
 
-func DatalistForeach(datalist *Data, func_ C.GDataForeachFunc, user_data C.gpointer) () {
+func DatalistForeach(datalist *GLibData, func_ C.GDataForeachFunc, user_data C.gpointer) () {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	C._g_datalist_foreach(_cgo_datalist_, func_, user_data)
 	return
 }
 
-func DatalistGetData(datalist *Data, key string) (_return_ C.gpointer) {
+func DatalistGetData(datalist *GLibData, key string) (_return_ C.gpointer) {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
@@ -8335,7 +8333,7 @@ func DatalistGetData(datalist *Data, key string) (_return_ C.gpointer) {
 	return
 }
 
-func DatalistGetFlags(datalist *Data) (_go__return__ uint) {
+func DatalistGetFlags(datalist *GLibData) (_go__return__ uint) {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	var _return_ C.guint
 	_return_ = C._g_datalist_get_flags(_cgo_datalist_)
@@ -8343,52 +8341,52 @@ func DatalistGetFlags(datalist *Data) (_go__return__ uint) {
 	return
 }
 
-func DatalistIdDupData(datalist *Data, key_id C.GQuark, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
+func DatalistIdDupData(datalist *GLibData, key_id C.GQuark, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	_return_ = C._g_datalist_id_dup_data(_cgo_datalist_, key_id, dup_func, user_data)
 	return
 }
 
-func DatalistIdGetData(datalist *Data, key_id C.GQuark) (_return_ C.gpointer) {
+func DatalistIdGetData(datalist *GLibData, key_id C.GQuark) (_return_ C.gpointer) {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	_return_ = C._g_datalist_id_get_data(_cgo_datalist_, key_id)
 	return
 }
 
-func DatalistIdRemoveNoNotify(datalist *Data, key_id C.GQuark) (_return_ C.gpointer) {
+func DatalistIdRemoveNoNotify(datalist *GLibData, key_id C.GQuark) (_return_ C.gpointer) {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	_return_ = C._g_datalist_id_remove_no_notify(_cgo_datalist_, key_id)
 	return
 }
 
-func DatalistIdReplaceData(datalist *Data, key_id C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
+func DatalistIdReplaceData(datalist *GLibData, key_id C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	var _return_ C.gboolean
 	_return_ = C._g_datalist_id_replace_data(_cgo_datalist_, key_id, oldval, newval, destroy, old_destroy)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func DatalistIdSetDataFull(datalist *Data, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify) () {
+func DatalistIdSetDataFull(datalist *GLibData, key_id C.GQuark, data C.gpointer, destroy_func C.GDestroyNotify) () {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	C._g_datalist_id_set_data_full(_cgo_datalist_, key_id, data, destroy_func)
 	return
 }
 
-func DatalistInit(datalist *Data) () {
+func DatalistInit(datalist *GLibData) () {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	C._g_datalist_init(_cgo_datalist_)
 	return
 }
 
-func DatalistSetFlags(datalist *Data, flags uint) () {
+func DatalistSetFlags(datalist *GLibData, flags uint) () {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	_cgo_flags_ := (C.guint)(flags)
 	C._g_datalist_set_flags(_cgo_datalist_, _cgo_flags_)
 	return
 }
 
-func DatalistUnsetFlags(datalist *Data, flags uint) () {
+func DatalistUnsetFlags(datalist *GLibData, flags uint) () {
 	_cgo_datalist_ := (unsafe.Pointer)(unsafe.Pointer(datalist))
 	_cgo_flags_ := (C.guint)(flags)
 	C._g_datalist_unset_flags(_cgo_datalist_, _cgo_flags_)
@@ -8450,7 +8448,7 @@ func Dgettext(domain string, msgid string) (_go__return__ string) {
 func DirectEqual(v1 C.gpointer, v2 C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_direct_equal(v1, v2)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8481,7 +8479,7 @@ func Dngettext(domain string, msgid string, msgid_plural string, n uint64) (_go_
 func DoubleEqual(v1 C.gpointer, v2 C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_double_equal(v1, v2)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8664,7 +8662,7 @@ func GetCharset(charset string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_charset_))
 	var _return_ C.gboolean
 	_return_ = C._g_get_charset(_cgo_charset_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8682,7 +8680,7 @@ func GetCurrentDir() (_go__return__ string) {
 	return
 }
 
-func GetCurrentTime(result *TimeVal) () {
+func GetCurrentTime(result *GLibTimeVal) () {
 	_cgo_result_ := (*C.GTimeVal)(unsafe.Pointer(result))
 	C.g_get_current_time(_cgo_result_)
 	return
@@ -8699,7 +8697,7 @@ func GetFilenameCharsets(charsets string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_charsets_))
 	var _return_ C.gboolean
 	_return_ = C._g_get_filename_charsets(_cgo_charsets_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8833,7 +8831,7 @@ func HostnameIsAsciiEncoded(hostname string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_hostname_))
 	var _return_ C.gboolean
 	_return_ = C._g_hostname_is_ascii_encoded(_cgo_hostname_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8843,7 +8841,7 @@ func HostnameIsIpAddress(hostname string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_hostname_))
 	var _return_ C.gboolean
 	_return_ = C._g_hostname_is_ip_address(_cgo_hostname_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8853,7 +8851,7 @@ func HostnameIsNonAscii(hostname string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_hostname_))
 	var _return_ C.gboolean
 	_return_ = C._g_hostname_is_non_ascii(_cgo_hostname_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8895,21 +8893,21 @@ func IdleAddFull(priority int, function C.GSourceFunc, data C.gpointer, notify C
 func IdleRemoveByData(data C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_idle_remove_by_data(data)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func IdleSourceNew() (_go__return__ *Source) {
+func IdleSourceNew() (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_return_ = C.g_idle_source_new()
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
 func Int64Equal(v1 C.gpointer, v2 C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_int64_equal(v1, v2)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8923,7 +8921,7 @@ func Int64Hash(v C.gpointer) (_go__return__ uint) {
 func IntEqual(v1 C.gpointer, v2 C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_int_equal(v1, v2)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -8954,7 +8952,7 @@ func InternString(string_ string) (_go__return__ string) {
 	return
 }
 
-func IoAddWatch(channel *IOChannel, condition C.GIOCondition, func_ C.GIOFunc, user_data C.gpointer) (_go__return__ uint) {
+func IoAddWatch(channel *GLibIOChannel, condition C.GIOCondition, func_ C.GIOFunc, user_data C.gpointer) (_go__return__ uint) {
 	_cgo_channel_ := (*C.GIOChannel)(unsafe.Pointer(channel))
 	var _return_ C.guint
 	_return_ = C.g_io_add_watch(_cgo_channel_, condition, func_, user_data)
@@ -8962,7 +8960,7 @@ func IoAddWatch(channel *IOChannel, condition C.GIOCondition, func_ C.GIOFunc, u
 	return
 }
 
-func IoAddWatchFull(channel *IOChannel, priority int, condition C.GIOCondition, func_ C.GIOFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ uint) {
+func IoAddWatchFull(channel *GLibIOChannel, priority int, condition C.GIOCondition, func_ C.GIOFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ uint) {
 	_cgo_channel_ := (*C.GIOChannel)(unsafe.Pointer(channel))
 	_cgo_priority_ := (C.gint)(priority)
 	var _return_ C.guint
@@ -8971,11 +8969,11 @@ func IoAddWatchFull(channel *IOChannel, priority int, condition C.GIOCondition, 
 	return
 }
 
-func IoCreateWatch(channel *IOChannel, condition C.GIOCondition) (_go__return__ *Source) {
+func IoCreateWatch(channel *GLibIOChannel, condition C.GIOCondition) (_go__return__ *GLibSource) {
 	_cgo_channel_ := (*C.GIOChannel)(unsafe.Pointer(channel))
 	var _return_ *C.GSource
 	_return_ = C.g_io_create_watch(_cgo_channel_, condition)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9054,10 +9052,10 @@ func LogSetHandler(log_domain string, log_levels C.GLogLevelFlags, log_func C.GL
 	return
 }
 
-func MainCurrentSource() (_go__return__ *Source) {
+func MainCurrentSource() (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_return_ = C.g_main_current_source()
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9113,7 +9111,7 @@ func MarkupEscapeText(text string, length int64) (_go__return__ string) {
 func MemIsSystemMalloc() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_mem_is_system_malloc()
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9122,7 +9120,7 @@ func MemProfile() () {
 	return
 }
 
-func MemSetVtable(vtable *MemVTable) () {
+func MemSetVtable(vtable *GLibMemVTable) () {
 	_cgo_vtable_ := (*C.GMemVTable)(unsafe.Pointer(vtable))
 	C.g_mem_set_vtable(_cgo_vtable_)
 	return
@@ -9240,7 +9238,7 @@ func PathIsAbsolute(file_name string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	var _return_ C.gboolean
 	_return_ = C._g_path_is_absolute(_cgo_file_name_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9254,7 +9252,7 @@ func PathSkipRoot(file_name string) (_go__return__ string) {
 	return
 }
 
-func PatternMatch(pspec *PatternSpec, string_length uint, string_ string, string_reversed string) (_go__return__ bool) {
+func PatternMatch(pspec *GLibPatternSpec, string_length uint, string_ string, string_reversed string) (_go__return__ bool) {
 	_cgo_pspec_ := (*C.GPatternSpec)(unsafe.Pointer(pspec))
 	_cgo_string_length_ := (C.guint)(string_length)
 	_cstring_string__ := C.CString(string_)
@@ -9265,7 +9263,7 @@ func PatternMatch(pspec *PatternSpec, string_length uint, string_ string, string
 	defer C.free(unsafe.Pointer(_cstring_string_reversed_))
 	var _return_ C.gboolean
 	_return_ = C._g_pattern_match(_cgo_pspec_, _cgo_string_length_, _cgo_string__, _cgo_string_reversed_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9278,22 +9276,22 @@ func PatternMatchSimple(pattern string, string_ string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_pattern_match_simple(_cgo_pattern_, _cgo_string__)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func PatternMatchString(pspec *PatternSpec, string_ string) (_go__return__ bool) {
+func PatternMatchString(pspec *GLibPatternSpec, string_ string) (_go__return__ bool) {
 	_cgo_pspec_ := (*C.GPatternSpec)(unsafe.Pointer(pspec))
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
 	_return_ = C._g_pattern_match_string(_cgo_pspec_, _cgo_string__)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func Poll(fds *PollFD, nfds uint, timeout int) (_go__return__ int) {
+func Poll(fds *GLibPollFD, nfds uint, timeout int) (_go__return__ int) {
 	_cgo_fds_ := (*C.GPollFD)(unsafe.Pointer(fds))
 	_cgo_nfds_ := (C.guint)(nfds)
 	_cgo_timeout_ := (C.gint)(timeout)
@@ -9303,7 +9301,7 @@ func Poll(fds *PollFD, nfds uint, timeout int) (_go__return__ int) {
 	return
 }
 
-func PropagateError(dest *Error, src *Error) () {
+func PropagateError(dest *GLibError, src *GLibError) () {
 	_cgo_dest_ := (unsafe.Pointer)(unsafe.Pointer(dest))
 	_cgo_src_ := (*C.GError)(unsafe.Pointer(src))
 	C._g_propagate_error(_cgo_dest_, _cgo_src_)
@@ -9434,7 +9432,7 @@ func SetApplicationName(application_name string) () {
 	return
 }
 
-func SetErrorLiteral(err *Error, domain C.GQuark, code int, message string) () {
+func SetErrorLiteral(err *GLibError, domain C.GQuark, code int, message string) () {
 	_cgo_err_ := (unsafe.Pointer)(unsafe.Pointer(err))
 	_cgo_code_ := (C.gint)(code)
 	_cstring_message_ := C.CString(message)
@@ -9469,11 +9467,11 @@ func Setenv(variable string, value string, overwrite bool) (_go__return__ bool) 
 	_cstring_value_ := C.CString(value)
 	_cgo_value_ := (*C.gchar)(unsafe.Pointer(_cstring_value_))
 	defer C.free(unsafe.Pointer(_cstring_value_))
-	_cgo_overwrite_ := C.glibfalse()
-	if overwrite { _cgo_overwrite_ = C.glibtrue() }
+	_cgo_overwrite_ := (C.gboolean)(C.FALSE)
+	if overwrite { _cgo_overwrite_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
 	_return_ = C._g_setenv(_cgo_variable_, _cgo_value_, _cgo_overwrite_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9545,7 +9543,7 @@ func SpawnCheckExitStatus(exit_status int) (_go__return__ bool, _error_ unsafe.P
 	_cgo_exit_status_ := (C.gint)(exit_status)
 	var _return_ C.gboolean
 	_return_ = C._g_spawn_check_exit_status(_cgo_exit_status_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9560,7 +9558,7 @@ func SpawnCommandLineAsync(command_line string) (_go__return__ bool, _error_ uns
 	defer C.free(unsafe.Pointer(_cstring_command_line_))
 	var _return_ C.gboolean
 	_return_ = C._g_spawn_command_line_async(_cgo_command_line_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9590,7 +9588,7 @@ func Stpcpy(dest string, src string) (_go__return__ string) {
 func StrEqual(v1 C.gpointer, v2 C.gpointer) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_str_equal(v1, v2)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9603,7 +9601,7 @@ func StrHasPrefix(str string, prefix string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_prefix_))
 	var _return_ C.gboolean
 	_return_ = C._g_str_has_prefix(_cgo_str_, _cgo_prefix_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9616,7 +9614,7 @@ func StrHasSuffix(str string, suffix string) (_go__return__ bool) {
 	defer C.free(unsafe.Pointer(_cstring_suffix_))
 	var _return_ C.gboolean
 	_return_ = C._g_str_has_suffix(_cgo_str_, _cgo_suffix_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -9743,32 +9741,32 @@ func Strfreev(str_array string) () {
 	return
 }
 
-func StringNew(init string) (_go__return__ *String) {
+func StringNew(init string) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cstring_init_ := C.CString(init)
 	_cgo_init_ := (*C.gchar)(unsafe.Pointer(_cstring_init_))
 	defer C.free(unsafe.Pointer(_cstring_init_))
 	_return_ = C._g_string_new(_cgo_init_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func StringNewLen(init string, len_ int64) (_go__return__ *String) {
+func StringNewLen(init string, len_ int64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_len__ := (C.gssize)(len_)
 	_cstring_init_ := C.CString(init)
 	_cgo_init_ := (*C.gchar)(unsafe.Pointer(_cstring_init_))
 	defer C.free(unsafe.Pointer(_cstring_init_))
 	_return_ = C._g_string_new_len(_cgo_init_, _cgo_len__)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
-func StringSizedNew(dfl_size uint64) (_go__return__ *String) {
+func StringSizedNew(dfl_size uint64) (_go__return__ *GLibString) {
 	var _return_ *C.GString
 	_cgo_dfl_size_ := (C.gsize)(dfl_size)
 	_return_ = C.g_string_sized_new(_cgo_dfl_size_)
-	_go__return__ = (*String)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibString)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10020,24 +10018,24 @@ func TestBugBase(uri_pattern string) () {
 	return
 }
 
-func TestCreateCase(test_name string, data_size uint64, test_data C.gpointer, data_setup C.GTestFixtureFunc, data_test C.GTestFixtureFunc, data_teardown C.GTestFixtureFunc) (_go__return__ *TestCase) {
+func TestCreateCase(test_name string, data_size uint64, test_data C.gpointer, data_setup C.GTestFixtureFunc, data_test C.GTestFixtureFunc, data_teardown C.GTestFixtureFunc) (_go__return__ *GLibTestCase) {
 	var _return_ *C.GTestCase
 	_cgo_data_size_ := (C.gsize)(data_size)
 	_cstring_test_name_ := C.CString(test_name)
 	_cgo_test_name_ := (*C.char)(unsafe.Pointer(_cstring_test_name_))
 	defer C.free(unsafe.Pointer(_cstring_test_name_))
 	_return_ = C._g_test_create_case(_cgo_test_name_, _cgo_data_size_, test_data, data_setup, data_test, data_teardown)
-	_go__return__ = (*TestCase)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTestCase)(unsafe.Pointer(_return_))
 	return
 }
 
-func TestCreateSuite(suite_name string) (_go__return__ *TestSuite) {
+func TestCreateSuite(suite_name string) (_go__return__ *GLibTestSuite) {
 	var _return_ *C.GTestSuite
 	_cstring_suite_name_ := C.CString(suite_name)
 	_cgo_suite_name_ := (*C.char)(unsafe.Pointer(_cstring_suite_name_))
 	defer C.free(unsafe.Pointer(_cstring_suite_name_))
 	_return_ = C._g_test_create_suite(_cgo_suite_name_)
-	_go__return__ = (*TestSuite)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTestSuite)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10057,10 +10055,10 @@ func TestFail() () {
 	return
 }
 
-func TestGetRoot() (_go__return__ *TestSuite) {
+func TestGetRoot() (_go__return__ *GLibTestSuite) {
 	var _return_ *C.GTestSuite
 	_return_ = C.g_test_get_root()
-	_go__return__ = (*TestSuite)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibTestSuite)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10117,7 +10115,7 @@ func TestRun() (_return_ C.int) {
 	return
 }
 
-func TestRunSuite(suite *TestSuite) (_return_ C.int) {
+func TestRunSuite(suite *GLibTestSuite) (_return_ C.int) {
 	_cgo_suite_ := (*C.GTestSuite)(unsafe.Pointer(suite))
 	_return_ = C.g_test_run_suite(_cgo_suite_)
 	return
@@ -10160,21 +10158,21 @@ func TestTrapFork(usec_timeout uint64, test_trap_flags C.GTestTrapFlags) (_go__r
 	_cgo_usec_timeout_ := (C.guint64)(usec_timeout)
 	var _return_ C.gboolean
 	_return_ = C.g_test_trap_fork(_cgo_usec_timeout_, test_trap_flags)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func TestTrapHasPassed() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_test_trap_has_passed()
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func TestTrapReachedTimeout() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_test_trap_reached_timeout()
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -10212,19 +10210,19 @@ func TimeoutAddSecondsFull(priority int, interval uint, function C.GSourceFunc, 
 	return
 }
 
-func TimeoutSourceNew(interval uint) (_go__return__ *Source) {
+func TimeoutSourceNew(interval uint) (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_cgo_interval_ := (C.guint)(interval)
 	_return_ = C.g_timeout_source_new(_cgo_interval_)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func TimeoutSourceNewSeconds(interval uint) (_go__return__ *Source) {
+func TimeoutSourceNewSeconds(interval uint) (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_cgo_interval_ := (C.guint)(interval)
 	_return_ = C.g_timeout_source_new_seconds(_cgo_interval_)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10296,14 +10294,14 @@ func UnicharCombiningClass(uc C.gunichar) (_go__return__ int) {
 func UnicharCompose(a C.gunichar, b C.gunichar, ch *C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_compose(a, b, ch)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharDecompose(ch C.gunichar, a *C.gunichar, b *C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_decompose(ch, a, b)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -10317,8 +10315,8 @@ func UnicharDigitValue(c C.gunichar) (_go__return__ int) {
 func UnicharFullyDecompose(ch C.gunichar, compat bool, result *C.gunichar, result_len uint64) (_go__return__ uint64) {
 	_cgo_result_len_ := (C.gsize)(result_len)
 	var _return_ C.gsize
-	_cgo_compat_ := C.glibfalse()
-	if compat { _cgo_compat_ = C.glibtrue() }
+	_cgo_compat_ := (C.gboolean)(C.FALSE)
+	if compat { _cgo_compat_ = (C.gboolean)(C.TRUE) }
 	_return_ = C.g_unichar_fully_decompose(ch, _cgo_compat_, result, _cgo_result_len_)
 	_go__return__ = (uint64)(_return_)
 	return
@@ -10327,7 +10325,7 @@ func UnicharFullyDecompose(ch C.gunichar, compat bool, result *C.gunichar, resul
 func UnicharGetMirrorChar(ch C.gunichar, mirrored_ch *C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_get_mirror_char(ch, mirrored_ch)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -10339,119 +10337,119 @@ func UnicharGetScript(ch C.gunichar) (_return_ C.GUnicodeScript) {
 func UnicharIsalnum(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isalnum(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsalpha(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isalpha(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIscntrl(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_iscntrl(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsdefined(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isdefined(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsdigit(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isdigit(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsgraph(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isgraph(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIslower(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_islower(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsmark(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_ismark(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsprint(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isprint(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIspunct(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_ispunct(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsspace(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isspace(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIstitle(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_istitle(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsupper(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isupper(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIswide(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_iswide(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIswideCjk(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_iswide_cjk(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIsxdigit(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_isxdigit(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnicharIszerowidth(c C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_iszerowidth(c)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -10488,7 +10486,7 @@ func UnicharType(c C.gunichar) (_return_ C.GUnicodeType) {
 func UnicharValidate(ch C.gunichar) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_unichar_validate(ch)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -10527,17 +10525,17 @@ func UnixOpenPipe(fds *C.gint, flags int) (_go__return__ bool, _error_ unsafe.Po
 	_cgo_flags_ := (C.gint)(flags)
 	var _return_ C.gboolean
 	_return_ = C._g_unix_open_pipe(fds, _cgo_flags_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func UnixSetFdNonblocking(fd int, nonblock bool) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_fd_ := (C.gint)(fd)
-	_cgo_nonblock_ := C.glibfalse()
-	if nonblock { _cgo_nonblock_ = C.glibtrue() }
+	_cgo_nonblock_ := (C.gboolean)(C.FALSE)
+	if nonblock { _cgo_nonblock_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
 	_return_ = C._g_unix_set_fd_nonblocking(_cgo_fd_, _cgo_nonblock_, _error_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -10558,11 +10556,11 @@ func UnixSignalAddFull(priority int, signum int, handler C.GSourceFunc, user_dat
 	return
 }
 
-func UnixSignalSourceNew(signum int) (_go__return__ *Source) {
+func UnixSignalSourceNew(signum int) (_go__return__ *GLibSource) {
 	var _return_ *C.GSource
 	_cgo_signum_ := (C.gint)(signum)
 	_return_ = C.g_unix_signal_source_new(_cgo_signum_)
-	_go__return__ = (*Source)(unsafe.Pointer(_return_))
+	_go__return__ = (*GLibSource)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10590,8 +10588,8 @@ func UriEscapeString(unescaped string, reserved_chars_allowed string, allow_utf8
 	_cgo_reserved_chars_allowed_ := (*C.char)(unsafe.Pointer(_cstring_reserved_chars_allowed_))
 	defer C.free(unsafe.Pointer(_cstring_reserved_chars_allowed_))
 	var _return_ *C.char
-	_cgo_allow_utf8_ := C.glibfalse()
-	if allow_utf8 { _cgo_allow_utf8_ = C.glibtrue() }
+	_cgo_allow_utf8_ := (C.gboolean)(C.FALSE)
+	if allow_utf8 { _cgo_allow_utf8_ = (C.gboolean)(C.TRUE) }
 	_return_ = C._g_uri_escape_string(_cgo_unescaped_, _cgo_reserved_chars_allowed_, _cgo_allow_utf8_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
