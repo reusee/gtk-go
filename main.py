@@ -9,8 +9,43 @@ from common import *
 from function_handler import handleFunction
 import imp
 
+class Translator:
+  def __init__(self):
+    self.class_parents = {}
+    self.parsers = []
+
+  def add(self, filename):
+    parser = Parser(filename, self)
+    parser.prepare()
+    self.parsers.append(parser)
+
+  def preprocess(self):
+    # prepare
+    for parser in self.parsers:
+      parser.prepare()
+    # collect inheritance info
+    for parser in self.parsers:
+      for node in parser.nodes_of_class:
+        name = node.gi_name.replace('.', '')
+        if '_' in name: return
+        if not node.parent:
+          self.class_parents[name] = True
+        else:
+          parent_name = node.parent.resolved.replace('.', '')
+          self.class_parents[name] = parent_name
+
+  def parse(self):
+    for parser in self.parsers:
+      parser.parse()
+
+  def generate(self):
+    for parser in self.parsers:
+      generator = Generator(parser)
+      generator.generate()
+
 class Parser:
-  def __init__(self, filename):
+  def __init__(self, filename, translator):
+    self.translator = translator
     parser = GIRParser(False)
     parser.parse(filename)
 
@@ -45,32 +80,48 @@ class Parser:
     self.prefixes = self.namespace.symbol_prefixes
 
     self.functions = []
-    self.enum_symbols = []
-    self.const_symbols = []
+    self.const_symbols = set()
 
     self.record_types = {}
     self.class_types = {}
-    self.class_parents = {}
 
     self.exported_functions = set()
-
     self.functions_to_handle = []
 
-  def parse(self):
+  def prepare(self):
     for node in self.namespace.itervalues():
-      handlerName = 'handle' + type(node).__name__
-      if hasattr(self, handlerName):
-        getattr(self, handlerName)(node)
-      else:
-        print type(node).__name__, 'not handle'
-        stop
+      node_type = type(node).__name__.lower()
+      container = 'nodes_of_' + node_type
+      if not hasattr(self, container):
+        setattr(self, container, [])
+      container = getattr(self, container)
+      container.append(node)
+
+  def parse(self):
+    order = [
+      'nodes_of_class',
+      'nodes_of_record',
+      'nodes_of_alias',
+      'nodes_of_bitfield',
+      'nodes_of_callback',
+      'nodes_of_constant',
+      'nodes_of_enum',
+      'nodes_of_interface',
+
+      'nodes_of_function',
+    ]
+    for container in order:
+      if not hasattr(self, container): continue
+      container = getattr(self, container)
+      for node in container:
+        handler = 'handle' + type(node).__name__
+        handler = getattr(self, handler)
+        handler(node)
+
     for args in self.functions_to_handle:
-      self._handleFunction(*args)
+      self.handleFunction(*args)
 
   def handleFunction(self, *args):
-    self.functions_to_handle.append(args)
-
-  def _handleFunction(self, *args):
     generator = handleFunction(self, *args)
     if generator:
       self.functions.append(generator)
@@ -80,24 +131,22 @@ class Parser:
     for mem in node.members:
       if mem.symbol in self.skip_symbols:
         continue
-      self.enum_symbols.append(mem.symbol)
+      self.const_symbols.add(mem.symbol)
 
   def handleConstant(self, node):
-    #self.const_symbols.append((node.ctype, node.value, node.value_type.resolved))
-    if node.ctype in self.skip_symbols:
-      return
-    self.const_symbols.append(node.ctype)
+    if node.ctype in self.skip_symbols: return
+    self.const_symbols.add(node.ctype)
 
   def _handleCompositeType(self, node):
     # constructors
     for constructor in node.constructors:
-      self.handleFunction(constructor, node)
+      self.functions_to_handle.append((constructor, node))
     # static methods
     for function in node.static_methods:
-      self.handleFunction(function, node)
+      self.functions_to_handle.append((function, node))
     # methods
     for method in node.methods:
-      self.handleFunction(method, node)
+      self.functions_to_handle.append((method, node))
 
   def handleRecord(self, node):
     name = node.gi_name.replace('.', '')
@@ -114,11 +163,9 @@ class Parser:
     if c_type in self.skip_symbols: return
     if not node.parent:
       self.class_types[name] = 'unsafe.Pointer'
-      self.class_parents[name] = True
     else:
       parent_name = node.parent.resolved.replace('.', '')
       self.class_types[name] = parent_name
-      self.class_parents[name] = parent_name
     self._handleCompositeType(node)
 
   def handleAlias(self, alias):
@@ -126,7 +173,7 @@ class Parser:
 
   def handleBitfield(self, bitfield):
     for member in bitfield.members:
-      self.enum_symbols.append(member.symbol)
+      self.const_symbols.add(member.symbol)
 
   def handleCallback(self, callback):
     pass #TODO
@@ -139,12 +186,10 @@ class Parser:
 
   def get_family_tree(self, t):
     ret = [t]
-    if not self.class_parents.has_key(t): return ret
-    t = self.class_parents[t]
+    t = self.translator.class_parents[t]
     while t != True:
       ret.append(t)
-      if not self.class_parents.has_key(t): break
-      t = self.class_parents[t]
+      t = self.translator.class_parents[t]
     return ret
 
 def main():
@@ -153,12 +198,13 @@ def main():
     sys.exit()
   import glob
   gir_files = glob.glob(os.path.join(os.path.abspath(sys.argv[1]), '*.gir'))
+  translator = Translator()
   for f in gir_files:
     print os.path.basename(f)
-    parser = Parser(f)
-    parser.parse()
-    generator = Generator(parser)
-    generator.generate()
+    translator.add(f)
+  translator.preprocess()
+  translator.parse()
+  translator.generate()
 
 if __name__ == '__main__':
   main()

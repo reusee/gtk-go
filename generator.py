@@ -48,7 +48,6 @@ class Generator:
     self.generate_types()
     for generator in self.parser.functions:
       print >>self.out, generator.generate_go_func()
-    self.generate_enum_symbols()
     self.generate_const_symbols()
 
     self.write()
@@ -59,20 +58,14 @@ class Generator:
     output_file.write(self.out.getvalue())
     output_file.close()
 
-  def generate_enum_symbols(self):
-    for symbol in self.parser.enum_symbols:
-      go_name = symbol
-      for prefix in self.parser.prefixes:
-        if symbol.startswith(prefix.upper()):
-          go_name = symbol[len(prefix) + 1:]
-      print >>self.out, "const %s = C.%s" % (go_name, symbol)
-
   def generate_const_symbols(self):
     for symbol in self.parser.const_symbols:
       go_name = symbol
       for prefix in self.parser.prefixes:
         if symbol.startswith(prefix.upper()):
           go_name = symbol[len(prefix) + 1:]
+      if go_name in self.parser.conflict_const_names:
+        go_name = symbol
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 
   def generate_types(self):

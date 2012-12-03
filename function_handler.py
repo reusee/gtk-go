@@ -211,7 +211,7 @@ def map_record_and_class_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.gir_info.type.target_giname is None: continue
     gi_type = param.gir_info.type.target_giname.replace('.', '')
-    if gi_type not in parser.record_types and gi_type not in parser.class_types: continue
+    if (gi_type not in parser.record_types) and (gi_type not in parser.class_types): continue
 
     if gi_type in parser.record_types:
       generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(unsafe.Pointer(%s))' % (
@@ -230,7 +230,7 @@ def map_record_and_class_returns(parser, generator, function, klass):
     if ret.gir_info is None: continue
     if ret.gir_info.type.target_giname is None: continue
     gi_type = ret.gir_info.type.target_giname.replace('.', '')
-    if gi_type not in parser.record_types and gi_type not in parser.class_types: continue
+    if (gi_type not in parser.record_types) and (gi_type not in parser.class_types): continue
 
     if isinstance(ret.gir_info, ast.Parameter) and ret.gir_info.caller_allocates:
       assert(gi_type not in parser.class_types)
