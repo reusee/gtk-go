@@ -84,205 +84,203 @@ AtkTextAttribute _atk_text_attribute_register(gchar * name) {
 void _atk_text_free_ranges(void * ranges) {
 	(void)atk_text_free_ranges((AtkTextRange **)(ranges));
 }
-gboolean glibtrue() { return TRUE; }
-gboolean glibfalse() { return FALSE; }
 */
 import "C"
 import (
 	"unsafe"
 )
 
-type NoOpObjectFactoryClass C.AtkNoOpObjectFactoryClass
-type HypertextIface C.AtkHypertextIface
-type ImageIface C.AtkImageIface
-type DocumentIface C.AtkDocumentIface
-type WindowIface C.AtkWindowIface
-type ValueIface C.AtkValueIface
-type NoOpObjectClass C.AtkNoOpObjectClass
-type TextRange C.AtkTextRange
-type Rectangle C.AtkRectangle
-type PlugClass C.AtkPlugClass
-type EditableTextIface C.AtkEditableTextIface
-type TextRectangle C.AtkTextRectangle
-type ObjectClass C.AtkObjectClass
-type RelationClass C.AtkRelationClass
-type ActionIface C.AtkActionIface
-type ComponentIface C.AtkComponentIface
-type SelectionIface C.AtkSelectionIface
-type MiscClass C.AtkMiscClass
-type TableIface C.AtkTableIface
-type StreamableContentIface C.AtkStreamableContentIface
-type GObjectAccessibleClass C.AtkGObjectAccessibleClass
-type RelationSetClass C.AtkRelationSetClass
-type HyperlinkClass C.AtkHyperlinkClass
-type KeyEventStruct C.AtkKeyEventStruct
-type Attribute C.AtkAttribute
-type StateSetClass C.AtkStateSetClass
-type HyperlinkImplIface C.AtkHyperlinkImplIface
-type TextIface C.AtkTextIface
-type ObjectFactoryClass C.AtkObjectFactoryClass
-type SocketClass C.AtkSocketClass
-type Implementor C.AtkImplementor
-type UtilClass C.AtkUtilClass
-type NoOpObjectFactory struct { ObjectFactory }
-type NoOpObjectFactoryKind interface {
-  _IsNoOpObjectFactory()
+type AtkObjectFactoryClass C.AtkObjectFactoryClass
+type AtkUtilClass C.AtkUtilClass
+type AtkObjectClass C.AtkObjectClass
+type AtkRelationSetClass C.AtkRelationSetClass
+type AtkWindowIface C.AtkWindowIface
+type AtkTextRectangle C.AtkTextRectangle
+type AtkKeyEventStruct C.AtkKeyEventStruct
+type AtkTableIface C.AtkTableIface
+type AtkEditableTextIface C.AtkEditableTextIface
+type AtkRelationClass C.AtkRelationClass
+type AtkHyperlinkClass C.AtkHyperlinkClass
+type AtkPlugClass C.AtkPlugClass
+type AtkGObjectAccessibleClass C.AtkGObjectAccessibleClass
+type AtkSocketClass C.AtkSocketClass
+type AtkAttribute C.AtkAttribute
+type AtkValueIface C.AtkValueIface
+type AtkSelectionIface C.AtkSelectionIface
+type AtkHyperlinkImplIface C.AtkHyperlinkImplIface
+type AtkTextRange C.AtkTextRange
+type AtkStreamableContentIface C.AtkStreamableContentIface
+type AtkTextIface C.AtkTextIface
+type AtkActionIface C.AtkActionIface
+type AtkDocumentIface C.AtkDocumentIface
+type AtkHypertextIface C.AtkHypertextIface
+type AtkNoOpObjectClass C.AtkNoOpObjectClass
+type AtkMiscClass C.AtkMiscClass
+type AtkImplementor C.AtkImplementor
+type AtkNoOpObjectFactoryClass C.AtkNoOpObjectFactoryClass
+type AtkRectangle C.AtkRectangle
+type AtkStateSetClass C.AtkStateSetClass
+type AtkImageIface C.AtkImageIface
+type AtkComponentIface C.AtkComponentIface
+type AtkRelationSet struct { GObjectObject }
+type AtkRelationSetKind interface {
+  _IsAtkRelationSet()
   _getValue() unsafe.Pointer
 }
-func (self NoOpObjectFactory) _IsNoOpObjectFactory () {}
-func (self NoOpObjectFactory) _getValue() unsafe.Pointer { return self._value_ }
-func ToNoOpObjectFactory(value unsafe.Pointer) NoOpObjectFactory { return NoOpObjectFactory{ObjectFactory{value}} }
-type Plug struct { Object }
-type PlugKind interface {
-  _IsPlug()
+func (self AtkRelationSet) _IsAtkRelationSet () {}
+func (self AtkRelationSet) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkRelationSet(value unsafe.Pointer) AtkRelationSet { return AtkRelationSet{GObjectObject{value}} }
+type AtkHyperlink struct { GObjectObject }
+type AtkHyperlinkKind interface {
+  _IsAtkHyperlink()
   _getValue() unsafe.Pointer
 }
-func (self Plug) _IsPlug () {}
-func (self Plug) _getValue() unsafe.Pointer { return self._value_ }
-func ToPlug(value unsafe.Pointer) Plug { return Plug{Object{value}} }
-type Socket struct { Object }
-type SocketKind interface {
-  _IsSocket()
+func (self AtkHyperlink) _IsAtkHyperlink () {}
+func (self AtkHyperlink) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkHyperlink(value unsafe.Pointer) AtkHyperlink { return AtkHyperlink{GObjectObject{value}} }
+type AtkNoOpObject struct { AtkObject }
+type AtkNoOpObjectKind interface {
+  _IsAtkNoOpObject()
   _getValue() unsafe.Pointer
 }
-func (self Socket) _IsSocket () {}
-func (self Socket) _getValue() unsafe.Pointer { return self._value_ }
-func ToSocket(value unsafe.Pointer) Socket { return Socket{Object{value}} }
-type Hyperlink struct { _value_ unsafe.Pointer }
-type HyperlinkKind interface {
-  _IsHyperlink()
+func (self AtkNoOpObject) _IsAtkNoOpObject () {}
+func (self AtkNoOpObject) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkNoOpObject(value unsafe.Pointer) AtkNoOpObject { return AtkNoOpObject{AtkObject{GObjectObject{value}}} }
+type AtkNoOpObjectFactory struct { AtkObjectFactory }
+type AtkNoOpObjectFactoryKind interface {
+  _IsAtkNoOpObjectFactory()
   _getValue() unsafe.Pointer
 }
-func (self Hyperlink) _IsHyperlink () {}
-func (self Hyperlink) _getValue() unsafe.Pointer { return self._value_ }
-func ToHyperlink(value unsafe.Pointer) Hyperlink { return Hyperlink{value} }
-type ObjectFactory struct { _value_ unsafe.Pointer }
-type ObjectFactoryKind interface {
-  _IsObjectFactory()
+func (self AtkNoOpObjectFactory) _IsAtkNoOpObjectFactory () {}
+func (self AtkNoOpObjectFactory) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkNoOpObjectFactory(value unsafe.Pointer) AtkNoOpObjectFactory { return AtkNoOpObjectFactory{AtkObjectFactory{GObjectObject{value}}} }
+type AtkStateSet struct { GObjectObject }
+type AtkStateSetKind interface {
+  _IsAtkStateSet()
   _getValue() unsafe.Pointer
 }
-func (self ObjectFactory) _IsObjectFactory () {}
-func (self ObjectFactory) _getValue() unsafe.Pointer { return self._value_ }
-func ToObjectFactory(value unsafe.Pointer) ObjectFactory { return ObjectFactory{value} }
-type Object struct { _value_ unsafe.Pointer }
-type ObjectKind interface {
-  _IsObject()
+func (self AtkStateSet) _IsAtkStateSet () {}
+func (self AtkStateSet) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkStateSet(value unsafe.Pointer) AtkStateSet { return AtkStateSet{GObjectObject{value}} }
+type AtkRegistry struct { GObjectObject }
+type AtkRegistryKind interface {
+  _IsAtkRegistry()
   _getValue() unsafe.Pointer
 }
-func (self Object) _IsObject () {}
-func (self Object) _getValue() unsafe.Pointer { return self._value_ }
-func ToObject(value unsafe.Pointer) Object { return Object{value} }
-type Misc struct { _value_ unsafe.Pointer }
-type MiscKind interface {
-  _IsMisc()
+func (self AtkRegistry) _IsAtkRegistry () {}
+func (self AtkRegistry) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkRegistry(value unsafe.Pointer) AtkRegistry { return AtkRegistry{GObjectObject{value}} }
+type AtkMisc struct { GObjectObject }
+type AtkMiscKind interface {
+  _IsAtkMisc()
   _getValue() unsafe.Pointer
 }
-func (self Misc) _IsMisc () {}
-func (self Misc) _getValue() unsafe.Pointer { return self._value_ }
-func ToMisc(value unsafe.Pointer) Misc { return Misc{value} }
-type RelationSet struct { _value_ unsafe.Pointer }
-type RelationSetKind interface {
-  _IsRelationSet()
+func (self AtkMisc) _IsAtkMisc () {}
+func (self AtkMisc) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkMisc(value unsafe.Pointer) AtkMisc { return AtkMisc{GObjectObject{value}} }
+type AtkObject struct { GObjectObject }
+type AtkObjectKind interface {
+  _IsAtkObject()
   _getValue() unsafe.Pointer
 }
-func (self RelationSet) _IsRelationSet () {}
-func (self RelationSet) _getValue() unsafe.Pointer { return self._value_ }
-func ToRelationSet(value unsafe.Pointer) RelationSet { return RelationSet{value} }
-type Util struct { _value_ unsafe.Pointer }
-type UtilKind interface {
-  _IsUtil()
+func (self AtkObject) _IsAtkObject () {}
+func (self AtkObject) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkObject(value unsafe.Pointer) AtkObject { return AtkObject{GObjectObject{value}} }
+type AtkObjectFactory struct { GObjectObject }
+type AtkObjectFactoryKind interface {
+  _IsAtkObjectFactory()
   _getValue() unsafe.Pointer
 }
-func (self Util) _IsUtil () {}
-func (self Util) _getValue() unsafe.Pointer { return self._value_ }
-func ToUtil(value unsafe.Pointer) Util { return Util{value} }
-type Relation struct { _value_ unsafe.Pointer }
-type RelationKind interface {
-  _IsRelation()
+func (self AtkObjectFactory) _IsAtkObjectFactory () {}
+func (self AtkObjectFactory) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkObjectFactory(value unsafe.Pointer) AtkObjectFactory { return AtkObjectFactory{GObjectObject{value}} }
+type AtkRelation struct { GObjectObject }
+type AtkRelationKind interface {
+  _IsAtkRelation()
   _getValue() unsafe.Pointer
 }
-func (self Relation) _IsRelation () {}
-func (self Relation) _getValue() unsafe.Pointer { return self._value_ }
-func ToRelation(value unsafe.Pointer) Relation { return Relation{value} }
-type GObjectAccessible struct { Object }
-type GObjectAccessibleKind interface {
-  _IsGObjectAccessible()
+func (self AtkRelation) _IsAtkRelation () {}
+func (self AtkRelation) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkRelation(value unsafe.Pointer) AtkRelation { return AtkRelation{GObjectObject{value}} }
+type AtkSocket struct { AtkObject }
+type AtkSocketKind interface {
+  _IsAtkSocket()
   _getValue() unsafe.Pointer
 }
-func (self GObjectAccessible) _IsGObjectAccessible () {}
-func (self GObjectAccessible) _getValue() unsafe.Pointer { return self._value_ }
-func ToGObjectAccessible(value unsafe.Pointer) GObjectAccessible { return GObjectAccessible{Object{value}} }
-type NoOpObject struct { Object }
-type NoOpObjectKind interface {
-  _IsNoOpObject()
+func (self AtkSocket) _IsAtkSocket () {}
+func (self AtkSocket) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkSocket(value unsafe.Pointer) AtkSocket { return AtkSocket{AtkObject{GObjectObject{value}}} }
+type AtkPlug struct { AtkObject }
+type AtkPlugKind interface {
+  _IsAtkPlug()
   _getValue() unsafe.Pointer
 }
-func (self NoOpObject) _IsNoOpObject () {}
-func (self NoOpObject) _getValue() unsafe.Pointer { return self._value_ }
-func ToNoOpObject(value unsafe.Pointer) NoOpObject { return NoOpObject{Object{value}} }
-type StateSet struct { _value_ unsafe.Pointer }
-type StateSetKind interface {
-  _IsStateSet()
+func (self AtkPlug) _IsAtkPlug () {}
+func (self AtkPlug) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkPlug(value unsafe.Pointer) AtkPlug { return AtkPlug{AtkObject{GObjectObject{value}}} }
+type AtkGObjectAccessible struct { AtkObject }
+type AtkGObjectAccessibleKind interface {
+  _IsAtkGObjectAccessible()
   _getValue() unsafe.Pointer
 }
-func (self StateSet) _IsStateSet () {}
-func (self StateSet) _getValue() unsafe.Pointer { return self._value_ }
-func ToStateSet(value unsafe.Pointer) StateSet { return StateSet{value} }
-type Registry struct { _value_ unsafe.Pointer }
-type RegistryKind interface {
-  _IsRegistry()
+func (self AtkGObjectAccessible) _IsAtkGObjectAccessible () {}
+func (self AtkGObjectAccessible) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkGObjectAccessible(value unsafe.Pointer) AtkGObjectAccessible { return AtkGObjectAccessible{AtkObject{GObjectObject{value}}} }
+type AtkUtil struct { GObjectObject }
+type AtkUtilKind interface {
+  _IsAtkUtil()
   _getValue() unsafe.Pointer
 }
-func (self Registry) _IsRegistry () {}
-func (self Registry) _getValue() unsafe.Pointer { return self._value_ }
-func ToRegistry(value unsafe.Pointer) Registry { return Registry{value} }
+func (self AtkUtil) _IsAtkUtil () {}
+func (self AtkUtil) _getValue() unsafe.Pointer { return self._value_ }
+func ToAtkUtil(value unsafe.Pointer) AtkUtil { return AtkUtil{GObjectObject{value}} }
 func AttributeSetFree(attrib_set *C.AtkAttributeSet) () {
 	C.atk_attribute_set_free(attrib_set)
 	return
 }
 
-func GObjectAccessibleForObject(obj *C.GObject) (_go__return__ Object) {
+func GObjectAccessibleForObject(obj *C.GObject) (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_gobject_accessible_for_object(obj)
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *GObjectAccessible) GetObject() (_return_ *C.GObject) {
+func (_self_ *AtkGObjectAccessible) GetObject() (_return_ *C.GObject) {
 	_return_ = C.atk_gobject_accessible_get_object((*C.AtkGObjectAccessible)(_self_._value_))
 	return
 }
 
-func (_self_ *Hyperlink) GetEndIndex() (_go__return__ int) {
+func (_self_ *AtkHyperlink) GetEndIndex() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.atk_hyperlink_get_end_index((*C.AtkHyperlink)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Hyperlink) GetNAnchors() (_go__return__ int) {
+func (_self_ *AtkHyperlink) GetNAnchors() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.atk_hyperlink_get_n_anchors((*C.AtkHyperlink)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Hyperlink) GetObject(i int) (_go__return__ Object) {
+func (_self_ *AtkHyperlink) GetObject(i int) (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_cgo_i_ := (C.gint)(i)
 	_return_ = C.atk_hyperlink_get_object((*C.AtkHyperlink)(_self_._value_), _cgo_i_)
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Hyperlink) GetStartIndex() (_go__return__ int) {
+func (_self_ *AtkHyperlink) GetStartIndex() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.atk_hyperlink_get_start_index((*C.AtkHyperlink)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Hyperlink) GetUri(i int) (_go__return__ string) {
+func (_self_ *AtkHyperlink) GetUri(i int) (_go__return__ string) {
 	_cgo_i_ := (C.gint)(i)
 	var _return_ *C.gchar
 	_return_ = C.atk_hyperlink_get_uri((*C.AtkHyperlink)(_self_._value_), _cgo_i_)
@@ -290,167 +288,167 @@ func (_self_ *Hyperlink) GetUri(i int) (_go__return__ string) {
 	return
 }
 
-func (_self_ *Hyperlink) IsInline() (_go__return__ bool) {
+func (_self_ *AtkHyperlink) IsInline() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_hyperlink_is_inline((*C.AtkHyperlink)(_self_._value_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Hyperlink) IsValid() (_go__return__ bool) {
+func (_self_ *AtkHyperlink) IsValid() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_hyperlink_is_valid((*C.AtkHyperlink)(_self_._value_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Implementor) RefAccessible() (_go__return__ Object) {
+func (_self_ *AtkImplementor) RefAccessible() (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_implementor_ref_accessible((*C.AtkImplementor)(_self_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func MiscGetInstance() (_go__return__ Misc) {
+func MiscGetInstance() (_go__return__ AtkMisc) {
 	var _return_ *C.AtkMisc
 	_return_ = C._atk_misc_get_instance()
-	_go__return__ = ToMisc(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkMisc(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Misc) ThreadsEnter() () {
+func (_self_ *AtkMisc) ThreadsEnter() () {
 	C.atk_misc_threads_enter((*C.AtkMisc)(_self_._value_))
 	return
 }
 
-func (_self_ *Misc) ThreadsLeave() () {
+func (_self_ *AtkMisc) ThreadsLeave() () {
 	C.atk_misc_threads_leave((*C.AtkMisc)(_self_._value_))
 	return
 }
 
-func NoOpObjectNew(obj *C.GObject) (_go__return__ NoOpObject) {
+func NoOpObjectNew(obj *C.GObject) (_go__return__ AtkNoOpObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_no_op_object_new(obj)
-	_go__return__ = ToNoOpObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkNoOpObject(unsafe.Pointer(_return_))
 	return
 }
 
-func NoOpObjectFactoryNew() (_go__return__ NoOpObjectFactory) {
+func NoOpObjectFactoryNew() (_go__return__ AtkNoOpObjectFactory) {
 	var _return_ *C.AtkObjectFactory
 	_return_ = C.atk_no_op_object_factory_new()
-	_go__return__ = ToNoOpObjectFactory(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkNoOpObjectFactory(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) AddRelationship(relationship C.AtkRelationType, target ObjectKind) (_go__return__ bool) {
+func (_self_ *AtkObject) AddRelationship(relationship C.AtkRelationType, target AtkObjectKind) (_go__return__ bool) {
 	_cgo_target_ := (*C.AtkObject)(target._getValue())
 	var _return_ C.gboolean
 	_return_ = C.atk_object_add_relationship((*C.AtkObject)(_self_._value_), relationship, _cgo_target_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Object) ConnectPropertyChangeHandler(handler *C.AtkPropertyChangeHandler) (_go__return__ uint) {
+func (_self_ *AtkObject) ConnectPropertyChangeHandler(handler *C.AtkPropertyChangeHandler) (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.atk_object_connect_property_change_handler((*C.AtkObject)(_self_._value_), handler)
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Object) GetAttributes() (_return_ *C.AtkAttributeSet) {
+func (_self_ *AtkObject) GetAttributes() (_return_ *C.AtkAttributeSet) {
 	_return_ = C.atk_object_get_attributes((*C.AtkObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) GetDescription() (_go__return__ string) {
+func (_self_ *AtkObject) GetDescription() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._atk_object_get_description((*C.AtkObject)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Object) GetIndexInParent() (_go__return__ int) {
+func (_self_ *AtkObject) GetIndexInParent() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.atk_object_get_index_in_parent((*C.AtkObject)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Object) GetNAccessibleChildren() (_go__return__ int) {
+func (_self_ *AtkObject) GetNAccessibleChildren() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.atk_object_get_n_accessible_children((*C.AtkObject)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Object) GetName() (_go__return__ string) {
+func (_self_ *AtkObject) GetName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._atk_object_get_name((*C.AtkObject)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Object) GetParent() (_go__return__ Object) {
+func (_self_ *AtkObject) GetParent() (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_object_get_parent((*C.AtkObject)(_self_._value_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) GetRole() (_return_ C.AtkRole) {
+func (_self_ *AtkObject) GetRole() (_return_ C.AtkRole) {
 	_return_ = C.atk_object_get_role((*C.AtkObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) Initialize(data C.gpointer) () {
+func (_self_ *AtkObject) Initialize(data C.gpointer) () {
 	C.atk_object_initialize((*C.AtkObject)(_self_._value_), data)
 	return
 }
 
-func (_self_ *Object) NotifyStateChange(state C.AtkState, value bool) () {
-	_cgo_value_ := C.glibfalse()
-	if value { _cgo_value_ = C.glibtrue() }
+func (_self_ *AtkObject) NotifyStateChange(state C.AtkState, value bool) () {
+	_cgo_value_ := (C.gboolean)(C.FALSE)
+	if value { _cgo_value_ = (C.gboolean)(C.TRUE) }
 	C.atk_object_notify_state_change((*C.AtkObject)(_self_._value_), state, _cgo_value_)
 	return
 }
 
-func (_self_ *Object) RefAccessibleChild(i int) (_go__return__ Object) {
+func (_self_ *AtkObject) RefAccessibleChild(i int) (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_cgo_i_ := (C.gint)(i)
 	_return_ = C.atk_object_ref_accessible_child((*C.AtkObject)(_self_._value_), _cgo_i_)
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) RefRelationSet() (_go__return__ RelationSet) {
+func (_self_ *AtkObject) RefRelationSet() (_go__return__ AtkRelationSet) {
 	var _return_ *C.AtkRelationSet
 	_return_ = C.atk_object_ref_relation_set((*C.AtkObject)(_self_._value_))
-	_go__return__ = ToRelationSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkRelationSet(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) RefStateSet() (_go__return__ StateSet) {
+func (_self_ *AtkObject) RefStateSet() (_go__return__ AtkStateSet) {
 	var _return_ *C.AtkStateSet
 	_return_ = C.atk_object_ref_state_set((*C.AtkObject)(_self_._value_))
-	_go__return__ = ToStateSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkStateSet(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) RemovePropertyChangeHandler(handler_id uint) () {
+func (_self_ *AtkObject) RemovePropertyChangeHandler(handler_id uint) () {
 	_cgo_handler_id_ := (C.guint)(handler_id)
 	C.atk_object_remove_property_change_handler((*C.AtkObject)(_self_._value_), _cgo_handler_id_)
 	return
 }
 
-func (_self_ *Object) RemoveRelationship(relationship C.AtkRelationType, target ObjectKind) (_go__return__ bool) {
+func (_self_ *AtkObject) RemoveRelationship(relationship C.AtkRelationType, target AtkObjectKind) (_go__return__ bool) {
 	_cgo_target_ := (*C.AtkObject)(target._getValue())
 	var _return_ C.gboolean
 	_return_ = C.atk_object_remove_relationship((*C.AtkObject)(_self_._value_), relationship, _cgo_target_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Object) SetDescription(description string) () {
+func (_self_ *AtkObject) SetDescription(description string) () {
 	_cstring_description_ := C.CString(description)
 	_cgo_description_ := (*C.gchar)(unsafe.Pointer(_cstring_description_))
 	defer C.free(unsafe.Pointer(_cstring_description_))
@@ -458,7 +456,7 @@ func (_self_ *Object) SetDescription(description string) () {
 	return
 }
 
-func (_self_ *Object) SetName(name string) () {
+func (_self_ *AtkObject) SetName(name string) () {
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -466,168 +464,168 @@ func (_self_ *Object) SetName(name string) () {
 	return
 }
 
-func (_self_ *Object) SetParent(parent ObjectKind) () {
+func (_self_ *AtkObject) SetParent(parent AtkObjectKind) () {
 	_cgo_parent_ := (*C.AtkObject)(parent._getValue())
 	C.atk_object_set_parent((*C.AtkObject)(_self_._value_), _cgo_parent_)
 	return
 }
 
-func (_self_ *Object) SetRole(role C.AtkRole) () {
+func (_self_ *AtkObject) SetRole(role C.AtkRole) () {
 	C.atk_object_set_role((*C.AtkObject)(_self_._value_), role)
 	return
 }
 
-func (_self_ *ObjectFactory) CreateAccessible(obj *C.GObject) (_go__return__ Object) {
+func (_self_ *AtkObjectFactory) CreateAccessible(obj *C.GObject) (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_object_factory_create_accessible((*C.AtkObjectFactory)(_self_._value_), obj)
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *ObjectFactory) GetAccessibleType() (_return_ C.GType) {
+func (_self_ *AtkObjectFactory) GetAccessibleType() (_return_ C.GType) {
 	_return_ = C.atk_object_factory_get_accessible_type((*C.AtkObjectFactory)(_self_._value_))
 	return
 }
 
-func (_self_ *ObjectFactory) Invalidate() () {
+func (_self_ *AtkObjectFactory) Invalidate() () {
 	C.atk_object_factory_invalidate((*C.AtkObjectFactory)(_self_._value_))
 	return
 }
 
-func PlugNew() (_go__return__ Plug) {
+func AtkPlugNew() (_go__return__ AtkPlug) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_plug_new()
-	_go__return__ = ToPlug(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkPlug(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Plug) GetId() (_go__return__ string) {
+func (_self_ *AtkPlug) GetId() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.atk_plug_get_id((*C.AtkPlug)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Registry) GetFactory(type_ C.GType) (_go__return__ ObjectFactory) {
+func (_self_ *AtkRegistry) GetFactory(type_ C.GType) (_go__return__ AtkObjectFactory) {
 	var _return_ *C.AtkObjectFactory
 	_return_ = C.atk_registry_get_factory((*C.AtkRegistry)(_self_._value_), type_)
-	_go__return__ = ToObjectFactory(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObjectFactory(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Registry) GetFactoryType(type_ C.GType) (_return_ C.GType) {
+func (_self_ *AtkRegistry) GetFactoryType(type_ C.GType) (_return_ C.GType) {
 	_return_ = C.atk_registry_get_factory_type((*C.AtkRegistry)(_self_._value_), type_)
 	return
 }
 
-func (_self_ *Registry) SetFactoryType(type_ C.GType, factory_type C.GType) () {
+func (_self_ *AtkRegistry) SetFactoryType(type_ C.GType, factory_type C.GType) () {
 	C.atk_registry_set_factory_type((*C.AtkRegistry)(_self_._value_), type_, factory_type)
 	return
 }
 
-func RelationNew(targets ObjectKind, n_targets int, relationship C.AtkRelationType) (_go__return__ Relation) {
+func RelationNew(targets AtkObjectKind, n_targets int, relationship C.AtkRelationType) (_go__return__ AtkRelation) {
 	_cgo_targets_ := (unsafe.Pointer)(targets._getValue())
 	var _return_ *C.AtkRelation
 	_cgo_n_targets_ := (C.gint)(n_targets)
 	_return_ = C._atk_relation_new(_cgo_targets_, _cgo_n_targets_, relationship)
-	_go__return__ = ToRelation(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkRelation(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Relation) AddTarget(target ObjectKind) () {
+func (_self_ *AtkRelation) AddTarget(target AtkObjectKind) () {
 	_cgo_target_ := (*C.AtkObject)(target._getValue())
 	C.atk_relation_add_target((*C.AtkRelation)(_self_._value_), _cgo_target_)
 	return
 }
 
-func (_self_ *Relation) GetRelationType() (_return_ C.AtkRelationType) {
+func (_self_ *AtkRelation) GetRelationType() (_return_ C.AtkRelationType) {
 	_return_ = C.atk_relation_get_relation_type((*C.AtkRelation)(_self_._value_))
 	return
 }
 
-func (_self_ *Relation) GetTarget() (_return_ *C.GPtrArray) {
+func (_self_ *AtkRelation) GetTarget() (_return_ *C.GPtrArray) {
 	_return_ = C.atk_relation_get_target((*C.AtkRelation)(_self_._value_))
 	return
 }
 
-func (_self_ *Relation) RemoveTarget(target ObjectKind) (_go__return__ bool) {
+func (_self_ *AtkRelation) RemoveTarget(target AtkObjectKind) (_go__return__ bool) {
 	_cgo_target_ := (*C.AtkObject)(target._getValue())
 	var _return_ C.gboolean
 	_return_ = C.atk_relation_remove_target((*C.AtkRelation)(_self_._value_), _cgo_target_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func RelationSetNew() (_go__return__ RelationSet) {
+func RelationSetNew() (_go__return__ AtkRelationSet) {
 	var _return_ *C.AtkRelationSet
 	_return_ = C.atk_relation_set_new()
-	_go__return__ = ToRelationSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkRelationSet(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *RelationSet) Add(relation RelationKind) () {
+func (_self_ *AtkRelationSet) Add(relation AtkRelationKind) () {
 	_cgo_relation_ := (*C.AtkRelation)(relation._getValue())
 	C.atk_relation_set_add((*C.AtkRelationSet)(_self_._value_), _cgo_relation_)
 	return
 }
 
-func (_self_ *RelationSet) AddRelationByType(relationship C.AtkRelationType, target ObjectKind) () {
+func (_self_ *AtkRelationSet) AddRelationByType(relationship C.AtkRelationType, target AtkObjectKind) () {
 	_cgo_target_ := (*C.AtkObject)(target._getValue())
 	C.atk_relation_set_add_relation_by_type((*C.AtkRelationSet)(_self_._value_), relationship, _cgo_target_)
 	return
 }
 
-func (_self_ *RelationSet) Contains(relationship C.AtkRelationType) (_go__return__ bool) {
+func (_self_ *AtkRelationSet) Contains(relationship C.AtkRelationType) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_relation_set_contains((*C.AtkRelationSet)(_self_._value_), relationship)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RelationSet) ContainsTarget(relationship C.AtkRelationType, targe ObjectKind) (_go__return__ bool) {
+func (_self_ *AtkRelationSet) ContainsTarget(relationship C.AtkRelationType, targe AtkObjectKind) (_go__return__ bool) {
 	_cgo_targe_ := (*C.AtkObject)(targe._getValue())
 	var _return_ C.gboolean
 	_return_ = C.atk_relation_set_contains_target((*C.AtkRelationSet)(_self_._value_), relationship, _cgo_targe_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RelationSet) GetNRelations() (_go__return__ int) {
+func (_self_ *AtkRelationSet) GetNRelations() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.atk_relation_set_get_n_relations((*C.AtkRelationSet)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *RelationSet) GetRelation(i int) (_go__return__ Relation) {
+func (_self_ *AtkRelationSet) GetRelation(i int) (_go__return__ AtkRelation) {
 	var _return_ *C.AtkRelation
 	_cgo_i_ := (C.gint)(i)
 	_return_ = C.atk_relation_set_get_relation((*C.AtkRelationSet)(_self_._value_), _cgo_i_)
-	_go__return__ = ToRelation(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkRelation(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *RelationSet) GetRelationByType(relationship C.AtkRelationType) (_go__return__ Relation) {
+func (_self_ *AtkRelationSet) GetRelationByType(relationship C.AtkRelationType) (_go__return__ AtkRelation) {
 	var _return_ *C.AtkRelation
 	_return_ = C.atk_relation_set_get_relation_by_type((*C.AtkRelationSet)(_self_._value_), relationship)
-	_go__return__ = ToRelation(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkRelation(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *RelationSet) Remove(relation RelationKind) () {
+func (_self_ *AtkRelationSet) Remove(relation AtkRelationKind) () {
 	_cgo_relation_ := (*C.AtkRelation)(relation._getValue())
 	C.atk_relation_set_remove((*C.AtkRelationSet)(_self_._value_), _cgo_relation_)
 	return
 }
 
-func SocketNew() (_go__return__ Socket) {
+func AtkSocketNew() (_go__return__ AtkSocket) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_socket_new()
-	_go__return__ = ToSocket(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkSocket(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Socket) Embed(plug_id string) () {
+func (_self_ *AtkSocket) Embed(plug_id string) () {
 	_cstring_plug_id_ := C.CString(plug_id)
 	_cgo_plug_id_ := (*C.gchar)(unsafe.Pointer(_cstring_plug_id_))
 	defer C.free(unsafe.Pointer(_cstring_plug_id_))
@@ -635,88 +633,88 @@ func (_self_ *Socket) Embed(plug_id string) () {
 	return
 }
 
-func (_self_ *Socket) IsOccupied() (_go__return__ bool) {
+func (_self_ *AtkSocket) IsOccupied() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_socket_is_occupied((*C.AtkSocket)(_self_._value_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func StateSetNew() (_go__return__ StateSet) {
+func StateSetNew() (_go__return__ AtkStateSet) {
 	var _return_ *C.AtkStateSet
 	_return_ = C.atk_state_set_new()
-	_go__return__ = ToStateSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkStateSet(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *StateSet) AddState(type_ C.AtkStateType) (_go__return__ bool) {
+func (_self_ *AtkStateSet) AddState(type_ C.AtkStateType) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_state_set_add_state((*C.AtkStateSet)(_self_._value_), type_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *StateSet) AddStates(types *C.AtkStateType, n_types int) () {
+func (_self_ *AtkStateSet) AddStates(types *C.AtkStateType, n_types int) () {
 	_cgo_n_types_ := (C.gint)(n_types)
 	C.atk_state_set_add_states((*C.AtkStateSet)(_self_._value_), types, _cgo_n_types_)
 	return
 }
 
-func (_self_ *StateSet) AndSets(compare_set StateSetKind) (_go__return__ StateSet) {
+func (_self_ *AtkStateSet) AndSets(compare_set AtkStateSetKind) (_go__return__ AtkStateSet) {
 	_cgo_compare_set_ := (*C.AtkStateSet)(compare_set._getValue())
 	var _return_ *C.AtkStateSet
 	_return_ = C.atk_state_set_and_sets((*C.AtkStateSet)(_self_._value_), _cgo_compare_set_)
-	_go__return__ = ToStateSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkStateSet(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *StateSet) ClearStates() () {
+func (_self_ *AtkStateSet) ClearStates() () {
 	C.atk_state_set_clear_states((*C.AtkStateSet)(_self_._value_))
 	return
 }
 
-func (_self_ *StateSet) ContainsState(type_ C.AtkStateType) (_go__return__ bool) {
+func (_self_ *AtkStateSet) ContainsState(type_ C.AtkStateType) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_state_set_contains_state((*C.AtkStateSet)(_self_._value_), type_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *StateSet) ContainsStates(types *C.AtkStateType, n_types int) (_go__return__ bool) {
+func (_self_ *AtkStateSet) ContainsStates(types *C.AtkStateType, n_types int) (_go__return__ bool) {
 	_cgo_n_types_ := (C.gint)(n_types)
 	var _return_ C.gboolean
 	_return_ = C.atk_state_set_contains_states((*C.AtkStateSet)(_self_._value_), types, _cgo_n_types_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *StateSet) IsEmpty() (_go__return__ bool) {
+func (_self_ *AtkStateSet) IsEmpty() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_state_set_is_empty((*C.AtkStateSet)(_self_._value_))
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *StateSet) OrSets(compare_set StateSetKind) (_go__return__ StateSet) {
+func (_self_ *AtkStateSet) OrSets(compare_set AtkStateSetKind) (_go__return__ AtkStateSet) {
 	_cgo_compare_set_ := (*C.AtkStateSet)(compare_set._getValue())
 	var _return_ *C.AtkStateSet
 	_return_ = C.atk_state_set_or_sets((*C.AtkStateSet)(_self_._value_), _cgo_compare_set_)
-	_go__return__ = ToStateSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkStateSet(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *StateSet) RemoveState(type_ C.AtkStateType) (_go__return__ bool) {
+func (_self_ *AtkStateSet) RemoveState(type_ C.AtkStateType) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_state_set_remove_state((*C.AtkStateSet)(_self_._value_), type_)
-	_go__return__ = _return_ == C.glibtrue()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *StateSet) XorSets(compare_set StateSetKind) (_go__return__ StateSet) {
+func (_self_ *AtkStateSet) XorSets(compare_set AtkStateSetKind) (_go__return__ AtkStateSet) {
 	_cgo_compare_set_ := (*C.AtkStateSet)(compare_set._getValue())
 	var _return_ *C.AtkStateSet
 	_return_ = C.atk_state_set_xor_sets((*C.AtkStateSet)(_self_._value_), _cgo_compare_set_)
-	_go__return__ = ToStateSet(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkStateSet(unsafe.Pointer(_return_))
 	return
 }
 
@@ -749,30 +747,30 @@ func FocusTrackerInit(init C.AtkEventListenerInit) () {
 	return
 }
 
-func FocusTrackerNotify(object ObjectKind) () {
+func FocusTrackerNotify(object AtkObjectKind) () {
 	_cgo_object_ := (*C.AtkObject)(object._getValue())
 	C.atk_focus_tracker_notify(_cgo_object_)
 	return
 }
 
-func GetDefaultRegistry() (_go__return__ Registry) {
+func GetDefaultRegistry() (_go__return__ AtkRegistry) {
 	var _return_ *C.AtkRegistry
 	_return_ = C.atk_get_default_registry()
-	_go__return__ = ToRegistry(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkRegistry(unsafe.Pointer(_return_))
 	return
 }
 
-func GetFocusObject() (_go__return__ Object) {
+func GetFocusObject() (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_get_focus_object()
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func GetRoot() (_go__return__ Object) {
+func GetRoot() (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_get_root()
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
@@ -922,7 +920,7 @@ func TextAttributeRegister(name string) (_return_ C.AtkTextAttribute) {
 	return
 }
 
-func TextFreeRanges(ranges *TextRange) () {
+func TextFreeRanges(ranges *AtkTextRange) () {
 	_cgo_ranges_ := (unsafe.Pointer)(unsafe.Pointer(ranges))
 	C._atk_text_free_ranges(_cgo_ranges_)
 	return

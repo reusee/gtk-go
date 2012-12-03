@@ -125,6 +125,9 @@ def collect_go_func_info(parser, generator, function, klass):
     generator.go_func_name = klass.gi_name.split('.')[-1] + generator.go_func_name
   elif klass and not function.is_constructor and not function.is_method: # class or record static function
     generator.go_func_name = klass.gi_name.split('.')[-1] + generator.go_func_name
+  if not function.is_method: # method function will not cause name conflict
+    if generator.go_func_name in parser.conflict_function_names:
+      generator.go_func_name = parser.module_name.capitalize() + generator.go_func_name
 
   # go return
   generator.cgo_has_return = generator.c_has_return
@@ -266,12 +269,13 @@ def map_record_and_class_returns(parser, generator, function, klass):
           ret.go_return_name,
           convert_to_cgo_type(ret.c_return_type)))
         if function.is_constructor:
-          ret.go_return_type = klass.name
+          ret.go_return_type = klass.gi_name.replace('.', '')
         else:
           ret.go_return_type = gi_type
         generator.statements_after_cgo_call.append('_go_%s_ = To%s(unsafe.Pointer(_return_))' % (
           ret.go_return_name, ret.go_return_type))
         ret.go_return_name = '_go_%s_' % ret.go_return_name
+      else: assert False
 
 numeric_mapping = {
   'C.gchar': 'int8',

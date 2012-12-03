@@ -31,6 +31,13 @@ class Parser:
     func_spec_module = imp.load_source('func_spec', func_spec_file)
     self.func_spec = func_spec_module.func_specs
 
+    config_file = os.path.join(self.path, 'config.py')
+    config_module = imp.load_source('config', config_file)
+    for name in dir(config_module):
+      if name.startswith('_'): continue
+      if name[0].islower(): continue
+      setattr(self, name.lower(), getattr(config_module, name))
+
     self.namespace = parser.get_namespace()
     self.module_name = self.namespace.name.lower()
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
