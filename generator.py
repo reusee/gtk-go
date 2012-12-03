@@ -36,9 +36,6 @@ class Generator:
     for generator in self.parser.functions:
       if generator.has_c_func:
         print >>self.out, generator.generate_c_func()
-    # helper functions
-    print >>self.out, 'gboolean glibtrue() { return TRUE; }'
-    print >>self.out, 'gboolean glibfalse() { return FALSE; }'
     print >>self.out, "*/"
     # cgo
     print >>self.out, 'import "C"'

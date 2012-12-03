@@ -93,7 +93,7 @@ class Parser:
       self.handleFunction(method, node)
 
   def handleRecord(self, node):
-    name = node.name
+    name = node.gi_name.replace('.', '')
     if name.startswith('_'): return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
@@ -101,20 +101,22 @@ class Parser:
     self._handleCompositeType(node)
 
   def handleClass(self, node):
-    name = node.name
+    name = node.gi_name.replace('.', '')
+    if name.startswith('_'): return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
     if not node.parent:
       self.class_types[name] = 'unsafe.Pointer'
       self.class_parents[name] = True
     else:
-      scope, parent = node.parent.resolved.split('.')
+      scope, _ = node.parent.resolved.split('.')
+      parent_name = node.parent.resolved.replace('.', '')
       if scope.lower() != self.package_name:
         self.class_types[name] = 'unsafe.Pointer'
         self.class_parents[name] = True
       else:
-        self.class_types[name] = parent
-        self.class_parents[name] = parent
+        self.class_types[name] = parent_name
+        self.class_parents[name] = parent_name
     self._handleCompositeType(node)
 
   def handleAlias(self, alias):

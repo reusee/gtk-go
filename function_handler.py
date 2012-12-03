@@ -113,7 +113,7 @@ def collect_go_func_info(parser, generator, function, klass):
     generator.has_receiver = True
     value = generator.c_parameters[0]
     value.receiver_name = '_self_'
-    value.receiver_type = '*' + klass.gi_name.split('.')[-1]
+    value.receiver_type = '*' + klass.gi_name.replace('.', '')
     generator.receiver = value
 
   # go func name
@@ -154,6 +154,7 @@ def collect_go_func_info(parser, generator, function, klass):
       value.go_return_type = convert_to_cgo_type(value.c_parameter_type)
       generator.go_returns.append(value)
     value.cgo_argument = name
+    assert value.cgo_argument != None
     generator.cgo_arguments.append(value)
 
   if function.throws:
@@ -161,19 +162,24 @@ def collect_go_func_info(parser, generator, function, klass):
     value.go_return_name = '_error_'
     value.go_return_type = 'unsafe.Pointer'
     value.cgo_argument = value.go_return_name
+    assert value.cgo_argument != None
     generator.go_returns.append(value)
     generator.cgo_arguments.append(value)
 
   if function.is_method: # _self_ param
     value = generator.c_parameters[0]
-    if klass.name in parser.class_types:
+    klass_name = klass.gi_name.replace('.', '')
+    if klass_name in parser.class_types:
       value.cgo_argument = '(%s)(%s._value_)' % (
           convert_to_cgo_type(value.c_parameter_type),
           generator.receiver.receiver_name)
-    elif klass.name in parser.record_types:
+    elif klass_name in parser.record_types:
       value.cgo_argument = '(%s)(%s)' % (
           convert_to_cgo_type(value.c_parameter_type),
           generator.receiver.receiver_name)
+    else: 
+      assert False
+    assert value.cgo_argument != None
     generator.cgo_arguments.insert(0, value)
 
   # cgo call
@@ -201,8 +207,7 @@ def dereference_basic_type_out_param(parser, generator, function, klass):
 def map_record_and_class_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.gir_info.type.target_giname is None: continue
-    gi_scope, gi_type = param.gir_info.type.target_giname.split('.')
-    if gi_scope.lower() != parser.package_name: continue
+    gi_type = param.gir_info.type.target_giname.replace('.', '')
     if gi_type not in parser.record_types and gi_type not in parser.class_types: continue
 
     if gi_type in parser.record_types:
@@ -221,8 +226,7 @@ def map_record_and_class_returns(parser, generator, function, klass):
   for ret in generator.go_returns:
     if ret.gir_info is None: continue
     if ret.gir_info.type.target_giname is None: continue
-    gi_scope, gi_type = ret.gir_info.type.target_giname.split('.')
-    if gi_scope.lower() != parser.package_name: continue
+    gi_type = ret.gir_info.type.target_giname.replace('.', '')
     if gi_type not in parser.record_types and gi_type not in parser.class_types: continue
 
     if isinstance(ret.gir_info, ast.Parameter) and ret.gir_info.caller_allocates:
@@ -348,8 +352,8 @@ def map_boolean_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.go_parameter_type != 'C.gboolean': continue
     generator.statements_before_cgo_call.extend([
-      '_cgo_%s_ := C.glibfalse()' % param.go_parameter_name,
-      'if %s { _cgo_%s_ = C.glibtrue() }' % (param.go_parameter_name, param.go_parameter_name),
+      '_cgo_%s_ := (C.gboolean)(C.FALSE)' % param.go_parameter_name,
+      'if %s { _cgo_%s_ = (C.gboolean)(C.TRUE) }' % (param.go_parameter_name, param.go_parameter_name),
       ])
     param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
     param.go_parameter_type = 'bool'
@@ -358,7 +362,7 @@ def map_boolean_returns(parser, generator, function, klass):
   for ret in generator.go_returns:
     if ret.go_return_type != 'C.gboolean': continue
     generator.statements_before_cgo_call.append('var %s C.gboolean' % ret.go_return_name)
-    generator.statements_after_cgo_call.append('_go_%s_ = %s == C.glibtrue()' 
+    generator.statements_after_cgo_call.append('_go_%s_ = %s == (C.gboolean)(C.TRUE)' 
         % (ret.go_return_name, ret.go_return_name))
     ret.go_return_name = '_go_%s_' % ret.go_return_name
     ret.go_return_type = 'bool'
