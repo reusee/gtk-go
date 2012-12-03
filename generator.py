@@ -54,7 +54,7 @@ class Generator:
     self.write()
 
   def write(self):
-    f = os.path.join(self.parser.path, '%s.go' % self.parser.package_name)
+    f = os.path.join(self.parser.path, '%s.go' % self.parser.module_name)
     output_file = open(f, 'w')
     output_file.write(self.out.getvalue())
     output_file.close()

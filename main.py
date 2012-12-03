@@ -32,7 +32,7 @@ class Parser:
     self.func_spec = func_spec_module.func_specs
 
     self.namespace = parser.get_namespace()
-    self.package_name = self.namespace.name.lower()
+    self.module_name = self.namespace.name.lower()
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
     self.includes = list(parser.get_c_includes())
     self.prefixes = self.namespace.symbol_prefixes
@@ -109,14 +109,9 @@ class Parser:
       self.class_types[name] = 'unsafe.Pointer'
       self.class_parents[name] = True
     else:
-      scope, _ = node.parent.resolved.split('.')
       parent_name = node.parent.resolved.replace('.', '')
-      if scope.lower() != self.package_name:
-        self.class_types[name] = 'unsafe.Pointer'
-        self.class_parents[name] = True
-      else:
-        self.class_types[name] = parent_name
-        self.class_parents[name] = parent_name
+      self.class_types[name] = parent_name
+      self.class_parents[name] = parent_name
     self._handleCompositeType(node)
 
   def handleAlias(self, alias):
@@ -137,9 +132,11 @@ class Parser:
 
   def get_family_tree(self, t):
     ret = [t]
+    if not self.class_parents.has_key(t): return ret
     t = self.class_parents[t]
     while t != True:
       ret.append(t)
+      if not self.class_parents.has_key(t): break
       t = self.class_parents[t]
     return ret
 
