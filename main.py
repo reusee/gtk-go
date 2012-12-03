@@ -94,7 +94,7 @@ class Parser:
 
   def handleRecord(self, node):
     name = node.gi_name.replace('.', '')
-    if name.startswith('_'): return
+    if '_' in name: return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
     self.record_types[name] = c_type
@@ -102,7 +102,7 @@ class Parser:
 
   def handleClass(self, node):
     name = node.gi_name.replace('.', '')
-    if name.startswith('_'): return
+    if '_' in name: return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
     if not node.parent:
@@ -145,12 +145,16 @@ class Parser:
 
 def main():
   if len(sys.argv) < 2:
-    print "usage: %s <gir file>" % sys.argv[0]
+    print "usage: %s <gir files path>" % sys.argv[0]
     sys.exit()
-  parser = Parser(sys.argv[1])
-  parser.parse()
-  generator = Generator(parser)
-  generator.generate()
+  import glob
+  gir_files = glob.glob(os.path.join(os.path.abspath(sys.argv[1]), '*.gir'))
+  for f in gir_files:
+    print os.path.basename(f)
+    parser = Parser(f)
+    parser.parse()
+    generator = Generator(parser)
+    generator.generate()
 
 if __name__ == '__main__':
   main()
