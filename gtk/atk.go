@@ -9,24 +9,6 @@ package gtk
 // #include <glib-unix.h>
 // #include <atk/atk.h>
 /*
-AtkMisc * _atk_misc_get_instance() {
-	return (AtkMisc *)atk_misc_get_instance();
-}
-gchar * _atk_object_get_description(AtkObject * _self_) {
-	return (gchar *)atk_object_get_description(_self_);
-}
-gchar * _atk_object_get_name(AtkObject * _self_) {
-	return (gchar *)atk_object_get_name(_self_);
-}
-void _atk_object_set_description(AtkObject * _self_, gchar * description) {
-	(void)atk_object_set_description(_self_, (const gchar *)(description));
-}
-void _atk_object_set_name(AtkObject * _self_, gchar * name) {
-	(void)atk_object_set_name(_self_, (const gchar *)(name));
-}
-AtkRelation * _atk_relation_new(void * targets, gint n_targets, AtkRelationType relationship) {
-	return (AtkRelation *)atk_relation_new((AtkObject **)(targets), n_targets, relationship);
-}
 guint _atk_add_global_event_listener(GSignalEmissionHook listener, gchar * event_type) {
 	return (guint)atk_add_global_event_listener(listener, (const gchar *)(event_type));
 }
@@ -83,6 +65,24 @@ AtkTextAttribute _atk_text_attribute_register(gchar * name) {
 }
 void _atk_text_free_ranges(void * ranges) {
 	(void)atk_text_free_ranges((AtkTextRange **)(ranges));
+}
+AtkMisc * _atk_misc_get_instance() {
+	return (AtkMisc *)atk_misc_get_instance();
+}
+gchar * _atk_object_get_description(AtkObject * _self_) {
+	return (gchar *)atk_object_get_description(_self_);
+}
+gchar * _atk_object_get_name(AtkObject * _self_) {
+	return (gchar *)atk_object_get_name(_self_);
+}
+void _atk_object_set_description(AtkObject * _self_, gchar * description) {
+	(void)atk_object_set_description(_self_, (const gchar *)(description));
+}
+void _atk_object_set_name(AtkObject * _self_, gchar * name) {
+	(void)atk_object_set_name(_self_, (const gchar *)(name));
+}
+AtkRelation * _atk_relation_new(void * targets, gint n_targets, AtkRelationType relationship) {
+	return (AtkRelation *)atk_relation_new((AtkObject **)(targets), n_targets, relationship);
 }
 */
 import "C"
@@ -234,8 +234,216 @@ type AtkUtilKind interface {
 func (self AtkUtil) _IsAtkUtil () {}
 func (self AtkUtil) _getValue() unsafe.Pointer { return self._value_ }
 func ToAtkUtil(value unsafe.Pointer) AtkUtil { return AtkUtil{GObjectObject{value}} }
+func AddFocusTracker(focus_tracker C.AtkEventListener) (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.atk_add_focus_tracker(focus_tracker)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func AddGlobalEventListener(listener C.GSignalEmissionHook, event_type string) (_go__return__ uint) {
+	var _return_ C.guint
+	_cstring_event_type_ := C.CString(event_type)
+	_cgo_event_type_ := (*C.gchar)(unsafe.Pointer(_cstring_event_type_))
+	defer C.free(unsafe.Pointer(_cstring_event_type_))
+	_return_ = C._atk_add_global_event_listener(listener, _cgo_event_type_)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func AddKeyEventListener(listener C.AtkKeySnoopFunc, data C.gpointer) (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.atk_add_key_event_listener(listener, data)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
 func AttributeSetFree(attrib_set *C.AtkAttributeSet) () {
 	C.atk_attribute_set_free(attrib_set)
+	return
+}
+
+func FocusTrackerInit(init C.AtkEventListenerInit) () {
+	C.atk_focus_tracker_init(init)
+	return
+}
+
+func FocusTrackerNotify(object AtkObjectKind) () {
+	_cgo_object_ := (*C.AtkObject)(object._getValue())
+	C.atk_focus_tracker_notify(_cgo_object_)
+	return
+}
+
+func GetDefaultRegistry() (_go__return__ AtkRegistry) {
+	var _return_ *C.AtkRegistry
+	_return_ = C.atk_get_default_registry()
+	_go__return__ = ToAtkRegistry(unsafe.Pointer(_return_))
+	return
+}
+
+func GetFocusObject() (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_return_ = C.atk_get_focus_object()
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func GetRoot() (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_return_ = C.atk_get_root()
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func GetToolkitName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_get_toolkit_name()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func GetToolkitVersion() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_get_toolkit_version()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func GetVersion() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_get_version()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func RelationTypeForName(name string) (_return_ C.AtkRelationType) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_relation_type_for_name(_cgo_name_)
+	return
+}
+
+func RelationTypeGetName(type_ C.AtkRelationType) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_relation_type_get_name(type_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func RelationTypeRegister(name string) (_return_ C.AtkRelationType) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_relation_type_register(_cgo_name_)
+	return
+}
+
+func RemoveFocusTracker(tracker_id uint) () {
+	_cgo_tracker_id_ := (C.guint)(tracker_id)
+	C.atk_remove_focus_tracker(_cgo_tracker_id_)
+	return
+}
+
+func RemoveGlobalEventListener(listener_id uint) () {
+	_cgo_listener_id_ := (C.guint)(listener_id)
+	C.atk_remove_global_event_listener(_cgo_listener_id_)
+	return
+}
+
+func RemoveKeyEventListener(listener_id uint) () {
+	_cgo_listener_id_ := (C.guint)(listener_id)
+	C.atk_remove_key_event_listener(_cgo_listener_id_)
+	return
+}
+
+func RoleForName(name string) (_return_ C.AtkRole) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_role_for_name(_cgo_name_)
+	return
+}
+
+func RoleGetLocalizedName(role C.AtkRole) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_role_get_localized_name(role)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func RoleGetName(role C.AtkRole) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_role_get_name(role)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func RoleRegister(name string) (_return_ C.AtkRole) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_role_register(_cgo_name_)
+	return
+}
+
+func StateTypeForName(name string) (_return_ C.AtkStateType) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_state_type_for_name(_cgo_name_)
+	return
+}
+
+func StateTypeGetName(type_ C.AtkStateType) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_state_type_get_name(type_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func StateTypeRegister(name string) (_return_ C.AtkStateType) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_state_type_register(_cgo_name_)
+	return
+}
+
+func TextAttributeForName(name string) (_return_ C.AtkTextAttribute) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_text_attribute_for_name(_cgo_name_)
+	return
+}
+
+func TextAttributeGetName(attr C.AtkTextAttribute) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_text_attribute_get_name(attr)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func TextAttributeGetValue(attr C.AtkTextAttribute, index_ int) (_go__return__ string) {
+	_cgo_index__ := (C.gint)(index_)
+	var _return_ *C.gchar
+	_return_ = C._atk_text_attribute_get_value(attr, _cgo_index__)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func TextAttributeRegister(name string) (_return_ C.AtkTextAttribute) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._atk_text_attribute_register(_cgo_name_)
+	return
+}
+
+func TextFreeRanges(ranges *AtkTextRange) () {
+	_cgo_ranges_ := (unsafe.Pointer)(unsafe.Pointer(ranges))
+	C._atk_text_free_ranges(_cgo_ranges_)
 	return
 }
 
@@ -299,13 +507,6 @@ func (_self_ *AtkHyperlink) IsValid() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.atk_hyperlink_is_valid((*C.AtkHyperlink)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *AtkImplementor) RefAccessible() (_go__return__ AtkObject) {
-	var _return_ *C.AtkObject
-	_return_ = C.atk_implementor_ref_accessible((*C.AtkImplementor)(_self_))
-	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
@@ -718,425 +919,224 @@ func (_self_ *AtkStateSet) XorSets(compare_set AtkStateSetKind) (_go__return__ A
 	return
 }
 
-func AddFocusTracker(focus_tracker C.AtkEventListener) (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C.atk_add_focus_tracker(focus_tracker)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func AddGlobalEventListener(listener C.GSignalEmissionHook, event_type string) (_go__return__ uint) {
-	var _return_ C.guint
-	_cstring_event_type_ := C.CString(event_type)
-	_cgo_event_type_ := (*C.gchar)(unsafe.Pointer(_cstring_event_type_))
-	defer C.free(unsafe.Pointer(_cstring_event_type_))
-	_return_ = C._atk_add_global_event_listener(listener, _cgo_event_type_)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func AddKeyEventListener(listener C.AtkKeySnoopFunc, data C.gpointer) (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C.atk_add_key_event_listener(listener, data)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func FocusTrackerInit(init C.AtkEventListenerInit) () {
-	C.atk_focus_tracker_init(init)
-	return
-}
-
-func FocusTrackerNotify(object AtkObjectKind) () {
-	_cgo_object_ := (*C.AtkObject)(object._getValue())
-	C.atk_focus_tracker_notify(_cgo_object_)
-	return
-}
-
-func GetDefaultRegistry() (_go__return__ AtkRegistry) {
-	var _return_ *C.AtkRegistry
-	_return_ = C.atk_get_default_registry()
-	_go__return__ = ToAtkRegistry(unsafe.Pointer(_return_))
-	return
-}
-
-func GetFocusObject() (_go__return__ AtkObject) {
+func (_self_ *AtkImplementor) RefAccessible() (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
-	_return_ = C.atk_get_focus_object()
+	_return_ = C.atk_implementor_ref_accessible((*C.AtkImplementor)(_self_))
 	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
 
-func GetRoot() (_go__return__ AtkObject) {
-	var _return_ *C.AtkObject
-	_return_ = C.atk_get_root()
-	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
-	return
-}
-
-func GetToolkitName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_get_toolkit_name()
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func GetToolkitVersion() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_get_toolkit_version()
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func GetVersion() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_get_version()
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func RelationTypeForName(name string) (_return_ C.AtkRelationType) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_relation_type_for_name(_cgo_name_)
-	return
-}
-
-func RelationTypeGetName(type_ C.AtkRelationType) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_relation_type_get_name(type_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func RelationTypeRegister(name string) (_return_ C.AtkRelationType) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_relation_type_register(_cgo_name_)
-	return
-}
-
-func RemoveFocusTracker(tracker_id uint) () {
-	_cgo_tracker_id_ := (C.guint)(tracker_id)
-	C.atk_remove_focus_tracker(_cgo_tracker_id_)
-	return
-}
-
-func RemoveGlobalEventListener(listener_id uint) () {
-	_cgo_listener_id_ := (C.guint)(listener_id)
-	C.atk_remove_global_event_listener(_cgo_listener_id_)
-	return
-}
-
-func RemoveKeyEventListener(listener_id uint) () {
-	_cgo_listener_id_ := (C.guint)(listener_id)
-	C.atk_remove_key_event_listener(_cgo_listener_id_)
-	return
-}
-
-func RoleForName(name string) (_return_ C.AtkRole) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_role_for_name(_cgo_name_)
-	return
-}
-
-func RoleGetLocalizedName(role C.AtkRole) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_role_get_localized_name(role)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func RoleGetName(role C.AtkRole) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_role_get_name(role)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func RoleRegister(name string) (_return_ C.AtkRole) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_role_register(_cgo_name_)
-	return
-}
-
-func StateTypeForName(name string) (_return_ C.AtkStateType) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_state_type_for_name(_cgo_name_)
-	return
-}
-
-func StateTypeGetName(type_ C.AtkStateType) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_state_type_get_name(type_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func StateTypeRegister(name string) (_return_ C.AtkStateType) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_state_type_register(_cgo_name_)
-	return
-}
-
-func TextAttributeForName(name string) (_return_ C.AtkTextAttribute) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_text_attribute_for_name(_cgo_name_)
-	return
-}
-
-func TextAttributeGetName(attr C.AtkTextAttribute) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._atk_text_attribute_get_name(attr)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func TextAttributeGetValue(attr C.AtkTextAttribute, index_ int) (_go__return__ string) {
-	_cgo_index__ := (C.gint)(index_)
-	var _return_ *C.gchar
-	_return_ = C._atk_text_attribute_get_value(attr, _cgo_index__)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func TextAttributeRegister(name string) (_return_ C.AtkTextAttribute) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._atk_text_attribute_register(_cgo_name_)
-	return
-}
-
-func TextFreeRanges(ranges *AtkTextRange) () {
-	_cgo_ranges_ := (unsafe.Pointer)(unsafe.Pointer(ranges))
-	C._atk_text_free_ranges(_cgo_ranges_)
-	return
-}
-
-const XY_SCREEN = C.ATK_XY_SCREEN
-const XY_WINDOW = C.ATK_XY_WINDOW
-const HYPERLINK_IS_INLINE = C.ATK_HYPERLINK_IS_INLINE
-const KEY_EVENT_PRESS = C.ATK_KEY_EVENT_PRESS
-const KEY_EVENT_RELEASE = C.ATK_KEY_EVENT_RELEASE
-const KEY_EVENT_LAST_DEFINED = C.ATK_KEY_EVENT_LAST_DEFINED
-const LAYER_INVALID = C.ATK_LAYER_INVALID
-const LAYER_BACKGROUND = C.ATK_LAYER_BACKGROUND
-const LAYER_CANVAS = C.ATK_LAYER_CANVAS
-const LAYER_WIDGET = C.ATK_LAYER_WIDGET
-const LAYER_MDI = C.ATK_LAYER_MDI
-const LAYER_POPUP = C.ATK_LAYER_POPUP
-const LAYER_OVERLAY = C.ATK_LAYER_OVERLAY
-const LAYER_WINDOW = C.ATK_LAYER_WINDOW
-const RELATION_NULL = C.ATK_RELATION_NULL
-const RELATION_CONTROLLED_BY = C.ATK_RELATION_CONTROLLED_BY
-const RELATION_CONTROLLER_FOR = C.ATK_RELATION_CONTROLLER_FOR
-const RELATION_LABEL_FOR = C.ATK_RELATION_LABEL_FOR
-const RELATION_LABELLED_BY = C.ATK_RELATION_LABELLED_BY
-const RELATION_MEMBER_OF = C.ATK_RELATION_MEMBER_OF
-const RELATION_NODE_CHILD_OF = C.ATK_RELATION_NODE_CHILD_OF
-const RELATION_FLOWS_TO = C.ATK_RELATION_FLOWS_TO
-const RELATION_FLOWS_FROM = C.ATK_RELATION_FLOWS_FROM
-const RELATION_SUBWINDOW_OF = C.ATK_RELATION_SUBWINDOW_OF
-const RELATION_EMBEDS = C.ATK_RELATION_EMBEDS
-const RELATION_EMBEDDED_BY = C.ATK_RELATION_EMBEDDED_BY
-const RELATION_POPUP_FOR = C.ATK_RELATION_POPUP_FOR
+const STATE_EXPANDED = C.ATK_STATE_EXPANDED
+const STATE_VERTICAL = C.ATK_STATE_VERTICAL
+const STATE_SELECTABLE_TEXT = C.ATK_STATE_SELECTABLE_TEXT
 const RELATION_PARENT_WINDOW_OF = C.ATK_RELATION_PARENT_WINDOW_OF
+const ROLE_SECTION = C.ATK_ROLE_SECTION
+const ROLE_TABLE_CELL = C.ATK_ROLE_TABLE_CELL
+const ROLE_FILLER = C.ATK_ROLE_FILLER
+const TEXT_ATTR_JUSTIFICATION = C.ATK_TEXT_ATTR_JUSTIFICATION
+const ROLE_TOGGLE_BUTTON = C.ATK_ROLE_TOGGLE_BUTTON
+const ROLE_PAGE = C.ATK_ROLE_PAGE
+const ROLE_PROGRESS_BAR = C.ATK_ROLE_PROGRESS_BAR
+const ROLE_DIALOG = C.ATK_ROLE_DIALOG
+const STATE_FOCUSABLE = C.ATK_STATE_FOCUSABLE
+const ROLE_GLASS_PANE = C.ATK_ROLE_GLASS_PANE
+const STATE_BUSY = C.ATK_STATE_BUSY
+const TEXT_ATTR_WRAP_MODE = C.ATK_TEXT_ATTR_WRAP_MODE
+const ROLE_DIAL = C.ATK_ROLE_DIAL
+const LAYER_INVALID = C.ATK_LAYER_INVALID
+const ROLE_DOCUMENT_SPREADSHEET = C.ATK_ROLE_DOCUMENT_SPREADSHEET
 const RELATION_DESCRIBED_BY = C.ATK_RELATION_DESCRIBED_BY
-const RELATION_DESCRIPTION_FOR = C.ATK_RELATION_DESCRIPTION_FOR
+const ROLE_TOOL_BAR = C.ATK_ROLE_TOOL_BAR
+const ROLE_ALERT = C.ATK_ROLE_ALERT
+const ROLE_COMMENT = C.ATK_ROLE_COMMENT
+const STATE_DEFUNCT = C.ATK_STATE_DEFUNCT
+const TEXT_CLIP_MAX = C.ATK_TEXT_CLIP_MAX
+const ROLE_PAGE_TAB = C.ATK_ROLE_PAGE_TAB
+const RELATION_FLOWS_FROM = C.ATK_RELATION_FLOWS_FROM
+const ATK_STATE_FOCUSED = C.ATK_STATE_FOCUSED
+const ROLE_CHART = C.ATK_ROLE_CHART
+const ROLE_ROW_HEADER = C.ATK_ROLE_ROW_HEADER
+const TEXT_ATTR_DIRECTION = C.ATK_TEXT_ATTR_DIRECTION
+const LAYER_MDI = C.ATK_LAYER_MDI
+const TEXT_ATTR_STRETCH = C.ATK_TEXT_ATTR_STRETCH
+const STATE_MULTI_LINE = C.ATK_STATE_MULTI_LINE
+const TEXT_CLIP_BOTH = C.ATK_TEXT_CLIP_BOTH
+const TEXT_ATTR_SCALE = C.ATK_TEXT_ATTR_SCALE
+const ATK_STATE_ACTIVE = C.ATK_STATE_ACTIVE
+const STATE_OPAQUE = C.ATK_STATE_OPAQUE
+const TEXT_ATTR_RISE = C.ATK_TEXT_ATTR_RISE
+const ROLE_CALENDAR = C.ATK_ROLE_CALENDAR
+const STATE_TRUNCATED = C.ATK_STATE_TRUNCATED
+const ROLE_COMBO_BOX = C.ATK_ROLE_COMBO_BOX
+const ROLE_SCROLL_BAR = C.ATK_ROLE_SCROLL_BAR
+const ROLE_LAST_DEFINED = C.ATK_ROLE_LAST_DEFINED
+const ROLE_DOCUMENT_TEXT = C.ATK_ROLE_DOCUMENT_TEXT
+const STATE_MULTISELECTABLE = C.ATK_STATE_MULTISELECTABLE
+const ROLE_TOOL_TIP = C.ATK_ROLE_TOOL_TIP
+const TEXT_ATTR_STYLE = C.ATK_TEXT_ATTR_STYLE
+const TEXT_ATTR_BG_COLOR = C.ATK_TEXT_ATTR_BG_COLOR
+const ROLE_SPIN_BUTTON = C.ATK_ROLE_SPIN_BUTTON
+const ROLE_MENU = C.ATK_ROLE_MENU
+const ROLE_FRAME = C.ATK_ROLE_FRAME
+const TEXT_ATTR_LEFT_MARGIN = C.ATK_TEXT_ATTR_LEFT_MARGIN
+const ROLE_FOOTER = C.ATK_ROLE_FOOTER
+const LAYER_BACKGROUND = C.ATK_LAYER_BACKGROUND
+const ROLE_FONT_CHOOSER = C.ATK_ROLE_FONT_CHOOSER
+const ROLE_TERMINAL = C.ATK_ROLE_TERMINAL
+const TEXT_ATTR_BG_FULL_HEIGHT = C.ATK_TEXT_ATTR_BG_FULL_HEIGHT
+const LAYER_OVERLAY = C.ATK_LAYER_OVERLAY
+const ROLE_LINK = C.ATK_ROLE_LINK
+const ROLE_DOCUMENT_FRAME = C.ATK_ROLE_DOCUMENT_FRAME
+const ROLE_HTML_CONTAINER = C.ATK_ROLE_HTML_CONTAINER
+const ROLE_FORM = C.ATK_ROLE_FORM
+const ROLE_TEXT = C.ATK_ROLE_TEXT
+const STATE_SUPPORTS_AUTOCOMPLETION = C.ATK_STATE_SUPPORTS_AUTOCOMPLETION
+const RELATION_NODE_CHILD_OF = C.ATK_RELATION_NODE_CHILD_OF
+const ROLE_CAPTION = C.ATK_ROLE_CAPTION
+const ROLE_REDUNDANT_OBJECT = C.ATK_ROLE_REDUNDANT_OBJECT
+const TEXT_ATTR_WEIGHT = C.ATK_TEXT_ATTR_WEIGHT
+const ROLE_IMAGE_MAP = C.ATK_ROLE_IMAGE_MAP
+const ROLE_CANVAS = C.ATK_ROLE_CANVAS
+const ROLE_TABLE_COLUMN_HEADER = C.ATK_ROLE_TABLE_COLUMN_HEADER
+const RELATION_EMBEDS = C.ATK_RELATION_EMBEDS
+const TEXT_ATTR_FG_STIPPLE = C.ATK_TEXT_ATTR_FG_STIPPLE
+const TEXT_ATTR_LAST_DEFINED = C.ATK_TEXT_ATTR_LAST_DEFINED
+const ROLE_ARROW = C.ATK_ROLE_ARROW
+const ROLE_INTERNAL_FRAME = C.ATK_ROLE_INTERNAL_FRAME
+const ROLE_SEPARATOR = C.ATK_ROLE_SEPARATOR
+const TEXT_ATTR_RIGHT_MARGIN = C.ATK_TEXT_ATTR_RIGHT_MARGIN
+const ROLE_TREE = C.ATK_ROLE_TREE
+const XY_SCREEN = C.ATK_XY_SCREEN
+const TEXT_ATTR_PIXELS_INSIDE_WRAP = C.ATK_TEXT_ATTR_PIXELS_INSIDE_WRAP
+const ROLE_ENTRY = C.ATK_ROLE_ENTRY
+const ROLE_PASSWORD_TEXT = C.ATK_ROLE_PASSWORD_TEXT
+const STATE_TRANSIENT = C.ATK_STATE_TRANSIENT
+const RELATION_MEMBER_OF = C.ATK_RELATION_MEMBER_OF
+const STATE_INVALID = C.ATK_STATE_INVALID
+const ROLE_RADIO_MENU_ITEM = C.ATK_ROLE_RADIO_MENU_ITEM
+const TEXT_ATTR_PIXELS_BELOW_LINES = C.ATK_TEXT_ATTR_PIXELS_BELOW_LINES
+const LAYER_CANVAS = C.ATK_LAYER_CANVAS
+const ROLE_DOCUMENT_WEB = C.ATK_ROLE_DOCUMENT_WEB
+const ROLE_PAGE_TAB_LIST = C.ATK_ROLE_PAGE_TAB_LIST
+const LAYER_WINDOW = C.ATK_LAYER_WINDOW
+const STATE_MANAGES_DESCENDANTS = C.ATK_STATE_MANAGES_DESCENDANTS
+const ROLE_EMBEDDED = C.ATK_ROLE_EMBEDDED
+const ROLE_SCROLL_PANE = C.ATK_ROLE_SCROLL_PANE
+const ROLE_EDITBAR = C.ATK_ROLE_EDITBAR
+const ROLE_RADIO_BUTTON = C.ATK_ROLE_RADIO_BUTTON
+const ROLE_APPLICATION = C.ATK_ROLE_APPLICATION
+const STATE_CHECKED = C.ATK_STATE_CHECKED
+const RELATION_CONTROLLED_BY = C.ATK_RELATION_CONTROLLED_BY
+const ROLE_DESKTOP_FRAME = C.ATK_ROLE_DESKTOP_FRAME
+const ROLE_MENU_ITEM = C.ATK_ROLE_MENU_ITEM
+const ROLE_CHECK_MENU_ITEM = C.ATK_ROLE_CHECK_MENU_ITEM
+const ROLE_AUTOCOMPLETE = C.ATK_ROLE_AUTOCOMPLETE
+const RELATION_POPUP_FOR = C.ATK_RELATION_POPUP_FOR
+const STATE_ENABLED = C.ATK_STATE_ENABLED
+const ROLE_TREE_ITEM = C.ATK_ROLE_TREE_ITEM
+const STATE_LAST_DEFINED = C.ATK_STATE_LAST_DEFINED
+const STATE_REQUIRED = C.ATK_STATE_REQUIRED
+const ROLE_LIST_BOX = C.ATK_ROLE_LIST_BOX
+const ROLE_SLIDER = C.ATK_ROLE_SLIDER
+const TEXT_ATTR_VARIANT = C.ATK_TEXT_ATTR_VARIANT
+const ROLE_RULER = C.ATK_ROLE_RULER
+const STATE_VISIBLE = C.ATK_STATE_VISIBLE
+const ROLE_TABLE_ROW = C.ATK_ROLE_TABLE_ROW
+const KEY_EVENT_RELEASE = C.ATK_KEY_EVENT_RELEASE
+const RELATION_EMBEDDED_BY = C.ATK_RELATION_EMBEDDED_BY
+const STATE_INDETERMINATE = C.ATK_STATE_INDETERMINATE
+const ROLE_PARAGRAPH = C.ATK_ROLE_PARAGRAPH
 const RELATION_NODE_PARENT_OF = C.ATK_RELATION_NODE_PARENT_OF
 const RELATION_LAST_DEFINED = C.ATK_RELATION_LAST_DEFINED
-const ROLE_INVALID = C.ATK_ROLE_INVALID
-const ROLE_ACCEL_LABEL = C.ATK_ROLE_ACCEL_LABEL
-const ROLE_ALERT = C.ATK_ROLE_ALERT
-const ROLE_ANIMATION = C.ATK_ROLE_ANIMATION
-const ROLE_ARROW = C.ATK_ROLE_ARROW
-const ROLE_CALENDAR = C.ATK_ROLE_CALENDAR
-const ROLE_CANVAS = C.ATK_ROLE_CANVAS
-const ROLE_CHECK_BOX = C.ATK_ROLE_CHECK_BOX
-const ROLE_CHECK_MENU_ITEM = C.ATK_ROLE_CHECK_MENU_ITEM
-const ROLE_COLOR_CHOOSER = C.ATK_ROLE_COLOR_CHOOSER
-const ROLE_COLUMN_HEADER = C.ATK_ROLE_COLUMN_HEADER
-const ROLE_COMBO_BOX = C.ATK_ROLE_COMBO_BOX
-const ROLE_DATE_EDITOR = C.ATK_ROLE_DATE_EDITOR
-const ROLE_DESKTOP_ICON = C.ATK_ROLE_DESKTOP_ICON
-const ROLE_DESKTOP_FRAME = C.ATK_ROLE_DESKTOP_FRAME
-const ROLE_DIAL = C.ATK_ROLE_DIAL
-const ROLE_DIALOG = C.ATK_ROLE_DIALOG
-const ROLE_DIRECTORY_PANE = C.ATK_ROLE_DIRECTORY_PANE
-const ROLE_DRAWING_AREA = C.ATK_ROLE_DRAWING_AREA
-const ROLE_FILE_CHOOSER = C.ATK_ROLE_FILE_CHOOSER
-const ROLE_FILLER = C.ATK_ROLE_FILLER
-const ROLE_FONT_CHOOSER = C.ATK_ROLE_FONT_CHOOSER
-const ROLE_FRAME = C.ATK_ROLE_FRAME
-const ROLE_GLASS_PANE = C.ATK_ROLE_GLASS_PANE
-const ROLE_HTML_CONTAINER = C.ATK_ROLE_HTML_CONTAINER
-const ROLE_ICON = C.ATK_ROLE_ICON
-const ROLE_IMAGE = C.ATK_ROLE_IMAGE
-const ROLE_INTERNAL_FRAME = C.ATK_ROLE_INTERNAL_FRAME
-const ROLE_LABEL = C.ATK_ROLE_LABEL
-const ROLE_LAYERED_PANE = C.ATK_ROLE_LAYERED_PANE
-const ROLE_LIST = C.ATK_ROLE_LIST
-const ROLE_LIST_ITEM = C.ATK_ROLE_LIST_ITEM
-const ROLE_MENU = C.ATK_ROLE_MENU
-const ROLE_MENU_BAR = C.ATK_ROLE_MENU_BAR
-const ROLE_MENU_ITEM = C.ATK_ROLE_MENU_ITEM
-const ROLE_OPTION_PANE = C.ATK_ROLE_OPTION_PANE
-const ROLE_PAGE_TAB = C.ATK_ROLE_PAGE_TAB
-const ROLE_PAGE_TAB_LIST = C.ATK_ROLE_PAGE_TAB_LIST
-const ROLE_PANEL = C.ATK_ROLE_PANEL
-const ROLE_PASSWORD_TEXT = C.ATK_ROLE_PASSWORD_TEXT
-const ROLE_POPUP_MENU = C.ATK_ROLE_POPUP_MENU
-const ROLE_PROGRESS_BAR = C.ATK_ROLE_PROGRESS_BAR
-const ROLE_PUSH_BUTTON = C.ATK_ROLE_PUSH_BUTTON
-const ROLE_RADIO_BUTTON = C.ATK_ROLE_RADIO_BUTTON
-const ROLE_RADIO_MENU_ITEM = C.ATK_ROLE_RADIO_MENU_ITEM
-const ROLE_ROOT_PANE = C.ATK_ROLE_ROOT_PANE
-const ROLE_ROW_HEADER = C.ATK_ROLE_ROW_HEADER
-const ROLE_SCROLL_BAR = C.ATK_ROLE_SCROLL_BAR
-const ROLE_SCROLL_PANE = C.ATK_ROLE_SCROLL_PANE
-const ROLE_SEPARATOR = C.ATK_ROLE_SEPARATOR
-const ROLE_SLIDER = C.ATK_ROLE_SLIDER
-const ROLE_SPLIT_PANE = C.ATK_ROLE_SPLIT_PANE
-const ROLE_SPIN_BUTTON = C.ATK_ROLE_SPIN_BUTTON
-const ROLE_STATUSBAR = C.ATK_ROLE_STATUSBAR
-const ROLE_TABLE = C.ATK_ROLE_TABLE
-const ROLE_TABLE_CELL = C.ATK_ROLE_TABLE_CELL
-const ROLE_TABLE_COLUMN_HEADER = C.ATK_ROLE_TABLE_COLUMN_HEADER
-const ROLE_TABLE_ROW_HEADER = C.ATK_ROLE_TABLE_ROW_HEADER
-const ROLE_TEAR_OFF_MENU_ITEM = C.ATK_ROLE_TEAR_OFF_MENU_ITEM
-const ROLE_TERMINAL = C.ATK_ROLE_TERMINAL
-const ROLE_TEXT = C.ATK_ROLE_TEXT
-const ROLE_TOGGLE_BUTTON = C.ATK_ROLE_TOGGLE_BUTTON
-const ROLE_TOOL_BAR = C.ATK_ROLE_TOOL_BAR
-const ROLE_TOOL_TIP = C.ATK_ROLE_TOOL_TIP
-const ROLE_TREE = C.ATK_ROLE_TREE
-const ROLE_TREE_TABLE = C.ATK_ROLE_TREE_TABLE
-const ROLE_UNKNOWN = C.ATK_ROLE_UNKNOWN
-const ROLE_VIEWPORT = C.ATK_ROLE_VIEWPORT
-const ROLE_WINDOW = C.ATK_ROLE_WINDOW
-const ROLE_HEADER = C.ATK_ROLE_HEADER
-const ROLE_FOOTER = C.ATK_ROLE_FOOTER
-const ROLE_PARAGRAPH = C.ATK_ROLE_PARAGRAPH
-const ROLE_RULER = C.ATK_ROLE_RULER
-const ROLE_APPLICATION = C.ATK_ROLE_APPLICATION
-const ROLE_AUTOCOMPLETE = C.ATK_ROLE_AUTOCOMPLETE
-const ROLE_EDITBAR = C.ATK_ROLE_EDITBAR
-const ROLE_EMBEDDED = C.ATK_ROLE_EMBEDDED
-const ROLE_ENTRY = C.ATK_ROLE_ENTRY
-const ROLE_CHART = C.ATK_ROLE_CHART
-const ROLE_CAPTION = C.ATK_ROLE_CAPTION
-const ROLE_DOCUMENT_FRAME = C.ATK_ROLE_DOCUMENT_FRAME
-const ROLE_HEADING = C.ATK_ROLE_HEADING
-const ROLE_PAGE = C.ATK_ROLE_PAGE
-const ROLE_SECTION = C.ATK_ROLE_SECTION
-const ROLE_REDUNDANT_OBJECT = C.ATK_ROLE_REDUNDANT_OBJECT
-const ROLE_FORM = C.ATK_ROLE_FORM
-const ROLE_LINK = C.ATK_ROLE_LINK
-const ROLE_INPUT_METHOD_WINDOW = C.ATK_ROLE_INPUT_METHOD_WINDOW
-const ROLE_TABLE_ROW = C.ATK_ROLE_TABLE_ROW
-const ROLE_TREE_ITEM = C.ATK_ROLE_TREE_ITEM
-const ROLE_DOCUMENT_SPREADSHEET = C.ATK_ROLE_DOCUMENT_SPREADSHEET
-const ROLE_DOCUMENT_PRESENTATION = C.ATK_ROLE_DOCUMENT_PRESENTATION
-const ROLE_DOCUMENT_TEXT = C.ATK_ROLE_DOCUMENT_TEXT
-const ROLE_DOCUMENT_WEB = C.ATK_ROLE_DOCUMENT_WEB
-const ROLE_DOCUMENT_EMAIL = C.ATK_ROLE_DOCUMENT_EMAIL
-const ROLE_COMMENT = C.ATK_ROLE_COMMENT
-const ROLE_LIST_BOX = C.ATK_ROLE_LIST_BOX
-const ROLE_GROUPING = C.ATK_ROLE_GROUPING
-const ROLE_IMAGE_MAP = C.ATK_ROLE_IMAGE_MAP
-const ROLE_NOTIFICATION = C.ATK_ROLE_NOTIFICATION
-const ROLE_INFO_BAR = C.ATK_ROLE_INFO_BAR
-const ROLE_LAST_DEFINED = C.ATK_ROLE_LAST_DEFINED
-const STATE_INVALID = C.ATK_STATE_INVALID
-const STATE_ACTIVE = C.ATK_STATE_ACTIVE
-const STATE_ARMED = C.ATK_STATE_ARMED
-const STATE_BUSY = C.ATK_STATE_BUSY
-const STATE_CHECKED = C.ATK_STATE_CHECKED
-const STATE_DEFUNCT = C.ATK_STATE_DEFUNCT
-const STATE_EDITABLE = C.ATK_STATE_EDITABLE
-const STATE_ENABLED = C.ATK_STATE_ENABLED
-const STATE_EXPANDABLE = C.ATK_STATE_EXPANDABLE
-const STATE_EXPANDED = C.ATK_STATE_EXPANDED
-const STATE_FOCUSABLE = C.ATK_STATE_FOCUSABLE
-const STATE_FOCUSED = C.ATK_STATE_FOCUSED
-const STATE_HORIZONTAL = C.ATK_STATE_HORIZONTAL
-const STATE_ICONIFIED = C.ATK_STATE_ICONIFIED
-const STATE_MODAL = C.ATK_STATE_MODAL
-const STATE_MULTI_LINE = C.ATK_STATE_MULTI_LINE
-const STATE_MULTISELECTABLE = C.ATK_STATE_MULTISELECTABLE
-const STATE_OPAQUE = C.ATK_STATE_OPAQUE
-const STATE_PRESSED = C.ATK_STATE_PRESSED
 const STATE_RESIZABLE = C.ATK_STATE_RESIZABLE
-const STATE_SELECTABLE = C.ATK_STATE_SELECTABLE
-const STATE_SELECTED = C.ATK_STATE_SELECTED
-const STATE_SENSITIVE = C.ATK_STATE_SENSITIVE
-const STATE_SHOWING = C.ATK_STATE_SHOWING
-const STATE_SINGLE_LINE = C.ATK_STATE_SINGLE_LINE
-const STATE_STALE = C.ATK_STATE_STALE
-const STATE_TRANSIENT = C.ATK_STATE_TRANSIENT
-const STATE_VERTICAL = C.ATK_STATE_VERTICAL
-const STATE_VISIBLE = C.ATK_STATE_VISIBLE
-const STATE_MANAGES_DESCENDANTS = C.ATK_STATE_MANAGES_DESCENDANTS
-const STATE_INDETERMINATE = C.ATK_STATE_INDETERMINATE
-const STATE_TRUNCATED = C.ATK_STATE_TRUNCATED
-const STATE_REQUIRED = C.ATK_STATE_REQUIRED
-const STATE_INVALID_ENTRY = C.ATK_STATE_INVALID_ENTRY
-const STATE_SUPPORTS_AUTOCOMPLETION = C.ATK_STATE_SUPPORTS_AUTOCOMPLETION
-const STATE_SELECTABLE_TEXT = C.ATK_STATE_SELECTABLE_TEXT
-const STATE_DEFAULT = C.ATK_STATE_DEFAULT
-const STATE_ANIMATED = C.ATK_STATE_ANIMATED
+const RELATION_FLOWS_TO = C.ATK_RELATION_FLOWS_TO
+const ROLE_GROUPING = C.ATK_ROLE_GROUPING
+const ROLE_LAYERED_PANE = C.ATK_ROLE_LAYERED_PANE
 const STATE_VISITED = C.ATK_STATE_VISITED
-const STATE_LAST_DEFINED = C.ATK_STATE_LAST_DEFINED
-const TEXT_ATTR_INVALID = C.ATK_TEXT_ATTR_INVALID
-const TEXT_ATTR_LEFT_MARGIN = C.ATK_TEXT_ATTR_LEFT_MARGIN
-const TEXT_ATTR_RIGHT_MARGIN = C.ATK_TEXT_ATTR_RIGHT_MARGIN
-const TEXT_ATTR_INDENT = C.ATK_TEXT_ATTR_INDENT
-const TEXT_ATTR_INVISIBLE = C.ATK_TEXT_ATTR_INVISIBLE
-const TEXT_ATTR_EDITABLE = C.ATK_TEXT_ATTR_EDITABLE
-const TEXT_ATTR_PIXELS_ABOVE_LINES = C.ATK_TEXT_ATTR_PIXELS_ABOVE_LINES
-const TEXT_ATTR_PIXELS_BELOW_LINES = C.ATK_TEXT_ATTR_PIXELS_BELOW_LINES
-const TEXT_ATTR_PIXELS_INSIDE_WRAP = C.ATK_TEXT_ATTR_PIXELS_INSIDE_WRAP
-const TEXT_ATTR_BG_FULL_HEIGHT = C.ATK_TEXT_ATTR_BG_FULL_HEIGHT
-const TEXT_ATTR_RISE = C.ATK_TEXT_ATTR_RISE
-const TEXT_ATTR_UNDERLINE = C.ATK_TEXT_ATTR_UNDERLINE
-const TEXT_ATTR_STRIKETHROUGH = C.ATK_TEXT_ATTR_STRIKETHROUGH
-const TEXT_ATTR_SIZE = C.ATK_TEXT_ATTR_SIZE
-const TEXT_ATTR_SCALE = C.ATK_TEXT_ATTR_SCALE
-const TEXT_ATTR_WEIGHT = C.ATK_TEXT_ATTR_WEIGHT
-const TEXT_ATTR_LANGUAGE = C.ATK_TEXT_ATTR_LANGUAGE
-const TEXT_ATTR_FAMILY_NAME = C.ATK_TEXT_ATTR_FAMILY_NAME
-const TEXT_ATTR_BG_COLOR = C.ATK_TEXT_ATTR_BG_COLOR
-const TEXT_ATTR_FG_COLOR = C.ATK_TEXT_ATTR_FG_COLOR
-const TEXT_ATTR_BG_STIPPLE = C.ATK_TEXT_ATTR_BG_STIPPLE
-const TEXT_ATTR_FG_STIPPLE = C.ATK_TEXT_ATTR_FG_STIPPLE
-const TEXT_ATTR_WRAP_MODE = C.ATK_TEXT_ATTR_WRAP_MODE
-const TEXT_ATTR_DIRECTION = C.ATK_TEXT_ATTR_DIRECTION
-const TEXT_ATTR_JUSTIFICATION = C.ATK_TEXT_ATTR_JUSTIFICATION
-const TEXT_ATTR_STRETCH = C.ATK_TEXT_ATTR_STRETCH
-const TEXT_ATTR_VARIANT = C.ATK_TEXT_ATTR_VARIANT
-const TEXT_ATTR_STYLE = C.ATK_TEXT_ATTR_STYLE
-const TEXT_ATTR_LAST_DEFINED = C.ATK_TEXT_ATTR_LAST_DEFINED
-const TEXT_BOUNDARY_CHAR = C.ATK_TEXT_BOUNDARY_CHAR
-const TEXT_BOUNDARY_WORD_START = C.ATK_TEXT_BOUNDARY_WORD_START
-const TEXT_BOUNDARY_WORD_END = C.ATK_TEXT_BOUNDARY_WORD_END
-const TEXT_BOUNDARY_SENTENCE_START = C.ATK_TEXT_BOUNDARY_SENTENCE_START
-const TEXT_BOUNDARY_SENTENCE_END = C.ATK_TEXT_BOUNDARY_SENTENCE_END
-const TEXT_BOUNDARY_LINE_START = C.ATK_TEXT_BOUNDARY_LINE_START
-const TEXT_BOUNDARY_LINE_END = C.ATK_TEXT_BOUNDARY_LINE_END
+const ROLE_LIST_ITEM = C.ATK_ROLE_LIST_ITEM
+const RELATION_SUBWINDOW_OF = C.ATK_RELATION_SUBWINDOW_OF
+const ROLE_DATE_EDITOR = C.ATK_ROLE_DATE_EDITOR
+const STATE_HORIZONTAL = C.ATK_STATE_HORIZONTAL
+const STATE_EDITABLE = C.ATK_STATE_EDITABLE
+const XY_WINDOW = C.ATK_XY_WINDOW
 const TEXT_CLIP_NONE = C.ATK_TEXT_CLIP_NONE
+const TEXT_ATTR_PIXELS_ABOVE_LINES = C.ATK_TEXT_ATTR_PIXELS_ABOVE_LINES
+const ROLE_FILE_CHOOSER = C.ATK_ROLE_FILE_CHOOSER
+const STATE_SENSITIVE = C.ATK_STATE_SENSITIVE
+const ROLE_COLOR_CHOOSER = C.ATK_ROLE_COLOR_CHOOSER
+const LAYER_POPUP = C.ATK_LAYER_POPUP
+const STATE_MODAL = C.ATK_STATE_MODAL
+const LAYER_WIDGET = C.ATK_LAYER_WIDGET
+const STATE_SELECTABLE = C.ATK_STATE_SELECTABLE
+const TEXT_ATTR_UNDERLINE = C.ATK_TEXT_ATTR_UNDERLINE
+const STATE_ARMED = C.ATK_STATE_ARMED
+const ROLE_DOCUMENT_PRESENTATION = C.ATK_ROLE_DOCUMENT_PRESENTATION
+const STATE_DEFAULT = C.ATK_STATE_DEFAULT
+const ROLE_OPTION_PANE = C.ATK_ROLE_OPTION_PANE
+const RELATION_LABELLED_BY = C.ATK_RELATION_LABELLED_BY
+const TEXT_BOUNDARY_LINE_START = C.ATK_TEXT_BOUNDARY_LINE_START
+const STATE_SINGLE_LINE = C.ATK_STATE_SINGLE_LINE
+const ROLE_TABLE = C.ATK_ROLE_TABLE
+const TEXT_ATTR_STRIKETHROUGH = C.ATK_TEXT_ATTR_STRIKETHROUGH
+const ROLE_COLUMN_HEADER = C.ATK_ROLE_COLUMN_HEADER
+const ROLE_DOCUMENT_EMAIL = C.ATK_ROLE_DOCUMENT_EMAIL
+const STATE_INVALID_ENTRY = C.ATK_STATE_INVALID_ENTRY
+const ROLE_DESKTOP_ICON = C.ATK_ROLE_DESKTOP_ICON
+const HYPERLINK_IS_INLINE = C.ATK_HYPERLINK_IS_INLINE
+const ROLE_HEADER = C.ATK_ROLE_HEADER
+const ROLE_ACCEL_LABEL = C.ATK_ROLE_ACCEL_LABEL
+const RELATION_CONTROLLER_FOR = C.ATK_RELATION_CONTROLLER_FOR
+const ROLE_INVALID = C.ATK_ROLE_INVALID
+const ROLE_HEADING = C.ATK_ROLE_HEADING
+const ROLE_INFO_BAR = C.ATK_ROLE_INFO_BAR
+const TEXT_BOUNDARY_LINE_END = C.ATK_TEXT_BOUNDARY_LINE_END
+const ROLE_UNKNOWN = C.ATK_ROLE_UNKNOWN
+const STATE_ICONIFIED = C.ATK_STATE_ICONIFIED
+const KEY_EVENT_LAST_DEFINED = C.ATK_KEY_EVENT_LAST_DEFINED
+const ROLE_PUSH_BUTTON = C.ATK_ROLE_PUSH_BUTTON
+const ROLE_PANEL = C.ATK_ROLE_PANEL
+const ROLE_LIST = C.ATK_ROLE_LIST
+const RELATION_LABEL_FOR = C.ATK_RELATION_LABEL_FOR
+const ATK_STATE_SELECTED = C.ATK_STATE_SELECTED
+const ROLE_MENU_BAR = C.ATK_ROLE_MENU_BAR
+const TEXT_ATTR_INDENT = C.ATK_TEXT_ATTR_INDENT
+const TEXT_BOUNDARY_SENTENCE_START = C.ATK_TEXT_BOUNDARY_SENTENCE_START
+const RELATION_NULL = C.ATK_RELATION_NULL
+const ROLE_INPUT_METHOD_WINDOW = C.ATK_ROLE_INPUT_METHOD_WINDOW
+const STATE_EXPANDABLE = C.ATK_STATE_EXPANDABLE
+const TEXT_ATTR_EDITABLE = C.ATK_TEXT_ATTR_EDITABLE
+const TEXT_ATTR_BG_STIPPLE = C.ATK_TEXT_ATTR_BG_STIPPLE
+const STATE_SHOWING = C.ATK_STATE_SHOWING
+const KEY_EVENT_PRESS = C.ATK_KEY_EVENT_PRESS
+const ROLE_TREE_TABLE = C.ATK_ROLE_TREE_TABLE
+const ROLE_TABLE_ROW_HEADER = C.ATK_ROLE_TABLE_ROW_HEADER
+const TEXT_BOUNDARY_WORD_START = C.ATK_TEXT_BOUNDARY_WORD_START
+const ROLE_DIRECTORY_PANE = C.ATK_ROLE_DIRECTORY_PANE
+const ROLE_SPLIT_PANE = C.ATK_ROLE_SPLIT_PANE
+const ROLE_LABEL = C.ATK_ROLE_LABEL
+const ROLE_NOTIFICATION = C.ATK_ROLE_NOTIFICATION
+const TEXT_ATTR_LANGUAGE = C.ATK_TEXT_ATTR_LANGUAGE
+const ROLE_ROOT_PANE = C.ATK_ROLE_ROOT_PANE
 const TEXT_CLIP_MIN = C.ATK_TEXT_CLIP_MIN
-const TEXT_CLIP_MAX = C.ATK_TEXT_CLIP_MAX
-const TEXT_CLIP_BOTH = C.ATK_TEXT_CLIP_BOTH
+const ROLE_DRAWING_AREA = C.ATK_ROLE_DRAWING_AREA
+const STATE_STALE = C.ATK_STATE_STALE
+const ROLE_ICON = C.ATK_ROLE_ICON
+const TEXT_ATTR_FAMILY_NAME = C.ATK_TEXT_ATTR_FAMILY_NAME
+const ROLE_TEAR_OFF_MENU_ITEM = C.ATK_ROLE_TEAR_OFF_MENU_ITEM
+const ROLE_WINDOW = C.ATK_ROLE_WINDOW
+const STATE_ANIMATED = C.ATK_STATE_ANIMATED
+const TEXT_ATTR_INVALID = C.ATK_TEXT_ATTR_INVALID
+const TEXT_ATTR_FG_COLOR = C.ATK_TEXT_ATTR_FG_COLOR
+const ROLE_VIEWPORT = C.ATK_ROLE_VIEWPORT
+const TEXT_BOUNDARY_WORD_END = C.ATK_TEXT_BOUNDARY_WORD_END
+const TEXT_BOUNDARY_CHAR = C.ATK_TEXT_BOUNDARY_CHAR
+const ROLE_CHECK_BOX = C.ATK_ROLE_CHECK_BOX
+const TEXT_ATTR_INVISIBLE = C.ATK_TEXT_ATTR_INVISIBLE
+const ROLE_POPUP_MENU = C.ATK_ROLE_POPUP_MENU
+const ROLE_ANIMATION = C.ATK_ROLE_ANIMATION
+const ROLE_IMAGE = C.ATK_ROLE_IMAGE
+const RELATION_DESCRIPTION_FOR = C.ATK_RELATION_DESCRIPTION_FOR
+const ROLE_STATUSBAR = C.ATK_ROLE_STATUSBAR
+const TEXT_BOUNDARY_SENTENCE_END = C.ATK_TEXT_BOUNDARY_SENTENCE_END
+const TEXT_ATTR_SIZE = C.ATK_TEXT_ATTR_SIZE
+const STATE_PRESSED = C.ATK_STATE_PRESSED

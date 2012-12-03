@@ -9,11 +9,11 @@ package gtk
 // #include <glib-unix.h>
 // #include <glib-object.h>
 /*
-gchar * _g_binding_get_source_property(GBinding * _self_) {
-	return (gchar *)g_binding_get_source_property(_self_);
+gpointer _g_boxed_copy(GType boxed_type, gpointer src_boxed) {
+	return (gpointer)g_boxed_copy(boxed_type, (gconstpointer)(src_boxed));
 }
-gchar * _g_binding_get_target_property(GBinding * _self_) {
-	return (gchar *)g_binding_get_target_property(_self_);
+GType _g_boxed_type_register_static(gchar * name, GBoxedCopyFunc boxed_copy, GBoxedFreeFunc boxed_free) {
+	return (GType)g_boxed_type_register_static((const gchar *)(name), boxed_copy, boxed_free);
 }
 void _g_cclosure_marshal_BOOLEAN__BOXED_BOXED(GClosure * closure, GValue * return_value, guint n_param_values, GValue * param_values, gpointer invocation_hint, gpointer marshal_data) {
 	(void)g_cclosure_marshal_BOOLEAN__BOXED_BOXED(closure, return_value, n_param_values, (const GValue *)(param_values), invocation_hint, marshal_data);
@@ -83,222 +83,6 @@ void _g_cclosure_marshal_VOID__VOID(GClosure * closure, GValue * return_value, g
 }
 void _g_cclosure_marshal_generic(GClosure * closure, GValue * return_gvalue, guint n_param_values, GValue * param_values, gpointer invocation_hint, gpointer marshal_data) {
 	(void)g_cclosure_marshal_generic(closure, return_gvalue, n_param_values, (const GValue *)(param_values), invocation_hint, marshal_data);
-}
-GParamSpec * _g_object_interface_find_property(gpointer g_iface, gchar * property_name) {
-	return (GParamSpec *)g_object_interface_find_property(g_iface, (const gchar *)(property_name));
-}
-void * _g_object_interface_list_properties(gpointer g_iface, guint * n_properties_p) {
-	return (void *)g_object_interface_list_properties(g_iface, n_properties_p);
-}
-GBinding * _g_object_bind_property(GObject * _self_, gchar * source_property, gpointer target, gchar * target_property, GBindingFlags flags) {
-	return (GBinding *)g_object_bind_property((gpointer)(_self_), (const gchar *)(source_property), target, (const gchar *)(target_property), flags);
-}
-GBinding * _g_object_bind_property_full(GObject * _self_, gchar * source_property, gpointer target, gchar * target_property, GBindingFlags flags, GBindingTransformFunc transform_to, GBindingTransformFunc transform_from, gpointer user_data, GDestroyNotify notify) {
-	return (GBinding *)g_object_bind_property_full((gpointer)(_self_), (const gchar *)(source_property), target, (const gchar *)(target_property), flags, transform_to, transform_from, user_data, notify);
-}
-GBinding * _g_object_bind_property_with_closures(GObject * _self_, gchar * source_property, gpointer target, gchar * target_property, GBindingFlags flags, GClosure * transform_to, GClosure * transform_from) {
-	return (GBinding *)g_object_bind_property_with_closures((gpointer)(_self_), (const gchar *)(source_property), target, (const gchar *)(target_property), flags, transform_to, transform_from);
-}
-gpointer _g_object_dup_data(GObject * _self_, gchar * key, GDuplicateFunc dup_func, gpointer user_data) {
-	return (gpointer)g_object_dup_data(_self_, (const gchar *)(key), dup_func, user_data);
-}
-gpointer _g_object_get_data(GObject * _self_, gchar * key) {
-	return (gpointer)g_object_get_data(_self_, (const gchar *)(key));
-}
-void _g_object_get_property(GObject * _self_, gchar * property_name, GValue * value) {
-	(void)g_object_get_property(_self_, (const gchar *)(property_name), value);
-}
-gboolean _g_object_is_floating(GObject * _self_) {
-	return (gboolean)g_object_is_floating((gpointer)(_self_));
-}
-void _g_object_notify(GObject * _self_, gchar * property_name) {
-	(void)g_object_notify(_self_, (const gchar *)(property_name));
-}
-gpointer _g_object_ref(GObject * _self_) {
-	return (gpointer)g_object_ref((gpointer)(_self_));
-}
-gpointer _g_object_ref_sink(GObject * _self_) {
-	return (gpointer)g_object_ref_sink((gpointer)(_self_));
-}
-gboolean _g_object_replace_data(GObject * _self_, gchar * key, gpointer oldval, gpointer newval, GDestroyNotify destroy, GDestroyNotify * old_destroy) {
-	return (gboolean)g_object_replace_data(_self_, (const gchar *)(key), oldval, newval, destroy, old_destroy);
-}
-void _g_object_set_data(GObject * _self_, gchar * key, gpointer data) {
-	(void)g_object_set_data(_self_, (const gchar *)(key), data);
-}
-void _g_object_set_data_full(GObject * _self_, gchar * key, gpointer data, GDestroyNotify destroy) {
-	(void)g_object_set_data_full(_self_, (const gchar *)(key), data, destroy);
-}
-void _g_object_set_property(GObject * _self_, gchar * property_name, GValue * value) {
-	(void)g_object_set_property(_self_, (const gchar *)(property_name), (const GValue *)(value));
-}
-gpointer _g_object_steal_data(GObject * _self_, gchar * key) {
-	return (gpointer)g_object_steal_data(_self_, (const gchar *)(key));
-}
-void _g_object_unref(GObject * _self_) {
-	(void)g_object_unref((gpointer)(_self_));
-}
-GParamSpec * _g_object_class_find_property(GObjectClass * _self_, gchar * property_name) {
-	return (GParamSpec *)g_object_class_find_property(_self_, (const gchar *)(property_name));
-}
-void * _g_object_class_list_properties(GObjectClass * _self_, guint * n_properties) {
-	return (void *)g_object_class_list_properties(_self_, n_properties);
-}
-void _g_object_class_override_property(GObjectClass * _self_, guint property_id, gchar * name) {
-	(void)g_object_class_override_property(_self_, property_id, (const gchar *)(name));
-}
-gpointer _g_param_spec_internal(GType param_type, gchar * name, gchar * nick, gchar * blurb, GParamFlags flags) {
-	return (gpointer)g_param_spec_internal(param_type, (const gchar *)(name), (const gchar *)(nick), (const gchar *)(blurb), flags);
-}
-gchar * _g_param_spec_get_blurb(GParamSpec * _self_) {
-	return (gchar *)g_param_spec_get_blurb(_self_);
-}
-gchar * _g_param_spec_get_name(GParamSpec * _self_) {
-	return (gchar *)g_param_spec_get_name(_self_);
-}
-gchar * _g_param_spec_get_nick(GParamSpec * _self_) {
-	return (gchar *)g_param_spec_get_nick(_self_);
-}
-void * _g_param_spec_pool_list(GParamSpecPool * _self_, GType owner_type, guint * n_pspecs_p) {
-	return (void *)g_param_spec_pool_list(_self_, owner_type, n_pspecs_p);
-}
-GParamSpec * _g_param_spec_pool_lookup(GParamSpecPool * _self_, gchar * param_name, GType owner_type, gboolean walk_ancestors) {
-	return (GParamSpec *)g_param_spec_pool_lookup(_self_, (const gchar *)(param_name), owner_type, walk_ancestors);
-}
-gpointer _g_type_class_peek_parent(GTypeClass * _self_) {
-	return (gpointer)g_type_class_peek_parent((gpointer)(_self_));
-}
-void _g_type_class_unref(GTypeClass * _self_) {
-	(void)g_type_class_unref((gpointer)(_self_));
-}
-void _g_type_class_unref_uncached(GTypeClass * _self_) {
-	(void)g_type_class_unref_uncached((gpointer)(_self_));
-}
-gpointer _g_type_interface_peek_parent(GTypeInterface * _self_) {
-	return (gpointer)g_type_interface_peek_parent((gpointer)(_self_));
-}
-void _g_type_module_add_interface(GTypeModule * _self_, GType instance_type, GType interface_type, GInterfaceInfo * interface_info) {
-	(void)g_type_module_add_interface(_self_, instance_type, interface_type, (const GInterfaceInfo *)(interface_info));
-}
-GType _g_type_module_register_enum(GTypeModule * _self_, gchar * name, GEnumValue * const_static_values) {
-	return (GType)g_type_module_register_enum(_self_, (const gchar *)(name), (const GEnumValue *)(const_static_values));
-}
-GType _g_type_module_register_flags(GTypeModule * _self_, gchar * name, GFlagsValue * const_static_values) {
-	return (GType)g_type_module_register_flags(_self_, (const gchar *)(name), (const GFlagsValue *)(const_static_values));
-}
-GType _g_type_module_register_type(GTypeModule * _self_, GType parent_type, gchar * type_name, GTypeInfo * type_info, GTypeFlags flags) {
-	return (GType)g_type_module_register_type(_self_, parent_type, (const gchar *)(type_name), (const GTypeInfo *)(type_info), flags);
-}
-void _g_type_module_set_name(GTypeModule * _self_, gchar * name) {
-	(void)g_type_module_set_name(_self_, (const gchar *)(name));
-}
-void _g_value_copy(GValue * _self_, GValue * dest_value) {
-	(void)g_value_copy((const GValue *)(_self_), dest_value);
-}
-gpointer _g_value_dup_boxed(GValue * _self_) {
-	return (gpointer)g_value_dup_boxed((const GValue *)(_self_));
-}
-gpointer _g_value_dup_object(GValue * _self_) {
-	return (gpointer)g_value_dup_object((const GValue *)(_self_));
-}
-GParamSpec * _g_value_dup_param(GValue * _self_) {
-	return (GParamSpec *)g_value_dup_param((const GValue *)(_self_));
-}
-gchar * _g_value_dup_string(GValue * _self_) {
-	return (gchar *)g_value_dup_string((const GValue *)(_self_));
-}
-GVariant * _g_value_dup_variant(GValue * _self_) {
-	return (GVariant *)g_value_dup_variant((const GValue *)(_self_));
-}
-gboolean _g_value_fits_pointer(GValue * _self_) {
-	return (gboolean)g_value_fits_pointer((const GValue *)(_self_));
-}
-gboolean _g_value_get_boolean(GValue * _self_) {
-	return (gboolean)g_value_get_boolean((const GValue *)(_self_));
-}
-gpointer _g_value_get_boxed(GValue * _self_) {
-	return (gpointer)g_value_get_boxed((const GValue *)(_self_));
-}
-gdouble _g_value_get_double(GValue * _self_) {
-	return (gdouble)g_value_get_double((const GValue *)(_self_));
-}
-gint _g_value_get_enum(GValue * _self_) {
-	return (gint)g_value_get_enum((const GValue *)(_self_));
-}
-guint _g_value_get_flags(GValue * _self_) {
-	return (guint)g_value_get_flags((const GValue *)(_self_));
-}
-gfloat _g_value_get_float(GValue * _self_) {
-	return (gfloat)g_value_get_float((const GValue *)(_self_));
-}
-GType _g_value_get_gtype(GValue * _self_) {
-	return (GType)g_value_get_gtype((const GValue *)(_self_));
-}
-gint _g_value_get_int(GValue * _self_) {
-	return (gint)g_value_get_int((const GValue *)(_self_));
-}
-gint64 _g_value_get_int64(GValue * _self_) {
-	return (gint64)g_value_get_int64((const GValue *)(_self_));
-}
-glong _g_value_get_long(GValue * _self_) {
-	return (glong)g_value_get_long((const GValue *)(_self_));
-}
-gpointer _g_value_get_object(GValue * _self_) {
-	return (gpointer)g_value_get_object((const GValue *)(_self_));
-}
-GParamSpec * _g_value_get_param(GValue * _self_) {
-	return (GParamSpec *)g_value_get_param((const GValue *)(_self_));
-}
-gpointer _g_value_get_pointer(GValue * _self_) {
-	return (gpointer)g_value_get_pointer((const GValue *)(_self_));
-}
-gint8 _g_value_get_schar(GValue * _self_) {
-	return (gint8)g_value_get_schar((const GValue *)(_self_));
-}
-gchar * _g_value_get_string(GValue * _self_) {
-	return (gchar *)g_value_get_string((const GValue *)(_self_));
-}
-guchar _g_value_get_uchar(GValue * _self_) {
-	return (guchar)g_value_get_uchar((const GValue *)(_self_));
-}
-guint _g_value_get_uint(GValue * _self_) {
-	return (guint)g_value_get_uint((const GValue *)(_self_));
-}
-guint64 _g_value_get_uint64(GValue * _self_) {
-	return (guint64)g_value_get_uint64((const GValue *)(_self_));
-}
-gulong _g_value_get_ulong(GValue * _self_) {
-	return (gulong)g_value_get_ulong((const GValue *)(_self_));
-}
-GVariant * _g_value_get_variant(GValue * _self_) {
-	return (GVariant *)g_value_get_variant((const GValue *)(_self_));
-}
-gpointer _g_value_peek_pointer(GValue * _self_) {
-	return (gpointer)g_value_peek_pointer((const GValue *)(_self_));
-}
-void _g_value_set_boxed(GValue * _self_, gpointer v_boxed) {
-	(void)g_value_set_boxed(_self_, (gconstpointer)(v_boxed));
-}
-void _g_value_set_static_boxed(GValue * _self_, gpointer v_boxed) {
-	(void)g_value_set_static_boxed(_self_, (gconstpointer)(v_boxed));
-}
-void _g_value_set_static_string(GValue * _self_, gchar * v_string) {
-	(void)g_value_set_static_string(_self_, (const gchar *)(v_string));
-}
-void _g_value_set_string(GValue * _self_, gchar * v_string) {
-	(void)g_value_set_string(_self_, (const gchar *)(v_string));
-}
-void _g_value_take_boxed(GValue * _self_, gpointer v_boxed) {
-	(void)g_value_take_boxed(_self_, (gconstpointer)(v_boxed));
-}
-gboolean _g_value_transform(GValue * _self_, GValue * dest_value) {
-	return (gboolean)g_value_transform((const GValue *)(_self_), dest_value);
-}
-gpointer _g_boxed_copy(GType boxed_type, gpointer src_boxed) {
-	return (gpointer)g_boxed_copy(boxed_type, (gconstpointer)(src_boxed));
-}
-GType _g_boxed_type_register_static(gchar * name, GBoxedCopyFunc boxed_copy, GBoxedFreeFunc boxed_free) {
-	return (GType)g_boxed_type_register_static((const gchar *)(name), boxed_copy, boxed_free);
 }
 void _g_enum_complete_type_info(GType g_enum_type, GTypeInfo * info, GEnumValue * const_values) {
 	(void)g_enum_complete_type_info(g_enum_type, info, (const GEnumValue *)(const_values));
@@ -464,6 +248,222 @@ GType _g_type_register_static(GType parent_type, gchar * type_name, GTypeInfo * 
 }
 GType _g_type_register_static_simple(GType parent_type, gchar * type_name, guint class_size, GClassInitFunc class_init, guint instance_size, GInstanceInitFunc instance_init, GTypeFlags flags) {
 	return (GType)g_type_register_static_simple(parent_type, (const gchar *)(type_name), class_size, class_init, instance_size, instance_init, flags);
+}
+gchar * _g_binding_get_source_property(GBinding * _self_) {
+	return (gchar *)g_binding_get_source_property(_self_);
+}
+gchar * _g_binding_get_target_property(GBinding * _self_) {
+	return (gchar *)g_binding_get_target_property(_self_);
+}
+GParamSpec * _g_object_interface_find_property(gpointer g_iface, gchar * property_name) {
+	return (GParamSpec *)g_object_interface_find_property(g_iface, (const gchar *)(property_name));
+}
+void * _g_object_interface_list_properties(gpointer g_iface, guint * n_properties_p) {
+	return (void *)g_object_interface_list_properties(g_iface, n_properties_p);
+}
+GBinding * _g_object_bind_property(GObject * _self_, gchar * source_property, gpointer target, gchar * target_property, GBindingFlags flags) {
+	return (GBinding *)g_object_bind_property((gpointer)(_self_), (const gchar *)(source_property), target, (const gchar *)(target_property), flags);
+}
+GBinding * _g_object_bind_property_full(GObject * _self_, gchar * source_property, gpointer target, gchar * target_property, GBindingFlags flags, GBindingTransformFunc transform_to, GBindingTransformFunc transform_from, gpointer user_data, GDestroyNotify notify) {
+	return (GBinding *)g_object_bind_property_full((gpointer)(_self_), (const gchar *)(source_property), target, (const gchar *)(target_property), flags, transform_to, transform_from, user_data, notify);
+}
+GBinding * _g_object_bind_property_with_closures(GObject * _self_, gchar * source_property, gpointer target, gchar * target_property, GBindingFlags flags, GClosure * transform_to, GClosure * transform_from) {
+	return (GBinding *)g_object_bind_property_with_closures((gpointer)(_self_), (const gchar *)(source_property), target, (const gchar *)(target_property), flags, transform_to, transform_from);
+}
+gpointer _g_object_dup_data(GObject * _self_, gchar * key, GDuplicateFunc dup_func, gpointer user_data) {
+	return (gpointer)g_object_dup_data(_self_, (const gchar *)(key), dup_func, user_data);
+}
+gpointer _g_object_get_data(GObject * _self_, gchar * key) {
+	return (gpointer)g_object_get_data(_self_, (const gchar *)(key));
+}
+void _g_object_get_property(GObject * _self_, gchar * property_name, GValue * value) {
+	(void)g_object_get_property(_self_, (const gchar *)(property_name), value);
+}
+gboolean _g_object_is_floating(GObject * _self_) {
+	return (gboolean)g_object_is_floating((gpointer)(_self_));
+}
+void _g_object_notify(GObject * _self_, gchar * property_name) {
+	(void)g_object_notify(_self_, (const gchar *)(property_name));
+}
+gpointer _g_object_ref(GObject * _self_) {
+	return (gpointer)g_object_ref((gpointer)(_self_));
+}
+gpointer _g_object_ref_sink(GObject * _self_) {
+	return (gpointer)g_object_ref_sink((gpointer)(_self_));
+}
+gboolean _g_object_replace_data(GObject * _self_, gchar * key, gpointer oldval, gpointer newval, GDestroyNotify destroy, GDestroyNotify * old_destroy) {
+	return (gboolean)g_object_replace_data(_self_, (const gchar *)(key), oldval, newval, destroy, old_destroy);
+}
+void _g_object_set_data(GObject * _self_, gchar * key, gpointer data) {
+	(void)g_object_set_data(_self_, (const gchar *)(key), data);
+}
+void _g_object_set_data_full(GObject * _self_, gchar * key, gpointer data, GDestroyNotify destroy) {
+	(void)g_object_set_data_full(_self_, (const gchar *)(key), data, destroy);
+}
+void _g_object_set_property(GObject * _self_, gchar * property_name, GValue * value) {
+	(void)g_object_set_property(_self_, (const gchar *)(property_name), (const GValue *)(value));
+}
+gpointer _g_object_steal_data(GObject * _self_, gchar * key) {
+	return (gpointer)g_object_steal_data(_self_, (const gchar *)(key));
+}
+void _g_object_unref(GObject * _self_) {
+	(void)g_object_unref((gpointer)(_self_));
+}
+gpointer _g_param_spec_internal(GType param_type, gchar * name, gchar * nick, gchar * blurb, GParamFlags flags) {
+	return (gpointer)g_param_spec_internal(param_type, (const gchar *)(name), (const gchar *)(nick), (const gchar *)(blurb), flags);
+}
+gchar * _g_param_spec_get_blurb(GParamSpec * _self_) {
+	return (gchar *)g_param_spec_get_blurb(_self_);
+}
+gchar * _g_param_spec_get_name(GParamSpec * _self_) {
+	return (gchar *)g_param_spec_get_name(_self_);
+}
+gchar * _g_param_spec_get_nick(GParamSpec * _self_) {
+	return (gchar *)g_param_spec_get_nick(_self_);
+}
+void _g_type_module_add_interface(GTypeModule * _self_, GType instance_type, GType interface_type, GInterfaceInfo * interface_info) {
+	(void)g_type_module_add_interface(_self_, instance_type, interface_type, (const GInterfaceInfo *)(interface_info));
+}
+GType _g_type_module_register_enum(GTypeModule * _self_, gchar * name, GEnumValue * const_static_values) {
+	return (GType)g_type_module_register_enum(_self_, (const gchar *)(name), (const GEnumValue *)(const_static_values));
+}
+GType _g_type_module_register_flags(GTypeModule * _self_, gchar * name, GFlagsValue * const_static_values) {
+	return (GType)g_type_module_register_flags(_self_, (const gchar *)(name), (const GFlagsValue *)(const_static_values));
+}
+GType _g_type_module_register_type(GTypeModule * _self_, GType parent_type, gchar * type_name, GTypeInfo * type_info, GTypeFlags flags) {
+	return (GType)g_type_module_register_type(_self_, parent_type, (const gchar *)(type_name), (const GTypeInfo *)(type_info), flags);
+}
+void _g_type_module_set_name(GTypeModule * _self_, gchar * name) {
+	(void)g_type_module_set_name(_self_, (const gchar *)(name));
+}
+GParamSpec * _g_object_class_find_property(GObjectClass * _self_, gchar * property_name) {
+	return (GParamSpec *)g_object_class_find_property(_self_, (const gchar *)(property_name));
+}
+void * _g_object_class_list_properties(GObjectClass * _self_, guint * n_properties) {
+	return (void *)g_object_class_list_properties(_self_, n_properties);
+}
+void _g_object_class_override_property(GObjectClass * _self_, guint property_id, gchar * name) {
+	(void)g_object_class_override_property(_self_, property_id, (const gchar *)(name));
+}
+void * _g_param_spec_pool_list(GParamSpecPool * _self_, GType owner_type, guint * n_pspecs_p) {
+	return (void *)g_param_spec_pool_list(_self_, owner_type, n_pspecs_p);
+}
+GParamSpec * _g_param_spec_pool_lookup(GParamSpecPool * _self_, gchar * param_name, GType owner_type, gboolean walk_ancestors) {
+	return (GParamSpec *)g_param_spec_pool_lookup(_self_, (const gchar *)(param_name), owner_type, walk_ancestors);
+}
+gpointer _g_type_class_peek_parent(GTypeClass * _self_) {
+	return (gpointer)g_type_class_peek_parent((gpointer)(_self_));
+}
+void _g_type_class_unref(GTypeClass * _self_) {
+	(void)g_type_class_unref((gpointer)(_self_));
+}
+void _g_type_class_unref_uncached(GTypeClass * _self_) {
+	(void)g_type_class_unref_uncached((gpointer)(_self_));
+}
+gpointer _g_type_interface_peek_parent(GTypeInterface * _self_) {
+	return (gpointer)g_type_interface_peek_parent((gpointer)(_self_));
+}
+void _g_value_copy(GValue * _self_, GValue * dest_value) {
+	(void)g_value_copy((const GValue *)(_self_), dest_value);
+}
+gpointer _g_value_dup_boxed(GValue * _self_) {
+	return (gpointer)g_value_dup_boxed((const GValue *)(_self_));
+}
+gpointer _g_value_dup_object(GValue * _self_) {
+	return (gpointer)g_value_dup_object((const GValue *)(_self_));
+}
+GParamSpec * _g_value_dup_param(GValue * _self_) {
+	return (GParamSpec *)g_value_dup_param((const GValue *)(_self_));
+}
+gchar * _g_value_dup_string(GValue * _self_) {
+	return (gchar *)g_value_dup_string((const GValue *)(_self_));
+}
+GVariant * _g_value_dup_variant(GValue * _self_) {
+	return (GVariant *)g_value_dup_variant((const GValue *)(_self_));
+}
+gboolean _g_value_fits_pointer(GValue * _self_) {
+	return (gboolean)g_value_fits_pointer((const GValue *)(_self_));
+}
+gboolean _g_value_get_boolean(GValue * _self_) {
+	return (gboolean)g_value_get_boolean((const GValue *)(_self_));
+}
+gpointer _g_value_get_boxed(GValue * _self_) {
+	return (gpointer)g_value_get_boxed((const GValue *)(_self_));
+}
+gdouble _g_value_get_double(GValue * _self_) {
+	return (gdouble)g_value_get_double((const GValue *)(_self_));
+}
+gint _g_value_get_enum(GValue * _self_) {
+	return (gint)g_value_get_enum((const GValue *)(_self_));
+}
+guint _g_value_get_flags(GValue * _self_) {
+	return (guint)g_value_get_flags((const GValue *)(_self_));
+}
+gfloat _g_value_get_float(GValue * _self_) {
+	return (gfloat)g_value_get_float((const GValue *)(_self_));
+}
+GType _g_value_get_gtype(GValue * _self_) {
+	return (GType)g_value_get_gtype((const GValue *)(_self_));
+}
+gint _g_value_get_int(GValue * _self_) {
+	return (gint)g_value_get_int((const GValue *)(_self_));
+}
+gint64 _g_value_get_int64(GValue * _self_) {
+	return (gint64)g_value_get_int64((const GValue *)(_self_));
+}
+glong _g_value_get_long(GValue * _self_) {
+	return (glong)g_value_get_long((const GValue *)(_self_));
+}
+gpointer _g_value_get_object(GValue * _self_) {
+	return (gpointer)g_value_get_object((const GValue *)(_self_));
+}
+GParamSpec * _g_value_get_param(GValue * _self_) {
+	return (GParamSpec *)g_value_get_param((const GValue *)(_self_));
+}
+gpointer _g_value_get_pointer(GValue * _self_) {
+	return (gpointer)g_value_get_pointer((const GValue *)(_self_));
+}
+gint8 _g_value_get_schar(GValue * _self_) {
+	return (gint8)g_value_get_schar((const GValue *)(_self_));
+}
+gchar * _g_value_get_string(GValue * _self_) {
+	return (gchar *)g_value_get_string((const GValue *)(_self_));
+}
+guchar _g_value_get_uchar(GValue * _self_) {
+	return (guchar)g_value_get_uchar((const GValue *)(_self_));
+}
+guint _g_value_get_uint(GValue * _self_) {
+	return (guint)g_value_get_uint((const GValue *)(_self_));
+}
+guint64 _g_value_get_uint64(GValue * _self_) {
+	return (guint64)g_value_get_uint64((const GValue *)(_self_));
+}
+gulong _g_value_get_ulong(GValue * _self_) {
+	return (gulong)g_value_get_ulong((const GValue *)(_self_));
+}
+GVariant * _g_value_get_variant(GValue * _self_) {
+	return (GVariant *)g_value_get_variant((const GValue *)(_self_));
+}
+gpointer _g_value_peek_pointer(GValue * _self_) {
+	return (gpointer)g_value_peek_pointer((const GValue *)(_self_));
+}
+void _g_value_set_boxed(GValue * _self_, gpointer v_boxed) {
+	(void)g_value_set_boxed(_self_, (gconstpointer)(v_boxed));
+}
+void _g_value_set_static_boxed(GValue * _self_, gpointer v_boxed) {
+	(void)g_value_set_static_boxed(_self_, (gconstpointer)(v_boxed));
+}
+void _g_value_set_static_string(GValue * _self_, gchar * v_string) {
+	(void)g_value_set_static_string(_self_, (const gchar *)(v_string));
+}
+void _g_value_set_string(GValue * _self_, gchar * v_string) {
+	(void)g_value_set_string(_self_, (const gchar *)(v_string));
+}
+void _g_value_take_boxed(GValue * _self_, gpointer v_boxed) {
+	(void)g_value_take_boxed(_self_, (gconstpointer)(v_boxed));
+}
+gboolean _g_value_transform(GValue * _self_, GValue * dest_value) {
+	return (gboolean)g_value_transform((const GValue *)(_self_), dest_value);
 }
 */
 import "C"
@@ -724,1328 +724,6 @@ type GObjectParamSpecVariantKind interface {
 func (self GObjectParamSpecVariant) _IsGObjectParamSpecVariant () {}
 func (self GObjectParamSpecVariant) _getValue() unsafe.Pointer { return self._value_ }
 func ToGObjectParamSpecVariant(value unsafe.Pointer) GObjectParamSpecVariant { return GObjectParamSpecVariant{GObjectParamSpec{value}} }
-func (_self_ *GObjectBinding) GetFlags() (_return_ C.GBindingFlags) {
-	_return_ = C.g_binding_get_flags((*C.GBinding)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectBinding) GetSource() (_go__return__ GObjectObject) {
-	var _return_ *C.GObject
-	_return_ = C.g_binding_get_source((*C.GBinding)(_self_._value_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectBinding) GetSourceProperty() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_binding_get_source_property((*C.GBinding)(_self_._value_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GObjectBinding) GetTarget() (_go__return__ GObjectObject) {
-	var _return_ *C.GObject
-	_return_ = C.g_binding_get_target((*C.GBinding)(_self_._value_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectBinding) GetTargetProperty() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_binding_get_target_property((*C.GBinding)(_self_._value_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func CClosureMarshalBooleanBoxedBoxed(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_BOOLEAN__BOXED_BOXED(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalBooleanFlags(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_BOOLEAN__FLAGS(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalStringObjectPointer(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_STRING__OBJECT_POINTER(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidBoolean(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__BOOLEAN(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidBoxed(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__BOXED(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidChar(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__CHAR(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidDouble(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__DOUBLE(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidEnum(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__ENUM(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidFlags(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__FLAGS(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidFloat(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__FLOAT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidInt(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__INT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidLong(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__LONG(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidObject(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__OBJECT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidParam(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__PARAM(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidPointer(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__POINTER(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidString(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__STRING(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidUchar(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__UCHAR(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidUint(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__UINT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidUintPointer(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__UINT_POINTER(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidUlong(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__ULONG(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidVariant(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__VARIANT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalVoidVoid(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_VOID__VOID(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureMarshalGeneric(closure *GObjectClosure, return_gvalue *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	_cgo_return_gvalue_ := (*C.GValue)(unsafe.Pointer(return_gvalue))
-	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
-	_cgo_n_param_values_ := (C.guint)(n_param_values)
-	C._g_cclosure_marshal_generic(_cgo_closure_, _cgo_return_gvalue_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
-	return
-}
-
-func CClosureNew(callback_func C.GCallback, user_data C.gpointer, destroy_data C.GClosureNotify) (_go__return__ *GObjectClosure) {
-	var _return_ *C.GClosure
-	_return_ = C.g_cclosure_new(callback_func, user_data, destroy_data)
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func CClosureNewObject(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *GObjectClosure) {
-	_cgo_object_ := (*C.GObject)(object._getValue())
-	var _return_ *C.GClosure
-	_return_ = C.g_cclosure_new_object(callback_func, _cgo_object_)
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func CClosureNewObjectSwap(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *GObjectClosure) {
-	_cgo_object_ := (*C.GObject)(object._getValue())
-	var _return_ *C.GClosure
-	_return_ = C.g_cclosure_new_object_swap(callback_func, _cgo_object_)
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func CClosureNewSwap(callback_func C.GCallback, user_data C.gpointer, destroy_data C.GClosureNotify) (_go__return__ *GObjectClosure) {
-	var _return_ *C.GClosure
-	_return_ = C.g_cclosure_new_swap(callback_func, user_data, destroy_data)
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func ClosureNewObject(sizeof_closure uint, object GObjectObjectKind) (_go__return__ *GObjectClosure) {
-	_cgo_object_ := (*C.GObject)(object._getValue())
-	var _return_ *C.GClosure
-	_cgo_sizeof_closure_ := (C.guint)(sizeof_closure)
-	_return_ = C.g_closure_new_object(_cgo_sizeof_closure_, _cgo_object_)
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func ClosureNewSimple(sizeof_closure uint, data C.gpointer) (_go__return__ *GObjectClosure) {
-	var _return_ *C.GClosure
-	_cgo_sizeof_closure_ := (C.guint)(sizeof_closure)
-	_return_ = C.g_closure_new_simple(_cgo_sizeof_closure_, data)
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectClosure) AddFinalizeNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
-	C.g_closure_add_finalize_notifier((*C.GClosure)(_self_), notify_data, notify_func)
-	return
-}
-
-func (_self_ *GObjectClosure) AddInvalidateNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
-	C.g_closure_add_invalidate_notifier((*C.GClosure)(_self_), notify_data, notify_func)
-	return
-}
-
-func (_self_ *GObjectClosure) AddMarshalGuards(pre_marshal_data C.gpointer, pre_marshal_notify C.GClosureNotify, post_marshal_data C.gpointer, post_marshal_notify C.GClosureNotify) () {
-	C.g_closure_add_marshal_guards((*C.GClosure)(_self_), pre_marshal_data, pre_marshal_notify, post_marshal_data, post_marshal_notify)
-	return
-}
-
-func (_self_ *GObjectClosure) Invalidate() () {
-	C.g_closure_invalidate((*C.GClosure)(_self_))
-	return
-}
-
-func (_self_ *GObjectClosure) Ref() (_go__return__ *GObjectClosure) {
-	var _return_ *C.GClosure
-	_return_ = C.g_closure_ref((*C.GClosure)(_self_))
-	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectClosure) RemoveFinalizeNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
-	C.g_closure_remove_finalize_notifier((*C.GClosure)(_self_), notify_data, notify_func)
-	return
-}
-
-func (_self_ *GObjectClosure) RemoveInvalidateNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
-	C.g_closure_remove_invalidate_notifier((*C.GClosure)(_self_), notify_data, notify_func)
-	return
-}
-
-func (_self_ *GObjectClosure) SetMarshal(marshal C.GClosureMarshal) () {
-	C.g_closure_set_marshal((*C.GClosure)(_self_), marshal)
-	return
-}
-
-func (_self_ *GObjectClosure) SetMetaMarshal(marshal_data C.gpointer, meta_marshal C.GClosureMarshal) () {
-	C.g_closure_set_meta_marshal((*C.GClosure)(_self_), marshal_data, meta_marshal)
-	return
-}
-
-func (_self_ *GObjectClosure) Sink() () {
-	C.g_closure_sink((*C.GClosure)(_self_))
-	return
-}
-
-func (_self_ *GObjectClosure) Unref() () {
-	C.g_closure_unref((*C.GClosure)(_self_))
-	return
-}
-
-func ObjectInterfaceFindProperty(g_iface C.gpointer, property_name string) (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	_return_ = C._g_object_interface_find_property(g_iface, _cgo_property_name_)
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func ObjectInterfaceInstallProperty(g_iface C.gpointer, pspec GObjectParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
-	C.g_object_interface_install_property(g_iface, _cgo_pspec_)
-	return
-}
-
-func ObjectInterfaceListProperties(g_iface C.gpointer) (_return_ unsafe.Pointer, _go_n_properties_p_ uint) {
-	var n_properties_p C.guint
-	_return_ = C._g_object_interface_list_properties(g_iface, &n_properties_p)
-	_go_n_properties_p_ = (uint)(n_properties_p)
-	return
-}
-
-func (_self_ *GObjectObject) AddToggleRef(notify C.GToggleNotify, data C.gpointer) () {
-	C.g_object_add_toggle_ref((*C.GObject)(_self_._value_), notify, data)
-	return
-}
-
-func (_self_ *GObjectObject) BindProperty(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags) (_go__return__ GObjectBinding) {
-	_cgo_target_ := (C.gpointer)(target._getValue())
-	var _return_ *C.GBinding
-	_cstring_source_property_ := C.CString(source_property)
-	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
-	defer C.free(unsafe.Pointer(_cstring_source_property_))
-	_cstring_target_property_ := C.CString(target_property)
-	_cgo_target_property_ := (*C.gchar)(unsafe.Pointer(_cstring_target_property_))
-	defer C.free(unsafe.Pointer(_cstring_target_property_))
-	_return_ = C._g_object_bind_property((*C.GObject)(_self_._value_), _cgo_source_property_, _cgo_target_, _cgo_target_property_, flags)
-	_go__return__ = ToGObjectBinding(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectObject) BindPropertyFull(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to C.GBindingTransformFunc, transform_from C.GBindingTransformFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ GObjectBinding) {
-	_cgo_target_ := (C.gpointer)(target._getValue())
-	var _return_ *C.GBinding
-	_cstring_source_property_ := C.CString(source_property)
-	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
-	defer C.free(unsafe.Pointer(_cstring_source_property_))
-	_cstring_target_property_ := C.CString(target_property)
-	_cgo_target_property_ := (*C.gchar)(unsafe.Pointer(_cstring_target_property_))
-	defer C.free(unsafe.Pointer(_cstring_target_property_))
-	_return_ = C._g_object_bind_property_full((*C.GObject)(_self_._value_), _cgo_source_property_, _cgo_target_, _cgo_target_property_, flags, transform_to, transform_from, user_data, notify)
-	_go__return__ = ToGObjectBinding(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectObject) BindPropertyWithClosures(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to *GObjectClosure, transform_from *GObjectClosure) (_go__return__ GObjectBinding) {
-	_cgo_target_ := (C.gpointer)(target._getValue())
-	_cgo_transform_to_ := (*C.GClosure)(unsafe.Pointer(transform_to))
-	_cgo_transform_from_ := (*C.GClosure)(unsafe.Pointer(transform_from))
-	var _return_ *C.GBinding
-	_cstring_source_property_ := C.CString(source_property)
-	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
-	defer C.free(unsafe.Pointer(_cstring_source_property_))
-	_cstring_target_property_ := C.CString(target_property)
-	_cgo_target_property_ := (*C.gchar)(unsafe.Pointer(_cstring_target_property_))
-	defer C.free(unsafe.Pointer(_cstring_target_property_))
-	_return_ = C._g_object_bind_property_with_closures((*C.GObject)(_self_._value_), _cgo_source_property_, _cgo_target_, _cgo_target_property_, flags, _cgo_transform_to_, _cgo_transform_from_)
-	_go__return__ = ToGObjectBinding(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectObject) DupData(key string, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
-	_cstring_key_ := C.CString(key)
-	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
-	defer C.free(unsafe.Pointer(_cstring_key_))
-	_return_ = C._g_object_dup_data((*C.GObject)(_self_._value_), _cgo_key_, dup_func, user_data)
-	return
-}
-
-func (_self_ *GObjectObject) DupQdata(quark C.GQuark, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
-	_return_ = C.g_object_dup_qdata((*C.GObject)(_self_._value_), quark, dup_func, user_data)
-	return
-}
-
-func (_self_ *GObjectObject) ForceFloating() () {
-	C.g_object_force_floating((*C.GObject)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectObject) FreezeNotify() () {
-	C.g_object_freeze_notify((*C.GObject)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectObject) GetData(key string) (_return_ C.gpointer) {
-	_cstring_key_ := C.CString(key)
-	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
-	defer C.free(unsafe.Pointer(_cstring_key_))
-	_return_ = C._g_object_get_data((*C.GObject)(_self_._value_), _cgo_key_)
-	return
-}
-
-func (_self_ *GObjectObject) GetProperty(property_name string, value *GObjectValue) () {
-	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	C._g_object_get_property((*C.GObject)(_self_._value_), _cgo_property_name_, _cgo_value_)
-	return
-}
-
-func (_self_ *GObjectObject) GetQdata(quark C.GQuark) (_return_ C.gpointer) {
-	_return_ = C.g_object_get_qdata((*C.GObject)(_self_._value_), quark)
-	return
-}
-
-func (_self_ *GObjectObject) IsFloating() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._g_object_is_floating((*C.GObject)(_self_._value_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectObject) Notify(property_name string) () {
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	C._g_object_notify((*C.GObject)(_self_._value_), _cgo_property_name_)
-	return
-}
-
-func (_self_ *GObjectObject) NotifyByPspec(pspec GObjectParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
-	C.g_object_notify_by_pspec((*C.GObject)(_self_._value_), _cgo_pspec_)
-	return
-}
-
-func (_self_ *GObjectObject) Ref() (_go__return__ GObjectObject) {
-	var _return_ C.gpointer
-	_return_ = C._g_object_ref((*C.GObject)(_self_._value_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectObject) RefSink() (_go__return__ GObjectObject) {
-	var _return_ C.gpointer
-	_return_ = C._g_object_ref_sink((*C.GObject)(_self_._value_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectObject) RemoveToggleRef(notify C.GToggleNotify, data C.gpointer) () {
-	C.g_object_remove_toggle_ref((*C.GObject)(_self_._value_), notify, data)
-	return
-}
-
-func (_self_ *GObjectObject) ReplaceData(key string, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
-	_cstring_key_ := C.CString(key)
-	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
-	defer C.free(unsafe.Pointer(_cstring_key_))
-	var _return_ C.gboolean
-	_return_ = C._g_object_replace_data((*C.GObject)(_self_._value_), _cgo_key_, oldval, newval, destroy, old_destroy)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectObject) ReplaceQdata(quark C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_object_replace_qdata((*C.GObject)(_self_._value_), quark, oldval, newval, destroy, old_destroy)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectObject) RunDispose() () {
-	C.g_object_run_dispose((*C.GObject)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectObject) SetData(key string, data C.gpointer) () {
-	_cstring_key_ := C.CString(key)
-	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
-	defer C.free(unsafe.Pointer(_cstring_key_))
-	C._g_object_set_data((*C.GObject)(_self_._value_), _cgo_key_, data)
-	return
-}
-
-func (_self_ *GObjectObject) SetDataFull(key string, data C.gpointer, destroy C.GDestroyNotify) () {
-	_cstring_key_ := C.CString(key)
-	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
-	defer C.free(unsafe.Pointer(_cstring_key_))
-	C._g_object_set_data_full((*C.GObject)(_self_._value_), _cgo_key_, data, destroy)
-	return
-}
-
-func (_self_ *GObjectObject) SetProperty(property_name string, value *GObjectValue) () {
-	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	C._g_object_set_property((*C.GObject)(_self_._value_), _cgo_property_name_, _cgo_value_)
-	return
-}
-
-func (_self_ *GObjectObject) SetQdata(quark C.GQuark, data C.gpointer) () {
-	C.g_object_set_qdata((*C.GObject)(_self_._value_), quark, data)
-	return
-}
-
-func (_self_ *GObjectObject) SetQdataFull(quark C.GQuark, data C.gpointer, destroy C.GDestroyNotify) () {
-	C.g_object_set_qdata_full((*C.GObject)(_self_._value_), quark, data, destroy)
-	return
-}
-
-func (_self_ *GObjectObject) StealData(key string) (_return_ C.gpointer) {
-	_cstring_key_ := C.CString(key)
-	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
-	defer C.free(unsafe.Pointer(_cstring_key_))
-	_return_ = C._g_object_steal_data((*C.GObject)(_self_._value_), _cgo_key_)
-	return
-}
-
-func (_self_ *GObjectObject) StealQdata(quark C.GQuark) (_return_ C.gpointer) {
-	_return_ = C.g_object_steal_qdata((*C.GObject)(_self_._value_), quark)
-	return
-}
-
-func (_self_ *GObjectObject) ThawNotify() () {
-	C.g_object_thaw_notify((*C.GObject)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectObject) Unref() () {
-	C._g_object_unref((*C.GObject)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectObject) WatchClosure(closure *GObjectClosure) () {
-	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
-	C.g_object_watch_closure((*C.GObject)(_self_._value_), _cgo_closure_)
-	return
-}
-
-func (_self_ *GObjectObject) WeakRef(notify C.GWeakNotify, data C.gpointer) () {
-	C.g_object_weak_ref((*C.GObject)(_self_._value_), notify, data)
-	return
-}
-
-func (_self_ *GObjectObject) WeakUnref(notify C.GWeakNotify, data C.gpointer) () {
-	C.g_object_weak_unref((*C.GObject)(_self_._value_), notify, data)
-	return
-}
-
-func (_self_ *GObjectObjectClass) FindProperty(property_name string) (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	_return_ = C._g_object_class_find_property((*C.GObjectClass)(_self_), _cgo_property_name_)
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectObjectClass) InstallProperty(property_id uint, pspec GObjectParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
-	_cgo_property_id_ := (C.guint)(property_id)
-	C.g_object_class_install_property((*C.GObjectClass)(_self_), _cgo_property_id_, _cgo_pspec_)
-	return
-}
-
-func (_self_ *GObjectObjectClass) ListProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
-	var n_properties C.guint
-	_return_ = C._g_object_class_list_properties((*C.GObjectClass)(_self_), &n_properties)
-	_go_n_properties_ = (uint)(n_properties)
-	return
-}
-
-func (_self_ *GObjectObjectClass) OverrideProperty(property_id uint, name string) () {
-	_cgo_property_id_ := (C.guint)(property_id)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._g_object_class_override_property((*C.GObjectClass)(_self_), _cgo_property_id_, _cgo_name_)
-	return
-}
-
-func ParamSpecInternal(param_type C.GType, name string, nick string, blurb string, flags C.GParamFlags) (_return_ C.gpointer) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_cstring_nick_ := C.CString(nick)
-	_cgo_nick_ := (*C.gchar)(unsafe.Pointer(_cstring_nick_))
-	defer C.free(unsafe.Pointer(_cstring_nick_))
-	_cstring_blurb_ := C.CString(blurb)
-	_cgo_blurb_ := (*C.gchar)(unsafe.Pointer(_cstring_blurb_))
-	defer C.free(unsafe.Pointer(_cstring_blurb_))
-	_return_ = C._g_param_spec_internal(param_type, _cgo_name_, _cgo_nick_, _cgo_blurb_, flags)
-	return
-}
-
-func (_self_ *GObjectParamSpec) GetBlurb() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_param_spec_get_blurb((*C.GParamSpec)(_self_._value_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GObjectParamSpec) GetName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_param_spec_get_name((*C.GParamSpec)(_self_._value_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GObjectParamSpec) GetNick() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_param_spec_get_nick((*C.GParamSpec)(_self_._value_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GObjectParamSpec) GetQdata(quark C.GQuark) (_return_ C.gpointer) {
-	_return_ = C.g_param_spec_get_qdata((*C.GParamSpec)(_self_._value_), quark)
-	return
-}
-
-func (_self_ *GObjectParamSpec) GetRedirectTarget() (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_return_ = C.g_param_spec_get_redirect_target((*C.GParamSpec)(_self_._value_))
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectParamSpec) Ref() (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_return_ = C.g_param_spec_ref((*C.GParamSpec)(_self_._value_))
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectParamSpec) RefSink() (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_return_ = C.g_param_spec_ref_sink((*C.GParamSpec)(_self_._value_))
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectParamSpec) SetQdata(quark C.GQuark, data C.gpointer) () {
-	C.g_param_spec_set_qdata((*C.GParamSpec)(_self_._value_), quark, data)
-	return
-}
-
-func (_self_ *GObjectParamSpec) SetQdataFull(quark C.GQuark, data C.gpointer, destroy C.GDestroyNotify) () {
-	C.g_param_spec_set_qdata_full((*C.GParamSpec)(_self_._value_), quark, data, destroy)
-	return
-}
-
-func (_self_ *GObjectParamSpec) Sink() () {
-	C.g_param_spec_sink((*C.GParamSpec)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectParamSpec) StealQdata(quark C.GQuark) (_return_ C.gpointer) {
-	_return_ = C.g_param_spec_steal_qdata((*C.GParamSpec)(_self_._value_), quark)
-	return
-}
-
-func (_self_ *GObjectParamSpec) Unref() () {
-	C.g_param_spec_unref((*C.GParamSpec)(_self_._value_))
-	return
-}
-
-func ParamSpecPoolNew(type_prefixing bool) (_go__return__ *GObjectParamSpecPool) {
-	var _return_ *C.GParamSpecPool
-	_cgo_type_prefixing_ := (C.gboolean)(C.FALSE)
-	if type_prefixing { _cgo_type_prefixing_ = (C.gboolean)(C.TRUE) }
-	_return_ = C.g_param_spec_pool_new(_cgo_type_prefixing_)
-	_go__return__ = (*GObjectParamSpecPool)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectParamSpecPool) Insert(pspec GObjectParamSpecKind, owner_type C.GType) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
-	C.g_param_spec_pool_insert((*C.GParamSpecPool)(_self_), _cgo_pspec_, owner_type)
-	return
-}
-
-func (_self_ *GObjectParamSpecPool) List(owner_type C.GType) (_return_ unsafe.Pointer, _go_n_pspecs_p_ uint) {
-	var n_pspecs_p C.guint
-	_return_ = C._g_param_spec_pool_list((*C.GParamSpecPool)(_self_), owner_type, &n_pspecs_p)
-	_go_n_pspecs_p_ = (uint)(n_pspecs_p)
-	return
-}
-
-func (_self_ *GObjectParamSpecPool) ListOwned(owner_type C.GType) (_return_ *C.GList) {
-	_return_ = C.g_param_spec_pool_list_owned((*C.GParamSpecPool)(_self_), owner_type)
-	return
-}
-
-func (_self_ *GObjectParamSpecPool) Lookup(param_name string, owner_type C.GType, walk_ancestors bool) (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_cstring_param_name_ := C.CString(param_name)
-	_cgo_param_name_ := (*C.gchar)(unsafe.Pointer(_cstring_param_name_))
-	defer C.free(unsafe.Pointer(_cstring_param_name_))
-	_cgo_walk_ancestors_ := (C.gboolean)(C.FALSE)
-	if walk_ancestors { _cgo_walk_ancestors_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_param_spec_pool_lookup((*C.GParamSpecPool)(_self_), _cgo_param_name_, owner_type, _cgo_walk_ancestors_)
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectParamSpecPool) Remove(pspec GObjectParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
-	C.g_param_spec_pool_remove((*C.GParamSpecPool)(_self_), _cgo_pspec_)
-	return
-}
-
-func TypeClassAddPrivate(g_class C.gpointer, private_size uint64) () {
-	_cgo_private_size_ := (C.gsize)(private_size)
-	C.g_type_class_add_private(g_class, _cgo_private_size_)
-	return
-}
-
-func TypeClassPeek(type_ C.GType) (_go__return__ *GObjectTypeClass) {
-	var _return_ C.gpointer
-	_return_ = C.g_type_class_peek(type_)
-	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
-	return
-}
-
-func TypeClassPeekStatic(type_ C.GType) (_go__return__ *GObjectTypeClass) {
-	var _return_ C.gpointer
-	_return_ = C.g_type_class_peek_static(type_)
-	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
-	return
-}
-
-func TypeClassRef(type_ C.GType) (_go__return__ *GObjectTypeClass) {
-	var _return_ C.gpointer
-	_return_ = C.g_type_class_ref(type_)
-	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectTypeClass) GetPrivate(private_type C.GType) (_return_ C.gpointer) {
-	_return_ = C.g_type_class_get_private((*C.GTypeClass)(_self_), private_type)
-	return
-}
-
-func (_self_ *GObjectTypeClass) PeekParent() (_go__return__ *GObjectTypeClass) {
-	var _return_ C.gpointer
-	_return_ = C._g_type_class_peek_parent((*C.GTypeClass)(_self_))
-	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectTypeClass) Unref() () {
-	C._g_type_class_unref((*C.GTypeClass)(_self_))
-	return
-}
-
-func (_self_ *GObjectTypeClass) UnrefUncached() () {
-	C._g_type_class_unref_uncached((*C.GTypeClass)(_self_))
-	return
-}
-
-func (_self_ *GObjectTypeInstance) GetPrivate(private_type C.GType) (_return_ C.gpointer) {
-	_return_ = C.g_type_instance_get_private((*C.GTypeInstance)(_self_), private_type)
-	return
-}
-
-func TypeInterfaceAddPrerequisite(interface_type C.GType, prerequisite_type C.GType) () {
-	C.g_type_interface_add_prerequisite(interface_type, prerequisite_type)
-	return
-}
-
-func TypeInterfaceGetPlugin(instance_type C.GType, interface_type C.GType) (_return_ *C.GTypePlugin) {
-	_return_ = C.g_type_interface_get_plugin(instance_type, interface_type)
-	return
-}
-
-func TypeInterfacePeek(instance_class *GObjectTypeClass, iface_type C.GType) (_go__return__ *GObjectTypeInterface) {
-	_cgo_instance_class_ := (C.gpointer)(unsafe.Pointer(instance_class))
-	var _return_ C.gpointer
-	_return_ = C.g_type_interface_peek(_cgo_instance_class_, iface_type)
-	_go__return__ = (*GObjectTypeInterface)(unsafe.Pointer(_return_))
-	return
-}
-
-func TypeInterfacePrerequisites(interface_type C.GType) (_return_ *C.GType, _go_n_prerequisites_ uint) {
-	var n_prerequisites C.guint
-	_return_ = C.g_type_interface_prerequisites(interface_type, &n_prerequisites)
-	_go_n_prerequisites_ = (uint)(n_prerequisites)
-	return
-}
-
-func (_self_ *GObjectTypeInterface) PeekParent() (_go__return__ *GObjectTypeInterface) {
-	var _return_ C.gpointer
-	_return_ = C._g_type_interface_peek_parent((*C.GTypeInterface)(_self_))
-	_go__return__ = (*GObjectTypeInterface)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectTypeModule) AddInterface(instance_type C.GType, interface_type C.GType, interface_info *GObjectInterfaceInfo) () {
-	_cgo_interface_info_ := (*C.GInterfaceInfo)(unsafe.Pointer(interface_info))
-	C._g_type_module_add_interface((*C.GTypeModule)(_self_._value_), instance_type, interface_type, _cgo_interface_info_)
-	return
-}
-
-func (_self_ *GObjectTypeModule) RegisterEnum(name string, const_static_values *GObjectEnumValue) (_return_ C.GType) {
-	_cgo_const_static_values_ := (*C.GEnumValue)(unsafe.Pointer(const_static_values))
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_type_module_register_enum((*C.GTypeModule)(_self_._value_), _cgo_name_, _cgo_const_static_values_)
-	return
-}
-
-func (_self_ *GObjectTypeModule) RegisterFlags(name string, const_static_values *GObjectFlagsValue) (_return_ C.GType) {
-	_cgo_const_static_values_ := (*C.GFlagsValue)(unsafe.Pointer(const_static_values))
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_type_module_register_flags((*C.GTypeModule)(_self_._value_), _cgo_name_, _cgo_const_static_values_)
-	return
-}
-
-func (_self_ *GObjectTypeModule) RegisterType(parent_type C.GType, type_name string, type_info *GObjectTypeInfo, flags C.GTypeFlags) (_return_ C.GType) {
-	_cgo_type_info_ := (*C.GTypeInfo)(unsafe.Pointer(type_info))
-	_cstring_type_name_ := C.CString(type_name)
-	_cgo_type_name_ := (*C.gchar)(unsafe.Pointer(_cstring_type_name_))
-	defer C.free(unsafe.Pointer(_cstring_type_name_))
-	_return_ = C._g_type_module_register_type((*C.GTypeModule)(_self_._value_), parent_type, _cgo_type_name_, _cgo_type_info_, flags)
-	return
-}
-
-func (_self_ *GObjectTypeModule) SetName(name string) () {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._g_type_module_set_name((*C.GTypeModule)(_self_._value_), _cgo_name_)
-	return
-}
-
-func (_self_ *GObjectTypeModule) Unuse() () {
-	C.g_type_module_unuse((*C.GTypeModule)(_self_._value_))
-	return
-}
-
-func (_self_ *GObjectTypeModule) Use() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_type_module_use((*C.GTypeModule)(_self_._value_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func TypeValueTablePeek(type_ C.GType) (_go__return__ *GObjectTypeValueTable) {
-	var _return_ *C.GTypeValueTable
-	_return_ = C.g_type_value_table_peek(type_)
-	_go__return__ = (*GObjectTypeValueTable)(unsafe.Pointer(_return_))
-	return
-}
-
-func ValueRegisterTransformFunc(src_type C.GType, dest_type C.GType, transform_func C.GValueTransform) () {
-	C.g_value_register_transform_func(src_type, dest_type, transform_func)
-	return
-}
-
-func ValueTypeCompatible(src_type C.GType, dest_type C.GType) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_value_type_compatible(src_type, dest_type)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func ValueTypeTransformable(src_type C.GType, dest_type C.GType) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_value_type_transformable(src_type, dest_type)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectValue) Copy(dest_value *GObjectValue) () {
-	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
-	C._g_value_copy((*C.GValue)(_self_), _cgo_dest_value_)
-	return
-}
-
-func (_self_ *GObjectValue) DupBoxed() (_return_ C.gpointer) {
-	_return_ = C._g_value_dup_boxed((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) DupObject() (_go__return__ GObjectObject) {
-	var _return_ C.gpointer
-	_return_ = C._g_value_dup_object((*C.GValue)(_self_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectValue) DupParam() (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_return_ = C._g_value_dup_param((*C.GValue)(_self_))
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectValue) DupString() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_value_dup_string((*C.GValue)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GObjectValue) DupVariant() (_return_ *C.GVariant) {
-	_return_ = C._g_value_dup_variant((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) FitsPointer() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._g_value_fits_pointer((*C.GValue)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectValue) GetBoolean() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._g_value_get_boolean((*C.GValue)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectValue) GetBoxed() (_return_ C.gpointer) {
-	_return_ = C._g_value_get_boxed((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) GetDouble() (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C._g_value_get_double((*C.GValue)(_self_))
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetEnum() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._g_value_get_enum((*C.GValue)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetFlags() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._g_value_get_flags((*C.GValue)(_self_))
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetFloat() (_go__return__ float64) {
-	var _return_ C.gfloat
-	_return_ = C._g_value_get_float((*C.GValue)(_self_))
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetGtype() (_return_ C.GType) {
-	_return_ = C._g_value_get_gtype((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) GetInt() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._g_value_get_int((*C.GValue)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetInt64() (_go__return__ int64) {
-	var _return_ C.gint64
-	_return_ = C._g_value_get_int64((*C.GValue)(_self_))
-	_go__return__ = (int64)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetLong() (_go__return__ int64) {
-	var _return_ C.glong
-	_return_ = C._g_value_get_long((*C.GValue)(_self_))
-	_go__return__ = (int64)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetObject() (_go__return__ GObjectObject) {
-	var _return_ C.gpointer
-	_return_ = C._g_value_get_object((*C.GValue)(_self_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectValue) GetParam() (_go__return__ GObjectParamSpec) {
-	var _return_ *C.GParamSpec
-	_return_ = C._g_value_get_param((*C.GValue)(_self_))
-	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectValue) GetPointer() (_return_ C.gpointer) {
-	_return_ = C._g_value_get_pointer((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) GetSchar() (_go__return__ int8) {
-	var _return_ C.gint8
-	_return_ = C._g_value_get_schar((*C.GValue)(_self_))
-	_go__return__ = (int8)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetString() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_value_get_string((*C.GValue)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GObjectValue) GetUchar() (_go__return__ byte) {
-	var _return_ C.guchar
-	_return_ = C._g_value_get_uchar((*C.GValue)(_self_))
-	_go__return__ = (byte)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetUint() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._g_value_get_uint((*C.GValue)(_self_))
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetUint64() (_go__return__ uint64) {
-	var _return_ C.guint64
-	_return_ = C._g_value_get_uint64((*C.GValue)(_self_))
-	_go__return__ = (uint64)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetUlong() (_go__return__ uint64) {
-	var _return_ C.gulong
-	_return_ = C._g_value_get_ulong((*C.GValue)(_self_))
-	_go__return__ = (uint64)(_return_)
-	return
-}
-
-func (_self_ *GObjectValue) GetVariant() (_return_ *C.GVariant) {
-	_return_ = C._g_value_get_variant((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) Init(g_type C.GType) (_go__return__ *GObjectValue) {
-	var _return_ *C.GValue
-	_return_ = C.g_value_init((*C.GValue)(_self_), g_type)
-	_go__return__ = (*GObjectValue)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectValue) PeekPointer() (_return_ C.gpointer) {
-	_return_ = C._g_value_peek_pointer((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectValue) Reset() (_go__return__ *GObjectValue) {
-	var _return_ *C.GValue
-	_return_ = C.g_value_reset((*C.GValue)(_self_))
-	_go__return__ = (*GObjectValue)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectValue) SetBoolean(v_boolean bool) () {
-	_cgo_v_boolean_ := (C.gboolean)(C.FALSE)
-	if v_boolean { _cgo_v_boolean_ = (C.gboolean)(C.TRUE) }
-	C.g_value_set_boolean((*C.GValue)(_self_), _cgo_v_boolean_)
-	return
-}
-
-func (_self_ *GObjectValue) SetBoxed(v_boxed C.gpointer) () {
-	C._g_value_set_boxed((*C.GValue)(_self_), v_boxed)
-	return
-}
-
-func (_self_ *GObjectValue) SetDouble(v_double float64) () {
-	_cgo_v_double_ := (C.gdouble)(v_double)
-	C.g_value_set_double((*C.GValue)(_self_), _cgo_v_double_)
-	return
-}
-
-func (_self_ *GObjectValue) SetEnum(v_enum int) () {
-	_cgo_v_enum_ := (C.gint)(v_enum)
-	C.g_value_set_enum((*C.GValue)(_self_), _cgo_v_enum_)
-	return
-}
-
-func (_self_ *GObjectValue) SetFlags(v_flags uint) () {
-	_cgo_v_flags_ := (C.guint)(v_flags)
-	C.g_value_set_flags((*C.GValue)(_self_), _cgo_v_flags_)
-	return
-}
-
-func (_self_ *GObjectValue) SetFloat(v_float float64) () {
-	_cgo_v_float_ := (C.gfloat)(v_float)
-	C.g_value_set_float((*C.GValue)(_self_), _cgo_v_float_)
-	return
-}
-
-func (_self_ *GObjectValue) SetGtype(v_gtype C.GType) () {
-	C.g_value_set_gtype((*C.GValue)(_self_), v_gtype)
-	return
-}
-
-func (_self_ *GObjectValue) SetInstance(instance C.gpointer) () {
-	C.g_value_set_instance((*C.GValue)(_self_), instance)
-	return
-}
-
-func (_self_ *GObjectValue) SetInt(v_int int) () {
-	_cgo_v_int_ := (C.gint)(v_int)
-	C.g_value_set_int((*C.GValue)(_self_), _cgo_v_int_)
-	return
-}
-
-func (_self_ *GObjectValue) SetInt64(v_int64 int64) () {
-	_cgo_v_int64_ := (C.gint64)(v_int64)
-	C.g_value_set_int64((*C.GValue)(_self_), _cgo_v_int64_)
-	return
-}
-
-func (_self_ *GObjectValue) SetLong(v_long int64) () {
-	_cgo_v_long_ := (C.glong)(v_long)
-	C.g_value_set_long((*C.GValue)(_self_), _cgo_v_long_)
-	return
-}
-
-func (_self_ *GObjectValue) SetObject(v_object GObjectObjectKind) () {
-	_cgo_v_object_ := (C.gpointer)(v_object._getValue())
-	C.g_value_set_object((*C.GValue)(_self_), _cgo_v_object_)
-	return
-}
-
-func (_self_ *GObjectValue) SetParam(param GObjectParamSpecKind) () {
-	_cgo_param_ := (*C.GParamSpec)(param._getValue())
-	C.g_value_set_param((*C.GValue)(_self_), _cgo_param_)
-	return
-}
-
-func (_self_ *GObjectValue) SetPointer(v_pointer C.gpointer) () {
-	C.g_value_set_pointer((*C.GValue)(_self_), v_pointer)
-	return
-}
-
-func (_self_ *GObjectValue) SetSchar(v_char int8) () {
-	_cgo_v_char_ := (C.gint8)(v_char)
-	C.g_value_set_schar((*C.GValue)(_self_), _cgo_v_char_)
-	return
-}
-
-func (_self_ *GObjectValue) SetStaticBoxed(v_boxed C.gpointer) () {
-	C._g_value_set_static_boxed((*C.GValue)(_self_), v_boxed)
-	return
-}
-
-func (_self_ *GObjectValue) SetStaticString(v_string string) () {
-	_cstring_v_string_ := C.CString(v_string)
-	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
-	defer C.free(unsafe.Pointer(_cstring_v_string_))
-	C._g_value_set_static_string((*C.GValue)(_self_), _cgo_v_string_)
-	return
-}
-
-func (_self_ *GObjectValue) SetString(v_string string) () {
-	_cstring_v_string_ := C.CString(v_string)
-	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
-	defer C.free(unsafe.Pointer(_cstring_v_string_))
-	C._g_value_set_string((*C.GValue)(_self_), _cgo_v_string_)
-	return
-}
-
-func (_self_ *GObjectValue) SetUchar(v_uchar byte) () {
-	_cgo_v_uchar_ := (C.guchar)(v_uchar)
-	C.g_value_set_uchar((*C.GValue)(_self_), _cgo_v_uchar_)
-	return
-}
-
-func (_self_ *GObjectValue) SetUint(v_uint uint) () {
-	_cgo_v_uint_ := (C.guint)(v_uint)
-	C.g_value_set_uint((*C.GValue)(_self_), _cgo_v_uint_)
-	return
-}
-
-func (_self_ *GObjectValue) SetUint64(v_uint64 uint64) () {
-	_cgo_v_uint64_ := (C.guint64)(v_uint64)
-	C.g_value_set_uint64((*C.GValue)(_self_), _cgo_v_uint64_)
-	return
-}
-
-func (_self_ *GObjectValue) SetUlong(v_ulong uint64) () {
-	_cgo_v_ulong_ := (C.gulong)(v_ulong)
-	C.g_value_set_ulong((*C.GValue)(_self_), _cgo_v_ulong_)
-	return
-}
-
-func (_self_ *GObjectValue) SetVariant(variant *C.GVariant) () {
-	C.g_value_set_variant((*C.GValue)(_self_), variant)
-	return
-}
-
-func (_self_ *GObjectValue) TakeBoxed(v_boxed C.gpointer) () {
-	C._g_value_take_boxed((*C.GValue)(_self_), v_boxed)
-	return
-}
-
-func (_self_ *GObjectValue) TakeObject(v_object C.gpointer) () {
-	C.g_value_take_object((*C.GValue)(_self_), v_object)
-	return
-}
-
-func (_self_ *GObjectValue) TakeParam(param GObjectParamSpecKind) () {
-	_cgo_param_ := (*C.GParamSpec)(param._getValue())
-	C.g_value_take_param((*C.GValue)(_self_), _cgo_param_)
-	return
-}
-
-func (_self_ *GObjectValue) TakeString(v_string string) () {
-	_cstring_v_string_ := C.CString(v_string)
-	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
-	defer C.free(unsafe.Pointer(_cstring_v_string_))
-	C.g_value_take_string((*C.GValue)(_self_), _cgo_v_string_)
-	return
-}
-
-func (_self_ *GObjectValue) TakeVariant(variant *C.GVariant) () {
-	C.g_value_take_variant((*C.GValue)(_self_), variant)
-	return
-}
-
-func (_self_ *GObjectValue) Transform(dest_value *GObjectValue) (_go__return__ bool) {
-	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
-	var _return_ C.gboolean
-	_return_ = C._g_value_transform((*C.GValue)(_self_), _cgo_dest_value_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GObjectValue) Unset() () {
-	C.g_value_unset((*C.GValue)(_self_))
-	return
-}
-
-func (_self_ *GObjectWeakRef) Clear() () {
-	C.g_weak_ref_clear((*C.GWeakRef)(_self_))
-	return
-}
-
-func (_self_ *GObjectWeakRef) Get() (_go__return__ GObjectObject) {
-	var _return_ C.gpointer
-	_return_ = C.g_weak_ref_get((*C.GWeakRef)(_self_))
-	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GObjectWeakRef) Init(object C.gpointer) () {
-	C.g_weak_ref_init((*C.GWeakRef)(_self_), object)
-	return
-}
-
-func (_self_ *GObjectWeakRef) Set(object C.gpointer) () {
-	C.g_weak_ref_set((*C.GWeakRef)(_self_), object)
-	return
-}
-
 func BoxedCopy(boxed_type C.GType, src_boxed C.gpointer) (_return_ C.gpointer) {
 	_return_ = C._g_boxed_copy(boxed_type, src_boxed)
 	return
@@ -2061,6 +739,243 @@ func BoxedTypeRegisterStatic(name string, boxed_copy C.GBoxedCopyFunc, boxed_fre
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._g_boxed_type_register_static(_cgo_name_, boxed_copy, boxed_free)
+	return
+}
+
+func CclosureMarshalBooleanBoxedBoxed(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_BOOLEAN__BOXED_BOXED(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalBooleanFlags(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_BOOLEAN__FLAGS(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalStringObjectPointer(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_STRING__OBJECT_POINTER(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidBoolean(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__BOOLEAN(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidBoxed(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__BOXED(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidChar(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__CHAR(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidDouble(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__DOUBLE(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidEnum(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__ENUM(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidFlags(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__FLAGS(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidFloat(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__FLOAT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidInt(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__INT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidLong(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__LONG(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidObject(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__OBJECT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidParam(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__PARAM(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidPointer(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__POINTER(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidString(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__STRING(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidUchar(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__UCHAR(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidUint(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__UINT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidUintPointer(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__UINT_POINTER(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidUlong(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__ULONG(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidVariant(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__VARIANT(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalVoidVoid(closure *GObjectClosure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_VOID__VOID(_cgo_closure_, _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureMarshalGeneric(closure *GObjectClosure, return_gvalue *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	_cgo_return_gvalue_ := (*C.GValue)(unsafe.Pointer(return_gvalue))
+	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	C._g_cclosure_marshal_generic(_cgo_closure_, _cgo_return_gvalue_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint, marshal_data)
+	return
+}
+
+func CclosureNew(callback_func C.GCallback, user_data C.gpointer, destroy_data C.GClosureNotify) (_go__return__ *GObjectClosure) {
+	var _return_ *C.GClosure
+	_return_ = C.g_cclosure_new(callback_func, user_data, destroy_data)
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
+	return
+}
+
+func CclosureNewObject(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *GObjectClosure) {
+	_cgo_object_ := (*C.GObject)(object._getValue())
+	var _return_ *C.GClosure
+	_return_ = C.g_cclosure_new_object(callback_func, _cgo_object_)
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
+	return
+}
+
+func CclosureNewObjectSwap(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *GObjectClosure) {
+	_cgo_object_ := (*C.GObject)(object._getValue())
+	var _return_ *C.GClosure
+	_return_ = C.g_cclosure_new_object_swap(callback_func, _cgo_object_)
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
+	return
+}
+
+func CclosureNewSwap(callback_func C.GCallback, user_data C.gpointer, destroy_data C.GClosureNotify) (_go__return__ *GObjectClosure) {
+	var _return_ *C.GClosure
+	_return_ = C.g_cclosure_new_swap(callback_func, user_data, destroy_data)
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2417,6 +1332,15 @@ func ParamSpecPointer(name string, nick string, blurb string, flags C.GParamFlag
 	defer C.free(unsafe.Pointer(_cstring_blurb_))
 	_return_ = C._g_param_spec_pointer(_cgo_name_, _cgo_nick_, _cgo_blurb_, flags)
 	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func ParamSpecPoolNew(type_prefixing bool) (_go__return__ *GObjectParamSpecPool) {
+	var _return_ *C.GParamSpecPool
+	_cgo_type_prefixing_ := (C.gboolean)(C.FALSE)
+	if type_prefixing { _cgo_type_prefixing_ = (C.gboolean)(C.TRUE) }
+	_return_ = C.g_param_spec_pool_new(_cgo_type_prefixing_)
+	_go__return__ = (*GObjectParamSpecPool)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2997,6 +1921,33 @@ func TypeChildren(type_ C.GType) (_return_ *C.GType, _go_n_children_ uint) {
 	return
 }
 
+func TypeClassAddPrivate(g_class C.gpointer, private_size uint64) () {
+	_cgo_private_size_ := (C.gsize)(private_size)
+	C.g_type_class_add_private(g_class, _cgo_private_size_)
+	return
+}
+
+func TypeClassPeek(type_ C.GType) (_go__return__ *GObjectTypeClass) {
+	var _return_ C.gpointer
+	_return_ = C.g_type_class_peek(type_)
+	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
+	return
+}
+
+func TypeClassPeekStatic(type_ C.GType) (_go__return__ *GObjectTypeClass) {
+	var _return_ C.gpointer
+	_return_ = C.g_type_class_peek_static(type_)
+	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
+	return
+}
+
+func TypeClassRef(type_ C.GType) (_go__return__ *GObjectTypeClass) {
+	var _return_ C.gpointer
+	_return_ = C.g_type_class_ref(type_)
+	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
+	return
+}
+
 func TypeCreateInstance(type_ C.GType) (_go__return__ *GObjectTypeInstance) {
 	var _return_ *C.GTypeInstance
 	_return_ = C.g_type_create_instance(type_)
@@ -3067,6 +2018,31 @@ func TypeGetPlugin(type_ C.GType) (_return_ *C.GTypePlugin) {
 
 func TypeGetQdata(type_ C.GType, quark C.GQuark) (_return_ C.gpointer) {
 	_return_ = C.g_type_get_qdata(type_, quark)
+	return
+}
+
+func TypeInterfaceAddPrerequisite(interface_type C.GType, prerequisite_type C.GType) () {
+	C.g_type_interface_add_prerequisite(interface_type, prerequisite_type)
+	return
+}
+
+func TypeInterfaceGetPlugin(instance_type C.GType, interface_type C.GType) (_return_ *C.GTypePlugin) {
+	_return_ = C.g_type_interface_get_plugin(instance_type, interface_type)
+	return
+}
+
+func TypeInterfacePeek(instance_class *GObjectTypeClass, iface_type C.GType) (_go__return__ *GObjectTypeInterface) {
+	_cgo_instance_class_ := (C.gpointer)(unsafe.Pointer(instance_class))
+	var _return_ C.gpointer
+	_return_ = C.g_type_interface_peek(_cgo_instance_class_, iface_type)
+	_go__return__ = (*GObjectTypeInterface)(unsafe.Pointer(_return_))
+	return
+}
+
+func TypeInterfacePrerequisites(interface_type C.GType) (_return_ *C.GType, _go_n_prerequisites_ uint) {
+	var n_prerequisites C.guint
+	_return_ = C.g_type_interface_prerequisites(interface_type, &n_prerequisites)
+	_go_n_prerequisites_ = (uint)(n_prerequisites)
 	return
 }
 
@@ -3189,59 +2165,1083 @@ func TypeTestFlags(type_ C.GType, flags uint) (_go__return__ bool) {
 	return
 }
 
-const BINDING_DEFAULT = C.G_BINDING_DEFAULT
-const BINDING_BIDIRECTIONAL = C.G_BINDING_BIDIRECTIONAL
-const BINDING_SYNC_CREATE = C.G_BINDING_SYNC_CREATE
-const BINDING_INVERT_BOOLEAN = C.G_BINDING_INVERT_BOOLEAN
-const CONNECT_AFTER = C.G_CONNECT_AFTER
-const CONNECT_SWAPPED = C.G_CONNECT_SWAPPED
-const PARAM_READABLE = C.G_PARAM_READABLE
-const PARAM_WRITABLE = C.G_PARAM_WRITABLE
-const PARAM_CONSTRUCT = C.G_PARAM_CONSTRUCT
-const PARAM_CONSTRUCT_ONLY = C.G_PARAM_CONSTRUCT_ONLY
-const PARAM_LAX_VALIDATION = C.G_PARAM_LAX_VALIDATION
-const PARAM_STATIC_NAME = C.G_PARAM_STATIC_NAME
-const PARAM_PRIVATE = C.G_PARAM_PRIVATE
-const PARAM_STATIC_NICK = C.G_PARAM_STATIC_NICK
-const PARAM_STATIC_BLURB = C.G_PARAM_STATIC_BLURB
-const PARAM_DEPRECATED = C.G_PARAM_DEPRECATED
-const SIGNAL_RUN_FIRST = C.G_SIGNAL_RUN_FIRST
-const SIGNAL_RUN_LAST = C.G_SIGNAL_RUN_LAST
-const SIGNAL_RUN_CLEANUP = C.G_SIGNAL_RUN_CLEANUP
-const SIGNAL_NO_RECURSE = C.G_SIGNAL_NO_RECURSE
-const SIGNAL_DETAILED = C.G_SIGNAL_DETAILED
-const SIGNAL_ACTION = C.G_SIGNAL_ACTION
-const SIGNAL_NO_HOOKS = C.G_SIGNAL_NO_HOOKS
-const SIGNAL_MUST_COLLECT = C.G_SIGNAL_MUST_COLLECT
-const SIGNAL_DEPRECATED = C.G_SIGNAL_DEPRECATED
-const SIGNAL_MATCH_ID = C.G_SIGNAL_MATCH_ID
-const SIGNAL_MATCH_DETAIL = C.G_SIGNAL_MATCH_DETAIL
-const SIGNAL_MATCH_CLOSURE = C.G_SIGNAL_MATCH_CLOSURE
-const SIGNAL_MATCH_FUNC = C.G_SIGNAL_MATCH_FUNC
-const SIGNAL_MATCH_DATA = C.G_SIGNAL_MATCH_DATA
-const SIGNAL_MATCH_UNBLOCKED = C.G_SIGNAL_MATCH_UNBLOCKED
-const TYPE_DEBUG_NONE = C.G_TYPE_DEBUG_NONE
-const TYPE_DEBUG_OBJECTS = C.G_TYPE_DEBUG_OBJECTS
-const TYPE_DEBUG_SIGNALS = C.G_TYPE_DEBUG_SIGNALS
-const TYPE_DEBUG_MASK = C.G_TYPE_DEBUG_MASK
-const TYPE_FLAG_ABSTRACT = C.G_TYPE_FLAG_ABSTRACT
-const TYPE_FLAG_VALUE_ABSTRACT = C.G_TYPE_FLAG_VALUE_ABSTRACT
-const TYPE_FLAG_CLASSED = C.G_TYPE_FLAG_CLASSED
-const TYPE_FLAG_INSTANTIATABLE = C.G_TYPE_FLAG_INSTANTIATABLE
-const TYPE_FLAG_DERIVABLE = C.G_TYPE_FLAG_DERIVABLE
-const TYPE_FLAG_DEEP_DERIVABLE = C.G_TYPE_FLAG_DEEP_DERIVABLE
-const PARAM_MASK = C.G_PARAM_MASK
+func TypeValueTablePeek(type_ C.GType) (_go__return__ *GObjectTypeValueTable) {
+	var _return_ *C.GTypeValueTable
+	_return_ = C.g_type_value_table_peek(type_)
+	_go__return__ = (*GObjectTypeValueTable)(unsafe.Pointer(_return_))
+	return
+}
+
+func ValueRegisterTransformFunc(src_type C.GType, dest_type C.GType, transform_func C.GValueTransform) () {
+	C.g_value_register_transform_func(src_type, dest_type, transform_func)
+	return
+}
+
+func ValueTypeCompatible(src_type C.GType, dest_type C.GType) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.g_value_type_compatible(src_type, dest_type)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ValueTypeTransformable(src_type C.GType, dest_type C.GType) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.g_value_type_transformable(src_type, dest_type)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectBinding) GetFlags() (_return_ C.GBindingFlags) {
+	_return_ = C.g_binding_get_flags((*C.GBinding)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectBinding) GetSource() (_go__return__ GObjectObject) {
+	var _return_ *C.GObject
+	_return_ = C.g_binding_get_source((*C.GBinding)(_self_._value_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectBinding) GetSourceProperty() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_binding_get_source_property((*C.GBinding)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GObjectBinding) GetTarget() (_go__return__ GObjectObject) {
+	var _return_ *C.GObject
+	_return_ = C.g_binding_get_target((*C.GBinding)(_self_._value_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectBinding) GetTargetProperty() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_binding_get_target_property((*C.GBinding)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func ObjectInterfaceFindProperty(g_iface C.gpointer, property_name string) (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._g_object_interface_find_property(g_iface, _cgo_property_name_)
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func ObjectInterfaceInstallProperty(g_iface C.gpointer, pspec GObjectParamSpecKind) () {
+	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	C.g_object_interface_install_property(g_iface, _cgo_pspec_)
+	return
+}
+
+func ObjectInterfaceListProperties(g_iface C.gpointer) (_return_ unsafe.Pointer, _go_n_properties_p_ uint) {
+	var n_properties_p C.guint
+	_return_ = C._g_object_interface_list_properties(g_iface, &n_properties_p)
+	_go_n_properties_p_ = (uint)(n_properties_p)
+	return
+}
+
+func (_self_ *GObjectObject) AddToggleRef(notify C.GToggleNotify, data C.gpointer) () {
+	C.g_object_add_toggle_ref((*C.GObject)(_self_._value_), notify, data)
+	return
+}
+
+func (_self_ *GObjectObject) BindProperty(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags) (_go__return__ GObjectBinding) {
+	_cgo_target_ := (C.gpointer)(target._getValue())
+	var _return_ *C.GBinding
+	_cstring_source_property_ := C.CString(source_property)
+	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
+	defer C.free(unsafe.Pointer(_cstring_source_property_))
+	_cstring_target_property_ := C.CString(target_property)
+	_cgo_target_property_ := (*C.gchar)(unsafe.Pointer(_cstring_target_property_))
+	defer C.free(unsafe.Pointer(_cstring_target_property_))
+	_return_ = C._g_object_bind_property((*C.GObject)(_self_._value_), _cgo_source_property_, _cgo_target_, _cgo_target_property_, flags)
+	_go__return__ = ToGObjectBinding(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectObject) BindPropertyFull(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to C.GBindingTransformFunc, transform_from C.GBindingTransformFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ GObjectBinding) {
+	_cgo_target_ := (C.gpointer)(target._getValue())
+	var _return_ *C.GBinding
+	_cstring_source_property_ := C.CString(source_property)
+	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
+	defer C.free(unsafe.Pointer(_cstring_source_property_))
+	_cstring_target_property_ := C.CString(target_property)
+	_cgo_target_property_ := (*C.gchar)(unsafe.Pointer(_cstring_target_property_))
+	defer C.free(unsafe.Pointer(_cstring_target_property_))
+	_return_ = C._g_object_bind_property_full((*C.GObject)(_self_._value_), _cgo_source_property_, _cgo_target_, _cgo_target_property_, flags, transform_to, transform_from, user_data, notify)
+	_go__return__ = ToGObjectBinding(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectObject) BindPropertyWithClosures(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to *GObjectClosure, transform_from *GObjectClosure) (_go__return__ GObjectBinding) {
+	_cgo_target_ := (C.gpointer)(target._getValue())
+	_cgo_transform_to_ := (*C.GClosure)(unsafe.Pointer(transform_to))
+	_cgo_transform_from_ := (*C.GClosure)(unsafe.Pointer(transform_from))
+	var _return_ *C.GBinding
+	_cstring_source_property_ := C.CString(source_property)
+	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
+	defer C.free(unsafe.Pointer(_cstring_source_property_))
+	_cstring_target_property_ := C.CString(target_property)
+	_cgo_target_property_ := (*C.gchar)(unsafe.Pointer(_cstring_target_property_))
+	defer C.free(unsafe.Pointer(_cstring_target_property_))
+	_return_ = C._g_object_bind_property_with_closures((*C.GObject)(_self_._value_), _cgo_source_property_, _cgo_target_, _cgo_target_property_, flags, _cgo_transform_to_, _cgo_transform_from_)
+	_go__return__ = ToGObjectBinding(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectObject) DupData(key string, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._g_object_dup_data((*C.GObject)(_self_._value_), _cgo_key_, dup_func, user_data)
+	return
+}
+
+func (_self_ *GObjectObject) DupQdata(quark C.GQuark, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
+	_return_ = C.g_object_dup_qdata((*C.GObject)(_self_._value_), quark, dup_func, user_data)
+	return
+}
+
+func (_self_ *GObjectObject) ForceFloating() () {
+	C.g_object_force_floating((*C.GObject)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectObject) FreezeNotify() () {
+	C.g_object_freeze_notify((*C.GObject)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectObject) GetData(key string) (_return_ C.gpointer) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._g_object_get_data((*C.GObject)(_self_._value_), _cgo_key_)
+	return
+}
+
+func (_self_ *GObjectObject) GetProperty(property_name string, value *GObjectValue) () {
+	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._g_object_get_property((*C.GObject)(_self_._value_), _cgo_property_name_, _cgo_value_)
+	return
+}
+
+func (_self_ *GObjectObject) GetQdata(quark C.GQuark) (_return_ C.gpointer) {
+	_return_ = C.g_object_get_qdata((*C.GObject)(_self_._value_), quark)
+	return
+}
+
+func (_self_ *GObjectObject) IsFloating() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._g_object_is_floating((*C.GObject)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectObject) Notify(property_name string) () {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._g_object_notify((*C.GObject)(_self_._value_), _cgo_property_name_)
+	return
+}
+
+func (_self_ *GObjectObject) NotifyByPspec(pspec GObjectParamSpecKind) () {
+	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	C.g_object_notify_by_pspec((*C.GObject)(_self_._value_), _cgo_pspec_)
+	return
+}
+
+func (_self_ *GObjectObject) Ref() (_go__return__ GObjectObject) {
+	var _return_ C.gpointer
+	_return_ = C._g_object_ref((*C.GObject)(_self_._value_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectObject) RefSink() (_go__return__ GObjectObject) {
+	var _return_ C.gpointer
+	_return_ = C._g_object_ref_sink((*C.GObject)(_self_._value_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectObject) RemoveToggleRef(notify C.GToggleNotify, data C.gpointer) () {
+	C.g_object_remove_toggle_ref((*C.GObject)(_self_._value_), notify, data)
+	return
+}
+
+func (_self_ *GObjectObject) ReplaceData(key string, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	var _return_ C.gboolean
+	_return_ = C._g_object_replace_data((*C.GObject)(_self_._value_), _cgo_key_, oldval, newval, destroy, old_destroy)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectObject) ReplaceQdata(quark C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.g_object_replace_qdata((*C.GObject)(_self_._value_), quark, oldval, newval, destroy, old_destroy)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectObject) RunDispose() () {
+	C.g_object_run_dispose((*C.GObject)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectObject) SetData(key string, data C.gpointer) () {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._g_object_set_data((*C.GObject)(_self_._value_), _cgo_key_, data)
+	return
+}
+
+func (_self_ *GObjectObject) SetDataFull(key string, data C.gpointer, destroy C.GDestroyNotify) () {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	C._g_object_set_data_full((*C.GObject)(_self_._value_), _cgo_key_, data, destroy)
+	return
+}
+
+func (_self_ *GObjectObject) SetProperty(property_name string, value *GObjectValue) () {
+	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	C._g_object_set_property((*C.GObject)(_self_._value_), _cgo_property_name_, _cgo_value_)
+	return
+}
+
+func (_self_ *GObjectObject) SetQdata(quark C.GQuark, data C.gpointer) () {
+	C.g_object_set_qdata((*C.GObject)(_self_._value_), quark, data)
+	return
+}
+
+func (_self_ *GObjectObject) SetQdataFull(quark C.GQuark, data C.gpointer, destroy C.GDestroyNotify) () {
+	C.g_object_set_qdata_full((*C.GObject)(_self_._value_), quark, data, destroy)
+	return
+}
+
+func (_self_ *GObjectObject) StealData(key string) (_return_ C.gpointer) {
+	_cstring_key_ := C.CString(key)
+	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
+	defer C.free(unsafe.Pointer(_cstring_key_))
+	_return_ = C._g_object_steal_data((*C.GObject)(_self_._value_), _cgo_key_)
+	return
+}
+
+func (_self_ *GObjectObject) StealQdata(quark C.GQuark) (_return_ C.gpointer) {
+	_return_ = C.g_object_steal_qdata((*C.GObject)(_self_._value_), quark)
+	return
+}
+
+func (_self_ *GObjectObject) ThawNotify() () {
+	C.g_object_thaw_notify((*C.GObject)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectObject) Unref() () {
+	C._g_object_unref((*C.GObject)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectObject) WatchClosure(closure *GObjectClosure) () {
+	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
+	C.g_object_watch_closure((*C.GObject)(_self_._value_), _cgo_closure_)
+	return
+}
+
+func (_self_ *GObjectObject) WeakRef(notify C.GWeakNotify, data C.gpointer) () {
+	C.g_object_weak_ref((*C.GObject)(_self_._value_), notify, data)
+	return
+}
+
+func (_self_ *GObjectObject) WeakUnref(notify C.GWeakNotify, data C.gpointer) () {
+	C.g_object_weak_unref((*C.GObject)(_self_._value_), notify, data)
+	return
+}
+
+func ParamSpecInternal(param_type C.GType, name string, nick string, blurb string, flags C.GParamFlags) (_return_ C.gpointer) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_nick_ := C.CString(nick)
+	_cgo_nick_ := (*C.gchar)(unsafe.Pointer(_cstring_nick_))
+	defer C.free(unsafe.Pointer(_cstring_nick_))
+	_cstring_blurb_ := C.CString(blurb)
+	_cgo_blurb_ := (*C.gchar)(unsafe.Pointer(_cstring_blurb_))
+	defer C.free(unsafe.Pointer(_cstring_blurb_))
+	_return_ = C._g_param_spec_internal(param_type, _cgo_name_, _cgo_nick_, _cgo_blurb_, flags)
+	return
+}
+
+func (_self_ *GObjectParamSpec) GetBlurb() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_param_spec_get_blurb((*C.GParamSpec)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GObjectParamSpec) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_param_spec_get_name((*C.GParamSpec)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GObjectParamSpec) GetNick() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_param_spec_get_nick((*C.GParamSpec)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GObjectParamSpec) GetQdata(quark C.GQuark) (_return_ C.gpointer) {
+	_return_ = C.g_param_spec_get_qdata((*C.GParamSpec)(_self_._value_), quark)
+	return
+}
+
+func (_self_ *GObjectParamSpec) GetRedirectTarget() (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_return_ = C.g_param_spec_get_redirect_target((*C.GParamSpec)(_self_._value_))
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectParamSpec) Ref() (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_return_ = C.g_param_spec_ref((*C.GParamSpec)(_self_._value_))
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectParamSpec) RefSink() (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_return_ = C.g_param_spec_ref_sink((*C.GParamSpec)(_self_._value_))
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectParamSpec) SetQdata(quark C.GQuark, data C.gpointer) () {
+	C.g_param_spec_set_qdata((*C.GParamSpec)(_self_._value_), quark, data)
+	return
+}
+
+func (_self_ *GObjectParamSpec) SetQdataFull(quark C.GQuark, data C.gpointer, destroy C.GDestroyNotify) () {
+	C.g_param_spec_set_qdata_full((*C.GParamSpec)(_self_._value_), quark, data, destroy)
+	return
+}
+
+func (_self_ *GObjectParamSpec) Sink() () {
+	C.g_param_spec_sink((*C.GParamSpec)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectParamSpec) StealQdata(quark C.GQuark) (_return_ C.gpointer) {
+	_return_ = C.g_param_spec_steal_qdata((*C.GParamSpec)(_self_._value_), quark)
+	return
+}
+
+func (_self_ *GObjectParamSpec) Unref() () {
+	C.g_param_spec_unref((*C.GParamSpec)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectTypeModule) AddInterface(instance_type C.GType, interface_type C.GType, interface_info *GObjectInterfaceInfo) () {
+	_cgo_interface_info_ := (*C.GInterfaceInfo)(unsafe.Pointer(interface_info))
+	C._g_type_module_add_interface((*C.GTypeModule)(_self_._value_), instance_type, interface_type, _cgo_interface_info_)
+	return
+}
+
+func (_self_ *GObjectTypeModule) RegisterEnum(name string, const_static_values *GObjectEnumValue) (_return_ C.GType) {
+	_cgo_const_static_values_ := (*C.GEnumValue)(unsafe.Pointer(const_static_values))
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_type_module_register_enum((*C.GTypeModule)(_self_._value_), _cgo_name_, _cgo_const_static_values_)
+	return
+}
+
+func (_self_ *GObjectTypeModule) RegisterFlags(name string, const_static_values *GObjectFlagsValue) (_return_ C.GType) {
+	_cgo_const_static_values_ := (*C.GFlagsValue)(unsafe.Pointer(const_static_values))
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_type_module_register_flags((*C.GTypeModule)(_self_._value_), _cgo_name_, _cgo_const_static_values_)
+	return
+}
+
+func (_self_ *GObjectTypeModule) RegisterType(parent_type C.GType, type_name string, type_info *GObjectTypeInfo, flags C.GTypeFlags) (_return_ C.GType) {
+	_cgo_type_info_ := (*C.GTypeInfo)(unsafe.Pointer(type_info))
+	_cstring_type_name_ := C.CString(type_name)
+	_cgo_type_name_ := (*C.gchar)(unsafe.Pointer(_cstring_type_name_))
+	defer C.free(unsafe.Pointer(_cstring_type_name_))
+	_return_ = C._g_type_module_register_type((*C.GTypeModule)(_self_._value_), parent_type, _cgo_type_name_, _cgo_type_info_, flags)
+	return
+}
+
+func (_self_ *GObjectTypeModule) SetName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._g_type_module_set_name((*C.GTypeModule)(_self_._value_), _cgo_name_)
+	return
+}
+
+func (_self_ *GObjectTypeModule) Unuse() () {
+	C.g_type_module_unuse((*C.GTypeModule)(_self_._value_))
+	return
+}
+
+func (_self_ *GObjectTypeModule) Use() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.g_type_module_use((*C.GTypeModule)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ClosureNewObject(sizeof_closure uint, object GObjectObjectKind) (_go__return__ *GObjectClosure) {
+	_cgo_object_ := (*C.GObject)(object._getValue())
+	var _return_ *C.GClosure
+	_cgo_sizeof_closure_ := (C.guint)(sizeof_closure)
+	_return_ = C.g_closure_new_object(_cgo_sizeof_closure_, _cgo_object_)
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
+	return
+}
+
+func ClosureNewSimple(sizeof_closure uint, data C.gpointer) (_go__return__ *GObjectClosure) {
+	var _return_ *C.GClosure
+	_cgo_sizeof_closure_ := (C.guint)(sizeof_closure)
+	_return_ = C.g_closure_new_simple(_cgo_sizeof_closure_, data)
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectClosure) AddFinalizeNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
+	C.g_closure_add_finalize_notifier((*C.GClosure)(_self_), notify_data, notify_func)
+	return
+}
+
+func (_self_ *GObjectClosure) AddInvalidateNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
+	C.g_closure_add_invalidate_notifier((*C.GClosure)(_self_), notify_data, notify_func)
+	return
+}
+
+func (_self_ *GObjectClosure) AddMarshalGuards(pre_marshal_data C.gpointer, pre_marshal_notify C.GClosureNotify, post_marshal_data C.gpointer, post_marshal_notify C.GClosureNotify) () {
+	C.g_closure_add_marshal_guards((*C.GClosure)(_self_), pre_marshal_data, pre_marshal_notify, post_marshal_data, post_marshal_notify)
+	return
+}
+
+func (_self_ *GObjectClosure) Invalidate() () {
+	C.g_closure_invalidate((*C.GClosure)(_self_))
+	return
+}
+
+func (_self_ *GObjectClosure) Ref() (_go__return__ *GObjectClosure) {
+	var _return_ *C.GClosure
+	_return_ = C.g_closure_ref((*C.GClosure)(_self_))
+	_go__return__ = (*GObjectClosure)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectClosure) RemoveFinalizeNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
+	C.g_closure_remove_finalize_notifier((*C.GClosure)(_self_), notify_data, notify_func)
+	return
+}
+
+func (_self_ *GObjectClosure) RemoveInvalidateNotifier(notify_data C.gpointer, notify_func C.GClosureNotify) () {
+	C.g_closure_remove_invalidate_notifier((*C.GClosure)(_self_), notify_data, notify_func)
+	return
+}
+
+func (_self_ *GObjectClosure) SetMarshal(marshal C.GClosureMarshal) () {
+	C.g_closure_set_marshal((*C.GClosure)(_self_), marshal)
+	return
+}
+
+func (_self_ *GObjectClosure) SetMetaMarshal(marshal_data C.gpointer, meta_marshal C.GClosureMarshal) () {
+	C.g_closure_set_meta_marshal((*C.GClosure)(_self_), marshal_data, meta_marshal)
+	return
+}
+
+func (_self_ *GObjectClosure) Sink() () {
+	C.g_closure_sink((*C.GClosure)(_self_))
+	return
+}
+
+func (_self_ *GObjectClosure) Unref() () {
+	C.g_closure_unref((*C.GClosure)(_self_))
+	return
+}
+
+func (_self_ *GObjectObjectClass) FindProperty(property_name string) (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._g_object_class_find_property((*C.GObjectClass)(_self_), _cgo_property_name_)
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectObjectClass) InstallProperty(property_id uint, pspec GObjectParamSpecKind) () {
+	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_property_id_ := (C.guint)(property_id)
+	C.g_object_class_install_property((*C.GObjectClass)(_self_), _cgo_property_id_, _cgo_pspec_)
+	return
+}
+
+func (_self_ *GObjectObjectClass) ListProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+	var n_properties C.guint
+	_return_ = C._g_object_class_list_properties((*C.GObjectClass)(_self_), &n_properties)
+	_go_n_properties_ = (uint)(n_properties)
+	return
+}
+
+func (_self_ *GObjectObjectClass) OverrideProperty(property_id uint, name string) () {
+	_cgo_property_id_ := (C.guint)(property_id)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._g_object_class_override_property((*C.GObjectClass)(_self_), _cgo_property_id_, _cgo_name_)
+	return
+}
+
+func (_self_ *GObjectParamSpecPool) Insert(pspec GObjectParamSpecKind, owner_type C.GType) () {
+	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	C.g_param_spec_pool_insert((*C.GParamSpecPool)(_self_), _cgo_pspec_, owner_type)
+	return
+}
+
+func (_self_ *GObjectParamSpecPool) List(owner_type C.GType) (_return_ unsafe.Pointer, _go_n_pspecs_p_ uint) {
+	var n_pspecs_p C.guint
+	_return_ = C._g_param_spec_pool_list((*C.GParamSpecPool)(_self_), owner_type, &n_pspecs_p)
+	_go_n_pspecs_p_ = (uint)(n_pspecs_p)
+	return
+}
+
+func (_self_ *GObjectParamSpecPool) ListOwned(owner_type C.GType) (_return_ *C.GList) {
+	_return_ = C.g_param_spec_pool_list_owned((*C.GParamSpecPool)(_self_), owner_type)
+	return
+}
+
+func (_self_ *GObjectParamSpecPool) Lookup(param_name string, owner_type C.GType, walk_ancestors bool) (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_cstring_param_name_ := C.CString(param_name)
+	_cgo_param_name_ := (*C.gchar)(unsafe.Pointer(_cstring_param_name_))
+	defer C.free(unsafe.Pointer(_cstring_param_name_))
+	_cgo_walk_ancestors_ := (C.gboolean)(C.FALSE)
+	if walk_ancestors { _cgo_walk_ancestors_ = (C.gboolean)(C.TRUE) }
+	_return_ = C._g_param_spec_pool_lookup((*C.GParamSpecPool)(_self_), _cgo_param_name_, owner_type, _cgo_walk_ancestors_)
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectParamSpecPool) Remove(pspec GObjectParamSpecKind) () {
+	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	C.g_param_spec_pool_remove((*C.GParamSpecPool)(_self_), _cgo_pspec_)
+	return
+}
+
+func (_self_ *GObjectTypeClass) GetPrivate(private_type C.GType) (_return_ C.gpointer) {
+	_return_ = C.g_type_class_get_private((*C.GTypeClass)(_self_), private_type)
+	return
+}
+
+func (_self_ *GObjectTypeClass) PeekParent() (_go__return__ *GObjectTypeClass) {
+	var _return_ C.gpointer
+	_return_ = C._g_type_class_peek_parent((*C.GTypeClass)(_self_))
+	_go__return__ = (*GObjectTypeClass)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectTypeClass) Unref() () {
+	C._g_type_class_unref((*C.GTypeClass)(_self_))
+	return
+}
+
+func (_self_ *GObjectTypeClass) UnrefUncached() () {
+	C._g_type_class_unref_uncached((*C.GTypeClass)(_self_))
+	return
+}
+
+func (_self_ *GObjectTypeInstance) GetPrivate(private_type C.GType) (_return_ C.gpointer) {
+	_return_ = C.g_type_instance_get_private((*C.GTypeInstance)(_self_), private_type)
+	return
+}
+
+func (_self_ *GObjectTypeInterface) PeekParent() (_go__return__ *GObjectTypeInterface) {
+	var _return_ C.gpointer
+	_return_ = C._g_type_interface_peek_parent((*C.GTypeInterface)(_self_))
+	_go__return__ = (*GObjectTypeInterface)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) Copy(dest_value *GObjectValue) () {
+	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
+	C._g_value_copy((*C.GValue)(_self_), _cgo_dest_value_)
+	return
+}
+
+func (_self_ *GObjectValue) DupBoxed() (_return_ C.gpointer) {
+	_return_ = C._g_value_dup_boxed((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) DupObject() (_go__return__ GObjectObject) {
+	var _return_ C.gpointer
+	_return_ = C._g_value_dup_object((*C.GValue)(_self_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) DupParam() (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_return_ = C._g_value_dup_param((*C.GValue)(_self_))
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) DupString() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_value_dup_string((*C.GValue)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GObjectValue) DupVariant() (_return_ *C.GVariant) {
+	_return_ = C._g_value_dup_variant((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) FitsPointer() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._g_value_fits_pointer((*C.GValue)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectValue) GetBoolean() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._g_value_get_boolean((*C.GValue)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectValue) GetBoxed() (_return_ C.gpointer) {
+	_return_ = C._g_value_get_boxed((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) GetDouble() (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C._g_value_get_double((*C.GValue)(_self_))
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetEnum() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._g_value_get_enum((*C.GValue)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetFlags() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C._g_value_get_flags((*C.GValue)(_self_))
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetFloat() (_go__return__ float64) {
+	var _return_ C.gfloat
+	_return_ = C._g_value_get_float((*C.GValue)(_self_))
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetGtype() (_return_ C.GType) {
+	_return_ = C._g_value_get_gtype((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) GetInt() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._g_value_get_int((*C.GValue)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetInt64() (_go__return__ int64) {
+	var _return_ C.gint64
+	_return_ = C._g_value_get_int64((*C.GValue)(_self_))
+	_go__return__ = (int64)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetLong() (_go__return__ int64) {
+	var _return_ C.glong
+	_return_ = C._g_value_get_long((*C.GValue)(_self_))
+	_go__return__ = (int64)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetObject() (_go__return__ GObjectObject) {
+	var _return_ C.gpointer
+	_return_ = C._g_value_get_object((*C.GValue)(_self_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) GetParam() (_go__return__ GObjectParamSpec) {
+	var _return_ *C.GParamSpec
+	_return_ = C._g_value_get_param((*C.GValue)(_self_))
+	_go__return__ = ToGObjectParamSpec(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) GetPointer() (_return_ C.gpointer) {
+	_return_ = C._g_value_get_pointer((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) GetSchar() (_go__return__ int8) {
+	var _return_ C.gint8
+	_return_ = C._g_value_get_schar((*C.GValue)(_self_))
+	_go__return__ = (int8)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetString() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_value_get_string((*C.GValue)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GObjectValue) GetUchar() (_go__return__ byte) {
+	var _return_ C.guchar
+	_return_ = C._g_value_get_uchar((*C.GValue)(_self_))
+	_go__return__ = (byte)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetUint() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C._g_value_get_uint((*C.GValue)(_self_))
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetUint64() (_go__return__ uint64) {
+	var _return_ C.guint64
+	_return_ = C._g_value_get_uint64((*C.GValue)(_self_))
+	_go__return__ = (uint64)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetUlong() (_go__return__ uint64) {
+	var _return_ C.gulong
+	_return_ = C._g_value_get_ulong((*C.GValue)(_self_))
+	_go__return__ = (uint64)(_return_)
+	return
+}
+
+func (_self_ *GObjectValue) GetVariant() (_return_ *C.GVariant) {
+	_return_ = C._g_value_get_variant((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) Init(g_type C.GType) (_go__return__ *GObjectValue) {
+	var _return_ *C.GValue
+	_return_ = C.g_value_init((*C.GValue)(_self_), g_type)
+	_go__return__ = (*GObjectValue)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) PeekPointer() (_return_ C.gpointer) {
+	_return_ = C._g_value_peek_pointer((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectValue) Reset() (_go__return__ *GObjectValue) {
+	var _return_ *C.GValue
+	_return_ = C.g_value_reset((*C.GValue)(_self_))
+	_go__return__ = (*GObjectValue)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectValue) SetBoolean(v_boolean bool) () {
+	_cgo_v_boolean_ := (C.gboolean)(C.FALSE)
+	if v_boolean { _cgo_v_boolean_ = (C.gboolean)(C.TRUE) }
+	C.g_value_set_boolean((*C.GValue)(_self_), _cgo_v_boolean_)
+	return
+}
+
+func (_self_ *GObjectValue) SetBoxed(v_boxed C.gpointer) () {
+	C._g_value_set_boxed((*C.GValue)(_self_), v_boxed)
+	return
+}
+
+func (_self_ *GObjectValue) SetDouble(v_double float64) () {
+	_cgo_v_double_ := (C.gdouble)(v_double)
+	C.g_value_set_double((*C.GValue)(_self_), _cgo_v_double_)
+	return
+}
+
+func (_self_ *GObjectValue) SetEnum(v_enum int) () {
+	_cgo_v_enum_ := (C.gint)(v_enum)
+	C.g_value_set_enum((*C.GValue)(_self_), _cgo_v_enum_)
+	return
+}
+
+func (_self_ *GObjectValue) SetFlags(v_flags uint) () {
+	_cgo_v_flags_ := (C.guint)(v_flags)
+	C.g_value_set_flags((*C.GValue)(_self_), _cgo_v_flags_)
+	return
+}
+
+func (_self_ *GObjectValue) SetFloat(v_float float64) () {
+	_cgo_v_float_ := (C.gfloat)(v_float)
+	C.g_value_set_float((*C.GValue)(_self_), _cgo_v_float_)
+	return
+}
+
+func (_self_ *GObjectValue) SetGtype(v_gtype C.GType) () {
+	C.g_value_set_gtype((*C.GValue)(_self_), v_gtype)
+	return
+}
+
+func (_self_ *GObjectValue) SetInstance(instance C.gpointer) () {
+	C.g_value_set_instance((*C.GValue)(_self_), instance)
+	return
+}
+
+func (_self_ *GObjectValue) SetInt(v_int int) () {
+	_cgo_v_int_ := (C.gint)(v_int)
+	C.g_value_set_int((*C.GValue)(_self_), _cgo_v_int_)
+	return
+}
+
+func (_self_ *GObjectValue) SetInt64(v_int64 int64) () {
+	_cgo_v_int64_ := (C.gint64)(v_int64)
+	C.g_value_set_int64((*C.GValue)(_self_), _cgo_v_int64_)
+	return
+}
+
+func (_self_ *GObjectValue) SetLong(v_long int64) () {
+	_cgo_v_long_ := (C.glong)(v_long)
+	C.g_value_set_long((*C.GValue)(_self_), _cgo_v_long_)
+	return
+}
+
+func (_self_ *GObjectValue) SetObject(v_object GObjectObjectKind) () {
+	_cgo_v_object_ := (C.gpointer)(v_object._getValue())
+	C.g_value_set_object((*C.GValue)(_self_), _cgo_v_object_)
+	return
+}
+
+func (_self_ *GObjectValue) SetParam(param GObjectParamSpecKind) () {
+	_cgo_param_ := (*C.GParamSpec)(param._getValue())
+	C.g_value_set_param((*C.GValue)(_self_), _cgo_param_)
+	return
+}
+
+func (_self_ *GObjectValue) SetPointer(v_pointer C.gpointer) () {
+	C.g_value_set_pointer((*C.GValue)(_self_), v_pointer)
+	return
+}
+
+func (_self_ *GObjectValue) SetSchar(v_char int8) () {
+	_cgo_v_char_ := (C.gint8)(v_char)
+	C.g_value_set_schar((*C.GValue)(_self_), _cgo_v_char_)
+	return
+}
+
+func (_self_ *GObjectValue) SetStaticBoxed(v_boxed C.gpointer) () {
+	C._g_value_set_static_boxed((*C.GValue)(_self_), v_boxed)
+	return
+}
+
+func (_self_ *GObjectValue) SetStaticString(v_string string) () {
+	_cstring_v_string_ := C.CString(v_string)
+	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
+	defer C.free(unsafe.Pointer(_cstring_v_string_))
+	C._g_value_set_static_string((*C.GValue)(_self_), _cgo_v_string_)
+	return
+}
+
+func (_self_ *GObjectValue) SetString(v_string string) () {
+	_cstring_v_string_ := C.CString(v_string)
+	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
+	defer C.free(unsafe.Pointer(_cstring_v_string_))
+	C._g_value_set_string((*C.GValue)(_self_), _cgo_v_string_)
+	return
+}
+
+func (_self_ *GObjectValue) SetUchar(v_uchar byte) () {
+	_cgo_v_uchar_ := (C.guchar)(v_uchar)
+	C.g_value_set_uchar((*C.GValue)(_self_), _cgo_v_uchar_)
+	return
+}
+
+func (_self_ *GObjectValue) SetUint(v_uint uint) () {
+	_cgo_v_uint_ := (C.guint)(v_uint)
+	C.g_value_set_uint((*C.GValue)(_self_), _cgo_v_uint_)
+	return
+}
+
+func (_self_ *GObjectValue) SetUint64(v_uint64 uint64) () {
+	_cgo_v_uint64_ := (C.guint64)(v_uint64)
+	C.g_value_set_uint64((*C.GValue)(_self_), _cgo_v_uint64_)
+	return
+}
+
+func (_self_ *GObjectValue) SetUlong(v_ulong uint64) () {
+	_cgo_v_ulong_ := (C.gulong)(v_ulong)
+	C.g_value_set_ulong((*C.GValue)(_self_), _cgo_v_ulong_)
+	return
+}
+
+func (_self_ *GObjectValue) SetVariant(variant *C.GVariant) () {
+	C.g_value_set_variant((*C.GValue)(_self_), variant)
+	return
+}
+
+func (_self_ *GObjectValue) TakeBoxed(v_boxed C.gpointer) () {
+	C._g_value_take_boxed((*C.GValue)(_self_), v_boxed)
+	return
+}
+
+func (_self_ *GObjectValue) TakeObject(v_object C.gpointer) () {
+	C.g_value_take_object((*C.GValue)(_self_), v_object)
+	return
+}
+
+func (_self_ *GObjectValue) TakeParam(param GObjectParamSpecKind) () {
+	_cgo_param_ := (*C.GParamSpec)(param._getValue())
+	C.g_value_take_param((*C.GValue)(_self_), _cgo_param_)
+	return
+}
+
+func (_self_ *GObjectValue) TakeString(v_string string) () {
+	_cstring_v_string_ := C.CString(v_string)
+	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
+	defer C.free(unsafe.Pointer(_cstring_v_string_))
+	C.g_value_take_string((*C.GValue)(_self_), _cgo_v_string_)
+	return
+}
+
+func (_self_ *GObjectValue) TakeVariant(variant *C.GVariant) () {
+	C.g_value_take_variant((*C.GValue)(_self_), variant)
+	return
+}
+
+func (_self_ *GObjectValue) Transform(dest_value *GObjectValue) (_go__return__ bool) {
+	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
+	var _return_ C.gboolean
+	_return_ = C._g_value_transform((*C.GValue)(_self_), _cgo_dest_value_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GObjectValue) Unset() () {
+	C.g_value_unset((*C.GValue)(_self_))
+	return
+}
+
+func (_self_ *GObjectWeakRef) Clear() () {
+	C.g_weak_ref_clear((*C.GWeakRef)(_self_))
+	return
+}
+
+func (_self_ *GObjectWeakRef) Get() (_go__return__ GObjectObject) {
+	var _return_ C.gpointer
+	_return_ = C.g_weak_ref_get((*C.GWeakRef)(_self_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GObjectWeakRef) Init(object C.gpointer) () {
+	C.g_weak_ref_init((*C.GWeakRef)(_self_), object)
+	return
+}
+
+func (_self_ *GObjectWeakRef) Set(object C.gpointer) () {
+	C.g_weak_ref_set((*C.GWeakRef)(_self_), object)
+	return
+}
+
 const PARAM_READWRITE = C.G_PARAM_READWRITE
-const PARAM_STATIC_STRINGS = C.G_PARAM_STATIC_STRINGS
-const PARAM_USER_SHIFT = C.G_PARAM_USER_SHIFT
-const SIGNAL_FLAGS_MASK = C.G_SIGNAL_FLAGS_MASK
-const SIGNAL_MATCH_MASK = C.G_SIGNAL_MATCH_MASK
+const TYPE_FLAG_INSTANTIATABLE = C.G_TYPE_FLAG_INSTANTIATABLE
+const PARAM_STATIC_NICK = C.G_PARAM_STATIC_NICK
+const SIGNAL_ACTION = C.G_SIGNAL_ACTION
 const TYPE_FLAG_RESERVED_ID_BIT = C.G_TYPE_FLAG_RESERVED_ID_BIT
+const BINDING_BIDIRECTIONAL = C.G_BINDING_BIDIRECTIONAL
+const TYPE_FLAG_DERIVABLE = C.G_TYPE_FLAG_DERIVABLE
+const PARAM_STATIC_BLURB = C.G_PARAM_STATIC_BLURB
+const SIGNAL_RUN_CLEANUP = C.G_SIGNAL_RUN_CLEANUP
+const PARAM_CONSTRUCT_ONLY = C.G_PARAM_CONSTRUCT_ONLY
 const TYPE_FUNDAMENTAL_MAX = C.G_TYPE_FUNDAMENTAL_MAX
-const TYPE_FUNDAMENTAL_SHIFT = C.G_TYPE_FUNDAMENTAL_SHIFT
-const TYPE_RESERVED_BSE_FIRST = C.G_TYPE_RESERVED_BSE_FIRST
-const TYPE_RESERVED_BSE_LAST = C.G_TYPE_RESERVED_BSE_LAST
-const TYPE_RESERVED_GLIB_FIRST = C.G_TYPE_RESERVED_GLIB_FIRST
-const TYPE_RESERVED_GLIB_LAST = C.G_TYPE_RESERVED_GLIB_LAST
+const SIGNAL_NO_HOOKS = C.G_SIGNAL_NO_HOOKS
+const BINDING_SYNC_CREATE = C.G_BINDING_SYNC_CREATE
+const PARAM_READABLE = C.G_PARAM_READABLE
+const SIGNAL_MATCH_ID = C.G_SIGNAL_MATCH_ID
+const PARAM_CONSTRUCT = C.G_PARAM_CONSTRUCT
 const TYPE_RESERVED_USER_FIRST = C.G_TYPE_RESERVED_USER_FIRST
+const PARAM_LAX_VALIDATION = C.G_PARAM_LAX_VALIDATION
+const TYPE_FLAG_DEEP_DERIVABLE = C.G_TYPE_FLAG_DEEP_DERIVABLE
+const SIGNAL_FLAGS_MASK = C.G_SIGNAL_FLAGS_MASK
+const SIGNAL_RUN_LAST = C.G_SIGNAL_RUN_LAST
+const TYPE_FLAG_ABSTRACT = C.G_TYPE_FLAG_ABSTRACT
+const TYPE_RESERVED_GLIB_LAST = C.G_TYPE_RESERVED_GLIB_LAST
+const TYPE_RESERVED_BSE_FIRST = C.G_TYPE_RESERVED_BSE_FIRST
+const SIGNAL_MATCH_MASK = C.G_SIGNAL_MATCH_MASK
+const PARAM_PRIVATE = C.G_PARAM_PRIVATE
+const PARAM_MASK = C.G_PARAM_MASK
+const TYPE_FUNDAMENTAL_SHIFT = C.G_TYPE_FUNDAMENTAL_SHIFT
+const CONNECT_AFTER = C.G_CONNECT_AFTER
+const TYPE_DEBUG_SIGNALS = C.G_TYPE_DEBUG_SIGNALS
+const PARAM_STATIC_NAME = C.G_PARAM_STATIC_NAME
+const PARAM_DEPRECATED = C.G_PARAM_DEPRECATED
+const TYPE_DEBUG_OBJECTS = C.G_TYPE_DEBUG_OBJECTS
+const SIGNAL_MATCH_CLOSURE = C.G_SIGNAL_MATCH_CLOSURE
+const SIGNAL_NO_RECURSE = C.G_SIGNAL_NO_RECURSE
+const TYPE_DEBUG_MASK = C.G_TYPE_DEBUG_MASK
+const SIGNAL_MATCH_FUNC = C.G_SIGNAL_MATCH_FUNC
+const PARAM_STATIC_STRINGS = C.G_PARAM_STATIC_STRINGS
+const TYPE_RESERVED_BSE_LAST = C.G_TYPE_RESERVED_BSE_LAST
 const VALUE_NOCOPY_CONTENTS = C.G_VALUE_NOCOPY_CONTENTS
+const SIGNAL_MATCH_DATA = C.G_SIGNAL_MATCH_DATA
+const BINDING_DEFAULT = C.G_BINDING_DEFAULT
+const CONNECT_SWAPPED = C.G_CONNECT_SWAPPED
+const SIGNAL_MATCH_UNBLOCKED = C.G_SIGNAL_MATCH_UNBLOCKED
+const SIGNAL_DETAILED = C.G_SIGNAL_DETAILED
+const SIGNAL_MATCH_DETAIL = C.G_SIGNAL_MATCH_DETAIL
+const TYPE_FLAG_CLASSED = C.G_TYPE_FLAG_CLASSED
+const BINDING_INVERT_BOOLEAN = C.G_BINDING_INVERT_BOOLEAN
+const TYPE_FLAG_VALUE_ABSTRACT = C.G_TYPE_FLAG_VALUE_ABSTRACT
+const PARAM_USER_SHIFT = C.G_PARAM_USER_SHIFT
+const SIGNAL_MUST_COLLECT = C.G_SIGNAL_MUST_COLLECT
+const PARAM_WRITABLE = C.G_PARAM_WRITABLE
+const TYPE_RESERVED_GLIB_FIRST = C.G_TYPE_RESERVED_GLIB_FIRST
+const TYPE_DEBUG_NONE = C.G_TYPE_DEBUG_NONE
+const SIGNAL_RUN_FIRST = C.G_SIGNAL_RUN_FIRST
+const SIGNAL_DEPRECATED = C.G_SIGNAL_DEPRECATED

@@ -9,6 +9,93 @@ package gtk
 // #include <glib-unix.h>
 // #include <gtk/gtkx.h>
 /*
+void _gtk_accelerator_parse(gchar * accelerator, guint * accelerator_key, GdkModifierType * accelerator_mods) {
+	(void)gtk_accelerator_parse((const gchar *)(accelerator), accelerator_key, accelerator_mods);
+}
+void _gtk_accelerator_parse_with_keycode(gchar * accelerator, guint * accelerator_key, void * accelerator_codes, GdkModifierType * accelerator_mods) {
+	(void)gtk_accelerator_parse_with_keycode((const gchar *)(accelerator), accelerator_key, (guint **)(accelerator_codes), accelerator_mods);
+}
+GTokenType _gtk_binding_entry_add_signal_from_string(GtkBindingSet * binding_set, gchar * signal_desc) {
+	return (GTokenType)gtk_binding_entry_add_signal_from_string(binding_set, (const gchar *)(signal_desc));
+}
+void _gtk_binding_entry_add_signall(GtkBindingSet * binding_set, guint keyval, GdkModifierType modifiers, gchar * signal_name, GSList * binding_args) {
+	(void)gtk_binding_entry_add_signall(binding_set, keyval, modifiers, (const gchar *)(signal_name), binding_args);
+}
+GtkBindingSet * _gtk_binding_set_find(gchar * set_name) {
+	return (GtkBindingSet *)gtk_binding_set_find((const gchar *)(set_name));
+}
+GtkBindingSet * _gtk_binding_set_new(gchar * set_name) {
+	return (GtkBindingSet *)gtk_binding_set_new((const gchar *)(set_name));
+}
+gchar * _gtk_check_version(guint required_major, guint required_minor, guint required_micro) {
+	return (gchar *)gtk_check_version(required_major, required_minor, required_micro);
+}
+void _gtk_drag_set_icon_name(GdkDragContext * context, gchar * icon_name, gint hot_x, gint hot_y) {
+	(void)gtk_drag_set_icon_name(context, (const gchar *)(icon_name), hot_x, hot_y);
+}
+void _gtk_drag_set_icon_stock(GdkDragContext * context, gchar * stock_id, gint hot_x, gint hot_y) {
+	(void)gtk_drag_set_icon_stock(context, (const gchar *)(stock_id), hot_x, hot_y);
+}
+GtkIconSize _gtk_icon_size_from_name(gchar * name) {
+	return (GtkIconSize)gtk_icon_size_from_name((const gchar *)(name));
+}
+gchar * _gtk_icon_size_get_name(GtkIconSize size) {
+	return (gchar *)gtk_icon_size_get_name(size);
+}
+GtkIconSize _gtk_icon_size_register(gchar * name, gint width, gint height) {
+	return (GtkIconSize)gtk_icon_size_register((const gchar *)(name), width, height);
+}
+void _gtk_icon_size_register_alias(gchar * alias, GtkIconSize target) {
+	(void)gtk_icon_size_register_alias((const gchar *)(alias), target);
+}
+gchar * _gtk_paper_size_get_default() {
+	return (gchar *)gtk_paper_size_get_default();
+}
+gboolean _gtk_rc_property_parse_border(GParamSpec * pspec, GString * gstring, GValue * property_value) {
+	return (gboolean)gtk_rc_property_parse_border((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
+}
+gboolean _gtk_rc_property_parse_color(GParamSpec * pspec, GString * gstring, GValue * property_value) {
+	return (gboolean)gtk_rc_property_parse_color((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
+}
+gboolean _gtk_rc_property_parse_enum(GParamSpec * pspec, GString * gstring, GValue * property_value) {
+	return (gboolean)gtk_rc_property_parse_enum((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
+}
+gboolean _gtk_rc_property_parse_flags(GParamSpec * pspec, GString * gstring, GValue * property_value) {
+	return (gboolean)gtk_rc_property_parse_flags((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
+}
+gboolean _gtk_rc_property_parse_requisition(GParamSpec * pspec, GString * gstring, GValue * property_value) {
+	return (gboolean)gtk_rc_property_parse_requisition((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
+}
+GdkPixbuf * _gtk_render_icon_pixbuf(GtkStyleContext * context, GtkIconSource * source, GtkIconSize size) {
+	return (GdkPixbuf *)gtk_render_icon_pixbuf(context, (const GtkIconSource *)(source), size);
+}
+gboolean _gtk_show_uri(GdkScreen * screen, gchar * uri, guint32 timestamp, void * error) {
+	return (gboolean)gtk_show_uri(screen, (const gchar *)(uri), timestamp, (GError **)(error));
+}
+gboolean _gtk_stock_lookup(gchar * stock_id, GtkStockItem * item) {
+	return (gboolean)gtk_stock_lookup((const gchar *)(stock_id), item);
+}
+void _gtk_stock_set_translate_func(gchar * domain, GtkTranslateFunc func, gpointer data, GDestroyNotify notify) {
+	(void)gtk_stock_set_translate_func((const gchar *)(domain), func, data, notify);
+}
+GtkWidget * _gtk_test_create_simple_window(gchar * window_title, gchar * dialog_text) {
+	return (GtkWidget *)gtk_test_create_simple_window((const gchar *)(window_title), (const gchar *)(dialog_text));
+}
+GtkWidget * _gtk_test_find_label(GtkWidget * widget, gchar * label_pattern) {
+	return (GtkWidget *)gtk_test_find_label(widget, (const gchar *)(label_pattern));
+}
+GtkWidget * _gtk_test_find_widget(GtkWidget * widget, gchar * label_pattern, GType widget_type) {
+	return (GtkWidget *)gtk_test_find_widget(widget, (const gchar *)(label_pattern), widget_type);
+}
+GType * _gtk_test_list_all_types(guint * n_types) {
+	return (GType *)gtk_test_list_all_types(n_types);
+}
+void _gtk_test_text_set(GtkWidget * widget, gchar * string) {
+	(void)gtk_test_text_set(widget, (const gchar *)(string));
+}
+gboolean _gtk_tree_get_row_drag_data(GtkSelectionData * selection_data, void * tree_model, void * path) {
+	return (gboolean)gtk_tree_get_row_drag_data(selection_data, (GtkTreeModel **)(tree_model), (GtkTreePath **)(path));
+}
 void _gtk_about_dialog_add_credit_section(GtkAboutDialog * _self_, gchar * section_name, void * people) {
 	(void)gtk_about_dialog_add_credit_section(_self_, (const gchar *)(section_name), (const gchar **)(people));
 }
@@ -219,21 +306,6 @@ gchar * _gtk_assistant_get_page_title(GtkAssistant * _self_, GtkWidget * page) {
 void _gtk_assistant_set_page_title(GtkAssistant * _self_, GtkWidget * page, gchar * title) {
 	(void)gtk_assistant_set_page_title(_self_, page, (const gchar *)(title));
 }
-GTokenType _gtk_binding_entry_add_signal_from_string(GtkBindingSet * binding_set, gchar * signal_desc) {
-	return (GTokenType)gtk_binding_entry_add_signal_from_string(binding_set, (const gchar *)(signal_desc));
-}
-void _gtk_binding_entry_add_signall(GtkBindingSet * binding_set, guint keyval, GdkModifierType modifiers, gchar * signal_name, GSList * binding_args) {
-	(void)gtk_binding_entry_add_signall(binding_set, keyval, modifiers, (const gchar *)(signal_name), binding_args);
-}
-GtkBindingSet * _gtk_binding_set_find(gchar * set_name) {
-	return (GtkBindingSet *)gtk_binding_set_find((const gchar *)(set_name));
-}
-GtkBindingSet * _gtk_binding_set_new(gchar * set_name) {
-	return (GtkBindingSet *)gtk_binding_set_new((const gchar *)(set_name));
-}
-GtkBorder * _gtk_border_copy(GtkBorder * _self_) {
-	return (GtkBorder *)gtk_border_copy((const GtkBorder *)(_self_));
-}
 guint _gtk_builder_add_from_file(GtkBuilder * _self_, gchar * filename, void * error) {
 	return (guint)gtk_builder_add_from_file(_self_, (const gchar *)(filename), (GError **)(error));
 }
@@ -317,12 +389,6 @@ void _gtk_cell_area_inner_cell_area(GtkCellArea * _self_, GtkWidget * widget, Gd
 }
 void _gtk_cell_area_render(GtkCellArea * _self_, GtkCellAreaContext * context, GtkWidget * widget, cairo_t * cr, GdkRectangle * background_area, GdkRectangle * cell_area, GtkCellRendererState flags, gboolean paint_focus) {
 	(void)gtk_cell_area_render(_self_, context, widget, cr, (const GdkRectangle *)(background_area), (const GdkRectangle *)(cell_area), flags, paint_focus);
-}
-GParamSpec * _gtk_cell_area_class_find_cell_property(GtkCellAreaClass * _self_, gchar * property_name) {
-	return (GParamSpec *)gtk_cell_area_class_find_cell_property(_self_, (const gchar *)(property_name));
-}
-void * _gtk_cell_area_class_list_cell_properties(GtkCellAreaClass * _self_, guint * n_properties) {
-	return (void *)gtk_cell_area_class_list_cell_properties(_self_, n_properties);
 }
 gboolean _gtk_cell_renderer_activate(GtkCellRenderer * _self_, GdkEvent * event, GtkWidget * widget, gchar * path, GdkRectangle * background_area, GdkRectangle * cell_area, GtkCellRendererState flags) {
 	return (gboolean)gtk_cell_renderer_activate(_self_, event, widget, (const gchar *)(path), (const GdkRectangle *)(background_area), (const GdkRectangle *)(cell_area), flags);
@@ -417,12 +483,6 @@ void _gtk_container_child_set_property(GtkContainer * _self_, GtkWidget * child,
 gboolean _gtk_container_get_focus_chain(GtkContainer * _self_, void * focusable_widgets) {
 	return (gboolean)gtk_container_get_focus_chain(_self_, (GList **)(focusable_widgets));
 }
-GParamSpec * _gtk_container_class_find_child_property(GtkContainerClass * _self_, gchar * property_name) {
-	return (GParamSpec *)gtk_container_class_find_child_property((GObjectClass *)(_self_), (const gchar *)(property_name));
-}
-void * _gtk_container_class_list_child_properties(GtkContainerClass * _self_, guint * n_properties) {
-	return (void *)gtk_container_class_list_child_properties((GObjectClass *)(_self_), n_properties);
-}
 GtkCssProvider * _gtk_css_provider_get_named(gchar * name, gchar * variant) {
 	return (GtkCssProvider *)gtk_css_provider_get_named((const gchar *)(name), (const gchar *)(variant));
 }
@@ -431,27 +491,6 @@ gboolean _gtk_css_provider_load_from_file(GtkCssProvider * _self_, GFile * file,
 }
 gboolean _gtk_css_provider_load_from_path(GtkCssProvider * _self_, gchar * path, void * error) {
 	return (gboolean)gtk_css_provider_load_from_path(_self_, (const gchar *)(path), (GError **)(error));
-}
-guint _gtk_css_section_get_end_line(GtkCssSection * _self_) {
-	return (guint)gtk_css_section_get_end_line((const GtkCssSection *)(_self_));
-}
-guint _gtk_css_section_get_end_position(GtkCssSection * _self_) {
-	return (guint)gtk_css_section_get_end_position((const GtkCssSection *)(_self_));
-}
-GFile * _gtk_css_section_get_file(GtkCssSection * _self_) {
-	return (GFile *)gtk_css_section_get_file((const GtkCssSection *)(_self_));
-}
-GtkCssSection * _gtk_css_section_get_parent(GtkCssSection * _self_) {
-	return (GtkCssSection *)gtk_css_section_get_parent((const GtkCssSection *)(_self_));
-}
-GtkCssSectionType _gtk_css_section_get_section_type(GtkCssSection * _self_) {
-	return (GtkCssSectionType)gtk_css_section_get_section_type((const GtkCssSection *)(_self_));
-}
-guint _gtk_css_section_get_start_line(GtkCssSection * _self_) {
-	return (guint)gtk_css_section_get_start_line((const GtkCssSection *)(_self_));
-}
-guint _gtk_css_section_get_start_position(GtkCssSection * _self_) {
-	return (guint)gtk_css_section_get_start_position((const GtkCssSection *)(_self_));
 }
 GtkWidget * _gtk_dialog_add_button(GtkDialog * _self_, gchar * button_text, gint response_id) {
 	return (GtkWidget *)gtk_dialog_add_button(_self_, (const gchar *)(button_text), response_id);
@@ -576,9 +615,6 @@ gchar * _gtk_frame_get_label(GtkFrame * _self_) {
 void _gtk_frame_set_label(GtkFrame * _self_, gchar * label) {
 	(void)gtk_frame_set_label(_self_, (const gchar *)(label));
 }
-gboolean _gtk_gradient_resolve(GtkGradient * _self_, GtkStyleProperties * props, void * resolved_gradient) {
-	return (gboolean)gtk_gradient_resolve(_self_, props, (cairo_pattern_t **)(resolved_gradient));
-}
 void _gtk_im_context_get_preedit_string(GtkIMContext * _self_, void * str, void * attrs, gint * cursor_pos) {
 	(void)gtk_im_context_get_preedit_string(_self_, (gchar **)(str), (PangoAttrList **)(attrs), cursor_pos);
 }
@@ -605,60 +641,6 @@ void _gtk_icon_factory_add(GtkIconFactory * _self_, gchar * stock_id, GtkIconSet
 }
 GtkIconSet * _gtk_icon_factory_lookup(GtkIconFactory * _self_, gchar * stock_id) {
 	return (GtkIconSet *)gtk_icon_factory_lookup(_self_, (const gchar *)(stock_id));
-}
-gchar * _gtk_icon_info_get_display_name(GtkIconInfo * _self_) {
-	return (gchar *)gtk_icon_info_get_display_name(_self_);
-}
-gchar * _gtk_icon_info_get_filename(GtkIconInfo * _self_) {
-	return (gchar *)gtk_icon_info_get_filename(_self_);
-}
-GdkPixbuf * _gtk_icon_info_load_icon(GtkIconInfo * _self_, void * error) {
-	return (GdkPixbuf *)gtk_icon_info_load_icon(_self_, (GError **)(error));
-}
-GdkPixbuf * _gtk_icon_info_load_symbolic(GtkIconInfo * _self_, GdkRGBA * fg, GdkRGBA * success_color, GdkRGBA * warning_color, GdkRGBA * error_color, gboolean * was_symbolic, void * error) {
-	return (GdkPixbuf *)gtk_icon_info_load_symbolic(_self_, (const GdkRGBA *)(fg), (const GdkRGBA *)(success_color), (const GdkRGBA *)(warning_color), (const GdkRGBA *)(error_color), was_symbolic, (GError **)(error));
-}
-GdkPixbuf * _gtk_icon_info_load_symbolic_for_context(GtkIconInfo * _self_, GtkStyleContext * context, gboolean * was_symbolic, void * error) {
-	return (GdkPixbuf *)gtk_icon_info_load_symbolic_for_context(_self_, context, was_symbolic, (GError **)(error));
-}
-void _gtk_icon_set_add_source(GtkIconSet * _self_, GtkIconSource * source) {
-	(void)gtk_icon_set_add_source(_self_, (const GtkIconSource *)(source));
-}
-GtkIconSource * _gtk_icon_source_copy(GtkIconSource * _self_) {
-	return (GtkIconSource *)gtk_icon_source_copy((const GtkIconSource *)(_self_));
-}
-GtkTextDirection _gtk_icon_source_get_direction(GtkIconSource * _self_) {
-	return (GtkTextDirection)gtk_icon_source_get_direction((const GtkIconSource *)(_self_));
-}
-gboolean _gtk_icon_source_get_direction_wildcarded(GtkIconSource * _self_) {
-	return (gboolean)gtk_icon_source_get_direction_wildcarded((const GtkIconSource *)(_self_));
-}
-gchar * _gtk_icon_source_get_filename(GtkIconSource * _self_) {
-	return (gchar *)gtk_icon_source_get_filename((const GtkIconSource *)(_self_));
-}
-gchar * _gtk_icon_source_get_icon_name(GtkIconSource * _self_) {
-	return (gchar *)gtk_icon_source_get_icon_name((const GtkIconSource *)(_self_));
-}
-GdkPixbuf * _gtk_icon_source_get_pixbuf(GtkIconSource * _self_) {
-	return (GdkPixbuf *)gtk_icon_source_get_pixbuf((const GtkIconSource *)(_self_));
-}
-GtkIconSize _gtk_icon_source_get_size(GtkIconSource * _self_) {
-	return (GtkIconSize)gtk_icon_source_get_size((const GtkIconSource *)(_self_));
-}
-gboolean _gtk_icon_source_get_size_wildcarded(GtkIconSource * _self_) {
-	return (gboolean)gtk_icon_source_get_size_wildcarded((const GtkIconSource *)(_self_));
-}
-GtkStateType _gtk_icon_source_get_state(GtkIconSource * _self_) {
-	return (GtkStateType)gtk_icon_source_get_state((const GtkIconSource *)(_self_));
-}
-gboolean _gtk_icon_source_get_state_wildcarded(GtkIconSource * _self_) {
-	return (gboolean)gtk_icon_source_get_state_wildcarded((const GtkIconSource *)(_self_));
-}
-void _gtk_icon_source_set_filename(GtkIconSource * _self_, gchar * filename) {
-	(void)gtk_icon_source_set_filename(_self_, (const gchar *)(filename));
-}
-void _gtk_icon_source_set_icon_name(GtkIconSource * _self_, gchar * icon_name) {
-	(void)gtk_icon_source_set_icon_name(_self_, (const gchar *)(icon_name));
 }
 void _gtk_icon_theme_add_builtin_icon(gchar * icon_name, gint size, GdkPixbuf * pixbuf) {
 	(void)gtk_icon_theme_add_builtin_icon((const gchar *)(icon_name), size, pixbuf);
@@ -900,33 +882,6 @@ gboolean _gtk_page_setup_to_file(GtkPageSetup * _self_, char * file_name, void *
 void _gtk_page_setup_to_key_file(GtkPageSetup * _self_, GKeyFile * key_file, gchar * group_name) {
 	(void)gtk_page_setup_to_key_file(_self_, key_file, (const gchar *)(group_name));
 }
-GtkPaperSize * _gtk_paper_size_new(gchar * name) {
-	return (GtkPaperSize *)gtk_paper_size_new((const gchar *)(name));
-}
-GtkPaperSize * _gtk_paper_size_new_custom(gchar * name, gchar * display_name, gdouble width, gdouble height, GtkUnit unit) {
-	return (GtkPaperSize *)gtk_paper_size_new_custom((const gchar *)(name), (const gchar *)(display_name), width, height, unit);
-}
-GtkPaperSize * _gtk_paper_size_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * error) {
-	return (GtkPaperSize *)gtk_paper_size_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(error));
-}
-GtkPaperSize * _gtk_paper_size_new_from_ppd(gchar * ppd_name, gchar * ppd_display_name, gdouble width, gdouble height) {
-	return (GtkPaperSize *)gtk_paper_size_new_from_ppd((const gchar *)(ppd_name), (const gchar *)(ppd_display_name), width, height);
-}
-gchar * _gtk_paper_size_get_default() {
-	return (gchar *)gtk_paper_size_get_default();
-}
-gchar * _gtk_paper_size_get_display_name(GtkPaperSize * _self_) {
-	return (gchar *)gtk_paper_size_get_display_name(_self_);
-}
-gchar * _gtk_paper_size_get_name(GtkPaperSize * _self_) {
-	return (gchar *)gtk_paper_size_get_name(_self_);
-}
-gchar * _gtk_paper_size_get_ppd_name(GtkPaperSize * _self_) {
-	return (gchar *)gtk_paper_size_get_ppd_name(_self_);
-}
-void _gtk_paper_size_to_key_file(GtkPaperSize * _self_, GKeyFile * key_file, gchar * group_name) {
-	(void)gtk_paper_size_to_key_file(_self_, key_file, (const gchar *)(group_name));
-}
 void _gtk_print_operation_get_error(GtkPrintOperation * _self_, void * error) {
 	(void)gtk_print_operation_get_error(_self_, (GError **)(error));
 }
@@ -1107,36 +1062,6 @@ gchar * _gtk_recent_filter_get_name(GtkRecentFilter * _self_) {
 void _gtk_recent_filter_set_name(GtkRecentFilter * _self_, gchar * name) {
 	(void)gtk_recent_filter_set_name(_self_, (const gchar *)(name));
 }
-GAppInfo * _gtk_recent_info_create_app_info(GtkRecentInfo * _self_, gchar * app_name, void * error) {
-	return (GAppInfo *)gtk_recent_info_create_app_info(_self_, (const gchar *)(app_name), (GError **)(error));
-}
-gboolean _gtk_recent_info_get_application_info(GtkRecentInfo * _self_, gchar * app_name, void * app_exec, guint * count, time_t * time_) {
-	return (gboolean)gtk_recent_info_get_application_info(_self_, (const gchar *)(app_name), (const gchar **)(app_exec), count, time_);
-}
-void * _gtk_recent_info_get_applications(GtkRecentInfo * _self_, gsize * length) {
-	return (void *)gtk_recent_info_get_applications(_self_, length);
-}
-gchar * _gtk_recent_info_get_description(GtkRecentInfo * _self_) {
-	return (gchar *)gtk_recent_info_get_description(_self_);
-}
-gchar * _gtk_recent_info_get_display_name(GtkRecentInfo * _self_) {
-	return (gchar *)gtk_recent_info_get_display_name(_self_);
-}
-void * _gtk_recent_info_get_groups(GtkRecentInfo * _self_, gsize * length) {
-	return (void *)gtk_recent_info_get_groups(_self_, length);
-}
-gchar * _gtk_recent_info_get_mime_type(GtkRecentInfo * _self_) {
-	return (gchar *)gtk_recent_info_get_mime_type(_self_);
-}
-gchar * _gtk_recent_info_get_uri(GtkRecentInfo * _self_) {
-	return (gchar *)gtk_recent_info_get_uri(_self_);
-}
-gboolean _gtk_recent_info_has_application(GtkRecentInfo * _self_, gchar * app_name) {
-	return (gboolean)gtk_recent_info_has_application(_self_, (const gchar *)(app_name));
-}
-gboolean _gtk_recent_info_has_group(GtkRecentInfo * _self_, gchar * group_name) {
-	return (gboolean)gtk_recent_info_has_group(_self_, (const gchar *)(group_name));
-}
 gboolean _gtk_recent_manager_add_full(GtkRecentManager * _self_, gchar * uri, GtkRecentData * recent_data) {
 	return (gboolean)gtk_recent_manager_add_full(_self_, (const gchar *)(uri), (const GtkRecentData *)(recent_data));
 }
@@ -1158,62 +1083,8 @@ gint _gtk_recent_manager_purge_items(GtkRecentManager * _self_, void * error) {
 gboolean _gtk_recent_manager_remove_item(GtkRecentManager * _self_, gchar * uri, void * error) {
 	return (gboolean)gtk_recent_manager_remove_item(_self_, (const gchar *)(uri), (GError **)(error));
 }
-GtkRequisition * _gtk_requisition_copy(GtkRequisition * _self_) {
-	return (GtkRequisition *)gtk_requisition_copy((const GtkRequisition *)(_self_));
-}
 void _gtk_scale_add_mark(GtkScale * _self_, gdouble value, GtkPositionType position, gchar * markup) {
 	(void)gtk_scale_add_mark(_self_, value, position, (const gchar *)(markup));
-}
-GtkSelectionData * _gtk_selection_data_copy(GtkSelectionData * _self_) {
-	return (GtkSelectionData *)gtk_selection_data_copy((const GtkSelectionData *)(_self_));
-}
-guchar * _gtk_selection_data_get_data(GtkSelectionData * _self_) {
-	return (guchar *)gtk_selection_data_get_data((const GtkSelectionData *)(_self_));
-}
-GdkAtom _gtk_selection_data_get_data_type(GtkSelectionData * _self_) {
-	return (GdkAtom)gtk_selection_data_get_data_type((const GtkSelectionData *)(_self_));
-}
-guchar * _gtk_selection_data_get_data_with_length(GtkSelectionData * _self_, gint * length) {
-	return (guchar *)gtk_selection_data_get_data_with_length((const GtkSelectionData *)(_self_), length);
-}
-GdkDisplay * _gtk_selection_data_get_display(GtkSelectionData * _self_) {
-	return (GdkDisplay *)gtk_selection_data_get_display((const GtkSelectionData *)(_self_));
-}
-gint _gtk_selection_data_get_format(GtkSelectionData * _self_) {
-	return (gint)gtk_selection_data_get_format((const GtkSelectionData *)(_self_));
-}
-gint _gtk_selection_data_get_length(GtkSelectionData * _self_) {
-	return (gint)gtk_selection_data_get_length((const GtkSelectionData *)(_self_));
-}
-GdkPixbuf * _gtk_selection_data_get_pixbuf(GtkSelectionData * _self_) {
-	return (GdkPixbuf *)gtk_selection_data_get_pixbuf((const GtkSelectionData *)(_self_));
-}
-GdkAtom _gtk_selection_data_get_selection(GtkSelectionData * _self_) {
-	return (GdkAtom)gtk_selection_data_get_selection((const GtkSelectionData *)(_self_));
-}
-GdkAtom _gtk_selection_data_get_target(GtkSelectionData * _self_) {
-	return (GdkAtom)gtk_selection_data_get_target((const GtkSelectionData *)(_self_));
-}
-guchar * _gtk_selection_data_get_text(GtkSelectionData * _self_) {
-	return (guchar *)gtk_selection_data_get_text((const GtkSelectionData *)(_self_));
-}
-void * _gtk_selection_data_get_uris(GtkSelectionData * _self_) {
-	return (void *)gtk_selection_data_get_uris((const GtkSelectionData *)(_self_));
-}
-gboolean _gtk_selection_data_set_text(GtkSelectionData * _self_, gchar * str, gint len) {
-	return (gboolean)gtk_selection_data_set_text(_self_, (const gchar *)(str), len);
-}
-gboolean _gtk_selection_data_targets_include_image(GtkSelectionData * _self_, gboolean writable) {
-	return (gboolean)gtk_selection_data_targets_include_image((const GtkSelectionData *)(_self_), writable);
-}
-gboolean _gtk_selection_data_targets_include_rich_text(GtkSelectionData * _self_, GtkTextBuffer * buffer) {
-	return (gboolean)gtk_selection_data_targets_include_rich_text((const GtkSelectionData *)(_self_), buffer);
-}
-gboolean _gtk_selection_data_targets_include_text(GtkSelectionData * _self_) {
-	return (gboolean)gtk_selection_data_targets_include_text((const GtkSelectionData *)(_self_));
-}
-gboolean _gtk_selection_data_targets_include_uri(GtkSelectionData * _self_) {
-	return (gboolean)gtk_selection_data_targets_include_uri((const GtkSelectionData *)(_self_));
 }
 void _gtk_settings_set_double_property(GtkSettings * _self_, gchar * name, gdouble v_double, gchar * origin) {
 	(void)gtk_settings_set_double_property(_self_, (const gchar *)(name), v_double, (const gchar *)(origin));
@@ -1275,9 +1146,6 @@ guint _gtk_statusbar_get_context_id(GtkStatusbar * _self_, gchar * context_descr
 guint _gtk_statusbar_push(GtkStatusbar * _self_, guint context_id, gchar * text) {
 	return (guint)gtk_statusbar_push(_self_, context_id, (const gchar *)(text));
 }
-GtkStockItem * _gtk_stock_item_copy(GtkStockItem * _self_) {
-	return (GtkStockItem *)gtk_stock_item_copy((const GtkStockItem *)(_self_));
-}
 void _gtk_style_context_add_class(GtkStyleContext * _self_, gchar * class_name) {
 	(void)gtk_style_context_add_class(_self_, (const gchar *)(class_name));
 }
@@ -1337,18 +1205,6 @@ void _gtk_style_properties_set_property(GtkStyleProperties * _self_, gchar * pro
 }
 void _gtk_style_properties_unset_property(GtkStyleProperties * _self_, gchar * property, GtkStateFlags state) {
 	(void)gtk_style_properties_unset_property(_self_, (const gchar *)(property), state);
-}
-GtkSymbolicColor * _gtk_symbolic_color_new_literal(GdkRGBA * color) {
-	return (GtkSymbolicColor *)gtk_symbolic_color_new_literal((const GdkRGBA *)(color));
-}
-GtkSymbolicColor * _gtk_symbolic_color_new_name(gchar * name) {
-	return (GtkSymbolicColor *)gtk_symbolic_color_new_name((const gchar *)(name));
-}
-GtkSymbolicColor * _gtk_symbolic_color_new_win32(gchar * theme_class, gint id) {
-	return (GtkSymbolicColor *)gtk_symbolic_color_new_win32((const gchar *)(theme_class), id);
-}
-GtkTargetEntry * _gtk_target_entry_new(gchar * target, guint flags, guint info) {
-	return (GtkTargetEntry *)gtk_target_entry_new((const gchar *)(target), flags, info);
 }
 void _gtk_text_buffer_add_mark(GtkTextBuffer * _self_, GtkTextMark * mark, GtkTextIter * where) {
 	(void)gtk_text_buffer_add_mark(_self_, mark, (const GtkTextIter *)(where));
@@ -1430,6 +1286,522 @@ guint8 * _gtk_text_buffer_serialize(GtkTextBuffer * _self_, GtkTextBuffer * cont
 }
 void _gtk_text_buffer_set_text(GtkTextBuffer * _self_, gchar * text, gint len) {
 	(void)gtk_text_buffer_set_text(_self_, (const gchar *)(text), len);
+}
+GtkTextMark * _gtk_text_mark_new(gchar * name, gboolean left_gravity) {
+	return (GtkTextMark *)gtk_text_mark_new((const gchar *)(name), left_gravity);
+}
+gchar * _gtk_text_mark_get_name(GtkTextMark * _self_) {
+	return (gchar *)gtk_text_mark_get_name(_self_);
+}
+GtkTextTag * _gtk_text_tag_new(gchar * name) {
+	return (GtkTextTag *)gtk_text_tag_new((const gchar *)(name));
+}
+gboolean _gtk_text_tag_event(GtkTextTag * _self_, GObject * event_object, GdkEvent * event, GtkTextIter * iter) {
+	return (gboolean)gtk_text_tag_event(_self_, event_object, event, (const GtkTextIter *)(iter));
+}
+GtkTextTag * _gtk_text_tag_table_lookup(GtkTextTagTable * _self_, gchar * name) {
+	return (GtkTextTag *)gtk_text_tag_table_lookup(_self_, (const gchar *)(name));
+}
+void _gtk_text_view_get_cursor_locations(GtkTextView * _self_, GtkTextIter * iter, GdkRectangle * strong, GdkRectangle * weak) {
+	(void)gtk_text_view_get_cursor_locations(_self_, (const GtkTextIter *)(iter), strong, weak);
+}
+void _gtk_text_view_get_iter_location(GtkTextView * _self_, GtkTextIter * iter, GdkRectangle * location) {
+	(void)gtk_text_view_get_iter_location(_self_, (const GtkTextIter *)(iter), location);
+}
+void _gtk_text_view_get_line_yrange(GtkTextView * _self_, GtkTextIter * iter, gint * y, gint * height) {
+	(void)gtk_text_view_get_line_yrange(_self_, (const GtkTextIter *)(iter), y, height);
+}
+gboolean _gtk_text_view_starts_display_line(GtkTextView * _self_, GtkTextIter * iter) {
+	return (gboolean)gtk_text_view_starts_display_line(_self_, (const GtkTextIter *)(iter));
+}
+GtkThemingEngine * _gtk_theming_engine_load(gchar * name) {
+	return (GtkThemingEngine *)gtk_theming_engine_load((const gchar *)(name));
+}
+void _gtk_theming_engine_register_property(gchar * name_space, GtkStylePropertyParser parse_func, GParamSpec * pspec) {
+	(void)gtk_theming_engine_register_property((const gchar *)(name_space), parse_func, pspec);
+}
+PangoFontDescription * _gtk_theming_engine_get_font(GtkThemingEngine * _self_, GtkStateFlags state) {
+	return (PangoFontDescription *)gtk_theming_engine_get_font(_self_, state);
+}
+GtkWidgetPath * _gtk_theming_engine_get_path(GtkThemingEngine * _self_) {
+	return (GtkWidgetPath *)gtk_theming_engine_get_path(_self_);
+}
+void _gtk_theming_engine_get_property(GtkThemingEngine * _self_, gchar * property, GtkStateFlags state, GValue * value) {
+	(void)gtk_theming_engine_get_property(_self_, (const gchar *)(property), state, value);
+}
+void _gtk_theming_engine_get_style_property(GtkThemingEngine * _self_, gchar * property_name, GValue * value) {
+	(void)gtk_theming_engine_get_style_property(_self_, (const gchar *)(property_name), value);
+}
+gboolean _gtk_theming_engine_has_class(GtkThemingEngine * _self_, gchar * style_class) {
+	return (gboolean)gtk_theming_engine_has_class(_self_, (const gchar *)(style_class));
+}
+gboolean _gtk_theming_engine_has_region(GtkThemingEngine * _self_, gchar * style_region, GtkRegionFlags * flags) {
+	return (gboolean)gtk_theming_engine_has_region(_self_, (const gchar *)(style_region), flags);
+}
+gboolean _gtk_theming_engine_lookup_color(GtkThemingEngine * _self_, gchar * color_name, GdkRGBA * color) {
+	return (gboolean)gtk_theming_engine_lookup_color(_self_, (const gchar *)(color_name), color);
+}
+GtkToggleAction * _gtk_toggle_action_new(gchar * name, gchar * label, gchar * tooltip, gchar * stock_id) {
+	return (GtkToggleAction *)gtk_toggle_action_new((const gchar *)(name), (const gchar *)(label), (const gchar *)(tooltip), (const gchar *)(stock_id));
+}
+GtkWidget * _gtk_toggle_button_new_with_label(gchar * label) {
+	return (GtkWidget *)gtk_toggle_button_new_with_label((const gchar *)(label));
+}
+GtkWidget * _gtk_toggle_button_new_with_mnemonic(gchar * label) {
+	return (GtkWidget *)gtk_toggle_button_new_with_mnemonic((const gchar *)(label));
+}
+GtkToolItem * _gtk_toggle_tool_button_new_from_stock(gchar * stock_id) {
+	return (GtkToolItem *)gtk_toggle_tool_button_new_from_stock((const gchar *)(stock_id));
+}
+GtkToolItem * _gtk_tool_button_new(GtkWidget * icon_widget, gchar * label) {
+	return (GtkToolItem *)gtk_tool_button_new(icon_widget, (const gchar *)(label));
+}
+GtkToolItem * _gtk_tool_button_new_from_stock(gchar * stock_id) {
+	return (GtkToolItem *)gtk_tool_button_new_from_stock((const gchar *)(stock_id));
+}
+gchar * _gtk_tool_button_get_icon_name(GtkToolButton * _self_) {
+	return (gchar *)gtk_tool_button_get_icon_name(_self_);
+}
+gchar * _gtk_tool_button_get_label(GtkToolButton * _self_) {
+	return (gchar *)gtk_tool_button_get_label(_self_);
+}
+gchar * _gtk_tool_button_get_stock_id(GtkToolButton * _self_) {
+	return (gchar *)gtk_tool_button_get_stock_id(_self_);
+}
+void _gtk_tool_button_set_icon_name(GtkToolButton * _self_, gchar * icon_name) {
+	(void)gtk_tool_button_set_icon_name(_self_, (const gchar *)(icon_name));
+}
+void _gtk_tool_button_set_label(GtkToolButton * _self_, gchar * label) {
+	(void)gtk_tool_button_set_label(_self_, (const gchar *)(label));
+}
+void _gtk_tool_button_set_stock_id(GtkToolButton * _self_, gchar * stock_id) {
+	(void)gtk_tool_button_set_stock_id(_self_, (const gchar *)(stock_id));
+}
+GtkWidget * _gtk_tool_item_get_proxy_menu_item(GtkToolItem * _self_, gchar * menu_item_id) {
+	return (GtkWidget *)gtk_tool_item_get_proxy_menu_item(_self_, (const gchar *)(menu_item_id));
+}
+void _gtk_tool_item_set_proxy_menu_item(GtkToolItem * _self_, gchar * menu_item_id, GtkWidget * menu_item) {
+	(void)gtk_tool_item_set_proxy_menu_item(_self_, (const gchar *)(menu_item_id), menu_item);
+}
+void _gtk_tool_item_set_tooltip_markup(GtkToolItem * _self_, gchar * markup) {
+	(void)gtk_tool_item_set_tooltip_markup(_self_, (const gchar *)(markup));
+}
+void _gtk_tool_item_set_tooltip_text(GtkToolItem * _self_, gchar * text) {
+	(void)gtk_tool_item_set_tooltip_text(_self_, (const gchar *)(text));
+}
+GtkWidget * _gtk_tool_item_group_new(gchar * label) {
+	return (GtkWidget *)gtk_tool_item_group_new((const gchar *)(label));
+}
+gchar * _gtk_tool_item_group_get_label(GtkToolItemGroup * _self_) {
+	return (gchar *)gtk_tool_item_group_get_label(_self_);
+}
+void _gtk_tool_item_group_set_label(GtkToolItemGroup * _self_, gchar * label) {
+	(void)gtk_tool_item_group_set_label(_self_, (const gchar *)(label));
+}
+GtkTargetEntry * _gtk_tool_palette_get_drag_target_group() {
+	return (GtkTargetEntry *)gtk_tool_palette_get_drag_target_group();
+}
+GtkTargetEntry * _gtk_tool_palette_get_drag_target_item() {
+	return (GtkTargetEntry *)gtk_tool_palette_get_drag_target_item();
+}
+GtkWidget * _gtk_tool_palette_get_drag_item(GtkToolPalette * _self_, GtkSelectionData * selection) {
+	return (GtkWidget *)gtk_tool_palette_get_drag_item(_self_, (const GtkSelectionData *)(selection));
+}
+void _gtk_tooltip_set_icon_from_icon_name(GtkTooltip * _self_, gchar * icon_name, GtkIconSize size) {
+	(void)gtk_tooltip_set_icon_from_icon_name(_self_, (const gchar *)(icon_name), size);
+}
+void _gtk_tooltip_set_icon_from_stock(GtkTooltip * _self_, gchar * stock_id, GtkIconSize size) {
+	(void)gtk_tooltip_set_icon_from_stock(_self_, (const gchar *)(stock_id), size);
+}
+void _gtk_tooltip_set_markup(GtkTooltip * _self_, gchar * markup) {
+	(void)gtk_tooltip_set_markup(_self_, (const gchar *)(markup));
+}
+void _gtk_tooltip_set_text(GtkTooltip * _self_, gchar * text) {
+	(void)gtk_tooltip_set_text(_self_, (const gchar *)(text));
+}
+void _gtk_tooltip_set_tip_area(GtkTooltip * _self_, GdkRectangle * rect) {
+	(void)gtk_tooltip_set_tip_area(_self_, (const GdkRectangle *)(rect));
+}
+gboolean _gtk_tree_selection_get_selected(GtkTreeSelection * _self_, void * model, GtkTreeIter * iter) {
+	return (gboolean)gtk_tree_selection_get_selected(_self_, (GtkTreeModel **)(model), iter);
+}
+GList * _gtk_tree_selection_get_selected_rows(GtkTreeSelection * _self_, void * model) {
+	return (GList *)gtk_tree_selection_get_selected_rows(_self_, (GtkTreeModel **)(model));
+}
+void _gtk_tree_view_get_cursor(GtkTreeView * _self_, void * path, void * focus_column) {
+	(void)gtk_tree_view_get_cursor(_self_, (GtkTreePath **)(path), (GtkTreeViewColumn **)(focus_column));
+}
+gboolean _gtk_tree_view_get_dest_row_at_pos(GtkTreeView * _self_, gint drag_x, gint drag_y, void * path, GtkTreeViewDropPosition * pos) {
+	return (gboolean)gtk_tree_view_get_dest_row_at_pos(_self_, drag_x, drag_y, (GtkTreePath **)(path), pos);
+}
+void _gtk_tree_view_get_drag_dest_row(GtkTreeView * _self_, void * path, GtkTreeViewDropPosition * pos) {
+	(void)gtk_tree_view_get_drag_dest_row(_self_, (GtkTreePath **)(path), pos);
+}
+gboolean _gtk_tree_view_get_path_at_pos(GtkTreeView * _self_, gint x, gint y, void * path, void * column, gint * cell_x, gint * cell_y) {
+	return (gboolean)gtk_tree_view_get_path_at_pos(_self_, x, y, (GtkTreePath **)(path), (GtkTreeViewColumn **)(column), cell_x, cell_y);
+}
+gboolean _gtk_tree_view_get_visible_range(GtkTreeView * _self_, void * start_path, void * end_path) {
+	return (gboolean)gtk_tree_view_get_visible_range(_self_, (GtkTreePath **)(start_path), (GtkTreePath **)(end_path));
+}
+gint _gtk_tree_view_insert_column_with_data_func(GtkTreeView * _self_, gint position, gchar * title, GtkCellRenderer * cell, GtkTreeCellDataFunc func, gpointer data, GDestroyNotify dnotify) {
+	return (gint)gtk_tree_view_insert_column_with_data_func(_self_, position, (const gchar *)(title), cell, func, data, dnotify);
+}
+gboolean _gtk_tree_view_is_blank_at_pos(GtkTreeView * _self_, gint x, gint y, void * path, void * column, gint * cell_x, gint * cell_y) {
+	return (gboolean)gtk_tree_view_is_blank_at_pos(_self_, x, y, (GtkTreePath **)(path), (GtkTreeViewColumn **)(column), cell_x, cell_y);
+}
+void _gtk_tree_view_column_add_attribute(GtkTreeViewColumn * _self_, GtkCellRenderer * cell_renderer, gchar * attribute, gint column) {
+	(void)gtk_tree_view_column_add_attribute(_self_, cell_renderer, (const gchar *)(attribute), column);
+}
+void _gtk_tree_view_column_cell_get_size(GtkTreeViewColumn * _self_, GdkRectangle * cell_area, gint * x_offset, gint * y_offset, gint * width, gint * height) {
+	(void)gtk_tree_view_column_cell_get_size(_self_, (const GdkRectangle *)(cell_area), x_offset, y_offset, width, height);
+}
+gchar * _gtk_tree_view_column_get_title(GtkTreeViewColumn * _self_) {
+	return (gchar *)gtk_tree_view_column_get_title(_self_);
+}
+void _gtk_tree_view_column_set_title(GtkTreeViewColumn * _self_, gchar * title) {
+	(void)gtk_tree_view_column_set_title(_self_, (const gchar *)(title));
+}
+void _gtk_ui_manager_add_ui(GtkUIManager * _self_, guint merge_id, gchar * path, gchar * name, gchar * action, GtkUIManagerItemType type, gboolean top) {
+	(void)gtk_ui_manager_add_ui(_self_, merge_id, (const gchar *)(path), (const gchar *)(name), (const gchar *)(action), type, top);
+}
+guint _gtk_ui_manager_add_ui_from_file(GtkUIManager * _self_, gchar * filename, void * error) {
+	return (guint)gtk_ui_manager_add_ui_from_file(_self_, (const gchar *)(filename), (GError **)(error));
+}
+guint _gtk_ui_manager_add_ui_from_resource(GtkUIManager * _self_, gchar * resource_path, void * error) {
+	return (guint)gtk_ui_manager_add_ui_from_resource(_self_, (const gchar *)(resource_path), (GError **)(error));
+}
+guint _gtk_ui_manager_add_ui_from_string(GtkUIManager * _self_, gchar * buffer, gssize length, void * error) {
+	return (guint)gtk_ui_manager_add_ui_from_string(_self_, (const gchar *)(buffer), length, (GError **)(error));
+}
+GtkAction * _gtk_ui_manager_get_action(GtkUIManager * _self_, gchar * path) {
+	return (GtkAction *)gtk_ui_manager_get_action(_self_, (const gchar *)(path));
+}
+GtkWidget * _gtk_ui_manager_get_widget(GtkUIManager * _self_, gchar * path) {
+	return (GtkWidget *)gtk_ui_manager_get_widget(_self_, (const gchar *)(path));
+}
+void _gtk_widget_add_accelerator(GtkWidget * _self_, gchar * accel_signal, GtkAccelGroup * accel_group, guint accel_key, GdkModifierType accel_mods, GtkAccelFlags accel_flags) {
+	(void)gtk_widget_add_accelerator(_self_, (const gchar *)(accel_signal), accel_group, accel_key, accel_mods, accel_flags);
+}
+void _gtk_widget_child_notify(GtkWidget * _self_, gchar * child_property) {
+	(void)gtk_widget_child_notify(_self_, (const gchar *)(child_property));
+}
+PangoLayout * _gtk_widget_create_pango_layout(GtkWidget * _self_, gchar * text) {
+	return (PangoLayout *)gtk_widget_create_pango_layout(_self_, (const gchar *)(text));
+}
+void _gtk_drag_source_set_icon_name(GtkWidget * _self_, gchar * icon_name) {
+	(void)gtk_drag_source_set_icon_name(_self_, (const gchar *)(icon_name));
+}
+void _gtk_drag_source_set_icon_stock(GtkWidget * _self_, gchar * stock_id) {
+	(void)gtk_drag_source_set_icon_stock(_self_, (const gchar *)(stock_id));
+}
+gchar * _gtk_widget_get_name(GtkWidget * _self_) {
+	return (gchar *)gtk_widget_get_name(_self_);
+}
+void _gtk_widget_insert_action_group(GtkWidget * _self_, gchar * name, GActionGroup * group) {
+	(void)gtk_widget_insert_action_group(_self_, (const gchar *)(name), group);
+}
+gboolean _gtk_widget_intersect(GtkWidget * _self_, GdkRectangle * area, GdkRectangle * intersection) {
+	return (gboolean)gtk_widget_intersect(_self_, (const GdkRectangle *)(area), intersection);
+}
+void _gtk_widget_override_background_color(GtkWidget * _self_, GtkStateFlags state, GdkRGBA * color) {
+	(void)gtk_widget_override_background_color(_self_, state, (const GdkRGBA *)(color));
+}
+void _gtk_widget_override_color(GtkWidget * _self_, GtkStateFlags state, GdkRGBA * color) {
+	(void)gtk_widget_override_color(_self_, state, (const GdkRGBA *)(color));
+}
+void _gtk_widget_override_cursor(GtkWidget * _self_, GdkRGBA * cursor, GdkRGBA * secondary_cursor) {
+	(void)gtk_widget_override_cursor(_self_, (const GdkRGBA *)(cursor), (const GdkRGBA *)(secondary_cursor));
+}
+void _gtk_widget_override_font(GtkWidget * _self_, PangoFontDescription * font_desc) {
+	(void)gtk_widget_override_font(_self_, (const PangoFontDescription *)(font_desc));
+}
+void _gtk_widget_override_symbolic_color(GtkWidget * _self_, gchar * name, GdkRGBA * color) {
+	(void)gtk_widget_override_symbolic_color(_self_, (const gchar *)(name), (const GdkRGBA *)(color));
+}
+void _gtk_widget_queue_draw_region(GtkWidget * _self_, cairo_region_t * region) {
+	(void)gtk_widget_queue_draw_region(_self_, (const cairo_region_t *)(region));
+}
+cairo_region_t * _gtk_widget_region_intersect(GtkWidget * _self_, cairo_region_t * region) {
+	return (cairo_region_t *)gtk_widget_region_intersect(_self_, (const cairo_region_t *)(region));
+}
+GdkPixbuf * _gtk_widget_render_icon_pixbuf(GtkWidget * _self_, gchar * stock_id, GtkIconSize size) {
+	return (GdkPixbuf *)gtk_widget_render_icon_pixbuf(_self_, (const gchar *)(stock_id), size);
+}
+void _gtk_widget_set_accel_path(GtkWidget * _self_, gchar * accel_path, GtkAccelGroup * accel_group) {
+	(void)gtk_widget_set_accel_path(_self_, (const gchar *)(accel_path), accel_group);
+}
+void _gtk_widget_set_allocation(GtkWidget * _self_, GtkAllocation * allocation) {
+	(void)gtk_widget_set_allocation(_self_, (const GtkAllocation *)(allocation));
+}
+void _gtk_widget_set_composite_name(GtkWidget * _self_, gchar * name) {
+	(void)gtk_widget_set_composite_name(_self_, (const gchar *)(name));
+}
+void _gtk_widget_set_name(GtkWidget * _self_, gchar * name) {
+	(void)gtk_widget_set_name(_self_, (const gchar *)(name));
+}
+void _gtk_widget_set_tooltip_markup(GtkWidget * _self_, gchar * markup) {
+	(void)gtk_widget_set_tooltip_markup(_self_, (const gchar *)(markup));
+}
+void _gtk_widget_set_tooltip_text(GtkWidget * _self_, gchar * text) {
+	(void)gtk_widget_set_tooltip_text(_self_, (const gchar *)(text));
+}
+void _gtk_widget_style_get_property(GtkWidget * _self_, gchar * property_name, GValue * value) {
+	(void)gtk_widget_style_get_property(_self_, (const gchar *)(property_name), value);
+}
+gchar * _gtk_window_get_default_icon_name() {
+	return (gchar *)gtk_window_get_default_icon_name();
+}
+gboolean _gtk_window_set_default_icon_from_file(gchar * filename, void * err) {
+	return (gboolean)gtk_window_set_default_icon_from_file((const gchar *)(filename), (GError **)(err));
+}
+void _gtk_window_set_default_icon_name(gchar * name) {
+	(void)gtk_window_set_default_icon_name((const gchar *)(name));
+}
+gchar * _gtk_window_get_icon_name(GtkWindow * _self_) {
+	return (gchar *)gtk_window_get_icon_name(_self_);
+}
+gchar * _gtk_window_get_role(GtkWindow * _self_) {
+	return (gchar *)gtk_window_get_role(_self_);
+}
+gchar * _gtk_window_get_title(GtkWindow * _self_) {
+	return (gchar *)gtk_window_get_title(_self_);
+}
+gboolean _gtk_window_parse_geometry(GtkWindow * _self_, gchar * geometry) {
+	return (gboolean)gtk_window_parse_geometry(_self_, (const gchar *)(geometry));
+}
+gboolean _gtk_window_set_icon_from_file(GtkWindow * _self_, gchar * filename, void * err) {
+	return (gboolean)gtk_window_set_icon_from_file(_self_, (const gchar *)(filename), (GError **)(err));
+}
+void _gtk_window_set_icon_name(GtkWindow * _self_, gchar * name) {
+	(void)gtk_window_set_icon_name(_self_, (const gchar *)(name));
+}
+void _gtk_window_set_role(GtkWindow * _self_, gchar * role) {
+	(void)gtk_window_set_role(_self_, (const gchar *)(role));
+}
+void _gtk_window_set_startup_id(GtkWindow * _self_, gchar * startup_id) {
+	(void)gtk_window_set_startup_id(_self_, (const gchar *)(startup_id));
+}
+void _gtk_window_set_title(GtkWindow * _self_, gchar * title) {
+	(void)gtk_window_set_title(_self_, (const gchar *)(title));
+}
+void _gtk_window_set_wmclass(GtkWindow * _self_, gchar * wmclass_name, gchar * wmclass_class) {
+	(void)gtk_window_set_wmclass(_self_, (const gchar *)(wmclass_name), (const gchar *)(wmclass_class));
+}
+GtkBorder * _gtk_border_copy(GtkBorder * _self_) {
+	return (GtkBorder *)gtk_border_copy((const GtkBorder *)(_self_));
+}
+GParamSpec * _gtk_cell_area_class_find_cell_property(GtkCellAreaClass * _self_, gchar * property_name) {
+	return (GParamSpec *)gtk_cell_area_class_find_cell_property(_self_, (const gchar *)(property_name));
+}
+void * _gtk_cell_area_class_list_cell_properties(GtkCellAreaClass * _self_, guint * n_properties) {
+	return (void *)gtk_cell_area_class_list_cell_properties(_self_, n_properties);
+}
+GParamSpec * _gtk_container_class_find_child_property(GtkContainerClass * _self_, gchar * property_name) {
+	return (GParamSpec *)gtk_container_class_find_child_property((GObjectClass *)(_self_), (const gchar *)(property_name));
+}
+void * _gtk_container_class_list_child_properties(GtkContainerClass * _self_, guint * n_properties) {
+	return (void *)gtk_container_class_list_child_properties((GObjectClass *)(_self_), n_properties);
+}
+guint _gtk_css_section_get_end_line(GtkCssSection * _self_) {
+	return (guint)gtk_css_section_get_end_line((const GtkCssSection *)(_self_));
+}
+guint _gtk_css_section_get_end_position(GtkCssSection * _self_) {
+	return (guint)gtk_css_section_get_end_position((const GtkCssSection *)(_self_));
+}
+GFile * _gtk_css_section_get_file(GtkCssSection * _self_) {
+	return (GFile *)gtk_css_section_get_file((const GtkCssSection *)(_self_));
+}
+GtkCssSection * _gtk_css_section_get_parent(GtkCssSection * _self_) {
+	return (GtkCssSection *)gtk_css_section_get_parent((const GtkCssSection *)(_self_));
+}
+GtkCssSectionType _gtk_css_section_get_section_type(GtkCssSection * _self_) {
+	return (GtkCssSectionType)gtk_css_section_get_section_type((const GtkCssSection *)(_self_));
+}
+guint _gtk_css_section_get_start_line(GtkCssSection * _self_) {
+	return (guint)gtk_css_section_get_start_line((const GtkCssSection *)(_self_));
+}
+guint _gtk_css_section_get_start_position(GtkCssSection * _self_) {
+	return (guint)gtk_css_section_get_start_position((const GtkCssSection *)(_self_));
+}
+gboolean _gtk_gradient_resolve(GtkGradient * _self_, GtkStyleProperties * props, void * resolved_gradient) {
+	return (gboolean)gtk_gradient_resolve(_self_, props, (cairo_pattern_t **)(resolved_gradient));
+}
+gchar * _gtk_icon_info_get_display_name(GtkIconInfo * _self_) {
+	return (gchar *)gtk_icon_info_get_display_name(_self_);
+}
+gchar * _gtk_icon_info_get_filename(GtkIconInfo * _self_) {
+	return (gchar *)gtk_icon_info_get_filename(_self_);
+}
+GdkPixbuf * _gtk_icon_info_load_icon(GtkIconInfo * _self_, void * error) {
+	return (GdkPixbuf *)gtk_icon_info_load_icon(_self_, (GError **)(error));
+}
+GdkPixbuf * _gtk_icon_info_load_symbolic(GtkIconInfo * _self_, GdkRGBA * fg, GdkRGBA * success_color, GdkRGBA * warning_color, GdkRGBA * error_color, gboolean * was_symbolic, void * error) {
+	return (GdkPixbuf *)gtk_icon_info_load_symbolic(_self_, (const GdkRGBA *)(fg), (const GdkRGBA *)(success_color), (const GdkRGBA *)(warning_color), (const GdkRGBA *)(error_color), was_symbolic, (GError **)(error));
+}
+GdkPixbuf * _gtk_icon_info_load_symbolic_for_context(GtkIconInfo * _self_, GtkStyleContext * context, gboolean * was_symbolic, void * error) {
+	return (GdkPixbuf *)gtk_icon_info_load_symbolic_for_context(_self_, context, was_symbolic, (GError **)(error));
+}
+void _gtk_icon_set_add_source(GtkIconSet * _self_, GtkIconSource * source) {
+	(void)gtk_icon_set_add_source(_self_, (const GtkIconSource *)(source));
+}
+GtkIconSource * _gtk_icon_source_copy(GtkIconSource * _self_) {
+	return (GtkIconSource *)gtk_icon_source_copy((const GtkIconSource *)(_self_));
+}
+GtkTextDirection _gtk_icon_source_get_direction(GtkIconSource * _self_) {
+	return (GtkTextDirection)gtk_icon_source_get_direction((const GtkIconSource *)(_self_));
+}
+gboolean _gtk_icon_source_get_direction_wildcarded(GtkIconSource * _self_) {
+	return (gboolean)gtk_icon_source_get_direction_wildcarded((const GtkIconSource *)(_self_));
+}
+gchar * _gtk_icon_source_get_filename(GtkIconSource * _self_) {
+	return (gchar *)gtk_icon_source_get_filename((const GtkIconSource *)(_self_));
+}
+gchar * _gtk_icon_source_get_icon_name(GtkIconSource * _self_) {
+	return (gchar *)gtk_icon_source_get_icon_name((const GtkIconSource *)(_self_));
+}
+GdkPixbuf * _gtk_icon_source_get_pixbuf(GtkIconSource * _self_) {
+	return (GdkPixbuf *)gtk_icon_source_get_pixbuf((const GtkIconSource *)(_self_));
+}
+GtkIconSize _gtk_icon_source_get_size(GtkIconSource * _self_) {
+	return (GtkIconSize)gtk_icon_source_get_size((const GtkIconSource *)(_self_));
+}
+gboolean _gtk_icon_source_get_size_wildcarded(GtkIconSource * _self_) {
+	return (gboolean)gtk_icon_source_get_size_wildcarded((const GtkIconSource *)(_self_));
+}
+GtkStateType _gtk_icon_source_get_state(GtkIconSource * _self_) {
+	return (GtkStateType)gtk_icon_source_get_state((const GtkIconSource *)(_self_));
+}
+gboolean _gtk_icon_source_get_state_wildcarded(GtkIconSource * _self_) {
+	return (gboolean)gtk_icon_source_get_state_wildcarded((const GtkIconSource *)(_self_));
+}
+void _gtk_icon_source_set_filename(GtkIconSource * _self_, gchar * filename) {
+	(void)gtk_icon_source_set_filename(_self_, (const gchar *)(filename));
+}
+void _gtk_icon_source_set_icon_name(GtkIconSource * _self_, gchar * icon_name) {
+	(void)gtk_icon_source_set_icon_name(_self_, (const gchar *)(icon_name));
+}
+GtkPaperSize * _gtk_paper_size_new(gchar * name) {
+	return (GtkPaperSize *)gtk_paper_size_new((const gchar *)(name));
+}
+GtkPaperSize * _gtk_paper_size_new_custom(gchar * name, gchar * display_name, gdouble width, gdouble height, GtkUnit unit) {
+	return (GtkPaperSize *)gtk_paper_size_new_custom((const gchar *)(name), (const gchar *)(display_name), width, height, unit);
+}
+GtkPaperSize * _gtk_paper_size_new_from_key_file(GKeyFile * key_file, gchar * group_name, void * error) {
+	return (GtkPaperSize *)gtk_paper_size_new_from_key_file(key_file, (const gchar *)(group_name), (GError **)(error));
+}
+GtkPaperSize * _gtk_paper_size_new_from_ppd(gchar * ppd_name, gchar * ppd_display_name, gdouble width, gdouble height) {
+	return (GtkPaperSize *)gtk_paper_size_new_from_ppd((const gchar *)(ppd_name), (const gchar *)(ppd_display_name), width, height);
+}
+gchar * _gtk_paper_size_get_display_name(GtkPaperSize * _self_) {
+	return (gchar *)gtk_paper_size_get_display_name(_self_);
+}
+gchar * _gtk_paper_size_get_name(GtkPaperSize * _self_) {
+	return (gchar *)gtk_paper_size_get_name(_self_);
+}
+gchar * _gtk_paper_size_get_ppd_name(GtkPaperSize * _self_) {
+	return (gchar *)gtk_paper_size_get_ppd_name(_self_);
+}
+void _gtk_paper_size_to_key_file(GtkPaperSize * _self_, GKeyFile * key_file, gchar * group_name) {
+	(void)gtk_paper_size_to_key_file(_self_, key_file, (const gchar *)(group_name));
+}
+GAppInfo * _gtk_recent_info_create_app_info(GtkRecentInfo * _self_, gchar * app_name, void * error) {
+	return (GAppInfo *)gtk_recent_info_create_app_info(_self_, (const gchar *)(app_name), (GError **)(error));
+}
+gboolean _gtk_recent_info_get_application_info(GtkRecentInfo * _self_, gchar * app_name, void * app_exec, guint * count, time_t * time_) {
+	return (gboolean)gtk_recent_info_get_application_info(_self_, (const gchar *)(app_name), (const gchar **)(app_exec), count, time_);
+}
+void * _gtk_recent_info_get_applications(GtkRecentInfo * _self_, gsize * length) {
+	return (void *)gtk_recent_info_get_applications(_self_, length);
+}
+gchar * _gtk_recent_info_get_description(GtkRecentInfo * _self_) {
+	return (gchar *)gtk_recent_info_get_description(_self_);
+}
+gchar * _gtk_recent_info_get_display_name(GtkRecentInfo * _self_) {
+	return (gchar *)gtk_recent_info_get_display_name(_self_);
+}
+void * _gtk_recent_info_get_groups(GtkRecentInfo * _self_, gsize * length) {
+	return (void *)gtk_recent_info_get_groups(_self_, length);
+}
+gchar * _gtk_recent_info_get_mime_type(GtkRecentInfo * _self_) {
+	return (gchar *)gtk_recent_info_get_mime_type(_self_);
+}
+gchar * _gtk_recent_info_get_uri(GtkRecentInfo * _self_) {
+	return (gchar *)gtk_recent_info_get_uri(_self_);
+}
+gboolean _gtk_recent_info_has_application(GtkRecentInfo * _self_, gchar * app_name) {
+	return (gboolean)gtk_recent_info_has_application(_self_, (const gchar *)(app_name));
+}
+gboolean _gtk_recent_info_has_group(GtkRecentInfo * _self_, gchar * group_name) {
+	return (gboolean)gtk_recent_info_has_group(_self_, (const gchar *)(group_name));
+}
+GtkRequisition * _gtk_requisition_copy(GtkRequisition * _self_) {
+	return (GtkRequisition *)gtk_requisition_copy((const GtkRequisition *)(_self_));
+}
+GtkSelectionData * _gtk_selection_data_copy(GtkSelectionData * _self_) {
+	return (GtkSelectionData *)gtk_selection_data_copy((const GtkSelectionData *)(_self_));
+}
+guchar * _gtk_selection_data_get_data(GtkSelectionData * _self_) {
+	return (guchar *)gtk_selection_data_get_data((const GtkSelectionData *)(_self_));
+}
+GdkAtom _gtk_selection_data_get_data_type(GtkSelectionData * _self_) {
+	return (GdkAtom)gtk_selection_data_get_data_type((const GtkSelectionData *)(_self_));
+}
+guchar * _gtk_selection_data_get_data_with_length(GtkSelectionData * _self_, gint * length) {
+	return (guchar *)gtk_selection_data_get_data_with_length((const GtkSelectionData *)(_self_), length);
+}
+GdkDisplay * _gtk_selection_data_get_display(GtkSelectionData * _self_) {
+	return (GdkDisplay *)gtk_selection_data_get_display((const GtkSelectionData *)(_self_));
+}
+gint _gtk_selection_data_get_format(GtkSelectionData * _self_) {
+	return (gint)gtk_selection_data_get_format((const GtkSelectionData *)(_self_));
+}
+gint _gtk_selection_data_get_length(GtkSelectionData * _self_) {
+	return (gint)gtk_selection_data_get_length((const GtkSelectionData *)(_self_));
+}
+GdkPixbuf * _gtk_selection_data_get_pixbuf(GtkSelectionData * _self_) {
+	return (GdkPixbuf *)gtk_selection_data_get_pixbuf((const GtkSelectionData *)(_self_));
+}
+GdkAtom _gtk_selection_data_get_selection(GtkSelectionData * _self_) {
+	return (GdkAtom)gtk_selection_data_get_selection((const GtkSelectionData *)(_self_));
+}
+GdkAtom _gtk_selection_data_get_target(GtkSelectionData * _self_) {
+	return (GdkAtom)gtk_selection_data_get_target((const GtkSelectionData *)(_self_));
+}
+guchar * _gtk_selection_data_get_text(GtkSelectionData * _self_) {
+	return (guchar *)gtk_selection_data_get_text((const GtkSelectionData *)(_self_));
+}
+void * _gtk_selection_data_get_uris(GtkSelectionData * _self_) {
+	return (void *)gtk_selection_data_get_uris((const GtkSelectionData *)(_self_));
+}
+gboolean _gtk_selection_data_set_text(GtkSelectionData * _self_, gchar * str, gint len) {
+	return (gboolean)gtk_selection_data_set_text(_self_, (const gchar *)(str), len);
+}
+gboolean _gtk_selection_data_targets_include_image(GtkSelectionData * _self_, gboolean writable) {
+	return (gboolean)gtk_selection_data_targets_include_image((const GtkSelectionData *)(_self_), writable);
+}
+gboolean _gtk_selection_data_targets_include_rich_text(GtkSelectionData * _self_, GtkTextBuffer * buffer) {
+	return (gboolean)gtk_selection_data_targets_include_rich_text((const GtkSelectionData *)(_self_), buffer);
+}
+gboolean _gtk_selection_data_targets_include_text(GtkSelectionData * _self_) {
+	return (gboolean)gtk_selection_data_targets_include_text((const GtkSelectionData *)(_self_));
+}
+gboolean _gtk_selection_data_targets_include_uri(GtkSelectionData * _self_) {
+	return (gboolean)gtk_selection_data_targets_include_uri((const GtkSelectionData *)(_self_));
+}
+GtkStockItem * _gtk_stock_item_copy(GtkStockItem * _self_) {
+	return (GtkStockItem *)gtk_stock_item_copy((const GtkStockItem *)(_self_));
+}
+GtkSymbolicColor * _gtk_symbolic_color_new_literal(GdkRGBA * color) {
+	return (GtkSymbolicColor *)gtk_symbolic_color_new_literal((const GdkRGBA *)(color));
+}
+GtkSymbolicColor * _gtk_symbolic_color_new_name(gchar * name) {
+	return (GtkSymbolicColor *)gtk_symbolic_color_new_name((const gchar *)(name));
+}
+GtkSymbolicColor * _gtk_symbolic_color_new_win32(gchar * theme_class, gint id) {
+	return (GtkSymbolicColor *)gtk_symbolic_color_new_win32((const gchar *)(theme_class), id);
+}
+GtkTargetEntry * _gtk_target_entry_new(gchar * target, guint flags, guint info) {
+	return (GtkTargetEntry *)gtk_target_entry_new((const gchar *)(target), flags, info);
 }
 void _gtk_text_iter_assign(GtkTextIter * _self_, GtkTextIter * other) {
 	(void)gtk_text_iter_assign(_self_, (const GtkTextIter *)(other));
@@ -1572,141 +1944,6 @@ gboolean _gtk_text_iter_starts_word(GtkTextIter * _self_) {
 gboolean _gtk_text_iter_toggles_tag(GtkTextIter * _self_, GtkTextTag * tag) {
 	return (gboolean)gtk_text_iter_toggles_tag((const GtkTextIter *)(_self_), tag);
 }
-GtkTextMark * _gtk_text_mark_new(gchar * name, gboolean left_gravity) {
-	return (GtkTextMark *)gtk_text_mark_new((const gchar *)(name), left_gravity);
-}
-gchar * _gtk_text_mark_get_name(GtkTextMark * _self_) {
-	return (gchar *)gtk_text_mark_get_name(_self_);
-}
-GtkTextTag * _gtk_text_tag_new(gchar * name) {
-	return (GtkTextTag *)gtk_text_tag_new((const gchar *)(name));
-}
-gboolean _gtk_text_tag_event(GtkTextTag * _self_, GObject * event_object, GdkEvent * event, GtkTextIter * iter) {
-	return (gboolean)gtk_text_tag_event(_self_, event_object, event, (const GtkTextIter *)(iter));
-}
-GtkTextTag * _gtk_text_tag_table_lookup(GtkTextTagTable * _self_, gchar * name) {
-	return (GtkTextTag *)gtk_text_tag_table_lookup(_self_, (const gchar *)(name));
-}
-void _gtk_text_view_get_cursor_locations(GtkTextView * _self_, GtkTextIter * iter, GdkRectangle * strong, GdkRectangle * weak) {
-	(void)gtk_text_view_get_cursor_locations(_self_, (const GtkTextIter *)(iter), strong, weak);
-}
-void _gtk_text_view_get_iter_location(GtkTextView * _self_, GtkTextIter * iter, GdkRectangle * location) {
-	(void)gtk_text_view_get_iter_location(_self_, (const GtkTextIter *)(iter), location);
-}
-void _gtk_text_view_get_line_yrange(GtkTextView * _self_, GtkTextIter * iter, gint * y, gint * height) {
-	(void)gtk_text_view_get_line_yrange(_self_, (const GtkTextIter *)(iter), y, height);
-}
-gboolean _gtk_text_view_starts_display_line(GtkTextView * _self_, GtkTextIter * iter) {
-	return (gboolean)gtk_text_view_starts_display_line(_self_, (const GtkTextIter *)(iter));
-}
-GtkThemingEngine * _gtk_theming_engine_load(gchar * name) {
-	return (GtkThemingEngine *)gtk_theming_engine_load((const gchar *)(name));
-}
-void _gtk_theming_engine_register_property(gchar * name_space, GtkStylePropertyParser parse_func, GParamSpec * pspec) {
-	(void)gtk_theming_engine_register_property((const gchar *)(name_space), parse_func, pspec);
-}
-PangoFontDescription * _gtk_theming_engine_get_font(GtkThemingEngine * _self_, GtkStateFlags state) {
-	return (PangoFontDescription *)gtk_theming_engine_get_font(_self_, state);
-}
-GtkWidgetPath * _gtk_theming_engine_get_path(GtkThemingEngine * _self_) {
-	return (GtkWidgetPath *)gtk_theming_engine_get_path(_self_);
-}
-void _gtk_theming_engine_get_property(GtkThemingEngine * _self_, gchar * property, GtkStateFlags state, GValue * value) {
-	(void)gtk_theming_engine_get_property(_self_, (const gchar *)(property), state, value);
-}
-void _gtk_theming_engine_get_style_property(GtkThemingEngine * _self_, gchar * property_name, GValue * value) {
-	(void)gtk_theming_engine_get_style_property(_self_, (const gchar *)(property_name), value);
-}
-gboolean _gtk_theming_engine_has_class(GtkThemingEngine * _self_, gchar * style_class) {
-	return (gboolean)gtk_theming_engine_has_class(_self_, (const gchar *)(style_class));
-}
-gboolean _gtk_theming_engine_has_region(GtkThemingEngine * _self_, gchar * style_region, GtkRegionFlags * flags) {
-	return (gboolean)gtk_theming_engine_has_region(_self_, (const gchar *)(style_region), flags);
-}
-gboolean _gtk_theming_engine_lookup_color(GtkThemingEngine * _self_, gchar * color_name, GdkRGBA * color) {
-	return (gboolean)gtk_theming_engine_lookup_color(_self_, (const gchar *)(color_name), color);
-}
-GtkToggleAction * _gtk_toggle_action_new(gchar * name, gchar * label, gchar * tooltip, gchar * stock_id) {
-	return (GtkToggleAction *)gtk_toggle_action_new((const gchar *)(name), (const gchar *)(label), (const gchar *)(tooltip), (const gchar *)(stock_id));
-}
-GtkWidget * _gtk_toggle_button_new_with_label(gchar * label) {
-	return (GtkWidget *)gtk_toggle_button_new_with_label((const gchar *)(label));
-}
-GtkWidget * _gtk_toggle_button_new_with_mnemonic(gchar * label) {
-	return (GtkWidget *)gtk_toggle_button_new_with_mnemonic((const gchar *)(label));
-}
-GtkToolItem * _gtk_toggle_tool_button_new_from_stock(gchar * stock_id) {
-	return (GtkToolItem *)gtk_toggle_tool_button_new_from_stock((const gchar *)(stock_id));
-}
-GtkToolItem * _gtk_tool_button_new(GtkWidget * icon_widget, gchar * label) {
-	return (GtkToolItem *)gtk_tool_button_new(icon_widget, (const gchar *)(label));
-}
-GtkToolItem * _gtk_tool_button_new_from_stock(gchar * stock_id) {
-	return (GtkToolItem *)gtk_tool_button_new_from_stock((const gchar *)(stock_id));
-}
-gchar * _gtk_tool_button_get_icon_name(GtkToolButton * _self_) {
-	return (gchar *)gtk_tool_button_get_icon_name(_self_);
-}
-gchar * _gtk_tool_button_get_label(GtkToolButton * _self_) {
-	return (gchar *)gtk_tool_button_get_label(_self_);
-}
-gchar * _gtk_tool_button_get_stock_id(GtkToolButton * _self_) {
-	return (gchar *)gtk_tool_button_get_stock_id(_self_);
-}
-void _gtk_tool_button_set_icon_name(GtkToolButton * _self_, gchar * icon_name) {
-	(void)gtk_tool_button_set_icon_name(_self_, (const gchar *)(icon_name));
-}
-void _gtk_tool_button_set_label(GtkToolButton * _self_, gchar * label) {
-	(void)gtk_tool_button_set_label(_self_, (const gchar *)(label));
-}
-void _gtk_tool_button_set_stock_id(GtkToolButton * _self_, gchar * stock_id) {
-	(void)gtk_tool_button_set_stock_id(_self_, (const gchar *)(stock_id));
-}
-GtkWidget * _gtk_tool_item_get_proxy_menu_item(GtkToolItem * _self_, gchar * menu_item_id) {
-	return (GtkWidget *)gtk_tool_item_get_proxy_menu_item(_self_, (const gchar *)(menu_item_id));
-}
-void _gtk_tool_item_set_proxy_menu_item(GtkToolItem * _self_, gchar * menu_item_id, GtkWidget * menu_item) {
-	(void)gtk_tool_item_set_proxy_menu_item(_self_, (const gchar *)(menu_item_id), menu_item);
-}
-void _gtk_tool_item_set_tooltip_markup(GtkToolItem * _self_, gchar * markup) {
-	(void)gtk_tool_item_set_tooltip_markup(_self_, (const gchar *)(markup));
-}
-void _gtk_tool_item_set_tooltip_text(GtkToolItem * _self_, gchar * text) {
-	(void)gtk_tool_item_set_tooltip_text(_self_, (const gchar *)(text));
-}
-GtkWidget * _gtk_tool_item_group_new(gchar * label) {
-	return (GtkWidget *)gtk_tool_item_group_new((const gchar *)(label));
-}
-gchar * _gtk_tool_item_group_get_label(GtkToolItemGroup * _self_) {
-	return (gchar *)gtk_tool_item_group_get_label(_self_);
-}
-void _gtk_tool_item_group_set_label(GtkToolItemGroup * _self_, gchar * label) {
-	(void)gtk_tool_item_group_set_label(_self_, (const gchar *)(label));
-}
-GtkTargetEntry * _gtk_tool_palette_get_drag_target_group() {
-	return (GtkTargetEntry *)gtk_tool_palette_get_drag_target_group();
-}
-GtkTargetEntry * _gtk_tool_palette_get_drag_target_item() {
-	return (GtkTargetEntry *)gtk_tool_palette_get_drag_target_item();
-}
-GtkWidget * _gtk_tool_palette_get_drag_item(GtkToolPalette * _self_, GtkSelectionData * selection) {
-	return (GtkWidget *)gtk_tool_palette_get_drag_item(_self_, (const GtkSelectionData *)(selection));
-}
-void _gtk_tooltip_set_icon_from_icon_name(GtkTooltip * _self_, gchar * icon_name, GtkIconSize size) {
-	(void)gtk_tooltip_set_icon_from_icon_name(_self_, (const gchar *)(icon_name), size);
-}
-void _gtk_tooltip_set_icon_from_stock(GtkTooltip * _self_, gchar * stock_id, GtkIconSize size) {
-	(void)gtk_tooltip_set_icon_from_stock(_self_, (const gchar *)(stock_id), size);
-}
-void _gtk_tooltip_set_markup(GtkTooltip * _self_, gchar * markup) {
-	(void)gtk_tooltip_set_markup(_self_, (const gchar *)(markup));
-}
-void _gtk_tooltip_set_text(GtkTooltip * _self_, gchar * text) {
-	(void)gtk_tooltip_set_text(_self_, (const gchar *)(text));
-}
-void _gtk_tooltip_set_tip_area(GtkTooltip * _self_, GdkRectangle * rect) {
-	(void)gtk_tooltip_set_tip_area(_self_, (const GdkRectangle *)(rect));
-}
 GtkTreePath * _gtk_tree_path_new_from_string(gchar * path) {
 	return (GtkTreePath *)gtk_tree_path_new_from_string((const gchar *)(path));
 }
@@ -1715,132 +1952,6 @@ gint _gtk_tree_path_compare(GtkTreePath * _self_, GtkTreePath * b) {
 }
 GtkTreePath * _gtk_tree_path_copy(GtkTreePath * _self_) {
 	return (GtkTreePath *)gtk_tree_path_copy((const GtkTreePath *)(_self_));
-}
-gboolean _gtk_tree_selection_get_selected(GtkTreeSelection * _self_, void * model, GtkTreeIter * iter) {
-	return (gboolean)gtk_tree_selection_get_selected(_self_, (GtkTreeModel **)(model), iter);
-}
-GList * _gtk_tree_selection_get_selected_rows(GtkTreeSelection * _self_, void * model) {
-	return (GList *)gtk_tree_selection_get_selected_rows(_self_, (GtkTreeModel **)(model));
-}
-void _gtk_tree_view_get_cursor(GtkTreeView * _self_, void * path, void * focus_column) {
-	(void)gtk_tree_view_get_cursor(_self_, (GtkTreePath **)(path), (GtkTreeViewColumn **)(focus_column));
-}
-gboolean _gtk_tree_view_get_dest_row_at_pos(GtkTreeView * _self_, gint drag_x, gint drag_y, void * path, GtkTreeViewDropPosition * pos) {
-	return (gboolean)gtk_tree_view_get_dest_row_at_pos(_self_, drag_x, drag_y, (GtkTreePath **)(path), pos);
-}
-void _gtk_tree_view_get_drag_dest_row(GtkTreeView * _self_, void * path, GtkTreeViewDropPosition * pos) {
-	(void)gtk_tree_view_get_drag_dest_row(_self_, (GtkTreePath **)(path), pos);
-}
-gboolean _gtk_tree_view_get_path_at_pos(GtkTreeView * _self_, gint x, gint y, void * path, void * column, gint * cell_x, gint * cell_y) {
-	return (gboolean)gtk_tree_view_get_path_at_pos(_self_, x, y, (GtkTreePath **)(path), (GtkTreeViewColumn **)(column), cell_x, cell_y);
-}
-gboolean _gtk_tree_view_get_visible_range(GtkTreeView * _self_, void * start_path, void * end_path) {
-	return (gboolean)gtk_tree_view_get_visible_range(_self_, (GtkTreePath **)(start_path), (GtkTreePath **)(end_path));
-}
-gint _gtk_tree_view_insert_column_with_data_func(GtkTreeView * _self_, gint position, gchar * title, GtkCellRenderer * cell, GtkTreeCellDataFunc func, gpointer data, GDestroyNotify dnotify) {
-	return (gint)gtk_tree_view_insert_column_with_data_func(_self_, position, (const gchar *)(title), cell, func, data, dnotify);
-}
-gboolean _gtk_tree_view_is_blank_at_pos(GtkTreeView * _self_, gint x, gint y, void * path, void * column, gint * cell_x, gint * cell_y) {
-	return (gboolean)gtk_tree_view_is_blank_at_pos(_self_, x, y, (GtkTreePath **)(path), (GtkTreeViewColumn **)(column), cell_x, cell_y);
-}
-void _gtk_tree_view_column_add_attribute(GtkTreeViewColumn * _self_, GtkCellRenderer * cell_renderer, gchar * attribute, gint column) {
-	(void)gtk_tree_view_column_add_attribute(_self_, cell_renderer, (const gchar *)(attribute), column);
-}
-void _gtk_tree_view_column_cell_get_size(GtkTreeViewColumn * _self_, GdkRectangle * cell_area, gint * x_offset, gint * y_offset, gint * width, gint * height) {
-	(void)gtk_tree_view_column_cell_get_size(_self_, (const GdkRectangle *)(cell_area), x_offset, y_offset, width, height);
-}
-gchar * _gtk_tree_view_column_get_title(GtkTreeViewColumn * _self_) {
-	return (gchar *)gtk_tree_view_column_get_title(_self_);
-}
-void _gtk_tree_view_column_set_title(GtkTreeViewColumn * _self_, gchar * title) {
-	(void)gtk_tree_view_column_set_title(_self_, (const gchar *)(title));
-}
-void _gtk_ui_manager_add_ui(GtkUIManager * _self_, guint merge_id, gchar * path, gchar * name, gchar * action, GtkUIManagerItemType type, gboolean top) {
-	(void)gtk_ui_manager_add_ui(_self_, merge_id, (const gchar *)(path), (const gchar *)(name), (const gchar *)(action), type, top);
-}
-guint _gtk_ui_manager_add_ui_from_file(GtkUIManager * _self_, gchar * filename, void * error) {
-	return (guint)gtk_ui_manager_add_ui_from_file(_self_, (const gchar *)(filename), (GError **)(error));
-}
-guint _gtk_ui_manager_add_ui_from_resource(GtkUIManager * _self_, gchar * resource_path, void * error) {
-	return (guint)gtk_ui_manager_add_ui_from_resource(_self_, (const gchar *)(resource_path), (GError **)(error));
-}
-guint _gtk_ui_manager_add_ui_from_string(GtkUIManager * _self_, gchar * buffer, gssize length, void * error) {
-	return (guint)gtk_ui_manager_add_ui_from_string(_self_, (const gchar *)(buffer), length, (GError **)(error));
-}
-GtkAction * _gtk_ui_manager_get_action(GtkUIManager * _self_, gchar * path) {
-	return (GtkAction *)gtk_ui_manager_get_action(_self_, (const gchar *)(path));
-}
-GtkWidget * _gtk_ui_manager_get_widget(GtkUIManager * _self_, gchar * path) {
-	return (GtkWidget *)gtk_ui_manager_get_widget(_self_, (const gchar *)(path));
-}
-void _gtk_widget_add_accelerator(GtkWidget * _self_, gchar * accel_signal, GtkAccelGroup * accel_group, guint accel_key, GdkModifierType accel_mods, GtkAccelFlags accel_flags) {
-	(void)gtk_widget_add_accelerator(_self_, (const gchar *)(accel_signal), accel_group, accel_key, accel_mods, accel_flags);
-}
-void _gtk_widget_child_notify(GtkWidget * _self_, gchar * child_property) {
-	(void)gtk_widget_child_notify(_self_, (const gchar *)(child_property));
-}
-PangoLayout * _gtk_widget_create_pango_layout(GtkWidget * _self_, gchar * text) {
-	return (PangoLayout *)gtk_widget_create_pango_layout(_self_, (const gchar *)(text));
-}
-void _gtk_drag_source_set_icon_name(GtkWidget * _self_, gchar * icon_name) {
-	(void)gtk_drag_source_set_icon_name(_self_, (const gchar *)(icon_name));
-}
-void _gtk_drag_source_set_icon_stock(GtkWidget * _self_, gchar * stock_id) {
-	(void)gtk_drag_source_set_icon_stock(_self_, (const gchar *)(stock_id));
-}
-gchar * _gtk_widget_get_name(GtkWidget * _self_) {
-	return (gchar *)gtk_widget_get_name(_self_);
-}
-void _gtk_widget_insert_action_group(GtkWidget * _self_, gchar * name, GActionGroup * group) {
-	(void)gtk_widget_insert_action_group(_self_, (const gchar *)(name), group);
-}
-gboolean _gtk_widget_intersect(GtkWidget * _self_, GdkRectangle * area, GdkRectangle * intersection) {
-	return (gboolean)gtk_widget_intersect(_self_, (const GdkRectangle *)(area), intersection);
-}
-void _gtk_widget_override_background_color(GtkWidget * _self_, GtkStateFlags state, GdkRGBA * color) {
-	(void)gtk_widget_override_background_color(_self_, state, (const GdkRGBA *)(color));
-}
-void _gtk_widget_override_color(GtkWidget * _self_, GtkStateFlags state, GdkRGBA * color) {
-	(void)gtk_widget_override_color(_self_, state, (const GdkRGBA *)(color));
-}
-void _gtk_widget_override_cursor(GtkWidget * _self_, GdkRGBA * cursor, GdkRGBA * secondary_cursor) {
-	(void)gtk_widget_override_cursor(_self_, (const GdkRGBA *)(cursor), (const GdkRGBA *)(secondary_cursor));
-}
-void _gtk_widget_override_font(GtkWidget * _self_, PangoFontDescription * font_desc) {
-	(void)gtk_widget_override_font(_self_, (const PangoFontDescription *)(font_desc));
-}
-void _gtk_widget_override_symbolic_color(GtkWidget * _self_, gchar * name, GdkRGBA * color) {
-	(void)gtk_widget_override_symbolic_color(_self_, (const gchar *)(name), (const GdkRGBA *)(color));
-}
-void _gtk_widget_queue_draw_region(GtkWidget * _self_, cairo_region_t * region) {
-	(void)gtk_widget_queue_draw_region(_self_, (const cairo_region_t *)(region));
-}
-cairo_region_t * _gtk_widget_region_intersect(GtkWidget * _self_, cairo_region_t * region) {
-	return (cairo_region_t *)gtk_widget_region_intersect(_self_, (const cairo_region_t *)(region));
-}
-GdkPixbuf * _gtk_widget_render_icon_pixbuf(GtkWidget * _self_, gchar * stock_id, GtkIconSize size) {
-	return (GdkPixbuf *)gtk_widget_render_icon_pixbuf(_self_, (const gchar *)(stock_id), size);
-}
-void _gtk_widget_set_accel_path(GtkWidget * _self_, gchar * accel_path, GtkAccelGroup * accel_group) {
-	(void)gtk_widget_set_accel_path(_self_, (const gchar *)(accel_path), accel_group);
-}
-void _gtk_widget_set_allocation(GtkWidget * _self_, GtkAllocation * allocation) {
-	(void)gtk_widget_set_allocation(_self_, (const GtkAllocation *)(allocation));
-}
-void _gtk_widget_set_composite_name(GtkWidget * _self_, gchar * name) {
-	(void)gtk_widget_set_composite_name(_self_, (const gchar *)(name));
-}
-void _gtk_widget_set_name(GtkWidget * _self_, gchar * name) {
-	(void)gtk_widget_set_name(_self_, (const gchar *)(name));
-}
-void _gtk_widget_set_tooltip_markup(GtkWidget * _self_, gchar * markup) {
-	(void)gtk_widget_set_tooltip_markup(_self_, (const gchar *)(markup));
-}
-void _gtk_widget_set_tooltip_text(GtkWidget * _self_, gchar * text) {
-	(void)gtk_widget_set_tooltip_text(_self_, (const gchar *)(text));
-}
-void _gtk_widget_style_get_property(GtkWidget * _self_, gchar * property_name, GValue * value) {
-	(void)gtk_widget_style_get_property(_self_, (const gchar *)(property_name), value);
 }
 GParamSpec * _gtk_widget_class_find_style_property(GtkWidgetClass * _self_, gchar * property_name) {
 	return (GParamSpec *)gtk_widget_class_find_style_property(_self_, (const gchar *)(property_name));
@@ -1916,117 +2027,6 @@ gint _gtk_widget_path_length(GtkWidgetPath * _self_) {
 }
 char * _gtk_widget_path_to_string(GtkWidgetPath * _self_) {
 	return (char *)gtk_widget_path_to_string((const GtkWidgetPath *)(_self_));
-}
-gchar * _gtk_window_get_default_icon_name() {
-	return (gchar *)gtk_window_get_default_icon_name();
-}
-gboolean _gtk_window_set_default_icon_from_file(gchar * filename, void * err) {
-	return (gboolean)gtk_window_set_default_icon_from_file((const gchar *)(filename), (GError **)(err));
-}
-void _gtk_window_set_default_icon_name(gchar * name) {
-	(void)gtk_window_set_default_icon_name((const gchar *)(name));
-}
-gchar * _gtk_window_get_icon_name(GtkWindow * _self_) {
-	return (gchar *)gtk_window_get_icon_name(_self_);
-}
-gchar * _gtk_window_get_role(GtkWindow * _self_) {
-	return (gchar *)gtk_window_get_role(_self_);
-}
-gchar * _gtk_window_get_title(GtkWindow * _self_) {
-	return (gchar *)gtk_window_get_title(_self_);
-}
-gboolean _gtk_window_parse_geometry(GtkWindow * _self_, gchar * geometry) {
-	return (gboolean)gtk_window_parse_geometry(_self_, (const gchar *)(geometry));
-}
-gboolean _gtk_window_set_icon_from_file(GtkWindow * _self_, gchar * filename, void * err) {
-	return (gboolean)gtk_window_set_icon_from_file(_self_, (const gchar *)(filename), (GError **)(err));
-}
-void _gtk_window_set_icon_name(GtkWindow * _self_, gchar * name) {
-	(void)gtk_window_set_icon_name(_self_, (const gchar *)(name));
-}
-void _gtk_window_set_role(GtkWindow * _self_, gchar * role) {
-	(void)gtk_window_set_role(_self_, (const gchar *)(role));
-}
-void _gtk_window_set_startup_id(GtkWindow * _self_, gchar * startup_id) {
-	(void)gtk_window_set_startup_id(_self_, (const gchar *)(startup_id));
-}
-void _gtk_window_set_title(GtkWindow * _self_, gchar * title) {
-	(void)gtk_window_set_title(_self_, (const gchar *)(title));
-}
-void _gtk_window_set_wmclass(GtkWindow * _self_, gchar * wmclass_name, gchar * wmclass_class) {
-	(void)gtk_window_set_wmclass(_self_, (const gchar *)(wmclass_name), (const gchar *)(wmclass_class));
-}
-void _gtk_accelerator_parse(gchar * accelerator, guint * accelerator_key, GdkModifierType * accelerator_mods) {
-	(void)gtk_accelerator_parse((const gchar *)(accelerator), accelerator_key, accelerator_mods);
-}
-void _gtk_accelerator_parse_with_keycode(gchar * accelerator, guint * accelerator_key, void * accelerator_codes, GdkModifierType * accelerator_mods) {
-	(void)gtk_accelerator_parse_with_keycode((const gchar *)(accelerator), accelerator_key, (guint **)(accelerator_codes), accelerator_mods);
-}
-gchar * _gtk_check_version(guint required_major, guint required_minor, guint required_micro) {
-	return (gchar *)gtk_check_version(required_major, required_minor, required_micro);
-}
-void _gtk_drag_set_icon_name(GdkDragContext * context, gchar * icon_name, gint hot_x, gint hot_y) {
-	(void)gtk_drag_set_icon_name(context, (const gchar *)(icon_name), hot_x, hot_y);
-}
-void _gtk_drag_set_icon_stock(GdkDragContext * context, gchar * stock_id, gint hot_x, gint hot_y) {
-	(void)gtk_drag_set_icon_stock(context, (const gchar *)(stock_id), hot_x, hot_y);
-}
-GtkIconSize _gtk_icon_size_from_name(gchar * name) {
-	return (GtkIconSize)gtk_icon_size_from_name((const gchar *)(name));
-}
-gchar * _gtk_icon_size_get_name(GtkIconSize size) {
-	return (gchar *)gtk_icon_size_get_name(size);
-}
-GtkIconSize _gtk_icon_size_register(gchar * name, gint width, gint height) {
-	return (GtkIconSize)gtk_icon_size_register((const gchar *)(name), width, height);
-}
-void _gtk_icon_size_register_alias(gchar * alias, GtkIconSize target) {
-	(void)gtk_icon_size_register_alias((const gchar *)(alias), target);
-}
-gboolean _gtk_rc_property_parse_border(GParamSpec * pspec, GString * gstring, GValue * property_value) {
-	return (gboolean)gtk_rc_property_parse_border((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
-}
-gboolean _gtk_rc_property_parse_color(GParamSpec * pspec, GString * gstring, GValue * property_value) {
-	return (gboolean)gtk_rc_property_parse_color((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
-}
-gboolean _gtk_rc_property_parse_enum(GParamSpec * pspec, GString * gstring, GValue * property_value) {
-	return (gboolean)gtk_rc_property_parse_enum((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
-}
-gboolean _gtk_rc_property_parse_flags(GParamSpec * pspec, GString * gstring, GValue * property_value) {
-	return (gboolean)gtk_rc_property_parse_flags((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
-}
-gboolean _gtk_rc_property_parse_requisition(GParamSpec * pspec, GString * gstring, GValue * property_value) {
-	return (gboolean)gtk_rc_property_parse_requisition((const GParamSpec *)(pspec), (const GString *)(gstring), property_value);
-}
-GdkPixbuf * _gtk_render_icon_pixbuf(GtkStyleContext * context, GtkIconSource * source, GtkIconSize size) {
-	return (GdkPixbuf *)gtk_render_icon_pixbuf(context, (const GtkIconSource *)(source), size);
-}
-gboolean _gtk_show_uri(GdkScreen * screen, gchar * uri, guint32 timestamp, void * error) {
-	return (gboolean)gtk_show_uri(screen, (const gchar *)(uri), timestamp, (GError **)(error));
-}
-gboolean _gtk_stock_lookup(gchar * stock_id, GtkStockItem * item) {
-	return (gboolean)gtk_stock_lookup((const gchar *)(stock_id), item);
-}
-void _gtk_stock_set_translate_func(gchar * domain, GtkTranslateFunc func, gpointer data, GDestroyNotify notify) {
-	(void)gtk_stock_set_translate_func((const gchar *)(domain), func, data, notify);
-}
-GtkWidget * _gtk_test_create_simple_window(gchar * window_title, gchar * dialog_text) {
-	return (GtkWidget *)gtk_test_create_simple_window((const gchar *)(window_title), (const gchar *)(dialog_text));
-}
-GtkWidget * _gtk_test_find_label(GtkWidget * widget, gchar * label_pattern) {
-	return (GtkWidget *)gtk_test_find_label(widget, (const gchar *)(label_pattern));
-}
-GtkWidget * _gtk_test_find_widget(GtkWidget * widget, gchar * label_pattern, GType widget_type) {
-	return (GtkWidget *)gtk_test_find_widget(widget, (const gchar *)(label_pattern), widget_type);
-}
-GType * _gtk_test_list_all_types(guint * n_types) {
-	return (GType *)gtk_test_list_all_types(n_types);
-}
-void _gtk_test_text_set(GtkWidget * widget, gchar * string) {
-	(void)gtk_test_text_set(widget, (const gchar *)(string));
-}
-gboolean _gtk_tree_get_row_drag_data(GtkSelectionData * selection_data, void * tree_model, void * path) {
-	return (gboolean)gtk_tree_get_row_drag_data(selection_data, (GtkTreeModel **)(tree_model), (GtkTreePath **)(path));
 }
 */
 import "C"
@@ -2423,7 +2423,7 @@ type GtkToolItemGroupKind interface {
 }
 func (self GtkToolItemGroup) _IsGtkToolItemGroup () {}
 func (self GtkToolItemGroup) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToolItemGroup(value unsafe.Pointer) GtkToolItemGroup { return GtkToolItemGroup{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkToolItemGroup(value unsafe.Pointer) GtkToolItemGroup { return GtkToolItemGroup{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkEventBox struct { GtkBin }
 type GtkEventBoxKind interface {
   _IsGtkEventBox()
@@ -2431,7 +2431,7 @@ type GtkEventBoxKind interface {
 }
 func (self GtkEventBox) _IsGtkEventBox () {}
 func (self GtkEventBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkEventBox(value unsafe.Pointer) GtkEventBox { return GtkEventBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkEventBox(value unsafe.Pointer) GtkEventBox { return GtkEventBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkLabel struct { GtkMisc }
 type GtkLabelKind interface {
   _IsGtkLabel()
@@ -2439,7 +2439,7 @@ type GtkLabelKind interface {
 }
 func (self GtkLabel) _IsGtkLabel () {}
 func (self GtkLabel) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkLabel(value unsafe.Pointer) GtkLabel { return GtkLabel{GtkMisc{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkLabel(value unsafe.Pointer) GtkLabel { return GtkLabel{GtkMisc{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkRcStyle struct { GObjectObject }
 type GtkRcStyleKind interface {
   _IsGtkRcStyle()
@@ -2455,7 +2455,7 @@ type GtkViewportKind interface {
 }
 func (self GtkViewport) _IsGtkViewport () {}
 func (self GtkViewport) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkViewport(value unsafe.Pointer) GtkViewport { return GtkViewport{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkViewport(value unsafe.Pointer) GtkViewport { return GtkViewport{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkScaleButton struct { GtkButton }
 type GtkScaleButtonKind interface {
   _IsGtkScaleButton()
@@ -2463,7 +2463,7 @@ type GtkScaleButtonKind interface {
 }
 func (self GtkScaleButton) _IsGtkScaleButton () {}
 func (self GtkScaleButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkScaleButton(value unsafe.Pointer) GtkScaleButton { return GtkScaleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkScaleButton(value unsafe.Pointer) GtkScaleButton { return GtkScaleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkMessageDialog struct { GtkDialog }
 type GtkMessageDialogKind interface {
   _IsGtkMessageDialog()
@@ -2471,7 +2471,7 @@ type GtkMessageDialogKind interface {
 }
 func (self GtkMessageDialog) _IsGtkMessageDialog () {}
 func (self GtkMessageDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMessageDialog(value unsafe.Pointer) GtkMessageDialog { return GtkMessageDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkMessageDialog(value unsafe.Pointer) GtkMessageDialog { return GtkMessageDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkBin struct { GtkContainer }
 type GtkBinKind interface {
   _IsGtkBin()
@@ -2479,7 +2479,7 @@ type GtkBinKind interface {
 }
 func (self GtkBin) _IsGtkBin () {}
 func (self GtkBin) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkBin(value unsafe.Pointer) GtkBin { return GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkBin(value unsafe.Pointer) GtkBin { return GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkFrame struct { GtkBin }
 type GtkFrameKind interface {
   _IsGtkFrame()
@@ -2487,7 +2487,7 @@ type GtkFrameKind interface {
 }
 func (self GtkFrame) _IsGtkFrame () {}
 func (self GtkFrame) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFrame(value unsafe.Pointer) GtkFrame { return GtkFrame{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkFrame(value unsafe.Pointer) GtkFrame { return GtkFrame{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkRadioMenuItem struct { GtkCheckMenuItem }
 type GtkRadioMenuItemKind interface {
   _IsGtkRadioMenuItem()
@@ -2495,7 +2495,7 @@ type GtkRadioMenuItemKind interface {
 }
 func (self GtkRadioMenuItem) _IsGtkRadioMenuItem () {}
 func (self GtkRadioMenuItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRadioMenuItem(value unsafe.Pointer) GtkRadioMenuItem { return GtkRadioMenuItem{GtkCheckMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkRadioMenuItem(value unsafe.Pointer) GtkRadioMenuItem { return GtkRadioMenuItem{GtkCheckMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkProgressBar struct { GtkWidget }
 type GtkProgressBarKind interface {
   _IsGtkProgressBar()
@@ -2503,7 +2503,7 @@ type GtkProgressBarKind interface {
 }
 func (self GtkProgressBar) _IsGtkProgressBar () {}
 func (self GtkProgressBar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkProgressBar(value unsafe.Pointer) GtkProgressBar { return GtkProgressBar{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkProgressBar(value unsafe.Pointer) GtkProgressBar { return GtkProgressBar{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkCellRendererProgress struct { GtkCellRenderer }
 type GtkCellRendererProgressKind interface {
   _IsGtkCellRendererProgress()
@@ -2511,7 +2511,7 @@ type GtkCellRendererProgressKind interface {
 }
 func (self GtkCellRendererProgress) _IsGtkCellRendererProgress () {}
 func (self GtkCellRendererProgress) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererProgress(value unsafe.Pointer) GtkCellRendererProgress { return GtkCellRendererProgress{GtkCellRenderer{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellRendererProgress(value unsafe.Pointer) GtkCellRendererProgress { return GtkCellRendererProgress{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkCellView struct { GtkWidget }
 type GtkCellViewKind interface {
   _IsGtkCellView()
@@ -2519,7 +2519,7 @@ type GtkCellViewKind interface {
 }
 func (self GtkCellView) _IsGtkCellView () {}
 func (self GtkCellView) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellView(value unsafe.Pointer) GtkCellView { return GtkCellView{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellView(value unsafe.Pointer) GtkCellView { return GtkCellView{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkIconFactory struct { GObjectObject }
 type GtkIconFactoryKind interface {
   _IsGtkIconFactory()
@@ -2535,7 +2535,7 @@ type GtkRecentChooserWidgetKind interface {
 }
 func (self GtkRecentChooserWidget) _IsGtkRecentChooserWidget () {}
 func (self GtkRecentChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRecentChooserWidget(value unsafe.Pointer) GtkRecentChooserWidget { return GtkRecentChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkRecentChooserWidget(value unsafe.Pointer) GtkRecentChooserWidget { return GtkRecentChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkTable struct { GtkContainer }
 type GtkTableKind interface {
   _IsGtkTable()
@@ -2543,7 +2543,7 @@ type GtkTableKind interface {
 }
 func (self GtkTable) _IsGtkTable () {}
 func (self GtkTable) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkTable(value unsafe.Pointer) GtkTable { return GtkTable{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkTable(value unsafe.Pointer) GtkTable { return GtkTable{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkTreeViewColumn struct { GObjectInitiallyUnowned }
 type GtkTreeViewColumnKind interface {
   _IsGtkTreeViewColumn()
@@ -2551,7 +2551,7 @@ type GtkTreeViewColumnKind interface {
 }
 func (self GtkTreeViewColumn) _IsGtkTreeViewColumn () {}
 func (self GtkTreeViewColumn) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkTreeViewColumn(value unsafe.Pointer) GtkTreeViewColumn { return GtkTreeViewColumn{GObjectInitiallyUnowned{value}} }
+func ToGtkTreeViewColumn(value unsafe.Pointer) GtkTreeViewColumn { return GtkTreeViewColumn{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkAboutDialog struct { GtkDialog }
 type GtkAboutDialogKind interface {
   _IsGtkAboutDialog()
@@ -2559,7 +2559,7 @@ type GtkAboutDialogKind interface {
 }
 func (self GtkAboutDialog) _IsGtkAboutDialog () {}
 func (self GtkAboutDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAboutDialog(value unsafe.Pointer) GtkAboutDialog { return GtkAboutDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkAboutDialog(value unsafe.Pointer) GtkAboutDialog { return GtkAboutDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkIconTheme struct { GObjectObject }
 type GtkIconThemeKind interface {
   _IsGtkIconTheme()
@@ -2575,7 +2575,7 @@ type GtkColorSelectionDialogKind interface {
 }
 func (self GtkColorSelectionDialog) _IsGtkColorSelectionDialog () {}
 func (self GtkColorSelectionDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkColorSelectionDialog(value unsafe.Pointer) GtkColorSelectionDialog { return GtkColorSelectionDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkColorSelectionDialog(value unsafe.Pointer) GtkColorSelectionDialog { return GtkColorSelectionDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkIMContext struct { GObjectObject }
 type GtkIMContextKind interface {
   _IsGtkIMContext()
@@ -2599,7 +2599,7 @@ type GtkDialogKind interface {
 }
 func (self GtkDialog) _IsGtkDialog () {}
 func (self GtkDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkDialog(value unsafe.Pointer) GtkDialog { return GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkDialog(value unsafe.Pointer) GtkDialog { return GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkTreeModelSort struct { GObjectObject }
 type GtkTreeModelSortKind interface {
   _IsGtkTreeModelSort()
@@ -2631,7 +2631,7 @@ type GtkCellAreaKind interface {
 }
 func (self GtkCellArea) _IsGtkCellArea () {}
 func (self GtkCellArea) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellArea(value unsafe.Pointer) GtkCellArea { return GtkCellArea{GObjectInitiallyUnowned{value}} }
+func ToGtkCellArea(value unsafe.Pointer) GtkCellArea { return GtkCellArea{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkCellRendererCombo struct { GtkCellRendererText }
 type GtkCellRendererComboKind interface {
   _IsGtkCellRendererCombo()
@@ -2639,7 +2639,7 @@ type GtkCellRendererComboKind interface {
 }
 func (self GtkCellRendererCombo) _IsGtkCellRendererCombo () {}
 func (self GtkCellRendererCombo) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererCombo(value unsafe.Pointer) GtkCellRendererCombo { return GtkCellRendererCombo{GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{value}}}} }
+func ToGtkCellRendererCombo(value unsafe.Pointer) GtkCellRendererCombo { return GtkCellRendererCombo{GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkStyleProperties struct { GObjectObject }
 type GtkStylePropertiesKind interface {
   _IsGtkStyleProperties()
@@ -2655,7 +2655,7 @@ type GtkVSeparatorKind interface {
 }
 func (self GtkVSeparator) _IsGtkVSeparator () {}
 func (self GtkVSeparator) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVSeparator(value unsafe.Pointer) GtkVSeparator { return GtkVSeparator{GtkSeparator{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkVSeparator(value unsafe.Pointer) GtkVSeparator { return GtkVSeparator{GtkSeparator{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkArrow struct { GtkMisc }
 type GtkArrowKind interface {
   _IsGtkArrow()
@@ -2663,7 +2663,7 @@ type GtkArrowKind interface {
 }
 func (self GtkArrow) _IsGtkArrow () {}
 func (self GtkArrow) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkArrow(value unsafe.Pointer) GtkArrow { return GtkArrow{GtkMisc{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkArrow(value unsafe.Pointer) GtkArrow { return GtkArrow{GtkMisc{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkHBox struct { GtkBox }
 type GtkHBoxKind interface {
   _IsGtkHBox()
@@ -2671,7 +2671,7 @@ type GtkHBoxKind interface {
 }
 func (self GtkHBox) _IsGtkHBox () {}
 func (self GtkHBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHBox(value unsafe.Pointer) GtkHBox { return GtkHBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkHBox(value unsafe.Pointer) GtkHBox { return GtkHBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkFileChooserWidget struct { GtkBox }
 type GtkFileChooserWidgetKind interface {
   _IsGtkFileChooserWidget()
@@ -2679,7 +2679,7 @@ type GtkFileChooserWidgetKind interface {
 }
 func (self GtkFileChooserWidget) _IsGtkFileChooserWidget () {}
 func (self GtkFileChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFileChooserWidget(value unsafe.Pointer) GtkFileChooserWidget { return GtkFileChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkFileChooserWidget(value unsafe.Pointer) GtkFileChooserWidget { return GtkFileChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkMountOperation struct { GioMountOperation }
 type GtkMountOperationKind interface {
   _IsGtkMountOperation()
@@ -2687,7 +2687,7 @@ type GtkMountOperationKind interface {
 }
 func (self GtkMountOperation) _IsGtkMountOperation () {}
 func (self GtkMountOperation) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMountOperation(value unsafe.Pointer) GtkMountOperation { return GtkMountOperation{GioMountOperation{value}} }
+func ToGtkMountOperation(value unsafe.Pointer) GtkMountOperation { return GtkMountOperation{GioMountOperation{GObjectObject{value}}} }
 type GtkHScrollbar struct { GtkScrollbar }
 type GtkHScrollbarKind interface {
   _IsGtkHScrollbar()
@@ -2695,7 +2695,7 @@ type GtkHScrollbarKind interface {
 }
 func (self GtkHScrollbar) _IsGtkHScrollbar () {}
 func (self GtkHScrollbar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHScrollbar(value unsafe.Pointer) GtkHScrollbar { return GtkHScrollbar{GtkScrollbar{GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkHScrollbar(value unsafe.Pointer) GtkHScrollbar { return GtkHScrollbar{GtkScrollbar{GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkListStore struct { GObjectObject }
 type GtkListStoreKind interface {
   _IsGtkListStore()
@@ -2719,7 +2719,7 @@ type GtkAspectFrameKind interface {
 }
 func (self GtkAspectFrame) _IsGtkAspectFrame () {}
 func (self GtkAspectFrame) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAspectFrame(value unsafe.Pointer) GtkAspectFrame { return GtkAspectFrame{GtkFrame{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkAspectFrame(value unsafe.Pointer) GtkAspectFrame { return GtkAspectFrame{GtkFrame{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkThemingEngine struct { GObjectObject }
 type GtkThemingEngineKind interface {
   _IsGtkThemingEngine()
@@ -2735,7 +2735,7 @@ type GtkCellRendererTextKind interface {
 }
 func (self GtkCellRendererText) _IsGtkCellRendererText () {}
 func (self GtkCellRendererText) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererText(value unsafe.Pointer) GtkCellRendererText { return GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellRendererText(value unsafe.Pointer) GtkCellRendererText { return GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkOffscreenWindow struct { GtkWindow }
 type GtkOffscreenWindowKind interface {
   _IsGtkOffscreenWindow()
@@ -2743,7 +2743,7 @@ type GtkOffscreenWindowKind interface {
 }
 func (self GtkOffscreenWindow) _IsGtkOffscreenWindow () {}
 func (self GtkOffscreenWindow) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkOffscreenWindow(value unsafe.Pointer) GtkOffscreenWindow { return GtkOffscreenWindow{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkOffscreenWindow(value unsafe.Pointer) GtkOffscreenWindow { return GtkOffscreenWindow{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkTooltip struct { GObjectObject }
 type GtkTooltipKind interface {
   _IsGtkTooltip()
@@ -2759,7 +2759,7 @@ type GtkCellAreaBoxKind interface {
 }
 func (self GtkCellAreaBox) _IsGtkCellAreaBox () {}
 func (self GtkCellAreaBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellAreaBox(value unsafe.Pointer) GtkCellAreaBox { return GtkCellAreaBox{GtkCellArea{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellAreaBox(value unsafe.Pointer) GtkCellAreaBox { return GtkCellAreaBox{GtkCellArea{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkHPaned struct { GtkPaned }
 type GtkHPanedKind interface {
   _IsGtkHPaned()
@@ -2767,7 +2767,7 @@ type GtkHPanedKind interface {
 }
 func (self GtkHPaned) _IsGtkHPaned () {}
 func (self GtkHPaned) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHPaned(value unsafe.Pointer) GtkHPaned { return GtkHPaned{GtkPaned{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkHPaned(value unsafe.Pointer) GtkHPaned { return GtkHPaned{GtkPaned{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkGrid struct { GtkContainer }
 type GtkGridKind interface {
   _IsGtkGrid()
@@ -2775,7 +2775,7 @@ type GtkGridKind interface {
 }
 func (self GtkGrid) _IsGtkGrid () {}
 func (self GtkGrid) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkGrid(value unsafe.Pointer) GtkGrid { return GtkGrid{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkGrid(value unsafe.Pointer) GtkGrid { return GtkGrid{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkCalendar struct { GtkWidget }
 type GtkCalendarKind interface {
   _IsGtkCalendar()
@@ -2783,7 +2783,7 @@ type GtkCalendarKind interface {
 }
 func (self GtkCalendar) _IsGtkCalendar () {}
 func (self GtkCalendar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCalendar(value unsafe.Pointer) GtkCalendar { return GtkCalendar{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkCalendar(value unsafe.Pointer) GtkCalendar { return GtkCalendar{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkPaned struct { GtkContainer }
 type GtkPanedKind interface {
   _IsGtkPaned()
@@ -2791,7 +2791,7 @@ type GtkPanedKind interface {
 }
 func (self GtkPaned) _IsGtkPaned () {}
 func (self GtkPaned) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkPaned(value unsafe.Pointer) GtkPaned { return GtkPaned{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkPaned(value unsafe.Pointer) GtkPaned { return GtkPaned{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkWindowGroup struct { GObjectObject }
 type GtkWindowGroupKind interface {
   _IsGtkWindowGroup()
@@ -2807,7 +2807,7 @@ type GtkAccelLabelKind interface {
 }
 func (self GtkAccelLabel) _IsGtkAccelLabel () {}
 func (self GtkAccelLabel) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAccelLabel(value unsafe.Pointer) GtkAccelLabel { return GtkAccelLabel{GtkLabel{GtkMisc{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkAccelLabel(value unsafe.Pointer) GtkAccelLabel { return GtkAccelLabel{GtkLabel{GtkMisc{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkVButtonBox struct { GtkButtonBox }
 type GtkVButtonBoxKind interface {
   _IsGtkVButtonBox()
@@ -2815,7 +2815,7 @@ type GtkVButtonBoxKind interface {
 }
 func (self GtkVButtonBox) _IsGtkVButtonBox () {}
 func (self GtkVButtonBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVButtonBox(value unsafe.Pointer) GtkVButtonBox { return GtkVButtonBox{GtkButtonBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkVButtonBox(value unsafe.Pointer) GtkVButtonBox { return GtkVButtonBox{GtkButtonBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkBox struct { GtkContainer }
 type GtkBoxKind interface {
   _IsGtkBox()
@@ -2823,7 +2823,7 @@ type GtkBoxKind interface {
 }
 func (self GtkBox) _IsGtkBox () {}
 func (self GtkBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkBox(value unsafe.Pointer) GtkBox { return GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkBox(value unsafe.Pointer) GtkBox { return GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkCellRenderer struct { GObjectInitiallyUnowned }
 type GtkCellRendererKind interface {
   _IsGtkCellRenderer()
@@ -2831,7 +2831,7 @@ type GtkCellRendererKind interface {
 }
 func (self GtkCellRenderer) _IsGtkCellRenderer () {}
 func (self GtkCellRenderer) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRenderer(value unsafe.Pointer) GtkCellRenderer { return GtkCellRenderer{GObjectInitiallyUnowned{value}} }
+func ToGtkCellRenderer(value unsafe.Pointer) GtkCellRenderer { return GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkAccessible struct { AtkObject }
 type GtkAccessibleKind interface {
   _IsGtkAccessible()
@@ -2839,7 +2839,7 @@ type GtkAccessibleKind interface {
 }
 func (self GtkAccessible) _IsGtkAccessible () {}
 func (self GtkAccessible) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAccessible(value unsafe.Pointer) GtkAccessible { return GtkAccessible{AtkObject{value}} }
+func ToGtkAccessible(value unsafe.Pointer) GtkAccessible { return GtkAccessible{AtkObject{GObjectObject{value}}} }
 type GtkSettings struct { GObjectObject }
 type GtkSettingsKind interface {
   _IsGtkSettings()
@@ -2863,7 +2863,7 @@ type GtkAppChooserWidgetKind interface {
 }
 func (self GtkAppChooserWidget) _IsGtkAppChooserWidget () {}
 func (self GtkAppChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAppChooserWidget(value unsafe.Pointer) GtkAppChooserWidget { return GtkAppChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkAppChooserWidget(value unsafe.Pointer) GtkAppChooserWidget { return GtkAppChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkFileChooserDialog struct { GtkDialog }
 type GtkFileChooserDialogKind interface {
   _IsGtkFileChooserDialog()
@@ -2871,7 +2871,7 @@ type GtkFileChooserDialogKind interface {
 }
 func (self GtkFileChooserDialog) _IsGtkFileChooserDialog () {}
 func (self GtkFileChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFileChooserDialog(value unsafe.Pointer) GtkFileChooserDialog { return GtkFileChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkFileChooserDialog(value unsafe.Pointer) GtkFileChooserDialog { return GtkFileChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkSeparatorToolItem struct { GtkToolItem }
 type GtkSeparatorToolItemKind interface {
   _IsGtkSeparatorToolItem()
@@ -2879,7 +2879,7 @@ type GtkSeparatorToolItemKind interface {
 }
 func (self GtkSeparatorToolItem) _IsGtkSeparatorToolItem () {}
 func (self GtkSeparatorToolItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSeparatorToolItem(value unsafe.Pointer) GtkSeparatorToolItem { return GtkSeparatorToolItem{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkSeparatorToolItem(value unsafe.Pointer) GtkSeparatorToolItem { return GtkSeparatorToolItem{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkToolButton struct { GtkToolItem }
 type GtkToolButtonKind interface {
   _IsGtkToolButton()
@@ -2887,7 +2887,7 @@ type GtkToolButtonKind interface {
 }
 func (self GtkToolButton) _IsGtkToolButton () {}
 func (self GtkToolButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToolButton(value unsafe.Pointer) GtkToolButton { return GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkToolButton(value unsafe.Pointer) GtkToolButton { return GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkMisc struct { GtkWidget }
 type GtkMiscKind interface {
   _IsGtkMisc()
@@ -2895,7 +2895,7 @@ type GtkMiscKind interface {
 }
 func (self GtkMisc) _IsGtkMisc () {}
 func (self GtkMisc) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMisc(value unsafe.Pointer) GtkMisc { return GtkMisc{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkMisc(value unsafe.Pointer) GtkMisc { return GtkMisc{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkApplication struct { GioApplication }
 type GtkApplicationKind interface {
   _IsGtkApplication()
@@ -2903,7 +2903,7 @@ type GtkApplicationKind interface {
 }
 func (self GtkApplication) _IsGtkApplication () {}
 func (self GtkApplication) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkApplication(value unsafe.Pointer) GtkApplication { return GtkApplication{GioApplication{value}} }
+func ToGtkApplication(value unsafe.Pointer) GtkApplication { return GtkApplication{GioApplication{GObjectObject{value}}} }
 type GtkHButtonBox struct { GtkButtonBox }
 type GtkHButtonBoxKind interface {
   _IsGtkHButtonBox()
@@ -2911,7 +2911,7 @@ type GtkHButtonBoxKind interface {
 }
 func (self GtkHButtonBox) _IsGtkHButtonBox () {}
 func (self GtkHButtonBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHButtonBox(value unsafe.Pointer) GtkHButtonBox { return GtkHButtonBox{GtkButtonBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkHButtonBox(value unsafe.Pointer) GtkHButtonBox { return GtkHButtonBox{GtkButtonBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkColorButton struct { GtkButton }
 type GtkColorButtonKind interface {
   _IsGtkColorButton()
@@ -2919,7 +2919,7 @@ type GtkColorButtonKind interface {
 }
 func (self GtkColorButton) _IsGtkColorButton () {}
 func (self GtkColorButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkColorButton(value unsafe.Pointer) GtkColorButton { return GtkColorButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkColorButton(value unsafe.Pointer) GtkColorButton { return GtkColorButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkPrintContext struct { GObjectObject }
 type GtkPrintContextKind interface {
   _IsGtkPrintContext()
@@ -2935,7 +2935,7 @@ type GtkFontSelectionDialogKind interface {
 }
 func (self GtkFontSelectionDialog) _IsGtkFontSelectionDialog () {}
 func (self GtkFontSelectionDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFontSelectionDialog(value unsafe.Pointer) GtkFontSelectionDialog { return GtkFontSelectionDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkFontSelectionDialog(value unsafe.Pointer) GtkFontSelectionDialog { return GtkFontSelectionDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkSocket struct { GtkContainer }
 type GtkSocketKind interface {
   _IsGtkSocket()
@@ -2943,7 +2943,7 @@ type GtkSocketKind interface {
 }
 func (self GtkSocket) _IsGtkSocket () {}
 func (self GtkSocket) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSocket(value unsafe.Pointer) GtkSocket { return GtkSocket{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkSocket(value unsafe.Pointer) GtkSocket { return GtkSocket{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkSeparator struct { GtkWidget }
 type GtkSeparatorKind interface {
   _IsGtkSeparator()
@@ -2951,7 +2951,7 @@ type GtkSeparatorKind interface {
 }
 func (self GtkSeparator) _IsGtkSeparator () {}
 func (self GtkSeparator) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSeparator(value unsafe.Pointer) GtkSeparator { return GtkSeparator{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkSeparator(value unsafe.Pointer) GtkSeparator { return GtkSeparator{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkActionGroup struct { GObjectObject }
 type GtkActionGroupKind interface {
   _IsGtkActionGroup()
@@ -2967,7 +2967,7 @@ type GtkMenuKind interface {
 }
 func (self GtkMenu) _IsGtkMenu () {}
 func (self GtkMenu) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMenu(value unsafe.Pointer) GtkMenu { return GtkMenu{GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkMenu(value unsafe.Pointer) GtkMenu { return GtkMenu{GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkToggleButton struct { GtkButton }
 type GtkToggleButtonKind interface {
   _IsGtkToggleButton()
@@ -2975,7 +2975,7 @@ type GtkToggleButtonKind interface {
 }
 func (self GtkToggleButton) _IsGtkToggleButton () {}
 func (self GtkToggleButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToggleButton(value unsafe.Pointer) GtkToggleButton { return GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkToggleButton(value unsafe.Pointer) GtkToggleButton { return GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkFileChooserButton struct { GtkBox }
 type GtkFileChooserButtonKind interface {
   _IsGtkFileChooserButton()
@@ -2983,7 +2983,7 @@ type GtkFileChooserButtonKind interface {
 }
 func (self GtkFileChooserButton) _IsGtkFileChooserButton () {}
 func (self GtkFileChooserButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFileChooserButton(value unsafe.Pointer) GtkFileChooserButton { return GtkFileChooserButton{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkFileChooserButton(value unsafe.Pointer) GtkFileChooserButton { return GtkFileChooserButton{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkRecentChooserDialog struct { GtkDialog }
 type GtkRecentChooserDialogKind interface {
   _IsGtkRecentChooserDialog()
@@ -2991,7 +2991,7 @@ type GtkRecentChooserDialogKind interface {
 }
 func (self GtkRecentChooserDialog) _IsGtkRecentChooserDialog () {}
 func (self GtkRecentChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRecentChooserDialog(value unsafe.Pointer) GtkRecentChooserDialog { return GtkRecentChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkRecentChooserDialog(value unsafe.Pointer) GtkRecentChooserDialog { return GtkRecentChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkAlignment struct { GtkBin }
 type GtkAlignmentKind interface {
   _IsGtkAlignment()
@@ -2999,7 +2999,7 @@ type GtkAlignmentKind interface {
 }
 func (self GtkAlignment) _IsGtkAlignment () {}
 func (self GtkAlignment) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAlignment(value unsafe.Pointer) GtkAlignment { return GtkAlignment{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkAlignment(value unsafe.Pointer) GtkAlignment { return GtkAlignment{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkAssistant struct { GtkWindow }
 type GtkAssistantKind interface {
   _IsGtkAssistant()
@@ -3007,7 +3007,7 @@ type GtkAssistantKind interface {
 }
 func (self GtkAssistant) _IsGtkAssistant () {}
 func (self GtkAssistant) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAssistant(value unsafe.Pointer) GtkAssistant { return GtkAssistant{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkAssistant(value unsafe.Pointer) GtkAssistant { return GtkAssistant{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkHandleBox struct { GtkBin }
 type GtkHandleBoxKind interface {
   _IsGtkHandleBox()
@@ -3015,7 +3015,7 @@ type GtkHandleBoxKind interface {
 }
 func (self GtkHandleBox) _IsGtkHandleBox () {}
 func (self GtkHandleBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHandleBox(value unsafe.Pointer) GtkHandleBox { return GtkHandleBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkHandleBox(value unsafe.Pointer) GtkHandleBox { return GtkHandleBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkVPaned struct { GtkPaned }
 type GtkVPanedKind interface {
   _IsGtkVPaned()
@@ -3023,7 +3023,7 @@ type GtkVPanedKind interface {
 }
 func (self GtkVPaned) _IsGtkVPaned () {}
 func (self GtkVPaned) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVPaned(value unsafe.Pointer) GtkVPaned { return GtkVPaned{GtkPaned{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkVPaned(value unsafe.Pointer) GtkVPaned { return GtkVPaned{GtkPaned{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkMenuButton struct { GtkToggleButton }
 type GtkMenuButtonKind interface {
   _IsGtkMenuButton()
@@ -3031,7 +3031,7 @@ type GtkMenuButtonKind interface {
 }
 func (self GtkMenuButton) _IsGtkMenuButton () {}
 func (self GtkMenuButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMenuButton(value unsafe.Pointer) GtkMenuButton { return GtkMenuButton{GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkMenuButton(value unsafe.Pointer) GtkMenuButton { return GtkMenuButton{GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkEntry struct { GtkWidget }
 type GtkEntryKind interface {
   _IsGtkEntry()
@@ -3039,7 +3039,7 @@ type GtkEntryKind interface {
 }
 func (self GtkEntry) _IsGtkEntry () {}
 func (self GtkEntry) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkEntry(value unsafe.Pointer) GtkEntry { return GtkEntry{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkEntry(value unsafe.Pointer) GtkEntry { return GtkEntry{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkSeparatorMenuItem struct { GtkMenuItem }
 type GtkSeparatorMenuItemKind interface {
   _IsGtkSeparatorMenuItem()
@@ -3047,7 +3047,7 @@ type GtkSeparatorMenuItemKind interface {
 }
 func (self GtkSeparatorMenuItem) _IsGtkSeparatorMenuItem () {}
 func (self GtkSeparatorMenuItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSeparatorMenuItem(value unsafe.Pointer) GtkSeparatorMenuItem { return GtkSeparatorMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkSeparatorMenuItem(value unsafe.Pointer) GtkSeparatorMenuItem { return GtkSeparatorMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkButtonBox struct { GtkBox }
 type GtkButtonBoxKind interface {
   _IsGtkButtonBox()
@@ -3055,7 +3055,7 @@ type GtkButtonBoxKind interface {
 }
 func (self GtkButtonBox) _IsGtkButtonBox () {}
 func (self GtkButtonBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkButtonBox(value unsafe.Pointer) GtkButtonBox { return GtkButtonBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkButtonBox(value unsafe.Pointer) GtkButtonBox { return GtkButtonBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkWindow struct { GtkBin }
 type GtkWindowKind interface {
   _IsGtkWindow()
@@ -3063,7 +3063,7 @@ type GtkWindowKind interface {
 }
 func (self GtkWindow) _IsGtkWindow () {}
 func (self GtkWindow) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkWindow(value unsafe.Pointer) GtkWindow { return GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkWindow(value unsafe.Pointer) GtkWindow { return GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkToolPalette struct { GtkContainer }
 type GtkToolPaletteKind interface {
   _IsGtkToolPalette()
@@ -3071,7 +3071,7 @@ type GtkToolPaletteKind interface {
 }
 func (self GtkToolPalette) _IsGtkToolPalette () {}
 func (self GtkToolPalette) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToolPalette(value unsafe.Pointer) GtkToolPalette { return GtkToolPalette{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkToolPalette(value unsafe.Pointer) GtkToolPalette { return GtkToolPalette{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkSwitch struct { GtkWidget }
 type GtkSwitchKind interface {
   _IsGtkSwitch()
@@ -3079,7 +3079,7 @@ type GtkSwitchKind interface {
 }
 func (self GtkSwitch) _IsGtkSwitch () {}
 func (self GtkSwitch) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSwitch(value unsafe.Pointer) GtkSwitch { return GtkSwitch{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkSwitch(value unsafe.Pointer) GtkSwitch { return GtkSwitch{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkCellRendererAccel struct { GtkCellRendererText }
 type GtkCellRendererAccelKind interface {
   _IsGtkCellRendererAccel()
@@ -3087,7 +3087,7 @@ type GtkCellRendererAccelKind interface {
 }
 func (self GtkCellRendererAccel) _IsGtkCellRendererAccel () {}
 func (self GtkCellRendererAccel) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererAccel(value unsafe.Pointer) GtkCellRendererAccel { return GtkCellRendererAccel{GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{value}}}} }
+func ToGtkCellRendererAccel(value unsafe.Pointer) GtkCellRendererAccel { return GtkCellRendererAccel{GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkScrollbar struct { GtkRange }
 type GtkScrollbarKind interface {
   _IsGtkScrollbar()
@@ -3095,7 +3095,7 @@ type GtkScrollbarKind interface {
 }
 func (self GtkScrollbar) _IsGtkScrollbar () {}
 func (self GtkScrollbar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkScrollbar(value unsafe.Pointer) GtkScrollbar { return GtkScrollbar{GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkScrollbar(value unsafe.Pointer) GtkScrollbar { return GtkScrollbar{GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkStatusbar struct { GtkBox }
 type GtkStatusbarKind interface {
   _IsGtkStatusbar()
@@ -3103,7 +3103,7 @@ type GtkStatusbarKind interface {
 }
 func (self GtkStatusbar) _IsGtkStatusbar () {}
 func (self GtkStatusbar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkStatusbar(value unsafe.Pointer) GtkStatusbar { return GtkStatusbar{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkStatusbar(value unsafe.Pointer) GtkStatusbar { return GtkStatusbar{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkTreeModelFilter struct { GObjectObject }
 type GtkTreeModelFilterKind interface {
   _IsGtkTreeModelFilter()
@@ -3119,7 +3119,7 @@ type GtkNotebookKind interface {
 }
 func (self GtkNotebook) _IsGtkNotebook () {}
 func (self GtkNotebook) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkNotebook(value unsafe.Pointer) GtkNotebook { return GtkNotebook{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkNotebook(value unsafe.Pointer) GtkNotebook { return GtkNotebook{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkPlug struct { GtkWindow }
 type GtkPlugKind interface {
   _IsGtkPlug()
@@ -3127,7 +3127,7 @@ type GtkPlugKind interface {
 }
 func (self GtkPlug) _IsGtkPlug () {}
 func (self GtkPlug) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkPlug(value unsafe.Pointer) GtkPlug { return GtkPlug{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkPlug(value unsafe.Pointer) GtkPlug { return GtkPlug{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkColorChooserDialog struct { GtkDialog }
 type GtkColorChooserDialogKind interface {
   _IsGtkColorChooserDialog()
@@ -3135,7 +3135,7 @@ type GtkColorChooserDialogKind interface {
 }
 func (self GtkColorChooserDialog) _IsGtkColorChooserDialog () {}
 func (self GtkColorChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkColorChooserDialog(value unsafe.Pointer) GtkColorChooserDialog { return GtkColorChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkColorChooserDialog(value unsafe.Pointer) GtkColorChooserDialog { return GtkColorChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkTreeView struct { GtkContainer }
 type GtkTreeViewKind interface {
   _IsGtkTreeView()
@@ -3143,7 +3143,7 @@ type GtkTreeViewKind interface {
 }
 func (self GtkTreeView) _IsGtkTreeView () {}
 func (self GtkTreeView) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkTreeView(value unsafe.Pointer) GtkTreeView { return GtkTreeView{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkTreeView(value unsafe.Pointer) GtkTreeView { return GtkTreeView{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkFileFilter struct { GObjectInitiallyUnowned }
 type GtkFileFilterKind interface {
   _IsGtkFileFilter()
@@ -3151,7 +3151,7 @@ type GtkFileFilterKind interface {
 }
 func (self GtkFileFilter) _IsGtkFileFilter () {}
 func (self GtkFileFilter) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFileFilter(value unsafe.Pointer) GtkFileFilter { return GtkFileFilter{GObjectInitiallyUnowned{value}} }
+func ToGtkFileFilter(value unsafe.Pointer) GtkFileFilter { return GtkFileFilter{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkSearchEntry struct { GtkEntry }
 type GtkSearchEntryKind interface {
   _IsGtkSearchEntry()
@@ -3159,7 +3159,7 @@ type GtkSearchEntryKind interface {
 }
 func (self GtkSearchEntry) _IsGtkSearchEntry () {}
 func (self GtkSearchEntry) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSearchEntry(value unsafe.Pointer) GtkSearchEntry { return GtkSearchEntry{GtkEntry{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkSearchEntry(value unsafe.Pointer) GtkSearchEntry { return GtkSearchEntry{GtkEntry{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkLockButton struct { GtkButton }
 type GtkLockButtonKind interface {
   _IsGtkLockButton()
@@ -3167,7 +3167,7 @@ type GtkLockButtonKind interface {
 }
 func (self GtkLockButton) _IsGtkLockButton () {}
 func (self GtkLockButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkLockButton(value unsafe.Pointer) GtkLockButton { return GtkLockButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkLockButton(value unsafe.Pointer) GtkLockButton { return GtkLockButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkLinkButton struct { GtkButton }
 type GtkLinkButtonKind interface {
   _IsGtkLinkButton()
@@ -3175,7 +3175,7 @@ type GtkLinkButtonKind interface {
 }
 func (self GtkLinkButton) _IsGtkLinkButton () {}
 func (self GtkLinkButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkLinkButton(value unsafe.Pointer) GtkLinkButton { return GtkLinkButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkLinkButton(value unsafe.Pointer) GtkLinkButton { return GtkLinkButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkAppChooserButton struct { GtkComboBox }
 type GtkAppChooserButtonKind interface {
   _IsGtkAppChooserButton()
@@ -3183,7 +3183,7 @@ type GtkAppChooserButtonKind interface {
 }
 func (self GtkAppChooserButton) _IsGtkAppChooserButton () {}
 func (self GtkAppChooserButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAppChooserButton(value unsafe.Pointer) GtkAppChooserButton { return GtkAppChooserButton{GtkComboBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkAppChooserButton(value unsafe.Pointer) GtkAppChooserButton { return GtkAppChooserButton{GtkComboBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkClipboard struct { GObjectObject }
 type GtkClipboardKind interface {
   _IsGtkClipboard()
@@ -3199,7 +3199,7 @@ type GtkInfoBarKind interface {
 }
 func (self GtkInfoBar) _IsGtkInfoBar () {}
 func (self GtkInfoBar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkInfoBar(value unsafe.Pointer) GtkInfoBar { return GtkInfoBar{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkInfoBar(value unsafe.Pointer) GtkInfoBar { return GtkInfoBar{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkRange struct { GtkWidget }
 type GtkRangeKind interface {
   _IsGtkRange()
@@ -3207,7 +3207,7 @@ type GtkRangeKind interface {
 }
 func (self GtkRange) _IsGtkRange () {}
 func (self GtkRange) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRange(value unsafe.Pointer) GtkRange { return GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkRange(value unsafe.Pointer) GtkRange { return GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkTreeSelection struct { GObjectObject }
 type GtkTreeSelectionKind interface {
   _IsGtkTreeSelection()
@@ -3223,7 +3223,7 @@ type GtkMenuToolButtonKind interface {
 }
 func (self GtkMenuToolButton) _IsGtkMenuToolButton () {}
 func (self GtkMenuToolButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMenuToolButton(value unsafe.Pointer) GtkMenuToolButton { return GtkMenuToolButton{GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkMenuToolButton(value unsafe.Pointer) GtkMenuToolButton { return GtkMenuToolButton{GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkRadioButton struct { GtkCheckButton }
 type GtkRadioButtonKind interface {
   _IsGtkRadioButton()
@@ -3231,7 +3231,7 @@ type GtkRadioButtonKind interface {
 }
 func (self GtkRadioButton) _IsGtkRadioButton () {}
 func (self GtkRadioButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRadioButton(value unsafe.Pointer) GtkRadioButton { return GtkRadioButton{GtkCheckButton{GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}}} }
+func ToGtkRadioButton(value unsafe.Pointer) GtkRadioButton { return GtkRadioButton{GtkCheckButton{GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}}} }
 type GtkPrintSettings struct { GObjectObject }
 type GtkPrintSettingsKind interface {
   _IsGtkPrintSettings()
@@ -3247,7 +3247,7 @@ type GtkIconViewKind interface {
 }
 func (self GtkIconView) _IsGtkIconView () {}
 func (self GtkIconView) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkIconView(value unsafe.Pointer) GtkIconView { return GtkIconView{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkIconView(value unsafe.Pointer) GtkIconView { return GtkIconView{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkImageMenuItem struct { GtkMenuItem }
 type GtkImageMenuItemKind interface {
   _IsGtkImageMenuItem()
@@ -3255,7 +3255,7 @@ type GtkImageMenuItemKind interface {
 }
 func (self GtkImageMenuItem) _IsGtkImageMenuItem () {}
 func (self GtkImageMenuItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkImageMenuItem(value unsafe.Pointer) GtkImageMenuItem { return GtkImageMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkImageMenuItem(value unsafe.Pointer) GtkImageMenuItem { return GtkImageMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkCheckButton struct { GtkToggleButton }
 type GtkCheckButtonKind interface {
   _IsGtkCheckButton()
@@ -3263,7 +3263,7 @@ type GtkCheckButtonKind interface {
 }
 func (self GtkCheckButton) _IsGtkCheckButton () {}
 func (self GtkCheckButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCheckButton(value unsafe.Pointer) GtkCheckButton { return GtkCheckButton{GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkCheckButton(value unsafe.Pointer) GtkCheckButton { return GtkCheckButton{GtkToggleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkTearoffMenuItem struct { GtkMenuItem }
 type GtkTearoffMenuItemKind interface {
   _IsGtkTearoffMenuItem()
@@ -3271,7 +3271,7 @@ type GtkTearoffMenuItemKind interface {
 }
 func (self GtkTearoffMenuItem) _IsGtkTearoffMenuItem () {}
 func (self GtkTearoffMenuItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkTearoffMenuItem(value unsafe.Pointer) GtkTearoffMenuItem { return GtkTearoffMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkTearoffMenuItem(value unsafe.Pointer) GtkTearoffMenuItem { return GtkTearoffMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkVScrollbar struct { GtkScrollbar }
 type GtkVScrollbarKind interface {
   _IsGtkVScrollbar()
@@ -3279,7 +3279,7 @@ type GtkVScrollbarKind interface {
 }
 func (self GtkVScrollbar) _IsGtkVScrollbar () {}
 func (self GtkVScrollbar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVScrollbar(value unsafe.Pointer) GtkVScrollbar { return GtkVScrollbar{GtkScrollbar{GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkVScrollbar(value unsafe.Pointer) GtkVScrollbar { return GtkVScrollbar{GtkScrollbar{GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkRecentFilter struct { GObjectInitiallyUnowned }
 type GtkRecentFilterKind interface {
   _IsGtkRecentFilter()
@@ -3287,7 +3287,7 @@ type GtkRecentFilterKind interface {
 }
 func (self GtkRecentFilter) _IsGtkRecentFilter () {}
 func (self GtkRecentFilter) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRecentFilter(value unsafe.Pointer) GtkRecentFilter { return GtkRecentFilter{GObjectInitiallyUnowned{value}} }
+func ToGtkRecentFilter(value unsafe.Pointer) GtkRecentFilter { return GtkRecentFilter{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkSpinButton struct { GtkEntry }
 type GtkSpinButtonKind interface {
   _IsGtkSpinButton()
@@ -3295,7 +3295,7 @@ type GtkSpinButtonKind interface {
 }
 func (self GtkSpinButton) _IsGtkSpinButton () {}
 func (self GtkSpinButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSpinButton(value unsafe.Pointer) GtkSpinButton { return GtkSpinButton{GtkEntry{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkSpinButton(value unsafe.Pointer) GtkSpinButton { return GtkSpinButton{GtkEntry{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkPrintOperation struct { GObjectObject }
 type GtkPrintOperationKind interface {
   _IsGtkPrintOperation()
@@ -3311,7 +3311,7 @@ type GtkContainerKind interface {
 }
 func (self GtkContainer) _IsGtkContainer () {}
 func (self GtkContainer) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkContainer(value unsafe.Pointer) GtkContainer { return GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkContainer(value unsafe.Pointer) GtkContainer { return GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkImage struct { GtkMisc }
 type GtkImageKind interface {
   _IsGtkImage()
@@ -3319,7 +3319,7 @@ type GtkImageKind interface {
 }
 func (self GtkImage) _IsGtkImage () {}
 func (self GtkImage) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkImage(value unsafe.Pointer) GtkImage { return GtkImage{GtkMisc{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkImage(value unsafe.Pointer) GtkImage { return GtkImage{GtkMisc{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkTextView struct { GtkContainer }
 type GtkTextViewKind interface {
   _IsGtkTextView()
@@ -3327,7 +3327,7 @@ type GtkTextViewKind interface {
 }
 func (self GtkTextView) _IsGtkTextView () {}
 func (self GtkTextView) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkTextView(value unsafe.Pointer) GtkTextView { return GtkTextView{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkTextView(value unsafe.Pointer) GtkTextView { return GtkTextView{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkLevelBar struct { GtkWidget }
 type GtkLevelBarKind interface {
   _IsGtkLevelBar()
@@ -3335,7 +3335,7 @@ type GtkLevelBarKind interface {
 }
 func (self GtkLevelBar) _IsGtkLevelBar () {}
 func (self GtkLevelBar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkLevelBar(value unsafe.Pointer) GtkLevelBar { return GtkLevelBar{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkLevelBar(value unsafe.Pointer) GtkLevelBar { return GtkLevelBar{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkIMMulticontext struct { GtkIMContext }
 type GtkIMMulticontextKind interface {
   _IsGtkIMMulticontext()
@@ -3351,7 +3351,7 @@ type GtkToolItemKind interface {
 }
 func (self GtkToolItem) _IsGtkToolItem () {}
 func (self GtkToolItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToolItem(value unsafe.Pointer) GtkToolItem { return GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkToolItem(value unsafe.Pointer) GtkToolItem { return GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkVolumeButton struct { GtkScaleButton }
 type GtkVolumeButtonKind interface {
   _IsGtkVolumeButton()
@@ -3359,7 +3359,7 @@ type GtkVolumeButtonKind interface {
 }
 func (self GtkVolumeButton) _IsGtkVolumeButton () {}
 func (self GtkVolumeButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVolumeButton(value unsafe.Pointer) GtkVolumeButton { return GtkVolumeButton{GtkScaleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkVolumeButton(value unsafe.Pointer) GtkVolumeButton { return GtkVolumeButton{GtkScaleButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkVBox struct { GtkBox }
 type GtkVBoxKind interface {
   _IsGtkVBox()
@@ -3367,7 +3367,7 @@ type GtkVBoxKind interface {
 }
 func (self GtkVBox) _IsGtkVBox () {}
 func (self GtkVBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVBox(value unsafe.Pointer) GtkVBox { return GtkVBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkVBox(value unsafe.Pointer) GtkVBox { return GtkVBox{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkSizeGroup struct { GObjectObject }
 type GtkSizeGroupKind interface {
   _IsGtkSizeGroup()
@@ -3383,7 +3383,7 @@ type GtkButtonKind interface {
 }
 func (self GtkButton) _IsGtkButton () {}
 func (self GtkButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkButton(value unsafe.Pointer) GtkButton { return GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkButton(value unsafe.Pointer) GtkButton { return GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkFixed struct { GtkContainer }
 type GtkFixedKind interface {
   _IsGtkFixed()
@@ -3391,7 +3391,7 @@ type GtkFixedKind interface {
 }
 func (self GtkFixed) _IsGtkFixed () {}
 func (self GtkFixed) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFixed(value unsafe.Pointer) GtkFixed { return GtkFixed{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkFixed(value unsafe.Pointer) GtkFixed { return GtkFixed{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkSpinner struct { GtkWidget }
 type GtkSpinnerKind interface {
   _IsGtkSpinner()
@@ -3399,7 +3399,7 @@ type GtkSpinnerKind interface {
 }
 func (self GtkSpinner) _IsGtkSpinner () {}
 func (self GtkSpinner) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkSpinner(value unsafe.Pointer) GtkSpinner { return GtkSpinner{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkSpinner(value unsafe.Pointer) GtkSpinner { return GtkSpinner{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkStyleContext struct { GObjectObject }
 type GtkStyleContextKind interface {
   _IsGtkStyleContext()
@@ -3423,7 +3423,7 @@ type GtkAppChooserDialogKind interface {
 }
 func (self GtkAppChooserDialog) _IsGtkAppChooserDialog () {}
 func (self GtkAppChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAppChooserDialog(value unsafe.Pointer) GtkAppChooserDialog { return GtkAppChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkAppChooserDialog(value unsafe.Pointer) GtkAppChooserDialog { return GtkAppChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkApplicationWindow struct { GtkWindow }
 type GtkApplicationWindowKind interface {
   _IsGtkApplicationWindow()
@@ -3431,7 +3431,7 @@ type GtkApplicationWindowKind interface {
 }
 func (self GtkApplicationWindow) _IsGtkApplicationWindow () {}
 func (self GtkApplicationWindow) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkApplicationWindow(value unsafe.Pointer) GtkApplicationWindow { return GtkApplicationWindow{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkApplicationWindow(value unsafe.Pointer) GtkApplicationWindow { return GtkApplicationWindow{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkComboBoxText struct { GtkComboBox }
 type GtkComboBoxTextKind interface {
   _IsGtkComboBoxText()
@@ -3439,7 +3439,7 @@ type GtkComboBoxTextKind interface {
 }
 func (self GtkComboBoxText) _IsGtkComboBoxText () {}
 func (self GtkComboBoxText) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkComboBoxText(value unsafe.Pointer) GtkComboBoxText { return GtkComboBoxText{GtkComboBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkComboBoxText(value unsafe.Pointer) GtkComboBoxText { return GtkComboBoxText{GtkComboBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkEntryBuffer struct { GObjectObject }
 type GtkEntryBufferKind interface {
   _IsGtkEntryBuffer()
@@ -3455,7 +3455,7 @@ type GtkMenuShellKind interface {
 }
 func (self GtkMenuShell) _IsGtkMenuShell () {}
 func (self GtkMenuShell) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMenuShell(value unsafe.Pointer) GtkMenuShell { return GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkMenuShell(value unsafe.Pointer) GtkMenuShell { return GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkBuilder struct { GObjectObject }
 type GtkBuilderKind interface {
   _IsGtkBuilder()
@@ -3471,7 +3471,7 @@ type GtkComboBoxKind interface {
 }
 func (self GtkComboBox) _IsGtkComboBox () {}
 func (self GtkComboBox) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkComboBox(value unsafe.Pointer) GtkComboBox { return GtkComboBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkComboBox(value unsafe.Pointer) GtkComboBox { return GtkComboBox{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkInvisible struct { GtkWidget }
 type GtkInvisibleKind interface {
   _IsGtkInvisible()
@@ -3479,7 +3479,7 @@ type GtkInvisibleKind interface {
 }
 func (self GtkInvisible) _IsGtkInvisible () {}
 func (self GtkInvisible) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkInvisible(value unsafe.Pointer) GtkInvisible { return GtkInvisible{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkInvisible(value unsafe.Pointer) GtkInvisible { return GtkInvisible{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkFontChooserDialog struct { GtkDialog }
 type GtkFontChooserDialogKind interface {
   _IsGtkFontChooserDialog()
@@ -3487,7 +3487,7 @@ type GtkFontChooserDialogKind interface {
 }
 func (self GtkFontChooserDialog) _IsGtkFontChooserDialog () {}
 func (self GtkFontChooserDialog) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFontChooserDialog(value unsafe.Pointer) GtkFontChooserDialog { return GtkFontChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkFontChooserDialog(value unsafe.Pointer) GtkFontChooserDialog { return GtkFontChooserDialog{GtkDialog{GtkWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkRadioToolButton struct { GtkToggleToolButton }
 type GtkRadioToolButtonKind interface {
   _IsGtkRadioToolButton()
@@ -3495,7 +3495,7 @@ type GtkRadioToolButtonKind interface {
 }
 func (self GtkRadioToolButton) _IsGtkRadioToolButton () {}
 func (self GtkRadioToolButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRadioToolButton(value unsafe.Pointer) GtkRadioToolButton { return GtkRadioToolButton{GtkToggleToolButton{GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}}} }
+func ToGtkRadioToolButton(value unsafe.Pointer) GtkRadioToolButton { return GtkRadioToolButton{GtkToggleToolButton{GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}}} }
 type GtkRecentChooserMenu struct { GtkMenu }
 type GtkRecentChooserMenuKind interface {
   _IsGtkRecentChooserMenu()
@@ -3503,7 +3503,7 @@ type GtkRecentChooserMenuKind interface {
 }
 func (self GtkRecentChooserMenu) _IsGtkRecentChooserMenu () {}
 func (self GtkRecentChooserMenu) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkRecentChooserMenu(value unsafe.Pointer) GtkRecentChooserMenu { return GtkRecentChooserMenu{GtkMenu{GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkRecentChooserMenu(value unsafe.Pointer) GtkRecentChooserMenu { return GtkRecentChooserMenu{GtkMenu{GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkHScale struct { GtkScale }
 type GtkHScaleKind interface {
   _IsGtkHScale()
@@ -3511,7 +3511,7 @@ type GtkHScaleKind interface {
 }
 func (self GtkHScale) _IsGtkHScale () {}
 func (self GtkHScale) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHScale(value unsafe.Pointer) GtkHScale { return GtkHScale{GtkScale{GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkHScale(value unsafe.Pointer) GtkHScale { return GtkHScale{GtkScale{GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkHSeparator struct { GtkSeparator }
 type GtkHSeparatorKind interface {
   _IsGtkHSeparator()
@@ -3519,7 +3519,7 @@ type GtkHSeparatorKind interface {
 }
 func (self GtkHSeparator) _IsGtkHSeparator () {}
 func (self GtkHSeparator) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHSeparator(value unsafe.Pointer) GtkHSeparator { return GtkHSeparator{GtkSeparator{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkHSeparator(value unsafe.Pointer) GtkHSeparator { return GtkHSeparator{GtkSeparator{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkStatusIcon struct { GObjectObject }
 type GtkStatusIconKind interface {
   _IsGtkStatusIcon()
@@ -3535,7 +3535,7 @@ type GtkOverlayKind interface {
 }
 func (self GtkOverlay) _IsGtkOverlay () {}
 func (self GtkOverlay) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkOverlay(value unsafe.Pointer) GtkOverlay { return GtkOverlay{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkOverlay(value unsafe.Pointer) GtkOverlay { return GtkOverlay{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkVScale struct { GtkScale }
 type GtkVScaleKind interface {
   _IsGtkVScale()
@@ -3543,7 +3543,7 @@ type GtkVScaleKind interface {
 }
 func (self GtkVScale) _IsGtkVScale () {}
 func (self GtkVScale) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkVScale(value unsafe.Pointer) GtkVScale { return GtkVScale{GtkScale{GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkVScale(value unsafe.Pointer) GtkVScale { return GtkVScale{GtkScale{GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkEntryCompletion struct { GObjectObject }
 type GtkEntryCompletionKind interface {
   _IsGtkEntryCompletion()
@@ -3559,7 +3559,7 @@ type GtkScaleKind interface {
 }
 func (self GtkScale) _IsGtkScale () {}
 func (self GtkScale) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkScale(value unsafe.Pointer) GtkScale { return GtkScale{GtkRange{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkScale(value unsafe.Pointer) GtkScale { return GtkScale{GtkRange{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkFontSelection struct { GtkBox }
 type GtkFontSelectionKind interface {
   _IsGtkFontSelection()
@@ -3567,7 +3567,7 @@ type GtkFontSelectionKind interface {
 }
 func (self GtkFontSelection) _IsGtkFontSelection () {}
 func (self GtkFontSelection) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFontSelection(value unsafe.Pointer) GtkFontSelection { return GtkFontSelection{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkFontSelection(value unsafe.Pointer) GtkFontSelection { return GtkFontSelection{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkToggleToolButton struct { GtkToolButton }
 type GtkToggleToolButtonKind interface {
   _IsGtkToggleToolButton()
@@ -3575,7 +3575,7 @@ type GtkToggleToolButtonKind interface {
 }
 func (self GtkToggleToolButton) _IsGtkToggleToolButton () {}
 func (self GtkToggleToolButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToggleToolButton(value unsafe.Pointer) GtkToggleToolButton { return GtkToggleToolButton{GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}}} }
+func ToGtkToggleToolButton(value unsafe.Pointer) GtkToggleToolButton { return GtkToggleToolButton{GtkToolButton{GtkToolItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}}} }
 type GtkToggleAction struct { GtkAction }
 type GtkToggleActionKind interface {
   _IsGtkToggleAction()
@@ -3591,7 +3591,7 @@ type GtkCellRendererPixbufKind interface {
 }
 func (self GtkCellRendererPixbuf) _IsGtkCellRendererPixbuf () {}
 func (self GtkCellRendererPixbuf) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererPixbuf(value unsafe.Pointer) GtkCellRendererPixbuf { return GtkCellRendererPixbuf{GtkCellRenderer{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellRendererPixbuf(value unsafe.Pointer) GtkCellRendererPixbuf { return GtkCellRendererPixbuf{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkIMContextSimple struct { GtkIMContext }
 type GtkIMContextSimpleKind interface {
   _IsGtkIMContextSimple()
@@ -3607,7 +3607,7 @@ type GtkScrolledWindowKind interface {
 }
 func (self GtkScrolledWindow) _IsGtkScrolledWindow () {}
 func (self GtkScrolledWindow) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkScrolledWindow(value unsafe.Pointer) GtkScrolledWindow { return GtkScrolledWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkScrolledWindow(value unsafe.Pointer) GtkScrolledWindow { return GtkScrolledWindow{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkCellRendererSpin struct { GtkCellRendererText }
 type GtkCellRendererSpinKind interface {
   _IsGtkCellRendererSpin()
@@ -3615,7 +3615,7 @@ type GtkCellRendererSpinKind interface {
 }
 func (self GtkCellRendererSpin) _IsGtkCellRendererSpin () {}
 func (self GtkCellRendererSpin) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererSpin(value unsafe.Pointer) GtkCellRendererSpin { return GtkCellRendererSpin{GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{value}}}} }
+func ToGtkCellRendererSpin(value unsafe.Pointer) GtkCellRendererSpin { return GtkCellRendererSpin{GtkCellRendererText{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkTextTag struct { GObjectObject }
 type GtkTextTagKind interface {
   _IsGtkTextTag()
@@ -3631,7 +3631,7 @@ type GtkNumerableIconKind interface {
 }
 func (self GtkNumerableIcon) _IsGtkNumerableIcon () {}
 func (self GtkNumerableIcon) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkNumerableIcon(value unsafe.Pointer) GtkNumerableIcon { return GtkNumerableIcon{GioEmblemedIcon{value}} }
+func ToGtkNumerableIcon(value unsafe.Pointer) GtkNumerableIcon { return GtkNumerableIcon{GioEmblemedIcon{GObjectObject{value}}} }
 type GtkAction struct { GObjectObject }
 type GtkActionKind interface {
   _IsGtkAction()
@@ -3655,7 +3655,7 @@ type GtkAdjustmentKind interface {
 }
 func (self GtkAdjustment) _IsGtkAdjustment () {}
 func (self GtkAdjustment) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkAdjustment(value unsafe.Pointer) GtkAdjustment { return GtkAdjustment{GObjectInitiallyUnowned{value}} }
+func ToGtkAdjustment(value unsafe.Pointer) GtkAdjustment { return GtkAdjustment{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkExpander struct { GtkBin }
 type GtkExpanderKind interface {
   _IsGtkExpander()
@@ -3663,7 +3663,7 @@ type GtkExpanderKind interface {
 }
 func (self GtkExpander) _IsGtkExpander () {}
 func (self GtkExpander) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkExpander(value unsafe.Pointer) GtkExpander { return GtkExpander{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkExpander(value unsafe.Pointer) GtkExpander { return GtkExpander{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkColorChooserWidget struct { GtkBox }
 type GtkColorChooserWidgetKind interface {
   _IsGtkColorChooserWidget()
@@ -3671,7 +3671,7 @@ type GtkColorChooserWidgetKind interface {
 }
 func (self GtkColorChooserWidget) _IsGtkColorChooserWidget () {}
 func (self GtkColorChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkColorChooserWidget(value unsafe.Pointer) GtkColorChooserWidget { return GtkColorChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkColorChooserWidget(value unsafe.Pointer) GtkColorChooserWidget { return GtkColorChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkFontChooserWidget struct { GtkBox }
 type GtkFontChooserWidgetKind interface {
   _IsGtkFontChooserWidget()
@@ -3679,7 +3679,7 @@ type GtkFontChooserWidgetKind interface {
 }
 func (self GtkFontChooserWidget) _IsGtkFontChooserWidget () {}
 func (self GtkFontChooserWidget) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFontChooserWidget(value unsafe.Pointer) GtkFontChooserWidget { return GtkFontChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkFontChooserWidget(value unsafe.Pointer) GtkFontChooserWidget { return GtkFontChooserWidget{GtkBox{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkRecentManager struct { GObjectObject }
 type GtkRecentManagerKind interface {
   _IsGtkRecentManager()
@@ -3695,7 +3695,7 @@ type GtkDrawingAreaKind interface {
 }
 func (self GtkDrawingArea) _IsGtkDrawingArea () {}
 func (self GtkDrawingArea) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkDrawingArea(value unsafe.Pointer) GtkDrawingArea { return GtkDrawingArea{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkDrawingArea(value unsafe.Pointer) GtkDrawingArea { return GtkDrawingArea{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkMenuItem struct { GtkBin }
 type GtkMenuItemKind interface {
   _IsGtkMenuItem()
@@ -3703,7 +3703,7 @@ type GtkMenuItemKind interface {
 }
 func (self GtkMenuItem) _IsGtkMenuItem () {}
 func (self GtkMenuItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMenuItem(value unsafe.Pointer) GtkMenuItem { return GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkMenuItem(value unsafe.Pointer) GtkMenuItem { return GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
 type GtkCssProvider struct { GObjectObject }
 type GtkCssProviderKind interface {
   _IsGtkCssProvider()
@@ -3719,7 +3719,7 @@ type GtkCellRendererSpinnerKind interface {
 }
 func (self GtkCellRendererSpinner) _IsGtkCellRendererSpinner () {}
 func (self GtkCellRendererSpinner) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererSpinner(value unsafe.Pointer) GtkCellRendererSpinner { return GtkCellRendererSpinner{GtkCellRenderer{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellRendererSpinner(value unsafe.Pointer) GtkCellRendererSpinner { return GtkCellRendererSpinner{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkStyle struct { GObjectObject }
 type GtkStyleKind interface {
   _IsGtkStyle()
@@ -3735,7 +3735,7 @@ type GtkCellRendererToggleKind interface {
 }
 func (self GtkCellRendererToggle) _IsGtkCellRendererToggle () {}
 func (self GtkCellRendererToggle) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCellRendererToggle(value unsafe.Pointer) GtkCellRendererToggle { return GtkCellRendererToggle{GtkCellRenderer{GObjectInitiallyUnowned{value}}} }
+func ToGtkCellRendererToggle(value unsafe.Pointer) GtkCellRendererToggle { return GtkCellRendererToggle{GtkCellRenderer{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkAccelMap struct { GObjectObject }
 type GtkAccelMapKind interface {
   _IsGtkAccelMap()
@@ -3775,7 +3775,7 @@ type GtkToolbarKind interface {
 }
 func (self GtkToolbar) _IsGtkToolbar () {}
 func (self GtkToolbar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkToolbar(value unsafe.Pointer) GtkToolbar { return GtkToolbar{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkToolbar(value unsafe.Pointer) GtkToolbar { return GtkToolbar{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkTextMark struct { GObjectObject }
 type GtkTextMarkKind interface {
   _IsGtkTextMark()
@@ -3791,7 +3791,7 @@ type GtkCheckMenuItemKind interface {
 }
 func (self GtkCheckMenuItem) _IsGtkCheckMenuItem () {}
 func (self GtkCheckMenuItem) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkCheckMenuItem(value unsafe.Pointer) GtkCheckMenuItem { return GtkCheckMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkCheckMenuItem(value unsafe.Pointer) GtkCheckMenuItem { return GtkCheckMenuItem{GtkMenuItem{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkLayout struct { GtkContainer }
 type GtkLayoutKind interface {
   _IsGtkLayout()
@@ -3799,7 +3799,7 @@ type GtkLayoutKind interface {
 }
 func (self GtkLayout) _IsGtkLayout () {}
 func (self GtkLayout) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkLayout(value unsafe.Pointer) GtkLayout { return GtkLayout{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}} }
+func ToGtkLayout(value unsafe.Pointer) GtkLayout { return GtkLayout{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}} }
 type GtkWidget struct { GObjectInitiallyUnowned }
 type GtkWidgetKind interface {
   _IsGtkWidget()
@@ -3807,7 +3807,7 @@ type GtkWidgetKind interface {
 }
 func (self GtkWidget) _IsGtkWidget () {}
 func (self GtkWidget) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkWidget(value unsafe.Pointer) GtkWidget { return GtkWidget{GObjectInitiallyUnowned{value}} }
+func ToGtkWidget(value unsafe.Pointer) GtkWidget { return GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}} }
 type GtkFontButton struct { GtkButton }
 type GtkFontButtonKind interface {
   _IsGtkFontButton()
@@ -3815,7 +3815,7 @@ type GtkFontButtonKind interface {
 }
 func (self GtkFontButton) _IsGtkFontButton () {}
 func (self GtkFontButton) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkFontButton(value unsafe.Pointer) GtkFontButton { return GtkFontButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}}} }
+func ToGtkFontButton(value unsafe.Pointer) GtkFontButton { return GtkFontButton{GtkButton{GtkBin{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}}} }
 type GtkHSV struct { GtkWidget }
 type GtkHSVKind interface {
   _IsGtkHSV()
@@ -3823,7 +3823,7 @@ type GtkHSVKind interface {
 }
 func (self GtkHSV) _IsGtkHSV () {}
 func (self GtkHSV) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkHSV(value unsafe.Pointer) GtkHSV { return GtkHSV{GtkWidget{GObjectInitiallyUnowned{value}}} }
+func ToGtkHSV(value unsafe.Pointer) GtkHSV { return GtkHSV{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}} }
 type GtkMenuBar struct { GtkMenuShell }
 type GtkMenuBarKind interface {
   _IsGtkMenuBar()
@@ -3831,7 +3831,1034 @@ type GtkMenuBarKind interface {
 }
 func (self GtkMenuBar) _IsGtkMenuBar () {}
 func (self GtkMenuBar) _getValue() unsafe.Pointer { return self._value_ }
-func ToGtkMenuBar(value unsafe.Pointer) GtkMenuBar { return GtkMenuBar{GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{value}}}}} }
+func ToGtkMenuBar(value unsafe.Pointer) GtkMenuBar { return GtkMenuBar{GtkMenuShell{GtkContainer{GtkWidget{GObjectInitiallyUnowned{GObjectObject{value}}}}}} }
+func AccelGroupsActivate(object *C.GObject, accel_key uint, accel_mods C.GdkModifierType) (_go__return__ bool) {
+	_cgo_accel_key_ := (C.guint)(accel_key)
+	var _return_ C.gboolean
+	_return_ = C.gtk_accel_groups_activate(object, _cgo_accel_key_, accel_mods)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func AccelGroupsFromObject(object *C.GObject) (_return_ *C.GSList) {
+	_return_ = C.gtk_accel_groups_from_object(object)
+	return
+}
+
+func AcceleratorGetDefaultModMask() (_return_ C.GdkModifierType) {
+	_return_ = C.gtk_accelerator_get_default_mod_mask()
+	return
+}
+
+func AcceleratorGetLabel(accelerator_key uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
+	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
+	var _return_ *C.gchar
+	_return_ = C.gtk_accelerator_get_label(_cgo_accelerator_key_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func AcceleratorGetLabelWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
+	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
+	_cgo_keycode_ := (C.guint)(keycode)
+	var _return_ *C.gchar
+	_return_ = C.gtk_accelerator_get_label_with_keycode(display, _cgo_accelerator_key_, _cgo_keycode_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func AcceleratorName(accelerator_key uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
+	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
+	var _return_ *C.gchar
+	_return_ = C.gtk_accelerator_name(_cgo_accelerator_key_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func AcceleratorNameWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
+	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
+	_cgo_keycode_ := (C.guint)(keycode)
+	var _return_ *C.gchar
+	_return_ = C.gtk_accelerator_name_with_keycode(display, _cgo_accelerator_key_, _cgo_keycode_, accelerator_mods)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func AcceleratorParse(accelerator string) (_go_accelerator_key_ uint, accelerator_mods *C.GdkModifierType) {
+	var accelerator_key C.guint
+	_cstring_accelerator_ := C.CString(accelerator)
+	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
+	defer C.free(unsafe.Pointer(_cstring_accelerator_))
+	C._gtk_accelerator_parse(_cgo_accelerator_, &accelerator_key, accelerator_mods)
+	_go_accelerator_key_ = (uint)(accelerator_key)
+	return
+}
+
+func AcceleratorParseWithKeycode(accelerator string) (_go_accelerator_key_ uint, accelerator_codes unsafe.Pointer, accelerator_mods *C.GdkModifierType) {
+	var accelerator_key C.guint
+	_cstring_accelerator_ := C.CString(accelerator)
+	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
+	defer C.free(unsafe.Pointer(_cstring_accelerator_))
+	C._gtk_accelerator_parse_with_keycode(_cgo_accelerator_, &accelerator_key, accelerator_codes, accelerator_mods)
+	_go_accelerator_key_ = (uint)(accelerator_key)
+	return
+}
+
+func AcceleratorSetDefaultModMask(default_mod_mask C.GdkModifierType) () {
+	C.gtk_accelerator_set_default_mod_mask(default_mod_mask)
+	return
+}
+
+func AcceleratorValid(keyval uint, modifiers C.GdkModifierType) (_go__return__ bool) {
+	_cgo_keyval_ := (C.guint)(keyval)
+	var _return_ C.gboolean
+	_return_ = C.gtk_accelerator_valid(_cgo_keyval_, modifiers)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func AlternativeDialogButtonOrder(screen *C.GdkScreen) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_alternative_dialog_button_order(screen)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func BindingEntryAddSignalFromString(binding_set *GtkBindingSet, signal_desc string) (_return_ C.GTokenType) {
+	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
+	_cstring_signal_desc_ := C.CString(signal_desc)
+	_cgo_signal_desc_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_desc_))
+	defer C.free(unsafe.Pointer(_cstring_signal_desc_))
+	_return_ = C._gtk_binding_entry_add_signal_from_string(_cgo_binding_set_, _cgo_signal_desc_)
+	return
+}
+
+func BindingEntryAddSignall(binding_set *GtkBindingSet, keyval uint, modifiers C.GdkModifierType, signal_name string, binding_args *C.GSList) () {
+	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
+	_cgo_keyval_ := (C.guint)(keyval)
+	_cstring_signal_name_ := C.CString(signal_name)
+	_cgo_signal_name_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_name_))
+	defer C.free(unsafe.Pointer(_cstring_signal_name_))
+	C._gtk_binding_entry_add_signall(_cgo_binding_set_, _cgo_keyval_, modifiers, _cgo_signal_name_, binding_args)
+	return
+}
+
+func BindingEntryRemove(binding_set *GtkBindingSet, keyval uint, modifiers C.GdkModifierType) () {
+	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
+	_cgo_keyval_ := (C.guint)(keyval)
+	C.gtk_binding_entry_remove(_cgo_binding_set_, _cgo_keyval_, modifiers)
+	return
+}
+
+func BindingEntrySkip(binding_set *GtkBindingSet, keyval uint, modifiers C.GdkModifierType) () {
+	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
+	_cgo_keyval_ := (C.guint)(keyval)
+	C.gtk_binding_entry_skip(_cgo_binding_set_, _cgo_keyval_, modifiers)
+	return
+}
+
+func BindingSetByClass(object_class C.gpointer) (_go__return__ *GtkBindingSet) {
+	var _return_ *C.GtkBindingSet
+	_return_ = C.gtk_binding_set_by_class(object_class)
+	_go__return__ = (*GtkBindingSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func BindingSetFind(set_name string) (_go__return__ *GtkBindingSet) {
+	var _return_ *C.GtkBindingSet
+	_cstring_set_name_ := C.CString(set_name)
+	_cgo_set_name_ := (*C.gchar)(unsafe.Pointer(_cstring_set_name_))
+	defer C.free(unsafe.Pointer(_cstring_set_name_))
+	_return_ = C._gtk_binding_set_find(_cgo_set_name_)
+	_go__return__ = (*GtkBindingSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func BindingSetNew(set_name string) (_go__return__ *GtkBindingSet) {
+	var _return_ *C.GtkBindingSet
+	_cstring_set_name_ := C.CString(set_name)
+	_cgo_set_name_ := (*C.gchar)(unsafe.Pointer(_cstring_set_name_))
+	defer C.free(unsafe.Pointer(_cstring_set_name_))
+	_return_ = C._gtk_binding_set_new(_cgo_set_name_)
+	_go__return__ = (*GtkBindingSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func BindingsActivate(object *C.GObject, keyval uint, modifiers C.GdkModifierType) (_go__return__ bool) {
+	_cgo_keyval_ := (C.guint)(keyval)
+	var _return_ C.gboolean
+	_return_ = C.gtk_bindings_activate(object, _cgo_keyval_, modifiers)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func BindingsActivateEvent(object *C.GObject, event *C.GdkEventKey) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_bindings_activate_event(object, event)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func BuilderErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_builder_error_quark()
+	return
+}
+
+func CairoShouldDrawWindow(cr *C.cairo_t, window *C.GdkWindow) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_cairo_should_draw_window(cr, window)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func CairoTransformToWindow(cr *C.cairo_t, widget GtkWidgetKind, window *C.GdkWindow) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	C.gtk_cairo_transform_to_window(cr, _cgo_widget_, window)
+	return
+}
+
+func CheckVersion(required_major uint, required_minor uint, required_micro uint) (_go__return__ string) {
+	_cgo_required_major_ := (C.guint)(required_major)
+	_cgo_required_minor_ := (C.guint)(required_minor)
+	_cgo_required_micro_ := (C.guint)(required_micro)
+	var _return_ *C.gchar
+	_return_ = C._gtk_check_version(_cgo_required_major_, _cgo_required_minor_, _cgo_required_micro_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func CssProviderErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_css_provider_error_quark()
+	return
+}
+
+func DeviceGrabAdd(widget GtkWidgetKind, device *C.GdkDevice, block_others bool) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_block_others_ := (C.gboolean)(C.FALSE)
+	if block_others { _cgo_block_others_ = (C.gboolean)(C.TRUE) }
+	C.gtk_device_grab_add(_cgo_widget_, device, _cgo_block_others_)
+	return
+}
+
+func DeviceGrabRemove(widget GtkWidgetKind, device *C.GdkDevice) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	C.gtk_device_grab_remove(_cgo_widget_, device)
+	return
+}
+
+func DisableSetlocale() () {
+	C.gtk_disable_setlocale()
+	return
+}
+
+func DistributeNaturalAllocation(extra_space int, n_requested_sizes uint, sizes *GtkRequestedSize) (_go__return__ int) {
+	_cgo_sizes_ := (*C.GtkRequestedSize)(unsafe.Pointer(sizes))
+	_cgo_extra_space_ := (C.gint)(extra_space)
+	_cgo_n_requested_sizes_ := (C.guint)(n_requested_sizes)
+	var _return_ C.gint
+	_return_ = C.gtk_distribute_natural_allocation(_cgo_extra_space_, _cgo_n_requested_sizes_, _cgo_sizes_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func DragFinish(context *C.GdkDragContext, success bool, del bool, time_ uint32) () {
+	_cgo_time__ := (C.guint32)(time_)
+	_cgo_success_ := (C.gboolean)(C.FALSE)
+	if success { _cgo_success_ = (C.gboolean)(C.TRUE) }
+	_cgo_del_ := (C.gboolean)(C.FALSE)
+	if del { _cgo_del_ = (C.gboolean)(C.TRUE) }
+	C.gtk_drag_finish(context, _cgo_success_, _cgo_del_, _cgo_time__)
+	return
+}
+
+func DragGetSourceWidget(context *C.GdkDragContext) (_go__return__ GtkWidget) {
+	var _return_ *C.GtkWidget
+	_return_ = C.gtk_drag_get_source_widget(context)
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func DragSetIconDefault(context *C.GdkDragContext) () {
+	C.gtk_drag_set_icon_default(context)
+	return
+}
+
+func DragSetIconGicon(context *C.GdkDragContext, icon *C.GIcon, hot_x int, hot_y int) () {
+	_cgo_hot_x_ := (C.gint)(hot_x)
+	_cgo_hot_y_ := (C.gint)(hot_y)
+	C.gtk_drag_set_icon_gicon(context, icon, _cgo_hot_x_, _cgo_hot_y_)
+	return
+}
+
+func DragSetIconName(context *C.GdkDragContext, icon_name string, hot_x int, hot_y int) () {
+	_cgo_hot_x_ := (C.gint)(hot_x)
+	_cgo_hot_y_ := (C.gint)(hot_y)
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_drag_set_icon_name(context, _cgo_icon_name_, _cgo_hot_x_, _cgo_hot_y_)
+	return
+}
+
+func DragSetIconPixbuf(context *C.GdkDragContext, pixbuf *C.GdkPixbuf, hot_x int, hot_y int) () {
+	_cgo_hot_x_ := (C.gint)(hot_x)
+	_cgo_hot_y_ := (C.gint)(hot_y)
+	C.gtk_drag_set_icon_pixbuf(context, pixbuf, _cgo_hot_x_, _cgo_hot_y_)
+	return
+}
+
+func DragSetIconStock(context *C.GdkDragContext, stock_id string, hot_x int, hot_y int) () {
+	_cgo_hot_x_ := (C.gint)(hot_x)
+	_cgo_hot_y_ := (C.gint)(hot_y)
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	C._gtk_drag_set_icon_stock(context, _cgo_stock_id_, _cgo_hot_x_, _cgo_hot_y_)
+	return
+}
+
+func DragSetIconSurface(context *C.GdkDragContext, surface *C.cairo_surface_t) () {
+	C.gtk_drag_set_icon_surface(context, surface)
+	return
+}
+
+func DragSetIconWidget(context *C.GdkDragContext, widget GtkWidgetKind, hot_x int, hot_y int) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_hot_x_ := (C.gint)(hot_x)
+	_cgo_hot_y_ := (C.gint)(hot_y)
+	C.gtk_drag_set_icon_widget(context, _cgo_widget_, _cgo_hot_x_, _cgo_hot_y_)
+	return
+}
+
+func EventsPending() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_events_pending()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func False() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_false()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func FileChooserErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_file_chooser_error_quark()
+	return
+}
+
+func GetBinaryAge() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_get_binary_age()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func GetCurrentEvent() (_return_ *C.GdkEvent) {
+	_return_ = C.gtk_get_current_event()
+	return
+}
+
+func GetCurrentEventDevice() (_return_ *C.GdkDevice) {
+	_return_ = C.gtk_get_current_event_device()
+	return
+}
+
+func GetCurrentEventState() (_go__return__ bool, state *C.GdkModifierType) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_get_current_event_state(state)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func GetCurrentEventTime() (_go__return__ uint32) {
+	var _return_ C.guint32
+	_return_ = C.gtk_get_current_event_time()
+	_go__return__ = (uint32)(_return_)
+	return
+}
+
+func GetDebugFlags() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_get_debug_flags()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func GetDefaultLanguage() (_return_ *C.PangoLanguage) {
+	_return_ = C.gtk_get_default_language()
+	return
+}
+
+func GetEventWidget(event *C.GdkEvent) (_go__return__ GtkWidget) {
+	var _return_ *C.GtkWidget
+	_return_ = C.gtk_get_event_widget(event)
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func GetInterfaceAge() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_get_interface_age()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func GetMajorVersion() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_get_major_version()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func GetMicroVersion() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_get_micro_version()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func GetMinorVersion() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_get_minor_version()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func GetOptionGroup(open_default_display bool) (_return_ *C.GOptionGroup) {
+	_cgo_open_default_display_ := (C.gboolean)(C.FALSE)
+	if open_default_display { _cgo_open_default_display_ = (C.gboolean)(C.TRUE) }
+	_return_ = C.gtk_get_option_group(_cgo_open_default_display_)
+	return
+}
+
+func GrabGetCurrent() (_go__return__ GtkWidget) {
+	var _return_ *C.GtkWidget
+	_return_ = C.gtk_grab_get_current()
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func IconSizeFromName(name string) (_return_ C.GtkIconSize) {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_icon_size_from_name(_cgo_name_)
+	return
+}
+
+func IconSizeGetName(size C.GtkIconSize) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_icon_size_get_name(size)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func IconSizeLookup(size C.GtkIconSize) (_go__return__ bool, _go_width_ int, _go_height_ int) {
+	var width C.gint
+	var height C.gint
+	var _return_ C.gboolean
+	_return_ = C.gtk_icon_size_lookup(size, &width, &height)
+	_go_width_ = (int)(width)
+	_go_height_ = (int)(height)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func IconSizeLookupForSettings(settings GtkSettingsKind, size C.GtkIconSize) (_go__return__ bool, _go_width_ int, _go_height_ int) {
+	_cgo_settings_ := (*C.GtkSettings)(settings._getValue())
+	var width C.gint
+	var height C.gint
+	var _return_ C.gboolean
+	_return_ = C.gtk_icon_size_lookup_for_settings(_cgo_settings_, size, &width, &height)
+	_go_width_ = (int)(width)
+	_go_height_ = (int)(height)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func IconSizeRegister(name string, width int, height int) (_return_ C.GtkIconSize) {
+	_cgo_width_ := (C.gint)(width)
+	_cgo_height_ := (C.gint)(height)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_icon_size_register(_cgo_name_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func IconSizeRegisterAlias(alias string, target C.GtkIconSize) () {
+	_cstring_alias_ := C.CString(alias)
+	_cgo_alias_ := (*C.gchar)(unsafe.Pointer(_cstring_alias_))
+	defer C.free(unsafe.Pointer(_cstring_alias_))
+	C._gtk_icon_size_register_alias(_cgo_alias_, target)
+	return
+}
+
+func IconThemeErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_icon_theme_error_quark()
+	return
+}
+
+func Main() () {
+	C.gtk_main()
+	return
+}
+
+func MainDoEvent(event *C.GdkEvent) () {
+	C.gtk_main_do_event(event)
+	return
+}
+
+func MainIteration() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_main_iteration()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func MainIterationDo(blocking bool) (_go__return__ bool) {
+	_cgo_blocking_ := (C.gboolean)(C.FALSE)
+	if blocking { _cgo_blocking_ = (C.gboolean)(C.TRUE) }
+	var _return_ C.gboolean
+	_return_ = C.gtk_main_iteration_do(_cgo_blocking_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func MainLevel() (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.gtk_main_level()
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func MainQuit() () {
+	C.gtk_main_quit()
+	return
+}
+
+func PaperSizeGetDefault() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_paper_size_get_default()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func PaperSizeGetPaperSizes(include_custom bool) (_return_ *C.GList) {
+	_cgo_include_custom_ := (C.gboolean)(C.FALSE)
+	if include_custom { _cgo_include_custom_ = (C.gboolean)(C.TRUE) }
+	_return_ = C.gtk_paper_size_get_paper_sizes(_cgo_include_custom_)
+	return
+}
+
+func PrintErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_print_error_quark()
+	return
+}
+
+func PrintRunPageSetupDialog(parent GtkWindowKind, page_setup GtkPageSetupKind, settings GtkPrintSettingsKind) (_go__return__ GtkPageSetup) {
+	_cgo_parent_ := (*C.GtkWindow)(parent._getValue())
+	_cgo_page_setup_ := (*C.GtkPageSetup)(page_setup._getValue())
+	_cgo_settings_ := (*C.GtkPrintSettings)(settings._getValue())
+	var _return_ *C.GtkPageSetup
+	_return_ = C.gtk_print_run_page_setup_dialog(_cgo_parent_, _cgo_page_setup_, _cgo_settings_)
+	_go__return__ = ToGtkPageSetup(unsafe.Pointer(_return_))
+	return
+}
+
+func PrintRunPageSetupDialogAsync(parent GtkWindowKind, page_setup GtkPageSetupKind, settings GtkPrintSettingsKind, done_cb C.GtkPageSetupDoneFunc, data C.gpointer) () {
+	_cgo_parent_ := (*C.GtkWindow)(parent._getValue())
+	_cgo_page_setup_ := (*C.GtkPageSetup)(page_setup._getValue())
+	_cgo_settings_ := (*C.GtkPrintSettings)(settings._getValue())
+	C.gtk_print_run_page_setup_dialog_async(_cgo_parent_, _cgo_page_setup_, _cgo_settings_, done_cb, data)
+	return
+}
+
+func PropagateEvent(widget GtkWidgetKind, event *C.GdkEvent) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	C.gtk_propagate_event(_cgo_widget_, event)
+	return
+}
+
+func RcPropertyParseBorder(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_rc_property_parse_border(pspec, gstring, property_value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func RcPropertyParseColor(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_rc_property_parse_color(pspec, gstring, property_value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func RcPropertyParseEnum(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_rc_property_parse_enum(pspec, gstring, property_value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func RcPropertyParseFlags(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_rc_property_parse_flags(pspec, gstring, property_value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func RcPropertyParseRequisition(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_rc_property_parse_requisition(pspec, gstring, property_value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func RecentChooserErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_recent_chooser_error_quark()
+	return
+}
+
+func RecentManagerErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.gtk_recent_manager_error_quark()
+	return
+}
+
+func RenderActivity(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_activity(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderArrow(context GtkStyleContextKind, cr *C.cairo_t, angle float64, x float64, y float64, size float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_angle_ := (C.gdouble)(angle)
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_size_ := (C.gdouble)(size)
+	C.gtk_render_arrow(_cgo_context_, cr, _cgo_angle_, _cgo_x_, _cgo_y_, _cgo_size_)
+	return
+}
+
+func RenderBackground(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_background(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderCheck(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_check(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderExpander(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_expander(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderExtension(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side C.GtkPositionType) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_extension(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, gap_side)
+	return
+}
+
+func RenderFocus(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_focus(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderFrame(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_frame(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderFrameGap(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side C.GtkPositionType, xy0_gap float64, xy1_gap float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	_cgo_xy0_gap_ := (C.gdouble)(xy0_gap)
+	_cgo_xy1_gap_ := (C.gdouble)(xy1_gap)
+	C.gtk_render_frame_gap(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, gap_side, _cgo_xy0_gap_, _cgo_xy1_gap_)
+	return
+}
+
+func RenderHandle(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_handle(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderIcon(context GtkStyleContextKind, cr *C.cairo_t, pixbuf *C.GdkPixbuf, x float64, y float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	C.gtk_render_icon(_cgo_context_, cr, pixbuf, _cgo_x_, _cgo_y_)
+	return
+}
+
+func RenderIconPixbuf(context GtkStyleContextKind, source *GtkIconSource, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_source_ := (*C.GtkIconSource)(unsafe.Pointer(source))
+	_return_ = C._gtk_render_icon_pixbuf(_cgo_context_, _cgo_source_, size)
+	return
+}
+
+func RenderInsertionCursor(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, layout *C.PangoLayout, index C.int, direction C.PangoDirection) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	C.gtk_render_insertion_cursor(_cgo_context_, cr, _cgo_x_, _cgo_y_, layout, index, direction)
+	return
+}
+
+func RenderLayout(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, layout *C.PangoLayout) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	C.gtk_render_layout(_cgo_context_, cr, _cgo_x_, _cgo_y_, layout)
+	return
+}
+
+func RenderLine(context GtkStyleContextKind, cr *C.cairo_t, x0 float64, y0 float64, x1 float64, y1 float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x0_ := (C.gdouble)(x0)
+	_cgo_y0_ := (C.gdouble)(y0)
+	_cgo_x1_ := (C.gdouble)(x1)
+	_cgo_y1_ := (C.gdouble)(y1)
+	C.gtk_render_line(_cgo_context_, cr, _cgo_x0_, _cgo_y0_, _cgo_x1_, _cgo_y1_)
+	return
+}
+
+func RenderOption(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_option(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	return
+}
+
+func RenderSlider(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, orientation C.GtkOrientation) () {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_cgo_x_ := (C.gdouble)(x)
+	_cgo_y_ := (C.gdouble)(y)
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_render_slider(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, orientation)
+	return
+}
+
+func RgbToHsv(r float64, g float64, b float64) (_go_h_ float64, _go_s_ float64, _go_v_ float64) {
+	_cgo_r_ := (C.gdouble)(r)
+	_cgo_g_ := (C.gdouble)(g)
+	_cgo_b_ := (C.gdouble)(b)
+	var h C.gdouble
+	var s C.gdouble
+	var v C.gdouble
+	C.gtk_rgb_to_hsv(_cgo_r_, _cgo_g_, _cgo_b_, &h, &s, &v)
+	_go_h_ = (float64)(h)
+	_go_s_ = (float64)(s)
+	_go_v_ = (float64)(v)
+	return
+}
+
+func SelectionAddTarget(widget GtkWidgetKind, selection C.GdkAtom, target C.GdkAtom, info uint) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_info_ := (C.guint)(info)
+	C.gtk_selection_add_target(_cgo_widget_, selection, target, _cgo_info_)
+	return
+}
+
+func SelectionClearTargets(widget GtkWidgetKind, selection C.GdkAtom) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	C.gtk_selection_clear_targets(_cgo_widget_, selection)
+	return
+}
+
+func SelectionConvert(widget GtkWidgetKind, selection C.GdkAtom, target C.GdkAtom, time_ uint32) (_go__return__ bool) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_time__ := (C.guint32)(time_)
+	var _return_ C.gboolean
+	_return_ = C.gtk_selection_convert(_cgo_widget_, selection, target, _cgo_time__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func SelectionOwnerSet(widget GtkWidgetKind, selection C.GdkAtom, time_ uint32) (_go__return__ bool) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_time__ := (C.guint32)(time_)
+	var _return_ C.gboolean
+	_return_ = C.gtk_selection_owner_set(_cgo_widget_, selection, _cgo_time__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func SelectionOwnerSetForDisplay(display *C.GdkDisplay, widget GtkWidgetKind, selection C.GdkAtom, time_ uint32) (_go__return__ bool) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_time__ := (C.guint32)(time_)
+	var _return_ C.gboolean
+	_return_ = C.gtk_selection_owner_set_for_display(display, _cgo_widget_, selection, _cgo_time__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func SelectionRemoveAll(widget GtkWidgetKind) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	C.gtk_selection_remove_all(_cgo_widget_)
+	return
+}
+
+func SetDebugFlags(flags uint) () {
+	_cgo_flags_ := (C.guint)(flags)
+	C.gtk_set_debug_flags(_cgo_flags_)
+	return
+}
+
+func ShowUri(screen *C.GdkScreen, uri string, timestamp uint32) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cgo_timestamp_ := (C.guint32)(timestamp)
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_show_uri(screen, _cgo_uri_, _cgo_timestamp_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func StockListIds() (_return_ *C.GSList) {
+	_return_ = C.gtk_stock_list_ids()
+	return
+}
+
+func StockLookup(stock_id string) (_go__return__ bool, item *GtkStockItem) {
+	var _allocated_item_ C.GtkStockItem
+	_cstring_stock_id_ := C.CString(stock_id)
+	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
+	defer C.free(unsafe.Pointer(_cstring_stock_id_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_stock_lookup(_cgo_stock_id_, &_allocated_item_)
+	item = (*GtkStockItem)(unsafe.Pointer(&_allocated_item_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func StockSetTranslateFunc(domain string, func_ C.GtkTranslateFunc, data C.gpointer, notify C.GDestroyNotify) () {
+	_cstring_domain_ := C.CString(domain)
+	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
+	defer C.free(unsafe.Pointer(_cstring_domain_))
+	C._gtk_stock_set_translate_func(_cgo_domain_, func_, data, notify)
+	return
+}
+
+func TargetTableNewFromList(list *GtkTargetList) (_return_ *C.GtkTargetEntry, _go_n_targets_ int) {
+	_cgo_list_ := (*C.GtkTargetList)(unsafe.Pointer(list))
+	var n_targets C.gint
+	_return_ = C.gtk_target_table_new_from_list(_cgo_list_, &n_targets)
+	_go_n_targets_ = (int)(n_targets)
+	return
+}
+
+func TestCreateSimpleWindow(window_title string, dialog_text string) (_go__return__ GtkWidget) {
+	var _return_ *C.GtkWidget
+	_cstring_window_title_ := C.CString(window_title)
+	_cgo_window_title_ := (*C.gchar)(unsafe.Pointer(_cstring_window_title_))
+	defer C.free(unsafe.Pointer(_cstring_window_title_))
+	_cstring_dialog_text_ := C.CString(dialog_text)
+	_cgo_dialog_text_ := (*C.gchar)(unsafe.Pointer(_cstring_dialog_text_))
+	defer C.free(unsafe.Pointer(_cstring_dialog_text_))
+	_return_ = C._gtk_test_create_simple_window(_cgo_window_title_, _cgo_dialog_text_)
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func TestFindLabel(widget GtkWidgetKind, label_pattern string) (_go__return__ GtkWidget) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	var _return_ *C.GtkWidget
+	_cstring_label_pattern_ := C.CString(label_pattern)
+	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
+	_return_ = C._gtk_test_find_label(_cgo_widget_, _cgo_label_pattern_)
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func TestFindSibling(base_widget GtkWidgetKind, widget_type C.GType) (_go__return__ GtkWidget) {
+	_cgo_base_widget_ := (*C.GtkWidget)(base_widget._getValue())
+	var _return_ *C.GtkWidget
+	_return_ = C.gtk_test_find_sibling(_cgo_base_widget_, widget_type)
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func TestFindWidget(widget GtkWidgetKind, label_pattern string, widget_type C.GType) (_go__return__ GtkWidget) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	var _return_ *C.GtkWidget
+	_cstring_label_pattern_ := C.CString(label_pattern)
+	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
+	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
+	_return_ = C._gtk_test_find_widget(_cgo_widget_, _cgo_label_pattern_, widget_type)
+	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func TestListAllTypes() (_return_ *C.GType, _go_n_types_ uint) {
+	var n_types C.guint
+	_return_ = C._gtk_test_list_all_types(&n_types)
+	_go_n_types_ = (uint)(n_types)
+	return
+}
+
+func TestRegisterAllTypes() () {
+	C.gtk_test_register_all_types()
+	return
+}
+
+func TestSliderGetValue(widget GtkWidgetKind) (_return_ C.double) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_return_ = C.gtk_test_slider_get_value(_cgo_widget_)
+	return
+}
+
+func TestSliderSetPerc(widget GtkWidgetKind, percentage C.double) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	C.gtk_test_slider_set_perc(_cgo_widget_, percentage)
+	return
+}
+
+func TestSpinButtonClick(spinner GtkSpinButtonKind, button uint, upwards bool) (_go__return__ bool) {
+	_cgo_spinner_ := (*C.GtkSpinButton)(spinner._getValue())
+	_cgo_button_ := (C.guint)(button)
+	_cgo_upwards_ := (C.gboolean)(C.FALSE)
+	if upwards { _cgo_upwards_ = (C.gboolean)(C.TRUE) }
+	var _return_ C.gboolean
+	_return_ = C.gtk_test_spin_button_click(_cgo_spinner_, _cgo_button_, _cgo_upwards_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func TestTextGet(widget GtkWidgetKind) (_go__return__ string) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	var _return_ *C.gchar
+	_return_ = C.gtk_test_text_get(_cgo_widget_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func TestTextSet(widget GtkWidgetKind, string_ string) () {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	C._gtk_test_text_set(_cgo_widget_, _cgo_string__)
+	return
+}
+
+func TestWidgetClick(widget GtkWidgetKind, button uint, modifiers C.GdkModifierType) (_go__return__ bool) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_button_ := (C.guint)(button)
+	var _return_ C.gboolean
+	_return_ = C.gtk_test_widget_click(_cgo_widget_, _cgo_button_, modifiers)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func TestWidgetSendKey(widget GtkWidgetKind, keyval uint, modifiers C.GdkModifierType) (_go__return__ bool) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	_cgo_keyval_ := (C.guint)(keyval)
+	var _return_ C.gboolean
+	_return_ = C.gtk_test_widget_send_key(_cgo_widget_, _cgo_keyval_, modifiers)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func TreeGetRowDragData(selection_data *GtkSelectionData) (_go__return__ bool, tree_model unsafe.Pointer, path *GtkTreePath) {
+	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+	var _allocated_path_ *C.GtkTreePath
+	var _return_ C.gboolean
+	_return_ = C._gtk_tree_get_row_drag_data(_cgo_selection_data_, tree_model, unsafe.Pointer(&_allocated_path_))
+	path = (*GtkTreePath)(unsafe.Pointer(_allocated_path_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func TreeRowReferenceDeleted(proxy *C.GObject, path *GtkTreePath) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	C.gtk_tree_row_reference_deleted(proxy, _cgo_path_)
+	return
+}
+
+func TreeRowReferenceInserted(proxy *C.GObject, path *GtkTreePath) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	C.gtk_tree_row_reference_inserted(proxy, _cgo_path_)
+	return
+}
+
+func TreeRowReferenceReordered(proxy *C.GObject, path *GtkTreePath, iter *GtkTreeIter, new_order *C.gint) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_row_reference_reordered(proxy, _cgo_path_, _cgo_iter_, new_order)
+	return
+}
+
+func TreeSetRowDragData(selection_data *GtkSelectionData, tree_model *C.GtkTreeModel, path *GtkTreePath) (_go__return__ bool) {
+	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_set_row_drag_data(_cgo_selection_data_, tree_model, _cgo_path_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func True() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_true()
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
 func AboutDialogNew() (_go__return__ GtkAboutDialog) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_about_dialog_new()
@@ -5408,93 +6435,6 @@ func (_self_ *GtkBin) GetChild() (_go__return__ GtkWidget) {
 	return
 }
 
-func BindingEntryAddSignalFromString(binding_set *GtkBindingSet, signal_desc string) (_return_ C.GTokenType) {
-	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
-	_cstring_signal_desc_ := C.CString(signal_desc)
-	_cgo_signal_desc_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_desc_))
-	defer C.free(unsafe.Pointer(_cstring_signal_desc_))
-	_return_ = C._gtk_binding_entry_add_signal_from_string(_cgo_binding_set_, _cgo_signal_desc_)
-	return
-}
-
-func BindingEntryAddSignall(binding_set *GtkBindingSet, keyval uint, modifiers C.GdkModifierType, signal_name string, binding_args *C.GSList) () {
-	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
-	_cgo_keyval_ := (C.guint)(keyval)
-	_cstring_signal_name_ := C.CString(signal_name)
-	_cgo_signal_name_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_name_))
-	defer C.free(unsafe.Pointer(_cstring_signal_name_))
-	C._gtk_binding_entry_add_signall(_cgo_binding_set_, _cgo_keyval_, modifiers, _cgo_signal_name_, binding_args)
-	return
-}
-
-func BindingEntryRemove(binding_set *GtkBindingSet, keyval uint, modifiers C.GdkModifierType) () {
-	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
-	_cgo_keyval_ := (C.guint)(keyval)
-	C.gtk_binding_entry_remove(_cgo_binding_set_, _cgo_keyval_, modifiers)
-	return
-}
-
-func BindingEntrySkip(binding_set *GtkBindingSet, keyval uint, modifiers C.GdkModifierType) () {
-	_cgo_binding_set_ := (*C.GtkBindingSet)(unsafe.Pointer(binding_set))
-	_cgo_keyval_ := (C.guint)(keyval)
-	C.gtk_binding_entry_skip(_cgo_binding_set_, _cgo_keyval_, modifiers)
-	return
-}
-
-func BindingSetByClass(object_class C.gpointer) (_go__return__ *GtkBindingSet) {
-	var _return_ *C.GtkBindingSet
-	_return_ = C.gtk_binding_set_by_class(object_class)
-	_go__return__ = (*GtkBindingSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func BindingSetFind(set_name string) (_go__return__ *GtkBindingSet) {
-	var _return_ *C.GtkBindingSet
-	_cstring_set_name_ := C.CString(set_name)
-	_cgo_set_name_ := (*C.gchar)(unsafe.Pointer(_cstring_set_name_))
-	defer C.free(unsafe.Pointer(_cstring_set_name_))
-	_return_ = C._gtk_binding_set_find(_cgo_set_name_)
-	_go__return__ = (*GtkBindingSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func BindingSetNew(set_name string) (_go__return__ *GtkBindingSet) {
-	var _return_ *C.GtkBindingSet
-	_cstring_set_name_ := C.CString(set_name)
-	_cgo_set_name_ := (*C.gchar)(unsafe.Pointer(_cstring_set_name_))
-	defer C.free(unsafe.Pointer(_cstring_set_name_))
-	_return_ = C._gtk_binding_set_new(_cgo_set_name_)
-	_go__return__ = (*GtkBindingSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkBindingSet) Activate(keyval uint, modifiers C.GdkModifierType, object *C.GObject) (_go__return__ bool) {
-	_cgo_keyval_ := (C.guint)(keyval)
-	var _return_ C.gboolean
-	_return_ = C.gtk_binding_set_activate((*C.GtkBindingSet)(_self_), _cgo_keyval_, modifiers, object)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func BorderNew() (_go__return__ *GtkBorder) {
-	var _return_ *C.GtkBorder
-	_return_ = C.gtk_border_new()
-	_go__return__ = (*GtkBorder)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkBorder) Copy() (_go__return__ *GtkBorder) {
-	var _return_ *C.GtkBorder
-	_return_ = C._gtk_border_copy((*C.GtkBorder)(_self_))
-	_go__return__ = (*GtkBorder)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkBorder) Free() () {
-	C.gtk_border_free((*C.GtkBorder)(_self_))
-	return
-}
-
 func BoxNew(orientation C.GtkOrientation, spacing int) (_go__return__ GtkBox) {
 	var _return_ *C.GtkWidget
 	_cgo_spacing_ := (C.gint)(spacing)
@@ -6350,27 +7290,6 @@ func (_self_ *GtkCellAreaBox) PackStart(renderer GtkCellRendererKind, expand boo
 func (_self_ *GtkCellAreaBox) SetSpacing(spacing int) () {
 	_cgo_spacing_ := (C.gint)(spacing)
 	C.gtk_cell_area_box_set_spacing((*C.GtkCellAreaBox)(_self_._value_), _cgo_spacing_)
-	return
-}
-
-func (_self_ *GtkCellAreaClass) FindCellProperty(property_name string) (_return_ *C.GParamSpec) {
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	_return_ = C._gtk_cell_area_class_find_cell_property((*C.GtkCellAreaClass)(_self_), _cgo_property_name_)
-	return
-}
-
-func (_self_ *GtkCellAreaClass) InstallCellProperty(property_id uint, pspec *C.GParamSpec) () {
-	_cgo_property_id_ := (C.guint)(property_id)
-	C.gtk_cell_area_class_install_cell_property((*C.GtkCellAreaClass)(_self_), _cgo_property_id_, pspec)
-	return
-}
-
-func (_self_ *GtkCellAreaClass) ListCellProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
-	var n_properties C.guint
-	_return_ = C._gtk_cell_area_class_list_cell_properties((*C.GtkCellAreaClass)(_self_), &n_properties)
-	_go_n_properties_ = (uint)(n_properties)
 	return
 }
 
@@ -7665,32 +8584,6 @@ func (_self_ *GtkContainer) UnsetFocusChain() () {
 	return
 }
 
-func (_self_ *GtkContainerClass) FindChildProperty(property_name string) (_return_ *C.GParamSpec) {
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	_return_ = C._gtk_container_class_find_child_property((*C.GtkContainerClass)(_self_), _cgo_property_name_)
-	return
-}
-
-func (_self_ *GtkContainerClass) HandleBorderWidth() () {
-	C.gtk_container_class_handle_border_width((*C.GtkContainerClass)(_self_))
-	return
-}
-
-func (_self_ *GtkContainerClass) InstallChildProperty(property_id uint, pspec *C.GParamSpec) () {
-	_cgo_property_id_ := (C.guint)(property_id)
-	C.gtk_container_class_install_child_property((*C.GtkContainerClass)(_self_), _cgo_property_id_, pspec)
-	return
-}
-
-func (_self_ *GtkContainerClass) ListChildProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
-	var n_properties C.guint
-	_return_ = C._gtk_container_class_list_child_properties((*C.GtkContainerClass)(_self_), &n_properties)
-	_go_n_properties_ = (uint)(n_properties)
-	return
-}
-
 func CssProviderNew() (_go__return__ GtkCssProvider) {
 	var _return_ *C.GtkCssProvider
 	_return_ = C.gtk_css_provider_new()
@@ -7739,63 +8632,6 @@ func (_self_ *GtkCssProvider) ToString() (_go__return__ string) {
 	var _return_ *C.char
 	_return_ = C.gtk_css_provider_to_string((*C.GtkCssProvider)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkCssSection) GetEndLine() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._gtk_css_section_get_end_line((*C.GtkCssSection)(_self_))
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GtkCssSection) GetEndPosition() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._gtk_css_section_get_end_position((*C.GtkCssSection)(_self_))
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GtkCssSection) GetFile() (_return_ *C.GFile) {
-	_return_ = C._gtk_css_section_get_file((*C.GtkCssSection)(_self_))
-	return
-}
-
-func (_self_ *GtkCssSection) GetParent() (_go__return__ *GtkCssSection) {
-	var _return_ *C.GtkCssSection
-	_return_ = C._gtk_css_section_get_parent((*C.GtkCssSection)(_self_))
-	_go__return__ = (*GtkCssSection)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkCssSection) GetSectionType() (_return_ C.GtkCssSectionType) {
-	_return_ = C._gtk_css_section_get_section_type((*C.GtkCssSection)(_self_))
-	return
-}
-
-func (_self_ *GtkCssSection) GetStartLine() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._gtk_css_section_get_start_line((*C.GtkCssSection)(_self_))
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GtkCssSection) GetStartPosition() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._gtk_css_section_get_start_position((*C.GtkCssSection)(_self_))
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GtkCssSection) Ref() (_go__return__ *GtkCssSection) {
-	var _return_ *C.GtkCssSection
-	_return_ = C.gtk_css_section_ref((*C.GtkCssSection)(_self_))
-	_go__return__ = (*GtkCssSection)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkCssSection) Unref() () {
-	C.gtk_css_section_unref((*C.GtkCssSection)(_self_))
 	return
 }
 
@@ -9117,70 +9953,6 @@ func (_self_ *GtkFrame) SetShadowType(type_ C.GtkShadowType) () {
 	return
 }
 
-func GradientNewLinear(x0 float64, y0 float64, x1 float64, y1 float64) (_go__return__ *GtkGradient) {
-	var _return_ *C.GtkGradient
-	_cgo_x0_ := (C.gdouble)(x0)
-	_cgo_y0_ := (C.gdouble)(y0)
-	_cgo_x1_ := (C.gdouble)(x1)
-	_cgo_y1_ := (C.gdouble)(y1)
-	_return_ = C.gtk_gradient_new_linear(_cgo_x0_, _cgo_y0_, _cgo_x1_, _cgo_y1_)
-	_go__return__ = (*GtkGradient)(unsafe.Pointer(_return_))
-	return
-}
-
-func GradientNewRadial(x0 float64, y0 float64, radius0 float64, x1 float64, y1 float64, radius1 float64) (_go__return__ *GtkGradient) {
-	var _return_ *C.GtkGradient
-	_cgo_x0_ := (C.gdouble)(x0)
-	_cgo_y0_ := (C.gdouble)(y0)
-	_cgo_radius0_ := (C.gdouble)(radius0)
-	_cgo_x1_ := (C.gdouble)(x1)
-	_cgo_y1_ := (C.gdouble)(y1)
-	_cgo_radius1_ := (C.gdouble)(radius1)
-	_return_ = C.gtk_gradient_new_radial(_cgo_x0_, _cgo_y0_, _cgo_radius0_, _cgo_x1_, _cgo_y1_, _cgo_radius1_)
-	_go__return__ = (*GtkGradient)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkGradient) AddColorStop(offset float64, color *GtkSymbolicColor) () {
-	_cgo_color_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color))
-	_cgo_offset_ := (C.gdouble)(offset)
-	C.gtk_gradient_add_color_stop((*C.GtkGradient)(_self_), _cgo_offset_, _cgo_color_)
-	return
-}
-
-func (_self_ *GtkGradient) Ref() (_go__return__ *GtkGradient) {
-	var _return_ *C.GtkGradient
-	_return_ = C.gtk_gradient_ref((*C.GtkGradient)(_self_))
-	_go__return__ = (*GtkGradient)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkGradient) Resolve(props GtkStylePropertiesKind) (_go__return__ bool, resolved_gradient unsafe.Pointer) {
-	_cgo_props_ := (*C.GtkStyleProperties)(props._getValue())
-	var _return_ C.gboolean
-	_return_ = C._gtk_gradient_resolve((*C.GtkGradient)(_self_), _cgo_props_, resolved_gradient)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkGradient) ResolveForContext(context GtkStyleContextKind) (_return_ *C.cairo_pattern_t) {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_return_ = C.gtk_gradient_resolve_for_context((*C.GtkGradient)(_self_), _cgo_context_)
-	return
-}
-
-func (_self_ *GtkGradient) ToString() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C.gtk_gradient_to_string((*C.GtkGradient)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkGradient) Unref() () {
-	C.gtk_gradient_unref((*C.GtkGradient)(_self_))
-	return
-}
-
 func GridNew() (_go__return__ GtkGrid) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_grid_new()
@@ -9461,262 +10233,6 @@ func (_self_ *GtkIconFactory) Lookup(stock_id string) (_go__return__ *GtkIconSet
 
 func (_self_ *GtkIconFactory) RemoveDefault() () {
 	C.gtk_icon_factory_remove_default((*C.GtkIconFactory)(_self_._value_))
-	return
-}
-
-func IconInfoNewForPixbuf(icon_theme GtkIconThemeKind, pixbuf *C.GdkPixbuf) (_go__return__ *GtkIconInfo) {
-	_cgo_icon_theme_ := (*C.GtkIconTheme)(icon_theme._getValue())
-	var _return_ *C.GtkIconInfo
-	_return_ = C.gtk_icon_info_new_for_pixbuf(_cgo_icon_theme_, pixbuf)
-	_go__return__ = (*GtkIconInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconInfo) Copy() (_go__return__ *GtkIconInfo) {
-	var _return_ *C.GtkIconInfo
-	_return_ = C.gtk_icon_info_copy((*C.GtkIconInfo)(_self_))
-	_go__return__ = (*GtkIconInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconInfo) Free() () {
-	C.gtk_icon_info_free((*C.GtkIconInfo)(_self_))
-	return
-}
-
-func (_self_ *GtkIconInfo) GetBaseSize() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C.gtk_icon_info_get_base_size((*C.GtkIconInfo)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkIconInfo) GetBuiltinPixbuf() (_return_ *C.GdkPixbuf) {
-	_return_ = C.gtk_icon_info_get_builtin_pixbuf((*C.GtkIconInfo)(_self_))
-	return
-}
-
-func (_self_ *GtkIconInfo) GetDisplayName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_icon_info_get_display_name((*C.GtkIconInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkIconInfo) GetEmbeddedRect() (_go__return__ bool, rectangle *C.GdkRectangle) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_icon_info_get_embedded_rect((*C.GtkIconInfo)(_self_), rectangle)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkIconInfo) GetFilename() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_icon_info_get_filename((*C.GtkIconInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkIconInfo) LoadIcon() (_return_ *C.GdkPixbuf, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_icon_info_load_icon((*C.GtkIconInfo)(_self_), _error_)
-	return
-}
-
-func (_self_ *GtkIconInfo) LoadSymbolic(fg *C.GdkRGBA, success_color *C.GdkRGBA, warning_color *C.GdkRGBA, error_color *C.GdkRGBA) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ unsafe.Pointer) {
-	var was_symbolic C.gboolean
-	_return_ = C._gtk_icon_info_load_symbolic((*C.GtkIconInfo)(_self_), fg, success_color, warning_color, error_color, &was_symbolic, _error_)
-	_go_was_symbolic_ = was_symbolic == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkIconInfo) LoadSymbolicForContext(context GtkStyleContextKind) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ unsafe.Pointer) {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	var was_symbolic C.gboolean
-	_return_ = C._gtk_icon_info_load_symbolic_for_context((*C.GtkIconInfo)(_self_), _cgo_context_, &was_symbolic, _error_)
-	_go_was_symbolic_ = was_symbolic == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkIconInfo) SetRawCoordinates(raw_coordinates bool) () {
-	_cgo_raw_coordinates_ := (C.gboolean)(C.FALSE)
-	if raw_coordinates { _cgo_raw_coordinates_ = (C.gboolean)(C.TRUE) }
-	C.gtk_icon_info_set_raw_coordinates((*C.GtkIconInfo)(_self_), _cgo_raw_coordinates_)
-	return
-}
-
-func IconSetNew() (_go__return__ *GtkIconSet) {
-	var _return_ *C.GtkIconSet
-	_return_ = C.gtk_icon_set_new()
-	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func IconSetNewFromPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ *GtkIconSet) {
-	var _return_ *C.GtkIconSet
-	_return_ = C.gtk_icon_set_new_from_pixbuf(pixbuf)
-	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconSet) AddSource(source *GtkIconSource) () {
-	_cgo_source_ := (*C.GtkIconSource)(unsafe.Pointer(source))
-	C._gtk_icon_set_add_source((*C.GtkIconSet)(_self_), _cgo_source_)
-	return
-}
-
-func (_self_ *GtkIconSet) Copy() (_go__return__ *GtkIconSet) {
-	var _return_ *C.GtkIconSet
-	_return_ = C.gtk_icon_set_copy((*C.GtkIconSet)(_self_))
-	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconSet) Ref() (_go__return__ *GtkIconSet) {
-	var _return_ *C.GtkIconSet
-	_return_ = C.gtk_icon_set_ref((*C.GtkIconSet)(_self_))
-	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconSet) RenderIconPixbuf(context GtkStyleContextKind, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_return_ = C.gtk_icon_set_render_icon_pixbuf((*C.GtkIconSet)(_self_), _cgo_context_, size)
-	return
-}
-
-func (_self_ *GtkIconSet) Unref() () {
-	C.gtk_icon_set_unref((*C.GtkIconSet)(_self_))
-	return
-}
-
-func IconSourceNew() (_go__return__ *GtkIconSource) {
-	var _return_ *C.GtkIconSource
-	_return_ = C.gtk_icon_source_new()
-	_go__return__ = (*GtkIconSource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconSource) Copy() (_go__return__ *GtkIconSource) {
-	var _return_ *C.GtkIconSource
-	_return_ = C._gtk_icon_source_copy((*C.GtkIconSource)(_self_))
-	_go__return__ = (*GtkIconSource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkIconSource) Free() () {
-	C.gtk_icon_source_free((*C.GtkIconSource)(_self_))
-	return
-}
-
-func (_self_ *GtkIconSource) GetDirection() (_return_ C.GtkTextDirection) {
-	_return_ = C._gtk_icon_source_get_direction((*C.GtkIconSource)(_self_))
-	return
-}
-
-func (_self_ *GtkIconSource) GetDirectionWildcarded() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_icon_source_get_direction_wildcarded((*C.GtkIconSource)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkIconSource) GetFilename() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_icon_source_get_filename((*C.GtkIconSource)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkIconSource) GetIconName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_icon_source_get_icon_name((*C.GtkIconSource)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkIconSource) GetPixbuf() (_return_ *C.GdkPixbuf) {
-	_return_ = C._gtk_icon_source_get_pixbuf((*C.GtkIconSource)(_self_))
-	return
-}
-
-func (_self_ *GtkIconSource) GetSize() (_return_ C.GtkIconSize) {
-	_return_ = C._gtk_icon_source_get_size((*C.GtkIconSource)(_self_))
-	return
-}
-
-func (_self_ *GtkIconSource) GetSizeWildcarded() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_icon_source_get_size_wildcarded((*C.GtkIconSource)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkIconSource) GetState() (_return_ C.GtkStateType) {
-	_return_ = C._gtk_icon_source_get_state((*C.GtkIconSource)(_self_))
-	return
-}
-
-func (_self_ *GtkIconSource) GetStateWildcarded() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_icon_source_get_state_wildcarded((*C.GtkIconSource)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkIconSource) SetDirection(direction C.GtkTextDirection) () {
-	C.gtk_icon_source_set_direction((*C.GtkIconSource)(_self_), direction)
-	return
-}
-
-func (_self_ *GtkIconSource) SetDirectionWildcarded(setting bool) () {
-	_cgo_setting_ := (C.gboolean)(C.FALSE)
-	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
-	C.gtk_icon_source_set_direction_wildcarded((*C.GtkIconSource)(_self_), _cgo_setting_)
-	return
-}
-
-func (_self_ *GtkIconSource) SetFilename(filename string) () {
-	_cstring_filename_ := C.CString(filename)
-	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
-	defer C.free(unsafe.Pointer(_cstring_filename_))
-	C._gtk_icon_source_set_filename((*C.GtkIconSource)(_self_), _cgo_filename_)
-	return
-}
-
-func (_self_ *GtkIconSource) SetIconName(icon_name string) () {
-	_cstring_icon_name_ := C.CString(icon_name)
-	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
-	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	C._gtk_icon_source_set_icon_name((*C.GtkIconSource)(_self_), _cgo_icon_name_)
-	return
-}
-
-func (_self_ *GtkIconSource) SetPixbuf(pixbuf *C.GdkPixbuf) () {
-	C.gtk_icon_source_set_pixbuf((*C.GtkIconSource)(_self_), pixbuf)
-	return
-}
-
-func (_self_ *GtkIconSource) SetSize(size C.GtkIconSize) () {
-	C.gtk_icon_source_set_size((*C.GtkIconSource)(_self_), size)
-	return
-}
-
-func (_self_ *GtkIconSource) SetSizeWildcarded(setting bool) () {
-	_cgo_setting_ := (C.gboolean)(C.FALSE)
-	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
-	C.gtk_icon_source_set_size_wildcarded((*C.GtkIconSource)(_self_), _cgo_setting_)
-	return
-}
-
-func (_self_ *GtkIconSource) SetState(state C.GtkStateType) () {
-	C.gtk_icon_source_set_state((*C.GtkIconSource)(_self_), state)
-	return
-}
-
-func (_self_ *GtkIconSource) SetStateWildcarded(setting bool) () {
-	_cgo_setting_ := (C.gboolean)(C.FALSE)
-	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
-	C.gtk_icon_source_set_state_wildcarded((*C.GtkIconSource)(_self_), _cgo_setting_)
 	return
 }
 
@@ -12528,175 +13044,6 @@ func (_self_ *GtkPaned) SetPosition(position int) () {
 	return
 }
 
-func PaperSizeNew(name string) (_go__return__ *GtkPaperSize) {
-	var _return_ *C.GtkPaperSize
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._gtk_paper_size_new(_cgo_name_)
-	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
-	return
-}
-
-func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit C.GtkUnit) (_go__return__ *GtkPaperSize) {
-	var _return_ *C.GtkPaperSize
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_cstring_display_name_ := C.CString(display_name)
-	_cgo_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_display_name_))
-	defer C.free(unsafe.Pointer(_cstring_display_name_))
-	_return_ = C._gtk_paper_size_new_custom(_cgo_name_, _cgo_display_name_, _cgo_width_, _cgo_height_, unit)
-	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
-	return
-}
-
-func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ *GtkPaperSize, _error_ unsafe.Pointer) {
-	var _return_ *C.GtkPaperSize
-	_cstring_group_name_ := C.CString(group_name)
-	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
-	defer C.free(unsafe.Pointer(_cstring_group_name_))
-	_return_ = C._gtk_paper_size_new_from_key_file(key_file, _cgo_group_name_, _error_)
-	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
-	return
-}
-
-func PaperSizeNewFromPpd(ppd_name string, ppd_display_name string, width float64, height float64) (_go__return__ *GtkPaperSize) {
-	var _return_ *C.GtkPaperSize
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	_cstring_ppd_name_ := C.CString(ppd_name)
-	_cgo_ppd_name_ := (*C.gchar)(unsafe.Pointer(_cstring_ppd_name_))
-	defer C.free(unsafe.Pointer(_cstring_ppd_name_))
-	_cstring_ppd_display_name_ := C.CString(ppd_display_name)
-	_cgo_ppd_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_ppd_display_name_))
-	defer C.free(unsafe.Pointer(_cstring_ppd_display_name_))
-	_return_ = C._gtk_paper_size_new_from_ppd(_cgo_ppd_name_, _cgo_ppd_display_name_, _cgo_width_, _cgo_height_)
-	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
-	return
-}
-
-func PaperSizeGetDefault() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_paper_size_get_default()
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func PaperSizeGetPaperSizes(include_custom bool) (_return_ *C.GList) {
-	_cgo_include_custom_ := (C.gboolean)(C.FALSE)
-	if include_custom { _cgo_include_custom_ = (C.gboolean)(C.TRUE) }
-	_return_ = C.gtk_paper_size_get_paper_sizes(_cgo_include_custom_)
-	return
-}
-
-func (_self_ *GtkPaperSize) Copy() (_go__return__ *GtkPaperSize) {
-	var _return_ *C.GtkPaperSize
-	_return_ = C.gtk_paper_size_copy((*C.GtkPaperSize)(_self_))
-	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkPaperSize) Free() () {
-	C.gtk_paper_size_free((*C.GtkPaperSize)(_self_))
-	return
-}
-
-func (_self_ *GtkPaperSize) GetDefaultBottomMargin(unit C.GtkUnit) (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_bottom_margin((*C.GtkPaperSize)(_self_), unit)
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GtkPaperSize) GetDefaultLeftMargin(unit C.GtkUnit) (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_left_margin((*C.GtkPaperSize)(_self_), unit)
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GtkPaperSize) GetDefaultRightMargin(unit C.GtkUnit) (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_right_margin((*C.GtkPaperSize)(_self_), unit)
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GtkPaperSize) GetDefaultTopMargin(unit C.GtkUnit) (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_top_margin((*C.GtkPaperSize)(_self_), unit)
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GtkPaperSize) GetDisplayName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_paper_size_get_display_name((*C.GtkPaperSize)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkPaperSize) GetHeight(unit C.GtkUnit) (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_height((*C.GtkPaperSize)(_self_), unit)
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GtkPaperSize) GetName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_paper_size_get_name((*C.GtkPaperSize)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkPaperSize) GetPpdName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_paper_size_get_ppd_name((*C.GtkPaperSize)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkPaperSize) GetWidth(unit C.GtkUnit) (_go__return__ float64) {
-	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_width((*C.GtkPaperSize)(_self_), unit)
-	_go__return__ = (float64)(_return_)
-	return
-}
-
-func (_self_ *GtkPaperSize) IsCustom() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_paper_size_is_custom((*C.GtkPaperSize)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkPaperSize) IsEqual(size2 *GtkPaperSize) (_go__return__ bool) {
-	_cgo_size2_ := (*C.GtkPaperSize)(unsafe.Pointer(size2))
-	var _return_ C.gboolean
-	_return_ = C.gtk_paper_size_is_equal((*C.GtkPaperSize)(_self_), _cgo_size2_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkPaperSize) SetSize(width float64, height float64, unit C.GtkUnit) () {
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_paper_size_set_size((*C.GtkPaperSize)(_self_), _cgo_width_, _cgo_height_, unit)
-	return
-}
-
-func (_self_ *GtkPaperSize) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
-	_cstring_group_name_ := C.CString(group_name)
-	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
-	defer C.free(unsafe.Pointer(_cstring_group_name_))
-	C._gtk_paper_size_to_key_file((*C.GtkPaperSize)(_self_), key_file, _cgo_group_name_)
-	return
-}
-
 func GtkPlugNew(socket_id C.Window) (_go__return__ GtkPlug) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_plug_new(socket_id)
@@ -14237,183 +14584,6 @@ func (_self_ *GtkRecentFilter) SetName(name string) () {
 	return
 }
 
-func (_self_ *GtkRecentInfo) CreateAppInfo(app_name string) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
-	_cstring_app_name_ := C.CString(app_name)
-	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
-	defer C.free(unsafe.Pointer(_cstring_app_name_))
-	_return_ = C._gtk_recent_info_create_app_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, _error_)
-	return
-}
-
-func (_self_ *GtkRecentInfo) Exists() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_recent_info_exists((*C.GtkRecentInfo)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetAdded() (_return_ C.time_t) {
-	_return_ = C.gtk_recent_info_get_added((*C.GtkRecentInfo)(_self_))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetAge() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C.gtk_recent_info_get_age((*C.GtkRecentInfo)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetApplicationInfo(app_name string) (_go__return__ bool, app_exec unsafe.Pointer, _go_count_ uint, time_ C.time_t) {
-	var count C.guint
-	_cstring_app_name_ := C.CString(app_name)
-	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
-	defer C.free(unsafe.Pointer(_cstring_app_name_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_recent_info_get_application_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, app_exec, &count, &time_)
-	_go_count_ = (uint)(count)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetApplications() (_return_ unsafe.Pointer, _go_length_ uint64) {
-	var length C.gsize
-	_return_ = C._gtk_recent_info_get_applications((*C.GtkRecentInfo)(_self_), &length)
-	_go_length_ = (uint64)(length)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetDescription() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_recent_info_get_description((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetDisplayName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_recent_info_get_display_name((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetGicon() (_return_ *C.GIcon) {
-	_return_ = C.gtk_recent_info_get_gicon((*C.GtkRecentInfo)(_self_))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetGroups() (_return_ unsafe.Pointer, _go_length_ uint64) {
-	var length C.gsize
-	_return_ = C._gtk_recent_info_get_groups((*C.GtkRecentInfo)(_self_), &length)
-	_go_length_ = (uint64)(length)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetIcon(size int) (_return_ *C.GdkPixbuf) {
-	_cgo_size_ := (C.gint)(size)
-	_return_ = C.gtk_recent_info_get_icon((*C.GtkRecentInfo)(_self_), _cgo_size_)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetMimeType() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_recent_info_get_mime_type((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetModified() (_return_ C.time_t) {
-	_return_ = C.gtk_recent_info_get_modified((*C.GtkRecentInfo)(_self_))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetPrivateHint() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_recent_info_get_private_hint((*C.GtkRecentInfo)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetShortName() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C.gtk_recent_info_get_short_name((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetUri() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_recent_info_get_uri((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetUriDisplay() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C.gtk_recent_info_get_uri_display((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) GetVisited() (_return_ C.time_t) {
-	_return_ = C.gtk_recent_info_get_visited((*C.GtkRecentInfo)(_self_))
-	return
-}
-
-func (_self_ *GtkRecentInfo) HasApplication(app_name string) (_go__return__ bool) {
-	_cstring_app_name_ := C.CString(app_name)
-	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
-	defer C.free(unsafe.Pointer(_cstring_app_name_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_recent_info_has_application((*C.GtkRecentInfo)(_self_), _cgo_app_name_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) HasGroup(group_name string) (_go__return__ bool) {
-	_cstring_group_name_ := C.CString(group_name)
-	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
-	defer C.free(unsafe.Pointer(_cstring_group_name_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_recent_info_has_group((*C.GtkRecentInfo)(_self_), _cgo_group_name_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) IsLocal() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_recent_info_is_local((*C.GtkRecentInfo)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) LastApplication() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C.gtk_recent_info_last_application((*C.GtkRecentInfo)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkRecentInfo) Match(info_b *GtkRecentInfo) (_go__return__ bool) {
-	_cgo_info_b_ := (*C.GtkRecentInfo)(unsafe.Pointer(info_b))
-	var _return_ C.gboolean
-	_return_ = C.gtk_recent_info_match((*C.GtkRecentInfo)(_self_), _cgo_info_b_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkRecentInfo) Ref() (_go__return__ *GtkRecentInfo) {
-	var _return_ *C.GtkRecentInfo
-	_return_ = C.gtk_recent_info_ref((*C.GtkRecentInfo)(_self_))
-	_go__return__ = (*GtkRecentInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkRecentInfo) Unref() () {
-	C.gtk_recent_info_unref((*C.GtkRecentInfo)(_self_))
-	return
-}
-
 func RecentManagerNew() (_go__return__ GtkRecentManager) {
 	var _return_ *C.GtkRecentManager
 	_return_ = C.gtk_recent_manager_new()
@@ -14501,25 +14671,6 @@ func (_self_ *GtkRecentManager) RemoveItem(uri string) (_go__return__ bool, _err
 	var _return_ C.gboolean
 	_return_ = C._gtk_recent_manager_remove_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func RequisitionNew() (_go__return__ *GtkRequisition) {
-	var _return_ *C.GtkRequisition
-	_return_ = C.gtk_requisition_new()
-	_go__return__ = (*GtkRequisition)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkRequisition) Copy() (_go__return__ *GtkRequisition) {
-	var _return_ *C.GtkRequisition
-	_return_ = C._gtk_requisition_copy((*C.GtkRequisition)(_self_))
-	_go__return__ = (*GtkRequisition)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkRequisition) Free() () {
-	C.gtk_requisition_free((*C.GtkRequisition)(_self_))
 	return
 }
 
@@ -14823,130 +14974,6 @@ func SearchEntryNew() (_go__return__ GtkSearchEntry) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_search_entry_new()
 	_go__return__ = ToGtkSearchEntry(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkSelectionData) Copy() (_go__return__ *GtkSelectionData) {
-	var _return_ *C.GtkSelectionData
-	_return_ = C._gtk_selection_data_copy((*C.GtkSelectionData)(_self_))
-	_go__return__ = (*GtkSelectionData)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkSelectionData) Free() () {
-	C.gtk_selection_data_free((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetData() (_return_ *C.guchar) {
-	_return_ = C._gtk_selection_data_get_data((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetDataType() (_return_ C.GdkAtom) {
-	_return_ = C._gtk_selection_data_get_data_type((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetDataWithLength() (_return_ *C.guchar, _go_length_ int) {
-	var length C.gint
-	_return_ = C._gtk_selection_data_get_data_with_length((*C.GtkSelectionData)(_self_), &length)
-	_go_length_ = (int)(length)
-	return
-}
-
-func (_self_ *GtkSelectionData) GetDisplay() (_return_ *C.GdkDisplay) {
-	_return_ = C._gtk_selection_data_get_display((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetFormat() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_selection_data_get_format((*C.GtkSelectionData)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkSelectionData) GetLength() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_selection_data_get_length((*C.GtkSelectionData)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkSelectionData) GetPixbuf() (_return_ *C.GdkPixbuf) {
-	_return_ = C._gtk_selection_data_get_pixbuf((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetSelection() (_return_ C.GdkAtom) {
-	_return_ = C._gtk_selection_data_get_selection((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetTarget() (_return_ C.GdkAtom) {
-	_return_ = C._gtk_selection_data_get_target((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetText() (_go__return__ string) {
-	var _return_ *C.guchar
-	_return_ = C._gtk_selection_data_get_text((*C.GtkSelectionData)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkSelectionData) GetUris() (_return_ unsafe.Pointer) {
-	_return_ = C._gtk_selection_data_get_uris((*C.GtkSelectionData)(_self_))
-	return
-}
-
-func (_self_ *GtkSelectionData) SetPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_selection_data_set_pixbuf((*C.GtkSelectionData)(_self_), pixbuf)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkSelectionData) SetText(str string, len_ int) (_go__return__ bool) {
-	_cgo_len__ := (C.gint)(len_)
-	_cstring_str_ := C.CString(str)
-	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
-	defer C.free(unsafe.Pointer(_cstring_str_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_selection_data_set_text((*C.GtkSelectionData)(_self_), _cgo_str_, _cgo_len__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkSelectionData) TargetsIncludeImage(writable bool) (_go__return__ bool) {
-	_cgo_writable_ := (C.gboolean)(C.FALSE)
-	if writable { _cgo_writable_ = (C.gboolean)(C.TRUE) }
-	var _return_ C.gboolean
-	_return_ = C._gtk_selection_data_targets_include_image((*C.GtkSelectionData)(_self_), _cgo_writable_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkSelectionData) TargetsIncludeRichText(buffer GtkTextBufferKind) (_go__return__ bool) {
-	_cgo_buffer_ := (*C.GtkTextBuffer)(buffer._getValue())
-	var _return_ C.gboolean
-	_return_ = C._gtk_selection_data_targets_include_rich_text((*C.GtkSelectionData)(_self_), _cgo_buffer_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkSelectionData) TargetsIncludeText() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_selection_data_targets_include_text((*C.GtkSelectionData)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkSelectionData) TargetsIncludeUri() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_selection_data_targets_include_uri((*C.GtkSelectionData)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -15612,18 +15639,6 @@ func (_self_ *GtkStatusbar) RemoveAll(context_id uint) () {
 	return
 }
 
-func (_self_ *GtkStockItem) Copy() (_go__return__ *GtkStockItem) {
-	var _return_ *C.GtkStockItem
-	_return_ = C._gtk_stock_item_copy((*C.GtkStockItem)(_self_))
-	_go__return__ = (*GtkStockItem)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkStockItem) Free() () {
-	C.gtk_stock_item_free((*C.GtkStockItem)(_self_))
-	return
-}
-
 func (_self_ *GtkStyle) HasContext() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_style_has_context((*C.GtkStyle)(_self_._value_))
@@ -15998,205 +16013,6 @@ func (_self_ *GtkSwitch) SetActive(is_active bool) () {
 	_cgo_is_active_ := (C.gboolean)(C.FALSE)
 	if is_active { _cgo_is_active_ = (C.gboolean)(C.TRUE) }
 	C.gtk_switch_set_active((*C.GtkSwitch)(_self_._value_), _cgo_is_active_)
-	return
-}
-
-func SymbolicColorNewAlpha(color *GtkSymbolicColor, factor float64) (_go__return__ *GtkSymbolicColor) {
-	_cgo_color_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color))
-	var _return_ *C.GtkSymbolicColor
-	_cgo_factor_ := (C.gdouble)(factor)
-	_return_ = C.gtk_symbolic_color_new_alpha(_cgo_color_, _cgo_factor_)
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func SymbolicColorNewLiteral(color *C.GdkRGBA) (_go__return__ *GtkSymbolicColor) {
-	var _return_ *C.GtkSymbolicColor
-	_return_ = C._gtk_symbolic_color_new_literal(color)
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func SymbolicColorNewMix(color1 *GtkSymbolicColor, color2 *GtkSymbolicColor, factor float64) (_go__return__ *GtkSymbolicColor) {
-	_cgo_color1_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color1))
-	_cgo_color2_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color2))
-	var _return_ *C.GtkSymbolicColor
-	_cgo_factor_ := (C.gdouble)(factor)
-	_return_ = C.gtk_symbolic_color_new_mix(_cgo_color1_, _cgo_color2_, _cgo_factor_)
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func SymbolicColorNewName(name string) (_go__return__ *GtkSymbolicColor) {
-	var _return_ *C.GtkSymbolicColor
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._gtk_symbolic_color_new_name(_cgo_name_)
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func SymbolicColorNewShade(color *GtkSymbolicColor, factor float64) (_go__return__ *GtkSymbolicColor) {
-	_cgo_color_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color))
-	var _return_ *C.GtkSymbolicColor
-	_cgo_factor_ := (C.gdouble)(factor)
-	_return_ = C.gtk_symbolic_color_new_shade(_cgo_color_, _cgo_factor_)
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func SymbolicColorNewWin32(theme_class string, id int) (_go__return__ *GtkSymbolicColor) {
-	var _return_ *C.GtkSymbolicColor
-	_cgo_id_ := (C.gint)(id)
-	_cstring_theme_class_ := C.CString(theme_class)
-	_cgo_theme_class_ := (*C.gchar)(unsafe.Pointer(_cstring_theme_class_))
-	defer C.free(unsafe.Pointer(_cstring_theme_class_))
-	_return_ = C._gtk_symbolic_color_new_win32(_cgo_theme_class_, _cgo_id_)
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkSymbolicColor) Ref() (_go__return__ *GtkSymbolicColor) {
-	var _return_ *C.GtkSymbolicColor
-	_return_ = C.gtk_symbolic_color_ref((*C.GtkSymbolicColor)(_self_))
-	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkSymbolicColor) Resolve(props GtkStylePropertiesKind) (_go__return__ bool, resolved_color *C.GdkRGBA) {
-	_cgo_props_ := (*C.GtkStyleProperties)(props._getValue())
-	var _return_ C.gboolean
-	_return_ = C.gtk_symbolic_color_resolve((*C.GtkSymbolicColor)(_self_), _cgo_props_, resolved_color)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkSymbolicColor) ToString() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C.gtk_symbolic_color_to_string((*C.GtkSymbolicColor)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkSymbolicColor) Unref() () {
-	C.gtk_symbolic_color_unref((*C.GtkSymbolicColor)(_self_))
-	return
-}
-
-func TargetEntryNew(target string, flags uint, info uint) (_go__return__ *GtkTargetEntry) {
-	var _return_ *C.GtkTargetEntry
-	_cgo_flags_ := (C.guint)(flags)
-	_cgo_info_ := (C.guint)(info)
-	_cstring_target_ := C.CString(target)
-	_cgo_target_ := (*C.gchar)(unsafe.Pointer(_cstring_target_))
-	defer C.free(unsafe.Pointer(_cstring_target_))
-	_return_ = C._gtk_target_entry_new(_cgo_target_, _cgo_flags_, _cgo_info_)
-	_go__return__ = (*GtkTargetEntry)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTargetEntry) Copy() (_go__return__ *GtkTargetEntry) {
-	var _return_ *C.GtkTargetEntry
-	_return_ = C.gtk_target_entry_copy((*C.GtkTargetEntry)(_self_))
-	_go__return__ = (*GtkTargetEntry)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTargetEntry) Free() () {
-	C.gtk_target_entry_free((*C.GtkTargetEntry)(_self_))
-	return
-}
-
-func (_self_ *GtkTargetList) Add(target C.GdkAtom, flags uint, info uint) () {
-	_cgo_flags_ := (C.guint)(flags)
-	_cgo_info_ := (C.guint)(info)
-	C.gtk_target_list_add((*C.GtkTargetList)(_self_), target, _cgo_flags_, _cgo_info_)
-	return
-}
-
-func (_self_ *GtkTargetList) AddImageTargets(info uint, writable bool) () {
-	_cgo_info_ := (C.guint)(info)
-	_cgo_writable_ := (C.gboolean)(C.FALSE)
-	if writable { _cgo_writable_ = (C.gboolean)(C.TRUE) }
-	C.gtk_target_list_add_image_targets((*C.GtkTargetList)(_self_), _cgo_info_, _cgo_writable_)
-	return
-}
-
-func (_self_ *GtkTargetList) AddRichTextTargets(info uint, deserializable bool, buffer GtkTextBufferKind) () {
-	_cgo_buffer_ := (*C.GtkTextBuffer)(buffer._getValue())
-	_cgo_info_ := (C.guint)(info)
-	_cgo_deserializable_ := (C.gboolean)(C.FALSE)
-	if deserializable { _cgo_deserializable_ = (C.gboolean)(C.TRUE) }
-	C.gtk_target_list_add_rich_text_targets((*C.GtkTargetList)(_self_), _cgo_info_, _cgo_deserializable_, _cgo_buffer_)
-	return
-}
-
-func (_self_ *GtkTargetList) AddTextTargets(info uint) () {
-	_cgo_info_ := (C.guint)(info)
-	C.gtk_target_list_add_text_targets((*C.GtkTargetList)(_self_), _cgo_info_)
-	return
-}
-
-func (_self_ *GtkTargetList) AddUriTargets(info uint) () {
-	_cgo_info_ := (C.guint)(info)
-	C.gtk_target_list_add_uri_targets((*C.GtkTargetList)(_self_), _cgo_info_)
-	return
-}
-
-func (_self_ *GtkTargetList) Find(target C.GdkAtom, info *C.guint) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_target_list_find((*C.GtkTargetList)(_self_), target, info)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTargetList) Ref() (_go__return__ *GtkTargetList) {
-	var _return_ *C.GtkTargetList
-	_return_ = C.gtk_target_list_ref((*C.GtkTargetList)(_self_))
-	_go__return__ = (*GtkTargetList)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTargetList) Remove(target C.GdkAtom) () {
-	C.gtk_target_list_remove((*C.GtkTargetList)(_self_), target)
-	return
-}
-
-func (_self_ *GtkTargetList) Unref() () {
-	C.gtk_target_list_unref((*C.GtkTargetList)(_self_))
-	return
-}
-
-func TextAttributesNew() (_go__return__ *GtkTextAttributes) {
-	var _return_ *C.GtkTextAttributes
-	_return_ = C.gtk_text_attributes_new()
-	_go__return__ = (*GtkTextAttributes)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTextAttributes) Copy() (_go__return__ *GtkTextAttributes) {
-	var _return_ *C.GtkTextAttributes
-	_return_ = C.gtk_text_attributes_copy((*C.GtkTextAttributes)(_self_))
-	_go__return__ = (*GtkTextAttributes)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTextAttributes) CopyValues(dest *GtkTextAttributes) () {
-	_cgo_dest_ := (*C.GtkTextAttributes)(unsafe.Pointer(dest))
-	C.gtk_text_attributes_copy_values((*C.GtkTextAttributes)(_self_), _cgo_dest_)
-	return
-}
-
-func (_self_ *GtkTextAttributes) Ref() (_go__return__ *GtkTextAttributes) {
-	var _return_ *C.GtkTextAttributes
-	_return_ = C.gtk_text_attributes_ref((*C.GtkTextAttributes)(_self_))
-	_go__return__ = (*GtkTextAttributes)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTextAttributes) Unref() () {
-	C.gtk_text_attributes_unref((*C.GtkTextAttributes)(_self_))
 	return
 }
 
@@ -16778,675 +16594,6 @@ func (_self_ *GtkTextChildAnchor) GetDeleted() (_go__return__ bool) {
 
 func (_self_ *GtkTextChildAnchor) GetWidgets() (_return_ *C.GList) {
 	_return_ = C.gtk_text_child_anchor_get_widgets((*C.GtkTextChildAnchor)(_self_._value_))
-	return
-}
-
-func (_self_ *GtkTextIter) Assign(other *GtkTextIter) () {
-	_cgo_other_ := (*C.GtkTextIter)(unsafe.Pointer(other))
-	C._gtk_text_iter_assign((*C.GtkTextIter)(_self_), _cgo_other_)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardChar() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_char((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardChars(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_chars((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardCursorPosition() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_cursor_position((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardCursorPositions(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardFindChar(pred C.GtkTextCharPredicate, user_data C.gpointer, limit *GtkTextIter) (_go__return__ bool) {
-	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_backward_find_char((*C.GtkTextIter)(_self_), pred, user_data, _cgo_limit_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardLine() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_line((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardLines(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_lines((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardSearch(str string, flags C.GtkTextSearchFlags, limit *GtkTextIter) (_go__return__ bool, match_start *GtkTextIter, match_end *GtkTextIter) {
-	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
-	var _allocated_match_start_ C.GtkTextIter
-	var _allocated_match_end_ C.GtkTextIter
-	_cstring_str_ := C.CString(str)
-	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
-	defer C.free(unsafe.Pointer(_cstring_str_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_backward_search((*C.GtkTextIter)(_self_), _cgo_str_, flags, &_allocated_match_start_, &_allocated_match_end_, _cgo_limit_)
-	match_start = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_start_))
-	match_end = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_end_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardSentenceStart() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_sentence_start((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardSentenceStarts(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_sentence_starts((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardToTagToggle(tag GtkTextTagKind) (_go__return__ bool) {
-	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_to_tag_toggle((*C.GtkTextIter)(_self_), _cgo_tag_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardVisibleCursorPosition() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_visible_cursor_position((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardVisibleCursorPositions(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_visible_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardVisibleLine() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_visible_line((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardVisibleLines(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_visible_lines((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardVisibleWordStart() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_visible_word_start((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardVisibleWordStarts(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_visible_word_starts((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardWordStart() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_word_start((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BackwardWordStarts(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_backward_word_starts((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) BeginsTag(tag GtkTextTagKind) (_go__return__ bool) {
-	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_begins_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) CanInsert(default_editability bool) (_go__return__ bool) {
-	_cgo_default_editability_ := (C.gboolean)(C.FALSE)
-	if default_editability { _cgo_default_editability_ = (C.gboolean)(C.TRUE) }
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_can_insert((*C.GtkTextIter)(_self_), _cgo_default_editability_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) Compare(rhs *GtkTextIter) (_go__return__ int) {
-	_cgo_rhs_ := (*C.GtkTextIter)(unsafe.Pointer(rhs))
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_compare((*C.GtkTextIter)(_self_), _cgo_rhs_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) Copy() (_go__return__ *GtkTextIter) {
-	var _return_ *C.GtkTextIter
-	_return_ = C._gtk_text_iter_copy((*C.GtkTextIter)(_self_))
-	_go__return__ = (*GtkTextIter)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTextIter) Editable(default_setting bool) (_go__return__ bool) {
-	_cgo_default_setting_ := (C.gboolean)(C.FALSE)
-	if default_setting { _cgo_default_setting_ = (C.gboolean)(C.TRUE) }
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_editable((*C.GtkTextIter)(_self_), _cgo_default_setting_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) EndsLine() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_ends_line((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) EndsSentence() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_ends_sentence((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) EndsTag(tag GtkTextTagKind) (_go__return__ bool) {
-	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_ends_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) EndsWord() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_ends_word((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) Equal(rhs *GtkTextIter) (_go__return__ bool) {
-	_cgo_rhs_ := (*C.GtkTextIter)(unsafe.Pointer(rhs))
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_equal((*C.GtkTextIter)(_self_), _cgo_rhs_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardChar() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_char((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardChars(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_chars((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardCursorPosition() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_cursor_position((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardCursorPositions(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardFindChar(pred C.GtkTextCharPredicate, user_data C.gpointer, limit *GtkTextIter) (_go__return__ bool) {
-	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_forward_find_char((*C.GtkTextIter)(_self_), pred, user_data, _cgo_limit_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardLine() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_line((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardLines(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_lines((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardSearch(str string, flags C.GtkTextSearchFlags, limit *GtkTextIter) (_go__return__ bool, match_start *GtkTextIter, match_end *GtkTextIter) {
-	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
-	var _allocated_match_start_ C.GtkTextIter
-	var _allocated_match_end_ C.GtkTextIter
-	_cstring_str_ := C.CString(str)
-	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
-	defer C.free(unsafe.Pointer(_cstring_str_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_forward_search((*C.GtkTextIter)(_self_), _cgo_str_, flags, &_allocated_match_start_, &_allocated_match_end_, _cgo_limit_)
-	match_start = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_start_))
-	match_end = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_end_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardSentenceEnd() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_sentence_end((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardSentenceEnds(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_sentence_ends((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardToEnd() () {
-	C.gtk_text_iter_forward_to_end((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardToLineEnd() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_to_line_end((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardToTagToggle(tag GtkTextTagKind) (_go__return__ bool) {
-	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_to_tag_toggle((*C.GtkTextIter)(_self_), _cgo_tag_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardVisibleCursorPosition() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_visible_cursor_position((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardVisibleCursorPositions(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_visible_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardVisibleLine() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_visible_line((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardVisibleLines(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_visible_lines((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardVisibleWordEnd() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_visible_word_end((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardVisibleWordEnds(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_visible_word_ends((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardWordEnd() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_word_end((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) ForwardWordEnds(count int) (_go__return__ bool) {
-	_cgo_count_ := (C.gint)(count)
-	var _return_ C.gboolean
-	_return_ = C.gtk_text_iter_forward_word_ends((*C.GtkTextIter)(_self_), _cgo_count_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) Free() () {
-	C.gtk_text_iter_free((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetAttributes() (_go__return__ bool, values *GtkTextAttributes) {
-	var _allocated_values_ C.GtkTextAttributes
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_get_attributes((*C.GtkTextIter)(_self_), &_allocated_values_)
-	values = (*GtkTextAttributes)(unsafe.Pointer(&_allocated_values_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) GetBuffer() (_go__return__ GtkTextBuffer) {
-	var _return_ *C.GtkTextBuffer
-	_return_ = C._gtk_text_iter_get_buffer((*C.GtkTextIter)(_self_))
-	_go__return__ = ToGtkTextBuffer(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetBytesInLine() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_bytes_in_line((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetChar() (_return_ C.gunichar) {
-	_return_ = C._gtk_text_iter_get_char((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetCharsInLine() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_chars_in_line((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetChildAnchor() (_go__return__ GtkTextChildAnchor) {
-	var _return_ *C.GtkTextChildAnchor
-	_return_ = C._gtk_text_iter_get_child_anchor((*C.GtkTextIter)(_self_))
-	_go__return__ = ToGtkTextChildAnchor(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetLanguage() (_return_ *C.PangoLanguage) {
-	_return_ = C._gtk_text_iter_get_language((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetLine() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_line((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetLineIndex() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_line_index((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetLineOffset() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_line_offset((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetMarks() (_return_ *C.GSList) {
-	_return_ = C._gtk_text_iter_get_marks((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetOffset() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_offset((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetPixbuf() (_return_ *C.GdkPixbuf) {
-	_return_ = C._gtk_text_iter_get_pixbuf((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetSlice(end *GtkTextIter) (_go__return__ string) {
-	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
-	var _return_ *C.gchar
-	_return_ = C._gtk_text_iter_get_slice((*C.GtkTextIter)(_self_), _cgo_end_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkTextIter) GetTags() (_return_ *C.GSList) {
-	_return_ = C._gtk_text_iter_get_tags((*C.GtkTextIter)(_self_))
-	return
-}
-
-func (_self_ *GtkTextIter) GetText(end *GtkTextIter) (_go__return__ string) {
-	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
-	var _return_ *C.gchar
-	_return_ = C._gtk_text_iter_get_text((*C.GtkTextIter)(_self_), _cgo_end_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkTextIter) GetToggledTags(toggled_on bool) (_return_ *C.GSList) {
-	_cgo_toggled_on_ := (C.gboolean)(C.FALSE)
-	if toggled_on { _cgo_toggled_on_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._gtk_text_iter_get_toggled_tags((*C.GtkTextIter)(_self_), _cgo_toggled_on_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetVisibleLineIndex() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_visible_line_index((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetVisibleLineOffset() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_text_iter_get_visible_line_offset((*C.GtkTextIter)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTextIter) GetVisibleSlice(end *GtkTextIter) (_go__return__ string) {
-	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
-	var _return_ *C.gchar
-	_return_ = C._gtk_text_iter_get_visible_slice((*C.GtkTextIter)(_self_), _cgo_end_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkTextIter) GetVisibleText(end *GtkTextIter) (_go__return__ string) {
-	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
-	var _return_ *C.gchar
-	_return_ = C._gtk_text_iter_get_visible_text((*C.GtkTextIter)(_self_), _cgo_end_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkTextIter) HasTag(tag GtkTextTagKind) (_go__return__ bool) {
-	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_has_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) InRange(start *GtkTextIter, end *GtkTextIter) (_go__return__ bool) {
-	_cgo_start_ := (*C.GtkTextIter)(unsafe.Pointer(start))
-	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_in_range((*C.GtkTextIter)(_self_), _cgo_start_, _cgo_end_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) InsideSentence() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_inside_sentence((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) InsideWord() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_inside_word((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) IsCursorPosition() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_is_cursor_position((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) IsEnd() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_is_end((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) IsStart() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_is_start((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) Order(second *GtkTextIter) () {
-	_cgo_second_ := (*C.GtkTextIter)(unsafe.Pointer(second))
-	C.gtk_text_iter_order((*C.GtkTextIter)(_self_), _cgo_second_)
-	return
-}
-
-func (_self_ *GtkTextIter) SetLine(line_number int) () {
-	_cgo_line_number_ := (C.gint)(line_number)
-	C.gtk_text_iter_set_line((*C.GtkTextIter)(_self_), _cgo_line_number_)
-	return
-}
-
-func (_self_ *GtkTextIter) SetLineIndex(byte_on_line int) () {
-	_cgo_byte_on_line_ := (C.gint)(byte_on_line)
-	C.gtk_text_iter_set_line_index((*C.GtkTextIter)(_self_), _cgo_byte_on_line_)
-	return
-}
-
-func (_self_ *GtkTextIter) SetLineOffset(char_on_line int) () {
-	_cgo_char_on_line_ := (C.gint)(char_on_line)
-	C.gtk_text_iter_set_line_offset((*C.GtkTextIter)(_self_), _cgo_char_on_line_)
-	return
-}
-
-func (_self_ *GtkTextIter) SetOffset(char_offset int) () {
-	_cgo_char_offset_ := (C.gint)(char_offset)
-	C.gtk_text_iter_set_offset((*C.GtkTextIter)(_self_), _cgo_char_offset_)
-	return
-}
-
-func (_self_ *GtkTextIter) SetVisibleLineIndex(byte_on_line int) () {
-	_cgo_byte_on_line_ := (C.gint)(byte_on_line)
-	C.gtk_text_iter_set_visible_line_index((*C.GtkTextIter)(_self_), _cgo_byte_on_line_)
-	return
-}
-
-func (_self_ *GtkTextIter) SetVisibleLineOffset(char_on_line int) () {
-	_cgo_char_on_line_ := (C.gint)(char_on_line)
-	C.gtk_text_iter_set_visible_line_offset((*C.GtkTextIter)(_self_), _cgo_char_on_line_)
-	return
-}
-
-func (_self_ *GtkTextIter) StartsLine() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_starts_line((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) StartsSentence() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_starts_sentence((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) StartsWord() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_starts_word((*C.GtkTextIter)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTextIter) TogglesTag(tag GtkTextTagKind) (_go__return__ bool) {
-	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
-	var _return_ C.gboolean
-	_return_ = C._gtk_text_iter_toggles_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -19021,18 +18168,6 @@ func (_self_ *GtkTooltip) SetTipArea(rect *C.GdkRectangle) () {
 	return
 }
 
-func (_self_ *GtkTreeIter) Copy() (_go__return__ *GtkTreeIter) {
-	var _return_ *C.GtkTreeIter
-	_return_ = C.gtk_tree_iter_copy((*C.GtkTreeIter)(_self_))
-	_go__return__ = (*GtkTreeIter)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTreeIter) Free() () {
-	C.gtk_tree_iter_free((*C.GtkTreeIter)(_self_))
-	return
-}
-
 func (_self_ *GtkTreeModelFilter) ClearCache() () {
 	C.gtk_tree_model_filter_clear_cache((*C.GtkTreeModelFilter)(_self_._value_))
 	return
@@ -19147,194 +18282,6 @@ func (_self_ *GtkTreeModelSort) IterIsValid(iter *GtkTreeIter) (_go__return__ bo
 
 func (_self_ *GtkTreeModelSort) ResetDefaultSortFunc() () {
 	C.gtk_tree_model_sort_reset_default_sort_func((*C.GtkTreeModelSort)(_self_._value_))
-	return
-}
-
-func TreePathNew() (_go__return__ *GtkTreePath) {
-	var _return_ *C.GtkTreePath
-	_return_ = C.gtk_tree_path_new()
-	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
-	return
-}
-
-func TreePathNewFirst() (_go__return__ *GtkTreePath) {
-	var _return_ *C.GtkTreePath
-	_return_ = C.gtk_tree_path_new_first()
-	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
-	return
-}
-
-func TreePathNewFromString(path string) (_go__return__ *GtkTreePath) {
-	var _return_ *C.GtkTreePath
-	_cstring_path_ := C.CString(path)
-	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
-	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._gtk_tree_path_new_from_string(_cgo_path_)
-	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTreePath) AppendIndex(index_ int) () {
-	_cgo_index__ := (C.gint)(index_)
-	C.gtk_tree_path_append_index((*C.GtkTreePath)(_self_), _cgo_index__)
-	return
-}
-
-func (_self_ *GtkTreePath) Compare(b *GtkTreePath) (_go__return__ int) {
-	_cgo_b_ := (*C.GtkTreePath)(unsafe.Pointer(b))
-	var _return_ C.gint
-	_return_ = C._gtk_tree_path_compare((*C.GtkTreePath)(_self_), _cgo_b_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTreePath) Copy() (_go__return__ *GtkTreePath) {
-	var _return_ *C.GtkTreePath
-	_return_ = C._gtk_tree_path_copy((*C.GtkTreePath)(_self_))
-	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTreePath) Down() () {
-	C.gtk_tree_path_down((*C.GtkTreePath)(_self_))
-	return
-}
-
-func (_self_ *GtkTreePath) Free() () {
-	C.gtk_tree_path_free((*C.GtkTreePath)(_self_))
-	return
-}
-
-func (_self_ *GtkTreePath) GetDepth() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C.gtk_tree_path_get_depth((*C.GtkTreePath)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkTreePath) GetIndices() (_return_ *C.gint) {
-	_return_ = C.gtk_tree_path_get_indices((*C.GtkTreePath)(_self_))
-	return
-}
-
-func (_self_ *GtkTreePath) GetIndicesWithDepth() (_return_ *C.gint, _go_depth_ int) {
-	var depth C.gint
-	_return_ = C.gtk_tree_path_get_indices_with_depth((*C.GtkTreePath)(_self_), &depth)
-	_go_depth_ = (int)(depth)
-	return
-}
-
-func (_self_ *GtkTreePath) IsAncestor(descendant *GtkTreePath) (_go__return__ bool) {
-	_cgo_descendant_ := (*C.GtkTreePath)(unsafe.Pointer(descendant))
-	var _return_ C.gboolean
-	_return_ = C.gtk_tree_path_is_ancestor((*C.GtkTreePath)(_self_), _cgo_descendant_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTreePath) IsDescendant(ancestor *GtkTreePath) (_go__return__ bool) {
-	_cgo_ancestor_ := (*C.GtkTreePath)(unsafe.Pointer(ancestor))
-	var _return_ C.gboolean
-	_return_ = C.gtk_tree_path_is_descendant((*C.GtkTreePath)(_self_), _cgo_ancestor_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTreePath) Next() () {
-	C.gtk_tree_path_next((*C.GtkTreePath)(_self_))
-	return
-}
-
-func (_self_ *GtkTreePath) PrependIndex(index_ int) () {
-	_cgo_index__ := (C.gint)(index_)
-	C.gtk_tree_path_prepend_index((*C.GtkTreePath)(_self_), _cgo_index__)
-	return
-}
-
-func (_self_ *GtkTreePath) Prev() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_tree_path_prev((*C.GtkTreePath)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkTreePath) ToString() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C.gtk_tree_path_to_string((*C.GtkTreePath)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkTreePath) Up() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_tree_path_up((*C.GtkTreePath)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func TreeRowReferenceNew(model *C.GtkTreeModel, path *GtkTreePath) (_go__return__ *GtkTreeRowReference) {
-	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	var _return_ *C.GtkTreeRowReference
-	_return_ = C.gtk_tree_row_reference_new(model, _cgo_path_)
-	_go__return__ = (*GtkTreeRowReference)(unsafe.Pointer(_return_))
-	return
-}
-
-func TreeRowReferenceNewProxy(proxy *C.GObject, model *C.GtkTreeModel, path *GtkTreePath) (_go__return__ *GtkTreeRowReference) {
-	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	var _return_ *C.GtkTreeRowReference
-	_return_ = C.gtk_tree_row_reference_new_proxy(proxy, model, _cgo_path_)
-	_go__return__ = (*GtkTreeRowReference)(unsafe.Pointer(_return_))
-	return
-}
-
-func TreeRowReferenceDeleted(proxy *C.GObject, path *GtkTreePath) () {
-	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	C.gtk_tree_row_reference_deleted(proxy, _cgo_path_)
-	return
-}
-
-func TreeRowReferenceInserted(proxy *C.GObject, path *GtkTreePath) () {
-	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	C.gtk_tree_row_reference_inserted(proxy, _cgo_path_)
-	return
-}
-
-func TreeRowReferenceReordered(proxy *C.GObject, path *GtkTreePath, iter *GtkTreeIter, new_order *C.gint) () {
-	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
-	C.gtk_tree_row_reference_reordered(proxy, _cgo_path_, _cgo_iter_, new_order)
-	return
-}
-
-func (_self_ *GtkTreeRowReference) Copy() (_go__return__ *GtkTreeRowReference) {
-	var _return_ *C.GtkTreeRowReference
-	_return_ = C.gtk_tree_row_reference_copy((*C.GtkTreeRowReference)(_self_))
-	_go__return__ = (*GtkTreeRowReference)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTreeRowReference) Free() () {
-	C.gtk_tree_row_reference_free((*C.GtkTreeRowReference)(_self_))
-	return
-}
-
-func (_self_ *GtkTreeRowReference) GetModel() (_return_ *C.GtkTreeModel) {
-	_return_ = C.gtk_tree_row_reference_get_model((*C.GtkTreeRowReference)(_self_))
-	return
-}
-
-func (_self_ *GtkTreeRowReference) GetPath() (_go__return__ *GtkTreePath) {
-	var _return_ *C.GtkTreePath
-	_return_ = C.gtk_tree_row_reference_get_path((*C.GtkTreeRowReference)(_self_))
-	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkTreeRowReference) Valid() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_tree_row_reference_valid((*C.GtkTreeRowReference)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -22075,296 +21022,6 @@ func (_self_ *GtkWidget) UnsetStateFlags(flags C.GtkStateFlags) () {
 	return
 }
 
-func (_self_ *GtkWidgetClass) FindStyleProperty(property_name string) (_return_ *C.GParamSpec) {
-	_cstring_property_name_ := C.CString(property_name)
-	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
-	defer C.free(unsafe.Pointer(_cstring_property_name_))
-	_return_ = C._gtk_widget_class_find_style_property((*C.GtkWidgetClass)(_self_), _cgo_property_name_)
-	return
-}
-
-func (_self_ *GtkWidgetClass) InstallStyleProperty(pspec *C.GParamSpec) () {
-	C.gtk_widget_class_install_style_property((*C.GtkWidgetClass)(_self_), pspec)
-	return
-}
-
-func (_self_ *GtkWidgetClass) InstallStylePropertyParser(pspec *C.GParamSpec, parser C.GtkRcPropertyParser) () {
-	C.gtk_widget_class_install_style_property_parser((*C.GtkWidgetClass)(_self_), pspec, parser)
-	return
-}
-
-func (_self_ *GtkWidgetClass) ListStyleProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
-	var n_properties C.guint
-	_return_ = C._gtk_widget_class_list_style_properties((*C.GtkWidgetClass)(_self_), &n_properties)
-	_go_n_properties_ = (uint)(n_properties)
-	return
-}
-
-func (_self_ *GtkWidgetClass) SetAccessibleRole(role C.AtkRole) () {
-	C.gtk_widget_class_set_accessible_role((*C.GtkWidgetClass)(_self_), role)
-	return
-}
-
-func (_self_ *GtkWidgetClass) SetAccessibleType(type_ C.GType) () {
-	C.gtk_widget_class_set_accessible_type((*C.GtkWidgetClass)(_self_), type_)
-	return
-}
-
-func WidgetPathNew() (_go__return__ *GtkWidgetPath) {
-	var _return_ *C.GtkWidgetPath
-	_return_ = C.gtk_widget_path_new()
-	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkWidgetPath) AppendForWidget(widget GtkWidgetKind) (_go__return__ int) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	var _return_ C.gint
-	_return_ = C.gtk_widget_path_append_for_widget((*C.GtkWidgetPath)(_self_), _cgo_widget_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) AppendType(type_ C.GType) (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C.gtk_widget_path_append_type((*C.GtkWidgetPath)(_self_), type_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) AppendWithSiblings(siblings *GtkWidgetPath, sibling_index uint) (_go__return__ int) {
-	_cgo_siblings_ := (*C.GtkWidgetPath)(unsafe.Pointer(siblings))
-	_cgo_sibling_index_ := (C.guint)(sibling_index)
-	var _return_ C.gint
-	_return_ = C.gtk_widget_path_append_with_siblings((*C.GtkWidgetPath)(_self_), _cgo_siblings_, _cgo_sibling_index_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) Copy() (_go__return__ *GtkWidgetPath) {
-	var _return_ *C.GtkWidgetPath
-	_return_ = C._gtk_widget_path_copy((*C.GtkWidgetPath)(_self_))
-	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkWidgetPath) Free() () {
-	C.gtk_widget_path_free((*C.GtkWidgetPath)(_self_))
-	return
-}
-
-func (_self_ *GtkWidgetPath) GetObjectType() (_return_ C.GType) {
-	_return_ = C._gtk_widget_path_get_object_type((*C.GtkWidgetPath)(_self_))
-	return
-}
-
-func (_self_ *GtkWidgetPath) HasParent(type_ C.GType) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_has_parent((*C.GtkWidgetPath)(_self_), type_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IsType(type_ C.GType) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_is_type((*C.GtkWidgetPath)(_self_), type_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterAddClass(pos int, name string) () {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._gtk_widget_path_iter_add_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterAddRegion(pos int, name string, flags C.GtkRegionFlags) () {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._gtk_widget_path_iter_add_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_, flags)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterClearClasses(pos int) () {
-	_cgo_pos_ := (C.gint)(pos)
-	C.gtk_widget_path_iter_clear_classes((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterClearRegions(pos int) () {
-	_cgo_pos_ := (C.gint)(pos)
-	C.gtk_widget_path_iter_clear_regions((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterGetName(pos int) (_go__return__ string) {
-	_cgo_pos_ := (C.gint)(pos)
-	var _return_ *C.gchar
-	_return_ = C._gtk_widget_path_iter_get_name((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterGetObjectType(pos int) (_return_ C.GType) {
-	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_get_object_type((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterGetSiblingIndex(pos int) (_go__return__ uint) {
-	_cgo_pos_ := (C.gint)(pos)
-	var _return_ C.guint
-	_return_ = C._gtk_widget_path_iter_get_sibling_index((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterGetSiblings(pos int) (_go__return__ *GtkWidgetPath) {
-	var _return_ *C.GtkWidgetPath
-	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_get_siblings((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterHasClass(pos int, name string) (_go__return__ bool) {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_iter_has_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterHasName(pos int, name string) (_go__return__ bool) {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_iter_has_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterHasQclass(pos int, qname C.GQuark) (_go__return__ bool) {
-	_cgo_pos_ := (C.gint)(pos)
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_iter_has_qclass((*C.GtkWidgetPath)(_self_), _cgo_pos_, qname)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterHasQname(pos int, qname C.GQuark) (_go__return__ bool) {
-	_cgo_pos_ := (C.gint)(pos)
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_iter_has_qname((*C.GtkWidgetPath)(_self_), _cgo_pos_, qname)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterHasQregion(pos int, qname C.GQuark) (_go__return__ bool, flags *C.GtkRegionFlags) {
-	_cgo_pos_ := (C.gint)(pos)
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_iter_has_qregion((*C.GtkWidgetPath)(_self_), _cgo_pos_, qname, flags)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterHasRegion(pos int, name string) (_go__return__ bool, flags *C.GtkRegionFlags) {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_widget_path_iter_has_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_, flags)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterListClasses(pos int) (_return_ *C.GSList) {
-	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_list_classes((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterListRegions(pos int) (_return_ *C.GSList) {
-	_cgo_pos_ := (C.gint)(pos)
-	_return_ = C._gtk_widget_path_iter_list_regions((*C.GtkWidgetPath)(_self_), _cgo_pos_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterRemoveClass(pos int, name string) () {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._gtk_widget_path_iter_remove_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterRemoveRegion(pos int, name string) () {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._gtk_widget_path_iter_remove_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterSetName(pos int, name string) () {
-	_cgo_pos_ := (C.gint)(pos)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._gtk_widget_path_iter_set_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) IterSetObjectType(pos int, type_ C.GType) () {
-	_cgo_pos_ := (C.gint)(pos)
-	C.gtk_widget_path_iter_set_object_type((*C.GtkWidgetPath)(_self_), _cgo_pos_, type_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) Length() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C._gtk_widget_path_length((*C.GtkWidgetPath)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) PrependType(type_ C.GType) () {
-	C.gtk_widget_path_prepend_type((*C.GtkWidgetPath)(_self_), type_)
-	return
-}
-
-func (_self_ *GtkWidgetPath) Ref() (_go__return__ *GtkWidgetPath) {
-	var _return_ *C.GtkWidgetPath
-	_return_ = C.gtk_widget_path_ref((*C.GtkWidgetPath)(_self_))
-	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GtkWidgetPath) ToString() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._gtk_widget_path_to_string((*C.GtkWidgetPath)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GtkWidgetPath) Unref() () {
-	C.gtk_widget_path_unref((*C.GtkWidgetPath)(_self_))
-	return
-}
-
 func WindowNew(type_ C.GtkWindowType) (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_new(type_)
@@ -23157,1719 +21814,3062 @@ func (_self_ *GtkWindowGroup) RemoveWindow(window GtkWindowKind) () {
 	return
 }
 
-func AccelGroupsActivate(object *C.GObject, accel_key uint, accel_mods C.GdkModifierType) (_go__return__ bool) {
-	_cgo_accel_key_ := (C.guint)(accel_key)
-	var _return_ C.gboolean
-	_return_ = C.gtk_accel_groups_activate(object, _cgo_accel_key_, accel_mods)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func AccelGroupsFromObject(object *C.GObject) (_return_ *C.GSList) {
-	_return_ = C.gtk_accel_groups_from_object(object)
-	return
-}
-
-func AcceleratorGetDefaultModMask() (_return_ C.GdkModifierType) {
-	_return_ = C.gtk_accelerator_get_default_mod_mask()
-	return
-}
-
-func AcceleratorGetLabel(accelerator_key uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
-	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
-	var _return_ *C.gchar
-	_return_ = C.gtk_accelerator_get_label(_cgo_accelerator_key_, accelerator_mods)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func AcceleratorGetLabelWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
-	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
-	_cgo_keycode_ := (C.guint)(keycode)
-	var _return_ *C.gchar
-	_return_ = C.gtk_accelerator_get_label_with_keycode(display, _cgo_accelerator_key_, _cgo_keycode_, accelerator_mods)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func AcceleratorName(accelerator_key uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
-	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
-	var _return_ *C.gchar
-	_return_ = C.gtk_accelerator_name(_cgo_accelerator_key_, accelerator_mods)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func AcceleratorNameWithKeycode(display *C.GdkDisplay, accelerator_key uint, keycode uint, accelerator_mods C.GdkModifierType) (_go__return__ string) {
-	_cgo_accelerator_key_ := (C.guint)(accelerator_key)
-	_cgo_keycode_ := (C.guint)(keycode)
-	var _return_ *C.gchar
-	_return_ = C.gtk_accelerator_name_with_keycode(display, _cgo_accelerator_key_, _cgo_keycode_, accelerator_mods)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func AcceleratorParse(accelerator string) (_go_accelerator_key_ uint, accelerator_mods *C.GdkModifierType) {
-	var accelerator_key C.guint
-	_cstring_accelerator_ := C.CString(accelerator)
-	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
-	defer C.free(unsafe.Pointer(_cstring_accelerator_))
-	C._gtk_accelerator_parse(_cgo_accelerator_, &accelerator_key, accelerator_mods)
-	_go_accelerator_key_ = (uint)(accelerator_key)
-	return
-}
-
-func AcceleratorParseWithKeycode(accelerator string) (_go_accelerator_key_ uint, accelerator_codes unsafe.Pointer, accelerator_mods *C.GdkModifierType) {
-	var accelerator_key C.guint
-	_cstring_accelerator_ := C.CString(accelerator)
-	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
-	defer C.free(unsafe.Pointer(_cstring_accelerator_))
-	C._gtk_accelerator_parse_with_keycode(_cgo_accelerator_, &accelerator_key, accelerator_codes, accelerator_mods)
-	_go_accelerator_key_ = (uint)(accelerator_key)
-	return
-}
-
-func AcceleratorSetDefaultModMask(default_mod_mask C.GdkModifierType) () {
-	C.gtk_accelerator_set_default_mod_mask(default_mod_mask)
-	return
-}
-
-func AcceleratorValid(keyval uint, modifiers C.GdkModifierType) (_go__return__ bool) {
+func (_self_ *GtkBindingSet) Activate(keyval uint, modifiers C.GdkModifierType, object *C.GObject) (_go__return__ bool) {
 	_cgo_keyval_ := (C.guint)(keyval)
 	var _return_ C.gboolean
-	_return_ = C.gtk_accelerator_valid(_cgo_keyval_, modifiers)
+	_return_ = C.gtk_binding_set_activate((*C.GtkBindingSet)(_self_), _cgo_keyval_, modifiers, object)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func AlternativeDialogButtonOrder(screen *C.GdkScreen) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_alternative_dialog_button_order(screen)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func BorderNew() (_go__return__ *GtkBorder) {
+	var _return_ *C.GtkBorder
+	_return_ = C.gtk_border_new()
+	_go__return__ = (*GtkBorder)(unsafe.Pointer(_return_))
 	return
 }
 
-func BindingsActivate(object *C.GObject, keyval uint, modifiers C.GdkModifierType) (_go__return__ bool) {
-	_cgo_keyval_ := (C.guint)(keyval)
-	var _return_ C.gboolean
-	_return_ = C.gtk_bindings_activate(object, _cgo_keyval_, modifiers)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func (_self_ *GtkBorder) Copy() (_go__return__ *GtkBorder) {
+	var _return_ *C.GtkBorder
+	_return_ = C._gtk_border_copy((*C.GtkBorder)(_self_))
+	_go__return__ = (*GtkBorder)(unsafe.Pointer(_return_))
 	return
 }
 
-func BindingsActivateEvent(object *C.GObject, event *C.GdkEventKey) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_bindings_activate_event(object, event)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func (_self_ *GtkBorder) Free() () {
+	C.gtk_border_free((*C.GtkBorder)(_self_))
 	return
 }
 
-func BuilderErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_builder_error_quark()
+func (_self_ *GtkCellAreaClass) FindCellProperty(property_name string) (_return_ *C.GParamSpec) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_cell_area_class_find_cell_property((*C.GtkCellAreaClass)(_self_), _cgo_property_name_)
 	return
 }
 
-func CairoShouldDrawWindow(cr *C.cairo_t, window *C.GdkWindow) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_cairo_should_draw_window(cr, window)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func (_self_ *GtkCellAreaClass) InstallCellProperty(property_id uint, pspec *C.GParamSpec) () {
+	_cgo_property_id_ := (C.guint)(property_id)
+	C.gtk_cell_area_class_install_cell_property((*C.GtkCellAreaClass)(_self_), _cgo_property_id_, pspec)
 	return
 }
 
-func CairoTransformToWindow(cr *C.cairo_t, widget GtkWidgetKind, window *C.GdkWindow) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	C.gtk_cairo_transform_to_window(cr, _cgo_widget_, window)
+func (_self_ *GtkCellAreaClass) ListCellProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+	var n_properties C.guint
+	_return_ = C._gtk_cell_area_class_list_cell_properties((*C.GtkCellAreaClass)(_self_), &n_properties)
+	_go_n_properties_ = (uint)(n_properties)
 	return
 }
 
-func CheckVersion(required_major uint, required_minor uint, required_micro uint) (_go__return__ string) {
-	_cgo_required_major_ := (C.guint)(required_major)
-	_cgo_required_minor_ := (C.guint)(required_minor)
-	_cgo_required_micro_ := (C.guint)(required_micro)
-	var _return_ *C.gchar
-	_return_ = C._gtk_check_version(_cgo_required_major_, _cgo_required_minor_, _cgo_required_micro_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+func (_self_ *GtkContainerClass) FindChildProperty(property_name string) (_return_ *C.GParamSpec) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_container_class_find_child_property((*C.GtkContainerClass)(_self_), _cgo_property_name_)
 	return
 }
 
-func CssProviderErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_css_provider_error_quark()
+func (_self_ *GtkContainerClass) HandleBorderWidth() () {
+	C.gtk_container_class_handle_border_width((*C.GtkContainerClass)(_self_))
 	return
 }
 
-func DeviceGrabAdd(widget GtkWidgetKind, device *C.GdkDevice, block_others bool) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_block_others_ := (C.gboolean)(C.FALSE)
-	if block_others { _cgo_block_others_ = (C.gboolean)(C.TRUE) }
-	C.gtk_device_grab_add(_cgo_widget_, device, _cgo_block_others_)
+func (_self_ *GtkContainerClass) InstallChildProperty(property_id uint, pspec *C.GParamSpec) () {
+	_cgo_property_id_ := (C.guint)(property_id)
+	C.gtk_container_class_install_child_property((*C.GtkContainerClass)(_self_), _cgo_property_id_, pspec)
 	return
 }
 
-func DeviceGrabRemove(widget GtkWidgetKind, device *C.GdkDevice) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	C.gtk_device_grab_remove(_cgo_widget_, device)
+func (_self_ *GtkContainerClass) ListChildProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+	var n_properties C.guint
+	_return_ = C._gtk_container_class_list_child_properties((*C.GtkContainerClass)(_self_), &n_properties)
+	_go_n_properties_ = (uint)(n_properties)
 	return
 }
 
-func DisableSetlocale() () {
-	C.gtk_disable_setlocale()
-	return
-}
-
-func DistributeNaturalAllocation(extra_space int, n_requested_sizes uint, sizes *GtkRequestedSize) (_go__return__ int) {
-	_cgo_sizes_ := (*C.GtkRequestedSize)(unsafe.Pointer(sizes))
-	_cgo_extra_space_ := (C.gint)(extra_space)
-	_cgo_n_requested_sizes_ := (C.guint)(n_requested_sizes)
-	var _return_ C.gint
-	_return_ = C.gtk_distribute_natural_allocation(_cgo_extra_space_, _cgo_n_requested_sizes_, _cgo_sizes_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func DragFinish(context *C.GdkDragContext, success bool, del bool, time_ uint32) () {
-	_cgo_time__ := (C.guint32)(time_)
-	_cgo_success_ := (C.gboolean)(C.FALSE)
-	if success { _cgo_success_ = (C.gboolean)(C.TRUE) }
-	_cgo_del_ := (C.gboolean)(C.FALSE)
-	if del { _cgo_del_ = (C.gboolean)(C.TRUE) }
-	C.gtk_drag_finish(context, _cgo_success_, _cgo_del_, _cgo_time__)
-	return
-}
-
-func DragGetSourceWidget(context *C.GdkDragContext) (_go__return__ GtkWidget) {
-	var _return_ *C.GtkWidget
-	_return_ = C.gtk_drag_get_source_widget(context)
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
-	return
-}
-
-func DragSetIconDefault(context *C.GdkDragContext) () {
-	C.gtk_drag_set_icon_default(context)
-	return
-}
-
-func DragSetIconGicon(context *C.GdkDragContext, icon *C.GIcon, hot_x int, hot_y int) () {
-	_cgo_hot_x_ := (C.gint)(hot_x)
-	_cgo_hot_y_ := (C.gint)(hot_y)
-	C.gtk_drag_set_icon_gicon(context, icon, _cgo_hot_x_, _cgo_hot_y_)
-	return
-}
-
-func DragSetIconName(context *C.GdkDragContext, icon_name string, hot_x int, hot_y int) () {
-	_cgo_hot_x_ := (C.gint)(hot_x)
-	_cgo_hot_y_ := (C.gint)(hot_y)
-	_cstring_icon_name_ := C.CString(icon_name)
-	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
-	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	C._gtk_drag_set_icon_name(context, _cgo_icon_name_, _cgo_hot_x_, _cgo_hot_y_)
-	return
-}
-
-func DragSetIconPixbuf(context *C.GdkDragContext, pixbuf *C.GdkPixbuf, hot_x int, hot_y int) () {
-	_cgo_hot_x_ := (C.gint)(hot_x)
-	_cgo_hot_y_ := (C.gint)(hot_y)
-	C.gtk_drag_set_icon_pixbuf(context, pixbuf, _cgo_hot_x_, _cgo_hot_y_)
-	return
-}
-
-func DragSetIconStock(context *C.GdkDragContext, stock_id string, hot_x int, hot_y int) () {
-	_cgo_hot_x_ := (C.gint)(hot_x)
-	_cgo_hot_y_ := (C.gint)(hot_y)
-	_cstring_stock_id_ := C.CString(stock_id)
-	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
-	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	C._gtk_drag_set_icon_stock(context, _cgo_stock_id_, _cgo_hot_x_, _cgo_hot_y_)
-	return
-}
-
-func DragSetIconSurface(context *C.GdkDragContext, surface *C.cairo_surface_t) () {
-	C.gtk_drag_set_icon_surface(context, surface)
-	return
-}
-
-func DragSetIconWidget(context *C.GdkDragContext, widget GtkWidgetKind, hot_x int, hot_y int) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_hot_x_ := (C.gint)(hot_x)
-	_cgo_hot_y_ := (C.gint)(hot_y)
-	C.gtk_drag_set_icon_widget(context, _cgo_widget_, _cgo_hot_x_, _cgo_hot_y_)
-	return
-}
-
-func EventsPending() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_events_pending()
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func False() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_false()
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func FileChooserErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_file_chooser_error_quark()
-	return
-}
-
-func GetBinaryAge() (_go__return__ uint) {
+func (_self_ *GtkCssSection) GetEndLine() (_go__return__ uint) {
 	var _return_ C.guint
-	_return_ = C.gtk_get_binary_age()
+	_return_ = C._gtk_css_section_get_end_line((*C.GtkCssSection)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func GetCurrentEvent() (_return_ *C.GdkEvent) {
-	_return_ = C.gtk_get_current_event()
-	return
-}
-
-func GetCurrentEventDevice() (_return_ *C.GdkDevice) {
-	_return_ = C.gtk_get_current_event_device()
-	return
-}
-
-func GetCurrentEventState() (_go__return__ bool, state *C.GdkModifierType) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_get_current_event_state(state)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func GetCurrentEventTime() (_go__return__ uint32) {
-	var _return_ C.guint32
-	_return_ = C.gtk_get_current_event_time()
-	_go__return__ = (uint32)(_return_)
-	return
-}
-
-func GetDebugFlags() (_go__return__ uint) {
+func (_self_ *GtkCssSection) GetEndPosition() (_go__return__ uint) {
 	var _return_ C.guint
-	_return_ = C.gtk_get_debug_flags()
+	_return_ = C._gtk_css_section_get_end_position((*C.GtkCssSection)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func GetDefaultLanguage() (_return_ *C.PangoLanguage) {
-	_return_ = C.gtk_get_default_language()
+func (_self_ *GtkCssSection) GetFile() (_return_ *C.GFile) {
+	_return_ = C._gtk_css_section_get_file((*C.GtkCssSection)(_self_))
 	return
 }
 
-func GetEventWidget(event *C.GdkEvent) (_go__return__ GtkWidget) {
-	var _return_ *C.GtkWidget
-	_return_ = C.gtk_get_event_widget(event)
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
+func (_self_ *GtkCssSection) GetParent() (_go__return__ *GtkCssSection) {
+	var _return_ *C.GtkCssSection
+	_return_ = C._gtk_css_section_get_parent((*C.GtkCssSection)(_self_))
+	_go__return__ = (*GtkCssSection)(unsafe.Pointer(_return_))
 	return
 }
 
-func GetInterfaceAge() (_go__return__ uint) {
+func (_self_ *GtkCssSection) GetSectionType() (_return_ C.GtkCssSectionType) {
+	_return_ = C._gtk_css_section_get_section_type((*C.GtkCssSection)(_self_))
+	return
+}
+
+func (_self_ *GtkCssSection) GetStartLine() (_go__return__ uint) {
 	var _return_ C.guint
-	_return_ = C.gtk_get_interface_age()
+	_return_ = C._gtk_css_section_get_start_line((*C.GtkCssSection)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func GetMajorVersion() (_go__return__ uint) {
+func (_self_ *GtkCssSection) GetStartPosition() (_go__return__ uint) {
 	var _return_ C.guint
-	_return_ = C.gtk_get_major_version()
+	_return_ = C._gtk_css_section_get_start_position((*C.GtkCssSection)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func GetMicroVersion() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C.gtk_get_micro_version()
-	_go__return__ = (uint)(_return_)
+func (_self_ *GtkCssSection) Ref() (_go__return__ *GtkCssSection) {
+	var _return_ *C.GtkCssSection
+	_return_ = C.gtk_css_section_ref((*C.GtkCssSection)(_self_))
+	_go__return__ = (*GtkCssSection)(unsafe.Pointer(_return_))
 	return
 }
 
-func GetMinorVersion() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C.gtk_get_minor_version()
-	_go__return__ = (uint)(_return_)
+func (_self_ *GtkCssSection) Unref() () {
+	C.gtk_css_section_unref((*C.GtkCssSection)(_self_))
 	return
 }
 
-func GetOptionGroup(open_default_display bool) (_return_ *C.GOptionGroup) {
-	_cgo_open_default_display_ := (C.gboolean)(C.FALSE)
-	if open_default_display { _cgo_open_default_display_ = (C.gboolean)(C.TRUE) }
-	_return_ = C.gtk_get_option_group(_cgo_open_default_display_)
-	return
-}
-
-func GrabGetCurrent() (_go__return__ GtkWidget) {
-	var _return_ *C.GtkWidget
-	_return_ = C.gtk_grab_get_current()
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
-	return
-}
-
-func IconSizeFromName(name string) (_return_ C.GtkIconSize) {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._gtk_icon_size_from_name(_cgo_name_)
-	return
-}
-
-func IconSizeGetName(size C.GtkIconSize) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._gtk_icon_size_get_name(size)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func IconSizeLookup(size C.GtkIconSize) (_go__return__ bool, _go_width_ int, _go_height_ int) {
-	var width C.gint
-	var height C.gint
-	var _return_ C.gboolean
-	_return_ = C.gtk_icon_size_lookup(size, &width, &height)
-	_go_width_ = (int)(width)
-	_go_height_ = (int)(height)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func IconSizeLookupForSettings(settings GtkSettingsKind, size C.GtkIconSize) (_go__return__ bool, _go_width_ int, _go_height_ int) {
-	_cgo_settings_ := (*C.GtkSettings)(settings._getValue())
-	var width C.gint
-	var height C.gint
-	var _return_ C.gboolean
-	_return_ = C.gtk_icon_size_lookup_for_settings(_cgo_settings_, size, &width, &height)
-	_go_width_ = (int)(width)
-	_go_height_ = (int)(height)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func IconSizeRegister(name string, width int, height int) (_return_ C.GtkIconSize) {
-	_cgo_width_ := (C.gint)(width)
-	_cgo_height_ := (C.gint)(height)
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._gtk_icon_size_register(_cgo_name_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func IconSizeRegisterAlias(alias string, target C.GtkIconSize) () {
-	_cstring_alias_ := C.CString(alias)
-	_cgo_alias_ := (*C.gchar)(unsafe.Pointer(_cstring_alias_))
-	defer C.free(unsafe.Pointer(_cstring_alias_))
-	C._gtk_icon_size_register_alias(_cgo_alias_, target)
-	return
-}
-
-func IconThemeErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_icon_theme_error_quark()
-	return
-}
-
-func Main() () {
-	C.gtk_main()
-	return
-}
-
-func MainDoEvent(event *C.GdkEvent) () {
-	C.gtk_main_do_event(event)
-	return
-}
-
-func MainIteration() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.gtk_main_iteration()
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func MainIterationDo(blocking bool) (_go__return__ bool) {
-	_cgo_blocking_ := (C.gboolean)(C.FALSE)
-	if blocking { _cgo_blocking_ = (C.gboolean)(C.TRUE) }
-	var _return_ C.gboolean
-	_return_ = C.gtk_main_iteration_do(_cgo_blocking_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func MainLevel() (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C.gtk_main_level()
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func MainQuit() () {
-	C.gtk_main_quit()
-	return
-}
-
-func PrintErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_print_error_quark()
-	return
-}
-
-func PrintRunPageSetupDialog(parent GtkWindowKind, page_setup GtkPageSetupKind, settings GtkPrintSettingsKind) (_go__return__ GtkPageSetup) {
-	_cgo_parent_ := (*C.GtkWindow)(parent._getValue())
-	_cgo_page_setup_ := (*C.GtkPageSetup)(page_setup._getValue())
-	_cgo_settings_ := (*C.GtkPrintSettings)(settings._getValue())
-	var _return_ *C.GtkPageSetup
-	_return_ = C.gtk_print_run_page_setup_dialog(_cgo_parent_, _cgo_page_setup_, _cgo_settings_)
-	_go__return__ = ToGtkPageSetup(unsafe.Pointer(_return_))
-	return
-}
-
-func PrintRunPageSetupDialogAsync(parent GtkWindowKind, page_setup GtkPageSetupKind, settings GtkPrintSettingsKind, done_cb C.GtkPageSetupDoneFunc, data C.gpointer) () {
-	_cgo_parent_ := (*C.GtkWindow)(parent._getValue())
-	_cgo_page_setup_ := (*C.GtkPageSetup)(page_setup._getValue())
-	_cgo_settings_ := (*C.GtkPrintSettings)(settings._getValue())
-	C.gtk_print_run_page_setup_dialog_async(_cgo_parent_, _cgo_page_setup_, _cgo_settings_, done_cb, data)
-	return
-}
-
-func PropagateEvent(widget GtkWidgetKind, event *C.GdkEvent) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	C.gtk_propagate_event(_cgo_widget_, event)
-	return
-}
-
-func RcPropertyParseBorder(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_rc_property_parse_border(pspec, gstring, property_value)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func RcPropertyParseColor(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_rc_property_parse_color(pspec, gstring, property_value)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func RcPropertyParseEnum(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_rc_property_parse_enum(pspec, gstring, property_value)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func RcPropertyParseFlags(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_rc_property_parse_flags(pspec, gstring, property_value)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func RcPropertyParseRequisition(pspec *C.GParamSpec, gstring *C.GString, property_value *C.GValue) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._gtk_rc_property_parse_requisition(pspec, gstring, property_value)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func RecentChooserErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_recent_chooser_error_quark()
-	return
-}
-
-func RecentManagerErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.gtk_recent_manager_error_quark()
-	return
-}
-
-func RenderActivity(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_activity(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderArrow(context GtkStyleContextKind, cr *C.cairo_t, angle float64, x float64, y float64, size float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_angle_ := (C.gdouble)(angle)
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_size_ := (C.gdouble)(size)
-	C.gtk_render_arrow(_cgo_context_, cr, _cgo_angle_, _cgo_x_, _cgo_y_, _cgo_size_)
-	return
-}
-
-func RenderBackground(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_background(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderCheck(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_check(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderExpander(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_expander(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderExtension(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side C.GtkPositionType) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_extension(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, gap_side)
-	return
-}
-
-func RenderFocus(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_focus(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderFrame(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_frame(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderFrameGap(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side C.GtkPositionType, xy0_gap float64, xy1_gap float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	_cgo_xy0_gap_ := (C.gdouble)(xy0_gap)
-	_cgo_xy1_gap_ := (C.gdouble)(xy1_gap)
-	C.gtk_render_frame_gap(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, gap_side, _cgo_xy0_gap_, _cgo_xy1_gap_)
-	return
-}
-
-func RenderHandle(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_handle(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	return
-}
-
-func RenderIcon(context GtkStyleContextKind, cr *C.cairo_t, pixbuf *C.GdkPixbuf, x float64, y float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	C.gtk_render_icon(_cgo_context_, cr, pixbuf, _cgo_x_, _cgo_y_)
-	return
-}
-
-func RenderIconPixbuf(context GtkStyleContextKind, source *GtkIconSource, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_source_ := (*C.GtkIconSource)(unsafe.Pointer(source))
-	_return_ = C._gtk_render_icon_pixbuf(_cgo_context_, _cgo_source_, size)
-	return
-}
-
-func RenderInsertionCursor(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, layout *C.PangoLayout, index C.int, direction C.PangoDirection) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	C.gtk_render_insertion_cursor(_cgo_context_, cr, _cgo_x_, _cgo_y_, layout, index, direction)
-	return
-}
-
-func RenderLayout(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, layout *C.PangoLayout) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	C.gtk_render_layout(_cgo_context_, cr, _cgo_x_, _cgo_y_, layout)
-	return
-}
-
-func RenderLine(context GtkStyleContextKind, cr *C.cairo_t, x0 float64, y0 float64, x1 float64, y1 float64) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+func GradientNewLinear(x0 float64, y0 float64, x1 float64, y1 float64) (_go__return__ *GtkGradient) {
+	var _return_ *C.GtkGradient
 	_cgo_x0_ := (C.gdouble)(x0)
 	_cgo_y0_ := (C.gdouble)(y0)
 	_cgo_x1_ := (C.gdouble)(x1)
 	_cgo_y1_ := (C.gdouble)(y1)
-	C.gtk_render_line(_cgo_context_, cr, _cgo_x0_, _cgo_y0_, _cgo_x1_, _cgo_y1_)
+	_return_ = C.gtk_gradient_new_linear(_cgo_x0_, _cgo_y0_, _cgo_x1_, _cgo_y1_)
+	_go__return__ = (*GtkGradient)(unsafe.Pointer(_return_))
 	return
 }
 
-func RenderOption(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64) () {
+func GradientNewRadial(x0 float64, y0 float64, radius0 float64, x1 float64, y1 float64, radius1 float64) (_go__return__ *GtkGradient) {
+	var _return_ *C.GtkGradient
+	_cgo_x0_ := (C.gdouble)(x0)
+	_cgo_y0_ := (C.gdouble)(y0)
+	_cgo_radius0_ := (C.gdouble)(radius0)
+	_cgo_x1_ := (C.gdouble)(x1)
+	_cgo_y1_ := (C.gdouble)(y1)
+	_cgo_radius1_ := (C.gdouble)(radius1)
+	_return_ = C.gtk_gradient_new_radial(_cgo_x0_, _cgo_y0_, _cgo_radius0_, _cgo_x1_, _cgo_y1_, _cgo_radius1_)
+	_go__return__ = (*GtkGradient)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkGradient) AddColorStop(offset float64, color *GtkSymbolicColor) () {
+	_cgo_color_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color))
+	_cgo_offset_ := (C.gdouble)(offset)
+	C.gtk_gradient_add_color_stop((*C.GtkGradient)(_self_), _cgo_offset_, _cgo_color_)
+	return
+}
+
+func (_self_ *GtkGradient) Ref() (_go__return__ *GtkGradient) {
+	var _return_ *C.GtkGradient
+	_return_ = C.gtk_gradient_ref((*C.GtkGradient)(_self_))
+	_go__return__ = (*GtkGradient)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkGradient) Resolve(props GtkStylePropertiesKind) (_go__return__ bool, resolved_gradient unsafe.Pointer) {
+	_cgo_props_ := (*C.GtkStyleProperties)(props._getValue())
+	var _return_ C.gboolean
+	_return_ = C._gtk_gradient_resolve((*C.GtkGradient)(_self_), _cgo_props_, resolved_gradient)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkGradient) ResolveForContext(context GtkStyleContextKind) (_return_ *C.cairo_pattern_t) {
 	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_option(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	_return_ = C.gtk_gradient_resolve_for_context((*C.GtkGradient)(_self_), _cgo_context_)
 	return
 }
 
-func RenderSlider(context GtkStyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, orientation C.GtkOrientation) () {
-	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
-	_cgo_x_ := (C.gdouble)(x)
-	_cgo_y_ := (C.gdouble)(y)
-	_cgo_width_ := (C.gdouble)(width)
-	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_slider(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, orientation)
-	return
-}
-
-func RgbToHsv(r float64, g float64, b float64) (_go_h_ float64, _go_s_ float64, _go_v_ float64) {
-	_cgo_r_ := (C.gdouble)(r)
-	_cgo_g_ := (C.gdouble)(g)
-	_cgo_b_ := (C.gdouble)(b)
-	var h C.gdouble
-	var s C.gdouble
-	var v C.gdouble
-	C.gtk_rgb_to_hsv(_cgo_r_, _cgo_g_, _cgo_b_, &h, &s, &v)
-	_go_h_ = (float64)(h)
-	_go_s_ = (float64)(s)
-	_go_v_ = (float64)(v)
-	return
-}
-
-func SelectionAddTarget(widget GtkWidgetKind, selection C.GdkAtom, target C.GdkAtom, info uint) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_info_ := (C.guint)(info)
-	C.gtk_selection_add_target(_cgo_widget_, selection, target, _cgo_info_)
-	return
-}
-
-func SelectionClearTargets(widget GtkWidgetKind, selection C.GdkAtom) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	C.gtk_selection_clear_targets(_cgo_widget_, selection)
-	return
-}
-
-func SelectionConvert(widget GtkWidgetKind, selection C.GdkAtom, target C.GdkAtom, time_ uint32) (_go__return__ bool) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_time__ := (C.guint32)(time_)
-	var _return_ C.gboolean
-	_return_ = C.gtk_selection_convert(_cgo_widget_, selection, target, _cgo_time__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func SelectionOwnerSet(widget GtkWidgetKind, selection C.GdkAtom, time_ uint32) (_go__return__ bool) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_time__ := (C.guint32)(time_)
-	var _return_ C.gboolean
-	_return_ = C.gtk_selection_owner_set(_cgo_widget_, selection, _cgo_time__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func SelectionOwnerSetForDisplay(display *C.GdkDisplay, widget GtkWidgetKind, selection C.GdkAtom, time_ uint32) (_go__return__ bool) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_time__ := (C.guint32)(time_)
-	var _return_ C.gboolean
-	_return_ = C.gtk_selection_owner_set_for_display(display, _cgo_widget_, selection, _cgo_time__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func SelectionRemoveAll(widget GtkWidgetKind) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	C.gtk_selection_remove_all(_cgo_widget_)
-	return
-}
-
-func SetDebugFlags(flags uint) () {
-	_cgo_flags_ := (C.guint)(flags)
-	C.gtk_set_debug_flags(_cgo_flags_)
-	return
-}
-
-func ShowUri(screen *C.GdkScreen, uri string, timestamp uint32) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_timestamp_ := (C.guint32)(timestamp)
-	_cstring_uri_ := C.CString(uri)
-	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
-	defer C.free(unsafe.Pointer(_cstring_uri_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_show_uri(screen, _cgo_uri_, _cgo_timestamp_, _error_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func StockListIds() (_return_ *C.GSList) {
-	_return_ = C.gtk_stock_list_ids()
-	return
-}
-
-func StockLookup(stock_id string) (_go__return__ bool, item *GtkStockItem) {
-	var _allocated_item_ C.GtkStockItem
-	_cstring_stock_id_ := C.CString(stock_id)
-	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
-	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	var _return_ C.gboolean
-	_return_ = C._gtk_stock_lookup(_cgo_stock_id_, &_allocated_item_)
-	item = (*GtkStockItem)(unsafe.Pointer(&_allocated_item_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func StockSetTranslateFunc(domain string, func_ C.GtkTranslateFunc, data C.gpointer, notify C.GDestroyNotify) () {
-	_cstring_domain_ := C.CString(domain)
-	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
-	defer C.free(unsafe.Pointer(_cstring_domain_))
-	C._gtk_stock_set_translate_func(_cgo_domain_, func_, data, notify)
-	return
-}
-
-func TargetTableNewFromList(list *GtkTargetList) (_return_ *C.GtkTargetEntry, _go_n_targets_ int) {
-	_cgo_list_ := (*C.GtkTargetList)(unsafe.Pointer(list))
-	var n_targets C.gint
-	_return_ = C.gtk_target_table_new_from_list(_cgo_list_, &n_targets)
-	_go_n_targets_ = (int)(n_targets)
-	return
-}
-
-func TestCreateSimpleWindow(window_title string, dialog_text string) (_go__return__ GtkWidget) {
-	var _return_ *C.GtkWidget
-	_cstring_window_title_ := C.CString(window_title)
-	_cgo_window_title_ := (*C.gchar)(unsafe.Pointer(_cstring_window_title_))
-	defer C.free(unsafe.Pointer(_cstring_window_title_))
-	_cstring_dialog_text_ := C.CString(dialog_text)
-	_cgo_dialog_text_ := (*C.gchar)(unsafe.Pointer(_cstring_dialog_text_))
-	defer C.free(unsafe.Pointer(_cstring_dialog_text_))
-	_return_ = C._gtk_test_create_simple_window(_cgo_window_title_, _cgo_dialog_text_)
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
-	return
-}
-
-func TestFindLabel(widget GtkWidgetKind, label_pattern string) (_go__return__ GtkWidget) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	var _return_ *C.GtkWidget
-	_cstring_label_pattern_ := C.CString(label_pattern)
-	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
-	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
-	_return_ = C._gtk_test_find_label(_cgo_widget_, _cgo_label_pattern_)
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
-	return
-}
-
-func TestFindSibling(base_widget GtkWidgetKind, widget_type C.GType) (_go__return__ GtkWidget) {
-	_cgo_base_widget_ := (*C.GtkWidget)(base_widget._getValue())
-	var _return_ *C.GtkWidget
-	_return_ = C.gtk_test_find_sibling(_cgo_base_widget_, widget_type)
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
-	return
-}
-
-func TestFindWidget(widget GtkWidgetKind, label_pattern string, widget_type C.GType) (_go__return__ GtkWidget) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	var _return_ *C.GtkWidget
-	_cstring_label_pattern_ := C.CString(label_pattern)
-	_cgo_label_pattern_ := (*C.gchar)(unsafe.Pointer(_cstring_label_pattern_))
-	defer C.free(unsafe.Pointer(_cstring_label_pattern_))
-	_return_ = C._gtk_test_find_widget(_cgo_widget_, _cgo_label_pattern_, widget_type)
-	_go__return__ = ToGtkWidget(unsafe.Pointer(_return_))
-	return
-}
-
-func TestListAllTypes() (_return_ *C.GType, _go_n_types_ uint) {
-	var n_types C.guint
-	_return_ = C._gtk_test_list_all_types(&n_types)
-	_go_n_types_ = (uint)(n_types)
-	return
-}
-
-func TestRegisterAllTypes() () {
-	C.gtk_test_register_all_types()
-	return
-}
-
-func TestSliderGetValue(widget GtkWidgetKind) (_return_ C.double) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_return_ = C.gtk_test_slider_get_value(_cgo_widget_)
-	return
-}
-
-func TestSliderSetPerc(widget GtkWidgetKind, percentage C.double) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	C.gtk_test_slider_set_perc(_cgo_widget_, percentage)
-	return
-}
-
-func TestSpinButtonClick(spinner GtkSpinButtonKind, button uint, upwards bool) (_go__return__ bool) {
-	_cgo_spinner_ := (*C.GtkSpinButton)(spinner._getValue())
-	_cgo_button_ := (C.guint)(button)
-	_cgo_upwards_ := (C.gboolean)(C.FALSE)
-	if upwards { _cgo_upwards_ = (C.gboolean)(C.TRUE) }
-	var _return_ C.gboolean
-	_return_ = C.gtk_test_spin_button_click(_cgo_spinner_, _cgo_button_, _cgo_upwards_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func TestTextGet(widget GtkWidgetKind) (_go__return__ string) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	var _return_ *C.gchar
-	_return_ = C.gtk_test_text_get(_cgo_widget_)
+func (_self_ *GtkGradient) ToString() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C.gtk_gradient_to_string((*C.GtkGradient)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func TestTextSet(widget GtkWidgetKind, string_ string) () {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	C._gtk_test_text_set(_cgo_widget_, _cgo_string__)
+func (_self_ *GtkGradient) Unref() () {
+	C.gtk_gradient_unref((*C.GtkGradient)(_self_))
 	return
 }
 
-func TestWidgetClick(widget GtkWidgetKind, button uint, modifiers C.GdkModifierType) (_go__return__ bool) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_button_ := (C.guint)(button)
+func IconInfoNewForPixbuf(icon_theme GtkIconThemeKind, pixbuf *C.GdkPixbuf) (_go__return__ *GtkIconInfo) {
+	_cgo_icon_theme_ := (*C.GtkIconTheme)(icon_theme._getValue())
+	var _return_ *C.GtkIconInfo
+	_return_ = C.gtk_icon_info_new_for_pixbuf(_cgo_icon_theme_, pixbuf)
+	_go__return__ = (*GtkIconInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconInfo) Copy() (_go__return__ *GtkIconInfo) {
+	var _return_ *C.GtkIconInfo
+	_return_ = C.gtk_icon_info_copy((*C.GtkIconInfo)(_self_))
+	_go__return__ = (*GtkIconInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconInfo) Free() () {
+	C.gtk_icon_info_free((*C.GtkIconInfo)(_self_))
+	return
+}
+
+func (_self_ *GtkIconInfo) GetBaseSize() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_icon_info_get_base_size((*C.GtkIconInfo)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkIconInfo) GetBuiltinPixbuf() (_return_ *C.GdkPixbuf) {
+	_return_ = C.gtk_icon_info_get_builtin_pixbuf((*C.GtkIconInfo)(_self_))
+	return
+}
+
+func (_self_ *GtkIconInfo) GetDisplayName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_icon_info_get_display_name((*C.GtkIconInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkIconInfo) GetEmbeddedRect() (_go__return__ bool, rectangle *C.GdkRectangle) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_test_widget_click(_cgo_widget_, _cgo_button_, modifiers)
+	_return_ = C.gtk_icon_info_get_embedded_rect((*C.GtkIconInfo)(_self_), rectangle)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func TestWidgetSendKey(widget GtkWidgetKind, keyval uint, modifiers C.GdkModifierType) (_go__return__ bool) {
-	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
-	_cgo_keyval_ := (C.guint)(keyval)
+func (_self_ *GtkIconInfo) GetFilename() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_icon_info_get_filename((*C.GtkIconInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkIconInfo) LoadIcon() (_return_ *C.GdkPixbuf, _error_ unsafe.Pointer) {
+	_return_ = C._gtk_icon_info_load_icon((*C.GtkIconInfo)(_self_), _error_)
+	return
+}
+
+func (_self_ *GtkIconInfo) LoadSymbolic(fg *C.GdkRGBA, success_color *C.GdkRGBA, warning_color *C.GdkRGBA, error_color *C.GdkRGBA) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ unsafe.Pointer) {
+	var was_symbolic C.gboolean
+	_return_ = C._gtk_icon_info_load_symbolic((*C.GtkIconInfo)(_self_), fg, success_color, warning_color, error_color, &was_symbolic, _error_)
+	_go_was_symbolic_ = was_symbolic == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkIconInfo) LoadSymbolicForContext(context GtkStyleContextKind) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ unsafe.Pointer) {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	var was_symbolic C.gboolean
+	_return_ = C._gtk_icon_info_load_symbolic_for_context((*C.GtkIconInfo)(_self_), _cgo_context_, &was_symbolic, _error_)
+	_go_was_symbolic_ = was_symbolic == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkIconInfo) SetRawCoordinates(raw_coordinates bool) () {
+	_cgo_raw_coordinates_ := (C.gboolean)(C.FALSE)
+	if raw_coordinates { _cgo_raw_coordinates_ = (C.gboolean)(C.TRUE) }
+	C.gtk_icon_info_set_raw_coordinates((*C.GtkIconInfo)(_self_), _cgo_raw_coordinates_)
+	return
+}
+
+func IconSetNew() (_go__return__ *GtkIconSet) {
+	var _return_ *C.GtkIconSet
+	_return_ = C.gtk_icon_set_new()
+	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func IconSetNewFromPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ *GtkIconSet) {
+	var _return_ *C.GtkIconSet
+	_return_ = C.gtk_icon_set_new_from_pixbuf(pixbuf)
+	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconSet) AddSource(source *GtkIconSource) () {
+	_cgo_source_ := (*C.GtkIconSource)(unsafe.Pointer(source))
+	C._gtk_icon_set_add_source((*C.GtkIconSet)(_self_), _cgo_source_)
+	return
+}
+
+func (_self_ *GtkIconSet) Copy() (_go__return__ *GtkIconSet) {
+	var _return_ *C.GtkIconSet
+	_return_ = C.gtk_icon_set_copy((*C.GtkIconSet)(_self_))
+	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconSet) Ref() (_go__return__ *GtkIconSet) {
+	var _return_ *C.GtkIconSet
+	_return_ = C.gtk_icon_set_ref((*C.GtkIconSet)(_self_))
+	_go__return__ = (*GtkIconSet)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconSet) RenderIconPixbuf(context GtkStyleContextKind, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
+	_cgo_context_ := (*C.GtkStyleContext)(context._getValue())
+	_return_ = C.gtk_icon_set_render_icon_pixbuf((*C.GtkIconSet)(_self_), _cgo_context_, size)
+	return
+}
+
+func (_self_ *GtkIconSet) Unref() () {
+	C.gtk_icon_set_unref((*C.GtkIconSet)(_self_))
+	return
+}
+
+func IconSourceNew() (_go__return__ *GtkIconSource) {
+	var _return_ *C.GtkIconSource
+	_return_ = C.gtk_icon_source_new()
+	_go__return__ = (*GtkIconSource)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconSource) Copy() (_go__return__ *GtkIconSource) {
+	var _return_ *C.GtkIconSource
+	_return_ = C._gtk_icon_source_copy((*C.GtkIconSource)(_self_))
+	_go__return__ = (*GtkIconSource)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkIconSource) Free() () {
+	C.gtk_icon_source_free((*C.GtkIconSource)(_self_))
+	return
+}
+
+func (_self_ *GtkIconSource) GetDirection() (_return_ C.GtkTextDirection) {
+	_return_ = C._gtk_icon_source_get_direction((*C.GtkIconSource)(_self_))
+	return
+}
+
+func (_self_ *GtkIconSource) GetDirectionWildcarded() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_test_widget_send_key(_cgo_widget_, _cgo_keyval_, modifiers)
+	_return_ = C._gtk_icon_source_get_direction_wildcarded((*C.GtkIconSource)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func TreeGetRowDragData(selection_data *GtkSelectionData) (_go__return__ bool, tree_model unsafe.Pointer, path *GtkTreePath) {
-	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
-	var _allocated_path_ *C.GtkTreePath
+func (_self_ *GtkIconSource) GetFilename() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_icon_source_get_filename((*C.GtkIconSource)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkIconSource) GetIconName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_icon_source_get_icon_name((*C.GtkIconSource)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkIconSource) GetPixbuf() (_return_ *C.GdkPixbuf) {
+	_return_ = C._gtk_icon_source_get_pixbuf((*C.GtkIconSource)(_self_))
+	return
+}
+
+func (_self_ *GtkIconSource) GetSize() (_return_ C.GtkIconSize) {
+	_return_ = C._gtk_icon_source_get_size((*C.GtkIconSource)(_self_))
+	return
+}
+
+func (_self_ *GtkIconSource) GetSizeWildcarded() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C._gtk_tree_get_row_drag_data(_cgo_selection_data_, tree_model, unsafe.Pointer(&_allocated_path_))
-	path = (*GtkTreePath)(unsafe.Pointer(_allocated_path_))
+	_return_ = C._gtk_icon_source_get_size_wildcarded((*C.GtkIconSource)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func TreeSetRowDragData(selection_data *GtkSelectionData, tree_model *C.GtkTreeModel, path *GtkTreePath) (_go__return__ bool) {
-	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+func (_self_ *GtkIconSource) GetState() (_return_ C.GtkStateType) {
+	_return_ = C._gtk_icon_source_get_state((*C.GtkIconSource)(_self_))
+	return
+}
+
+func (_self_ *GtkIconSource) GetStateWildcarded() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_icon_source_get_state_wildcarded((*C.GtkIconSource)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkIconSource) SetDirection(direction C.GtkTextDirection) () {
+	C.gtk_icon_source_set_direction((*C.GtkIconSource)(_self_), direction)
+	return
+}
+
+func (_self_ *GtkIconSource) SetDirectionWildcarded(setting bool) () {
+	_cgo_setting_ := (C.gboolean)(C.FALSE)
+	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
+	C.gtk_icon_source_set_direction_wildcarded((*C.GtkIconSource)(_self_), _cgo_setting_)
+	return
+}
+
+func (_self_ *GtkIconSource) SetFilename(filename string) () {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	C._gtk_icon_source_set_filename((*C.GtkIconSource)(_self_), _cgo_filename_)
+	return
+}
+
+func (_self_ *GtkIconSource) SetIconName(icon_name string) () {
+	_cstring_icon_name_ := C.CString(icon_name)
+	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
+	defer C.free(unsafe.Pointer(_cstring_icon_name_))
+	C._gtk_icon_source_set_icon_name((*C.GtkIconSource)(_self_), _cgo_icon_name_)
+	return
+}
+
+func (_self_ *GtkIconSource) SetPixbuf(pixbuf *C.GdkPixbuf) () {
+	C.gtk_icon_source_set_pixbuf((*C.GtkIconSource)(_self_), pixbuf)
+	return
+}
+
+func (_self_ *GtkIconSource) SetSize(size C.GtkIconSize) () {
+	C.gtk_icon_source_set_size((*C.GtkIconSource)(_self_), size)
+	return
+}
+
+func (_self_ *GtkIconSource) SetSizeWildcarded(setting bool) () {
+	_cgo_setting_ := (C.gboolean)(C.FALSE)
+	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
+	C.gtk_icon_source_set_size_wildcarded((*C.GtkIconSource)(_self_), _cgo_setting_)
+	return
+}
+
+func (_self_ *GtkIconSource) SetState(state C.GtkStateType) () {
+	C.gtk_icon_source_set_state((*C.GtkIconSource)(_self_), state)
+	return
+}
+
+func (_self_ *GtkIconSource) SetStateWildcarded(setting bool) () {
+	_cgo_setting_ := (C.gboolean)(C.FALSE)
+	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
+	C.gtk_icon_source_set_state_wildcarded((*C.GtkIconSource)(_self_), _cgo_setting_)
+	return
+}
+
+func PaperSizeNew(name string) (_go__return__ *GtkPaperSize) {
+	var _return_ *C.GtkPaperSize
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_paper_size_new(_cgo_name_)
+	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
+	return
+}
+
+func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit C.GtkUnit) (_go__return__ *GtkPaperSize) {
+	var _return_ *C.GtkPaperSize
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_cstring_display_name_ := C.CString(display_name)
+	_cgo_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_display_name_))
+	defer C.free(unsafe.Pointer(_cstring_display_name_))
+	_return_ = C._gtk_paper_size_new_custom(_cgo_name_, _cgo_display_name_, _cgo_width_, _cgo_height_, unit)
+	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
+	return
+}
+
+func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ *GtkPaperSize, _error_ unsafe.Pointer) {
+	var _return_ *C.GtkPaperSize
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	_return_ = C._gtk_paper_size_new_from_key_file(key_file, _cgo_group_name_, _error_)
+	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
+	return
+}
+
+func PaperSizeNewFromPpd(ppd_name string, ppd_display_name string, width float64, height float64) (_go__return__ *GtkPaperSize) {
+	var _return_ *C.GtkPaperSize
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	_cstring_ppd_name_ := C.CString(ppd_name)
+	_cgo_ppd_name_ := (*C.gchar)(unsafe.Pointer(_cstring_ppd_name_))
+	defer C.free(unsafe.Pointer(_cstring_ppd_name_))
+	_cstring_ppd_display_name_ := C.CString(ppd_display_name)
+	_cgo_ppd_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_ppd_display_name_))
+	defer C.free(unsafe.Pointer(_cstring_ppd_display_name_))
+	_return_ = C._gtk_paper_size_new_from_ppd(_cgo_ppd_name_, _cgo_ppd_display_name_, _cgo_width_, _cgo_height_)
+	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkPaperSize) Copy() (_go__return__ *GtkPaperSize) {
+	var _return_ *C.GtkPaperSize
+	_return_ = C.gtk_paper_size_copy((*C.GtkPaperSize)(_self_))
+	_go__return__ = (*GtkPaperSize)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkPaperSize) Free() () {
+	C.gtk_paper_size_free((*C.GtkPaperSize)(_self_))
+	return
+}
+
+func (_self_ *GtkPaperSize) GetDefaultBottomMargin(unit C.GtkUnit) (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.gtk_paper_size_get_default_bottom_margin((*C.GtkPaperSize)(_self_), unit)
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GtkPaperSize) GetDefaultLeftMargin(unit C.GtkUnit) (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.gtk_paper_size_get_default_left_margin((*C.GtkPaperSize)(_self_), unit)
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GtkPaperSize) GetDefaultRightMargin(unit C.GtkUnit) (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.gtk_paper_size_get_default_right_margin((*C.GtkPaperSize)(_self_), unit)
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GtkPaperSize) GetDefaultTopMargin(unit C.GtkUnit) (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.gtk_paper_size_get_default_top_margin((*C.GtkPaperSize)(_self_), unit)
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GtkPaperSize) GetDisplayName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_paper_size_get_display_name((*C.GtkPaperSize)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkPaperSize) GetHeight(unit C.GtkUnit) (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.gtk_paper_size_get_height((*C.GtkPaperSize)(_self_), unit)
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GtkPaperSize) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_paper_size_get_name((*C.GtkPaperSize)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkPaperSize) GetPpdName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_paper_size_get_ppd_name((*C.GtkPaperSize)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkPaperSize) GetWidth(unit C.GtkUnit) (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.gtk_paper_size_get_width((*C.GtkPaperSize)(_self_), unit)
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *GtkPaperSize) IsCustom() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_paper_size_is_custom((*C.GtkPaperSize)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkPaperSize) IsEqual(size2 *GtkPaperSize) (_go__return__ bool) {
+	_cgo_size2_ := (*C.GtkPaperSize)(unsafe.Pointer(size2))
+	var _return_ C.gboolean
+	_return_ = C.gtk_paper_size_is_equal((*C.GtkPaperSize)(_self_), _cgo_size2_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkPaperSize) SetSize(width float64, height float64, unit C.GtkUnit) () {
+	_cgo_width_ := (C.gdouble)(width)
+	_cgo_height_ := (C.gdouble)(height)
+	C.gtk_paper_size_set_size((*C.GtkPaperSize)(_self_), _cgo_width_, _cgo_height_, unit)
+	return
+}
+
+func (_self_ *GtkPaperSize) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	C._gtk_paper_size_to_key_file((*C.GtkPaperSize)(_self_), key_file, _cgo_group_name_)
+	return
+}
+
+func (_self_ *GtkRecentInfo) CreateAppInfo(app_name string) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
+	_cstring_app_name_ := C.CString(app_name)
+	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
+	defer C.free(unsafe.Pointer(_cstring_app_name_))
+	_return_ = C._gtk_recent_info_create_app_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, _error_)
+	return
+}
+
+func (_self_ *GtkRecentInfo) Exists() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_info_exists((*C.GtkRecentInfo)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetAdded() (_return_ C.time_t) {
+	_return_ = C.gtk_recent_info_get_added((*C.GtkRecentInfo)(_self_))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetAge() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_recent_info_get_age((*C.GtkRecentInfo)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetApplicationInfo(app_name string) (_go__return__ bool, app_exec unsafe.Pointer, _go_count_ uint, time_ C.time_t) {
+	var count C.guint
+	_cstring_app_name_ := C.CString(app_name)
+	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
+	defer C.free(unsafe.Pointer(_cstring_app_name_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_recent_info_get_application_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, app_exec, &count, &time_)
+	_go_count_ = (uint)(count)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetApplications() (_return_ unsafe.Pointer, _go_length_ uint64) {
+	var length C.gsize
+	_return_ = C._gtk_recent_info_get_applications((*C.GtkRecentInfo)(_self_), &length)
+	_go_length_ = (uint64)(length)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetDescription() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_recent_info_get_description((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetDisplayName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_recent_info_get_display_name((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetGicon() (_return_ *C.GIcon) {
+	_return_ = C.gtk_recent_info_get_gicon((*C.GtkRecentInfo)(_self_))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetGroups() (_return_ unsafe.Pointer, _go_length_ uint64) {
+	var length C.gsize
+	_return_ = C._gtk_recent_info_get_groups((*C.GtkRecentInfo)(_self_), &length)
+	_go_length_ = (uint64)(length)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetIcon(size int) (_return_ *C.GdkPixbuf) {
+	_cgo_size_ := (C.gint)(size)
+	_return_ = C.gtk_recent_info_get_icon((*C.GtkRecentInfo)(_self_), _cgo_size_)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetMimeType() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_recent_info_get_mime_type((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetModified() (_return_ C.time_t) {
+	_return_ = C.gtk_recent_info_get_modified((*C.GtkRecentInfo)(_self_))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetPrivateHint() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_info_get_private_hint((*C.GtkRecentInfo)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetShortName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_recent_info_get_short_name((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetUri() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_recent_info_get_uri((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetUriDisplay() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_recent_info_get_uri_display((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) GetVisited() (_return_ C.time_t) {
+	_return_ = C.gtk_recent_info_get_visited((*C.GtkRecentInfo)(_self_))
+	return
+}
+
+func (_self_ *GtkRecentInfo) HasApplication(app_name string) (_go__return__ bool) {
+	_cstring_app_name_ := C.CString(app_name)
+	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
+	defer C.free(unsafe.Pointer(_cstring_app_name_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_recent_info_has_application((*C.GtkRecentInfo)(_self_), _cgo_app_name_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) HasGroup(group_name string) (_go__return__ bool) {
+	_cstring_group_name_ := C.CString(group_name)
+	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
+	defer C.free(unsafe.Pointer(_cstring_group_name_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_recent_info_has_group((*C.GtkRecentInfo)(_self_), _cgo_group_name_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) IsLocal() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_info_is_local((*C.GtkRecentInfo)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) LastApplication() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_recent_info_last_application((*C.GtkRecentInfo)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkRecentInfo) Match(info_b *GtkRecentInfo) (_go__return__ bool) {
+	_cgo_info_b_ := (*C.GtkRecentInfo)(unsafe.Pointer(info_b))
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_info_match((*C.GtkRecentInfo)(_self_), _cgo_info_b_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkRecentInfo) Ref() (_go__return__ *GtkRecentInfo) {
+	var _return_ *C.GtkRecentInfo
+	_return_ = C.gtk_recent_info_ref((*C.GtkRecentInfo)(_self_))
+	_go__return__ = (*GtkRecentInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkRecentInfo) Unref() () {
+	C.gtk_recent_info_unref((*C.GtkRecentInfo)(_self_))
+	return
+}
+
+func RequisitionNew() (_go__return__ *GtkRequisition) {
+	var _return_ *C.GtkRequisition
+	_return_ = C.gtk_requisition_new()
+	_go__return__ = (*GtkRequisition)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkRequisition) Copy() (_go__return__ *GtkRequisition) {
+	var _return_ *C.GtkRequisition
+	_return_ = C._gtk_requisition_copy((*C.GtkRequisition)(_self_))
+	_go__return__ = (*GtkRequisition)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkRequisition) Free() () {
+	C.gtk_requisition_free((*C.GtkRequisition)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) Copy() (_go__return__ *GtkSelectionData) {
+	var _return_ *C.GtkSelectionData
+	_return_ = C._gtk_selection_data_copy((*C.GtkSelectionData)(_self_))
+	_go__return__ = (*GtkSelectionData)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkSelectionData) Free() () {
+	C.gtk_selection_data_free((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetData() (_return_ *C.guchar) {
+	_return_ = C._gtk_selection_data_get_data((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetDataType() (_return_ C.GdkAtom) {
+	_return_ = C._gtk_selection_data_get_data_type((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetDataWithLength() (_return_ *C.guchar, _go_length_ int) {
+	var length C.gint
+	_return_ = C._gtk_selection_data_get_data_with_length((*C.GtkSelectionData)(_self_), &length)
+	_go_length_ = (int)(length)
+	return
+}
+
+func (_self_ *GtkSelectionData) GetDisplay() (_return_ *C.GdkDisplay) {
+	_return_ = C._gtk_selection_data_get_display((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetFormat() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_selection_data_get_format((*C.GtkSelectionData)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkSelectionData) GetLength() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_selection_data_get_length((*C.GtkSelectionData)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkSelectionData) GetPixbuf() (_return_ *C.GdkPixbuf) {
+	_return_ = C._gtk_selection_data_get_pixbuf((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetSelection() (_return_ C.GdkAtom) {
+	_return_ = C._gtk_selection_data_get_selection((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetTarget() (_return_ C.GdkAtom) {
+	_return_ = C._gtk_selection_data_get_target((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetText() (_go__return__ string) {
+	var _return_ *C.guchar
+	_return_ = C._gtk_selection_data_get_text((*C.GtkSelectionData)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkSelectionData) GetUris() (_return_ unsafe.Pointer) {
+	_return_ = C._gtk_selection_data_get_uris((*C.GtkSelectionData)(_self_))
+	return
+}
+
+func (_self_ *GtkSelectionData) SetPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_selection_data_set_pixbuf((*C.GtkSelectionData)(_self_), pixbuf)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkSelectionData) SetText(str string, len_ int) (_go__return__ bool) {
+	_cgo_len__ := (C.gint)(len_)
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_selection_data_set_text((*C.GtkSelectionData)(_self_), _cgo_str_, _cgo_len__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkSelectionData) TargetsIncludeImage(writable bool) (_go__return__ bool) {
+	_cgo_writable_ := (C.gboolean)(C.FALSE)
+	if writable { _cgo_writable_ = (C.gboolean)(C.TRUE) }
+	var _return_ C.gboolean
+	_return_ = C._gtk_selection_data_targets_include_image((*C.GtkSelectionData)(_self_), _cgo_writable_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkSelectionData) TargetsIncludeRichText(buffer GtkTextBufferKind) (_go__return__ bool) {
+	_cgo_buffer_ := (*C.GtkTextBuffer)(buffer._getValue())
+	var _return_ C.gboolean
+	_return_ = C._gtk_selection_data_targets_include_rich_text((*C.GtkSelectionData)(_self_), _cgo_buffer_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkSelectionData) TargetsIncludeText() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_selection_data_targets_include_text((*C.GtkSelectionData)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkSelectionData) TargetsIncludeUri() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_selection_data_targets_include_uri((*C.GtkSelectionData)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkStockItem) Copy() (_go__return__ *GtkStockItem) {
+	var _return_ *C.GtkStockItem
+	_return_ = C._gtk_stock_item_copy((*C.GtkStockItem)(_self_))
+	_go__return__ = (*GtkStockItem)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkStockItem) Free() () {
+	C.gtk_stock_item_free((*C.GtkStockItem)(_self_))
+	return
+}
+
+func SymbolicColorNewAlpha(color *GtkSymbolicColor, factor float64) (_go__return__ *GtkSymbolicColor) {
+	_cgo_color_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color))
+	var _return_ *C.GtkSymbolicColor
+	_cgo_factor_ := (C.gdouble)(factor)
+	_return_ = C.gtk_symbolic_color_new_alpha(_cgo_color_, _cgo_factor_)
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func SymbolicColorNewLiteral(color *C.GdkRGBA) (_go__return__ *GtkSymbolicColor) {
+	var _return_ *C.GtkSymbolicColor
+	_return_ = C._gtk_symbolic_color_new_literal(color)
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func SymbolicColorNewMix(color1 *GtkSymbolicColor, color2 *GtkSymbolicColor, factor float64) (_go__return__ *GtkSymbolicColor) {
+	_cgo_color1_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color1))
+	_cgo_color2_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color2))
+	var _return_ *C.GtkSymbolicColor
+	_cgo_factor_ := (C.gdouble)(factor)
+	_return_ = C.gtk_symbolic_color_new_mix(_cgo_color1_, _cgo_color2_, _cgo_factor_)
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func SymbolicColorNewName(name string) (_go__return__ *GtkSymbolicColor) {
+	var _return_ *C.GtkSymbolicColor
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_symbolic_color_new_name(_cgo_name_)
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func SymbolicColorNewShade(color *GtkSymbolicColor, factor float64) (_go__return__ *GtkSymbolicColor) {
+	_cgo_color_ := (*C.GtkSymbolicColor)(unsafe.Pointer(color))
+	var _return_ *C.GtkSymbolicColor
+	_cgo_factor_ := (C.gdouble)(factor)
+	_return_ = C.gtk_symbolic_color_new_shade(_cgo_color_, _cgo_factor_)
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func SymbolicColorNewWin32(theme_class string, id int) (_go__return__ *GtkSymbolicColor) {
+	var _return_ *C.GtkSymbolicColor
+	_cgo_id_ := (C.gint)(id)
+	_cstring_theme_class_ := C.CString(theme_class)
+	_cgo_theme_class_ := (*C.gchar)(unsafe.Pointer(_cstring_theme_class_))
+	defer C.free(unsafe.Pointer(_cstring_theme_class_))
+	_return_ = C._gtk_symbolic_color_new_win32(_cgo_theme_class_, _cgo_id_)
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkSymbolicColor) Ref() (_go__return__ *GtkSymbolicColor) {
+	var _return_ *C.GtkSymbolicColor
+	_return_ = C.gtk_symbolic_color_ref((*C.GtkSymbolicColor)(_self_))
+	_go__return__ = (*GtkSymbolicColor)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkSymbolicColor) Resolve(props GtkStylePropertiesKind) (_go__return__ bool, resolved_color *C.GdkRGBA) {
+	_cgo_props_ := (*C.GtkStyleProperties)(props._getValue())
+	var _return_ C.gboolean
+	_return_ = C.gtk_symbolic_color_resolve((*C.GtkSymbolicColor)(_self_), _cgo_props_, resolved_color)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkSymbolicColor) ToString() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C.gtk_symbolic_color_to_string((*C.GtkSymbolicColor)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkSymbolicColor) Unref() () {
+	C.gtk_symbolic_color_unref((*C.GtkSymbolicColor)(_self_))
+	return
+}
+
+func TargetEntryNew(target string, flags uint, info uint) (_go__return__ *GtkTargetEntry) {
+	var _return_ *C.GtkTargetEntry
+	_cgo_flags_ := (C.guint)(flags)
+	_cgo_info_ := (C.guint)(info)
+	_cstring_target_ := C.CString(target)
+	_cgo_target_ := (*C.gchar)(unsafe.Pointer(_cstring_target_))
+	defer C.free(unsafe.Pointer(_cstring_target_))
+	_return_ = C._gtk_target_entry_new(_cgo_target_, _cgo_flags_, _cgo_info_)
+	_go__return__ = (*GtkTargetEntry)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTargetEntry) Copy() (_go__return__ *GtkTargetEntry) {
+	var _return_ *C.GtkTargetEntry
+	_return_ = C.gtk_target_entry_copy((*C.GtkTargetEntry)(_self_))
+	_go__return__ = (*GtkTargetEntry)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTargetEntry) Free() () {
+	C.gtk_target_entry_free((*C.GtkTargetEntry)(_self_))
+	return
+}
+
+func (_self_ *GtkTargetList) Add(target C.GdkAtom, flags uint, info uint) () {
+	_cgo_flags_ := (C.guint)(flags)
+	_cgo_info_ := (C.guint)(info)
+	C.gtk_target_list_add((*C.GtkTargetList)(_self_), target, _cgo_flags_, _cgo_info_)
+	return
+}
+
+func (_self_ *GtkTargetList) AddImageTargets(info uint, writable bool) () {
+	_cgo_info_ := (C.guint)(info)
+	_cgo_writable_ := (C.gboolean)(C.FALSE)
+	if writable { _cgo_writable_ = (C.gboolean)(C.TRUE) }
+	C.gtk_target_list_add_image_targets((*C.GtkTargetList)(_self_), _cgo_info_, _cgo_writable_)
+	return
+}
+
+func (_self_ *GtkTargetList) AddRichTextTargets(info uint, deserializable bool, buffer GtkTextBufferKind) () {
+	_cgo_buffer_ := (*C.GtkTextBuffer)(buffer._getValue())
+	_cgo_info_ := (C.guint)(info)
+	_cgo_deserializable_ := (C.gboolean)(C.FALSE)
+	if deserializable { _cgo_deserializable_ = (C.gboolean)(C.TRUE) }
+	C.gtk_target_list_add_rich_text_targets((*C.GtkTargetList)(_self_), _cgo_info_, _cgo_deserializable_, _cgo_buffer_)
+	return
+}
+
+func (_self_ *GtkTargetList) AddTextTargets(info uint) () {
+	_cgo_info_ := (C.guint)(info)
+	C.gtk_target_list_add_text_targets((*C.GtkTargetList)(_self_), _cgo_info_)
+	return
+}
+
+func (_self_ *GtkTargetList) AddUriTargets(info uint) () {
+	_cgo_info_ := (C.guint)(info)
+	C.gtk_target_list_add_uri_targets((*C.GtkTargetList)(_self_), _cgo_info_)
+	return
+}
+
+func (_self_ *GtkTargetList) Find(target C.GdkAtom, info *C.guint) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_target_list_find((*C.GtkTargetList)(_self_), target, info)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTargetList) Ref() (_go__return__ *GtkTargetList) {
+	var _return_ *C.GtkTargetList
+	_return_ = C.gtk_target_list_ref((*C.GtkTargetList)(_self_))
+	_go__return__ = (*GtkTargetList)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTargetList) Remove(target C.GdkAtom) () {
+	C.gtk_target_list_remove((*C.GtkTargetList)(_self_), target)
+	return
+}
+
+func (_self_ *GtkTargetList) Unref() () {
+	C.gtk_target_list_unref((*C.GtkTargetList)(_self_))
+	return
+}
+
+func TextAttributesNew() (_go__return__ *GtkTextAttributes) {
+	var _return_ *C.GtkTextAttributes
+	_return_ = C.gtk_text_attributes_new()
+	_go__return__ = (*GtkTextAttributes)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTextAttributes) Copy() (_go__return__ *GtkTextAttributes) {
+	var _return_ *C.GtkTextAttributes
+	_return_ = C.gtk_text_attributes_copy((*C.GtkTextAttributes)(_self_))
+	_go__return__ = (*GtkTextAttributes)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTextAttributes) CopyValues(dest *GtkTextAttributes) () {
+	_cgo_dest_ := (*C.GtkTextAttributes)(unsafe.Pointer(dest))
+	C.gtk_text_attributes_copy_values((*C.GtkTextAttributes)(_self_), _cgo_dest_)
+	return
+}
+
+func (_self_ *GtkTextAttributes) Ref() (_go__return__ *GtkTextAttributes) {
+	var _return_ *C.GtkTextAttributes
+	_return_ = C.gtk_text_attributes_ref((*C.GtkTextAttributes)(_self_))
+	_go__return__ = (*GtkTextAttributes)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTextAttributes) Unref() () {
+	C.gtk_text_attributes_unref((*C.GtkTextAttributes)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) Assign(other *GtkTextIter) () {
+	_cgo_other_ := (*C.GtkTextIter)(unsafe.Pointer(other))
+	C._gtk_text_iter_assign((*C.GtkTextIter)(_self_), _cgo_other_)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardChar() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_char((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardChars(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_chars((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardCursorPosition() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_cursor_position((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardCursorPositions(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardFindChar(pred C.GtkTextCharPredicate, user_data C.gpointer, limit *GtkTextIter) (_go__return__ bool) {
+	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_backward_find_char((*C.GtkTextIter)(_self_), pred, user_data, _cgo_limit_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardLine() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_line((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardLines(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_lines((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardSearch(str string, flags C.GtkTextSearchFlags, limit *GtkTextIter) (_go__return__ bool, match_start *GtkTextIter, match_end *GtkTextIter) {
+	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
+	var _allocated_match_start_ C.GtkTextIter
+	var _allocated_match_end_ C.GtkTextIter
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_backward_search((*C.GtkTextIter)(_self_), _cgo_str_, flags, &_allocated_match_start_, &_allocated_match_end_, _cgo_limit_)
+	match_start = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_start_))
+	match_end = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_end_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardSentenceStart() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_sentence_start((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardSentenceStarts(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_sentence_starts((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardToTagToggle(tag GtkTextTagKind) (_go__return__ bool) {
+	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_to_tag_toggle((*C.GtkTextIter)(_self_), _cgo_tag_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardVisibleCursorPosition() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_visible_cursor_position((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardVisibleCursorPositions(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_visible_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardVisibleLine() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_visible_line((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardVisibleLines(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_visible_lines((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardVisibleWordStart() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_visible_word_start((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardVisibleWordStarts(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_visible_word_starts((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardWordStart() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_word_start((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BackwardWordStarts(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_backward_word_starts((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) BeginsTag(tag GtkTextTagKind) (_go__return__ bool) {
+	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_begins_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) CanInsert(default_editability bool) (_go__return__ bool) {
+	_cgo_default_editability_ := (C.gboolean)(C.FALSE)
+	if default_editability { _cgo_default_editability_ = (C.gboolean)(C.TRUE) }
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_can_insert((*C.GtkTextIter)(_self_), _cgo_default_editability_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) Compare(rhs *GtkTextIter) (_go__return__ int) {
+	_cgo_rhs_ := (*C.GtkTextIter)(unsafe.Pointer(rhs))
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_compare((*C.GtkTextIter)(_self_), _cgo_rhs_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) Copy() (_go__return__ *GtkTextIter) {
+	var _return_ *C.GtkTextIter
+	_return_ = C._gtk_text_iter_copy((*C.GtkTextIter)(_self_))
+	_go__return__ = (*GtkTextIter)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTextIter) Editable(default_setting bool) (_go__return__ bool) {
+	_cgo_default_setting_ := (C.gboolean)(C.FALSE)
+	if default_setting { _cgo_default_setting_ = (C.gboolean)(C.TRUE) }
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_editable((*C.GtkTextIter)(_self_), _cgo_default_setting_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) EndsLine() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_ends_line((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) EndsSentence() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_ends_sentence((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) EndsTag(tag GtkTextTagKind) (_go__return__ bool) {
+	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_ends_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) EndsWord() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_ends_word((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) Equal(rhs *GtkTextIter) (_go__return__ bool) {
+	_cgo_rhs_ := (*C.GtkTextIter)(unsafe.Pointer(rhs))
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_equal((*C.GtkTextIter)(_self_), _cgo_rhs_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardChar() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_char((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardChars(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_chars((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardCursorPosition() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_cursor_position((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardCursorPositions(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardFindChar(pred C.GtkTextCharPredicate, user_data C.gpointer, limit *GtkTextIter) (_go__return__ bool) {
+	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_forward_find_char((*C.GtkTextIter)(_self_), pred, user_data, _cgo_limit_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardLine() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_line((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardLines(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_lines((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardSearch(str string, flags C.GtkTextSearchFlags, limit *GtkTextIter) (_go__return__ bool, match_start *GtkTextIter, match_end *GtkTextIter) {
+	_cgo_limit_ := (*C.GtkTextIter)(unsafe.Pointer(limit))
+	var _allocated_match_start_ C.GtkTextIter
+	var _allocated_match_end_ C.GtkTextIter
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_forward_search((*C.GtkTextIter)(_self_), _cgo_str_, flags, &_allocated_match_start_, &_allocated_match_end_, _cgo_limit_)
+	match_start = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_start_))
+	match_end = (*GtkTextIter)(unsafe.Pointer(&_allocated_match_end_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardSentenceEnd() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_sentence_end((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardSentenceEnds(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_sentence_ends((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardToEnd() () {
+	C.gtk_text_iter_forward_to_end((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardToLineEnd() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_to_line_end((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardToTagToggle(tag GtkTextTagKind) (_go__return__ bool) {
+	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_to_tag_toggle((*C.GtkTextIter)(_self_), _cgo_tag_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardVisibleCursorPosition() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_visible_cursor_position((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardVisibleCursorPositions(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_visible_cursor_positions((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardVisibleLine() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_visible_line((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardVisibleLines(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_visible_lines((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardVisibleWordEnd() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_visible_word_end((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardVisibleWordEnds(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_visible_word_ends((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardWordEnd() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_word_end((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) ForwardWordEnds(count int) (_go__return__ bool) {
+	_cgo_count_ := (C.gint)(count)
+	var _return_ C.gboolean
+	_return_ = C.gtk_text_iter_forward_word_ends((*C.GtkTextIter)(_self_), _cgo_count_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) Free() () {
+	C.gtk_text_iter_free((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetAttributes() (_go__return__ bool, values *GtkTextAttributes) {
+	var _allocated_values_ C.GtkTextAttributes
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_get_attributes((*C.GtkTextIter)(_self_), &_allocated_values_)
+	values = (*GtkTextAttributes)(unsafe.Pointer(&_allocated_values_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) GetBuffer() (_go__return__ GtkTextBuffer) {
+	var _return_ *C.GtkTextBuffer
+	_return_ = C._gtk_text_iter_get_buffer((*C.GtkTextIter)(_self_))
+	_go__return__ = ToGtkTextBuffer(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetBytesInLine() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_bytes_in_line((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetChar() (_return_ C.gunichar) {
+	_return_ = C._gtk_text_iter_get_char((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetCharsInLine() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_chars_in_line((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetChildAnchor() (_go__return__ GtkTextChildAnchor) {
+	var _return_ *C.GtkTextChildAnchor
+	_return_ = C._gtk_text_iter_get_child_anchor((*C.GtkTextIter)(_self_))
+	_go__return__ = ToGtkTextChildAnchor(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetLanguage() (_return_ *C.PangoLanguage) {
+	_return_ = C._gtk_text_iter_get_language((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetLine() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_line((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetLineIndex() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_line_index((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetLineOffset() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_line_offset((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetMarks() (_return_ *C.GSList) {
+	_return_ = C._gtk_text_iter_get_marks((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetOffset() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_offset((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetPixbuf() (_return_ *C.GdkPixbuf) {
+	_return_ = C._gtk_text_iter_get_pixbuf((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetSlice(end *GtkTextIter) (_go__return__ string) {
+	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
+	var _return_ *C.gchar
+	_return_ = C._gtk_text_iter_get_slice((*C.GtkTextIter)(_self_), _cgo_end_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkTextIter) GetTags() (_return_ *C.GSList) {
+	_return_ = C._gtk_text_iter_get_tags((*C.GtkTextIter)(_self_))
+	return
+}
+
+func (_self_ *GtkTextIter) GetText(end *GtkTextIter) (_go__return__ string) {
+	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
+	var _return_ *C.gchar
+	_return_ = C._gtk_text_iter_get_text((*C.GtkTextIter)(_self_), _cgo_end_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkTextIter) GetToggledTags(toggled_on bool) (_return_ *C.GSList) {
+	_cgo_toggled_on_ := (C.gboolean)(C.FALSE)
+	if toggled_on { _cgo_toggled_on_ = (C.gboolean)(C.TRUE) }
+	_return_ = C._gtk_text_iter_get_toggled_tags((*C.GtkTextIter)(_self_), _cgo_toggled_on_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetVisibleLineIndex() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_visible_line_index((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetVisibleLineOffset() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_text_iter_get_visible_line_offset((*C.GtkTextIter)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTextIter) GetVisibleSlice(end *GtkTextIter) (_go__return__ string) {
+	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
+	var _return_ *C.gchar
+	_return_ = C._gtk_text_iter_get_visible_slice((*C.GtkTextIter)(_self_), _cgo_end_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkTextIter) GetVisibleText(end *GtkTextIter) (_go__return__ string) {
+	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
+	var _return_ *C.gchar
+	_return_ = C._gtk_text_iter_get_visible_text((*C.GtkTextIter)(_self_), _cgo_end_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkTextIter) HasTag(tag GtkTextTagKind) (_go__return__ bool) {
+	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_has_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) InRange(start *GtkTextIter, end *GtkTextIter) (_go__return__ bool) {
+	_cgo_start_ := (*C.GtkTextIter)(unsafe.Pointer(start))
+	_cgo_end_ := (*C.GtkTextIter)(unsafe.Pointer(end))
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_in_range((*C.GtkTextIter)(_self_), _cgo_start_, _cgo_end_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) InsideSentence() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_inside_sentence((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) InsideWord() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_inside_word((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) IsCursorPosition() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_is_cursor_position((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) IsEnd() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_is_end((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) IsStart() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_is_start((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) Order(second *GtkTextIter) () {
+	_cgo_second_ := (*C.GtkTextIter)(unsafe.Pointer(second))
+	C.gtk_text_iter_order((*C.GtkTextIter)(_self_), _cgo_second_)
+	return
+}
+
+func (_self_ *GtkTextIter) SetLine(line_number int) () {
+	_cgo_line_number_ := (C.gint)(line_number)
+	C.gtk_text_iter_set_line((*C.GtkTextIter)(_self_), _cgo_line_number_)
+	return
+}
+
+func (_self_ *GtkTextIter) SetLineIndex(byte_on_line int) () {
+	_cgo_byte_on_line_ := (C.gint)(byte_on_line)
+	C.gtk_text_iter_set_line_index((*C.GtkTextIter)(_self_), _cgo_byte_on_line_)
+	return
+}
+
+func (_self_ *GtkTextIter) SetLineOffset(char_on_line int) () {
+	_cgo_char_on_line_ := (C.gint)(char_on_line)
+	C.gtk_text_iter_set_line_offset((*C.GtkTextIter)(_self_), _cgo_char_on_line_)
+	return
+}
+
+func (_self_ *GtkTextIter) SetOffset(char_offset int) () {
+	_cgo_char_offset_ := (C.gint)(char_offset)
+	C.gtk_text_iter_set_offset((*C.GtkTextIter)(_self_), _cgo_char_offset_)
+	return
+}
+
+func (_self_ *GtkTextIter) SetVisibleLineIndex(byte_on_line int) () {
+	_cgo_byte_on_line_ := (C.gint)(byte_on_line)
+	C.gtk_text_iter_set_visible_line_index((*C.GtkTextIter)(_self_), _cgo_byte_on_line_)
+	return
+}
+
+func (_self_ *GtkTextIter) SetVisibleLineOffset(char_on_line int) () {
+	_cgo_char_on_line_ := (C.gint)(char_on_line)
+	C.gtk_text_iter_set_visible_line_offset((*C.GtkTextIter)(_self_), _cgo_char_on_line_)
+	return
+}
+
+func (_self_ *GtkTextIter) StartsLine() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_starts_line((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) StartsSentence() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_starts_sentence((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) StartsWord() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_starts_word((*C.GtkTextIter)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTextIter) TogglesTag(tag GtkTextTagKind) (_go__return__ bool) {
+	_cgo_tag_ := (*C.GtkTextTag)(tag._getValue())
+	var _return_ C.gboolean
+	_return_ = C._gtk_text_iter_toggles_tag((*C.GtkTextIter)(_self_), _cgo_tag_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTreeIter) Copy() (_go__return__ *GtkTreeIter) {
+	var _return_ *C.GtkTreeIter
+	_return_ = C.gtk_tree_iter_copy((*C.GtkTreeIter)(_self_))
+	_go__return__ = (*GtkTreeIter)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTreeIter) Free() () {
+	C.gtk_tree_iter_free((*C.GtkTreeIter)(_self_))
+	return
+}
+
+func TreePathNew() (_go__return__ *GtkTreePath) {
+	var _return_ *C.GtkTreePath
+	_return_ = C.gtk_tree_path_new()
+	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
+	return
+}
+
+func TreePathNewFirst() (_go__return__ *GtkTreePath) {
+	var _return_ *C.GtkTreePath
+	_return_ = C.gtk_tree_path_new_first()
+	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
+	return
+}
+
+func TreePathNewFromString(path string) (_go__return__ *GtkTreePath) {
+	var _return_ *C.GtkTreePath
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._gtk_tree_path_new_from_string(_cgo_path_)
+	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTreePath) AppendIndex(index_ int) () {
+	_cgo_index__ := (C.gint)(index_)
+	C.gtk_tree_path_append_index((*C.GtkTreePath)(_self_), _cgo_index__)
+	return
+}
+
+func (_self_ *GtkTreePath) Compare(b *GtkTreePath) (_go__return__ int) {
+	_cgo_b_ := (*C.GtkTreePath)(unsafe.Pointer(b))
+	var _return_ C.gint
+	_return_ = C._gtk_tree_path_compare((*C.GtkTreePath)(_self_), _cgo_b_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTreePath) Copy() (_go__return__ *GtkTreePath) {
+	var _return_ *C.GtkTreePath
+	_return_ = C._gtk_tree_path_copy((*C.GtkTreePath)(_self_))
+	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTreePath) Down() () {
+	C.gtk_tree_path_down((*C.GtkTreePath)(_self_))
+	return
+}
+
+func (_self_ *GtkTreePath) Free() () {
+	C.gtk_tree_path_free((*C.GtkTreePath)(_self_))
+	return
+}
+
+func (_self_ *GtkTreePath) GetDepth() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_tree_path_get_depth((*C.GtkTreePath)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkTreePath) GetIndices() (_return_ *C.gint) {
+	_return_ = C.gtk_tree_path_get_indices((*C.GtkTreePath)(_self_))
+	return
+}
+
+func (_self_ *GtkTreePath) GetIndicesWithDepth() (_return_ *C.gint, _go_depth_ int) {
+	var depth C.gint
+	_return_ = C.gtk_tree_path_get_indices_with_depth((*C.GtkTreePath)(_self_), &depth)
+	_go_depth_ = (int)(depth)
+	return
+}
+
+func (_self_ *GtkTreePath) IsAncestor(descendant *GtkTreePath) (_go__return__ bool) {
+	_cgo_descendant_ := (*C.GtkTreePath)(unsafe.Pointer(descendant))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_path_is_ancestor((*C.GtkTreePath)(_self_), _cgo_descendant_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTreePath) IsDescendant(ancestor *GtkTreePath) (_go__return__ bool) {
+	_cgo_ancestor_ := (*C.GtkTreePath)(unsafe.Pointer(ancestor))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_path_is_descendant((*C.GtkTreePath)(_self_), _cgo_ancestor_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTreePath) Next() () {
+	C.gtk_tree_path_next((*C.GtkTreePath)(_self_))
+	return
+}
+
+func (_self_ *GtkTreePath) PrependIndex(index_ int) () {
+	_cgo_index__ := (C.gint)(index_)
+	C.gtk_tree_path_prepend_index((*C.GtkTreePath)(_self_), _cgo_index__)
+	return
+}
+
+func (_self_ *GtkTreePath) Prev() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_path_prev((*C.GtkTreePath)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkTreePath) ToString() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_tree_path_to_string((*C.GtkTreePath)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkTreePath) Up() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_path_up((*C.GtkTreePath)(_self_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func TreeRowReferenceNew(model *C.GtkTreeModel, path *GtkTreePath) (_go__return__ *GtkTreeRowReference) {
 	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _return_ *C.GtkTreeRowReference
+	_return_ = C.gtk_tree_row_reference_new(model, _cgo_path_)
+	_go__return__ = (*GtkTreeRowReference)(unsafe.Pointer(_return_))
+	return
+}
+
+func TreeRowReferenceNewProxy(proxy *C.GObject, model *C.GtkTreeModel, path *GtkTreePath) (_go__return__ *GtkTreeRowReference) {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _return_ *C.GtkTreeRowReference
+	_return_ = C.gtk_tree_row_reference_new_proxy(proxy, model, _cgo_path_)
+	_go__return__ = (*GtkTreeRowReference)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTreeRowReference) Copy() (_go__return__ *GtkTreeRowReference) {
+	var _return_ *C.GtkTreeRowReference
+	_return_ = C.gtk_tree_row_reference_copy((*C.GtkTreeRowReference)(_self_))
+	_go__return__ = (*GtkTreeRowReference)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTreeRowReference) Free() () {
+	C.gtk_tree_row_reference_free((*C.GtkTreeRowReference)(_self_))
+	return
+}
+
+func (_self_ *GtkTreeRowReference) GetModel() (_return_ *C.GtkTreeModel) {
+	_return_ = C.gtk_tree_row_reference_get_model((*C.GtkTreeRowReference)(_self_))
+	return
+}
+
+func (_self_ *GtkTreeRowReference) GetPath() (_go__return__ *GtkTreePath) {
+	var _return_ *C.GtkTreePath
+	_return_ = C.gtk_tree_row_reference_get_path((*C.GtkTreeRowReference)(_self_))
+	_go__return__ = (*GtkTreePath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkTreeRowReference) Valid() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_tree_set_row_drag_data(_cgo_selection_data_, tree_model, _cgo_path_)
+	_return_ = C.gtk_tree_row_reference_valid((*C.GtkTreeRowReference)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func True() (_go__return__ bool) {
+func (_self_ *GtkWidgetClass) FindStyleProperty(property_name string) (_return_ *C.GParamSpec) {
+	_cstring_property_name_ := C.CString(property_name)
+	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
+	defer C.free(unsafe.Pointer(_cstring_property_name_))
+	_return_ = C._gtk_widget_class_find_style_property((*C.GtkWidgetClass)(_self_), _cgo_property_name_)
+	return
+}
+
+func (_self_ *GtkWidgetClass) InstallStyleProperty(pspec *C.GParamSpec) () {
+	C.gtk_widget_class_install_style_property((*C.GtkWidgetClass)(_self_), pspec)
+	return
+}
+
+func (_self_ *GtkWidgetClass) InstallStylePropertyParser(pspec *C.GParamSpec, parser C.GtkRcPropertyParser) () {
+	C.gtk_widget_class_install_style_property_parser((*C.GtkWidgetClass)(_self_), pspec, parser)
+	return
+}
+
+func (_self_ *GtkWidgetClass) ListStyleProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+	var n_properties C.guint
+	_return_ = C._gtk_widget_class_list_style_properties((*C.GtkWidgetClass)(_self_), &n_properties)
+	_go_n_properties_ = (uint)(n_properties)
+	return
+}
+
+func (_self_ *GtkWidgetClass) SetAccessibleRole(role C.AtkRole) () {
+	C.gtk_widget_class_set_accessible_role((*C.GtkWidgetClass)(_self_), role)
+	return
+}
+
+func (_self_ *GtkWidgetClass) SetAccessibleType(type_ C.GType) () {
+	C.gtk_widget_class_set_accessible_type((*C.GtkWidgetClass)(_self_), type_)
+	return
+}
+
+func WidgetPathNew() (_go__return__ *GtkWidgetPath) {
+	var _return_ *C.GtkWidgetPath
+	_return_ = C.gtk_widget_path_new()
+	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkWidgetPath) AppendForWidget(widget GtkWidgetKind) (_go__return__ int) {
+	_cgo_widget_ := (*C.GtkWidget)(widget._getValue())
+	var _return_ C.gint
+	_return_ = C.gtk_widget_path_append_for_widget((*C.GtkWidgetPath)(_self_), _cgo_widget_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) AppendType(type_ C.GType) (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_widget_path_append_type((*C.GtkWidgetPath)(_self_), type_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) AppendWithSiblings(siblings *GtkWidgetPath, sibling_index uint) (_go__return__ int) {
+	_cgo_siblings_ := (*C.GtkWidgetPath)(unsafe.Pointer(siblings))
+	_cgo_sibling_index_ := (C.guint)(sibling_index)
+	var _return_ C.gint
+	_return_ = C.gtk_widget_path_append_with_siblings((*C.GtkWidgetPath)(_self_), _cgo_siblings_, _cgo_sibling_index_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) Copy() (_go__return__ *GtkWidgetPath) {
+	var _return_ *C.GtkWidgetPath
+	_return_ = C._gtk_widget_path_copy((*C.GtkWidgetPath)(_self_))
+	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkWidgetPath) Free() () {
+	C.gtk_widget_path_free((*C.GtkWidgetPath)(_self_))
+	return
+}
+
+func (_self_ *GtkWidgetPath) GetObjectType() (_return_ C.GType) {
+	_return_ = C._gtk_widget_path_get_object_type((*C.GtkWidgetPath)(_self_))
+	return
+}
+
+func (_self_ *GtkWidgetPath) HasParent(type_ C.GType) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_true()
+	_return_ = C._gtk_widget_path_has_parent((*C.GtkWidgetPath)(_self_), type_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-const ACCEL_VISIBLE = C.GTK_ACCEL_VISIBLE
-const ACCEL_LOCKED = C.GTK_ACCEL_LOCKED
-const ACCEL_MASK = C.GTK_ACCEL_MASK
-const ALIGN_FILL = C.GTK_ALIGN_FILL
-const ALIGN_START = C.GTK_ALIGN_START
-const ALIGN_END = C.GTK_ALIGN_END
-const ALIGN_CENTER = C.GTK_ALIGN_CENTER
-const APPLICATION_INHIBIT_LOGOUT = C.GTK_APPLICATION_INHIBIT_LOGOUT
-const APPLICATION_INHIBIT_SWITCH = C.GTK_APPLICATION_INHIBIT_SWITCH
-const APPLICATION_INHIBIT_SUSPEND = C.GTK_APPLICATION_INHIBIT_SUSPEND
-const APPLICATION_INHIBIT_IDLE = C.GTK_APPLICATION_INHIBIT_IDLE
-const ARROWS_BOTH = C.GTK_ARROWS_BOTH
-const ARROWS_START = C.GTK_ARROWS_START
-const ARROWS_END = C.GTK_ARROWS_END
-const ARROW_UP = C.GTK_ARROW_UP
-const ARROW_DOWN = C.GTK_ARROW_DOWN
-const ARROW_LEFT = C.GTK_ARROW_LEFT
-const ARROW_RIGHT = C.GTK_ARROW_RIGHT
-const ARROW_NONE = C.GTK_ARROW_NONE
-const ASSISTANT_PAGE_CONTENT = C.GTK_ASSISTANT_PAGE_CONTENT
-const ASSISTANT_PAGE_INTRO = C.GTK_ASSISTANT_PAGE_INTRO
-const ASSISTANT_PAGE_CONFIRM = C.GTK_ASSISTANT_PAGE_CONFIRM
-const ASSISTANT_PAGE_SUMMARY = C.GTK_ASSISTANT_PAGE_SUMMARY
-const ASSISTANT_PAGE_PROGRESS = C.GTK_ASSISTANT_PAGE_PROGRESS
-const ASSISTANT_PAGE_CUSTOM = C.GTK_ASSISTANT_PAGE_CUSTOM
-const EXPAND = C.GTK_EXPAND
-const SHRINK = C.GTK_SHRINK
-const FILL = C.GTK_FILL
-const BORDER_STYLE_NONE = C.GTK_BORDER_STYLE_NONE
-const BORDER_STYLE_SOLID = C.GTK_BORDER_STYLE_SOLID
-const BORDER_STYLE_INSET = C.GTK_BORDER_STYLE_INSET
-const BORDER_STYLE_OUTSET = C.GTK_BORDER_STYLE_OUTSET
-const BORDER_STYLE_HIDDEN = C.GTK_BORDER_STYLE_HIDDEN
-const BORDER_STYLE_DOTTED = C.GTK_BORDER_STYLE_DOTTED
-const BORDER_STYLE_DASHED = C.GTK_BORDER_STYLE_DASHED
-const BORDER_STYLE_DOUBLE = C.GTK_BORDER_STYLE_DOUBLE
-const BORDER_STYLE_GROOVE = C.GTK_BORDER_STYLE_GROOVE
-const BORDER_STYLE_RIDGE = C.GTK_BORDER_STYLE_RIDGE
-const BUILDER_ERROR_INVALID_TYPE_FUNCTION = C.GTK_BUILDER_ERROR_INVALID_TYPE_FUNCTION
-const BUILDER_ERROR_UNHANDLED_TAG = C.GTK_BUILDER_ERROR_UNHANDLED_TAG
-const BUILDER_ERROR_MISSING_ATTRIBUTE = C.GTK_BUILDER_ERROR_MISSING_ATTRIBUTE
-const BUILDER_ERROR_INVALID_ATTRIBUTE = C.GTK_BUILDER_ERROR_INVALID_ATTRIBUTE
-const BUILDER_ERROR_INVALID_TAG = C.GTK_BUILDER_ERROR_INVALID_TAG
-const BUILDER_ERROR_MISSING_PROPERTY_VALUE = C.GTK_BUILDER_ERROR_MISSING_PROPERTY_VALUE
-const BUILDER_ERROR_INVALID_VALUE = C.GTK_BUILDER_ERROR_INVALID_VALUE
-const BUILDER_ERROR_VERSION_MISMATCH = C.GTK_BUILDER_ERROR_VERSION_MISMATCH
-const BUILDER_ERROR_DUPLICATE_ID = C.GTK_BUILDER_ERROR_DUPLICATE_ID
-const BUTTONBOX_SPREAD = C.GTK_BUTTONBOX_SPREAD
-const BUTTONBOX_EDGE = C.GTK_BUTTONBOX_EDGE
-const BUTTONBOX_START = C.GTK_BUTTONBOX_START
-const BUTTONBOX_END = C.GTK_BUTTONBOX_END
-const BUTTONBOX_CENTER = C.GTK_BUTTONBOX_CENTER
-const BUTTONS_NONE = C.GTK_BUTTONS_NONE
-const BUTTONS_OK = C.GTK_BUTTONS_OK
-const BUTTONS_CLOSE = C.GTK_BUTTONS_CLOSE
-const BUTTONS_CANCEL = C.GTK_BUTTONS_CANCEL
-const BUTTONS_YES_NO = C.GTK_BUTTONS_YES_NO
-const BUTTONS_OK_CANCEL = C.GTK_BUTTONS_OK_CANCEL
-const CALENDAR_SHOW_HEADING = C.GTK_CALENDAR_SHOW_HEADING
-const CALENDAR_SHOW_DAY_NAMES = C.GTK_CALENDAR_SHOW_DAY_NAMES
-const CALENDAR_NO_MONTH_CHANGE = C.GTK_CALENDAR_NO_MONTH_CHANGE
-const CALENDAR_SHOW_WEEK_NUMBERS = C.GTK_CALENDAR_SHOW_WEEK_NUMBERS
-const CALENDAR_SHOW_DETAILS = C.GTK_CALENDAR_SHOW_DETAILS
-const CELL_RENDERER_ACCEL_MODE_GTK = C.GTK_CELL_RENDERER_ACCEL_MODE_GTK
-const CELL_RENDERER_ACCEL_MODE_OTHER = C.GTK_CELL_RENDERER_ACCEL_MODE_OTHER
-const CELL_RENDERER_MODE_INERT = C.GTK_CELL_RENDERER_MODE_INERT
-const CELL_RENDERER_MODE_ACTIVATABLE = C.GTK_CELL_RENDERER_MODE_ACTIVATABLE
-const CELL_RENDERER_MODE_EDITABLE = C.GTK_CELL_RENDERER_MODE_EDITABLE
-const CELL_RENDERER_SELECTED = C.GTK_CELL_RENDERER_SELECTED
-const CELL_RENDERER_PRELIT = C.GTK_CELL_RENDERER_PRELIT
-const CELL_RENDERER_INSENSITIVE = C.GTK_CELL_RENDERER_INSENSITIVE
-const CELL_RENDERER_SORTED = C.GTK_CELL_RENDERER_SORTED
-const CELL_RENDERER_FOCUSED = C.GTK_CELL_RENDERER_FOCUSED
-const CELL_RENDERER_EXPANDABLE = C.GTK_CELL_RENDERER_EXPANDABLE
-const CELL_RENDERER_EXPANDED = C.GTK_CELL_RENDERER_EXPANDED
-const CORNER_TOP_LEFT = C.GTK_CORNER_TOP_LEFT
-const CORNER_BOTTOM_LEFT = C.GTK_CORNER_BOTTOM_LEFT
-const CORNER_TOP_RIGHT = C.GTK_CORNER_TOP_RIGHT
-const CORNER_BOTTOM_RIGHT = C.GTK_CORNER_BOTTOM_RIGHT
-const CSS_PROVIDER_ERROR_FAILED = C.GTK_CSS_PROVIDER_ERROR_FAILED
-const CSS_PROVIDER_ERROR_SYNTAX = C.GTK_CSS_PROVIDER_ERROR_SYNTAX
-const CSS_PROVIDER_ERROR_IMPORT = C.GTK_CSS_PROVIDER_ERROR_IMPORT
-const CSS_PROVIDER_ERROR_NAME = C.GTK_CSS_PROVIDER_ERROR_NAME
-const CSS_PROVIDER_ERROR_DEPRECATED = C.GTK_CSS_PROVIDER_ERROR_DEPRECATED
-const CSS_PROVIDER_ERROR_UNKNOWN_VALUE = C.GTK_CSS_PROVIDER_ERROR_UNKNOWN_VALUE
-const CSS_SECTION_DOCUMENT = C.GTK_CSS_SECTION_DOCUMENT
-const CSS_SECTION_IMPORT = C.GTK_CSS_SECTION_IMPORT
-const CSS_SECTION_COLOR_DEFINITION = C.GTK_CSS_SECTION_COLOR_DEFINITION
-const CSS_SECTION_BINDING_SET = C.GTK_CSS_SECTION_BINDING_SET
-const CSS_SECTION_RULESET = C.GTK_CSS_SECTION_RULESET
-const CSS_SECTION_SELECTOR = C.GTK_CSS_SECTION_SELECTOR
-const CSS_SECTION_DECLARATION = C.GTK_CSS_SECTION_DECLARATION
-const CSS_SECTION_VALUE = C.GTK_CSS_SECTION_VALUE
-const CSS_SECTION_KEYFRAMES = C.GTK_CSS_SECTION_KEYFRAMES
-const DEBUG_MISC = C.GTK_DEBUG_MISC
-const DEBUG_PLUGSOCKET = C.GTK_DEBUG_PLUGSOCKET
-const DEBUG_TEXT = C.GTK_DEBUG_TEXT
-const DEBUG_TREE = C.GTK_DEBUG_TREE
-const DEBUG_UPDATES = C.GTK_DEBUG_UPDATES
-const DEBUG_KEYBINDINGS = C.GTK_DEBUG_KEYBINDINGS
-const DEBUG_MULTIHEAD = C.GTK_DEBUG_MULTIHEAD
-const DEBUG_MODULES = C.GTK_DEBUG_MODULES
-const DEBUG_GEOMETRY = C.GTK_DEBUG_GEOMETRY
-const DEBUG_ICONTHEME = C.GTK_DEBUG_ICONTHEME
-const DEBUG_PRINTING = C.GTK_DEBUG_PRINTING
-const DEBUG_BUILDER = C.GTK_DEBUG_BUILDER
-const DEBUG_SIZE_REQUEST = C.GTK_DEBUG_SIZE_REQUEST
-const DEBUG_NO_CSS_CACHE = C.GTK_DEBUG_NO_CSS_CACHE
-const DELETE_CHARS = C.GTK_DELETE_CHARS
-const DELETE_WORD_ENDS = C.GTK_DELETE_WORD_ENDS
-const DELETE_WORDS = C.GTK_DELETE_WORDS
-const DELETE_DISPLAY_LINES = C.GTK_DELETE_DISPLAY_LINES
-const DELETE_DISPLAY_LINE_ENDS = C.GTK_DELETE_DISPLAY_LINE_ENDS
-const DELETE_PARAGRAPH_ENDS = C.GTK_DELETE_PARAGRAPH_ENDS
-const DELETE_PARAGRAPHS = C.GTK_DELETE_PARAGRAPHS
-const DELETE_WHITESPACE = C.GTK_DELETE_WHITESPACE
-const DEST_DEFAULT_MOTION = C.GTK_DEST_DEFAULT_MOTION
-const DEST_DEFAULT_HIGHLIGHT = C.GTK_DEST_DEFAULT_HIGHLIGHT
-const DEST_DEFAULT_DROP = C.GTK_DEST_DEFAULT_DROP
-const DEST_DEFAULT_ALL = C.GTK_DEST_DEFAULT_ALL
-const DIALOG_MODAL = C.GTK_DIALOG_MODAL
-const DIALOG_DESTROY_WITH_PARENT = C.GTK_DIALOG_DESTROY_WITH_PARENT
-const DIR_TAB_FORWARD = C.GTK_DIR_TAB_FORWARD
-const DIR_TAB_BACKWARD = C.GTK_DIR_TAB_BACKWARD
-const DIR_UP = C.GTK_DIR_UP
-const DIR_DOWN = C.GTK_DIR_DOWN
-const DIR_LEFT = C.GTK_DIR_LEFT
-const DIR_RIGHT = C.GTK_DIR_RIGHT
-const DRAG_RESULT_SUCCESS = C.GTK_DRAG_RESULT_SUCCESS
-const DRAG_RESULT_NO_TARGET = C.GTK_DRAG_RESULT_NO_TARGET
-const DRAG_RESULT_USER_CANCELLED = C.GTK_DRAG_RESULT_USER_CANCELLED
-const DRAG_RESULT_TIMEOUT_EXPIRED = C.GTK_DRAG_RESULT_TIMEOUT_EXPIRED
-const DRAG_RESULT_GRAB_BROKEN = C.GTK_DRAG_RESULT_GRAB_BROKEN
-const DRAG_RESULT_ERROR = C.GTK_DRAG_RESULT_ERROR
-const ENTRY_ICON_PRIMARY = C.GTK_ENTRY_ICON_PRIMARY
-const ENTRY_ICON_SECONDARY = C.GTK_ENTRY_ICON_SECONDARY
-const EXPANDER_COLLAPSED = C.GTK_EXPANDER_COLLAPSED
-const EXPANDER_SEMI_COLLAPSED = C.GTK_EXPANDER_SEMI_COLLAPSED
-const EXPANDER_SEMI_EXPANDED = C.GTK_EXPANDER_SEMI_EXPANDED
-const EXPANDER_EXPANDED = C.GTK_EXPANDER_EXPANDED
+func (_self_ *GtkWidgetPath) IsType(type_ C.GType) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_is_type((*C.GtkWidgetPath)(_self_), type_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterAddClass(pos int, name string) () {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_add_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterAddRegion(pos int, name string, flags C.GtkRegionFlags) () {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_add_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_, flags)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterClearClasses(pos int) () {
+	_cgo_pos_ := (C.gint)(pos)
+	C.gtk_widget_path_iter_clear_classes((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterClearRegions(pos int) () {
+	_cgo_pos_ := (C.gint)(pos)
+	C.gtk_widget_path_iter_clear_regions((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterGetName(pos int) (_go__return__ string) {
+	_cgo_pos_ := (C.gint)(pos)
+	var _return_ *C.gchar
+	_return_ = C._gtk_widget_path_iter_get_name((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterGetObjectType(pos int) (_return_ C.GType) {
+	_cgo_pos_ := (C.gint)(pos)
+	_return_ = C._gtk_widget_path_iter_get_object_type((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterGetSiblingIndex(pos int) (_go__return__ uint) {
+	_cgo_pos_ := (C.gint)(pos)
+	var _return_ C.guint
+	_return_ = C._gtk_widget_path_iter_get_sibling_index((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterGetSiblings(pos int) (_go__return__ *GtkWidgetPath) {
+	var _return_ *C.GtkWidgetPath
+	_cgo_pos_ := (C.gint)(pos)
+	_return_ = C._gtk_widget_path_iter_get_siblings((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterHasClass(pos int, name string) (_go__return__ bool) {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_iter_has_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterHasName(pos int, name string) (_go__return__ bool) {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_iter_has_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterHasQclass(pos int, qname C.GQuark) (_go__return__ bool) {
+	_cgo_pos_ := (C.gint)(pos)
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_iter_has_qclass((*C.GtkWidgetPath)(_self_), _cgo_pos_, qname)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterHasQname(pos int, qname C.GQuark) (_go__return__ bool) {
+	_cgo_pos_ := (C.gint)(pos)
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_iter_has_qname((*C.GtkWidgetPath)(_self_), _cgo_pos_, qname)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterHasQregion(pos int, qname C.GQuark) (_go__return__ bool, flags *C.GtkRegionFlags) {
+	_cgo_pos_ := (C.gint)(pos)
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_iter_has_qregion((*C.GtkWidgetPath)(_self_), _cgo_pos_, qname, flags)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterHasRegion(pos int, name string) (_go__return__ bool, flags *C.GtkRegionFlags) {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_widget_path_iter_has_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_, flags)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterListClasses(pos int) (_return_ *C.GSList) {
+	_cgo_pos_ := (C.gint)(pos)
+	_return_ = C._gtk_widget_path_iter_list_classes((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterListRegions(pos int) (_return_ *C.GSList) {
+	_cgo_pos_ := (C.gint)(pos)
+	_return_ = C._gtk_widget_path_iter_list_regions((*C.GtkWidgetPath)(_self_), _cgo_pos_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterRemoveClass(pos int, name string) () {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_remove_class((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterRemoveRegion(pos int, name string) () {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_remove_region((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterSetName(pos int, name string) () {
+	_cgo_pos_ := (C.gint)(pos)
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_widget_path_iter_set_name((*C.GtkWidgetPath)(_self_), _cgo_pos_, _cgo_name_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) IterSetObjectType(pos int, type_ C.GType) () {
+	_cgo_pos_ := (C.gint)(pos)
+	C.gtk_widget_path_iter_set_object_type((*C.GtkWidgetPath)(_self_), _cgo_pos_, type_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) Length() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._gtk_widget_path_length((*C.GtkWidgetPath)(_self_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) PrependType(type_ C.GType) () {
+	C.gtk_widget_path_prepend_type((*C.GtkWidgetPath)(_self_), type_)
+	return
+}
+
+func (_self_ *GtkWidgetPath) Ref() (_go__return__ *GtkWidgetPath) {
+	var _return_ *C.GtkWidgetPath
+	_return_ = C.gtk_widget_path_ref((*C.GtkWidgetPath)(_self_))
+	_go__return__ = (*GtkWidgetPath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GtkWidgetPath) ToString() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C._gtk_widget_path_to_string((*C.GtkWidgetPath)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GtkWidgetPath) Unref() () {
+	C.gtk_widget_path_unref((*C.GtkWidgetPath)(_self_))
+	return
+}
+
+const STYLE_CLASS_CALENDAR = C.GTK_STYLE_CLASS_CALENDAR
 const FILE_CHOOSER_ACTION_OPEN = C.GTK_FILE_CHOOSER_ACTION_OPEN
-const FILE_CHOOSER_ACTION_SAVE = C.GTK_FILE_CHOOSER_ACTION_SAVE
-const FILE_CHOOSER_ACTION_SELECT_FOLDER = C.GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER
-const FILE_CHOOSER_ACTION_CREATE_FOLDER = C.GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER
-const FILE_CHOOSER_CONFIRMATION_CONFIRM = C.GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM
-const FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME = C.GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME
-const FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN = C.GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN
-const FILE_CHOOSER_ERROR_NONEXISTENT = C.GTK_FILE_CHOOSER_ERROR_NONEXISTENT
-const FILE_CHOOSER_ERROR_BAD_FILENAME = C.GTK_FILE_CHOOSER_ERROR_BAD_FILENAME
-const FILE_CHOOSER_ERROR_ALREADY_EXISTS = C.GTK_FILE_CHOOSER_ERROR_ALREADY_EXISTS
-const FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME = C.GTK_FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME
-const FILE_FILTER_FILENAME = C.GTK_FILE_FILTER_FILENAME
-const FILE_FILTER_URI = C.GTK_FILE_FILTER_URI
-const FILE_FILTER_DISPLAY_NAME = C.GTK_FILE_FILTER_DISPLAY_NAME
-const FILE_FILTER_MIME_TYPE = C.GTK_FILE_FILTER_MIME_TYPE
-const IM_PREEDIT_NOTHING = C.GTK_IM_PREEDIT_NOTHING
-const IM_PREEDIT_CALLBACK = C.GTK_IM_PREEDIT_CALLBACK
-const IM_PREEDIT_NONE = C.GTK_IM_PREEDIT_NONE
-const IM_STATUS_NOTHING = C.GTK_IM_STATUS_NOTHING
-const IM_STATUS_CALLBACK = C.GTK_IM_STATUS_CALLBACK
-const IM_STATUS_NONE = C.GTK_IM_STATUS_NONE
-const ICON_LOOKUP_NO_SVG = C.GTK_ICON_LOOKUP_NO_SVG
-const ICON_LOOKUP_FORCE_SVG = C.GTK_ICON_LOOKUP_FORCE_SVG
-const ICON_LOOKUP_USE_BUILTIN = C.GTK_ICON_LOOKUP_USE_BUILTIN
-const ICON_LOOKUP_GENERIC_FALLBACK = C.GTK_ICON_LOOKUP_GENERIC_FALLBACK
-const ICON_LOOKUP_FORCE_SIZE = C.GTK_ICON_LOOKUP_FORCE_SIZE
-const ICON_SIZE_INVALID = C.GTK_ICON_SIZE_INVALID
-const ICON_SIZE_MENU = C.GTK_ICON_SIZE_MENU
-const ICON_SIZE_SMALL_TOOLBAR = C.GTK_ICON_SIZE_SMALL_TOOLBAR
-const ICON_SIZE_LARGE_TOOLBAR = C.GTK_ICON_SIZE_LARGE_TOOLBAR
-const ICON_SIZE_BUTTON = C.GTK_ICON_SIZE_BUTTON
-const ICON_SIZE_DND = C.GTK_ICON_SIZE_DND
-const ICON_SIZE_DIALOG = C.GTK_ICON_SIZE_DIALOG
-const ICON_THEME_NOT_FOUND = C.GTK_ICON_THEME_NOT_FOUND
-const ICON_THEME_FAILED = C.GTK_ICON_THEME_FAILED
-const ICON_VIEW_NO_DROP = C.GTK_ICON_VIEW_NO_DROP
-const ICON_VIEW_DROP_INTO = C.GTK_ICON_VIEW_DROP_INTO
-const ICON_VIEW_DROP_LEFT = C.GTK_ICON_VIEW_DROP_LEFT
-const ICON_VIEW_DROP_RIGHT = C.GTK_ICON_VIEW_DROP_RIGHT
-const ICON_VIEW_DROP_ABOVE = C.GTK_ICON_VIEW_DROP_ABOVE
-const ICON_VIEW_DROP_BELOW = C.GTK_ICON_VIEW_DROP_BELOW
-const IMAGE_EMPTY = C.GTK_IMAGE_EMPTY
-const IMAGE_PIXBUF = C.GTK_IMAGE_PIXBUF
-const IMAGE_STOCK = C.GTK_IMAGE_STOCK
-const IMAGE_ICON_SET = C.GTK_IMAGE_ICON_SET
-const IMAGE_ANIMATION = C.GTK_IMAGE_ANIMATION
-const IMAGE_ICON_NAME = C.GTK_IMAGE_ICON_NAME
-const IMAGE_GICON = C.GTK_IMAGE_GICON
-const INPUT_HINT_NONE = C.GTK_INPUT_HINT_NONE
-const INPUT_HINT_SPELLCHECK = C.GTK_INPUT_HINT_SPELLCHECK
-const INPUT_HINT_NO_SPELLCHECK = C.GTK_INPUT_HINT_NO_SPELLCHECK
-const INPUT_HINT_WORD_COMPLETION = C.GTK_INPUT_HINT_WORD_COMPLETION
-const INPUT_HINT_LOWERCASE = C.GTK_INPUT_HINT_LOWERCASE
-const INPUT_HINT_UPPERCASE_CHARS = C.GTK_INPUT_HINT_UPPERCASE_CHARS
-const INPUT_HINT_UPPERCASE_WORDS = C.GTK_INPUT_HINT_UPPERCASE_WORDS
-const INPUT_HINT_UPPERCASE_SENTENCES = C.GTK_INPUT_HINT_UPPERCASE_SENTENCES
-const INPUT_HINT_INHIBIT_OSK = C.GTK_INPUT_HINT_INHIBIT_OSK
-const INPUT_PURPOSE_FREE_FORM = C.GTK_INPUT_PURPOSE_FREE_FORM
-const INPUT_PURPOSE_ALPHA = C.GTK_INPUT_PURPOSE_ALPHA
-const INPUT_PURPOSE_DIGITS = C.GTK_INPUT_PURPOSE_DIGITS
-const INPUT_PURPOSE_NUMBER = C.GTK_INPUT_PURPOSE_NUMBER
-const INPUT_PURPOSE_PHONE = C.GTK_INPUT_PURPOSE_PHONE
-const INPUT_PURPOSE_URL = C.GTK_INPUT_PURPOSE_URL
-const INPUT_PURPOSE_EMAIL = C.GTK_INPUT_PURPOSE_EMAIL
-const INPUT_PURPOSE_NAME = C.GTK_INPUT_PURPOSE_NAME
-const INPUT_PURPOSE_PASSWORD = C.GTK_INPUT_PURPOSE_PASSWORD
-const INPUT_PURPOSE_PIN = C.GTK_INPUT_PURPOSE_PIN
-const JUNCTION_NONE = C.GTK_JUNCTION_NONE
-const JUNCTION_CORNER_TOPLEFT = C.GTK_JUNCTION_CORNER_TOPLEFT
-const JUNCTION_CORNER_TOPRIGHT = C.GTK_JUNCTION_CORNER_TOPRIGHT
-const JUNCTION_CORNER_BOTTOMLEFT = C.GTK_JUNCTION_CORNER_BOTTOMLEFT
-const JUNCTION_CORNER_BOTTOMRIGHT = C.GTK_JUNCTION_CORNER_BOTTOMRIGHT
-const JUNCTION_TOP = C.GTK_JUNCTION_TOP
-const JUNCTION_BOTTOM = C.GTK_JUNCTION_BOTTOM
-const JUNCTION_LEFT = C.GTK_JUNCTION_LEFT
-const JUNCTION_RIGHT = C.GTK_JUNCTION_RIGHT
-const JUSTIFY_LEFT = C.GTK_JUSTIFY_LEFT
-const JUSTIFY_RIGHT = C.GTK_JUSTIFY_RIGHT
-const JUSTIFY_CENTER = C.GTK_JUSTIFY_CENTER
-const JUSTIFY_FILL = C.GTK_JUSTIFY_FILL
-const LEVEL_BAR_MODE_CONTINUOUS = C.GTK_LEVEL_BAR_MODE_CONTINUOUS
-const LEVEL_BAR_MODE_DISCRETE = C.GTK_LEVEL_BAR_MODE_DISCRETE
-const LICENSE_UNKNOWN = C.GTK_LICENSE_UNKNOWN
-const LICENSE_CUSTOM = C.GTK_LICENSE_CUSTOM
-const LICENSE_GPL_2_0 = C.GTK_LICENSE_GPL_2_0
-const LICENSE_GPL_3_0 = C.GTK_LICENSE_GPL_3_0
-const LICENSE_LGPL_2_1 = C.GTK_LICENSE_LGPL_2_1
-const LICENSE_LGPL_3_0 = C.GTK_LICENSE_LGPL_3_0
-const LICENSE_BSD = C.GTK_LICENSE_BSD
-const LICENSE_MIT_X11 = C.GTK_LICENSE_MIT_X11
-const LICENSE_ARTISTIC = C.GTK_LICENSE_ARTISTIC
-const MENU_DIR_PARENT = C.GTK_MENU_DIR_PARENT
-const MENU_DIR_CHILD = C.GTK_MENU_DIR_CHILD
-const MENU_DIR_NEXT = C.GTK_MENU_DIR_NEXT
-const MENU_DIR_PREV = C.GTK_MENU_DIR_PREV
-const MESSAGE_INFO = C.GTK_MESSAGE_INFO
-const MESSAGE_WARNING = C.GTK_MESSAGE_WARNING
-const MESSAGE_QUESTION = C.GTK_MESSAGE_QUESTION
-const MESSAGE_ERROR = C.GTK_MESSAGE_ERROR
-const MESSAGE_OTHER = C.GTK_MESSAGE_OTHER
-const MOVEMENT_LOGICAL_POSITIONS = C.GTK_MOVEMENT_LOGICAL_POSITIONS
-const MOVEMENT_VISUAL_POSITIONS = C.GTK_MOVEMENT_VISUAL_POSITIONS
-const MOVEMENT_WORDS = C.GTK_MOVEMENT_WORDS
-const MOVEMENT_DISPLAY_LINES = C.GTK_MOVEMENT_DISPLAY_LINES
-const MOVEMENT_DISPLAY_LINE_ENDS = C.GTK_MOVEMENT_DISPLAY_LINE_ENDS
-const MOVEMENT_PARAGRAPHS = C.GTK_MOVEMENT_PARAGRAPHS
-const MOVEMENT_PARAGRAPH_ENDS = C.GTK_MOVEMENT_PARAGRAPH_ENDS
-const MOVEMENT_PAGES = C.GTK_MOVEMENT_PAGES
-const MOVEMENT_BUFFER_ENDS = C.GTK_MOVEMENT_BUFFER_ENDS
-const MOVEMENT_HORIZONTAL_PAGES = C.GTK_MOVEMENT_HORIZONTAL_PAGES
-const NOTEBOOK_TAB_FIRST = C.GTK_NOTEBOOK_TAB_FIRST
-const NOTEBOOK_TAB_LAST = C.GTK_NOTEBOOK_TAB_LAST
-const NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM = C.GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM
-const NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP = C.GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP
-const NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM = C.GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM
-const NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_BOTTOM_TO_TOP = C.GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_BOTTOM_TO_TOP
-const NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_LEFT_TO_RIGHT = C.GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_LEFT_TO_RIGHT
-const NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT = C.GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT
-const NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT = C.GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT
-const NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT = C.GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT
-const ORIENTATION_HORIZONTAL = C.GTK_ORIENTATION_HORIZONTAL
-const ORIENTATION_VERTICAL = C.GTK_ORIENTATION_VERTICAL
-const PACK_DIRECTION_LTR = C.GTK_PACK_DIRECTION_LTR
-const PACK_DIRECTION_RTL = C.GTK_PACK_DIRECTION_RTL
-const PACK_DIRECTION_TTB = C.GTK_PACK_DIRECTION_TTB
-const PACK_DIRECTION_BTT = C.GTK_PACK_DIRECTION_BTT
-const PACK_START = C.GTK_PACK_START
-const PACK_END = C.GTK_PACK_END
-const PAGE_ORIENTATION_PORTRAIT = C.GTK_PAGE_ORIENTATION_PORTRAIT
-const PAGE_ORIENTATION_LANDSCAPE = C.GTK_PAGE_ORIENTATION_LANDSCAPE
-const PAGE_ORIENTATION_REVERSE_PORTRAIT = C.GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT
-const PAGE_ORIENTATION_REVERSE_LANDSCAPE = C.GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE
-const PAGE_SET_ALL = C.GTK_PAGE_SET_ALL
-const PAGE_SET_EVEN = C.GTK_PAGE_SET_EVEN
-const PAGE_SET_ODD = C.GTK_PAGE_SET_ODD
-const PATH_PRIO_LOWEST = C.GTK_PATH_PRIO_LOWEST
-const PATH_PRIO_GTK = C.GTK_PATH_PRIO_GTK
-const PATH_PRIO_APPLICATION = C.GTK_PATH_PRIO_APPLICATION
-const PATH_PRIO_THEME = C.GTK_PATH_PRIO_THEME
-const PATH_PRIO_RC = C.GTK_PATH_PRIO_RC
-const PATH_PRIO_HIGHEST = C.GTK_PATH_PRIO_HIGHEST
-const PATH_WIDGET = C.GTK_PATH_WIDGET
-const PATH_WIDGET_CLASS = C.GTK_PATH_WIDGET_CLASS
-const PATH_CLASS = C.GTK_PATH_CLASS
-const POLICY_ALWAYS = C.GTK_POLICY_ALWAYS
-const POLICY_AUTOMATIC = C.GTK_POLICY_AUTOMATIC
-const POLICY_NEVER = C.GTK_POLICY_NEVER
-const POS_LEFT = C.GTK_POS_LEFT
-const POS_RIGHT = C.GTK_POS_RIGHT
-const POS_TOP = C.GTK_POS_TOP
-const POS_BOTTOM = C.GTK_POS_BOTTOM
-const PRINT_DUPLEX_SIMPLEX = C.GTK_PRINT_DUPLEX_SIMPLEX
-const PRINT_DUPLEX_HORIZONTAL = C.GTK_PRINT_DUPLEX_HORIZONTAL
-const PRINT_DUPLEX_VERTICAL = C.GTK_PRINT_DUPLEX_VERTICAL
-const PRINT_ERROR_GENERAL = C.GTK_PRINT_ERROR_GENERAL
-const PRINT_ERROR_INTERNAL_ERROR = C.GTK_PRINT_ERROR_INTERNAL_ERROR
-const PRINT_ERROR_NOMEM = C.GTK_PRINT_ERROR_NOMEM
 const PRINT_ERROR_INVALID_FILE = C.GTK_PRINT_ERROR_INVALID_FILE
-const PRINT_OPERATION_ACTION_PRINT_DIALOG = C.GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG
-const PRINT_OPERATION_ACTION_PRINT = C.GTK_PRINT_OPERATION_ACTION_PRINT
-const PRINT_OPERATION_ACTION_PREVIEW = C.GTK_PRINT_OPERATION_ACTION_PREVIEW
-const PRINT_OPERATION_ACTION_EXPORT = C.GTK_PRINT_OPERATION_ACTION_EXPORT
-const PRINT_OPERATION_RESULT_ERROR = C.GTK_PRINT_OPERATION_RESULT_ERROR
-const PRINT_OPERATION_RESULT_APPLY = C.GTK_PRINT_OPERATION_RESULT_APPLY
-const PRINT_OPERATION_RESULT_CANCEL = C.GTK_PRINT_OPERATION_RESULT_CANCEL
-const PRINT_OPERATION_RESULT_IN_PROGRESS = C.GTK_PRINT_OPERATION_RESULT_IN_PROGRESS
-const PRINT_PAGES_ALL = C.GTK_PRINT_PAGES_ALL
-const PRINT_PAGES_CURRENT = C.GTK_PRINT_PAGES_CURRENT
-const PRINT_PAGES_RANGES = C.GTK_PRINT_PAGES_RANGES
-const PRINT_PAGES_SELECTION = C.GTK_PRINT_PAGES_SELECTION
-const PRINT_QUALITY_LOW = C.GTK_PRINT_QUALITY_LOW
-const PRINT_QUALITY_NORMAL = C.GTK_PRINT_QUALITY_NORMAL
-const PRINT_QUALITY_HIGH = C.GTK_PRINT_QUALITY_HIGH
-const PRINT_QUALITY_DRAFT = C.GTK_PRINT_QUALITY_DRAFT
-const PRINT_STATUS_INITIAL = C.GTK_PRINT_STATUS_INITIAL
-const PRINT_STATUS_PREPARING = C.GTK_PRINT_STATUS_PREPARING
-const PRINT_STATUS_GENERATING_DATA = C.GTK_PRINT_STATUS_GENERATING_DATA
-const PRINT_STATUS_SENDING_DATA = C.GTK_PRINT_STATUS_SENDING_DATA
-const PRINT_STATUS_PENDING = C.GTK_PRINT_STATUS_PENDING
-const PRINT_STATUS_PENDING_ISSUE = C.GTK_PRINT_STATUS_PENDING_ISSUE
-const PRINT_STATUS_PRINTING = C.GTK_PRINT_STATUS_PRINTING
-const PRINT_STATUS_FINISHED = C.GTK_PRINT_STATUS_FINISHED
-const PRINT_STATUS_FINISHED_ABORTED = C.GTK_PRINT_STATUS_FINISHED_ABORTED
-const RC_FG = C.GTK_RC_FG
-const RC_BG = C.GTK_RC_BG
-const RC_TEXT = C.GTK_RC_TEXT
-const RC_BASE = C.GTK_RC_BASE
-const RC_TOKEN_INVALID = C.GTK_RC_TOKEN_INVALID
-const RC_TOKEN_INCLUDE = C.GTK_RC_TOKEN_INCLUDE
-const RC_TOKEN_NORMAL = C.GTK_RC_TOKEN_NORMAL
-const RC_TOKEN_ACTIVE = C.GTK_RC_TOKEN_ACTIVE
-const RC_TOKEN_PRELIGHT = C.GTK_RC_TOKEN_PRELIGHT
-const RC_TOKEN_SELECTED = C.GTK_RC_TOKEN_SELECTED
-const RC_TOKEN_INSENSITIVE = C.GTK_RC_TOKEN_INSENSITIVE
-const RC_TOKEN_FG = C.GTK_RC_TOKEN_FG
-const RC_TOKEN_BG = C.GTK_RC_TOKEN_BG
-const RC_TOKEN_TEXT = C.GTK_RC_TOKEN_TEXT
-const RC_TOKEN_BASE = C.GTK_RC_TOKEN_BASE
-const RC_TOKEN_XTHICKNESS = C.GTK_RC_TOKEN_XTHICKNESS
-const RC_TOKEN_YTHICKNESS = C.GTK_RC_TOKEN_YTHICKNESS
-const RC_TOKEN_FONT = C.GTK_RC_TOKEN_FONT
-const RC_TOKEN_FONTSET = C.GTK_RC_TOKEN_FONTSET
-const RC_TOKEN_FONT_NAME = C.GTK_RC_TOKEN_FONT_NAME
-const RC_TOKEN_BG_PIXMAP = C.GTK_RC_TOKEN_BG_PIXMAP
-const RC_TOKEN_PIXMAP_PATH = C.GTK_RC_TOKEN_PIXMAP_PATH
-const RC_TOKEN_STYLE = C.GTK_RC_TOKEN_STYLE
-const RC_TOKEN_BINDING = C.GTK_RC_TOKEN_BINDING
-const RC_TOKEN_BIND = C.GTK_RC_TOKEN_BIND
-const RC_TOKEN_WIDGET = C.GTK_RC_TOKEN_WIDGET
-const RC_TOKEN_WIDGET_CLASS = C.GTK_RC_TOKEN_WIDGET_CLASS
-const RC_TOKEN_CLASS = C.GTK_RC_TOKEN_CLASS
-const RC_TOKEN_LOWEST = C.GTK_RC_TOKEN_LOWEST
-const RC_TOKEN_GTK = C.GTK_RC_TOKEN_GTK
-const RC_TOKEN_APPLICATION = C.GTK_RC_TOKEN_APPLICATION
-const RC_TOKEN_THEME = C.GTK_RC_TOKEN_THEME
-const RC_TOKEN_RC = C.GTK_RC_TOKEN_RC
-const RC_TOKEN_HIGHEST = C.GTK_RC_TOKEN_HIGHEST
-const RC_TOKEN_ENGINE = C.GTK_RC_TOKEN_ENGINE
-const RC_TOKEN_MODULE_PATH = C.GTK_RC_TOKEN_MODULE_PATH
-const RC_TOKEN_IM_MODULE_PATH = C.GTK_RC_TOKEN_IM_MODULE_PATH
-const RC_TOKEN_IM_MODULE_FILE = C.GTK_RC_TOKEN_IM_MODULE_FILE
-const RC_TOKEN_STOCK = C.GTK_RC_TOKEN_STOCK
-const RC_TOKEN_LTR = C.GTK_RC_TOKEN_LTR
-const RC_TOKEN_RTL = C.GTK_RC_TOKEN_RTL
-const RC_TOKEN_COLOR = C.GTK_RC_TOKEN_COLOR
-const RC_TOKEN_UNBIND = C.GTK_RC_TOKEN_UNBIND
-const RC_TOKEN_LAST = C.GTK_RC_TOKEN_LAST
-const RECENT_CHOOSER_ERROR_NOT_FOUND = C.GTK_RECENT_CHOOSER_ERROR_NOT_FOUND
-const RECENT_CHOOSER_ERROR_INVALID_URI = C.GTK_RECENT_CHOOSER_ERROR_INVALID_URI
-const RECENT_FILTER_URI = C.GTK_RECENT_FILTER_URI
-const RECENT_FILTER_DISPLAY_NAME = C.GTK_RECENT_FILTER_DISPLAY_NAME
-const RECENT_FILTER_MIME_TYPE = C.GTK_RECENT_FILTER_MIME_TYPE
-const RECENT_FILTER_APPLICATION = C.GTK_RECENT_FILTER_APPLICATION
-const RECENT_FILTER_GROUP = C.GTK_RECENT_FILTER_GROUP
-const RECENT_FILTER_AGE = C.GTK_RECENT_FILTER_AGE
-const RECENT_MANAGER_ERROR_NOT_FOUND = C.GTK_RECENT_MANAGER_ERROR_NOT_FOUND
-const RECENT_MANAGER_ERROR_INVALID_URI = C.GTK_RECENT_MANAGER_ERROR_INVALID_URI
-const RECENT_MANAGER_ERROR_INVALID_ENCODING = C.GTK_RECENT_MANAGER_ERROR_INVALID_ENCODING
-const RECENT_MANAGER_ERROR_NOT_REGISTERED = C.GTK_RECENT_MANAGER_ERROR_NOT_REGISTERED
-const RECENT_MANAGER_ERROR_READ = C.GTK_RECENT_MANAGER_ERROR_READ
-const RECENT_MANAGER_ERROR_WRITE = C.GTK_RECENT_MANAGER_ERROR_WRITE
-const RECENT_MANAGER_ERROR_UNKNOWN = C.GTK_RECENT_MANAGER_ERROR_UNKNOWN
-const RECENT_SORT_NONE = C.GTK_RECENT_SORT_NONE
-const RECENT_SORT_MRU = C.GTK_RECENT_SORT_MRU
-const RECENT_SORT_LRU = C.GTK_RECENT_SORT_LRU
-const RECENT_SORT_CUSTOM = C.GTK_RECENT_SORT_CUSTOM
-const REGION_EVEN = C.GTK_REGION_EVEN
-const REGION_ODD = C.GTK_REGION_ODD
-const REGION_FIRST = C.GTK_REGION_FIRST
-const REGION_LAST = C.GTK_REGION_LAST
-const REGION_ONLY = C.GTK_REGION_ONLY
-const REGION_SORTED = C.GTK_REGION_SORTED
-const RELIEF_NORMAL = C.GTK_RELIEF_NORMAL
-const RELIEF_HALF = C.GTK_RELIEF_HALF
-const RELIEF_NONE = C.GTK_RELIEF_NONE
-const RESIZE_PARENT = C.GTK_RESIZE_PARENT
-const RESIZE_QUEUE = C.GTK_RESIZE_QUEUE
-const RESIZE_IMMEDIATE = C.GTK_RESIZE_IMMEDIATE
-const RESPONSE_NONE = C.GTK_RESPONSE_NONE
-const RESPONSE_REJECT = C.GTK_RESPONSE_REJECT
-const RESPONSE_ACCEPT = C.GTK_RESPONSE_ACCEPT
-const RESPONSE_DELETE_EVENT = C.GTK_RESPONSE_DELETE_EVENT
-const RESPONSE_OK = C.GTK_RESPONSE_OK
-const RESPONSE_CANCEL = C.GTK_RESPONSE_CANCEL
-const RESPONSE_CLOSE = C.GTK_RESPONSE_CLOSE
-const RESPONSE_YES = C.GTK_RESPONSE_YES
-const RESPONSE_NO = C.GTK_RESPONSE_NO
-const RESPONSE_APPLY = C.GTK_RESPONSE_APPLY
-const RESPONSE_HELP = C.GTK_RESPONSE_HELP
-const SCROLL_STEPS = C.GTK_SCROLL_STEPS
-const SCROLL_PAGES = C.GTK_SCROLL_PAGES
+const STYLE_CLASS_CELL = C.GTK_STYLE_CLASS_CELL
+const JUSTIFY_CENTER = C.GTK_JUSTIFY_CENTER
 const SCROLL_ENDS = C.GTK_SCROLL_ENDS
-const SCROLL_HORIZONTAL_STEPS = C.GTK_SCROLL_HORIZONTAL_STEPS
-const SCROLL_HORIZONTAL_PAGES = C.GTK_SCROLL_HORIZONTAL_PAGES
-const SCROLL_HORIZONTAL_ENDS = C.GTK_SCROLL_HORIZONTAL_ENDS
-const SCROLL_NONE = C.GTK_SCROLL_NONE
-const SCROLL_JUMP = C.GTK_SCROLL_JUMP
-const SCROLL_STEP_BACKWARD = C.GTK_SCROLL_STEP_BACKWARD
-const SCROLL_STEP_FORWARD = C.GTK_SCROLL_STEP_FORWARD
-const SCROLL_PAGE_BACKWARD = C.GTK_SCROLL_PAGE_BACKWARD
-const SCROLL_PAGE_FORWARD = C.GTK_SCROLL_PAGE_FORWARD
-const SCROLL_STEP_UP = C.GTK_SCROLL_STEP_UP
-const SCROLL_STEP_DOWN = C.GTK_SCROLL_STEP_DOWN
-const SCROLL_PAGE_UP = C.GTK_SCROLL_PAGE_UP
-const SCROLL_PAGE_DOWN = C.GTK_SCROLL_PAGE_DOWN
-const SCROLL_STEP_LEFT = C.GTK_SCROLL_STEP_LEFT
-const SCROLL_STEP_RIGHT = C.GTK_SCROLL_STEP_RIGHT
-const SCROLL_PAGE_LEFT = C.GTK_SCROLL_PAGE_LEFT
-const SCROLL_PAGE_RIGHT = C.GTK_SCROLL_PAGE_RIGHT
-const SCROLL_START = C.GTK_SCROLL_START
-const SCROLL_END = C.GTK_SCROLL_END
-const SCROLL_MINIMUM = C.GTK_SCROLL_MINIMUM
-const SCROLL_NATURAL = C.GTK_SCROLL_NATURAL
-const SELECTION_NONE = C.GTK_SELECTION_NONE
-const SELECTION_SINGLE = C.GTK_SELECTION_SINGLE
-const SELECTION_BROWSE = C.GTK_SELECTION_BROWSE
-const SELECTION_MULTIPLE = C.GTK_SELECTION_MULTIPLE
-const SENSITIVITY_AUTO = C.GTK_SENSITIVITY_AUTO
+const PRINT_SETTINGS_SCALE = C.GTK_PRINT_SETTINGS_SCALE
+const RC_TOKEN_YTHICKNESS = C.GTK_RC_TOKEN_YTHICKNESS
 const SENSITIVITY_ON = C.GTK_SENSITIVITY_ON
-const SENSITIVITY_OFF = C.GTK_SENSITIVITY_OFF
-const SHADOW_NONE = C.GTK_SHADOW_NONE
-const SHADOW_IN = C.GTK_SHADOW_IN
-const SHADOW_OUT = C.GTK_SHADOW_OUT
-const SHADOW_ETCHED_IN = C.GTK_SHADOW_ETCHED_IN
-const SHADOW_ETCHED_OUT = C.GTK_SHADOW_ETCHED_OUT
-const SIZE_GROUP_NONE = C.GTK_SIZE_GROUP_NONE
-const SIZE_GROUP_HORIZONTAL = C.GTK_SIZE_GROUP_HORIZONTAL
-const SIZE_GROUP_VERTICAL = C.GTK_SIZE_GROUP_VERTICAL
-const SIZE_GROUP_BOTH = C.GTK_SIZE_GROUP_BOTH
-const SIZE_REQUEST_HEIGHT_FOR_WIDTH = C.GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH
-const SIZE_REQUEST_WIDTH_FOR_HEIGHT = C.GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT
-const SIZE_REQUEST_CONSTANT_SIZE = C.GTK_SIZE_REQUEST_CONSTANT_SIZE
-const SORT_ASCENDING = C.GTK_SORT_ASCENDING
-const SORT_DESCENDING = C.GTK_SORT_DESCENDING
-const UPDATE_ALWAYS = C.GTK_UPDATE_ALWAYS
-const UPDATE_IF_VALID = C.GTK_UPDATE_IF_VALID
-const SPIN_STEP_FORWARD = C.GTK_SPIN_STEP_FORWARD
-const SPIN_STEP_BACKWARD = C.GTK_SPIN_STEP_BACKWARD
-const SPIN_PAGE_FORWARD = C.GTK_SPIN_PAGE_FORWARD
-const SPIN_PAGE_BACKWARD = C.GTK_SPIN_PAGE_BACKWARD
-const SPIN_HOME = C.GTK_SPIN_HOME
-const SPIN_END = C.GTK_SPIN_END
-const SPIN_USER_DEFINED = C.GTK_SPIN_USER_DEFINED
-const STATE_FLAG_NORMAL = C.GTK_STATE_FLAG_NORMAL
-const STATE_FLAG_ACTIVE = C.GTK_STATE_FLAG_ACTIVE
-const STATE_FLAG_PRELIGHT = C.GTK_STATE_FLAG_PRELIGHT
+const PRINT_QUALITY_DRAFT = C.GTK_PRINT_QUALITY_DRAFT
 const STATE_FLAG_SELECTED = C.GTK_STATE_FLAG_SELECTED
-const STATE_FLAG_INSENSITIVE = C.GTK_STATE_FLAG_INSENSITIVE
-const STATE_FLAG_INCONSISTENT = C.GTK_STATE_FLAG_INCONSISTENT
-const STATE_FLAG_FOCUSED = C.GTK_STATE_FLAG_FOCUSED
-const STATE_FLAG_BACKDROP = C.GTK_STATE_FLAG_BACKDROP
-const STATE_NORMAL = C.GTK_STATE_NORMAL
-const STATE_ACTIVE = C.GTK_STATE_ACTIVE
-const STATE_PRELIGHT = C.GTK_STATE_PRELIGHT
-const STATE_SELECTED = C.GTK_STATE_SELECTED
-const STATE_INSENSITIVE = C.GTK_STATE_INSENSITIVE
-const STATE_INCONSISTENT = C.GTK_STATE_INCONSISTENT
-const STATE_FOCUSED = C.GTK_STATE_FOCUSED
-const TARGET_SAME_APP = C.GTK_TARGET_SAME_APP
-const TARGET_SAME_WIDGET = C.GTK_TARGET_SAME_WIDGET
-const TARGET_OTHER_APP = C.GTK_TARGET_OTHER_APP
-const TARGET_OTHER_WIDGET = C.GTK_TARGET_OTHER_WIDGET
-const TEXT_BUFFER_TARGET_INFO_BUFFER_CONTENTS = C.GTK_TEXT_BUFFER_TARGET_INFO_BUFFER_CONTENTS
-const TEXT_BUFFER_TARGET_INFO_RICH_TEXT = C.GTK_TEXT_BUFFER_TARGET_INFO_RICH_TEXT
-const TEXT_BUFFER_TARGET_INFO_TEXT = C.GTK_TEXT_BUFFER_TARGET_INFO_TEXT
-const TEXT_DIR_NONE = C.GTK_TEXT_DIR_NONE
-const TEXT_DIR_LTR = C.GTK_TEXT_DIR_LTR
-const TEXT_DIR_RTL = C.GTK_TEXT_DIR_RTL
-const TEXT_SEARCH_VISIBLE_ONLY = C.GTK_TEXT_SEARCH_VISIBLE_ONLY
-const TEXT_SEARCH_TEXT_ONLY = C.GTK_TEXT_SEARCH_TEXT_ONLY
-const TEXT_SEARCH_CASE_INSENSITIVE = C.GTK_TEXT_SEARCH_CASE_INSENSITIVE
-const TEXT_WINDOW_PRIVATE = C.GTK_TEXT_WINDOW_PRIVATE
-const TEXT_WINDOW_WIDGET = C.GTK_TEXT_WINDOW_WIDGET
-const TEXT_WINDOW_TEXT = C.GTK_TEXT_WINDOW_TEXT
-const TEXT_WINDOW_LEFT = C.GTK_TEXT_WINDOW_LEFT
-const TEXT_WINDOW_RIGHT = C.GTK_TEXT_WINDOW_RIGHT
-const TEXT_WINDOW_TOP = C.GTK_TEXT_WINDOW_TOP
-const TEXT_WINDOW_BOTTOM = C.GTK_TEXT_WINDOW_BOTTOM
-const TOOL_PALETTE_DRAG_ITEMS = C.GTK_TOOL_PALETTE_DRAG_ITEMS
-const TOOL_PALETTE_DRAG_GROUPS = C.GTK_TOOL_PALETTE_DRAG_GROUPS
-const TOOLBAR_SPACE_EMPTY = C.GTK_TOOLBAR_SPACE_EMPTY
-const TOOLBAR_SPACE_LINE = C.GTK_TOOLBAR_SPACE_LINE
-const TOOLBAR_ICONS = C.GTK_TOOLBAR_ICONS
-const TOOLBAR_TEXT = C.GTK_TOOLBAR_TEXT
-const TOOLBAR_BOTH = C.GTK_TOOLBAR_BOTH
-const TOOLBAR_BOTH_HORIZ = C.GTK_TOOLBAR_BOTH_HORIZ
-const TREE_MODEL_ITERS_PERSIST = C.GTK_TREE_MODEL_ITERS_PERSIST
-const TREE_MODEL_LIST_ONLY = C.GTK_TREE_MODEL_LIST_ONLY
-const TREE_VIEW_COLUMN_GROW_ONLY = C.GTK_TREE_VIEW_COLUMN_GROW_ONLY
-const TREE_VIEW_COLUMN_AUTOSIZE = C.GTK_TREE_VIEW_COLUMN_AUTOSIZE
-const TREE_VIEW_COLUMN_FIXED = C.GTK_TREE_VIEW_COLUMN_FIXED
-const TREE_VIEW_DROP_BEFORE = C.GTK_TREE_VIEW_DROP_BEFORE
-const TREE_VIEW_DROP_AFTER = C.GTK_TREE_VIEW_DROP_AFTER
-const TREE_VIEW_DROP_INTO_OR_BEFORE = C.GTK_TREE_VIEW_DROP_INTO_OR_BEFORE
-const TREE_VIEW_DROP_INTO_OR_AFTER = C.GTK_TREE_VIEW_DROP_INTO_OR_AFTER
-const TREE_VIEW_GRID_LINES_NONE = C.GTK_TREE_VIEW_GRID_LINES_NONE
-const TREE_VIEW_GRID_LINES_HORIZONTAL = C.GTK_TREE_VIEW_GRID_LINES_HORIZONTAL
-const TREE_VIEW_GRID_LINES_VERTICAL = C.GTK_TREE_VIEW_GRID_LINES_VERTICAL
-const TREE_VIEW_GRID_LINES_BOTH = C.GTK_TREE_VIEW_GRID_LINES_BOTH
-const UI_MANAGER_AUTO = C.GTK_UI_MANAGER_AUTO
-const UI_MANAGER_MENUBAR = C.GTK_UI_MANAGER_MENUBAR
-const UI_MANAGER_MENU = C.GTK_UI_MANAGER_MENU
-const UI_MANAGER_TOOLBAR = C.GTK_UI_MANAGER_TOOLBAR
-const UI_MANAGER_PLACEHOLDER = C.GTK_UI_MANAGER_PLACEHOLDER
-const UI_MANAGER_POPUP = C.GTK_UI_MANAGER_POPUP
-const UI_MANAGER_MENUITEM = C.GTK_UI_MANAGER_MENUITEM
-const UI_MANAGER_TOOLITEM = C.GTK_UI_MANAGER_TOOLITEM
-const UI_MANAGER_SEPARATOR = C.GTK_UI_MANAGER_SEPARATOR
-const UI_MANAGER_ACCELERATOR = C.GTK_UI_MANAGER_ACCELERATOR
-const UI_MANAGER_POPUP_WITH_ACCELS = C.GTK_UI_MANAGER_POPUP_WITH_ACCELS
-const UNIT_NONE = C.GTK_UNIT_NONE
-const UNIT_POINTS = C.GTK_UNIT_POINTS
-const UNIT_INCH = C.GTK_UNIT_INCH
-const UNIT_MM = C.GTK_UNIT_MM
-const WIDGET_HELP_TOOLTIP = C.GTK_WIDGET_HELP_TOOLTIP
-const WIDGET_HELP_WHATS_THIS = C.GTK_WIDGET_HELP_WHATS_THIS
-const WIN_POS_NONE = C.GTK_WIN_POS_NONE
-const WIN_POS_CENTER = C.GTK_WIN_POS_CENTER
-const WIN_POS_MOUSE = C.GTK_WIN_POS_MOUSE
-const WIN_POS_CENTER_ALWAYS = C.GTK_WIN_POS_CENTER_ALWAYS
-const WIN_POS_CENTER_ON_PARENT = C.GTK_WIN_POS_CENTER_ON_PARENT
-const WINDOW_TOPLEVEL = C.GTK_WINDOW_TOPLEVEL
-const WINDOW_POPUP = C.GTK_WINDOW_POPUP
-const WRAP_NONE = C.GTK_WRAP_NONE
-const WRAP_CHAR = C.GTK_WRAP_CHAR
-const WRAP_WORD = C.GTK_WRAP_WORD
-const WRAP_WORD_CHAR = C.GTK_WRAP_WORD_CHAR
-const BINARY_AGE = C.GTK_BINARY_AGE
-const INPUT_ERROR = C.GTK_INPUT_ERROR
-const INTERFACE_AGE = C.GTK_INTERFACE_AGE
-const LEVEL_BAR_OFFSET_HIGH = C.GTK_LEVEL_BAR_OFFSET_HIGH
-const LEVEL_BAR_OFFSET_LOW = C.GTK_LEVEL_BAR_OFFSET_LOW
-const MAJOR_VERSION = C.GTK_MAJOR_VERSION
-const MAX_COMPOSE_LEN = C.GTK_MAX_COMPOSE_LEN
-const MICRO_VERSION = C.GTK_MICRO_VERSION
-const MINOR_VERSION = C.GTK_MINOR_VERSION
 const PAPER_NAME_A3 = C.GTK_PAPER_NAME_A3
 const PAPER_NAME_A4 = C.GTK_PAPER_NAME_A4
 const PAPER_NAME_A5 = C.GTK_PAPER_NAME_A5
-const PAPER_NAME_B5 = C.GTK_PAPER_NAME_B5
-const PAPER_NAME_EXECUTIVE = C.GTK_PAPER_NAME_EXECUTIVE
-const PAPER_NAME_LEGAL = C.GTK_PAPER_NAME_LEGAL
-const PAPER_NAME_LETTER = C.GTK_PAPER_NAME_LETTER
-const PATH_PRIO_MASK = C.GTK_PATH_PRIO_MASK
-const PRINT_SETTINGS_COLLATE = C.GTK_PRINT_SETTINGS_COLLATE
-const PRINT_SETTINGS_DEFAULT_SOURCE = C.GTK_PRINT_SETTINGS_DEFAULT_SOURCE
-const PRINT_SETTINGS_DITHER = C.GTK_PRINT_SETTINGS_DITHER
-const PRINT_SETTINGS_DUPLEX = C.GTK_PRINT_SETTINGS_DUPLEX
-const PRINT_SETTINGS_FINISHINGS = C.GTK_PRINT_SETTINGS_FINISHINGS
-const PRINT_SETTINGS_MEDIA_TYPE = C.GTK_PRINT_SETTINGS_MEDIA_TYPE
-const PRINT_SETTINGS_NUMBER_UP = C.GTK_PRINT_SETTINGS_NUMBER_UP
-const PRINT_SETTINGS_NUMBER_UP_LAYOUT = C.GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT
-const PRINT_SETTINGS_N_COPIES = C.GTK_PRINT_SETTINGS_N_COPIES
-const PRINT_SETTINGS_ORIENTATION = C.GTK_PRINT_SETTINGS_ORIENTATION
-const PRINT_SETTINGS_OUTPUT_BASENAME = C.GTK_PRINT_SETTINGS_OUTPUT_BASENAME
-const PRINT_SETTINGS_OUTPUT_BIN = C.GTK_PRINT_SETTINGS_OUTPUT_BIN
-const PRINT_SETTINGS_OUTPUT_DIR = C.GTK_PRINT_SETTINGS_OUTPUT_DIR
-const PRINT_SETTINGS_OUTPUT_FILE_FORMAT = C.GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT
-const PRINT_SETTINGS_OUTPUT_URI = C.GTK_PRINT_SETTINGS_OUTPUT_URI
-const PRINT_SETTINGS_PAGE_RANGES = C.GTK_PRINT_SETTINGS_PAGE_RANGES
-const PRINT_SETTINGS_PAGE_SET = C.GTK_PRINT_SETTINGS_PAGE_SET
-const PRINT_SETTINGS_PAPER_FORMAT = C.GTK_PRINT_SETTINGS_PAPER_FORMAT
-const PRINT_SETTINGS_PAPER_HEIGHT = C.GTK_PRINT_SETTINGS_PAPER_HEIGHT
-const PRINT_SETTINGS_PAPER_WIDTH = C.GTK_PRINT_SETTINGS_PAPER_WIDTH
-const PRINT_SETTINGS_PRINTER = C.GTK_PRINT_SETTINGS_PRINTER
-const PRINT_SETTINGS_PRINTER_LPI = C.GTK_PRINT_SETTINGS_PRINTER_LPI
-const PRINT_SETTINGS_PRINT_PAGES = C.GTK_PRINT_SETTINGS_PRINT_PAGES
-const PRINT_SETTINGS_QUALITY = C.GTK_PRINT_SETTINGS_QUALITY
-const PRINT_SETTINGS_RESOLUTION = C.GTK_PRINT_SETTINGS_RESOLUTION
-const PRINT_SETTINGS_RESOLUTION_X = C.GTK_PRINT_SETTINGS_RESOLUTION_X
-const PRINT_SETTINGS_RESOLUTION_Y = C.GTK_PRINT_SETTINGS_RESOLUTION_Y
-const PRINT_SETTINGS_REVERSE = C.GTK_PRINT_SETTINGS_REVERSE
-const PRINT_SETTINGS_SCALE = C.GTK_PRINT_SETTINGS_SCALE
-const PRINT_SETTINGS_USE_COLOR = C.GTK_PRINT_SETTINGS_USE_COLOR
-const PRINT_SETTINGS_WIN32_DRIVER_EXTRA = C.GTK_PRINT_SETTINGS_WIN32_DRIVER_EXTRA
-const PRINT_SETTINGS_WIN32_DRIVER_VERSION = C.GTK_PRINT_SETTINGS_WIN32_DRIVER_VERSION
-const PRIORITY_RESIZE = C.GTK_PRIORITY_RESIZE
-const STOCK_ABOUT = C.GTK_STOCK_ABOUT
-const STOCK_ADD = C.GTK_STOCK_ADD
-const STOCK_APPLY = C.GTK_STOCK_APPLY
-const STOCK_BOLD = C.GTK_STOCK_BOLD
-const STOCK_CANCEL = C.GTK_STOCK_CANCEL
-const STOCK_CAPS_LOCK_WARNING = C.GTK_STOCK_CAPS_LOCK_WARNING
-const STOCK_CDROM = C.GTK_STOCK_CDROM
-const STOCK_CLEAR = C.GTK_STOCK_CLEAR
-const STOCK_CLOSE = C.GTK_STOCK_CLOSE
-const STOCK_COLOR_PICKER = C.GTK_STOCK_COLOR_PICKER
-const STOCK_CONNECT = C.GTK_STOCK_CONNECT
-const STOCK_CONVERT = C.GTK_STOCK_CONVERT
-const STOCK_COPY = C.GTK_STOCK_COPY
-const STOCK_CUT = C.GTK_STOCK_CUT
-const STOCK_DELETE = C.GTK_STOCK_DELETE
-const STOCK_DIALOG_AUTHENTICATION = C.GTK_STOCK_DIALOG_AUTHENTICATION
-const STOCK_DIALOG_ERROR = C.GTK_STOCK_DIALOG_ERROR
-const STOCK_DIALOG_INFO = C.GTK_STOCK_DIALOG_INFO
-const STOCK_DIALOG_QUESTION = C.GTK_STOCK_DIALOG_QUESTION
-const STOCK_DIALOG_WARNING = C.GTK_STOCK_DIALOG_WARNING
-const STOCK_DIRECTORY = C.GTK_STOCK_DIRECTORY
-const STOCK_DISCARD = C.GTK_STOCK_DISCARD
-const STOCK_DISCONNECT = C.GTK_STOCK_DISCONNECT
-const STOCK_DND = C.GTK_STOCK_DND
-const STOCK_DND_MULTIPLE = C.GTK_STOCK_DND_MULTIPLE
-const STOCK_EDIT = C.GTK_STOCK_EDIT
-const STOCK_EXECUTE = C.GTK_STOCK_EXECUTE
-const STOCK_FILE = C.GTK_STOCK_FILE
-const STOCK_FIND = C.GTK_STOCK_FIND
-const STOCK_FIND_AND_REPLACE = C.GTK_STOCK_FIND_AND_REPLACE
-const STOCK_FLOPPY = C.GTK_STOCK_FLOPPY
-const STOCK_FULLSCREEN = C.GTK_STOCK_FULLSCREEN
-const STOCK_GOTO_BOTTOM = C.GTK_STOCK_GOTO_BOTTOM
-const STOCK_GOTO_FIRST = C.GTK_STOCK_GOTO_FIRST
-const STOCK_GOTO_LAST = C.GTK_STOCK_GOTO_LAST
-const STOCK_GOTO_TOP = C.GTK_STOCK_GOTO_TOP
-const STOCK_GO_BACK = C.GTK_STOCK_GO_BACK
-const STOCK_GO_DOWN = C.GTK_STOCK_GO_DOWN
-const STOCK_GO_FORWARD = C.GTK_STOCK_GO_FORWARD
-const STOCK_GO_UP = C.GTK_STOCK_GO_UP
-const STOCK_HARDDISK = C.GTK_STOCK_HARDDISK
-const STOCK_HELP = C.GTK_STOCK_HELP
-const STOCK_HOME = C.GTK_STOCK_HOME
-const STOCK_INDENT = C.GTK_STOCK_INDENT
-const STOCK_INDEX = C.GTK_STOCK_INDEX
-const STOCK_INFO = C.GTK_STOCK_INFO
-const STOCK_ITALIC = C.GTK_STOCK_ITALIC
-const STOCK_JUMP_TO = C.GTK_STOCK_JUMP_TO
-const STOCK_JUSTIFY_CENTER = C.GTK_STOCK_JUSTIFY_CENTER
-const STOCK_JUSTIFY_FILL = C.GTK_STOCK_JUSTIFY_FILL
-const STOCK_JUSTIFY_LEFT = C.GTK_STOCK_JUSTIFY_LEFT
-const STOCK_JUSTIFY_RIGHT = C.GTK_STOCK_JUSTIFY_RIGHT
-const STOCK_LEAVE_FULLSCREEN = C.GTK_STOCK_LEAVE_FULLSCREEN
-const STOCK_MEDIA_FORWARD = C.GTK_STOCK_MEDIA_FORWARD
-const STOCK_MEDIA_NEXT = C.GTK_STOCK_MEDIA_NEXT
-const STOCK_MEDIA_PAUSE = C.GTK_STOCK_MEDIA_PAUSE
-const STOCK_MEDIA_PLAY = C.GTK_STOCK_MEDIA_PLAY
-const STOCK_MEDIA_PREVIOUS = C.GTK_STOCK_MEDIA_PREVIOUS
-const STOCK_MEDIA_RECORD = C.GTK_STOCK_MEDIA_RECORD
-const STOCK_MEDIA_REWIND = C.GTK_STOCK_MEDIA_REWIND
-const STOCK_MEDIA_STOP = C.GTK_STOCK_MEDIA_STOP
-const STOCK_MISSING_IMAGE = C.GTK_STOCK_MISSING_IMAGE
-const STOCK_NETWORK = C.GTK_STOCK_NETWORK
-const STOCK_NEW = C.GTK_STOCK_NEW
-const STOCK_NO = C.GTK_STOCK_NO
-const STOCK_OK = C.GTK_STOCK_OK
-const STOCK_OPEN = C.GTK_STOCK_OPEN
-const STOCK_ORIENTATION_LANDSCAPE = C.GTK_STOCK_ORIENTATION_LANDSCAPE
-const STOCK_ORIENTATION_PORTRAIT = C.GTK_STOCK_ORIENTATION_PORTRAIT
-const STOCK_ORIENTATION_REVERSE_LANDSCAPE = C.GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE
-const STOCK_ORIENTATION_REVERSE_PORTRAIT = C.GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT
-const STOCK_PAGE_SETUP = C.GTK_STOCK_PAGE_SETUP
-const STOCK_PASTE = C.GTK_STOCK_PASTE
-const STOCK_PREFERENCES = C.GTK_STOCK_PREFERENCES
-const STOCK_PRINT = C.GTK_STOCK_PRINT
-const STOCK_PRINT_ERROR = C.GTK_STOCK_PRINT_ERROR
-const STOCK_PRINT_PAUSED = C.GTK_STOCK_PRINT_PAUSED
-const STOCK_PRINT_PREVIEW = C.GTK_STOCK_PRINT_PREVIEW
-const STOCK_PRINT_REPORT = C.GTK_STOCK_PRINT_REPORT
-const STOCK_PRINT_WARNING = C.GTK_STOCK_PRINT_WARNING
-const STOCK_PROPERTIES = C.GTK_STOCK_PROPERTIES
-const STOCK_QUIT = C.GTK_STOCK_QUIT
-const STOCK_REDO = C.GTK_STOCK_REDO
-const STOCK_REFRESH = C.GTK_STOCK_REFRESH
-const STOCK_REMOVE = C.GTK_STOCK_REMOVE
-const STOCK_REVERT_TO_SAVED = C.GTK_STOCK_REVERT_TO_SAVED
-const STOCK_SAVE = C.GTK_STOCK_SAVE
-const STOCK_SAVE_AS = C.GTK_STOCK_SAVE_AS
-const STOCK_SELECT_ALL = C.GTK_STOCK_SELECT_ALL
-const STOCK_SELECT_COLOR = C.GTK_STOCK_SELECT_COLOR
-const STOCK_SELECT_FONT = C.GTK_STOCK_SELECT_FONT
-const STOCK_SORT_ASCENDING = C.GTK_STOCK_SORT_ASCENDING
-const STOCK_SORT_DESCENDING = C.GTK_STOCK_SORT_DESCENDING
-const STOCK_SPELL_CHECK = C.GTK_STOCK_SPELL_CHECK
-const STOCK_STOP = C.GTK_STOCK_STOP
-const STOCK_STRIKETHROUGH = C.GTK_STOCK_STRIKETHROUGH
-const STOCK_UNDELETE = C.GTK_STOCK_UNDELETE
-const STOCK_UNDERLINE = C.GTK_STOCK_UNDERLINE
-const STOCK_UNDO = C.GTK_STOCK_UNDO
-const STOCK_UNINDENT = C.GTK_STOCK_UNINDENT
-const STOCK_YES = C.GTK_STOCK_YES
-const STOCK_ZOOM_100 = C.GTK_STOCK_ZOOM_100
-const STOCK_ZOOM_FIT = C.GTK_STOCK_ZOOM_FIT
-const STOCK_ZOOM_IN = C.GTK_STOCK_ZOOM_IN
-const STOCK_ZOOM_OUT = C.GTK_STOCK_ZOOM_OUT
-const STYLE_CLASS_ACCELERATOR = C.GTK_STYLE_CLASS_ACCELERATOR
-const STYLE_CLASS_ARROW = C.GTK_STYLE_CLASS_ARROW
-const STYLE_CLASS_BACKGROUND = C.GTK_STYLE_CLASS_BACKGROUND
-const STYLE_CLASS_BOTTOM = C.GTK_STYLE_CLASS_BOTTOM
-const STYLE_CLASS_BUTTON = C.GTK_STYLE_CLASS_BUTTON
-const STYLE_CLASS_CALENDAR = C.GTK_STYLE_CLASS_CALENDAR
-const STYLE_CLASS_CELL = C.GTK_STYLE_CLASS_CELL
-const STYLE_CLASS_CHECK = C.GTK_STYLE_CLASS_CHECK
-const STYLE_CLASS_COMBOBOX_ENTRY = C.GTK_STYLE_CLASS_COMBOBOX_ENTRY
-const STYLE_CLASS_CURSOR_HANDLE = C.GTK_STYLE_CLASS_CURSOR_HANDLE
-const STYLE_CLASS_DEFAULT = C.GTK_STYLE_CLASS_DEFAULT
-const STYLE_CLASS_DIM_LABEL = C.GTK_STYLE_CLASS_DIM_LABEL
-const STYLE_CLASS_DND = C.GTK_STYLE_CLASS_DND
-const STYLE_CLASS_DOCK = C.GTK_STYLE_CLASS_DOCK
-const STYLE_CLASS_ENTRY = C.GTK_STYLE_CLASS_ENTRY
-const STYLE_CLASS_ERROR = C.GTK_STYLE_CLASS_ERROR
-const STYLE_CLASS_EXPANDER = C.GTK_STYLE_CLASS_EXPANDER
-const STYLE_CLASS_FRAME = C.GTK_STYLE_CLASS_FRAME
-const STYLE_CLASS_GRIP = C.GTK_STYLE_CLASS_GRIP
-const STYLE_CLASS_HEADER = C.GTK_STYLE_CLASS_HEADER
-const STYLE_CLASS_HIGHLIGHT = C.GTK_STYLE_CLASS_HIGHLIGHT
-const STYLE_CLASS_HORIZONTAL = C.GTK_STYLE_CLASS_HORIZONTAL
-const STYLE_CLASS_IMAGE = C.GTK_STYLE_CLASS_IMAGE
-const STYLE_CLASS_INFO = C.GTK_STYLE_CLASS_INFO
-const STYLE_CLASS_INLINE_TOOLBAR = C.GTK_STYLE_CLASS_INLINE_TOOLBAR
-const STYLE_CLASS_LEFT = C.GTK_STYLE_CLASS_LEFT
-const STYLE_CLASS_LEVEL_BAR = C.GTK_STYLE_CLASS_LEVEL_BAR
-const STYLE_CLASS_LINKED = C.GTK_STYLE_CLASS_LINKED
-const STYLE_CLASS_MARK = C.GTK_STYLE_CLASS_MARK
-const STYLE_CLASS_MENU = C.GTK_STYLE_CLASS_MENU
-const STYLE_CLASS_MENUBAR = C.GTK_STYLE_CLASS_MENUBAR
-const STYLE_CLASS_MENUITEM = C.GTK_STYLE_CLASS_MENUITEM
-const STYLE_CLASS_NOTEBOOK = C.GTK_STYLE_CLASS_NOTEBOOK
-const STYLE_CLASS_OSD = C.GTK_STYLE_CLASS_OSD
-const STYLE_CLASS_PANE_SEPARATOR = C.GTK_STYLE_CLASS_PANE_SEPARATOR
-const STYLE_CLASS_PRIMARY_TOOLBAR = C.GTK_STYLE_CLASS_PRIMARY_TOOLBAR
-const STYLE_CLASS_PROGRESSBAR = C.GTK_STYLE_CLASS_PROGRESSBAR
-const STYLE_CLASS_PULSE = C.GTK_STYLE_CLASS_PULSE
-const STYLE_CLASS_QUESTION = C.GTK_STYLE_CLASS_QUESTION
-const STYLE_CLASS_RADIO = C.GTK_STYLE_CLASS_RADIO
-const STYLE_CLASS_RAISED = C.GTK_STYLE_CLASS_RAISED
-const STYLE_CLASS_RIGHT = C.GTK_STYLE_CLASS_RIGHT
-const STYLE_CLASS_RUBBERBAND = C.GTK_STYLE_CLASS_RUBBERBAND
-const STYLE_CLASS_SCALE = C.GTK_STYLE_CLASS_SCALE
-const STYLE_CLASS_SCALE_HAS_MARKS_ABOVE = C.GTK_STYLE_CLASS_SCALE_HAS_MARKS_ABOVE
-const STYLE_CLASS_SCALE_HAS_MARKS_BELOW = C.GTK_STYLE_CLASS_SCALE_HAS_MARKS_BELOW
-const STYLE_CLASS_SCROLLBAR = C.GTK_STYLE_CLASS_SCROLLBAR
-const STYLE_CLASS_SCROLLBARS_JUNCTION = C.GTK_STYLE_CLASS_SCROLLBARS_JUNCTION
-const STYLE_CLASS_SEPARATOR = C.GTK_STYLE_CLASS_SEPARATOR
-const STYLE_CLASS_SIDEBAR = C.GTK_STYLE_CLASS_SIDEBAR
-const STYLE_CLASS_SLIDER = C.GTK_STYLE_CLASS_SLIDER
-const STYLE_CLASS_SPINBUTTON = C.GTK_STYLE_CLASS_SPINBUTTON
-const STYLE_CLASS_SPINNER = C.GTK_STYLE_CLASS_SPINNER
-const STYLE_CLASS_TOOLBAR = C.GTK_STYLE_CLASS_TOOLBAR
-const STYLE_CLASS_TOOLTIP = C.GTK_STYLE_CLASS_TOOLTIP
-const STYLE_CLASS_TOP = C.GTK_STYLE_CLASS_TOP
-const STYLE_CLASS_TROUGH = C.GTK_STYLE_CLASS_TROUGH
-const STYLE_CLASS_VERTICAL = C.GTK_STYLE_CLASS_VERTICAL
-const STYLE_CLASS_VIEW = C.GTK_STYLE_CLASS_VIEW
-const STYLE_CLASS_WARNING = C.GTK_STYLE_CLASS_WARNING
-const STYLE_PROPERTY_BACKGROUND_COLOR = C.GTK_STYLE_PROPERTY_BACKGROUND_COLOR
-const STYLE_PROPERTY_BACKGROUND_IMAGE = C.GTK_STYLE_PROPERTY_BACKGROUND_IMAGE
-const STYLE_PROPERTY_BORDER_COLOR = C.GTK_STYLE_PROPERTY_BORDER_COLOR
-const STYLE_PROPERTY_BORDER_RADIUS = C.GTK_STYLE_PROPERTY_BORDER_RADIUS
-const STYLE_PROPERTY_BORDER_STYLE = C.GTK_STYLE_PROPERTY_BORDER_STYLE
-const STYLE_PROPERTY_BORDER_WIDTH = C.GTK_STYLE_PROPERTY_BORDER_WIDTH
-const STYLE_PROPERTY_COLOR = C.GTK_STYLE_PROPERTY_COLOR
-const STYLE_PROPERTY_FONT = C.GTK_STYLE_PROPERTY_FONT
-const STYLE_PROPERTY_MARGIN = C.GTK_STYLE_PROPERTY_MARGIN
-const STYLE_PROPERTY_PADDING = C.GTK_STYLE_PROPERTY_PADDING
-const STYLE_PROVIDER_PRIORITY_APPLICATION = C.GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
 const STYLE_PROVIDER_PRIORITY_FALLBACK = C.GTK_STYLE_PROVIDER_PRIORITY_FALLBACK
+const STOCK_UNINDENT = C.GTK_STOCK_UNINDENT
+const STOCK_DIRECTORY = C.GTK_STOCK_DIRECTORY
+const STOCK_CONNECT = C.GTK_STOCK_CONNECT
+const STYLE_CLASS_TROUGH = C.GTK_STYLE_CLASS_TROUGH
+const STOCK_MEDIA_NEXT = C.GTK_STOCK_MEDIA_NEXT
+const DIR_TAB_FORWARD = C.GTK_DIR_TAB_FORWARD
+const PRINT_DUPLEX_HORIZONTAL = C.GTK_PRINT_DUPLEX_HORIZONTAL
+const RC_TOKEN_BASE = C.GTK_RC_TOKEN_BASE
+const RESPONSE_HELP = C.GTK_RESPONSE_HELP
+const PACK_DIRECTION_TTB = C.GTK_PACK_DIRECTION_TTB
+const STOCK_DIALOG_QUESTION = C.GTK_STOCK_DIALOG_QUESTION
+const ENTRY_ICON_PRIMARY = C.GTK_ENTRY_ICON_PRIMARY
+const ORIENTATION_HORIZONTAL = C.GTK_ORIENTATION_HORIZONTAL
+const STOCK_REDO = C.GTK_STOCK_REDO
+const MOVEMENT_PARAGRAPH_ENDS = C.GTK_MOVEMENT_PARAGRAPH_ENDS
+const STOCK_QUIT = C.GTK_STOCK_QUIT
+const STYLE_CLASS_HEADER = C.GTK_STYLE_CLASS_HEADER
+const JUNCTION_CORNER_TOPLEFT = C.GTK_JUNCTION_CORNER_TOPLEFT
+const BUILDER_ERROR_VERSION_MISMATCH = C.GTK_BUILDER_ERROR_VERSION_MISMATCH
+const INPUT_ERROR = C.GTK_INPUT_ERROR
+const SIZE_GROUP_NONE = C.GTK_SIZE_GROUP_NONE
+const BORDER_STYLE_INSET = C.GTK_BORDER_STYLE_INSET
+const PATH_WIDGET = C.GTK_PATH_WIDGET
+const BUILDER_ERROR_INVALID_TYPE_FUNCTION = C.GTK_BUILDER_ERROR_INVALID_TYPE_FUNCTION
+const PRINT_SETTINGS_PRINTER_LPI = C.GTK_PRINT_SETTINGS_PRINTER_LPI
+const POS_BOTTOM = C.GTK_POS_BOTTOM
+const PRINT_OPERATION_RESULT_IN_PROGRESS = C.GTK_PRINT_OPERATION_RESULT_IN_PROGRESS
+const FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME = C.GTK_FILE_CHOOSER_ERROR_INCOMPLETE_HOSTNAME
+const STYLE_PROPERTY_PADDING = C.GTK_STYLE_PROPERTY_PADDING
+const BUTTONS_OK = C.GTK_BUTTONS_OK
+const RC_TEXT = C.GTK_RC_TEXT
+const STYLE_PROPERTY_FONT = C.GTK_STYLE_PROPERTY_FONT
+const SCROLL_PAGE_FORWARD = C.GTK_SCROLL_PAGE_FORWARD
+const RC_TOKEN_LAST = C.GTK_RC_TOKEN_LAST
+const STOCK_DIALOG_INFO = C.GTK_STOCK_DIALOG_INFO
+const INPUT_PURPOSE_NUMBER = C.GTK_INPUT_PURPOSE_NUMBER
+const SCROLL_PAGE_UP = C.GTK_SCROLL_PAGE_UP
+const STOCK_PRINT_WARNING = C.GTK_STOCK_PRINT_WARNING
+const NOTEBOOK_TAB_FIRST = C.GTK_NOTEBOOK_TAB_FIRST
+const RC_TOKEN_RTL = C.GTK_RC_TOKEN_RTL
+const TOOL_PALETTE_DRAG_GROUPS = C.GTK_TOOL_PALETTE_DRAG_GROUPS
+const MESSAGE_OTHER = C.GTK_MESSAGE_OTHER
+const ICON_LOOKUP_FORCE_SVG = C.GTK_ICON_LOOKUP_FORCE_SVG
+const STOCK_ZOOM_FIT = C.GTK_STOCK_ZOOM_FIT
+const STATE_FLAG_ACTIVE = C.GTK_STATE_FLAG_ACTIVE
+const BUTTONBOX_END = C.GTK_BUTTONBOX_END
+const MOVEMENT_VISUAL_POSITIONS = C.GTK_MOVEMENT_VISUAL_POSITIONS
+const STOCK_FILE = C.GTK_STOCK_FILE
+const STOCK_CDROM = C.GTK_STOCK_CDROM
+const STATE_PRELIGHT = C.GTK_STATE_PRELIGHT
+const FILE_CHOOSER_ACTION_SELECT_FOLDER = C.GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER
+const STATE_FLAG_PRELIGHT = C.GTK_STATE_FLAG_PRELIGHT
+const RC_TOKEN_BINDING = C.GTK_RC_TOKEN_BINDING
+const UI_MANAGER_POPUP_WITH_ACCELS = C.GTK_UI_MANAGER_POPUP_WITH_ACCELS
+const RC_TOKEN_MODULE_PATH = C.GTK_RC_TOKEN_MODULE_PATH
+const SCROLL_STEP_FORWARD = C.GTK_SCROLL_STEP_FORWARD
+const DRAG_RESULT_SUCCESS = C.GTK_DRAG_RESULT_SUCCESS
+const STOCK_MEDIA_PLAY = C.GTK_STOCK_MEDIA_PLAY
+const ICON_LOOKUP_GENERIC_FALLBACK = C.GTK_ICON_LOOKUP_GENERIC_FALLBACK
+const STYLE_CLASS_SPINNER = C.GTK_STYLE_CLASS_SPINNER
+const SCROLL_STEP_LEFT = C.GTK_SCROLL_STEP_LEFT
+const SCROLL_JUMP = C.GTK_SCROLL_JUMP
+const STYLE_CLASS_ERROR = C.GTK_STYLE_CLASS_ERROR
+const STOCK_PRINT_PAUSED = C.GTK_STOCK_PRINT_PAUSED
+const DELETE_DISPLAY_LINES = C.GTK_DELETE_DISPLAY_LINES
+const STYLE_PROPERTY_BORDER_STYLE = C.GTK_STYLE_PROPERTY_BORDER_STYLE
+const PRINT_PAGES_RANGES = C.GTK_PRINT_PAGES_RANGES
+const STOCK_CLOSE = C.GTK_STOCK_CLOSE
+const MOVEMENT_PAGES = C.GTK_MOVEMENT_PAGES
+const PRINT_SETTINGS_RESOLUTION = C.GTK_PRINT_SETTINGS_RESOLUTION
+const RC_TOKEN_STOCK = C.GTK_RC_TOKEN_STOCK
+const SHRINK = C.GTK_SHRINK
+const STOCK_GO_UP = C.GTK_STOCK_GO_UP
+const PRINT_QUALITY_LOW = C.GTK_PRINT_QUALITY_LOW
+const STOCK_EXECUTE = C.GTK_STOCK_EXECUTE
+const PRINT_SETTINGS_USE_COLOR = C.GTK_PRINT_SETTINGS_USE_COLOR
+const DEBUG_BUILDER = C.GTK_DEBUG_BUILDER
+const APPLICATION_INHIBIT_LOGOUT = C.GTK_APPLICATION_INHIBIT_LOGOUT
+const IM_PREEDIT_NONE = C.GTK_IM_PREEDIT_NONE
+const RESPONSE_CANCEL = C.GTK_RESPONSE_CANCEL
+const RC_TOKEN_FG = C.GTK_RC_TOKEN_FG
+const UNIT_INCH = C.GTK_UNIT_INCH
+const STYLE_CLASS_TOOLTIP = C.GTK_STYLE_CLASS_TOOLTIP
+const STOCK_INFO = C.GTK_STOCK_INFO
+const RESIZE_IMMEDIATE = C.GTK_RESIZE_IMMEDIATE
+const STOCK_PRINT_REPORT = C.GTK_STOCK_PRINT_REPORT
+const INPUT_PURPOSE_PASSWORD = C.GTK_INPUT_PURPOSE_PASSWORD
 const STYLE_PROVIDER_PRIORITY_SETTINGS = C.GTK_STYLE_PROVIDER_PRIORITY_SETTINGS
-const STYLE_PROVIDER_PRIORITY_THEME = C.GTK_STYLE_PROVIDER_PRIORITY_THEME
-const STYLE_PROVIDER_PRIORITY_USER = C.GTK_STYLE_PROVIDER_PRIORITY_USER
+const DEBUG_ICONTHEME = C.GTK_DEBUG_ICONTHEME
+const RC_TOKEN_BG_PIXMAP = C.GTK_RC_TOKEN_BG_PIXMAP
+const PRINT_SETTINGS_MEDIA_TYPE = C.GTK_PRINT_SETTINGS_MEDIA_TYPE
+const PRINT_SETTINGS_PRINT_PAGES = C.GTK_PRINT_SETTINGS_PRINT_PAGES
+const NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM = C.GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_TOP_TO_BOTTOM
+const NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM = C.GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_TOP_TO_BOTTOM
+const PAGE_ORIENTATION_REVERSE_PORTRAIT = C.GTK_PAGE_ORIENTATION_REVERSE_PORTRAIT
+const IM_PREEDIT_CALLBACK = C.GTK_IM_PREEDIT_CALLBACK
+const STYLE_CLASS_QUESTION = C.GTK_STYLE_CLASS_QUESTION
+const PATH_PRIO_GTK = C.GTK_PATH_PRIO_GTK
+const TREE_VIEW_DROP_AFTER = C.GTK_TREE_VIEW_DROP_AFTER
+const PACK_END = C.GTK_PACK_END
+const MOVEMENT_BUFFER_ENDS = C.GTK_MOVEMENT_BUFFER_ENDS
+const SCROLL_HORIZONTAL_ENDS = C.GTK_SCROLL_HORIZONTAL_ENDS
+const STYLE_CLASS_LINKED = C.GTK_STYLE_CLASS_LINKED
+const EXPANDER_SEMI_EXPANDED = C.GTK_EXPANDER_SEMI_EXPANDED
+const CELL_RENDERER_SORTED = C.GTK_CELL_RENDERER_SORTED
+const RESPONSE_ACCEPT = C.GTK_RESPONSE_ACCEPT
+const RC_TOKEN_LTR = C.GTK_RC_TOKEN_LTR
+const CELL_RENDERER_PRELIT = C.GTK_CELL_RENDERER_PRELIT
+const DEBUG_GEOMETRY = C.GTK_DEBUG_GEOMETRY
+const TEXT_WINDOW_BOTTOM = C.GTK_TEXT_WINDOW_BOTTOM
+const CELL_RENDERER_ACCEL_MODE_OTHER = C.GTK_CELL_RENDERER_ACCEL_MODE_OTHER
+const CELL_RENDERER_ACCEL_MODE_GTK = C.GTK_CELL_RENDERER_ACCEL_MODE_GTK
+const DIR_TAB_BACKWARD = C.GTK_DIR_TAB_BACKWARD
+const STOCK_PASTE = C.GTK_STOCK_PASTE
+const TOOLBAR_TEXT = C.GTK_TOOLBAR_TEXT
+const PRINT_SETTINGS_COLLATE = C.GTK_PRINT_SETTINGS_COLLATE
+const STYLE_CLASS_SLIDER = C.GTK_STYLE_CLASS_SLIDER
+const TREE_MODEL_ITERS_PERSIST = C.GTK_TREE_MODEL_ITERS_PERSIST
+const NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT = C.GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_RIGHT_TO_LEFT
+const POLICY_NEVER = C.GTK_POLICY_NEVER
+const RECENT_FILTER_AGE = C.GTK_RECENT_FILTER_AGE
+const SHADOW_IN = C.GTK_SHADOW_IN
+const WIN_POS_NONE = C.GTK_WIN_POS_NONE
+const STOCK_MEDIA_FORWARD = C.GTK_STOCK_MEDIA_FORWARD
+const WINDOW_TOPLEVEL = C.GTK_WINDOW_TOPLEVEL
+const FILE_CHOOSER_ACTION_CREATE_FOLDER = C.GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER
+const LEVEL_BAR_MODE_CONTINUOUS = C.GTK_LEVEL_BAR_MODE_CONTINUOUS
+const STYLE_CLASS_GRIP = C.GTK_STYLE_CLASS_GRIP
+const ALIGN_CENTER = C.GTK_ALIGN_CENTER
+const BUILDER_ERROR_MISSING_ATTRIBUTE = C.GTK_BUILDER_ERROR_MISSING_ATTRIBUTE
+const FILE_CHOOSER_ACTION_SAVE = C.GTK_FILE_CHOOSER_ACTION_SAVE
+const BORDER_STYLE_DASHED = C.GTK_BORDER_STYLE_DASHED
+const PAPER_NAME_B5 = C.GTK_PAPER_NAME_B5
+const PRINT_OPERATION_ACTION_PREVIEW = C.GTK_PRINT_OPERATION_ACTION_PREVIEW
+const UI_MANAGER_MENUBAR = C.GTK_UI_MANAGER_MENUBAR
+const RC_TOKEN_STYLE = C.GTK_RC_TOKEN_STYLE
+const CALENDAR_SHOW_HEADING = C.GTK_CALENDAR_SHOW_HEADING
+const ICON_LOOKUP_USE_BUILTIN = C.GTK_ICON_LOOKUP_USE_BUILTIN
+const CSS_SECTION_VALUE = C.GTK_CSS_SECTION_VALUE
+const RELIEF_NONE = C.GTK_RELIEF_NONE
+const PRINT_SETTINGS_DEFAULT_SOURCE = C.GTK_PRINT_SETTINGS_DEFAULT_SOURCE
+const PAPER_NAME_EXECUTIVE = C.GTK_PAPER_NAME_EXECUTIVE
+const ARROWS_END = C.GTK_ARROWS_END
+const JUSTIFY_FILL = C.GTK_JUSTIFY_FILL
+const STOCK_PAGE_SETUP = C.GTK_STOCK_PAGE_SETUP
+const RC_TOKEN_SELECTED = C.GTK_RC_TOKEN_SELECTED
+const FILE_FILTER_DISPLAY_NAME = C.GTK_FILE_FILTER_DISPLAY_NAME
+const UI_MANAGER_AUTO = C.GTK_UI_MANAGER_AUTO
+const PRINT_SETTINGS_PAPER_WIDTH = C.GTK_PRINT_SETTINGS_PAPER_WIDTH
+const RECENT_SORT_MRU = C.GTK_RECENT_SORT_MRU
+const TARGET_SAME_APP = C.GTK_TARGET_SAME_APP
+const WIDGET_HELP_WHATS_THIS = C.GTK_WIDGET_HELP_WHATS_THIS
+const DEBUG_TREE = C.GTK_DEBUG_TREE
+const SCROLL_MINIMUM = C.GTK_SCROLL_MINIMUM
+const STYLE_CLASS_VERTICAL = C.GTK_STYLE_CLASS_VERTICAL
+const MOVEMENT_DISPLAY_LINES = C.GTK_MOVEMENT_DISPLAY_LINES
+const REGION_ONLY = C.GTK_REGION_ONLY
+const PRINT_PAGES_CURRENT = C.GTK_PRINT_PAGES_CURRENT
+const REGION_LAST = C.GTK_REGION_LAST
+const STYLE_CLASS_MENU = C.GTK_STYLE_CLASS_MENU
+const STYLE_CLASS_TOP = C.GTK_STYLE_CLASS_TOP
+const STOCK_DISCARD = C.GTK_STOCK_DISCARD
+const TEXT_WINDOW_TEXT = C.GTK_TEXT_WINDOW_TEXT
+const STOCK_FULLSCREEN = C.GTK_STOCK_FULLSCREEN
+const STOCK_DIALOG_WARNING = C.GTK_STOCK_DIALOG_WARNING
+const RC_TOKEN_INVALID = C.GTK_RC_TOKEN_INVALID
+const STOCK_ORIENTATION_REVERSE_PORTRAIT = C.GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT
+const CSS_SECTION_IMPORT = C.GTK_CSS_SECTION_IMPORT
+const NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT = C.GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_RIGHT_TO_LEFT
+const NOTEBOOK_TAB_LAST = C.GTK_NOTEBOOK_TAB_LAST
+const STYLE_CLASS_INLINE_TOOLBAR = C.GTK_STYLE_CLASS_INLINE_TOOLBAR
+const WRAP_NONE = C.GTK_WRAP_NONE
+const STYLE_CLASS_ARROW = C.GTK_STYLE_CLASS_ARROW
+const TREE_VIEW_COLUMN_GROW_ONLY = C.GTK_TREE_VIEW_COLUMN_GROW_ONLY
+const TEXT_BUFFER_TARGET_INFO_RICH_TEXT = C.GTK_TEXT_BUFFER_TARGET_INFO_RICH_TEXT
+const SCROLL_PAGE_LEFT = C.GTK_SCROLL_PAGE_LEFT
+const CALENDAR_SHOW_DETAILS = C.GTK_CALENDAR_SHOW_DETAILS
+const BORDER_STYLE_DOTTED = C.GTK_BORDER_STYLE_DOTTED
+const TEXT_DIR_RTL = C.GTK_TEXT_DIR_RTL
+const ASSISTANT_PAGE_SUMMARY = C.GTK_ASSISTANT_PAGE_SUMMARY
+const STOCK_GOTO_TOP = C.GTK_STOCK_GOTO_TOP
+const PRINT_STATUS_PREPARING = C.GTK_PRINT_STATUS_PREPARING
+const CSS_SECTION_DECLARATION = C.GTK_CSS_SECTION_DECLARATION
+const STOCK_SELECT_COLOR = C.GTK_STOCK_SELECT_COLOR
+const ICON_SIZE_INVALID = C.GTK_ICON_SIZE_INVALID
+const MENU_DIR_NEXT = C.GTK_MENU_DIR_NEXT
+const INPUT_HINT_UPPERCASE_SENTENCES = C.GTK_INPUT_HINT_UPPERCASE_SENTENCES
+const BORDER_STYLE_NONE = C.GTK_BORDER_STYLE_NONE
+const MESSAGE_WARNING = C.GTK_MESSAGE_WARNING
+const UI_MANAGER_ACCELERATOR = C.GTK_UI_MANAGER_ACCELERATOR
+const STOCK_UNDERLINE = C.GTK_STOCK_UNDERLINE
+const STYLE_CLASS_WARNING = C.GTK_STYLE_CLASS_WARNING
+const ICON_VIEW_DROP_BELOW = C.GTK_ICON_VIEW_DROP_BELOW
+const TEXT_SEARCH_TEXT_ONLY = C.GTK_TEXT_SEARCH_TEXT_ONLY
+const POLICY_AUTOMATIC = C.GTK_POLICY_AUTOMATIC
+const STOCK_JUMP_TO = C.GTK_STOCK_JUMP_TO
+const STOCK_MEDIA_REWIND = C.GTK_STOCK_MEDIA_REWIND
+const FILE_CHOOSER_ERROR_NONEXISTENT = C.GTK_FILE_CHOOSER_ERROR_NONEXISTENT
+const UI_MANAGER_TOOLITEM = C.GTK_UI_MANAGER_TOOLITEM
+const RECENT_MANAGER_ERROR_INVALID_ENCODING = C.GTK_RECENT_MANAGER_ERROR_INVALID_ENCODING
+const MESSAGE_QUESTION = C.GTK_MESSAGE_QUESTION
+const SPIN_END = C.GTK_SPIN_END
+const MOVEMENT_PARAGRAPHS = C.GTK_MOVEMENT_PARAGRAPHS
+const UI_MANAGER_SEPARATOR = C.GTK_UI_MANAGER_SEPARATOR
+const JUNCTION_NONE = C.GTK_JUNCTION_NONE
+const CORNER_BOTTOM_RIGHT = C.GTK_CORNER_BOTTOM_RIGHT
+const RECENT_MANAGER_ERROR_READ = C.GTK_RECENT_MANAGER_ERROR_READ
+const ARROWS_BOTH = C.GTK_ARROWS_BOTH
+const CALENDAR_SHOW_WEEK_NUMBERS = C.GTK_CALENDAR_SHOW_WEEK_NUMBERS
+const STOCK_GOTO_FIRST = C.GTK_STOCK_GOTO_FIRST
+const PRINT_OPERATION_ACTION_EXPORT = C.GTK_PRINT_OPERATION_ACTION_EXPORT
+const PATH_PRIO_LOWEST = C.GTK_PATH_PRIO_LOWEST
+const JUNCTION_BOTTOM = C.GTK_JUNCTION_BOTTOM
+const BUILDER_ERROR_DUPLICATE_ID = C.GTK_BUILDER_ERROR_DUPLICATE_ID
+const SPIN_USER_DEFINED = C.GTK_SPIN_USER_DEFINED
+const SENSITIVITY_AUTO = C.GTK_SENSITIVITY_AUTO
+const RC_TOKEN_COLOR = C.GTK_RC_TOKEN_COLOR
+const PAGE_SET_EVEN = C.GTK_PAGE_SET_EVEN
+const FILE_CHOOSER_ERROR_ALREADY_EXISTS = C.GTK_FILE_CHOOSER_ERROR_ALREADY_EXISTS
+const STOCK_CUT = C.GTK_STOCK_CUT
+const RECENT_FILTER_MIME_TYPE = C.GTK_RECENT_FILTER_MIME_TYPE
+const CELL_RENDERER_EXPANDED = C.GTK_CELL_RENDERER_EXPANDED
+const CELL_RENDERER_EXPANDABLE = C.GTK_CELL_RENDERER_EXPANDABLE
+const DRAG_RESULT_USER_CANCELLED = C.GTK_DRAG_RESULT_USER_CANCELLED
+const LICENSE_CUSTOM = C.GTK_LICENSE_CUSTOM
+const PRINT_SETTINGS_REVERSE = C.GTK_PRINT_SETTINGS_REVERSE
+const WINDOW_POPUP = C.GTK_WINDOW_POPUP
+const RC_TOKEN_INSENSITIVE = C.GTK_RC_TOKEN_INSENSITIVE
+const MOVEMENT_DISPLAY_LINE_ENDS = C.GTK_MOVEMENT_DISPLAY_LINE_ENDS
+const BUTTONBOX_CENTER = C.GTK_BUTTONBOX_CENTER
+const STYLE_CLASS_FRAME = C.GTK_STYLE_CLASS_FRAME
+const STOCK_PRINT_ERROR = C.GTK_STOCK_PRINT_ERROR
+const STOCK_PRINT = C.GTK_STOCK_PRINT
+const STOCK_ZOOM_100 = C.GTK_STOCK_ZOOM_100
+const FILL = C.GTK_FILL
+const TARGET_OTHER_WIDGET = C.GTK_TARGET_OTHER_WIDGET
+const RECENT_MANAGER_ERROR_WRITE = C.GTK_RECENT_MANAGER_ERROR_WRITE
+const UPDATE_IF_VALID = C.GTK_UPDATE_IF_VALID
+const MOVEMENT_LOGICAL_POSITIONS = C.GTK_MOVEMENT_LOGICAL_POSITIONS
+const PRINT_DUPLEX_SIMPLEX = C.GTK_PRINT_DUPLEX_SIMPLEX
+const STYLE_CLASS_ENTRY = C.GTK_STYLE_CLASS_ENTRY
+const PATH_PRIO_MASK = C.GTK_PATH_PRIO_MASK
+const SPIN_PAGE_FORWARD = C.GTK_SPIN_PAGE_FORWARD
+const SPIN_STEP_BACKWARD = C.GTK_SPIN_STEP_BACKWARD
+const SORT_DESCENDING = C.GTK_SORT_DESCENDING
+const STOCK_REFRESH = C.GTK_STOCK_REFRESH
+const BUTTONS_CLOSE = C.GTK_BUTTONS_CLOSE
+const ASSISTANT_PAGE_CUSTOM = C.GTK_ASSISTANT_PAGE_CUSTOM
+const LEVEL_BAR_MODE_DISCRETE = C.GTK_LEVEL_BAR_MODE_DISCRETE
+const SCROLL_STEP_UP = C.GTK_SCROLL_STEP_UP
+const RC_TOKEN_ENGINE = C.GTK_RC_TOKEN_ENGINE
+const STOCK_JUSTIFY_LEFT = C.GTK_STOCK_JUSTIFY_LEFT
+const SHADOW_ETCHED_OUT = C.GTK_SHADOW_ETCHED_OUT
+const MAX_COMPOSE_LEN = C.GTK_MAX_COMPOSE_LEN
+const TREE_VIEW_DROP_BEFORE = C.GTK_TREE_VIEW_DROP_BEFORE
+const STOCK_DISCONNECT = C.GTK_STOCK_DISCONNECT
 const STYLE_REGION_COLUMN = C.GTK_STYLE_REGION_COLUMN
-const STYLE_REGION_COLUMN_HEADER = C.GTK_STYLE_REGION_COLUMN_HEADER
-const STYLE_REGION_ROW = C.GTK_STYLE_REGION_ROW
-const STYLE_REGION_TAB = C.GTK_STYLE_REGION_TAB
+const IM_PREEDIT_NOTHING = C.GTK_IM_PREEDIT_NOTHING
+const DELETE_WHITESPACE = C.GTK_DELETE_WHITESPACE
+const TEXT_BUFFER_TARGET_INFO_BUFFER_CONTENTS = C.GTK_TEXT_BUFFER_TARGET_INFO_BUFFER_CONTENTS
+const FILE_CHOOSER_ERROR_BAD_FILENAME = C.GTK_FILE_CHOOSER_ERROR_BAD_FILENAME
+const TEXT_WINDOW_WIDGET = C.GTK_TEXT_WINDOW_WIDGET
+const RESIZE_PARENT = C.GTK_RESIZE_PARENT
+const DIALOG_DESTROY_WITH_PARENT = C.GTK_DIALOG_DESTROY_WITH_PARENT
+const POS_RIGHT = C.GTK_POS_RIGHT
+const DEST_DEFAULT_DROP = C.GTK_DEST_DEFAULT_DROP
+const BUTTONBOX_EDGE = C.GTK_BUTTONBOX_EDGE
+const PRINT_PAGES_ALL = C.GTK_PRINT_PAGES_ALL
+const INPUT_PURPOSE_FREE_FORM = C.GTK_INPUT_PURPOSE_FREE_FORM
+const PAGE_ORIENTATION_LANDSCAPE = C.GTK_PAGE_ORIENTATION_LANDSCAPE
+const DIR_LEFT = C.GTK_DIR_LEFT
+const STOCK_JUSTIFY_FILL = C.GTK_STOCK_JUSTIFY_FILL
+const CELL_RENDERER_MODE_INERT = C.GTK_CELL_RENDERER_MODE_INERT
+const DELETE_DISPLAY_LINE_ENDS = C.GTK_DELETE_DISPLAY_LINE_ENDS
+const DEBUG_MULTIHEAD = C.GTK_DEBUG_MULTIHEAD
+const TEXT_WINDOW_PRIVATE = C.GTK_TEXT_WINDOW_PRIVATE
+const RC_TOKEN_XTHICKNESS = C.GTK_RC_TOKEN_XTHICKNESS
+const LICENSE_LGPL_3_0 = C.GTK_LICENSE_LGPL_3_0
+const GTK_STATE_SELECTED = C.GTK_STATE_SELECTED
+const STYLE_CLASS_MENUBAR = C.GTK_STYLE_CLASS_MENUBAR
+const PRINT_STATUS_GENERATING_DATA = C.GTK_PRINT_STATUS_GENERATING_DATA
+const BORDER_STYLE_OUTSET = C.GTK_BORDER_STYLE_OUTSET
+const POLICY_ALWAYS = C.GTK_POLICY_ALWAYS
+const CALENDAR_NO_MONTH_CHANGE = C.GTK_CALENDAR_NO_MONTH_CHANGE
+const TEXT_DIR_NONE = C.GTK_TEXT_DIR_NONE
+const DELETE_CHARS = C.GTK_DELETE_CHARS
+const RC_TOKEN_THEME = C.GTK_RC_TOKEN_THEME
+const TEXT_WINDOW_LEFT = C.GTK_TEXT_WINDOW_LEFT
+const ICON_VIEW_DROP_ABOVE = C.GTK_ICON_VIEW_DROP_ABOVE
+const PATH_PRIO_APPLICATION = C.GTK_PATH_PRIO_APPLICATION
+const BORDER_STYLE_DOUBLE = C.GTK_BORDER_STYLE_DOUBLE
+const RC_TOKEN_PRELIGHT = C.GTK_RC_TOKEN_PRELIGHT
+const STYLE_CLASS_BACKGROUND = C.GTK_STYLE_CLASS_BACKGROUND
+const BORDER_STYLE_RIDGE = C.GTK_BORDER_STYLE_RIDGE
+const ACCEL_MASK = C.GTK_ACCEL_MASK
+const STOCK_SELECT_FONT = C.GTK_STOCK_SELECT_FONT
+const STYLE_CLASS_HORIZONTAL = C.GTK_STYLE_CLASS_HORIZONTAL
+const STYLE_CLASS_NOTEBOOK = C.GTK_STYLE_CLASS_NOTEBOOK
+const INPUT_HINT_UPPERCASE_CHARS = C.GTK_INPUT_HINT_UPPERCASE_CHARS
+const WIDGET_HELP_TOOLTIP = C.GTK_WIDGET_HELP_TOOLTIP
+const RC_TOKEN_INCLUDE = C.GTK_RC_TOKEN_INCLUDE
+const DRAG_RESULT_ERROR = C.GTK_DRAG_RESULT_ERROR
+const ICON_SIZE_DND = C.GTK_ICON_SIZE_DND
+const STYLE_CLASS_SPINBUTTON = C.GTK_STYLE_CLASS_SPINBUTTON
+const STYLE_CLASS_SCALE = C.GTK_STYLE_CLASS_SCALE
+const PRINT_OPERATION_RESULT_ERROR = C.GTK_PRINT_OPERATION_RESULT_ERROR
+const SORT_ASCENDING = C.GTK_SORT_ASCENDING
+const RC_TOKEN_RC = C.GTK_RC_TOKEN_RC
+const STYLE_PROPERTY_BACKGROUND_COLOR = C.GTK_STYLE_PROPERTY_BACKGROUND_COLOR
+const TEXT_SEARCH_VISIBLE_ONLY = C.GTK_TEXT_SEARCH_VISIBLE_ONLY
+const RC_TOKEN_HIGHEST = C.GTK_RC_TOKEN_HIGHEST
+const BUTTONS_YES_NO = C.GTK_BUTTONS_YES_NO
+const CSS_PROVIDER_ERROR_DEPRECATED = C.GTK_CSS_PROVIDER_ERROR_DEPRECATED
+const APPLICATION_INHIBIT_SUSPEND = C.GTK_APPLICATION_INHIBIT_SUSPEND
+const STYLE_CLASS_RIGHT = C.GTK_STYLE_CLASS_RIGHT
+const PRINT_SETTINGS_NUMBER_UP_LAYOUT = C.GTK_PRINT_SETTINGS_NUMBER_UP_LAYOUT
+const APPLICATION_INHIBIT_SWITCH = C.GTK_APPLICATION_INHIBIT_SWITCH
+const PRINT_SETTINGS_OUTPUT_FILE_FORMAT = C.GTK_PRINT_SETTINGS_OUTPUT_FILE_FORMAT
+const INTERFACE_AGE = C.GTK_INTERFACE_AGE
+const RECENT_SORT_NONE = C.GTK_RECENT_SORT_NONE
+const CSS_PROVIDER_ERROR_FAILED = C.GTK_CSS_PROVIDER_ERROR_FAILED
+const MAJOR_VERSION = C.GTK_MAJOR_VERSION
+const PRINT_PAGES_SELECTION = C.GTK_PRINT_PAGES_SELECTION
+const STATE_INSENSITIVE = C.GTK_STATE_INSENSITIVE
+const TARGET_SAME_WIDGET = C.GTK_TARGET_SAME_WIDGET
+const STOCK_PREFERENCES = C.GTK_STOCK_PREFERENCES
+const STOCK_LEAVE_FULLSCREEN = C.GTK_STOCK_LEAVE_FULLSCREEN
+const WIN_POS_MOUSE = C.GTK_WIN_POS_MOUSE
+const PAPER_NAME_LETTER = C.GTK_PAPER_NAME_LETTER
+const PATH_CLASS = C.GTK_PATH_CLASS
+const SCROLL_NATURAL = C.GTK_SCROLL_NATURAL
+const DRAG_RESULT_TIMEOUT_EXPIRED = C.GTK_DRAG_RESULT_TIMEOUT_EXPIRED
+const STOCK_STOP = C.GTK_STOCK_STOP
+const STYLE_PROVIDER_PRIORITY_USER = C.GTK_STYLE_PROVIDER_PRIORITY_USER
+const STOCK_JUSTIFY_CENTER = C.GTK_STOCK_JUSTIFY_CENTER
+const PRINT_OPERATION_ACTION_PRINT_DIALOG = C.GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG
+const STYLE_CLASS_COMBOBOX_ENTRY = C.GTK_STYLE_CLASS_COMBOBOX_ENTRY
+const PRINT_OPERATION_RESULT_APPLY = C.GTK_PRINT_OPERATION_RESULT_APPLY
+const STYLE_PROVIDER_PRIORITY_APPLICATION = C.GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
+const STOCK_CLEAR = C.GTK_STOCK_CLEAR
+const RC_TOKEN_PIXMAP_PATH = C.GTK_RC_TOKEN_PIXMAP_PATH
+const LEVEL_BAR_OFFSET_HIGH = C.GTK_LEVEL_BAR_OFFSET_HIGH
+const PRINT_SETTINGS_PAGE_SET = C.GTK_PRINT_SETTINGS_PAGE_SET
+const RC_TOKEN_ACTIVE = C.GTK_RC_TOKEN_ACTIVE
+const PRINT_SETTINGS_RESOLUTION_X = C.GTK_PRINT_SETTINGS_RESOLUTION_X
+const SIZE_REQUEST_CONSTANT_SIZE = C.GTK_SIZE_REQUEST_CONSTANT_SIZE
+const SHADOW_NONE = C.GTK_SHADOW_NONE
+const RECENT_SORT_LRU = C.GTK_RECENT_SORT_LRU
+const STOCK_REVERT_TO_SAVED = C.GTK_STOCK_REVERT_TO_SAVED
 const TEXT_VIEW_PRIORITY_VALIDATE = C.GTK_TEXT_VIEW_PRIORITY_VALIDATE
+const RECENT_SORT_CUSTOM = C.GTK_RECENT_SORT_CUSTOM
+const ICON_SIZE_SMALL_TOOLBAR = C.GTK_ICON_SIZE_SMALL_TOOLBAR
+const PRINT_QUALITY_NORMAL = C.GTK_PRINT_QUALITY_NORMAL
+const CALENDAR_SHOW_DAY_NAMES = C.GTK_CALENDAR_SHOW_DAY_NAMES
+const TREE_VIEW_DROP_INTO_OR_BEFORE = C.GTK_TREE_VIEW_DROP_INTO_OR_BEFORE
+const STOCK_BOLD = C.GTK_STOCK_BOLD
+const PRINT_SETTINGS_N_COPIES = C.GTK_PRINT_SETTINGS_N_COPIES
+const STYLE_CLASS_EXPANDER = C.GTK_STYLE_CLASS_EXPANDER
+const STOCK_OPEN = C.GTK_STOCK_OPEN
+const ENTRY_ICON_SECONDARY = C.GTK_ENTRY_ICON_SECONDARY
+const SHADOW_OUT = C.GTK_SHADOW_OUT
+const ICON_THEME_FAILED = C.GTK_ICON_THEME_FAILED
+const ACCEL_LOCKED = C.GTK_ACCEL_LOCKED
+const FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME = C.GTK_FILE_CHOOSER_CONFIRMATION_ACCEPT_FILENAME
+const DEBUG_KEYBINDINGS = C.GTK_DEBUG_KEYBINDINGS
+const UI_MANAGER_PLACEHOLDER = C.GTK_UI_MANAGER_PLACEHOLDER
+const STOCK_CANCEL = C.GTK_STOCK_CANCEL
+const SCROLL_NONE = C.GTK_SCROLL_NONE
+const STYLE_PROPERTY_COLOR = C.GTK_STYLE_PROPERTY_COLOR
+const PRINT_SETTINGS_DITHER = C.GTK_PRINT_SETTINGS_DITHER
+const SPIN_STEP_FORWARD = C.GTK_SPIN_STEP_FORWARD
+const RECENT_CHOOSER_ERROR_INVALID_URI = C.GTK_RECENT_CHOOSER_ERROR_INVALID_URI
+const BUILDER_ERROR_INVALID_VALUE = C.GTK_BUILDER_ERROR_INVALID_VALUE
+const BUILDER_ERROR_INVALID_ATTRIBUTE = C.GTK_BUILDER_ERROR_INVALID_ATTRIBUTE
+const BUTTONS_NONE = C.GTK_BUTTONS_NONE
+const STYLE_PROVIDER_PRIORITY_THEME = C.GTK_STYLE_PROVIDER_PRIORITY_THEME
+const EXPANDER_EXPANDED = C.GTK_EXPANDER_EXPANDED
+const ALIGN_START = C.GTK_ALIGN_START
+const ICON_LOOKUP_NO_SVG = C.GTK_ICON_LOOKUP_NO_SVG
+const UI_MANAGER_TOOLBAR = C.GTK_UI_MANAGER_TOOLBAR
+const STATE_NORMAL = C.GTK_STATE_NORMAL
+const DEST_DEFAULT_MOTION = C.GTK_DEST_DEFAULT_MOTION
+const STOCK_ADD = C.GTK_STOCK_ADD
+const TOOLBAR_SPACE_EMPTY = C.GTK_TOOLBAR_SPACE_EMPTY
+const CSS_SECTION_SELECTOR = C.GTK_CSS_SECTION_SELECTOR
+const RESIZE_QUEUE = C.GTK_RESIZE_QUEUE
+const STOCK_APPLY = C.GTK_STOCK_APPLY
+const RECENT_MANAGER_ERROR_INVALID_URI = C.GTK_RECENT_MANAGER_ERROR_INVALID_URI
+const CSS_SECTION_KEYFRAMES = C.GTK_CSS_SECTION_KEYFRAMES
+const RC_TOKEN_APPLICATION = C.GTK_RC_TOKEN_APPLICATION
+const PATH_PRIO_THEME = C.GTK_PATH_PRIO_THEME
+const STYLE_CLASS_VIEW = C.GTK_STYLE_CLASS_VIEW
+const STOCK_MEDIA_PREVIOUS = C.GTK_STOCK_MEDIA_PREVIOUS
+const RECENT_FILTER_URI = C.GTK_RECENT_FILTER_URI
+const INPUT_HINT_NONE = C.GTK_INPUT_HINT_NONE
+const TOOL_PALETTE_DRAG_ITEMS = C.GTK_TOOL_PALETTE_DRAG_ITEMS
+const ACCEL_VISIBLE = C.GTK_ACCEL_VISIBLE
+const LICENSE_BSD = C.GTK_LICENSE_BSD
+const ALIGN_FILL = C.GTK_ALIGN_FILL
+const LICENSE_UNKNOWN = C.GTK_LICENSE_UNKNOWN
+const STOCK_MEDIA_STOP = C.GTK_STOCK_MEDIA_STOP
+const FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN = C.GTK_FILE_CHOOSER_CONFIRMATION_SELECT_AGAIN
+const INPUT_PURPOSE_PHONE = C.GTK_INPUT_PURPOSE_PHONE
+const PRINT_ERROR_GENERAL = C.GTK_PRINT_ERROR_GENERAL
+const ARROW_UP = C.GTK_ARROW_UP
+const MINOR_VERSION = C.GTK_MINOR_VERSION
+const SPIN_HOME = C.GTK_SPIN_HOME
+const PRINT_ERROR_NOMEM = C.GTK_PRINT_ERROR_NOMEM
+const PRINT_QUALITY_HIGH = C.GTK_PRINT_QUALITY_HIGH
+const STOCK_FIND = C.GTK_STOCK_FIND
+const JUNCTION_CORNER_BOTTOMLEFT = C.GTK_JUNCTION_CORNER_BOTTOMLEFT
+const JUNCTION_LEFT = C.GTK_JUNCTION_LEFT
+const STOCK_ZOOM_IN = C.GTK_STOCK_ZOOM_IN
+const INPUT_PURPOSE_URL = C.GTK_INPUT_PURPOSE_URL
+const STYLE_CLASS_SCALE_HAS_MARKS_BELOW = C.GTK_STYLE_CLASS_SCALE_HAS_MARKS_BELOW
+const PRINT_SETTINGS_DUPLEX = C.GTK_PRINT_SETTINGS_DUPLEX
+const PRINT_STATUS_PENDING = C.GTK_PRINT_STATUS_PENDING
+const STYLE_REGION_ROW = C.GTK_STYLE_REGION_ROW
+const SELECTION_BROWSE = C.GTK_SELECTION_BROWSE
+const DELETE_PARAGRAPHS = C.GTK_DELETE_PARAGRAPHS
+const FILE_CHOOSER_CONFIRMATION_CONFIRM = C.GTK_FILE_CHOOSER_CONFIRMATION_CONFIRM
+const LICENSE_LGPL_2_1 = C.GTK_LICENSE_LGPL_2_1
+const STYLE_CLASS_RADIO = C.GTK_STYLE_CLASS_RADIO
+const FILE_FILTER_MIME_TYPE = C.GTK_FILE_FILTER_MIME_TYPE
+const STOCK_COLOR_PICKER = C.GTK_STOCK_COLOR_PICKER
+const INPUT_PURPOSE_EMAIL = C.GTK_INPUT_PURPOSE_EMAIL
+const STOCK_SAVE = C.GTK_STOCK_SAVE
+const MENU_DIR_CHILD = C.GTK_MENU_DIR_CHILD
+const NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_LEFT_TO_RIGHT = C.GTK_NUMBER_UP_LAYOUT_TOP_TO_BOTTOM_LEFT_TO_RIGHT
+const STYLE_PROPERTY_BORDER_WIDTH = C.GTK_STYLE_PROPERTY_BORDER_WIDTH
+const STYLE_CLASS_DEFAULT = C.GTK_STYLE_CLASS_DEFAULT
+const ICON_VIEW_NO_DROP = C.GTK_ICON_VIEW_NO_DROP
+const STYLE_PROPERTY_BACKGROUND_IMAGE = C.GTK_STYLE_PROPERTY_BACKGROUND_IMAGE
+const TOOLBAR_ICONS = C.GTK_TOOLBAR_ICONS
+const PRINT_SETTINGS_OUTPUT_BIN = C.GTK_PRINT_SETTINGS_OUTPUT_BIN
+const PRINT_STATUS_FINISHED = C.GTK_PRINT_STATUS_FINISHED
+const CORNER_TOP_LEFT = C.GTK_CORNER_TOP_LEFT
+const CORNER_TOP_RIGHT = C.GTK_CORNER_TOP_RIGHT
+const RC_TOKEN_LOWEST = C.GTK_RC_TOKEN_LOWEST
+const ALIGN_END = C.GTK_ALIGN_END
+const STOCK_STRIKETHROUGH = C.GTK_STOCK_STRIKETHROUGH
+const CELL_RENDERER_FOCUSED = C.GTK_CELL_RENDERER_FOCUSED
+const STOCK_GOTO_BOTTOM = C.GTK_STOCK_GOTO_BOTTOM
+const UI_MANAGER_MENUITEM = C.GTK_UI_MANAGER_MENUITEM
+const MESSAGE_ERROR = C.GTK_MESSAGE_ERROR
+const CELL_RENDERER_SELECTED = C.GTK_CELL_RENDERER_SELECTED
+const PRINT_OPERATION_RESULT_CANCEL = C.GTK_PRINT_OPERATION_RESULT_CANCEL
+const PRINT_STATUS_FINISHED_ABORTED = C.GTK_PRINT_STATUS_FINISHED_ABORTED
+const PRINT_SETTINGS_OUTPUT_BASENAME = C.GTK_PRINT_SETTINGS_OUTPUT_BASENAME
+const STOCK_MISSING_IMAGE = C.GTK_STOCK_MISSING_IMAGE
+const STYLE_CLASS_BUTTON = C.GTK_STYLE_CLASS_BUTTON
+const STOCK_EDIT = C.GTK_STOCK_EDIT
+const INPUT_HINT_LOWERCASE = C.GTK_INPUT_HINT_LOWERCASE
+const DEST_DEFAULT_ALL = C.GTK_DEST_DEFAULT_ALL
+const SCROLL_END = C.GTK_SCROLL_END
+const TEXT_SEARCH_CASE_INSENSITIVE = C.GTK_TEXT_SEARCH_CASE_INSENSITIVE
+const STOCK_CAPS_LOCK_WARNING = C.GTK_STOCK_CAPS_LOCK_WARNING
+const ORIENTATION_VERTICAL = C.GTK_ORIENTATION_VERTICAL
+const WIN_POS_CENTER_ALWAYS = C.GTK_WIN_POS_CENTER_ALWAYS
+const MENU_DIR_PARENT = C.GTK_MENU_DIR_PARENT
+const RC_TOKEN_IM_MODULE_PATH = C.GTK_RC_TOKEN_IM_MODULE_PATH
+const SPIN_PAGE_BACKWARD = C.GTK_SPIN_PAGE_BACKWARD
+const RC_TOKEN_WIDGET = C.GTK_RC_TOKEN_WIDGET
+const STYLE_CLASS_IMAGE = C.GTK_STYLE_CLASS_IMAGE
+const FILE_FILTER_FILENAME = C.GTK_FILE_FILTER_FILENAME
+const SCROLL_STEPS = C.GTK_SCROLL_STEPS
+const CSS_SECTION_RULESET = C.GTK_CSS_SECTION_RULESET
+const STOCK_GO_BACK = C.GTK_STOCK_GO_BACK
+const DEBUG_TEXT = C.GTK_DEBUG_TEXT
+const STOCK_NEW = C.GTK_STOCK_NEW
+const RECENT_MANAGER_ERROR_UNKNOWN = C.GTK_RECENT_MANAGER_ERROR_UNKNOWN
+const PRINT_OPERATION_ACTION_PRINT = C.GTK_PRINT_OPERATION_ACTION_PRINT
+const PRINT_STATUS_PENDING_ISSUE = C.GTK_PRINT_STATUS_PENDING_ISSUE
+const STYLE_CLASS_SCROLLBARS_JUNCTION = C.GTK_STYLE_CLASS_SCROLLBARS_JUNCTION
+const RESPONSE_REJECT = C.GTK_RESPONSE_REJECT
+const PRINT_ERROR_INTERNAL_ERROR = C.GTK_PRINT_ERROR_INTERNAL_ERROR
+const SCROLL_PAGES = C.GTK_SCROLL_PAGES
+const TREE_VIEW_GRID_LINES_BOTH = C.GTK_TREE_VIEW_GRID_LINES_BOTH
+const CSS_PROVIDER_ERROR_UNKNOWN_VALUE = C.GTK_CSS_PROVIDER_ERROR_UNKNOWN_VALUE
+const STOCK_COPY = C.GTK_STOCK_COPY
+const BUILDER_ERROR_INVALID_TAG = C.GTK_BUILDER_ERROR_INVALID_TAG
+const STOCK_SORT_ASCENDING = C.GTK_STOCK_SORT_ASCENDING
+const IMAGE_ICON_SET = C.GTK_IMAGE_ICON_SET
+const NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT = C.GTK_NUMBER_UP_LAYOUT_BOTTOM_TO_TOP_LEFT_TO_RIGHT
+const MOVEMENT_WORDS = C.GTK_MOVEMENT_WORDS
+const STOCK_PROPERTIES = C.GTK_STOCK_PROPERTIES
+const STOCK_ORIENTATION_REVERSE_LANDSCAPE = C.GTK_STOCK_ORIENTATION_REVERSE_LANDSCAPE
+const STYLE_CLASS_LEFT = C.GTK_STYLE_CLASS_LEFT
+const SIZE_REQUEST_HEIGHT_FOR_WIDTH = C.GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH
+const NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP = C.GTK_NUMBER_UP_LAYOUT_LEFT_TO_RIGHT_BOTTOM_TO_TOP
+const PACK_DIRECTION_LTR = C.GTK_PACK_DIRECTION_LTR
+const RESPONSE_CLOSE = C.GTK_RESPONSE_CLOSE
+const WRAP_WORD = C.GTK_WRAP_WORD
+const STYLE_PROPERTY_BORDER_COLOR = C.GTK_STYLE_PROPERTY_BORDER_COLOR
+const TREE_MODEL_LIST_ONLY = C.GTK_TREE_MODEL_LIST_ONLY
+const STYLE_CLASS_LEVEL_BAR = C.GTK_STYLE_CLASS_LEVEL_BAR
+const CSS_PROVIDER_ERROR_NAME = C.GTK_CSS_PROVIDER_ERROR_NAME
+const RC_BASE = C.GTK_RC_BASE
+const APPLICATION_INHIBIT_IDLE = C.GTK_APPLICATION_INHIBIT_IDLE
+const STYLE_CLASS_PROGRESSBAR = C.GTK_STYLE_CLASS_PROGRESSBAR
+const ASSISTANT_PAGE_CONTENT = C.GTK_ASSISTANT_PAGE_CONTENT
+const JUNCTION_CORNER_BOTTOMRIGHT = C.GTK_JUNCTION_CORNER_BOTTOMRIGHT
+const SCROLL_HORIZONTAL_STEPS = C.GTK_SCROLL_HORIZONTAL_STEPS
+const BUTTONBOX_START = C.GTK_BUTTONBOX_START
+const DIALOG_MODAL = C.GTK_DIALOG_MODAL
+const IMAGE_ICON_NAME = C.GTK_IMAGE_ICON_NAME
+const STOCK_PRINT_PREVIEW = C.GTK_STOCK_PRINT_PREVIEW
+const RC_TOKEN_IM_MODULE_FILE = C.GTK_RC_TOKEN_IM_MODULE_FILE
+const EXPANDER_COLLAPSED = C.GTK_EXPANDER_COLLAPSED
+const JUSTIFY_RIGHT = C.GTK_JUSTIFY_RIGHT
+const STOCK_INDEX = C.GTK_STOCK_INDEX
+const STATE_FLAG_NORMAL = C.GTK_STATE_FLAG_NORMAL
+const WIN_POS_CENTER_ON_PARENT = C.GTK_WIN_POS_CENTER_ON_PARENT
+const STATE_FLAG_INCONSISTENT = C.GTK_STATE_FLAG_INCONSISTENT
+const SIZE_GROUP_VERTICAL = C.GTK_SIZE_GROUP_VERTICAL
+const STYLE_CLASS_BOTTOM = C.GTK_STYLE_CLASS_BOTTOM
+const ASSISTANT_PAGE_INTRO = C.GTK_ASSISTANT_PAGE_INTRO
+const PRINT_SETTINGS_PAGE_RANGES = C.GTK_PRINT_SETTINGS_PAGE_RANGES
+const STYLE_CLASS_DND = C.GTK_STYLE_CLASS_DND
+const LICENSE_GPL_3_0 = C.GTK_LICENSE_GPL_3_0
+const RESPONSE_YES = C.GTK_RESPONSE_YES
+const RC_TOKEN_UNBIND = C.GTK_RC_TOKEN_UNBIND
+const DEBUG_NO_CSS_CACHE = C.GTK_DEBUG_NO_CSS_CACHE
+const PRINT_STATUS_INITIAL = C.GTK_PRINT_STATUS_INITIAL
+const JUNCTION_RIGHT = C.GTK_JUNCTION_RIGHT
+const REGION_ODD = C.GTK_REGION_ODD
+const SENSITIVITY_OFF = C.GTK_SENSITIVITY_OFF
+const RC_TOKEN_WIDGET_CLASS = C.GTK_RC_TOKEN_WIDGET_CLASS
+const STOCK_HOME = C.GTK_STOCK_HOME
+const SCROLL_HORIZONTAL_PAGES = C.GTK_SCROLL_HORIZONTAL_PAGES
+const STYLE_CLASS_PANE_SEPARATOR = C.GTK_STYLE_CLASS_PANE_SEPARATOR
+const STOCK_GOTO_LAST = C.GTK_STOCK_GOTO_LAST
+const CELL_RENDERER_INSENSITIVE = C.GTK_CELL_RENDERER_INSENSITIVE
+const CSS_PROVIDER_ERROR_IMPORT = C.GTK_CSS_PROVIDER_ERROR_IMPORT
+const IMAGE_STOCK = C.GTK_IMAGE_STOCK
+const PRIORITY_RESIZE = C.GTK_PRIORITY_RESIZE
+const ARROWS_START = C.GTK_ARROWS_START
+const ASSISTANT_PAGE_PROGRESS = C.GTK_ASSISTANT_PAGE_PROGRESS
+const DIR_UP = C.GTK_DIR_UP
+const TREE_VIEW_GRID_LINES_VERTICAL = C.GTK_TREE_VIEW_GRID_LINES_VERTICAL
+const STOCK_UNDO = C.GTK_STOCK_UNDO
+const DEBUG_MISC = C.GTK_DEBUG_MISC
+const STOCK_REMOVE = C.GTK_STOCK_REMOVE
+const SIZE_GROUP_HORIZONTAL = C.GTK_SIZE_GROUP_HORIZONTAL
+const INPUT_HINT_UPPERCASE_WORDS = C.GTK_INPUT_HINT_UPPERCASE_WORDS
+const PACK_DIRECTION_BTT = C.GTK_PACK_DIRECTION_BTT
+const PRINT_SETTINGS_PAPER_HEIGHT = C.GTK_PRINT_SETTINGS_PAPER_HEIGHT
+const STOCK_NETWORK = C.GTK_STOCK_NETWORK
+const STOCK_HARDDISK = C.GTK_STOCK_HARDDISK
+const ICON_VIEW_DROP_RIGHT = C.GTK_ICON_VIEW_DROP_RIGHT
+const ASSISTANT_PAGE_CONFIRM = C.GTK_ASSISTANT_PAGE_CONFIRM
+const RC_TOKEN_TEXT = C.GTK_RC_TOKEN_TEXT
+const PAGE_SET_ALL = C.GTK_PAGE_SET_ALL
+const SCROLL_STEP_BACKWARD = C.GTK_SCROLL_STEP_BACKWARD
+const TREE_VIEW_COLUMN_AUTOSIZE = C.GTK_TREE_VIEW_COLUMN_AUTOSIZE
+const UNIT_NONE = C.GTK_UNIT_NONE
+const TOOLBAR_SPACE_LINE = C.GTK_TOOLBAR_SPACE_LINE
+const INPUT_PURPOSE_DIGITS = C.GTK_INPUT_PURPOSE_DIGITS
+const SCROLL_PAGE_DOWN = C.GTK_SCROLL_PAGE_DOWN
+const PAGE_ORIENTATION_REVERSE_LANDSCAPE = C.GTK_PAGE_ORIENTATION_REVERSE_LANDSCAPE
+const BORDER_STYLE_GROOVE = C.GTK_BORDER_STYLE_GROOVE
+const SELECTION_SINGLE = C.GTK_SELECTION_SINGLE
+const RC_TOKEN_NORMAL = C.GTK_RC_TOKEN_NORMAL
+const STYLE_CLASS_PULSE = C.GTK_STYLE_CLASS_PULSE
+const BUTTONS_OK_CANCEL = C.GTK_BUTTONS_OK_CANCEL
+const CSS_SECTION_DOCUMENT = C.GTK_CSS_SECTION_DOCUMENT
+const RC_TOKEN_FONT_NAME = C.GTK_RC_TOKEN_FONT_NAME
+const STOCK_SELECT_ALL = C.GTK_STOCK_SELECT_ALL
+const BINARY_AGE = C.GTK_BINARY_AGE
+const STYLE_CLASS_DOCK = C.GTK_STYLE_CLASS_DOCK
+const RESPONSE_DELETE_EVENT = C.GTK_RESPONSE_DELETE_EVENT
+const STYLE_REGION_TAB = C.GTK_STYLE_REGION_TAB
+const STOCK_ABOUT = C.GTK_STOCK_ABOUT
+const MESSAGE_INFO = C.GTK_MESSAGE_INFO
+const CSS_SECTION_BINDING_SET = C.GTK_CSS_SECTION_BINDING_SET
+const CORNER_BOTTOM_LEFT = C.GTK_CORNER_BOTTOM_LEFT
+const TEXT_BUFFER_TARGET_INFO_TEXT = C.GTK_TEXT_BUFFER_TARGET_INFO_TEXT
+const PRINT_SETTINGS_QUALITY = C.GTK_PRINT_SETTINGS_QUALITY
+const STOCK_DELETE = C.GTK_STOCK_DELETE
+const STOCK_SORT_DESCENDING = C.GTK_STOCK_SORT_DESCENDING
+const GTK_STATE_ACTIVE = C.GTK_STATE_ACTIVE
+const STOCK_UNDELETE = C.GTK_STOCK_UNDELETE
+const STOCK_DIALOG_AUTHENTICATION = C.GTK_STOCK_DIALOG_AUTHENTICATION
+const STOCK_NO = C.GTK_STOCK_NO
+const PRINT_SETTINGS_RESOLUTION_Y = C.GTK_PRINT_SETTINGS_RESOLUTION_Y
+const STYLE_CLASS_CHECK = C.GTK_STYLE_CLASS_CHECK
+const ICON_LOOKUP_FORCE_SIZE = C.GTK_ICON_LOOKUP_FORCE_SIZE
+const PRINT_STATUS_SENDING_DATA = C.GTK_PRINT_STATUS_SENDING_DATA
+const PAGE_ORIENTATION_PORTRAIT = C.GTK_PAGE_ORIENTATION_PORTRAIT
+const RESPONSE_OK = C.GTK_RESPONSE_OK
+const TREE_VIEW_GRID_LINES_HORIZONTAL = C.GTK_TREE_VIEW_GRID_LINES_HORIZONTAL
+const STOCK_ITALIC = C.GTK_STOCK_ITALIC
+const POS_LEFT = C.GTK_POS_LEFT
+const SCROLL_PAGE_BACKWARD = C.GTK_SCROLL_PAGE_BACKWARD
+const RC_FG = C.GTK_RC_FG
+const STOCK_YES = C.GTK_STOCK_YES
+const REGION_FIRST = C.GTK_REGION_FIRST
+const STYLE_CLASS_MENUITEM = C.GTK_STYLE_CLASS_MENUITEM
+const ARROW_DOWN = C.GTK_ARROW_DOWN
+const STYLE_CLASS_PRIMARY_TOOLBAR = C.GTK_STYLE_CLASS_PRIMARY_TOOLBAR
+const GTK_STATE_FOCUSED = C.GTK_STATE_FOCUSED
+const DRAG_RESULT_NO_TARGET = C.GTK_DRAG_RESULT_NO_TARGET
+const INPUT_HINT_WORD_COMPLETION = C.GTK_INPUT_HINT_WORD_COMPLETION
+const RESPONSE_NONE = C.GTK_RESPONSE_NONE
+const PRINT_SETTINGS_ORIENTATION = C.GTK_PRINT_SETTINGS_ORIENTATION
+const STYLE_CLASS_RUBBERBAND = C.GTK_STYLE_CLASS_RUBBERBAND
+const CELL_RENDERER_MODE_ACTIVATABLE = C.GTK_CELL_RENDERER_MODE_ACTIVATABLE
+const ICON_VIEW_DROP_LEFT = C.GTK_ICON_VIEW_DROP_LEFT
+const DELETE_WORD_ENDS = C.GTK_DELETE_WORD_ENDS
+const POS_TOP = C.GTK_POS_TOP
+const STATE_FLAG_INSENSITIVE = C.GTK_STATE_FLAG_INSENSITIVE
+const STOCK_GO_FORWARD = C.GTK_STOCK_GO_FORWARD
+const INPUT_HINT_SPELLCHECK = C.GTK_INPUT_HINT_SPELLCHECK
+const STYLE_CLASS_SEPARATOR = C.GTK_STYLE_CLASS_SEPARATOR
+const DEST_DEFAULT_HIGHLIGHT = C.GTK_DEST_DEFAULT_HIGHLIGHT
+const IM_STATUS_NOTHING = C.GTK_IM_STATUS_NOTHING
+const LICENSE_GPL_2_0 = C.GTK_LICENSE_GPL_2_0
+const TOOLBAR_BOTH_HORIZ = C.GTK_TOOLBAR_BOTH_HORIZ
+const PACK_DIRECTION_RTL = C.GTK_PACK_DIRECTION_RTL
+const STATE_FLAG_BACKDROP = C.GTK_STATE_FLAG_BACKDROP
+const RC_TOKEN_FONT = C.GTK_RC_TOKEN_FONT
+const PRINT_SETTINGS_OUTPUT_URI = C.GTK_PRINT_SETTINGS_OUTPUT_URI
+const STOCK_DIALOG_ERROR = C.GTK_STOCK_DIALOG_ERROR
+const ICON_SIZE_BUTTON = C.GTK_ICON_SIZE_BUTTON
+const SELECTION_NONE = C.GTK_SELECTION_NONE
+const STYLE_CLASS_SIDEBAR = C.GTK_STYLE_CLASS_SIDEBAR
+const STATE_INCONSISTENT = C.GTK_STATE_INCONSISTENT
+const STOCK_DND_MULTIPLE = C.GTK_STOCK_DND_MULTIPLE
+const RC_TOKEN_BIND = C.GTK_RC_TOKEN_BIND
+const JUNCTION_CORNER_TOPRIGHT = C.GTK_JUNCTION_CORNER_TOPRIGHT
+const EXPANDER_SEMI_COLLAPSED = C.GTK_EXPANDER_SEMI_COLLAPSED
+const IMAGE_EMPTY = C.GTK_IMAGE_EMPTY
+const INPUT_PURPOSE_PIN = C.GTK_INPUT_PURPOSE_PIN
+const STOCK_DND = C.GTK_STOCK_DND
+const STOCK_JUSTIFY_RIGHT = C.GTK_STOCK_JUSTIFY_RIGHT
+const STYLE_CLASS_OSD = C.GTK_STYLE_CLASS_OSD
+const BUTTONS_CANCEL = C.GTK_BUTTONS_CANCEL
+const IMAGE_ANIMATION = C.GTK_IMAGE_ANIMATION
+const EXPAND = C.GTK_EXPAND
+const STOCK_ORIENTATION_PORTRAIT = C.GTK_STOCK_ORIENTATION_PORTRAIT
+const DRAG_RESULT_GRAB_BROKEN = C.GTK_DRAG_RESULT_GRAB_BROKEN
+const PRINT_SETTINGS_FINISHINGS = C.GTK_PRINT_SETTINGS_FINISHINGS
+const BUTTONBOX_SPREAD = C.GTK_BUTTONBOX_SPREAD
+const PRINT_STATUS_PRINTING = C.GTK_PRINT_STATUS_PRINTING
+const PAPER_NAME_LEGAL = C.GTK_PAPER_NAME_LEGAL
+const ARROW_LEFT = C.GTK_ARROW_LEFT
+const ARROW_RIGHT = C.GTK_ARROW_RIGHT
+const MENU_DIR_PREV = C.GTK_MENU_DIR_PREV
+const DIR_RIGHT = C.GTK_DIR_RIGHT
+const PRINT_SETTINGS_PRINTER = C.GTK_PRINT_SETTINGS_PRINTER
+const STYLE_REGION_COLUMN_HEADER = C.GTK_STYLE_REGION_COLUMN_HEADER
+const ICON_SIZE_LARGE_TOOLBAR = C.GTK_ICON_SIZE_LARGE_TOOLBAR
+const STATE_FLAG_FOCUSED = C.GTK_STATE_FLAG_FOCUSED
+const BUILDER_ERROR_UNHANDLED_TAG = C.GTK_BUILDER_ERROR_UNHANDLED_TAG
+const DEBUG_PLUGSOCKET = C.GTK_DEBUG_PLUGSOCKET
+const CELL_RENDERER_MODE_EDITABLE = C.GTK_CELL_RENDERER_MODE_EDITABLE
+const DEBUG_MODULES = C.GTK_DEBUG_MODULES
+const SCROLL_STEP_RIGHT = C.GTK_SCROLL_STEP_RIGHT
+const STOCK_GO_DOWN = C.GTK_STOCK_GO_DOWN
+const RECENT_FILTER_GROUP = C.GTK_RECENT_FILTER_GROUP
+const SIZE_REQUEST_WIDTH_FOR_HEIGHT = C.GTK_SIZE_REQUEST_WIDTH_FOR_HEIGHT
+const STYLE_CLASS_CURSOR_HANDLE = C.GTK_STYLE_CLASS_CURSOR_HANDLE
+const INPUT_PURPOSE_ALPHA = C.GTK_INPUT_PURPOSE_ALPHA
+const PACK_START = C.GTK_PACK_START
+const DEBUG_SIZE_REQUEST = C.GTK_DEBUG_SIZE_REQUEST
+const STYLE_PROPERTY_MARGIN = C.GTK_STYLE_PROPERTY_MARGIN
+const PAGE_SET_ODD = C.GTK_PAGE_SET_ODD
+const RC_BG = C.GTK_RC_BG
+const FILE_FILTER_URI = C.GTK_FILE_FILTER_URI
+const ICON_SIZE_DIALOG = C.GTK_ICON_SIZE_DIALOG
+const STOCK_SAVE_AS = C.GTK_STOCK_SAVE_AS
+const STOCK_SPELL_CHECK = C.GTK_STOCK_SPELL_CHECK
+const INPUT_HINT_NO_SPELLCHECK = C.GTK_INPUT_HINT_NO_SPELLCHECK
+const ICON_VIEW_DROP_INTO = C.GTK_ICON_VIEW_DROP_INTO
+const CSS_PROVIDER_ERROR_SYNTAX = C.GTK_CSS_PROVIDER_ERROR_SYNTAX
+const STOCK_MEDIA_RECORD = C.GTK_STOCK_MEDIA_RECORD
+const UNIT_POINTS = C.GTK_UNIT_POINTS
+const TEXT_WINDOW_RIGHT = C.GTK_TEXT_WINDOW_RIGHT
+const STYLE_CLASS_RAISED = C.GTK_STYLE_CLASS_RAISED
+const LEVEL_BAR_OFFSET_LOW = C.GTK_LEVEL_BAR_OFFSET_LOW
+const JUSTIFY_LEFT = C.GTK_JUSTIFY_LEFT
+const PRINT_SETTINGS_OUTPUT_DIR = C.GTK_PRINT_SETTINGS_OUTPUT_DIR
+const LICENSE_ARTISTIC = C.GTK_LICENSE_ARTISTIC
+const RC_TOKEN_FONTSET = C.GTK_RC_TOKEN_FONTSET
+const RC_TOKEN_CLASS = C.GTK_RC_TOKEN_CLASS
+const INPUT_HINT_INHIBIT_OSK = C.GTK_INPUT_HINT_INHIBIT_OSK
+const TOOLBAR_BOTH = C.GTK_TOOLBAR_BOTH
+const SCROLL_START = C.GTK_SCROLL_START
+const SELECTION_MULTIPLE = C.GTK_SELECTION_MULTIPLE
+const JUNCTION_TOP = C.GTK_JUNCTION_TOP
+const REGION_SORTED = C.GTK_REGION_SORTED
+const LICENSE_MIT_X11 = C.GTK_LICENSE_MIT_X11
+const ICON_SIZE_MENU = C.GTK_ICON_SIZE_MENU
+const STOCK_HELP = C.GTK_STOCK_HELP
+const INPUT_PURPOSE_NAME = C.GTK_INPUT_PURPOSE_NAME
+const SCROLL_PAGE_RIGHT = C.GTK_SCROLL_PAGE_RIGHT
+const SIZE_GROUP_BOTH = C.GTK_SIZE_GROUP_BOTH
+const DEBUG_UPDATES = C.GTK_DEBUG_UPDATES
+const WRAP_WORD_CHAR = C.GTK_WRAP_WORD_CHAR
+const UPDATE_ALWAYS = C.GTK_UPDATE_ALWAYS
+const STOCK_INDENT = C.GTK_STOCK_INDENT
+const STYLE_CLASS_HIGHLIGHT = C.GTK_STYLE_CLASS_HIGHLIGHT
+const BUILDER_ERROR_MISSING_PROPERTY_VALUE = C.GTK_BUILDER_ERROR_MISSING_PROPERTY_VALUE
+const UI_MANAGER_POPUP = C.GTK_UI_MANAGER_POPUP
+const PATH_PRIO_RC = C.GTK_PATH_PRIO_RC
+const STYLE_CLASS_TOOLBAR = C.GTK_STYLE_CLASS_TOOLBAR
+const MICRO_VERSION = C.GTK_MICRO_VERSION
+const DEBUG_PRINTING = C.GTK_DEBUG_PRINTING
+const PRINT_SETTINGS_WIN32_DRIVER_EXTRA = C.GTK_PRINT_SETTINGS_WIN32_DRIVER_EXTRA
+const UNIT_MM = C.GTK_UNIT_MM
+const ICON_THEME_NOT_FOUND = C.GTK_ICON_THEME_NOT_FOUND
+const SHADOW_ETCHED_IN = C.GTK_SHADOW_ETCHED_IN
+const STYLE_PROPERTY_BORDER_RADIUS = C.GTK_STYLE_PROPERTY_BORDER_RADIUS
+const PATH_WIDGET_CLASS = C.GTK_PATH_WIDGET_CLASS
+const IMAGE_GICON = C.GTK_IMAGE_GICON
+const STOCK_CONVERT = C.GTK_STOCK_CONVERT
+const TARGET_OTHER_APP = C.GTK_TARGET_OTHER_APP
+const SCROLL_STEP_DOWN = C.GTK_SCROLL_STEP_DOWN
+const TEXT_WINDOW_TOP = C.GTK_TEXT_WINDOW_TOP
+const RECENT_MANAGER_ERROR_NOT_FOUND = C.GTK_RECENT_MANAGER_ERROR_NOT_FOUND
+const REGION_EVEN = C.GTK_REGION_EVEN
+const PRINT_SETTINGS_WIN32_DRIVER_VERSION = C.GTK_PRINT_SETTINGS_WIN32_DRIVER_VERSION
+const DIR_DOWN = C.GTK_DIR_DOWN
+const IM_STATUS_CALLBACK = C.GTK_IM_STATUS_CALLBACK
+const TREE_VIEW_DROP_INTO_OR_AFTER = C.GTK_TREE_VIEW_DROP_INTO_OR_AFTER
+const CSS_SECTION_COLOR_DEFINITION = C.GTK_CSS_SECTION_COLOR_DEFINITION
+const WIN_POS_CENTER = C.GTK_WIN_POS_CENTER
+const RC_TOKEN_GTK = C.GTK_RC_TOKEN_GTK
+const PRINT_SETTINGS_NUMBER_UP = C.GTK_PRINT_SETTINGS_NUMBER_UP
+const RESPONSE_APPLY = C.GTK_RESPONSE_APPLY
+const BORDER_STYLE_HIDDEN = C.GTK_BORDER_STYLE_HIDDEN
+const DELETE_WORDS = C.GTK_DELETE_WORDS
+const ARROW_NONE = C.GTK_ARROW_NONE
+const DELETE_PARAGRAPH_ENDS = C.GTK_DELETE_PARAGRAPH_ENDS
+const STOCK_OK = C.GTK_STOCK_OK
+const RECENT_CHOOSER_ERROR_NOT_FOUND = C.GTK_RECENT_CHOOSER_ERROR_NOT_FOUND
+const WRAP_CHAR = C.GTK_WRAP_CHAR
+const STOCK_MEDIA_PAUSE = C.GTK_STOCK_MEDIA_PAUSE
+const RELIEF_NORMAL = C.GTK_RELIEF_NORMAL
+const RECENT_MANAGER_ERROR_NOT_REGISTERED = C.GTK_RECENT_MANAGER_ERROR_NOT_REGISTERED
+const STYLE_CLASS_INFO = C.GTK_STYLE_CLASS_INFO
+const RESPONSE_NO = C.GTK_RESPONSE_NO
+const RECENT_FILTER_APPLICATION = C.GTK_RECENT_FILTER_APPLICATION
+const STYLE_CLASS_DIM_LABEL = C.GTK_STYLE_CLASS_DIM_LABEL
+const TREE_VIEW_GRID_LINES_NONE = C.GTK_TREE_VIEW_GRID_LINES_NONE
+const TREE_VIEW_COLUMN_FIXED = C.GTK_TREE_VIEW_COLUMN_FIXED
+const NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_BOTTOM_TO_TOP = C.GTK_NUMBER_UP_LAYOUT_RIGHT_TO_LEFT_BOTTOM_TO_TOP
+const STOCK_FLOPPY = C.GTK_STOCK_FLOPPY
+const IM_STATUS_NONE = C.GTK_IM_STATUS_NONE
+const RECENT_FILTER_DISPLAY_NAME = C.GTK_RECENT_FILTER_DISPLAY_NAME
+const STOCK_ORIENTATION_LANDSCAPE = C.GTK_STOCK_ORIENTATION_LANDSCAPE
+const STYLE_CLASS_ACCELERATOR = C.GTK_STYLE_CLASS_ACCELERATOR
+const TEXT_DIR_LTR = C.GTK_TEXT_DIR_LTR
+const RC_TOKEN_BG = C.GTK_RC_TOKEN_BG
+const UI_MANAGER_MENU = C.GTK_UI_MANAGER_MENU
+const PRINT_DUPLEX_VERTICAL = C.GTK_PRINT_DUPLEX_VERTICAL
+const STYLE_CLASS_SCALE_HAS_MARKS_ABOVE = C.GTK_STYLE_CLASS_SCALE_HAS_MARKS_ABOVE
+const RELIEF_HALF = C.GTK_RELIEF_HALF
+const PRINT_SETTINGS_PAPER_FORMAT = C.GTK_PRINT_SETTINGS_PAPER_FORMAT
+const BORDER_STYLE_SOLID = C.GTK_BORDER_STYLE_SOLID
+const MOVEMENT_HORIZONTAL_PAGES = C.GTK_MOVEMENT_HORIZONTAL_PAGES
+const STYLE_CLASS_SCROLLBAR = C.GTK_STYLE_CLASS_SCROLLBAR
+const PATH_PRIO_HIGHEST = C.GTK_PATH_PRIO_HIGHEST
+const STYLE_CLASS_MARK = C.GTK_STYLE_CLASS_MARK
+const IMAGE_PIXBUF = C.GTK_IMAGE_PIXBUF
+const STOCK_ZOOM_OUT = C.GTK_STOCK_ZOOM_OUT
+const STOCK_FIND_AND_REPLACE = C.GTK_STOCK_FIND_AND_REPLACE

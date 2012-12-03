@@ -19,6 +19,240 @@ package gtk
 // #include </usr/include/gio-unix-2.0/gio/gunixsocketaddress.h>
 // #include </usr/include/gio-unix-2.0/gio/gunixinputstream.h>
 /*
+GAppInfo * _g_app_info_create_from_commandline(char * commandline, char * application_name, GAppInfoCreateFlags flags, void * error) {
+	return (GAppInfo *)g_app_info_create_from_commandline((const char *)(commandline), (const char *)(application_name), flags, (GError **)(error));
+}
+GList * _g_app_info_get_all_for_type(char * content_type) {
+	return (GList *)g_app_info_get_all_for_type((const char *)(content_type));
+}
+GAppInfo * _g_app_info_get_default_for_type(char * content_type, gboolean must_support_uris) {
+	return (GAppInfo *)g_app_info_get_default_for_type((const char *)(content_type), must_support_uris);
+}
+GAppInfo * _g_app_info_get_default_for_uri_scheme(char * uri_scheme) {
+	return (GAppInfo *)g_app_info_get_default_for_uri_scheme((const char *)(uri_scheme));
+}
+GList * _g_app_info_get_fallback_for_type(gchar * content_type) {
+	return (GList *)g_app_info_get_fallback_for_type((const gchar *)(content_type));
+}
+GList * _g_app_info_get_recommended_for_type(gchar * content_type) {
+	return (GList *)g_app_info_get_recommended_for_type((const gchar *)(content_type));
+}
+gboolean _g_app_info_launch_default_for_uri(char * uri, GAppLaunchContext * launch_context, void * error) {
+	return (gboolean)g_app_info_launch_default_for_uri((const char *)(uri), launch_context, (GError **)(error));
+}
+void _g_app_info_reset_type_associations(char * content_type) {
+	(void)g_app_info_reset_type_associations((const char *)(content_type));
+}
+GDBusConnection * _g_bus_get_finish(GAsyncResult * res, void * error) {
+	return (GDBusConnection *)g_bus_get_finish(res, (GError **)(error));
+}
+GDBusConnection * _g_bus_get_sync(GBusType bus_type, GCancellable * cancellable, void * error) {
+	return (GDBusConnection *)g_bus_get_sync(bus_type, cancellable, (GError **)(error));
+}
+guint _g_bus_own_name(GBusType bus_type, gchar * name, GBusNameOwnerFlags flags, GBusAcquiredCallback bus_acquired_handler, GBusNameAcquiredCallback name_acquired_handler, GBusNameLostCallback name_lost_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
+	return (guint)g_bus_own_name(bus_type, (const gchar *)(name), flags, bus_acquired_handler, name_acquired_handler, name_lost_handler, user_data, user_data_free_func);
+}
+guint _g_bus_own_name_on_connection(GDBusConnection * connection, gchar * name, GBusNameOwnerFlags flags, GBusNameAcquiredCallback name_acquired_handler, GBusNameLostCallback name_lost_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
+	return (guint)g_bus_own_name_on_connection(connection, (const gchar *)(name), flags, name_acquired_handler, name_lost_handler, user_data, user_data_free_func);
+}
+guint _g_bus_own_name_on_connection_with_closures(GDBusConnection * connection, gchar * name, GBusNameOwnerFlags flags, GClosure * name_acquired_closure, GClosure * name_lost_closure) {
+	return (guint)g_bus_own_name_on_connection_with_closures(connection, (const gchar *)(name), flags, name_acquired_closure, name_lost_closure);
+}
+guint _g_bus_own_name_with_closures(GBusType bus_type, gchar * name, GBusNameOwnerFlags flags, GClosure * bus_acquired_closure, GClosure * name_acquired_closure, GClosure * name_lost_closure) {
+	return (guint)g_bus_own_name_with_closures(bus_type, (const gchar *)(name), flags, bus_acquired_closure, name_acquired_closure, name_lost_closure);
+}
+guint _g_bus_watch_name(GBusType bus_type, gchar * name, GBusNameWatcherFlags flags, GBusNameAppearedCallback name_appeared_handler, GBusNameVanishedCallback name_vanished_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
+	return (guint)g_bus_watch_name(bus_type, (const gchar *)(name), flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func);
+}
+guint _g_bus_watch_name_on_connection(GDBusConnection * connection, gchar * name, GBusNameWatcherFlags flags, GBusNameAppearedCallback name_appeared_handler, GBusNameVanishedCallback name_vanished_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
+	return (guint)g_bus_watch_name_on_connection(connection, (const gchar *)(name), flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func);
+}
+guint _g_bus_watch_name_on_connection_with_closures(GDBusConnection * connection, gchar * name, GBusNameWatcherFlags flags, GClosure * name_appeared_closure, GClosure * name_vanished_closure) {
+	return (guint)g_bus_watch_name_on_connection_with_closures(connection, (const gchar *)(name), flags, name_appeared_closure, name_vanished_closure);
+}
+guint _g_bus_watch_name_with_closures(GBusType bus_type, gchar * name, GBusNameWatcherFlags flags, GClosure * name_appeared_closure, GClosure * name_vanished_closure) {
+	return (guint)g_bus_watch_name_with_closures(bus_type, (const gchar *)(name), flags, name_appeared_closure, name_vanished_closure);
+}
+gboolean _g_content_type_can_be_executable(gchar * type) {
+	return (gboolean)g_content_type_can_be_executable((const gchar *)(type));
+}
+gboolean _g_content_type_equals(gchar * type1, gchar * type2) {
+	return (gboolean)g_content_type_equals((const gchar *)(type1), (const gchar *)(type2));
+}
+gchar * _g_content_type_from_mime_type(gchar * mime_type) {
+	return (gchar *)g_content_type_from_mime_type((const gchar *)(mime_type));
+}
+gchar * _g_content_type_get_description(gchar * type) {
+	return (gchar *)g_content_type_get_description((const gchar *)(type));
+}
+gchar * _g_content_type_get_generic_icon_name(gchar * type) {
+	return (gchar *)g_content_type_get_generic_icon_name((const gchar *)(type));
+}
+GIcon * _g_content_type_get_icon(gchar * type) {
+	return (GIcon *)g_content_type_get_icon((const gchar *)(type));
+}
+gchar * _g_content_type_get_mime_type(gchar * type) {
+	return (gchar *)g_content_type_get_mime_type((const gchar *)(type));
+}
+GIcon * _g_content_type_get_symbolic_icon(gchar * type) {
+	return (GIcon *)g_content_type_get_symbolic_icon((const gchar *)(type));
+}
+void * _g_content_type_guess_for_tree(GFile * root) {
+	return (void *)g_content_type_guess_for_tree(root);
+}
+gboolean _g_content_type_is_a(gchar * type, gchar * supertype) {
+	return (gboolean)g_content_type_is_a((const gchar *)(type), (const gchar *)(supertype));
+}
+gboolean _g_content_type_is_unknown(gchar * type) {
+	return (gboolean)g_content_type_is_unknown((const gchar *)(type));
+}
+gchar * _g_dbus_address_get_for_bus_sync(GBusType bus_type, GCancellable * cancellable, void * error) {
+	return (gchar *)g_dbus_address_get_for_bus_sync(bus_type, cancellable, (GError **)(error));
+}
+void _g_dbus_address_get_stream(gchar * address, GCancellable * cancellable, GAsyncReadyCallback callback, gpointer user_data) {
+	(void)g_dbus_address_get_stream((const gchar *)(address), cancellable, callback, user_data);
+}
+GIOStream * _g_dbus_address_get_stream_finish(GAsyncResult * res, void * out_guid, void * error) {
+	return (GIOStream *)g_dbus_address_get_stream_finish(res, (gchar **)(out_guid), (GError **)(error));
+}
+GIOStream * _g_dbus_address_get_stream_sync(gchar * address, void * out_guid, GCancellable * cancellable, void * error) {
+	return (GIOStream *)g_dbus_address_get_stream_sync((const gchar *)(address), (gchar **)(out_guid), cancellable, (GError **)(error));
+}
+gchar * _g_dbus_error_encode_gerror(GError * error) {
+	return (gchar *)g_dbus_error_encode_gerror((const GError *)(error));
+}
+gchar * _g_dbus_error_get_remote_error(GError * error) {
+	return (gchar *)g_dbus_error_get_remote_error((const GError *)(error));
+}
+gboolean _g_dbus_error_is_remote_error(GError * error) {
+	return (gboolean)g_dbus_error_is_remote_error((const GError *)(error));
+}
+GError * _g_dbus_error_new_for_dbus_error(gchar * dbus_error_name, gchar * dbus_error_message) {
+	return (GError *)g_dbus_error_new_for_dbus_error((const gchar *)(dbus_error_name), (const gchar *)(dbus_error_message));
+}
+gboolean _g_dbus_error_register_error(GQuark error_domain, gint error_code, gchar * dbus_error_name) {
+	return (gboolean)g_dbus_error_register_error(error_domain, error_code, (const gchar *)(dbus_error_name));
+}
+void _g_dbus_error_register_error_domain(gchar * error_domain_quark_name, volatile gsize * quark_volatile, GDBusErrorEntry * entries, guint num_entries) {
+	(void)g_dbus_error_register_error_domain((const gchar *)(error_domain_quark_name), quark_volatile, (const GDBusErrorEntry *)(entries), num_entries);
+}
+gboolean _g_dbus_error_unregister_error(GQuark error_domain, gint error_code, gchar * dbus_error_name) {
+	return (gboolean)g_dbus_error_unregister_error(error_domain, error_code, (const gchar *)(dbus_error_name));
+}
+GVariant * _g_dbus_gvalue_to_gvariant(GValue * gvalue, GVariantType * type) {
+	return (GVariant *)g_dbus_gvalue_to_gvariant((const GValue *)(gvalue), (const GVariantType *)(type));
+}
+gboolean _g_dbus_is_address(gchar * string) {
+	return (gboolean)g_dbus_is_address((const gchar *)(string));
+}
+gboolean _g_dbus_is_guid(gchar * string) {
+	return (gboolean)g_dbus_is_guid((const gchar *)(string));
+}
+gboolean _g_dbus_is_interface_name(gchar * string) {
+	return (gboolean)g_dbus_is_interface_name((const gchar *)(string));
+}
+gboolean _g_dbus_is_member_name(gchar * string) {
+	return (gboolean)g_dbus_is_member_name((const gchar *)(string));
+}
+gboolean _g_dbus_is_name(gchar * string) {
+	return (gboolean)g_dbus_is_name((const gchar *)(string));
+}
+gboolean _g_dbus_is_supported_address(gchar * string, void * error) {
+	return (gboolean)g_dbus_is_supported_address((const gchar *)(string), (GError **)(error));
+}
+gboolean _g_dbus_is_unique_name(gchar * string) {
+	return (gboolean)g_dbus_is_unique_name((const gchar *)(string));
+}
+GFile * _g_file_new_for_commandline_arg(char * arg) {
+	return (GFile *)g_file_new_for_commandline_arg((const char *)(arg));
+}
+GFile * _g_file_new_for_path(char * path) {
+	return (GFile *)g_file_new_for_path((const char *)(path));
+}
+GFile * _g_file_new_for_uri(char * uri) {
+	return (GFile *)g_file_new_for_uri((const char *)(uri));
+}
+GFile * _g_file_new_tmp(char * tmpl, void * iostream, void * error) {
+	return (GFile *)g_file_new_tmp((const char *)(tmpl), (GFileIOStream **)(iostream), (GError **)(error));
+}
+GFile * _g_file_parse_name(char * parse_name) {
+	return (GFile *)g_file_parse_name((const char *)(parse_name));
+}
+guint _g_icon_hash(gpointer icon) {
+	return (guint)g_icon_hash((gconstpointer)(icon));
+}
+GIcon * _g_icon_new_for_string(gchar * str, void * error) {
+	return (GIcon *)g_icon_new_for_string((const gchar *)(str), (GError **)(error));
+}
+GIOExtension * _g_io_extension_point_implement(char * extension_point_name, GType type, char * extension_name, gint priority) {
+	return (GIOExtension *)g_io_extension_point_implement((const char *)(extension_point_name), type, (const char *)(extension_name), priority);
+}
+GIOExtensionPoint * _g_io_extension_point_lookup(char * name) {
+	return (GIOExtensionPoint *)g_io_extension_point_lookup((const char *)(name));
+}
+GIOExtensionPoint * _g_io_extension_point_register(char * name) {
+	return (GIOExtensionPoint *)g_io_extension_point_register((const char *)(name));
+}
+GList * _g_io_modules_load_all_in_directory(gchar * dirname) {
+	return (GList *)g_io_modules_load_all_in_directory((const gchar *)(dirname));
+}
+GList * _g_io_modules_load_all_in_directory_with_scope(gchar * dirname, GIOModuleScope * scope) {
+	return (GList *)g_io_modules_load_all_in_directory_with_scope((const gchar *)(dirname), scope);
+}
+void _g_io_modules_scan_all_in_directory(char * dirname) {
+	(void)g_io_modules_scan_all_in_directory((const char *)(dirname));
+}
+void _g_io_modules_scan_all_in_directory_with_scope(gchar * dirname, GIOModuleScope * scope) {
+	(void)g_io_modules_scan_all_in_directory_with_scope((const gchar *)(dirname), scope);
+}
+gssize _g_pollable_stream_read(GInputStream * stream, void * buffer, gsize count, gboolean blocking, GCancellable * cancellable, void * error) {
+	return (gssize)g_pollable_stream_read(stream, buffer, count, blocking, cancellable, (GError **)(error));
+}
+GProxy * _g_proxy_get_default_for_protocol(gchar * protocol) {
+	return (GProxy *)g_proxy_get_default_for_protocol((const gchar *)(protocol));
+}
+GResource * _g_resource_load(gchar * filename, void * error) {
+	return (GResource *)g_resource_load((const gchar *)(filename), (GError **)(error));
+}
+void * _g_resources_enumerate_children(char * path, GResourceLookupFlags lookup_flags, void * error) {
+	return (void *)g_resources_enumerate_children((const char *)(path), lookup_flags, (GError **)(error));
+}
+gboolean _g_resources_get_info(char * path, GResourceLookupFlags lookup_flags, gsize * size, guint32 * flags, void * error) {
+	return (gboolean)g_resources_get_info((const char *)(path), lookup_flags, size, flags, (GError **)(error));
+}
+GBytes * _g_resources_lookup_data(char * path, GResourceLookupFlags lookup_flags, void * error) {
+	return (GBytes *)g_resources_lookup_data((const char *)(path), lookup_flags, (GError **)(error));
+}
+GInputStream * _g_resources_open_stream(char * path, GResourceLookupFlags lookup_flags, void * error) {
+	return (GInputStream *)g_resources_open_stream((const char *)(path), lookup_flags, (GError **)(error));
+}
+void _g_simple_async_report_gerror_in_idle(GObject * object, GAsyncReadyCallback callback, gpointer user_data, GError * error) {
+	(void)g_simple_async_report_gerror_in_idle(object, callback, user_data, (const GError *)(error));
+}
+GIOStream * _g_tls_client_connection_new(GIOStream * base_io_stream, GSocketConnectable * server_identity, void * error) {
+	return (GIOStream *)g_tls_client_connection_new(base_io_stream, server_identity, (GError **)(error));
+}
+GTlsDatabase * _g_tls_file_database_new(gchar * anchors, void * error) {
+	return (GTlsDatabase *)g_tls_file_database_new((const gchar *)(anchors), (GError **)(error));
+}
+GIOStream * _g_tls_server_connection_new(GIOStream * base_io_stream, GTlsCertificate * certificate, void * error) {
+	return (GIOStream *)g_tls_server_connection_new(base_io_stream, certificate, (GError **)(error));
+}
+gboolean _g_unix_is_mount_path_system_internal(char * mount_path) {
+	return (gboolean)g_unix_is_mount_path_system_internal((const char *)(mount_path));
+}
+GUnixMountEntry * _g_unix_mount_at(char * mount_path, guint64 * time_read) {
+	return (GUnixMountEntry *)g_unix_mount_at((const char *)(mount_path), time_read);
+}
+char * _g_unix_mount_get_device_path(GUnixMountEntry * mount_entry) {
+	return (char *)g_unix_mount_get_device_path(mount_entry);
+}
+char * _g_unix_mount_get_fs_type(GUnixMountEntry * mount_entry) {
+	return (char *)g_unix_mount_get_fs_type(mount_entry);
+}
+char * _g_unix_mount_get_mount_path(GUnixMountEntry * mount_entry) {
+	return (char *)g_unix_mount_get_mount_path(mount_entry);
+}
 void * _g_app_launch_context_get_environment(GAppLaunchContext * _self_) {
 	return (void *)g_app_launch_context_get_environment(_self_);
 }
@@ -175,15 +409,6 @@ GDBusMessage * _g_dbus_connection_send_message_with_reply_sync(GDBusConnection *
 guint _g_dbus_connection_signal_subscribe(GDBusConnection * _self_, gchar * sender, gchar * interface_name, gchar * member, gchar * object_path, gchar * arg0, GDBusSignalFlags flags, GDBusSignalCallback callback, gpointer user_data, GDestroyNotify user_data_free_func) {
 	return (guint)g_dbus_connection_signal_subscribe(_self_, (const gchar *)(sender), (const gchar *)(interface_name), (const gchar *)(member), (const gchar *)(object_path), (const gchar *)(arg0), flags, callback, user_data, user_data_free_func);
 }
-GDBusMethodInfo * _g_dbus_interface_info_lookup_method(GDBusInterfaceInfo * _self_, gchar * name) {
-	return (GDBusMethodInfo *)g_dbus_interface_info_lookup_method(_self_, (const gchar *)(name));
-}
-GDBusPropertyInfo * _g_dbus_interface_info_lookup_property(GDBusInterfaceInfo * _self_, gchar * name) {
-	return (GDBusPropertyInfo *)g_dbus_interface_info_lookup_property(_self_, (const gchar *)(name));
-}
-GDBusSignalInfo * _g_dbus_interface_info_lookup_signal(GDBusInterfaceInfo * _self_, gchar * name) {
-	return (GDBusSignalInfo *)g_dbus_interface_info_lookup_signal(_self_, (const gchar *)(name));
-}
 gboolean _g_dbus_interface_skeleton_export(GDBusInterfaceSkeleton * _self_, GDBusConnection * connection, gchar * object_path, void * error) {
 	return (gboolean)g_dbus_interface_skeleton_export(_self_, connection, (const gchar *)(object_path), (GError **)(error));
 }
@@ -279,12 +504,6 @@ void _g_dbus_method_invocation_return_error_literal(GDBusMethodInvocation * _sel
 }
 void _g_dbus_method_invocation_return_gerror(GDBusMethodInvocation * _self_, GError * error) {
 	(void)g_dbus_method_invocation_return_gerror(_self_, (const GError *)(error));
-}
-GDBusNodeInfo * _g_dbus_node_info_new_for_xml(gchar * xml_data, void * error) {
-	return (GDBusNodeInfo *)g_dbus_node_info_new_for_xml((const gchar *)(xml_data), (GError **)(error));
-}
-GDBusInterfaceInfo * _g_dbus_node_info_lookup_interface(GDBusNodeInfo * _self_, gchar * name) {
-	return (GDBusInterfaceInfo *)g_dbus_node_info_lookup_interface(_self_, (const gchar *)(name));
 }
 GDBusObjectManager * _g_dbus_object_manager_client_new_finish(GAsyncResult * res, void * error) {
 	return (GDBusObjectManager *)g_dbus_object_manager_client_new_finish(res, (GError **)(error));
@@ -502,27 +721,6 @@ gboolean _g_desktop_app_info_has_key(GDesktopAppInfo * _self_, char * key) {
 gboolean _g_desktop_app_info_launch_uris_as_manager(GDesktopAppInfo * _self_, GList * uris, GAppLaunchContext * launch_context, GSpawnFlags spawn_flags, GSpawnChildSetupFunc user_setup, gpointer user_setup_data, GDesktopAppLaunchCallback pid_callback, gpointer pid_callback_data, void * error) {
 	return (gboolean)g_desktop_app_info_launch_uris_as_manager(_self_, uris, launch_context, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, (GError **)(error));
 }
-void _g_file_attribute_info_list_add(GFileAttributeInfoList * _self_, char * name, GFileAttributeType type, GFileAttributeInfoFlags flags) {
-	(void)g_file_attribute_info_list_add(_self_, (const char *)(name), type, flags);
-}
-GFileAttributeInfo * _g_file_attribute_info_list_lookup(GFileAttributeInfoList * _self_, char * name) {
-	return (GFileAttributeInfo *)g_file_attribute_info_list_lookup(_self_, (const char *)(name));
-}
-GFileAttributeMatcher * _g_file_attribute_matcher_new(char * attributes) {
-	return (GFileAttributeMatcher *)g_file_attribute_matcher_new((const char *)(attributes));
-}
-gboolean _g_file_attribute_matcher_enumerate_namespace(GFileAttributeMatcher * _self_, char * ns) {
-	return (gboolean)g_file_attribute_matcher_enumerate_namespace(_self_, (const char *)(ns));
-}
-char * _g_file_attribute_matcher_enumerate_next(GFileAttributeMatcher * _self_) {
-	return (char *)g_file_attribute_matcher_enumerate_next(_self_);
-}
-gboolean _g_file_attribute_matcher_matches(GFileAttributeMatcher * _self_, char * attribute) {
-	return (gboolean)g_file_attribute_matcher_matches(_self_, (const char *)(attribute));
-}
-gboolean _g_file_attribute_matcher_matches_only(GFileAttributeMatcher * _self_, char * attribute) {
-	return (gboolean)g_file_attribute_matcher_matches_only(_self_, (const char *)(attribute));
-}
 gboolean _g_file_enumerator_close(GFileEnumerator * _self_, GCancellable * cancellable, void * error) {
 	return (gboolean)g_file_enumerator_close(_self_, cancellable, (GError **)(error));
 }
@@ -682,26 +880,8 @@ char * _g_filename_completer_get_completion_suffix(GFilenameCompleter * _self_, 
 void * _g_filename_completer_get_completions(GFilenameCompleter * _self_, char * initial_text) {
 	return (void *)g_filename_completer_get_completions(_self_, (const char *)(initial_text));
 }
-char * _g_io_extension_get_name(GIOExtension * _self_) {
-	return (char *)g_io_extension_get_name(_self_);
-}
-GIOExtension * _g_io_extension_point_implement(char * extension_point_name, GType type, char * extension_name, gint priority) {
-	return (GIOExtension *)g_io_extension_point_implement((const char *)(extension_point_name), type, (const char *)(extension_name), priority);
-}
-GIOExtensionPoint * _g_io_extension_point_lookup(char * name) {
-	return (GIOExtensionPoint *)g_io_extension_point_lookup((const char *)(name));
-}
-GIOExtensionPoint * _g_io_extension_point_register(char * name) {
-	return (GIOExtensionPoint *)g_io_extension_point_register((const char *)(name));
-}
-GIOExtension * _g_io_extension_point_get_extension_by_name(GIOExtensionPoint * _self_, char * name) {
-	return (GIOExtension *)g_io_extension_point_get_extension_by_name(_self_, (const char *)(name));
-}
 GIOModule * _g_io_module_new(gchar * filename) {
 	return (GIOModule *)g_io_module_new((const gchar *)(filename));
-}
-void _g_io_module_scope_block(GIOModuleScope * _self_, gchar * basename) {
-	(void)g_io_module_scope_block(_self_, (const gchar *)(basename));
 }
 gboolean _g_io_stream_splice_finish(GAsyncResult * result, void * error) {
 	return (gboolean)g_io_stream_splice_finish(result, (GError **)(error));
@@ -979,24 +1159,6 @@ void _g_resolver_lookup_service_async(GResolver * _self_, gchar * service, gchar
 GList * _g_resolver_lookup_service_finish(GResolver * _self_, GAsyncResult * result, void * error) {
 	return (GList *)g_resolver_lookup_service_finish(_self_, result, (GError **)(error));
 }
-GResource * _g_resource_new_from_data(GBytes * data, void * error) {
-	return (GResource *)g_resource_new_from_data(data, (GError **)(error));
-}
-GResource * _g_resource_load(gchar * filename, void * error) {
-	return (GResource *)g_resource_load((const gchar *)(filename), (GError **)(error));
-}
-void * _g_resource_enumerate_children(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, void * error) {
-	return (void *)g_resource_enumerate_children(_self_, (const char *)(path), lookup_flags, (GError **)(error));
-}
-gboolean _g_resource_get_info(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, gsize * size, guint32 * flags, void * error) {
-	return (gboolean)g_resource_get_info(_self_, (const char *)(path), lookup_flags, size, flags, (GError **)(error));
-}
-GBytes * _g_resource_lookup_data(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, void * error) {
-	return (GBytes *)g_resource_lookup_data(_self_, (const char *)(path), lookup_flags, (GError **)(error));
-}
-GInputStream * _g_resource_open_stream(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, void * error) {
-	return (GInputStream *)g_resource_open_stream(_self_, (const char *)(path), lookup_flags, (GError **)(error));
-}
 GSettings * _g_settings_new(gchar * schema_id) {
 	return (GSettings *)g_settings_new((const gchar *)(schema_id));
 }
@@ -1107,18 +1269,6 @@ gboolean _g_settings_set_uint(GSettings * _self_, gchar * key, guint value) {
 }
 gboolean _g_settings_set_value(GSettings * _self_, gchar * key, GVariant * value) {
 	return (gboolean)g_settings_set_value(_self_, (const gchar *)(key), value);
-}
-gchar * _g_settings_schema_get_id(GSettingsSchema * _self_) {
-	return (gchar *)g_settings_schema_get_id(_self_);
-}
-gchar * _g_settings_schema_get_path(GSettingsSchema * _self_) {
-	return (gchar *)g_settings_schema_get_path(_self_);
-}
-GSettingsSchemaSource * _g_settings_schema_source_new_from_directory(gchar * directory, GSettingsSchemaSource * parent, gboolean trusted, void * error) {
-	return (GSettingsSchemaSource *)g_settings_schema_source_new_from_directory((const gchar *)(directory), parent, trusted, (GError **)(error));
-}
-GSettingsSchema * _g_settings_schema_source_lookup(GSettingsSchemaSource * _self_, gchar * schema_id, gboolean recursive) {
-	return (GSettingsSchema *)g_settings_schema_source_lookup(_self_, (const gchar *)(schema_id), recursive);
 }
 GSimpleAction * _g_simple_action_new(gchar * name, GVariantType * parameter_type) {
 	return (GSimpleAction *)g_simple_action_new((const gchar *)(name), (const GVariantType *)(parameter_type));
@@ -1276,12 +1426,6 @@ gboolean _g_socket_listener_add_inet_port(GSocketListener * _self_, guint16 port
 gboolean _g_socket_listener_add_socket(GSocketListener * _self_, GSocket * socket, GObject * source_object, void * error) {
 	return (gboolean)g_socket_listener_add_socket(_self_, socket, source_object, (GError **)(error));
 }
-GSrvTarget * _g_srv_target_new(gchar * hostname, guint16 port, guint16 priority, guint16 weight) {
-	return (GSrvTarget *)g_srv_target_new((const gchar *)(hostname), port, priority, weight);
-}
-gchar * _g_srv_target_get_hostname(GSrvTarget * _self_) {
-	return (gchar *)g_srv_target_get_hostname(_self_);
-}
 gboolean _g_task_propagate_boolean(GTask * _self_, void * error) {
 	return (gboolean)g_task_propagate_boolean(_self_, (GError **)(error));
 }
@@ -1417,18 +1561,6 @@ gint * _g_unix_fd_list_peek_fds(GUnixFDList * _self_, gint * length) {
 gboolean _g_unix_fd_message_append_fd(GUnixFDMessage * _self_, gint fd, void * error) {
 	return (gboolean)g_unix_fd_message_append_fd(_self_, fd, (GError **)(error));
 }
-char * _g_unix_mount_point_get_device_path(GUnixMountPoint * _self_) {
-	return (char *)g_unix_mount_point_get_device_path(_self_);
-}
-char * _g_unix_mount_point_get_fs_type(GUnixMountPoint * _self_) {
-	return (char *)g_unix_mount_point_get_fs_type(_self_);
-}
-char * _g_unix_mount_point_get_mount_path(GUnixMountPoint * _self_) {
-	return (char *)g_unix_mount_point_get_mount_path(_self_);
-}
-char * _g_unix_mount_point_get_options(GUnixMountPoint * _self_) {
-	return (char *)g_unix_mount_point_get_options(_self_);
-}
 GSocketAddress * _g_unix_socket_address_new(gchar * path) {
 	return (GSocketAddress *)g_unix_socket_address_new((const gchar *)(path));
 }
@@ -1453,227 +1585,95 @@ GMount * _g_volume_monitor_get_mount_for_uuid(GVolumeMonitor * _self_, char * uu
 GVolume * _g_volume_monitor_get_volume_for_uuid(GVolumeMonitor * _self_, char * uuid) {
 	return (GVolume *)g_volume_monitor_get_volume_for_uuid(_self_, (const char *)(uuid));
 }
-GAppInfo * _g_app_info_create_from_commandline(char * commandline, char * application_name, GAppInfoCreateFlags flags, void * error) {
-	return (GAppInfo *)g_app_info_create_from_commandline((const char *)(commandline), (const char *)(application_name), flags, (GError **)(error));
+GDBusMethodInfo * _g_dbus_interface_info_lookup_method(GDBusInterfaceInfo * _self_, gchar * name) {
+	return (GDBusMethodInfo *)g_dbus_interface_info_lookup_method(_self_, (const gchar *)(name));
 }
-GList * _g_app_info_get_all_for_type(char * content_type) {
-	return (GList *)g_app_info_get_all_for_type((const char *)(content_type));
+GDBusPropertyInfo * _g_dbus_interface_info_lookup_property(GDBusInterfaceInfo * _self_, gchar * name) {
+	return (GDBusPropertyInfo *)g_dbus_interface_info_lookup_property(_self_, (const gchar *)(name));
 }
-GAppInfo * _g_app_info_get_default_for_type(char * content_type, gboolean must_support_uris) {
-	return (GAppInfo *)g_app_info_get_default_for_type((const char *)(content_type), must_support_uris);
+GDBusSignalInfo * _g_dbus_interface_info_lookup_signal(GDBusInterfaceInfo * _self_, gchar * name) {
+	return (GDBusSignalInfo *)g_dbus_interface_info_lookup_signal(_self_, (const gchar *)(name));
 }
-GAppInfo * _g_app_info_get_default_for_uri_scheme(char * uri_scheme) {
-	return (GAppInfo *)g_app_info_get_default_for_uri_scheme((const char *)(uri_scheme));
+GDBusNodeInfo * _g_dbus_node_info_new_for_xml(gchar * xml_data, void * error) {
+	return (GDBusNodeInfo *)g_dbus_node_info_new_for_xml((const gchar *)(xml_data), (GError **)(error));
 }
-GList * _g_app_info_get_fallback_for_type(gchar * content_type) {
-	return (GList *)g_app_info_get_fallback_for_type((const gchar *)(content_type));
+GDBusInterfaceInfo * _g_dbus_node_info_lookup_interface(GDBusNodeInfo * _self_, gchar * name) {
+	return (GDBusInterfaceInfo *)g_dbus_node_info_lookup_interface(_self_, (const gchar *)(name));
 }
-GList * _g_app_info_get_recommended_for_type(gchar * content_type) {
-	return (GList *)g_app_info_get_recommended_for_type((const gchar *)(content_type));
+void _g_file_attribute_info_list_add(GFileAttributeInfoList * _self_, char * name, GFileAttributeType type, GFileAttributeInfoFlags flags) {
+	(void)g_file_attribute_info_list_add(_self_, (const char *)(name), type, flags);
 }
-gboolean _g_app_info_launch_default_for_uri(char * uri, GAppLaunchContext * launch_context, void * error) {
-	return (gboolean)g_app_info_launch_default_for_uri((const char *)(uri), launch_context, (GError **)(error));
+GFileAttributeInfo * _g_file_attribute_info_list_lookup(GFileAttributeInfoList * _self_, char * name) {
+	return (GFileAttributeInfo *)g_file_attribute_info_list_lookup(_self_, (const char *)(name));
 }
-void _g_app_info_reset_type_associations(char * content_type) {
-	(void)g_app_info_reset_type_associations((const char *)(content_type));
+GFileAttributeMatcher * _g_file_attribute_matcher_new(char * attributes) {
+	return (GFileAttributeMatcher *)g_file_attribute_matcher_new((const char *)(attributes));
 }
-GDBusConnection * _g_bus_get_finish(GAsyncResult * res, void * error) {
-	return (GDBusConnection *)g_bus_get_finish(res, (GError **)(error));
+gboolean _g_file_attribute_matcher_enumerate_namespace(GFileAttributeMatcher * _self_, char * ns) {
+	return (gboolean)g_file_attribute_matcher_enumerate_namespace(_self_, (const char *)(ns));
 }
-GDBusConnection * _g_bus_get_sync(GBusType bus_type, GCancellable * cancellable, void * error) {
-	return (GDBusConnection *)g_bus_get_sync(bus_type, cancellable, (GError **)(error));
+char * _g_file_attribute_matcher_enumerate_next(GFileAttributeMatcher * _self_) {
+	return (char *)g_file_attribute_matcher_enumerate_next(_self_);
 }
-guint _g_bus_own_name(GBusType bus_type, gchar * name, GBusNameOwnerFlags flags, GBusAcquiredCallback bus_acquired_handler, GBusNameAcquiredCallback name_acquired_handler, GBusNameLostCallback name_lost_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
-	return (guint)g_bus_own_name(bus_type, (const gchar *)(name), flags, bus_acquired_handler, name_acquired_handler, name_lost_handler, user_data, user_data_free_func);
+gboolean _g_file_attribute_matcher_matches(GFileAttributeMatcher * _self_, char * attribute) {
+	return (gboolean)g_file_attribute_matcher_matches(_self_, (const char *)(attribute));
 }
-guint _g_bus_own_name_on_connection(GDBusConnection * connection, gchar * name, GBusNameOwnerFlags flags, GBusNameAcquiredCallback name_acquired_handler, GBusNameLostCallback name_lost_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
-	return (guint)g_bus_own_name_on_connection(connection, (const gchar *)(name), flags, name_acquired_handler, name_lost_handler, user_data, user_data_free_func);
+gboolean _g_file_attribute_matcher_matches_only(GFileAttributeMatcher * _self_, char * attribute) {
+	return (gboolean)g_file_attribute_matcher_matches_only(_self_, (const char *)(attribute));
 }
-guint _g_bus_own_name_on_connection_with_closures(GDBusConnection * connection, gchar * name, GBusNameOwnerFlags flags, GClosure * name_acquired_closure, GClosure * name_lost_closure) {
-	return (guint)g_bus_own_name_on_connection_with_closures(connection, (const gchar *)(name), flags, name_acquired_closure, name_lost_closure);
+char * _g_io_extension_get_name(GIOExtension * _self_) {
+	return (char *)g_io_extension_get_name(_self_);
 }
-guint _g_bus_own_name_with_closures(GBusType bus_type, gchar * name, GBusNameOwnerFlags flags, GClosure * bus_acquired_closure, GClosure * name_acquired_closure, GClosure * name_lost_closure) {
-	return (guint)g_bus_own_name_with_closures(bus_type, (const gchar *)(name), flags, bus_acquired_closure, name_acquired_closure, name_lost_closure);
+GIOExtension * _g_io_extension_point_get_extension_by_name(GIOExtensionPoint * _self_, char * name) {
+	return (GIOExtension *)g_io_extension_point_get_extension_by_name(_self_, (const char *)(name));
 }
-guint _g_bus_watch_name(GBusType bus_type, gchar * name, GBusNameWatcherFlags flags, GBusNameAppearedCallback name_appeared_handler, GBusNameVanishedCallback name_vanished_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
-	return (guint)g_bus_watch_name(bus_type, (const gchar *)(name), flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func);
+void _g_io_module_scope_block(GIOModuleScope * _self_, gchar * basename) {
+	(void)g_io_module_scope_block(_self_, (const gchar *)(basename));
 }
-guint _g_bus_watch_name_on_connection(GDBusConnection * connection, gchar * name, GBusNameWatcherFlags flags, GBusNameAppearedCallback name_appeared_handler, GBusNameVanishedCallback name_vanished_handler, gpointer user_data, GDestroyNotify user_data_free_func) {
-	return (guint)g_bus_watch_name_on_connection(connection, (const gchar *)(name), flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func);
+GResource * _g_resource_new_from_data(GBytes * data, void * error) {
+	return (GResource *)g_resource_new_from_data(data, (GError **)(error));
 }
-guint _g_bus_watch_name_on_connection_with_closures(GDBusConnection * connection, gchar * name, GBusNameWatcherFlags flags, GClosure * name_appeared_closure, GClosure * name_vanished_closure) {
-	return (guint)g_bus_watch_name_on_connection_with_closures(connection, (const gchar *)(name), flags, name_appeared_closure, name_vanished_closure);
+void * _g_resource_enumerate_children(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, void * error) {
+	return (void *)g_resource_enumerate_children(_self_, (const char *)(path), lookup_flags, (GError **)(error));
 }
-guint _g_bus_watch_name_with_closures(GBusType bus_type, gchar * name, GBusNameWatcherFlags flags, GClosure * name_appeared_closure, GClosure * name_vanished_closure) {
-	return (guint)g_bus_watch_name_with_closures(bus_type, (const gchar *)(name), flags, name_appeared_closure, name_vanished_closure);
+gboolean _g_resource_get_info(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, gsize * size, guint32 * flags, void * error) {
+	return (gboolean)g_resource_get_info(_self_, (const char *)(path), lookup_flags, size, flags, (GError **)(error));
 }
-gboolean _g_content_type_can_be_executable(gchar * type) {
-	return (gboolean)g_content_type_can_be_executable((const gchar *)(type));
+GBytes * _g_resource_lookup_data(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, void * error) {
+	return (GBytes *)g_resource_lookup_data(_self_, (const char *)(path), lookup_flags, (GError **)(error));
 }
-gboolean _g_content_type_equals(gchar * type1, gchar * type2) {
-	return (gboolean)g_content_type_equals((const gchar *)(type1), (const gchar *)(type2));
+GInputStream * _g_resource_open_stream(GResource * _self_, char * path, GResourceLookupFlags lookup_flags, void * error) {
+	return (GInputStream *)g_resource_open_stream(_self_, (const char *)(path), lookup_flags, (GError **)(error));
 }
-gchar * _g_content_type_from_mime_type(gchar * mime_type) {
-	return (gchar *)g_content_type_from_mime_type((const gchar *)(mime_type));
+gchar * _g_settings_schema_get_id(GSettingsSchema * _self_) {
+	return (gchar *)g_settings_schema_get_id(_self_);
 }
-gchar * _g_content_type_get_description(gchar * type) {
-	return (gchar *)g_content_type_get_description((const gchar *)(type));
+gchar * _g_settings_schema_get_path(GSettingsSchema * _self_) {
+	return (gchar *)g_settings_schema_get_path(_self_);
 }
-gchar * _g_content_type_get_generic_icon_name(gchar * type) {
-	return (gchar *)g_content_type_get_generic_icon_name((const gchar *)(type));
+GSettingsSchemaSource * _g_settings_schema_source_new_from_directory(gchar * directory, GSettingsSchemaSource * parent, gboolean trusted, void * error) {
+	return (GSettingsSchemaSource *)g_settings_schema_source_new_from_directory((const gchar *)(directory), parent, trusted, (GError **)(error));
 }
-GIcon * _g_content_type_get_icon(gchar * type) {
-	return (GIcon *)g_content_type_get_icon((const gchar *)(type));
+GSettingsSchema * _g_settings_schema_source_lookup(GSettingsSchemaSource * _self_, gchar * schema_id, gboolean recursive) {
+	return (GSettingsSchema *)g_settings_schema_source_lookup(_self_, (const gchar *)(schema_id), recursive);
 }
-gchar * _g_content_type_get_mime_type(gchar * type) {
-	return (gchar *)g_content_type_get_mime_type((const gchar *)(type));
+GSrvTarget * _g_srv_target_new(gchar * hostname, guint16 port, guint16 priority, guint16 weight) {
+	return (GSrvTarget *)g_srv_target_new((const gchar *)(hostname), port, priority, weight);
 }
-GIcon * _g_content_type_get_symbolic_icon(gchar * type) {
-	return (GIcon *)g_content_type_get_symbolic_icon((const gchar *)(type));
+gchar * _g_srv_target_get_hostname(GSrvTarget * _self_) {
+	return (gchar *)g_srv_target_get_hostname(_self_);
 }
-void * _g_content_type_guess_for_tree(GFile * root) {
-	return (void *)g_content_type_guess_for_tree(root);
+char * _g_unix_mount_point_get_device_path(GUnixMountPoint * _self_) {
+	return (char *)g_unix_mount_point_get_device_path(_self_);
 }
-gboolean _g_content_type_is_a(gchar * type, gchar * supertype) {
-	return (gboolean)g_content_type_is_a((const gchar *)(type), (const gchar *)(supertype));
+char * _g_unix_mount_point_get_fs_type(GUnixMountPoint * _self_) {
+	return (char *)g_unix_mount_point_get_fs_type(_self_);
 }
-gboolean _g_content_type_is_unknown(gchar * type) {
-	return (gboolean)g_content_type_is_unknown((const gchar *)(type));
+char * _g_unix_mount_point_get_mount_path(GUnixMountPoint * _self_) {
+	return (char *)g_unix_mount_point_get_mount_path(_self_);
 }
-gchar * _g_dbus_address_get_for_bus_sync(GBusType bus_type, GCancellable * cancellable, void * error) {
-	return (gchar *)g_dbus_address_get_for_bus_sync(bus_type, cancellable, (GError **)(error));
-}
-void _g_dbus_address_get_stream(gchar * address, GCancellable * cancellable, GAsyncReadyCallback callback, gpointer user_data) {
-	(void)g_dbus_address_get_stream((const gchar *)(address), cancellable, callback, user_data);
-}
-GIOStream * _g_dbus_address_get_stream_finish(GAsyncResult * res, void * out_guid, void * error) {
-	return (GIOStream *)g_dbus_address_get_stream_finish(res, (gchar **)(out_guid), (GError **)(error));
-}
-GIOStream * _g_dbus_address_get_stream_sync(gchar * address, void * out_guid, GCancellable * cancellable, void * error) {
-	return (GIOStream *)g_dbus_address_get_stream_sync((const gchar *)(address), (gchar **)(out_guid), cancellable, (GError **)(error));
-}
-gchar * _g_dbus_error_encode_gerror(GError * error) {
-	return (gchar *)g_dbus_error_encode_gerror((const GError *)(error));
-}
-gchar * _g_dbus_error_get_remote_error(GError * error) {
-	return (gchar *)g_dbus_error_get_remote_error((const GError *)(error));
-}
-gboolean _g_dbus_error_is_remote_error(GError * error) {
-	return (gboolean)g_dbus_error_is_remote_error((const GError *)(error));
-}
-GError * _g_dbus_error_new_for_dbus_error(gchar * dbus_error_name, gchar * dbus_error_message) {
-	return (GError *)g_dbus_error_new_for_dbus_error((const gchar *)(dbus_error_name), (const gchar *)(dbus_error_message));
-}
-gboolean _g_dbus_error_register_error(GQuark error_domain, gint error_code, gchar * dbus_error_name) {
-	return (gboolean)g_dbus_error_register_error(error_domain, error_code, (const gchar *)(dbus_error_name));
-}
-void _g_dbus_error_register_error_domain(gchar * error_domain_quark_name, volatile gsize * quark_volatile, GDBusErrorEntry * entries, guint num_entries) {
-	(void)g_dbus_error_register_error_domain((const gchar *)(error_domain_quark_name), quark_volatile, (const GDBusErrorEntry *)(entries), num_entries);
-}
-gboolean _g_dbus_error_unregister_error(GQuark error_domain, gint error_code, gchar * dbus_error_name) {
-	return (gboolean)g_dbus_error_unregister_error(error_domain, error_code, (const gchar *)(dbus_error_name));
-}
-GVariant * _g_dbus_gvalue_to_gvariant(GValue * gvalue, GVariantType * type) {
-	return (GVariant *)g_dbus_gvalue_to_gvariant((const GValue *)(gvalue), (const GVariantType *)(type));
-}
-gboolean _g_dbus_is_address(gchar * string) {
-	return (gboolean)g_dbus_is_address((const gchar *)(string));
-}
-gboolean _g_dbus_is_guid(gchar * string) {
-	return (gboolean)g_dbus_is_guid((const gchar *)(string));
-}
-gboolean _g_dbus_is_interface_name(gchar * string) {
-	return (gboolean)g_dbus_is_interface_name((const gchar *)(string));
-}
-gboolean _g_dbus_is_member_name(gchar * string) {
-	return (gboolean)g_dbus_is_member_name((const gchar *)(string));
-}
-gboolean _g_dbus_is_name(gchar * string) {
-	return (gboolean)g_dbus_is_name((const gchar *)(string));
-}
-gboolean _g_dbus_is_supported_address(gchar * string, void * error) {
-	return (gboolean)g_dbus_is_supported_address((const gchar *)(string), (GError **)(error));
-}
-gboolean _g_dbus_is_unique_name(gchar * string) {
-	return (gboolean)g_dbus_is_unique_name((const gchar *)(string));
-}
-GFile * _g_file_new_for_commandline_arg(char * arg) {
-	return (GFile *)g_file_new_for_commandline_arg((const char *)(arg));
-}
-GFile * _g_file_new_for_path(char * path) {
-	return (GFile *)g_file_new_for_path((const char *)(path));
-}
-GFile * _g_file_new_for_uri(char * uri) {
-	return (GFile *)g_file_new_for_uri((const char *)(uri));
-}
-GFile * _g_file_new_tmp(char * tmpl, void * iostream, void * error) {
-	return (GFile *)g_file_new_tmp((const char *)(tmpl), (GFileIOStream **)(iostream), (GError **)(error));
-}
-GFile * _g_file_parse_name(char * parse_name) {
-	return (GFile *)g_file_parse_name((const char *)(parse_name));
-}
-guint _g_icon_hash(gpointer icon) {
-	return (guint)g_icon_hash((gconstpointer)(icon));
-}
-GIcon * _g_icon_new_for_string(gchar * str, void * error) {
-	return (GIcon *)g_icon_new_for_string((const gchar *)(str), (GError **)(error));
-}
-GList * _g_io_modules_load_all_in_directory(gchar * dirname) {
-	return (GList *)g_io_modules_load_all_in_directory((const gchar *)(dirname));
-}
-GList * _g_io_modules_load_all_in_directory_with_scope(gchar * dirname, GIOModuleScope * scope) {
-	return (GList *)g_io_modules_load_all_in_directory_with_scope((const gchar *)(dirname), scope);
-}
-void _g_io_modules_scan_all_in_directory(char * dirname) {
-	(void)g_io_modules_scan_all_in_directory((const char *)(dirname));
-}
-void _g_io_modules_scan_all_in_directory_with_scope(gchar * dirname, GIOModuleScope * scope) {
-	(void)g_io_modules_scan_all_in_directory_with_scope((const gchar *)(dirname), scope);
-}
-gssize _g_pollable_stream_read(GInputStream * stream, void * buffer, gsize count, gboolean blocking, GCancellable * cancellable, void * error) {
-	return (gssize)g_pollable_stream_read(stream, buffer, count, blocking, cancellable, (GError **)(error));
-}
-GProxy * _g_proxy_get_default_for_protocol(gchar * protocol) {
-	return (GProxy *)g_proxy_get_default_for_protocol((const gchar *)(protocol));
-}
-void * _g_resources_enumerate_children(char * path, GResourceLookupFlags lookup_flags, void * error) {
-	return (void *)g_resources_enumerate_children((const char *)(path), lookup_flags, (GError **)(error));
-}
-gboolean _g_resources_get_info(char * path, GResourceLookupFlags lookup_flags, gsize * size, guint32 * flags, void * error) {
-	return (gboolean)g_resources_get_info((const char *)(path), lookup_flags, size, flags, (GError **)(error));
-}
-GBytes * _g_resources_lookup_data(char * path, GResourceLookupFlags lookup_flags, void * error) {
-	return (GBytes *)g_resources_lookup_data((const char *)(path), lookup_flags, (GError **)(error));
-}
-GInputStream * _g_resources_open_stream(char * path, GResourceLookupFlags lookup_flags, void * error) {
-	return (GInputStream *)g_resources_open_stream((const char *)(path), lookup_flags, (GError **)(error));
-}
-void _g_simple_async_report_gerror_in_idle(GObject * object, GAsyncReadyCallback callback, gpointer user_data, GError * error) {
-	(void)g_simple_async_report_gerror_in_idle(object, callback, user_data, (const GError *)(error));
-}
-GIOStream * _g_tls_client_connection_new(GIOStream * base_io_stream, GSocketConnectable * server_identity, void * error) {
-	return (GIOStream *)g_tls_client_connection_new(base_io_stream, server_identity, (GError **)(error));
-}
-GTlsDatabase * _g_tls_file_database_new(gchar * anchors, void * error) {
-	return (GTlsDatabase *)g_tls_file_database_new((const gchar *)(anchors), (GError **)(error));
-}
-GIOStream * _g_tls_server_connection_new(GIOStream * base_io_stream, GTlsCertificate * certificate, void * error) {
-	return (GIOStream *)g_tls_server_connection_new(base_io_stream, certificate, (GError **)(error));
-}
-gboolean _g_unix_is_mount_path_system_internal(char * mount_path) {
-	return (gboolean)g_unix_is_mount_path_system_internal((const char *)(mount_path));
-}
-GUnixMountEntry * _g_unix_mount_at(char * mount_path, guint64 * time_read) {
-	return (GUnixMountEntry *)g_unix_mount_at((const char *)(mount_path), time_read);
-}
-char * _g_unix_mount_get_device_path(GUnixMountEntry * mount_entry) {
-	return (char *)g_unix_mount_get_device_path(mount_entry);
-}
-char * _g_unix_mount_get_fs_type(GUnixMountEntry * mount_entry) {
-	return (char *)g_unix_mount_get_fs_type(mount_entry);
-}
-char * _g_unix_mount_get_mount_path(GUnixMountEntry * mount_entry) {
-	return (char *)g_unix_mount_get_mount_path(mount_entry);
+char * _g_unix_mount_point_get_options(GUnixMountPoint * _self_) {
+	return (char *)g_unix_mount_point_get_options(_self_);
 }
 */
 import "C"
@@ -2111,7 +2111,7 @@ type GioIOModuleKind interface {
 }
 func (self GioIOModule) _IsGioIOModule () {}
 func (self GioIOModule) _getValue() unsafe.Pointer { return self._value_ }
-func ToGioIOModule(value unsafe.Pointer) GioIOModule { return GioIOModule{GObjectTypeModule{value}} }
+func ToGioIOModule(value unsafe.Pointer) GioIOModule { return GioIOModule{GObjectTypeModule{GObjectObject{value}}} }
 type GioSocketService struct { GioSocketListener }
 type GioSocketServiceKind interface {
   _IsGioSocketService()
@@ -2656,6 +2656,956 @@ type GioMemoryInputStreamKind interface {
 func (self GioMemoryInputStream) _IsGioMemoryInputStream () {}
 func (self GioMemoryInputStream) _getValue() unsafe.Pointer { return self._value_ }
 func ToGioMemoryInputStream(value unsafe.Pointer) GioMemoryInputStream { return GioMemoryInputStream{GioInputStream{GObjectObject{value}}} }
+func AppInfoCreateFromCommandline(commandline string, application_name string, flags C.GAppInfoCreateFlags) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
+	_cstring_commandline_ := C.CString(commandline)
+	_cgo_commandline_ := (*C.char)(unsafe.Pointer(_cstring_commandline_))
+	defer C.free(unsafe.Pointer(_cstring_commandline_))
+	_cstring_application_name_ := C.CString(application_name)
+	_cgo_application_name_ := (*C.char)(unsafe.Pointer(_cstring_application_name_))
+	defer C.free(unsafe.Pointer(_cstring_application_name_))
+	_return_ = C._g_app_info_create_from_commandline(_cgo_commandline_, _cgo_application_name_, flags, _error_)
+	return
+}
+
+func AppInfoGetAll() (_return_ *C.GList) {
+	_return_ = C.g_app_info_get_all()
+	return
+}
+
+func AppInfoGetAllForType(content_type string) (_return_ *C.GList) {
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_return_ = C._g_app_info_get_all_for_type(_cgo_content_type_)
+	return
+}
+
+func AppInfoGetDefaultForType(content_type string, must_support_uris bool) (_return_ *C.GAppInfo) {
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_cgo_must_support_uris_ := (C.gboolean)(C.FALSE)
+	if must_support_uris { _cgo_must_support_uris_ = (C.gboolean)(C.TRUE) }
+	_return_ = C._g_app_info_get_default_for_type(_cgo_content_type_, _cgo_must_support_uris_)
+	return
+}
+
+func AppInfoGetDefaultForUriScheme(uri_scheme string) (_return_ *C.GAppInfo) {
+	_cstring_uri_scheme_ := C.CString(uri_scheme)
+	_cgo_uri_scheme_ := (*C.char)(unsafe.Pointer(_cstring_uri_scheme_))
+	defer C.free(unsafe.Pointer(_cstring_uri_scheme_))
+	_return_ = C._g_app_info_get_default_for_uri_scheme(_cgo_uri_scheme_)
+	return
+}
+
+func AppInfoGetFallbackForType(content_type string) (_return_ *C.GList) {
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_return_ = C._g_app_info_get_fallback_for_type(_cgo_content_type_)
+	return
+}
+
+func AppInfoGetRecommendedForType(content_type string) (_return_ *C.GList) {
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	_return_ = C._g_app_info_get_recommended_for_type(_cgo_content_type_)
+	return
+}
+
+func AppInfoLaunchDefaultForUri(uri string, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context._getValue())
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._g_app_info_launch_default_for_uri(_cgo_uri_, _cgo_launch_context_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func AppInfoResetTypeAssociations(content_type string) () {
+	_cstring_content_type_ := C.CString(content_type)
+	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
+	defer C.free(unsafe.Pointer(_cstring_content_type_))
+	C._g_app_info_reset_type_associations(_cgo_content_type_)
+	return
+}
+
+func AsyncInitableNewvAsync(object_type C.GType, n_parameters uint, parameters *C.GParameter, io_priority C.int, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_n_parameters_ := (C.guint)(n_parameters)
+	C.g_async_initable_newv_async(object_type, _cgo_n_parameters_, parameters, io_priority, _cgo_cancellable_, callback, user_data)
+	return
+}
+
+func BusGet(bus_type C.GBusType, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	C.g_bus_get(bus_type, _cgo_cancellable_, callback, user_data)
+	return
+}
+
+func BusGetFinish(res *C.GAsyncResult) (_go__return__ GioDBusConnection, _error_ unsafe.Pointer) {
+	var _return_ *C.GDBusConnection
+	_return_ = C._g_bus_get_finish(res, _error_)
+	_go__return__ = ToGioDBusConnection(unsafe.Pointer(_return_))
+	return
+}
+
+func BusGetSync(bus_type C.GBusType, cancellable GioCancellableKind) (_go__return__ GioDBusConnection, _error_ unsafe.Pointer) {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	var _return_ *C.GDBusConnection
+	_return_ = C._g_bus_get_sync(bus_type, _cgo_cancellable_, _error_)
+	_go__return__ = ToGioDBusConnection(unsafe.Pointer(_return_))
+	return
+}
+
+func BusOwnName(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bus_acquired_handler C.GBusAcquiredCallback, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_own_name(bus_type, _cgo_name_, flags, bus_acquired_handler, name_acquired_handler, name_lost_handler, user_data, user_data_free_func)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusOwnNameOnConnection(connection GioDBusConnectionKind, name string, flags C.GBusNameOwnerFlags, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
+	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_own_name_on_connection(_cgo_connection_, _cgo_name_, flags, name_acquired_handler, name_lost_handler, user_data, user_data_free_func)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusOwnNameOnConnectionWithClosures(connection GioDBusConnectionKind, name string, flags C.GBusNameOwnerFlags, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
+	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_own_name_on_connection_with_closures(_cgo_connection_, _cgo_name_, flags, name_acquired_closure, name_lost_closure)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusOwnNameWithClosures(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bus_acquired_closure *C.GClosure, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_own_name_with_closures(bus_type, _cgo_name_, flags, bus_acquired_closure, name_acquired_closure, name_lost_closure)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusUnownName(owner_id uint) () {
+	_cgo_owner_id_ := (C.guint)(owner_id)
+	C.g_bus_unown_name(_cgo_owner_id_)
+	return
+}
+
+func BusUnwatchName(watcher_id uint) () {
+	_cgo_watcher_id_ := (C.guint)(watcher_id)
+	C.g_bus_unwatch_name(_cgo_watcher_id_)
+	return
+}
+
+func BusWatchName(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_watch_name(bus_type, _cgo_name_, flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusWatchNameOnConnection(connection GioDBusConnectionKind, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
+	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_watch_name_on_connection(_cgo_connection_, _cgo_name_, flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusWatchNameOnConnectionWithClosures(connection GioDBusConnectionKind, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
+	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_watch_name_on_connection_with_closures(_cgo_connection_, _cgo_name_, flags, name_appeared_closure, name_vanished_closure)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func BusWatchNameWithClosures(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
+	var _return_ C.guint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_bus_watch_name_with_closures(bus_type, _cgo_name_, flags, name_appeared_closure, name_vanished_closure)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func ContentTypeCanBeExecutable(type_ string) (_go__return__ bool) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	var _return_ C.gboolean
+	_return_ = C._g_content_type_can_be_executable(_cgo_type__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ContentTypeEquals(type1 string, type2 string) (_go__return__ bool) {
+	_cstring_type1_ := C.CString(type1)
+	_cgo_type1_ := (*C.gchar)(unsafe.Pointer(_cstring_type1_))
+	defer C.free(unsafe.Pointer(_cstring_type1_))
+	_cstring_type2_ := C.CString(type2)
+	_cgo_type2_ := (*C.gchar)(unsafe.Pointer(_cstring_type2_))
+	defer C.free(unsafe.Pointer(_cstring_type2_))
+	var _return_ C.gboolean
+	_return_ = C._g_content_type_equals(_cgo_type1_, _cgo_type2_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ContentTypeFromMimeType(mime_type string) (_go__return__ string) {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	var _return_ *C.gchar
+	_return_ = C._g_content_type_from_mime_type(_cgo_mime_type_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func ContentTypeGetDescription(type_ string) (_go__return__ string) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	var _return_ *C.gchar
+	_return_ = C._g_content_type_get_description(_cgo_type__)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func ContentTypeGetGenericIconName(type_ string) (_go__return__ string) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	var _return_ *C.gchar
+	_return_ = C._g_content_type_get_generic_icon_name(_cgo_type__)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func ContentTypeGetIcon(type_ string) (_return_ *C.GIcon) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	_return_ = C._g_content_type_get_icon(_cgo_type__)
+	return
+}
+
+func ContentTypeGetMimeType(type_ string) (_go__return__ string) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	var _return_ *C.gchar
+	_return_ = C._g_content_type_get_mime_type(_cgo_type__)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func ContentTypeGetSymbolicIcon(type_ string) (_return_ *C.GIcon) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	_return_ = C._g_content_type_get_symbolic_icon(_cgo_type__)
+	return
+}
+
+func ContentTypeGuessForTree(root *C.GFile) (_return_ unsafe.Pointer) {
+	_return_ = C._g_content_type_guess_for_tree(root)
+	return
+}
+
+func ContentTypeIsA(type_ string, supertype string) (_go__return__ bool) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	_cstring_supertype_ := C.CString(supertype)
+	_cgo_supertype_ := (*C.gchar)(unsafe.Pointer(_cstring_supertype_))
+	defer C.free(unsafe.Pointer(_cstring_supertype_))
+	var _return_ C.gboolean
+	_return_ = C._g_content_type_is_a(_cgo_type__, _cgo_supertype_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ContentTypeIsUnknown(type_ string) (_go__return__ bool) {
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	var _return_ C.gboolean
+	_return_ = C._g_content_type_is_unknown(_cgo_type__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ContentTypesGetRegistered() (_return_ *C.GList) {
+	_return_ = C.g_content_types_get_registered()
+	return
+}
+
+func DbusAddressGetForBusSync(bus_type C.GBusType, cancellable GioCancellableKind) (_go__return__ string, _error_ unsafe.Pointer) {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	var _return_ *C.gchar
+	_return_ = C._g_dbus_address_get_for_bus_sync(bus_type, _cgo_cancellable_, _error_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func DbusAddressGetStream(address string, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cstring_address_ := C.CString(address)
+	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
+	defer C.free(unsafe.Pointer(_cstring_address_))
+	C._g_dbus_address_get_stream(_cgo_address_, _cgo_cancellable_, callback, user_data)
+	return
+}
+
+func DbusAddressGetStreamFinish(res *C.GAsyncResult, out_guid string) (_go__return__ GioIOStream, _error_ unsafe.Pointer) {
+	var _return_ *C.GIOStream
+	_cstring_out_guid_ := C.CString(out_guid)
+	_cgo_out_guid_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_out_guid_))
+	defer C.free(unsafe.Pointer(_cstring_out_guid_))
+	_return_ = C._g_dbus_address_get_stream_finish(res, _cgo_out_guid_, _error_)
+	_go__return__ = ToGioIOStream(unsafe.Pointer(_return_))
+	return
+}
+
+func DbusAddressGetStreamSync(address string, out_guid string, cancellable GioCancellableKind) (_go__return__ GioIOStream, _error_ unsafe.Pointer) {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	var _return_ *C.GIOStream
+	_cstring_address_ := C.CString(address)
+	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
+	defer C.free(unsafe.Pointer(_cstring_address_))
+	_cstring_out_guid_ := C.CString(out_guid)
+	_cgo_out_guid_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_out_guid_))
+	defer C.free(unsafe.Pointer(_cstring_out_guid_))
+	_return_ = C._g_dbus_address_get_stream_sync(_cgo_address_, _cgo_out_guid_, _cgo_cancellable_, _error_)
+	_go__return__ = ToGioIOStream(unsafe.Pointer(_return_))
+	return
+}
+
+func DbusErrorEncodeGerror(error_ *C.GError) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_dbus_error_encode_gerror(error_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func DbusErrorGetRemoteError(error_ *C.GError) (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_dbus_error_get_remote_error(error_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func DbusErrorIsRemoteError(error_ *C.GError) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_error_is_remote_error(error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusErrorNewForDbusError(dbus_error_name string, dbus_error_message string) (_return_ *C.GError) {
+	_cstring_dbus_error_name_ := C.CString(dbus_error_name)
+	_cgo_dbus_error_name_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_name_))
+	defer C.free(unsafe.Pointer(_cstring_dbus_error_name_))
+	_cstring_dbus_error_message_ := C.CString(dbus_error_message)
+	_cgo_dbus_error_message_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_message_))
+	defer C.free(unsafe.Pointer(_cstring_dbus_error_message_))
+	_return_ = C._g_dbus_error_new_for_dbus_error(_cgo_dbus_error_name_, _cgo_dbus_error_message_)
+	return
+}
+
+func DbusErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.g_dbus_error_quark()
+	return
+}
+
+func DbusErrorRegisterError(error_domain C.GQuark, error_code int, dbus_error_name string) (_go__return__ bool) {
+	_cgo_error_code_ := (C.gint)(error_code)
+	_cstring_dbus_error_name_ := C.CString(dbus_error_name)
+	_cgo_dbus_error_name_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_name_))
+	defer C.free(unsafe.Pointer(_cstring_dbus_error_name_))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_error_register_error(error_domain, _cgo_error_code_, _cgo_dbus_error_name_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusErrorRegisterErrorDomain(error_domain_quark_name string, quark_volatile *C. gsize, entries *GioDBusErrorEntry, num_entries uint) () {
+	_cgo_entries_ := (*C.GDBusErrorEntry)(unsafe.Pointer(entries))
+	_cgo_num_entries_ := (C.guint)(num_entries)
+	_cstring_error_domain_quark_name_ := C.CString(error_domain_quark_name)
+	_cgo_error_domain_quark_name_ := (*C.gchar)(unsafe.Pointer(_cstring_error_domain_quark_name_))
+	defer C.free(unsafe.Pointer(_cstring_error_domain_quark_name_))
+	C._g_dbus_error_register_error_domain(_cgo_error_domain_quark_name_, quark_volatile, _cgo_entries_, _cgo_num_entries_)
+	return
+}
+
+func DbusErrorStripRemoteError(error_ *C.GError) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.g_dbus_error_strip_remote_error(error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusErrorUnregisterError(error_domain C.GQuark, error_code int, dbus_error_name string) (_go__return__ bool) {
+	_cgo_error_code_ := (C.gint)(error_code)
+	_cstring_dbus_error_name_ := C.CString(dbus_error_name)
+	_cgo_dbus_error_name_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_name_))
+	defer C.free(unsafe.Pointer(_cstring_dbus_error_name_))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_error_unregister_error(error_domain, _cgo_error_code_, _cgo_dbus_error_name_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusGenerateGuid() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.g_dbus_generate_guid()
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func DbusGvalueToGvariant(gvalue *C.GValue, type_ *C.GVariantType) (_return_ *C.GVariant) {
+	_return_ = C._g_dbus_gvalue_to_gvariant(gvalue, type_)
+	return
+}
+
+func DbusGvariantToGvalue(value *C.GVariant) (out_gvalue *C.GValue) {
+	C.g_dbus_gvariant_to_gvalue(value, out_gvalue)
+	return
+}
+
+func DbusIsAddress(string_ string) (_go__return__ bool) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_address(_cgo_string__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusIsGuid(string_ string) (_go__return__ bool) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_guid(_cgo_string__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusIsInterfaceName(string_ string) (_go__return__ bool) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_interface_name(_cgo_string__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusIsMemberName(string_ string) (_go__return__ bool) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_member_name(_cgo_string__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusIsName(string_ string) (_go__return__ bool) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_name(_cgo_string__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusIsSupportedAddress(string_ string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_supported_address(_cgo_string__, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func DbusIsUniqueName(string_ string) (_go__return__ bool) {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	var _return_ C.gboolean
+	_return_ = C._g_dbus_is_unique_name(_cgo_string__)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func FileNewForCommandlineArg(arg string) (_return_ *C.GFile) {
+	_cstring_arg_ := C.CString(arg)
+	_cgo_arg_ := (*C.char)(unsafe.Pointer(_cstring_arg_))
+	defer C.free(unsafe.Pointer(_cstring_arg_))
+	_return_ = C._g_file_new_for_commandline_arg(_cgo_arg_)
+	return
+}
+
+func FileNewForPath(path string) (_return_ *C.GFile) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._g_file_new_for_path(_cgo_path_)
+	return
+}
+
+func FileNewForUri(uri string) (_return_ *C.GFile) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	_return_ = C._g_file_new_for_uri(_cgo_uri_)
+	return
+}
+
+func FileNewTmp(tmpl string) (_return_ *C.GFile, iostream *GioFileIOStream, _error_ unsafe.Pointer) {
+	var _allocated_iostream_ *C.GFileIOStream
+	_cstring_tmpl_ := C.CString(tmpl)
+	_cgo_tmpl_ := (*C.char)(unsafe.Pointer(_cstring_tmpl_))
+	defer C.free(unsafe.Pointer(_cstring_tmpl_))
+	_return_ = C._g_file_new_tmp(_cgo_tmpl_, unsafe.Pointer(&_allocated_iostream_), _error_)
+	iostream = (*GioFileIOStream)(unsafe.Pointer(_allocated_iostream_))
+	return
+}
+
+func FileParseName(parse_name string) (_return_ *C.GFile) {
+	_cstring_parse_name_ := C.CString(parse_name)
+	_cgo_parse_name_ := (*C.char)(unsafe.Pointer(_cstring_parse_name_))
+	defer C.free(unsafe.Pointer(_cstring_parse_name_))
+	_return_ = C._g_file_parse_name(_cgo_parse_name_)
+	return
+}
+
+func IconHash(icon C.gpointer) (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C._g_icon_hash(icon)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func IconNewForString(str string) (_return_ *C.GIcon, _error_ unsafe.Pointer) {
+	_cstring_str_ := C.CString(str)
+	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
+	defer C.free(unsafe.Pointer(_cstring_str_))
+	_return_ = C._g_icon_new_for_string(_cgo_str_, _error_)
+	return
+}
+
+func IoErrorFromErrno(err_no int) (_return_ C.GIOErrorEnum) {
+	_cgo_err_no_ := (C.gint)(err_no)
+	_return_ = C.g_io_error_from_errno(_cgo_err_no_)
+	return
+}
+
+func IoErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.g_io_error_quark()
+	return
+}
+
+func IoExtensionPointImplement(extension_point_name string, type_ C.GType, extension_name string, priority int) (_go__return__ *GioIOExtension) {
+	var _return_ *C.GIOExtension
+	_cgo_priority_ := (C.gint)(priority)
+	_cstring_extension_point_name_ := C.CString(extension_point_name)
+	_cgo_extension_point_name_ := (*C.char)(unsafe.Pointer(_cstring_extension_point_name_))
+	defer C.free(unsafe.Pointer(_cstring_extension_point_name_))
+	_cstring_extension_name_ := C.CString(extension_name)
+	_cgo_extension_name_ := (*C.char)(unsafe.Pointer(_cstring_extension_name_))
+	defer C.free(unsafe.Pointer(_cstring_extension_name_))
+	_return_ = C._g_io_extension_point_implement(_cgo_extension_point_name_, type_, _cgo_extension_name_, _cgo_priority_)
+	_go__return__ = (*GioIOExtension)(unsafe.Pointer(_return_))
+	return
+}
+
+func IoExtensionPointLookup(name string) (_go__return__ *GioIOExtensionPoint) {
+	var _return_ *C.GIOExtensionPoint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_io_extension_point_lookup(_cgo_name_)
+	_go__return__ = (*GioIOExtensionPoint)(unsafe.Pointer(_return_))
+	return
+}
+
+func IoExtensionPointRegister(name string) (_go__return__ *GioIOExtensionPoint) {
+	var _return_ *C.GIOExtensionPoint
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_io_extension_point_register(_cgo_name_)
+	_go__return__ = (*GioIOExtensionPoint)(unsafe.Pointer(_return_))
+	return
+}
+
+func IoModulesLoadAllInDirectory(dirname string) (_return_ *C.GList) {
+	_cstring_dirname_ := C.CString(dirname)
+	_cgo_dirname_ := (*C.gchar)(unsafe.Pointer(_cstring_dirname_))
+	defer C.free(unsafe.Pointer(_cstring_dirname_))
+	_return_ = C._g_io_modules_load_all_in_directory(_cgo_dirname_)
+	return
+}
+
+func IoModulesLoadAllInDirectoryWithScope(dirname string, scope *GioIOModuleScope) (_return_ *C.GList) {
+	_cgo_scope_ := (*C.GIOModuleScope)(unsafe.Pointer(scope))
+	_cstring_dirname_ := C.CString(dirname)
+	_cgo_dirname_ := (*C.gchar)(unsafe.Pointer(_cstring_dirname_))
+	defer C.free(unsafe.Pointer(_cstring_dirname_))
+	_return_ = C._g_io_modules_load_all_in_directory_with_scope(_cgo_dirname_, _cgo_scope_)
+	return
+}
+
+func IoModulesScanAllInDirectory(dirname string) () {
+	_cstring_dirname_ := C.CString(dirname)
+	_cgo_dirname_ := (*C.char)(unsafe.Pointer(_cstring_dirname_))
+	defer C.free(unsafe.Pointer(_cstring_dirname_))
+	C._g_io_modules_scan_all_in_directory(_cgo_dirname_)
+	return
+}
+
+func IoModulesScanAllInDirectoryWithScope(dirname string, scope *GioIOModuleScope) () {
+	_cgo_scope_ := (*C.GIOModuleScope)(unsafe.Pointer(scope))
+	_cstring_dirname_ := C.CString(dirname)
+	_cgo_dirname_ := (*C.gchar)(unsafe.Pointer(_cstring_dirname_))
+	defer C.free(unsafe.Pointer(_cstring_dirname_))
+	C._g_io_modules_scan_all_in_directory_with_scope(_cgo_dirname_, _cgo_scope_)
+	return
+}
+
+func NetworkMonitorGetDefault() (_return_ *C.GNetworkMonitor) {
+	_return_ = C.g_network_monitor_get_default()
+	return
+}
+
+func PollableSourceNew(pollable_stream *C.GObject) (_return_ *C.GSource) {
+	_return_ = C.g_pollable_source_new(pollable_stream)
+	return
+}
+
+func PollableSourceNewFull(pollable_stream C.gpointer, child_source *C.GSource, cancellable GioCancellableKind) (_return_ *C.GSource) {
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_return_ = C.g_pollable_source_new_full(pollable_stream, child_source, _cgo_cancellable_)
+	return
+}
+
+func PollableStreamRead(stream GioInputStreamKind, buffer unsafe.Pointer, count uint64, blocking bool, cancellable GioCancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+	_cgo_stream_ := (*C.GInputStream)(stream._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_count_ := (C.gsize)(count)
+	var _return_ C.gssize
+	_cgo_blocking_ := (C.gboolean)(C.FALSE)
+	if blocking { _cgo_blocking_ = (C.gboolean)(C.TRUE) }
+	_return_ = C._g_pollable_stream_read(_cgo_stream_, buffer, _cgo_count_, _cgo_blocking_, _cgo_cancellable_, _error_)
+	_go__return__ = (int64)(_return_)
+	return
+}
+
+func ProxyGetDefaultForProtocol(protocol string) (_return_ *C.GProxy) {
+	_cstring_protocol_ := C.CString(protocol)
+	_cgo_protocol_ := (*C.gchar)(unsafe.Pointer(_cstring_protocol_))
+	defer C.free(unsafe.Pointer(_cstring_protocol_))
+	_return_ = C._g_proxy_get_default_for_protocol(_cgo_protocol_)
+	return
+}
+
+func ProxyResolverGetDefault() (_return_ *C.GProxyResolver) {
+	_return_ = C.g_proxy_resolver_get_default()
+	return
+}
+
+func ResolverErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.g_resolver_error_quark()
+	return
+}
+
+func ResourceErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.g_resource_error_quark()
+	return
+}
+
+func ResourceLoad(filename string) (_go__return__ *GioResource, _error_ unsafe.Pointer) {
+	var _return_ *C.GResource
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	_return_ = C._g_resource_load(_cgo_filename_, _error_)
+	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
+	return
+}
+
+func ResourcesEnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._g_resources_enumerate_children(_cgo_path_, lookup_flags, _error_)
+	return
+}
+
+func ResourcesGetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ unsafe.Pointer) {
+	var size C.gsize
+	var flags C.guint32
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	var _return_ C.gboolean
+	_return_ = C._g_resources_get_info(_cgo_path_, lookup_flags, &size, &flags, _error_)
+	_go_size_ = (uint64)(size)
+	_go_flags_ = (uint32)(flags)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func ResourcesLookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._g_resources_lookup_data(_cgo_path_, lookup_flags, _error_)
+	return
+}
+
+func ResourcesOpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ GioInputStream, _error_ unsafe.Pointer) {
+	var _return_ *C.GInputStream
+	_cstring_path_ := C.CString(path)
+	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
+	defer C.free(unsafe.Pointer(_cstring_path_))
+	_return_ = C._g_resources_open_stream(_cgo_path_, lookup_flags, _error_)
+	_go__return__ = ToGioInputStream(unsafe.Pointer(_return_))
+	return
+}
+
+func SettingsSchemaSourceGetDefault() (_go__return__ *GioSettingsSchemaSource) {
+	var _return_ *C.GSettingsSchemaSource
+	_return_ = C.g_settings_schema_source_get_default()
+	_go__return__ = (*GioSettingsSchemaSource)(unsafe.Pointer(_return_))
+	return
+}
+
+func SimpleAsyncReportGerrorInIdle(object *C.GObject, callback C.GAsyncReadyCallback, user_data C.gpointer, error_ *C.GError) () {
+	C._g_simple_async_report_gerror_in_idle(object, callback, user_data, error_)
+	return
+}
+
+func SimpleAsyncReportTakeGerrorInIdle(object *C.GObject, callback C.GAsyncReadyCallback, user_data C.gpointer, error_ *C.GError) () {
+	C.g_simple_async_report_take_gerror_in_idle(object, callback, user_data, error_)
+	return
+}
+
+func SrvTargetListSort(targets *C.GList) (_return_ *C.GList) {
+	_return_ = C.g_srv_target_list_sort(targets)
+	return
+}
+
+func TlsBackendGetDefault() (_return_ *C.GTlsBackend) {
+	_return_ = C.g_tls_backend_get_default()
+	return
+}
+
+func TlsClientConnectionNew(base_io_stream GioIOStreamKind, server_identity *C.GSocketConnectable) (_return_ *C.GIOStream, _error_ unsafe.Pointer) {
+	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
+	_return_ = C._g_tls_client_connection_new(_cgo_base_io_stream_, server_identity, _error_)
+	return
+}
+
+func TlsErrorQuark() (_return_ C.GQuark) {
+	_return_ = C.g_tls_error_quark()
+	return
+}
+
+func TlsFileDatabaseNew(anchors string) (_return_ *C.GTlsDatabase, _error_ unsafe.Pointer) {
+	_cstring_anchors_ := C.CString(anchors)
+	_cgo_anchors_ := (*C.gchar)(unsafe.Pointer(_cstring_anchors_))
+	defer C.free(unsafe.Pointer(_cstring_anchors_))
+	_return_ = C._g_tls_file_database_new(_cgo_anchors_, _error_)
+	return
+}
+
+func TlsServerConnectionNew(base_io_stream GioIOStreamKind, certificate GioTlsCertificateKind) (_return_ *C.GIOStream, _error_ unsafe.Pointer) {
+	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
+	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
+	_return_ = C._g_tls_server_connection_new(_cgo_base_io_stream_, _cgo_certificate_, _error_)
+	return
+}
+
+func UnixIsMountPathSystemInternal(mount_path string) (_go__return__ bool) {
+	_cstring_mount_path_ := C.CString(mount_path)
+	_cgo_mount_path_ := (*C.char)(unsafe.Pointer(_cstring_mount_path_))
+	defer C.free(unsafe.Pointer(_cstring_mount_path_))
+	var _return_ C.gboolean
+	_return_ = C._g_unix_is_mount_path_system_internal(_cgo_mount_path_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountAt(mount_path string) (_go__return__ *GioUnixMountEntry, _go_time_read_ uint64) {
+	var _return_ *C.GUnixMountEntry
+	var time_read C.guint64
+	_cstring_mount_path_ := C.CString(mount_path)
+	_cgo_mount_path_ := (*C.char)(unsafe.Pointer(_cstring_mount_path_))
+	defer C.free(unsafe.Pointer(_cstring_mount_path_))
+	_return_ = C._g_unix_mount_at(_cgo_mount_path_, &time_read)
+	_go__return__ = (*GioUnixMountEntry)(unsafe.Pointer(_return_))
+	_go_time_read_ = (uint64)(time_read)
+	return
+}
+
+func UnixMountCompare(mount1 *GioUnixMountEntry, mount2 *GioUnixMountEntry) (_go__return__ int) {
+	_cgo_mount1_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount1))
+	_cgo_mount2_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount2))
+	var _return_ C.gint
+	_return_ = C.g_unix_mount_compare(_cgo_mount1_, _cgo_mount2_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func UnixMountFree(mount_entry *GioUnixMountEntry) () {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	C.g_unix_mount_free(_cgo_mount_entry_)
+	return
+}
+
+func UnixMountGetDevicePath(mount_entry *GioUnixMountEntry) (_go__return__ string) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ *C.char
+	_return_ = C._g_unix_mount_get_device_path(_cgo_mount_entry_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func UnixMountGetFsType(mount_entry *GioUnixMountEntry) (_go__return__ string) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ *C.char
+	_return_ = C._g_unix_mount_get_fs_type(_cgo_mount_entry_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func UnixMountGetMountPath(mount_entry *GioUnixMountEntry) (_go__return__ string) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ *C.char
+	_return_ = C._g_unix_mount_get_mount_path(_cgo_mount_entry_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func UnixMountGuessCanEject(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ C.gboolean
+	_return_ = C.g_unix_mount_guess_can_eject(_cgo_mount_entry_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountGuessIcon(mount_entry *GioUnixMountEntry) (_return_ *C.GIcon) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	_return_ = C.g_unix_mount_guess_icon(_cgo_mount_entry_)
+	return
+}
+
+func UnixMountGuessName(mount_entry *GioUnixMountEntry) (_go__return__ string) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ *C.char
+	_return_ = C.g_unix_mount_guess_name(_cgo_mount_entry_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func UnixMountGuessShouldDisplay(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ C.gboolean
+	_return_ = C.g_unix_mount_guess_should_display(_cgo_mount_entry_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountGuessSymbolicIcon(mount_entry *GioUnixMountEntry) (_return_ *C.GIcon) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	_return_ = C.g_unix_mount_guess_symbolic_icon(_cgo_mount_entry_)
+	return
+}
+
+func UnixMountIsReadonly(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ C.gboolean
+	_return_ = C.g_unix_mount_is_readonly(_cgo_mount_entry_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountIsSystemInternal(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
+	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+	var _return_ C.gboolean
+	_return_ = C.g_unix_mount_is_system_internal(_cgo_mount_entry_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountPointsChangedSince(time uint64) (_go__return__ bool) {
+	_cgo_time_ := (C.guint64)(time)
+	var _return_ C.gboolean
+	_return_ = C.g_unix_mount_points_changed_since(_cgo_time_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountPointsGet() (_return_ *C.GList, _go_time_read_ uint64) {
+	var time_read C.guint64
+	_return_ = C.g_unix_mount_points_get(&time_read)
+	_go_time_read_ = (uint64)(time_read)
+	return
+}
+
+func UnixMountsChangedSince(time uint64) (_go__return__ bool) {
+	_cgo_time_ := (C.guint64)(time)
+	var _return_ C.gboolean
+	_return_ = C.g_unix_mounts_changed_since(_cgo_time_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func UnixMountsGet() (_return_ *C.GList, _go_time_read_ uint64) {
+	var time_read C.guint64
+	_return_ = C.g_unix_mounts_get(&time_read)
+	_go_time_read_ = (uint64)(time_read)
+	return
+}
+
 func AppLaunchContextNew() (_go__return__ GioAppLaunchContext) {
 	var _return_ *C.GAppLaunchContext
 	_return_ = C.g_app_launch_context_new()
@@ -3202,30 +4152,6 @@ func DBusActionGroupGet(connection GioDBusConnectionKind, bus_name string, objec
 	return
 }
 
-func (_self_ *GioDBusAnnotationInfo) Ref() (_go__return__ *GioDBusAnnotationInfo) {
-	var _return_ *C.GDBusAnnotationInfo
-	_return_ = C.g_dbus_annotation_info_ref((*C.GDBusAnnotationInfo)(_self_))
-	_go__return__ = (*GioDBusAnnotationInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusAnnotationInfo) Unref() () {
-	C.g_dbus_annotation_info_unref((*C.GDBusAnnotationInfo)(_self_))
-	return
-}
-
-func (_self_ *GioDBusArgInfo) Ref() (_go__return__ *GioDBusArgInfo) {
-	var _return_ *C.GDBusArgInfo
-	_return_ = C.g_dbus_arg_info_ref((*C.GDBusArgInfo)(_self_))
-	_go__return__ = (*GioDBusArgInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusArgInfo) Unref() () {
-	C.g_dbus_arg_info_unref((*C.GDBusArgInfo)(_self_))
-	return
-}
-
 func DBusAuthObserverNew() (_go__return__ GioDBusAuthObserver) {
 	var _return_ *C.GDBusAuthObserver
 	_return_ = C.g_dbus_auth_observer_new()
@@ -3677,64 +4603,6 @@ func (_self_ *GioDBusConnection) UnregisterSubtree(registration_id uint) (_go__r
 	return
 }
 
-func (_self_ *GioDBusInterfaceInfo) CacheBuild() () {
-	C.g_dbus_interface_info_cache_build((*C.GDBusInterfaceInfo)(_self_))
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) CacheRelease() () {
-	C.g_dbus_interface_info_cache_release((*C.GDBusInterfaceInfo)(_self_))
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) GenerateXml(indent uint) (string_builder *C.GString) {
-	_cgo_indent_ := (C.guint)(indent)
-	C.g_dbus_interface_info_generate_xml((*C.GDBusInterfaceInfo)(_self_), _cgo_indent_, string_builder)
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) LookupMethod(name string) (_go__return__ *GioDBusMethodInfo) {
-	var _return_ *C.GDBusMethodInfo
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_dbus_interface_info_lookup_method((*C.GDBusInterfaceInfo)(_self_), _cgo_name_)
-	_go__return__ = (*GioDBusMethodInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) LookupProperty(name string) (_go__return__ *GioDBusPropertyInfo) {
-	var _return_ *C.GDBusPropertyInfo
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_dbus_interface_info_lookup_property((*C.GDBusInterfaceInfo)(_self_), _cgo_name_)
-	_go__return__ = (*GioDBusPropertyInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) LookupSignal(name string) (_go__return__ *GioDBusSignalInfo) {
-	var _return_ *C.GDBusSignalInfo
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_dbus_interface_info_lookup_signal((*C.GDBusInterfaceInfo)(_self_), _cgo_name_)
-	_go__return__ = (*GioDBusSignalInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) Ref() (_go__return__ *GioDBusInterfaceInfo) {
-	var _return_ *C.GDBusInterfaceInfo
-	_return_ = C.g_dbus_interface_info_ref((*C.GDBusInterfaceInfo)(_self_))
-	_go__return__ = (*GioDBusInterfaceInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusInterfaceInfo) Unref() () {
-	C.g_dbus_interface_info_unref((*C.GDBusInterfaceInfo)(_self_))
-	return
-}
-
 func (_self_ *GioDBusInterfaceSkeleton) Export(connection GioDBusConnectionKind, object_path string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
 	_cstring_object_path_ := C.CString(object_path)
@@ -4154,18 +5022,6 @@ func (_self_ *GioDBusMessage) ToGerror() (_go__return__ bool, _error_ unsafe.Poi
 	return
 }
 
-func (_self_ *GioDBusMethodInfo) Ref() (_go__return__ *GioDBusMethodInfo) {
-	var _return_ *C.GDBusMethodInfo
-	_return_ = C.g_dbus_method_info_ref((*C.GDBusMethodInfo)(_self_))
-	_go__return__ = (*GioDBusMethodInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusMethodInfo) Unref() () {
-	C.g_dbus_method_info_unref((*C.GDBusMethodInfo)(_self_))
-	return
-}
-
 func (_self_ *GioDBusMethodInvocation) GetConnection() (_go__return__ GioDBusConnection) {
 	var _return_ *C.GDBusConnection
 	_return_ = C.g_dbus_method_invocation_get_connection((*C.GDBusMethodInvocation)(_self_._value_))
@@ -4263,44 +5119,6 @@ func (_self_ *GioDBusMethodInvocation) ReturnValueWithUnixFdList(parameters *C.G
 
 func (_self_ *GioDBusMethodInvocation) TakeError(error_ *C.GError) () {
 	C.g_dbus_method_invocation_take_error((*C.GDBusMethodInvocation)(_self_._value_), error_)
-	return
-}
-
-func DBusNodeInfoNewForXml(xml_data string) (_go__return__ *GioDBusNodeInfo, _error_ unsafe.Pointer) {
-	var _return_ *C.GDBusNodeInfo
-	_cstring_xml_data_ := C.CString(xml_data)
-	_cgo_xml_data_ := (*C.gchar)(unsafe.Pointer(_cstring_xml_data_))
-	defer C.free(unsafe.Pointer(_cstring_xml_data_))
-	_return_ = C._g_dbus_node_info_new_for_xml(_cgo_xml_data_, _error_)
-	_go__return__ = (*GioDBusNodeInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusNodeInfo) GenerateXml(indent uint) (string_builder *C.GString) {
-	_cgo_indent_ := (C.guint)(indent)
-	C.g_dbus_node_info_generate_xml((*C.GDBusNodeInfo)(_self_), _cgo_indent_, string_builder)
-	return
-}
-
-func (_self_ *GioDBusNodeInfo) LookupInterface(name string) (_go__return__ *GioDBusInterfaceInfo) {
-	var _return_ *C.GDBusInterfaceInfo
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_dbus_node_info_lookup_interface((*C.GDBusNodeInfo)(_self_), _cgo_name_)
-	_go__return__ = (*GioDBusInterfaceInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusNodeInfo) Ref() (_go__return__ *GioDBusNodeInfo) {
-	var _return_ *C.GDBusNodeInfo
-	_return_ = C.g_dbus_node_info_ref((*C.GDBusNodeInfo)(_self_))
-	_go__return__ = (*GioDBusNodeInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusNodeInfo) Unref() () {
-	C.g_dbus_node_info_unref((*C.GDBusNodeInfo)(_self_))
 	return
 }
 
@@ -4509,18 +5327,6 @@ func (_self_ *GioDBusObjectSkeleton) SetObjectPath(object_path string) () {
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
 	C._g_dbus_object_skeleton_set_object_path((*C.GDBusObjectSkeleton)(_self_._value_), _cgo_object_path_)
-	return
-}
-
-func (_self_ *GioDBusPropertyInfo) Ref() (_go__return__ *GioDBusPropertyInfo) {
-	var _return_ *C.GDBusPropertyInfo
-	_return_ = C.g_dbus_property_info_ref((*C.GDBusPropertyInfo)(_self_))
-	_go__return__ = (*GioDBusPropertyInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusPropertyInfo) Unref() () {
-	C.g_dbus_property_info_unref((*C.GDBusPropertyInfo)(_self_))
 	return
 }
 
@@ -4799,18 +5605,6 @@ func (_self_ *GioDBusServer) Start() () {
 
 func (_self_ *GioDBusServer) Stop() () {
 	C.g_dbus_server_stop((*C.GDBusServer)(_self_._value_))
-	return
-}
-
-func (_self_ *GioDBusSignalInfo) Ref() (_go__return__ *GioDBusSignalInfo) {
-	var _return_ *C.GDBusSignalInfo
-	_return_ = C.g_dbus_signal_info_ref((*C.GDBusSignalInfo)(_self_))
-	_go__return__ = (*GioDBusSignalInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioDBusSignalInfo) Unref() () {
-	C.g_dbus_signal_info_unref((*C.GDBusSignalInfo)(_self_))
 	return
 }
 
@@ -5277,124 +6071,6 @@ func (_self_ *GioEmblemedIcon) GetEmblems() (_return_ *C.GList) {
 
 func (_self_ *GioEmblemedIcon) GetIcon() (_return_ *C.GIcon) {
 	_return_ = C.g_emblemed_icon_get_icon((*C.GEmblemedIcon)(_self_._value_))
-	return
-}
-
-func FileAttributeInfoListNew() (_go__return__ *GioFileAttributeInfoList) {
-	var _return_ *C.GFileAttributeInfoList
-	_return_ = C.g_file_attribute_info_list_new()
-	_go__return__ = (*GioFileAttributeInfoList)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeInfoList) Add(name string, type_ C.GFileAttributeType, flags C.GFileAttributeInfoFlags) () {
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._g_file_attribute_info_list_add((*C.GFileAttributeInfoList)(_self_), _cgo_name_, type_, flags)
-	return
-}
-
-func (_self_ *GioFileAttributeInfoList) Dup() (_go__return__ *GioFileAttributeInfoList) {
-	var _return_ *C.GFileAttributeInfoList
-	_return_ = C.g_file_attribute_info_list_dup((*C.GFileAttributeInfoList)(_self_))
-	_go__return__ = (*GioFileAttributeInfoList)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeInfoList) Lookup(name string) (_go__return__ *GioFileAttributeInfo) {
-	var _return_ *C.GFileAttributeInfo
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_file_attribute_info_list_lookup((*C.GFileAttributeInfoList)(_self_), _cgo_name_)
-	_go__return__ = (*GioFileAttributeInfo)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeInfoList) Ref() (_go__return__ *GioFileAttributeInfoList) {
-	var _return_ *C.GFileAttributeInfoList
-	_return_ = C.g_file_attribute_info_list_ref((*C.GFileAttributeInfoList)(_self_))
-	_go__return__ = (*GioFileAttributeInfoList)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeInfoList) Unref() () {
-	C.g_file_attribute_info_list_unref((*C.GFileAttributeInfoList)(_self_))
-	return
-}
-
-func FileAttributeMatcherNew(attributes string) (_go__return__ *GioFileAttributeMatcher) {
-	var _return_ *C.GFileAttributeMatcher
-	_cstring_attributes_ := C.CString(attributes)
-	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
-	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_attribute_matcher_new(_cgo_attributes_)
-	_go__return__ = (*GioFileAttributeMatcher)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) EnumerateNamespace(ns string) (_go__return__ bool) {
-	_cstring_ns_ := C.CString(ns)
-	_cgo_ns_ := (*C.char)(unsafe.Pointer(_cstring_ns_))
-	defer C.free(unsafe.Pointer(_cstring_ns_))
-	var _return_ C.gboolean
-	_return_ = C._g_file_attribute_matcher_enumerate_namespace((*C.GFileAttributeMatcher)(_self_), _cgo_ns_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) EnumerateNext() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._g_file_attribute_matcher_enumerate_next((*C.GFileAttributeMatcher)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) Matches(attribute string) (_go__return__ bool) {
-	_cstring_attribute_ := C.CString(attribute)
-	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
-	defer C.free(unsafe.Pointer(_cstring_attribute_))
-	var _return_ C.gboolean
-	_return_ = C._g_file_attribute_matcher_matches((*C.GFileAttributeMatcher)(_self_), _cgo_attribute_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) MatchesOnly(attribute string) (_go__return__ bool) {
-	_cstring_attribute_ := C.CString(attribute)
-	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
-	defer C.free(unsafe.Pointer(_cstring_attribute_))
-	var _return_ C.gboolean
-	_return_ = C._g_file_attribute_matcher_matches_only((*C.GFileAttributeMatcher)(_self_), _cgo_attribute_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) Ref() (_go__return__ *GioFileAttributeMatcher) {
-	var _return_ *C.GFileAttributeMatcher
-	_return_ = C.g_file_attribute_matcher_ref((*C.GFileAttributeMatcher)(_self_))
-	_go__return__ = (*GioFileAttributeMatcher)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) Subtract(subtract *GioFileAttributeMatcher) (_go__return__ *GioFileAttributeMatcher) {
-	_cgo_subtract_ := (*C.GFileAttributeMatcher)(unsafe.Pointer(subtract))
-	var _return_ *C.GFileAttributeMatcher
-	_return_ = C.g_file_attribute_matcher_subtract((*C.GFileAttributeMatcher)(_self_), _cgo_subtract_)
-	_go__return__ = (*GioFileAttributeMatcher)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) ToString() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C.g_file_attribute_matcher_to_string((*C.GFileAttributeMatcher)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioFileAttributeMatcher) Unref() () {
-	C.g_file_attribute_matcher_unref((*C.GFileAttributeMatcher)(_self_))
 	return
 }
 
@@ -6141,89 +6817,6 @@ func (_self_ *GioFilterOutputStream) SetCloseBaseStream(close_base bool) () {
 	return
 }
 
-func (_self_ *GioIOExtension) GetName() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._g_io_extension_get_name((*C.GIOExtension)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioIOExtension) GetPriority() (_go__return__ int) {
-	var _return_ C.gint
-	_return_ = C.g_io_extension_get_priority((*C.GIOExtension)(_self_))
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GioIOExtension) GetType() (_return_ C.GType) {
-	_return_ = C.g_io_extension_get_type((*C.GIOExtension)(_self_))
-	return
-}
-
-func (_self_ *GioIOExtension) RefClass() (_return_ *C.GTypeClass) {
-	_return_ = C.g_io_extension_ref_class((*C.GIOExtension)(_self_))
-	return
-}
-
-func IOExtensionPointImplement(extension_point_name string, type_ C.GType, extension_name string, priority int) (_go__return__ *GioIOExtension) {
-	var _return_ *C.GIOExtension
-	_cgo_priority_ := (C.gint)(priority)
-	_cstring_extension_point_name_ := C.CString(extension_point_name)
-	_cgo_extension_point_name_ := (*C.char)(unsafe.Pointer(_cstring_extension_point_name_))
-	defer C.free(unsafe.Pointer(_cstring_extension_point_name_))
-	_cstring_extension_name_ := C.CString(extension_name)
-	_cgo_extension_name_ := (*C.char)(unsafe.Pointer(_cstring_extension_name_))
-	defer C.free(unsafe.Pointer(_cstring_extension_name_))
-	_return_ = C._g_io_extension_point_implement(_cgo_extension_point_name_, type_, _cgo_extension_name_, _cgo_priority_)
-	_go__return__ = (*GioIOExtension)(unsafe.Pointer(_return_))
-	return
-}
-
-func IOExtensionPointLookup(name string) (_go__return__ *GioIOExtensionPoint) {
-	var _return_ *C.GIOExtensionPoint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_io_extension_point_lookup(_cgo_name_)
-	_go__return__ = (*GioIOExtensionPoint)(unsafe.Pointer(_return_))
-	return
-}
-
-func IOExtensionPointRegister(name string) (_go__return__ *GioIOExtensionPoint) {
-	var _return_ *C.GIOExtensionPoint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_io_extension_point_register(_cgo_name_)
-	_go__return__ = (*GioIOExtensionPoint)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioIOExtensionPoint) GetExtensionByName(name string) (_go__return__ *GioIOExtension) {
-	var _return_ *C.GIOExtension
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_io_extension_point_get_extension_by_name((*C.GIOExtensionPoint)(_self_), _cgo_name_)
-	_go__return__ = (*GioIOExtension)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioIOExtensionPoint) GetExtensions() (_return_ *C.GList) {
-	_return_ = C.g_io_extension_point_get_extensions((*C.GIOExtensionPoint)(_self_))
-	return
-}
-
-func (_self_ *GioIOExtensionPoint) GetRequiredType() (_return_ C.GType) {
-	_return_ = C.g_io_extension_point_get_required_type((*C.GIOExtensionPoint)(_self_))
-	return
-}
-
-func (_self_ *GioIOExtensionPoint) SetRequiredType(type_ C.GType) () {
-	C.g_io_extension_point_set_required_type((*C.GIOExtensionPoint)(_self_), type_)
-	return
-}
-
 func IOModuleNew(filename string) (_go__return__ GioIOModule) {
 	var _return_ *C.GIOModule
 	_cstring_filename_ := C.CString(filename)
@@ -6231,26 +6824,6 @@ func IOModuleNew(filename string) (_go__return__ GioIOModule) {
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_return_ = C._g_io_module_new(_cgo_filename_)
 	_go__return__ = ToGioIOModule(unsafe.Pointer(_return_))
-	return
-}
-
-func IOModuleScopeNew(flags C.GIOModuleScopeFlags) (_go__return__ *GioIOModuleScope) {
-	var _return_ *C.GIOModuleScope
-	_return_ = C.g_io_module_scope_new(flags)
-	_go__return__ = (*GioIOModuleScope)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioIOModuleScope) Block(basename string) () {
-	_cstring_basename_ := C.CString(basename)
-	_cgo_basename_ := (*C.gchar)(unsafe.Pointer(_cstring_basename_))
-	defer C.free(unsafe.Pointer(_cstring_basename_))
-	C._g_io_module_scope_block((*C.GIOModuleScope)(_self_), _cgo_basename_)
-	return
-}
-
-func (_self_ *GioIOModuleScope) Free() () {
-	C.g_io_module_scope_free((*C.GIOModuleScope)(_self_))
 	return
 }
 
@@ -7678,85 +8251,6 @@ func (_self_ *GioResolver) SetDefault() () {
 	return
 }
 
-func ResourceNewFromData(data *C.GBytes) (_go__return__ *GioResource, _error_ unsafe.Pointer) {
-	var _return_ *C.GResource
-	_return_ = C._g_resource_new_from_data(data, _error_)
-	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
-	return
-}
-
-func ResourceLoad(filename string) (_go__return__ *GioResource, _error_ unsafe.Pointer) {
-	var _return_ *C.GResource
-	_cstring_filename_ := C.CString(filename)
-	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
-	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._g_resource_load(_cgo_filename_, _error_)
-	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioResource) Register() () {
-	C.g_resources_register((*C.GResource)(_self_))
-	return
-}
-
-func (_self_ *GioResource) Unregister() () {
-	C.g_resources_unregister((*C.GResource)(_self_))
-	return
-}
-
-func (_self_ *GioResource) EnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
-	_cstring_path_ := C.CString(path)
-	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
-	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resource_enumerate_children((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
-	return
-}
-
-func (_self_ *GioResource) GetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ unsafe.Pointer) {
-	var size C.gsize
-	var flags C.guint32
-	_cstring_path_ := C.CString(path)
-	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
-	defer C.free(unsafe.Pointer(_cstring_path_))
-	var _return_ C.gboolean
-	_return_ = C._g_resource_get_info((*C.GResource)(_self_), _cgo_path_, lookup_flags, &size, &flags, _error_)
-	_go_size_ = (uint64)(size)
-	_go_flags_ = (uint32)(flags)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioResource) LookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
-	_cstring_path_ := C.CString(path)
-	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
-	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resource_lookup_data((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
-	return
-}
-
-func (_self_ *GioResource) OpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ GioInputStream, _error_ unsafe.Pointer) {
-	var _return_ *C.GInputStream
-	_cstring_path_ := C.CString(path)
-	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
-	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resource_open_stream((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
-	_go__return__ = ToGioInputStream(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioResource) Ref() (_go__return__ *GioResource) {
-	var _return_ *C.GResource
-	_return_ = C.g_resource_ref((*C.GResource)(_self_))
-	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioResource) Unref() () {
-	C.g_resource_unref((*C.GResource)(_self_))
-	return
-}
-
 func SettingsNew(schema_id string) (_go__return__ GioSettings) {
 	var _return_ *C.GSettings
 	_cstring_schema_id_ := C.CString(schema_id)
@@ -8142,76 +8636,6 @@ func (_self_ *GioSettings) SetValue(key string, value *C.GVariant) (_go__return_
 	var _return_ C.gboolean
 	_return_ = C._g_settings_set_value((*C.GSettings)(_self_._value_), _cgo_key_, value)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioSettingsSchema) GetId() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_settings_schema_get_id((*C.GSettingsSchema)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioSettingsSchema) GetPath() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_settings_schema_get_path((*C.GSettingsSchema)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioSettingsSchema) Ref() (_go__return__ *GioSettingsSchema) {
-	var _return_ *C.GSettingsSchema
-	_return_ = C.g_settings_schema_ref((*C.GSettingsSchema)(_self_))
-	_go__return__ = (*GioSettingsSchema)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioSettingsSchema) Unref() () {
-	C.g_settings_schema_unref((*C.GSettingsSchema)(_self_))
-	return
-}
-
-func SettingsSchemaSourceNewFromDirectory(directory string, parent *GioSettingsSchemaSource, trusted bool) (_go__return__ *GioSettingsSchemaSource, _error_ unsafe.Pointer) {
-	_cgo_parent_ := (*C.GSettingsSchemaSource)(unsafe.Pointer(parent))
-	var _return_ *C.GSettingsSchemaSource
-	_cstring_directory_ := C.CString(directory)
-	_cgo_directory_ := (*C.gchar)(unsafe.Pointer(_cstring_directory_))
-	defer C.free(unsafe.Pointer(_cstring_directory_))
-	_cgo_trusted_ := (C.gboolean)(C.FALSE)
-	if trusted { _cgo_trusted_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_settings_schema_source_new_from_directory(_cgo_directory_, _cgo_parent_, _cgo_trusted_, _error_)
-	_go__return__ = (*GioSettingsSchemaSource)(unsafe.Pointer(_return_))
-	return
-}
-
-func SettingsSchemaSourceGetDefault() (_go__return__ *GioSettingsSchemaSource) {
-	var _return_ *C.GSettingsSchemaSource
-	_return_ = C.g_settings_schema_source_get_default()
-	_go__return__ = (*GioSettingsSchemaSource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioSettingsSchemaSource) Lookup(schema_id string, recursive bool) (_go__return__ *GioSettingsSchema) {
-	var _return_ *C.GSettingsSchema
-	_cstring_schema_id_ := C.CString(schema_id)
-	_cgo_schema_id_ := (*C.gchar)(unsafe.Pointer(_cstring_schema_id_))
-	defer C.free(unsafe.Pointer(_cstring_schema_id_))
-	_cgo_recursive_ := (C.gboolean)(C.FALSE)
-	if recursive { _cgo_recursive_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_settings_schema_source_lookup((*C.GSettingsSchemaSource)(_self_), _cgo_schema_id_, _cgo_recursive_)
-	_go__return__ = (*GioSettingsSchema)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioSettingsSchemaSource) Ref() (_go__return__ *GioSettingsSchemaSource) {
-	var _return_ *C.GSettingsSchemaSource
-	_return_ = C.g_settings_schema_source_ref((*C.GSettingsSchemaSource)(_self_))
-	_go__return__ = (*GioSettingsSchemaSource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioSettingsSchemaSource) Unref() () {
-	C.g_settings_schema_source_unref((*C.GSettingsSchemaSource)(_self_))
 	return
 }
 
@@ -9209,81 +9633,6 @@ func (_self_ *GioSocketService) Stop() () {
 	return
 }
 
-func SrvTargetNew(hostname string, port uint16, priority uint16, weight uint16) (_go__return__ *GioSrvTarget) {
-	var _return_ *C.GSrvTarget
-	_cgo_port_ := (C.guint16)(port)
-	_cgo_priority_ := (C.guint16)(priority)
-	_cgo_weight_ := (C.guint16)(weight)
-	_cstring_hostname_ := C.CString(hostname)
-	_cgo_hostname_ := (*C.gchar)(unsafe.Pointer(_cstring_hostname_))
-	defer C.free(unsafe.Pointer(_cstring_hostname_))
-	_return_ = C._g_srv_target_new(_cgo_hostname_, _cgo_port_, _cgo_priority_, _cgo_weight_)
-	_go__return__ = (*GioSrvTarget)(unsafe.Pointer(_return_))
-	return
-}
-
-func SrvTargetListSort(targets *C.GList) (_return_ *C.GList) {
-	_return_ = C.g_srv_target_list_sort(targets)
-	return
-}
-
-func (_self_ *GioSrvTarget) Copy() (_go__return__ *GioSrvTarget) {
-	var _return_ *C.GSrvTarget
-	_return_ = C.g_srv_target_copy((*C.GSrvTarget)(_self_))
-	_go__return__ = (*GioSrvTarget)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioSrvTarget) Free() () {
-	C.g_srv_target_free((*C.GSrvTarget)(_self_))
-	return
-}
-
-func (_self_ *GioSrvTarget) GetHostname() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_srv_target_get_hostname((*C.GSrvTarget)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioSrvTarget) GetPort() (_go__return__ uint16) {
-	var _return_ C.guint16
-	_return_ = C.g_srv_target_get_port((*C.GSrvTarget)(_self_))
-	_go__return__ = (uint16)(_return_)
-	return
-}
-
-func (_self_ *GioSrvTarget) GetPriority() (_go__return__ uint16) {
-	var _return_ C.guint16
-	_return_ = C.g_srv_target_get_priority((*C.GSrvTarget)(_self_))
-	_go__return__ = (uint16)(_return_)
-	return
-}
-
-func (_self_ *GioSrvTarget) GetWeight() (_go__return__ uint16) {
-	var _return_ C.guint16
-	_return_ = C.g_srv_target_get_weight((*C.GSrvTarget)(_self_))
-	_go__return__ = (uint16)(_return_)
-	return
-}
-
-func (_self_ *GioStaticResource) Fini() () {
-	C.g_static_resource_fini((*C.GStaticResource)(_self_))
-	return
-}
-
-func (_self_ *GioStaticResource) GetResource() (_go__return__ *GioResource) {
-	var _return_ *C.GResource
-	_return_ = C.g_static_resource_get_resource((*C.GStaticResource)(_self_))
-	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *GioStaticResource) Init() () {
-	C.g_static_resource_init((*C.GStaticResource)(_self_))
-	return
-}
-
 func TaskNew(source_object C.gpointer, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, callback_data C.gpointer) (_go__return__ GioTask) {
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
 	var _return_ *C.GTask
@@ -10146,92 +10495,6 @@ func (_self_ *GioUnixMountMonitor) SetRateLimit(limit_msec C.int) () {
 	return
 }
 
-func (_self_ *GioUnixMountPoint) Compare(mount2 *GioUnixMountPoint) (_go__return__ int) {
-	_cgo_mount2_ := (*C.GUnixMountPoint)(unsafe.Pointer(mount2))
-	var _return_ C.gint
-	_return_ = C.g_unix_mount_point_compare((*C.GUnixMountPoint)(_self_), _cgo_mount2_)
-	_go__return__ = (int)(_return_)
-	return
-}
-
-func (_self_ *GioUnixMountPoint) Free() () {
-	C.g_unix_mount_point_free((*C.GUnixMountPoint)(_self_))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GetDevicePath() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._g_unix_mount_point_get_device_path((*C.GUnixMountPoint)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GetFsType() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._g_unix_mount_point_get_fs_type((*C.GUnixMountPoint)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GetMountPath() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._g_unix_mount_point_get_mount_path((*C.GUnixMountPoint)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GetOptions() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C._g_unix_mount_point_get_options((*C.GUnixMountPoint)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GuessCanEject() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_point_guess_can_eject((*C.GUnixMountPoint)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GuessIcon() (_return_ *C.GIcon) {
-	_return_ = C.g_unix_mount_point_guess_icon((*C.GUnixMountPoint)(_self_))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GuessName() (_go__return__ string) {
-	var _return_ *C.char
-	_return_ = C.g_unix_mount_point_guess_name((*C.GUnixMountPoint)(_self_))
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) GuessSymbolicIcon() (_return_ *C.GIcon) {
-	_return_ = C.g_unix_mount_point_guess_symbolic_icon((*C.GUnixMountPoint)(_self_))
-	return
-}
-
-func (_self_ *GioUnixMountPoint) IsLoopback() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_point_is_loopback((*C.GUnixMountPoint)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioUnixMountPoint) IsReadonly() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_point_is_readonly((*C.GUnixMountPoint)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func (_self_ *GioUnixMountPoint) IsUserMountable() (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_point_is_user_mountable((*C.GUnixMountPoint)(_self_))
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
 func UnixOutputStreamNew(fd int, close_fd bool) (_go__return__ GioUnixOutputStream) {
 	var _return_ *C.GOutputStream
 	_cgo_fd_ := (C.gint)(fd)
@@ -10421,1336 +10684,1073 @@ func (_self_ *GioZlibDecompressor) GetFileInfo() (_go__return__ GioFileInfo) {
 	return
 }
 
-func AppInfoCreateFromCommandline(commandline string, application_name string, flags C.GAppInfoCreateFlags) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
-	_cstring_commandline_ := C.CString(commandline)
-	_cgo_commandline_ := (*C.char)(unsafe.Pointer(_cstring_commandline_))
-	defer C.free(unsafe.Pointer(_cstring_commandline_))
-	_cstring_application_name_ := C.CString(application_name)
-	_cgo_application_name_ := (*C.char)(unsafe.Pointer(_cstring_application_name_))
-	defer C.free(unsafe.Pointer(_cstring_application_name_))
-	_return_ = C._g_app_info_create_from_commandline(_cgo_commandline_, _cgo_application_name_, flags, _error_)
+func (_self_ *GioDBusAnnotationInfo) Ref() (_go__return__ *GioDBusAnnotationInfo) {
+	var _return_ *C.GDBusAnnotationInfo
+	_return_ = C.g_dbus_annotation_info_ref((*C.GDBusAnnotationInfo)(_self_))
+	_go__return__ = (*GioDBusAnnotationInfo)(unsafe.Pointer(_return_))
 	return
 }
 
-func AppInfoGetAll() (_return_ *C.GList) {
-	_return_ = C.g_app_info_get_all()
+func (_self_ *GioDBusAnnotationInfo) Unref() () {
+	C.g_dbus_annotation_info_unref((*C.GDBusAnnotationInfo)(_self_))
 	return
 }
 
-func AppInfoGetAllForType(content_type string) (_return_ *C.GList) {
-	_cstring_content_type_ := C.CString(content_type)
-	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
-	defer C.free(unsafe.Pointer(_cstring_content_type_))
-	_return_ = C._g_app_info_get_all_for_type(_cgo_content_type_)
+func (_self_ *GioDBusArgInfo) Ref() (_go__return__ *GioDBusArgInfo) {
+	var _return_ *C.GDBusArgInfo
+	_return_ = C.g_dbus_arg_info_ref((*C.GDBusArgInfo)(_self_))
+	_go__return__ = (*GioDBusArgInfo)(unsafe.Pointer(_return_))
 	return
 }
 
-func AppInfoGetDefaultForType(content_type string, must_support_uris bool) (_return_ *C.GAppInfo) {
-	_cstring_content_type_ := C.CString(content_type)
-	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
-	defer C.free(unsafe.Pointer(_cstring_content_type_))
-	_cgo_must_support_uris_ := (C.gboolean)(C.FALSE)
-	if must_support_uris { _cgo_must_support_uris_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_app_info_get_default_for_type(_cgo_content_type_, _cgo_must_support_uris_)
+func (_self_ *GioDBusArgInfo) Unref() () {
+	C.g_dbus_arg_info_unref((*C.GDBusArgInfo)(_self_))
 	return
 }
 
-func AppInfoGetDefaultForUriScheme(uri_scheme string) (_return_ *C.GAppInfo) {
-	_cstring_uri_scheme_ := C.CString(uri_scheme)
-	_cgo_uri_scheme_ := (*C.char)(unsafe.Pointer(_cstring_uri_scheme_))
-	defer C.free(unsafe.Pointer(_cstring_uri_scheme_))
-	_return_ = C._g_app_info_get_default_for_uri_scheme(_cgo_uri_scheme_)
+func (_self_ *GioDBusInterfaceInfo) CacheBuild() () {
+	C.g_dbus_interface_info_cache_build((*C.GDBusInterfaceInfo)(_self_))
 	return
 }
 
-func AppInfoGetFallbackForType(content_type string) (_return_ *C.GList) {
-	_cstring_content_type_ := C.CString(content_type)
-	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
-	defer C.free(unsafe.Pointer(_cstring_content_type_))
-	_return_ = C._g_app_info_get_fallback_for_type(_cgo_content_type_)
+func (_self_ *GioDBusInterfaceInfo) CacheRelease() () {
+	C.g_dbus_interface_info_cache_release((*C.GDBusInterfaceInfo)(_self_))
 	return
 }
 
-func AppInfoGetRecommendedForType(content_type string) (_return_ *C.GList) {
-	_cstring_content_type_ := C.CString(content_type)
-	_cgo_content_type_ := (*C.gchar)(unsafe.Pointer(_cstring_content_type_))
-	defer C.free(unsafe.Pointer(_cstring_content_type_))
-	_return_ = C._g_app_info_get_recommended_for_type(_cgo_content_type_)
+func (_self_ *GioDBusInterfaceInfo) GenerateXml(indent uint) (string_builder *C.GString) {
+	_cgo_indent_ := (C.guint)(indent)
+	C.g_dbus_interface_info_generate_xml((*C.GDBusInterfaceInfo)(_self_), _cgo_indent_, string_builder)
 	return
 }
 
-func AppInfoLaunchDefaultForUri(uri string, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context._getValue())
-	_cstring_uri_ := C.CString(uri)
-	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
-	defer C.free(unsafe.Pointer(_cstring_uri_))
+func (_self_ *GioDBusInterfaceInfo) LookupMethod(name string) (_go__return__ *GioDBusMethodInfo) {
+	var _return_ *C.GDBusMethodInfo
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_dbus_interface_info_lookup_method((*C.GDBusInterfaceInfo)(_self_), _cgo_name_)
+	_go__return__ = (*GioDBusMethodInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusInterfaceInfo) LookupProperty(name string) (_go__return__ *GioDBusPropertyInfo) {
+	var _return_ *C.GDBusPropertyInfo
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_dbus_interface_info_lookup_property((*C.GDBusInterfaceInfo)(_self_), _cgo_name_)
+	_go__return__ = (*GioDBusPropertyInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusInterfaceInfo) LookupSignal(name string) (_go__return__ *GioDBusSignalInfo) {
+	var _return_ *C.GDBusSignalInfo
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_dbus_interface_info_lookup_signal((*C.GDBusInterfaceInfo)(_self_), _cgo_name_)
+	_go__return__ = (*GioDBusSignalInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusInterfaceInfo) Ref() (_go__return__ *GioDBusInterfaceInfo) {
+	var _return_ *C.GDBusInterfaceInfo
+	_return_ = C.g_dbus_interface_info_ref((*C.GDBusInterfaceInfo)(_self_))
+	_go__return__ = (*GioDBusInterfaceInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusInterfaceInfo) Unref() () {
+	C.g_dbus_interface_info_unref((*C.GDBusInterfaceInfo)(_self_))
+	return
+}
+
+func (_self_ *GioDBusMethodInfo) Ref() (_go__return__ *GioDBusMethodInfo) {
+	var _return_ *C.GDBusMethodInfo
+	_return_ = C.g_dbus_method_info_ref((*C.GDBusMethodInfo)(_self_))
+	_go__return__ = (*GioDBusMethodInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusMethodInfo) Unref() () {
+	C.g_dbus_method_info_unref((*C.GDBusMethodInfo)(_self_))
+	return
+}
+
+func DBusNodeInfoNewForXml(xml_data string) (_go__return__ *GioDBusNodeInfo, _error_ unsafe.Pointer) {
+	var _return_ *C.GDBusNodeInfo
+	_cstring_xml_data_ := C.CString(xml_data)
+	_cgo_xml_data_ := (*C.gchar)(unsafe.Pointer(_cstring_xml_data_))
+	defer C.free(unsafe.Pointer(_cstring_xml_data_))
+	_return_ = C._g_dbus_node_info_new_for_xml(_cgo_xml_data_, _error_)
+	_go__return__ = (*GioDBusNodeInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusNodeInfo) GenerateXml(indent uint) (string_builder *C.GString) {
+	_cgo_indent_ := (C.guint)(indent)
+	C.g_dbus_node_info_generate_xml((*C.GDBusNodeInfo)(_self_), _cgo_indent_, string_builder)
+	return
+}
+
+func (_self_ *GioDBusNodeInfo) LookupInterface(name string) (_go__return__ *GioDBusInterfaceInfo) {
+	var _return_ *C.GDBusInterfaceInfo
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_dbus_node_info_lookup_interface((*C.GDBusNodeInfo)(_self_), _cgo_name_)
+	_go__return__ = (*GioDBusInterfaceInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusNodeInfo) Ref() (_go__return__ *GioDBusNodeInfo) {
+	var _return_ *C.GDBusNodeInfo
+	_return_ = C.g_dbus_node_info_ref((*C.GDBusNodeInfo)(_self_))
+	_go__return__ = (*GioDBusNodeInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusNodeInfo) Unref() () {
+	C.g_dbus_node_info_unref((*C.GDBusNodeInfo)(_self_))
+	return
+}
+
+func (_self_ *GioDBusPropertyInfo) Ref() (_go__return__ *GioDBusPropertyInfo) {
+	var _return_ *C.GDBusPropertyInfo
+	_return_ = C.g_dbus_property_info_ref((*C.GDBusPropertyInfo)(_self_))
+	_go__return__ = (*GioDBusPropertyInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusPropertyInfo) Unref() () {
+	C.g_dbus_property_info_unref((*C.GDBusPropertyInfo)(_self_))
+	return
+}
+
+func (_self_ *GioDBusSignalInfo) Ref() (_go__return__ *GioDBusSignalInfo) {
+	var _return_ *C.GDBusSignalInfo
+	_return_ = C.g_dbus_signal_info_ref((*C.GDBusSignalInfo)(_self_))
+	_go__return__ = (*GioDBusSignalInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioDBusSignalInfo) Unref() () {
+	C.g_dbus_signal_info_unref((*C.GDBusSignalInfo)(_self_))
+	return
+}
+
+func FileAttributeInfoListNew() (_go__return__ *GioFileAttributeInfoList) {
+	var _return_ *C.GFileAttributeInfoList
+	_return_ = C.g_file_attribute_info_list_new()
+	_go__return__ = (*GioFileAttributeInfoList)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeInfoList) Add(name string, type_ C.GFileAttributeType, flags C.GFileAttributeInfoFlags) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._g_file_attribute_info_list_add((*C.GFileAttributeInfoList)(_self_), _cgo_name_, type_, flags)
+	return
+}
+
+func (_self_ *GioFileAttributeInfoList) Dup() (_go__return__ *GioFileAttributeInfoList) {
+	var _return_ *C.GFileAttributeInfoList
+	_return_ = C.g_file_attribute_info_list_dup((*C.GFileAttributeInfoList)(_self_))
+	_go__return__ = (*GioFileAttributeInfoList)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeInfoList) Lookup(name string) (_go__return__ *GioFileAttributeInfo) {
+	var _return_ *C.GFileAttributeInfo
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_file_attribute_info_list_lookup((*C.GFileAttributeInfoList)(_self_), _cgo_name_)
+	_go__return__ = (*GioFileAttributeInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeInfoList) Ref() (_go__return__ *GioFileAttributeInfoList) {
+	var _return_ *C.GFileAttributeInfoList
+	_return_ = C.g_file_attribute_info_list_ref((*C.GFileAttributeInfoList)(_self_))
+	_go__return__ = (*GioFileAttributeInfoList)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeInfoList) Unref() () {
+	C.g_file_attribute_info_list_unref((*C.GFileAttributeInfoList)(_self_))
+	return
+}
+
+func FileAttributeMatcherNew(attributes string) (_go__return__ *GioFileAttributeMatcher) {
+	var _return_ *C.GFileAttributeMatcher
+	_cstring_attributes_ := C.CString(attributes)
+	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
+	defer C.free(unsafe.Pointer(_cstring_attributes_))
+	_return_ = C._g_file_attribute_matcher_new(_cgo_attributes_)
+	_go__return__ = (*GioFileAttributeMatcher)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeMatcher) EnumerateNamespace(ns string) (_go__return__ bool) {
+	_cstring_ns_ := C.CString(ns)
+	_cgo_ns_ := (*C.char)(unsafe.Pointer(_cstring_ns_))
+	defer C.free(unsafe.Pointer(_cstring_ns_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_launch_default_for_uri(_cgo_uri_, _cgo_launch_context_, _error_)
+	_return_ = C._g_file_attribute_matcher_enumerate_namespace((*C.GFileAttributeMatcher)(_self_), _cgo_ns_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func AppInfoResetTypeAssociations(content_type string) () {
-	_cstring_content_type_ := C.CString(content_type)
-	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
-	defer C.free(unsafe.Pointer(_cstring_content_type_))
-	C._g_app_info_reset_type_associations(_cgo_content_type_)
-	return
-}
-
-func AsyncInitableNewvAsync(object_type C.GType, n_parameters uint, parameters *C.GParameter, io_priority C.int, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	_cgo_n_parameters_ := (C.guint)(n_parameters)
-	C.g_async_initable_newv_async(object_type, _cgo_n_parameters_, parameters, io_priority, _cgo_cancellable_, callback, user_data)
-	return
-}
-
-func BusGet(bus_type C.GBusType, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	C.g_bus_get(bus_type, _cgo_cancellable_, callback, user_data)
-	return
-}
-
-func BusGetFinish(res *C.GAsyncResult) (_go__return__ GioDBusConnection, _error_ unsafe.Pointer) {
-	var _return_ *C.GDBusConnection
-	_return_ = C._g_bus_get_finish(res, _error_)
-	_go__return__ = ToGioDBusConnection(unsafe.Pointer(_return_))
-	return
-}
-
-func BusGetSync(bus_type C.GBusType, cancellable GioCancellableKind) (_go__return__ GioDBusConnection, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	var _return_ *C.GDBusConnection
-	_return_ = C._g_bus_get_sync(bus_type, _cgo_cancellable_, _error_)
-	_go__return__ = ToGioDBusConnection(unsafe.Pointer(_return_))
-	return
-}
-
-func BusOwnName(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bus_acquired_handler C.GBusAcquiredCallback, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_own_name(bus_type, _cgo_name_, flags, bus_acquired_handler, name_acquired_handler, name_lost_handler, user_data, user_data_free_func)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusOwnNameOnConnection(connection GioDBusConnectionKind, name string, flags C.GBusNameOwnerFlags, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_own_name_on_connection(_cgo_connection_, _cgo_name_, flags, name_acquired_handler, name_lost_handler, user_data, user_data_free_func)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusOwnNameOnConnectionWithClosures(connection GioDBusConnectionKind, name string, flags C.GBusNameOwnerFlags, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_own_name_on_connection_with_closures(_cgo_connection_, _cgo_name_, flags, name_acquired_closure, name_lost_closure)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusOwnNameWithClosures(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bus_acquired_closure *C.GClosure, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_own_name_with_closures(bus_type, _cgo_name_, flags, bus_acquired_closure, name_acquired_closure, name_lost_closure)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusUnownName(owner_id uint) () {
-	_cgo_owner_id_ := (C.guint)(owner_id)
-	C.g_bus_unown_name(_cgo_owner_id_)
-	return
-}
-
-func BusUnwatchName(watcher_id uint) () {
-	_cgo_watcher_id_ := (C.guint)(watcher_id)
-	C.g_bus_unwatch_name(_cgo_watcher_id_)
-	return
-}
-
-func BusWatchName(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_watch_name(bus_type, _cgo_name_, flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusWatchNameOnConnection(connection GioDBusConnectionKind, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_watch_name_on_connection(_cgo_connection_, _cgo_name_, flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusWatchNameOnConnectionWithClosures(connection GioDBusConnectionKind, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_watch_name_on_connection_with_closures(_cgo_connection_, _cgo_name_, flags, name_appeared_closure, name_vanished_closure)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func BusWatchNameWithClosures(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
-	var _return_ C.guint
-	_cstring_name_ := C.CString(name)
-	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
-	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_watch_name_with_closures(bus_type, _cgo_name_, flags, name_appeared_closure, name_vanished_closure)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func ContentTypeCanBeExecutable(type_ string) (_go__return__ bool) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	var _return_ C.gboolean
-	_return_ = C._g_content_type_can_be_executable(_cgo_type__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func ContentTypeEquals(type1 string, type2 string) (_go__return__ bool) {
-	_cstring_type1_ := C.CString(type1)
-	_cgo_type1_ := (*C.gchar)(unsafe.Pointer(_cstring_type1_))
-	defer C.free(unsafe.Pointer(_cstring_type1_))
-	_cstring_type2_ := C.CString(type2)
-	_cgo_type2_ := (*C.gchar)(unsafe.Pointer(_cstring_type2_))
-	defer C.free(unsafe.Pointer(_cstring_type2_))
-	var _return_ C.gboolean
-	_return_ = C._g_content_type_equals(_cgo_type1_, _cgo_type2_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func ContentTypeFromMimeType(mime_type string) (_go__return__ string) {
-	_cstring_mime_type_ := C.CString(mime_type)
-	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
-	defer C.free(unsafe.Pointer(_cstring_mime_type_))
-	var _return_ *C.gchar
-	_return_ = C._g_content_type_from_mime_type(_cgo_mime_type_)
+func (_self_ *GioFileAttributeMatcher) EnumerateNext() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C._g_file_attribute_matcher_enumerate_next((*C.GFileAttributeMatcher)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func ContentTypeGetDescription(type_ string) (_go__return__ string) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	var _return_ *C.gchar
-	_return_ = C._g_content_type_get_description(_cgo_type__)
+func (_self_ *GioFileAttributeMatcher) Matches(attribute string) (_go__return__ bool) {
+	_cstring_attribute_ := C.CString(attribute)
+	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_))
+	var _return_ C.gboolean
+	_return_ = C._g_file_attribute_matcher_matches((*C.GFileAttributeMatcher)(_self_), _cgo_attribute_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GioFileAttributeMatcher) MatchesOnly(attribute string) (_go__return__ bool) {
+	_cstring_attribute_ := C.CString(attribute)
+	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_))
+	var _return_ C.gboolean
+	_return_ = C._g_file_attribute_matcher_matches_only((*C.GFileAttributeMatcher)(_self_), _cgo_attribute_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *GioFileAttributeMatcher) Ref() (_go__return__ *GioFileAttributeMatcher) {
+	var _return_ *C.GFileAttributeMatcher
+	_return_ = C.g_file_attribute_matcher_ref((*C.GFileAttributeMatcher)(_self_))
+	_go__return__ = (*GioFileAttributeMatcher)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeMatcher) Subtract(subtract *GioFileAttributeMatcher) (_go__return__ *GioFileAttributeMatcher) {
+	_cgo_subtract_ := (*C.GFileAttributeMatcher)(unsafe.Pointer(subtract))
+	var _return_ *C.GFileAttributeMatcher
+	_return_ = C.g_file_attribute_matcher_subtract((*C.GFileAttributeMatcher)(_self_), _cgo_subtract_)
+	_go__return__ = (*GioFileAttributeMatcher)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioFileAttributeMatcher) ToString() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C.g_file_attribute_matcher_to_string((*C.GFileAttributeMatcher)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func ContentTypeGetGenericIconName(type_ string) (_go__return__ string) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	var _return_ *C.gchar
-	_return_ = C._g_content_type_get_generic_icon_name(_cgo_type__)
+func (_self_ *GioFileAttributeMatcher) Unref() () {
+	C.g_file_attribute_matcher_unref((*C.GFileAttributeMatcher)(_self_))
+	return
+}
+
+func (_self_ *GioIOExtension) GetName() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C._g_io_extension_get_name((*C.GIOExtension)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func ContentTypeGetIcon(type_ string) (_return_ *C.GIcon) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	_return_ = C._g_content_type_get_icon(_cgo_type__)
+func (_self_ *GioIOExtension) GetPriority() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.g_io_extension_get_priority((*C.GIOExtension)(_self_))
+	_go__return__ = (int)(_return_)
 	return
 }
 
-func ContentTypeGetMimeType(type_ string) (_go__return__ string) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	var _return_ *C.gchar
-	_return_ = C._g_content_type_get_mime_type(_cgo_type__)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+func (_self_ *GioIOExtension) GetType() (_return_ C.GType) {
+	_return_ = C.g_io_extension_get_type((*C.GIOExtension)(_self_))
 	return
 }
 
-func ContentTypeGetSymbolicIcon(type_ string) (_return_ *C.GIcon) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	_return_ = C._g_content_type_get_symbolic_icon(_cgo_type__)
+func (_self_ *GioIOExtension) RefClass() (_return_ *C.GTypeClass) {
+	_return_ = C.g_io_extension_ref_class((*C.GIOExtension)(_self_))
 	return
 }
 
-func ContentTypeGuessForTree(root *C.GFile) (_return_ unsafe.Pointer) {
-	_return_ = C._g_content_type_guess_for_tree(root)
+func (_self_ *GioIOExtensionPoint) GetExtensionByName(name string) (_go__return__ *GioIOExtension) {
+	var _return_ *C.GIOExtension
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._g_io_extension_point_get_extension_by_name((*C.GIOExtensionPoint)(_self_), _cgo_name_)
+	_go__return__ = (*GioIOExtension)(unsafe.Pointer(_return_))
 	return
 }
 
-func ContentTypeIsA(type_ string, supertype string) (_go__return__ bool) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	_cstring_supertype_ := C.CString(supertype)
-	_cgo_supertype_ := (*C.gchar)(unsafe.Pointer(_cstring_supertype_))
-	defer C.free(unsafe.Pointer(_cstring_supertype_))
-	var _return_ C.gboolean
-	_return_ = C._g_content_type_is_a(_cgo_type__, _cgo_supertype_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func (_self_ *GioIOExtensionPoint) GetExtensions() (_return_ *C.GList) {
+	_return_ = C.g_io_extension_point_get_extensions((*C.GIOExtensionPoint)(_self_))
 	return
 }
 
-func ContentTypeIsUnknown(type_ string) (_go__return__ bool) {
-	_cstring_type__ := C.CString(type_)
-	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
-	defer C.free(unsafe.Pointer(_cstring_type__))
-	var _return_ C.gboolean
-	_return_ = C._g_content_type_is_unknown(_cgo_type__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func (_self_ *GioIOExtensionPoint) GetRequiredType() (_return_ C.GType) {
+	_return_ = C.g_io_extension_point_get_required_type((*C.GIOExtensionPoint)(_self_))
 	return
 }
 
-func ContentTypesGetRegistered() (_return_ *C.GList) {
-	_return_ = C.g_content_types_get_registered()
+func (_self_ *GioIOExtensionPoint) SetRequiredType(type_ C.GType) () {
+	C.g_io_extension_point_set_required_type((*C.GIOExtensionPoint)(_self_), type_)
 	return
 }
 
-func DbusAddressGetForBusSync(bus_type C.GBusType, cancellable GioCancellableKind) (_go__return__ string, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	var _return_ *C.gchar
-	_return_ = C._g_dbus_address_get_for_bus_sync(bus_type, _cgo_cancellable_, _error_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+func IOModuleScopeNew(flags C.GIOModuleScopeFlags) (_go__return__ *GioIOModuleScope) {
+	var _return_ *C.GIOModuleScope
+	_return_ = C.g_io_module_scope_new(flags)
+	_go__return__ = (*GioIOModuleScope)(unsafe.Pointer(_return_))
 	return
 }
 
-func DbusAddressGetStream(address string, cancellable GioCancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	_cstring_address_ := C.CString(address)
-	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
-	defer C.free(unsafe.Pointer(_cstring_address_))
-	C._g_dbus_address_get_stream(_cgo_address_, _cgo_cancellable_, callback, user_data)
+func (_self_ *GioIOModuleScope) Block(basename string) () {
+	_cstring_basename_ := C.CString(basename)
+	_cgo_basename_ := (*C.gchar)(unsafe.Pointer(_cstring_basename_))
+	defer C.free(unsafe.Pointer(_cstring_basename_))
+	C._g_io_module_scope_block((*C.GIOModuleScope)(_self_), _cgo_basename_)
 	return
 }
 
-func DbusAddressGetStreamFinish(res *C.GAsyncResult, out_guid string) (_go__return__ GioIOStream, _error_ unsafe.Pointer) {
-	var _return_ *C.GIOStream
-	_cstring_out_guid_ := C.CString(out_guid)
-	_cgo_out_guid_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_out_guid_))
-	defer C.free(unsafe.Pointer(_cstring_out_guid_))
-	_return_ = C._g_dbus_address_get_stream_finish(res, _cgo_out_guid_, _error_)
-	_go__return__ = ToGioIOStream(unsafe.Pointer(_return_))
+func (_self_ *GioIOModuleScope) Free() () {
+	C.g_io_module_scope_free((*C.GIOModuleScope)(_self_))
 	return
 }
 
-func DbusAddressGetStreamSync(address string, out_guid string, cancellable GioCancellableKind) (_go__return__ GioIOStream, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	var _return_ *C.GIOStream
-	_cstring_address_ := C.CString(address)
-	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
-	defer C.free(unsafe.Pointer(_cstring_address_))
-	_cstring_out_guid_ := C.CString(out_guid)
-	_cgo_out_guid_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_out_guid_))
-	defer C.free(unsafe.Pointer(_cstring_out_guid_))
-	_return_ = C._g_dbus_address_get_stream_sync(_cgo_address_, _cgo_out_guid_, _cgo_cancellable_, _error_)
-	_go__return__ = ToGioIOStream(unsafe.Pointer(_return_))
+func ResourceNewFromData(data *C.GBytes) (_go__return__ *GioResource, _error_ unsafe.Pointer) {
+	var _return_ *C.GResource
+	_return_ = C._g_resource_new_from_data(data, _error_)
+	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
 	return
 }
 
-func DbusErrorEncodeGerror(error_ *C.GError) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_dbus_error_encode_gerror(error_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+func (_self_ *GioResource) Register() () {
+	C.g_resources_register((*C.GResource)(_self_))
 	return
 }
 
-func DbusErrorGetRemoteError(error_ *C.GError) (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C._g_dbus_error_get_remote_error(error_)
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+func (_self_ *GioResource) Unregister() () {
+	C.g_resources_unregister((*C.GResource)(_self_))
 	return
 }
 
-func DbusErrorIsRemoteError(error_ *C.GError) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_error_is_remote_error(error_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusErrorNewForDbusError(dbus_error_name string, dbus_error_message string) (_return_ *C.GError) {
-	_cstring_dbus_error_name_ := C.CString(dbus_error_name)
-	_cgo_dbus_error_name_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_name_))
-	defer C.free(unsafe.Pointer(_cstring_dbus_error_name_))
-	_cstring_dbus_error_message_ := C.CString(dbus_error_message)
-	_cgo_dbus_error_message_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_message_))
-	defer C.free(unsafe.Pointer(_cstring_dbus_error_message_))
-	_return_ = C._g_dbus_error_new_for_dbus_error(_cgo_dbus_error_name_, _cgo_dbus_error_message_)
-	return
-}
-
-func DbusErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.g_dbus_error_quark()
-	return
-}
-
-func DbusErrorRegisterError(error_domain C.GQuark, error_code int, dbus_error_name string) (_go__return__ bool) {
-	_cgo_error_code_ := (C.gint)(error_code)
-	_cstring_dbus_error_name_ := C.CString(dbus_error_name)
-	_cgo_dbus_error_name_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_name_))
-	defer C.free(unsafe.Pointer(_cstring_dbus_error_name_))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_error_register_error(error_domain, _cgo_error_code_, _cgo_dbus_error_name_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusErrorRegisterErrorDomain(error_domain_quark_name string, quark_volatile *C. gsize, entries *GioDBusErrorEntry, num_entries uint) () {
-	_cgo_entries_ := (*C.GDBusErrorEntry)(unsafe.Pointer(entries))
-	_cgo_num_entries_ := (C.guint)(num_entries)
-	_cstring_error_domain_quark_name_ := C.CString(error_domain_quark_name)
-	_cgo_error_domain_quark_name_ := (*C.gchar)(unsafe.Pointer(_cstring_error_domain_quark_name_))
-	defer C.free(unsafe.Pointer(_cstring_error_domain_quark_name_))
-	C._g_dbus_error_register_error_domain(_cgo_error_domain_quark_name_, quark_volatile, _cgo_entries_, _cgo_num_entries_)
-	return
-}
-
-func DbusErrorStripRemoteError(error_ *C.GError) (_go__return__ bool) {
-	var _return_ C.gboolean
-	_return_ = C.g_dbus_error_strip_remote_error(error_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusErrorUnregisterError(error_domain C.GQuark, error_code int, dbus_error_name string) (_go__return__ bool) {
-	_cgo_error_code_ := (C.gint)(error_code)
-	_cstring_dbus_error_name_ := C.CString(dbus_error_name)
-	_cgo_dbus_error_name_ := (*C.gchar)(unsafe.Pointer(_cstring_dbus_error_name_))
-	defer C.free(unsafe.Pointer(_cstring_dbus_error_name_))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_error_unregister_error(error_domain, _cgo_error_code_, _cgo_dbus_error_name_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusGenerateGuid() (_go__return__ string) {
-	var _return_ *C.gchar
-	_return_ = C.g_dbus_generate_guid()
-	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func DbusGvalueToGvariant(gvalue *C.GValue, type_ *C.GVariantType) (_return_ *C.GVariant) {
-	_return_ = C._g_dbus_gvalue_to_gvariant(gvalue, type_)
-	return
-}
-
-func DbusGvariantToGvalue(value *C.GVariant) (out_gvalue *C.GValue) {
-	C.g_dbus_gvariant_to_gvalue(value, out_gvalue)
-	return
-}
-
-func DbusIsAddress(string_ string) (_go__return__ bool) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_address(_cgo_string__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusIsGuid(string_ string) (_go__return__ bool) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_guid(_cgo_string__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusIsInterfaceName(string_ string) (_go__return__ bool) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_interface_name(_cgo_string__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusIsMemberName(string_ string) (_go__return__ bool) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_member_name(_cgo_string__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusIsName(string_ string) (_go__return__ bool) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_name(_cgo_string__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusIsSupportedAddress(string_ string) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_supported_address(_cgo_string__, _error_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func DbusIsUniqueName(string_ string) (_go__return__ bool) {
-	_cstring_string__ := C.CString(string_)
-	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
-	defer C.free(unsafe.Pointer(_cstring_string__))
-	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_unique_name(_cgo_string__)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func FileNewForCommandlineArg(arg string) (_return_ *C.GFile) {
-	_cstring_arg_ := C.CString(arg)
-	_cgo_arg_ := (*C.char)(unsafe.Pointer(_cstring_arg_))
-	defer C.free(unsafe.Pointer(_cstring_arg_))
-	_return_ = C._g_file_new_for_commandline_arg(_cgo_arg_)
-	return
-}
-
-func FileNewForPath(path string) (_return_ *C.GFile) {
+func (_self_ *GioResource) EnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_file_new_for_path(_cgo_path_)
+	_return_ = C._g_resource_enumerate_children((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
 	return
 }
 
-func FileNewForUri(uri string) (_return_ *C.GFile) {
-	_cstring_uri_ := C.CString(uri)
-	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
-	defer C.free(unsafe.Pointer(_cstring_uri_))
-	_return_ = C._g_file_new_for_uri(_cgo_uri_)
-	return
-}
-
-func FileNewTmp(tmpl string) (_return_ *C.GFile, iostream *GioFileIOStream, _error_ unsafe.Pointer) {
-	var _allocated_iostream_ *C.GFileIOStream
-	_cstring_tmpl_ := C.CString(tmpl)
-	_cgo_tmpl_ := (*C.char)(unsafe.Pointer(_cstring_tmpl_))
-	defer C.free(unsafe.Pointer(_cstring_tmpl_))
-	_return_ = C._g_file_new_tmp(_cgo_tmpl_, unsafe.Pointer(&_allocated_iostream_), _error_)
-	iostream = (*GioFileIOStream)(unsafe.Pointer(_allocated_iostream_))
-	return
-}
-
-func FileParseName(parse_name string) (_return_ *C.GFile) {
-	_cstring_parse_name_ := C.CString(parse_name)
-	_cgo_parse_name_ := (*C.char)(unsafe.Pointer(_cstring_parse_name_))
-	defer C.free(unsafe.Pointer(_cstring_parse_name_))
-	_return_ = C._g_file_parse_name(_cgo_parse_name_)
-	return
-}
-
-func IconHash(icon C.gpointer) (_go__return__ uint) {
-	var _return_ C.guint
-	_return_ = C._g_icon_hash(icon)
-	_go__return__ = (uint)(_return_)
-	return
-}
-
-func IconNewForString(str string) (_return_ *C.GIcon, _error_ unsafe.Pointer) {
-	_cstring_str_ := C.CString(str)
-	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
-	defer C.free(unsafe.Pointer(_cstring_str_))
-	_return_ = C._g_icon_new_for_string(_cgo_str_, _error_)
-	return
-}
-
-func IoErrorFromErrno(err_no int) (_return_ C.GIOErrorEnum) {
-	_cgo_err_no_ := (C.gint)(err_no)
-	_return_ = C.g_io_error_from_errno(_cgo_err_no_)
-	return
-}
-
-func IoErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.g_io_error_quark()
-	return
-}
-
-func IoModulesLoadAllInDirectory(dirname string) (_return_ *C.GList) {
-	_cstring_dirname_ := C.CString(dirname)
-	_cgo_dirname_ := (*C.gchar)(unsafe.Pointer(_cstring_dirname_))
-	defer C.free(unsafe.Pointer(_cstring_dirname_))
-	_return_ = C._g_io_modules_load_all_in_directory(_cgo_dirname_)
-	return
-}
-
-func IoModulesLoadAllInDirectoryWithScope(dirname string, scope *GioIOModuleScope) (_return_ *C.GList) {
-	_cgo_scope_ := (*C.GIOModuleScope)(unsafe.Pointer(scope))
-	_cstring_dirname_ := C.CString(dirname)
-	_cgo_dirname_ := (*C.gchar)(unsafe.Pointer(_cstring_dirname_))
-	defer C.free(unsafe.Pointer(_cstring_dirname_))
-	_return_ = C._g_io_modules_load_all_in_directory_with_scope(_cgo_dirname_, _cgo_scope_)
-	return
-}
-
-func IoModulesScanAllInDirectory(dirname string) () {
-	_cstring_dirname_ := C.CString(dirname)
-	_cgo_dirname_ := (*C.char)(unsafe.Pointer(_cstring_dirname_))
-	defer C.free(unsafe.Pointer(_cstring_dirname_))
-	C._g_io_modules_scan_all_in_directory(_cgo_dirname_)
-	return
-}
-
-func IoModulesScanAllInDirectoryWithScope(dirname string, scope *GioIOModuleScope) () {
-	_cgo_scope_ := (*C.GIOModuleScope)(unsafe.Pointer(scope))
-	_cstring_dirname_ := C.CString(dirname)
-	_cgo_dirname_ := (*C.gchar)(unsafe.Pointer(_cstring_dirname_))
-	defer C.free(unsafe.Pointer(_cstring_dirname_))
-	C._g_io_modules_scan_all_in_directory_with_scope(_cgo_dirname_, _cgo_scope_)
-	return
-}
-
-func NetworkMonitorGetDefault() (_return_ *C.GNetworkMonitor) {
-	_return_ = C.g_network_monitor_get_default()
-	return
-}
-
-func PollableSourceNew(pollable_stream *C.GObject) (_return_ *C.GSource) {
-	_return_ = C.g_pollable_source_new(pollable_stream)
-	return
-}
-
-func PollableSourceNewFull(pollable_stream C.gpointer, child_source *C.GSource, cancellable GioCancellableKind) (_return_ *C.GSource) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	_return_ = C.g_pollable_source_new_full(pollable_stream, child_source, _cgo_cancellable_)
-	return
-}
-
-func PollableStreamRead(stream GioInputStreamKind, buffer unsafe.Pointer, count uint64, blocking bool, cancellable GioCancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_stream_ := (*C.GInputStream)(stream._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
-	_cgo_count_ := (C.gsize)(count)
-	var _return_ C.gssize
-	_cgo_blocking_ := (C.gboolean)(C.FALSE)
-	if blocking { _cgo_blocking_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_pollable_stream_read(_cgo_stream_, buffer, _cgo_count_, _cgo_blocking_, _cgo_cancellable_, _error_)
-	_go__return__ = (int64)(_return_)
-	return
-}
-
-func ProxyGetDefaultForProtocol(protocol string) (_return_ *C.GProxy) {
-	_cstring_protocol_ := C.CString(protocol)
-	_cgo_protocol_ := (*C.gchar)(unsafe.Pointer(_cstring_protocol_))
-	defer C.free(unsafe.Pointer(_cstring_protocol_))
-	_return_ = C._g_proxy_get_default_for_protocol(_cgo_protocol_)
-	return
-}
-
-func ProxyResolverGetDefault() (_return_ *C.GProxyResolver) {
-	_return_ = C.g_proxy_resolver_get_default()
-	return
-}
-
-func ResolverErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.g_resolver_error_quark()
-	return
-}
-
-func ResourceErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.g_resource_error_quark()
-	return
-}
-
-func ResourcesEnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
-	_cstring_path_ := C.CString(path)
-	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
-	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resources_enumerate_children(_cgo_path_, lookup_flags, _error_)
-	return
-}
-
-func ResourcesGetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ unsafe.Pointer) {
+func (_self_ *GioResource) GetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ unsafe.Pointer) {
 	var size C.gsize
 	var flags C.guint32
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	var _return_ C.gboolean
-	_return_ = C._g_resources_get_info(_cgo_path_, lookup_flags, &size, &flags, _error_)
+	_return_ = C._g_resource_get_info((*C.GResource)(_self_), _cgo_path_, lookup_flags, &size, &flags, _error_)
 	_go_size_ = (uint64)(size)
 	_go_flags_ = (uint32)(flags)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func ResourcesLookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
+func (_self_ *GioResource) LookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resources_lookup_data(_cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resource_lookup_data((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
 	return
 }
 
-func ResourcesOpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ GioInputStream, _error_ unsafe.Pointer) {
+func (_self_ *GioResource) OpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ GioInputStream, _error_ unsafe.Pointer) {
 	var _return_ *C.GInputStream
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resources_open_stream(_cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resource_open_stream((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
 	_go__return__ = ToGioInputStream(unsafe.Pointer(_return_))
 	return
 }
 
-func SimpleAsyncReportGerrorInIdle(object *C.GObject, callback C.GAsyncReadyCallback, user_data C.gpointer, error_ *C.GError) () {
-	C._g_simple_async_report_gerror_in_idle(object, callback, user_data, error_)
+func (_self_ *GioResource) Ref() (_go__return__ *GioResource) {
+	var _return_ *C.GResource
+	_return_ = C.g_resource_ref((*C.GResource)(_self_))
+	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
 	return
 }
 
-func SimpleAsyncReportTakeGerrorInIdle(object *C.GObject, callback C.GAsyncReadyCallback, user_data C.gpointer, error_ *C.GError) () {
-	C.g_simple_async_report_take_gerror_in_idle(object, callback, user_data, error_)
+func (_self_ *GioResource) Unref() () {
+	C.g_resource_unref((*C.GResource)(_self_))
 	return
 }
 
-func TlsBackendGetDefault() (_return_ *C.GTlsBackend) {
-	_return_ = C.g_tls_backend_get_default()
+func (_self_ *GioSettingsSchema) GetId() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_settings_schema_get_id((*C.GSettingsSchema)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func TlsClientConnectionNew(base_io_stream GioIOStreamKind, server_identity *C.GSocketConnectable) (_return_ *C.GIOStream, _error_ unsafe.Pointer) {
-	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
-	_return_ = C._g_tls_client_connection_new(_cgo_base_io_stream_, server_identity, _error_)
+func (_self_ *GioSettingsSchema) GetPath() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_settings_schema_get_path((*C.GSettingsSchema)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func TlsErrorQuark() (_return_ C.GQuark) {
-	_return_ = C.g_tls_error_quark()
+func (_self_ *GioSettingsSchema) Ref() (_go__return__ *GioSettingsSchema) {
+	var _return_ *C.GSettingsSchema
+	_return_ = C.g_settings_schema_ref((*C.GSettingsSchema)(_self_))
+	_go__return__ = (*GioSettingsSchema)(unsafe.Pointer(_return_))
 	return
 }
 
-func TlsFileDatabaseNew(anchors string) (_return_ *C.GTlsDatabase, _error_ unsafe.Pointer) {
-	_cstring_anchors_ := C.CString(anchors)
-	_cgo_anchors_ := (*C.gchar)(unsafe.Pointer(_cstring_anchors_))
-	defer C.free(unsafe.Pointer(_cstring_anchors_))
-	_return_ = C._g_tls_file_database_new(_cgo_anchors_, _error_)
+func (_self_ *GioSettingsSchema) Unref() () {
+	C.g_settings_schema_unref((*C.GSettingsSchema)(_self_))
 	return
 }
 
-func TlsServerConnectionNew(base_io_stream GioIOStreamKind, certificate GioTlsCertificateKind) (_return_ *C.GIOStream, _error_ unsafe.Pointer) {
-	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
-	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
-	_return_ = C._g_tls_server_connection_new(_cgo_base_io_stream_, _cgo_certificate_, _error_)
+func SettingsSchemaSourceNewFromDirectory(directory string, parent *GioSettingsSchemaSource, trusted bool) (_go__return__ *GioSettingsSchemaSource, _error_ unsafe.Pointer) {
+	_cgo_parent_ := (*C.GSettingsSchemaSource)(unsafe.Pointer(parent))
+	var _return_ *C.GSettingsSchemaSource
+	_cstring_directory_ := C.CString(directory)
+	_cgo_directory_ := (*C.gchar)(unsafe.Pointer(_cstring_directory_))
+	defer C.free(unsafe.Pointer(_cstring_directory_))
+	_cgo_trusted_ := (C.gboolean)(C.FALSE)
+	if trusted { _cgo_trusted_ = (C.gboolean)(C.TRUE) }
+	_return_ = C._g_settings_schema_source_new_from_directory(_cgo_directory_, _cgo_parent_, _cgo_trusted_, _error_)
+	_go__return__ = (*GioSettingsSchemaSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func UnixIsMountPathSystemInternal(mount_path string) (_go__return__ bool) {
-	_cstring_mount_path_ := C.CString(mount_path)
-	_cgo_mount_path_ := (*C.char)(unsafe.Pointer(_cstring_mount_path_))
-	defer C.free(unsafe.Pointer(_cstring_mount_path_))
-	var _return_ C.gboolean
-	_return_ = C._g_unix_is_mount_path_system_internal(_cgo_mount_path_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+func (_self_ *GioSettingsSchemaSource) Lookup(schema_id string, recursive bool) (_go__return__ *GioSettingsSchema) {
+	var _return_ *C.GSettingsSchema
+	_cstring_schema_id_ := C.CString(schema_id)
+	_cgo_schema_id_ := (*C.gchar)(unsafe.Pointer(_cstring_schema_id_))
+	defer C.free(unsafe.Pointer(_cstring_schema_id_))
+	_cgo_recursive_ := (C.gboolean)(C.FALSE)
+	if recursive { _cgo_recursive_ = (C.gboolean)(C.TRUE) }
+	_return_ = C._g_settings_schema_source_lookup((*C.GSettingsSchemaSource)(_self_), _cgo_schema_id_, _cgo_recursive_)
+	_go__return__ = (*GioSettingsSchema)(unsafe.Pointer(_return_))
 	return
 }
 
-func UnixMountAt(mount_path string) (_go__return__ *GioUnixMountEntry, _go_time_read_ uint64) {
-	var _return_ *C.GUnixMountEntry
-	var time_read C.guint64
-	_cstring_mount_path_ := C.CString(mount_path)
-	_cgo_mount_path_ := (*C.char)(unsafe.Pointer(_cstring_mount_path_))
-	defer C.free(unsafe.Pointer(_cstring_mount_path_))
-	_return_ = C._g_unix_mount_at(_cgo_mount_path_, &time_read)
-	_go__return__ = (*GioUnixMountEntry)(unsafe.Pointer(_return_))
-	_go_time_read_ = (uint64)(time_read)
+func (_self_ *GioSettingsSchemaSource) Ref() (_go__return__ *GioSettingsSchemaSource) {
+	var _return_ *C.GSettingsSchemaSource
+	_return_ = C.g_settings_schema_source_ref((*C.GSettingsSchemaSource)(_self_))
+	_go__return__ = (*GioSettingsSchemaSource)(unsafe.Pointer(_return_))
 	return
 }
 
-func UnixMountCompare(mount1 *GioUnixMountEntry, mount2 *GioUnixMountEntry) (_go__return__ int) {
-	_cgo_mount1_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount1))
-	_cgo_mount2_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount2))
+func (_self_ *GioSettingsSchemaSource) Unref() () {
+	C.g_settings_schema_source_unref((*C.GSettingsSchemaSource)(_self_))
+	return
+}
+
+func SrvTargetNew(hostname string, port uint16, priority uint16, weight uint16) (_go__return__ *GioSrvTarget) {
+	var _return_ *C.GSrvTarget
+	_cgo_port_ := (C.guint16)(port)
+	_cgo_priority_ := (C.guint16)(priority)
+	_cgo_weight_ := (C.guint16)(weight)
+	_cstring_hostname_ := C.CString(hostname)
+	_cgo_hostname_ := (*C.gchar)(unsafe.Pointer(_cstring_hostname_))
+	defer C.free(unsafe.Pointer(_cstring_hostname_))
+	_return_ = C._g_srv_target_new(_cgo_hostname_, _cgo_port_, _cgo_priority_, _cgo_weight_)
+	_go__return__ = (*GioSrvTarget)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioSrvTarget) Copy() (_go__return__ *GioSrvTarget) {
+	var _return_ *C.GSrvTarget
+	_return_ = C.g_srv_target_copy((*C.GSrvTarget)(_self_))
+	_go__return__ = (*GioSrvTarget)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioSrvTarget) Free() () {
+	C.g_srv_target_free((*C.GSrvTarget)(_self_))
+	return
+}
+
+func (_self_ *GioSrvTarget) GetHostname() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._g_srv_target_get_hostname((*C.GSrvTarget)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GioSrvTarget) GetPort() (_go__return__ uint16) {
+	var _return_ C.guint16
+	_return_ = C.g_srv_target_get_port((*C.GSrvTarget)(_self_))
+	_go__return__ = (uint16)(_return_)
+	return
+}
+
+func (_self_ *GioSrvTarget) GetPriority() (_go__return__ uint16) {
+	var _return_ C.guint16
+	_return_ = C.g_srv_target_get_priority((*C.GSrvTarget)(_self_))
+	_go__return__ = (uint16)(_return_)
+	return
+}
+
+func (_self_ *GioSrvTarget) GetWeight() (_go__return__ uint16) {
+	var _return_ C.guint16
+	_return_ = C.g_srv_target_get_weight((*C.GSrvTarget)(_self_))
+	_go__return__ = (uint16)(_return_)
+	return
+}
+
+func (_self_ *GioStaticResource) Fini() () {
+	C.g_static_resource_fini((*C.GStaticResource)(_self_))
+	return
+}
+
+func (_self_ *GioStaticResource) GetResource() (_go__return__ *GioResource) {
+	var _return_ *C.GResource
+	_return_ = C.g_static_resource_get_resource((*C.GStaticResource)(_self_))
+	_go__return__ = (*GioResource)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *GioStaticResource) Init() () {
+	C.g_static_resource_init((*C.GStaticResource)(_self_))
+	return
+}
+
+func (_self_ *GioUnixMountPoint) Compare(mount2 *GioUnixMountPoint) (_go__return__ int) {
+	_cgo_mount2_ := (*C.GUnixMountPoint)(unsafe.Pointer(mount2))
 	var _return_ C.gint
-	_return_ = C.g_unix_mount_compare(_cgo_mount1_, _cgo_mount2_)
+	_return_ = C.g_unix_mount_point_compare((*C.GUnixMountPoint)(_self_), _cgo_mount2_)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func UnixMountFree(mount_entry *GioUnixMountEntry) () {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
-	C.g_unix_mount_free(_cgo_mount_entry_)
+func (_self_ *GioUnixMountPoint) Free() () {
+	C.g_unix_mount_point_free((*C.GUnixMountPoint)(_self_))
 	return
 }
 
-func UnixMountGetDevicePath(mount_entry *GioUnixMountEntry) (_go__return__ string) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) GetDevicePath() (_go__return__ string) {
 	var _return_ *C.char
-	_return_ = C._g_unix_mount_get_device_path(_cgo_mount_entry_)
+	_return_ = C._g_unix_mount_point_get_device_path((*C.GUnixMountPoint)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func UnixMountGetFsType(mount_entry *GioUnixMountEntry) (_go__return__ string) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) GetFsType() (_go__return__ string) {
 	var _return_ *C.char
-	_return_ = C._g_unix_mount_get_fs_type(_cgo_mount_entry_)
+	_return_ = C._g_unix_mount_point_get_fs_type((*C.GUnixMountPoint)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func UnixMountGetMountPath(mount_entry *GioUnixMountEntry) (_go__return__ string) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) GetMountPath() (_go__return__ string) {
 	var _return_ *C.char
-	_return_ = C._g_unix_mount_get_mount_path(_cgo_mount_entry_)
+	_return_ = C._g_unix_mount_point_get_mount_path((*C.GUnixMountPoint)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func UnixMountGuessCanEject(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
-	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_guess_can_eject(_cgo_mount_entry_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func UnixMountGuessIcon(mount_entry *GioUnixMountEntry) (_return_ *C.GIcon) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
-	_return_ = C.g_unix_mount_guess_icon(_cgo_mount_entry_)
-	return
-}
-
-func UnixMountGuessName(mount_entry *GioUnixMountEntry) (_go__return__ string) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) GetOptions() (_go__return__ string) {
 	var _return_ *C.char
-	_return_ = C.g_unix_mount_guess_name(_cgo_mount_entry_)
+	_return_ = C._g_unix_mount_point_get_options((*C.GUnixMountPoint)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func UnixMountGuessShouldDisplay(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) GuessCanEject() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_guess_should_display(_cgo_mount_entry_)
+	_return_ = C.g_unix_mount_point_guess_can_eject((*C.GUnixMountPoint)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func UnixMountGuessSymbolicIcon(mount_entry *GioUnixMountEntry) (_return_ *C.GIcon) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
-	_return_ = C.g_unix_mount_guess_symbolic_icon(_cgo_mount_entry_)
+func (_self_ *GioUnixMountPoint) GuessIcon() (_return_ *C.GIcon) {
+	_return_ = C.g_unix_mount_point_guess_icon((*C.GUnixMountPoint)(_self_))
 	return
 }
 
-func UnixMountIsReadonly(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) GuessName() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C.g_unix_mount_point_guess_name((*C.GUnixMountPoint)(_self_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *GioUnixMountPoint) GuessSymbolicIcon() (_return_ *C.GIcon) {
+	_return_ = C.g_unix_mount_point_guess_symbolic_icon((*C.GUnixMountPoint)(_self_))
+	return
+}
+
+func (_self_ *GioUnixMountPoint) IsLoopback() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_is_readonly(_cgo_mount_entry_)
+	_return_ = C.g_unix_mount_point_is_loopback((*C.GUnixMountPoint)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func UnixMountIsSystemInternal(mount_entry *GioUnixMountEntry) (_go__return__ bool) {
-	_cgo_mount_entry_ := (*C.GUnixMountEntry)(unsafe.Pointer(mount_entry))
+func (_self_ *GioUnixMountPoint) IsReadonly() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_is_system_internal(_cgo_mount_entry_)
+	_return_ = C.g_unix_mount_point_is_readonly((*C.GUnixMountPoint)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func UnixMountPointsChangedSince(time uint64) (_go__return__ bool) {
-	_cgo_time_ := (C.guint64)(time)
+func (_self_ *GioUnixMountPoint) IsUserMountable() (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.g_unix_mount_points_changed_since(_cgo_time_)
+	_return_ = C.g_unix_mount_point_is_user_mountable((*C.GUnixMountPoint)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func UnixMountPointsGet() (_return_ *C.GList, _go_time_read_ uint64) {
-	var time_read C.guint64
-	_return_ = C.g_unix_mount_points_get(&time_read)
-	_go_time_read_ = (uint64)(time_read)
-	return
-}
-
-func UnixMountsChangedSince(time uint64) (_go__return__ bool) {
-	_cgo_time_ := (C.guint64)(time)
-	var _return_ C.gboolean
-	_return_ = C.g_unix_mounts_changed_since(_cgo_time_)
-	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
-	return
-}
-
-func UnixMountsGet() (_return_ *C.GList, _go_time_read_ uint64) {
-	var time_read C.guint64
-	_return_ = C.g_unix_mounts_get(&time_read)
-	_go_time_read_ = (uint64)(time_read)
-	return
-}
-
-const APP_INFO_CREATE_NONE = C.G_APP_INFO_CREATE_NONE
-const APP_INFO_CREATE_NEEDS_TERMINAL = C.G_APP_INFO_CREATE_NEEDS_TERMINAL
-const APP_INFO_CREATE_SUPPORTS_URIS = C.G_APP_INFO_CREATE_SUPPORTS_URIS
-const APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION = C.G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
-const APPLICATION_FLAGS_NONE = C.G_APPLICATION_FLAGS_NONE
-const APPLICATION_IS_SERVICE = C.G_APPLICATION_IS_SERVICE
-const APPLICATION_IS_LAUNCHER = C.G_APPLICATION_IS_LAUNCHER
-const APPLICATION_HANDLES_OPEN = C.G_APPLICATION_HANDLES_OPEN
-const APPLICATION_HANDLES_COMMAND_LINE = C.G_APPLICATION_HANDLES_COMMAND_LINE
-const APPLICATION_SEND_ENVIRONMENT = C.G_APPLICATION_SEND_ENVIRONMENT
-const APPLICATION_NON_UNIQUE = C.G_APPLICATION_NON_UNIQUE
-const ASK_PASSWORD_NEED_PASSWORD = C.G_ASK_PASSWORD_NEED_PASSWORD
-const ASK_PASSWORD_NEED_USERNAME = C.G_ASK_PASSWORD_NEED_USERNAME
-const ASK_PASSWORD_NEED_DOMAIN = C.G_ASK_PASSWORD_NEED_DOMAIN
-const ASK_PASSWORD_SAVING_SUPPORTED = C.G_ASK_PASSWORD_SAVING_SUPPORTED
-const ASK_PASSWORD_ANONYMOUS_SUPPORTED = C.G_ASK_PASSWORD_ANONYMOUS_SUPPORTED
-const BUS_NAME_OWNER_FLAGS_NONE = C.G_BUS_NAME_OWNER_FLAGS_NONE
-const BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT = C.G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
-const BUS_NAME_OWNER_FLAGS_REPLACE = C.G_BUS_NAME_OWNER_FLAGS_REPLACE
-const BUS_NAME_WATCHER_FLAGS_NONE = C.G_BUS_NAME_WATCHER_FLAGS_NONE
-const BUS_NAME_WATCHER_FLAGS_AUTO_START = C.G_BUS_NAME_WATCHER_FLAGS_AUTO_START
-const BUS_TYPE_STARTER = C.G_BUS_TYPE_STARTER
-const BUS_TYPE_NONE = C.G_BUS_TYPE_NONE
-const BUS_TYPE_SYSTEM = C.G_BUS_TYPE_SYSTEM
-const BUS_TYPE_SESSION = C.G_BUS_TYPE_SESSION
-const CONVERTER_NO_FLAGS = C.G_CONVERTER_NO_FLAGS
-const CONVERTER_INPUT_AT_END = C.G_CONVERTER_INPUT_AT_END
-const CONVERTER_FLUSH = C.G_CONVERTER_FLUSH
-const CONVERTER_ERROR = C.G_CONVERTER_ERROR
-const CONVERTER_CONVERTED = C.G_CONVERTER_CONVERTED
-const CONVERTER_FINISHED = C.G_CONVERTER_FINISHED
-const CONVERTER_FLUSHED = C.G_CONVERTER_FLUSHED
-const CREDENTIALS_TYPE_INVALID = C.G_CREDENTIALS_TYPE_INVALID
-const CREDENTIALS_TYPE_LINUX_UCRED = C.G_CREDENTIALS_TYPE_LINUX_UCRED
-const CREDENTIALS_TYPE_FREEBSD_CMSGCRED = C.G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED
-const CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED = C.G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
-const DBUS_CALL_FLAGS_NONE = C.G_DBUS_CALL_FLAGS_NONE
-const DBUS_CALL_FLAGS_NO_AUTO_START = C.G_DBUS_CALL_FLAGS_NO_AUTO_START
-const DBUS_CAPABILITY_FLAGS_NONE = C.G_DBUS_CAPABILITY_FLAGS_NONE
-const DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING = C.G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING
-const DBUS_CONNECTION_FLAGS_NONE = C.G_DBUS_CONNECTION_FLAGS_NONE
-const DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT
-const DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER
-const DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
-const DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION = C.G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION
-const DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING = C.G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING
-const DBUS_ERROR_FAILED = C.G_DBUS_ERROR_FAILED
-const DBUS_ERROR_NO_MEMORY = C.G_DBUS_ERROR_NO_MEMORY
-const DBUS_ERROR_SERVICE_UNKNOWN = C.G_DBUS_ERROR_SERVICE_UNKNOWN
-const DBUS_ERROR_NAME_HAS_NO_OWNER = C.G_DBUS_ERROR_NAME_HAS_NO_OWNER
-const DBUS_ERROR_NO_REPLY = C.G_DBUS_ERROR_NO_REPLY
-const DBUS_ERROR_IO_ERROR = C.G_DBUS_ERROR_IO_ERROR
-const DBUS_ERROR_BAD_ADDRESS = C.G_DBUS_ERROR_BAD_ADDRESS
-const DBUS_ERROR_NOT_SUPPORTED = C.G_DBUS_ERROR_NOT_SUPPORTED
-const DBUS_ERROR_LIMITS_EXCEEDED = C.G_DBUS_ERROR_LIMITS_EXCEEDED
-const DBUS_ERROR_ACCESS_DENIED = C.G_DBUS_ERROR_ACCESS_DENIED
-const DBUS_ERROR_AUTH_FAILED = C.G_DBUS_ERROR_AUTH_FAILED
-const DBUS_ERROR_NO_SERVER = C.G_DBUS_ERROR_NO_SERVER
-const DBUS_ERROR_TIMEOUT = C.G_DBUS_ERROR_TIMEOUT
-const DBUS_ERROR_NO_NETWORK = C.G_DBUS_ERROR_NO_NETWORK
-const DBUS_ERROR_ADDRESS_IN_USE = C.G_DBUS_ERROR_ADDRESS_IN_USE
-const DBUS_ERROR_DISCONNECTED = C.G_DBUS_ERROR_DISCONNECTED
-const DBUS_ERROR_INVALID_ARGS = C.G_DBUS_ERROR_INVALID_ARGS
-const DBUS_ERROR_FILE_NOT_FOUND = C.G_DBUS_ERROR_FILE_NOT_FOUND
-const DBUS_ERROR_FILE_EXISTS = C.G_DBUS_ERROR_FILE_EXISTS
-const DBUS_ERROR_UNKNOWN_METHOD = C.G_DBUS_ERROR_UNKNOWN_METHOD
-const DBUS_ERROR_TIMED_OUT = C.G_DBUS_ERROR_TIMED_OUT
-const DBUS_ERROR_MATCH_RULE_NOT_FOUND = C.G_DBUS_ERROR_MATCH_RULE_NOT_FOUND
-const DBUS_ERROR_MATCH_RULE_INVALID = C.G_DBUS_ERROR_MATCH_RULE_INVALID
-const DBUS_ERROR_SPAWN_EXEC_FAILED = C.G_DBUS_ERROR_SPAWN_EXEC_FAILED
-const DBUS_ERROR_SPAWN_FORK_FAILED = C.G_DBUS_ERROR_SPAWN_FORK_FAILED
-const DBUS_ERROR_SPAWN_CHILD_EXITED = C.G_DBUS_ERROR_SPAWN_CHILD_EXITED
-const DBUS_ERROR_SPAWN_CHILD_SIGNALED = C.G_DBUS_ERROR_SPAWN_CHILD_SIGNALED
-const DBUS_ERROR_SPAWN_FAILED = C.G_DBUS_ERROR_SPAWN_FAILED
-const DBUS_ERROR_SPAWN_SETUP_FAILED = C.G_DBUS_ERROR_SPAWN_SETUP_FAILED
-const DBUS_ERROR_SPAWN_CONFIG_INVALID = C.G_DBUS_ERROR_SPAWN_CONFIG_INVALID
-const DBUS_ERROR_SPAWN_SERVICE_INVALID = C.G_DBUS_ERROR_SPAWN_SERVICE_INVALID
-const DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND = C.G_DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND
-const DBUS_ERROR_SPAWN_PERMISSIONS_INVALID = C.G_DBUS_ERROR_SPAWN_PERMISSIONS_INVALID
-const DBUS_ERROR_SPAWN_FILE_INVALID = C.G_DBUS_ERROR_SPAWN_FILE_INVALID
-const DBUS_ERROR_SPAWN_NO_MEMORY = C.G_DBUS_ERROR_SPAWN_NO_MEMORY
-const DBUS_ERROR_UNIX_PROCESS_ID_UNKNOWN = C.G_DBUS_ERROR_UNIX_PROCESS_ID_UNKNOWN
-const DBUS_ERROR_INVALID_SIGNATURE = C.G_DBUS_ERROR_INVALID_SIGNATURE
-const DBUS_ERROR_INVALID_FILE_CONTENT = C.G_DBUS_ERROR_INVALID_FILE_CONTENT
-const DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN = C.G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN
-const DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN = C.G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN
-const DBUS_ERROR_OBJECT_PATH_IN_USE = C.G_DBUS_ERROR_OBJECT_PATH_IN_USE
-const DBUS_INTERFACE_SKELETON_FLAGS_NONE = C.G_DBUS_INTERFACE_SKELETON_FLAGS_NONE
-const DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD = C.G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
-const DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN = C.G_DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN
-const DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN = C.G_DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN
-const DBUS_MESSAGE_FLAGS_NONE = C.G_DBUS_MESSAGE_FLAGS_NONE
-const DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED = C.G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED
-const DBUS_MESSAGE_FLAGS_NO_AUTO_START = C.G_DBUS_MESSAGE_FLAGS_NO_AUTO_START
-const DBUS_MESSAGE_HEADER_FIELD_INVALID = C.G_DBUS_MESSAGE_HEADER_FIELD_INVALID
-const DBUS_MESSAGE_HEADER_FIELD_PATH = C.G_DBUS_MESSAGE_HEADER_FIELD_PATH
-const DBUS_MESSAGE_HEADER_FIELD_INTERFACE = C.G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE
-const DBUS_MESSAGE_HEADER_FIELD_MEMBER = C.G_DBUS_MESSAGE_HEADER_FIELD_MEMBER
-const DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME = C.G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME
-const DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL = C.G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL
-const DBUS_MESSAGE_HEADER_FIELD_DESTINATION = C.G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION
-const DBUS_MESSAGE_HEADER_FIELD_SENDER = C.G_DBUS_MESSAGE_HEADER_FIELD_SENDER
-const DBUS_MESSAGE_HEADER_FIELD_SIGNATURE = C.G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE
-const DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS = C.G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS
-const DBUS_MESSAGE_TYPE_INVALID = C.G_DBUS_MESSAGE_TYPE_INVALID
-const DBUS_MESSAGE_TYPE_METHOD_CALL = C.G_DBUS_MESSAGE_TYPE_METHOD_CALL
-const DBUS_MESSAGE_TYPE_METHOD_RETURN = C.G_DBUS_MESSAGE_TYPE_METHOD_RETURN
-const DBUS_MESSAGE_TYPE_ERROR = C.G_DBUS_MESSAGE_TYPE_ERROR
-const DBUS_MESSAGE_TYPE_SIGNAL = C.G_DBUS_MESSAGE_TYPE_SIGNAL
-const DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE = C.G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE
-const DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START = C.G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START
-const DBUS_PROPERTY_INFO_FLAGS_NONE = C.G_DBUS_PROPERTY_INFO_FLAGS_NONE
-const DBUS_PROPERTY_INFO_FLAGS_READABLE = C.G_DBUS_PROPERTY_INFO_FLAGS_READABLE
-const DBUS_PROPERTY_INFO_FLAGS_WRITABLE = C.G_DBUS_PROPERTY_INFO_FLAGS_WRITABLE
-const DBUS_PROXY_FLAGS_NONE = C.G_DBUS_PROXY_FLAGS_NONE
-const DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES = C.G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES
-const DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS = C.G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS
-const DBUS_PROXY_FLAGS_DO_NOT_AUTO_START = C.G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START
-const DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES = C.G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES
-const DBUS_SEND_MESSAGE_FLAGS_NONE = C.G_DBUS_SEND_MESSAGE_FLAGS_NONE
-const DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL = C.G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL
-const DBUS_SERVER_FLAGS_NONE = C.G_DBUS_SERVER_FLAGS_NONE
-const DBUS_SERVER_FLAGS_RUN_IN_THREAD = C.G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
-const DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS = C.G_DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
-const DBUS_SIGNAL_FLAGS_NONE = C.G_DBUS_SIGNAL_FLAGS_NONE
-const DBUS_SIGNAL_FLAGS_NO_MATCH_RULE = C.G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE
-const DBUS_SUBTREE_FLAGS_NONE = C.G_DBUS_SUBTREE_FLAGS_NONE
-const DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES = C.G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES
-const DATA_STREAM_BYTE_ORDER_BIG_ENDIAN = C.G_DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
-const DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN = C.G_DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
-const DATA_STREAM_BYTE_ORDER_HOST_ENDIAN = C.G_DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
-const DATA_STREAM_NEWLINE_TYPE_LF = C.G_DATA_STREAM_NEWLINE_TYPE_LF
-const DATA_STREAM_NEWLINE_TYPE_CR = C.G_DATA_STREAM_NEWLINE_TYPE_CR
-const DATA_STREAM_NEWLINE_TYPE_CR_LF = C.G_DATA_STREAM_NEWLINE_TYPE_CR_LF
-const DATA_STREAM_NEWLINE_TYPE_ANY = C.G_DATA_STREAM_NEWLINE_TYPE_ANY
-const DRIVE_START_NONE = C.G_DRIVE_START_NONE
-const DRIVE_START_STOP_TYPE_UNKNOWN = C.G_DRIVE_START_STOP_TYPE_UNKNOWN
-const DRIVE_START_STOP_TYPE_SHUTDOWN = C.G_DRIVE_START_STOP_TYPE_SHUTDOWN
-const DRIVE_START_STOP_TYPE_NETWORK = C.G_DRIVE_START_STOP_TYPE_NETWORK
-const DRIVE_START_STOP_TYPE_MULTIDISK = C.G_DRIVE_START_STOP_TYPE_MULTIDISK
-const DRIVE_START_STOP_TYPE_PASSWORD = C.G_DRIVE_START_STOP_TYPE_PASSWORD
-const EMBLEM_ORIGIN_UNKNOWN = C.G_EMBLEM_ORIGIN_UNKNOWN
-const EMBLEM_ORIGIN_DEVICE = C.G_EMBLEM_ORIGIN_DEVICE
-const EMBLEM_ORIGIN_LIVEMETADATA = C.G_EMBLEM_ORIGIN_LIVEMETADATA
-const EMBLEM_ORIGIN_TAG = C.G_EMBLEM_ORIGIN_TAG
-const FILE_ATTRIBUTE_INFO_NONE = C.G_FILE_ATTRIBUTE_INFO_NONE
-const FILE_ATTRIBUTE_INFO_COPY_WITH_FILE = C.G_FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
-const FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED = C.G_FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
-const FILE_ATTRIBUTE_STATUS_UNSET = C.G_FILE_ATTRIBUTE_STATUS_UNSET
-const FILE_ATTRIBUTE_STATUS_SET = C.G_FILE_ATTRIBUTE_STATUS_SET
-const FILE_ATTRIBUTE_STATUS_ERROR_SETTING = C.G_FILE_ATTRIBUTE_STATUS_ERROR_SETTING
-const FILE_ATTRIBUTE_TYPE_INVALID = C.G_FILE_ATTRIBUTE_TYPE_INVALID
-const FILE_ATTRIBUTE_TYPE_STRING = C.G_FILE_ATTRIBUTE_TYPE_STRING
-const FILE_ATTRIBUTE_TYPE_BYTE_STRING = C.G_FILE_ATTRIBUTE_TYPE_BYTE_STRING
-const FILE_ATTRIBUTE_TYPE_BOOLEAN = C.G_FILE_ATTRIBUTE_TYPE_BOOLEAN
-const FILE_ATTRIBUTE_TYPE_UINT32 = C.G_FILE_ATTRIBUTE_TYPE_UINT32
-const FILE_ATTRIBUTE_TYPE_INT32 = C.G_FILE_ATTRIBUTE_TYPE_INT32
-const FILE_ATTRIBUTE_TYPE_UINT64 = C.G_FILE_ATTRIBUTE_TYPE_UINT64
-const FILE_ATTRIBUTE_TYPE_INT64 = C.G_FILE_ATTRIBUTE_TYPE_INT64
-const FILE_ATTRIBUTE_TYPE_OBJECT = C.G_FILE_ATTRIBUTE_TYPE_OBJECT
-const FILE_ATTRIBUTE_TYPE_STRINGV = C.G_FILE_ATTRIBUTE_TYPE_STRINGV
-const FILE_COPY_NONE = C.G_FILE_COPY_NONE
-const FILE_COPY_OVERWRITE = C.G_FILE_COPY_OVERWRITE
-const FILE_COPY_BACKUP = C.G_FILE_COPY_BACKUP
-const FILE_COPY_NOFOLLOW_SYMLINKS = C.G_FILE_COPY_NOFOLLOW_SYMLINKS
-const FILE_COPY_ALL_METADATA = C.G_FILE_COPY_ALL_METADATA
-const FILE_COPY_NO_FALLBACK_FOR_MOVE = C.G_FILE_COPY_NO_FALLBACK_FOR_MOVE
-const FILE_COPY_TARGET_DEFAULT_PERMS = C.G_FILE_COPY_TARGET_DEFAULT_PERMS
-const FILE_CREATE_NONE = C.G_FILE_CREATE_NONE
-const FILE_CREATE_PRIVATE = C.G_FILE_CREATE_PRIVATE
-const FILE_CREATE_REPLACE_DESTINATION = C.G_FILE_CREATE_REPLACE_DESTINATION
-const FILE_MONITOR_EVENT_CHANGED = C.G_FILE_MONITOR_EVENT_CHANGED
-const FILE_MONITOR_EVENT_CHANGES_DONE_HINT = C.G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
-const FILE_MONITOR_EVENT_DELETED = C.G_FILE_MONITOR_EVENT_DELETED
-const FILE_MONITOR_EVENT_CREATED = C.G_FILE_MONITOR_EVENT_CREATED
-const FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED = C.G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
-const FILE_MONITOR_EVENT_PRE_UNMOUNT = C.G_FILE_MONITOR_EVENT_PRE_UNMOUNT
-const FILE_MONITOR_EVENT_UNMOUNTED = C.G_FILE_MONITOR_EVENT_UNMOUNTED
-const FILE_MONITOR_EVENT_MOVED = C.G_FILE_MONITOR_EVENT_MOVED
-const FILE_MONITOR_NONE = C.G_FILE_MONITOR_NONE
-const FILE_MONITOR_WATCH_MOUNTS = C.G_FILE_MONITOR_WATCH_MOUNTS
-const FILE_MONITOR_SEND_MOVED = C.G_FILE_MONITOR_SEND_MOVED
-const FILE_QUERY_INFO_NONE = C.G_FILE_QUERY_INFO_NONE
-const FILE_QUERY_INFO_NOFOLLOW_SYMLINKS = C.G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
-const FILE_TYPE_UNKNOWN = C.G_FILE_TYPE_UNKNOWN
-const FILE_TYPE_REGULAR = C.G_FILE_TYPE_REGULAR
-const FILE_TYPE_DIRECTORY = C.G_FILE_TYPE_DIRECTORY
-const FILE_TYPE_SYMBOLIC_LINK = C.G_FILE_TYPE_SYMBOLIC_LINK
-const FILE_TYPE_SPECIAL = C.G_FILE_TYPE_SPECIAL
-const FILE_TYPE_SHORTCUT = C.G_FILE_TYPE_SHORTCUT
-const FILE_TYPE_MOUNTABLE = C.G_FILE_TYPE_MOUNTABLE
 const FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS = C.G_FILESYSTEM_PREVIEW_TYPE_IF_ALWAYS
-const FILESYSTEM_PREVIEW_TYPE_IF_LOCAL = C.G_FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
-const FILESYSTEM_PREVIEW_TYPE_NEVER = C.G_FILESYSTEM_PREVIEW_TYPE_NEVER
-const IO_ERROR_FAILED = C.G_IO_ERROR_FAILED
-const IO_ERROR_NOT_FOUND = C.G_IO_ERROR_NOT_FOUND
-const IO_ERROR_EXISTS = C.G_IO_ERROR_EXISTS
-const IO_ERROR_IS_DIRECTORY = C.G_IO_ERROR_IS_DIRECTORY
-const IO_ERROR_NOT_DIRECTORY = C.G_IO_ERROR_NOT_DIRECTORY
-const IO_ERROR_NOT_EMPTY = C.G_IO_ERROR_NOT_EMPTY
-const IO_ERROR_NOT_REGULAR_FILE = C.G_IO_ERROR_NOT_REGULAR_FILE
-const IO_ERROR_NOT_SYMBOLIC_LINK = C.G_IO_ERROR_NOT_SYMBOLIC_LINK
-const IO_ERROR_NOT_MOUNTABLE_FILE = C.G_IO_ERROR_NOT_MOUNTABLE_FILE
-const IO_ERROR_FILENAME_TOO_LONG = C.G_IO_ERROR_FILENAME_TOO_LONG
-const IO_ERROR_INVALID_FILENAME = C.G_IO_ERROR_INVALID_FILENAME
-const IO_ERROR_TOO_MANY_LINKS = C.G_IO_ERROR_TOO_MANY_LINKS
-const IO_ERROR_NO_SPACE = C.G_IO_ERROR_NO_SPACE
-const IO_ERROR_INVALID_ARGUMENT = C.G_IO_ERROR_INVALID_ARGUMENT
-const IO_ERROR_PERMISSION_DENIED = C.G_IO_ERROR_PERMISSION_DENIED
-const IO_ERROR_NOT_SUPPORTED = C.G_IO_ERROR_NOT_SUPPORTED
-const IO_ERROR_NOT_MOUNTED = C.G_IO_ERROR_NOT_MOUNTED
-const IO_ERROR_ALREADY_MOUNTED = C.G_IO_ERROR_ALREADY_MOUNTED
-const IO_ERROR_CLOSED = C.G_IO_ERROR_CLOSED
-const IO_ERROR_CANCELLED = C.G_IO_ERROR_CANCELLED
-const IO_ERROR_PENDING = C.G_IO_ERROR_PENDING
 const IO_ERROR_READ_ONLY = C.G_IO_ERROR_READ_ONLY
-const IO_ERROR_CANT_CREATE_BACKUP = C.G_IO_ERROR_CANT_CREATE_BACKUP
-const IO_ERROR_WRONG_ETAG = C.G_IO_ERROR_WRONG_ETAG
-const IO_ERROR_TIMED_OUT = C.G_IO_ERROR_TIMED_OUT
-const IO_ERROR_WOULD_RECURSE = C.G_IO_ERROR_WOULD_RECURSE
-const IO_ERROR_BUSY = C.G_IO_ERROR_BUSY
-const IO_ERROR_WOULD_BLOCK = C.G_IO_ERROR_WOULD_BLOCK
-const IO_ERROR_HOST_NOT_FOUND = C.G_IO_ERROR_HOST_NOT_FOUND
-const IO_ERROR_WOULD_MERGE = C.G_IO_ERROR_WOULD_MERGE
-const IO_ERROR_FAILED_HANDLED = C.G_IO_ERROR_FAILED_HANDLED
-const IO_ERROR_TOO_MANY_OPEN_FILES = C.G_IO_ERROR_TOO_MANY_OPEN_FILES
-const IO_ERROR_NOT_INITIALIZED = C.G_IO_ERROR_NOT_INITIALIZED
-const IO_ERROR_ADDRESS_IN_USE = C.G_IO_ERROR_ADDRESS_IN_USE
-const IO_ERROR_PARTIAL_INPUT = C.G_IO_ERROR_PARTIAL_INPUT
-const IO_ERROR_INVALID_DATA = C.G_IO_ERROR_INVALID_DATA
-const IO_ERROR_DBUS_ERROR = C.G_IO_ERROR_DBUS_ERROR
-const IO_ERROR_HOST_UNREACHABLE = C.G_IO_ERROR_HOST_UNREACHABLE
-const IO_ERROR_NETWORK_UNREACHABLE = C.G_IO_ERROR_NETWORK_UNREACHABLE
-const IO_ERROR_CONNECTION_REFUSED = C.G_IO_ERROR_CONNECTION_REFUSED
-const IO_ERROR_PROXY_FAILED = C.G_IO_ERROR_PROXY_FAILED
-const IO_ERROR_PROXY_AUTH_FAILED = C.G_IO_ERROR_PROXY_AUTH_FAILED
-const IO_ERROR_PROXY_NEED_AUTH = C.G_IO_ERROR_PROXY_NEED_AUTH
-const IO_ERROR_PROXY_NOT_ALLOWED = C.G_IO_ERROR_PROXY_NOT_ALLOWED
-const IO_MODULE_SCOPE_NONE = C.G_IO_MODULE_SCOPE_NONE
-const IO_MODULE_SCOPE_BLOCK_DUPLICATES = C.G_IO_MODULE_SCOPE_BLOCK_DUPLICATES
-const IO_STREAM_SPLICE_NONE = C.G_IO_STREAM_SPLICE_NONE
-const IO_STREAM_SPLICE_CLOSE_STREAM1 = C.G_IO_STREAM_SPLICE_CLOSE_STREAM1
-const IO_STREAM_SPLICE_CLOSE_STREAM2 = C.G_IO_STREAM_SPLICE_CLOSE_STREAM2
-const IO_STREAM_SPLICE_WAIT_FOR_BOTH = C.G_IO_STREAM_SPLICE_WAIT_FOR_BOTH
-const MOUNT_MOUNT_NONE = C.G_MOUNT_MOUNT_NONE
-const MOUNT_OPERATION_HANDLED = C.G_MOUNT_OPERATION_HANDLED
-const MOUNT_OPERATION_ABORTED = C.G_MOUNT_OPERATION_ABORTED
-const MOUNT_OPERATION_UNHANDLED = C.G_MOUNT_OPERATION_UNHANDLED
-const MOUNT_UNMOUNT_NONE = C.G_MOUNT_UNMOUNT_NONE
-const MOUNT_UNMOUNT_FORCE = C.G_MOUNT_UNMOUNT_FORCE
-const OUTPUT_STREAM_SPLICE_NONE = C.G_OUTPUT_STREAM_SPLICE_NONE
-const OUTPUT_STREAM_SPLICE_CLOSE_SOURCE = C.G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
-const OUTPUT_STREAM_SPLICE_CLOSE_TARGET = C.G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET
-const PASSWORD_SAVE_NEVER = C.G_PASSWORD_SAVE_NEVER
-const PASSWORD_SAVE_FOR_SESSION = C.G_PASSWORD_SAVE_FOR_SESSION
-const PASSWORD_SAVE_PERMANENTLY = C.G_PASSWORD_SAVE_PERMANENTLY
-const RESOLVER_ERROR_NOT_FOUND = C.G_RESOLVER_ERROR_NOT_FOUND
-const RESOLVER_ERROR_TEMPORARY_FAILURE = C.G_RESOLVER_ERROR_TEMPORARY_FAILURE
-const RESOLVER_ERROR_INTERNAL = C.G_RESOLVER_ERROR_INTERNAL
-const RESOLVER_RECORD_SRV = C.G_RESOLVER_RECORD_SRV
-const RESOLVER_RECORD_MX = C.G_RESOLVER_RECORD_MX
-const RESOLVER_RECORD_TXT = C.G_RESOLVER_RECORD_TXT
-const RESOLVER_RECORD_SOA = C.G_RESOLVER_RECORD_SOA
-const RESOLVER_RECORD_NS = C.G_RESOLVER_RECORD_NS
-const RESOURCE_ERROR_NOT_FOUND = C.G_RESOURCE_ERROR_NOT_FOUND
-const RESOURCE_ERROR_INTERNAL = C.G_RESOURCE_ERROR_INTERNAL
-const RESOURCE_FLAGS_NONE = C.G_RESOURCE_FLAGS_NONE
-const RESOURCE_FLAGS_COMPRESSED = C.G_RESOURCE_FLAGS_COMPRESSED
-const RESOURCE_LOOKUP_FLAGS_NONE = C.G_RESOURCE_LOOKUP_FLAGS_NONE
-const SETTINGS_BIND_DEFAULT = C.G_SETTINGS_BIND_DEFAULT
-const SETTINGS_BIND_GET = C.G_SETTINGS_BIND_GET
-const SETTINGS_BIND_SET = C.G_SETTINGS_BIND_SET
-const SETTINGS_BIND_NO_SENSITIVITY = C.G_SETTINGS_BIND_NO_SENSITIVITY
-const SETTINGS_BIND_GET_NO_CHANGES = C.G_SETTINGS_BIND_GET_NO_CHANGES
-const SETTINGS_BIND_INVERT_BOOLEAN = C.G_SETTINGS_BIND_INVERT_BOOLEAN
-const SOCKET_CLIENT_RESOLVING = C.G_SOCKET_CLIENT_RESOLVING
-const SOCKET_CLIENT_RESOLVED = C.G_SOCKET_CLIENT_RESOLVED
-const SOCKET_CLIENT_CONNECTING = C.G_SOCKET_CLIENT_CONNECTING
-const SOCKET_CLIENT_CONNECTED = C.G_SOCKET_CLIENT_CONNECTED
-const SOCKET_CLIENT_PROXY_NEGOTIATING = C.G_SOCKET_CLIENT_PROXY_NEGOTIATING
-const SOCKET_CLIENT_PROXY_NEGOTIATED = C.G_SOCKET_CLIENT_PROXY_NEGOTIATED
-const SOCKET_CLIENT_TLS_HANDSHAKING = C.G_SOCKET_CLIENT_TLS_HANDSHAKING
-const SOCKET_CLIENT_TLS_HANDSHAKED = C.G_SOCKET_CLIENT_TLS_HANDSHAKED
-const SOCKET_CLIENT_COMPLETE = C.G_SOCKET_CLIENT_COMPLETE
-const SOCKET_FAMILY_INVALID = C.G_SOCKET_FAMILY_INVALID
-const SOCKET_FAMILY_UNIX = C.G_SOCKET_FAMILY_UNIX
-const SOCKET_FAMILY_IPV4 = C.G_SOCKET_FAMILY_IPV4
-const SOCKET_FAMILY_IPV6 = C.G_SOCKET_FAMILY_IPV6
-const SOCKET_MSG_NONE = C.G_SOCKET_MSG_NONE
-const SOCKET_MSG_OOB = C.G_SOCKET_MSG_OOB
-const SOCKET_MSG_PEEK = C.G_SOCKET_MSG_PEEK
-const SOCKET_MSG_DONTROUTE = C.G_SOCKET_MSG_DONTROUTE
-const SOCKET_PROTOCOL_UNKNOWN = C.G_SOCKET_PROTOCOL_UNKNOWN
-const SOCKET_PROTOCOL_DEFAULT = C.G_SOCKET_PROTOCOL_DEFAULT
-const SOCKET_PROTOCOL_TCP = C.G_SOCKET_PROTOCOL_TCP
-const SOCKET_PROTOCOL_UDP = C.G_SOCKET_PROTOCOL_UDP
-const SOCKET_PROTOCOL_SCTP = C.G_SOCKET_PROTOCOL_SCTP
-const SOCKET_TYPE_INVALID = C.G_SOCKET_TYPE_INVALID
-const SOCKET_TYPE_STREAM = C.G_SOCKET_TYPE_STREAM
+const BUS_TYPE_NONE = C.G_BUS_TYPE_NONE
+const IO_ERROR_NOT_REGULAR_FILE = C.G_IO_ERROR_NOT_REGULAR_FILE
 const SOCKET_TYPE_DATAGRAM = C.G_SOCKET_TYPE_DATAGRAM
-const SOCKET_TYPE_SEQPACKET = C.G_SOCKET_TYPE_SEQPACKET
-const TEST_DBUS_NONE = C.G_TEST_DBUS_NONE
-const TLS_AUTHENTICATION_NONE = C.G_TLS_AUTHENTICATION_NONE
-const TLS_AUTHENTICATION_REQUESTED = C.G_TLS_AUTHENTICATION_REQUESTED
-const TLS_AUTHENTICATION_REQUIRED = C.G_TLS_AUTHENTICATION_REQUIRED
-const TLS_CERTIFICATE_UNKNOWN_CA = C.G_TLS_CERTIFICATE_UNKNOWN_CA
-const TLS_CERTIFICATE_BAD_IDENTITY = C.G_TLS_CERTIFICATE_BAD_IDENTITY
-const TLS_CERTIFICATE_NOT_ACTIVATED = C.G_TLS_CERTIFICATE_NOT_ACTIVATED
-const TLS_CERTIFICATE_EXPIRED = C.G_TLS_CERTIFICATE_EXPIRED
-const TLS_CERTIFICATE_REVOKED = C.G_TLS_CERTIFICATE_REVOKED
-const TLS_CERTIFICATE_INSECURE = C.G_TLS_CERTIFICATE_INSECURE
-const TLS_CERTIFICATE_GENERIC_ERROR = C.G_TLS_CERTIFICATE_GENERIC_ERROR
-const TLS_CERTIFICATE_VALIDATE_ALL = C.G_TLS_CERTIFICATE_VALIDATE_ALL
-const TLS_DATABASE_LOOKUP_NONE = C.G_TLS_DATABASE_LOOKUP_NONE
-const TLS_DATABASE_LOOKUP_KEYPAIR = C.G_TLS_DATABASE_LOOKUP_KEYPAIR
-const TLS_DATABASE_VERIFY_NONE = C.G_TLS_DATABASE_VERIFY_NONE
-const TLS_ERROR_UNAVAILABLE = C.G_TLS_ERROR_UNAVAILABLE
-const TLS_ERROR_MISC = C.G_TLS_ERROR_MISC
-const TLS_ERROR_BAD_CERTIFICATE = C.G_TLS_ERROR_BAD_CERTIFICATE
-const TLS_ERROR_NOT_TLS = C.G_TLS_ERROR_NOT_TLS
-const TLS_ERROR_HANDSHAKE = C.G_TLS_ERROR_HANDSHAKE
-const TLS_ERROR_CERTIFICATE_REQUIRED = C.G_TLS_ERROR_CERTIFICATE_REQUIRED
-const TLS_ERROR_EOF = C.G_TLS_ERROR_EOF
-const TLS_INTERACTION_UNHANDLED = C.G_TLS_INTERACTION_UNHANDLED
-const TLS_INTERACTION_HANDLED = C.G_TLS_INTERACTION_HANDLED
-const TLS_INTERACTION_FAILED = C.G_TLS_INTERACTION_FAILED
-const TLS_PASSWORD_NONE = C.G_TLS_PASSWORD_NONE
-const TLS_PASSWORD_RETRY = C.G_TLS_PASSWORD_RETRY
-const TLS_PASSWORD_MANY_TRIES = C.G_TLS_PASSWORD_MANY_TRIES
-const TLS_PASSWORD_FINAL_TRY = C.G_TLS_PASSWORD_FINAL_TRY
-const TLS_REHANDSHAKE_NEVER = C.G_TLS_REHANDSHAKE_NEVER
-const TLS_REHANDSHAKE_SAFELY = C.G_TLS_REHANDSHAKE_SAFELY
-const TLS_REHANDSHAKE_UNSAFELY = C.G_TLS_REHANDSHAKE_UNSAFELY
-const UNIX_SOCKET_ADDRESS_INVALID = C.G_UNIX_SOCKET_ADDRESS_INVALID
-const UNIX_SOCKET_ADDRESS_ANONYMOUS = C.G_UNIX_SOCKET_ADDRESS_ANONYMOUS
-const UNIX_SOCKET_ADDRESS_PATH = C.G_UNIX_SOCKET_ADDRESS_PATH
-const UNIX_SOCKET_ADDRESS_ABSTRACT = C.G_UNIX_SOCKET_ADDRESS_ABSTRACT
-const UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED = C.G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED
-const ZLIB_COMPRESSOR_FORMAT_ZLIB = C.G_ZLIB_COMPRESSOR_FORMAT_ZLIB
-const ZLIB_COMPRESSOR_FORMAT_GZIP = C.G_ZLIB_COMPRESSOR_FORMAT_GZIP
-const ZLIB_COMPRESSOR_FORMAT_RAW = C.G_ZLIB_COMPRESSOR_FORMAT_RAW
-const DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME = C.G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME
-const FILE_ATTRIBUTE_ACCESS_CAN_DELETE = C.G_FILE_ATTRIBUTE_ACCESS_CAN_DELETE
-const FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE = C.G_FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE
-const FILE_ATTRIBUTE_ACCESS_CAN_READ = C.G_FILE_ATTRIBUTE_ACCESS_CAN_READ
-const FILE_ATTRIBUTE_ACCESS_CAN_RENAME = C.G_FILE_ATTRIBUTE_ACCESS_CAN_RENAME
-const FILE_ATTRIBUTE_ACCESS_CAN_TRASH = C.G_FILE_ATTRIBUTE_ACCESS_CAN_TRASH
-const FILE_ATTRIBUTE_ACCESS_CAN_WRITE = C.G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE
-const FILE_ATTRIBUTE_DOS_IS_ARCHIVE = C.G_FILE_ATTRIBUTE_DOS_IS_ARCHIVE
-const FILE_ATTRIBUTE_DOS_IS_SYSTEM = C.G_FILE_ATTRIBUTE_DOS_IS_SYSTEM
-const FILE_ATTRIBUTE_ETAG_VALUE = C.G_FILE_ATTRIBUTE_ETAG_VALUE
-const FILE_ATTRIBUTE_FILESYSTEM_FREE = C.G_FILE_ATTRIBUTE_FILESYSTEM_FREE
-const FILE_ATTRIBUTE_FILESYSTEM_READONLY = C.G_FILE_ATTRIBUTE_FILESYSTEM_READONLY
-const FILE_ATTRIBUTE_FILESYSTEM_SIZE = C.G_FILE_ATTRIBUTE_FILESYSTEM_SIZE
+const DBUS_PROXY_FLAGS_DO_NOT_AUTO_START = C.G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START
+const DBUS_ERROR_FAILED = C.G_DBUS_ERROR_FAILED
+const IO_ERROR_INVALID_ARGUMENT = C.G_IO_ERROR_INVALID_ARGUMENT
+const DBUS_ERROR_NO_NETWORK = C.G_DBUS_ERROR_NO_NETWORK
 const FILE_ATTRIBUTE_FILESYSTEM_TYPE = C.G_FILE_ATTRIBUTE_FILESYSTEM_TYPE
-const FILE_ATTRIBUTE_FILESYSTEM_USED = C.G_FILE_ATTRIBUTE_FILESYSTEM_USED
-const FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW = C.G_FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW
-const FILE_ATTRIBUTE_GVFS_BACKEND = C.G_FILE_ATTRIBUTE_GVFS_BACKEND
-const FILE_ATTRIBUTE_ID_FILE = C.G_FILE_ATTRIBUTE_ID_FILE
-const FILE_ATTRIBUTE_ID_FILESYSTEM = C.G_FILE_ATTRIBUTE_ID_FILESYSTEM
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_START = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_START
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP
-const FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT
-const FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI = C.G_FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI
-const FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC = C.G_FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC
-const FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE = C.G_FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE
-const FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE = C.G_FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE
-const FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE = C.G_FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE
-const FILE_ATTRIBUTE_OWNER_GROUP = C.G_FILE_ATTRIBUTE_OWNER_GROUP
-const FILE_ATTRIBUTE_OWNER_USER = C.G_FILE_ATTRIBUTE_OWNER_USER
-const FILE_ATTRIBUTE_OWNER_USER_REAL = C.G_FILE_ATTRIBUTE_OWNER_USER_REAL
-const FILE_ATTRIBUTE_PREVIEW_ICON = C.G_FILE_ATTRIBUTE_PREVIEW_ICON
-const FILE_ATTRIBUTE_SELINUX_CONTEXT = C.G_FILE_ATTRIBUTE_SELINUX_CONTEXT
-const FILE_ATTRIBUTE_STANDARD_ALLOCATED_SIZE = C.G_FILE_ATTRIBUTE_STANDARD_ALLOCATED_SIZE
-const FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE = C.G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
-const FILE_ATTRIBUTE_STANDARD_COPY_NAME = C.G_FILE_ATTRIBUTE_STANDARD_COPY_NAME
-const FILE_ATTRIBUTE_STANDARD_DESCRIPTION = C.G_FILE_ATTRIBUTE_STANDARD_DESCRIPTION
-const FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME = C.G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME
-const FILE_ATTRIBUTE_STANDARD_EDIT_NAME = C.G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME
-const FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE = C.G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE
-const FILE_ATTRIBUTE_STANDARD_ICON = C.G_FILE_ATTRIBUTE_STANDARD_ICON
-const FILE_ATTRIBUTE_STANDARD_IS_BACKUP = C.G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP
-const FILE_ATTRIBUTE_STANDARD_IS_HIDDEN = C.G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN
-const FILE_ATTRIBUTE_STANDARD_IS_SYMLINK = C.G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK
-const FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL = C.G_FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL
-const FILE_ATTRIBUTE_STANDARD_NAME = C.G_FILE_ATTRIBUTE_STANDARD_NAME
-const FILE_ATTRIBUTE_STANDARD_SIZE = C.G_FILE_ATTRIBUTE_STANDARD_SIZE
-const FILE_ATTRIBUTE_STANDARD_SORT_ORDER = C.G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER
-const FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON = C.G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON
-const FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET = C.G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET
-const FILE_ATTRIBUTE_STANDARD_TARGET_URI = C.G_FILE_ATTRIBUTE_STANDARD_TARGET_URI
-const FILE_ATTRIBUTE_STANDARD_TYPE = C.G_FILE_ATTRIBUTE_STANDARD_TYPE
-const FILE_ATTRIBUTE_THUMBNAILING_FAILED = C.G_FILE_ATTRIBUTE_THUMBNAILING_FAILED
-const FILE_ATTRIBUTE_THUMBNAIL_PATH = C.G_FILE_ATTRIBUTE_THUMBNAIL_PATH
-const FILE_ATTRIBUTE_TIME_ACCESS = C.G_FILE_ATTRIBUTE_TIME_ACCESS
-const FILE_ATTRIBUTE_TIME_ACCESS_USEC = C.G_FILE_ATTRIBUTE_TIME_ACCESS_USEC
-const FILE_ATTRIBUTE_TIME_CHANGED = C.G_FILE_ATTRIBUTE_TIME_CHANGED
-const FILE_ATTRIBUTE_TIME_CHANGED_USEC = C.G_FILE_ATTRIBUTE_TIME_CHANGED_USEC
-const FILE_ATTRIBUTE_TIME_CREATED = C.G_FILE_ATTRIBUTE_TIME_CREATED
-const FILE_ATTRIBUTE_TIME_CREATED_USEC = C.G_FILE_ATTRIBUTE_TIME_CREATED_USEC
-const FILE_ATTRIBUTE_TIME_MODIFIED = C.G_FILE_ATTRIBUTE_TIME_MODIFIED
-const FILE_ATTRIBUTE_TIME_MODIFIED_USEC = C.G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC
-const FILE_ATTRIBUTE_TRASH_DELETION_DATE = C.G_FILE_ATTRIBUTE_TRASH_DELETION_DATE
-const FILE_ATTRIBUTE_TRASH_ITEM_COUNT = C.G_FILE_ATTRIBUTE_TRASH_ITEM_COUNT
-const FILE_ATTRIBUTE_TRASH_ORIG_PATH = C.G_FILE_ATTRIBUTE_TRASH_ORIG_PATH
-const FILE_ATTRIBUTE_UNIX_BLOCKS = C.G_FILE_ATTRIBUTE_UNIX_BLOCKS
-const FILE_ATTRIBUTE_UNIX_BLOCK_SIZE = C.G_FILE_ATTRIBUTE_UNIX_BLOCK_SIZE
-const FILE_ATTRIBUTE_UNIX_DEVICE = C.G_FILE_ATTRIBUTE_UNIX_DEVICE
-const FILE_ATTRIBUTE_UNIX_GID = C.G_FILE_ATTRIBUTE_UNIX_GID
-const FILE_ATTRIBUTE_UNIX_INODE = C.G_FILE_ATTRIBUTE_UNIX_INODE
-const FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT = C.G_FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT
+const FILE_CREATE_PRIVATE = C.G_FILE_CREATE_PRIVATE
+const FILE_TYPE_SPECIAL = C.G_FILE_TYPE_SPECIAL
+const DBUS_ERROR_LIMITS_EXCEEDED = C.G_DBUS_ERROR_LIMITS_EXCEEDED
+const APPLICATION_SEND_ENVIRONMENT = C.G_APPLICATION_SEND_ENVIRONMENT
+const IO_STREAM_SPLICE_WAIT_FOR_BOTH = C.G_IO_STREAM_SPLICE_WAIT_FOR_BOTH
+const TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER = C.G_TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER
+const DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START = C.G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_DO_NOT_AUTO_START
 const FILE_ATTRIBUTE_UNIX_MODE = C.G_FILE_ATTRIBUTE_UNIX_MODE
-const FILE_ATTRIBUTE_UNIX_NLINK = C.G_FILE_ATTRIBUTE_UNIX_NLINK
-const FILE_ATTRIBUTE_UNIX_RDEV = C.G_FILE_ATTRIBUTE_UNIX_RDEV
-const FILE_ATTRIBUTE_UNIX_UID = C.G_FILE_ATTRIBUTE_UNIX_UID
-const MENU_ATTRIBUTE_ACTION = C.G_MENU_ATTRIBUTE_ACTION
-const MENU_ATTRIBUTE_LABEL = C.G_MENU_ATTRIBUTE_LABEL
-const MENU_ATTRIBUTE_TARGET = C.G_MENU_ATTRIBUTE_TARGET
-const MENU_LINK_SECTION = C.G_MENU_LINK_SECTION
+const FILE_ATTRIBUTE_TYPE_INT32 = C.G_FILE_ATTRIBUTE_TYPE_INT32
+const TLS_DATABASE_VERIFY_NONE = C.G_TLS_DATABASE_VERIFY_NONE
+const DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES = C.G_DBUS_PROXY_FLAGS_GET_INVALIDATED_PROPERTIES
+const FILESYSTEM_PREVIEW_TYPE_IF_LOCAL = C.G_FILESYSTEM_PREVIEW_TYPE_IF_LOCAL
+const DBUS_ERROR_SPAWN_CHILD_SIGNALED = C.G_DBUS_ERROR_SPAWN_CHILD_SIGNALED
+const DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
+const IO_ERROR_TOO_MANY_LINKS = C.G_IO_ERROR_TOO_MANY_LINKS
+const DBUS_ERROR_SPAWN_FAILED = C.G_DBUS_ERROR_SPAWN_FAILED
+const FILE_ATTRIBUTE_UNIX_BLOCKS = C.G_FILE_ATTRIBUTE_UNIX_BLOCKS
+const IO_ERROR_PROXY_NOT_ALLOWED = C.G_IO_ERROR_PROXY_NOT_ALLOWED
+const SOCKET_CLIENT_RESOLVED = C.G_SOCKET_CLIENT_RESOLVED
+const DBUS_ERROR_SERVICE_UNKNOWN = C.G_DBUS_ERROR_SERVICE_UNKNOWN
+const TLS_ERROR_CERTIFICATE_REQUIRED = C.G_TLS_ERROR_CERTIFICATE_REQUIRED
+const DBUS_ERROR_NO_REPLY = C.G_DBUS_ERROR_NO_REPLY
+const CREDENTIALS_TYPE_FREEBSD_CMSGCRED = C.G_CREDENTIALS_TYPE_FREEBSD_CMSGCRED
+const DBUS_SEND_MESSAGE_FLAGS_NONE = C.G_DBUS_SEND_MESSAGE_FLAGS_NONE
 const MENU_LINK_SUBMENU = C.G_MENU_LINK_SUBMENU
 const NATIVE_VOLUME_MONITOR_EXTENSION_POINT_NAME = C.G_NATIVE_VOLUME_MONITOR_EXTENSION_POINT_NAME
-const NETWORK_MONITOR_EXTENSION_POINT_NAME = C.G_NETWORK_MONITOR_EXTENSION_POINT_NAME
-const PROXY_EXTENSION_POINT_NAME = C.G_PROXY_EXTENSION_POINT_NAME
-const PROXY_RESOLVER_EXTENSION_POINT_NAME = C.G_PROXY_RESOLVER_EXTENSION_POINT_NAME
 const TLS_BACKEND_EXTENSION_POINT_NAME = C.G_TLS_BACKEND_EXTENSION_POINT_NAME
-const TLS_DATABASE_PURPOSE_AUTHENTICATE_CLIENT = C.G_TLS_DATABASE_PURPOSE_AUTHENTICATE_CLIENT
-const TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER = C.G_TLS_DATABASE_PURPOSE_AUTHENTICATE_SERVER
-const VFS_EXTENSION_POINT_NAME = C.G_VFS_EXTENSION_POINT_NAME
-const VOLUME_IDENTIFIER_KIND_CLASS = C.G_VOLUME_IDENTIFIER_KIND_CLASS
-const VOLUME_IDENTIFIER_KIND_HAL_UDI = C.G_VOLUME_IDENTIFIER_KIND_HAL_UDI
-const VOLUME_IDENTIFIER_KIND_LABEL = C.G_VOLUME_IDENTIFIER_KIND_LABEL
-const VOLUME_IDENTIFIER_KIND_NFS_MOUNT = C.G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT
-const VOLUME_IDENTIFIER_KIND_UNIX_DEVICE = C.G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE
+const SOCKET_FAMILY_INVALID = C.G_SOCKET_FAMILY_INVALID
+const FILE_ATTRIBUTE_STANDARD_SORT_ORDER = C.G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER
+const FILE_COPY_OVERWRITE = C.G_FILE_COPY_OVERWRITE
+const IO_ERROR_WOULD_RECURSE = C.G_IO_ERROR_WOULD_RECURSE
+const SETTINGS_BIND_GET = C.G_SETTINGS_BIND_GET
+const SOCKET_CLIENT_COMPLETE = C.G_SOCKET_CLIENT_COMPLETE
+const SOCKET_TYPE_STREAM = C.G_SOCKET_TYPE_STREAM
+const RESOURCE_LOOKUP_FLAGS_NONE = C.G_RESOURCE_LOOKUP_FLAGS_NONE
+const DBUS_ERROR_FILE_EXISTS = C.G_DBUS_ERROR_FILE_EXISTS
+const DBUS_ERROR_OBJECT_PATH_IN_USE = C.G_DBUS_ERROR_OBJECT_PATH_IN_USE
+const FILE_ATTRIBUTE_GVFS_BACKEND = C.G_FILE_ATTRIBUTE_GVFS_BACKEND
+const DBUS_ERROR_NOT_SUPPORTED = C.G_DBUS_ERROR_NOT_SUPPORTED
+const TLS_CERTIFICATE_VALIDATE_ALL = C.G_TLS_CERTIFICATE_VALIDATE_ALL
+const FILE_ATTRIBUTE_TYPE_BYTE_STRING = C.G_FILE_ATTRIBUTE_TYPE_BYTE_STRING
+const SETTINGS_BIND_SET = C.G_SETTINGS_BIND_SET
+const ZLIB_COMPRESSOR_FORMAT_ZLIB = C.G_ZLIB_COMPRESSOR_FORMAT_ZLIB
+const FILE_ATTRIBUTE_UNIX_DEVICE = C.G_FILE_ATTRIBUTE_UNIX_DEVICE
+const SOCKET_CLIENT_CONNECTED = C.G_SOCKET_CLIENT_CONNECTED
+const FILESYSTEM_PREVIEW_TYPE_NEVER = C.G_FILESYSTEM_PREVIEW_TYPE_NEVER
+const DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_SERVER
+const DBUS_MESSAGE_HEADER_FIELD_DESTINATION = C.G_DBUS_MESSAGE_HEADER_FIELD_DESTINATION
+const TLS_ERROR_BAD_CERTIFICATE = C.G_TLS_ERROR_BAD_CERTIFICATE
+const IO_ERROR_CANT_CREATE_BACKUP = C.G_IO_ERROR_CANT_CREATE_BACKUP
+const DATA_STREAM_NEWLINE_TYPE_LF = C.G_DATA_STREAM_NEWLINE_TYPE_LF
+const RESOURCE_ERROR_INTERNAL = C.G_RESOURCE_ERROR_INTERNAL
+const FILE_ATTRIBUTE_STANDARD_ALLOCATED_SIZE = C.G_FILE_ATTRIBUTE_STANDARD_ALLOCATED_SIZE
+const SOCKET_PROTOCOL_UDP = C.G_SOCKET_PROTOCOL_UDP
+const DATA_STREAM_BYTE_ORDER_HOST_ENDIAN = C.G_DATA_STREAM_BYTE_ORDER_HOST_ENDIAN
+const FILE_ATTRIBUTE_TYPE_UINT64 = C.G_FILE_ATTRIBUTE_TYPE_UINT64
+const SETTINGS_BIND_GET_NO_CHANGES = C.G_SETTINGS_BIND_GET_NO_CHANGES
+const FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME = C.G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME
+const FILE_QUERY_INFO_NOFOLLOW_SYMLINKS = C.G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS
+const FILE_ATTRIBUTE_STATUS_SET = C.G_FILE_ATTRIBUTE_STATUS_SET
+const FILE_MONITOR_EVENT_PRE_UNMOUNT = C.G_FILE_MONITOR_EVENT_PRE_UNMOUNT
+const FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED = C.G_FILE_ATTRIBUTE_INFO_COPY_WHEN_MOVED
+const FILE_ATTRIBUTE_OWNER_USER_REAL = C.G_FILE_ATTRIBUTE_OWNER_USER_REAL
+const FILE_ATTRIBUTE_STANDARD_IS_BACKUP = C.G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP
+const IO_STREAM_SPLICE_NONE = C.G_IO_STREAM_SPLICE_NONE
+const DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS = C.G_DBUS_MESSAGE_HEADER_FIELD_NUM_UNIX_FDS
+const FILE_ATTRIBUTE_TRASH_ITEM_COUNT = C.G_FILE_ATTRIBUTE_TRASH_ITEM_COUNT
+const FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE = C.G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE
+const IO_ERROR_INVALID_DATA = C.G_IO_ERROR_INVALID_DATA
+const FILE_ATTRIBUTE_ACCESS_CAN_TRASH = C.G_FILE_ATTRIBUTE_ACCESS_CAN_TRASH
+const FILE_ATTRIBUTE_ACCESS_CAN_WRITE = C.G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE
+const FILE_ATTRIBUTE_TIME_ACCESS_USEC = C.G_FILE_ATTRIBUTE_TIME_ACCESS_USEC
+const MOUNT_OPERATION_UNHANDLED = C.G_MOUNT_OPERATION_UNHANDLED
+const TLS_PASSWORD_FINAL_TRY = C.G_TLS_PASSWORD_FINAL_TRY
+const DATA_STREAM_NEWLINE_TYPE_ANY = C.G_DATA_STREAM_NEWLINE_TYPE_ANY
+const FILE_MONITOR_EVENT_DELETED = C.G_FILE_MONITOR_EVENT_DELETED
+const DATA_STREAM_NEWLINE_TYPE_CR_LF = C.G_DATA_STREAM_NEWLINE_TYPE_CR_LF
+const SOCKET_TYPE_SEQPACKET = C.G_SOCKET_TYPE_SEQPACKET
+const FILE_ATTRIBUTE_UNIX_NLINK = C.G_FILE_ATTRIBUTE_UNIX_NLINK
+const DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL = C.G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL
+const SOCKET_MSG_PEEK = C.G_SOCKET_MSG_PEEK
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_EJECT
+const TLS_INTERACTION_UNHANDLED = C.G_TLS_INTERACTION_UNHANDLED
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_MOUNT
+const FILE_ATTRIBUTE_ID_FILE = C.G_FILE_ATTRIBUTE_ID_FILE
+const FILE_ATTRIBUTE_STANDARD_NAME = C.G_FILE_ATTRIBUTE_STANDARD_NAME
+const TLS_ERROR_UNAVAILABLE = C.G_TLS_ERROR_UNAVAILABLE
+const TLS_ERROR_MISC = C.G_TLS_ERROR_MISC
+const DBUS_MESSAGE_TYPE_SIGNAL = C.G_DBUS_MESSAGE_TYPE_SIGNAL
+const FILE_ATTRIBUTE_TIME_CREATED_USEC = C.G_FILE_ATTRIBUTE_TIME_CREATED_USEC
+const FILE_MONITOR_SEND_MOVED = C.G_FILE_MONITOR_SEND_MOVED
+const FILE_ATTRIBUTE_TRASH_ORIG_PATH = C.G_FILE_ATTRIBUTE_TRASH_ORIG_PATH
+const FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON = C.G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON
+const FILE_CREATE_REPLACE_DESTINATION = C.G_FILE_CREATE_REPLACE_DESTINATION
+const FILE_CREATE_NONE = C.G_FILE_CREATE_NONE
+const DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN = C.G_DBUS_MESSAGE_BYTE_ORDER_BIG_ENDIAN
+const FILE_ATTRIBUTE_TYPE_BOOLEAN = C.G_FILE_ATTRIBUTE_TYPE_BOOLEAN
+const IO_ERROR_WOULD_BLOCK = C.G_IO_ERROR_WOULD_BLOCK
+const DBUS_ERROR_SPAWN_FORK_FAILED = C.G_DBUS_ERROR_SPAWN_FORK_FAILED
+const FILE_ATTRIBUTE_STATUS_ERROR_SETTING = C.G_FILE_ATTRIBUTE_STATUS_ERROR_SETTING
+const IO_ERROR_ADDRESS_IN_USE = C.G_IO_ERROR_ADDRESS_IN_USE
+const DBUS_ERROR_SPAWN_SERVICE_INVALID = C.G_DBUS_ERROR_SPAWN_SERVICE_INVALID
+const FILE_ATTRIBUTE_FILESYSTEM_USED = C.G_FILE_ATTRIBUTE_FILESYSTEM_USED
+const DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN = C.G_DBUS_MESSAGE_BYTE_ORDER_LITTLE_ENDIAN
+const SOCKET_PROTOCOL_DEFAULT = C.G_SOCKET_PROTOCOL_DEFAULT
+const FILE_ATTRIBUTE_ACCESS_CAN_READ = C.G_FILE_ATTRIBUTE_ACCESS_CAN_READ
+const APPLICATION_FLAGS_NONE = C.G_APPLICATION_FLAGS_NONE
+const FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL = C.G_FILE_ATTRIBUTE_STANDARD_IS_VIRTUAL
+const FILE_ATTRIBUTE_THUMBNAILING_FAILED = C.G_FILE_ATTRIBUTE_THUMBNAILING_FAILED
+const FILE_ATTRIBUTE_ETAG_VALUE = C.G_FILE_ATTRIBUTE_ETAG_VALUE
+const FILE_ATTRIBUTE_ID_FILESYSTEM = C.G_FILE_ATTRIBUTE_ID_FILESYSTEM
+const APP_INFO_CREATE_SUPPORTS_URIS = C.G_APP_INFO_CREATE_SUPPORTS_URIS
+const CONVERTER_ERROR = C.G_CONVERTER_ERROR
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_START_DEGRADED
+const FILE_MONITOR_EVENT_CHANGES_DONE_HINT = C.G_FILE_MONITOR_EVENT_CHANGES_DONE_HINT
+const DBUS_ERROR_TIMEOUT = C.G_DBUS_ERROR_TIMEOUT
+const APP_INFO_CREATE_NEEDS_TERMINAL = C.G_APP_INFO_CREATE_NEEDS_TERMINAL
+const TLS_CERTIFICATE_GENERIC_ERROR = C.G_TLS_CERTIFICATE_GENERIC_ERROR
+const MOUNT_UNMOUNT_FORCE = C.G_MOUNT_UNMOUNT_FORCE
+const FILE_ATTRIBUTE_UNIX_UID = C.G_FILE_ATTRIBUTE_UNIX_UID
+const ASK_PASSWORD_NEED_DOMAIN = C.G_ASK_PASSWORD_NEED_DOMAIN
+const EMBLEM_ORIGIN_TAG = C.G_EMBLEM_ORIGIN_TAG
+const SOCKET_CLIENT_PROXY_NEGOTIATED = C.G_SOCKET_CLIENT_PROXY_NEGOTIATED
+const DBUS_CONNECTION_FLAGS_NONE = C.G_DBUS_CONNECTION_FLAGS_NONE
+const DBUS_PROPERTY_INFO_FLAGS_READABLE = C.G_DBUS_PROPERTY_INFO_FLAGS_READABLE
+const SOCKET_PROTOCOL_UNKNOWN = C.G_SOCKET_PROTOCOL_UNKNOWN
+const DBUS_ERROR_INVALID_SIGNATURE = C.G_DBUS_ERROR_INVALID_SIGNATURE
+const FILE_COPY_NONE = C.G_FILE_COPY_NONE
+const FILE_ATTRIBUTE_STANDARD_EDIT_NAME = C.G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME
+const CONVERTER_NO_FLAGS = C.G_CONVERTER_NO_FLAGS
+const FILE_COPY_TARGET_DEFAULT_PERMS = C.G_FILE_COPY_TARGET_DEFAULT_PERMS
+const FILE_ATTRIBUTE_TIME_CHANGED_USEC = C.G_FILE_ATTRIBUTE_TIME_CHANGED_USEC
+const IO_ERROR_CANCELLED = C.G_IO_ERROR_CANCELLED
+const TLS_PASSWORD_MANY_TRIES = C.G_TLS_PASSWORD_MANY_TRIES
+const DBUS_ERROR_NO_MEMORY = C.G_DBUS_ERROR_NO_MEMORY
+const DBUS_ERROR_INVALID_FILE_CONTENT = C.G_DBUS_ERROR_INVALID_FILE_CONTENT
+const TLS_PASSWORD_RETRY = C.G_TLS_PASSWORD_RETRY
+const RESOLVER_ERROR_INTERNAL = C.G_RESOLVER_ERROR_INTERNAL
+const DBUS_ERROR_SPAWN_PERMISSIONS_INVALID = C.G_DBUS_ERROR_SPAWN_PERMISSIONS_INVALID
+const MENU_ATTRIBUTE_TARGET = C.G_MENU_ATTRIBUTE_TARGET
+const FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI = C.G_FILE_ATTRIBUTE_MOUNTABLE_HAL_UDI
+const IO_MODULE_SCOPE_NONE = C.G_IO_MODULE_SCOPE_NONE
+const FILE_TYPE_MOUNTABLE = C.G_FILE_TYPE_MOUNTABLE
 const VOLUME_IDENTIFIER_KIND_UUID = C.G_VOLUME_IDENTIFIER_KIND_UUID
+const RESOLVER_RECORD_TXT = C.G_RESOLVER_RECORD_TXT
+const FILE_ATTRIBUTE_STANDARD_DESCRIPTION = C.G_FILE_ATTRIBUTE_STANDARD_DESCRIPTION
+const DBUS_PROXY_FLAGS_NONE = C.G_DBUS_PROXY_FLAGS_NONE
+const CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED = C.G_CREDENTIALS_TYPE_OPENBSD_SOCKPEERCRED
+const TLS_CERTIFICATE_UNKNOWN_CA = C.G_TLS_CERTIFICATE_UNKNOWN_CA
+const DBUS_SERVER_FLAGS_NONE = C.G_DBUS_SERVER_FLAGS_NONE
+const APPLICATION_NON_UNIQUE = C.G_APPLICATION_NON_UNIQUE
+const CONVERTER_FLUSH = C.G_CONVERTER_FLUSH
+const IO_ERROR_NOT_MOUNTED = C.G_IO_ERROR_NOT_MOUNTED
+const DRIVE_START_STOP_TYPE_PASSWORD = C.G_DRIVE_START_STOP_TYPE_PASSWORD
+const EMBLEM_ORIGIN_DEVICE = C.G_EMBLEM_ORIGIN_DEVICE
+const FILE_ATTRIBUTE_TYPE_STRING = C.G_FILE_ATTRIBUTE_TYPE_STRING
+const BUS_NAME_OWNER_FLAGS_NONE = C.G_BUS_NAME_OWNER_FLAGS_NONE
+const SOCKET_CLIENT_TLS_HANDSHAKED = C.G_SOCKET_CLIENT_TLS_HANDSHAKED
+const FILE_ATTRIBUTE_DOS_IS_SYSTEM = C.G_FILE_ATTRIBUTE_DOS_IS_SYSTEM
+const DBUS_MESSAGE_TYPE_INVALID = C.G_DBUS_MESSAGE_TYPE_INVALID
+const FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT = C.G_FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT
+const DBUS_ERROR_NAME_HAS_NO_OWNER = C.G_DBUS_ERROR_NAME_HAS_NO_OWNER
+const PROXY_EXTENSION_POINT_NAME = C.G_PROXY_EXTENSION_POINT_NAME
+const IO_ERROR_INVALID_FILENAME = C.G_IO_ERROR_INVALID_FILENAME
+const DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME = C.G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME
+const IO_ERROR_WRONG_ETAG = C.G_IO_ERROR_WRONG_ETAG
+const DBUS_SUBTREE_FLAGS_NONE = C.G_DBUS_SUBTREE_FLAGS_NONE
+const ASK_PASSWORD_ANONYMOUS_SUPPORTED = C.G_ASK_PASSWORD_ANONYMOUS_SUPPORTED
+const ASK_PASSWORD_NEED_USERNAME = C.G_ASK_PASSWORD_NEED_USERNAME
+const FILE_ATTRIBUTE_UNIX_RDEV = C.G_FILE_ATTRIBUTE_UNIX_RDEV
+const APPLICATION_HANDLES_OPEN = C.G_APPLICATION_HANDLES_OPEN
+const DBUS_MESSAGE_HEADER_FIELD_INTERFACE = C.G_DBUS_MESSAGE_HEADER_FIELD_INTERFACE
+const SETTINGS_BIND_INVERT_BOOLEAN = C.G_SETTINGS_BIND_INVERT_BOOLEAN
+const ASK_PASSWORD_SAVING_SUPPORTED = C.G_ASK_PASSWORD_SAVING_SUPPORTED
+const DBUS_CALL_FLAGS_NO_AUTO_START = C.G_DBUS_CALL_FLAGS_NO_AUTO_START
+const DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT = C.G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT
+const MOUNT_MOUNT_NONE = C.G_MOUNT_MOUNT_NONE
+const TLS_ERROR_NOT_TLS = C.G_TLS_ERROR_NOT_TLS
+const UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED = C.G_UNIX_SOCKET_ADDRESS_ABSTRACT_PADDED
+const IO_ERROR_TOO_MANY_OPEN_FILES = C.G_IO_ERROR_TOO_MANY_OPEN_FILES
+const DBUS_SIGNAL_FLAGS_NONE = C.G_DBUS_SIGNAL_FLAGS_NONE
+const SOCKET_FAMILY_IPV4 = C.G_SOCKET_FAMILY_IPV4
+const RESOLVER_RECORD_SOA = C.G_RESOLVER_RECORD_SOA
+const DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE = C.G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE
+const APPLICATION_HANDLES_COMMAND_LINE = C.G_APPLICATION_HANDLES_COMMAND_LINE
+const BUS_TYPE_SYSTEM = C.G_BUS_TYPE_SYSTEM
+const MOUNT_UNMOUNT_NONE = C.G_MOUNT_UNMOUNT_NONE
+const APPLICATION_IS_SERVICE = C.G_APPLICATION_IS_SERVICE
+const DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES = C.G_DBUS_SUBTREE_FLAGS_DISPATCH_TO_UNENUMERATED_NODES
+const VOLUME_IDENTIFIER_KIND_UNIX_DEVICE = C.G_VOLUME_IDENTIFIER_KIND_UNIX_DEVICE
+const IO_ERROR_FAILED = C.G_IO_ERROR_FAILED
+const SOCKET_MSG_NONE = C.G_SOCKET_MSG_NONE
+const IO_ERROR_CLOSED = C.G_IO_ERROR_CLOSED
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_START = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_START
+const DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN = C.G_DBUS_ERROR_SELINUX_SECURITY_CONTEXT_UNKNOWN
+const SETTINGS_BIND_DEFAULT = C.G_SETTINGS_BIND_DEFAULT
+const FILE_TYPE_SYMBOLIC_LINK = C.G_FILE_TYPE_SYMBOLIC_LINK
+const IO_ERROR_CONNECTION_REFUSED = C.G_IO_ERROR_CONNECTION_REFUSED
+const IO_ERROR_PARTIAL_INPUT = C.G_IO_ERROR_PARTIAL_INPUT
+const DBUS_MESSAGE_TYPE_METHOD_RETURN = C.G_DBUS_MESSAGE_TYPE_METHOD_RETURN
+const DBUS_MESSAGE_TYPE_ERROR = C.G_DBUS_MESSAGE_TYPE_ERROR
+const DBUS_CAPABILITY_FLAGS_NONE = C.G_DBUS_CAPABILITY_FLAGS_NONE
+const TLS_AUTHENTICATION_REQUESTED = C.G_TLS_AUTHENTICATION_REQUESTED
+const DBUS_ERROR_FILE_NOT_FOUND = C.G_DBUS_ERROR_FILE_NOT_FOUND
+const FILE_ATTRIBUTE_TIME_MODIFIED_USEC = C.G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC
+const DBUS_SIGNAL_FLAGS_NO_MATCH_RULE = C.G_DBUS_SIGNAL_FLAGS_NO_MATCH_RULE
+const IO_ERROR_HOST_NOT_FOUND = C.G_IO_ERROR_HOST_NOT_FOUND
+const APPLICATION_IS_LAUNCHER = C.G_APPLICATION_IS_LAUNCHER
+const PROXY_RESOLVER_EXTENSION_POINT_NAME = C.G_PROXY_RESOLVER_EXTENSION_POINT_NAME
+const MOUNT_OPERATION_HANDLED = C.G_MOUNT_OPERATION_HANDLED
+const DBUS_MESSAGE_HEADER_FIELD_SENDER = C.G_DBUS_MESSAGE_HEADER_FIELD_SENDER
+const FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW = C.G_FILE_ATTRIBUTE_FILESYSTEM_USE_PREVIEW
+const VOLUME_IDENTIFIER_KIND_CLASS = C.G_VOLUME_IDENTIFIER_KIND_CLASS
+const DRIVE_START_STOP_TYPE_MULTIDISK = C.G_DRIVE_START_STOP_TYPE_MULTIDISK
+const FILE_ATTRIBUTE_TIME_MODIFIED = C.G_FILE_ATTRIBUTE_TIME_MODIFIED
+const BUS_TYPE_SESSION = C.G_BUS_TYPE_SESSION
+const FILE_MONITOR_EVENT_UNMOUNTED = C.G_FILE_MONITOR_EVENT_UNMOUNTED
+const DRIVE_START_STOP_TYPE_NETWORK = C.G_DRIVE_START_STOP_TYPE_NETWORK
+const DBUS_ERROR_SPAWN_FILE_INVALID = C.G_DBUS_ERROR_SPAWN_FILE_INVALID
+const DBUS_ERROR_SPAWN_CONFIG_INVALID = C.G_DBUS_ERROR_SPAWN_CONFIG_INVALID
+const FILE_TYPE_UNKNOWN = C.G_FILE_TYPE_UNKNOWN
+const FILE_TYPE_DIRECTORY = C.G_FILE_TYPE_DIRECTORY
+const VOLUME_IDENTIFIER_KIND_LABEL = C.G_VOLUME_IDENTIFIER_KIND_LABEL
+const APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION = C.G_APP_INFO_CREATE_SUPPORTS_STARTUP_NOTIFICATION
+const DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND = C.G_DBUS_ERROR_SPAWN_SERVICE_NOT_FOUND
+const ASK_PASSWORD_NEED_PASSWORD = C.G_ASK_PASSWORD_NEED_PASSWORD
+const FILE_ATTRIBUTE_DOS_IS_ARCHIVE = C.G_FILE_ATTRIBUTE_DOS_IS_ARCHIVE
+const CONVERTER_FLUSHED = C.G_CONVERTER_FLUSHED
+const FILE_ATTRIBUTE_STANDARD_TYPE = C.G_FILE_ATTRIBUTE_STANDARD_TYPE
+const SOCKET_FAMILY_UNIX = C.G_SOCKET_FAMILY_UNIX
+const TLS_INTERACTION_HANDLED = C.G_TLS_INTERACTION_HANDLED
+const MENU_LINK_SECTION = C.G_MENU_LINK_SECTION
+const TLS_PASSWORD_NONE = C.G_TLS_PASSWORD_NONE
+const FILE_MONITOR_WATCH_MOUNTS = C.G_FILE_MONITOR_WATCH_MOUNTS
+const DBUS_ERROR_IO_ERROR = C.G_DBUS_ERROR_IO_ERROR
+const FILE_ATTRIBUTE_STANDARD_SIZE = C.G_FILE_ATTRIBUTE_STANDARD_SIZE
+const DBUS_ERROR_MATCH_RULE_NOT_FOUND = C.G_DBUS_ERROR_MATCH_RULE_NOT_FOUND
+const TLS_DATABASE_LOOKUP_NONE = C.G_TLS_DATABASE_LOOKUP_NONE
+const IO_ERROR_TIMED_OUT = C.G_IO_ERROR_TIMED_OUT
+const FILE_ATTRIBUTE_STANDARD_COPY_NAME = C.G_FILE_ATTRIBUTE_STANDARD_COPY_NAME
+const DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING = C.G_DBUS_CONNECTION_FLAGS_DELAY_MESSAGE_PROCESSING
+const DBUS_PROPERTY_INFO_FLAGS_NONE = C.G_DBUS_PROPERTY_INFO_FLAGS_NONE
+const DBUS_MESSAGE_HEADER_FIELD_PATH = C.G_DBUS_MESSAGE_HEADER_FIELD_PATH
+const SOCKET_PROTOCOL_SCTP = C.G_SOCKET_PROTOCOL_SCTP
+const IO_STREAM_SPLICE_CLOSE_STREAM1 = C.G_IO_STREAM_SPLICE_CLOSE_STREAM1
+const IO_STREAM_SPLICE_CLOSE_STREAM2 = C.G_IO_STREAM_SPLICE_CLOSE_STREAM2
+const DBUS_ERROR_MATCH_RULE_INVALID = C.G_DBUS_ERROR_MATCH_RULE_INVALID
+const BUS_TYPE_STARTER = C.G_BUS_TYPE_STARTER
+const FILE_MONITOR_EVENT_CREATED = C.G_FILE_MONITOR_EVENT_CREATED
+const FILE_ATTRIBUTE_TRASH_DELETION_DATE = C.G_FILE_ATTRIBUTE_TRASH_DELETION_DATE
+const DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL = C.G_DBUS_SEND_MESSAGE_FLAGS_PRESERVE_SERIAL
+const DBUS_MESSAGE_TYPE_METHOD_CALL = C.G_DBUS_MESSAGE_TYPE_METHOD_CALL
+const UNIX_SOCKET_ADDRESS_PATH = C.G_UNIX_SOCKET_ADDRESS_PATH
+const FILE_ATTRIBUTE_STANDARD_IS_HIDDEN = C.G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN
+const IO_ERROR_EXISTS = C.G_IO_ERROR_EXISTS
+const DATA_STREAM_BYTE_ORDER_BIG_ENDIAN = C.G_DATA_STREAM_BYTE_ORDER_BIG_ENDIAN
+const FILE_ATTRIBUTE_TYPE_INT64 = C.G_FILE_ATTRIBUTE_TYPE_INT64
+const FILE_COPY_ALL_METADATA = C.G_FILE_COPY_ALL_METADATA
+const CONVERTER_FINISHED = C.G_CONVERTER_FINISHED
+const FILE_ATTRIBUTE_STANDARD_IS_SYMLINK = C.G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK
+const TLS_AUTHENTICATION_NONE = C.G_TLS_AUTHENTICATION_NONE
+const CREDENTIALS_TYPE_LINUX_UCRED = C.G_CREDENTIALS_TYPE_LINUX_UCRED
+const IO_ERROR_NOT_FOUND = C.G_IO_ERROR_NOT_FOUND
+const FILE_ATTRIBUTE_STATUS_UNSET = C.G_FILE_ATTRIBUTE_STATUS_UNSET
+const UNIX_SOCKET_ADDRESS_ABSTRACT = C.G_UNIX_SOCKET_ADDRESS_ABSTRACT
+const DBUS_ERROR_INVALID_ARGS = C.G_DBUS_ERROR_INVALID_ARGS
+const FILE_ATTRIBUTE_OWNER_USER = C.G_FILE_ATTRIBUTE_OWNER_USER
+const DBUS_ERROR_ADDRESS_IN_USE = C.G_DBUS_ERROR_ADDRESS_IN_USE
+const FILE_TYPE_REGULAR = C.G_FILE_TYPE_REGULAR
+const FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET = C.G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET
+const DBUS_ERROR_SPAWN_CHILD_EXITED = C.G_DBUS_ERROR_SPAWN_CHILD_EXITED
+const FILE_ATTRIBUTE_TIME_CHANGED = C.G_FILE_ATTRIBUTE_TIME_CHANGED
+const DBUS_SERVER_FLAGS_RUN_IN_THREAD = C.G_DBUS_SERVER_FLAGS_RUN_IN_THREAD
+const SOCKET_CLIENT_PROXY_NEGOTIATING = C.G_SOCKET_CLIENT_PROXY_NEGOTIATING
+const DBUS_MESSAGE_HEADER_FIELD_INVALID = C.G_DBUS_MESSAGE_HEADER_FIELD_INVALID
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_STOP
+const TLS_DATABASE_LOOKUP_KEYPAIR = C.G_TLS_DATABASE_LOOKUP_KEYPAIR
+const FILE_ATTRIBUTE_PREVIEW_ICON = C.G_FILE_ATTRIBUTE_PREVIEW_ICON
+const IO_ERROR_NOT_MOUNTABLE_FILE = C.G_IO_ERROR_NOT_MOUNTABLE_FILE
+const FILE_QUERY_INFO_NONE = C.G_FILE_QUERY_INFO_NONE
+const FILE_TYPE_SHORTCUT = C.G_FILE_TYPE_SHORTCUT
+const DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS = C.G_DBUS_SERVER_FLAGS_AUTHENTICATION_ALLOW_ANONYMOUS
+const DBUS_ERROR_UNIX_PROCESS_ID_UNKNOWN = C.G_DBUS_ERROR_UNIX_PROCESS_ID_UNKNOWN
+const TLS_ERROR_HANDSHAKE = C.G_TLS_ERROR_HANDSHAKE
+const DBUS_ERROR_UNKNOWN_METHOD = C.G_DBUS_ERROR_UNKNOWN_METHOD
+const IO_ERROR_PROXY_NEED_AUTH = C.G_IO_ERROR_PROXY_NEED_AUTH
+const TLS_CERTIFICATE_BAD_IDENTITY = C.G_TLS_CERTIFICATE_BAD_IDENTITY
+const VOLUME_IDENTIFIER_KIND_NFS_MOUNT = C.G_VOLUME_IDENTIFIER_KIND_NFS_MOUNT
+const DBUS_MESSAGE_FLAGS_NO_AUTO_START = C.G_DBUS_MESSAGE_FLAGS_NO_AUTO_START
+const FILE_ATTRIBUTE_STANDARD_TARGET_URI = C.G_FILE_ATTRIBUTE_STANDARD_TARGET_URI
+const SETTINGS_BIND_NO_SENSITIVITY = C.G_SETTINGS_BIND_NO_SENSITIVITY
+const OUTPUT_STREAM_SPLICE_CLOSE_TARGET = C.G_OUTPUT_STREAM_SPLICE_CLOSE_TARGET
+const IO_ERROR_FAILED_HANDLED = C.G_IO_ERROR_FAILED_HANDLED
+const DBUS_ERROR_BAD_ADDRESS = C.G_DBUS_ERROR_BAD_ADDRESS
+const MOUNT_OPERATION_ABORTED = C.G_MOUNT_OPERATION_ABORTED
+const FILE_ATTRIBUTE_TIME_ACCESS = C.G_FILE_ATTRIBUTE_TIME_ACCESS
+const DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN = C.G_DBUS_ERROR_ADT_AUDIT_DATA_UNKNOWN
+const CREDENTIALS_TYPE_INVALID = C.G_CREDENTIALS_TYPE_INVALID
+const IO_ERROR_PROXY_FAILED = C.G_IO_ERROR_PROXY_FAILED
+const DBUS_PROPERTY_INFO_FLAGS_WRITABLE = C.G_DBUS_PROPERTY_INFO_FLAGS_WRITABLE
+const SOCKET_MSG_OOB = C.G_SOCKET_MSG_OOB
+const FILE_ATTRIBUTE_TYPE_UINT32 = C.G_FILE_ATTRIBUTE_TYPE_UINT32
+const TLS_REHANDSHAKE_NEVER = C.G_TLS_REHANDSHAKE_NEVER
+const SOCKET_CLIENT_TLS_HANDSHAKING = C.G_SOCKET_CLIENT_TLS_HANDSHAKING
+const DATA_STREAM_NEWLINE_TYPE_CR = C.G_DATA_STREAM_NEWLINE_TYPE_CR
+const IO_ERROR_HOST_UNREACHABLE = C.G_IO_ERROR_HOST_UNREACHABLE
+const IO_ERROR_DBUS_ERROR = C.G_IO_ERROR_DBUS_ERROR
+const IO_ERROR_NO_SPACE = C.G_IO_ERROR_NO_SPACE
+const DRIVE_START_NONE = C.G_DRIVE_START_NONE
+const DBUS_ERROR_SPAWN_NO_MEMORY = C.G_DBUS_ERROR_SPAWN_NO_MEMORY
+const SOCKET_CLIENT_RESOLVING = C.G_SOCKET_CLIENT_RESOLVING
+const IO_ERROR_PENDING = C.G_IO_ERROR_PENDING
+const UNIX_SOCKET_ADDRESS_INVALID = C.G_UNIX_SOCKET_ADDRESS_INVALID
+const MENU_ATTRIBUTE_ACTION = C.G_MENU_ATTRIBUTE_ACTION
+const FILE_ATTRIBUTE_ACCESS_CAN_RENAME = C.G_FILE_ATTRIBUTE_ACCESS_CAN_RENAME
+const DBUS_ERROR_NO_SERVER = C.G_DBUS_ERROR_NO_SERVER
+const DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION = C.G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION
+const FILE_MONITOR_EVENT_MOVED = C.G_FILE_MONITOR_EVENT_MOVED
+const FILE_ATTRIBUTE_UNIX_INODE = C.G_FILE_ATTRIBUTE_UNIX_INODE
+const FILE_ATTRIBUTE_TYPE_INVALID = C.G_FILE_ATTRIBUTE_TYPE_INVALID
+const RESOURCE_ERROR_NOT_FOUND = C.G_RESOURCE_ERROR_NOT_FOUND
+const SOCKET_TYPE_INVALID = C.G_SOCKET_TYPE_INVALID
+const DBUS_MESSAGE_HEADER_FIELD_SIGNATURE = C.G_DBUS_MESSAGE_HEADER_FIELD_SIGNATURE
+const CONVERTER_CONVERTED = C.G_CONVERTER_CONVERTED
+const FILE_ATTRIBUTE_UNIX_BLOCK_SIZE = C.G_FILE_ATTRIBUTE_UNIX_BLOCK_SIZE
+const FILE_ATTRIBUTE_THUMBNAIL_PATH = C.G_FILE_ATTRIBUTE_THUMBNAIL_PATH
+const FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE = C.G_FILE_ATTRIBUTE_ACCESS_CAN_EXECUTE
+const RESOLVER_RECORD_SRV = C.G_RESOLVER_RECORD_SRV
+const IO_ERROR_NOT_INITIALIZED = C.G_IO_ERROR_NOT_INITIALIZED
+const RESOLVER_RECORD_MX = C.G_RESOLVER_RECORD_MX
+const DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING = C.G_DBUS_CAPABILITY_FLAGS_UNIX_FD_PASSING
 const VOLUME_MONITOR_EXTENSION_POINT_NAME = C.G_VOLUME_MONITOR_EXTENSION_POINT_NAME
+const FILE_MONITOR_NONE = C.G_FILE_MONITOR_NONE
+const VFS_EXTENSION_POINT_NAME = C.G_VFS_EXTENSION_POINT_NAME
+const TLS_REHANDSHAKE_UNSAFELY = C.G_TLS_REHANDSHAKE_UNSAFELY
+const EMBLEM_ORIGIN_UNKNOWN = C.G_EMBLEM_ORIGIN_UNKNOWN
+const FILE_ATTRIBUTE_TYPE_OBJECT = C.G_FILE_ATTRIBUTE_TYPE_OBJECT
+const FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE = C.G_FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE
+const DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME = C.G_DESKTOP_APP_INFO_LOOKUP_EXTENSION_POINT_NAME
+const SOCKET_MSG_DONTROUTE = C.G_SOCKET_MSG_DONTROUTE
+const IO_ERROR_ALREADY_MOUNTED = C.G_IO_ERROR_ALREADY_MOUNTED
+const RESOLVER_ERROR_TEMPORARY_FAILURE = C.G_RESOLVER_ERROR_TEMPORARY_FAILURE
+const FILE_ATTRIBUTE_OWNER_GROUP = C.G_FILE_ATTRIBUTE_OWNER_GROUP
+const RESOLVER_ERROR_NOT_FOUND = C.G_RESOLVER_ERROR_NOT_FOUND
+const DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN = C.G_DATA_STREAM_BYTE_ORDER_LITTLE_ENDIAN
+const DBUS_MESSAGE_FLAGS_NONE = C.G_DBUS_MESSAGE_FLAGS_NONE
+const IO_ERROR_WOULD_MERGE = C.G_IO_ERROR_WOULD_MERGE
+const ZLIB_COMPRESSOR_FORMAT_GZIP = C.G_ZLIB_COMPRESSOR_FORMAT_GZIP
+const ZLIB_COMPRESSOR_FORMAT_RAW = C.G_ZLIB_COMPRESSOR_FORMAT_RAW
+const TLS_ERROR_EOF = C.G_TLS_ERROR_EOF
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_POLL
+const VOLUME_IDENTIFIER_KIND_HAL_UDI = C.G_VOLUME_IDENTIFIER_KIND_HAL_UDI
+const TLS_CERTIFICATE_NOT_ACTIVATED = C.G_TLS_CERTIFICATE_NOT_ACTIVATED
+const IO_ERROR_PERMISSION_DENIED = C.G_IO_ERROR_PERMISSION_DENIED
+const FILE_ATTRIBUTE_UNIX_GID = C.G_FILE_ATTRIBUTE_UNIX_GID
+const EMBLEM_ORIGIN_LIVEMETADATA = C.G_EMBLEM_ORIGIN_LIVEMETADATA
+const TLS_CERTIFICATE_INSECURE = C.G_TLS_CERTIFICATE_INSECURE
+const PASSWORD_SAVE_NEVER = C.G_PASSWORD_SAVE_NEVER
+const IO_ERROR_IS_DIRECTORY = C.G_IO_ERROR_IS_DIRECTORY
+const DBUS_ERROR_ACCESS_DENIED = C.G_DBUS_ERROR_ACCESS_DENIED
+const FILE_ATTRIBUTE_STANDARD_ICON = C.G_FILE_ATTRIBUTE_STANDARD_ICON
+const FILE_ATTRIBUTE_SELINUX_CONTEXT = C.G_FILE_ATTRIBUTE_SELINUX_CONTEXT
+const FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT = C.G_FILE_ATTRIBUTE_MOUNTABLE_CAN_UNMOUNT
+const UNIX_SOCKET_ADDRESS_ANONYMOUS = C.G_UNIX_SOCKET_ADDRESS_ANONYMOUS
+const FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC = C.G_FILE_ATTRIBUTE_MOUNTABLE_IS_MEDIA_CHECK_AUTOMATIC
+const FILE_ATTRIBUTE_INFO_COPY_WITH_FILE = C.G_FILE_ATTRIBUTE_INFO_COPY_WITH_FILE
+const FILE_ATTRIBUTE_FILESYSTEM_SIZE = C.G_FILE_ATTRIBUTE_FILESYSTEM_SIZE
+const TLS_DATABASE_PURPOSE_AUTHENTICATE_CLIENT = C.G_TLS_DATABASE_PURPOSE_AUTHENTICATE_CLIENT
+const DBUS_INTERFACE_SKELETON_FLAGS_NONE = C.G_DBUS_INTERFACE_SKELETON_FLAGS_NONE
+const FILE_ATTRIBUTE_TYPE_STRINGV = C.G_FILE_ATTRIBUTE_TYPE_STRINGV
+const FILE_MONITOR_EVENT_CHANGED = C.G_FILE_MONITOR_EVENT_CHANGED
+const RESOURCE_FLAGS_NONE = C.G_RESOURCE_FLAGS_NONE
+const FILE_ATTRIBUTE_INFO_NONE = C.G_FILE_ATTRIBUTE_INFO_NONE
+const BUS_NAME_OWNER_FLAGS_REPLACE = C.G_BUS_NAME_OWNER_FLAGS_REPLACE
+const BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT = C.G_BUS_NAME_OWNER_FLAGS_ALLOW_REPLACEMENT
+const RESOLVER_RECORD_NS = C.G_RESOLVER_RECORD_NS
+const FILE_ATTRIBUTE_TIME_CREATED = C.G_FILE_ATTRIBUTE_TIME_CREATED
+const BUS_NAME_WATCHER_FLAGS_NONE = C.G_BUS_NAME_WATCHER_FLAGS_NONE
+const OUTPUT_STREAM_SPLICE_NONE = C.G_OUTPUT_STREAM_SPLICE_NONE
+const FILE_COPY_NOFOLLOW_SYMLINKS = C.G_FILE_COPY_NOFOLLOW_SYMLINKS
+const SOCKET_CLIENT_CONNECTING = C.G_SOCKET_CLIENT_CONNECTING
+const DRIVE_START_STOP_TYPE_UNKNOWN = C.G_DRIVE_START_STOP_TYPE_UNKNOWN
+const TLS_CERTIFICATE_EXPIRED = C.G_TLS_CERTIFICATE_EXPIRED
+const IO_MODULE_SCOPE_BLOCK_DUPLICATES = C.G_IO_MODULE_SCOPE_BLOCK_DUPLICATES
+const DBUS_ERROR_DISCONNECTED = C.G_DBUS_ERROR_DISCONNECTED
+const TLS_REHANDSHAKE_SAFELY = C.G_TLS_REHANDSHAKE_SAFELY
+const FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE = C.G_FILE_ATTRIBUTE_MOUNTABLE_START_STOP_TYPE
+const IO_ERROR_PROXY_AUTH_FAILED = C.G_IO_ERROR_PROXY_AUTH_FAILED
+const DBUS_CALL_FLAGS_NONE = C.G_DBUS_CALL_FLAGS_NONE
+const DBUS_ERROR_TIMED_OUT = C.G_DBUS_ERROR_TIMED_OUT
+const IO_ERROR_FILENAME_TOO_LONG = C.G_IO_ERROR_FILENAME_TOO_LONG
+const DBUS_ERROR_SPAWN_SETUP_FAILED = C.G_DBUS_ERROR_SPAWN_SETUP_FAILED
+const DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS = C.G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS
+const SOCKET_FAMILY_IPV6 = C.G_SOCKET_FAMILY_IPV6
+const FILE_COPY_NO_FALLBACK_FOR_MOVE = C.G_FILE_COPY_NO_FALLBACK_FOR_MOVE
+const FILE_ATTRIBUTE_FILESYSTEM_READONLY = C.G_FILE_ATTRIBUTE_FILESYSTEM_READONLY
+const PASSWORD_SAVE_PERMANENTLY = C.G_PASSWORD_SAVE_PERMANENTLY
+const DRIVE_START_STOP_TYPE_SHUTDOWN = C.G_DRIVE_START_STOP_TYPE_SHUTDOWN
+const DBUS_ERROR_AUTH_FAILED = C.G_DBUS_ERROR_AUTH_FAILED
+const TEST_DBUS_NONE = C.G_TEST_DBUS_NONE
+const DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD = C.G_DBUS_INTERFACE_SKELETON_FLAGS_HANDLE_METHOD_INVOCATIONS_IN_THREAD
+const IO_ERROR_NOT_SYMBOLIC_LINK = C.G_IO_ERROR_NOT_SYMBOLIC_LINK
+const NETWORK_MONITOR_EXTENSION_POINT_NAME = C.G_NETWORK_MONITOR_EXTENSION_POINT_NAME
+const IO_ERROR_NOT_EMPTY = C.G_IO_ERROR_NOT_EMPTY
+const DBUS_MESSAGE_HEADER_FIELD_MEMBER = C.G_DBUS_MESSAGE_HEADER_FIELD_MEMBER
+const DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES = C.G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES
+const MENU_ATTRIBUTE_LABEL = C.G_MENU_ATTRIBUTE_LABEL
+const FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE = C.G_FILE_ATTRIBUTE_MOUNTABLE_UNIX_DEVICE_FILE
+const BUS_NAME_WATCHER_FLAGS_AUTO_START = C.G_BUS_NAME_WATCHER_FLAGS_AUTO_START
+const TLS_INTERACTION_FAILED = C.G_TLS_INTERACTION_FAILED
+const IO_ERROR_NETWORK_UNREACHABLE = C.G_IO_ERROR_NETWORK_UNREACHABLE
+const FILE_ATTRIBUTE_ACCESS_CAN_DELETE = C.G_FILE_ATTRIBUTE_ACCESS_CAN_DELETE
+const PASSWORD_SAVE_FOR_SESSION = C.G_PASSWORD_SAVE_FOR_SESSION
+const IO_ERROR_NOT_SUPPORTED = C.G_IO_ERROR_NOT_SUPPORTED
+const CONVERTER_INPUT_AT_END = C.G_CONVERTER_INPUT_AT_END
+const FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED = C.G_FILE_MONITOR_EVENT_ATTRIBUTE_CHANGED
+const DBUS_ERROR_SPAWN_EXEC_FAILED = C.G_DBUS_ERROR_SPAWN_EXEC_FAILED
+const FILE_ATTRIBUTE_FILESYSTEM_FREE = C.G_FILE_ATTRIBUTE_FILESYSTEM_FREE
+const APP_INFO_CREATE_NONE = C.G_APP_INFO_CREATE_NONE
+const DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED = C.G_DBUS_MESSAGE_FLAGS_NO_REPLY_EXPECTED
+const RESOURCE_FLAGS_COMPRESSED = C.G_RESOURCE_FLAGS_COMPRESSED
+const TLS_CERTIFICATE_REVOKED = C.G_TLS_CERTIFICATE_REVOKED
+const TLS_AUTHENTICATION_REQUIRED = C.G_TLS_AUTHENTICATION_REQUIRED
+const OUTPUT_STREAM_SPLICE_CLOSE_SOURCE = C.G_OUTPUT_STREAM_SPLICE_CLOSE_SOURCE
+const SOCKET_PROTOCOL_TCP = C.G_SOCKET_PROTOCOL_TCP
+const IO_ERROR_NOT_DIRECTORY = C.G_IO_ERROR_NOT_DIRECTORY
+const FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE = C.G_FILE_ATTRIBUTE_STANDARD_FAST_CONTENT_TYPE
+const IO_ERROR_BUSY = C.G_IO_ERROR_BUSY
+const FILE_COPY_BACKUP = C.G_FILE_COPY_BACKUP

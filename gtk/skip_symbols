@@ -1,27 +1,3 @@
-// rename
-gio.go:8403[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gio.cgo1.go:9656]: SocketNew redeclared in this block
-previous declaration at atk.go:621[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/atk.cgo1.go:795]
-gtk.go:5085[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:5321]: ApplicationNew redeclared in this block
-previous declaration at gio.go:2712[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gio.cgo1.go:1943]
-gtk.go:11226[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:14352]: MenuNew redeclared in this block
-previous declaration at gio.go:6735[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gio.cgo1.go:7374]
-gtk.go:11498[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:14760]: MenuItemNew redeclared in this block
-previous declaration at gio.go:6888[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gio.cgo1.go:7593]
-gtk.go:11825[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:15263]: MountOperationNew redeclared in this block
-previous declaration at gio.go:7091[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gio.cgo1.go:7860]
-gtk.go:12700[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:16506]: PlugNew redeclared in this block
-previous declaration at atk.go:495[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/atk.cgo1.go:621]
-gtk.go:15107[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:19955]: SocketNew redeclared in this block
-previous declaration at gio.go:8403[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gio.cgo1.go:9656]
-gtk.go:24566[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:33654]: STATE_ACTIVE redeclared in this block
-previous declaration at atk.go:1064[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/atk.cgo1.go:1342]
-gtk.go:24568[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:33656]: STATE_SELECTED redeclared in this block
-previous declaration at atk.go:1084[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/atk.cgo1.go:1362]
-gtk.go:24571[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:33659]: STATE_FOCUSED redeclared in this block
-previous declaration at atk.go:1074[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/atk.cgo1.go:1352]
-gtk.go:24571[/tmp/go-build187457344/_/home/reus/gtk-go/gtk/_test/gtk.cgo1.go:33659]: too many errors
-FAIL  _/home/reus/gtk-go/gtk [build failed]
-
 // compile error
 g_clear_object
 g_io_module_query
