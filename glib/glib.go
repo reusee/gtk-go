@@ -2,7 +2,7 @@
 
 package glib
 
-// #cgo pkg-config: glib-2.0 gobject-2.0
+// #cgo pkg-config: glib-2.0 gobject-2.0 gtk+-3.0
 // #include <string.h>
 // #include <glib-object.h>
 // #include <glib/gstdio.h>

@@ -1,7 +1,8 @@
-// type and func name conflict
-gtk_accel_map_foreach
+// compile error
+g_clear_object
 
-_GtkRcProperty
+// macros
+G_VALUE_COLLECT_FORMAT_MAX_LENGTH
 
 gtk_init
 gtk_init_check
@@ -9,6 +10,8 @@ gtk_init_with_args
 gtk_parse_args
 
 // deprecated
+g_object_compat_control
+
 GtkColorSelection
 gtk_color_selection_palette_from_string
 gtk_color_selection_get_current_alpha

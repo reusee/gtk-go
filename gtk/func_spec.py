@@ -129534,6 +129534,1054 @@ func_specs = {
       ),
     ],
   ),
+  'g_desktop_app_info_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_desktop_app_info_new_from_filename': Spec(
+    return_type = 'GDesktopAppInfo *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_new_from_keyfile': Spec(
+    return_type = 'GDesktopAppInfo *',
+    parameters = [
+      Param(
+        type = 'GKeyFile *',
+        name = 'key_file',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_filename': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_generic_name': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_categories': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_keywords': Spec(
+    return_type = 'const char *const *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_nodisplay': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_show_in': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+      Param(
+        type = 'const gchar *',
+        name = 'desktop_env',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_startup_wm_class': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_new': Spec(
+    return_type = 'GDesktopAppInfo *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'desktop_id',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_is_hidden': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_set_desktop_env': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'desktop_env',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_has_key': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'key',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_string': Spec(
+    return_type = 'char *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'key',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_get_boolean': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'info',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'key',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_lookup_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_desktop_app_info_lookup_get_default_for_uri_scheme': Spec(
+    return_type = 'GAppInfo *',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfoLookup *',
+        name = 'lookup',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'uri_scheme',
+      ),
+    ],
+  ),
+  'g_desktop_app_info_launch_uris_as_manager': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GDesktopAppInfo *',
+        name = 'appinfo',
+      ),
+      Param(
+        type = 'GList *',
+        name = 'uris',
+      ),
+      Param(
+        type = 'GAppLaunchContext *',
+        name = 'launch_context',
+      ),
+      Param(
+        type = 'GSpawnFlags',
+        name = 'spawn_flags',
+      ),
+      Param(
+        type = 'GSpawnChildSetupFunc',
+        name = 'user_setup',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_setup_data',
+      ),
+      Param(
+        type = 'GDesktopAppLaunchCallback',
+        name = 'pid_callback',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'pid_callback_data',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_connection_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_connection_send_fd': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'gint',
+        name = 'fd',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_connection_receive_fd': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_connection_send_credentials': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_connection_send_credentials_async': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GAsyncReadyCallback',
+        name = 'callback',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+    ],
+  ),
+  'g_unix_connection_send_credentials_finish': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GAsyncResult *',
+        name = 'result',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_connection_receive_credentials': Spec(
+    return_type = 'GCredentials *',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_connection_receive_credentials_async': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GAsyncReadyCallback',
+        name = 'callback',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+    ],
+  ),
+  'g_unix_connection_receive_credentials_finish': Spec(
+    return_type = 'GCredentials *',
+    parameters = [
+      Param(
+        type = 'GUnixConnection *',
+        name = 'connection',
+      ),
+      Param(
+        type = 'GAsyncResult *',
+        name = 'result',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_credentials_message_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_credentials_message_new': Spec(
+    return_type = 'GSocketControlMessage *',
+    parameters = [
+    ],
+  ),
+  'g_unix_credentials_message_new_with_credentials': Spec(
+    return_type = 'GSocketControlMessage *',
+    parameters = [
+      Param(
+        type = 'GCredentials *',
+        name = 'credentials',
+      ),
+    ],
+  ),
+  'g_unix_credentials_message_get_credentials': Spec(
+    return_type = 'GCredentials *',
+    parameters = [
+      Param(
+        type = 'GUnixCredentialsMessage *',
+        name = 'message',
+      ),
+    ],
+  ),
+  'g_unix_credentials_message_is_supported': Spec(
+    return_type = 'gboolean',
+    parameters = [
+    ],
+  ),
+  'g_unix_fd_list_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_fd_list_new': Spec(
+    return_type = 'GUnixFDList *',
+    parameters = [
+    ],
+  ),
+  'g_unix_fd_list_new_from_array': Spec(
+    return_type = 'GUnixFDList *',
+    parameters = [
+      Param(
+        type = 'const gint *',
+        name = 'fds',
+      ),
+      Param(
+        type = 'gint',
+        name = 'n_fds',
+      ),
+    ],
+  ),
+  'g_unix_fd_list_append': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixFDList *',
+        name = 'list',
+      ),
+      Param(
+        type = 'gint',
+        name = 'fd',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_fd_list_get_length': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixFDList *',
+        name = 'list',
+      ),
+    ],
+  ),
+  'g_unix_fd_list_get': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixFDList *',
+        name = 'list',
+      ),
+      Param(
+        type = 'gint',
+        name = 'index_',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_fd_list_peek_fds': Spec(
+    return_type = 'const gint *',
+    parameters = [
+      Param(
+        type = 'GUnixFDList *',
+        name = 'list',
+      ),
+      Param(
+        type = 'gint *',
+        name = 'length',
+      ),
+    ],
+  ),
+  'g_unix_fd_list_steal_fds': Spec(
+    return_type = 'gint *',
+    parameters = [
+      Param(
+        type = 'GUnixFDList *',
+        name = 'list',
+      ),
+      Param(
+        type = 'gint *',
+        name = 'length',
+      ),
+    ],
+  ),
+  'g_unix_fd_message_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_fd_message_new_with_fd_list': Spec(
+    return_type = 'GSocketControlMessage *',
+    parameters = [
+      Param(
+        type = 'GUnixFDList *',
+        name = 'fd_list',
+      ),
+    ],
+  ),
+  'g_unix_fd_message_new': Spec(
+    return_type = 'GSocketControlMessage *',
+    parameters = [
+    ],
+  ),
+  'g_unix_fd_message_get_fd_list': Spec(
+    return_type = 'GUnixFDList *',
+    parameters = [
+      Param(
+        type = 'GUnixFDMessage *',
+        name = 'message',
+      ),
+    ],
+  ),
+  'g_unix_fd_message_steal_fds': Spec(
+    return_type = 'gint *',
+    parameters = [
+      Param(
+        type = 'GUnixFDMessage *',
+        name = 'message',
+      ),
+      Param(
+        type = 'gint *',
+        name = 'length',
+      ),
+    ],
+  ),
+  'g_unix_fd_message_append_fd': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixFDMessage *',
+        name = 'message',
+      ),
+      Param(
+        type = 'gint',
+        name = 'fd',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'g_unix_input_stream_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_input_stream_new': Spec(
+    return_type = 'GInputStream *',
+    parameters = [
+      Param(
+        type = 'gint',
+        name = 'fd',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'close_fd',
+      ),
+    ],
+  ),
+  'g_unix_input_stream_set_close_fd': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixInputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'close_fd',
+      ),
+    ],
+  ),
+  'g_unix_input_stream_get_close_fd': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixInputStream *',
+        name = 'stream',
+      ),
+    ],
+  ),
+  'g_unix_input_stream_get_fd': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixInputStream *',
+        name = 'stream',
+      ),
+    ],
+  ),
+  'g_unix_mount_free': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_free': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_compare': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount1',
+      ),
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount2',
+      ),
+    ],
+  ),
+  'g_unix_mount_get_mount_path': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_get_device_path': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_get_fs_type': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_is_readonly': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_is_system_internal': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_guess_can_eject': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_guess_should_display': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_guess_name': Spec(
+    return_type = 'char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_guess_icon': Spec(
+    return_type = 'GIcon *',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_guess_symbolic_icon': Spec(
+    return_type = 'GIcon *',
+    parameters = [
+      Param(
+        type = 'GUnixMountEntry *',
+        name = 'mount_entry',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_compare': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount1',
+      ),
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount2',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_get_mount_path': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_get_device_path': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_get_fs_type': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_get_options': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_is_readonly': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_is_user_mountable': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_is_loopback': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_guess_can_eject': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_guess_name': Spec(
+    return_type = 'char *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_guess_icon': Spec(
+    return_type = 'GIcon *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_point_guess_symbolic_icon': Spec(
+    return_type = 'GIcon *',
+    parameters = [
+      Param(
+        type = 'GUnixMountPoint *',
+        name = 'mount_point',
+      ),
+    ],
+  ),
+  'g_unix_mount_points_get': Spec(
+    return_type = 'GList *',
+    parameters = [
+      Param(
+        type = 'guint64 *',
+        name = 'time_read',
+      ),
+    ],
+  ),
+  'g_unix_mounts_get': Spec(
+    return_type = 'GList *',
+    parameters = [
+      Param(
+        type = 'guint64 *',
+        name = 'time_read',
+      ),
+    ],
+  ),
+  'g_unix_mount_at': Spec(
+    return_type = 'GUnixMountEntry *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'mount_path',
+      ),
+      Param(
+        type = 'guint64 *',
+        name = 'time_read',
+      ),
+    ],
+  ),
+  'g_unix_mounts_changed_since': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'guint64',
+        name = 'time',
+      ),
+    ],
+  ),
+  'g_unix_mount_points_changed_since': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'guint64',
+        name = 'time',
+      ),
+    ],
+  ),
+  'g_unix_mount_monitor_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_mount_monitor_new': Spec(
+    return_type = 'GUnixMountMonitor *',
+    parameters = [
+    ],
+  ),
+  'g_unix_mount_monitor_set_rate_limit': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixMountMonitor *',
+        name = 'mount_monitor',
+      ),
+      Param(
+        type = 'int',
+        name = 'limit_msec',
+      ),
+    ],
+  ),
+  'g_unix_is_mount_path_system_internal': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'mount_path',
+      ),
+    ],
+  ),
+  'g_unix_output_stream_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_output_stream_new': Spec(
+    return_type = 'GOutputStream *',
+    parameters = [
+      Param(
+        type = 'gint',
+        name = 'fd',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'close_fd',
+      ),
+    ],
+  ),
+  'g_unix_output_stream_set_close_fd': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GUnixOutputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'close_fd',
+      ),
+    ],
+  ),
+  'g_unix_output_stream_get_close_fd': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixOutputStream *',
+        name = 'stream',
+      ),
+    ],
+  ),
+  'g_unix_output_stream_get_fd': Spec(
+    return_type = 'gint',
+    parameters = [
+      Param(
+        type = 'GUnixOutputStream *',
+        name = 'stream',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_unix_socket_address_new': Spec(
+    return_type = 'GSocketAddress *',
+    parameters = [
+      Param(
+        type = 'const gchar *',
+        name = 'path',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_new_abstract': Spec(
+    return_type = 'GSocketAddress *',
+    parameters = [
+      Param(
+        type = 'const gchar *',
+        name = 'path',
+      ),
+      Param(
+        type = 'gint',
+        name = 'path_len',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_new_with_type': Spec(
+    return_type = 'GSocketAddress *',
+    parameters = [
+      Param(
+        type = 'const gchar *',
+        name = 'path',
+      ),
+      Param(
+        type = 'gint',
+        name = 'path_len',
+      ),
+      Param(
+        type = 'GUnixSocketAddressType',
+        name = 'type',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_get_path': Spec(
+    return_type = 'const char *',
+    parameters = [
+      Param(
+        type = 'GUnixSocketAddress *',
+        name = 'address',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_get_path_len': Spec(
+    return_type = 'gsize',
+    parameters = [
+      Param(
+        type = 'GUnixSocketAddress *',
+        name = 'address',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_get_address_type': Spec(
+    return_type = 'GUnixSocketAddressType',
+    parameters = [
+      Param(
+        type = 'GUnixSocketAddress *',
+        name = 'address',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_get_is_abstract': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GUnixSocketAddress *',
+        name = 'address',
+      ),
+    ],
+  ),
+  'g_unix_socket_address_abstract_names_supported': Spec(
+    return_type = 'gboolean',
+    parameters = [
+    ],
+  ),
   '__builtin_bswap32': Spec(
     return_type = 'uint32_t',
     parameters = [
