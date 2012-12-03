@@ -15,6 +15,7 @@ class Parser:
     parser.parse(filename)
 
     self.path = os.path.dirname(os.path.abspath(filename))
+    self.package = os.path.basename(self.path)
 
     self.skip_symbols = set()
     skip_symbol_file = os.path.join(self.path, 'skip_symbols')
@@ -93,6 +94,7 @@ class Parser:
 
   def handleRecord(self, node):
     name = node.name
+    if name.startswith('_'): return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
     self.record_types[name] = c_type

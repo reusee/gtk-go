@@ -80,7 +80,11 @@ def collect_c_func_info(parser, generator, function, klass):
   for i, param in enumerate(lib_func_spec.parameters):
     value = Value()
     if function.is_method and i == 0: # use class type instead of spec type
-      value.c_parameter_type = klass.ctype + ' *'
+      assert klass.c_name == klass.gi_name.replace('.', '')
+      if klass.ctype is None:
+        value.c_parameter_type = klass.c_name + ' *'
+      else:
+        value.c_parameter_type = klass.ctype + ' *'
       value.c_parameter_name = '_self_'
     else:
       value.c_parameter_type = convert_to_cgo_capatible_type(param.type)
