@@ -14,6 +14,7 @@ uint64_t __builtin_bswap64 (uint64_t x);
 #include <gio/gunixmounts.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gunixsocketaddress.h>
+#include <gio/gfiledescriptorbased.h>
 
 #include <gdk-pixbuf/gdk-pixdata.h>
 #include <gdk-pixbuf/gdk-pixbuf-animation.h>

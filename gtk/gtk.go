@@ -2028,6 +2028,120 @@ gint _gtk_widget_path_length(GtkWidgetPath * _self_) {
 char * _gtk_widget_path_to_string(GtkWidgetPath * _self_) {
 	return (char *)gtk_widget_path_to_string((const GtkWidgetPath *)(_self_));
 }
+gchar * _gtk_actionable_get_action_name(GtkActionable * _self_) {
+	return (gchar *)gtk_actionable_get_action_name(_self_);
+}
+void _gtk_actionable_set_action_name(GtkActionable * _self_, gchar * action_name) {
+	(void)gtk_actionable_set_action_name(_self_, (const gchar *)(action_name));
+}
+void _gtk_actionable_set_detailed_action_name(GtkActionable * _self_, gchar * detailed_action_name) {
+	(void)gtk_actionable_set_detailed_action_name(_self_, (const gchar *)(detailed_action_name));
+}
+void _gtk_buildable_add_child(GtkBuildable * _self_, GtkBuilder * builder, GObject * child, gchar * type) {
+	(void)gtk_buildable_add_child(_self_, builder, child, (const gchar *)(type));
+}
+GObject * _gtk_buildable_construct_child(GtkBuildable * _self_, GtkBuilder * builder, gchar * name) {
+	return (GObject *)gtk_buildable_construct_child(_self_, builder, (const gchar *)(name));
+}
+void _gtk_buildable_custom_finished(GtkBuildable * _self_, GtkBuilder * builder, GObject * child, gchar * tagname, gpointer data) {
+	(void)gtk_buildable_custom_finished(_self_, builder, child, (const gchar *)(tagname), data);
+}
+void _gtk_buildable_custom_tag_end(GtkBuildable * _self_, GtkBuilder * builder, GObject * child, gchar * tagname, gpointer * data) {
+	(void)gtk_buildable_custom_tag_end(_self_, builder, child, (const gchar *)(tagname), data);
+}
+gboolean _gtk_buildable_custom_tag_start(GtkBuildable * _self_, GtkBuilder * builder, GObject * child, gchar * tagname, GMarkupParser * parser, gpointer * data) {
+	return (gboolean)gtk_buildable_custom_tag_start(_self_, builder, child, (const gchar *)(tagname), parser, data);
+}
+GObject * _gtk_buildable_get_internal_child(GtkBuildable * _self_, GtkBuilder * builder, gchar * childname) {
+	return (GObject *)gtk_buildable_get_internal_child(_self_, builder, (const gchar *)(childname));
+}
+gchar * _gtk_buildable_get_name(GtkBuildable * _self_) {
+	return (gchar *)gtk_buildable_get_name(_self_);
+}
+void _gtk_buildable_set_buildable_property(GtkBuildable * _self_, GtkBuilder * builder, gchar * name, GValue * value) {
+	(void)gtk_buildable_set_buildable_property(_self_, builder, (const gchar *)(name), (const GValue *)(value));
+}
+void _gtk_buildable_set_name(GtkBuildable * _self_, gchar * name) {
+	(void)gtk_buildable_set_name(_self_, (const gchar *)(name));
+}
+void _gtk_cell_layout_add_attribute(GtkCellLayout * _self_, GtkCellRenderer * cell, gchar * attribute, gint column) {
+	(void)gtk_cell_layout_add_attribute(_self_, cell, (const gchar *)(attribute), column);
+}
+void _gtk_color_chooser_set_rgba(GtkColorChooser * _self_, GdkRGBA * color) {
+	(void)gtk_color_chooser_set_rgba(_self_, (const GdkRGBA *)(color));
+}
+gboolean _gtk_file_chooser_add_shortcut_folder(GtkFileChooser * _self_, char * folder, void * error) {
+	return (gboolean)gtk_file_chooser_add_shortcut_folder(_self_, (const char *)(folder), (GError **)(error));
+}
+gboolean _gtk_file_chooser_add_shortcut_folder_uri(GtkFileChooser * _self_, char * uri, void * error) {
+	return (gboolean)gtk_file_chooser_add_shortcut_folder_uri(_self_, (const char *)(uri), (GError **)(error));
+}
+gboolean _gtk_file_chooser_remove_shortcut_folder(GtkFileChooser * _self_, char * folder, void * error) {
+	return (gboolean)gtk_file_chooser_remove_shortcut_folder(_self_, (const char *)(folder), (GError **)(error));
+}
+gboolean _gtk_file_chooser_remove_shortcut_folder_uri(GtkFileChooser * _self_, char * uri, void * error) {
+	return (gboolean)gtk_file_chooser_remove_shortcut_folder_uri(_self_, (const char *)(uri), (GError **)(error));
+}
+gboolean _gtk_file_chooser_select_file(GtkFileChooser * _self_, GFile * file, void * error) {
+	return (gboolean)gtk_file_chooser_select_file(_self_, file, (GError **)(error));
+}
+gboolean _gtk_file_chooser_select_filename(GtkFileChooser * _self_, char * filename) {
+	return (gboolean)gtk_file_chooser_select_filename(_self_, (const char *)(filename));
+}
+gboolean _gtk_file_chooser_select_uri(GtkFileChooser * _self_, char * uri) {
+	return (gboolean)gtk_file_chooser_select_uri(_self_, (const char *)(uri));
+}
+gboolean _gtk_file_chooser_set_current_folder(GtkFileChooser * _self_, gchar * filename) {
+	return (gboolean)gtk_file_chooser_set_current_folder(_self_, (const gchar *)(filename));
+}
+gboolean _gtk_file_chooser_set_current_folder_file(GtkFileChooser * _self_, GFile * file, void * error) {
+	return (gboolean)gtk_file_chooser_set_current_folder_file(_self_, file, (GError **)(error));
+}
+gboolean _gtk_file_chooser_set_current_folder_uri(GtkFileChooser * _self_, gchar * uri) {
+	return (gboolean)gtk_file_chooser_set_current_folder_uri(_self_, (const gchar *)(uri));
+}
+void _gtk_file_chooser_set_current_name(GtkFileChooser * _self_, gchar * name) {
+	(void)gtk_file_chooser_set_current_name(_self_, (const gchar *)(name));
+}
+gboolean _gtk_file_chooser_set_file(GtkFileChooser * _self_, GFile * file, void * error) {
+	return (gboolean)gtk_file_chooser_set_file(_self_, file, (GError **)(error));
+}
+gboolean _gtk_file_chooser_set_filename(GtkFileChooser * _self_, char * filename) {
+	return (gboolean)gtk_file_chooser_set_filename(_self_, (const char *)(filename));
+}
+gboolean _gtk_file_chooser_set_uri(GtkFileChooser * _self_, char * uri) {
+	return (gboolean)gtk_file_chooser_set_uri(_self_, (const char *)(uri));
+}
+void _gtk_file_chooser_unselect_filename(GtkFileChooser * _self_, char * filename) {
+	(void)gtk_file_chooser_unselect_filename(_self_, (const char *)(filename));
+}
+void _gtk_file_chooser_unselect_uri(GtkFileChooser * _self_, char * uri) {
+	(void)gtk_file_chooser_unselect_uri(_self_, (const char *)(uri));
+}
+void _gtk_font_chooser_set_font(GtkFontChooser * _self_, gchar * fontname) {
+	(void)gtk_font_chooser_set_font(_self_, (const gchar *)(fontname));
+}
+void _gtk_font_chooser_set_font_desc(GtkFontChooser * _self_, PangoFontDescription * font_desc) {
+	(void)gtk_font_chooser_set_font_desc(_self_, (const PangoFontDescription *)(font_desc));
+}
+void _gtk_font_chooser_set_preview_text(GtkFontChooser * _self_, gchar * text) {
+	(void)gtk_font_chooser_set_preview_text(_self_, (const gchar *)(text));
+}
+void * _gtk_recent_chooser_get_uris(GtkRecentChooser * _self_, gsize * length) {
+	return (void *)gtk_recent_chooser_get_uris(_self_, length);
+}
+gboolean _gtk_recent_chooser_select_uri(GtkRecentChooser * _self_, gchar * uri, void * error) {
+	return (gboolean)gtk_recent_chooser_select_uri(_self_, (const gchar *)(uri), (GError **)(error));
+}
+gboolean _gtk_recent_chooser_set_current_uri(GtkRecentChooser * _self_, gchar * uri, void * error) {
+	return (gboolean)gtk_recent_chooser_set_current_uri(_self_, (const gchar *)(uri), (GError **)(error));
+}
+void _gtk_recent_chooser_unselect_uri(GtkRecentChooser * _self_, gchar * uri) {
+	(void)gtk_recent_chooser_unselect_uri(_self_, (const gchar *)(uri));
+}
+gboolean _gtk_tree_model_get_iter_from_string(GtkTreeModel * _self_, GtkTreeIter * iter, gchar * path_string) {
+	return (gboolean)gtk_tree_model_get_iter_from_string(_self_, iter, (const gchar *)(path_string));
+}
 */
 import "C"
 import (
@@ -2416,1430 +2530,4328 @@ type ArrowClass C.GtkArrowClass
 type ScaleClass C.GtkScaleClass
 type CssProviderPrivate C.GtkCssProviderPrivate
 type HSVClass C.GtkHSVClass
-type SizeGroup struct { GObjectObject }
+type SizeGroup struct {
+	GObjectObject
+	Buildable
+	_value_ unsafe.Pointer
+}
 type SizeGroupKind interface {
   _IsSizeGroup()
   GetGObject() unsafe.Pointer
 }
-func (self SizeGroup) _IsSizeGroup () {}
+func (self SizeGroup) _IsSizeGroup() {}
 func (self SizeGroup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSizeGroup(value unsafe.Pointer) SizeGroup { return SizeGroup{GObjectObject{value}} }
-type OffscreenWindow struct { Window }
+func ToSizeGroup(value unsafe.Pointer) SizeGroup {
+	return SizeGroup{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self SizeGroup) _IsBuildable () {}
+type OffscreenWindow struct {
+	GtkWindow
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type OffscreenWindowKind interface {
   _IsOffscreenWindow()
   GetGObject() unsafe.Pointer
 }
-func (self OffscreenWindow) _IsOffscreenWindow () {}
+func (self OffscreenWindow) _IsOffscreenWindow() {}
 func (self OffscreenWindow) GetGObject() unsafe.Pointer { return self._value_ }
-func ToOffscreenWindow(value unsafe.Pointer) OffscreenWindow { return OffscreenWindow{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type TreeSelection struct { GObjectObject }
+func ToOffscreenWindow(value unsafe.Pointer) OffscreenWindow {
+	return OffscreenWindow{
+		ToGtkWindow(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self OffscreenWindow) _IsImplementorIface () {}
+func (self OffscreenWindow) _IsBuildable () {}
+type TreeSelection struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TreeSelectionKind interface {
   _IsTreeSelection()
   GetGObject() unsafe.Pointer
 }
-func (self TreeSelection) _IsTreeSelection () {}
+func (self TreeSelection) _IsTreeSelection() {}
 func (self TreeSelection) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTreeSelection(value unsafe.Pointer) TreeSelection { return TreeSelection{GObjectObject{value}} }
-type Action struct { GObjectObject }
-type ActionKind interface {
-  _IsAction()
+func ToTreeSelection(value unsafe.Pointer) TreeSelection {
+	return TreeSelection{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type FontChooser struct {
+	_value_ unsafe.Pointer
+}
+type FontChooserKind interface {
+  _IsFontChooser()
   GetGObject() unsafe.Pointer
 }
-func (self Action) _IsAction () {}
-func (self Action) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAction(value unsafe.Pointer) Action { return Action{GObjectObject{value}} }
-type TreeModelFilter struct { GObjectObject }
+func (self FontChooser) _IsFontChooser() {}
+func (self FontChooser) GetGObject() unsafe.Pointer { return self._value_ }
+func ToFontChooser(value unsafe.Pointer) FontChooser {
+	return FontChooser{
+		value,
+	}
+}
+type TreeModelFilter struct {
+	GObjectObject
+	TreeDragSource
+	TreeModel
+	_value_ unsafe.Pointer
+}
 type TreeModelFilterKind interface {
   _IsTreeModelFilter()
   GetGObject() unsafe.Pointer
 }
-func (self TreeModelFilter) _IsTreeModelFilter () {}
+func (self TreeModelFilter) _IsTreeModelFilter() {}
 func (self TreeModelFilter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTreeModelFilter(value unsafe.Pointer) TreeModelFilter { return TreeModelFilter{GObjectObject{value}} }
-type AspectFrame struct { Frame }
+func ToTreeModelFilter(value unsafe.Pointer) TreeModelFilter {
+	return TreeModelFilter{
+		ToGObjectObject(value),
+		ToTreeDragSource(value),
+		ToTreeModel(value),
+		value,
+	}
+}
+func (self TreeModelFilter) _IsTreeDragSource () {}
+func (self TreeModelFilter) _IsTreeModel () {}
+type AspectFrame struct {
+	Frame
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type AspectFrameKind interface {
   _IsAspectFrame()
   GetGObject() unsafe.Pointer
 }
-func (self AspectFrame) _IsAspectFrame () {}
+func (self AspectFrame) _IsAspectFrame() {}
 func (self AspectFrame) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAspectFrame(value unsafe.Pointer) AspectFrame { return AspectFrame{Frame{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type RecentChooserMenu struct { GtkMenu }
+func ToAspectFrame(value unsafe.Pointer) AspectFrame {
+	return AspectFrame{
+		ToFrame(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self AspectFrame) _IsImplementorIface () {}
+func (self AspectFrame) _IsBuildable () {}
+type RecentChooserMenu struct {
+	GtkMenu
+	ImplementorIface
+	Activatable
+	Buildable
+	RecentChooser
+	_value_ unsafe.Pointer
+}
 type RecentChooserMenuKind interface {
   _IsRecentChooserMenu()
   GetGObject() unsafe.Pointer
 }
-func (self RecentChooserMenu) _IsRecentChooserMenu () {}
+func (self RecentChooserMenu) _IsRecentChooserMenu() {}
 func (self RecentChooserMenu) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRecentChooserMenu(value unsafe.Pointer) RecentChooserMenu { return RecentChooserMenu{GtkMenu{MenuShell{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type FontButton struct { Button }
+func ToRecentChooserMenu(value unsafe.Pointer) RecentChooserMenu {
+	return RecentChooserMenu{
+		ToGtkMenu(value),
+		ToImplementorIface(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		ToRecentChooser(value),
+		value,
+	}
+}
+func (self RecentChooserMenu) _IsImplementorIface () {}
+func (self RecentChooserMenu) _IsActivatable () {}
+func (self RecentChooserMenu) _IsBuildable () {}
+func (self RecentChooserMenu) _IsRecentChooser () {}
+type FontButton struct {
+	Button
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	FontChooser
+	_value_ unsafe.Pointer
+}
 type FontButtonKind interface {
   _IsFontButton()
   GetGObject() unsafe.Pointer
 }
-func (self FontButton) _IsFontButton () {}
+func (self FontButton) _IsFontButton() {}
 func (self FontButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFontButton(value unsafe.Pointer) FontButton { return FontButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type FontChooserDialog struct { Dialog }
+func ToFontButton(value unsafe.Pointer) FontButton {
+	return FontButton{
+		ToButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		ToFontChooser(value),
+		value,
+	}
+}
+func (self FontButton) _IsImplementorIface () {}
+func (self FontButton) _IsActionable () {}
+func (self FontButton) _IsActivatable () {}
+func (self FontButton) _IsBuildable () {}
+func (self FontButton) _IsFontChooser () {}
+type FontChooserDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	FontChooser
+	_value_ unsafe.Pointer
+}
 type FontChooserDialogKind interface {
   _IsFontChooserDialog()
   GetGObject() unsafe.Pointer
 }
-func (self FontChooserDialog) _IsFontChooserDialog () {}
+func (self FontChooserDialog) _IsFontChooserDialog() {}
 func (self FontChooserDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFontChooserDialog(value unsafe.Pointer) FontChooserDialog { return FontChooserDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type MenuBar struct { MenuShell }
+func ToFontChooserDialog(value unsafe.Pointer) FontChooserDialog {
+	return FontChooserDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToFontChooser(value),
+		value,
+	}
+}
+func (self FontChooserDialog) _IsImplementorIface () {}
+func (self FontChooserDialog) _IsBuildable () {}
+func (self FontChooserDialog) _IsFontChooser () {}
+type MenuBar struct {
+	MenuShell
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type MenuBarKind interface {
   _IsMenuBar()
   GetGObject() unsafe.Pointer
 }
-func (self MenuBar) _IsMenuBar () {}
+func (self MenuBar) _IsMenuBar() {}
 func (self MenuBar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToMenuBar(value unsafe.Pointer) MenuBar { return MenuBar{MenuShell{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Bin struct { Container }
+func ToMenuBar(value unsafe.Pointer) MenuBar {
+	return MenuBar{
+		ToMenuShell(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self MenuBar) _IsImplementorIface () {}
+func (self MenuBar) _IsBuildable () {}
+type Bin struct {
+	Container
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type BinKind interface {
   _IsBin()
   GetGObject() unsafe.Pointer
 }
-func (self Bin) _IsBin () {}
+func (self Bin) _IsBin() {}
 func (self Bin) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBin(value unsafe.Pointer) Bin { return Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type Widget struct { InitiallyUnowned }
+func ToBin(value unsafe.Pointer) Bin {
+	return Bin{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Bin) _IsImplementorIface () {}
+func (self Bin) _IsBuildable () {}
+type Widget struct {
+	InitiallyUnowned
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type WidgetKind interface {
   _IsWidget()
   GetGObject() unsafe.Pointer
 }
-func (self Widget) _IsWidget () {}
+func (self Widget) _IsWidget() {}
 func (self Widget) GetGObject() unsafe.Pointer { return self._value_ }
-func ToWidget(value unsafe.Pointer) Widget { return Widget{InitiallyUnowned{GObjectObject{value}}} }
-type NumerableIcon struct { EmblemedIcon }
+func ToWidget(value unsafe.Pointer) Widget {
+	return Widget{
+		ToInitiallyUnowned(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Widget) _IsImplementorIface () {}
+func (self Widget) _IsBuildable () {}
+type NumerableIcon struct {
+	EmblemedIcon
+	Icon
+	_value_ unsafe.Pointer
+}
 type NumerableIconKind interface {
   _IsNumerableIcon()
   GetGObject() unsafe.Pointer
 }
-func (self NumerableIcon) _IsNumerableIcon () {}
+func (self NumerableIcon) _IsNumerableIcon() {}
 func (self NumerableIcon) GetGObject() unsafe.Pointer { return self._value_ }
-func ToNumerableIcon(value unsafe.Pointer) NumerableIcon { return NumerableIcon{EmblemedIcon{GObjectObject{value}}} }
-type ActionGroup struct { GObjectObject }
-type ActionGroupKind interface {
-  _IsActionGroup()
-  GetGObject() unsafe.Pointer
+func ToNumerableIcon(value unsafe.Pointer) NumerableIcon {
+	return NumerableIcon{
+		ToEmblemedIcon(value),
+		ToIcon(value),
+		value,
+	}
 }
-func (self ActionGroup) _IsActionGroup () {}
-func (self ActionGroup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToActionGroup(value unsafe.Pointer) ActionGroup { return ActionGroup{GObjectObject{value}} }
-type CellAreaBox struct { CellArea }
+func (self NumerableIcon) _IsIcon () {}
+type CellAreaBox struct {
+	CellArea
+	Buildable
+	CellLayout
+	Orientable
+	_value_ unsafe.Pointer
+}
 type CellAreaBoxKind interface {
   _IsCellAreaBox()
   GetGObject() unsafe.Pointer
 }
-func (self CellAreaBox) _IsCellAreaBox () {}
+func (self CellAreaBox) _IsCellAreaBox() {}
 func (self CellAreaBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellAreaBox(value unsafe.Pointer) CellAreaBox { return CellAreaBox{CellArea{InitiallyUnowned{GObjectObject{value}}}} }
-type CellRendererToggle struct { CellRenderer }
+func ToCellAreaBox(value unsafe.Pointer) CellAreaBox {
+	return CellAreaBox{
+		ToCellArea(value),
+		ToBuildable(value),
+		ToCellLayout(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self CellAreaBox) _IsBuildable () {}
+func (self CellAreaBox) _IsCellLayout () {}
+func (self CellAreaBox) _IsOrientable () {}
+type CellRendererToggle struct {
+	CellRenderer
+	_value_ unsafe.Pointer
+}
 type CellRendererToggleKind interface {
   _IsCellRendererToggle()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererToggle) _IsCellRendererToggle () {}
+func (self CellRendererToggle) _IsCellRendererToggle() {}
 func (self CellRendererToggle) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererToggle(value unsafe.Pointer) CellRendererToggle { return CellRendererToggle{CellRenderer{InitiallyUnowned{GObjectObject{value}}}} }
-type SearchEntry struct { Entry }
+func ToCellRendererToggle(value unsafe.Pointer) CellRendererToggle {
+	return CellRendererToggle{
+		ToCellRenderer(value),
+		value,
+	}
+}
+type SearchEntry struct {
+	Entry
+	ImplementorIface
+	Buildable
+	CellEditable
+	Editable
+	_value_ unsafe.Pointer
+}
 type SearchEntryKind interface {
   _IsSearchEntry()
   GetGObject() unsafe.Pointer
 }
-func (self SearchEntry) _IsSearchEntry () {}
+func (self SearchEntry) _IsSearchEntry() {}
 func (self SearchEntry) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSearchEntry(value unsafe.Pointer) SearchEntry { return SearchEntry{Entry{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type HSeparator struct { Separator }
+func ToSearchEntry(value unsafe.Pointer) SearchEntry {
+	return SearchEntry{
+		ToEntry(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellEditable(value),
+		ToEditable(value),
+		value,
+	}
+}
+func (self SearchEntry) _IsImplementorIface () {}
+func (self SearchEntry) _IsBuildable () {}
+func (self SearchEntry) _IsCellEditable () {}
+func (self SearchEntry) _IsEditable () {}
+type GtkTable struct {
+	Container
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
+type GtkTableKind interface {
+  _IsGtkTable()
+  GetGObject() unsafe.Pointer
+}
+func (self GtkTable) _IsGtkTable() {}
+func (self GtkTable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGtkTable(value unsafe.Pointer) GtkTable {
+	return GtkTable{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkTable) _IsImplementorIface () {}
+func (self GtkTable) _IsBuildable () {}
+type HSeparator struct {
+	Separator
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type HSeparatorKind interface {
   _IsHSeparator()
   GetGObject() unsafe.Pointer
 }
-func (self HSeparator) _IsHSeparator () {}
+func (self HSeparator) _IsHSeparator() {}
 func (self HSeparator) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHSeparator(value unsafe.Pointer) HSeparator { return HSeparator{Separator{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type HSV struct { Widget }
+func ToHSeparator(value unsafe.Pointer) HSeparator {
+	return HSeparator{
+		ToSeparator(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self HSeparator) _IsImplementorIface () {}
+func (self HSeparator) _IsBuildable () {}
+func (self HSeparator) _IsOrientable () {}
+type HSV struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type HSVKind interface {
   _IsHSV()
   GetGObject() unsafe.Pointer
 }
-func (self HSV) _IsHSV () {}
+func (self HSV) _IsHSV() {}
 func (self HSV) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHSV(value unsafe.Pointer) HSV { return HSV{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type TreeView struct { Container }
+func ToHSV(value unsafe.Pointer) HSV {
+	return HSV{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self HSV) _IsImplementorIface () {}
+func (self HSV) _IsBuildable () {}
+type TreeView struct {
+	Container
+	ImplementorIface
+	Buildable
+	Scrollable
+	_value_ unsafe.Pointer
+}
 type TreeViewKind interface {
   _IsTreeView()
   GetGObject() unsafe.Pointer
 }
-func (self TreeView) _IsTreeView () {}
+func (self TreeView) _IsTreeView() {}
 func (self TreeView) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTreeView(value unsafe.Pointer) TreeView { return TreeView{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type Layout struct { Container }
+func ToTreeView(value unsafe.Pointer) TreeView {
+	return TreeView{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToScrollable(value),
+		value,
+	}
+}
+func (self TreeView) _IsImplementorIface () {}
+func (self TreeView) _IsBuildable () {}
+func (self TreeView) _IsScrollable () {}
+type Layout struct {
+	Container
+	ImplementorIface
+	Buildable
+	Scrollable
+	_value_ unsafe.Pointer
+}
 type LayoutKind interface {
   _IsLayout()
   GetGObject() unsafe.Pointer
 }
-func (self Layout) _IsLayout () {}
+func (self Layout) _IsLayout() {}
 func (self Layout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLayout(value unsafe.Pointer) Layout { return Layout{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type ColorChooserDialog struct { Dialog }
+func ToLayout(value unsafe.Pointer) Layout {
+	return Layout{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToScrollable(value),
+		value,
+	}
+}
+func (self Layout) _IsImplementorIface () {}
+func (self Layout) _IsBuildable () {}
+func (self Layout) _IsScrollable () {}
+type ColorChooserDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	ColorChooser
+	_value_ unsafe.Pointer
+}
 type ColorChooserDialogKind interface {
   _IsColorChooserDialog()
   GetGObject() unsafe.Pointer
 }
-func (self ColorChooserDialog) _IsColorChooserDialog () {}
+func (self ColorChooserDialog) _IsColorChooserDialog() {}
 func (self ColorChooserDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorChooserDialog(value unsafe.Pointer) ColorChooserDialog { return ColorChooserDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type PrintContext struct { GObjectObject }
+func ToColorChooserDialog(value unsafe.Pointer) ColorChooserDialog {
+	return ColorChooserDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToColorChooser(value),
+		value,
+	}
+}
+func (self ColorChooserDialog) _IsImplementorIface () {}
+func (self ColorChooserDialog) _IsBuildable () {}
+func (self ColorChooserDialog) _IsColorChooser () {}
+type PrintContext struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type PrintContextKind interface {
   _IsPrintContext()
   GetGObject() unsafe.Pointer
 }
-func (self PrintContext) _IsPrintContext () {}
+func (self PrintContext) _IsPrintContext() {}
 func (self PrintContext) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPrintContext(value unsafe.Pointer) PrintContext { return PrintContext{GObjectObject{value}} }
-type SeparatorToolItem struct { ToolItem }
+func ToPrintContext(value unsafe.Pointer) PrintContext {
+	return PrintContext{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type SeparatorToolItem struct {
+	ToolItem
+	ImplementorIface
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type SeparatorToolItemKind interface {
   _IsSeparatorToolItem()
   GetGObject() unsafe.Pointer
 }
-func (self SeparatorToolItem) _IsSeparatorToolItem () {}
+func (self SeparatorToolItem) _IsSeparatorToolItem() {}
 func (self SeparatorToolItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSeparatorToolItem(value unsafe.Pointer) SeparatorToolItem { return SeparatorToolItem{ToolItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type MenuButton struct { ToggleButton }
+func ToSeparatorToolItem(value unsafe.Pointer) SeparatorToolItem {
+	return SeparatorToolItem{
+		ToToolItem(value),
+		ToImplementorIface(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self SeparatorToolItem) _IsImplementorIface () {}
+func (self SeparatorToolItem) _IsActivatable () {}
+func (self SeparatorToolItem) _IsBuildable () {}
+type MenuButton struct {
+	ToggleButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type MenuButtonKind interface {
   _IsMenuButton()
   GetGObject() unsafe.Pointer
 }
-func (self MenuButton) _IsMenuButton () {}
+func (self MenuButton) _IsMenuButton() {}
 func (self MenuButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToMenuButton(value unsafe.Pointer) MenuButton { return MenuButton{ToggleButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type HScrollbar struct { Scrollbar }
+func ToMenuButton(value unsafe.Pointer) MenuButton {
+	return MenuButton{
+		ToToggleButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self MenuButton) _IsImplementorIface () {}
+func (self MenuButton) _IsActionable () {}
+func (self MenuButton) _IsActivatable () {}
+func (self MenuButton) _IsBuildable () {}
+type HScrollbar struct {
+	Scrollbar
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type HScrollbarKind interface {
   _IsHScrollbar()
   GetGObject() unsafe.Pointer
 }
-func (self HScrollbar) _IsHScrollbar () {}
+func (self HScrollbar) _IsHScrollbar() {}
 func (self HScrollbar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHScrollbar(value unsafe.Pointer) HScrollbar { return HScrollbar{Scrollbar{Range{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Paned struct { Container }
+func ToHScrollbar(value unsafe.Pointer) HScrollbar {
+	return HScrollbar{
+		ToScrollbar(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self HScrollbar) _IsImplementorIface () {}
+func (self HScrollbar) _IsBuildable () {}
+func (self HScrollbar) _IsOrientable () {}
+type Paned struct {
+	Container
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type PanedKind interface {
   _IsPaned()
   GetGObject() unsafe.Pointer
 }
-func (self Paned) _IsPaned () {}
+func (self Paned) _IsPaned() {}
 func (self Paned) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPaned(value unsafe.Pointer) Paned { return Paned{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type CellRendererCombo struct { CellRendererText }
+func ToPaned(value unsafe.Pointer) Paned {
+	return Paned{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Paned) _IsImplementorIface () {}
+func (self Paned) _IsBuildable () {}
+func (self Paned) _IsOrientable () {}
+type CellRendererCombo struct {
+	CellRendererText
+	_value_ unsafe.Pointer
+}
 type CellRendererComboKind interface {
   _IsCellRendererCombo()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererCombo) _IsCellRendererCombo () {}
+func (self CellRendererCombo) _IsCellRendererCombo() {}
 func (self CellRendererCombo) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererCombo(value unsafe.Pointer) CellRendererCombo { return CellRendererCombo{CellRendererText{CellRenderer{InitiallyUnowned{GObjectObject{value}}}}} }
-type HandleBox struct { Bin }
+func ToCellRendererCombo(value unsafe.Pointer) CellRendererCombo {
+	return CellRendererCombo{
+		ToCellRendererText(value),
+		value,
+	}
+}
+type HandleBox struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type HandleBoxKind interface {
   _IsHandleBox()
   GetGObject() unsafe.Pointer
 }
-func (self HandleBox) _IsHandleBox () {}
+func (self HandleBox) _IsHandleBox() {}
 func (self HandleBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHandleBox(value unsafe.Pointer) HandleBox { return HandleBox{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type IMContextSimple struct { IMContext }
+func ToHandleBox(value unsafe.Pointer) HandleBox {
+	return HandleBox{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self HandleBox) _IsImplementorIface () {}
+func (self HandleBox) _IsBuildable () {}
+type IMContextSimple struct {
+	IMContext
+	_value_ unsafe.Pointer
+}
 type IMContextSimpleKind interface {
   _IsIMContextSimple()
   GetGObject() unsafe.Pointer
 }
-func (self IMContextSimple) _IsIMContextSimple () {}
+func (self IMContextSimple) _IsIMContextSimple() {}
 func (self IMContextSimple) GetGObject() unsafe.Pointer { return self._value_ }
-func ToIMContextSimple(value unsafe.Pointer) IMContextSimple { return IMContextSimple{IMContext{GObjectObject{value}}} }
-type Scrollbar struct { Range }
+func ToIMContextSimple(value unsafe.Pointer) IMContextSimple {
+	return IMContextSimple{
+		ToIMContext(value),
+		value,
+	}
+}
+type Scrollbar struct {
+	Range
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ScrollbarKind interface {
   _IsScrollbar()
   GetGObject() unsafe.Pointer
 }
-func (self Scrollbar) _IsScrollbar () {}
+func (self Scrollbar) _IsScrollbar() {}
 func (self Scrollbar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScrollbar(value unsafe.Pointer) Scrollbar { return Scrollbar{Range{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type Arrow struct { GtkMisc }
+func ToScrollbar(value unsafe.Pointer) Scrollbar {
+	return Scrollbar{
+		ToRange(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Scrollbar) _IsImplementorIface () {}
+func (self Scrollbar) _IsBuildable () {}
+func (self Scrollbar) _IsOrientable () {}
+type PrintOperationPreview struct {
+	_value_ unsafe.Pointer
+}
+type PrintOperationPreviewKind interface {
+  _IsPrintOperationPreview()
+  GetGObject() unsafe.Pointer
+}
+func (self PrintOperationPreview) _IsPrintOperationPreview() {}
+func (self PrintOperationPreview) GetGObject() unsafe.Pointer { return self._value_ }
+func ToPrintOperationPreview(value unsafe.Pointer) PrintOperationPreview {
+	return PrintOperationPreview{
+		value,
+	}
+}
+type Arrow struct {
+	GtkMisc
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ArrowKind interface {
   _IsArrow()
   GetGObject() unsafe.Pointer
 }
-func (self Arrow) _IsArrow () {}
+func (self Arrow) _IsArrow() {}
 func (self Arrow) GetGObject() unsafe.Pointer { return self._value_ }
-func ToArrow(value unsafe.Pointer) Arrow { return Arrow{GtkMisc{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type CellArea struct { InitiallyUnowned }
+func ToArrow(value unsafe.Pointer) Arrow {
+	return Arrow{
+		ToGtkMisc(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Arrow) _IsImplementorIface () {}
+func (self Arrow) _IsBuildable () {}
+type CellArea struct {
+	InitiallyUnowned
+	Buildable
+	CellLayout
+	_value_ unsafe.Pointer
+}
 type CellAreaKind interface {
   _IsCellArea()
   GetGObject() unsafe.Pointer
 }
-func (self CellArea) _IsCellArea () {}
+func (self CellArea) _IsCellArea() {}
 func (self CellArea) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellArea(value unsafe.Pointer) CellArea { return CellArea{InitiallyUnowned{GObjectObject{value}}} }
-type Fixed struct { Container }
+func ToCellArea(value unsafe.Pointer) CellArea {
+	return CellArea{
+		ToInitiallyUnowned(value),
+		ToBuildable(value),
+		ToCellLayout(value),
+		value,
+	}
+}
+func (self CellArea) _IsBuildable () {}
+func (self CellArea) _IsCellLayout () {}
+type Fixed struct {
+	Container
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type FixedKind interface {
   _IsFixed()
   GetGObject() unsafe.Pointer
 }
-func (self Fixed) _IsFixed () {}
+func (self Fixed) _IsFixed() {}
 func (self Fixed) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFixed(value unsafe.Pointer) Fixed { return Fixed{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type MessageDialog struct { Dialog }
+func ToFixed(value unsafe.Pointer) Fixed {
+	return Fixed{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Fixed) _IsImplementorIface () {}
+func (self Fixed) _IsBuildable () {}
+type MessageDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type MessageDialogKind interface {
   _IsMessageDialog()
   GetGObject() unsafe.Pointer
 }
-func (self MessageDialog) _IsMessageDialog () {}
+func (self MessageDialog) _IsMessageDialog() {}
 func (self MessageDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToMessageDialog(value unsafe.Pointer) MessageDialog { return MessageDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type GtkMountOperation struct { GioMountOperation }
+func ToMessageDialog(value unsafe.Pointer) MessageDialog {
+	return MessageDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self MessageDialog) _IsImplementorIface () {}
+func (self MessageDialog) _IsBuildable () {}
+type GtkMountOperation struct {
+	GioMountOperation
+	_value_ unsafe.Pointer
+}
 type GtkMountOperationKind interface {
   _IsGtkMountOperation()
   GetGObject() unsafe.Pointer
 }
-func (self GtkMountOperation) _IsGtkMountOperation () {}
+func (self GtkMountOperation) _IsGtkMountOperation() {}
 func (self GtkMountOperation) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkMountOperation(value unsafe.Pointer) GtkMountOperation { return GtkMountOperation{GioMountOperation{GObjectObject{value}}} }
-type ButtonBox struct { Box }
+func ToGtkMountOperation(value unsafe.Pointer) GtkMountOperation {
+	return GtkMountOperation{
+		ToGioMountOperation(value),
+		value,
+	}
+}
+type ButtonBox struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ButtonBoxKind interface {
   _IsButtonBox()
   GetGObject() unsafe.Pointer
 }
-func (self ButtonBox) _IsButtonBox () {}
+func (self ButtonBox) _IsButtonBox() {}
 func (self ButtonBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToButtonBox(value unsafe.Pointer) ButtonBox { return ButtonBox{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ColorButton struct { Button }
+func ToButtonBox(value unsafe.Pointer) ButtonBox {
+	return ButtonBox{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self ButtonBox) _IsImplementorIface () {}
+func (self ButtonBox) _IsBuildable () {}
+func (self ButtonBox) _IsOrientable () {}
+type ColorButton struct {
+	Button
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	ColorChooser
+	_value_ unsafe.Pointer
+}
 type ColorButtonKind interface {
   _IsColorButton()
   GetGObject() unsafe.Pointer
 }
-func (self ColorButton) _IsColorButton () {}
+func (self ColorButton) _IsColorButton() {}
 func (self ColorButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorButton(value unsafe.Pointer) ColorButton { return ColorButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type LockButton struct { Button }
+func ToColorButton(value unsafe.Pointer) ColorButton {
+	return ColorButton{
+		ToButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		ToColorChooser(value),
+		value,
+	}
+}
+func (self ColorButton) _IsImplementorIface () {}
+func (self ColorButton) _IsActionable () {}
+func (self ColorButton) _IsActivatable () {}
+func (self ColorButton) _IsBuildable () {}
+func (self ColorButton) _IsColorChooser () {}
+type LockButton struct {
+	Button
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type LockButtonKind interface {
   _IsLockButton()
   GetGObject() unsafe.Pointer
 }
-func (self LockButton) _IsLockButton () {}
+func (self LockButton) _IsLockButton() {}
 func (self LockButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLockButton(value unsafe.Pointer) LockButton { return LockButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type RecentAction struct { Action }
+func ToLockButton(value unsafe.Pointer) LockButton {
+	return LockButton{
+		ToButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self LockButton) _IsImplementorIface () {}
+func (self LockButton) _IsActionable () {}
+func (self LockButton) _IsActivatable () {}
+func (self LockButton) _IsBuildable () {}
+type TreeModel struct {
+	_value_ unsafe.Pointer
+}
+type TreeModelKind interface {
+  _IsTreeModel()
+  GetGObject() unsafe.Pointer
+}
+func (self TreeModel) _IsTreeModel() {}
+func (self TreeModel) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTreeModel(value unsafe.Pointer) TreeModel {
+	return TreeModel{
+		value,
+	}
+}
+type RecentAction struct {
+	GtkAction
+	Buildable
+	RecentChooser
+	_value_ unsafe.Pointer
+}
 type RecentActionKind interface {
   _IsRecentAction()
   GetGObject() unsafe.Pointer
 }
-func (self RecentAction) _IsRecentAction () {}
+func (self RecentAction) _IsRecentAction() {}
 func (self RecentAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRecentAction(value unsafe.Pointer) RecentAction { return RecentAction{Action{GObjectObject{value}}} }
-type IMMulticontext struct { IMContext }
+func ToRecentAction(value unsafe.Pointer) RecentAction {
+	return RecentAction{
+		ToGtkAction(value),
+		ToBuildable(value),
+		ToRecentChooser(value),
+		value,
+	}
+}
+func (self RecentAction) _IsBuildable () {}
+func (self RecentAction) _IsRecentChooser () {}
+type IMMulticontext struct {
+	IMContext
+	_value_ unsafe.Pointer
+}
 type IMMulticontextKind interface {
   _IsIMMulticontext()
   GetGObject() unsafe.Pointer
 }
-func (self IMMulticontext) _IsIMMulticontext () {}
+func (self IMMulticontext) _IsIMMulticontext() {}
 func (self IMMulticontext) GetGObject() unsafe.Pointer { return self._value_ }
-func ToIMMulticontext(value unsafe.Pointer) IMMulticontext { return IMMulticontext{IMContext{GObjectObject{value}}} }
-type StatusIcon struct { GObjectObject }
+func ToIMMulticontext(value unsafe.Pointer) IMMulticontext {
+	return IMMulticontext{
+		ToIMContext(value),
+		value,
+	}
+}
+type StatusIcon struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type StatusIconKind interface {
   _IsStatusIcon()
   GetGObject() unsafe.Pointer
 }
-func (self StatusIcon) _IsStatusIcon () {}
+func (self StatusIcon) _IsStatusIcon() {}
 func (self StatusIcon) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStatusIcon(value unsafe.Pointer) StatusIcon { return StatusIcon{GObjectObject{value}} }
-type GtkMisc struct { Widget }
+func ToStatusIcon(value unsafe.Pointer) StatusIcon {
+	return StatusIcon{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type GtkMisc struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type GtkMiscKind interface {
   _IsGtkMisc()
   GetGObject() unsafe.Pointer
 }
-func (self GtkMisc) _IsGtkMisc () {}
+func (self GtkMisc) _IsGtkMisc() {}
 func (self GtkMisc) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkMisc(value unsafe.Pointer) GtkMisc { return GtkMisc{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Adjustment struct { InitiallyUnowned }
+func ToGtkMisc(value unsafe.Pointer) GtkMisc {
+	return GtkMisc{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkMisc) _IsImplementorIface () {}
+func (self GtkMisc) _IsBuildable () {}
+type Adjustment struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
 type AdjustmentKind interface {
   _IsAdjustment()
   GetGObject() unsafe.Pointer
 }
-func (self Adjustment) _IsAdjustment () {}
+func (self Adjustment) _IsAdjustment() {}
 func (self Adjustment) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAdjustment(value unsafe.Pointer) Adjustment { return Adjustment{InitiallyUnowned{GObjectObject{value}}} }
-type CellRendererSpin struct { CellRendererText }
+func ToAdjustment(value unsafe.Pointer) Adjustment {
+	return Adjustment{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
+type CellEditable struct {
+	_value_ unsafe.Pointer
+}
+type CellEditableKind interface {
+  _IsCellEditable()
+  GetGObject() unsafe.Pointer
+}
+func (self CellEditable) _IsCellEditable() {}
+func (self CellEditable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToCellEditable(value unsafe.Pointer) CellEditable {
+	return CellEditable{
+		value,
+	}
+}
+type CellRendererSpin struct {
+	CellRendererText
+	_value_ unsafe.Pointer
+}
 type CellRendererSpinKind interface {
   _IsCellRendererSpin()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererSpin) _IsCellRendererSpin () {}
+func (self CellRendererSpin) _IsCellRendererSpin() {}
 func (self CellRendererSpin) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererSpin(value unsafe.Pointer) CellRendererSpin { return CellRendererSpin{CellRendererText{CellRenderer{InitiallyUnowned{GObjectObject{value}}}}} }
-type TextView struct { Container }
+func ToCellRendererSpin(value unsafe.Pointer) CellRendererSpin {
+	return CellRendererSpin{
+		ToCellRendererText(value),
+		value,
+	}
+}
+type TextView struct {
+	Container
+	ImplementorIface
+	Buildable
+	Scrollable
+	_value_ unsafe.Pointer
+}
 type TextViewKind interface {
   _IsTextView()
   GetGObject() unsafe.Pointer
 }
-func (self TextView) _IsTextView () {}
+func (self TextView) _IsTextView() {}
 func (self TextView) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextView(value unsafe.Pointer) TextView { return TextView{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type EventBox struct { Bin }
+func ToTextView(value unsafe.Pointer) TextView {
+	return TextView{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToScrollable(value),
+		value,
+	}
+}
+func (self TextView) _IsImplementorIface () {}
+func (self TextView) _IsBuildable () {}
+func (self TextView) _IsScrollable () {}
+type EventBox struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type EventBoxKind interface {
   _IsEventBox()
   GetGObject() unsafe.Pointer
 }
-func (self EventBox) _IsEventBox () {}
+func (self EventBox) _IsEventBox() {}
 func (self EventBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToEventBox(value unsafe.Pointer) EventBox { return EventBox{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ScaleButton struct { Button }
+func ToEventBox(value unsafe.Pointer) EventBox {
+	return EventBox{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self EventBox) _IsImplementorIface () {}
+func (self EventBox) _IsBuildable () {}
+type ScaleButton struct {
+	Button
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ScaleButtonKind interface {
   _IsScaleButton()
   GetGObject() unsafe.Pointer
 }
-func (self ScaleButton) _IsScaleButton () {}
+func (self ScaleButton) _IsScaleButton() {}
 func (self ScaleButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScaleButton(value unsafe.Pointer) ScaleButton { return ScaleButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type Label struct { GtkMisc }
+func ToScaleButton(value unsafe.Pointer) ScaleButton {
+	return ScaleButton{
+		ToButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self ScaleButton) _IsImplementorIface () {}
+func (self ScaleButton) _IsActionable () {}
+func (self ScaleButton) _IsActivatable () {}
+func (self ScaleButton) _IsBuildable () {}
+func (self ScaleButton) _IsOrientable () {}
+type Label struct {
+	GtkMisc
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type LabelKind interface {
   _IsLabel()
   GetGObject() unsafe.Pointer
 }
-func (self Label) _IsLabel () {}
+func (self Label) _IsLabel() {}
 func (self Label) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLabel(value unsafe.Pointer) Label { return Label{GtkMisc{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type StyleContext struct { GObjectObject }
+func ToLabel(value unsafe.Pointer) Label {
+	return Label{
+		ToGtkMisc(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Label) _IsImplementorIface () {}
+func (self Label) _IsBuildable () {}
+type StyleContext struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type StyleContextKind interface {
   _IsStyleContext()
   GetGObject() unsafe.Pointer
 }
-func (self StyleContext) _IsStyleContext () {}
+func (self StyleContext) _IsStyleContext() {}
 func (self StyleContext) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStyleContext(value unsafe.Pointer) StyleContext { return StyleContext{GObjectObject{value}} }
-type VolumeButton struct { ScaleButton }
+func ToStyleContext(value unsafe.Pointer) StyleContext {
+	return StyleContext{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type VolumeButton struct {
+	ScaleButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VolumeButtonKind interface {
   _IsVolumeButton()
   GetGObject() unsafe.Pointer
 }
-func (self VolumeButton) _IsVolumeButton () {}
+func (self VolumeButton) _IsVolumeButton() {}
 func (self VolumeButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVolumeButton(value unsafe.Pointer) VolumeButton { return VolumeButton{ScaleButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type Clipboard struct { GObjectObject }
+func ToVolumeButton(value unsafe.Pointer) VolumeButton {
+	return VolumeButton{
+		ToScaleButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VolumeButton) _IsImplementorIface () {}
+func (self VolumeButton) _IsActionable () {}
+func (self VolumeButton) _IsActivatable () {}
+func (self VolumeButton) _IsBuildable () {}
+func (self VolumeButton) _IsOrientable () {}
+type Clipboard struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type ClipboardKind interface {
   _IsClipboard()
   GetGObject() unsafe.Pointer
 }
-func (self Clipboard) _IsClipboard () {}
+func (self Clipboard) _IsClipboard() {}
 func (self Clipboard) GetGObject() unsafe.Pointer { return self._value_ }
-func ToClipboard(value unsafe.Pointer) Clipboard { return Clipboard{GObjectObject{value}} }
-type Range struct { Widget }
+func ToClipboard(value unsafe.Pointer) Clipboard {
+	return Clipboard{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Range struct {
+	Widget
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type RangeKind interface {
   _IsRange()
   GetGObject() unsafe.Pointer
 }
-func (self Range) _IsRange () {}
+func (self Range) _IsRange() {}
 func (self Range) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRange(value unsafe.Pointer) Range { return Range{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type IconTheme struct { GObjectObject }
+func ToRange(value unsafe.Pointer) Range {
+	return Range{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Range) _IsImplementorIface () {}
+func (self Range) _IsBuildable () {}
+func (self Range) _IsOrientable () {}
+type IconTheme struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type IconThemeKind interface {
   _IsIconTheme()
   GetGObject() unsafe.Pointer
 }
-func (self IconTheme) _IsIconTheme () {}
+func (self IconTheme) _IsIconTheme() {}
 func (self IconTheme) GetGObject() unsafe.Pointer { return self._value_ }
-func ToIconTheme(value unsafe.Pointer) IconTheme { return IconTheme{GObjectObject{value}} }
-type TearoffMenuItem struct { GtkMenuItem }
+func ToIconTheme(value unsafe.Pointer) IconTheme {
+	return IconTheme{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type TearoffMenuItem struct {
+	GtkMenuItem
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type TearoffMenuItemKind interface {
   _IsTearoffMenuItem()
   GetGObject() unsafe.Pointer
 }
-func (self TearoffMenuItem) _IsTearoffMenuItem () {}
+func (self TearoffMenuItem) _IsTearoffMenuItem() {}
 func (self TearoffMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTearoffMenuItem(value unsafe.Pointer) TearoffMenuItem { return TearoffMenuItem{GtkMenuItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type EntryCompletion struct { GObjectObject }
+func ToTearoffMenuItem(value unsafe.Pointer) TearoffMenuItem {
+	return TearoffMenuItem{
+		ToGtkMenuItem(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self TearoffMenuItem) _IsImplementorIface () {}
+func (self TearoffMenuItem) _IsActionable () {}
+func (self TearoffMenuItem) _IsActivatable () {}
+func (self TearoffMenuItem) _IsBuildable () {}
+type EntryCompletion struct {
+	GObjectObject
+	Buildable
+	CellLayout
+	_value_ unsafe.Pointer
+}
 type EntryCompletionKind interface {
   _IsEntryCompletion()
   GetGObject() unsafe.Pointer
 }
-func (self EntryCompletion) _IsEntryCompletion () {}
+func (self EntryCompletion) _IsEntryCompletion() {}
 func (self EntryCompletion) GetGObject() unsafe.Pointer { return self._value_ }
-func ToEntryCompletion(value unsafe.Pointer) EntryCompletion { return EntryCompletion{GObjectObject{value}} }
-type AppChooserWidget struct { Box }
+func ToEntryCompletion(value unsafe.Pointer) EntryCompletion {
+	return EntryCompletion{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		ToCellLayout(value),
+		value,
+	}
+}
+func (self EntryCompletion) _IsBuildable () {}
+func (self EntryCompletion) _IsCellLayout () {}
+type AppChooserWidget struct {
+	Box
+	ImplementorIface
+	AppChooser
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type AppChooserWidgetKind interface {
   _IsAppChooserWidget()
   GetGObject() unsafe.Pointer
 }
-func (self AppChooserWidget) _IsAppChooserWidget () {}
+func (self AppChooserWidget) _IsAppChooserWidget() {}
 func (self AppChooserWidget) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAppChooserWidget(value unsafe.Pointer) AppChooserWidget { return AppChooserWidget{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ComboBox struct { Bin }
+func ToAppChooserWidget(value unsafe.Pointer) AppChooserWidget {
+	return AppChooserWidget{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToAppChooser(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self AppChooserWidget) _IsImplementorIface () {}
+func (self AppChooserWidget) _IsAppChooser () {}
+func (self AppChooserWidget) _IsBuildable () {}
+func (self AppChooserWidget) _IsOrientable () {}
+type ComboBox struct {
+	Bin
+	ImplementorIface
+	Buildable
+	CellEditable
+	CellLayout
+	_value_ unsafe.Pointer
+}
 type ComboBoxKind interface {
   _IsComboBox()
   GetGObject() unsafe.Pointer
 }
-func (self ComboBox) _IsComboBox () {}
+func (self ComboBox) _IsComboBox() {}
 func (self ComboBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToComboBox(value unsafe.Pointer) ComboBox { return ComboBox{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ListStore struct { GObjectObject }
+func ToComboBox(value unsafe.Pointer) ComboBox {
+	return ComboBox{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellEditable(value),
+		ToCellLayout(value),
+		value,
+	}
+}
+func (self ComboBox) _IsImplementorIface () {}
+func (self ComboBox) _IsBuildable () {}
+func (self ComboBox) _IsCellEditable () {}
+func (self ComboBox) _IsCellLayout () {}
+type ListStore struct {
+	GObjectObject
+	Buildable
+	TreeDragDest
+	TreeDragSource
+	TreeModel
+	TreeSortable
+	_value_ unsafe.Pointer
+}
 type ListStoreKind interface {
   _IsListStore()
   GetGObject() unsafe.Pointer
 }
-func (self ListStore) _IsListStore () {}
+func (self ListStore) _IsListStore() {}
 func (self ListStore) GetGObject() unsafe.Pointer { return self._value_ }
-func ToListStore(value unsafe.Pointer) ListStore { return ListStore{GObjectObject{value}} }
-type Statusbar struct { Box }
+func ToListStore(value unsafe.Pointer) ListStore {
+	return ListStore{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		ToTreeDragDest(value),
+		ToTreeDragSource(value),
+		ToTreeModel(value),
+		ToTreeSortable(value),
+		value,
+	}
+}
+func (self ListStore) _IsBuildable () {}
+func (self ListStore) _IsTreeDragDest () {}
+func (self ListStore) _IsTreeDragSource () {}
+func (self ListStore) _IsTreeModel () {}
+func (self ListStore) _IsTreeSortable () {}
+type Editable struct {
+	_value_ unsafe.Pointer
+}
+type EditableKind interface {
+  _IsEditable()
+  GetGObject() unsafe.Pointer
+}
+func (self Editable) _IsEditable() {}
+func (self Editable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToEditable(value unsafe.Pointer) Editable {
+	return Editable{
+		value,
+	}
+}
+type Statusbar struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type StatusbarKind interface {
   _IsStatusbar()
   GetGObject() unsafe.Pointer
 }
-func (self Statusbar) _IsStatusbar () {}
+func (self Statusbar) _IsStatusbar() {}
 func (self Statusbar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStatusbar(value unsafe.Pointer) Statusbar { return Statusbar{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ScrolledWindow struct { Bin }
+func ToStatusbar(value unsafe.Pointer) Statusbar {
+	return Statusbar{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Statusbar) _IsImplementorIface () {}
+func (self Statusbar) _IsBuildable () {}
+func (self Statusbar) _IsOrientable () {}
+type ScrolledWindow struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ScrolledWindowKind interface {
   _IsScrolledWindow()
   GetGObject() unsafe.Pointer
 }
-func (self ScrolledWindow) _IsScrolledWindow () {}
+func (self ScrolledWindow) _IsScrolledWindow() {}
 func (self ScrolledWindow) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScrolledWindow(value unsafe.Pointer) ScrolledWindow { return ScrolledWindow{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type RecentManager struct { GObjectObject }
+func ToScrolledWindow(value unsafe.Pointer) ScrolledWindow {
+	return ScrolledWindow{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ScrolledWindow) _IsImplementorIface () {}
+func (self ScrolledWindow) _IsBuildable () {}
+type RecentManager struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type RecentManagerKind interface {
   _IsRecentManager()
   GetGObject() unsafe.Pointer
 }
-func (self RecentManager) _IsRecentManager () {}
+func (self RecentManager) _IsRecentManager() {}
 func (self RecentManager) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRecentManager(value unsafe.Pointer) RecentManager { return RecentManager{GObjectObject{value}} }
-type Grid struct { Container }
+func ToRecentManager(value unsafe.Pointer) RecentManager {
+	return RecentManager{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Grid struct {
+	Container
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type GridKind interface {
   _IsGrid()
   GetGObject() unsafe.Pointer
 }
-func (self Grid) _IsGrid () {}
+func (self Grid) _IsGrid() {}
 func (self Grid) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGrid(value unsafe.Pointer) Grid { return Grid{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type ToggleAction struct { Action }
+func ToGrid(value unsafe.Pointer) Grid {
+	return Grid{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Grid) _IsImplementorIface () {}
+func (self Grid) _IsBuildable () {}
+func (self Grid) _IsOrientable () {}
+type ToggleAction struct {
+	GtkAction
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ToggleActionKind interface {
   _IsToggleAction()
   GetGObject() unsafe.Pointer
 }
-func (self ToggleAction) _IsToggleAction () {}
+func (self ToggleAction) _IsToggleAction() {}
 func (self ToggleAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToggleAction(value unsafe.Pointer) ToggleAction { return ToggleAction{Action{GObjectObject{value}}} }
-type FontSelectionDialog struct { Dialog }
+func ToToggleAction(value unsafe.Pointer) ToggleAction {
+	return ToggleAction{
+		ToGtkAction(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ToggleAction) _IsBuildable () {}
+type FontSelectionDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type FontSelectionDialogKind interface {
   _IsFontSelectionDialog()
   GetGObject() unsafe.Pointer
 }
-func (self FontSelectionDialog) _IsFontSelectionDialog () {}
+func (self FontSelectionDialog) _IsFontSelectionDialog() {}
 func (self FontSelectionDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFontSelectionDialog(value unsafe.Pointer) FontSelectionDialog { return FontSelectionDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type Builder struct { GObjectObject }
+func ToFontSelectionDialog(value unsafe.Pointer) FontSelectionDialog {
+	return FontSelectionDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self FontSelectionDialog) _IsImplementorIface () {}
+func (self FontSelectionDialog) _IsBuildable () {}
+type ToolShell struct {
+	_value_ unsafe.Pointer
+}
+type ToolShellKind interface {
+  _IsToolShell()
+  GetGObject() unsafe.Pointer
+}
+func (self ToolShell) _IsToolShell() {}
+func (self ToolShell) GetGObject() unsafe.Pointer { return self._value_ }
+func ToToolShell(value unsafe.Pointer) ToolShell {
+	return ToolShell{
+		value,
+	}
+}
+type Builder struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type BuilderKind interface {
   _IsBuilder()
   GetGObject() unsafe.Pointer
 }
-func (self Builder) _IsBuilder () {}
+func (self Builder) _IsBuilder() {}
 func (self Builder) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBuilder(value unsafe.Pointer) Builder { return Builder{GObjectObject{value}} }
-type Viewport struct { Bin }
+func ToBuilder(value unsafe.Pointer) Builder {
+	return Builder{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Viewport struct {
+	Bin
+	ImplementorIface
+	Buildable
+	Scrollable
+	_value_ unsafe.Pointer
+}
 type ViewportKind interface {
   _IsViewport()
   GetGObject() unsafe.Pointer
 }
-func (self Viewport) _IsViewport () {}
+func (self Viewport) _IsViewport() {}
 func (self Viewport) GetGObject() unsafe.Pointer { return self._value_ }
-func ToViewport(value unsafe.Pointer) Viewport { return Viewport{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Box struct { Container }
+func ToViewport(value unsafe.Pointer) Viewport {
+	return Viewport{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToScrollable(value),
+		value,
+	}
+}
+func (self Viewport) _IsImplementorIface () {}
+func (self Viewport) _IsBuildable () {}
+func (self Viewport) _IsScrollable () {}
+type Box struct {
+	Container
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type BoxKind interface {
   _IsBox()
   GetGObject() unsafe.Pointer
 }
-func (self Box) _IsBox () {}
+func (self Box) _IsBox() {}
 func (self Box) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBox(value unsafe.Pointer) Box { return Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type EntryBuffer struct { GObjectObject }
+func ToBox(value unsafe.Pointer) Box {
+	return Box{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Box) _IsImplementorIface () {}
+func (self Box) _IsBuildable () {}
+func (self Box) _IsOrientable () {}
+type EntryBuffer struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type EntryBufferKind interface {
   _IsEntryBuffer()
   GetGObject() unsafe.Pointer
 }
-func (self EntryBuffer) _IsEntryBuffer () {}
+func (self EntryBuffer) _IsEntryBuffer() {}
 func (self EntryBuffer) GetGObject() unsafe.Pointer { return self._value_ }
-func ToEntryBuffer(value unsafe.Pointer) EntryBuffer { return EntryBuffer{GObjectObject{value}} }
-type AccelMap struct { GObjectObject }
+func ToEntryBuffer(value unsafe.Pointer) EntryBuffer {
+	return EntryBuffer{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type AccelMap struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type AccelMapKind interface {
   _IsAccelMap()
   GetGObject() unsafe.Pointer
 }
-func (self AccelMap) _IsAccelMap () {}
+func (self AccelMap) _IsAccelMap() {}
 func (self AccelMap) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAccelMap(value unsafe.Pointer) AccelMap { return AccelMap{GObjectObject{value}} }
-type FileFilter struct { InitiallyUnowned }
+func ToAccelMap(value unsafe.Pointer) AccelMap {
+	return AccelMap{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type TreeDragSource struct {
+	_value_ unsafe.Pointer
+}
+type TreeDragSourceKind interface {
+  _IsTreeDragSource()
+  GetGObject() unsafe.Pointer
+}
+func (self TreeDragSource) _IsTreeDragSource() {}
+func (self TreeDragSource) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTreeDragSource(value unsafe.Pointer) TreeDragSource {
+	return TreeDragSource{
+		value,
+	}
+}
+type FileFilter struct {
+	InitiallyUnowned
+	Buildable
+	_value_ unsafe.Pointer
+}
 type FileFilterKind interface {
   _IsFileFilter()
   GetGObject() unsafe.Pointer
 }
-func (self FileFilter) _IsFileFilter () {}
+func (self FileFilter) _IsFileFilter() {}
 func (self FileFilter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFileFilter(value unsafe.Pointer) FileFilter { return FileFilter{InitiallyUnowned{GObjectObject{value}}} }
-type GtkApplication struct { GioApplication }
+func ToFileFilter(value unsafe.Pointer) FileFilter {
+	return FileFilter{
+		ToInitiallyUnowned(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self FileFilter) _IsBuildable () {}
+type GtkApplication struct {
+	GioApplication
+	GioActionGroup
+	ActionMap
+	_value_ unsafe.Pointer
+}
 type GtkApplicationKind interface {
   _IsGtkApplication()
   GetGObject() unsafe.Pointer
 }
-func (self GtkApplication) _IsGtkApplication () {}
+func (self GtkApplication) _IsGtkApplication() {}
 func (self GtkApplication) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkApplication(value unsafe.Pointer) GtkApplication { return GtkApplication{GioApplication{GObjectObject{value}}} }
-type VPaned struct { Paned }
+func ToGtkApplication(value unsafe.Pointer) GtkApplication {
+	return GtkApplication{
+		ToGioApplication(value),
+		ToGioActionGroup(value),
+		ToActionMap(value),
+		value,
+	}
+}
+func (self GtkApplication) _IsGioActionGroup () {}
+func (self GtkApplication) _IsActionMap () {}
+type VPaned struct {
+	Paned
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VPanedKind interface {
   _IsVPaned()
   GetGObject() unsafe.Pointer
 }
-func (self VPaned) _IsVPaned () {}
+func (self VPaned) _IsVPaned() {}
 func (self VPaned) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVPaned(value unsafe.Pointer) VPaned { return VPaned{Paned{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ColorSelectionDialog struct { Dialog }
+func ToVPaned(value unsafe.Pointer) VPaned {
+	return VPaned{
+		ToPaned(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VPaned) _IsImplementorIface () {}
+func (self VPaned) _IsBuildable () {}
+func (self VPaned) _IsOrientable () {}
+type ColorSelectionDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ColorSelectionDialogKind interface {
   _IsColorSelectionDialog()
   GetGObject() unsafe.Pointer
 }
-func (self ColorSelectionDialog) _IsColorSelectionDialog () {}
+func (self ColorSelectionDialog) _IsColorSelectionDialog() {}
 func (self ColorSelectionDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorSelectionDialog(value unsafe.Pointer) ColorSelectionDialog { return ColorSelectionDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type GtkMenu struct { MenuShell }
+func ToColorSelectionDialog(value unsafe.Pointer) ColorSelectionDialog {
+	return ColorSelectionDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ColorSelectionDialog) _IsImplementorIface () {}
+func (self ColorSelectionDialog) _IsBuildable () {}
+type GtkMenu struct {
+	MenuShell
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type GtkMenuKind interface {
   _IsGtkMenu()
   GetGObject() unsafe.Pointer
 }
-func (self GtkMenu) _IsGtkMenu () {}
+func (self GtkMenu) _IsGtkMenu() {}
 func (self GtkMenu) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkMenu(value unsafe.Pointer) GtkMenu { return GtkMenu{MenuShell{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type CellRendererText struct { CellRenderer }
+func ToGtkMenu(value unsafe.Pointer) GtkMenu {
+	return GtkMenu{
+		ToMenuShell(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkMenu) _IsImplementorIface () {}
+func (self GtkMenu) _IsBuildable () {}
+type CellRendererText struct {
+	CellRenderer
+	_value_ unsafe.Pointer
+}
 type CellRendererTextKind interface {
   _IsCellRendererText()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererText) _IsCellRendererText () {}
+func (self CellRendererText) _IsCellRendererText() {}
 func (self CellRendererText) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererText(value unsafe.Pointer) CellRendererText { return CellRendererText{CellRenderer{InitiallyUnowned{GObjectObject{value}}}} }
-type CellRenderer struct { InitiallyUnowned }
+func ToCellRendererText(value unsafe.Pointer) CellRendererText {
+	return CellRendererText{
+		ToCellRenderer(value),
+		value,
+	}
+}
+type CellRenderer struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
 type CellRendererKind interface {
   _IsCellRenderer()
   GetGObject() unsafe.Pointer
 }
-func (self CellRenderer) _IsCellRenderer () {}
+func (self CellRenderer) _IsCellRenderer() {}
 func (self CellRenderer) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRenderer(value unsafe.Pointer) CellRenderer { return CellRenderer{InitiallyUnowned{GObjectObject{value}}} }
-type Expander struct { Bin }
+func ToCellRenderer(value unsafe.Pointer) CellRenderer {
+	return CellRenderer{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
+type Expander struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ExpanderKind interface {
   _IsExpander()
   GetGObject() unsafe.Pointer
 }
-func (self Expander) _IsExpander () {}
+func (self Expander) _IsExpander() {}
 func (self Expander) GetGObject() unsafe.Pointer { return self._value_ }
-func ToExpander(value unsafe.Pointer) Expander { return Expander{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type HBox struct { Box }
+func ToExpander(value unsafe.Pointer) Expander {
+	return Expander{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Expander) _IsImplementorIface () {}
+func (self Expander) _IsBuildable () {}
+type HBox struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type HBoxKind interface {
   _IsHBox()
   GetGObject() unsafe.Pointer
 }
-func (self HBox) _IsHBox () {}
+func (self HBox) _IsHBox() {}
 func (self HBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHBox(value unsafe.Pointer) HBox { return HBox{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Accessible struct { AtkObject }
+func ToHBox(value unsafe.Pointer) HBox {
+	return HBox{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self HBox) _IsImplementorIface () {}
+func (self HBox) _IsBuildable () {}
+func (self HBox) _IsOrientable () {}
+type Accessible struct {
+	AtkObject
+	_value_ unsafe.Pointer
+}
 type AccessibleKind interface {
   _IsAccessible()
   GetGObject() unsafe.Pointer
 }
-func (self Accessible) _IsAccessible () {}
+func (self Accessible) _IsAccessible() {}
 func (self Accessible) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAccessible(value unsafe.Pointer) Accessible { return Accessible{AtkObject{GObjectObject{value}}} }
-type GtkSocket struct { Container }
+func ToAccessible(value unsafe.Pointer) Accessible {
+	return Accessible{
+		ToAtkObject(value),
+		value,
+	}
+}
+type RecentChooser struct {
+	_value_ unsafe.Pointer
+}
+type RecentChooserKind interface {
+  _IsRecentChooser()
+  GetGObject() unsafe.Pointer
+}
+func (self RecentChooser) _IsRecentChooser() {}
+func (self RecentChooser) GetGObject() unsafe.Pointer { return self._value_ }
+func ToRecentChooser(value unsafe.Pointer) RecentChooser {
+	return RecentChooser{
+		value,
+	}
+}
+type GtkSocket struct {
+	Container
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type GtkSocketKind interface {
   _IsGtkSocket()
   GetGObject() unsafe.Pointer
 }
-func (self GtkSocket) _IsGtkSocket () {}
+func (self GtkSocket) _IsGtkSocket() {}
 func (self GtkSocket) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkSocket(value unsafe.Pointer) GtkSocket { return GtkSocket{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type TextBuffer struct { GObjectObject }
+func ToGtkSocket(value unsafe.Pointer) GtkSocket {
+	return GtkSocket{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkSocket) _IsImplementorIface () {}
+func (self GtkSocket) _IsBuildable () {}
+type TextBuffer struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TextBufferKind interface {
   _IsTextBuffer()
   GetGObject() unsafe.Pointer
 }
-func (self TextBuffer) _IsTextBuffer () {}
+func (self TextBuffer) _IsTextBuffer() {}
 func (self TextBuffer) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextBuffer(value unsafe.Pointer) TextBuffer { return TextBuffer{GObjectObject{value}} }
-type HScale struct { Scale }
+func ToTextBuffer(value unsafe.Pointer) TextBuffer {
+	return TextBuffer{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type HScale struct {
+	Scale
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type HScaleKind interface {
   _IsHScale()
   GetGObject() unsafe.Pointer
 }
-func (self HScale) _IsHScale () {}
+func (self HScale) _IsHScale() {}
 func (self HScale) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHScale(value unsafe.Pointer) HScale { return HScale{Scale{Range{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Image struct { GtkMisc }
-type ImageKind interface {
-  _IsImage()
+func ToHScale(value unsafe.Pointer) HScale {
+	return HScale{
+		ToScale(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self HScale) _IsImplementorIface () {}
+func (self HScale) _IsBuildable () {}
+func (self HScale) _IsOrientable () {}
+type GtkActionGroup struct {
+	GObjectObject
+	Buildable
+	_value_ unsafe.Pointer
+}
+type GtkActionGroupKind interface {
+  _IsGtkActionGroup()
   GetGObject() unsafe.Pointer
 }
-func (self Image) _IsImage () {}
-func (self Image) GetGObject() unsafe.Pointer { return self._value_ }
-func ToImage(value unsafe.Pointer) Image { return Image{GtkMisc{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type IconView struct { Container }
+func (self GtkActionGroup) _IsGtkActionGroup() {}
+func (self GtkActionGroup) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGtkActionGroup(value unsafe.Pointer) GtkActionGroup {
+	return GtkActionGroup{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkActionGroup) _IsBuildable () {}
+type IconView struct {
+	Container
+	ImplementorIface
+	Buildable
+	CellLayout
+	Scrollable
+	_value_ unsafe.Pointer
+}
 type IconViewKind interface {
   _IsIconView()
   GetGObject() unsafe.Pointer
 }
-func (self IconView) _IsIconView () {}
+func (self IconView) _IsIconView() {}
 func (self IconView) GetGObject() unsafe.Pointer { return self._value_ }
-func ToIconView(value unsafe.Pointer) IconView { return IconView{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type RadioButton struct { CheckButton }
+func ToIconView(value unsafe.Pointer) IconView {
+	return IconView{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellLayout(value),
+		ToScrollable(value),
+		value,
+	}
+}
+func (self IconView) _IsImplementorIface () {}
+func (self IconView) _IsBuildable () {}
+func (self IconView) _IsCellLayout () {}
+func (self IconView) _IsScrollable () {}
+type RadioButton struct {
+	CheckButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type RadioButtonKind interface {
   _IsRadioButton()
   GetGObject() unsafe.Pointer
 }
-func (self RadioButton) _IsRadioButton () {}
+func (self RadioButton) _IsRadioButton() {}
 func (self RadioButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRadioButton(value unsafe.Pointer) RadioButton { return RadioButton{CheckButton{ToggleButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}}} }
-type ProgressBar struct { Widget }
+func ToRadioButton(value unsafe.Pointer) RadioButton {
+	return RadioButton{
+		ToCheckButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self RadioButton) _IsImplementorIface () {}
+func (self RadioButton) _IsActionable () {}
+func (self RadioButton) _IsActivatable () {}
+func (self RadioButton) _IsBuildable () {}
+type ProgressBar struct {
+	Widget
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ProgressBarKind interface {
   _IsProgressBar()
   GetGObject() unsafe.Pointer
 }
-func (self ProgressBar) _IsProgressBar () {}
+func (self ProgressBar) _IsProgressBar() {}
 func (self ProgressBar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToProgressBar(value unsafe.Pointer) ProgressBar { return ProgressBar{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Separator struct { Widget }
+func ToProgressBar(value unsafe.Pointer) ProgressBar {
+	return ProgressBar{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self ProgressBar) _IsImplementorIface () {}
+func (self ProgressBar) _IsBuildable () {}
+func (self ProgressBar) _IsOrientable () {}
+type Separator struct {
+	Widget
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type SeparatorKind interface {
   _IsSeparator()
   GetGObject() unsafe.Pointer
 }
-func (self Separator) _IsSeparator () {}
+func (self Separator) _IsSeparator() {}
 func (self Separator) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSeparator(value unsafe.Pointer) Separator { return Separator{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Calendar struct { Widget }
+func ToSeparator(value unsafe.Pointer) Separator {
+	return Separator{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Separator) _IsImplementorIface () {}
+func (self Separator) _IsBuildable () {}
+func (self Separator) _IsOrientable () {}
+type Calendar struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type CalendarKind interface {
   _IsCalendar()
   GetGObject() unsafe.Pointer
 }
-func (self Calendar) _IsCalendar () {}
+func (self Calendar) _IsCalendar() {}
 func (self Calendar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCalendar(value unsafe.Pointer) Calendar { return Calendar{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type GtkSettings struct { GObjectObject }
+func ToCalendar(value unsafe.Pointer) Calendar {
+	return Calendar{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Calendar) _IsImplementorIface () {}
+func (self Calendar) _IsBuildable () {}
+type GtkSettings struct {
+	GObjectObject
+	StyleProvider
+	_value_ unsafe.Pointer
+}
 type GtkSettingsKind interface {
   _IsGtkSettings()
   GetGObject() unsafe.Pointer
 }
-func (self GtkSettings) _IsGtkSettings () {}
+func (self GtkSettings) _IsGtkSettings() {}
 func (self GtkSettings) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkSettings(value unsafe.Pointer) GtkSettings { return GtkSettings{GObjectObject{value}} }
-type LevelBar struct { Widget }
+func ToGtkSettings(value unsafe.Pointer) GtkSettings {
+	return GtkSettings{
+		ToGObjectObject(value),
+		ToStyleProvider(value),
+		value,
+	}
+}
+func (self GtkSettings) _IsStyleProvider () {}
+type LevelBar struct {
+	Widget
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type LevelBarKind interface {
   _IsLevelBar()
   GetGObject() unsafe.Pointer
 }
-func (self LevelBar) _IsLevelBar () {}
+func (self LevelBar) _IsLevelBar() {}
 func (self LevelBar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLevelBar(value unsafe.Pointer) LevelBar { return LevelBar{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Alignment struct { Bin }
+func ToLevelBar(value unsafe.Pointer) LevelBar {
+	return LevelBar{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self LevelBar) _IsImplementorIface () {}
+func (self LevelBar) _IsBuildable () {}
+func (self LevelBar) _IsOrientable () {}
+type Alignment struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type AlignmentKind interface {
   _IsAlignment()
   GetGObject() unsafe.Pointer
 }
-func (self Alignment) _IsAlignment () {}
+func (self Alignment) _IsAlignment() {}
 func (self Alignment) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAlignment(value unsafe.Pointer) Alignment { return Alignment{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Style struct { GObjectObject }
+func ToAlignment(value unsafe.Pointer) Alignment {
+	return Alignment{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Alignment) _IsImplementorIface () {}
+func (self Alignment) _IsBuildable () {}
+type Style struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type StyleKind interface {
   _IsStyle()
   GetGObject() unsafe.Pointer
 }
-func (self Style) _IsStyle () {}
+func (self Style) _IsStyle() {}
 func (self Style) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStyle(value unsafe.Pointer) Style { return Style{GObjectObject{value}} }
-type ThemingEngine struct { GObjectObject }
+func ToStyle(value unsafe.Pointer) Style {
+	return Style{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type GtkWindow struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
+type GtkWindowKind interface {
+  _IsGtkWindow()
+  GetGObject() unsafe.Pointer
+}
+func (self GtkWindow) _IsGtkWindow() {}
+func (self GtkWindow) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGtkWindow(value unsafe.Pointer) GtkWindow {
+	return GtkWindow{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkWindow) _IsImplementorIface () {}
+func (self GtkWindow) _IsBuildable () {}
+type ThemingEngine struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type ThemingEngineKind interface {
   _IsThemingEngine()
   GetGObject() unsafe.Pointer
 }
-func (self ThemingEngine) _IsThemingEngine () {}
+func (self ThemingEngine) _IsThemingEngine() {}
 func (self ThemingEngine) GetGObject() unsafe.Pointer { return self._value_ }
-func ToThemingEngine(value unsafe.Pointer) ThemingEngine { return ThemingEngine{GObjectObject{value}} }
-type StyleProperties struct { GObjectObject }
+func ToThemingEngine(value unsafe.Pointer) ThemingEngine {
+	return ThemingEngine{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type StyleProperties struct {
+	GObjectObject
+	StyleProvider
+	_value_ unsafe.Pointer
+}
 type StylePropertiesKind interface {
   _IsStyleProperties()
   GetGObject() unsafe.Pointer
 }
-func (self StyleProperties) _IsStyleProperties () {}
+func (self StyleProperties) _IsStyleProperties() {}
 func (self StyleProperties) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStyleProperties(value unsafe.Pointer) StyleProperties { return StyleProperties{GObjectObject{value}} }
-type VSeparator struct { Separator }
+func ToStyleProperties(value unsafe.Pointer) StyleProperties {
+	return StyleProperties{
+		ToGObjectObject(value),
+		ToStyleProvider(value),
+		value,
+	}
+}
+func (self StyleProperties) _IsStyleProvider () {}
+type ColorChooser struct {
+	_value_ unsafe.Pointer
+}
+type ColorChooserKind interface {
+  _IsColorChooser()
+  GetGObject() unsafe.Pointer
+}
+func (self ColorChooser) _IsColorChooser() {}
+func (self ColorChooser) GetGObject() unsafe.Pointer { return self._value_ }
+func ToColorChooser(value unsafe.Pointer) ColorChooser {
+	return ColorChooser{
+		value,
+	}
+}
+type VSeparator struct {
+	Separator
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VSeparatorKind interface {
   _IsVSeparator()
   GetGObject() unsafe.Pointer
 }
-func (self VSeparator) _IsVSeparator () {}
+func (self VSeparator) _IsVSeparator() {}
 func (self VSeparator) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVSeparator(value unsafe.Pointer) VSeparator { return VSeparator{Separator{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type TextMark struct { GObjectObject }
+func ToVSeparator(value unsafe.Pointer) VSeparator {
+	return VSeparator{
+		ToSeparator(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VSeparator) _IsImplementorIface () {}
+func (self VSeparator) _IsBuildable () {}
+func (self VSeparator) _IsOrientable () {}
+type TextMark struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TextMarkKind interface {
   _IsTextMark()
   GetGObject() unsafe.Pointer
 }
-func (self TextMark) _IsTextMark () {}
+func (self TextMark) _IsTextMark() {}
 func (self TextMark) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextMark(value unsafe.Pointer) TextMark { return TextMark{GObjectObject{value}} }
-type Spinner struct { Widget }
+func ToTextMark(value unsafe.Pointer) TextMark {
+	return TextMark{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Spinner struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type SpinnerKind interface {
   _IsSpinner()
   GetGObject() unsafe.Pointer
 }
-func (self Spinner) _IsSpinner () {}
+func (self Spinner) _IsSpinner() {}
 func (self Spinner) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSpinner(value unsafe.Pointer) Spinner { return Spinner{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Scale struct { Range }
+func ToSpinner(value unsafe.Pointer) Spinner {
+	return Spinner{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Spinner) _IsImplementorIface () {}
+func (self Spinner) _IsBuildable () {}
+type Scale struct {
+	Range
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ScaleKind interface {
   _IsScale()
   GetGObject() unsafe.Pointer
 }
-func (self Scale) _IsScale () {}
+func (self Scale) _IsScale() {}
 func (self Scale) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScale(value unsafe.Pointer) Scale { return Scale{Range{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type LinkButton struct { Button }
+func ToScale(value unsafe.Pointer) Scale {
+	return Scale{
+		ToRange(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self Scale) _IsImplementorIface () {}
+func (self Scale) _IsBuildable () {}
+func (self Scale) _IsOrientable () {}
+type LinkButton struct {
+	Button
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type LinkButtonKind interface {
   _IsLinkButton()
   GetGObject() unsafe.Pointer
 }
-func (self LinkButton) _IsLinkButton () {}
+func (self LinkButton) _IsLinkButton() {}
 func (self LinkButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLinkButton(value unsafe.Pointer) LinkButton { return LinkButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type FileChooserWidget struct { Box }
+func ToLinkButton(value unsafe.Pointer) LinkButton {
+	return LinkButton{
+		ToButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self LinkButton) _IsImplementorIface () {}
+func (self LinkButton) _IsActionable () {}
+func (self LinkButton) _IsActivatable () {}
+func (self LinkButton) _IsBuildable () {}
+type FileChooserWidget struct {
+	Box
+	ImplementorIface
+	Buildable
+	FileChooser
+	Orientable
+	_value_ unsafe.Pointer
+}
 type FileChooserWidgetKind interface {
   _IsFileChooserWidget()
   GetGObject() unsafe.Pointer
 }
-func (self FileChooserWidget) _IsFileChooserWidget () {}
+func (self FileChooserWidget) _IsFileChooserWidget() {}
 func (self FileChooserWidget) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFileChooserWidget(value unsafe.Pointer) FileChooserWidget { return FileChooserWidget{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type GtkPlug struct { Window }
+func ToFileChooserWidget(value unsafe.Pointer) FileChooserWidget {
+	return FileChooserWidget{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToFileChooser(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self FileChooserWidget) _IsImplementorIface () {}
+func (self FileChooserWidget) _IsBuildable () {}
+func (self FileChooserWidget) _IsFileChooser () {}
+func (self FileChooserWidget) _IsOrientable () {}
+type GtkPlug struct {
+	GtkWindow
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type GtkPlugKind interface {
   _IsGtkPlug()
   GetGObject() unsafe.Pointer
 }
-func (self GtkPlug) _IsGtkPlug () {}
+func (self GtkPlug) _IsGtkPlug() {}
 func (self GtkPlug) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkPlug(value unsafe.Pointer) GtkPlug { return GtkPlug{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type AppChooserDialog struct { Dialog }
+func ToGtkPlug(value unsafe.Pointer) GtkPlug {
+	return GtkPlug{
+		ToGtkWindow(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkPlug) _IsImplementorIface () {}
+func (self GtkPlug) _IsBuildable () {}
+type AppChooserDialog struct {
+	Dialog
+	ImplementorIface
+	AppChooser
+	Buildable
+	_value_ unsafe.Pointer
+}
 type AppChooserDialogKind interface {
   _IsAppChooserDialog()
   GetGObject() unsafe.Pointer
 }
-func (self AppChooserDialog) _IsAppChooserDialog () {}
+func (self AppChooserDialog) _IsAppChooserDialog() {}
 func (self AppChooserDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAppChooserDialog(value unsafe.Pointer) AppChooserDialog { return AppChooserDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type CellView struct { Widget }
+func ToAppChooserDialog(value unsafe.Pointer) AppChooserDialog {
+	return AppChooserDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToAppChooser(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self AppChooserDialog) _IsImplementorIface () {}
+func (self AppChooserDialog) _IsAppChooser () {}
+func (self AppChooserDialog) _IsBuildable () {}
+type CellView struct {
+	Widget
+	ImplementorIface
+	Buildable
+	CellLayout
+	Orientable
+	_value_ unsafe.Pointer
+}
 type CellViewKind interface {
   _IsCellView()
   GetGObject() unsafe.Pointer
 }
-func (self CellView) _IsCellView () {}
+func (self CellView) _IsCellView() {}
 func (self CellView) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellView(value unsafe.Pointer) CellView { return CellView{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type MenuShell struct { Container }
+func ToCellView(value unsafe.Pointer) CellView {
+	return CellView{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellLayout(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self CellView) _IsImplementorIface () {}
+func (self CellView) _IsBuildable () {}
+func (self CellView) _IsCellLayout () {}
+func (self CellView) _IsOrientable () {}
+type MenuShell struct {
+	Container
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type MenuShellKind interface {
   _IsMenuShell()
   GetGObject() unsafe.Pointer
 }
-func (self MenuShell) _IsMenuShell () {}
+func (self MenuShell) _IsMenuShell() {}
 func (self MenuShell) GetGObject() unsafe.Pointer { return self._value_ }
-func ToMenuShell(value unsafe.Pointer) MenuShell { return MenuShell{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type TextChildAnchor struct { GObjectObject }
+func ToMenuShell(value unsafe.Pointer) MenuShell {
+	return MenuShell{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self MenuShell) _IsImplementorIface () {}
+func (self MenuShell) _IsBuildable () {}
+type TextChildAnchor struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TextChildAnchorKind interface {
   _IsTextChildAnchor()
   GetGObject() unsafe.Pointer
 }
-func (self TextChildAnchor) _IsTextChildAnchor () {}
+func (self TextChildAnchor) _IsTextChildAnchor() {}
 func (self TextChildAnchor) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextChildAnchor(value unsafe.Pointer) TextChildAnchor { return TextChildAnchor{GObjectObject{value}} }
-type Assistant struct { Window }
+func ToTextChildAnchor(value unsafe.Pointer) TextChildAnchor {
+	return TextChildAnchor{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Buildable struct {
+	_value_ unsafe.Pointer
+}
+type BuildableKind interface {
+  _IsBuildable()
+  GetGObject() unsafe.Pointer
+}
+func (self Buildable) _IsBuildable() {}
+func (self Buildable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToBuildable(value unsafe.Pointer) Buildable {
+	return Buildable{
+		value,
+	}
+}
+type Assistant struct {
+	GtkWindow
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type AssistantKind interface {
   _IsAssistant()
   GetGObject() unsafe.Pointer
 }
-func (self Assistant) _IsAssistant () {}
+func (self Assistant) _IsAssistant() {}
 func (self Assistant) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAssistant(value unsafe.Pointer) Assistant { return Assistant{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type FileChooserButton struct { Box }
+func ToAssistant(value unsafe.Pointer) Assistant {
+	return Assistant{
+		ToGtkWindow(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Assistant) _IsImplementorIface () {}
+func (self Assistant) _IsBuildable () {}
+type FileChooserButton struct {
+	Box
+	ImplementorIface
+	Buildable
+	FileChooser
+	Orientable
+	_value_ unsafe.Pointer
+}
 type FileChooserButtonKind interface {
   _IsFileChooserButton()
   GetGObject() unsafe.Pointer
 }
-func (self FileChooserButton) _IsFileChooserButton () {}
+func (self FileChooserButton) _IsFileChooserButton() {}
 func (self FileChooserButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFileChooserButton(value unsafe.Pointer) FileChooserButton { return FileChooserButton{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ColorSelection struct { Box }
+func ToFileChooserButton(value unsafe.Pointer) FileChooserButton {
+	return FileChooserButton{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToFileChooser(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self FileChooserButton) _IsImplementorIface () {}
+func (self FileChooserButton) _IsBuildable () {}
+func (self FileChooserButton) _IsFileChooser () {}
+func (self FileChooserButton) _IsOrientable () {}
+type ColorSelection struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ColorSelectionKind interface {
   _IsColorSelection()
   GetGObject() unsafe.Pointer
 }
-func (self ColorSelection) _IsColorSelection () {}
+func (self ColorSelection) _IsColorSelection() {}
 func (self ColorSelection) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorSelection(value unsafe.Pointer) ColorSelection { return ColorSelection{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type AppChooserButton struct { ComboBox }
+func ToColorSelection(value unsafe.Pointer) ColorSelection {
+	return ColorSelection{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self ColorSelection) _IsImplementorIface () {}
+func (self ColorSelection) _IsBuildable () {}
+func (self ColorSelection) _IsOrientable () {}
+type AppChooserButton struct {
+	ComboBox
+	ImplementorIface
+	AppChooser
+	Buildable
+	CellEditable
+	CellLayout
+	_value_ unsafe.Pointer
+}
 type AppChooserButtonKind interface {
   _IsAppChooserButton()
   GetGObject() unsafe.Pointer
 }
-func (self AppChooserButton) _IsAppChooserButton () {}
+func (self AppChooserButton) _IsAppChooserButton() {}
 func (self AppChooserButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAppChooserButton(value unsafe.Pointer) AppChooserButton { return AppChooserButton{ComboBox{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type VBox struct { Box }
+func ToAppChooserButton(value unsafe.Pointer) AppChooserButton {
+	return AppChooserButton{
+		ToComboBox(value),
+		ToImplementorIface(value),
+		ToAppChooser(value),
+		ToBuildable(value),
+		ToCellEditable(value),
+		ToCellLayout(value),
+		value,
+	}
+}
+func (self AppChooserButton) _IsImplementorIface () {}
+func (self AppChooserButton) _IsAppChooser () {}
+func (self AppChooserButton) _IsBuildable () {}
+func (self AppChooserButton) _IsCellEditable () {}
+func (self AppChooserButton) _IsCellLayout () {}
+type VBox struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VBoxKind interface {
   _IsVBox()
   GetGObject() unsafe.Pointer
 }
-func (self VBox) _IsVBox () {}
+func (self VBox) _IsVBox() {}
 func (self VBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVBox(value unsafe.Pointer) VBox { return VBox{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Notebook struct { Container }
+func ToVBox(value unsafe.Pointer) VBox {
+	return VBox{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VBox) _IsImplementorIface () {}
+func (self VBox) _IsBuildable () {}
+func (self VBox) _IsOrientable () {}
+type Notebook struct {
+	Container
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type NotebookKind interface {
   _IsNotebook()
   GetGObject() unsafe.Pointer
 }
-func (self Notebook) _IsNotebook () {}
+func (self Notebook) _IsNotebook() {}
 func (self Notebook) GetGObject() unsafe.Pointer { return self._value_ }
-func ToNotebook(value unsafe.Pointer) Notebook { return Notebook{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type ToolButton struct { ToolItem }
+func ToNotebook(value unsafe.Pointer) Notebook {
+	return Notebook{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Notebook) _IsImplementorIface () {}
+func (self Notebook) _IsBuildable () {}
+type ToolButton struct {
+	ToolItem
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ToolButtonKind interface {
   _IsToolButton()
   GetGObject() unsafe.Pointer
 }
-func (self ToolButton) _IsToolButton () {}
+func (self ToolButton) _IsToolButton() {}
 func (self ToolButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToolButton(value unsafe.Pointer) ToolButton { return ToolButton{ToolItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type FontChooserWidget struct { Box }
+func ToToolButton(value unsafe.Pointer) ToolButton {
+	return ToolButton{
+		ToToolItem(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ToolButton) _IsImplementorIface () {}
+func (self ToolButton) _IsActionable () {}
+func (self ToolButton) _IsActivatable () {}
+func (self ToolButton) _IsBuildable () {}
+type FontChooserWidget struct {
+	Box
+	ImplementorIface
+	Buildable
+	FontChooser
+	Orientable
+	_value_ unsafe.Pointer
+}
 type FontChooserWidgetKind interface {
   _IsFontChooserWidget()
   GetGObject() unsafe.Pointer
 }
-func (self FontChooserWidget) _IsFontChooserWidget () {}
+func (self FontChooserWidget) _IsFontChooserWidget() {}
 func (self FontChooserWidget) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFontChooserWidget(value unsafe.Pointer) FontChooserWidget { return FontChooserWidget{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type CellRendererSpinner struct { CellRenderer }
+func ToFontChooserWidget(value unsafe.Pointer) FontChooserWidget {
+	return FontChooserWidget{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToFontChooser(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self FontChooserWidget) _IsImplementorIface () {}
+func (self FontChooserWidget) _IsBuildable () {}
+func (self FontChooserWidget) _IsFontChooser () {}
+func (self FontChooserWidget) _IsOrientable () {}
+type CellRendererSpinner struct {
+	CellRenderer
+	_value_ unsafe.Pointer
+}
 type CellRendererSpinnerKind interface {
   _IsCellRendererSpinner()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererSpinner) _IsCellRendererSpinner () {}
+func (self CellRendererSpinner) _IsCellRendererSpinner() {}
 func (self CellRendererSpinner) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererSpinner(value unsafe.Pointer) CellRendererSpinner { return CellRendererSpinner{CellRenderer{InitiallyUnowned{GObjectObject{value}}}} }
-type ToolPalette struct { Container }
+func ToCellRendererSpinner(value unsafe.Pointer) CellRendererSpinner {
+	return CellRendererSpinner{
+		ToCellRenderer(value),
+		value,
+	}
+}
+type ToolPalette struct {
+	Container
+	ImplementorIface
+	Buildable
+	Orientable
+	Scrollable
+	_value_ unsafe.Pointer
+}
 type ToolPaletteKind interface {
   _IsToolPalette()
   GetGObject() unsafe.Pointer
 }
-func (self ToolPalette) _IsToolPalette () {}
+func (self ToolPalette) _IsToolPalette() {}
 func (self ToolPalette) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToolPalette(value unsafe.Pointer) ToolPalette { return ToolPalette{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type CellRendererPixbuf struct { CellRenderer }
+func ToToolPalette(value unsafe.Pointer) ToolPalette {
+	return ToolPalette{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		ToScrollable(value),
+		value,
+	}
+}
+func (self ToolPalette) _IsImplementorIface () {}
+func (self ToolPalette) _IsBuildable () {}
+func (self ToolPalette) _IsOrientable () {}
+func (self ToolPalette) _IsScrollable () {}
+type CellRendererPixbuf struct {
+	CellRenderer
+	_value_ unsafe.Pointer
+}
 type CellRendererPixbufKind interface {
   _IsCellRendererPixbuf()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererPixbuf) _IsCellRendererPixbuf () {}
+func (self CellRendererPixbuf) _IsCellRendererPixbuf() {}
 func (self CellRendererPixbuf) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererPixbuf(value unsafe.Pointer) CellRendererPixbuf { return CellRendererPixbuf{CellRenderer{InitiallyUnowned{GObjectObject{value}}}} }
-type TextTagTable struct { GObjectObject }
+func ToCellRendererPixbuf(value unsafe.Pointer) CellRendererPixbuf {
+	return CellRendererPixbuf{
+		ToCellRenderer(value),
+		value,
+	}
+}
+type TextTagTable struct {
+	GObjectObject
+	Buildable
+	_value_ unsafe.Pointer
+}
 type TextTagTableKind interface {
   _IsTextTagTable()
   GetGObject() unsafe.Pointer
 }
-func (self TextTagTable) _IsTextTagTable () {}
+func (self TextTagTable) _IsTextTagTable() {}
 func (self TextTagTable) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextTagTable(value unsafe.Pointer) TextTagTable { return TextTagTable{GObjectObject{value}} }
-type PrintSettings struct { GObjectObject }
+func ToTextTagTable(value unsafe.Pointer) TextTagTable {
+	return TextTagTable{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self TextTagTable) _IsBuildable () {}
+type PrintSettings struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type PrintSettingsKind interface {
   _IsPrintSettings()
   GetGObject() unsafe.Pointer
 }
-func (self PrintSettings) _IsPrintSettings () {}
+func (self PrintSettings) _IsPrintSettings() {}
 func (self PrintSettings) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPrintSettings(value unsafe.Pointer) PrintSettings { return PrintSettings{GObjectObject{value}} }
-type CheckMenuItem struct { GtkMenuItem }
+func ToPrintSettings(value unsafe.Pointer) PrintSettings {
+	return PrintSettings{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type CheckMenuItem struct {
+	GtkMenuItem
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type CheckMenuItemKind interface {
   _IsCheckMenuItem()
   GetGObject() unsafe.Pointer
 }
-func (self CheckMenuItem) _IsCheckMenuItem () {}
+func (self CheckMenuItem) _IsCheckMenuItem() {}
 func (self CheckMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCheckMenuItem(value unsafe.Pointer) CheckMenuItem { return CheckMenuItem{GtkMenuItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type IconFactory struct { GObjectObject }
+func ToCheckMenuItem(value unsafe.Pointer) CheckMenuItem {
+	return CheckMenuItem{
+		ToGtkMenuItem(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self CheckMenuItem) _IsImplementorIface () {}
+func (self CheckMenuItem) _IsActionable () {}
+func (self CheckMenuItem) _IsActivatable () {}
+func (self CheckMenuItem) _IsBuildable () {}
+type IconFactory struct {
+	GObjectObject
+	Buildable
+	_value_ unsafe.Pointer
+}
 type IconFactoryKind interface {
   _IsIconFactory()
   GetGObject() unsafe.Pointer
 }
-func (self IconFactory) _IsIconFactory () {}
+func (self IconFactory) _IsIconFactory() {}
 func (self IconFactory) GetGObject() unsafe.Pointer { return self._value_ }
-func ToIconFactory(value unsafe.Pointer) IconFactory { return IconFactory{GObjectObject{value}} }
-type CheckButton struct { ToggleButton }
+func ToIconFactory(value unsafe.Pointer) IconFactory {
+	return IconFactory{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self IconFactory) _IsBuildable () {}
+type CheckButton struct {
+	ToggleButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type CheckButtonKind interface {
   _IsCheckButton()
   GetGObject() unsafe.Pointer
 }
-func (self CheckButton) _IsCheckButton () {}
+func (self CheckButton) _IsCheckButton() {}
 func (self CheckButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCheckButton(value unsafe.Pointer) CheckButton { return CheckButton{ToggleButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type ComboBoxText struct { ComboBox }
+func ToCheckButton(value unsafe.Pointer) CheckButton {
+	return CheckButton{
+		ToToggleButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self CheckButton) _IsImplementorIface () {}
+func (self CheckButton) _IsActionable () {}
+func (self CheckButton) _IsActivatable () {}
+func (self CheckButton) _IsBuildable () {}
+type ComboBoxText struct {
+	ComboBox
+	ImplementorIface
+	Buildable
+	CellEditable
+	CellLayout
+	_value_ unsafe.Pointer
+}
 type ComboBoxTextKind interface {
   _IsComboBoxText()
   GetGObject() unsafe.Pointer
 }
-func (self ComboBoxText) _IsComboBoxText () {}
+func (self ComboBoxText) _IsComboBoxText() {}
 func (self ComboBoxText) GetGObject() unsafe.Pointer { return self._value_ }
-func ToComboBoxText(value unsafe.Pointer) ComboBoxText { return ComboBoxText{ComboBox{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type Switch struct { Widget }
+func ToComboBoxText(value unsafe.Pointer) ComboBoxText {
+	return ComboBoxText{
+		ToComboBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellEditable(value),
+		ToCellLayout(value),
+		value,
+	}
+}
+func (self ComboBoxText) _IsImplementorIface () {}
+func (self ComboBoxText) _IsBuildable () {}
+func (self ComboBoxText) _IsCellEditable () {}
+func (self ComboBoxText) _IsCellLayout () {}
+type Switch struct {
+	Widget
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type SwitchKind interface {
   _IsSwitch()
   GetGObject() unsafe.Pointer
 }
-func (self Switch) _IsSwitch () {}
+func (self Switch) _IsSwitch() {}
 func (self Switch) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSwitch(value unsafe.Pointer) Switch { return Switch{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type InfoBar struct { Box }
+func ToSwitch(value unsafe.Pointer) Switch {
+	return Switch{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Switch) _IsImplementorIface () {}
+func (self Switch) _IsActionable () {}
+func (self Switch) _IsActivatable () {}
+func (self Switch) _IsBuildable () {}
+type InfoBar struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type InfoBarKind interface {
   _IsInfoBar()
   GetGObject() unsafe.Pointer
 }
-func (self InfoBar) _IsInfoBar () {}
+func (self InfoBar) _IsInfoBar() {}
 func (self InfoBar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToInfoBar(value unsafe.Pointer) InfoBar { return InfoBar{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Tooltip struct { GObjectObject }
+func ToInfoBar(value unsafe.Pointer) InfoBar {
+	return InfoBar{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self InfoBar) _IsImplementorIface () {}
+func (self InfoBar) _IsBuildable () {}
+func (self InfoBar) _IsOrientable () {}
+type Tooltip struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TooltipKind interface {
   _IsTooltip()
   GetGObject() unsafe.Pointer
 }
-func (self Tooltip) _IsTooltip () {}
+func (self Tooltip) _IsTooltip() {}
 func (self Tooltip) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTooltip(value unsafe.Pointer) Tooltip { return Tooltip{GObjectObject{value}} }
-type Dialog struct { Window }
+func ToTooltip(value unsafe.Pointer) Tooltip {
+	return Tooltip{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Dialog struct {
+	GtkWindow
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type DialogKind interface {
   _IsDialog()
   GetGObject() unsafe.Pointer
 }
-func (self Dialog) _IsDialog () {}
+func (self Dialog) _IsDialog() {}
 func (self Dialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDialog(value unsafe.Pointer) Dialog { return Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type CellRendererProgress struct { CellRenderer }
+func ToDialog(value unsafe.Pointer) Dialog {
+	return Dialog{
+		ToGtkWindow(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Dialog) _IsImplementorIface () {}
+func (self Dialog) _IsBuildable () {}
+type CellRendererProgress struct {
+	CellRenderer
+	Orientable
+	_value_ unsafe.Pointer
+}
 type CellRendererProgressKind interface {
   _IsCellRendererProgress()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererProgress) _IsCellRendererProgress () {}
+func (self CellRendererProgress) _IsCellRendererProgress() {}
 func (self CellRendererProgress) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererProgress(value unsafe.Pointer) CellRendererProgress { return CellRendererProgress{CellRenderer{InitiallyUnowned{GObjectObject{value}}}} }
-type MenuToolButton struct { ToolButton }
+func ToCellRendererProgress(value unsafe.Pointer) CellRendererProgress {
+	return CellRendererProgress{
+		ToCellRenderer(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self CellRendererProgress) _IsOrientable () {}
+type MenuToolButton struct {
+	ToolButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type MenuToolButtonKind interface {
   _IsMenuToolButton()
   GetGObject() unsafe.Pointer
 }
-func (self MenuToolButton) _IsMenuToolButton () {}
+func (self MenuToolButton) _IsMenuToolButton() {}
 func (self MenuToolButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToMenuToolButton(value unsafe.Pointer) MenuToolButton { return MenuToolButton{ToolButton{ToolItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type UIManager struct { GObjectObject }
+func ToMenuToolButton(value unsafe.Pointer) MenuToolButton {
+	return MenuToolButton{
+		ToToolButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self MenuToolButton) _IsImplementorIface () {}
+func (self MenuToolButton) _IsActionable () {}
+func (self MenuToolButton) _IsActivatable () {}
+func (self MenuToolButton) _IsBuildable () {}
+type UIManager struct {
+	GObjectObject
+	Buildable
+	_value_ unsafe.Pointer
+}
 type UIManagerKind interface {
   _IsUIManager()
   GetGObject() unsafe.Pointer
 }
-func (self UIManager) _IsUIManager () {}
+func (self UIManager) _IsUIManager() {}
 func (self UIManager) GetGObject() unsafe.Pointer { return self._value_ }
-func ToUIManager(value unsafe.Pointer) UIManager { return UIManager{GObjectObject{value}} }
-type TreeViewColumn struct { InitiallyUnowned }
+func ToUIManager(value unsafe.Pointer) UIManager {
+	return UIManager{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self UIManager) _IsBuildable () {}
+type TreeViewColumn struct {
+	InitiallyUnowned
+	Buildable
+	CellLayout
+	_value_ unsafe.Pointer
+}
 type TreeViewColumnKind interface {
   _IsTreeViewColumn()
   GetGObject() unsafe.Pointer
 }
-func (self TreeViewColumn) _IsTreeViewColumn () {}
+func (self TreeViewColumn) _IsTreeViewColumn() {}
 func (self TreeViewColumn) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTreeViewColumn(value unsafe.Pointer) TreeViewColumn { return TreeViewColumn{InitiallyUnowned{GObjectObject{value}}} }
-type AccelGroup struct { GObjectObject }
+func ToTreeViewColumn(value unsafe.Pointer) TreeViewColumn {
+	return TreeViewColumn{
+		ToInitiallyUnowned(value),
+		ToBuildable(value),
+		ToCellLayout(value),
+		value,
+	}
+}
+func (self TreeViewColumn) _IsBuildable () {}
+func (self TreeViewColumn) _IsCellLayout () {}
+type Orientable struct {
+	_value_ unsafe.Pointer
+}
+type OrientableKind interface {
+  _IsOrientable()
+  GetGObject() unsafe.Pointer
+}
+func (self Orientable) _IsOrientable() {}
+func (self Orientable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToOrientable(value unsafe.Pointer) Orientable {
+	return Orientable{
+		value,
+	}
+}
+type AccelGroup struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type AccelGroupKind interface {
   _IsAccelGroup()
   GetGObject() unsafe.Pointer
 }
-func (self AccelGroup) _IsAccelGroup () {}
+func (self AccelGroup) _IsAccelGroup() {}
 func (self AccelGroup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAccelGroup(value unsafe.Pointer) AccelGroup { return AccelGroup{GObjectObject{value}} }
-type ToolItemGroup struct { Container }
+func ToAccelGroup(value unsafe.Pointer) AccelGroup {
+	return AccelGroup{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ToolItemGroup struct {
+	Container
+	ImplementorIface
+	Buildable
+	ToolShell
+	_value_ unsafe.Pointer
+}
 type ToolItemGroupKind interface {
   _IsToolItemGroup()
   GetGObject() unsafe.Pointer
 }
-func (self ToolItemGroup) _IsToolItemGroup () {}
+func (self ToolItemGroup) _IsToolItemGroup() {}
 func (self ToolItemGroup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToolItemGroup(value unsafe.Pointer) ToolItemGroup { return ToolItemGroup{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type IMContext struct { GObjectObject }
+func ToToolItemGroup(value unsafe.Pointer) ToolItemGroup {
+	return ToolItemGroup{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToToolShell(value),
+		value,
+	}
+}
+func (self ToolItemGroup) _IsImplementorIface () {}
+func (self ToolItemGroup) _IsBuildable () {}
+func (self ToolItemGroup) _IsToolShell () {}
+type IMContext struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type IMContextKind interface {
   _IsIMContext()
   GetGObject() unsafe.Pointer
 }
-func (self IMContext) _IsIMContext () {}
+func (self IMContext) _IsIMContext() {}
 func (self IMContext) GetGObject() unsafe.Pointer { return self._value_ }
-func ToIMContext(value unsafe.Pointer) IMContext { return IMContext{GObjectObject{value}} }
-type VButtonBox struct { ButtonBox }
+func ToIMContext(value unsafe.Pointer) IMContext {
+	return IMContext{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type VButtonBox struct {
+	ButtonBox
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VButtonBoxKind interface {
   _IsVButtonBox()
   GetGObject() unsafe.Pointer
 }
-func (self VButtonBox) _IsVButtonBox () {}
+func (self VButtonBox) _IsVButtonBox() {}
 func (self VButtonBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVButtonBox(value unsafe.Pointer) VButtonBox { return VButtonBox{ButtonBox{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type TextTag struct { GObjectObject }
+func ToVButtonBox(value unsafe.Pointer) VButtonBox {
+	return VButtonBox{
+		ToButtonBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VButtonBox) _IsImplementorIface () {}
+func (self VButtonBox) _IsBuildable () {}
+func (self VButtonBox) _IsOrientable () {}
+type TextTag struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TextTagKind interface {
   _IsTextTag()
   GetGObject() unsafe.Pointer
 }
-func (self TextTag) _IsTextTag () {}
+func (self TextTag) _IsTextTag() {}
 func (self TextTag) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextTag(value unsafe.Pointer) TextTag { return TextTag{GObjectObject{value}} }
-type Frame struct { Bin }
+func ToTextTag(value unsafe.Pointer) TextTag {
+	return TextTag{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Frame struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type FrameKind interface {
   _IsFrame()
   GetGObject() unsafe.Pointer
 }
-func (self Frame) _IsFrame () {}
+func (self Frame) _IsFrame() {}
 func (self Frame) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFrame(value unsafe.Pointer) Frame { return Frame{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type HButtonBox struct { ButtonBox }
+func ToFrame(value unsafe.Pointer) Frame {
+	return Frame{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Frame) _IsImplementorIface () {}
+func (self Frame) _IsBuildable () {}
+type HButtonBox struct {
+	ButtonBox
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type HButtonBoxKind interface {
   _IsHButtonBox()
   GetGObject() unsafe.Pointer
 }
-func (self HButtonBox) _IsHButtonBox () {}
+func (self HButtonBox) _IsHButtonBox() {}
 func (self HButtonBox) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHButtonBox(value unsafe.Pointer) HButtonBox { return HButtonBox{ButtonBox{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type WindowGroup struct { GObjectObject }
+func ToHButtonBox(value unsafe.Pointer) HButtonBox {
+	return HButtonBox{
+		ToButtonBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self HButtonBox) _IsImplementorIface () {}
+func (self HButtonBox) _IsBuildable () {}
+func (self HButtonBox) _IsOrientable () {}
+type WindowGroup struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type WindowGroupKind interface {
   _IsWindowGroup()
   GetGObject() unsafe.Pointer
 }
-func (self WindowGroup) _IsWindowGroup () {}
+func (self WindowGroup) _IsWindowGroup() {}
 func (self WindowGroup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToWindowGroup(value unsafe.Pointer) WindowGroup { return WindowGroup{GObjectObject{value}} }
-type AccelLabel struct { Label }
+func ToWindowGroup(value unsafe.Pointer) WindowGroup {
+	return WindowGroup{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type GtkImage struct {
+	GtkMisc
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
+type GtkImageKind interface {
+  _IsGtkImage()
+  GetGObject() unsafe.Pointer
+}
+func (self GtkImage) _IsGtkImage() {}
+func (self GtkImage) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGtkImage(value unsafe.Pointer) GtkImage {
+	return GtkImage{
+		ToGtkMisc(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkImage) _IsImplementorIface () {}
+func (self GtkImage) _IsBuildable () {}
+type TreeDragDest struct {
+	_value_ unsafe.Pointer
+}
+type TreeDragDestKind interface {
+  _IsTreeDragDest()
+  GetGObject() unsafe.Pointer
+}
+func (self TreeDragDest) _IsTreeDragDest() {}
+func (self TreeDragDest) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTreeDragDest(value unsafe.Pointer) TreeDragDest {
+	return TreeDragDest{
+		value,
+	}
+}
+type AccelLabel struct {
+	Label
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type AccelLabelKind interface {
   _IsAccelLabel()
   GetGObject() unsafe.Pointer
 }
-func (self AccelLabel) _IsAccelLabel () {}
+func (self AccelLabel) _IsAccelLabel() {}
 func (self AccelLabel) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAccelLabel(value unsafe.Pointer) AccelLabel { return AccelLabel{Label{GtkMisc{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ToggleToolButton struct { ToolButton }
+func ToAccelLabel(value unsafe.Pointer) AccelLabel {
+	return AccelLabel{
+		ToLabel(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self AccelLabel) _IsImplementorIface () {}
+func (self AccelLabel) _IsBuildable () {}
+type ToggleToolButton struct {
+	ToolButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ToggleToolButtonKind interface {
   _IsToggleToolButton()
   GetGObject() unsafe.Pointer
 }
-func (self ToggleToolButton) _IsToggleToolButton () {}
+func (self ToggleToolButton) _IsToggleToolButton() {}
 func (self ToggleToolButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToggleToolButton(value unsafe.Pointer) ToggleToolButton { return ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type ToolItem struct { Bin }
+func ToToggleToolButton(value unsafe.Pointer) ToggleToolButton {
+	return ToggleToolButton{
+		ToToolButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ToggleToolButton) _IsImplementorIface () {}
+func (self ToggleToolButton) _IsActionable () {}
+func (self ToggleToolButton) _IsActivatable () {}
+func (self ToggleToolButton) _IsBuildable () {}
+type ToolItem struct {
+	Bin
+	ImplementorIface
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ToolItemKind interface {
   _IsToolItem()
   GetGObject() unsafe.Pointer
 }
-func (self ToolItem) _IsToolItem () {}
+func (self ToolItem) _IsToolItem() {}
 func (self ToolItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToolItem(value unsafe.Pointer) ToolItem { return ToolItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type VScale struct { Scale }
+func ToToolItem(value unsafe.Pointer) ToolItem {
+	return ToolItem{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ToolItem) _IsImplementorIface () {}
+func (self ToolItem) _IsActivatable () {}
+func (self ToolItem) _IsBuildable () {}
+type VScale struct {
+	Scale
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VScaleKind interface {
   _IsVScale()
   GetGObject() unsafe.Pointer
 }
-func (self VScale) _IsVScale () {}
+func (self VScale) _IsVScale() {}
 func (self VScale) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVScale(value unsafe.Pointer) VScale { return VScale{Scale{Range{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Container struct { Widget }
+func ToVScale(value unsafe.Pointer) VScale {
+	return VScale{
+		ToScale(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VScale) _IsImplementorIface () {}
+func (self VScale) _IsBuildable () {}
+func (self VScale) _IsOrientable () {}
+type Container struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ContainerKind interface {
   _IsContainer()
   GetGObject() unsafe.Pointer
 }
-func (self Container) _IsContainer () {}
+func (self Container) _IsContainer() {}
 func (self Container) GetGObject() unsafe.Pointer { return self._value_ }
-func ToContainer(value unsafe.Pointer) Container { return Container{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Overlay struct { Bin }
+func ToContainer(value unsafe.Pointer) Container {
+	return Container{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Container) _IsImplementorIface () {}
+func (self Container) _IsBuildable () {}
+type Overlay struct {
+	Bin
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type OverlayKind interface {
   _IsOverlay()
   GetGObject() unsafe.Pointer
 }
-func (self Overlay) _IsOverlay () {}
+func (self Overlay) _IsOverlay() {}
 func (self Overlay) GetGObject() unsafe.Pointer { return self._value_ }
-func ToOverlay(value unsafe.Pointer) Overlay { return Overlay{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type SpinButton struct { Entry }
+func ToOverlay(value unsafe.Pointer) Overlay {
+	return Overlay{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Overlay) _IsImplementorIface () {}
+func (self Overlay) _IsBuildable () {}
+type CellLayout struct {
+	_value_ unsafe.Pointer
+}
+type CellLayoutKind interface {
+  _IsCellLayout()
+  GetGObject() unsafe.Pointer
+}
+func (self CellLayout) _IsCellLayout() {}
+func (self CellLayout) GetGObject() unsafe.Pointer { return self._value_ }
+func ToCellLayout(value unsafe.Pointer) CellLayout {
+	return CellLayout{
+		value,
+	}
+}
+type Activatable struct {
+	_value_ unsafe.Pointer
+}
+type ActivatableKind interface {
+  _IsActivatable()
+  GetGObject() unsafe.Pointer
+}
+func (self Activatable) _IsActivatable() {}
+func (self Activatable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToActivatable(value unsafe.Pointer) Activatable {
+	return Activatable{
+		value,
+	}
+}
+type SpinButton struct {
+	Entry
+	ImplementorIface
+	Buildable
+	CellEditable
+	Editable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type SpinButtonKind interface {
   _IsSpinButton()
   GetGObject() unsafe.Pointer
 }
-func (self SpinButton) _IsSpinButton () {}
+func (self SpinButton) _IsSpinButton() {}
 func (self SpinButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSpinButton(value unsafe.Pointer) SpinButton { return SpinButton{Entry{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type Window struct { Bin }
-type WindowKind interface {
-  _IsWindow()
-  GetGObject() unsafe.Pointer
+func ToSpinButton(value unsafe.Pointer) SpinButton {
+	return SpinButton{
+		ToEntry(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellEditable(value),
+		ToEditable(value),
+		ToOrientable(value),
+		value,
+	}
 }
-func (self Window) _IsWindow () {}
-func (self Window) GetGObject() unsafe.Pointer { return self._value_ }
-func ToWindow(value unsafe.Pointer) Window { return Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type TreeModelSort struct { GObjectObject }
+func (self SpinButton) _IsImplementorIface () {}
+func (self SpinButton) _IsBuildable () {}
+func (self SpinButton) _IsCellEditable () {}
+func (self SpinButton) _IsEditable () {}
+func (self SpinButton) _IsOrientable () {}
+type TreeModelSort struct {
+	GObjectObject
+	TreeDragSource
+	TreeModel
+	TreeSortable
+	_value_ unsafe.Pointer
+}
 type TreeModelSortKind interface {
   _IsTreeModelSort()
   GetGObject() unsafe.Pointer
 }
-func (self TreeModelSort) _IsTreeModelSort () {}
+func (self TreeModelSort) _IsTreeModelSort() {}
 func (self TreeModelSort) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTreeModelSort(value unsafe.Pointer) TreeModelSort { return TreeModelSort{GObjectObject{value}} }
-type RecentFilter struct { InitiallyUnowned }
+func ToTreeModelSort(value unsafe.Pointer) TreeModelSort {
+	return TreeModelSort{
+		ToGObjectObject(value),
+		ToTreeDragSource(value),
+		ToTreeModel(value),
+		ToTreeSortable(value),
+		value,
+	}
+}
+func (self TreeModelSort) _IsTreeDragSource () {}
+func (self TreeModelSort) _IsTreeModel () {}
+func (self TreeModelSort) _IsTreeSortable () {}
+type RecentFilter struct {
+	InitiallyUnowned
+	Buildable
+	_value_ unsafe.Pointer
+}
 type RecentFilterKind interface {
   _IsRecentFilter()
   GetGObject() unsafe.Pointer
 }
-func (self RecentFilter) _IsRecentFilter () {}
+func (self RecentFilter) _IsRecentFilter() {}
 func (self RecentFilter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRecentFilter(value unsafe.Pointer) RecentFilter { return RecentFilter{InitiallyUnowned{GObjectObject{value}}} }
-type TreeStore struct { GObjectObject }
+func ToRecentFilter(value unsafe.Pointer) RecentFilter {
+	return RecentFilter{
+		ToInitiallyUnowned(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self RecentFilter) _IsBuildable () {}
+type TreeStore struct {
+	GObjectObject
+	Buildable
+	TreeDragDest
+	TreeDragSource
+	TreeModel
+	TreeSortable
+	_value_ unsafe.Pointer
+}
 type TreeStoreKind interface {
   _IsTreeStore()
   GetGObject() unsafe.Pointer
 }
-func (self TreeStore) _IsTreeStore () {}
+func (self TreeStore) _IsTreeStore() {}
 func (self TreeStore) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTreeStore(value unsafe.Pointer) TreeStore { return TreeStore{GObjectObject{value}} }
-type RadioToolButton struct { ToggleToolButton }
+func ToTreeStore(value unsafe.Pointer) TreeStore {
+	return TreeStore{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		ToTreeDragDest(value),
+		ToTreeDragSource(value),
+		ToTreeModel(value),
+		ToTreeSortable(value),
+		value,
+	}
+}
+func (self TreeStore) _IsBuildable () {}
+func (self TreeStore) _IsTreeDragDest () {}
+func (self TreeStore) _IsTreeDragSource () {}
+func (self TreeStore) _IsTreeModel () {}
+func (self TreeStore) _IsTreeSortable () {}
+type RadioToolButton struct {
+	ToggleToolButton
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type RadioToolButtonKind interface {
   _IsRadioToolButton()
   GetGObject() unsafe.Pointer
 }
-func (self RadioToolButton) _IsRadioToolButton () {}
+func (self RadioToolButton) _IsRadioToolButton() {}
 func (self RadioToolButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRadioToolButton(value unsafe.Pointer) RadioToolButton { return RadioToolButton{ToggleToolButton{ToolButton{ToolItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}}} }
-type RecentChooserDialog struct { Dialog }
+func ToRadioToolButton(value unsafe.Pointer) RadioToolButton {
+	return RadioToolButton{
+		ToToggleToolButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self RadioToolButton) _IsImplementorIface () {}
+func (self RadioToolButton) _IsActionable () {}
+func (self RadioToolButton) _IsActivatable () {}
+func (self RadioToolButton) _IsBuildable () {}
+type RecentChooserDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	RecentChooser
+	_value_ unsafe.Pointer
+}
 type RecentChooserDialogKind interface {
   _IsRecentChooserDialog()
   GetGObject() unsafe.Pointer
 }
-func (self RecentChooserDialog) _IsRecentChooserDialog () {}
+func (self RecentChooserDialog) _IsRecentChooserDialog() {}
 func (self RecentChooserDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRecentChooserDialog(value unsafe.Pointer) RecentChooserDialog { return RecentChooserDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type ToggleButton struct { Button }
+func ToRecentChooserDialog(value unsafe.Pointer) RecentChooserDialog {
+	return RecentChooserDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToRecentChooser(value),
+		value,
+	}
+}
+func (self RecentChooserDialog) _IsImplementorIface () {}
+func (self RecentChooserDialog) _IsBuildable () {}
+func (self RecentChooserDialog) _IsRecentChooser () {}
+type ToggleButton struct {
+	Button
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ToggleButtonKind interface {
   _IsToggleButton()
   GetGObject() unsafe.Pointer
 }
-func (self ToggleButton) _IsToggleButton () {}
+func (self ToggleButton) _IsToggleButton() {}
 func (self ToggleButton) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToggleButton(value unsafe.Pointer) ToggleButton { return ToggleButton{Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type ColorChooserWidget struct { Box }
+func ToToggleButton(value unsafe.Pointer) ToggleButton {
+	return ToggleButton{
+		ToButton(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ToggleButton) _IsImplementorIface () {}
+func (self ToggleButton) _IsActionable () {}
+func (self ToggleButton) _IsActivatable () {}
+func (self ToggleButton) _IsBuildable () {}
+type ColorChooserWidget struct {
+	Box
+	ImplementorIface
+	Buildable
+	ColorChooser
+	Orientable
+	_value_ unsafe.Pointer
+}
 type ColorChooserWidgetKind interface {
   _IsColorChooserWidget()
   GetGObject() unsafe.Pointer
 }
-func (self ColorChooserWidget) _IsColorChooserWidget () {}
+func (self ColorChooserWidget) _IsColorChooserWidget() {}
 func (self ColorChooserWidget) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorChooserWidget(value unsafe.Pointer) ColorChooserWidget { return ColorChooserWidget{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ApplicationWindow struct { Window }
+func ToColorChooserWidget(value unsafe.Pointer) ColorChooserWidget {
+	return ColorChooserWidget{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToColorChooser(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self ColorChooserWidget) _IsImplementorIface () {}
+func (self ColorChooserWidget) _IsBuildable () {}
+func (self ColorChooserWidget) _IsColorChooser () {}
+func (self ColorChooserWidget) _IsOrientable () {}
+type ApplicationWindow struct {
+	GtkWindow
+	ImplementorIface
+	GioActionGroup
+	ActionMap
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ApplicationWindowKind interface {
   _IsApplicationWindow()
   GetGObject() unsafe.Pointer
 }
-func (self ApplicationWindow) _IsApplicationWindow () {}
+func (self ApplicationWindow) _IsApplicationWindow() {}
 func (self ApplicationWindow) GetGObject() unsafe.Pointer { return self._value_ }
-func ToApplicationWindow(value unsafe.Pointer) ApplicationWindow { return ApplicationWindow{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type Invisible struct { Widget }
+func ToApplicationWindow(value unsafe.Pointer) ApplicationWindow {
+	return ApplicationWindow{
+		ToGtkWindow(value),
+		ToImplementorIface(value),
+		ToGioActionGroup(value),
+		ToActionMap(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ApplicationWindow) _IsImplementorIface () {}
+func (self ApplicationWindow) _IsGioActionGroup () {}
+func (self ApplicationWindow) _IsActionMap () {}
+func (self ApplicationWindow) _IsBuildable () {}
+type Invisible struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type InvisibleKind interface {
   _IsInvisible()
   GetGObject() unsafe.Pointer
 }
-func (self Invisible) _IsInvisible () {}
+func (self Invisible) _IsInvisible() {}
 func (self Invisible) GetGObject() unsafe.Pointer { return self._value_ }
-func ToInvisible(value unsafe.Pointer) Invisible { return Invisible{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type RecentChooserWidget struct { Box }
+func ToInvisible(value unsafe.Pointer) Invisible {
+	return Invisible{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Invisible) _IsImplementorIface () {}
+func (self Invisible) _IsBuildable () {}
+type RecentChooserWidget struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	RecentChooser
+	_value_ unsafe.Pointer
+}
 type RecentChooserWidgetKind interface {
   _IsRecentChooserWidget()
   GetGObject() unsafe.Pointer
 }
-func (self RecentChooserWidget) _IsRecentChooserWidget () {}
+func (self RecentChooserWidget) _IsRecentChooserWidget() {}
 func (self RecentChooserWidget) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRecentChooserWidget(value unsafe.Pointer) RecentChooserWidget { return RecentChooserWidget{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type SeparatorMenuItem struct { GtkMenuItem }
+func ToRecentChooserWidget(value unsafe.Pointer) RecentChooserWidget {
+	return RecentChooserWidget{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		ToRecentChooser(value),
+		value,
+	}
+}
+func (self RecentChooserWidget) _IsImplementorIface () {}
+func (self RecentChooserWidget) _IsBuildable () {}
+func (self RecentChooserWidget) _IsOrientable () {}
+func (self RecentChooserWidget) _IsRecentChooser () {}
+type SeparatorMenuItem struct {
+	GtkMenuItem
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type SeparatorMenuItemKind interface {
   _IsSeparatorMenuItem()
   GetGObject() unsafe.Pointer
 }
-func (self SeparatorMenuItem) _IsSeparatorMenuItem () {}
+func (self SeparatorMenuItem) _IsSeparatorMenuItem() {}
 func (self SeparatorMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSeparatorMenuItem(value unsafe.Pointer) SeparatorMenuItem { return SeparatorMenuItem{GtkMenuItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type Toolbar struct { Container }
+func ToSeparatorMenuItem(value unsafe.Pointer) SeparatorMenuItem {
+	return SeparatorMenuItem{
+		ToGtkMenuItem(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self SeparatorMenuItem) _IsImplementorIface () {}
+func (self SeparatorMenuItem) _IsActionable () {}
+func (self SeparatorMenuItem) _IsActivatable () {}
+func (self SeparatorMenuItem) _IsBuildable () {}
+type Toolbar struct {
+	Container
+	ImplementorIface
+	Buildable
+	Orientable
+	ToolShell
+	_value_ unsafe.Pointer
+}
 type ToolbarKind interface {
   _IsToolbar()
   GetGObject() unsafe.Pointer
 }
-func (self Toolbar) _IsToolbar () {}
+func (self Toolbar) _IsToolbar() {}
 func (self Toolbar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToToolbar(value unsafe.Pointer) Toolbar { return Toolbar{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type RadioAction struct { ToggleAction }
+func ToToolbar(value unsafe.Pointer) Toolbar {
+	return Toolbar{
+		ToContainer(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		ToToolShell(value),
+		value,
+	}
+}
+func (self Toolbar) _IsImplementorIface () {}
+func (self Toolbar) _IsBuildable () {}
+func (self Toolbar) _IsOrientable () {}
+func (self Toolbar) _IsToolShell () {}
+type GtkAction struct {
+	GObjectObject
+	Buildable
+	_value_ unsafe.Pointer
+}
+type GtkActionKind interface {
+  _IsGtkAction()
+  GetGObject() unsafe.Pointer
+}
+func (self GtkAction) _IsGtkAction() {}
+func (self GtkAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGtkAction(value unsafe.Pointer) GtkAction {
+	return GtkAction{
+		ToGObjectObject(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkAction) _IsBuildable () {}
+type RadioAction struct {
+	ToggleAction
+	Buildable
+	_value_ unsafe.Pointer
+}
 type RadioActionKind interface {
   _IsRadioAction()
   GetGObject() unsafe.Pointer
 }
-func (self RadioAction) _IsRadioAction () {}
+func (self RadioAction) _IsRadioAction() {}
 func (self RadioAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRadioAction(value unsafe.Pointer) RadioAction { return RadioAction{ToggleAction{Action{GObjectObject{value}}}} }
-type DrawingArea struct { Widget }
+func ToRadioAction(value unsafe.Pointer) RadioAction {
+	return RadioAction{
+		ToToggleAction(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self RadioAction) _IsBuildable () {}
+type Scrollable struct {
+	_value_ unsafe.Pointer
+}
+type ScrollableKind interface {
+  _IsScrollable()
+  GetGObject() unsafe.Pointer
+}
+func (self Scrollable) _IsScrollable() {}
+func (self Scrollable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToScrollable(value unsafe.Pointer) Scrollable {
+	return Scrollable{
+		value,
+	}
+}
+type DrawingArea struct {
+	Widget
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type DrawingAreaKind interface {
   _IsDrawingArea()
   GetGObject() unsafe.Pointer
 }
-func (self DrawingArea) _IsDrawingArea () {}
+func (self DrawingArea) _IsDrawingArea() {}
 func (self DrawingArea) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDrawingArea(value unsafe.Pointer) DrawingArea { return DrawingArea{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type VScrollbar struct { Scrollbar }
+func ToDrawingArea(value unsafe.Pointer) DrawingArea {
+	return DrawingArea{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self DrawingArea) _IsImplementorIface () {}
+func (self DrawingArea) _IsBuildable () {}
+type VScrollbar struct {
+	Scrollbar
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type VScrollbarKind interface {
   _IsVScrollbar()
   GetGObject() unsafe.Pointer
 }
-func (self VScrollbar) _IsVScrollbar () {}
+func (self VScrollbar) _IsVScrollbar() {}
 func (self VScrollbar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToVScrollbar(value unsafe.Pointer) VScrollbar { return VScrollbar{Scrollbar{Range{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type AboutDialog struct { Dialog }
+func ToVScrollbar(value unsafe.Pointer) VScrollbar {
+	return VScrollbar{
+		ToScrollbar(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self VScrollbar) _IsImplementorIface () {}
+func (self VScrollbar) _IsBuildable () {}
+func (self VScrollbar) _IsOrientable () {}
+type AboutDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	_value_ unsafe.Pointer
+}
 type AboutDialogKind interface {
   _IsAboutDialog()
   GetGObject() unsafe.Pointer
 }
-func (self AboutDialog) _IsAboutDialog () {}
+func (self AboutDialog) _IsAboutDialog() {}
 func (self AboutDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAboutDialog(value unsafe.Pointer) AboutDialog { return AboutDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type CssProvider struct { GObjectObject }
+func ToAboutDialog(value unsafe.Pointer) AboutDialog {
+	return AboutDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self AboutDialog) _IsImplementorIface () {}
+func (self AboutDialog) _IsBuildable () {}
+type CssProvider struct {
+	GObjectObject
+	StyleProvider
+	_value_ unsafe.Pointer
+}
 type CssProviderKind interface {
   _IsCssProvider()
   GetGObject() unsafe.Pointer
 }
-func (self CssProvider) _IsCssProvider () {}
+func (self CssProvider) _IsCssProvider() {}
 func (self CssProvider) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCssProvider(value unsafe.Pointer) CssProvider { return CssProvider{GObjectObject{value}} }
-type Button struct { Bin }
+func ToCssProvider(value unsafe.Pointer) CssProvider {
+	return CssProvider{
+		ToGObjectObject(value),
+		ToStyleProvider(value),
+		value,
+	}
+}
+func (self CssProvider) _IsStyleProvider () {}
+type Button struct {
+	Bin
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ButtonKind interface {
   _IsButton()
   GetGObject() unsafe.Pointer
 }
-func (self Button) _IsButton () {}
+func (self Button) _IsButton() {}
 func (self Button) GetGObject() unsafe.Pointer { return self._value_ }
-func ToButton(value unsafe.Pointer) Button { return Button{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type ImageMenuItem struct { GtkMenuItem }
+func ToButton(value unsafe.Pointer) Button {
+	return Button{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self Button) _IsImplementorIface () {}
+func (self Button) _IsActionable () {}
+func (self Button) _IsActivatable () {}
+func (self Button) _IsBuildable () {}
+type ImageMenuItem struct {
+	GtkMenuItem
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type ImageMenuItemKind interface {
   _IsImageMenuItem()
   GetGObject() unsafe.Pointer
 }
-func (self ImageMenuItem) _IsImageMenuItem () {}
+func (self ImageMenuItem) _IsImageMenuItem() {}
 func (self ImageMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToImageMenuItem(value unsafe.Pointer) ImageMenuItem { return ImageMenuItem{GtkMenuItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}} }
-type FontSelection struct { Box }
+func ToImageMenuItem(value unsafe.Pointer) ImageMenuItem {
+	return ImageMenuItem{
+		ToGtkMenuItem(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self ImageMenuItem) _IsImplementorIface () {}
+func (self ImageMenuItem) _IsActionable () {}
+func (self ImageMenuItem) _IsActivatable () {}
+func (self ImageMenuItem) _IsBuildable () {}
+type FontSelection struct {
+	Box
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type FontSelectionKind interface {
   _IsFontSelection()
   GetGObject() unsafe.Pointer
 }
-func (self FontSelection) _IsFontSelection () {}
+func (self FontSelection) _IsFontSelection() {}
 func (self FontSelection) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFontSelection(value unsafe.Pointer) FontSelection { return FontSelection{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type GtkMenuItem struct { Bin }
+func ToFontSelection(value unsafe.Pointer) FontSelection {
+	return FontSelection{
+		ToBox(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self FontSelection) _IsImplementorIface () {}
+func (self FontSelection) _IsBuildable () {}
+func (self FontSelection) _IsOrientable () {}
+type GtkMenuItem struct {
+	Bin
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type GtkMenuItemKind interface {
   _IsGtkMenuItem()
   GetGObject() unsafe.Pointer
 }
-func (self GtkMenuItem) _IsGtkMenuItem () {}
+func (self GtkMenuItem) _IsGtkMenuItem() {}
 func (self GtkMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGtkMenuItem(value unsafe.Pointer) GtkMenuItem { return GtkMenuItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type RadioMenuItem struct { CheckMenuItem }
+func ToGtkMenuItem(value unsafe.Pointer) GtkMenuItem {
+	return GtkMenuItem{
+		ToBin(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self GtkMenuItem) _IsImplementorIface () {}
+func (self GtkMenuItem) _IsActionable () {}
+func (self GtkMenuItem) _IsActivatable () {}
+func (self GtkMenuItem) _IsBuildable () {}
+type RadioMenuItem struct {
+	CheckMenuItem
+	ImplementorIface
+	Actionable
+	Activatable
+	Buildable
+	_value_ unsafe.Pointer
+}
 type RadioMenuItemKind interface {
   _IsRadioMenuItem()
   GetGObject() unsafe.Pointer
 }
-func (self RadioMenuItem) _IsRadioMenuItem () {}
+func (self RadioMenuItem) _IsRadioMenuItem() {}
 func (self RadioMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRadioMenuItem(value unsafe.Pointer) RadioMenuItem { return RadioMenuItem{CheckMenuItem{GtkMenuItem{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type Entry struct { Widget }
+func ToRadioMenuItem(value unsafe.Pointer) RadioMenuItem {
+	return RadioMenuItem{
+		ToCheckMenuItem(value),
+		ToImplementorIface(value),
+		ToActionable(value),
+		ToActivatable(value),
+		ToBuildable(value),
+		value,
+	}
+}
+func (self RadioMenuItem) _IsImplementorIface () {}
+func (self RadioMenuItem) _IsActionable () {}
+func (self RadioMenuItem) _IsActivatable () {}
+func (self RadioMenuItem) _IsBuildable () {}
+type FileChooser struct {
+	_value_ unsafe.Pointer
+}
+type FileChooserKind interface {
+  _IsFileChooser()
+  GetGObject() unsafe.Pointer
+}
+func (self FileChooser) _IsFileChooser() {}
+func (self FileChooser) GetGObject() unsafe.Pointer { return self._value_ }
+func ToFileChooser(value unsafe.Pointer) FileChooser {
+	return FileChooser{
+		value,
+	}
+}
+type TreeSortable struct {
+	_value_ unsafe.Pointer
+}
+type TreeSortableKind interface {
+  _IsTreeSortable()
+  GetGObject() unsafe.Pointer
+}
+func (self TreeSortable) _IsTreeSortable() {}
+func (self TreeSortable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTreeSortable(value unsafe.Pointer) TreeSortable {
+	return TreeSortable{
+		value,
+	}
+}
+type Entry struct {
+	Widget
+	ImplementorIface
+	Buildable
+	CellEditable
+	Editable
+	_value_ unsafe.Pointer
+}
 type EntryKind interface {
   _IsEntry()
   GetGObject() unsafe.Pointer
 }
-func (self Entry) _IsEntry () {}
+func (self Entry) _IsEntry() {}
 func (self Entry) GetGObject() unsafe.Pointer { return self._value_ }
-func ToEntry(value unsafe.Pointer) Entry { return Entry{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type HPaned struct { Paned }
+func ToEntry(value unsafe.Pointer) Entry {
+	return Entry{
+		ToWidget(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToCellEditable(value),
+		ToEditable(value),
+		value,
+	}
+}
+func (self Entry) _IsImplementorIface () {}
+func (self Entry) _IsBuildable () {}
+func (self Entry) _IsCellEditable () {}
+func (self Entry) _IsEditable () {}
+type HPaned struct {
+	Paned
+	ImplementorIface
+	Buildable
+	Orientable
+	_value_ unsafe.Pointer
+}
 type HPanedKind interface {
   _IsHPaned()
   GetGObject() unsafe.Pointer
 }
-func (self HPaned) _IsHPaned () {}
+func (self HPaned) _IsHPaned() {}
 func (self HPaned) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHPaned(value unsafe.Pointer) HPaned { return HPaned{Paned{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type FileChooserDialog struct { Dialog }
+func ToHPaned(value unsafe.Pointer) HPaned {
+	return HPaned{
+		ToPaned(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToOrientable(value),
+		value,
+	}
+}
+func (self HPaned) _IsImplementorIface () {}
+func (self HPaned) _IsBuildable () {}
+func (self HPaned) _IsOrientable () {}
+type FileChooserDialog struct {
+	Dialog
+	ImplementorIface
+	Buildable
+	FileChooser
+	_value_ unsafe.Pointer
+}
 type FileChooserDialogKind interface {
   _IsFileChooserDialog()
   GetGObject() unsafe.Pointer
 }
-func (self FileChooserDialog) _IsFileChooserDialog () {}
+func (self FileChooserDialog) _IsFileChooserDialog() {}
 func (self FileChooserDialog) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFileChooserDialog(value unsafe.Pointer) FileChooserDialog { return FileChooserDialog{Dialog{Window{Bin{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}}}} }
-type CellAreaContext struct { GObjectObject }
+func ToFileChooserDialog(value unsafe.Pointer) FileChooserDialog {
+	return FileChooserDialog{
+		ToDialog(value),
+		ToImplementorIface(value),
+		ToBuildable(value),
+		ToFileChooser(value),
+		value,
+	}
+}
+func (self FileChooserDialog) _IsImplementorIface () {}
+func (self FileChooserDialog) _IsBuildable () {}
+func (self FileChooserDialog) _IsFileChooser () {}
+type Actionable struct {
+	_value_ unsafe.Pointer
+}
+type ActionableKind interface {
+  _IsActionable()
+  GetGObject() unsafe.Pointer
+}
+func (self Actionable) _IsActionable() {}
+func (self Actionable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToActionable(value unsafe.Pointer) Actionable {
+	return Actionable{
+		value,
+	}
+}
+type CellAreaContext struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type CellAreaContextKind interface {
   _IsCellAreaContext()
   GetGObject() unsafe.Pointer
 }
-func (self CellAreaContext) _IsCellAreaContext () {}
+func (self CellAreaContext) _IsCellAreaContext() {}
 func (self CellAreaContext) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellAreaContext(value unsafe.Pointer) CellAreaContext { return CellAreaContext{GObjectObject{value}} }
-type RcStyle struct { GObjectObject }
+func ToCellAreaContext(value unsafe.Pointer) CellAreaContext {
+	return CellAreaContext{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type StyleProvider struct {
+	_value_ unsafe.Pointer
+}
+type StyleProviderKind interface {
+  _IsStyleProvider()
+  GetGObject() unsafe.Pointer
+}
+func (self StyleProvider) _IsStyleProvider() {}
+func (self StyleProvider) GetGObject() unsafe.Pointer { return self._value_ }
+func ToStyleProvider(value unsafe.Pointer) StyleProvider {
+	return StyleProvider{
+		value,
+	}
+}
+type RcStyle struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type RcStyleKind interface {
   _IsRcStyle()
   GetGObject() unsafe.Pointer
 }
-func (self RcStyle) _IsRcStyle () {}
+func (self RcStyle) _IsRcStyle() {}
 func (self RcStyle) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRcStyle(value unsafe.Pointer) RcStyle { return RcStyle{GObjectObject{value}} }
-type PrintOperation struct { GObjectObject }
+func ToRcStyle(value unsafe.Pointer) RcStyle {
+	return RcStyle{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type AppChooser struct {
+	_value_ unsafe.Pointer
+}
+type AppChooserKind interface {
+  _IsAppChooser()
+  GetGObject() unsafe.Pointer
+}
+func (self AppChooser) _IsAppChooser() {}
+func (self AppChooser) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAppChooser(value unsafe.Pointer) AppChooser {
+	return AppChooser{
+		value,
+	}
+}
+type PrintOperation struct {
+	GObjectObject
+	PrintOperationPreview
+	_value_ unsafe.Pointer
+}
 type PrintOperationKind interface {
   _IsPrintOperation()
   GetGObject() unsafe.Pointer
 }
-func (self PrintOperation) _IsPrintOperation () {}
+func (self PrintOperation) _IsPrintOperation() {}
 func (self PrintOperation) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPrintOperation(value unsafe.Pointer) PrintOperation { return PrintOperation{GObjectObject{value}} }
-type CellRendererAccel struct { CellRendererText }
+func ToPrintOperation(value unsafe.Pointer) PrintOperation {
+	return PrintOperation{
+		ToGObjectObject(value),
+		ToPrintOperationPreview(value),
+		value,
+	}
+}
+func (self PrintOperation) _IsPrintOperationPreview () {}
+type CellRendererAccel struct {
+	CellRendererText
+	_value_ unsafe.Pointer
+}
 type CellRendererAccelKind interface {
   _IsCellRendererAccel()
   GetGObject() unsafe.Pointer
 }
-func (self CellRendererAccel) _IsCellRendererAccel () {}
+func (self CellRendererAccel) _IsCellRendererAccel() {}
 func (self CellRendererAccel) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCellRendererAccel(value unsafe.Pointer) CellRendererAccel { return CellRendererAccel{CellRendererText{CellRenderer{InitiallyUnowned{GObjectObject{value}}}}} }
-type Table struct { Container }
-type TableKind interface {
-  _IsTable()
-  GetGObject() unsafe.Pointer
+func ToCellRendererAccel(value unsafe.Pointer) CellRendererAccel {
+	return CellRendererAccel{
+		ToCellRendererText(value),
+		value,
+	}
 }
-func (self Table) _IsTable () {}
-func (self Table) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTable(value unsafe.Pointer) Table { return Table{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
-type PageSetup struct { GObjectObject }
+type PageSetup struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type PageSetupKind interface {
   _IsPageSetup()
   GetGObject() unsafe.Pointer
 }
-func (self PageSetup) _IsPageSetup () {}
+func (self PageSetup) _IsPageSetup() {}
 func (self PageSetup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPageSetup(value unsafe.Pointer) PageSetup { return PageSetup{GObjectObject{value}} }
+func ToPageSetup(value unsafe.Pointer) PageSetup {
+	return PageSetup{
+		ToGObjectObject(value),
+		value,
+	}
+}
 func AccelGroupsActivate(object *C.GObject, accel_key uint, accel_mods C.GdkModifierType) (_go__return__ bool) {
 	_cgo_accel_key_ := (C.guint)(accel_key)
 	var _return_ C.gboolean
@@ -4367,7 +7379,7 @@ func PrintErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func PrintRunPageSetupDialog(parent WindowKind, page_setup PageSetupKind, settings PrintSettingsKind) (_go__return__ PageSetup) {
+func PrintRunPageSetupDialog(parent GtkWindowKind, page_setup PageSetupKind, settings PrintSettingsKind) (_go__return__ PageSetup) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	_cgo_page_setup_ := (*C.GtkPageSetup)(page_setup.GetGObject())
 	_cgo_settings_ := (*C.GtkPrintSettings)(settings.GetGObject())
@@ -4377,7 +7389,7 @@ func PrintRunPageSetupDialog(parent WindowKind, page_setup PageSetupKind, settin
 	return
 }
 
-func PrintRunPageSetupDialogAsync(parent WindowKind, page_setup PageSetupKind, settings PrintSettingsKind, done_cb C.GtkPageSetupDoneFunc, data C.gpointer) () {
+func PrintRunPageSetupDialogAsync(parent GtkWindowKind, page_setup PageSetupKind, settings PrintSettingsKind, done_cb C.GtkPageSetupDoneFunc, data C.gpointer) () {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	_cgo_page_setup_ := (*C.GtkPageSetup)(page_setup.GetGObject())
 	_cgo_settings_ := (*C.GtkPrintSettings)(settings.GetGObject())
@@ -4822,11 +7834,13 @@ func TestWidgetSendKey(widget WidgetKind, keyval uint, modifiers C.GdkModifierTy
 	return
 }
 
-func TreeGetRowDragData(selection_data *SelectionData) (_go__return__ bool, tree_model unsafe.Pointer, path *TreePath) {
+func TreeGetRowDragData(selection_data *SelectionData) (_go__return__ bool, tree_model *TreeModel, path *TreePath) {
 	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+	var _allocated_tree_model_ *C.GtkTreeModel
 	var _allocated_path_ *C.GtkTreePath
 	var _return_ C.gboolean
-	_return_ = C._gtk_tree_get_row_drag_data(_cgo_selection_data_, tree_model, unsafe.Pointer(&_allocated_path_))
+	_return_ = C._gtk_tree_get_row_drag_data(_cgo_selection_data_, unsafe.Pointer(&_allocated_tree_model_), unsafe.Pointer(&_allocated_path_))
+	tree_model = (*TreeModel)(unsafe.Pointer(_allocated_tree_model_))
 	path = (*TreePath)(unsafe.Pointer(_allocated_path_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
@@ -4851,11 +7865,12 @@ func TreeRowReferenceReordered(proxy *C.GObject, path *TreePath, iter *TreeIter,
 	return
 }
 
-func TreeSetRowDragData(selection_data *SelectionData, tree_model *C.GtkTreeModel, path *TreePath) (_go__return__ bool) {
+func TreeSetRowDragData(selection_data *SelectionData, tree_model TreeModelKind, path *TreePath) (_go__return__ bool) {
 	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+	_cgo_tree_model_ := (*C.GtkTreeModel)(tree_model.GetGObject())
 	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
 	var _return_ C.gboolean
-	_return_ = C.gtk_tree_set_row_drag_data(_cgo_selection_data_, tree_model, _cgo_path_)
+	_return_ = C.gtk_tree_set_row_drag_data(_cgo_selection_data_, _cgo_tree_model_, _cgo_path_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -5326,7 +8341,7 @@ func (_self_ *Accessible) SetWidget(widget WidgetKind) () {
 	return
 }
 
-func ActionNew(name string, label string, tooltip string, stock_id string) (_go__return__ Action) {
+func ActionNew(name string, label string, tooltip string, stock_id string) (_go__return__ GtkAction) {
 	var _return_ *C.GtkAction
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -5341,185 +8356,185 @@ func ActionNew(name string, label string, tooltip string, stock_id string) (_go_
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_action_new(_cgo_name_, _cgo_label_, _cgo_tooltip_, _cgo_stock_id_)
-	_go__return__ = ToAction(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkAction(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Action) Activate() () {
+func (_self_ *GtkAction) Activate() () {
 	C.gtk_action_activate((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) BlockActivate() () {
+func (_self_ *GtkAction) BlockActivate() () {
 	C.gtk_action_block_activate((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) ConnectAccelerator() () {
+func (_self_ *GtkAction) ConnectAccelerator() () {
 	C.gtk_action_connect_accelerator((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) CreateIcon(icon_size C.GtkIconSize) (_go__return__ Widget) {
+func (_self_ *GtkAction) CreateIcon(icon_size C.GtkIconSize) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_icon((*C.GtkAction)(_self_._value_), icon_size)
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Action) CreateMenu() (_go__return__ Widget) {
+func (_self_ *GtkAction) CreateMenu() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_menu((*C.GtkAction)(_self_._value_))
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Action) CreateMenuItem() (_go__return__ Widget) {
+func (_self_ *GtkAction) CreateMenuItem() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_menu_item((*C.GtkAction)(_self_._value_))
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Action) CreateToolItem() (_go__return__ Widget) {
+func (_self_ *GtkAction) CreateToolItem() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_action_create_tool_item((*C.GtkAction)(_self_._value_))
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Action) DisconnectAccelerator() () {
+func (_self_ *GtkAction) DisconnectAccelerator() () {
 	C.gtk_action_disconnect_accelerator((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) GetAccelClosure() (_return_ *C.GClosure) {
+func (_self_ *GtkAction) GetAccelClosure() (_return_ *C.GClosure) {
 	_return_ = C.gtk_action_get_accel_closure((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) GetAccelPath() (_go__return__ string) {
+func (_self_ *GtkAction) GetAccelPath() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_accel_path((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetAlwaysShowImage() (_go__return__ bool) {
+func (_self_ *GtkAction) GetAlwaysShowImage() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_get_always_show_image((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) GetGicon() (_return_ *C.GIcon) {
+func (_self_ *GtkAction) GetGicon() (_return_ *C.GIcon) {
 	_return_ = C.gtk_action_get_gicon((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) GetIconName() (_go__return__ string) {
+func (_self_ *GtkAction) GetIconName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_icon_name((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetIsImportant() (_go__return__ bool) {
+func (_self_ *GtkAction) GetIsImportant() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_get_is_important((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) GetLabel() (_go__return__ string) {
+func (_self_ *GtkAction) GetLabel() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_label((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetName() (_go__return__ string) {
+func (_self_ *GtkAction) GetName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_name((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetProxies() (_return_ *C.GSList) {
+func (_self_ *GtkAction) GetProxies() (_return_ *C.GSList) {
 	_return_ = C.gtk_action_get_proxies((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func (_self_ *Action) GetSensitive() (_go__return__ bool) {
+func (_self_ *GtkAction) GetSensitive() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_get_sensitive((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) GetShortLabel() (_go__return__ string) {
+func (_self_ *GtkAction) GetShortLabel() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_short_label((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetStockId() (_go__return__ string) {
+func (_self_ *GtkAction) GetStockId() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_stock_id((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetTooltip() (_go__return__ string) {
+func (_self_ *GtkAction) GetTooltip() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_get_tooltip((*C.GtkAction)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Action) GetVisible() (_go__return__ bool) {
+func (_self_ *GtkAction) GetVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_get_visible((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) GetVisibleHorizontal() (_go__return__ bool) {
+func (_self_ *GtkAction) GetVisibleHorizontal() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_get_visible_horizontal((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) GetVisibleVertical() (_go__return__ bool) {
+func (_self_ *GtkAction) GetVisibleVertical() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_get_visible_vertical((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) IsSensitive() (_go__return__ bool) {
+func (_self_ *GtkAction) IsSensitive() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_is_sensitive((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) IsVisible() (_go__return__ bool) {
+func (_self_ *GtkAction) IsVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_is_visible((*C.GtkAction)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Action) SetAccelGroup(accel_group AccelGroupKind) () {
+func (_self_ *GtkAction) SetAccelGroup(accel_group AccelGroupKind) () {
 	_cgo_accel_group_ := (*C.GtkAccelGroup)(accel_group.GetGObject())
 	C.gtk_action_set_accel_group((*C.GtkAction)(_self_._value_), _cgo_accel_group_)
 	return
 }
 
-func (_self_ *Action) SetAccelPath(accel_path string) () {
+func (_self_ *GtkAction) SetAccelPath(accel_path string) () {
 	_cstring_accel_path_ := C.CString(accel_path)
 	_cgo_accel_path_ := (*C.gchar)(unsafe.Pointer(_cstring_accel_path_))
 	defer C.free(unsafe.Pointer(_cstring_accel_path_))
@@ -5527,19 +8542,19 @@ func (_self_ *Action) SetAccelPath(accel_path string) () {
 	return
 }
 
-func (_self_ *Action) SetAlwaysShowImage(always_show bool) () {
+func (_self_ *GtkAction) SetAlwaysShowImage(always_show bool) () {
 	_cgo_always_show_ := (C.gboolean)(C.FALSE)
 	if always_show { _cgo_always_show_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_set_always_show_image((*C.GtkAction)(_self_._value_), _cgo_always_show_)
 	return
 }
 
-func (_self_ *Action) SetGicon(icon *C.GIcon) () {
+func (_self_ *GtkAction) SetGicon(icon *C.GIcon) () {
 	C.gtk_action_set_gicon((*C.GtkAction)(_self_._value_), icon)
 	return
 }
 
-func (_self_ *Action) SetIconName(icon_name string) () {
+func (_self_ *GtkAction) SetIconName(icon_name string) () {
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
@@ -5547,14 +8562,14 @@ func (_self_ *Action) SetIconName(icon_name string) () {
 	return
 }
 
-func (_self_ *Action) SetIsImportant(is_important bool) () {
+func (_self_ *GtkAction) SetIsImportant(is_important bool) () {
 	_cgo_is_important_ := (C.gboolean)(C.FALSE)
 	if is_important { _cgo_is_important_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_set_is_important((*C.GtkAction)(_self_._value_), _cgo_is_important_)
 	return
 }
 
-func (_self_ *Action) SetLabel(label string) () {
+func (_self_ *GtkAction) SetLabel(label string) () {
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
@@ -5562,14 +8577,14 @@ func (_self_ *Action) SetLabel(label string) () {
 	return
 }
 
-func (_self_ *Action) SetSensitive(sensitive bool) () {
+func (_self_ *GtkAction) SetSensitive(sensitive bool) () {
 	_cgo_sensitive_ := (C.gboolean)(C.FALSE)
 	if sensitive { _cgo_sensitive_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_set_sensitive((*C.GtkAction)(_self_._value_), _cgo_sensitive_)
 	return
 }
 
-func (_self_ *Action) SetShortLabel(short_label string) () {
+func (_self_ *GtkAction) SetShortLabel(short_label string) () {
 	_cstring_short_label_ := C.CString(short_label)
 	_cgo_short_label_ := (*C.gchar)(unsafe.Pointer(_cstring_short_label_))
 	defer C.free(unsafe.Pointer(_cstring_short_label_))
@@ -5577,7 +8592,7 @@ func (_self_ *Action) SetShortLabel(short_label string) () {
 	return
 }
 
-func (_self_ *Action) SetStockId(stock_id string) () {
+func (_self_ *GtkAction) SetStockId(stock_id string) () {
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
@@ -5585,7 +8600,7 @@ func (_self_ *Action) SetStockId(stock_id string) () {
 	return
 }
 
-func (_self_ *Action) SetTooltip(tooltip string) () {
+func (_self_ *GtkAction) SetTooltip(tooltip string) () {
 	_cstring_tooltip_ := C.CString(tooltip)
 	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
 	defer C.free(unsafe.Pointer(_cstring_tooltip_))
@@ -5593,49 +8608,49 @@ func (_self_ *Action) SetTooltip(tooltip string) () {
 	return
 }
 
-func (_self_ *Action) SetVisible(visible bool) () {
+func (_self_ *GtkAction) SetVisible(visible bool) () {
 	_cgo_visible_ := (C.gboolean)(C.FALSE)
 	if visible { _cgo_visible_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_set_visible((*C.GtkAction)(_self_._value_), _cgo_visible_)
 	return
 }
 
-func (_self_ *Action) SetVisibleHorizontal(visible_horizontal bool) () {
+func (_self_ *GtkAction) SetVisibleHorizontal(visible_horizontal bool) () {
 	_cgo_visible_horizontal_ := (C.gboolean)(C.FALSE)
 	if visible_horizontal { _cgo_visible_horizontal_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_set_visible_horizontal((*C.GtkAction)(_self_._value_), _cgo_visible_horizontal_)
 	return
 }
 
-func (_self_ *Action) SetVisibleVertical(visible_vertical bool) () {
+func (_self_ *GtkAction) SetVisibleVertical(visible_vertical bool) () {
 	_cgo_visible_vertical_ := (C.gboolean)(C.FALSE)
 	if visible_vertical { _cgo_visible_vertical_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_set_visible_vertical((*C.GtkAction)(_self_._value_), _cgo_visible_vertical_)
 	return
 }
 
-func (_self_ *Action) UnblockActivate() () {
+func (_self_ *GtkAction) UnblockActivate() () {
 	C.gtk_action_unblock_activate((*C.GtkAction)(_self_._value_))
 	return
 }
 
-func ActionGroupNew(name string) (_go__return__ ActionGroup) {
+func ActionGroupNew(name string) (_go__return__ GtkActionGroup) {
 	var _return_ *C.GtkActionGroup
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._gtk_action_group_new(_cgo_name_)
-	_go__return__ = ToActionGroup(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkActionGroup(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *ActionGroup) AddAction(action ActionKind) () {
+func (_self_ *GtkActionGroup) AddAction(action GtkActionKind) () {
 	_cgo_action_ := (*C.GtkAction)(action.GetGObject())
 	C.gtk_action_group_add_action((*C.GtkActionGroup)(_self_._value_), _cgo_action_)
 	return
 }
 
-func (_self_ *ActionGroup) AddActionWithAccel(action ActionKind, accelerator string) () {
+func (_self_ *GtkActionGroup) AddActionWithAccel(action GtkActionKind, accelerator string) () {
 	_cgo_action_ := (*C.GtkAction)(action.GetGObject())
 	_cstring_accelerator_ := C.CString(accelerator)
 	_cgo_accelerator_ := (*C.gchar)(unsafe.Pointer(_cstring_accelerator_))
@@ -5644,74 +8659,74 @@ func (_self_ *ActionGroup) AddActionWithAccel(action ActionKind, accelerator str
 	return
 }
 
-func (_self_ *ActionGroup) GetAccelGroup() (_go__return__ AccelGroup) {
+func (_self_ *GtkActionGroup) GetAccelGroup() (_go__return__ AccelGroup) {
 	var _return_ *C.GtkAccelGroup
 	_return_ = C.gtk_action_group_get_accel_group((*C.GtkActionGroup)(_self_._value_))
 	_go__return__ = ToAccelGroup(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *ActionGroup) GetAction(action_name string) (_go__return__ Action) {
+func (_self_ *GtkActionGroup) GetAction(action_name string) (_go__return__ GtkAction) {
 	var _return_ *C.GtkAction
 	_cstring_action_name_ := C.CString(action_name)
 	_cgo_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_action_name_))
 	defer C.free(unsafe.Pointer(_cstring_action_name_))
 	_return_ = C._gtk_action_group_get_action((*C.GtkActionGroup)(_self_._value_), _cgo_action_name_)
-	_go__return__ = ToAction(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkAction(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *ActionGroup) GetName() (_go__return__ string) {
+func (_self_ *GtkActionGroup) GetName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_action_group_get_name((*C.GtkActionGroup)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *ActionGroup) GetSensitive() (_go__return__ bool) {
+func (_self_ *GtkActionGroup) GetSensitive() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_group_get_sensitive((*C.GtkActionGroup)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ActionGroup) GetVisible() (_go__return__ bool) {
+func (_self_ *GtkActionGroup) GetVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_action_group_get_visible((*C.GtkActionGroup)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ActionGroup) ListActions() (_return_ *C.GList) {
+func (_self_ *GtkActionGroup) ListActions() (_return_ *C.GList) {
 	_return_ = C.gtk_action_group_list_actions((*C.GtkActionGroup)(_self_._value_))
 	return
 }
 
-func (_self_ *ActionGroup) RemoveAction(action ActionKind) () {
+func (_self_ *GtkActionGroup) RemoveAction(action GtkActionKind) () {
 	_cgo_action_ := (*C.GtkAction)(action.GetGObject())
 	C.gtk_action_group_remove_action((*C.GtkActionGroup)(_self_._value_), _cgo_action_)
 	return
 }
 
-func (_self_ *ActionGroup) SetAccelGroup(accel_group AccelGroupKind) () {
+func (_self_ *GtkActionGroup) SetAccelGroup(accel_group AccelGroupKind) () {
 	_cgo_accel_group_ := (*C.GtkAccelGroup)(accel_group.GetGObject())
 	C.gtk_action_group_set_accel_group((*C.GtkActionGroup)(_self_._value_), _cgo_accel_group_)
 	return
 }
 
-func (_self_ *ActionGroup) SetSensitive(sensitive bool) () {
+func (_self_ *GtkActionGroup) SetSensitive(sensitive bool) () {
 	_cgo_sensitive_ := (C.gboolean)(C.FALSE)
 	if sensitive { _cgo_sensitive_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_group_set_sensitive((*C.GtkActionGroup)(_self_._value_), _cgo_sensitive_)
 	return
 }
 
-func (_self_ *ActionGroup) SetTranslateFunc(func_ C.GtkTranslateFunc, data C.gpointer, notify C.GDestroyNotify) () {
+func (_self_ *GtkActionGroup) SetTranslateFunc(func_ C.GtkTranslateFunc, data C.gpointer, notify C.GDestroyNotify) () {
 	C.gtk_action_group_set_translate_func((*C.GtkActionGroup)(_self_._value_), func_, data, notify)
 	return
 }
 
-func (_self_ *ActionGroup) SetTranslationDomain(domain string) () {
+func (_self_ *GtkActionGroup) SetTranslationDomain(domain string) () {
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
 	defer C.free(unsafe.Pointer(_cstring_domain_))
@@ -5719,14 +8734,14 @@ func (_self_ *ActionGroup) SetTranslationDomain(domain string) () {
 	return
 }
 
-func (_self_ *ActionGroup) SetVisible(visible bool) () {
+func (_self_ *GtkActionGroup) SetVisible(visible bool) () {
 	_cgo_visible_ := (C.gboolean)(C.FALSE)
 	if visible { _cgo_visible_ = (C.gboolean)(C.TRUE) }
 	C.gtk_action_group_set_visible((*C.GtkActionGroup)(_self_._value_), _cgo_visible_)
 	return
 }
 
-func (_self_ *ActionGroup) TranslateString(string_ string) (_go__return__ string) {
+func (_self_ *GtkActionGroup) TranslateString(string_ string) (_go__return__ string) {
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
@@ -5981,7 +8996,7 @@ func (_self_ *AppChooserButton) SetShowDialogItem(setting bool) () {
 	return
 }
 
-func AppChooserDialogNew(parent WindowKind, flags C.GtkDialogFlags, file *C.GFile) (_go__return__ AppChooserDialog) {
+func AppChooserDialogNew(parent GtkWindowKind, flags C.GtkDialogFlags, file *C.GFile) (_go__return__ AppChooserDialog) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_app_chooser_dialog_new(_cgo_parent_, flags, file)
@@ -5989,7 +9004,7 @@ func AppChooserDialogNew(parent WindowKind, flags C.GtkDialogFlags, file *C.GFil
 	return
 }
 
-func AppChooserDialogNewForContentType(parent WindowKind, flags C.GtkDialogFlags, content_type string) (_go__return__ AppChooserDialog) {
+func AppChooserDialogNewForContentType(parent GtkWindowKind, flags C.GtkDialogFlags, content_type string) (_go__return__ AppChooserDialog) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	var _return_ *C.GtkWidget
 	_cstring_content_type_ := C.CString(content_type)
@@ -6138,16 +9153,16 @@ func (_self_ *GtkApplication) AddAccelerator(accelerator string, action_name str
 	return
 }
 
-func (_self_ *GtkApplication) AddWindow(window WindowKind) () {
+func (_self_ *GtkApplication) AddWindow(window GtkWindowKind) () {
 	_cgo_window_ := (*C.GtkWindow)(window.GetGObject())
 	C.gtk_application_add_window((*C.GtkApplication)(_self_._value_), _cgo_window_)
 	return
 }
 
-func (_self_ *GtkApplication) GetActiveWindow() (_go__return__ Window) {
+func (_self_ *GtkApplication) GetActiveWindow() (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_application_get_active_window((*C.GtkApplication)(_self_._value_))
-	_go__return__ = ToWindow(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6161,11 +9176,11 @@ func (_self_ *GtkApplication) GetMenubar() (_return_ *C.GMenuModel) {
 	return
 }
 
-func (_self_ *GtkApplication) GetWindowById(id uint) (_go__return__ Window) {
+func (_self_ *GtkApplication) GetWindowById(id uint) (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWindow
 	_cgo_id_ := (C.guint)(id)
 	_return_ = C.gtk_application_get_window_by_id((*C.GtkApplication)(_self_._value_), _cgo_id_)
-	_go__return__ = ToWindow(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6174,7 +9189,7 @@ func (_self_ *GtkApplication) GetWindows() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *GtkApplication) Inhibit(window WindowKind, flags C.GtkApplicationInhibitFlags, reason string) (_go__return__ uint) {
+func (_self_ *GtkApplication) Inhibit(window GtkWindowKind, flags C.GtkApplicationInhibitFlags, reason string) (_go__return__ uint) {
 	_cgo_window_ := (*C.GtkWindow)(window.GetGObject())
 	var _return_ C.guint
 	_cstring_reason_ := C.CString(reason)
@@ -6200,7 +9215,7 @@ func (_self_ *GtkApplication) RemoveAccelerator(action_name string, parameter *C
 	return
 }
 
-func (_self_ *GtkApplication) RemoveWindow(window WindowKind) () {
+func (_self_ *GtkApplication) RemoveWindow(window GtkWindowKind) () {
 	_cgo_window_ := (*C.GtkWindow)(window.GetGObject())
 	C.gtk_application_remove_window((*C.GtkApplication)(_self_._value_), _cgo_window_)
 	return
@@ -6980,13 +9995,14 @@ func (_self_ *CellArea) AddFocusSibling(renderer CellRendererKind, sibling CellR
 	return
 }
 
-func (_self_ *CellArea) ApplyAttributes(tree_model *C.GtkTreeModel, iter *TreeIter, is_expander bool, is_expanded bool) () {
+func (_self_ *CellArea) ApplyAttributes(tree_model TreeModelKind, iter *TreeIter, is_expander bool, is_expanded bool) () {
+	_cgo_tree_model_ := (*C.GtkTreeModel)(tree_model.GetGObject())
 	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
 	_cgo_is_expander_ := (C.gboolean)(C.FALSE)
 	if is_expander { _cgo_is_expander_ = (C.gboolean)(C.TRUE) }
 	_cgo_is_expanded_ := (C.gboolean)(C.FALSE)
 	if is_expanded { _cgo_is_expanded_ = (C.gboolean)(C.TRUE) }
-	C.gtk_cell_area_apply_attributes((*C.GtkCellArea)(_self_._value_), tree_model, _cgo_iter_, _cgo_is_expander_, _cgo_is_expanded_)
+	C.gtk_cell_area_apply_attributes((*C.GtkCellArea)(_self_._value_), _cgo_tree_model_, _cgo_iter_, _cgo_is_expander_, _cgo_is_expanded_)
 	return
 }
 
@@ -7096,8 +10112,10 @@ func (_self_ *CellArea) GetCurrentPathString() (_go__return__ string) {
 	return
 }
 
-func (_self_ *CellArea) GetEditWidget() (_return_ *C.GtkCellEditable) {
+func (_self_ *CellArea) GetEditWidget() (_go__return__ CellEditable) {
+	var _return_ *C.GtkCellEditable
 	_return_ = C.gtk_cell_area_get_edit_widget((*C.GtkCellArea)(_self_._value_))
+	_go__return__ = ToCellEditable(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7550,12 +10568,14 @@ func (_self_ *CellRenderer) SetVisible(visible bool) () {
 	return
 }
 
-func (_self_ *CellRenderer) StartEditing(event *C.GdkEvent, widget WidgetKind, path string, background_area *C.GdkRectangle, cell_area *C.GdkRectangle, flags C.GtkCellRendererState) (_return_ *C.GtkCellEditable) {
+func (_self_ *CellRenderer) StartEditing(event *C.GdkEvent, widget WidgetKind, path string, background_area *C.GdkRectangle, cell_area *C.GdkRectangle, flags C.GtkCellRendererState) (_go__return__ CellEditable) {
 	_cgo_widget_ := (*C.GtkWidget)(widget.GetGObject())
+	var _return_ *C.GtkCellEditable
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	_return_ = C._gtk_cell_renderer_start_editing((*C.GtkCellRenderer)(_self_._value_), event, _cgo_widget_, _cgo_path_, background_area, cell_area, flags)
+	_go__return__ = ToCellEditable(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7734,8 +10754,10 @@ func (_self_ *CellView) GetFitModel() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *CellView) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *CellView) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_cell_view_get_model((*C.GtkCellView)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -7764,8 +10786,9 @@ func (_self_ *CellView) SetFitModel(fit_model bool) () {
 	return
 }
 
-func (_self_ *CellView) SetModel(model *C.GtkTreeModel) () {
-	C.gtk_cell_view_set_model((*C.GtkCellView)(_self_._value_), model)
+func (_self_ *CellView) SetModel(model TreeModelKind) () {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
+	C.gtk_cell_view_set_model((*C.GtkCellView)(_self_._value_), _cgo_model_)
 	return
 }
 
@@ -8046,7 +11069,7 @@ func (_self_ *ColorButton) SetTitle(title string) () {
 	return
 }
 
-func ColorChooserDialogNew(title string, parent WindowKind) (_go__return__ ColorChooserDialog) {
+func ColorChooserDialogNew(title string, parent GtkWindowKind) (_go__return__ ColorChooserDialog) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	var _return_ *C.GtkWidget
 	_cstring_title_ := C.CString(title)
@@ -8099,16 +11122,18 @@ func ComboBoxNewWithEntry() (_go__return__ ComboBox) {
 	return
 }
 
-func ComboBoxNewWithModel(model *C.GtkTreeModel) (_go__return__ ComboBox) {
+func ComboBoxNewWithModel(model TreeModelKind) (_go__return__ ComboBox) {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_combo_box_new_with_model(model)
+	_return_ = C.gtk_combo_box_new_with_model(_cgo_model_)
 	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
 
-func ComboBoxNewWithModelAndEntry(model *C.GtkTreeModel) (_go__return__ ComboBox) {
+func ComboBoxNewWithModelAndEntry(model TreeModelKind) (_go__return__ ComboBox) {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_combo_box_new_with_model_and_entry(model)
+	_return_ = C.gtk_combo_box_new_with_model_and_entry(_cgo_model_)
 	_go__return__ = ToComboBox(unsafe.Pointer(_return_))
 	return
 }
@@ -8183,8 +11208,10 @@ func (_self_ *ComboBox) GetIdColumn() (_go__return__ int) {
 	return
 }
 
-func (_self_ *ComboBox) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *ComboBox) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_combo_box_get_model((*C.GtkComboBox)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -8300,8 +11327,9 @@ func (_self_ *ComboBox) SetIdColumn(id_column int) () {
 	return
 }
 
-func (_self_ *ComboBox) SetModel(model *C.GtkTreeModel) () {
-	C.gtk_combo_box_set_model((*C.GtkComboBox)(_self_._value_), model)
+func (_self_ *ComboBox) SetModel(model TreeModelKind) () {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
+	C.gtk_combo_box_set_model((*C.GtkComboBox)(_self_._value_), _cgo_model_)
 	return
 }
 
@@ -9349,8 +12377,10 @@ func (_self_ *EntryCompletion) GetMinimumKeyLength() (_go__return__ int) {
 	return
 }
 
-func (_self_ *EntryCompletion) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *EntryCompletion) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_entry_completion_get_model((*C.GtkEntryCompletion)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -9430,8 +12460,9 @@ func (_self_ *EntryCompletion) SetMinimumKeyLength(length int) () {
 	return
 }
 
-func (_self_ *EntryCompletion) SetModel(model *C.GtkTreeModel) () {
-	C.gtk_entry_completion_set_model((*C.GtkEntryCompletion)(_self_._value_), model)
+func (_self_ *EntryCompletion) SetModel(model TreeModelKind) () {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
+	C.gtk_entry_completion_set_model((*C.GtkEntryCompletion)(_self_._value_), _cgo_model_)
 	return
 }
 
@@ -9884,7 +12915,7 @@ func (_self_ *FontButton) SetUseSize(use_size bool) () {
 	return
 }
 
-func FontChooserDialogNew(title string, parent WindowKind) (_go__return__ FontChooserDialog) {
+func FontChooserDialogNew(title string, parent GtkWindowKind) (_go__return__ FontChooserDialog) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	var _return_ *C.GtkWidget
 	_cstring_title_ := C.CString(title)
@@ -10396,9 +13427,10 @@ func IconViewNewWithArea(area CellAreaKind) (_go__return__ IconView) {
 	return
 }
 
-func IconViewNewWithModel(model *C.GtkTreeModel) (_go__return__ IconView) {
+func IconViewNewWithModel(model TreeModelKind) (_go__return__ IconView) {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_icon_view_new_with_model(model)
+	_return_ = C.gtk_icon_view_new_with_model(_cgo_model_)
 	_go__return__ = ToIconView(unsafe.Pointer(_return_))
 	return
 }
@@ -10534,8 +13566,10 @@ func (_self_ *IconView) GetMarkupColumn() (_go__return__ int) {
 	return
 }
 
-func (_self_ *IconView) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *IconView) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_icon_view_get_model((*C.GtkIconView)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -10707,8 +13741,9 @@ func (_self_ *IconView) SetMarkupColumn(column int) () {
 	return
 }
 
-func (_self_ *IconView) SetModel(model *C.GtkTreeModel) () {
-	C.gtk_icon_view_set_model((*C.GtkIconView)(_self_._value_), model)
+func (_self_ *IconView) SetModel(model TreeModelKind) () {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
+	C.gtk_icon_view_set_model((*C.GtkIconView)(_self_._value_), _cgo_model_)
 	return
 }
 
@@ -10790,137 +13825,137 @@ func (_self_ *IconView) UnsetModelDragSource() () {
 	return
 }
 
-func ImageNew() (_go__return__ Image) {
+func ImageNew() (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new()
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromAnimation(animation *C.GdkPixbufAnimation) (_go__return__ Image) {
+func ImageNewFromAnimation(animation *C.GdkPixbufAnimation) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_animation(animation)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromFile(filename string) (_go__return__ Image) {
+func ImageNewFromFile(filename string) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_return_ = C._gtk_image_new_from_file(_cgo_filename_)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromGicon(icon *C.GIcon, size C.GtkIconSize) (_go__return__ Image) {
+func ImageNewFromGicon(icon *C.GIcon, size C.GtkIconSize) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_gicon(icon, size)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromIconName(icon_name string, size C.GtkIconSize) (_go__return__ Image) {
+func ImageNewFromIconName(icon_name string, size C.GtkIconSize) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
 	_return_ = C._gtk_image_new_from_icon_name(_cgo_icon_name_, size)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromIconSet(icon_set *IconSet, size C.GtkIconSize) (_go__return__ Image) {
+func ImageNewFromIconSet(icon_set *IconSet, size C.GtkIconSize) (_go__return__ GtkImage) {
 	_cgo_icon_set_ := (*C.GtkIconSet)(unsafe.Pointer(icon_set))
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_icon_set(_cgo_icon_set_, size)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ Image) {
+func ImageNewFromPixbuf(pixbuf *C.GdkPixbuf) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_image_new_from_pixbuf(pixbuf)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromResource(resource_path string) (_go__return__ Image) {
+func ImageNewFromResource(resource_path string) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
 	_return_ = C._gtk_image_new_from_resource(_cgo_resource_path_)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromStock(stock_id string, size C.GtkIconSize) (_go__return__ Image) {
+func ImageNewFromStock(stock_id string, size C.GtkIconSize) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
 	_return_ = C._gtk_image_new_from_stock(_cgo_stock_id_, size)
-	_go__return__ = ToImage(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Image) Clear() () {
+func (_self_ *GtkImage) Clear() () {
 	C.gtk_image_clear((*C.GtkImage)(_self_._value_))
 	return
 }
 
-func (_self_ *Image) GetAnimation() (_return_ *C.GdkPixbufAnimation) {
+func (_self_ *GtkImage) GetAnimation() (_return_ *C.GdkPixbufAnimation) {
 	_return_ = C.gtk_image_get_animation((*C.GtkImage)(_self_._value_))
 	return
 }
 
-func (_self_ *Image) GetGicon() (gicon unsafe.Pointer, size C.GtkIconSize) {
+func (_self_ *GtkImage) GetGicon() (gicon unsafe.Pointer, size C.GtkIconSize) {
 	C._gtk_image_get_gicon((*C.GtkImage)(_self_._value_), gicon, &size)
 	return
 }
 
-func (_self_ *Image) GetIconName() (icon_name unsafe.Pointer, size C.GtkIconSize) {
+func (_self_ *GtkImage) GetIconName() (icon_name unsafe.Pointer, size C.GtkIconSize) {
 	C._gtk_image_get_icon_name((*C.GtkImage)(_self_._value_), icon_name, &size)
 	return
 }
 
-func (_self_ *Image) GetIconSet() (icon_set *IconSet, size C.GtkIconSize) {
+func (_self_ *GtkImage) GetIconSet() (icon_set *IconSet, size C.GtkIconSize) {
 	var _allocated_icon_set_ *C.GtkIconSet
 	C._gtk_image_get_icon_set((*C.GtkImage)(_self_._value_), unsafe.Pointer(&_allocated_icon_set_), &size)
 	icon_set = (*IconSet)(unsafe.Pointer(_allocated_icon_set_))
 	return
 }
 
-func (_self_ *Image) GetPixbuf() (_return_ *C.GdkPixbuf) {
+func (_self_ *GtkImage) GetPixbuf() (_return_ *C.GdkPixbuf) {
 	_return_ = C.gtk_image_get_pixbuf((*C.GtkImage)(_self_._value_))
 	return
 }
 
-func (_self_ *Image) GetPixelSize() (_go__return__ int) {
+func (_self_ *GtkImage) GetPixelSize() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.gtk_image_get_pixel_size((*C.GtkImage)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Image) GetStock() (stock_id unsafe.Pointer, size C.GtkIconSize) {
+func (_self_ *GtkImage) GetStock() (stock_id unsafe.Pointer, size C.GtkIconSize) {
 	C._gtk_image_get_stock((*C.GtkImage)(_self_._value_), stock_id, &size)
 	return
 }
 
-func (_self_ *Image) GetStorageType() (_return_ C.GtkImageType) {
+func (_self_ *GtkImage) GetStorageType() (_return_ C.GtkImageType) {
 	_return_ = C.gtk_image_get_storage_type((*C.GtkImage)(_self_._value_))
 	return
 }
 
-func (_self_ *Image) SetFromAnimation(animation *C.GdkPixbufAnimation) () {
+func (_self_ *GtkImage) SetFromAnimation(animation *C.GdkPixbufAnimation) () {
 	C.gtk_image_set_from_animation((*C.GtkImage)(_self_._value_), animation)
 	return
 }
 
-func (_self_ *Image) SetFromFile(filename string) () {
+func (_self_ *GtkImage) SetFromFile(filename string) () {
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
@@ -10928,12 +13963,12 @@ func (_self_ *Image) SetFromFile(filename string) () {
 	return
 }
 
-func (_self_ *Image) SetFromGicon(icon *C.GIcon, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromGicon(icon *C.GIcon, size C.GtkIconSize) () {
 	C.gtk_image_set_from_gicon((*C.GtkImage)(_self_._value_), icon, size)
 	return
 }
 
-func (_self_ *Image) SetFromIconName(icon_name string, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromIconName(icon_name string, size C.GtkIconSize) () {
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
@@ -10941,18 +13976,18 @@ func (_self_ *Image) SetFromIconName(icon_name string, size C.GtkIconSize) () {
 	return
 }
 
-func (_self_ *Image) SetFromIconSet(icon_set *IconSet, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromIconSet(icon_set *IconSet, size C.GtkIconSize) () {
 	_cgo_icon_set_ := (*C.GtkIconSet)(unsafe.Pointer(icon_set))
 	C.gtk_image_set_from_icon_set((*C.GtkImage)(_self_._value_), _cgo_icon_set_, size)
 	return
 }
 
-func (_self_ *Image) SetFromPixbuf(pixbuf *C.GdkPixbuf) () {
+func (_self_ *GtkImage) SetFromPixbuf(pixbuf *C.GdkPixbuf) () {
 	C.gtk_image_set_from_pixbuf((*C.GtkImage)(_self_._value_), pixbuf)
 	return
 }
 
-func (_self_ *Image) SetFromResource(resource_path string) () {
+func (_self_ *GtkImage) SetFromResource(resource_path string) () {
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
@@ -10960,7 +13995,7 @@ func (_self_ *Image) SetFromResource(resource_path string) () {
 	return
 }
 
-func (_self_ *Image) SetFromStock(stock_id string, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromStock(stock_id string, size C.GtkIconSize) () {
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
@@ -10968,7 +14003,7 @@ func (_self_ *Image) SetFromStock(stock_id string, size C.GtkIconSize) () {
 	return
 }
 
-func (_self_ *Image) SetPixelSize(pixel_size int) () {
+func (_self_ *GtkImage) SetPixelSize(pixel_size int) () {
 	_cgo_pixel_size_ := (C.gint)(pixel_size)
 	C.gtk_image_set_pixel_size((*C.GtkImage)(_self_._value_), _cgo_pixel_size_)
 	return
@@ -12351,16 +15386,16 @@ func (_self_ *GtkMisc) SetPadding(xpad int, ypad int) () {
 	return
 }
 
-func GtkMountOperationNew(parent WindowKind) (_return_ *C.GMountOperation) {
+func GtkMountOperationNew(parent GtkWindowKind) (_return_ *C.GMountOperation) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	_return_ = C.gtk_mount_operation_new(_cgo_parent_)
 	return
 }
 
-func (_self_ *GtkMountOperation) GetParent() (_go__return__ Window) {
+func (_self_ *GtkMountOperation) GetParent() (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_mount_operation_get_parent((*C.GtkMountOperation)(_self_._value_))
-	_go__return__ = ToWindow(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -12376,7 +15411,7 @@ func (_self_ *GtkMountOperation) IsShowing() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *GtkMountOperation) SetParent(parent WindowKind) () {
+func (_self_ *GtkMountOperation) SetParent(parent GtkWindowKind) () {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	C.gtk_mount_operation_set_parent((*C.GtkMountOperation)(_self_._value_), _cgo_parent_)
 	return
@@ -13256,7 +16291,7 @@ func (_self_ *PrintOperation) IsFinished() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *PrintOperation) Run(action C.GtkPrintOperationAction, parent WindowKind) (_return_ C.GtkPrintOperationResult, _error_ unsafe.Pointer) {
+func (_self_ *PrintOperation) Run(action C.GtkPrintOperationAction, parent GtkWindowKind) (_return_ C.GtkPrintOperationResult, _error_ unsafe.Pointer) {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	_return_ = C._gtk_print_operation_run((*C.GtkPrintOperation)(_self_._value_), action, _cgo_parent_, _error_)
 	return
@@ -15666,14 +18701,16 @@ func StyleContextNew() (_go__return__ StyleContext) {
 	return
 }
 
-func StyleContextAddProviderForScreen(screen *C.GdkScreen, provider *C.GtkStyleProvider, priority uint) () {
+func StyleContextAddProviderForScreen(screen *C.GdkScreen, provider StyleProviderKind, priority uint) () {
+	_cgo_provider_ := (*C.GtkStyleProvider)(provider.GetGObject())
 	_cgo_priority_ := (C.guint)(priority)
-	C.gtk_style_context_add_provider_for_screen(screen, provider, _cgo_priority_)
+	C.gtk_style_context_add_provider_for_screen(screen, _cgo_provider_, _cgo_priority_)
 	return
 }
 
-func StyleContextRemoveProviderForScreen(screen *C.GdkScreen, provider *C.GtkStyleProvider) () {
-	C.gtk_style_context_remove_provider_for_screen(screen, provider)
+func StyleContextRemoveProviderForScreen(screen *C.GdkScreen, provider StyleProviderKind) () {
+	_cgo_provider_ := (*C.GtkStyleProvider)(provider.GetGObject())
+	C.gtk_style_context_remove_provider_for_screen(screen, _cgo_provider_)
 	return
 }
 
@@ -15690,9 +18727,10 @@ func (_self_ *StyleContext) AddClass(class_name string) () {
 	return
 }
 
-func (_self_ *StyleContext) AddProvider(provider *C.GtkStyleProvider, priority uint) () {
+func (_self_ *StyleContext) AddProvider(provider StyleProviderKind, priority uint) () {
+	_cgo_provider_ := (*C.GtkStyleProvider)(provider.GetGObject())
 	_cgo_priority_ := (C.guint)(priority)
-	C.gtk_style_context_add_provider((*C.GtkStyleContext)(_self_._value_), provider, _cgo_priority_)
+	C.gtk_style_context_add_provider((*C.GtkStyleContext)(_self_._value_), _cgo_provider_, _cgo_priority_)
 	return
 }
 
@@ -15868,8 +18906,9 @@ func (_self_ *StyleContext) RemoveClass(class_name string) () {
 	return
 }
 
-func (_self_ *StyleContext) RemoveProvider(provider *C.GtkStyleProvider) () {
-	C.gtk_style_context_remove_provider((*C.GtkStyleContext)(_self_._value_), provider)
+func (_self_ *StyleContext) RemoveProvider(provider StyleProviderKind) () {
+	_cgo_provider_ := (*C.GtkStyleProvider)(provider.GetGObject())
+	C.gtk_style_context_remove_provider((*C.GtkStyleContext)(_self_._value_), _cgo_provider_)
 	return
 }
 
@@ -18220,8 +21259,10 @@ func (_self_ *TreeModelFilter) ConvertPathToChildPath(filter_path *TreePath) (_g
 	return
 }
 
-func (_self_ *TreeModelFilter) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *TreeModelFilter) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_tree_model_filter_get_model((*C.GtkTreeModelFilter)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18280,8 +21321,10 @@ func (_self_ *TreeModelSort) ConvertPathToChildPath(sorted_path *TreePath) (_go_
 	return
 }
 
-func (_self_ *TreeModelSort) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *TreeModelSort) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_tree_model_sort_get_model((*C.GtkTreeModelSort)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -18315,17 +21358,21 @@ func (_self_ *TreeSelection) GetSelectFunction() (_return_ C.GtkTreeSelectionFun
 	return
 }
 
-func (_self_ *TreeSelection) GetSelected() (_go__return__ bool, model unsafe.Pointer, iter *TreeIter) {
+func (_self_ *TreeSelection) GetSelected() (_go__return__ bool, model *TreeModel, iter *TreeIter) {
+	var _allocated_model_ *C.GtkTreeModel
 	var _allocated_iter_ C.GtkTreeIter
 	var _return_ C.gboolean
-	_return_ = C._gtk_tree_selection_get_selected((*C.GtkTreeSelection)(_self_._value_), model, &_allocated_iter_)
+	_return_ = C._gtk_tree_selection_get_selected((*C.GtkTreeSelection)(_self_._value_), unsafe.Pointer(&_allocated_model_), &_allocated_iter_)
+	model = (*TreeModel)(unsafe.Pointer(_allocated_model_))
 	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *TreeSelection) GetSelectedRows() (_return_ *C.GList, model unsafe.Pointer) {
-	_return_ = C._gtk_tree_selection_get_selected_rows((*C.GtkTreeSelection)(_self_._value_), model)
+func (_self_ *TreeSelection) GetSelectedRows() (_return_ *C.GList, model *TreeModel) {
+	var _allocated_model_ *C.GtkTreeModel
+	_return_ = C._gtk_tree_selection_get_selected_rows((*C.GtkTreeSelection)(_self_._value_), unsafe.Pointer(&_allocated_model_))
+	model = (*TreeModel)(unsafe.Pointer(_allocated_model_))
 	return
 }
 
@@ -18536,9 +21583,10 @@ func TreeViewNew() (_go__return__ TreeView) {
 	return
 }
 
-func TreeViewNewWithModel(model *C.GtkTreeModel) (_go__return__ TreeView) {
+func TreeViewNewWithModel(model TreeModelKind) (_go__return__ TreeView) {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_tree_view_new_with_model(model)
+	_return_ = C.gtk_tree_view_new_with_model(_cgo_model_)
 	_go__return__ = ToTreeView(unsafe.Pointer(_return_))
 	return
 }
@@ -18789,8 +21837,10 @@ func (_self_ *TreeView) GetLevelIndentation() (_go__return__ int) {
 	return
 }
 
-func (_self_ *TreeView) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *TreeView) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_tree_view_get_model((*C.GtkTreeView)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19099,8 +22149,9 @@ func (_self_ *TreeView) SetLevelIndentation(indentation int) () {
 	return
 }
 
-func (_self_ *TreeView) SetModel(model *C.GtkTreeModel) () {
-	C.gtk_tree_view_set_model((*C.GtkTreeView)(_self_._value_), model)
+func (_self_ *TreeView) SetModel(model TreeModelKind) () {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
+	C.gtk_tree_view_set_model((*C.GtkTreeView)(_self_._value_), _cgo_model_)
 	return
 }
 
@@ -19248,13 +22299,14 @@ func (_self_ *TreeViewColumn) CellIsVisible() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *TreeViewColumn) CellSetCellData(tree_model *C.GtkTreeModel, iter *TreeIter, is_expander bool, is_expanded bool) () {
+func (_self_ *TreeViewColumn) CellSetCellData(tree_model TreeModelKind, iter *TreeIter, is_expander bool, is_expanded bool) () {
+	_cgo_tree_model_ := (*C.GtkTreeModel)(tree_model.GetGObject())
 	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
 	_cgo_is_expander_ := (C.gboolean)(C.FALSE)
 	if is_expander { _cgo_is_expander_ = (C.gboolean)(C.TRUE) }
 	_cgo_is_expanded_ := (C.gboolean)(C.FALSE)
 	if is_expanded { _cgo_is_expanded_ = (C.gboolean)(C.TRUE) }
-	C.gtk_tree_view_column_cell_set_cell_data((*C.GtkTreeViewColumn)(_self_._value_), tree_model, _cgo_iter_, _cgo_is_expander_, _cgo_is_expanded_)
+	C.gtk_tree_view_column_cell_set_cell_data((*C.GtkTreeViewColumn)(_self_._value_), _cgo_tree_model_, _cgo_iter_, _cgo_is_expander_, _cgo_is_expanded_)
 	return
 }
 
@@ -19612,13 +22664,13 @@ func (_self_ *UIManager) GetAccelGroup() (_go__return__ AccelGroup) {
 	return
 }
 
-func (_self_ *UIManager) GetAction(path string) (_go__return__ Action) {
+func (_self_ *UIManager) GetAction(path string) (_go__return__ GtkAction) {
 	var _return_ *C.GtkAction
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	_return_ = C._gtk_ui_manager_get_action((*C.GtkUIManager)(_self_._value_), _cgo_path_)
-	_go__return__ = ToAction(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -19649,7 +22701,7 @@ func (_self_ *UIManager) GetWidget(path string) (_go__return__ Widget) {
 	return
 }
 
-func (_self_ *UIManager) InsertActionGroup(action_group ActionGroupKind, pos int) () {
+func (_self_ *UIManager) InsertActionGroup(action_group GtkActionGroupKind, pos int) () {
 	_cgo_action_group_ := (*C.GtkActionGroup)(action_group.GetGObject())
 	_cgo_pos_ := (C.gint)(pos)
 	C.gtk_ui_manager_insert_action_group((*C.GtkUIManager)(_self_._value_), _cgo_action_group_, _cgo_pos_)
@@ -19663,7 +22715,7 @@ func (_self_ *UIManager) NewMergeId() (_go__return__ uint) {
 	return
 }
 
-func (_self_ *UIManager) RemoveActionGroup(action_group ActionGroupKind) () {
+func (_self_ *UIManager) RemoveActionGroup(action_group GtkActionGroupKind) () {
 	_cgo_action_group_ := (*C.GtkActionGroup)(action_group.GetGObject())
 	C.gtk_ui_manager_remove_action_group((*C.GtkUIManager)(_self_._value_), _cgo_action_group_)
 	return
@@ -20343,10 +23395,10 @@ func (_self_ *Widget) GetTooltipText() (_go__return__ string) {
 	return
 }
 
-func (_self_ *Widget) GetTooltipWindow() (_go__return__ Window) {
+func (_self_ *Widget) GetTooltipWindow() (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_widget_get_tooltip_window((*C.GtkWidget)(_self_._value_))
-	_go__return__ = ToWindow(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -20472,12 +23524,11 @@ func (_self_ *Widget) InputShapeCombineRegion(region *C.cairo_region_t) () {
 	return
 }
 
-func (_self_ *Widget) InsertActionGroup(name string, group ActionGroupKind) () {
-	_cgo_group_ := (*C.GActionGroup)(group.GetGObject())
+func (_self_ *Widget) InsertActionGroup(name string, group *C.GActionGroup) () {
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._gtk_widget_insert_action_group((*C.GtkWidget)(_self_._value_), _cgo_name_, _cgo_group_)
+	C._gtk_widget_insert_action_group((*C.GtkWidget)(_self_._value_), _cgo_name_, group)
 	return
 }
 
@@ -20917,7 +23968,7 @@ func (_self_ *Widget) SetTooltipText(text string) () {
 	return
 }
 
-func (_self_ *Widget) SetTooltipWindow(custom_window WindowKind) () {
+func (_self_ *Widget) SetTooltipWindow(custom_window GtkWindowKind) () {
 	_cgo_custom_window_ := (*C.GtkWindow)(custom_window.GetGObject())
 	C.gtk_widget_set_tooltip_window((*C.GtkWidget)(_self_._value_), _cgo_custom_window_)
 	return
@@ -21036,10 +24087,10 @@ func (_self_ *Widget) UnsetStateFlags(flags C.GtkStateFlags) () {
 	return
 }
 
-func WindowNew(type_ C.GtkWindowType) (_go__return__ Window) {
+func WindowNew(type_ C.GtkWindowType) (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_new(type_)
-	_go__return__ = ToWindow(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
 
@@ -21095,41 +24146,41 @@ func WindowSetDefaultIconName(name string) () {
 	return
 }
 
-func (_self_ *Window) ActivateDefault() (_go__return__ bool) {
+func (_self_ *GtkWindow) ActivateDefault() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_activate_default((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) ActivateFocus() (_go__return__ bool) {
+func (_self_ *GtkWindow) ActivateFocus() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_activate_focus((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) ActivateKey(event *C.GdkEventKey) (_go__return__ bool) {
+func (_self_ *GtkWindow) ActivateKey(event *C.GdkEventKey) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_activate_key((*C.GtkWindow)(_self_._value_), event)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) AddAccelGroup(accel_group AccelGroupKind) () {
+func (_self_ *GtkWindow) AddAccelGroup(accel_group AccelGroupKind) () {
 	_cgo_accel_group_ := (*C.GtkAccelGroup)(accel_group.GetGObject())
 	C.gtk_window_add_accel_group((*C.GtkWindow)(_self_._value_), _cgo_accel_group_)
 	return
 }
 
-func (_self_ *Window) AddMnemonic(keyval uint, target WidgetKind) () {
+func (_self_ *GtkWindow) AddMnemonic(keyval uint, target WidgetKind) () {
 	_cgo_target_ := (*C.GtkWidget)(target.GetGObject())
 	_cgo_keyval_ := (C.guint)(keyval)
 	C.gtk_window_add_mnemonic((*C.GtkWindow)(_self_._value_), _cgo_keyval_, _cgo_target_)
 	return
 }
 
-func (_self_ *Window) BeginMoveDrag(button int, root_x int, root_y int, timestamp uint32) () {
+func (_self_ *GtkWindow) BeginMoveDrag(button int, root_x int, root_y int, timestamp uint32) () {
 	_cgo_button_ := (C.gint)(button)
 	_cgo_root_x_ := (C.gint)(root_x)
 	_cgo_root_y_ := (C.gint)(root_y)
@@ -21138,7 +24189,7 @@ func (_self_ *Window) BeginMoveDrag(button int, root_x int, root_y int, timestam
 	return
 }
 
-func (_self_ *Window) BeginResizeDrag(edge C.GdkWindowEdge, button int, root_x int, root_y int, timestamp uint32) () {
+func (_self_ *GtkWindow) BeginResizeDrag(edge C.GdkWindowEdge, button int, root_x int, root_y int, timestamp uint32) () {
 	_cgo_button_ := (C.gint)(button)
 	_cgo_root_x_ := (C.gint)(root_x)
 	_cgo_root_y_ := (C.gint)(root_y)
@@ -21147,45 +24198,45 @@ func (_self_ *Window) BeginResizeDrag(edge C.GdkWindowEdge, button int, root_x i
 	return
 }
 
-func (_self_ *Window) Deiconify() () {
+func (_self_ *GtkWindow) Deiconify() () {
 	C.gtk_window_deiconify((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) Fullscreen() () {
+func (_self_ *GtkWindow) Fullscreen() () {
 	C.gtk_window_fullscreen((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetAcceptFocus() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetAcceptFocus() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_accept_focus((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetApplication() (_go__return__ GtkApplication) {
+func (_self_ *GtkWindow) GetApplication() (_go__return__ GtkApplication) {
 	var _return_ *C.GtkApplication
 	_return_ = C.gtk_window_get_application((*C.GtkWindow)(_self_._value_))
 	_go__return__ = ToGtkApplication(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Window) GetAttachedTo() (_go__return__ Widget) {
+func (_self_ *GtkWindow) GetAttachedTo() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_get_attached_to((*C.GtkWindow)(_self_._value_))
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Window) GetDecorated() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetDecorated() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_decorated((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetDefaultSize() (_go_width_ int, _go_height_ int) {
+func (_self_ *GtkWindow) GetDefaultSize() (_go_width_ int, _go_height_ int) {
 	var width C.gint
 	var height C.gint
 	C.gtk_window_get_default_size((*C.GtkWindow)(_self_._value_), &width, &height)
@@ -21194,118 +24245,118 @@ func (_self_ *Window) GetDefaultSize() (_go_width_ int, _go_height_ int) {
 	return
 }
 
-func (_self_ *Window) GetDefaultWidget() (_go__return__ Widget) {
+func (_self_ *GtkWindow) GetDefaultWidget() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_get_default_widget((*C.GtkWindow)(_self_._value_))
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Window) GetDeletable() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetDeletable() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_deletable((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetDestroyWithParent() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetDestroyWithParent() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_destroy_with_parent((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetFocus() (_go__return__ Widget) {
+func (_self_ *GtkWindow) GetFocus() (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_window_get_focus((*C.GtkWindow)(_self_._value_))
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Window) GetFocusOnMap() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetFocusOnMap() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_focus_on_map((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetFocusVisible() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetFocusVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_focus_visible((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetGravity() (_return_ C.GdkGravity) {
+func (_self_ *GtkWindow) GetGravity() (_return_ C.GdkGravity) {
 	_return_ = C.gtk_window_get_gravity((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetGroup() (_go__return__ WindowGroup) {
+func (_self_ *GtkWindow) GetGroup() (_go__return__ WindowGroup) {
 	var _return_ *C.GtkWindowGroup
 	_return_ = C.gtk_window_get_group((*C.GtkWindow)(_self_._value_))
 	_go__return__ = ToWindowGroup(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Window) GetHasResizeGrip() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetHasResizeGrip() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_has_resize_grip((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetHideTitlebarWhenMaximized() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetHideTitlebarWhenMaximized() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_hide_titlebar_when_maximized((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetIcon() (_return_ *C.GdkPixbuf) {
+func (_self_ *GtkWindow) GetIcon() (_return_ *C.GdkPixbuf) {
 	_return_ = C.gtk_window_get_icon((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetIconList() (_return_ *C.GList) {
+func (_self_ *GtkWindow) GetIconList() (_return_ *C.GList) {
 	_return_ = C.gtk_window_get_icon_list((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetIconName() (_go__return__ string) {
+func (_self_ *GtkWindow) GetIconName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_icon_name((*C.GtkWindow)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Window) GetMnemonicModifier() (_return_ C.GdkModifierType) {
+func (_self_ *GtkWindow) GetMnemonicModifier() (_return_ C.GdkModifierType) {
 	_return_ = C.gtk_window_get_mnemonic_modifier((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetMnemonicsVisible() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetMnemonicsVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_mnemonics_visible((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetModal() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetModal() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_modal((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetOpacity() (_go__return__ float64) {
+func (_self_ *GtkWindow) GetOpacity() (_go__return__ float64) {
 	var _return_ C.gdouble
 	_return_ = C.gtk_window_get_opacity((*C.GtkWindow)(_self_._value_))
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *Window) GetPosition() (_go_root_x_ int, _go_root_y_ int) {
+func (_self_ *GtkWindow) GetPosition() (_go_root_x_ int, _go_root_y_ int) {
 	var root_x C.gint
 	var root_y C.gint
 	C.gtk_window_get_position((*C.GtkWindow)(_self_._value_), &root_x, &root_y)
@@ -21314,33 +24365,33 @@ func (_self_ *Window) GetPosition() (_go_root_x_ int, _go_root_y_ int) {
 	return
 }
 
-func (_self_ *Window) GetResizable() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetResizable() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_resizable((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetResizeGripArea() (_go__return__ bool, rect *C.GdkRectangle) {
+func (_self_ *GtkWindow) GetResizeGripArea() (_go__return__ bool, rect *C.GdkRectangle) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_resize_grip_area((*C.GtkWindow)(_self_._value_), rect)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetRole() (_go__return__ string) {
+func (_self_ *GtkWindow) GetRole() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_role((*C.GtkWindow)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Window) GetScreen() (_return_ *C.GdkScreen) {
+func (_self_ *GtkWindow) GetScreen() (_return_ *C.GdkScreen) {
 	_return_ = C.gtk_window_get_screen((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetSize() (_go_width_ int, _go_height_ int) {
+func (_self_ *GtkWindow) GetSize() (_go_width_ int, _go_height_ int) {
 	var width C.gint
 	var height C.gint
 	C.gtk_window_get_size((*C.GtkWindow)(_self_._value_), &width, &height)
@@ -21349,83 +24400,83 @@ func (_self_ *Window) GetSize() (_go_width_ int, _go_height_ int) {
 	return
 }
 
-func (_self_ *Window) GetSkipPagerHint() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetSkipPagerHint() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_skip_pager_hint((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetSkipTaskbarHint() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetSkipTaskbarHint() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_skip_taskbar_hint((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetTitle() (_go__return__ string) {
+func (_self_ *GtkWindow) GetTitle() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._gtk_window_get_title((*C.GtkWindow)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Window) GetTransientFor() (_go__return__ Window) {
+func (_self_ *GtkWindow) GetTransientFor() (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWindow
 	_return_ = C.gtk_window_get_transient_for((*C.GtkWindow)(_self_._value_))
-	_go__return__ = ToWindow(unsafe.Pointer(_return_))
+	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Window) GetTypeHint() (_return_ C.GdkWindowTypeHint) {
+func (_self_ *GtkWindow) GetTypeHint() (_return_ C.GdkWindowTypeHint) {
 	_return_ = C.gtk_window_get_type_hint((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) GetUrgencyHint() (_go__return__ bool) {
+func (_self_ *GtkWindow) GetUrgencyHint() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_get_urgency_hint((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) GetWindowType() (_return_ C.GtkWindowType) {
+func (_self_ *GtkWindow) GetWindowType() (_return_ C.GtkWindowType) {
 	_return_ = C.gtk_window_get_window_type((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) HasGroup() (_go__return__ bool) {
+func (_self_ *GtkWindow) HasGroup() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_has_group((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) HasToplevelFocus() (_go__return__ bool) {
+func (_self_ *GtkWindow) HasToplevelFocus() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_has_toplevel_focus((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) Iconify() () {
+func (_self_ *GtkWindow) Iconify() () {
 	C.gtk_window_iconify((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) IsActive() (_go__return__ bool) {
+func (_self_ *GtkWindow) IsActive() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_is_active((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) Maximize() () {
+func (_self_ *GtkWindow) Maximize() () {
 	C.gtk_window_maximize((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) MnemonicActivate(keyval uint, modifier C.GdkModifierType) (_go__return__ bool) {
+func (_self_ *GtkWindow) MnemonicActivate(keyval uint, modifier C.GdkModifierType) (_go__return__ bool) {
 	_cgo_keyval_ := (C.guint)(keyval)
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_mnemonic_activate((*C.GtkWindow)(_self_._value_), _cgo_keyval_, modifier)
@@ -21433,14 +24484,14 @@ func (_self_ *Window) MnemonicActivate(keyval uint, modifier C.GdkModifierType) 
 	return
 }
 
-func (_self_ *Window) Move(x int, y int) () {
+func (_self_ *GtkWindow) Move(x int, y int) () {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	C.gtk_window_move((*C.GtkWindow)(_self_._value_), _cgo_x_, _cgo_y_)
 	return
 }
 
-func (_self_ *Window) ParseGeometry(geometry string) (_go__return__ bool) {
+func (_self_ *GtkWindow) ParseGeometry(geometry string) (_go__return__ bool) {
 	_cstring_geometry_ := C.CString(geometry)
 	_cgo_geometry_ := (*C.gchar)(unsafe.Pointer(_cstring_geometry_))
 	defer C.free(unsafe.Pointer(_cstring_geometry_))
@@ -21450,181 +24501,181 @@ func (_self_ *Window) ParseGeometry(geometry string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Window) Present() () {
+func (_self_ *GtkWindow) Present() () {
 	C.gtk_window_present((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) PresentWithTime(timestamp uint32) () {
+func (_self_ *GtkWindow) PresentWithTime(timestamp uint32) () {
 	_cgo_timestamp_ := (C.guint32)(timestamp)
 	C.gtk_window_present_with_time((*C.GtkWindow)(_self_._value_), _cgo_timestamp_)
 	return
 }
 
-func (_self_ *Window) PropagateKeyEvent(event *C.GdkEventKey) (_go__return__ bool) {
+func (_self_ *GtkWindow) PropagateKeyEvent(event *C.GdkEventKey) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_propagate_key_event((*C.GtkWindow)(_self_._value_), event)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) RemoveAccelGroup(accel_group AccelGroupKind) () {
+func (_self_ *GtkWindow) RemoveAccelGroup(accel_group AccelGroupKind) () {
 	_cgo_accel_group_ := (*C.GtkAccelGroup)(accel_group.GetGObject())
 	C.gtk_window_remove_accel_group((*C.GtkWindow)(_self_._value_), _cgo_accel_group_)
 	return
 }
 
-func (_self_ *Window) RemoveMnemonic(keyval uint, target WidgetKind) () {
+func (_self_ *GtkWindow) RemoveMnemonic(keyval uint, target WidgetKind) () {
 	_cgo_target_ := (*C.GtkWidget)(target.GetGObject())
 	_cgo_keyval_ := (C.guint)(keyval)
 	C.gtk_window_remove_mnemonic((*C.GtkWindow)(_self_._value_), _cgo_keyval_, _cgo_target_)
 	return
 }
 
-func (_self_ *Window) ReshowWithInitialSize() () {
+func (_self_ *GtkWindow) ReshowWithInitialSize() () {
 	C.gtk_window_reshow_with_initial_size((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) Resize(width int, height int) () {
+func (_self_ *GtkWindow) Resize(width int, height int) () {
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	C.gtk_window_resize((*C.GtkWindow)(_self_._value_), _cgo_width_, _cgo_height_)
 	return
 }
 
-func (_self_ *Window) ResizeGripIsVisible() (_go__return__ bool) {
+func (_self_ *GtkWindow) ResizeGripIsVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.gtk_window_resize_grip_is_visible((*C.GtkWindow)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Window) ResizeToGeometry(width int, height int) () {
+func (_self_ *GtkWindow) ResizeToGeometry(width int, height int) () {
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	C.gtk_window_resize_to_geometry((*C.GtkWindow)(_self_._value_), _cgo_width_, _cgo_height_)
 	return
 }
 
-func (_self_ *Window) SetAcceptFocus(setting bool) () {
+func (_self_ *GtkWindow) SetAcceptFocus(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_accept_focus((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetApplication(application GtkApplicationKind) () {
+func (_self_ *GtkWindow) SetApplication(application GtkApplicationKind) () {
 	_cgo_application_ := (*C.GtkApplication)(application.GetGObject())
 	C.gtk_window_set_application((*C.GtkWindow)(_self_._value_), _cgo_application_)
 	return
 }
 
-func (_self_ *Window) SetAttachedTo(attach_widget WidgetKind) () {
+func (_self_ *GtkWindow) SetAttachedTo(attach_widget WidgetKind) () {
 	_cgo_attach_widget_ := (*C.GtkWidget)(attach_widget.GetGObject())
 	C.gtk_window_set_attached_to((*C.GtkWindow)(_self_._value_), _cgo_attach_widget_)
 	return
 }
 
-func (_self_ *Window) SetDecorated(setting bool) () {
+func (_self_ *GtkWindow) SetDecorated(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_decorated((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetDefault(default_widget WidgetKind) () {
+func (_self_ *GtkWindow) SetDefault(default_widget WidgetKind) () {
 	_cgo_default_widget_ := (*C.GtkWidget)(default_widget.GetGObject())
 	C.gtk_window_set_default((*C.GtkWindow)(_self_._value_), _cgo_default_widget_)
 	return
 }
 
-func (_self_ *Window) SetDefaultGeometry(width int, height int) () {
+func (_self_ *GtkWindow) SetDefaultGeometry(width int, height int) () {
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	C.gtk_window_set_default_geometry((*C.GtkWindow)(_self_._value_), _cgo_width_, _cgo_height_)
 	return
 }
 
-func (_self_ *Window) SetDefaultSize(width int, height int) () {
+func (_self_ *GtkWindow) SetDefaultSize(width int, height int) () {
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	C.gtk_window_set_default_size((*C.GtkWindow)(_self_._value_), _cgo_width_, _cgo_height_)
 	return
 }
 
-func (_self_ *Window) SetDeletable(setting bool) () {
+func (_self_ *GtkWindow) SetDeletable(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_deletable((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetDestroyWithParent(setting bool) () {
+func (_self_ *GtkWindow) SetDestroyWithParent(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_destroy_with_parent((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetFocus(focus WidgetKind) () {
+func (_self_ *GtkWindow) SetFocus(focus WidgetKind) () {
 	_cgo_focus_ := (*C.GtkWidget)(focus.GetGObject())
 	C.gtk_window_set_focus((*C.GtkWindow)(_self_._value_), _cgo_focus_)
 	return
 }
 
-func (_self_ *Window) SetFocusOnMap(setting bool) () {
+func (_self_ *GtkWindow) SetFocusOnMap(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_focus_on_map((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetFocusVisible(setting bool) () {
+func (_self_ *GtkWindow) SetFocusVisible(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_focus_visible((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetGeometryHints(geometry_widget WidgetKind, geometry *C.GdkGeometry, geom_mask C.GdkWindowHints) () {
+func (_self_ *GtkWindow) SetGeometryHints(geometry_widget WidgetKind, geometry *C.GdkGeometry, geom_mask C.GdkWindowHints) () {
 	_cgo_geometry_widget_ := (*C.GtkWidget)(geometry_widget.GetGObject())
 	C.gtk_window_set_geometry_hints((*C.GtkWindow)(_self_._value_), _cgo_geometry_widget_, geometry, geom_mask)
 	return
 }
 
-func (_self_ *Window) SetGravity(gravity C.GdkGravity) () {
+func (_self_ *GtkWindow) SetGravity(gravity C.GdkGravity) () {
 	C.gtk_window_set_gravity((*C.GtkWindow)(_self_._value_), gravity)
 	return
 }
 
-func (_self_ *Window) SetHasResizeGrip(value bool) () {
+func (_self_ *GtkWindow) SetHasResizeGrip(value bool) () {
 	_cgo_value_ := (C.gboolean)(C.FALSE)
 	if value { _cgo_value_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_has_resize_grip((*C.GtkWindow)(_self_._value_), _cgo_value_)
 	return
 }
 
-func (_self_ *Window) SetHasUserRefCount(setting bool) () {
+func (_self_ *GtkWindow) SetHasUserRefCount(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_has_user_ref_count((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetHideTitlebarWhenMaximized(setting bool) () {
+func (_self_ *GtkWindow) SetHideTitlebarWhenMaximized(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_hide_titlebar_when_maximized((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetIcon(icon *C.GdkPixbuf) () {
+func (_self_ *GtkWindow) SetIcon(icon *C.GdkPixbuf) () {
 	C.gtk_window_set_icon((*C.GtkWindow)(_self_._value_), icon)
 	return
 }
 
-func (_self_ *Window) SetIconFromFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GtkWindow) SetIconFromFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
@@ -21634,12 +24685,12 @@ func (_self_ *Window) SetIconFromFile(filename string) (_go__return__ bool, _err
 	return
 }
 
-func (_self_ *Window) SetIconList(list *C.GList) () {
+func (_self_ *GtkWindow) SetIconList(list *C.GList) () {
 	C.gtk_window_set_icon_list((*C.GtkWindow)(_self_._value_), list)
 	return
 }
 
-func (_self_ *Window) SetIconName(name string) () {
+func (_self_ *GtkWindow) SetIconName(name string) () {
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -21647,58 +24698,58 @@ func (_self_ *Window) SetIconName(name string) () {
 	return
 }
 
-func (_self_ *Window) SetKeepAbove(setting bool) () {
+func (_self_ *GtkWindow) SetKeepAbove(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_keep_above((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetKeepBelow(setting bool) () {
+func (_self_ *GtkWindow) SetKeepBelow(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_keep_below((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetMnemonicModifier(modifier C.GdkModifierType) () {
+func (_self_ *GtkWindow) SetMnemonicModifier(modifier C.GdkModifierType) () {
 	C.gtk_window_set_mnemonic_modifier((*C.GtkWindow)(_self_._value_), modifier)
 	return
 }
 
-func (_self_ *Window) SetMnemonicsVisible(setting bool) () {
+func (_self_ *GtkWindow) SetMnemonicsVisible(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_mnemonics_visible((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetModal(modal bool) () {
+func (_self_ *GtkWindow) SetModal(modal bool) () {
 	_cgo_modal_ := (C.gboolean)(C.FALSE)
 	if modal { _cgo_modal_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_modal((*C.GtkWindow)(_self_._value_), _cgo_modal_)
 	return
 }
 
-func (_self_ *Window) SetOpacity(opacity float64) () {
+func (_self_ *GtkWindow) SetOpacity(opacity float64) () {
 	_cgo_opacity_ := (C.gdouble)(opacity)
 	C.gtk_window_set_opacity((*C.GtkWindow)(_self_._value_), _cgo_opacity_)
 	return
 }
 
-func (_self_ *Window) SetPosition(position C.GtkWindowPosition) () {
+func (_self_ *GtkWindow) SetPosition(position C.GtkWindowPosition) () {
 	C.gtk_window_set_position((*C.GtkWindow)(_self_._value_), position)
 	return
 }
 
-func (_self_ *Window) SetResizable(resizable bool) () {
+func (_self_ *GtkWindow) SetResizable(resizable bool) () {
 	_cgo_resizable_ := (C.gboolean)(C.FALSE)
 	if resizable { _cgo_resizable_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_resizable((*C.GtkWindow)(_self_._value_), _cgo_resizable_)
 	return
 }
 
-func (_self_ *Window) SetRole(role string) () {
+func (_self_ *GtkWindow) SetRole(role string) () {
 	_cstring_role_ := C.CString(role)
 	_cgo_role_ := (*C.gchar)(unsafe.Pointer(_cstring_role_))
 	defer C.free(unsafe.Pointer(_cstring_role_))
@@ -21706,26 +24757,26 @@ func (_self_ *Window) SetRole(role string) () {
 	return
 }
 
-func (_self_ *Window) SetScreen(screen *C.GdkScreen) () {
+func (_self_ *GtkWindow) SetScreen(screen *C.GdkScreen) () {
 	C.gtk_window_set_screen((*C.GtkWindow)(_self_._value_), screen)
 	return
 }
 
-func (_self_ *Window) SetSkipPagerHint(setting bool) () {
+func (_self_ *GtkWindow) SetSkipPagerHint(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_skip_pager_hint((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetSkipTaskbarHint(setting bool) () {
+func (_self_ *GtkWindow) SetSkipTaskbarHint(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_skip_taskbar_hint((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetStartupId(startup_id string) () {
+func (_self_ *GtkWindow) SetStartupId(startup_id string) () {
 	_cstring_startup_id_ := C.CString(startup_id)
 	_cgo_startup_id_ := (*C.gchar)(unsafe.Pointer(_cstring_startup_id_))
 	defer C.free(unsafe.Pointer(_cstring_startup_id_))
@@ -21733,7 +24784,7 @@ func (_self_ *Window) SetStartupId(startup_id string) () {
 	return
 }
 
-func (_self_ *Window) SetTitle(title string) () {
+func (_self_ *GtkWindow) SetTitle(title string) () {
 	_cstring_title_ := C.CString(title)
 	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
 	defer C.free(unsafe.Pointer(_cstring_title_))
@@ -21741,25 +24792,25 @@ func (_self_ *Window) SetTitle(title string) () {
 	return
 }
 
-func (_self_ *Window) SetTransientFor(parent WindowKind) () {
+func (_self_ *GtkWindow) SetTransientFor(parent GtkWindowKind) () {
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
 	C.gtk_window_set_transient_for((*C.GtkWindow)(_self_._value_), _cgo_parent_)
 	return
 }
 
-func (_self_ *Window) SetTypeHint(hint C.GdkWindowTypeHint) () {
+func (_self_ *GtkWindow) SetTypeHint(hint C.GdkWindowTypeHint) () {
 	C.gtk_window_set_type_hint((*C.GtkWindow)(_self_._value_), hint)
 	return
 }
 
-func (_self_ *Window) SetUrgencyHint(setting bool) () {
+func (_self_ *GtkWindow) SetUrgencyHint(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.gtk_window_set_urgency_hint((*C.GtkWindow)(_self_._value_), _cgo_setting_)
 	return
 }
 
-func (_self_ *Window) SetWmclass(wmclass_name string, wmclass_class string) () {
+func (_self_ *GtkWindow) SetWmclass(wmclass_name string, wmclass_class string) () {
 	_cstring_wmclass_name_ := C.CString(wmclass_name)
 	_cgo_wmclass_name_ := (*C.gchar)(unsafe.Pointer(_cstring_wmclass_name_))
 	defer C.free(unsafe.Pointer(_cstring_wmclass_name_))
@@ -21770,22 +24821,22 @@ func (_self_ *Window) SetWmclass(wmclass_name string, wmclass_class string) () {
 	return
 }
 
-func (_self_ *Window) Stick() () {
+func (_self_ *GtkWindow) Stick() () {
 	C.gtk_window_stick((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) Unfullscreen() () {
+func (_self_ *GtkWindow) Unfullscreen() () {
 	C.gtk_window_unfullscreen((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) Unmaximize() () {
+func (_self_ *GtkWindow) Unmaximize() () {
 	C.gtk_window_unmaximize((*C.GtkWindow)(_self_._value_))
 	return
 }
 
-func (_self_ *Window) Unstick() () {
+func (_self_ *GtkWindow) Unstick() () {
 	C.gtk_window_unstick((*C.GtkWindow)(_self_._value_))
 	return
 }
@@ -21797,7 +24848,7 @@ func WindowGroupNew() (_go__return__ WindowGroup) {
 	return
 }
 
-func (_self_ *WindowGroup) AddWindow(window WindowKind) () {
+func (_self_ *WindowGroup) AddWindow(window GtkWindowKind) () {
 	_cgo_window_ := (*C.GtkWindow)(window.GetGObject())
 	C.gtk_window_group_add_window((*C.GtkWindowGroup)(_self_._value_), _cgo_window_)
 	return
@@ -21822,7 +24873,7 @@ func (_self_ *WindowGroup) ListWindows() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *WindowGroup) RemoveWindow(window WindowKind) () {
+func (_self_ *WindowGroup) RemoveWindow(window GtkWindowKind) () {
 	_cgo_window_ := (*C.GtkWindow)(window.GetGObject())
 	C.gtk_window_group_remove_window((*C.GtkWindowGroup)(_self_._value_), _cgo_window_)
 	return
@@ -23768,18 +26819,20 @@ func (_self_ *TreePath) Up() (_go__return__ bool) {
 	return
 }
 
-func TreeRowReferenceNew(model *C.GtkTreeModel, path *TreePath) (_go__return__ *TreeRowReference) {
+func TreeRowReferenceNew(model TreeModelKind, path *TreePath) (_go__return__ *TreeRowReference) {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
 	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
 	var _return_ *C.GtkTreeRowReference
-	_return_ = C.gtk_tree_row_reference_new(model, _cgo_path_)
+	_return_ = C.gtk_tree_row_reference_new(_cgo_model_, _cgo_path_)
 	_go__return__ = (*TreeRowReference)(unsafe.Pointer(_return_))
 	return
 }
 
-func TreeRowReferenceNewProxy(proxy *C.GObject, model *C.GtkTreeModel, path *TreePath) (_go__return__ *TreeRowReference) {
+func TreeRowReferenceNewProxy(proxy *C.GObject, model TreeModelKind, path *TreePath) (_go__return__ *TreeRowReference) {
+	_cgo_model_ := (*C.GtkTreeModel)(model.GetGObject())
 	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
 	var _return_ *C.GtkTreeRowReference
-	_return_ = C.gtk_tree_row_reference_new_proxy(proxy, model, _cgo_path_)
+	_return_ = C.gtk_tree_row_reference_new_proxy(proxy, _cgo_model_, _cgo_path_)
 	_go__return__ = (*TreeRowReference)(unsafe.Pointer(_return_))
 	return
 }
@@ -23796,8 +26849,10 @@ func (_self_ *TreeRowReference) Free() () {
 	return
 }
 
-func (_self_ *TreeRowReference) GetModel() (_return_ *C.GtkTreeModel) {
+func (_self_ *TreeRowReference) GetModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
 	_return_ = C.gtk_tree_row_reference_get_model((*C.GtkTreeRowReference)(_self_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
 	return
 }
 
@@ -24102,6 +27157,1482 @@ func (_self_ *WidgetPath) ToString() (_go__return__ string) {
 
 func (_self_ *WidgetPath) Unref() () {
 	C.gtk_widget_path_unref((*C.GtkWidgetPath)(_self_))
+	return
+}
+
+func (_self_ *Actionable) GetActionName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_actionable_get_action_name((*C.GtkActionable)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Actionable) GetActionTargetValue() (_return_ *C.GVariant) {
+	_return_ = C.gtk_actionable_get_action_target_value((*C.GtkActionable)(_self_._value_))
+	return
+}
+
+func (_self_ *Actionable) SetActionName(action_name string) () {
+	_cstring_action_name_ := C.CString(action_name)
+	_cgo_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_action_name_))
+	defer C.free(unsafe.Pointer(_cstring_action_name_))
+	C._gtk_actionable_set_action_name((*C.GtkActionable)(_self_._value_), _cgo_action_name_)
+	return
+}
+
+func (_self_ *Actionable) SetActionTargetValue(target_value *C.GVariant) () {
+	C.gtk_actionable_set_action_target_value((*C.GtkActionable)(_self_._value_), target_value)
+	return
+}
+
+func (_self_ *Actionable) SetDetailedActionName(detailed_action_name string) () {
+	_cstring_detailed_action_name_ := C.CString(detailed_action_name)
+	_cgo_detailed_action_name_ := (*C.gchar)(unsafe.Pointer(_cstring_detailed_action_name_))
+	defer C.free(unsafe.Pointer(_cstring_detailed_action_name_))
+	C._gtk_actionable_set_detailed_action_name((*C.GtkActionable)(_self_._value_), _cgo_detailed_action_name_)
+	return
+}
+
+func (_self_ *Activatable) DoSetRelatedAction(action GtkActionKind) () {
+	_cgo_action_ := (*C.GtkAction)(action.GetGObject())
+	C.gtk_activatable_do_set_related_action((*C.GtkActivatable)(_self_._value_), _cgo_action_)
+	return
+}
+
+func (_self_ *Activatable) GetRelatedAction() (_go__return__ GtkAction) {
+	var _return_ *C.GtkAction
+	_return_ = C.gtk_activatable_get_related_action((*C.GtkActivatable)(_self_._value_))
+	_go__return__ = ToGtkAction(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Activatable) GetUseActionAppearance() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_activatable_get_use_action_appearance((*C.GtkActivatable)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Activatable) SetRelatedAction(action GtkActionKind) () {
+	_cgo_action_ := (*C.GtkAction)(action.GetGObject())
+	C.gtk_activatable_set_related_action((*C.GtkActivatable)(_self_._value_), _cgo_action_)
+	return
+}
+
+func (_self_ *Activatable) SetUseActionAppearance(use_appearance bool) () {
+	_cgo_use_appearance_ := (C.gboolean)(C.FALSE)
+	if use_appearance { _cgo_use_appearance_ = (C.gboolean)(C.TRUE) }
+	C.gtk_activatable_set_use_action_appearance((*C.GtkActivatable)(_self_._value_), _cgo_use_appearance_)
+	return
+}
+
+func (_self_ *Activatable) SyncActionProperties(action GtkActionKind) () {
+	_cgo_action_ := (*C.GtkAction)(action.GetGObject())
+	C.gtk_activatable_sync_action_properties((*C.GtkActivatable)(_self_._value_), _cgo_action_)
+	return
+}
+
+func (_self_ *AppChooser) GetAppInfo() (_return_ *C.GAppInfo) {
+	_return_ = C.gtk_app_chooser_get_app_info((*C.GtkAppChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *AppChooser) GetContentType() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_app_chooser_get_content_type((*C.GtkAppChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AppChooser) Refresh() () {
+	C.gtk_app_chooser_refresh((*C.GtkAppChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *Buildable) AddChild(builder BuilderKind, child *C.GObject, type_ string) () {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_type__ := C.CString(type_)
+	_cgo_type__ := (*C.gchar)(unsafe.Pointer(_cstring_type__))
+	defer C.free(unsafe.Pointer(_cstring_type__))
+	C._gtk_buildable_add_child((*C.GtkBuildable)(_self_._value_), _cgo_builder_, child, _cgo_type__)
+	return
+}
+
+func (_self_ *Buildable) ConstructChild(builder BuilderKind, name string) (_return_ *C.GObject) {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	_return_ = C._gtk_buildable_construct_child((*C.GtkBuildable)(_self_._value_), _cgo_builder_, _cgo_name_)
+	return
+}
+
+func (_self_ *Buildable) CustomFinished(builder BuilderKind, child *C.GObject, tagname string, data C.gpointer) () {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_tagname_ := C.CString(tagname)
+	_cgo_tagname_ := (*C.gchar)(unsafe.Pointer(_cstring_tagname_))
+	defer C.free(unsafe.Pointer(_cstring_tagname_))
+	C._gtk_buildable_custom_finished((*C.GtkBuildable)(_self_._value_), _cgo_builder_, child, _cgo_tagname_, data)
+	return
+}
+
+func (_self_ *Buildable) CustomTagEnd(builder BuilderKind, child *C.GObject, tagname string, data *C.gpointer) () {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_tagname_ := C.CString(tagname)
+	_cgo_tagname_ := (*C.gchar)(unsafe.Pointer(_cstring_tagname_))
+	defer C.free(unsafe.Pointer(_cstring_tagname_))
+	C._gtk_buildable_custom_tag_end((*C.GtkBuildable)(_self_._value_), _cgo_builder_, child, _cgo_tagname_, data)
+	return
+}
+
+func (_self_ *Buildable) CustomTagStart(builder BuilderKind, child *C.GObject, tagname string) (_go__return__ bool, parser *C.GMarkupParser, data *C.gpointer) {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_tagname_ := C.CString(tagname)
+	_cgo_tagname_ := (*C.gchar)(unsafe.Pointer(_cstring_tagname_))
+	defer C.free(unsafe.Pointer(_cstring_tagname_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_buildable_custom_tag_start((*C.GtkBuildable)(_self_._value_), _cgo_builder_, child, _cgo_tagname_, parser, data)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Buildable) GetInternalChild(builder BuilderKind, childname string) (_return_ *C.GObject) {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_childname_ := C.CString(childname)
+	_cgo_childname_ := (*C.gchar)(unsafe.Pointer(_cstring_childname_))
+	defer C.free(unsafe.Pointer(_cstring_childname_))
+	_return_ = C._gtk_buildable_get_internal_child((*C.GtkBuildable)(_self_._value_), _cgo_builder_, _cgo_childname_)
+	return
+}
+
+func (_self_ *Buildable) GetName() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._gtk_buildable_get_name((*C.GtkBuildable)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Buildable) ParserFinished(builder BuilderKind) () {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	C.gtk_buildable_parser_finished((*C.GtkBuildable)(_self_._value_), _cgo_builder_)
+	return
+}
+
+func (_self_ *Buildable) SetBuildableProperty(builder BuilderKind, name string, value *C.GValue) () {
+	_cgo_builder_ := (*C.GtkBuilder)(builder.GetGObject())
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_buildable_set_buildable_property((*C.GtkBuildable)(_self_._value_), _cgo_builder_, _cgo_name_, value)
+	return
+}
+
+func (_self_ *Buildable) SetName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_buildable_set_name((*C.GtkBuildable)(_self_._value_), _cgo_name_)
+	return
+}
+
+func (_self_ *CellEditable) EditingDone() () {
+	C.gtk_cell_editable_editing_done((*C.GtkCellEditable)(_self_._value_))
+	return
+}
+
+func (_self_ *CellEditable) RemoveWidget() () {
+	C.gtk_cell_editable_remove_widget((*C.GtkCellEditable)(_self_._value_))
+	return
+}
+
+func (_self_ *CellEditable) StartEditing(event *C.GdkEvent) () {
+	C.gtk_cell_editable_start_editing((*C.GtkCellEditable)(_self_._value_), event)
+	return
+}
+
+func (_self_ *CellLayout) AddAttribute(cell CellRendererKind, attribute string, column int) () {
+	_cgo_cell_ := (*C.GtkCellRenderer)(cell.GetGObject())
+	_cgo_column_ := (C.gint)(column)
+	_cstring_attribute_ := C.CString(attribute)
+	_cgo_attribute_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_))
+	C._gtk_cell_layout_add_attribute((*C.GtkCellLayout)(_self_._value_), _cgo_cell_, _cgo_attribute_, _cgo_column_)
+	return
+}
+
+func (_self_ *CellLayout) Clear() () {
+	C.gtk_cell_layout_clear((*C.GtkCellLayout)(_self_._value_))
+	return
+}
+
+func (_self_ *CellLayout) ClearAttributes(cell CellRendererKind) () {
+	_cgo_cell_ := (*C.GtkCellRenderer)(cell.GetGObject())
+	C.gtk_cell_layout_clear_attributes((*C.GtkCellLayout)(_self_._value_), _cgo_cell_)
+	return
+}
+
+func (_self_ *CellLayout) GetArea() (_go__return__ CellArea) {
+	var _return_ *C.GtkCellArea
+	_return_ = C.gtk_cell_layout_get_area((*C.GtkCellLayout)(_self_._value_))
+	_go__return__ = ToCellArea(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *CellLayout) GetCells() (_return_ *C.GList) {
+	_return_ = C.gtk_cell_layout_get_cells((*C.GtkCellLayout)(_self_._value_))
+	return
+}
+
+func (_self_ *CellLayout) PackEnd(cell CellRendererKind, expand bool) () {
+	_cgo_cell_ := (*C.GtkCellRenderer)(cell.GetGObject())
+	_cgo_expand_ := (C.gboolean)(C.FALSE)
+	if expand { _cgo_expand_ = (C.gboolean)(C.TRUE) }
+	C.gtk_cell_layout_pack_end((*C.GtkCellLayout)(_self_._value_), _cgo_cell_, _cgo_expand_)
+	return
+}
+
+func (_self_ *CellLayout) PackStart(cell CellRendererKind, expand bool) () {
+	_cgo_cell_ := (*C.GtkCellRenderer)(cell.GetGObject())
+	_cgo_expand_ := (C.gboolean)(C.FALSE)
+	if expand { _cgo_expand_ = (C.gboolean)(C.TRUE) }
+	C.gtk_cell_layout_pack_start((*C.GtkCellLayout)(_self_._value_), _cgo_cell_, _cgo_expand_)
+	return
+}
+
+func (_self_ *CellLayout) Reorder(cell CellRendererKind, position int) () {
+	_cgo_cell_ := (*C.GtkCellRenderer)(cell.GetGObject())
+	_cgo_position_ := (C.gint)(position)
+	C.gtk_cell_layout_reorder((*C.GtkCellLayout)(_self_._value_), _cgo_cell_, _cgo_position_)
+	return
+}
+
+func (_self_ *CellLayout) SetCellDataFunc(cell CellRendererKind, func_ C.GtkCellLayoutDataFunc, func_data C.gpointer, destroy C.GDestroyNotify) () {
+	_cgo_cell_ := (*C.GtkCellRenderer)(cell.GetGObject())
+	C.gtk_cell_layout_set_cell_data_func((*C.GtkCellLayout)(_self_._value_), _cgo_cell_, func_, func_data, destroy)
+	return
+}
+
+func (_self_ *ColorChooser) GetRgba(color *C.GdkRGBA) () {
+	C.gtk_color_chooser_get_rgba((*C.GtkColorChooser)(_self_._value_), color)
+	return
+}
+
+func (_self_ *ColorChooser) GetUseAlpha() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_color_chooser_get_use_alpha((*C.GtkColorChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *ColorChooser) SetRgba(color *C.GdkRGBA) () {
+	C._gtk_color_chooser_set_rgba((*C.GtkColorChooser)(_self_._value_), color)
+	return
+}
+
+func (_self_ *ColorChooser) SetUseAlpha(use_alpha bool) () {
+	_cgo_use_alpha_ := (C.gboolean)(C.FALSE)
+	if use_alpha { _cgo_use_alpha_ = (C.gboolean)(C.TRUE) }
+	C.gtk_color_chooser_set_use_alpha((*C.GtkColorChooser)(_self_._value_), _cgo_use_alpha_)
+	return
+}
+
+func (_self_ *Editable) CopyClipboard() () {
+	C.gtk_editable_copy_clipboard((*C.GtkEditable)(_self_._value_))
+	return
+}
+
+func (_self_ *Editable) CutClipboard() () {
+	C.gtk_editable_cut_clipboard((*C.GtkEditable)(_self_._value_))
+	return
+}
+
+func (_self_ *Editable) DeleteSelection() () {
+	C.gtk_editable_delete_selection((*C.GtkEditable)(_self_._value_))
+	return
+}
+
+func (_self_ *Editable) DeleteText(start_pos int, end_pos int) () {
+	_cgo_start_pos_ := (C.gint)(start_pos)
+	_cgo_end_pos_ := (C.gint)(end_pos)
+	C.gtk_editable_delete_text((*C.GtkEditable)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
+	return
+}
+
+func (_self_ *Editable) GetChars(start_pos int, end_pos int) (_go__return__ string) {
+	_cgo_start_pos_ := (C.gint)(start_pos)
+	_cgo_end_pos_ := (C.gint)(end_pos)
+	var _return_ *C.gchar
+	_return_ = C.gtk_editable_get_chars((*C.GtkEditable)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Editable) GetEditable() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_editable_get_editable((*C.GtkEditable)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Editable) GetPosition() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_editable_get_position((*C.GtkEditable)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Editable) GetSelectionBounds() (_go__return__ bool, _go_start_pos_ int, _go_end_pos_ int) {
+	var start_pos C.gint
+	var end_pos C.gint
+	var _return_ C.gboolean
+	_return_ = C.gtk_editable_get_selection_bounds((*C.GtkEditable)(_self_._value_), &start_pos, &end_pos)
+	_go_start_pos_ = (int)(start_pos)
+	_go_end_pos_ = (int)(end_pos)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Editable) PasteClipboard() () {
+	C.gtk_editable_paste_clipboard((*C.GtkEditable)(_self_._value_))
+	return
+}
+
+func (_self_ *Editable) SelectRegion(start_pos int, end_pos int) () {
+	_cgo_start_pos_ := (C.gint)(start_pos)
+	_cgo_end_pos_ := (C.gint)(end_pos)
+	C.gtk_editable_select_region((*C.GtkEditable)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
+	return
+}
+
+func (_self_ *Editable) SetEditable(is_editable bool) () {
+	_cgo_is_editable_ := (C.gboolean)(C.FALSE)
+	if is_editable { _cgo_is_editable_ = (C.gboolean)(C.TRUE) }
+	C.gtk_editable_set_editable((*C.GtkEditable)(_self_._value_), _cgo_is_editable_)
+	return
+}
+
+func (_self_ *Editable) SetPosition(position int) () {
+	_cgo_position_ := (C.gint)(position)
+	C.gtk_editable_set_position((*C.GtkEditable)(_self_._value_), _cgo_position_)
+	return
+}
+
+func (_self_ *FileChooser) AddFilter(filter FileFilterKind) () {
+	_cgo_filter_ := (*C.GtkFileFilter)(filter.GetGObject())
+	C.gtk_file_chooser_add_filter((*C.GtkFileChooser)(_self_._value_), _cgo_filter_)
+	return
+}
+
+func (_self_ *FileChooser) AddShortcutFolder(folder string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_folder_ := C.CString(folder)
+	_cgo_folder_ := (*C.char)(unsafe.Pointer(_cstring_folder_))
+	defer C.free(unsafe.Pointer(_cstring_folder_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_add_shortcut_folder((*C.GtkFileChooser)(_self_._value_), _cgo_folder_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) AddShortcutFolderUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_add_shortcut_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetAction() (_return_ C.GtkFileChooserAction) {
+	_return_ = C.gtk_file_chooser_get_action((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetCreateFolders() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_create_folders((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetCurrentFolder() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_file_chooser_get_current_folder((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FileChooser) GetCurrentFolderFile() (_return_ *C.GFile) {
+	_return_ = C.gtk_file_chooser_get_current_folder_file((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetCurrentFolderUri() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_file_chooser_get_current_folder_uri((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FileChooser) GetDoOverwriteConfirmation() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_do_overwrite_confirmation((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetExtraWidget() (_go__return__ Widget) {
+	var _return_ *C.GtkWidget
+	_return_ = C.gtk_file_chooser_get_extra_widget((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *FileChooser) GetFile() (_return_ *C.GFile) {
+	_return_ = C.gtk_file_chooser_get_file((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetFilename() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_file_chooser_get_filename((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FileChooser) GetFilenames() (_return_ *C.GSList) {
+	_return_ = C.gtk_file_chooser_get_filenames((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetFiles() (_return_ *C.GSList) {
+	_return_ = C.gtk_file_chooser_get_files((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetFilter() (_go__return__ FileFilter) {
+	var _return_ *C.GtkFileFilter
+	_return_ = C.gtk_file_chooser_get_filter((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = ToFileFilter(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *FileChooser) GetLocalOnly() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_local_only((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetPreviewFile() (_return_ *C.GFile) {
+	_return_ = C.gtk_file_chooser_get_preview_file((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetPreviewFilename() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C.gtk_file_chooser_get_preview_filename((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FileChooser) GetPreviewUri() (_go__return__ string) {
+	var _return_ *C.char
+	_return_ = C.gtk_file_chooser_get_preview_uri((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FileChooser) GetPreviewWidget() (_go__return__ Widget) {
+	var _return_ *C.GtkWidget
+	_return_ = C.gtk_file_chooser_get_preview_widget((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = ToWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *FileChooser) GetPreviewWidgetActive() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_preview_widget_active((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetSelectMultiple() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_select_multiple((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetShowHidden() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_show_hidden((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) GetUri() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_file_chooser_get_uri((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FileChooser) GetUris() (_return_ *C.GSList) {
+	_return_ = C.gtk_file_chooser_get_uris((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) GetUsePreviewLabel() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_file_chooser_get_use_preview_label((*C.GtkFileChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) ListFilters() (_return_ *C.GSList) {
+	_return_ = C.gtk_file_chooser_list_filters((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) ListShortcutFolderUris() (_return_ *C.GSList) {
+	_return_ = C.gtk_file_chooser_list_shortcut_folder_uris((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) ListShortcutFolders() (_return_ *C.GSList) {
+	_return_ = C.gtk_file_chooser_list_shortcut_folders((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) RemoveFilter(filter FileFilterKind) () {
+	_cgo_filter_ := (*C.GtkFileFilter)(filter.GetGObject())
+	C.gtk_file_chooser_remove_filter((*C.GtkFileChooser)(_self_._value_), _cgo_filter_)
+	return
+}
+
+func (_self_ *FileChooser) RemoveShortcutFolder(folder string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_folder_ := C.CString(folder)
+	_cgo_folder_ := (*C.char)(unsafe.Pointer(_cstring_folder_))
+	defer C.free(unsafe.Pointer(_cstring_folder_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_remove_shortcut_folder((*C.GtkFileChooser)(_self_._value_), _cgo_folder_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) RemoveShortcutFolderUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_remove_shortcut_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SelectAll() () {
+	C.gtk_file_chooser_select_all((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) SelectFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_select_file((*C.GtkFileChooser)(_self_._value_), file, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SelectFilename(filename string) (_go__return__ bool) {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_select_filename((*C.GtkFileChooser)(_self_._value_), _cgo_filename_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SelectUri(uri string) (_go__return__ bool) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_select_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetAction(action C.GtkFileChooserAction) () {
+	C.gtk_file_chooser_set_action((*C.GtkFileChooser)(_self_._value_), action)
+	return
+}
+
+func (_self_ *FileChooser) SetCreateFolders(create_folders bool) () {
+	_cgo_create_folders_ := (C.gboolean)(C.FALSE)
+	if create_folders { _cgo_create_folders_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_create_folders((*C.GtkFileChooser)(_self_._value_), _cgo_create_folders_)
+	return
+}
+
+func (_self_ *FileChooser) SetCurrentFolder(filename string) (_go__return__ bool) {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_set_current_folder((*C.GtkFileChooser)(_self_._value_), _cgo_filename_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetCurrentFolderFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_set_current_folder_file((*C.GtkFileChooser)(_self_._value_), file, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetCurrentFolderUri(uri string) (_go__return__ bool) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_set_current_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetCurrentName(name string) () {
+	_cstring_name_ := C.CString(name)
+	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
+	defer C.free(unsafe.Pointer(_cstring_name_))
+	C._gtk_file_chooser_set_current_name((*C.GtkFileChooser)(_self_._value_), _cgo_name_)
+	return
+}
+
+func (_self_ *FileChooser) SetDoOverwriteConfirmation(do_overwrite_confirmation bool) () {
+	_cgo_do_overwrite_confirmation_ := (C.gboolean)(C.FALSE)
+	if do_overwrite_confirmation { _cgo_do_overwrite_confirmation_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_do_overwrite_confirmation((*C.GtkFileChooser)(_self_._value_), _cgo_do_overwrite_confirmation_)
+	return
+}
+
+func (_self_ *FileChooser) SetExtraWidget(extra_widget WidgetKind) () {
+	_cgo_extra_widget_ := (*C.GtkWidget)(extra_widget.GetGObject())
+	C.gtk_file_chooser_set_extra_widget((*C.GtkFileChooser)(_self_._value_), _cgo_extra_widget_)
+	return
+}
+
+func (_self_ *FileChooser) SetFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_set_file((*C.GtkFileChooser)(_self_._value_), file, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetFilename(filename string) (_go__return__ bool) {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_set_filename((*C.GtkFileChooser)(_self_._value_), _cgo_filename_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetFilter(filter FileFilterKind) () {
+	_cgo_filter_ := (*C.GtkFileFilter)(filter.GetGObject())
+	C.gtk_file_chooser_set_filter((*C.GtkFileChooser)(_self_._value_), _cgo_filter_)
+	return
+}
+
+func (_self_ *FileChooser) SetLocalOnly(local_only bool) () {
+	_cgo_local_only_ := (C.gboolean)(C.FALSE)
+	if local_only { _cgo_local_only_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_local_only((*C.GtkFileChooser)(_self_._value_), _cgo_local_only_)
+	return
+}
+
+func (_self_ *FileChooser) SetPreviewWidget(preview_widget WidgetKind) () {
+	_cgo_preview_widget_ := (*C.GtkWidget)(preview_widget.GetGObject())
+	C.gtk_file_chooser_set_preview_widget((*C.GtkFileChooser)(_self_._value_), _cgo_preview_widget_)
+	return
+}
+
+func (_self_ *FileChooser) SetPreviewWidgetActive(active bool) () {
+	_cgo_active_ := (C.gboolean)(C.FALSE)
+	if active { _cgo_active_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_preview_widget_active((*C.GtkFileChooser)(_self_._value_), _cgo_active_)
+	return
+}
+
+func (_self_ *FileChooser) SetSelectMultiple(select_multiple bool) () {
+	_cgo_select_multiple_ := (C.gboolean)(C.FALSE)
+	if select_multiple { _cgo_select_multiple_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_select_multiple((*C.GtkFileChooser)(_self_._value_), _cgo_select_multiple_)
+	return
+}
+
+func (_self_ *FileChooser) SetShowHidden(show_hidden bool) () {
+	_cgo_show_hidden_ := (C.gboolean)(C.FALSE)
+	if show_hidden { _cgo_show_hidden_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_show_hidden((*C.GtkFileChooser)(_self_._value_), _cgo_show_hidden_)
+	return
+}
+
+func (_self_ *FileChooser) SetUri(uri string) (_go__return__ bool) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_file_chooser_set_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FileChooser) SetUsePreviewLabel(use_label bool) () {
+	_cgo_use_label_ := (C.gboolean)(C.FALSE)
+	if use_label { _cgo_use_label_ = (C.gboolean)(C.TRUE) }
+	C.gtk_file_chooser_set_use_preview_label((*C.GtkFileChooser)(_self_._value_), _cgo_use_label_)
+	return
+}
+
+func (_self_ *FileChooser) UnselectAll() () {
+	C.gtk_file_chooser_unselect_all((*C.GtkFileChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FileChooser) UnselectFile(file *C.GFile) () {
+	C.gtk_file_chooser_unselect_file((*C.GtkFileChooser)(_self_._value_), file)
+	return
+}
+
+func (_self_ *FileChooser) UnselectFilename(filename string) () {
+	_cstring_filename_ := C.CString(filename)
+	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
+	defer C.free(unsafe.Pointer(_cstring_filename_))
+	C._gtk_file_chooser_unselect_filename((*C.GtkFileChooser)(_self_._value_), _cgo_filename_)
+	return
+}
+
+func (_self_ *FileChooser) UnselectUri(uri string) () {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	C._gtk_file_chooser_unselect_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_)
+	return
+}
+
+func (_self_ *FontChooser) GetFont() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_font_chooser_get_font((*C.GtkFontChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FontChooser) GetFontDesc() (_return_ *C.PangoFontDescription) {
+	_return_ = C.gtk_font_chooser_get_font_desc((*C.GtkFontChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FontChooser) GetFontFace() (_return_ *C.PangoFontFace) {
+	_return_ = C.gtk_font_chooser_get_font_face((*C.GtkFontChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FontChooser) GetFontFamily() (_return_ *C.PangoFontFamily) {
+	_return_ = C.gtk_font_chooser_get_font_family((*C.GtkFontChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *FontChooser) GetFontSize() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_font_chooser_get_font_size((*C.GtkFontChooser)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *FontChooser) GetPreviewText() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_font_chooser_get_preview_text((*C.GtkFontChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *FontChooser) GetShowPreviewEntry() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_font_chooser_get_show_preview_entry((*C.GtkFontChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *FontChooser) SetFilterFunc(filter C.GtkFontFilterFunc, user_data C.gpointer, destroy C.GDestroyNotify) () {
+	C.gtk_font_chooser_set_filter_func((*C.GtkFontChooser)(_self_._value_), filter, user_data, destroy)
+	return
+}
+
+func (_self_ *FontChooser) SetFont(fontname string) () {
+	_cstring_fontname_ := C.CString(fontname)
+	_cgo_fontname_ := (*C.gchar)(unsafe.Pointer(_cstring_fontname_))
+	defer C.free(unsafe.Pointer(_cstring_fontname_))
+	C._gtk_font_chooser_set_font((*C.GtkFontChooser)(_self_._value_), _cgo_fontname_)
+	return
+}
+
+func (_self_ *FontChooser) SetFontDesc(font_desc *C.PangoFontDescription) () {
+	C._gtk_font_chooser_set_font_desc((*C.GtkFontChooser)(_self_._value_), font_desc)
+	return
+}
+
+func (_self_ *FontChooser) SetPreviewText(text string) () {
+	_cstring_text_ := C.CString(text)
+	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
+	defer C.free(unsafe.Pointer(_cstring_text_))
+	C._gtk_font_chooser_set_preview_text((*C.GtkFontChooser)(_self_._value_), _cgo_text_)
+	return
+}
+
+func (_self_ *FontChooser) SetShowPreviewEntry(show_preview_entry bool) () {
+	_cgo_show_preview_entry_ := (C.gboolean)(C.FALSE)
+	if show_preview_entry { _cgo_show_preview_entry_ = (C.gboolean)(C.TRUE) }
+	C.gtk_font_chooser_set_show_preview_entry((*C.GtkFontChooser)(_self_._value_), _cgo_show_preview_entry_)
+	return
+}
+
+func (_self_ *Orientable) GetOrientation() (_return_ C.GtkOrientation) {
+	_return_ = C.gtk_orientable_get_orientation((*C.GtkOrientable)(_self_._value_))
+	return
+}
+
+func (_self_ *Orientable) SetOrientation(orientation C.GtkOrientation) () {
+	C.gtk_orientable_set_orientation((*C.GtkOrientable)(_self_._value_), orientation)
+	return
+}
+
+func (_self_ *PrintOperationPreview) EndPreview() () {
+	C.gtk_print_operation_preview_end_preview((*C.GtkPrintOperationPreview)(_self_._value_))
+	return
+}
+
+func (_self_ *PrintOperationPreview) IsSelected(page_nr int) (_go__return__ bool) {
+	_cgo_page_nr_ := (C.gint)(page_nr)
+	var _return_ C.gboolean
+	_return_ = C.gtk_print_operation_preview_is_selected((*C.GtkPrintOperationPreview)(_self_._value_), _cgo_page_nr_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *PrintOperationPreview) RenderPage(page_nr int) () {
+	_cgo_page_nr_ := (C.gint)(page_nr)
+	C.gtk_print_operation_preview_render_page((*C.GtkPrintOperationPreview)(_self_._value_), _cgo_page_nr_)
+	return
+}
+
+func (_self_ *RecentChooser) AddFilter(filter RecentFilterKind) () {
+	_cgo_filter_ := (*C.GtkRecentFilter)(filter.GetGObject())
+	C.gtk_recent_chooser_add_filter((*C.GtkRecentChooser)(_self_._value_), _cgo_filter_)
+	return
+}
+
+func (_self_ *RecentChooser) GetCurrentItem() (_go__return__ *RecentInfo) {
+	var _return_ *C.GtkRecentInfo
+	_return_ = C.gtk_recent_chooser_get_current_item((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = (*RecentInfo)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *RecentChooser) GetCurrentUri() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C.gtk_recent_chooser_get_current_uri((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *RecentChooser) GetFilter() (_go__return__ RecentFilter) {
+	var _return_ *C.GtkRecentFilter
+	_return_ = C.gtk_recent_chooser_get_filter((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = ToRecentFilter(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *RecentChooser) GetItems() (_return_ *C.GList) {
+	_return_ = C.gtk_recent_chooser_get_items((*C.GtkRecentChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *RecentChooser) GetLimit() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_recent_chooser_get_limit((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *RecentChooser) GetLocalOnly() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_chooser_get_local_only((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) GetSelectMultiple() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_chooser_get_select_multiple((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) GetShowIcons() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_chooser_get_show_icons((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) GetShowNotFound() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_chooser_get_show_not_found((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) GetShowPrivate() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_chooser_get_show_private((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) GetShowTips() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_recent_chooser_get_show_tips((*C.GtkRecentChooser)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) GetSortType() (_return_ C.GtkRecentSortType) {
+	_return_ = C.gtk_recent_chooser_get_sort_type((*C.GtkRecentChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *RecentChooser) GetUris() (_return_ unsafe.Pointer, _go_length_ uint64) {
+	var length C.gsize
+	_return_ = C._gtk_recent_chooser_get_uris((*C.GtkRecentChooser)(_self_._value_), &length)
+	_go_length_ = (uint64)(length)
+	return
+}
+
+func (_self_ *RecentChooser) ListFilters() (_return_ *C.GSList) {
+	_return_ = C.gtk_recent_chooser_list_filters((*C.GtkRecentChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *RecentChooser) RemoveFilter(filter RecentFilterKind) () {
+	_cgo_filter_ := (*C.GtkRecentFilter)(filter.GetGObject())
+	C.gtk_recent_chooser_remove_filter((*C.GtkRecentChooser)(_self_._value_), _cgo_filter_)
+	return
+}
+
+func (_self_ *RecentChooser) SelectAll() () {
+	C.gtk_recent_chooser_select_all((*C.GtkRecentChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *RecentChooser) SelectUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_recent_chooser_select_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) SetCurrentUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_recent_chooser_set_current_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *RecentChooser) SetFilter(filter RecentFilterKind) () {
+	_cgo_filter_ := (*C.GtkRecentFilter)(filter.GetGObject())
+	C.gtk_recent_chooser_set_filter((*C.GtkRecentChooser)(_self_._value_), _cgo_filter_)
+	return
+}
+
+func (_self_ *RecentChooser) SetLimit(limit int) () {
+	_cgo_limit_ := (C.gint)(limit)
+	C.gtk_recent_chooser_set_limit((*C.GtkRecentChooser)(_self_._value_), _cgo_limit_)
+	return
+}
+
+func (_self_ *RecentChooser) SetLocalOnly(local_only bool) () {
+	_cgo_local_only_ := (C.gboolean)(C.FALSE)
+	if local_only { _cgo_local_only_ = (C.gboolean)(C.TRUE) }
+	C.gtk_recent_chooser_set_local_only((*C.GtkRecentChooser)(_self_._value_), _cgo_local_only_)
+	return
+}
+
+func (_self_ *RecentChooser) SetSelectMultiple(select_multiple bool) () {
+	_cgo_select_multiple_ := (C.gboolean)(C.FALSE)
+	if select_multiple { _cgo_select_multiple_ = (C.gboolean)(C.TRUE) }
+	C.gtk_recent_chooser_set_select_multiple((*C.GtkRecentChooser)(_self_._value_), _cgo_select_multiple_)
+	return
+}
+
+func (_self_ *RecentChooser) SetShowIcons(show_icons bool) () {
+	_cgo_show_icons_ := (C.gboolean)(C.FALSE)
+	if show_icons { _cgo_show_icons_ = (C.gboolean)(C.TRUE) }
+	C.gtk_recent_chooser_set_show_icons((*C.GtkRecentChooser)(_self_._value_), _cgo_show_icons_)
+	return
+}
+
+func (_self_ *RecentChooser) SetShowNotFound(show_not_found bool) () {
+	_cgo_show_not_found_ := (C.gboolean)(C.FALSE)
+	if show_not_found { _cgo_show_not_found_ = (C.gboolean)(C.TRUE) }
+	C.gtk_recent_chooser_set_show_not_found((*C.GtkRecentChooser)(_self_._value_), _cgo_show_not_found_)
+	return
+}
+
+func (_self_ *RecentChooser) SetShowPrivate(show_private bool) () {
+	_cgo_show_private_ := (C.gboolean)(C.FALSE)
+	if show_private { _cgo_show_private_ = (C.gboolean)(C.TRUE) }
+	C.gtk_recent_chooser_set_show_private((*C.GtkRecentChooser)(_self_._value_), _cgo_show_private_)
+	return
+}
+
+func (_self_ *RecentChooser) SetShowTips(show_tips bool) () {
+	_cgo_show_tips_ := (C.gboolean)(C.FALSE)
+	if show_tips { _cgo_show_tips_ = (C.gboolean)(C.TRUE) }
+	C.gtk_recent_chooser_set_show_tips((*C.GtkRecentChooser)(_self_._value_), _cgo_show_tips_)
+	return
+}
+
+func (_self_ *RecentChooser) SetSortFunc(sort_func C.GtkRecentSortFunc, sort_data C.gpointer, data_destroy C.GDestroyNotify) () {
+	C.gtk_recent_chooser_set_sort_func((*C.GtkRecentChooser)(_self_._value_), sort_func, sort_data, data_destroy)
+	return
+}
+
+func (_self_ *RecentChooser) SetSortType(sort_type C.GtkRecentSortType) () {
+	C.gtk_recent_chooser_set_sort_type((*C.GtkRecentChooser)(_self_._value_), sort_type)
+	return
+}
+
+func (_self_ *RecentChooser) UnselectAll() () {
+	C.gtk_recent_chooser_unselect_all((*C.GtkRecentChooser)(_self_._value_))
+	return
+}
+
+func (_self_ *RecentChooser) UnselectUri(uri string) () {
+	_cstring_uri_ := C.CString(uri)
+	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
+	defer C.free(unsafe.Pointer(_cstring_uri_))
+	C._gtk_recent_chooser_unselect_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_)
+	return
+}
+
+func (_self_ *Scrollable) GetHadjustment() (_go__return__ Adjustment) {
+	var _return_ *C.GtkAdjustment
+	_return_ = C.gtk_scrollable_get_hadjustment((*C.GtkScrollable)(_self_._value_))
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Scrollable) GetHscrollPolicy() (_return_ C.GtkScrollablePolicy) {
+	_return_ = C.gtk_scrollable_get_hscroll_policy((*C.GtkScrollable)(_self_._value_))
+	return
+}
+
+func (_self_ *Scrollable) GetVadjustment() (_go__return__ Adjustment) {
+	var _return_ *C.GtkAdjustment
+	_return_ = C.gtk_scrollable_get_vadjustment((*C.GtkScrollable)(_self_._value_))
+	_go__return__ = ToAdjustment(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Scrollable) GetVscrollPolicy() (_return_ C.GtkScrollablePolicy) {
+	_return_ = C.gtk_scrollable_get_vscroll_policy((*C.GtkScrollable)(_self_._value_))
+	return
+}
+
+func (_self_ *Scrollable) SetHadjustment(hadjustment AdjustmentKind) () {
+	_cgo_hadjustment_ := (*C.GtkAdjustment)(hadjustment.GetGObject())
+	C.gtk_scrollable_set_hadjustment((*C.GtkScrollable)(_self_._value_), _cgo_hadjustment_)
+	return
+}
+
+func (_self_ *Scrollable) SetHscrollPolicy(policy C.GtkScrollablePolicy) () {
+	C.gtk_scrollable_set_hscroll_policy((*C.GtkScrollable)(_self_._value_), policy)
+	return
+}
+
+func (_self_ *Scrollable) SetVadjustment(vadjustment AdjustmentKind) () {
+	_cgo_vadjustment_ := (*C.GtkAdjustment)(vadjustment.GetGObject())
+	C.gtk_scrollable_set_vadjustment((*C.GtkScrollable)(_self_._value_), _cgo_vadjustment_)
+	return
+}
+
+func (_self_ *Scrollable) SetVscrollPolicy(policy C.GtkScrollablePolicy) () {
+	C.gtk_scrollable_set_vscroll_policy((*C.GtkScrollable)(_self_._value_), policy)
+	return
+}
+
+func (_self_ *StyleProvider) GetIconFactory(path *WidgetPath) (_go__return__ IconFactory) {
+	_cgo_path_ := (*C.GtkWidgetPath)(unsafe.Pointer(path))
+	var _return_ *C.GtkIconFactory
+	_return_ = C.gtk_style_provider_get_icon_factory((*C.GtkStyleProvider)(_self_._value_), _cgo_path_)
+	_go__return__ = ToIconFactory(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *StyleProvider) GetStyle(path *WidgetPath) (_go__return__ StyleProperties) {
+	_cgo_path_ := (*C.GtkWidgetPath)(unsafe.Pointer(path))
+	var _return_ *C.GtkStyleProperties
+	_return_ = C.gtk_style_provider_get_style((*C.GtkStyleProvider)(_self_._value_), _cgo_path_)
+	_go__return__ = ToStyleProperties(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *StyleProvider) GetStyleProperty(path *WidgetPath, state C.GtkStateFlags, pspec *C.GParamSpec) (_go__return__ bool, value *C.GValue) {
+	_cgo_path_ := (*C.GtkWidgetPath)(unsafe.Pointer(path))
+	var _return_ C.gboolean
+	_return_ = C.gtk_style_provider_get_style_property((*C.GtkStyleProvider)(_self_._value_), _cgo_path_, state, pspec, value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *ToolShell) GetEllipsizeMode() (_return_ C.PangoEllipsizeMode) {
+	_return_ = C.gtk_tool_shell_get_ellipsize_mode((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *ToolShell) GetIconSize() (_return_ C.GtkIconSize) {
+	_return_ = C.gtk_tool_shell_get_icon_size((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *ToolShell) GetOrientation() (_return_ C.GtkOrientation) {
+	_return_ = C.gtk_tool_shell_get_orientation((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *ToolShell) GetReliefStyle() (_return_ C.GtkReliefStyle) {
+	_return_ = C.gtk_tool_shell_get_relief_style((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *ToolShell) GetStyle() (_return_ C.GtkToolbarStyle) {
+	_return_ = C.gtk_tool_shell_get_style((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *ToolShell) GetTextAlignment() (_go__return__ float64) {
+	var _return_ C.gfloat
+	_return_ = C.gtk_tool_shell_get_text_alignment((*C.GtkToolShell)(_self_._value_))
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *ToolShell) GetTextOrientation() (_return_ C.GtkOrientation) {
+	_return_ = C.gtk_tool_shell_get_text_orientation((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *ToolShell) GetTextSizeGroup() (_go__return__ SizeGroup) {
+	var _return_ *C.GtkSizeGroup
+	_return_ = C.gtk_tool_shell_get_text_size_group((*C.GtkToolShell)(_self_._value_))
+	_go__return__ = ToSizeGroup(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *ToolShell) RebuildMenu() () {
+	C.gtk_tool_shell_rebuild_menu((*C.GtkToolShell)(_self_._value_))
+	return
+}
+
+func (_self_ *TreeDragDest) DragDataReceived(dest *TreePath, selection_data *SelectionData) (_go__return__ bool) {
+	_cgo_dest_ := (*C.GtkTreePath)(unsafe.Pointer(dest))
+	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_drag_dest_drag_data_received((*C.GtkTreeDragDest)(_self_._value_), _cgo_dest_, _cgo_selection_data_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeDragDest) RowDropPossible(dest_path *TreePath, selection_data *SelectionData) (_go__return__ bool) {
+	_cgo_dest_path_ := (*C.GtkTreePath)(unsafe.Pointer(dest_path))
+	_cgo_selection_data_ := (*C.GtkSelectionData)(unsafe.Pointer(selection_data))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_drag_dest_row_drop_possible((*C.GtkTreeDragDest)(_self_._value_), _cgo_dest_path_, _cgo_selection_data_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeDragSource) DragDataDelete(path *TreePath) (_go__return__ bool) {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_drag_source_drag_data_delete((*C.GtkTreeDragSource)(_self_._value_), _cgo_path_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeDragSource) DragDataGet(path *TreePath) (_go__return__ bool, selection_data *SelectionData) {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _allocated_selection_data_ C.GtkSelectionData
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_drag_source_drag_data_get((*C.GtkTreeDragSource)(_self_._value_), _cgo_path_, &_allocated_selection_data_)
+	selection_data = (*SelectionData)(unsafe.Pointer(&_allocated_selection_data_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeDragSource) RowDraggable(path *TreePath) (_go__return__ bool) {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_drag_source_row_draggable((*C.GtkTreeDragSource)(_self_._value_), _cgo_path_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) FilterNew(root *TreePath) (_go__return__ TreeModel) {
+	_cgo_root_ := (*C.GtkTreePath)(unsafe.Pointer(root))
+	var _return_ *C.GtkTreeModel
+	_return_ = C.gtk_tree_model_filter_new((*C.GtkTreeModel)(_self_._value_), _cgo_root_)
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *TreeModel) Foreach(func_ C.GtkTreeModelForeachFunc, user_data C.gpointer) () {
+	C.gtk_tree_model_foreach((*C.GtkTreeModel)(_self_._value_), func_, user_data)
+	return
+}
+
+func (_self_ *TreeModel) GetColumnType(index_ int) (_return_ C.GType) {
+	_cgo_index__ := (C.gint)(index_)
+	_return_ = C.gtk_tree_model_get_column_type((*C.GtkTreeModel)(_self_._value_), _cgo_index__)
+	return
+}
+
+func (_self_ *TreeModel) GetFlags() (_return_ C.GtkTreeModelFlags) {
+	_return_ = C.gtk_tree_model_get_flags((*C.GtkTreeModel)(_self_._value_))
+	return
+}
+
+func (_self_ *TreeModel) GetIter(path *TreePath) (_go__return__ bool, iter *TreeIter) {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	var _allocated_iter_ C.GtkTreeIter
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_get_iter((*C.GtkTreeModel)(_self_._value_), &_allocated_iter_, _cgo_path_)
+	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) GetIterFirst() (_go__return__ bool, iter *TreeIter) {
+	var _allocated_iter_ C.GtkTreeIter
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_get_iter_first((*C.GtkTreeModel)(_self_._value_), &_allocated_iter_)
+	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) GetIterFromString(path_string string) (_go__return__ bool, iter *TreeIter) {
+	var _allocated_iter_ C.GtkTreeIter
+	_cstring_path_string_ := C.CString(path_string)
+	_cgo_path_string_ := (*C.gchar)(unsafe.Pointer(_cstring_path_string_))
+	defer C.free(unsafe.Pointer(_cstring_path_string_))
+	var _return_ C.gboolean
+	_return_ = C._gtk_tree_model_get_iter_from_string((*C.GtkTreeModel)(_self_._value_), &_allocated_iter_, _cgo_path_string_)
+	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) GetNColumns() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.gtk_tree_model_get_n_columns((*C.GtkTreeModel)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *TreeModel) GetPath(iter *TreeIter) (_go__return__ *TreePath) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	var _return_ *C.GtkTreePath
+	_return_ = C.gtk_tree_model_get_path((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	_go__return__ = (*TreePath)(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *TreeModel) GetStringFromIter(iter *TreeIter) (_go__return__ string) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	var _return_ *C.gchar
+	_return_ = C.gtk_tree_model_get_string_from_iter((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *TreeModel) GetValue(iter *TreeIter, column int) (value *C.GValue) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	_cgo_column_ := (C.gint)(column)
+	C.gtk_tree_model_get_value((*C.GtkTreeModel)(_self_._value_), _cgo_iter_, _cgo_column_, value)
+	return
+}
+
+func (_self_ *TreeModel) IterChildren(parent *TreeIter) (_go__return__ bool, iter *TreeIter) {
+	_cgo_parent_ := (*C.GtkTreeIter)(unsafe.Pointer(parent))
+	var _allocated_iter_ C.GtkTreeIter
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_iter_children((*C.GtkTreeModel)(_self_._value_), &_allocated_iter_, _cgo_parent_)
+	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) IterHasChild(iter *TreeIter) (_go__return__ bool) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_iter_has_child((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) IterNChildren(iter *TreeIter) (_go__return__ int) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	var _return_ C.gint
+	_return_ = C.gtk_tree_model_iter_n_children((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *TreeModel) IterNext(iter *TreeIter) (_go__return__ bool) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_iter_next((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) IterNthChild(parent *TreeIter, n int) (_go__return__ bool, iter *TreeIter) {
+	_cgo_parent_ := (*C.GtkTreeIter)(unsafe.Pointer(parent))
+	var _allocated_iter_ C.GtkTreeIter
+	_cgo_n_ := (C.gint)(n)
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_iter_nth_child((*C.GtkTreeModel)(_self_._value_), &_allocated_iter_, _cgo_parent_, _cgo_n_)
+	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) IterParent(child *TreeIter) (_go__return__ bool, iter *TreeIter) {
+	_cgo_child_ := (*C.GtkTreeIter)(unsafe.Pointer(child))
+	var _allocated_iter_ C.GtkTreeIter
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_iter_parent((*C.GtkTreeModel)(_self_._value_), &_allocated_iter_, _cgo_child_)
+	iter = (*TreeIter)(unsafe.Pointer(&_allocated_iter_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) IterPrevious(iter *TreeIter) (_go__return__ bool) {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_model_iter_previous((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeModel) RefNode(iter *TreeIter) () {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_model_ref_node((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	return
+}
+
+func (_self_ *TreeModel) RowChanged(path *TreePath, iter *TreeIter) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_model_row_changed((*C.GtkTreeModel)(_self_._value_), _cgo_path_, _cgo_iter_)
+	return
+}
+
+func (_self_ *TreeModel) RowDeleted(path *TreePath) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	C.gtk_tree_model_row_deleted((*C.GtkTreeModel)(_self_._value_), _cgo_path_)
+	return
+}
+
+func (_self_ *TreeModel) RowHasChildToggled(path *TreePath, iter *TreeIter) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_model_row_has_child_toggled((*C.GtkTreeModel)(_self_._value_), _cgo_path_, _cgo_iter_)
+	return
+}
+
+func (_self_ *TreeModel) RowInserted(path *TreePath, iter *TreeIter) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_model_row_inserted((*C.GtkTreeModel)(_self_._value_), _cgo_path_, _cgo_iter_)
+	return
+}
+
+func (_self_ *TreeModel) RowsReordered(path *TreePath, iter *TreeIter, new_order *C.gint) () {
+	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_model_rows_reordered((*C.GtkTreeModel)(_self_._value_), _cgo_path_, _cgo_iter_, new_order)
+	return
+}
+
+func (_self_ *TreeModel) SortNewWithModel() (_go__return__ TreeModel) {
+	var _return_ *C.GtkTreeModel
+	_return_ = C.gtk_tree_model_sort_new_with_model((*C.GtkTreeModel)(_self_._value_))
+	_go__return__ = ToTreeModel(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *TreeModel) UnrefNode(iter *TreeIter) () {
+	_cgo_iter_ := (*C.GtkTreeIter)(unsafe.Pointer(iter))
+	C.gtk_tree_model_unref_node((*C.GtkTreeModel)(_self_._value_), _cgo_iter_)
+	return
+}
+
+func (_self_ *TreeSortable) GetSortColumnId() (_go__return__ bool, _go_sort_column_id_ int, order *C.GtkSortType) {
+	var sort_column_id C.gint
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_sortable_get_sort_column_id((*C.GtkTreeSortable)(_self_._value_), &sort_column_id, order)
+	_go_sort_column_id_ = (int)(sort_column_id)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeSortable) HasDefaultSortFunc() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.gtk_tree_sortable_has_default_sort_func((*C.GtkTreeSortable)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TreeSortable) SetDefaultSortFunc(sort_func C.GtkTreeIterCompareFunc, user_data C.gpointer, destroy C.GDestroyNotify) () {
+	C.gtk_tree_sortable_set_default_sort_func((*C.GtkTreeSortable)(_self_._value_), sort_func, user_data, destroy)
+	return
+}
+
+func (_self_ *TreeSortable) SetSortColumnId(sort_column_id int, order C.GtkSortType) () {
+	_cgo_sort_column_id_ := (C.gint)(sort_column_id)
+	C.gtk_tree_sortable_set_sort_column_id((*C.GtkTreeSortable)(_self_._value_), _cgo_sort_column_id_, order)
+	return
+}
+
+func (_self_ *TreeSortable) SetSortFunc(sort_column_id int, sort_func C.GtkTreeIterCompareFunc, user_data C.gpointer, destroy C.GDestroyNotify) () {
+	_cgo_sort_column_id_ := (C.gint)(sort_column_id)
+	C.gtk_tree_sortable_set_sort_func((*C.GtkTreeSortable)(_self_._value_), _cgo_sort_column_id_, sort_func, user_data, destroy)
+	return
+}
+
+func (_self_ *TreeSortable) SortColumnChanged() () {
+	C.gtk_tree_sortable_sort_column_changed((*C.GtkTreeSortable)(_self_._value_))
 	return
 }
 

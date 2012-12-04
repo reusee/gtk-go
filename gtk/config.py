@@ -1,3 +1,5 @@
+Strip_prefix_from_const = True
+
 # skip symbols
 
 Compile_error_c_symbols = [
@@ -117,4 +119,10 @@ Conflict_type_names = [
     'SocketPrivate',
     'ObjectClass',
     'AppLaunchContext',
+    'Action',
+    'ActionGroup',
+    'Image',
+    'Table',
+    'Window',
+    'Value',
 ]

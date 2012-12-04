@@ -84,6 +84,81 @@ void _atk_object_set_name(AtkObject * _self_, gchar * name) {
 AtkRelation * _atk_relation_new(void * targets, gint n_targets, AtkRelationType relationship) {
 	return (AtkRelation *)atk_relation_new((AtkObject **)(targets), n_targets, relationship);
 }
+gchar * _atk_action_get_description(AtkAction * _self_, gint i) {
+	return (gchar *)atk_action_get_description(_self_, i);
+}
+gchar * _atk_action_get_keybinding(AtkAction * _self_, gint i) {
+	return (gchar *)atk_action_get_keybinding(_self_, i);
+}
+gchar * _atk_action_get_localized_name(AtkAction * _self_, gint i) {
+	return (gchar *)atk_action_get_localized_name(_self_, i);
+}
+gchar * _atk_action_get_name(AtkAction * _self_, gint i) {
+	return (gchar *)atk_action_get_name(_self_, i);
+}
+gboolean _atk_action_set_description(AtkAction * _self_, gint i, gchar * desc) {
+	return (gboolean)atk_action_set_description(_self_, i, (const gchar *)(desc));
+}
+gchar * _atk_document_get_attribute_value(AtkDocument * _self_, gchar * attribute_name) {
+	return (gchar *)atk_document_get_attribute_value(_self_, (const gchar *)(attribute_name));
+}
+gchar * _atk_document_get_document_type(AtkDocument * _self_) {
+	return (gchar *)atk_document_get_document_type(_self_);
+}
+gchar * _atk_document_get_locale(AtkDocument * _self_) {
+	return (gchar *)atk_document_get_locale(_self_);
+}
+gboolean _atk_document_set_attribute_value(AtkDocument * _self_, gchar * attribute_name, gchar * attribute_value) {
+	return (gboolean)atk_document_set_attribute_value(_self_, (const gchar *)(attribute_name), (const gchar *)(attribute_value));
+}
+void _atk_editable_text_insert_text(AtkEditableText * _self_, gchar * string, gint length, gint * position) {
+	(void)atk_editable_text_insert_text(_self_, (const gchar *)(string), length, position);
+}
+void _atk_editable_text_set_text_contents(AtkEditableText * _self_, gchar * string) {
+	(void)atk_editable_text_set_text_contents(_self_, (const gchar *)(string));
+}
+gchar * _atk_image_get_image_description(AtkImage * _self_) {
+	return (gchar *)atk_image_get_image_description(_self_);
+}
+gchar * _atk_image_get_image_locale(AtkImage * _self_) {
+	return (gchar *)atk_image_get_image_locale(_self_);
+}
+gboolean _atk_image_set_image_description(AtkImage * _self_, gchar * description) {
+	return (gboolean)atk_image_set_image_description(_self_, (const gchar *)(description));
+}
+gchar * _atk_streamable_content_get_mime_type(AtkStreamableContent * _self_, gint i) {
+	return (gchar *)atk_streamable_content_get_mime_type(_self_, i);
+}
+GIOChannel * _atk_streamable_content_get_stream(AtkStreamableContent * _self_, gchar * mime_type) {
+	return (GIOChannel *)atk_streamable_content_get_stream(_self_, (const gchar *)(mime_type));
+}
+gchar * _atk_streamable_content_get_uri(AtkStreamableContent * _self_, gchar * mime_type) {
+	return (gchar *)atk_streamable_content_get_uri(_self_, (const gchar *)(mime_type));
+}
+gchar * _atk_table_get_column_description(AtkTable * _self_, gint column) {
+	return (gchar *)atk_table_get_column_description(_self_, column);
+}
+gchar * _atk_table_get_row_description(AtkTable * _self_, gint row) {
+	return (gchar *)atk_table_get_row_description(_self_, row);
+}
+gint _atk_table_get_selected_columns(AtkTable * _self_, void * selected) {
+	return (gint)atk_table_get_selected_columns(_self_, (gint **)(selected));
+}
+gint _atk_table_get_selected_rows(AtkTable * _self_, void * selected) {
+	return (gint)atk_table_get_selected_rows(_self_, (gint **)(selected));
+}
+void _atk_table_set_column_description(AtkTable * _self_, gint column, gchar * description) {
+	(void)atk_table_set_column_description(_self_, column, (const gchar *)(description));
+}
+void _atk_table_set_row_description(AtkTable * _self_, gint row, gchar * description) {
+	(void)atk_table_set_row_description(_self_, row, (const gchar *)(description));
+}
+void * _atk_text_get_bounded_ranges(AtkText * _self_, AtkTextRectangle * rect, AtkCoordType coord_type, AtkTextClipType x_clip_type, AtkTextClipType y_clip_type) {
+	return (void *)atk_text_get_bounded_ranges(_self_, rect, coord_type, x_clip_type, y_clip_type);
+}
+gboolean _atk_value_set_current_value(AtkValue * _self_, GValue * value) {
+	return (gboolean)atk_value_set_current_value(_self_, (const GValue *)(value));
+}
 */
 import "C"
 import (
@@ -122,118 +197,468 @@ type TextRectangle C.AtkTextRectangle
 type ObjectFactoryClass C.AtkObjectFactoryClass
 type Implementor C.AtkImplementor
 type UtilClass C.AtkUtilClass
-type NoOpObjectFactory struct { ObjectFactory }
-type NoOpObjectFactoryKind interface {
-  _IsNoOpObjectFactory()
-  GetGObject() unsafe.Pointer
+type StateSet struct {
+	GObjectObject
+	_value_ unsafe.Pointer
 }
-func (self NoOpObjectFactory) _IsNoOpObjectFactory () {}
-func (self NoOpObjectFactory) GetGObject() unsafe.Pointer { return self._value_ }
-func ToNoOpObjectFactory(value unsafe.Pointer) NoOpObjectFactory { return NoOpObjectFactory{ObjectFactory{GObjectObject{value}}} }
-type Hyperlink struct { GObjectObject }
-type HyperlinkKind interface {
-  _IsHyperlink()
-  GetGObject() unsafe.Pointer
-}
-func (self Hyperlink) _IsHyperlink () {}
-func (self Hyperlink) GetGObject() unsafe.Pointer { return self._value_ }
-func ToHyperlink(value unsafe.Pointer) Hyperlink { return Hyperlink{GObjectObject{value}} }
-type StateSet struct { GObjectObject }
 type StateSetKind interface {
   _IsStateSet()
   GetGObject() unsafe.Pointer
 }
-func (self StateSet) _IsStateSet () {}
+func (self StateSet) _IsStateSet() {}
 func (self StateSet) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStateSet(value unsafe.Pointer) StateSet { return StateSet{GObjectObject{value}} }
-type ObjectFactory struct { GObjectObject }
+func ToStateSet(value unsafe.Pointer) StateSet {
+	return StateSet{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ObjectFactory struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type ObjectFactoryKind interface {
   _IsObjectFactory()
   GetGObject() unsafe.Pointer
 }
-func (self ObjectFactory) _IsObjectFactory () {}
+func (self ObjectFactory) _IsObjectFactory() {}
 func (self ObjectFactory) GetGObject() unsafe.Pointer { return self._value_ }
-func ToObjectFactory(value unsafe.Pointer) ObjectFactory { return ObjectFactory{GObjectObject{value}} }
-type RelationSet struct { GObjectObject }
+func ToObjectFactory(value unsafe.Pointer) ObjectFactory {
+	return ObjectFactory{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type AtkImage struct {
+	_value_ unsafe.Pointer
+}
+type AtkImageKind interface {
+  _IsAtkImage()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkImage) _IsAtkImage() {}
+func (self AtkImage) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkImage(value unsafe.Pointer) AtkImage {
+	return AtkImage{
+		value,
+	}
+}
+type RelationSet struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type RelationSetKind interface {
   _IsRelationSet()
   GetGObject() unsafe.Pointer
 }
-func (self RelationSet) _IsRelationSet () {}
+func (self RelationSet) _IsRelationSet() {}
 func (self RelationSet) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRelationSet(value unsafe.Pointer) RelationSet { return RelationSet{GObjectObject{value}} }
-type Util struct { GObjectObject }
-type UtilKind interface {
-  _IsUtil()
-  GetGObject() unsafe.Pointer
+func ToRelationSet(value unsafe.Pointer) RelationSet {
+	return RelationSet{
+		ToGObjectObject(value),
+		value,
+	}
 }
-func (self Util) _IsUtil () {}
-func (self Util) GetGObject() unsafe.Pointer { return self._value_ }
-func ToUtil(value unsafe.Pointer) Util { return Util{GObjectObject{value}} }
-type AtkMisc struct { GObjectObject }
+type AtkMisc struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type AtkMiscKind interface {
   _IsAtkMisc()
   GetGObject() unsafe.Pointer
 }
-func (self AtkMisc) _IsAtkMisc () {}
+func (self AtkMisc) _IsAtkMisc() {}
 func (self AtkMisc) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAtkMisc(value unsafe.Pointer) AtkMisc { return AtkMisc{GObjectObject{value}} }
-type AtkObject struct { GObjectObject }
-type AtkObjectKind interface {
-  _IsAtkObject()
-  GetGObject() unsafe.Pointer
+func ToAtkMisc(value unsafe.Pointer) AtkMisc {
+	return AtkMisc{
+		ToGObjectObject(value),
+		value,
+	}
 }
-func (self AtkObject) _IsAtkObject () {}
-func (self AtkObject) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAtkObject(value unsafe.Pointer) AtkObject { return AtkObject{GObjectObject{value}} }
-type Relation struct { GObjectObject }
-type RelationKind interface {
-  _IsRelation()
-  GetGObject() unsafe.Pointer
+type GObjectAccessible struct {
+	AtkObject
+	_value_ unsafe.Pointer
 }
-func (self Relation) _IsRelation () {}
-func (self Relation) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRelation(value unsafe.Pointer) Relation { return Relation{GObjectObject{value}} }
-type GObjectAccessible struct { AtkObject }
 type GObjectAccessibleKind interface {
   _IsGObjectAccessible()
   GetGObject() unsafe.Pointer
 }
-func (self GObjectAccessible) _IsGObjectAccessible () {}
+func (self GObjectAccessible) _IsGObjectAccessible() {}
 func (self GObjectAccessible) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGObjectAccessible(value unsafe.Pointer) GObjectAccessible { return GObjectAccessible{AtkObject{GObjectObject{value}}} }
-type NoOpObject struct { AtkObject }
-type NoOpObjectKind interface {
-  _IsNoOpObject()
+func ToGObjectAccessible(value unsafe.Pointer) GObjectAccessible {
+	return GObjectAccessible{
+		ToAtkObject(value),
+		value,
+	}
+}
+type Document struct {
+	_value_ unsafe.Pointer
+}
+type DocumentKind interface {
+  _IsDocument()
   GetGObject() unsafe.Pointer
 }
-func (self NoOpObject) _IsNoOpObject () {}
-func (self NoOpObject) GetGObject() unsafe.Pointer { return self._value_ }
-func ToNoOpObject(value unsafe.Pointer) NoOpObject { return NoOpObject{AtkObject{GObjectObject{value}}} }
-type AtkSocket struct { AtkObject }
-type AtkSocketKind interface {
-  _IsAtkSocket()
+func (self Document) _IsDocument() {}
+func (self Document) GetGObject() unsafe.Pointer { return self._value_ }
+func ToDocument(value unsafe.Pointer) Document {
+	return Document{
+		value,
+	}
+}
+type EditableText struct {
+	_value_ unsafe.Pointer
+}
+type EditableTextKind interface {
+  _IsEditableText()
   GetGObject() unsafe.Pointer
 }
-func (self AtkSocket) _IsAtkSocket () {}
-func (self AtkSocket) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAtkSocket(value unsafe.Pointer) AtkSocket { return AtkSocket{AtkObject{GObjectObject{value}}} }
-type AtkPlug struct { AtkObject }
-type AtkPlugKind interface {
-  _IsAtkPlug()
+func (self EditableText) _IsEditableText() {}
+func (self EditableText) GetGObject() unsafe.Pointer { return self._value_ }
+func ToEditableText(value unsafe.Pointer) EditableText {
+	return EditableText{
+		value,
+	}
+}
+type AtkWindow struct {
+	_value_ unsafe.Pointer
+}
+type AtkWindowKind interface {
+  _IsAtkWindow()
   GetGObject() unsafe.Pointer
 }
-func (self AtkPlug) _IsAtkPlug () {}
-func (self AtkPlug) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAtkPlug(value unsafe.Pointer) AtkPlug { return AtkPlug{AtkObject{GObjectObject{value}}} }
-type Registry struct { GObjectObject }
+func (self AtkWindow) _IsAtkWindow() {}
+func (self AtkWindow) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkWindow(value unsafe.Pointer) AtkWindow {
+	return AtkWindow{
+		value,
+	}
+}
+type Component struct {
+	_value_ unsafe.Pointer
+}
+type ComponentKind interface {
+  _IsComponent()
+  GetGObject() unsafe.Pointer
+}
+func (self Component) _IsComponent() {}
+func (self Component) GetGObject() unsafe.Pointer { return self._value_ }
+func ToComponent(value unsafe.Pointer) Component {
+	return Component{
+		value,
+	}
+}
+type StreamableContent struct {
+	_value_ unsafe.Pointer
+}
+type StreamableContentKind interface {
+  _IsStreamableContent()
+  GetGObject() unsafe.Pointer
+}
+func (self StreamableContent) _IsStreamableContent() {}
+func (self StreamableContent) GetGObject() unsafe.Pointer { return self._value_ }
+func ToStreamableContent(value unsafe.Pointer) StreamableContent {
+	return StreamableContent{
+		value,
+	}
+}
+type Util struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type UtilKind interface {
+  _IsUtil()
+  GetGObject() unsafe.Pointer
+}
+func (self Util) _IsUtil() {}
+func (self Util) GetGObject() unsafe.Pointer { return self._value_ }
+func ToUtil(value unsafe.Pointer) Util {
+	return Util{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type AtkTable struct {
+	_value_ unsafe.Pointer
+}
+type AtkTableKind interface {
+  _IsAtkTable()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkTable) _IsAtkTable() {}
+func (self AtkTable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkTable(value unsafe.Pointer) AtkTable {
+	return AtkTable{
+		value,
+	}
+}
+type Registry struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type RegistryKind interface {
   _IsRegistry()
   GetGObject() unsafe.Pointer
 }
-func (self Registry) _IsRegistry () {}
+func (self Registry) _IsRegistry() {}
 func (self Registry) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRegistry(value unsafe.Pointer) Registry { return Registry{GObjectObject{value}} }
+func ToRegistry(value unsafe.Pointer) Registry {
+	return Registry{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type NoOpObject struct {
+	AtkObject
+	AtkAction
+	Component
+	Document
+	EditableText
+	Hypertext
+	AtkImage
+	Selection
+	AtkTable
+	Text
+	AtkValue
+	AtkWindow
+	_value_ unsafe.Pointer
+}
+type NoOpObjectKind interface {
+  _IsNoOpObject()
+  GetGObject() unsafe.Pointer
+}
+func (self NoOpObject) _IsNoOpObject() {}
+func (self NoOpObject) GetGObject() unsafe.Pointer { return self._value_ }
+func ToNoOpObject(value unsafe.Pointer) NoOpObject {
+	return NoOpObject{
+		ToAtkObject(value),
+		ToAtkAction(value),
+		ToComponent(value),
+		ToDocument(value),
+		ToEditableText(value),
+		ToHypertext(value),
+		ToAtkImage(value),
+		ToSelection(value),
+		ToAtkTable(value),
+		ToText(value),
+		ToAtkValue(value),
+		ToAtkWindow(value),
+		value,
+	}
+}
+func (self NoOpObject) _IsAtkAction () {}
+func (self NoOpObject) _IsComponent () {}
+func (self NoOpObject) _IsDocument () {}
+func (self NoOpObject) _IsEditableText () {}
+func (self NoOpObject) _IsHypertext () {}
+func (self NoOpObject) _IsAtkImage () {}
+func (self NoOpObject) _IsSelection () {}
+func (self NoOpObject) _IsAtkTable () {}
+func (self NoOpObject) _IsText () {}
+func (self NoOpObject) _IsAtkValue () {}
+func (self NoOpObject) _IsAtkWindow () {}
+type AtkSocket struct {
+	AtkObject
+	Component
+	_value_ unsafe.Pointer
+}
+type AtkSocketKind interface {
+  _IsAtkSocket()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkSocket) _IsAtkSocket() {}
+func (self AtkSocket) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkSocket(value unsafe.Pointer) AtkSocket {
+	return AtkSocket{
+		ToAtkObject(value),
+		ToComponent(value),
+		value,
+	}
+}
+func (self AtkSocket) _IsComponent () {}
+type AtkPlug struct {
+	AtkObject
+	Component
+	_value_ unsafe.Pointer
+}
+type AtkPlugKind interface {
+  _IsAtkPlug()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkPlug) _IsAtkPlug() {}
+func (self AtkPlug) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkPlug(value unsafe.Pointer) AtkPlug {
+	return AtkPlug{
+		ToAtkObject(value),
+		ToComponent(value),
+		value,
+	}
+}
+func (self AtkPlug) _IsComponent () {}
+type NoOpObjectFactory struct {
+	ObjectFactory
+	_value_ unsafe.Pointer
+}
+type NoOpObjectFactoryKind interface {
+  _IsNoOpObjectFactory()
+  GetGObject() unsafe.Pointer
+}
+func (self NoOpObjectFactory) _IsNoOpObjectFactory() {}
+func (self NoOpObjectFactory) GetGObject() unsafe.Pointer { return self._value_ }
+func ToNoOpObjectFactory(value unsafe.Pointer) NoOpObjectFactory {
+	return NoOpObjectFactory{
+		ToObjectFactory(value),
+		value,
+	}
+}
+type ImplementorIface struct {
+	_value_ unsafe.Pointer
+}
+type ImplementorIfaceKind interface {
+  _IsImplementorIface()
+  GetGObject() unsafe.Pointer
+}
+func (self ImplementorIface) _IsImplementorIface() {}
+func (self ImplementorIface) GetGObject() unsafe.Pointer { return self._value_ }
+func ToImplementorIface(value unsafe.Pointer) ImplementorIface {
+	return ImplementorIface{
+		value,
+	}
+}
+type Hyperlink struct {
+	GObjectObject
+	AtkAction
+	_value_ unsafe.Pointer
+}
+type HyperlinkKind interface {
+  _IsHyperlink()
+  GetGObject() unsafe.Pointer
+}
+func (self Hyperlink) _IsHyperlink() {}
+func (self Hyperlink) GetGObject() unsafe.Pointer { return self._value_ }
+func ToHyperlink(value unsafe.Pointer) Hyperlink {
+	return Hyperlink{
+		ToGObjectObject(value),
+		ToAtkAction(value),
+		value,
+	}
+}
+func (self Hyperlink) _IsAtkAction () {}
+type AtkObject struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type AtkObjectKind interface {
+  _IsAtkObject()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkObject) _IsAtkObject() {}
+func (self AtkObject) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkObject(value unsafe.Pointer) AtkObject {
+	return AtkObject{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type HyperlinkImpl struct {
+	_value_ unsafe.Pointer
+}
+type HyperlinkImplKind interface {
+  _IsHyperlinkImpl()
+  GetGObject() unsafe.Pointer
+}
+func (self HyperlinkImpl) _IsHyperlinkImpl() {}
+func (self HyperlinkImpl) GetGObject() unsafe.Pointer { return self._value_ }
+func ToHyperlinkImpl(value unsafe.Pointer) HyperlinkImpl {
+	return HyperlinkImpl{
+		value,
+	}
+}
+type Selection struct {
+	_value_ unsafe.Pointer
+}
+type SelectionKind interface {
+  _IsSelection()
+  GetGObject() unsafe.Pointer
+}
+func (self Selection) _IsSelection() {}
+func (self Selection) GetGObject() unsafe.Pointer { return self._value_ }
+func ToSelection(value unsafe.Pointer) Selection {
+	return Selection{
+		value,
+	}
+}
+type Text struct {
+	_value_ unsafe.Pointer
+}
+type TextKind interface {
+  _IsText()
+  GetGObject() unsafe.Pointer
+}
+func (self Text) _IsText() {}
+func (self Text) GetGObject() unsafe.Pointer { return self._value_ }
+func ToText(value unsafe.Pointer) Text {
+	return Text{
+		value,
+	}
+}
+type Hypertext struct {
+	_value_ unsafe.Pointer
+}
+type HypertextKind interface {
+  _IsHypertext()
+  GetGObject() unsafe.Pointer
+}
+func (self Hypertext) _IsHypertext() {}
+func (self Hypertext) GetGObject() unsafe.Pointer { return self._value_ }
+func ToHypertext(value unsafe.Pointer) Hypertext {
+	return Hypertext{
+		value,
+	}
+}
+type AtkValue struct {
+	_value_ unsafe.Pointer
+}
+type AtkValueKind interface {
+  _IsAtkValue()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkValue) _IsAtkValue() {}
+func (self AtkValue) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkValue(value unsafe.Pointer) AtkValue {
+	return AtkValue{
+		value,
+	}
+}
+type AtkAction struct {
+	_value_ unsafe.Pointer
+}
+type AtkActionKind interface {
+  _IsAtkAction()
+  GetGObject() unsafe.Pointer
+}
+func (self AtkAction) _IsAtkAction() {}
+func (self AtkAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAtkAction(value unsafe.Pointer) AtkAction {
+	return AtkAction{
+		value,
+	}
+}
+type Relation struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type RelationKind interface {
+  _IsRelation()
+  GetGObject() unsafe.Pointer
+}
+func (self Relation) _IsRelation() {}
+func (self Relation) GetGObject() unsafe.Pointer { return self._value_ }
+func ToRelation(value unsafe.Pointer) Relation {
+	return Relation{
+		ToGObjectObject(value),
+		value,
+	}
+}
 func AddFocusTracker(focus_tracker C.AtkEventListener) (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.atk_add_focus_tracker(focus_tracker)
@@ -923,6 +1348,812 @@ func (_self_ *Implementor) RefAccessible() (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_return_ = C.atk_implementor_ref_accessible((*C.AtkImplementor)(_self_))
 	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *AtkAction) DoAction(i int) (_go__return__ bool) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ C.gboolean
+	_return_ = C.atk_action_do_action((*C.AtkAction)(_self_._value_), _cgo_i_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkAction) GetDescription(i int) (_go__return__ string) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ *C.gchar
+	_return_ = C._atk_action_get_description((*C.AtkAction)(_self_._value_), _cgo_i_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkAction) GetKeybinding(i int) (_go__return__ string) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ *C.gchar
+	_return_ = C._atk_action_get_keybinding((*C.AtkAction)(_self_._value_), _cgo_i_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkAction) GetLocalizedName(i int) (_go__return__ string) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ *C.gchar
+	_return_ = C._atk_action_get_localized_name((*C.AtkAction)(_self_._value_), _cgo_i_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkAction) GetNActions() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_action_get_n_actions((*C.AtkAction)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkAction) GetName(i int) (_go__return__ string) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ *C.gchar
+	_return_ = C._atk_action_get_name((*C.AtkAction)(_self_._value_), _cgo_i_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkAction) SetDescription(i int, desc string) (_go__return__ bool) {
+	_cgo_i_ := (C.gint)(i)
+	_cstring_desc_ := C.CString(desc)
+	_cgo_desc_ := (*C.gchar)(unsafe.Pointer(_cstring_desc_))
+	defer C.free(unsafe.Pointer(_cstring_desc_))
+	var _return_ C.gboolean
+	_return_ = C._atk_action_set_description((*C.AtkAction)(_self_._value_), _cgo_i_, _cgo_desc_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Component) AddFocusHandler(handler C.AtkFocusHandler) (_go__return__ uint) {
+	var _return_ C.guint
+	_return_ = C.atk_component_add_focus_handler((*C.AtkComponent)(_self_._value_), handler)
+	_go__return__ = (uint)(_return_)
+	return
+}
+
+func (_self_ *Component) Contains(x int, y int, coord_type C.AtkCoordType) (_go__return__ bool) {
+	_cgo_x_ := (C.gint)(x)
+	_cgo_y_ := (C.gint)(y)
+	var _return_ C.gboolean
+	_return_ = C.atk_component_contains((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, coord_type)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Component) GetAlpha() (_go__return__ float64) {
+	var _return_ C.gdouble
+	_return_ = C.atk_component_get_alpha((*C.AtkComponent)(_self_._value_))
+	_go__return__ = (float64)(_return_)
+	return
+}
+
+func (_self_ *Component) GetExtents(x *C.gint, y *C.gint, width *C.gint, height *C.gint, coord_type C.AtkCoordType) () {
+	C.atk_component_get_extents((*C.AtkComponent)(_self_._value_), x, y, width, height, coord_type)
+	return
+}
+
+func (_self_ *Component) GetLayer() (_return_ C.AtkLayer) {
+	_return_ = C.atk_component_get_layer((*C.AtkComponent)(_self_._value_))
+	return
+}
+
+func (_self_ *Component) GetMdiZorder() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_component_get_mdi_zorder((*C.AtkComponent)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Component) GetPosition(x *C.gint, y *C.gint, coord_type C.AtkCoordType) () {
+	C.atk_component_get_position((*C.AtkComponent)(_self_._value_), x, y, coord_type)
+	return
+}
+
+func (_self_ *Component) GetSize(width *C.gint, height *C.gint) () {
+	C.atk_component_get_size((*C.AtkComponent)(_self_._value_), width, height)
+	return
+}
+
+func (_self_ *Component) GrabFocus() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.atk_component_grab_focus((*C.AtkComponent)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Component) RefAccessibleAtPoint(x int, y int, coord_type C.AtkCoordType) (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_cgo_x_ := (C.gint)(x)
+	_cgo_y_ := (C.gint)(y)
+	_return_ = C.atk_component_ref_accessible_at_point((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, coord_type)
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Component) RemoveFocusHandler(handler_id uint) () {
+	_cgo_handler_id_ := (C.guint)(handler_id)
+	C.atk_component_remove_focus_handler((*C.AtkComponent)(_self_._value_), _cgo_handler_id_)
+	return
+}
+
+func (_self_ *Component) SetExtents(x int, y int, width int, height int, coord_type C.AtkCoordType) (_go__return__ bool) {
+	_cgo_x_ := (C.gint)(x)
+	_cgo_y_ := (C.gint)(y)
+	_cgo_width_ := (C.gint)(width)
+	_cgo_height_ := (C.gint)(height)
+	var _return_ C.gboolean
+	_return_ = C.atk_component_set_extents((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, coord_type)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Component) SetPosition(x int, y int, coord_type C.AtkCoordType) (_go__return__ bool) {
+	_cgo_x_ := (C.gint)(x)
+	_cgo_y_ := (C.gint)(y)
+	var _return_ C.gboolean
+	_return_ = C.atk_component_set_position((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, coord_type)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Component) SetSize(width int, height int) (_go__return__ bool) {
+	_cgo_width_ := (C.gint)(width)
+	_cgo_height_ := (C.gint)(height)
+	var _return_ C.gboolean
+	_return_ = C.atk_component_set_size((*C.AtkComponent)(_self_._value_), _cgo_width_, _cgo_height_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Document) GetAttributeValue(attribute_name string) (_go__return__ string) {
+	_cstring_attribute_name_ := C.CString(attribute_name)
+	_cgo_attribute_name_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_name_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_name_))
+	var _return_ *C.gchar
+	_return_ = C._atk_document_get_attribute_value((*C.AtkDocument)(_self_._value_), _cgo_attribute_name_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Document) GetAttributes() (_return_ *C.AtkAttributeSet) {
+	_return_ = C.atk_document_get_attributes((*C.AtkDocument)(_self_._value_))
+	return
+}
+
+func (_self_ *Document) GetDocument() (_return_ C.gpointer) {
+	_return_ = C.atk_document_get_document((*C.AtkDocument)(_self_._value_))
+	return
+}
+
+func (_self_ *Document) GetDocumentType() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_document_get_document_type((*C.AtkDocument)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Document) GetLocale() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_document_get_locale((*C.AtkDocument)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Document) SetAttributeValue(attribute_name string, attribute_value string) (_go__return__ bool) {
+	_cstring_attribute_name_ := C.CString(attribute_name)
+	_cgo_attribute_name_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_name_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_name_))
+	_cstring_attribute_value_ := C.CString(attribute_value)
+	_cgo_attribute_value_ := (*C.gchar)(unsafe.Pointer(_cstring_attribute_value_))
+	defer C.free(unsafe.Pointer(_cstring_attribute_value_))
+	var _return_ C.gboolean
+	_return_ = C._atk_document_set_attribute_value((*C.AtkDocument)(_self_._value_), _cgo_attribute_name_, _cgo_attribute_value_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *EditableText) CopyText(start_pos int, end_pos int) () {
+	_cgo_start_pos_ := (C.gint)(start_pos)
+	_cgo_end_pos_ := (C.gint)(end_pos)
+	C.atk_editable_text_copy_text((*C.AtkEditableText)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
+	return
+}
+
+func (_self_ *EditableText) CutText(start_pos int, end_pos int) () {
+	_cgo_start_pos_ := (C.gint)(start_pos)
+	_cgo_end_pos_ := (C.gint)(end_pos)
+	C.atk_editable_text_cut_text((*C.AtkEditableText)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
+	return
+}
+
+func (_self_ *EditableText) DeleteText(start_pos int, end_pos int) () {
+	_cgo_start_pos_ := (C.gint)(start_pos)
+	_cgo_end_pos_ := (C.gint)(end_pos)
+	C.atk_editable_text_delete_text((*C.AtkEditableText)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
+	return
+}
+
+func (_self_ *EditableText) InsertText(string_ string, length int, position *C.gint) () {
+	_cgo_length_ := (C.gint)(length)
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	C._atk_editable_text_insert_text((*C.AtkEditableText)(_self_._value_), _cgo_string__, _cgo_length_, position)
+	return
+}
+
+func (_self_ *EditableText) PasteText(position int) () {
+	_cgo_position_ := (C.gint)(position)
+	C.atk_editable_text_paste_text((*C.AtkEditableText)(_self_._value_), _cgo_position_)
+	return
+}
+
+func (_self_ *EditableText) SetRunAttributes(attrib_set *C.AtkAttributeSet, start_offset int, end_offset int) (_go__return__ bool) {
+	_cgo_start_offset_ := (C.gint)(start_offset)
+	_cgo_end_offset_ := (C.gint)(end_offset)
+	var _return_ C.gboolean
+	_return_ = C.atk_editable_text_set_run_attributes((*C.AtkEditableText)(_self_._value_), attrib_set, _cgo_start_offset_, _cgo_end_offset_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *EditableText) SetTextContents(string_ string) () {
+	_cstring_string__ := C.CString(string_)
+	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
+	defer C.free(unsafe.Pointer(_cstring_string__))
+	C._atk_editable_text_set_text_contents((*C.AtkEditableText)(_self_._value_), _cgo_string__)
+	return
+}
+
+func (_self_ *HyperlinkImpl) GetHyperlink() (_go__return__ Hyperlink) {
+	var _return_ *C.AtkHyperlink
+	_return_ = C.atk_hyperlink_impl_get_hyperlink((*C.AtkHyperlinkImpl)(_self_._value_))
+	_go__return__ = ToHyperlink(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Hypertext) GetLink(link_index int) (_go__return__ Hyperlink) {
+	var _return_ *C.AtkHyperlink
+	_cgo_link_index_ := (C.gint)(link_index)
+	_return_ = C.atk_hypertext_get_link((*C.AtkHypertext)(_self_._value_), _cgo_link_index_)
+	_go__return__ = ToHyperlink(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Hypertext) GetLinkIndex(char_index int) (_go__return__ int) {
+	_cgo_char_index_ := (C.gint)(char_index)
+	var _return_ C.gint
+	_return_ = C.atk_hypertext_get_link_index((*C.AtkHypertext)(_self_._value_), _cgo_char_index_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Hypertext) GetNLinks() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_hypertext_get_n_links((*C.AtkHypertext)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkImage) GetImageDescription() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_image_get_image_description((*C.AtkImage)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkImage) GetImageLocale() (_go__return__ string) {
+	var _return_ *C.gchar
+	_return_ = C._atk_image_get_image_locale((*C.AtkImage)(_self_._value_))
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkImage) GetImagePosition(x *C.gint, y *C.gint, coord_type C.AtkCoordType) () {
+	C.atk_image_get_image_position((*C.AtkImage)(_self_._value_), x, y, coord_type)
+	return
+}
+
+func (_self_ *AtkImage) GetImageSize(width *C.gint, height *C.gint) () {
+	C.atk_image_get_image_size((*C.AtkImage)(_self_._value_), width, height)
+	return
+}
+
+func (_self_ *AtkImage) SetImageDescription(description string) (_go__return__ bool) {
+	_cstring_description_ := C.CString(description)
+	_cgo_description_ := (*C.gchar)(unsafe.Pointer(_cstring_description_))
+	defer C.free(unsafe.Pointer(_cstring_description_))
+	var _return_ C.gboolean
+	_return_ = C._atk_image_set_image_description((*C.AtkImage)(_self_._value_), _cgo_description_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Selection) AddSelection(i int) (_go__return__ bool) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ C.gboolean
+	_return_ = C.atk_selection_add_selection((*C.AtkSelection)(_self_._value_), _cgo_i_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Selection) ClearSelection() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.atk_selection_clear_selection((*C.AtkSelection)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Selection) GetSelectionCount() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_selection_get_selection_count((*C.AtkSelection)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Selection) IsChildSelected(i int) (_go__return__ bool) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ C.gboolean
+	_return_ = C.atk_selection_is_child_selected((*C.AtkSelection)(_self_._value_), _cgo_i_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Selection) RefSelection(i int) (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_cgo_i_ := (C.gint)(i)
+	_return_ = C.atk_selection_ref_selection((*C.AtkSelection)(_self_._value_), _cgo_i_)
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Selection) RemoveSelection(i int) (_go__return__ bool) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ C.gboolean
+	_return_ = C.atk_selection_remove_selection((*C.AtkSelection)(_self_._value_), _cgo_i_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Selection) SelectAllSelection() (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C.atk_selection_select_all_selection((*C.AtkSelection)(_self_._value_))
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *StreamableContent) GetMimeType(i int) (_go__return__ string) {
+	_cgo_i_ := (C.gint)(i)
+	var _return_ *C.gchar
+	_return_ = C._atk_streamable_content_get_mime_type((*C.AtkStreamableContent)(_self_._value_), _cgo_i_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *StreamableContent) GetNMimeTypes() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_streamable_content_get_n_mime_types((*C.AtkStreamableContent)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *StreamableContent) GetStream(mime_type string) (_return_ *C.GIOChannel) {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	_return_ = C._atk_streamable_content_get_stream((*C.AtkStreamableContent)(_self_._value_), _cgo_mime_type_)
+	return
+}
+
+func (_self_ *StreamableContent) GetUri(mime_type string) (_go__return__ string) {
+	_cstring_mime_type_ := C.CString(mime_type)
+	_cgo_mime_type_ := (*C.gchar)(unsafe.Pointer(_cstring_mime_type_))
+	defer C.free(unsafe.Pointer(_cstring_mime_type_))
+	var _return_ *C.gchar
+	_return_ = C._atk_streamable_content_get_uri((*C.AtkStreamableContent)(_self_._value_), _cgo_mime_type_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkTable) AddColumnSelection(column int) (_go__return__ bool) {
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_add_column_selection((*C.AtkTable)(_self_._value_), _cgo_column_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) AddRowSelection(row int) (_go__return__ bool) {
+	_cgo_row_ := (C.gint)(row)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_add_row_selection((*C.AtkTable)(_self_._value_), _cgo_row_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) GetCaption() (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_return_ = C.atk_table_get_caption((*C.AtkTable)(_self_._value_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *AtkTable) GetColumnAtIndex(index_ int) (_go__return__ int) {
+	_cgo_index__ := (C.gint)(index_)
+	var _return_ C.gint
+	_return_ = C.atk_table_get_column_at_index((*C.AtkTable)(_self_._value_), _cgo_index__)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetColumnDescription(column int) (_go__return__ string) {
+	_cgo_column_ := (C.gint)(column)
+	var _return_ *C.gchar
+	_return_ = C._atk_table_get_column_description((*C.AtkTable)(_self_._value_), _cgo_column_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkTable) GetColumnExtentAt(row int, column int) (_go__return__ int) {
+	_cgo_row_ := (C.gint)(row)
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gint
+	_return_ = C.atk_table_get_column_extent_at((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_column_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetColumnHeader(column int) (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_cgo_column_ := (C.gint)(column)
+	_return_ = C.atk_table_get_column_header((*C.AtkTable)(_self_._value_), _cgo_column_)
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *AtkTable) GetIndexAt(row int, column int) (_go__return__ int) {
+	_cgo_row_ := (C.gint)(row)
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gint
+	_return_ = C.atk_table_get_index_at((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_column_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetNColumns() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_table_get_n_columns((*C.AtkTable)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetNRows() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_table_get_n_rows((*C.AtkTable)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetRowAtIndex(index_ int) (_go__return__ int) {
+	_cgo_index__ := (C.gint)(index_)
+	var _return_ C.gint
+	_return_ = C.atk_table_get_row_at_index((*C.AtkTable)(_self_._value_), _cgo_index__)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetRowDescription(row int) (_go__return__ string) {
+	_cgo_row_ := (C.gint)(row)
+	var _return_ *C.gchar
+	_return_ = C._atk_table_get_row_description((*C.AtkTable)(_self_._value_), _cgo_row_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *AtkTable) GetRowExtentAt(row int, column int) (_go__return__ int) {
+	_cgo_row_ := (C.gint)(row)
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gint
+	_return_ = C.atk_table_get_row_extent_at((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_column_)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetRowHeader(row int) (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_cgo_row_ := (C.gint)(row)
+	_return_ = C.atk_table_get_row_header((*C.AtkTable)(_self_._value_), _cgo_row_)
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *AtkTable) GetSelectedColumns(selected unsafe.Pointer) (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._atk_table_get_selected_columns((*C.AtkTable)(_self_._value_), selected)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetSelectedRows(selected unsafe.Pointer) (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C._atk_table_get_selected_rows((*C.AtkTable)(_self_._value_), selected)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *AtkTable) GetSummary() (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_return_ = C.atk_table_get_summary((*C.AtkTable)(_self_._value_))
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *AtkTable) IsColumnSelected(column int) (_go__return__ bool) {
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_is_column_selected((*C.AtkTable)(_self_._value_), _cgo_column_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) IsRowSelected(row int) (_go__return__ bool) {
+	_cgo_row_ := (C.gint)(row)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_is_row_selected((*C.AtkTable)(_self_._value_), _cgo_row_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) IsSelected(row int, column int) (_go__return__ bool) {
+	_cgo_row_ := (C.gint)(row)
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_is_selected((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_column_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) RefAt(row int, column int) (_go__return__ AtkObject) {
+	var _return_ *C.AtkObject
+	_cgo_row_ := (C.gint)(row)
+	_cgo_column_ := (C.gint)(column)
+	_return_ = C.atk_table_ref_at((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_column_)
+	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *AtkTable) RemoveColumnSelection(column int) (_go__return__ bool) {
+	_cgo_column_ := (C.gint)(column)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_remove_column_selection((*C.AtkTable)(_self_._value_), _cgo_column_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) RemoveRowSelection(row int) (_go__return__ bool) {
+	_cgo_row_ := (C.gint)(row)
+	var _return_ C.gboolean
+	_return_ = C.atk_table_remove_row_selection((*C.AtkTable)(_self_._value_), _cgo_row_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkTable) SetCaption(caption AtkObjectKind) () {
+	_cgo_caption_ := (*C.AtkObject)(caption.GetGObject())
+	C.atk_table_set_caption((*C.AtkTable)(_self_._value_), _cgo_caption_)
+	return
+}
+
+func (_self_ *AtkTable) SetColumnDescription(column int, description string) () {
+	_cgo_column_ := (C.gint)(column)
+	_cstring_description_ := C.CString(description)
+	_cgo_description_ := (*C.gchar)(unsafe.Pointer(_cstring_description_))
+	defer C.free(unsafe.Pointer(_cstring_description_))
+	C._atk_table_set_column_description((*C.AtkTable)(_self_._value_), _cgo_column_, _cgo_description_)
+	return
+}
+
+func (_self_ *AtkTable) SetColumnHeader(column int, header AtkObjectKind) () {
+	_cgo_header_ := (*C.AtkObject)(header.GetGObject())
+	_cgo_column_ := (C.gint)(column)
+	C.atk_table_set_column_header((*C.AtkTable)(_self_._value_), _cgo_column_, _cgo_header_)
+	return
+}
+
+func (_self_ *AtkTable) SetRowDescription(row int, description string) () {
+	_cgo_row_ := (C.gint)(row)
+	_cstring_description_ := C.CString(description)
+	_cgo_description_ := (*C.gchar)(unsafe.Pointer(_cstring_description_))
+	defer C.free(unsafe.Pointer(_cstring_description_))
+	C._atk_table_set_row_description((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_description_)
+	return
+}
+
+func (_self_ *AtkTable) SetRowHeader(row int, header AtkObjectKind) () {
+	_cgo_header_ := (*C.AtkObject)(header.GetGObject())
+	_cgo_row_ := (C.gint)(row)
+	C.atk_table_set_row_header((*C.AtkTable)(_self_._value_), _cgo_row_, _cgo_header_)
+	return
+}
+
+func (_self_ *AtkTable) SetSummary(accessible AtkObjectKind) () {
+	_cgo_accessible_ := (*C.AtkObject)(accessible.GetGObject())
+	C.atk_table_set_summary((*C.AtkTable)(_self_._value_), _cgo_accessible_)
+	return
+}
+
+func (_self_ *Text) AddSelection(start_offset int, end_offset int) (_go__return__ bool) {
+	_cgo_start_offset_ := (C.gint)(start_offset)
+	_cgo_end_offset_ := (C.gint)(end_offset)
+	var _return_ C.gboolean
+	_return_ = C.atk_text_add_selection((*C.AtkText)(_self_._value_), _cgo_start_offset_, _cgo_end_offset_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Text) GetBoundedRanges(rect *TextRectangle, coord_type C.AtkCoordType, x_clip_type C.AtkTextClipType, y_clip_type C.AtkTextClipType) (_return_ unsafe.Pointer) {
+	_cgo_rect_ := (*C.AtkTextRectangle)(unsafe.Pointer(rect))
+	_return_ = C._atk_text_get_bounded_ranges((*C.AtkText)(_self_._value_), _cgo_rect_, coord_type, x_clip_type, y_clip_type)
+	return
+}
+
+func (_self_ *Text) GetCaretOffset() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_text_get_caret_offset((*C.AtkText)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Text) GetCharacterAtOffset(offset int) (_return_ C.gunichar) {
+	_cgo_offset_ := (C.gint)(offset)
+	_return_ = C.atk_text_get_character_at_offset((*C.AtkText)(_self_._value_), _cgo_offset_)
+	return
+}
+
+func (_self_ *Text) GetCharacterCount() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_text_get_character_count((*C.AtkText)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Text) GetCharacterExtents(offset int, x *C.gint, y *C.gint, width *C.gint, height *C.gint, coords C.AtkCoordType) () {
+	_cgo_offset_ := (C.gint)(offset)
+	C.atk_text_get_character_extents((*C.AtkText)(_self_._value_), _cgo_offset_, x, y, width, height, coords)
+	return
+}
+
+func (_self_ *Text) GetDefaultAttributes() (_return_ *C.AtkAttributeSet) {
+	_return_ = C.atk_text_get_default_attributes((*C.AtkText)(_self_._value_))
+	return
+}
+
+func (_self_ *Text) GetNSelections() (_go__return__ int) {
+	var _return_ C.gint
+	_return_ = C.atk_text_get_n_selections((*C.AtkText)(_self_._value_))
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Text) GetOffsetAtPoint(x int, y int, coords C.AtkCoordType) (_go__return__ int) {
+	_cgo_x_ := (C.gint)(x)
+	_cgo_y_ := (C.gint)(y)
+	var _return_ C.gint
+	_return_ = C.atk_text_get_offset_at_point((*C.AtkText)(_self_._value_), _cgo_x_, _cgo_y_, coords)
+	_go__return__ = (int)(_return_)
+	return
+}
+
+func (_self_ *Text) GetRangeExtents(start_offset int, end_offset int, coord_type C.AtkCoordType, rect *TextRectangle) () {
+	_cgo_rect_ := (*C.AtkTextRectangle)(unsafe.Pointer(rect))
+	_cgo_start_offset_ := (C.gint)(start_offset)
+	_cgo_end_offset_ := (C.gint)(end_offset)
+	C.atk_text_get_range_extents((*C.AtkText)(_self_._value_), _cgo_start_offset_, _cgo_end_offset_, coord_type, _cgo_rect_)
+	return
+}
+
+func (_self_ *Text) GetRunAttributes(offset int, start_offset *C.gint, end_offset *C.gint) (_return_ *C.AtkAttributeSet) {
+	_cgo_offset_ := (C.gint)(offset)
+	_return_ = C.atk_text_get_run_attributes((*C.AtkText)(_self_._value_), _cgo_offset_, start_offset, end_offset)
+	return
+}
+
+func (_self_ *Text) GetSelection(selection_num int, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+	_cgo_selection_num_ := (C.gint)(selection_num)
+	var _return_ *C.gchar
+	_return_ = C.atk_text_get_selection((*C.AtkText)(_self_._value_), _cgo_selection_num_, start_offset, end_offset)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Text) GetText(start_offset int, end_offset int) (_go__return__ string) {
+	_cgo_start_offset_ := (C.gint)(start_offset)
+	_cgo_end_offset_ := (C.gint)(end_offset)
+	var _return_ *C.gchar
+	_return_ = C.atk_text_get_text((*C.AtkText)(_self_._value_), _cgo_start_offset_, _cgo_end_offset_)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Text) GetTextAfterOffset(offset int, boundary_type C.AtkTextBoundary, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+	_cgo_offset_ := (C.gint)(offset)
+	var _return_ *C.gchar
+	_return_ = C.atk_text_get_text_after_offset((*C.AtkText)(_self_._value_), _cgo_offset_, boundary_type, start_offset, end_offset)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Text) GetTextAtOffset(offset int, boundary_type C.AtkTextBoundary, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+	_cgo_offset_ := (C.gint)(offset)
+	var _return_ *C.gchar
+	_return_ = C.atk_text_get_text_at_offset((*C.AtkText)(_self_._value_), _cgo_offset_, boundary_type, start_offset, end_offset)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Text) GetTextBeforeOffset(offset int, boundary_type C.AtkTextBoundary, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+	_cgo_offset_ := (C.gint)(offset)
+	var _return_ *C.gchar
+	_return_ = C.atk_text_get_text_before_offset((*C.AtkText)(_self_._value_), _cgo_offset_, boundary_type, start_offset, end_offset)
+	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func (_self_ *Text) RemoveSelection(selection_num int) (_go__return__ bool) {
+	_cgo_selection_num_ := (C.gint)(selection_num)
+	var _return_ C.gboolean
+	_return_ = C.atk_text_remove_selection((*C.AtkText)(_self_._value_), _cgo_selection_num_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Text) SetCaretOffset(offset int) (_go__return__ bool) {
+	_cgo_offset_ := (C.gint)(offset)
+	var _return_ C.gboolean
+	_return_ = C.atk_text_set_caret_offset((*C.AtkText)(_self_._value_), _cgo_offset_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *Text) SetSelection(selection_num int, start_offset int, end_offset int) (_go__return__ bool) {
+	_cgo_selection_num_ := (C.gint)(selection_num)
+	_cgo_start_offset_ := (C.gint)(start_offset)
+	_cgo_end_offset_ := (C.gint)(end_offset)
+	var _return_ C.gboolean
+	_return_ = C.atk_text_set_selection((*C.AtkText)(_self_._value_), _cgo_selection_num_, _cgo_start_offset_, _cgo_end_offset_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *AtkValue) GetCurrentValue(value *C.GValue) () {
+	C.atk_value_get_current_value((*C.AtkValue)(_self_._value_), value)
+	return
+}
+
+func (_self_ *AtkValue) GetMaximumValue(value *C.GValue) () {
+	C.atk_value_get_maximum_value((*C.AtkValue)(_self_._value_), value)
+	return
+}
+
+func (_self_ *AtkValue) GetMinimumIncrement(value *C.GValue) () {
+	C.atk_value_get_minimum_increment((*C.AtkValue)(_self_._value_), value)
+	return
+}
+
+func (_self_ *AtkValue) GetMinimumValue(value *C.GValue) () {
+	C.atk_value_get_minimum_value((*C.AtkValue)(_self_._value_), value)
+	return
+}
+
+func (_self_ *AtkValue) SetCurrentValue(value *C.GValue) (_go__return__ bool) {
+	var _return_ C.gboolean
+	_return_ = C._atk_value_set_current_value((*C.AtkValue)(_self_._value_), value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 

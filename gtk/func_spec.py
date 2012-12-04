@@ -130582,6 +130582,20 @@ func_specs = {
     parameters = [
     ],
   ),
+  'g_file_descriptor_based_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'g_file_descriptor_based_get_fd': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'GFileDescriptorBased *',
+        name = 'fd_based',
+      ),
+    ],
+  ),
   'gdk_pixdata_serialize': Spec(
     return_type = 'guint8 *',
     parameters = [

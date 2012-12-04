@@ -141,54 +141,105 @@ import (
 type PixbufLoaderClass C.GdkPixbufLoaderClass
 type PixbufFormat C.GdkPixbufFormat
 type PixbufSimpleAnimClass C.GdkPixbufSimpleAnimClass
-type PixbufSimpleAnim struct { PixbufAnimation }
+type PixbufSimpleAnim struct {
+	PixbufAnimation
+	_value_ unsafe.Pointer
+}
 type PixbufSimpleAnimKind interface {
   _IsPixbufSimpleAnim()
   GetGObject() unsafe.Pointer
 }
-func (self PixbufSimpleAnim) _IsPixbufSimpleAnim () {}
+func (self PixbufSimpleAnim) _IsPixbufSimpleAnim() {}
 func (self PixbufSimpleAnim) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufSimpleAnim(value unsafe.Pointer) PixbufSimpleAnim { return PixbufSimpleAnim{PixbufAnimation{GObjectObject{value}}} }
-type PixbufAnimation struct { GObjectObject }
+func ToPixbufSimpleAnim(value unsafe.Pointer) PixbufSimpleAnim {
+	return PixbufSimpleAnim{
+		ToPixbufAnimation(value),
+		value,
+	}
+}
+type PixbufAnimation struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type PixbufAnimationKind interface {
   _IsPixbufAnimation()
   GetGObject() unsafe.Pointer
 }
-func (self PixbufAnimation) _IsPixbufAnimation () {}
+func (self PixbufAnimation) _IsPixbufAnimation() {}
 func (self PixbufAnimation) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufAnimation(value unsafe.Pointer) PixbufAnimation { return PixbufAnimation{GObjectObject{value}} }
-type Pixbuf struct { GObjectObject }
+func ToPixbufAnimation(value unsafe.Pointer) PixbufAnimation {
+	return PixbufAnimation{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Pixbuf struct {
+	GObjectObject
+	Icon
+	_value_ unsafe.Pointer
+}
 type PixbufKind interface {
   _IsPixbuf()
   GetGObject() unsafe.Pointer
 }
-func (self Pixbuf) _IsPixbuf () {}
+func (self Pixbuf) _IsPixbuf() {}
 func (self Pixbuf) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbuf(value unsafe.Pointer) Pixbuf { return Pixbuf{GObjectObject{value}} }
-type PixbufAnimationIter struct { GObjectObject }
+func ToPixbuf(value unsafe.Pointer) Pixbuf {
+	return Pixbuf{
+		ToGObjectObject(value),
+		ToIcon(value),
+		value,
+	}
+}
+func (self Pixbuf) _IsIcon () {}
+type PixbufAnimationIter struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type PixbufAnimationIterKind interface {
   _IsPixbufAnimationIter()
   GetGObject() unsafe.Pointer
 }
-func (self PixbufAnimationIter) _IsPixbufAnimationIter () {}
+func (self PixbufAnimationIter) _IsPixbufAnimationIter() {}
 func (self PixbufAnimationIter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufAnimationIter(value unsafe.Pointer) PixbufAnimationIter { return PixbufAnimationIter{GObjectObject{value}} }
-type PixbufSimpleAnimIter struct { PixbufAnimationIter }
+func ToPixbufAnimationIter(value unsafe.Pointer) PixbufAnimationIter {
+	return PixbufAnimationIter{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type PixbufSimpleAnimIter struct {
+	PixbufAnimationIter
+	_value_ unsafe.Pointer
+}
 type PixbufSimpleAnimIterKind interface {
   _IsPixbufSimpleAnimIter()
   GetGObject() unsafe.Pointer
 }
-func (self PixbufSimpleAnimIter) _IsPixbufSimpleAnimIter () {}
+func (self PixbufSimpleAnimIter) _IsPixbufSimpleAnimIter() {}
 func (self PixbufSimpleAnimIter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufSimpleAnimIter(value unsafe.Pointer) PixbufSimpleAnimIter { return PixbufSimpleAnimIter{PixbufAnimationIter{GObjectObject{value}}} }
-type PixbufLoader struct { GObjectObject }
+func ToPixbufSimpleAnimIter(value unsafe.Pointer) PixbufSimpleAnimIter {
+	return PixbufSimpleAnimIter{
+		ToPixbufAnimationIter(value),
+		value,
+	}
+}
+type PixbufLoader struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type PixbufLoaderKind interface {
   _IsPixbufLoader()
   GetGObject() unsafe.Pointer
 }
-func (self PixbufLoader) _IsPixbufLoader () {}
+func (self PixbufLoader) _IsPixbufLoader() {}
 func (self PixbufLoader) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufLoader(value unsafe.Pointer) PixbufLoader { return PixbufLoader{GObjectObject{value}} }
+func ToPixbufLoader(value unsafe.Pointer) PixbufLoader {
+	return PixbufLoader{
+		ToGObjectObject(value),
+		value,
+	}
+}
 func PixbufErrorQuark() (_return_ C.GQuark) {
 	_return_ = C.gdk_pixbuf_error_quark()
 	return
