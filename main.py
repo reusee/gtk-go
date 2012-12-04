@@ -56,15 +56,6 @@ class Parser:
     self.path = os.path.dirname(os.path.abspath(filename))
     self.package = os.path.basename(self.path)
 
-    self.skip_symbols = set()
-    skip_symbol_file = os.path.join(self.path, 'skip_symbols')
-    if os.path.exists(skip_symbol_file):
-      self.skip_symbols = set([line.strip() 
-        for line in open(skip_symbol_file, 'r').xreadlines()
-        if not line.startswith('//')
-        ])
-      self.skip_symbols = set([l for l in self.skip_symbols if l])
-
     self.func_spec = {}
     func_spec_file = os.path.join(self.path, 'func_spec.py')
     func_spec_module = imp.load_source('func_spec', func_spec_file)
@@ -134,12 +125,11 @@ class Parser:
 
   def handleEnum(self, node):
     for mem in node.members:
-      if mem.symbol in self.skip_symbols:
-        continue
+      if self.is_skip(mem.symbol): continue
       self.const_symbols.add(mem.symbol)
 
   def handleConstant(self, node):
-    if node.ctype in self.skip_symbols: return
+    if self.is_skip(node.ctype): return
     self.const_symbols.add(node.ctype)
 
   def _handleCompositeType(self, node):
@@ -157,7 +147,7 @@ class Parser:
     name = self.convert_gi_name_to_go_name(node.gi_name)
     if '_' in name: return
     c_type = node.ctype
-    if c_type in self.skip_symbols: return
+    if self.is_skip(c_type): return
     if name in self.translator.names:
       print 'type name conflict', name
       assert False
@@ -169,7 +159,7 @@ class Parser:
     name = self.convert_gi_name_to_go_name(node.gi_name)
     if '_' in name: return
     c_type = node.ctype
-    if c_type in self.skip_symbols: return
+    if self.is_skip(c_type): return
     if not node.parent:
       self.class_types[name] = 'unsafe.Pointer'
     else:
@@ -209,6 +199,13 @@ class Parser:
     if name in self.conflict_type_names:
       name = gi_name.replace('.', '')
     return name
+
+  def is_skip(self, symbol):
+    if symbol in self.compile_error_c_symbols: return True
+    if symbol in self.not_exported_c_macros: return True
+    if symbol in self.manually_implement_c_symbols: return True
+    if symbol in self.deprecated_c_symbols: return True
+    return False
 
 def main():
   if len(sys.argv) < 2:

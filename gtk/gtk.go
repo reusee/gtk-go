@@ -2576,6 +2576,14 @@ type TreeViewKind interface {
 func (self TreeView) _IsTreeView () {}
 func (self TreeView) _getValue() unsafe.Pointer { return self._value_ }
 func ToTreeView(value unsafe.Pointer) TreeView { return TreeView{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
+type Layout struct { Container }
+type LayoutKind interface {
+  _IsLayout()
+  _getValue() unsafe.Pointer
+}
+func (self Layout) _IsLayout () {}
+func (self Layout) _getValue() unsafe.Pointer { return self._value_ }
+func ToLayout(value unsafe.Pointer) Layout { return Layout{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
 type ColorChooserDialog struct { Dialog }
 type ColorChooserDialogKind interface {
   _IsColorChooserDialog()
@@ -2736,6 +2744,14 @@ type IMMulticontextKind interface {
 func (self IMMulticontext) _IsIMMulticontext () {}
 func (self IMMulticontext) _getValue() unsafe.Pointer { return self._value_ }
 func ToIMMulticontext(value unsafe.Pointer) IMMulticontext { return IMMulticontext{IMContext{GObjectObject{value}}} }
+type StatusIcon struct { GObjectObject }
+type StatusIconKind interface {
+  _IsStatusIcon()
+  _getValue() unsafe.Pointer
+}
+func (self StatusIcon) _IsStatusIcon () {}
+func (self StatusIcon) _getValue() unsafe.Pointer { return self._value_ }
+func ToStatusIcon(value unsafe.Pointer) StatusIcon { return StatusIcon{GObjectObject{value}} }
 type GtkMisc struct { Widget }
 type GtkMiscKind interface {
   _IsGtkMisc()
@@ -3104,14 +3120,14 @@ type SeparatorKind interface {
 func (self Separator) _IsSeparator () {}
 func (self Separator) _getValue() unsafe.Pointer { return self._value_ }
 func ToSeparator(value unsafe.Pointer) Separator { return Separator{Widget{InitiallyUnowned{GObjectObject{value}}}} }
-type Layout struct { Container }
-type LayoutKind interface {
-  _IsLayout()
+type Calendar struct { Widget }
+type CalendarKind interface {
+  _IsCalendar()
   _getValue() unsafe.Pointer
 }
-func (self Layout) _IsLayout () {}
-func (self Layout) _getValue() unsafe.Pointer { return self._value_ }
-func ToLayout(value unsafe.Pointer) Layout { return Layout{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}} }
+func (self Calendar) _IsCalendar () {}
+func (self Calendar) _getValue() unsafe.Pointer { return self._value_ }
+func ToCalendar(value unsafe.Pointer) Calendar { return Calendar{Widget{InitiallyUnowned{GObjectObject{value}}}} }
 type GtkSettings struct { GObjectObject }
 type GtkSettingsKind interface {
   _IsGtkSettings()
@@ -3264,14 +3280,14 @@ type FileChooserButtonKind interface {
 func (self FileChooserButton) _IsFileChooserButton () {}
 func (self FileChooserButton) _getValue() unsafe.Pointer { return self._value_ }
 func ToFileChooserButton(value unsafe.Pointer) FileChooserButton { return FileChooserButton{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type StatusIcon struct { GObjectObject }
-type StatusIconKind interface {
-  _IsStatusIcon()
+type ColorSelection struct { Box }
+type ColorSelectionKind interface {
+  _IsColorSelection()
   _getValue() unsafe.Pointer
 }
-func (self StatusIcon) _IsStatusIcon () {}
-func (self StatusIcon) _getValue() unsafe.Pointer { return self._value_ }
-func ToStatusIcon(value unsafe.Pointer) StatusIcon { return StatusIcon{GObjectObject{value}} }
+func (self ColorSelection) _IsColorSelection () {}
+func (self ColorSelection) _getValue() unsafe.Pointer { return self._value_ }
+func ToColorSelection(value unsafe.Pointer) ColorSelection { return ColorSelection{Box{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
 type AppChooserButton struct { ComboBox }
 type AppChooserButtonKind interface {
   _IsAppChooserButton()
@@ -3768,14 +3784,6 @@ type HPanedKind interface {
 func (self HPaned) _IsHPaned () {}
 func (self HPaned) _getValue() unsafe.Pointer { return self._value_ }
 func ToHPaned(value unsafe.Pointer) HPaned { return HPaned{Paned{Container{Widget{InitiallyUnowned{GObjectObject{value}}}}}} }
-type Calendar struct { Widget }
-type CalendarKind interface {
-  _IsCalendar()
-  _getValue() unsafe.Pointer
-}
-func (self Calendar) _IsCalendar () {}
-func (self Calendar) _getValue() unsafe.Pointer { return self._value_ }
-func ToCalendar(value unsafe.Pointer) Calendar { return Calendar{Widget{InitiallyUnowned{GObjectObject{value}}}} }
 type FileChooserDialog struct { Dialog }
 type FileChooserDialogKind interface {
   _IsFileChooserDialog()
@@ -8053,6 +8061,11 @@ func ColorChooserWidgetNew() (_go__return__ ColorChooserWidget) {
 	var _return_ *C.GtkWidget
 	_return_ = C.gtk_color_chooser_widget_new()
 	_go__return__ = ToColorChooserWidget(unsafe.Pointer(_return_))
+	return
+}
+
+func ColorSelectionSetChangePaletteWithScreenHook(func_ C.GtkColorSelectionChangePaletteWithScreenFunc) (_return_ C.GtkColorSelectionChangePaletteWithScreenFunc) {
+	_return_ = C.gtk_color_selection_set_change_palette_with_screen_hook(func_)
 	return
 }
 

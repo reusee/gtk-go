@@ -36,7 +36,7 @@ def debug(parser, generator, function, klass):
   pass
 
 def check_skip(parser, generator, function, klass):
-  if function.symbol in parser.skip_symbols:
+  if parser.is_skip(function.symbol):
     generator.skip = True
   if function.symbol in parser.exported_functions:
     generator.skip = True
@@ -51,7 +51,7 @@ def check_skip(parser, generator, function, klass):
       generator.skip = True
     if param.direction == 'inout':
       generator.skip = True
-    if param.type.ctype in parser.skip_symbols:
+    if parser.is_skip(param.type.ctype):
       generator.skip = True
 
 def convert_to_cgo_capatible_type(t):

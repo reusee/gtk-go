@@ -1,3 +1,55 @@
+# skip symbols
+
+Compile_error_c_symbols = [
+  'g_clear_object',
+  'g_io_module_query',
+  'g_io_module_load',
+  'g_io_module_unload',
+]
+
+Not_exported_c_macros = [
+  'G_VALUE_COLLECT_FORMAT_MAX_LENGTH',
+]
+
+Manually_implement_c_symbols = [
+  'gtk_init',
+  'gtk_init_check',
+  'gtk_init_with_args',
+  'gtk_parse_args',
+]
+
+Deprecated_c_symbols = [
+  'g_object_compat_control',
+  'gtk_color_selection_palette_from_string',
+  'gtk_color_selection_get_current_alpha',
+  'gtk_color_selection_get_current_rgba',
+  'gtk_color_selection_get_has_opacity_control',
+  'gtk_color_selection_get_has_palette',
+  'gtk_color_selection_get_previous_alpha',
+  'gtk_color_selection_get_previous_rgba',
+  'gtk_color_selection_is_adjusting',
+  'gtk_color_selection_set_current_alpha',
+  'gtk_color_selection_set_current_rgba',
+  'gtk_color_selection_set_has_opacity_control',
+  'gtk_color_selection_set_has_palette',
+  'gtk_color_selection_set_previous_alpha',
+  'gtk_color_selection_set_previous_rgba',
+  'gtk_color_selection_dialog_new',
+  'gtk_color_selection_dialog_get_color_selection',
+  'gtk_color_selection_palette_to_string',
+  'gtk_color_selection_new',
+  'gtk_hsv_get_color',
+  'gtk_hsv_get_metrics',
+  'gtk_hsv_is_adjusting',
+  'gtk_hsv_set_color',
+  'gtk_hsv_set_metrics',
+  'gtk_style_get_style_property',
+  'gtk_hsv_new',
+  'gtk_style_get_valist',
+]
+
+# name conflict
+
 Conflict_function_names = [
   'SocketNew',
   'ApplicationNew',
