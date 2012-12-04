@@ -64,7 +64,7 @@ class Generator:
       for prefix in self.parser.prefixes:
         if symbol.startswith(prefix.upper()):
           go_name = symbol[len(prefix) + 1:]
-      if go_name in self.parser.conflict_const_names:
+      if hasattr(self.parser, 'conflict_const_names') and go_name in self.parser.conflict_const_names:
         go_name = symbol
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
 

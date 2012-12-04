@@ -26,6 +26,7 @@ class Translator:
       parser.prepare()
     # collect inheritance info
     for parser in self.parsers:
+      if not hasattr(parser, 'nodes_of_class'): continue
       for node in parser.nodes_of_class:
         name = parser.convert_gi_name_to_go_name(node.gi_name)
         if self.class_parents.has_key(name):
@@ -196,15 +197,15 @@ class Parser:
     namespace, name = gi_name.split('.')
     if namespace not in self.translator.namespaces:
       name = gi_name.replace('.', '')
-    if name in self.conflict_type_names:
+    if hasattr(self, 'conflict_type_names') and name in self.conflict_type_names:
       name = gi_name.replace('.', '')
     return name
 
   def is_skip(self, symbol):
-    if symbol in self.compile_error_c_symbols: return True
-    if symbol in self.not_exported_c_macros: return True
-    if symbol in self.manually_implement_c_symbols: return True
-    if symbol in self.deprecated_c_symbols: return True
+    if hasattr(self, 'compile_error_c_symbols') and symbol in self.compile_error_c_symbols: return True
+    if hasattr(self, 'not_exported_c_macros') and symbol in self.not_exported_c_macros: return True
+    if hasattr(self, 'manually_implement_c_symbols') and symbol in self.manually_implement_c_symbols: return True
+    if hasattr(self, 'deprecated_c_symbols') and symbol in self.deprecated_c_symbols: return True
     return False
 
 def main():

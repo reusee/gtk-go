@@ -127,7 +127,7 @@ def collect_go_func_info(parser, generator, function, klass):
   if not function.is_method: # method function will not cause name conflict
     if generator.go_func_name in parser.translator.names:
       generator.go_func_name = parser.module_name.capitalize() + generator.go_func_name
-    if generator.go_func_name in parser.conflict_function_names:
+    if hasattr(parser, 'conflict_function_names') and generator.go_func_name in parser.conflict_function_names:
       generator.go_func_name = parser.module_name.capitalize() + generator.go_func_name
     parser.translator.names.add(generator.go_func_name)
 
