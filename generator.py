@@ -81,10 +81,10 @@ class Generator:
       print >>self.out, '''\
 type {klass}Kind interface {{
   _Is{klass}()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }}
 func (self {klass}) _Is{klass} () {{}}
-func (self {klass}) _getValue() unsafe.Pointer {{ return self._value_ }}
+func (self {klass}) GetGObject() unsafe.Pointer {{ return self._value_ }}
 func To{klass}(value unsafe.Pointer) {klass} {{ return {types}value{braces} }}\
 '''.format(
     klass = name,

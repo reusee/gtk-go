@@ -220,7 +220,7 @@ def map_record_and_class_parameters(parser, generator, function, klass):
         param.go_parameter_name, param.go_parameter_type, param.go_parameter_name))
       param.go_parameter_type = '*' + gi_type
     elif gi_type in parser.class_types:
-      generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s._getValue())' % (
+      generator.statements_before_cgo_call.append('_cgo_%s_ := (%s)(%s.GetGObject())' % (
         param.go_parameter_name,
         convert_to_cgo_type(param.c_parameter_type),
         param.go_parameter_name))
