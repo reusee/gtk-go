@@ -21,7 +21,7 @@ import (
   "unsafe"
 )
 
-func (self *Object) Connect(signal string, fun func()) {
+func (self *GObjectObject) Connect(signal string, fun func()) {
   cgo_signal := C.CString(signal)
   defer C.free(unsafe.Pointer(cgo_signal))
 

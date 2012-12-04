@@ -481,8 +481,9 @@ type ClosureNotifyData C.GClosureNotifyData
 type ParamSpecTypeInfo C.GParamSpecTypeInfo
 type TypePluginClass C.GTypePluginClass
 type InitiallyUnownedClass C.GInitiallyUnownedClass
-type ObjectClass C.GObjectClass
+type GObjectObjectClass C.GObjectClass
 type FlagsClass C.GFlagsClass
+type GObjectValue C.GValue
 type ObjectConstructParam C.GObjectConstructParam
 type Closure C.GClosure
 type TypeInfo C.GTypeInfo
@@ -490,7 +491,6 @@ type TypeModuleClass C.GTypeModuleClass
 type ParamSpecClass C.GParamSpecClass
 type SignalInvocationHint C.GSignalInvocationHint
 type WeakRef C.GWeakRef
-type Value C.GValue
 type FlagsValue C.GFlagsValue
 type CClosure C.GCClosure
 type TypeFundamentalInfo C.GTypeFundamentalInfo
@@ -500,239 +500,467 @@ type TypeQuery C.GTypeQuery
 type ValueArray C.GValueArray
 type TypeValueTable C.GTypeValueTable
 type ParamSpecPool C.GParamSpecPool
-type ParamSpecUnichar struct { ParamSpec }
+type ParamSpecUnichar struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecUnicharKind interface {
   _IsParamSpecUnichar()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecUnichar) _IsParamSpecUnichar () {}
+func (self ParamSpecUnichar) _IsParamSpecUnichar() {}
 func (self ParamSpecUnichar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecUnichar(value unsafe.Pointer) ParamSpecUnichar { return ParamSpecUnichar{ParamSpec{value}} }
-type ParamSpecULong struct { ParamSpec }
+func ToParamSpecUnichar(value unsafe.Pointer) ParamSpecUnichar {
+	return ParamSpecUnichar{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecULong struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecULongKind interface {
   _IsParamSpecULong()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecULong) _IsParamSpecULong () {}
+func (self ParamSpecULong) _IsParamSpecULong() {}
 func (self ParamSpecULong) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecULong(value unsafe.Pointer) ParamSpecULong { return ParamSpecULong{ParamSpec{value}} }
-type ParamSpecDouble struct { ParamSpec }
+func ToParamSpecULong(value unsafe.Pointer) ParamSpecULong {
+	return ParamSpecULong{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecDouble struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecDoubleKind interface {
   _IsParamSpecDouble()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecDouble) _IsParamSpecDouble () {}
+func (self ParamSpecDouble) _IsParamSpecDouble() {}
 func (self ParamSpecDouble) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecDouble(value unsafe.Pointer) ParamSpecDouble { return ParamSpecDouble{ParamSpec{value}} }
-type ParamSpecInt64 struct { ParamSpec }
+func ToParamSpecDouble(value unsafe.Pointer) ParamSpecDouble {
+	return ParamSpecDouble{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecInt64 struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecInt64Kind interface {
   _IsParamSpecInt64()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecInt64) _IsParamSpecInt64 () {}
+func (self ParamSpecInt64) _IsParamSpecInt64() {}
 func (self ParamSpecInt64) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecInt64(value unsafe.Pointer) ParamSpecInt64 { return ParamSpecInt64{ParamSpec{value}} }
-type ParamSpecBoolean struct { ParamSpec }
+func ToParamSpecInt64(value unsafe.Pointer) ParamSpecInt64 {
+	return ParamSpecInt64{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecBoolean struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecBooleanKind interface {
   _IsParamSpecBoolean()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecBoolean) _IsParamSpecBoolean () {}
+func (self ParamSpecBoolean) _IsParamSpecBoolean() {}
 func (self ParamSpecBoolean) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecBoolean(value unsafe.Pointer) ParamSpecBoolean { return ParamSpecBoolean{ParamSpec{value}} }
-type ParamSpecParam struct { ParamSpec }
+func ToParamSpecBoolean(value unsafe.Pointer) ParamSpecBoolean {
+	return ParamSpecBoolean{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecParam struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecParamKind interface {
   _IsParamSpecParam()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecParam) _IsParamSpecParam () {}
+func (self ParamSpecParam) _IsParamSpecParam() {}
 func (self ParamSpecParam) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecParam(value unsafe.Pointer) ParamSpecParam { return ParamSpecParam{ParamSpec{value}} }
-type TypePlugin struct { _value_ unsafe.Pointer }
+func ToParamSpecParam(value unsafe.Pointer) ParamSpecParam {
+	return ParamSpecParam{
+		ToParamSpec(value),
+		value,
+	}
+}
+type TypePlugin struct {
+	_value_ unsafe.Pointer
+}
 type TypePluginKind interface {
   _IsTypePlugin()
   GetGObject() unsafe.Pointer
 }
-func (self TypePlugin) _IsTypePlugin () {}
+func (self TypePlugin) _IsTypePlugin() {}
 func (self TypePlugin) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTypePlugin(value unsafe.Pointer) TypePlugin { return TypePlugin{value} }
-type Object struct { _value_ unsafe.Pointer }
-type ObjectKind interface {
-  _IsObject()
-  GetGObject() unsafe.Pointer
+func ToTypePlugin(value unsafe.Pointer) TypePlugin {
+	return TypePlugin{
+		value,
+	}
 }
-func (self Object) _IsObject () {}
-func (self Object) GetGObject() unsafe.Pointer { return self._value_ }
-func ToObject(value unsafe.Pointer) Object { return Object{value} }
-type ParamSpecFloat struct { ParamSpec }
+type ParamSpecFloat struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecFloatKind interface {
   _IsParamSpecFloat()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecFloat) _IsParamSpecFloat () {}
+func (self ParamSpecFloat) _IsParamSpecFloat() {}
 func (self ParamSpecFloat) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecFloat(value unsafe.Pointer) ParamSpecFloat { return ParamSpecFloat{ParamSpec{value}} }
-type ParamSpec struct { _value_ unsafe.Pointer }
+func ToParamSpecFloat(value unsafe.Pointer) ParamSpecFloat {
+	return ParamSpecFloat{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpec struct {
+	_value_ unsafe.Pointer
+}
 type ParamSpecKind interface {
   _IsParamSpec()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpec) _IsParamSpec () {}
+func (self ParamSpec) _IsParamSpec() {}
 func (self ParamSpec) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpec(value unsafe.Pointer) ParamSpec { return ParamSpec{value} }
-type ParamSpecPointer struct { ParamSpec }
+func ToParamSpec(value unsafe.Pointer) ParamSpec {
+	return ParamSpec{
+		value,
+	}
+}
+type ParamSpecPointer struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecPointerKind interface {
   _IsParamSpecPointer()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecPointer) _IsParamSpecPointer () {}
+func (self ParamSpecPointer) _IsParamSpecPointer() {}
 func (self ParamSpecPointer) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecPointer(value unsafe.Pointer) ParamSpecPointer { return ParamSpecPointer{ParamSpec{value}} }
-type ParamSpecString struct { ParamSpec }
+func ToParamSpecPointer(value unsafe.Pointer) ParamSpecPointer {
+	return ParamSpecPointer{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecString struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecStringKind interface {
   _IsParamSpecString()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecString) _IsParamSpecString () {}
+func (self ParamSpecString) _IsParamSpecString() {}
 func (self ParamSpecString) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecString(value unsafe.Pointer) ParamSpecString { return ParamSpecString{ParamSpec{value}} }
-type ParamSpecUInt struct { ParamSpec }
+func ToParamSpecString(value unsafe.Pointer) ParamSpecString {
+	return ParamSpecString{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecUInt struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecUIntKind interface {
   _IsParamSpecUInt()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecUInt) _IsParamSpecUInt () {}
+func (self ParamSpecUInt) _IsParamSpecUInt() {}
 func (self ParamSpecUInt) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecUInt(value unsafe.Pointer) ParamSpecUInt { return ParamSpecUInt{ParamSpec{value}} }
-type ParamSpecObject struct { ParamSpec }
+func ToParamSpecUInt(value unsafe.Pointer) ParamSpecUInt {
+	return ParamSpecUInt{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecObject struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecObjectKind interface {
   _IsParamSpecObject()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecObject) _IsParamSpecObject () {}
+func (self ParamSpecObject) _IsParamSpecObject() {}
 func (self ParamSpecObject) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecObject(value unsafe.Pointer) ParamSpecObject { return ParamSpecObject{ParamSpec{value}} }
-type ParamSpecUChar struct { ParamSpec }
+func ToParamSpecObject(value unsafe.Pointer) ParamSpecObject {
+	return ParamSpecObject{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecUChar struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecUCharKind interface {
   _IsParamSpecUChar()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecUChar) _IsParamSpecUChar () {}
+func (self ParamSpecUChar) _IsParamSpecUChar() {}
 func (self ParamSpecUChar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecUChar(value unsafe.Pointer) ParamSpecUChar { return ParamSpecUChar{ParamSpec{value}} }
-type ParamSpecGType struct { ParamSpec }
+func ToParamSpecUChar(value unsafe.Pointer) ParamSpecUChar {
+	return ParamSpecUChar{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecGType struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecGTypeKind interface {
   _IsParamSpecGType()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecGType) _IsParamSpecGType () {}
+func (self ParamSpecGType) _IsParamSpecGType() {}
 func (self ParamSpecGType) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecGType(value unsafe.Pointer) ParamSpecGType { return ParamSpecGType{ParamSpec{value}} }
-type ParamSpecChar struct { ParamSpec }
+func ToParamSpecGType(value unsafe.Pointer) ParamSpecGType {
+	return ParamSpecGType{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecChar struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecCharKind interface {
   _IsParamSpecChar()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecChar) _IsParamSpecChar () {}
+func (self ParamSpecChar) _IsParamSpecChar() {}
 func (self ParamSpecChar) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecChar(value unsafe.Pointer) ParamSpecChar { return ParamSpecChar{ParamSpec{value}} }
-type ParamSpecBoxed struct { ParamSpec }
+func ToParamSpecChar(value unsafe.Pointer) ParamSpecChar {
+	return ParamSpecChar{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecBoxed struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecBoxedKind interface {
   _IsParamSpecBoxed()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecBoxed) _IsParamSpecBoxed () {}
+func (self ParamSpecBoxed) _IsParamSpecBoxed() {}
 func (self ParamSpecBoxed) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecBoxed(value unsafe.Pointer) ParamSpecBoxed { return ParamSpecBoxed{ParamSpec{value}} }
-type InitiallyUnowned struct { Object }
+func ToParamSpecBoxed(value unsafe.Pointer) ParamSpecBoxed {
+	return ParamSpecBoxed{
+		ToParamSpec(value),
+		value,
+	}
+}
+type InitiallyUnowned struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type InitiallyUnownedKind interface {
   _IsInitiallyUnowned()
   GetGObject() unsafe.Pointer
 }
-func (self InitiallyUnowned) _IsInitiallyUnowned () {}
+func (self InitiallyUnowned) _IsInitiallyUnowned() {}
 func (self InitiallyUnowned) GetGObject() unsafe.Pointer { return self._value_ }
-func ToInitiallyUnowned(value unsafe.Pointer) InitiallyUnowned { return InitiallyUnowned{Object{value}} }
-type ParamSpecLong struct { ParamSpec }
+func ToInitiallyUnowned(value unsafe.Pointer) InitiallyUnowned {
+	return InitiallyUnowned{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ParamSpecLong struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecLongKind interface {
   _IsParamSpecLong()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecLong) _IsParamSpecLong () {}
+func (self ParamSpecLong) _IsParamSpecLong() {}
 func (self ParamSpecLong) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecLong(value unsafe.Pointer) ParamSpecLong { return ParamSpecLong{ParamSpec{value}} }
-type ParamSpecEnum struct { ParamSpec }
+func ToParamSpecLong(value unsafe.Pointer) ParamSpecLong {
+	return ParamSpecLong{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecEnum struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecEnumKind interface {
   _IsParamSpecEnum()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecEnum) _IsParamSpecEnum () {}
+func (self ParamSpecEnum) _IsParamSpecEnum() {}
 func (self ParamSpecEnum) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecEnum(value unsafe.Pointer) ParamSpecEnum { return ParamSpecEnum{ParamSpec{value}} }
-type ParamSpecFlags struct { ParamSpec }
+func ToParamSpecEnum(value unsafe.Pointer) ParamSpecEnum {
+	return ParamSpecEnum{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecFlags struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecFlagsKind interface {
   _IsParamSpecFlags()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecFlags) _IsParamSpecFlags () {}
+func (self ParamSpecFlags) _IsParamSpecFlags() {}
 func (self ParamSpecFlags) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecFlags(value unsafe.Pointer) ParamSpecFlags { return ParamSpecFlags{ParamSpec{value}} }
-type ParamSpecValueArray struct { ParamSpec }
+func ToParamSpecFlags(value unsafe.Pointer) ParamSpecFlags {
+	return ParamSpecFlags{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecValueArray struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecValueArrayKind interface {
   _IsParamSpecValueArray()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecValueArray) _IsParamSpecValueArray () {}
+func (self ParamSpecValueArray) _IsParamSpecValueArray() {}
 func (self ParamSpecValueArray) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecValueArray(value unsafe.Pointer) ParamSpecValueArray { return ParamSpecValueArray{ParamSpec{value}} }
-type ParamSpecInt struct { ParamSpec }
+func ToParamSpecValueArray(value unsafe.Pointer) ParamSpecValueArray {
+	return ParamSpecValueArray{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecInt struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecIntKind interface {
   _IsParamSpecInt()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecInt) _IsParamSpecInt () {}
+func (self ParamSpecInt) _IsParamSpecInt() {}
 func (self ParamSpecInt) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecInt(value unsafe.Pointer) ParamSpecInt { return ParamSpecInt{ParamSpec{value}} }
-type Binding struct { Object }
+func ToParamSpecInt(value unsafe.Pointer) ParamSpecInt {
+	return ParamSpecInt{
+		ToParamSpec(value),
+		value,
+	}
+}
+type GObjectObject struct {
+	_value_ unsafe.Pointer
+}
+type GObjectObjectKind interface {
+  _IsGObjectObject()
+  GetGObject() unsafe.Pointer
+}
+func (self GObjectObject) _IsGObjectObject() {}
+func (self GObjectObject) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGObjectObject(value unsafe.Pointer) GObjectObject {
+	return GObjectObject{
+		value,
+	}
+}
+type Binding struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type BindingKind interface {
   _IsBinding()
   GetGObject() unsafe.Pointer
 }
-func (self Binding) _IsBinding () {}
+func (self Binding) _IsBinding() {}
 func (self Binding) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBinding(value unsafe.Pointer) Binding { return Binding{Object{value}} }
-type ParamSpecVariant struct { ParamSpec }
+func ToBinding(value unsafe.Pointer) Binding {
+	return Binding{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ParamSpecVariant struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecVariantKind interface {
   _IsParamSpecVariant()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecVariant) _IsParamSpecVariant () {}
+func (self ParamSpecVariant) _IsParamSpecVariant() {}
 func (self ParamSpecVariant) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecVariant(value unsafe.Pointer) ParamSpecVariant { return ParamSpecVariant{ParamSpec{value}} }
-type ParamSpecUInt64 struct { ParamSpec }
+func ToParamSpecVariant(value unsafe.Pointer) ParamSpecVariant {
+	return ParamSpecVariant{
+		ToParamSpec(value),
+		value,
+	}
+}
+type ParamSpecUInt64 struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecUInt64Kind interface {
   _IsParamSpecUInt64()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecUInt64) _IsParamSpecUInt64 () {}
+func (self ParamSpecUInt64) _IsParamSpecUInt64() {}
 func (self ParamSpecUInt64) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecUInt64(value unsafe.Pointer) ParamSpecUInt64 { return ParamSpecUInt64{ParamSpec{value}} }
-type TypeModule struct { Object }
+func ToParamSpecUInt64(value unsafe.Pointer) ParamSpecUInt64 {
+	return ParamSpecUInt64{
+		ToParamSpec(value),
+		value,
+	}
+}
+type TypeModule struct {
+	GObjectObject
+	TypePlugin
+	_value_ unsafe.Pointer
+}
 type TypeModuleKind interface {
   _IsTypeModule()
   GetGObject() unsafe.Pointer
 }
-func (self TypeModule) _IsTypeModule () {}
+func (self TypeModule) _IsTypeModule() {}
 func (self TypeModule) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTypeModule(value unsafe.Pointer) TypeModule { return TypeModule{Object{value}} }
+func ToTypeModule(value unsafe.Pointer) TypeModule {
+	return TypeModule{
+		ToGObjectObject(value),
+		ToTypePlugin(value),
+		value,
+	}
+}
 func (self TypeModule) _IsTypePlugin () {}
-type ParamSpecOverride struct { ParamSpec }
+type ParamSpecOverride struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecOverrideKind interface {
   _IsParamSpecOverride()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecOverride) _IsParamSpecOverride () {}
+func (self ParamSpecOverride) _IsParamSpecOverride() {}
 func (self ParamSpecOverride) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecOverride(value unsafe.Pointer) ParamSpecOverride { return ParamSpecOverride{ParamSpec{value}} }
+func ToParamSpecOverride(value unsafe.Pointer) ParamSpecOverride {
+	return ParamSpecOverride{
+		ToParamSpec(value),
+		value,
+	}
+}
 func BoxedCopy(boxed_type C.GType, src_boxed C.gpointer) (_return_ C.gpointer) {
 	_return_ = C._g_boxed_copy(boxed_type, src_boxed)
 	return
@@ -751,7 +979,7 @@ func BoxedTypeRegisterStatic(name string, boxed_copy C.GBoxedCopyFunc, boxed_fre
 	return
 }
 
-func CclosureMarshalBooleanBoxedBoxed(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalBooleanBoxedBoxed(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -760,7 +988,7 @@ func CclosureMarshalBooleanBoxedBoxed(closure *Closure, return_value *Value, n_p
 	return
 }
 
-func CclosureMarshalBooleanFlags(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalBooleanFlags(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -769,7 +997,7 @@ func CclosureMarshalBooleanFlags(closure *Closure, return_value *Value, n_param_
 	return
 }
 
-func CclosureMarshalStringObjectPointer(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalStringObjectPointer(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -778,7 +1006,7 @@ func CclosureMarshalStringObjectPointer(closure *Closure, return_value *Value, n
 	return
 }
 
-func CclosureMarshalVoidBoolean(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidBoolean(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -787,7 +1015,7 @@ func CclosureMarshalVoidBoolean(closure *Closure, return_value *Value, n_param_v
 	return
 }
 
-func CclosureMarshalVoidBoxed(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidBoxed(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -796,7 +1024,7 @@ func CclosureMarshalVoidBoxed(closure *Closure, return_value *Value, n_param_val
 	return
 }
 
-func CclosureMarshalVoidChar(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidChar(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -805,7 +1033,7 @@ func CclosureMarshalVoidChar(closure *Closure, return_value *Value, n_param_valu
 	return
 }
 
-func CclosureMarshalVoidDouble(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidDouble(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -814,7 +1042,7 @@ func CclosureMarshalVoidDouble(closure *Closure, return_value *Value, n_param_va
 	return
 }
 
-func CclosureMarshalVoidEnum(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidEnum(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -823,7 +1051,7 @@ func CclosureMarshalVoidEnum(closure *Closure, return_value *Value, n_param_valu
 	return
 }
 
-func CclosureMarshalVoidFlags(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidFlags(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -832,7 +1060,7 @@ func CclosureMarshalVoidFlags(closure *Closure, return_value *Value, n_param_val
 	return
 }
 
-func CclosureMarshalVoidFloat(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidFloat(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -841,7 +1069,7 @@ func CclosureMarshalVoidFloat(closure *Closure, return_value *Value, n_param_val
 	return
 }
 
-func CclosureMarshalVoidInt(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidInt(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -850,7 +1078,7 @@ func CclosureMarshalVoidInt(closure *Closure, return_value *Value, n_param_value
 	return
 }
 
-func CclosureMarshalVoidLong(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidLong(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -859,7 +1087,7 @@ func CclosureMarshalVoidLong(closure *Closure, return_value *Value, n_param_valu
 	return
 }
 
-func CclosureMarshalVoidObject(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidObject(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -868,7 +1096,7 @@ func CclosureMarshalVoidObject(closure *Closure, return_value *Value, n_param_va
 	return
 }
 
-func CclosureMarshalVoidParam(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidParam(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -877,7 +1105,7 @@ func CclosureMarshalVoidParam(closure *Closure, return_value *Value, n_param_val
 	return
 }
 
-func CclosureMarshalVoidPointer(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidPointer(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -886,7 +1114,7 @@ func CclosureMarshalVoidPointer(closure *Closure, return_value *Value, n_param_v
 	return
 }
 
-func CclosureMarshalVoidString(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidString(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -895,7 +1123,7 @@ func CclosureMarshalVoidString(closure *Closure, return_value *Value, n_param_va
 	return
 }
 
-func CclosureMarshalVoidUchar(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidUchar(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -904,7 +1132,7 @@ func CclosureMarshalVoidUchar(closure *Closure, return_value *Value, n_param_val
 	return
 }
 
-func CclosureMarshalVoidUint(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidUint(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -913,7 +1141,7 @@ func CclosureMarshalVoidUint(closure *Closure, return_value *Value, n_param_valu
 	return
 }
 
-func CclosureMarshalVoidUintPointer(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidUintPointer(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -922,7 +1150,7 @@ func CclosureMarshalVoidUintPointer(closure *Closure, return_value *Value, n_par
 	return
 }
 
-func CclosureMarshalVoidUlong(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidUlong(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -931,7 +1159,7 @@ func CclosureMarshalVoidUlong(closure *Closure, return_value *Value, n_param_val
 	return
 }
 
-func CclosureMarshalVoidVariant(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidVariant(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -940,7 +1168,7 @@ func CclosureMarshalVoidVariant(closure *Closure, return_value *Value, n_param_v
 	return
 }
 
-func CclosureMarshalVoidVoid(closure *Closure, return_value *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalVoidVoid(closure *Closure, return_value *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -949,7 +1177,7 @@ func CclosureMarshalVoidVoid(closure *Closure, return_value *Value, n_param_valu
 	return
 }
 
-func CclosureMarshalGeneric(closure *Closure, return_gvalue *Value, n_param_values uint, param_values *Value, invocation_hint C.gpointer, marshal_data C.gpointer) () {
+func CclosureMarshalGeneric(closure *Closure, return_gvalue *GObjectValue, n_param_values uint, param_values *GObjectValue, invocation_hint C.gpointer, marshal_data C.gpointer) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	_cgo_return_gvalue_ := (*C.GValue)(unsafe.Pointer(return_gvalue))
 	_cgo_param_values_ := (*C.GValue)(unsafe.Pointer(param_values))
@@ -965,7 +1193,7 @@ func CclosureNew(callback_func C.GCallback, user_data C.gpointer, destroy_data C
 	return
 }
 
-func CclosureNewObject(callback_func C.GCallback, object ObjectKind) (_go__return__ *Closure) {
+func CclosureNewObject(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *Closure) {
 	_cgo_object_ := (*C.GObject)(object.GetGObject())
 	var _return_ *C.GClosure
 	_return_ = C.g_cclosure_new_object(callback_func, _cgo_object_)
@@ -973,7 +1201,7 @@ func CclosureNewObject(callback_func C.GCallback, object ObjectKind) (_go__retur
 	return
 }
 
-func CclosureNewObjectSwap(callback_func C.GCallback, object ObjectKind) (_go__return__ *Closure) {
+func CclosureNewObjectSwap(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *Closure) {
 	_cgo_object_ := (*C.GObject)(object.GetGObject())
 	var _return_ *C.GClosure
 	_return_ = C.g_cclosure_new_object_swap(callback_func, _cgo_object_)
@@ -1506,7 +1734,7 @@ func ParamTypeRegisterStatic(name string, pspec_info *ParamSpecTypeInfo) (_retur
 	return
 }
 
-func ParamValueConvert(pspec ParamSpecKind, src_value *Value, dest_value *Value, strict_validation bool) (_go__return__ bool) {
+func ParamValueConvert(pspec ParamSpecKind, src_value *GObjectValue, dest_value *GObjectValue, strict_validation bool) (_go__return__ bool) {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_src_value_ := (*C.GValue)(unsafe.Pointer(src_value))
 	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
@@ -1518,7 +1746,7 @@ func ParamValueConvert(pspec ParamSpecKind, src_value *Value, dest_value *Value,
 	return
 }
 
-func ParamValueDefaults(pspec ParamSpecKind, value *Value) (_go__return__ bool) {
+func ParamValueDefaults(pspec ParamSpecKind, value *GObjectValue) (_go__return__ bool) {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ C.gboolean
@@ -1527,14 +1755,14 @@ func ParamValueDefaults(pspec ParamSpecKind, value *Value) (_go__return__ bool) 
 	return
 }
 
-func ParamValueSetDefault(pspec ParamSpecKind, value *Value) () {
+func ParamValueSetDefault(pspec ParamSpecKind, value *GObjectValue) () {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	C.g_param_value_set_default(_cgo_pspec_, _cgo_value_)
 	return
 }
 
-func ParamValueValidate(pspec ParamSpecKind, value *Value) (_go__return__ bool) {
+func ParamValueValidate(pspec ParamSpecKind, value *GObjectValue) (_go__return__ bool) {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ C.gboolean
@@ -1543,7 +1771,7 @@ func ParamValueValidate(pspec ParamSpecKind, value *Value) (_go__return__ bool) 
 	return
 }
 
-func ParamValuesCmp(pspec ParamSpecKind, value1 *Value, value2 *Value) (_go__return__ int) {
+func ParamValuesCmp(pspec ParamSpecKind, value1 *GObjectValue, value2 *GObjectValue) (_go__return__ int) {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value1_ := (*C.GValue)(unsafe.Pointer(value1))
 	_cgo_value2_ := (*C.GValue)(unsafe.Pointer(value2))
@@ -1561,7 +1789,7 @@ func PointerTypeRegisterStatic(name string) (_return_ C.GType) {
 	return
 }
 
-func SignalAccumulatorFirstWins(ihint *SignalInvocationHint, return_accu *Value, handler_return *Value, dummy C.gpointer) (_go__return__ bool) {
+func SignalAccumulatorFirstWins(ihint *SignalInvocationHint, return_accu *GObjectValue, handler_return *GObjectValue, dummy C.gpointer) (_go__return__ bool) {
 	_cgo_ihint_ := (*C.GSignalInvocationHint)(unsafe.Pointer(ihint))
 	_cgo_return_accu_ := (*C.GValue)(unsafe.Pointer(return_accu))
 	_cgo_handler_return_ := (*C.GValue)(unsafe.Pointer(handler_return))
@@ -1571,7 +1799,7 @@ func SignalAccumulatorFirstWins(ihint *SignalInvocationHint, return_accu *Value,
 	return
 }
 
-func SignalAccumulatorTrueHandled(ihint *SignalInvocationHint, return_accu *Value, handler_return *Value, dummy C.gpointer) (_go__return__ bool) {
+func SignalAccumulatorTrueHandled(ihint *SignalInvocationHint, return_accu *GObjectValue, handler_return *GObjectValue, dummy C.gpointer) (_go__return__ bool) {
 	_cgo_ihint_ := (*C.GSignalInvocationHint)(unsafe.Pointer(ihint))
 	_cgo_return_accu_ := (*C.GValue)(unsafe.Pointer(return_accu))
 	_cgo_handler_return_ := (*C.GValue)(unsafe.Pointer(handler_return))
@@ -1825,7 +2053,7 @@ func SourceSetDummyCallback(source *C.GSource) () {
 	return
 }
 
-func StrdupValueContents(value *Value) (_go__return__ string) {
+func StrdupValueContents(value *GObjectValue) (_go__return__ string) {
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ *C.gchar
 	_return_ = C._g_strdup_value_contents(_cgo_value_)
@@ -1908,7 +2136,7 @@ func TypeCheckIsValueType(type_ C.GType) (_go__return__ bool) {
 	return
 }
 
-func TypeCheckValue(value *Value) (_go__return__ bool) {
+func TypeCheckValue(value *GObjectValue) (_go__return__ bool) {
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ C.gboolean
 	_return_ = C.g_type_check_value(_cgo_value_)
@@ -1916,7 +2144,7 @@ func TypeCheckValue(value *Value) (_go__return__ bool) {
 	return
 }
 
-func TypeCheckValueHolds(value *Value, type_ C.GType) (_go__return__ bool) {
+func TypeCheckValueHolds(value *GObjectValue, type_ C.GType) (_go__return__ bool) {
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ C.gboolean
 	_return_ = C.g_type_check_value_holds(_cgo_value_, type_)
@@ -2211,10 +2439,10 @@ func (_self_ *Binding) GetFlags() (_return_ C.GBindingFlags) {
 	return
 }
 
-func (_self_ *Binding) GetSource() (_go__return__ Object) {
+func (_self_ *Binding) GetSource() (_go__return__ GObjectObject) {
 	var _return_ *C.GObject
 	_return_ = C.g_binding_get_source((*C.GBinding)(_self_._value_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2225,10 +2453,10 @@ func (_self_ *Binding) GetSourceProperty() (_go__return__ string) {
 	return
 }
 
-func (_self_ *Binding) GetTarget() (_go__return__ Object) {
+func (_self_ *Binding) GetTarget() (_go__return__ GObjectObject) {
 	var _return_ *C.GObject
 	_return_ = C.g_binding_get_target((*C.GBinding)(_self_._value_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2262,12 +2490,12 @@ func ObjectInterfaceListProperties(g_iface C.gpointer) (_return_ unsafe.Pointer,
 	return
 }
 
-func (_self_ *Object) AddToggleRef(notify C.GToggleNotify, data C.gpointer) () {
+func (_self_ *GObjectObject) AddToggleRef(notify C.GToggleNotify, data C.gpointer) () {
 	C.g_object_add_toggle_ref((*C.GObject)(_self_._value_), notify, data)
 	return
 }
 
-func (_self_ *Object) BindProperty(source_property string, target ObjectKind, target_property string, flags C.GBindingFlags) (_go__return__ Binding) {
+func (_self_ *GObjectObject) BindProperty(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags) (_go__return__ Binding) {
 	_cgo_target_ := (C.gpointer)(target.GetGObject())
 	var _return_ *C.GBinding
 	_cstring_source_property_ := C.CString(source_property)
@@ -2281,7 +2509,7 @@ func (_self_ *Object) BindProperty(source_property string, target ObjectKind, ta
 	return
 }
 
-func (_self_ *Object) BindPropertyFull(source_property string, target ObjectKind, target_property string, flags C.GBindingFlags, transform_to C.GBindingTransformFunc, transform_from C.GBindingTransformFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ Binding) {
+func (_self_ *GObjectObject) BindPropertyFull(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to C.GBindingTransformFunc, transform_from C.GBindingTransformFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ Binding) {
 	_cgo_target_ := (C.gpointer)(target.GetGObject())
 	var _return_ *C.GBinding
 	_cstring_source_property_ := C.CString(source_property)
@@ -2295,7 +2523,7 @@ func (_self_ *Object) BindPropertyFull(source_property string, target ObjectKind
 	return
 }
 
-func (_self_ *Object) BindPropertyWithClosures(source_property string, target ObjectKind, target_property string, flags C.GBindingFlags, transform_to *Closure, transform_from *Closure) (_go__return__ Binding) {
+func (_self_ *GObjectObject) BindPropertyWithClosures(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to *Closure, transform_from *Closure) (_go__return__ Binding) {
 	_cgo_target_ := (C.gpointer)(target.GetGObject())
 	_cgo_transform_to_ := (*C.GClosure)(unsafe.Pointer(transform_to))
 	_cgo_transform_from_ := (*C.GClosure)(unsafe.Pointer(transform_from))
@@ -2311,7 +2539,7 @@ func (_self_ *Object) BindPropertyWithClosures(source_property string, target Ob
 	return
 }
 
-func (_self_ *Object) DupData(key string, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
+func (_self_ *GObjectObject) DupData(key string, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
@@ -2319,22 +2547,22 @@ func (_self_ *Object) DupData(key string, dup_func C.GDuplicateFunc, user_data C
 	return
 }
 
-func (_self_ *Object) DupQdata(quark C.GQuark, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
+func (_self_ *GObjectObject) DupQdata(quark C.GQuark, dup_func C.GDuplicateFunc, user_data C.gpointer) (_return_ C.gpointer) {
 	_return_ = C.g_object_dup_qdata((*C.GObject)(_self_._value_), quark, dup_func, user_data)
 	return
 }
 
-func (_self_ *Object) ForceFloating() () {
+func (_self_ *GObjectObject) ForceFloating() () {
 	C.g_object_force_floating((*C.GObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) FreezeNotify() () {
+func (_self_ *GObjectObject) FreezeNotify() () {
 	C.g_object_freeze_notify((*C.GObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) GetData(key string) (_return_ C.gpointer) {
+func (_self_ *GObjectObject) GetData(key string) (_return_ C.gpointer) {
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
@@ -2342,7 +2570,7 @@ func (_self_ *Object) GetData(key string) (_return_ C.gpointer) {
 	return
 }
 
-func (_self_ *Object) GetProperty(property_name string, value *Value) () {
+func (_self_ *GObjectObject) GetProperty(property_name string, value *GObjectValue) () {
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	_cstring_property_name_ := C.CString(property_name)
 	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
@@ -2351,19 +2579,19 @@ func (_self_ *Object) GetProperty(property_name string, value *Value) () {
 	return
 }
 
-func (_self_ *Object) GetQdata(quark C.GQuark) (_return_ C.gpointer) {
+func (_self_ *GObjectObject) GetQdata(quark C.GQuark) (_return_ C.gpointer) {
 	_return_ = C.g_object_get_qdata((*C.GObject)(_self_._value_), quark)
 	return
 }
 
-func (_self_ *Object) IsFloating() (_go__return__ bool) {
+func (_self_ *GObjectObject) IsFloating() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_object_is_floating((*C.GObject)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Object) Notify(property_name string) () {
+func (_self_ *GObjectObject) Notify(property_name string) () {
 	_cstring_property_name_ := C.CString(property_name)
 	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
 	defer C.free(unsafe.Pointer(_cstring_property_name_))
@@ -2371,32 +2599,32 @@ func (_self_ *Object) Notify(property_name string) () {
 	return
 }
 
-func (_self_ *Object) NotifyByPspec(pspec ParamSpecKind) () {
+func (_self_ *GObjectObject) NotifyByPspec(pspec ParamSpecKind) () {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	C.g_object_notify_by_pspec((*C.GObject)(_self_._value_), _cgo_pspec_)
 	return
 }
 
-func (_self_ *Object) Ref() (_go__return__ Object) {
+func (_self_ *GObjectObject) Ref() (_go__return__ GObjectObject) {
 	var _return_ C.gpointer
 	_return_ = C._g_object_ref((*C.GObject)(_self_._value_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) RefSink() (_go__return__ Object) {
+func (_self_ *GObjectObject) RefSink() (_go__return__ GObjectObject) {
 	var _return_ C.gpointer
 	_return_ = C._g_object_ref_sink((*C.GObject)(_self_._value_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Object) RemoveToggleRef(notify C.GToggleNotify, data C.gpointer) () {
+func (_self_ *GObjectObject) RemoveToggleRef(notify C.GToggleNotify, data C.gpointer) () {
 	C.g_object_remove_toggle_ref((*C.GObject)(_self_._value_), notify, data)
 	return
 }
 
-func (_self_ *Object) ReplaceData(key string, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
+func (_self_ *GObjectObject) ReplaceData(key string, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
@@ -2406,19 +2634,19 @@ func (_self_ *Object) ReplaceData(key string, oldval C.gpointer, newval C.gpoint
 	return
 }
 
-func (_self_ *Object) ReplaceQdata(quark C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
+func (_self_ *GObjectObject) ReplaceQdata(quark C.GQuark, oldval C.gpointer, newval C.gpointer, destroy C.GDestroyNotify, old_destroy *C.GDestroyNotify) (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.g_object_replace_qdata((*C.GObject)(_self_._value_), quark, oldval, newval, destroy, old_destroy)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Object) RunDispose() () {
+func (_self_ *GObjectObject) RunDispose() () {
 	C.g_object_run_dispose((*C.GObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) SetData(key string, data C.gpointer) () {
+func (_self_ *GObjectObject) SetData(key string, data C.gpointer) () {
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
@@ -2426,7 +2654,7 @@ func (_self_ *Object) SetData(key string, data C.gpointer) () {
 	return
 }
 
-func (_self_ *Object) SetDataFull(key string, data C.gpointer, destroy C.GDestroyNotify) () {
+func (_self_ *GObjectObject) SetDataFull(key string, data C.gpointer, destroy C.GDestroyNotify) () {
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
@@ -2434,7 +2662,7 @@ func (_self_ *Object) SetDataFull(key string, data C.gpointer, destroy C.GDestro
 	return
 }
 
-func (_self_ *Object) SetProperty(property_name string, value *Value) () {
+func (_self_ *GObjectObject) SetProperty(property_name string, value *GObjectValue) () {
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	_cstring_property_name_ := C.CString(property_name)
 	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
@@ -2443,17 +2671,17 @@ func (_self_ *Object) SetProperty(property_name string, value *Value) () {
 	return
 }
 
-func (_self_ *Object) SetQdata(quark C.GQuark, data C.gpointer) () {
+func (_self_ *GObjectObject) SetQdata(quark C.GQuark, data C.gpointer) () {
 	C.g_object_set_qdata((*C.GObject)(_self_._value_), quark, data)
 	return
 }
 
-func (_self_ *Object) SetQdataFull(quark C.GQuark, data C.gpointer, destroy C.GDestroyNotify) () {
+func (_self_ *GObjectObject) SetQdataFull(quark C.GQuark, data C.gpointer, destroy C.GDestroyNotify) () {
 	C.g_object_set_qdata_full((*C.GObject)(_self_._value_), quark, data, destroy)
 	return
 }
 
-func (_self_ *Object) StealData(key string) (_return_ C.gpointer) {
+func (_self_ *GObjectObject) StealData(key string) (_return_ C.gpointer) {
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
@@ -2461,33 +2689,33 @@ func (_self_ *Object) StealData(key string) (_return_ C.gpointer) {
 	return
 }
 
-func (_self_ *Object) StealQdata(quark C.GQuark) (_return_ C.gpointer) {
+func (_self_ *GObjectObject) StealQdata(quark C.GQuark) (_return_ C.gpointer) {
 	_return_ = C.g_object_steal_qdata((*C.GObject)(_self_._value_), quark)
 	return
 }
 
-func (_self_ *Object) ThawNotify() () {
+func (_self_ *GObjectObject) ThawNotify() () {
 	C.g_object_thaw_notify((*C.GObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) Unref() () {
+func (_self_ *GObjectObject) Unref() () {
 	C._g_object_unref((*C.GObject)(_self_._value_))
 	return
 }
 
-func (_self_ *Object) WatchClosure(closure *Closure) () {
+func (_self_ *GObjectObject) WatchClosure(closure *Closure) () {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	C.g_object_watch_closure((*C.GObject)(_self_._value_), _cgo_closure_)
 	return
 }
 
-func (_self_ *Object) WeakRef(notify C.GWeakNotify, data C.gpointer) () {
+func (_self_ *GObjectObject) WeakRef(notify C.GWeakNotify, data C.gpointer) () {
 	C.g_object_weak_ref((*C.GObject)(_self_._value_), notify, data)
 	return
 }
 
-func (_self_ *Object) WeakUnref(notify C.GWeakNotify, data C.gpointer) () {
+func (_self_ *GObjectObject) WeakUnref(notify C.GWeakNotify, data C.gpointer) () {
 	C.g_object_weak_unref((*C.GObject)(_self_._value_), notify, data)
 	return
 }
@@ -2631,7 +2859,7 @@ func (_self_ *TypeModule) Use() (_go__return__ bool) {
 	return
 }
 
-func ClosureNewObject(sizeof_closure uint, object ObjectKind) (_go__return__ *Closure) {
+func ClosureNewObject(sizeof_closure uint, object GObjectObjectKind) (_go__return__ *Closure) {
 	_cgo_object_ := (*C.GObject)(object.GetGObject())
 	var _return_ *C.GClosure
 	_cgo_sizeof_closure_ := (C.guint)(sizeof_closure)
@@ -2705,7 +2933,7 @@ func (_self_ *Closure) Unref() () {
 	return
 }
 
-func (_self_ *ObjectClass) FindProperty(property_name string) (_go__return__ ParamSpec) {
+func (_self_ *GObjectObjectClass) FindProperty(property_name string) (_go__return__ ParamSpec) {
 	var _return_ *C.GParamSpec
 	_cstring_property_name_ := C.CString(property_name)
 	_cgo_property_name_ := (*C.gchar)(unsafe.Pointer(_cstring_property_name_))
@@ -2715,21 +2943,21 @@ func (_self_ *ObjectClass) FindProperty(property_name string) (_go__return__ Par
 	return
 }
 
-func (_self_ *ObjectClass) InstallProperty(property_id uint, pspec ParamSpecKind) () {
+func (_self_ *GObjectObjectClass) InstallProperty(property_id uint, pspec ParamSpecKind) () {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_property_id_ := (C.guint)(property_id)
 	C.g_object_class_install_property((*C.GObjectClass)(_self_), _cgo_property_id_, _cgo_pspec_)
 	return
 }
 
-func (_self_ *ObjectClass) ListProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+func (_self_ *GObjectObjectClass) ListProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
 	var n_properties C.guint
 	_return_ = C._g_object_class_list_properties((*C.GObjectClass)(_self_), &n_properties)
 	_go_n_properties_ = (uint)(n_properties)
 	return
 }
 
-func (_self_ *ObjectClass) OverrideProperty(property_id uint, name string) () {
+func (_self_ *GObjectObjectClass) OverrideProperty(property_id uint, name string) () {
 	_cgo_property_id_ := (C.guint)(property_id)
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2808,294 +3036,294 @@ func (_self_ *TypeInterface) PeekParent() (_go__return__ *TypeInterface) {
 	return
 }
 
-func (_self_ *Value) Copy(dest_value *Value) () {
+func (_self_ *GObjectValue) Copy(dest_value *GObjectValue) () {
 	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
 	C._g_value_copy((*C.GValue)(_self_), _cgo_dest_value_)
 	return
 }
 
-func (_self_ *Value) DupBoxed() (_return_ C.gpointer) {
+func (_self_ *GObjectValue) DupBoxed() (_return_ C.gpointer) {
 	_return_ = C._g_value_dup_boxed((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) DupObject() (_go__return__ Object) {
+func (_self_ *GObjectValue) DupObject() (_go__return__ GObjectObject) {
 	var _return_ C.gpointer
 	_return_ = C._g_value_dup_object((*C.GValue)(_self_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Value) DupParam() (_go__return__ ParamSpec) {
+func (_self_ *GObjectValue) DupParam() (_go__return__ ParamSpec) {
 	var _return_ *C.GParamSpec
 	_return_ = C._g_value_dup_param((*C.GValue)(_self_))
 	_go__return__ = ToParamSpec(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Value) DupString() (_go__return__ string) {
+func (_self_ *GObjectValue) DupString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_value_dup_string((*C.GValue)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Value) DupVariant() (_return_ *C.GVariant) {
+func (_self_ *GObjectValue) DupVariant() (_return_ *C.GVariant) {
 	_return_ = C._g_value_dup_variant((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) FitsPointer() (_go__return__ bool) {
+func (_self_ *GObjectValue) FitsPointer() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_value_fits_pointer((*C.GValue)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Value) GetBoolean() (_go__return__ bool) {
+func (_self_ *GObjectValue) GetBoolean() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C._g_value_get_boolean((*C.GValue)(_self_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Value) GetBoxed() (_return_ C.gpointer) {
+func (_self_ *GObjectValue) GetBoxed() (_return_ C.gpointer) {
 	_return_ = C._g_value_get_boxed((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) GetDouble() (_go__return__ float64) {
+func (_self_ *GObjectValue) GetDouble() (_go__return__ float64) {
 	var _return_ C.gdouble
 	_return_ = C._g_value_get_double((*C.GValue)(_self_))
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *Value) GetEnum() (_go__return__ int) {
+func (_self_ *GObjectValue) GetEnum() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C._g_value_get_enum((*C.GValue)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Value) GetFlags() (_go__return__ uint) {
+func (_self_ *GObjectValue) GetFlags() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_value_get_flags((*C.GValue)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Value) GetFloat() (_go__return__ float64) {
+func (_self_ *GObjectValue) GetFloat() (_go__return__ float64) {
 	var _return_ C.gfloat
 	_return_ = C._g_value_get_float((*C.GValue)(_self_))
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *Value) GetGtype() (_return_ C.GType) {
+func (_self_ *GObjectValue) GetGtype() (_return_ C.GType) {
 	_return_ = C._g_value_get_gtype((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) GetInt() (_go__return__ int) {
+func (_self_ *GObjectValue) GetInt() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C._g_value_get_int((*C.GValue)(_self_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Value) GetInt64() (_go__return__ int64) {
+func (_self_ *GObjectValue) GetInt64() (_go__return__ int64) {
 	var _return_ C.gint64
 	_return_ = C._g_value_get_int64((*C.GValue)(_self_))
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *Value) GetLong() (_go__return__ int64) {
+func (_self_ *GObjectValue) GetLong() (_go__return__ int64) {
 	var _return_ C.glong
 	_return_ = C._g_value_get_long((*C.GValue)(_self_))
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *Value) GetObject() (_go__return__ Object) {
+func (_self_ *GObjectValue) GetObject() (_go__return__ GObjectObject) {
 	var _return_ C.gpointer
 	_return_ = C._g_value_get_object((*C.GValue)(_self_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Value) GetParam() (_go__return__ ParamSpec) {
+func (_self_ *GObjectValue) GetParam() (_go__return__ ParamSpec) {
 	var _return_ *C.GParamSpec
 	_return_ = C._g_value_get_param((*C.GValue)(_self_))
 	_go__return__ = ToParamSpec(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Value) GetPointer() (_return_ C.gpointer) {
+func (_self_ *GObjectValue) GetPointer() (_return_ C.gpointer) {
 	_return_ = C._g_value_get_pointer((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) GetSchar() (_go__return__ int8) {
+func (_self_ *GObjectValue) GetSchar() (_go__return__ int8) {
 	var _return_ C.gint8
 	_return_ = C._g_value_get_schar((*C.GValue)(_self_))
 	_go__return__ = (int8)(_return_)
 	return
 }
 
-func (_self_ *Value) GetString() (_go__return__ string) {
+func (_self_ *GObjectValue) GetString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_value_get_string((*C.GValue)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Value) GetUchar() (_go__return__ byte) {
+func (_self_ *GObjectValue) GetUchar() (_go__return__ byte) {
 	var _return_ C.guchar
 	_return_ = C._g_value_get_uchar((*C.GValue)(_self_))
 	_go__return__ = (byte)(_return_)
 	return
 }
 
-func (_self_ *Value) GetUint() (_go__return__ uint) {
+func (_self_ *GObjectValue) GetUint() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._g_value_get_uint((*C.GValue)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Value) GetUint64() (_go__return__ uint64) {
+func (_self_ *GObjectValue) GetUint64() (_go__return__ uint64) {
 	var _return_ C.guint64
 	_return_ = C._g_value_get_uint64((*C.GValue)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *Value) GetUlong() (_go__return__ uint64) {
+func (_self_ *GObjectValue) GetUlong() (_go__return__ uint64) {
 	var _return_ C.gulong
 	_return_ = C._g_value_get_ulong((*C.GValue)(_self_))
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *Value) GetVariant() (_return_ *C.GVariant) {
+func (_self_ *GObjectValue) GetVariant() (_return_ *C.GVariant) {
 	_return_ = C._g_value_get_variant((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) Init(g_type C.GType) (_go__return__ *Value) {
+func (_self_ *GObjectValue) Init(g_type C.GType) (_go__return__ *GObjectValue) {
 	var _return_ *C.GValue
 	_return_ = C.g_value_init((*C.GValue)(_self_), g_type)
-	_go__return__ = (*Value)(unsafe.Pointer(_return_))
+	_go__return__ = (*GObjectValue)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Value) PeekPointer() (_return_ C.gpointer) {
+func (_self_ *GObjectValue) PeekPointer() (_return_ C.gpointer) {
 	_return_ = C._g_value_peek_pointer((*C.GValue)(_self_))
 	return
 }
 
-func (_self_ *Value) Reset() (_go__return__ *Value) {
+func (_self_ *GObjectValue) Reset() (_go__return__ *GObjectValue) {
 	var _return_ *C.GValue
 	_return_ = C.g_value_reset((*C.GValue)(_self_))
-	_go__return__ = (*Value)(unsafe.Pointer(_return_))
+	_go__return__ = (*GObjectValue)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Value) SetBoolean(v_boolean bool) () {
+func (_self_ *GObjectValue) SetBoolean(v_boolean bool) () {
 	_cgo_v_boolean_ := (C.gboolean)(C.FALSE)
 	if v_boolean { _cgo_v_boolean_ = (C.gboolean)(C.TRUE) }
 	C.g_value_set_boolean((*C.GValue)(_self_), _cgo_v_boolean_)
 	return
 }
 
-func (_self_ *Value) SetBoxed(v_boxed C.gpointer) () {
+func (_self_ *GObjectValue) SetBoxed(v_boxed C.gpointer) () {
 	C._g_value_set_boxed((*C.GValue)(_self_), v_boxed)
 	return
 }
 
-func (_self_ *Value) SetDouble(v_double float64) () {
+func (_self_ *GObjectValue) SetDouble(v_double float64) () {
 	_cgo_v_double_ := (C.gdouble)(v_double)
 	C.g_value_set_double((*C.GValue)(_self_), _cgo_v_double_)
 	return
 }
 
-func (_self_ *Value) SetEnum(v_enum int) () {
+func (_self_ *GObjectValue) SetEnum(v_enum int) () {
 	_cgo_v_enum_ := (C.gint)(v_enum)
 	C.g_value_set_enum((*C.GValue)(_self_), _cgo_v_enum_)
 	return
 }
 
-func (_self_ *Value) SetFlags(v_flags uint) () {
+func (_self_ *GObjectValue) SetFlags(v_flags uint) () {
 	_cgo_v_flags_ := (C.guint)(v_flags)
 	C.g_value_set_flags((*C.GValue)(_self_), _cgo_v_flags_)
 	return
 }
 
-func (_self_ *Value) SetFloat(v_float float64) () {
+func (_self_ *GObjectValue) SetFloat(v_float float64) () {
 	_cgo_v_float_ := (C.gfloat)(v_float)
 	C.g_value_set_float((*C.GValue)(_self_), _cgo_v_float_)
 	return
 }
 
-func (_self_ *Value) SetGtype(v_gtype C.GType) () {
+func (_self_ *GObjectValue) SetGtype(v_gtype C.GType) () {
 	C.g_value_set_gtype((*C.GValue)(_self_), v_gtype)
 	return
 }
 
-func (_self_ *Value) SetInstance(instance C.gpointer) () {
+func (_self_ *GObjectValue) SetInstance(instance C.gpointer) () {
 	C.g_value_set_instance((*C.GValue)(_self_), instance)
 	return
 }
 
-func (_self_ *Value) SetInt(v_int int) () {
+func (_self_ *GObjectValue) SetInt(v_int int) () {
 	_cgo_v_int_ := (C.gint)(v_int)
 	C.g_value_set_int((*C.GValue)(_self_), _cgo_v_int_)
 	return
 }
 
-func (_self_ *Value) SetInt64(v_int64 int64) () {
+func (_self_ *GObjectValue) SetInt64(v_int64 int64) () {
 	_cgo_v_int64_ := (C.gint64)(v_int64)
 	C.g_value_set_int64((*C.GValue)(_self_), _cgo_v_int64_)
 	return
 }
 
-func (_self_ *Value) SetLong(v_long int64) () {
+func (_self_ *GObjectValue) SetLong(v_long int64) () {
 	_cgo_v_long_ := (C.glong)(v_long)
 	C.g_value_set_long((*C.GValue)(_self_), _cgo_v_long_)
 	return
 }
 
-func (_self_ *Value) SetObject(v_object ObjectKind) () {
+func (_self_ *GObjectValue) SetObject(v_object GObjectObjectKind) () {
 	_cgo_v_object_ := (C.gpointer)(v_object.GetGObject())
 	C.g_value_set_object((*C.GValue)(_self_), _cgo_v_object_)
 	return
 }
 
-func (_self_ *Value) SetParam(param ParamSpecKind) () {
+func (_self_ *GObjectValue) SetParam(param ParamSpecKind) () {
 	_cgo_param_ := (*C.GParamSpec)(param.GetGObject())
 	C.g_value_set_param((*C.GValue)(_self_), _cgo_param_)
 	return
 }
 
-func (_self_ *Value) SetPointer(v_pointer C.gpointer) () {
+func (_self_ *GObjectValue) SetPointer(v_pointer C.gpointer) () {
 	C.g_value_set_pointer((*C.GValue)(_self_), v_pointer)
 	return
 }
 
-func (_self_ *Value) SetSchar(v_char int8) () {
+func (_self_ *GObjectValue) SetSchar(v_char int8) () {
 	_cgo_v_char_ := (C.gint8)(v_char)
 	C.g_value_set_schar((*C.GValue)(_self_), _cgo_v_char_)
 	return
 }
 
-func (_self_ *Value) SetStaticBoxed(v_boxed C.gpointer) () {
+func (_self_ *GObjectValue) SetStaticBoxed(v_boxed C.gpointer) () {
 	C._g_value_set_static_boxed((*C.GValue)(_self_), v_boxed)
 	return
 }
 
-func (_self_ *Value) SetStaticString(v_string string) () {
+func (_self_ *GObjectValue) SetStaticString(v_string string) () {
 	_cstring_v_string_ := C.CString(v_string)
 	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
 	defer C.free(unsafe.Pointer(_cstring_v_string_))
@@ -3103,7 +3331,7 @@ func (_self_ *Value) SetStaticString(v_string string) () {
 	return
 }
 
-func (_self_ *Value) SetString(v_string string) () {
+func (_self_ *GObjectValue) SetString(v_string string) () {
 	_cstring_v_string_ := C.CString(v_string)
 	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
 	defer C.free(unsafe.Pointer(_cstring_v_string_))
@@ -3111,52 +3339,52 @@ func (_self_ *Value) SetString(v_string string) () {
 	return
 }
 
-func (_self_ *Value) SetUchar(v_uchar byte) () {
+func (_self_ *GObjectValue) SetUchar(v_uchar byte) () {
 	_cgo_v_uchar_ := (C.guchar)(v_uchar)
 	C.g_value_set_uchar((*C.GValue)(_self_), _cgo_v_uchar_)
 	return
 }
 
-func (_self_ *Value) SetUint(v_uint uint) () {
+func (_self_ *GObjectValue) SetUint(v_uint uint) () {
 	_cgo_v_uint_ := (C.guint)(v_uint)
 	C.g_value_set_uint((*C.GValue)(_self_), _cgo_v_uint_)
 	return
 }
 
-func (_self_ *Value) SetUint64(v_uint64 uint64) () {
+func (_self_ *GObjectValue) SetUint64(v_uint64 uint64) () {
 	_cgo_v_uint64_ := (C.guint64)(v_uint64)
 	C.g_value_set_uint64((*C.GValue)(_self_), _cgo_v_uint64_)
 	return
 }
 
-func (_self_ *Value) SetUlong(v_ulong uint64) () {
+func (_self_ *GObjectValue) SetUlong(v_ulong uint64) () {
 	_cgo_v_ulong_ := (C.gulong)(v_ulong)
 	C.g_value_set_ulong((*C.GValue)(_self_), _cgo_v_ulong_)
 	return
 }
 
-func (_self_ *Value) SetVariant(variant *C.GVariant) () {
+func (_self_ *GObjectValue) SetVariant(variant *C.GVariant) () {
 	C.g_value_set_variant((*C.GValue)(_self_), variant)
 	return
 }
 
-func (_self_ *Value) TakeBoxed(v_boxed C.gpointer) () {
+func (_self_ *GObjectValue) TakeBoxed(v_boxed C.gpointer) () {
 	C._g_value_take_boxed((*C.GValue)(_self_), v_boxed)
 	return
 }
 
-func (_self_ *Value) TakeObject(v_object C.gpointer) () {
+func (_self_ *GObjectValue) TakeObject(v_object C.gpointer) () {
 	C.g_value_take_object((*C.GValue)(_self_), v_object)
 	return
 }
 
-func (_self_ *Value) TakeParam(param ParamSpecKind) () {
+func (_self_ *GObjectValue) TakeParam(param ParamSpecKind) () {
 	_cgo_param_ := (*C.GParamSpec)(param.GetGObject())
 	C.g_value_take_param((*C.GValue)(_self_), _cgo_param_)
 	return
 }
 
-func (_self_ *Value) TakeString(v_string string) () {
+func (_self_ *GObjectValue) TakeString(v_string string) () {
 	_cstring_v_string_ := C.CString(v_string)
 	_cgo_v_string_ := (*C.gchar)(unsafe.Pointer(_cstring_v_string_))
 	defer C.free(unsafe.Pointer(_cstring_v_string_))
@@ -3164,12 +3392,12 @@ func (_self_ *Value) TakeString(v_string string) () {
 	return
 }
 
-func (_self_ *Value) TakeVariant(variant *C.GVariant) () {
+func (_self_ *GObjectValue) TakeVariant(variant *C.GVariant) () {
 	C.g_value_take_variant((*C.GValue)(_self_), variant)
 	return
 }
 
-func (_self_ *Value) Transform(dest_value *Value) (_go__return__ bool) {
+func (_self_ *GObjectValue) Transform(dest_value *GObjectValue) (_go__return__ bool) {
 	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
 	var _return_ C.gboolean
 	_return_ = C._g_value_transform((*C.GValue)(_self_), _cgo_dest_value_)
@@ -3177,7 +3405,7 @@ func (_self_ *Value) Transform(dest_value *Value) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Value) Unset() () {
+func (_self_ *GObjectValue) Unset() () {
 	C.g_value_unset((*C.GValue)(_self_))
 	return
 }
@@ -3187,10 +3415,10 @@ func (_self_ *WeakRef) Clear() () {
 	return
 }
 
-func (_self_ *WeakRef) Get() (_go__return__ Object) {
+func (_self_ *WeakRef) Get() (_go__return__ GObjectObject) {
 	var _return_ C.gpointer
 	_return_ = C.g_weak_ref_get((*C.GWeakRef)(_self_))
-	_go__return__ = ToObject(unsafe.Pointer(_return_))
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
 	return
 }
 

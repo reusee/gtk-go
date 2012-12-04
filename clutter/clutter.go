@@ -805,807 +805,1653 @@ type StagePrivate C.ClutterStagePrivate
 type OffscreenEffectPrivate C.ClutterOffscreenEffectPrivate
 type SnapConstraintClass C.ClutterSnapConstraintClass
 type BindConstraintClass C.ClutterBindConstraintClass
-type Canvas struct { Object }
+type Canvas struct {
+	GObjectObject
+	Content
+	_value_ unsafe.Pointer
+}
 type CanvasKind interface {
   _IsCanvas()
   GetGObject() unsafe.Pointer
 }
-func (self Canvas) _IsCanvas () {}
+func (self Canvas) _IsCanvas() {}
 func (self Canvas) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCanvas(value unsafe.Pointer) Canvas { return Canvas{Object{value}} }
+func ToCanvas(value unsafe.Pointer) Canvas {
+	return Canvas{
+		ToGObjectObject(value),
+		ToContent(value),
+		value,
+	}
+}
 func (self Canvas) _IsContent () {}
-type FixedLayout struct { LayoutManager }
+type ClutterAction struct {
+	ActorMeta
+	_value_ unsafe.Pointer
+}
+type ClutterActionKind interface {
+  _IsClutterAction()
+  GetGObject() unsafe.Pointer
+}
+func (self ClutterAction) _IsClutterAction() {}
+func (self ClutterAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClutterAction(value unsafe.Pointer) ClutterAction {
+	return ClutterAction{
+		ToActorMeta(value),
+		value,
+	}
+}
+type FixedLayout struct {
+	LayoutManager
+	_value_ unsafe.Pointer
+}
 type FixedLayoutKind interface {
   _IsFixedLayout()
   GetGObject() unsafe.Pointer
 }
-func (self FixedLayout) _IsFixedLayout () {}
+func (self FixedLayout) _IsFixedLayout() {}
 func (self FixedLayout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFixedLayout(value unsafe.Pointer) FixedLayout { return FixedLayout{LayoutManager{InitiallyUnowned{Object{value}}}} }
-type DesaturateEffect struct { OffscreenEffect }
+func ToFixedLayout(value unsafe.Pointer) FixedLayout {
+	return FixedLayout{
+		ToLayoutManager(value),
+		value,
+	}
+}
+type DesaturateEffect struct {
+	OffscreenEffect
+	_value_ unsafe.Pointer
+}
 type DesaturateEffectKind interface {
   _IsDesaturateEffect()
   GetGObject() unsafe.Pointer
 }
-func (self DesaturateEffect) _IsDesaturateEffect () {}
+func (self DesaturateEffect) _IsDesaturateEffect() {}
 func (self DesaturateEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDesaturateEffect(value unsafe.Pointer) DesaturateEffect { return DesaturateEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type BehaviourDepth struct { Behaviour }
+func ToDesaturateEffect(value unsafe.Pointer) DesaturateEffect {
+	return DesaturateEffect{
+		ToOffscreenEffect(value),
+		value,
+	}
+}
+type BehaviourDepth struct {
+	Behaviour
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type BehaviourDepthKind interface {
   _IsBehaviourDepth()
   GetGObject() unsafe.Pointer
 }
-func (self BehaviourDepth) _IsBehaviourDepth () {}
+func (self BehaviourDepth) _IsBehaviourDepth() {}
 func (self BehaviourDepth) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviourDepth(value unsafe.Pointer) BehaviourDepth { return BehaviourDepth{Behaviour{Object{value}}} }
+func ToBehaviourDepth(value unsafe.Pointer) BehaviourDepth {
+	return BehaviourDepth{
+		ToBehaviour(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self BehaviourDepth) _IsScriptable () {}
-type FlowLayout struct { LayoutManager }
+type FlowLayout struct {
+	LayoutManager
+	_value_ unsafe.Pointer
+}
 type FlowLayoutKind interface {
   _IsFlowLayout()
   GetGObject() unsafe.Pointer
 }
-func (self FlowLayout) _IsFlowLayout () {}
+func (self FlowLayout) _IsFlowLayout() {}
 func (self FlowLayout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToFlowLayout(value unsafe.Pointer) FlowLayout { return FlowLayout{LayoutManager{InitiallyUnowned{Object{value}}}} }
-type ShaderMatrix struct { _value_ unsafe.Pointer }
+func ToFlowLayout(value unsafe.Pointer) FlowLayout {
+	return FlowLayout{
+		ToLayoutManager(value),
+		value,
+	}
+}
+type ShaderMatrix struct {
+	_value_ unsafe.Pointer
+}
 type ShaderMatrixKind interface {
   _IsShaderMatrix()
   GetGObject() unsafe.Pointer
 }
-func (self ShaderMatrix) _IsShaderMatrix () {}
+func (self ShaderMatrix) _IsShaderMatrix() {}
 func (self ShaderMatrix) GetGObject() unsafe.Pointer { return self._value_ }
-func ToShaderMatrix(value unsafe.Pointer) ShaderMatrix { return ShaderMatrix{value} }
-type TableLayout struct { LayoutManager }
+func ToShaderMatrix(value unsafe.Pointer) ShaderMatrix {
+	return ShaderMatrix{
+		value,
+	}
+}
+type TableLayout struct {
+	LayoutManager
+	_value_ unsafe.Pointer
+}
 type TableLayoutKind interface {
   _IsTableLayout()
   GetGObject() unsafe.Pointer
 }
-func (self TableLayout) _IsTableLayout () {}
+func (self TableLayout) _IsTableLayout() {}
 func (self TableLayout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTableLayout(value unsafe.Pointer) TableLayout { return TableLayout{LayoutManager{InitiallyUnowned{Object{value}}}} }
-type BoxLayout struct { LayoutManager }
+func ToTableLayout(value unsafe.Pointer) TableLayout {
+	return TableLayout{
+		ToLayoutManager(value),
+		value,
+	}
+}
+type BoxLayout struct {
+	LayoutManager
+	_value_ unsafe.Pointer
+}
 type BoxLayoutKind interface {
   _IsBoxLayout()
   GetGObject() unsafe.Pointer
 }
-func (self BoxLayout) _IsBoxLayout () {}
+func (self BoxLayout) _IsBoxLayout() {}
 func (self BoxLayout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBoxLayout(value unsafe.Pointer) BoxLayout { return BoxLayout{LayoutManager{InitiallyUnowned{Object{value}}}} }
-type Path struct { InitiallyUnowned }
+func ToBoxLayout(value unsafe.Pointer) BoxLayout {
+	return BoxLayout{
+		ToLayoutManager(value),
+		value,
+	}
+}
+type Path struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
 type PathKind interface {
   _IsPath()
   GetGObject() unsafe.Pointer
 }
-func (self Path) _IsPath () {}
+func (self Path) _IsPath() {}
 func (self Path) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPath(value unsafe.Pointer) Path { return Path{InitiallyUnowned{Object{value}}} }
-type LayoutManager struct { InitiallyUnowned }
+func ToPath(value unsafe.Pointer) Path {
+	return Path{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
+type LayoutManager struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
 type LayoutManagerKind interface {
   _IsLayoutManager()
   GetGObject() unsafe.Pointer
 }
-func (self LayoutManager) _IsLayoutManager () {}
+func (self LayoutManager) _IsLayoutManager() {}
 func (self LayoutManager) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLayoutManager(value unsafe.Pointer) LayoutManager { return LayoutManager{InitiallyUnowned{Object{value}}} }
-type TextNode struct { PaintNode }
+func ToLayoutManager(value unsafe.Pointer) LayoutManager {
+	return LayoutManager{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
+type TextNode struct {
+	PaintNode
+	_value_ unsafe.Pointer
+}
 type TextNodeKind interface {
   _IsTextNode()
   GetGObject() unsafe.Pointer
 }
-func (self TextNode) _IsTextNode () {}
+func (self TextNode) _IsTextNode() {}
 func (self TextNode) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextNode(value unsafe.Pointer) TextNode { return TextNode{PaintNode{value}} }
-type Shader struct { Object }
+func ToTextNode(value unsafe.Pointer) TextNode {
+	return TextNode{
+		ToPaintNode(value),
+		value,
+	}
+}
+type Shader struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type ShaderKind interface {
   _IsShader()
   GetGObject() unsafe.Pointer
 }
-func (self Shader) _IsShader () {}
+func (self Shader) _IsShader() {}
 func (self Shader) GetGObject() unsafe.Pointer { return self._value_ }
-func ToShader(value unsafe.Pointer) Shader { return Shader{Object{value}} }
-type ClipNode struct { PaintNode }
+func ToShader(value unsafe.Pointer) Shader {
+	return Shader{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ClipNode struct {
+	PaintNode
+	_value_ unsafe.Pointer
+}
 type ClipNodeKind interface {
   _IsClipNode()
   GetGObject() unsafe.Pointer
 }
-func (self ClipNode) _IsClipNode () {}
+func (self ClipNode) _IsClipNode() {}
 func (self ClipNode) GetGObject() unsafe.Pointer { return self._value_ }
-func ToClipNode(value unsafe.Pointer) ClipNode { return ClipNode{PaintNode{value}} }
-type ParamSpecUnit struct { ParamSpec }
+func ToClipNode(value unsafe.Pointer) ClipNode {
+	return ClipNode{
+		ToPaintNode(value),
+		value,
+	}
+}
+type ParamSpecUnit struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
 type ParamSpecUnitKind interface {
   _IsParamSpecUnit()
   GetGObject() unsafe.Pointer
 }
-func (self ParamSpecUnit) _IsParamSpecUnit () {}
+func (self ParamSpecUnit) _IsParamSpecUnit() {}
 func (self ParamSpecUnit) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecUnit(value unsafe.Pointer) ParamSpecUnit { return ParamSpecUnit{ParamSpec{value}} }
-type Media struct { _value_ unsafe.Pointer }
+func ToParamSpecUnit(value unsafe.Pointer) ParamSpecUnit {
+	return ParamSpecUnit{
+		ToParamSpec(value),
+		value,
+	}
+}
+type Media struct {
+	_value_ unsafe.Pointer
+}
 type MediaKind interface {
   _IsMedia()
   GetGObject() unsafe.Pointer
 }
-func (self Media) _IsMedia () {}
+func (self Media) _IsMedia() {}
 func (self Media) GetGObject() unsafe.Pointer { return self._value_ }
-func ToMedia(value unsafe.Pointer) Media { return Media{value} }
-type Animator struct { Object }
+func ToMedia(value unsafe.Pointer) Media {
+	return Media{
+		value,
+	}
+}
+type Animator struct {
+	GObjectObject
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type AnimatorKind interface {
   _IsAnimator()
   GetGObject() unsafe.Pointer
 }
-func (self Animator) _IsAnimator () {}
+func (self Animator) _IsAnimator() {}
 func (self Animator) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAnimator(value unsafe.Pointer) Animator { return Animator{Object{value}} }
+func ToAnimator(value unsafe.Pointer) Animator {
+	return Animator{
+		ToGObjectObject(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self Animator) _IsScriptable () {}
-type BlurEffect struct { OffscreenEffect }
+type BlurEffect struct {
+	OffscreenEffect
+	_value_ unsafe.Pointer
+}
 type BlurEffectKind interface {
   _IsBlurEffect()
   GetGObject() unsafe.Pointer
 }
-func (self BlurEffect) _IsBlurEffect () {}
+func (self BlurEffect) _IsBlurEffect() {}
 func (self BlurEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBlurEffect(value unsafe.Pointer) BlurEffect { return BlurEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type BehaviourScale struct { Behaviour }
+func ToBlurEffect(value unsafe.Pointer) BlurEffect {
+	return BlurEffect{
+		ToOffscreenEffect(value),
+		value,
+	}
+}
+type BehaviourScale struct {
+	Behaviour
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type BehaviourScaleKind interface {
   _IsBehaviourScale()
   GetGObject() unsafe.Pointer
 }
-func (self BehaviourScale) _IsBehaviourScale () {}
+func (self BehaviourScale) _IsBehaviourScale() {}
 func (self BehaviourScale) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviourScale(value unsafe.Pointer) BehaviourScale { return BehaviourScale{Behaviour{Object{value}}} }
+func ToBehaviourScale(value unsafe.Pointer) BehaviourScale {
+	return BehaviourScale{
+		ToBehaviour(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self BehaviourScale) _IsScriptable () {}
-type StageManager struct { Object }
+type StageManager struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type StageManagerKind interface {
   _IsStageManager()
   GetGObject() unsafe.Pointer
 }
-func (self StageManager) _IsStageManager () {}
+func (self StageManager) _IsStageManager() {}
 func (self StageManager) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStageManager(value unsafe.Pointer) StageManager { return StageManager{Object{value}} }
-type PaintNode struct { _value_ unsafe.Pointer }
+func ToStageManager(value unsafe.Pointer) StageManager {
+	return StageManager{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type PaintNode struct {
+	_value_ unsafe.Pointer
+}
 type PaintNodeKind interface {
   _IsPaintNode()
   GetGObject() unsafe.Pointer
 }
-func (self PaintNode) _IsPaintNode () {}
+func (self PaintNode) _IsPaintNode() {}
 func (self PaintNode) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPaintNode(value unsafe.Pointer) PaintNode { return PaintNode{value} }
-type Script struct { Object }
+func ToPaintNode(value unsafe.Pointer) PaintNode {
+	return PaintNode{
+		value,
+	}
+}
+type Script struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type ScriptKind interface {
   _IsScript()
   GetGObject() unsafe.Pointer
 }
-func (self Script) _IsScript () {}
+func (self Script) _IsScript() {}
 func (self Script) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScript(value unsafe.Pointer) Script { return Script{Object{value}} }
-type Actor struct { InitiallyUnowned }
+func ToScript(value unsafe.Pointer) Script {
+	return Script{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Actor struct {
+	InitiallyUnowned
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type ActorKind interface {
   _IsActor()
   GetGObject() unsafe.Pointer
 }
-func (self Actor) _IsActor () {}
+func (self Actor) _IsActor() {}
 func (self Actor) GetGObject() unsafe.Pointer { return self._value_ }
-func ToActor(value unsafe.Pointer) Actor { return Actor{InitiallyUnowned{Object{value}}} }
-func (self Actor) _IsAtkImplementorIface () {}
+func ToActor(value unsafe.Pointer) Actor {
+	return Actor{
+		ToInitiallyUnowned(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Actor) _IsImplementorIface () {}
 func (self Actor) _IsAnimatable () {}
 func (self Actor) _IsContainer () {}
 func (self Actor) _IsScriptable () {}
-type State struct { Object }
+type State struct {
+	GObjectObject
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type StateKind interface {
   _IsState()
   GetGObject() unsafe.Pointer
 }
-func (self State) _IsState () {}
+func (self State) _IsState() {}
 func (self State) GetGObject() unsafe.Pointer { return self._value_ }
-func ToState(value unsafe.Pointer) State { return State{Object{value}} }
+func ToState(value unsafe.Pointer) State {
+	return State{
+		ToGObjectObject(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self State) _IsScriptable () {}
-type GridLayout struct { LayoutManager }
+type GridLayout struct {
+	LayoutManager
+	_value_ unsafe.Pointer
+}
 type GridLayoutKind interface {
   _IsGridLayout()
   GetGObject() unsafe.Pointer
 }
-func (self GridLayout) _IsGridLayout () {}
+func (self GridLayout) _IsGridLayout() {}
 func (self GridLayout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGridLayout(value unsafe.Pointer) GridLayout { return GridLayout{LayoutManager{InitiallyUnowned{Object{value}}}} }
-type ScrollActor struct { Actor }
+func ToGridLayout(value unsafe.Pointer) GridLayout {
+	return GridLayout{
+		ToLayoutManager(value),
+		value,
+	}
+}
+type ScrollActor struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type ScrollActorKind interface {
   _IsScrollActor()
   GetGObject() unsafe.Pointer
 }
-func (self ScrollActor) _IsScrollActor () {}
+func (self ScrollActor) _IsScrollActor() {}
 func (self ScrollActor) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScrollActor(value unsafe.Pointer) ScrollActor { return ScrollActor{Actor{InitiallyUnowned{Object{value}}}} }
-func (self ScrollActor) _IsAtkImplementorIface () {}
+func ToScrollActor(value unsafe.Pointer) ScrollActor {
+	return ScrollActor{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self ScrollActor) _IsImplementorIface () {}
 func (self ScrollActor) _IsAnimatable () {}
 func (self ScrollActor) _IsContainer () {}
 func (self ScrollActor) _IsScriptable () {}
-type PanAction struct { GestureAction }
+type PanAction struct {
+	GestureAction
+	_value_ unsafe.Pointer
+}
 type PanActionKind interface {
   _IsPanAction()
   GetGObject() unsafe.Pointer
 }
-func (self PanAction) _IsPanAction () {}
+func (self PanAction) _IsPanAction() {}
 func (self PanAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPanAction(value unsafe.Pointer) PanAction { return PanAction{GestureAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type BehaviourRotate struct { Behaviour }
+func ToPanAction(value unsafe.Pointer) PanAction {
+	return PanAction{
+		ToGestureAction(value),
+		value,
+	}
+}
+type BehaviourRotate struct {
+	Behaviour
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type BehaviourRotateKind interface {
   _IsBehaviourRotate()
   GetGObject() unsafe.Pointer
 }
-func (self BehaviourRotate) _IsBehaviourRotate () {}
+func (self BehaviourRotate) _IsBehaviourRotate() {}
 func (self BehaviourRotate) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviourRotate(value unsafe.Pointer) BehaviourRotate { return BehaviourRotate{Behaviour{Object{value}}} }
+func ToBehaviourRotate(value unsafe.Pointer) BehaviourRotate {
+	return BehaviourRotate{
+		ToBehaviour(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self BehaviourRotate) _IsScriptable () {}
-type BehaviourPath struct { Behaviour }
+type BehaviourPath struct {
+	Behaviour
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type BehaviourPathKind interface {
   _IsBehaviourPath()
   GetGObject() unsafe.Pointer
 }
-func (self BehaviourPath) _IsBehaviourPath () {}
+func (self BehaviourPath) _IsBehaviourPath() {}
 func (self BehaviourPath) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviourPath(value unsafe.Pointer) BehaviourPath { return BehaviourPath{Behaviour{Object{value}}} }
+func ToBehaviourPath(value unsafe.Pointer) BehaviourPath {
+	return BehaviourPath{
+		ToBehaviour(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self BehaviourPath) _IsScriptable () {}
-type Behaviour struct { Object }
+type Behaviour struct {
+	GObjectObject
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type BehaviourKind interface {
   _IsBehaviour()
   GetGObject() unsafe.Pointer
 }
-func (self Behaviour) _IsBehaviour () {}
+func (self Behaviour) _IsBehaviour() {}
 func (self Behaviour) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviour(value unsafe.Pointer) Behaviour { return Behaviour{Object{value}} }
+func ToBehaviour(value unsafe.Pointer) Behaviour {
+	return Behaviour{
+		ToGObjectObject(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self Behaviour) _IsScriptable () {}
-type SwipeAction struct { GestureAction }
+type SwipeAction struct {
+	GestureAction
+	_value_ unsafe.Pointer
+}
 type SwipeActionKind interface {
   _IsSwipeAction()
   GetGObject() unsafe.Pointer
 }
-func (self SwipeAction) _IsSwipeAction () {}
+func (self SwipeAction) _IsSwipeAction() {}
 func (self SwipeAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSwipeAction(value unsafe.Pointer) SwipeAction { return SwipeAction{GestureAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type KeyframeTransition struct { PropertyTransition }
+func ToSwipeAction(value unsafe.Pointer) SwipeAction {
+	return SwipeAction{
+		ToGestureAction(value),
+		value,
+	}
+}
+type KeyframeTransition struct {
+	PropertyTransition
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type KeyframeTransitionKind interface {
   _IsKeyframeTransition()
   GetGObject() unsafe.Pointer
 }
-func (self KeyframeTransition) _IsKeyframeTransition () {}
+func (self KeyframeTransition) _IsKeyframeTransition() {}
 func (self KeyframeTransition) GetGObject() unsafe.Pointer { return self._value_ }
-func ToKeyframeTransition(value unsafe.Pointer) KeyframeTransition { return KeyframeTransition{PropertyTransition{Transition{Timeline{Object{value}}}}} }
+func ToKeyframeTransition(value unsafe.Pointer) KeyframeTransition {
+	return KeyframeTransition{
+		ToPropertyTransition(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self KeyframeTransition) _IsScriptable () {}
-type Stage struct { Group }
+type Stage struct {
+	Group
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type StageKind interface {
   _IsStage()
   GetGObject() unsafe.Pointer
 }
-func (self Stage) _IsStage () {}
+func (self Stage) _IsStage() {}
 func (self Stage) GetGObject() unsafe.Pointer { return self._value_ }
-func ToStage(value unsafe.Pointer) Stage { return Stage{Group{Actor{InitiallyUnowned{Object{value}}}}} }
-func (self Stage) _IsAtkImplementorIface () {}
+func ToStage(value unsafe.Pointer) Stage {
+	return Stage{
+		ToGroup(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Stage) _IsImplementorIface () {}
 func (self Stage) _IsAnimatable () {}
 func (self Stage) _IsContainer () {}
 func (self Stage) _IsScriptable () {}
-type Box struct { Actor }
+type Box struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type BoxKind interface {
   _IsBox()
   GetGObject() unsafe.Pointer
 }
-func (self Box) _IsBox () {}
+func (self Box) _IsBox() {}
 func (self Box) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBox(value unsafe.Pointer) Box { return Box{Actor{InitiallyUnowned{Object{value}}}} }
-func (self Box) _IsAtkImplementorIface () {}
+func ToBox(value unsafe.Pointer) Box {
+	return Box{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Box) _IsImplementorIface () {}
 func (self Box) _IsAnimatable () {}
 func (self Box) _IsContainer () {}
 func (self Box) _IsScriptable () {}
-type ColorNode struct { PipelineNode }
+type ColorNode struct {
+	PipelineNode
+	_value_ unsafe.Pointer
+}
 type ColorNodeKind interface {
   _IsColorNode()
   GetGObject() unsafe.Pointer
 }
-func (self ColorNode) _IsColorNode () {}
+func (self ColorNode) _IsColorNode() {}
 func (self ColorNode) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorNode(value unsafe.Pointer) ColorNode { return ColorNode{PipelineNode{PaintNode{value}}} }
-type Settings struct { Object }
+func ToColorNode(value unsafe.Pointer) ColorNode {
+	return ColorNode{
+		ToPipelineNode(value),
+		value,
+	}
+}
+type Settings struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type SettingsKind interface {
   _IsSettings()
   GetGObject() unsafe.Pointer
 }
-func (self Settings) _IsSettings () {}
+func (self Settings) _IsSettings() {}
 func (self Settings) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSettings(value unsafe.Pointer) Settings { return Settings{Object{value}} }
-type Animatable struct { _value_ unsafe.Pointer }
+func ToSettings(value unsafe.Pointer) Settings {
+	return Settings{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Animatable struct {
+	_value_ unsafe.Pointer
+}
 type AnimatableKind interface {
   _IsAnimatable()
   GetGObject() unsafe.Pointer
 }
-func (self Animatable) _IsAnimatable () {}
+func (self Animatable) _IsAnimatable() {}
 func (self Animatable) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAnimatable(value unsafe.Pointer) Animatable { return Animatable{value} }
-type GestureAction struct { Action }
+func ToAnimatable(value unsafe.Pointer) Animatable {
+	return Animatable{
+		value,
+	}
+}
+type GestureAction struct {
+	ClutterAction
+	_value_ unsafe.Pointer
+}
 type GestureActionKind interface {
   _IsGestureAction()
   GetGObject() unsafe.Pointer
 }
-func (self GestureAction) _IsGestureAction () {}
+func (self GestureAction) _IsGestureAction() {}
 func (self GestureAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGestureAction(value unsafe.Pointer) GestureAction { return GestureAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type OffscreenEffect struct { Effect }
+func ToGestureAction(value unsafe.Pointer) GestureAction {
+	return GestureAction{
+		ToClutterAction(value),
+		value,
+	}
+}
+type OffscreenEffect struct {
+	Effect
+	_value_ unsafe.Pointer
+}
 type OffscreenEffectKind interface {
   _IsOffscreenEffect()
   GetGObject() unsafe.Pointer
 }
-func (self OffscreenEffect) _IsOffscreenEffect () {}
+func (self OffscreenEffect) _IsOffscreenEffect() {}
 func (self OffscreenEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToOffscreenEffect(value unsafe.Pointer) OffscreenEffect { return OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type Model struct { Object }
+func ToOffscreenEffect(value unsafe.Pointer) OffscreenEffect {
+	return OffscreenEffect{
+		ToEffect(value),
+		value,
+	}
+}
+type Model struct {
+	GObjectObject
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type ModelKind interface {
   _IsModel()
   GetGObject() unsafe.Pointer
 }
-func (self Model) _IsModel () {}
+func (self Model) _IsModel() {}
 func (self Model) GetGObject() unsafe.Pointer { return self._value_ }
-func ToModel(value unsafe.Pointer) Model { return Model{Object{value}} }
+func ToModel(value unsafe.Pointer) Model {
+	return Model{
+		ToGObjectObject(value),
+		ToScriptable(value),
+		value,
+	}
+}
 func (self Model) _IsScriptable () {}
-type TextBuffer struct { Object }
+type TextBuffer struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type TextBufferKind interface {
   _IsTextBuffer()
   GetGObject() unsafe.Pointer
 }
-func (self TextBuffer) _IsTextBuffer () {}
+func (self TextBuffer) _IsTextBuffer() {}
 func (self TextBuffer) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextBuffer(value unsafe.Pointer) TextBuffer { return TextBuffer{Object{value}} }
-type BindConstraint struct { Constraint }
+func ToTextBuffer(value unsafe.Pointer) TextBuffer {
+	return TextBuffer{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type BindConstraint struct {
+	Constraint
+	_value_ unsafe.Pointer
+}
 type BindConstraintKind interface {
   _IsBindConstraint()
   GetGObject() unsafe.Pointer
 }
-func (self BindConstraint) _IsBindConstraint () {}
+func (self BindConstraint) _IsBindConstraint() {}
 func (self BindConstraint) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBindConstraint(value unsafe.Pointer) BindConstraint { return BindConstraint{Constraint{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type ActorMeta struct { InitiallyUnowned }
+func ToBindConstraint(value unsafe.Pointer) BindConstraint {
+	return BindConstraint{
+		ToConstraint(value),
+		value,
+	}
+}
+type ActorMeta struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
 type ActorMetaKind interface {
   _IsActorMeta()
   GetGObject() unsafe.Pointer
 }
-func (self ActorMeta) _IsActorMeta () {}
+func (self ActorMeta) _IsActorMeta() {}
 func (self ActorMeta) GetGObject() unsafe.Pointer { return self._value_ }
-func ToActorMeta(value unsafe.Pointer) ActorMeta { return ActorMeta{InitiallyUnowned{Object{value}}} }
-type Backend struct { Object }
+func ToActorMeta(value unsafe.Pointer) ActorMeta {
+	return ActorMeta{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
+type Backend struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type BackendKind interface {
   _IsBackend()
   GetGObject() unsafe.Pointer
 }
-func (self Backend) _IsBackend () {}
+func (self Backend) _IsBackend() {}
 func (self Backend) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBackend(value unsafe.Pointer) Backend { return Backend{Object{value}} }
-type Group struct { Actor }
+func ToBackend(value unsafe.Pointer) Backend {
+	return Backend{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type Group struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type GroupKind interface {
   _IsGroup()
   GetGObject() unsafe.Pointer
 }
-func (self Group) _IsGroup () {}
+func (self Group) _IsGroup() {}
 func (self Group) GetGObject() unsafe.Pointer { return self._value_ }
-func ToGroup(value unsafe.Pointer) Group { return Group{Actor{InitiallyUnowned{Object{value}}}} }
-func (self Group) _IsAtkImplementorIface () {}
+func ToGroup(value unsafe.Pointer) Group {
+	return Group{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Group) _IsImplementorIface () {}
 func (self Group) _IsAnimatable () {}
 func (self Group) _IsContainer () {}
 func (self Group) _IsScriptable () {}
-type ModelIter struct { Object }
+type ModelIter struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type ModelIterKind interface {
   _IsModelIter()
   GetGObject() unsafe.Pointer
 }
-func (self ModelIter) _IsModelIter () {}
+func (self ModelIter) _IsModelIter() {}
 func (self ModelIter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToModelIter(value unsafe.Pointer) ModelIter { return ModelIter{Object{value}} }
-type ClickAction struct { Action }
+func ToModelIter(value unsafe.Pointer) ModelIter {
+	return ModelIter{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ClickAction struct {
+	ClutterAction
+	_value_ unsafe.Pointer
+}
 type ClickActionKind interface {
   _IsClickAction()
   GetGObject() unsafe.Pointer
 }
-func (self ClickAction) _IsClickAction () {}
+func (self ClickAction) _IsClickAction() {}
 func (self ClickAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToClickAction(value unsafe.Pointer) ClickAction { return ClickAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type Texture struct { Actor }
+func ToClickAction(value unsafe.Pointer) ClickAction {
+	return ClickAction{
+		ToClutterAction(value),
+		value,
+	}
+}
+type Texture struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type TextureKind interface {
   _IsTexture()
   GetGObject() unsafe.Pointer
 }
-func (self Texture) _IsTexture () {}
+func (self Texture) _IsTexture() {}
 func (self Texture) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTexture(value unsafe.Pointer) Texture { return Texture{Actor{InitiallyUnowned{Object{value}}}} }
-func (self Texture) _IsAtkImplementorIface () {}
+func ToTexture(value unsafe.Pointer) Texture {
+	return Texture{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Texture) _IsImplementorIface () {}
 func (self Texture) _IsAnimatable () {}
 func (self Texture) _IsContainer () {}
 func (self Texture) _IsScriptable () {}
-type ShaderFloat struct { _value_ unsafe.Pointer }
-type ShaderFloatKind interface {
-  _IsShaderFloat()
-  GetGObject() unsafe.Pointer
+type BinLayout struct {
+	LayoutManager
+	_value_ unsafe.Pointer
 }
-func (self ShaderFloat) _IsShaderFloat () {}
-func (self ShaderFloat) GetGObject() unsafe.Pointer { return self._value_ }
-func ToShaderFloat(value unsafe.Pointer) ShaderFloat { return ShaderFloat{value} }
-type DeformEffect struct { OffscreenEffect }
-type DeformEffectKind interface {
-  _IsDeformEffect()
-  GetGObject() unsafe.Pointer
-}
-func (self DeformEffect) _IsDeformEffect () {}
-func (self DeformEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDeformEffect(value unsafe.Pointer) DeformEffect { return DeformEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type ParamSpecFixed struct { ParamSpec }
-type ParamSpecFixedKind interface {
-  _IsParamSpecFixed()
-  GetGObject() unsafe.Pointer
-}
-func (self ParamSpecFixed) _IsParamSpecFixed () {}
-func (self ParamSpecFixed) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecFixed(value unsafe.Pointer) ParamSpecFixed { return ParamSpecFixed{ParamSpec{value}} }
-type Rectangle struct { Actor }
-type RectangleKind interface {
-  _IsRectangle()
-  GetGObject() unsafe.Pointer
-}
-func (self Rectangle) _IsRectangle () {}
-func (self Rectangle) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRectangle(value unsafe.Pointer) Rectangle { return Rectangle{Actor{InitiallyUnowned{Object{value}}}} }
-func (self Rectangle) _IsAtkImplementorIface () {}
-func (self Rectangle) _IsAnimatable () {}
-func (self Rectangle) _IsContainer () {}
-func (self Rectangle) _IsScriptable () {}
-type Timeline struct { Object }
-type TimelineKind interface {
-  _IsTimeline()
-  GetGObject() unsafe.Pointer
-}
-func (self Timeline) _IsTimeline () {}
-func (self Timeline) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTimeline(value unsafe.Pointer) Timeline { return Timeline{Object{value}} }
-func (self Timeline) _IsScriptable () {}
-type RotateAction struct { GestureAction }
-type RotateActionKind interface {
-  _IsRotateAction()
-  GetGObject() unsafe.Pointer
-}
-func (self RotateAction) _IsRotateAction () {}
-func (self RotateAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRotateAction(value unsafe.Pointer) RotateAction { return RotateAction{GestureAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type Effect struct { ActorMeta }
-type EffectKind interface {
-  _IsEffect()
-  GetGObject() unsafe.Pointer
-}
-func (self Effect) _IsEffect () {}
-func (self Effect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToEffect(value unsafe.Pointer) Effect { return Effect{ActorMeta{InitiallyUnowned{Object{value}}}} }
-type InputDevice struct { Object }
-type InputDeviceKind interface {
-  _IsInputDevice()
-  GetGObject() unsafe.Pointer
-}
-func (self InputDevice) _IsInputDevice () {}
-func (self InputDevice) GetGObject() unsafe.Pointer { return self._value_ }
-func ToInputDevice(value unsafe.Pointer) InputDevice { return InputDevice{Object{value}} }
-type PageTurnEffect struct { DeformEffect }
-type PageTurnEffectKind interface {
-  _IsPageTurnEffect()
-  GetGObject() unsafe.Pointer
-}
-func (self PageTurnEffect) _IsPageTurnEffect () {}
-func (self PageTurnEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPageTurnEffect(value unsafe.Pointer) PageTurnEffect { return PageTurnEffect{DeformEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}}} }
-type ParamSpecColor struct { ParamSpec }
-type ParamSpecColorKind interface {
-  _IsParamSpecColor()
-  GetGObject() unsafe.Pointer
-}
-func (self ParamSpecColor) _IsParamSpecColor () {}
-func (self ParamSpecColor) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecColor(value unsafe.Pointer) ParamSpecColor { return ParamSpecColor{ParamSpec{value}} }
-type PropertyTransition struct { Transition }
-type PropertyTransitionKind interface {
-  _IsPropertyTransition()
-  GetGObject() unsafe.Pointer
-}
-func (self PropertyTransition) _IsPropertyTransition () {}
-func (self PropertyTransition) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPropertyTransition(value unsafe.Pointer) PropertyTransition { return PropertyTransition{Transition{Timeline{Object{value}}}} }
-func (self PropertyTransition) _IsScriptable () {}
-type BehaviourOpacity struct { Behaviour }
-type BehaviourOpacityKind interface {
-  _IsBehaviourOpacity()
-  GetGObject() unsafe.Pointer
-}
-func (self BehaviourOpacity) _IsBehaviourOpacity () {}
-func (self BehaviourOpacity) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviourOpacity(value unsafe.Pointer) BehaviourOpacity { return BehaviourOpacity{Behaviour{Object{value}}} }
-func (self BehaviourOpacity) _IsScriptable () {}
-type Constraint struct { ActorMeta }
-type ConstraintKind interface {
-  _IsConstraint()
-  GetGObject() unsafe.Pointer
-}
-func (self Constraint) _IsConstraint () {}
-func (self Constraint) GetGObject() unsafe.Pointer { return self._value_ }
-func ToConstraint(value unsafe.Pointer) Constraint { return Constraint{ActorMeta{InitiallyUnowned{Object{value}}}} }
-type Transition struct { Timeline }
-type TransitionKind interface {
-  _IsTransition()
-  GetGObject() unsafe.Pointer
-}
-func (self Transition) _IsTransition () {}
-func (self Transition) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTransition(value unsafe.Pointer) Transition { return Transition{Timeline{Object{value}}} }
-func (self Transition) _IsScriptable () {}
-type Scriptable struct { _value_ unsafe.Pointer }
-type ScriptableKind interface {
-  _IsScriptable()
-  GetGObject() unsafe.Pointer
-}
-func (self Scriptable) _IsScriptable () {}
-func (self Scriptable) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScriptable(value unsafe.Pointer) Scriptable { return Scriptable{value} }
-type ChildMeta struct { Object }
-type ChildMetaKind interface {
-  _IsChildMeta()
-  GetGObject() unsafe.Pointer
-}
-func (self ChildMeta) _IsChildMeta () {}
-func (self ChildMeta) GetGObject() unsafe.Pointer { return self._value_ }
-func ToChildMeta(value unsafe.Pointer) ChildMeta { return ChildMeta{Object{value}} }
-type BindingPool struct { Object }
-type BindingPoolKind interface {
-  _IsBindingPool()
-  GetGObject() unsafe.Pointer
-}
-func (self BindingPool) _IsBindingPool () {}
-func (self BindingPool) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBindingPool(value unsafe.Pointer) BindingPool { return BindingPool{Object{value}} }
-type Action struct { ActorMeta }
-type ActionKind interface {
-  _IsAction()
-  GetGObject() unsafe.Pointer
-}
-func (self Action) _IsAction () {}
-func (self Action) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAction(value unsafe.Pointer) Action { return Action{ActorMeta{InitiallyUnowned{Object{value}}}} }
-type ColorizeEffect struct { OffscreenEffect }
-type ColorizeEffectKind interface {
-  _IsColorizeEffect()
-  GetGObject() unsafe.Pointer
-}
-func (self ColorizeEffect) _IsColorizeEffect () {}
-func (self ColorizeEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToColorizeEffect(value unsafe.Pointer) ColorizeEffect { return ColorizeEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type PipelineNode struct { PaintNode }
-type PipelineNodeKind interface {
-  _IsPipelineNode()
-  GetGObject() unsafe.Pointer
-}
-func (self PipelineNode) _IsPipelineNode () {}
-func (self PipelineNode) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPipelineNode(value unsafe.Pointer) PipelineNode { return PipelineNode{PaintNode{value}} }
-type Text struct { Actor }
-type TextKind interface {
-  _IsText()
-  GetGObject() unsafe.Pointer
-}
-func (self Text) _IsText () {}
-func (self Text) GetGObject() unsafe.Pointer { return self._value_ }
-func ToText(value unsafe.Pointer) Text { return Text{Actor{InitiallyUnowned{Object{value}}}} }
-func (self Text) _IsAtkImplementorIface () {}
-func (self Text) _IsAnimatable () {}
-func (self Text) _IsContainer () {}
-func (self Text) _IsScriptable () {}
-type Interval struct { InitiallyUnowned }
-type IntervalKind interface {
-  _IsInterval()
-  GetGObject() unsafe.Pointer
-}
-func (self Interval) _IsInterval () {}
-func (self Interval) GetGObject() unsafe.Pointer { return self._value_ }
-func ToInterval(value unsafe.Pointer) Interval { return Interval{InitiallyUnowned{Object{value}}} }
-type BehaviourEllipse struct { Behaviour }
-type BehaviourEllipseKind interface {
-  _IsBehaviourEllipse()
-  GetGObject() unsafe.Pointer
-}
-func (self BehaviourEllipse) _IsBehaviourEllipse () {}
-func (self BehaviourEllipse) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBehaviourEllipse(value unsafe.Pointer) BehaviourEllipse { return BehaviourEllipse{Behaviour{Object{value}}} }
-func (self BehaviourEllipse) _IsScriptable () {}
-type ListModel struct { Model }
-type ListModelKind interface {
-  _IsListModel()
-  GetGObject() unsafe.Pointer
-}
-func (self ListModel) _IsListModel () {}
-func (self ListModel) GetGObject() unsafe.Pointer { return self._value_ }
-func ToListModel(value unsafe.Pointer) ListModel { return ListModel{Model{Object{value}}} }
-func (self ListModel) _IsScriptable () {}
-type Score struct { Object }
-type ScoreKind interface {
-  _IsScore()
-  GetGObject() unsafe.Pointer
-}
-func (self Score) _IsScore () {}
-func (self Score) GetGObject() unsafe.Pointer { return self._value_ }
-func ToScore(value unsafe.Pointer) Score { return Score{Object{value}} }
-type Image struct { Object }
-type ImageKind interface {
-  _IsImage()
-  GetGObject() unsafe.Pointer
-}
-func (self Image) _IsImage () {}
-func (self Image) GetGObject() unsafe.Pointer { return self._value_ }
-func ToImage(value unsafe.Pointer) Image { return Image{Object{value}} }
-func (self Image) _IsContent () {}
-type ShaderInt struct { _value_ unsafe.Pointer }
-type ShaderIntKind interface {
-  _IsShaderInt()
-  GetGObject() unsafe.Pointer
-}
-func (self ShaderInt) _IsShaderInt () {}
-func (self ShaderInt) GetGObject() unsafe.Pointer { return self._value_ }
-func ToShaderInt(value unsafe.Pointer) ShaderInt { return ShaderInt{value} }
-type Container struct { _value_ unsafe.Pointer }
-type ContainerKind interface {
-  _IsContainer()
-  GetGObject() unsafe.Pointer
-}
-func (self Container) _IsContainer () {}
-func (self Container) GetGObject() unsafe.Pointer { return self._value_ }
-func ToContainer(value unsafe.Pointer) Container { return Container{value} }
-type AlignConstraint struct { Constraint }
-type AlignConstraintKind interface {
-  _IsAlignConstraint()
-  GetGObject() unsafe.Pointer
-}
-func (self AlignConstraint) _IsAlignConstraint () {}
-func (self AlignConstraint) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAlignConstraint(value unsafe.Pointer) AlignConstraint { return AlignConstraint{Constraint{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type Content struct { _value_ unsafe.Pointer }
-type ContentKind interface {
-  _IsContent()
-  GetGObject() unsafe.Pointer
-}
-func (self Content) _IsContent () {}
-func (self Content) GetGObject() unsafe.Pointer { return self._value_ }
-func ToContent(value unsafe.Pointer) Content { return Content{value} }
-type TextureNode struct { PipelineNode }
-type TextureNodeKind interface {
-  _IsTextureNode()
-  GetGObject() unsafe.Pointer
-}
-func (self TextureNode) _IsTextureNode () {}
-func (self TextureNode) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTextureNode(value unsafe.Pointer) TextureNode { return TextureNode{PipelineNode{PaintNode{value}}} }
-type Animation struct { Object }
-type AnimationKind interface {
-  _IsAnimation()
-  GetGObject() unsafe.Pointer
-}
-func (self Animation) _IsAnimation () {}
-func (self Animation) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAnimation(value unsafe.Pointer) Animation { return Animation{Object{value}} }
-func (self Animation) _IsScriptable () {}
-type ZoomAction struct { GestureAction }
-type ZoomActionKind interface {
-  _IsZoomAction()
-  GetGObject() unsafe.Pointer
-}
-func (self ZoomAction) _IsZoomAction () {}
-func (self ZoomAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToZoomAction(value unsafe.Pointer) ZoomAction { return ZoomAction{GestureAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type DragAction struct { Action }
-type DragActionKind interface {
-  _IsDragAction()
-  GetGObject() unsafe.Pointer
-}
-func (self DragAction) _IsDragAction () {}
-func (self DragAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDragAction(value unsafe.Pointer) DragAction { return DragAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type TransitionGroup struct { Transition }
-type TransitionGroupKind interface {
-  _IsTransitionGroup()
-  GetGObject() unsafe.Pointer
-}
-func (self TransitionGroup) _IsTransitionGroup () {}
-func (self TransitionGroup) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTransitionGroup(value unsafe.Pointer) TransitionGroup { return TransitionGroup{Transition{Timeline{Object{value}}}} }
-func (self TransitionGroup) _IsScriptable () {}
-type Clone struct { Actor }
-type CloneKind interface {
-  _IsClone()
-  GetGObject() unsafe.Pointer
-}
-func (self Clone) _IsClone () {}
-func (self Clone) GetGObject() unsafe.Pointer { return self._value_ }
-func ToClone(value unsafe.Pointer) Clone { return Clone{Actor{InitiallyUnowned{Object{value}}}} }
-func (self Clone) _IsAtkImplementorIface () {}
-func (self Clone) _IsAnimatable () {}
-func (self Clone) _IsContainer () {}
-func (self Clone) _IsScriptable () {}
-type SnapConstraint struct { Constraint }
-type SnapConstraintKind interface {
-  _IsSnapConstraint()
-  GetGObject() unsafe.Pointer
-}
-func (self SnapConstraint) _IsSnapConstraint () {}
-func (self SnapConstraint) GetGObject() unsafe.Pointer { return self._value_ }
-func ToSnapConstraint(value unsafe.Pointer) SnapConstraint { return SnapConstraint{Constraint{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type BrightnessContrastEffect struct { OffscreenEffect }
-type BrightnessContrastEffectKind interface {
-  _IsBrightnessContrastEffect()
-  GetGObject() unsafe.Pointer
-}
-func (self BrightnessContrastEffect) _IsBrightnessContrastEffect () {}
-func (self BrightnessContrastEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBrightnessContrastEffect(value unsafe.Pointer) BrightnessContrastEffect { return BrightnessContrastEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type ShaderEffect struct { OffscreenEffect }
-type ShaderEffectKind interface {
-  _IsShaderEffect()
-  GetGObject() unsafe.Pointer
-}
-func (self ShaderEffect) _IsShaderEffect () {}
-func (self ShaderEffect) GetGObject() unsafe.Pointer { return self._value_ }
-func ToShaderEffect(value unsafe.Pointer) ShaderEffect { return ShaderEffect{OffscreenEffect{Effect{ActorMeta{InitiallyUnowned{Object{value}}}}}} }
-type Alpha struct { InitiallyUnowned }
-type AlphaKind interface {
-  _IsAlpha()
-  GetGObject() unsafe.Pointer
-}
-func (self Alpha) _IsAlpha () {}
-func (self Alpha) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAlpha(value unsafe.Pointer) Alpha { return Alpha{InitiallyUnowned{Object{value}}} }
-func (self Alpha) _IsScriptable () {}
-type LayoutMeta struct { ChildMeta }
-type LayoutMetaKind interface {
-  _IsLayoutMeta()
-  GetGObject() unsafe.Pointer
-}
-func (self LayoutMeta) _IsLayoutMeta () {}
-func (self LayoutMeta) GetGObject() unsafe.Pointer { return self._value_ }
-func ToLayoutMeta(value unsafe.Pointer) LayoutMeta { return LayoutMeta{ChildMeta{Object{value}}} }
-type DropAction struct { Action }
-type DropActionKind interface {
-  _IsDropAction()
-  GetGObject() unsafe.Pointer
-}
-func (self DropAction) _IsDropAction () {}
-func (self DropAction) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDropAction(value unsafe.Pointer) DropAction { return DropAction{Action{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type BinLayout struct { LayoutManager }
 type BinLayoutKind interface {
   _IsBinLayout()
   GetGObject() unsafe.Pointer
 }
-func (self BinLayout) _IsBinLayout () {}
+func (self BinLayout) _IsBinLayout() {}
 func (self BinLayout) GetGObject() unsafe.Pointer { return self._value_ }
-func ToBinLayout(value unsafe.Pointer) BinLayout { return BinLayout{LayoutManager{InitiallyUnowned{Object{value}}}} }
-type PathConstraint struct { Constraint }
+func ToBinLayout(value unsafe.Pointer) BinLayout {
+	return BinLayout{
+		ToLayoutManager(value),
+		value,
+	}
+}
+type DeformEffect struct {
+	OffscreenEffect
+	_value_ unsafe.Pointer
+}
+type DeformEffectKind interface {
+  _IsDeformEffect()
+  GetGObject() unsafe.Pointer
+}
+func (self DeformEffect) _IsDeformEffect() {}
+func (self DeformEffect) GetGObject() unsafe.Pointer { return self._value_ }
+func ToDeformEffect(value unsafe.Pointer) DeformEffect {
+	return DeformEffect{
+		ToOffscreenEffect(value),
+		value,
+	}
+}
+type ParamSpecFixed struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
+type ParamSpecFixedKind interface {
+  _IsParamSpecFixed()
+  GetGObject() unsafe.Pointer
+}
+func (self ParamSpecFixed) _IsParamSpecFixed() {}
+func (self ParamSpecFixed) GetGObject() unsafe.Pointer { return self._value_ }
+func ToParamSpecFixed(value unsafe.Pointer) ParamSpecFixed {
+	return ParamSpecFixed{
+		ToParamSpec(value),
+		value,
+	}
+}
+type Timeline struct {
+	GObjectObject
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type TimelineKind interface {
+  _IsTimeline()
+  GetGObject() unsafe.Pointer
+}
+func (self Timeline) _IsTimeline() {}
+func (self Timeline) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTimeline(value unsafe.Pointer) Timeline {
+	return Timeline{
+		ToGObjectObject(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Timeline) _IsScriptable () {}
+type RotateAction struct {
+	GestureAction
+	_value_ unsafe.Pointer
+}
+type RotateActionKind interface {
+  _IsRotateAction()
+  GetGObject() unsafe.Pointer
+}
+func (self RotateAction) _IsRotateAction() {}
+func (self RotateAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToRotateAction(value unsafe.Pointer) RotateAction {
+	return RotateAction{
+		ToGestureAction(value),
+		value,
+	}
+}
+type Effect struct {
+	ActorMeta
+	_value_ unsafe.Pointer
+}
+type EffectKind interface {
+  _IsEffect()
+  GetGObject() unsafe.Pointer
+}
+func (self Effect) _IsEffect() {}
+func (self Effect) GetGObject() unsafe.Pointer { return self._value_ }
+func ToEffect(value unsafe.Pointer) Effect {
+	return Effect{
+		ToActorMeta(value),
+		value,
+	}
+}
+type ClutterRectangle struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type ClutterRectangleKind interface {
+  _IsClutterRectangle()
+  GetGObject() unsafe.Pointer
+}
+func (self ClutterRectangle) _IsClutterRectangle() {}
+func (self ClutterRectangle) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClutterRectangle(value unsafe.Pointer) ClutterRectangle {
+	return ClutterRectangle{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self ClutterRectangle) _IsImplementorIface () {}
+func (self ClutterRectangle) _IsAnimatable () {}
+func (self ClutterRectangle) _IsContainer () {}
+func (self ClutterRectangle) _IsScriptable () {}
+type InputDevice struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type InputDeviceKind interface {
+  _IsInputDevice()
+  GetGObject() unsafe.Pointer
+}
+func (self InputDevice) _IsInputDevice() {}
+func (self InputDevice) GetGObject() unsafe.Pointer { return self._value_ }
+func ToInputDevice(value unsafe.Pointer) InputDevice {
+	return InputDevice{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type PageTurnEffect struct {
+	DeformEffect
+	_value_ unsafe.Pointer
+}
+type PageTurnEffectKind interface {
+  _IsPageTurnEffect()
+  GetGObject() unsafe.Pointer
+}
+func (self PageTurnEffect) _IsPageTurnEffect() {}
+func (self PageTurnEffect) GetGObject() unsafe.Pointer { return self._value_ }
+func ToPageTurnEffect(value unsafe.Pointer) PageTurnEffect {
+	return PageTurnEffect{
+		ToDeformEffect(value),
+		value,
+	}
+}
+type ParamSpecColor struct {
+	ParamSpec
+	_value_ unsafe.Pointer
+}
+type ParamSpecColorKind interface {
+  _IsParamSpecColor()
+  GetGObject() unsafe.Pointer
+}
+func (self ParamSpecColor) _IsParamSpecColor() {}
+func (self ParamSpecColor) GetGObject() unsafe.Pointer { return self._value_ }
+func ToParamSpecColor(value unsafe.Pointer) ParamSpecColor {
+	return ParamSpecColor{
+		ToParamSpec(value),
+		value,
+	}
+}
+type PropertyTransition struct {
+	Transition
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type PropertyTransitionKind interface {
+  _IsPropertyTransition()
+  GetGObject() unsafe.Pointer
+}
+func (self PropertyTransition) _IsPropertyTransition() {}
+func (self PropertyTransition) GetGObject() unsafe.Pointer { return self._value_ }
+func ToPropertyTransition(value unsafe.Pointer) PropertyTransition {
+	return PropertyTransition{
+		ToTransition(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self PropertyTransition) _IsScriptable () {}
+type BehaviourOpacity struct {
+	Behaviour
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type BehaviourOpacityKind interface {
+  _IsBehaviourOpacity()
+  GetGObject() unsafe.Pointer
+}
+func (self BehaviourOpacity) _IsBehaviourOpacity() {}
+func (self BehaviourOpacity) GetGObject() unsafe.Pointer { return self._value_ }
+func ToBehaviourOpacity(value unsafe.Pointer) BehaviourOpacity {
+	return BehaviourOpacity{
+		ToBehaviour(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self BehaviourOpacity) _IsScriptable () {}
+type ClutterText struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type ClutterTextKind interface {
+  _IsClutterText()
+  GetGObject() unsafe.Pointer
+}
+func (self ClutterText) _IsClutterText() {}
+func (self ClutterText) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClutterText(value unsafe.Pointer) ClutterText {
+	return ClutterText{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self ClutterText) _IsImplementorIface () {}
+func (self ClutterText) _IsAnimatable () {}
+func (self ClutterText) _IsContainer () {}
+func (self ClutterText) _IsScriptable () {}
+type Constraint struct {
+	ActorMeta
+	_value_ unsafe.Pointer
+}
+type ConstraintKind interface {
+  _IsConstraint()
+  GetGObject() unsafe.Pointer
+}
+func (self Constraint) _IsConstraint() {}
+func (self Constraint) GetGObject() unsafe.Pointer { return self._value_ }
+func ToConstraint(value unsafe.Pointer) Constraint {
+	return Constraint{
+		ToActorMeta(value),
+		value,
+	}
+}
+type Transition struct {
+	Timeline
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type TransitionKind interface {
+  _IsTransition()
+  GetGObject() unsafe.Pointer
+}
+func (self Transition) _IsTransition() {}
+func (self Transition) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTransition(value unsafe.Pointer) Transition {
+	return Transition{
+		ToTimeline(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Transition) _IsScriptable () {}
+type Scriptable struct {
+	_value_ unsafe.Pointer
+}
+type ScriptableKind interface {
+  _IsScriptable()
+  GetGObject() unsafe.Pointer
+}
+func (self Scriptable) _IsScriptable() {}
+func (self Scriptable) GetGObject() unsafe.Pointer { return self._value_ }
+func ToScriptable(value unsafe.Pointer) Scriptable {
+	return Scriptable{
+		value,
+	}
+}
+type ChildMeta struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type ChildMetaKind interface {
+  _IsChildMeta()
+  GetGObject() unsafe.Pointer
+}
+func (self ChildMeta) _IsChildMeta() {}
+func (self ChildMeta) GetGObject() unsafe.Pointer { return self._value_ }
+func ToChildMeta(value unsafe.Pointer) ChildMeta {
+	return ChildMeta{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type BindingPool struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type BindingPoolKind interface {
+  _IsBindingPool()
+  GetGObject() unsafe.Pointer
+}
+func (self BindingPool) _IsBindingPool() {}
+func (self BindingPool) GetGObject() unsafe.Pointer { return self._value_ }
+func ToBindingPool(value unsafe.Pointer) BindingPool {
+	return BindingPool{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ColorizeEffect struct {
+	OffscreenEffect
+	_value_ unsafe.Pointer
+}
+type ColorizeEffectKind interface {
+  _IsColorizeEffect()
+  GetGObject() unsafe.Pointer
+}
+func (self ColorizeEffect) _IsColorizeEffect() {}
+func (self ColorizeEffect) GetGObject() unsafe.Pointer { return self._value_ }
+func ToColorizeEffect(value unsafe.Pointer) ColorizeEffect {
+	return ColorizeEffect{
+		ToOffscreenEffect(value),
+		value,
+	}
+}
+type PipelineNode struct {
+	PaintNode
+	_value_ unsafe.Pointer
+}
+type PipelineNodeKind interface {
+  _IsPipelineNode()
+  GetGObject() unsafe.Pointer
+}
+func (self PipelineNode) _IsPipelineNode() {}
+func (self PipelineNode) GetGObject() unsafe.Pointer { return self._value_ }
+func ToPipelineNode(value unsafe.Pointer) PipelineNode {
+	return PipelineNode{
+		ToPaintNode(value),
+		value,
+	}
+}
+type Interval struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
+type IntervalKind interface {
+  _IsInterval()
+  GetGObject() unsafe.Pointer
+}
+func (self Interval) _IsInterval() {}
+func (self Interval) GetGObject() unsafe.Pointer { return self._value_ }
+func ToInterval(value unsafe.Pointer) Interval {
+	return Interval{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
+type BehaviourEllipse struct {
+	Behaviour
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type BehaviourEllipseKind interface {
+  _IsBehaviourEllipse()
+  GetGObject() unsafe.Pointer
+}
+func (self BehaviourEllipse) _IsBehaviourEllipse() {}
+func (self BehaviourEllipse) GetGObject() unsafe.Pointer { return self._value_ }
+func ToBehaviourEllipse(value unsafe.Pointer) BehaviourEllipse {
+	return BehaviourEllipse{
+		ToBehaviour(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self BehaviourEllipse) _IsScriptable () {}
+type ListModel struct {
+	Model
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type ListModelKind interface {
+  _IsListModel()
+  GetGObject() unsafe.Pointer
+}
+func (self ListModel) _IsListModel() {}
+func (self ListModel) GetGObject() unsafe.Pointer { return self._value_ }
+func ToListModel(value unsafe.Pointer) ListModel {
+	return ListModel{
+		ToModel(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self ListModel) _IsScriptable () {}
+type Score struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
+type ScoreKind interface {
+  _IsScore()
+  GetGObject() unsafe.Pointer
+}
+func (self Score) _IsScore() {}
+func (self Score) GetGObject() unsafe.Pointer { return self._value_ }
+func ToScore(value unsafe.Pointer) Score {
+	return Score{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type ShaderInt struct {
+	_value_ unsafe.Pointer
+}
+type ShaderIntKind interface {
+  _IsShaderInt()
+  GetGObject() unsafe.Pointer
+}
+func (self ShaderInt) _IsShaderInt() {}
+func (self ShaderInt) GetGObject() unsafe.Pointer { return self._value_ }
+func ToShaderInt(value unsafe.Pointer) ShaderInt {
+	return ShaderInt{
+		value,
+	}
+}
+type Container struct {
+	_value_ unsafe.Pointer
+}
+type ContainerKind interface {
+  _IsContainer()
+  GetGObject() unsafe.Pointer
+}
+func (self Container) _IsContainer() {}
+func (self Container) GetGObject() unsafe.Pointer { return self._value_ }
+func ToContainer(value unsafe.Pointer) Container {
+	return Container{
+		value,
+	}
+}
+type AlignConstraint struct {
+	Constraint
+	_value_ unsafe.Pointer
+}
+type AlignConstraintKind interface {
+  _IsAlignConstraint()
+  GetGObject() unsafe.Pointer
+}
+func (self AlignConstraint) _IsAlignConstraint() {}
+func (self AlignConstraint) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAlignConstraint(value unsafe.Pointer) AlignConstraint {
+	return AlignConstraint{
+		ToConstraint(value),
+		value,
+	}
+}
+type Content struct {
+	_value_ unsafe.Pointer
+}
+type ContentKind interface {
+  _IsContent()
+  GetGObject() unsafe.Pointer
+}
+func (self Content) _IsContent() {}
+func (self Content) GetGObject() unsafe.Pointer { return self._value_ }
+func ToContent(value unsafe.Pointer) Content {
+	return Content{
+		value,
+	}
+}
+type TextureNode struct {
+	PipelineNode
+	_value_ unsafe.Pointer
+}
+type TextureNodeKind interface {
+  _IsTextureNode()
+  GetGObject() unsafe.Pointer
+}
+func (self TextureNode) _IsTextureNode() {}
+func (self TextureNode) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTextureNode(value unsafe.Pointer) TextureNode {
+	return TextureNode{
+		ToPipelineNode(value),
+		value,
+	}
+}
+type Animation struct {
+	GObjectObject
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type AnimationKind interface {
+  _IsAnimation()
+  GetGObject() unsafe.Pointer
+}
+func (self Animation) _IsAnimation() {}
+func (self Animation) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAnimation(value unsafe.Pointer) Animation {
+	return Animation{
+		ToGObjectObject(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Animation) _IsScriptable () {}
+type ZoomAction struct {
+	GestureAction
+	_value_ unsafe.Pointer
+}
+type ZoomActionKind interface {
+  _IsZoomAction()
+  GetGObject() unsafe.Pointer
+}
+func (self ZoomAction) _IsZoomAction() {}
+func (self ZoomAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToZoomAction(value unsafe.Pointer) ZoomAction {
+	return ZoomAction{
+		ToGestureAction(value),
+		value,
+	}
+}
+type DragAction struct {
+	ClutterAction
+	_value_ unsafe.Pointer
+}
+type DragActionKind interface {
+  _IsDragAction()
+  GetGObject() unsafe.Pointer
+}
+func (self DragAction) _IsDragAction() {}
+func (self DragAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToDragAction(value unsafe.Pointer) DragAction {
+	return DragAction{
+		ToClutterAction(value),
+		value,
+	}
+}
+type TransitionGroup struct {
+	Transition
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type TransitionGroupKind interface {
+  _IsTransitionGroup()
+  GetGObject() unsafe.Pointer
+}
+func (self TransitionGroup) _IsTransitionGroup() {}
+func (self TransitionGroup) GetGObject() unsafe.Pointer { return self._value_ }
+func ToTransitionGroup(value unsafe.Pointer) TransitionGroup {
+	return TransitionGroup{
+		ToTransition(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self TransitionGroup) _IsScriptable () {}
+type ClutterImage struct {
+	GObjectObject
+	Content
+	_value_ unsafe.Pointer
+}
+type ClutterImageKind interface {
+  _IsClutterImage()
+  GetGObject() unsafe.Pointer
+}
+func (self ClutterImage) _IsClutterImage() {}
+func (self ClutterImage) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClutterImage(value unsafe.Pointer) ClutterImage {
+	return ClutterImage{
+		ToGObjectObject(value),
+		ToContent(value),
+		value,
+	}
+}
+func (self ClutterImage) _IsContent () {}
+type Clone struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type CloneKind interface {
+  _IsClone()
+  GetGObject() unsafe.Pointer
+}
+func (self Clone) _IsClone() {}
+func (self Clone) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClone(value unsafe.Pointer) Clone {
+	return Clone{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Clone) _IsImplementorIface () {}
+func (self Clone) _IsAnimatable () {}
+func (self Clone) _IsContainer () {}
+func (self Clone) _IsScriptable () {}
+type SnapConstraint struct {
+	Constraint
+	_value_ unsafe.Pointer
+}
+type SnapConstraintKind interface {
+  _IsSnapConstraint()
+  GetGObject() unsafe.Pointer
+}
+func (self SnapConstraint) _IsSnapConstraint() {}
+func (self SnapConstraint) GetGObject() unsafe.Pointer { return self._value_ }
+func ToSnapConstraint(value unsafe.Pointer) SnapConstraint {
+	return SnapConstraint{
+		ToConstraint(value),
+		value,
+	}
+}
+type BrightnessContrastEffect struct {
+	OffscreenEffect
+	_value_ unsafe.Pointer
+}
+type BrightnessContrastEffectKind interface {
+  _IsBrightnessContrastEffect()
+  GetGObject() unsafe.Pointer
+}
+func (self BrightnessContrastEffect) _IsBrightnessContrastEffect() {}
+func (self BrightnessContrastEffect) GetGObject() unsafe.Pointer { return self._value_ }
+func ToBrightnessContrastEffect(value unsafe.Pointer) BrightnessContrastEffect {
+	return BrightnessContrastEffect{
+		ToOffscreenEffect(value),
+		value,
+	}
+}
+type ShaderEffect struct {
+	OffscreenEffect
+	_value_ unsafe.Pointer
+}
+type ShaderEffectKind interface {
+  _IsShaderEffect()
+  GetGObject() unsafe.Pointer
+}
+func (self ShaderEffect) _IsShaderEffect() {}
+func (self ShaderEffect) GetGObject() unsafe.Pointer { return self._value_ }
+func ToShaderEffect(value unsafe.Pointer) ShaderEffect {
+	return ShaderEffect{
+		ToOffscreenEffect(value),
+		value,
+	}
+}
+type Alpha struct {
+	InitiallyUnowned
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type AlphaKind interface {
+  _IsAlpha()
+  GetGObject() unsafe.Pointer
+}
+func (self Alpha) _IsAlpha() {}
+func (self Alpha) GetGObject() unsafe.Pointer { return self._value_ }
+func ToAlpha(value unsafe.Pointer) Alpha {
+	return Alpha{
+		ToInitiallyUnowned(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self Alpha) _IsScriptable () {}
+type LayoutMeta struct {
+	ChildMeta
+	_value_ unsafe.Pointer
+}
+type LayoutMetaKind interface {
+  _IsLayoutMeta()
+  GetGObject() unsafe.Pointer
+}
+func (self LayoutMeta) _IsLayoutMeta() {}
+func (self LayoutMeta) GetGObject() unsafe.Pointer { return self._value_ }
+func ToLayoutMeta(value unsafe.Pointer) LayoutMeta {
+	return LayoutMeta{
+		ToChildMeta(value),
+		value,
+	}
+}
+type DropAction struct {
+	ClutterAction
+	_value_ unsafe.Pointer
+}
+type DropActionKind interface {
+  _IsDropAction()
+  GetGObject() unsafe.Pointer
+}
+func (self DropAction) _IsDropAction() {}
+func (self DropAction) GetGObject() unsafe.Pointer { return self._value_ }
+func ToDropAction(value unsafe.Pointer) DropAction {
+	return DropAction{
+		ToClutterAction(value),
+		value,
+	}
+}
+type ShaderFloat struct {
+	_value_ unsafe.Pointer
+}
+type ShaderFloatKind interface {
+  _IsShaderFloat()
+  GetGObject() unsafe.Pointer
+}
+func (self ShaderFloat) _IsShaderFloat() {}
+func (self ShaderFloat) GetGObject() unsafe.Pointer { return self._value_ }
+func ToShaderFloat(value unsafe.Pointer) ShaderFloat {
+	return ShaderFloat{
+		value,
+	}
+}
+type PathConstraint struct {
+	Constraint
+	_value_ unsafe.Pointer
+}
 type PathConstraintKind interface {
   _IsPathConstraint()
   GetGObject() unsafe.Pointer
 }
-func (self PathConstraint) _IsPathConstraint () {}
+func (self PathConstraint) _IsPathConstraint() {}
 func (self PathConstraint) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPathConstraint(value unsafe.Pointer) PathConstraint { return PathConstraint{Constraint{ActorMeta{InitiallyUnowned{Object{value}}}}} }
-type DeviceManager struct { Object }
+func ToPathConstraint(value unsafe.Pointer) PathConstraint {
+	return PathConstraint{
+		ToConstraint(value),
+		value,
+	}
+}
+type DeviceManager struct {
+	GObjectObject
+	_value_ unsafe.Pointer
+}
 type DeviceManagerKind interface {
   _IsDeviceManager()
   GetGObject() unsafe.Pointer
 }
-func (self DeviceManager) _IsDeviceManager () {}
+func (self DeviceManager) _IsDeviceManager() {}
 func (self DeviceManager) GetGObject() unsafe.Pointer { return self._value_ }
-func ToDeviceManager(value unsafe.Pointer) DeviceManager { return DeviceManager{Object{value}} }
-type CairoTexture struct { Texture }
+func ToDeviceManager(value unsafe.Pointer) DeviceManager {
+	return DeviceManager{
+		ToGObjectObject(value),
+		value,
+	}
+}
+type CairoTexture struct {
+	Texture
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
 type CairoTextureKind interface {
   _IsCairoTexture()
   GetGObject() unsafe.Pointer
 }
-func (self CairoTexture) _IsCairoTexture () {}
+func (self CairoTexture) _IsCairoTexture() {}
 func (self CairoTexture) GetGObject() unsafe.Pointer { return self._value_ }
-func ToCairoTexture(value unsafe.Pointer) CairoTexture { return CairoTexture{Texture{Actor{InitiallyUnowned{Object{value}}}}} }
-func (self CairoTexture) _IsAtkImplementorIface () {}
+func ToCairoTexture(value unsafe.Pointer) CairoTexture {
+	return CairoTexture{
+		ToTexture(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self CairoTexture) _IsImplementorIface () {}
 func (self CairoTexture) _IsAnimatable () {}
 func (self CairoTexture) _IsContainer () {}
 func (self CairoTexture) _IsScriptable () {}
@@ -2072,13 +2918,13 @@ func ActorNew() (_go__return__ Actor) {
 	return
 }
 
-func (_self_ *Actor) AddAction(action ActionKind) () {
+func (_self_ *Actor) AddAction(action ClutterActionKind) () {
 	_cgo_action_ := (*C.ClutterAction)(action.GetGObject())
 	C.clutter_actor_add_action((*C.ClutterActor)(_self_._value_), _cgo_action_)
 	return
 }
 
-func (_self_ *Actor) AddActionWithName(name string, action ActionKind) () {
+func (_self_ *Actor) AddActionWithName(name string, action ClutterActionKind) () {
 	_cgo_action_ := (*C.ClutterAction)(action.GetGObject())
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2246,13 +3092,13 @@ func (_self_ *Actor) GetAccessible() (_return_ *C.AtkObject) {
 	return
 }
 
-func (_self_ *Actor) GetAction(name string) (_go__return__ Action) {
+func (_self_ *Actor) GetAction(name string) (_go__return__ ClutterAction) {
 	var _return_ *C.ClutterAction
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
 	_return_ = C._clutter_actor_get_action((*C.ClutterActor)(_self_._value_), _cgo_name_)
-	_go__return__ = ToAction(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterAction(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2925,7 +3771,7 @@ func (_self_ *Actor) Realize() () {
 	return
 }
 
-func (_self_ *Actor) RemoveAction(action ActionKind) () {
+func (_self_ *Actor) RemoveAction(action ClutterActionKind) () {
 	_cgo_action_ := (*C.ClutterAction)(action.GetGObject())
 	C.clutter_actor_remove_action((*C.ClutterActor)(_self_._value_), _cgo_action_)
 	return
@@ -4302,7 +5148,7 @@ func ImageNew() (_go__return__ Content) {
 	return
 }
 
-func (_self_ *Image) SetBytes(data *C.GBytes, pixel_format C.CoglPixelFormat, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format C.CoglPixelFormat, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
@@ -5858,14 +6704,14 @@ func (_self_ *TableLayout) SetSpan(actor ActorKind, column_span int, row_span in
 	return
 }
 
-func TextNew() (_go__return__ Text) {
+func TextNew() (_go__return__ ClutterText) {
 	var _return_ *C.ClutterActor
 	_return_ = C.clutter_text_new()
-	_go__return__ = ToText(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterText(unsafe.Pointer(_return_))
 	return
 }
 
-func TextNewFull(font_name string, text string, color *Color) (_go__return__ Text) {
+func TextNewFull(font_name string, text string, color *Color) (_go__return__ ClutterText) {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	var _return_ *C.ClutterActor
 	_cstring_font_name_ := C.CString(font_name)
@@ -5875,19 +6721,19 @@ func TextNewFull(font_name string, text string, color *Color) (_go__return__ Tex
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
 	defer C.free(unsafe.Pointer(_cstring_text_))
 	_return_ = C._clutter_text_new_full(_cgo_font_name_, _cgo_text_, _cgo_color_)
-	_go__return__ = ToText(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterText(unsafe.Pointer(_return_))
 	return
 }
 
-func TextNewWithBuffer(buffer TextBufferKind) (_go__return__ Text) {
+func TextNewWithBuffer(buffer TextBufferKind) (_go__return__ ClutterText) {
 	_cgo_buffer_ := (*C.ClutterTextBuffer)(buffer.GetGObject())
 	var _return_ *C.ClutterActor
 	_return_ = C.clutter_text_new_with_buffer(_cgo_buffer_)
-	_go__return__ = ToText(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterText(unsafe.Pointer(_return_))
 	return
 }
 
-func TextNewWithText(font_name string, text string) (_go__return__ Text) {
+func TextNewWithText(font_name string, text string) (_go__return__ ClutterText) {
 	var _return_ *C.ClutterActor
 	_cstring_font_name_ := C.CString(font_name)
 	_cgo_font_name_ := (*C.gchar)(unsafe.Pointer(_cstring_font_name_))
@@ -5896,18 +6742,18 @@ func TextNewWithText(font_name string, text string) (_go__return__ Text) {
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
 	defer C.free(unsafe.Pointer(_cstring_text_))
 	_return_ = C._clutter_text_new_with_text(_cgo_font_name_, _cgo_text_)
-	_go__return__ = ToText(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterText(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Text) Activate() (_go__return__ bool) {
+func (_self_ *ClutterText) Activate() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_activate((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) CoordsToPosition(x float64, y float64) (_go__return__ int) {
+func (_self_ *ClutterText) CoordsToPosition(x float64, y float64) (_go__return__ int) {
 	_cgo_x_ := (C.gfloat)(x)
 	_cgo_y_ := (C.gfloat)(y)
 	var _return_ C.gint
@@ -5916,46 +6762,46 @@ func (_self_ *Text) CoordsToPosition(x float64, y float64) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Text) DeleteChars(n_chars uint) () {
+func (_self_ *ClutterText) DeleteChars(n_chars uint) () {
 	_cgo_n_chars_ := (C.guint)(n_chars)
 	C.clutter_text_delete_chars((*C.ClutterText)(_self_._value_), _cgo_n_chars_)
 	return
 }
 
-func (_self_ *Text) DeleteSelection() (_go__return__ bool) {
+func (_self_ *ClutterText) DeleteSelection() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_delete_selection((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) DeleteText(start_pos int64, end_pos int64) () {
+func (_self_ *ClutterText) DeleteText(start_pos int64, end_pos int64) () {
 	_cgo_start_pos_ := (C.gssize)(start_pos)
 	_cgo_end_pos_ := (C.gssize)(end_pos)
 	C.clutter_text_delete_text((*C.ClutterText)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
 	return
 }
 
-func (_self_ *Text) GetActivatable() (_go__return__ bool) {
+func (_self_ *ClutterText) GetActivatable() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_activatable((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetAttributes() (_return_ *C.PangoAttrList) {
+func (_self_ *ClutterText) GetAttributes() (_return_ *C.PangoAttrList) {
 	_return_ = C.clutter_text_get_attributes((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetBuffer() (_go__return__ TextBuffer) {
+func (_self_ *ClutterText) GetBuffer() (_go__return__ TextBuffer) {
 	var _return_ *C.ClutterTextBuffer
 	_return_ = C.clutter_text_get_buffer((*C.ClutterText)(_self_._value_))
 	_go__return__ = ToTextBuffer(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Text) GetChars(start_pos int64, end_pos int64) (_go__return__ string) {
+func (_self_ *ClutterText) GetChars(start_pos int64, end_pos int64) (_go__return__ string) {
 	_cgo_start_pos_ := (C.gssize)(start_pos)
 	_cgo_end_pos_ := (C.gssize)(end_pos)
 	var _return_ *C.gchar
@@ -5964,78 +6810,78 @@ func (_self_ *Text) GetChars(start_pos int64, end_pos int64) (_go__return__ stri
 	return
 }
 
-func (_self_ *Text) GetColor() (color *Color) {
+func (_self_ *ClutterText) GetColor() (color *Color) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
 	color = (*Color)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
-func (_self_ *Text) GetCursorColor() (color *Color) {
+func (_self_ *ClutterText) GetCursorColor() (color *Color) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_cursor_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
 	color = (*Color)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
-func (_self_ *Text) GetCursorPosition() (_go__return__ int) {
+func (_self_ *ClutterText) GetCursorPosition() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.clutter_text_get_cursor_position((*C.ClutterText)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Text) GetCursorSize() (_go__return__ uint) {
+func (_self_ *ClutterText) GetCursorSize() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.clutter_text_get_cursor_size((*C.ClutterText)(_self_._value_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Text) GetCursorVisible() (_go__return__ bool) {
+func (_self_ *ClutterText) GetCursorVisible() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_cursor_visible((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetEditable() (_go__return__ bool) {
+func (_self_ *ClutterText) GetEditable() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_editable((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetEllipsize() (_return_ C.PangoEllipsizeMode) {
+func (_self_ *ClutterText) GetEllipsize() (_return_ C.PangoEllipsizeMode) {
 	_return_ = C.clutter_text_get_ellipsize((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetFontDescription() (_return_ *C.PangoFontDescription) {
+func (_self_ *ClutterText) GetFontDescription() (_return_ *C.PangoFontDescription) {
 	_return_ = C.clutter_text_get_font_description((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetFontName() (_go__return__ string) {
+func (_self_ *ClutterText) GetFontName() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._clutter_text_get_font_name((*C.ClutterText)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Text) GetJustify() (_go__return__ bool) {
+func (_self_ *ClutterText) GetJustify() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_justify((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetLayout() (_return_ *C.PangoLayout) {
+func (_self_ *ClutterText) GetLayout() (_return_ *C.PangoLayout) {
 	_return_ = C.clutter_text_get_layout((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetLayoutOffsets() (_go_x_ int, _go_y_ int) {
+func (_self_ *ClutterText) GetLayoutOffsets() (_go_x_ int, _go_y_ int) {
 	var x C.gint
 	var y C.gint
 	C.clutter_text_get_layout_offsets((*C.ClutterText)(_self_._value_), &x, &y)
@@ -6044,92 +6890,92 @@ func (_self_ *Text) GetLayoutOffsets() (_go_x_ int, _go_y_ int) {
 	return
 }
 
-func (_self_ *Text) GetLineAlignment() (_return_ C.PangoAlignment) {
+func (_self_ *ClutterText) GetLineAlignment() (_return_ C.PangoAlignment) {
 	_return_ = C.clutter_text_get_line_alignment((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetLineWrap() (_go__return__ bool) {
+func (_self_ *ClutterText) GetLineWrap() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_line_wrap((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetLineWrapMode() (_return_ C.PangoWrapMode) {
+func (_self_ *ClutterText) GetLineWrapMode() (_return_ C.PangoWrapMode) {
 	_return_ = C.clutter_text_get_line_wrap_mode((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetMaxLength() (_go__return__ int) {
+func (_self_ *ClutterText) GetMaxLength() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.clutter_text_get_max_length((*C.ClutterText)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Text) GetPasswordChar() (_return_ C.gunichar) {
+func (_self_ *ClutterText) GetPasswordChar() (_return_ C.gunichar) {
 	_return_ = C.clutter_text_get_password_char((*C.ClutterText)(_self_._value_))
 	return
 }
 
-func (_self_ *Text) GetSelectable() (_go__return__ bool) {
+func (_self_ *ClutterText) GetSelectable() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_selectable((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetSelectedTextColor() (color *Color) {
+func (_self_ *ClutterText) GetSelectedTextColor() (color *Color) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_selected_text_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
 	color = (*Color)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
-func (_self_ *Text) GetSelection() (_go__return__ string) {
+func (_self_ *ClutterText) GetSelection() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.clutter_text_get_selection((*C.ClutterText)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Text) GetSelectionBound() (_go__return__ int) {
+func (_self_ *ClutterText) GetSelectionBound() (_go__return__ int) {
 	var _return_ C.gint
 	_return_ = C.clutter_text_get_selection_bound((*C.ClutterText)(_self_._value_))
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Text) GetSelectionColor() (color *Color) {
+func (_self_ *ClutterText) GetSelectionColor() (color *Color) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_selection_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
 	color = (*Color)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
-func (_self_ *Text) GetSingleLineMode() (_go__return__ bool) {
+func (_self_ *ClutterText) GetSingleLineMode() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_single_line_mode((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) GetText() (_go__return__ string) {
+func (_self_ *ClutterText) GetText() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._clutter_text_get_text((*C.ClutterText)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Text) GetUseMarkup() (_go__return__ bool) {
+func (_self_ *ClutterText) GetUseMarkup() (_go__return__ bool) {
 	var _return_ C.gboolean
 	_return_ = C.clutter_text_get_use_markup((*C.ClutterText)(_self_._value_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Text) InsertText(text string, position int64) () {
+func (_self_ *ClutterText) InsertText(text string, position int64) () {
 	_cgo_position_ := (C.gssize)(position)
 	_cstring_text_ := C.CString(text)
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
@@ -6138,12 +6984,12 @@ func (_self_ *Text) InsertText(text string, position int64) () {
 	return
 }
 
-func (_self_ *Text) InsertUnichar(wc C.gunichar) () {
+func (_self_ *ClutterText) InsertUnichar(wc C.gunichar) () {
 	C.clutter_text_insert_unichar((*C.ClutterText)(_self_._value_), wc)
 	return
 }
 
-func (_self_ *Text) PositionToCoords(position int) (_go__return__ bool, _go_x_ float64, _go_y_ float64, _go_line_height_ float64) {
+func (_self_ *ClutterText) PositionToCoords(position int) (_go__return__ bool, _go_x_ float64, _go_y_ float64, _go_line_height_ float64) {
 	_cgo_position_ := (C.gint)(position)
 	var x C.gfloat
 	var y C.gfloat
@@ -6157,73 +7003,73 @@ func (_self_ *Text) PositionToCoords(position int) (_go__return__ bool, _go_x_ f
 	return
 }
 
-func (_self_ *Text) SetActivatable(activatable bool) () {
+func (_self_ *ClutterText) SetActivatable(activatable bool) () {
 	_cgo_activatable_ := (C.gboolean)(C.FALSE)
 	if activatable { _cgo_activatable_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_activatable((*C.ClutterText)(_self_._value_), _cgo_activatable_)
 	return
 }
 
-func (_self_ *Text) SetAttributes(attrs *C.PangoAttrList) () {
+func (_self_ *ClutterText) SetAttributes(attrs *C.PangoAttrList) () {
 	C.clutter_text_set_attributes((*C.ClutterText)(_self_._value_), attrs)
 	return
 }
 
-func (_self_ *Text) SetBuffer(buffer TextBufferKind) () {
+func (_self_ *ClutterText) SetBuffer(buffer TextBufferKind) () {
 	_cgo_buffer_ := (*C.ClutterTextBuffer)(buffer.GetGObject())
 	C.clutter_text_set_buffer((*C.ClutterText)(_self_._value_), _cgo_buffer_)
 	return
 }
 
-func (_self_ *Text) SetColor(color *Color) () {
+func (_self_ *ClutterText) SetColor(color *Color) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
 }
 
-func (_self_ *Text) SetCursorColor(color *Color) () {
+func (_self_ *ClutterText) SetCursorColor(color *Color) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_cursor_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
 }
 
-func (_self_ *Text) SetCursorPosition(position int) () {
+func (_self_ *ClutterText) SetCursorPosition(position int) () {
 	_cgo_position_ := (C.gint)(position)
 	C.clutter_text_set_cursor_position((*C.ClutterText)(_self_._value_), _cgo_position_)
 	return
 }
 
-func (_self_ *Text) SetCursorSize(size int) () {
+func (_self_ *ClutterText) SetCursorSize(size int) () {
 	_cgo_size_ := (C.gint)(size)
 	C.clutter_text_set_cursor_size((*C.ClutterText)(_self_._value_), _cgo_size_)
 	return
 }
 
-func (_self_ *Text) SetCursorVisible(cursor_visible bool) () {
+func (_self_ *ClutterText) SetCursorVisible(cursor_visible bool) () {
 	_cgo_cursor_visible_ := (C.gboolean)(C.FALSE)
 	if cursor_visible { _cgo_cursor_visible_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_cursor_visible((*C.ClutterText)(_self_._value_), _cgo_cursor_visible_)
 	return
 }
 
-func (_self_ *Text) SetEditable(editable bool) () {
+func (_self_ *ClutterText) SetEditable(editable bool) () {
 	_cgo_editable_ := (C.gboolean)(C.FALSE)
 	if editable { _cgo_editable_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_editable((*C.ClutterText)(_self_._value_), _cgo_editable_)
 	return
 }
 
-func (_self_ *Text) SetEllipsize(mode C.PangoEllipsizeMode) () {
+func (_self_ *ClutterText) SetEllipsize(mode C.PangoEllipsizeMode) () {
 	C.clutter_text_set_ellipsize((*C.ClutterText)(_self_._value_), mode)
 	return
 }
 
-func (_self_ *Text) SetFontDescription(font_desc *C.PangoFontDescription) () {
+func (_self_ *ClutterText) SetFontDescription(font_desc *C.PangoFontDescription) () {
 	C.clutter_text_set_font_description((*C.ClutterText)(_self_._value_), font_desc)
 	return
 }
 
-func (_self_ *Text) SetFontName(font_name string) () {
+func (_self_ *ClutterText) SetFontName(font_name string) () {
 	_cstring_font_name_ := C.CString(font_name)
 	_cgo_font_name_ := (*C.gchar)(unsafe.Pointer(_cstring_font_name_))
 	defer C.free(unsafe.Pointer(_cstring_font_name_))
@@ -6231,31 +7077,31 @@ func (_self_ *Text) SetFontName(font_name string) () {
 	return
 }
 
-func (_self_ *Text) SetJustify(justify bool) () {
+func (_self_ *ClutterText) SetJustify(justify bool) () {
 	_cgo_justify_ := (C.gboolean)(C.FALSE)
 	if justify { _cgo_justify_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_justify((*C.ClutterText)(_self_._value_), _cgo_justify_)
 	return
 }
 
-func (_self_ *Text) SetLineAlignment(alignment C.PangoAlignment) () {
+func (_self_ *ClutterText) SetLineAlignment(alignment C.PangoAlignment) () {
 	C.clutter_text_set_line_alignment((*C.ClutterText)(_self_._value_), alignment)
 	return
 }
 
-func (_self_ *Text) SetLineWrap(line_wrap bool) () {
+func (_self_ *ClutterText) SetLineWrap(line_wrap bool) () {
 	_cgo_line_wrap_ := (C.gboolean)(C.FALSE)
 	if line_wrap { _cgo_line_wrap_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_line_wrap((*C.ClutterText)(_self_._value_), _cgo_line_wrap_)
 	return
 }
 
-func (_self_ *Text) SetLineWrapMode(wrap_mode C.PangoWrapMode) () {
+func (_self_ *ClutterText) SetLineWrapMode(wrap_mode C.PangoWrapMode) () {
 	C.clutter_text_set_line_wrap_mode((*C.ClutterText)(_self_._value_), wrap_mode)
 	return
 }
 
-func (_self_ *Text) SetMarkup(markup string) () {
+func (_self_ *ClutterText) SetMarkup(markup string) () {
 	_cstring_markup_ := C.CString(markup)
 	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
 	defer C.free(unsafe.Pointer(_cstring_markup_))
@@ -6263,18 +7109,18 @@ func (_self_ *Text) SetMarkup(markup string) () {
 	return
 }
 
-func (_self_ *Text) SetMaxLength(max int) () {
+func (_self_ *ClutterText) SetMaxLength(max int) () {
 	_cgo_max_ := (C.gint)(max)
 	C.clutter_text_set_max_length((*C.ClutterText)(_self_._value_), _cgo_max_)
 	return
 }
 
-func (_self_ *Text) SetPasswordChar(wc C.gunichar) () {
+func (_self_ *ClutterText) SetPasswordChar(wc C.gunichar) () {
 	C.clutter_text_set_password_char((*C.ClutterText)(_self_._value_), wc)
 	return
 }
 
-func (_self_ *Text) SetPreeditString(preedit_str string, preedit_attrs *C.PangoAttrList, cursor_pos uint) () {
+func (_self_ *ClutterText) SetPreeditString(preedit_str string, preedit_attrs *C.PangoAttrList, cursor_pos uint) () {
 	_cgo_cursor_pos_ := (C.guint)(cursor_pos)
 	_cstring_preedit_str_ := C.CString(preedit_str)
 	_cgo_preedit_str_ := (*C.gchar)(unsafe.Pointer(_cstring_preedit_str_))
@@ -6283,46 +7129,46 @@ func (_self_ *Text) SetPreeditString(preedit_str string, preedit_attrs *C.PangoA
 	return
 }
 
-func (_self_ *Text) SetSelectable(selectable bool) () {
+func (_self_ *ClutterText) SetSelectable(selectable bool) () {
 	_cgo_selectable_ := (C.gboolean)(C.FALSE)
 	if selectable { _cgo_selectable_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_selectable((*C.ClutterText)(_self_._value_), _cgo_selectable_)
 	return
 }
 
-func (_self_ *Text) SetSelectedTextColor(color *Color) () {
+func (_self_ *ClutterText) SetSelectedTextColor(color *Color) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_selected_text_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
 }
 
-func (_self_ *Text) SetSelection(start_pos int64, end_pos int64) () {
+func (_self_ *ClutterText) SetSelection(start_pos int64, end_pos int64) () {
 	_cgo_start_pos_ := (C.gssize)(start_pos)
 	_cgo_end_pos_ := (C.gssize)(end_pos)
 	C.clutter_text_set_selection((*C.ClutterText)(_self_._value_), _cgo_start_pos_, _cgo_end_pos_)
 	return
 }
 
-func (_self_ *Text) SetSelectionBound(selection_bound int) () {
+func (_self_ *ClutterText) SetSelectionBound(selection_bound int) () {
 	_cgo_selection_bound_ := (C.gint)(selection_bound)
 	C.clutter_text_set_selection_bound((*C.ClutterText)(_self_._value_), _cgo_selection_bound_)
 	return
 }
 
-func (_self_ *Text) SetSelectionColor(color *Color) () {
+func (_self_ *ClutterText) SetSelectionColor(color *Color) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_selection_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
 }
 
-func (_self_ *Text) SetSingleLineMode(single_line bool) () {
+func (_self_ *ClutterText) SetSingleLineMode(single_line bool) () {
 	_cgo_single_line_ := (C.gboolean)(C.FALSE)
 	if single_line { _cgo_single_line_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_single_line_mode((*C.ClutterText)(_self_._value_), _cgo_single_line_)
 	return
 }
 
-func (_self_ *Text) SetText(text string) () {
+func (_self_ *ClutterText) SetText(text string) () {
 	_cstring_text_ := C.CString(text)
 	_cgo_text_ := (*C.gchar)(unsafe.Pointer(_cstring_text_))
 	defer C.free(unsafe.Pointer(_cstring_text_))
@@ -6330,7 +7176,7 @@ func (_self_ *Text) SetText(text string) () {
 	return
 }
 
-func (_self_ *Text) SetUseMarkup(setting bool) () {
+func (_self_ *ClutterText) SetUseMarkup(setting bool) () {
 	_cgo_setting_ := (C.gboolean)(C.FALSE)
 	if setting { _cgo_setting_ = (C.gboolean)(C.TRUE) }
 	C.clutter_text_set_use_markup((*C.ClutterText)(_self_._value_), _cgo_setting_)

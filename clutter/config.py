@@ -6,6 +6,16 @@ Compile_error_c_symbols = [
     'g_clear_object',
 ]
 
+Conflict_type_names = [
+  'Object',
+  'Action',
+  'Image',
+  'Text',
+  'ObjectClass',
+  'Value',
+  'Rectangle',
+]
+
 Not_exported_c_macros = [
   'CLUTTER_WINDOWING_GDK',
   'CLUTTER_X11_XINPUT_KEY_PRESS_EVENT',
