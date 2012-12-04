@@ -77,29 +77,44 @@ class Generator:
       print >>self.out, "type %s C.%s" % (name, c_type)
 
     for name, node in self.parser.class_types.iteritems():
-      field = None
-      if not node.parent:
-        field = 'unsafe.Pointer'
-      else:
-        field = self.parser.convert_gi_name_to_go_name(node.parent.resolved)
-      if field != 'unsafe.Pointer':
-        print >>self.out, 'type %s struct { %s }' % (name, field)
-      else:
-        print >>self.out, 'type %s struct { _value_ unsafe.Pointer }' % name
-      family_tree = self.parser.get_family_tree(name)
+      has_parent = False
+      embedded_fields = []
+      if node.parent:
+        has_parent = True
+        embedded_fields.append(self.parser.convert_gi_name_to_go_name(node.parent.resolved))
+      if isinstance(node, ast.Class):
+        for interface in node.interfaces:
+          embedded_fields.append(self.parser.convert_gi_name_to_go_name(interface.target_giname))
+      # type def
+      print >>self.out, 'type %s struct {' % name
+      for field in embedded_fields:
+        print >>self.out, '\t%s' % field
+      #if not has_parent:
+      print >>self.out, '\t_value_ unsafe.Pointer'
+      print >>self.out, '}'
+      # interface kind
       print >>self.out, '''\
 type {klass}Kind interface {{
   _Is{klass}()
   GetGObject() unsafe.Pointer
-}}
-func (self {klass}) _Is{klass} () {{}}
-func (self {klass}) GetGObject() unsafe.Pointer {{ return self._value_ }}
-func To{klass}(value unsafe.Pointer) {klass} {{ return {types}value{braces} }}\
-'''.format(
-    klass = name,
-    types = ''.join('%s{' % t for t in family_tree),
-    braces = '}' * len(family_tree),
-    )
+}}'''.format(
+        klass = name
+        )
+      # implement interface
+      print >>self.out, 'func (self {klass}) _Is{klass}() {{}}'.format(klass = name)
+      # get gobject method
+      print >>self.out, 'func (self {klass}) GetGObject() unsafe.Pointer {{ return self._value_ }}'.format(
+          klass = name)
+      # wrapper
+      print >>self.out, 'func To{klass}(value unsafe.Pointer) {klass} {{'.format(klass = name)
+      print >>self.out, '\treturn %s{' % name
+      for field in embedded_fields:
+        print >>self.out, '\t\tTo%s(value),' % field
+      #if not has_parent:
+      print >>self.out, '\t\tvalue,'
+      print >>self.out, '\t}'
+      print >>self.out, '}'
+      # implemented interfaces
       if isinstance(node, ast.Class):
         for inter in node.interfaces:
           print >>self.out, 'func (self {klass}) _Is{interface} () {{}}'.format(

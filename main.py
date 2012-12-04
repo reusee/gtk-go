@@ -26,8 +26,12 @@ class Translator:
       parser.prepare()
     # collect inheritance info
     for parser in self.parsers:
-      if not hasattr(parser, 'nodes_of_class'): continue
-      for node in parser.nodes_of_class + parser.nodes_of_interface:
+      nodes = []
+      if hasattr(parser, 'nodes_of_class'):
+        nodes.extend(parser.nodes_of_class)
+      if hasattr(parser, 'nodes_of_interface'):
+        nodes.extend(parser.nodes_of_interface)
+      for node in nodes:
         name = parser.convert_gi_name_to_go_name(node.gi_name)
         if self.class_parents.has_key(name):
           print 'type name conflict', name
