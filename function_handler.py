@@ -80,7 +80,6 @@ def collect_c_func_info(parser, generator, function, klass):
   for i, param in enumerate(lib_func_spec.parameters):
     value = Value()
     if function.is_method and i == 0: # use class type instead of spec type
-      assert klass.c_name == klass.gi_name.replace('.', '')
       if klass.ctype is None:
         value.c_parameter_type = klass.c_name + ' *'
       else:
@@ -113,7 +112,7 @@ def collect_go_func_info(parser, generator, function, klass):
     generator.has_receiver = True
     value = generator.c_parameters[0]
     value.receiver_name = '_self_'
-    value.receiver_type = '*' + klass.gi_name.replace('.', '')
+    value.receiver_type = '*' + parser.convert_gi_name_to_go_name(klass.gi_name)
     generator.receiver = value
 
   # go func name
@@ -126,8 +125,11 @@ def collect_go_func_info(parser, generator, function, klass):
   elif klass and not function.is_constructor and not function.is_method: # class or record static function
     generator.go_func_name = klass.gi_name.split('.')[-1] + generator.go_func_name
   if not function.is_method: # method function will not cause name conflict
+    if generator.go_func_name in parser.translator.names:
+      generator.go_func_name = parser.module_name.capitalize() + generator.go_func_name
     if generator.go_func_name in parser.conflict_function_names:
       generator.go_func_name = parser.module_name.capitalize() + generator.go_func_name
+    parser.translator.names.add(generator.go_func_name)
 
   # go return
   generator.cgo_has_return = generator.c_has_return
@@ -171,7 +173,7 @@ def collect_go_func_info(parser, generator, function, klass):
 
   if function.is_method: # _self_ param
     value = generator.c_parameters[0]
-    klass_name = klass.gi_name.replace('.', '')
+    klass_name = parser.convert_gi_name_to_go_name(klass.gi_name)
     if klass_name in parser.class_types:
       value.cgo_argument = '(%s)(%s._value_)' % (
           convert_to_cgo_type(value.c_parameter_type),
@@ -210,7 +212,7 @@ def dereference_basic_type_out_param(parser, generator, function, klass):
 def map_record_and_class_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.gir_info.type.target_giname is None: continue
-    gi_type = param.gir_info.type.target_giname.replace('.', '')
+    gi_type = parser.convert_gi_name_to_go_name(param.gir_info.type.target_giname)
     if (gi_type not in parser.record_types) and (gi_type not in parser.class_types): continue
 
     if gi_type in parser.record_types:
@@ -229,7 +231,7 @@ def map_record_and_class_returns(parser, generator, function, klass):
   for ret in generator.go_returns:
     if ret.gir_info is None: continue
     if ret.gir_info.type.target_giname is None: continue
-    gi_type = ret.gir_info.type.target_giname.replace('.', '')
+    gi_type = parser.convert_gi_name_to_go_name(ret.gir_info.type.target_giname)
     if (gi_type not in parser.record_types) and (gi_type not in parser.class_types): continue
 
     if isinstance(ret.gir_info, ast.Parameter) and ret.gir_info.caller_allocates:
@@ -269,7 +271,7 @@ def map_record_and_class_returns(parser, generator, function, klass):
           ret.go_return_name,
           convert_to_cgo_type(ret.c_return_type)))
         if function.is_constructor:
-          ret.go_return_type = klass.gi_name.replace('.', '')
+          ret.go_return_type = parser.convert_gi_name_to_go_name(klass.gi_name)
         else:
           ret.go_return_type = gi_type
         generator.statements_after_cgo_call.append('_go_%s_ = To%s(unsafe.Pointer(_return_))' % (

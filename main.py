@@ -13,10 +13,11 @@ class Translator:
   def __init__(self):
     self.class_parents = {}
     self.parsers = []
+    self.names = set()
+    self.namespaces = set()
 
   def add(self, filename):
     parser = Parser(filename, self)
-    parser.prepare()
     self.parsers.append(parser)
 
   def preprocess(self):
@@ -26,12 +27,15 @@ class Translator:
     # collect inheritance info
     for parser in self.parsers:
       for node in parser.nodes_of_class:
-        name = node.gi_name.replace('.', '')
+        name = parser.convert_gi_name_to_go_name(node.gi_name)
+        if self.class_parents.has_key(name):
+          print 'type name conflict', name
+          assert False
         if '_' in name: return
         if not node.parent:
           self.class_parents[name] = True
         else:
-          parent_name = node.parent.resolved.replace('.', '')
+          parent_name = parser.convert_gi_name_to_go_name(node.parent.resolved)
           self.class_parents[name] = parent_name
 
   def parse(self):
@@ -75,6 +79,7 @@ class Parser:
 
     self.namespace = parser.get_namespace()
     self.module_name = self.namespace.name.lower()
+    self.translator.namespaces.add(self.namespace.name)
     self.pkgconfig_packages = list(parser.get_pkgconfig_packages())
     self.includes = list(parser.get_c_includes())
     self.prefixes = self.namespace.symbol_prefixes
@@ -82,8 +87,8 @@ class Parser:
     self.functions = []
     self.const_symbols = set()
 
-    self.record_types = {}
     self.class_types = {}
+    self.record_types = {}
 
     self.exported_functions = set()
     self.functions_to_handle = []
@@ -149,23 +154,28 @@ class Parser:
       self.functions_to_handle.append((method, node))
 
   def handleRecord(self, node):
-    name = node.gi_name.replace('.', '')
+    name = self.convert_gi_name_to_go_name(node.gi_name)
     if '_' in name: return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
+    if name in self.translator.names:
+      print 'type name conflict', name
+      assert False
     self.record_types[name] = c_type
+    self.translator.names.add(name)
     self._handleCompositeType(node)
 
   def handleClass(self, node):
-    name = node.gi_name.replace('.', '')
+    name = self.convert_gi_name_to_go_name(node.gi_name)
     if '_' in name: return
     c_type = node.ctype
     if c_type in self.skip_symbols: return
     if not node.parent:
       self.class_types[name] = 'unsafe.Pointer'
     else:
-      parent_name = node.parent.resolved.replace('.', '')
+      parent_name = self.convert_gi_name_to_go_name(node.parent.resolved)
       self.class_types[name] = parent_name
+    self.translator.names.add(name)
     self._handleCompositeType(node)
 
   def handleAlias(self, alias):
@@ -191,6 +201,14 @@ class Parser:
       ret.append(t)
       t = self.translator.class_parents[t]
     return ret
+
+  def convert_gi_name_to_go_name(self, gi_name):
+    namespace, name = gi_name.split('.')
+    if namespace not in self.translator.namespaces:
+      name = gi_name.replace('.', '')
+    if name in self.conflict_type_names:
+      name = gi_name.replace('.', '')
+    return name
 
 def main():
   if len(sys.argv) < 2:
