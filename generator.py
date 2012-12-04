@@ -60,6 +60,7 @@ class Generator:
 
   def generate_const_symbols(self):
     for symbol in self.parser.const_symbols:
+      if self.parser.is_skip(symbol): continue
       go_name = symbol
       for prefix in self.parser.prefixes:
         if symbol.startswith(prefix.upper()):
