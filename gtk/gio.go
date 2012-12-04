@@ -1891,770 +1891,770 @@ type IOModuleScope C.GIOModuleScope
 type SimpleActionGroup struct { GObjectObject }
 type SimpleActionGroupKind interface {
   _IsSimpleActionGroup()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SimpleActionGroup) _IsSimpleActionGroup () {}
-func (self SimpleActionGroup) _getValue() unsafe.Pointer { return self._value_ }
+func (self SimpleActionGroup) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSimpleActionGroup(value unsafe.Pointer) SimpleActionGroup { return SimpleActionGroup{GObjectObject{value}} }
 type DBusProxy struct { GObjectObject }
 type DBusProxyKind interface {
   _IsDBusProxy()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusProxy) _IsDBusProxy () {}
-func (self DBusProxy) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusProxy) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusProxy(value unsafe.Pointer) DBusProxy { return DBusProxy{GObjectObject{value}} }
 type UnixOutputStream struct { OutputStream }
 type UnixOutputStreamKind interface {
   _IsUnixOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixOutputStream) _IsUnixOutputStream () {}
-func (self UnixOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixOutputStream(value unsafe.Pointer) UnixOutputStream { return UnixOutputStream{OutputStream{GObjectObject{value}}} }
 type NativeVolumeMonitor struct { VolumeMonitor }
 type NativeVolumeMonitorKind interface {
   _IsNativeVolumeMonitor()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self NativeVolumeMonitor) _IsNativeVolumeMonitor () {}
-func (self NativeVolumeMonitor) _getValue() unsafe.Pointer { return self._value_ }
+func (self NativeVolumeMonitor) GetGObject() unsafe.Pointer { return self._value_ }
 func ToNativeVolumeMonitor(value unsafe.Pointer) NativeVolumeMonitor { return NativeVolumeMonitor{VolumeMonitor{GObjectObject{value}}} }
 type FilenameCompleter struct { GObjectObject }
 type FilenameCompleterKind interface {
   _IsFilenameCompleter()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FilenameCompleter) _IsFilenameCompleter () {}
-func (self FilenameCompleter) _getValue() unsafe.Pointer { return self._value_ }
+func (self FilenameCompleter) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFilenameCompleter(value unsafe.Pointer) FilenameCompleter { return FilenameCompleter{GObjectObject{value}} }
 type TcpConnection struct { SocketConnection }
 type TcpConnectionKind interface {
   _IsTcpConnection()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TcpConnection) _IsTcpConnection () {}
-func (self TcpConnection) _getValue() unsafe.Pointer { return self._value_ }
+func (self TcpConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTcpConnection(value unsafe.Pointer) TcpConnection { return TcpConnection{SocketConnection{IOStream{GObjectObject{value}}}} }
 type ZlibDecompressor struct { GObjectObject }
 type ZlibDecompressorKind interface {
   _IsZlibDecompressor()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ZlibDecompressor) _IsZlibDecompressor () {}
-func (self ZlibDecompressor) _getValue() unsafe.Pointer { return self._value_ }
+func (self ZlibDecompressor) GetGObject() unsafe.Pointer { return self._value_ }
 func ToZlibDecompressor(value unsafe.Pointer) ZlibDecompressor { return ZlibDecompressor{GObjectObject{value}} }
 type SocketAddressEnumerator struct { GObjectObject }
 type SocketAddressEnumeratorKind interface {
   _IsSocketAddressEnumerator()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketAddressEnumerator) _IsSocketAddressEnumerator () {}
-func (self SocketAddressEnumerator) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketAddressEnumerator) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketAddressEnumerator(value unsafe.Pointer) SocketAddressEnumerator { return SocketAddressEnumerator{GObjectObject{value}} }
 type DataOutputStream struct { FilterOutputStream }
 type DataOutputStreamKind interface {
   _IsDataOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DataOutputStream) _IsDataOutputStream () {}
-func (self DataOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self DataOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDataOutputStream(value unsafe.Pointer) DataOutputStream { return DataOutputStream{FilterOutputStream{OutputStream{GObjectObject{value}}}} }
 type UnixMountMonitor struct { GObjectObject }
 type UnixMountMonitorKind interface {
   _IsUnixMountMonitor()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixMountMonitor) _IsUnixMountMonitor () {}
-func (self UnixMountMonitor) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixMountMonitor) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixMountMonitor(value unsafe.Pointer) UnixMountMonitor { return UnixMountMonitor{GObjectObject{value}} }
 type Task struct { GObjectObject }
 type TaskKind interface {
   _IsTask()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Task) _IsTask () {}
-func (self Task) _getValue() unsafe.Pointer { return self._value_ }
+func (self Task) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTask(value unsafe.Pointer) Task { return Task{GObjectObject{value}} }
 type MenuModel struct { GObjectObject }
 type MenuModelKind interface {
   _IsMenuModel()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self MenuModel) _IsMenuModel () {}
-func (self MenuModel) _getValue() unsafe.Pointer { return self._value_ }
+func (self MenuModel) GetGObject() unsafe.Pointer { return self._value_ }
 func ToMenuModel(value unsafe.Pointer) MenuModel { return MenuModel{GObjectObject{value}} }
 type SimpleAsyncResult struct { GObjectObject }
 type SimpleAsyncResultKind interface {
   _IsSimpleAsyncResult()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SimpleAsyncResult) _IsSimpleAsyncResult () {}
-func (self SimpleAsyncResult) _getValue() unsafe.Pointer { return self._value_ }
+func (self SimpleAsyncResult) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSimpleAsyncResult(value unsafe.Pointer) SimpleAsyncResult { return SimpleAsyncResult{GObjectObject{value}} }
 type ConverterInputStream struct { FilterInputStream }
 type ConverterInputStreamKind interface {
   _IsConverterInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ConverterInputStream) _IsConverterInputStream () {}
-func (self ConverterInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self ConverterInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToConverterInputStream(value unsafe.Pointer) ConverterInputStream { return ConverterInputStream{FilterInputStream{InputStream{GObjectObject{value}}}} }
 type DBusActionGroup struct { GObjectObject }
 type DBusActionGroupKind interface {
   _IsDBusActionGroup()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusActionGroup) _IsDBusActionGroup () {}
-func (self DBusActionGroup) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusActionGroup) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusActionGroup(value unsafe.Pointer) DBusActionGroup { return DBusActionGroup{GObjectObject{value}} }
 type SocketConnection struct { IOStream }
 type SocketConnectionKind interface {
   _IsSocketConnection()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketConnection) _IsSocketConnection () {}
-func (self SocketConnection) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketConnection(value unsafe.Pointer) SocketConnection { return SocketConnection{IOStream{GObjectObject{value}}} }
 type GioMountOperation struct { GObjectObject }
 type GioMountOperationKind interface {
   _IsGioMountOperation()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GioMountOperation) _IsGioMountOperation () {}
-func (self GioMountOperation) _getValue() unsafe.Pointer { return self._value_ }
+func (self GioMountOperation) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGioMountOperation(value unsafe.Pointer) GioMountOperation { return GioMountOperation{GObjectObject{value}} }
 type GioSocket struct { GObjectObject }
 type GioSocketKind interface {
   _IsGioSocket()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GioSocket) _IsGioSocket () {}
-func (self GioSocket) _getValue() unsafe.Pointer { return self._value_ }
+func (self GioSocket) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGioSocket(value unsafe.Pointer) GioSocket { return GioSocket{GObjectObject{value}} }
 type DBusConnection struct { GObjectObject }
 type DBusConnectionKind interface {
   _IsDBusConnection()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusConnection) _IsDBusConnection () {}
-func (self DBusConnection) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusConnection(value unsafe.Pointer) DBusConnection { return DBusConnection{GObjectObject{value}} }
 type UnixFDMessage struct { SocketControlMessage }
 type UnixFDMessageKind interface {
   _IsUnixFDMessage()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixFDMessage) _IsUnixFDMessage () {}
-func (self UnixFDMessage) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixFDMessage) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixFDMessage(value unsafe.Pointer) UnixFDMessage { return UnixFDMessage{SocketControlMessage{GObjectObject{value}}} }
 type ProxyAddress struct { InetSocketAddress }
 type ProxyAddressKind interface {
   _IsProxyAddress()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ProxyAddress) _IsProxyAddress () {}
-func (self ProxyAddress) _getValue() unsafe.Pointer { return self._value_ }
+func (self ProxyAddress) GetGObject() unsafe.Pointer { return self._value_ }
 func ToProxyAddress(value unsafe.Pointer) ProxyAddress { return ProxyAddress{InetSocketAddress{SocketAddress{GObjectObject{value}}}} }
 type CharsetConverter struct { GObjectObject }
 type CharsetConverterKind interface {
   _IsCharsetConverter()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self CharsetConverter) _IsCharsetConverter () {}
-func (self CharsetConverter) _getValue() unsafe.Pointer { return self._value_ }
+func (self CharsetConverter) GetGObject() unsafe.Pointer { return self._value_ }
 func ToCharsetConverter(value unsafe.Pointer) CharsetConverter { return CharsetConverter{GObjectObject{value}} }
 type FilterInputStream struct { InputStream }
 type FilterInputStreamKind interface {
   _IsFilterInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FilterInputStream) _IsFilterInputStream () {}
-func (self FilterInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self FilterInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFilterInputStream(value unsafe.Pointer) FilterInputStream { return FilterInputStream{InputStream{GObjectObject{value}}} }
 type InetAddress struct { GObjectObject }
 type InetAddressKind interface {
   _IsInetAddress()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self InetAddress) _IsInetAddress () {}
-func (self InetAddress) _getValue() unsafe.Pointer { return self._value_ }
+func (self InetAddress) GetGObject() unsafe.Pointer { return self._value_ }
 func ToInetAddress(value unsafe.Pointer) InetAddress { return InetAddress{GObjectObject{value}} }
 type DBusObjectSkeleton struct { GObjectObject }
 type DBusObjectSkeletonKind interface {
   _IsDBusObjectSkeleton()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusObjectSkeleton) _IsDBusObjectSkeleton () {}
-func (self DBusObjectSkeleton) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusObjectSkeleton) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusObjectSkeleton(value unsafe.Pointer) DBusObjectSkeleton { return DBusObjectSkeleton{GObjectObject{value}} }
 type DBusInterfaceSkeleton struct { GObjectObject }
 type DBusInterfaceSkeletonKind interface {
   _IsDBusInterfaceSkeleton()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusInterfaceSkeleton) _IsDBusInterfaceSkeleton () {}
-func (self DBusInterfaceSkeleton) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusInterfaceSkeleton) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusInterfaceSkeleton(value unsafe.Pointer) DBusInterfaceSkeleton { return DBusInterfaceSkeleton{GObjectObject{value}} }
 type FileIcon struct { GObjectObject }
 type FileIconKind interface {
   _IsFileIcon()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileIcon) _IsFileIcon () {}
-func (self FileIcon) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileIcon) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileIcon(value unsafe.Pointer) FileIcon { return FileIcon{GObjectObject{value}} }
 type UnixConnection struct { SocketConnection }
 type UnixConnectionKind interface {
   _IsUnixConnection()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixConnection) _IsUnixConnection () {}
-func (self UnixConnection) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixConnection(value unsafe.Pointer) UnixConnection { return UnixConnection{SocketConnection{IOStream{GObjectObject{value}}}} }
 type AppLaunchContext struct { GObjectObject }
 type AppLaunchContextKind interface {
   _IsAppLaunchContext()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self AppLaunchContext) _IsAppLaunchContext () {}
-func (self AppLaunchContext) _getValue() unsafe.Pointer { return self._value_ }
+func (self AppLaunchContext) GetGObject() unsafe.Pointer { return self._value_ }
 func ToAppLaunchContext(value unsafe.Pointer) AppLaunchContext { return AppLaunchContext{GObjectObject{value}} }
 type IOStream struct { GObjectObject }
 type IOStreamKind interface {
   _IsIOStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self IOStream) _IsIOStream () {}
-func (self IOStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self IOStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToIOStream(value unsafe.Pointer) IOStream { return IOStream{GObjectObject{value}} }
 type Permission struct { GObjectObject }
 type PermissionKind interface {
   _IsPermission()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Permission) _IsPermission () {}
-func (self Permission) _getValue() unsafe.Pointer { return self._value_ }
+func (self Permission) GetGObject() unsafe.Pointer { return self._value_ }
 func ToPermission(value unsafe.Pointer) Permission { return Permission{GObjectObject{value}} }
 type BufferedInputStream struct { FilterInputStream }
 type BufferedInputStreamKind interface {
   _IsBufferedInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self BufferedInputStream) _IsBufferedInputStream () {}
-func (self BufferedInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self BufferedInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToBufferedInputStream(value unsafe.Pointer) BufferedInputStream { return BufferedInputStream{FilterInputStream{InputStream{GObjectObject{value}}}} }
 type GioMenuItem struct { GObjectObject }
 type GioMenuItemKind interface {
   _IsGioMenuItem()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GioMenuItem) _IsGioMenuItem () {}
-func (self GioMenuItem) _getValue() unsafe.Pointer { return self._value_ }
+func (self GioMenuItem) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGioMenuItem(value unsafe.Pointer) GioMenuItem { return GioMenuItem{GObjectObject{value}} }
 type DBusObjectManagerServer struct { GObjectObject }
 type DBusObjectManagerServerKind interface {
   _IsDBusObjectManagerServer()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusObjectManagerServer) _IsDBusObjectManagerServer () {}
-func (self DBusObjectManagerServer) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusObjectManagerServer) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusObjectManagerServer(value unsafe.Pointer) DBusObjectManagerServer { return DBusObjectManagerServer{GObjectObject{value}} }
 type UnixFDList struct { GObjectObject }
 type UnixFDListKind interface {
   _IsUnixFDList()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixFDList) _IsUnixFDList () {}
-func (self UnixFDList) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixFDList) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixFDList(value unsafe.Pointer) UnixFDList { return UnixFDList{GObjectObject{value}} }
 type EmblemedIcon struct { GObjectObject }
 type EmblemedIconKind interface {
   _IsEmblemedIcon()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self EmblemedIcon) _IsEmblemedIcon () {}
-func (self EmblemedIcon) _getValue() unsafe.Pointer { return self._value_ }
+func (self EmblemedIcon) GetGObject() unsafe.Pointer { return self._value_ }
 func ToEmblemedIcon(value unsafe.Pointer) EmblemedIcon { return EmblemedIcon{GObjectObject{value}} }
 type TlsConnection struct { IOStream }
 type TlsConnectionKind interface {
   _IsTlsConnection()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TlsConnection) _IsTlsConnection () {}
-func (self TlsConnection) _getValue() unsafe.Pointer { return self._value_ }
+func (self TlsConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTlsConnection(value unsafe.Pointer) TlsConnection { return TlsConnection{IOStream{GObjectObject{value}}} }
 type TestDBus struct { GObjectObject }
 type TestDBusKind interface {
   _IsTestDBus()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TestDBus) _IsTestDBus () {}
-func (self TestDBus) _getValue() unsafe.Pointer { return self._value_ }
+func (self TestDBus) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTestDBus(value unsafe.Pointer) TestDBus { return TestDBus{GObjectObject{value}} }
 type SocketControlMessage struct { GObjectObject }
 type SocketControlMessageKind interface {
   _IsSocketControlMessage()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketControlMessage) _IsSocketControlMessage () {}
-func (self SocketControlMessage) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketControlMessage) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketControlMessage(value unsafe.Pointer) SocketControlMessage { return SocketControlMessage{GObjectObject{value}} }
 type ProxyAddressEnumerator struct { SocketAddressEnumerator }
 type ProxyAddressEnumeratorKind interface {
   _IsProxyAddressEnumerator()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ProxyAddressEnumerator) _IsProxyAddressEnumerator () {}
-func (self ProxyAddressEnumerator) _getValue() unsafe.Pointer { return self._value_ }
+func (self ProxyAddressEnumerator) GetGObject() unsafe.Pointer { return self._value_ }
 func ToProxyAddressEnumerator(value unsafe.Pointer) ProxyAddressEnumerator { return ProxyAddressEnumerator{SocketAddressEnumerator{GObjectObject{value}}} }
 type Vfs struct { GObjectObject }
 type VfsKind interface {
   _IsVfs()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Vfs) _IsVfs () {}
-func (self Vfs) _getValue() unsafe.Pointer { return self._value_ }
+func (self Vfs) GetGObject() unsafe.Pointer { return self._value_ }
 func ToVfs(value unsafe.Pointer) Vfs { return Vfs{GObjectObject{value}} }
 type TlsCertificate struct { GObjectObject }
 type TlsCertificateKind interface {
   _IsTlsCertificate()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TlsCertificate) _IsTlsCertificate () {}
-func (self TlsCertificate) _getValue() unsafe.Pointer { return self._value_ }
+func (self TlsCertificate) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTlsCertificate(value unsafe.Pointer) TlsCertificate { return TlsCertificate{GObjectObject{value}} }
 type UnixCredentialsMessage struct { SocketControlMessage }
 type UnixCredentialsMessageKind interface {
   _IsUnixCredentialsMessage()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixCredentialsMessage) _IsUnixCredentialsMessage () {}
-func (self UnixCredentialsMessage) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixCredentialsMessage) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixCredentialsMessage(value unsafe.Pointer) UnixCredentialsMessage { return UnixCredentialsMessage{SocketControlMessage{GObjectObject{value}}} }
 type VolumeMonitor struct { GObjectObject }
 type VolumeMonitorKind interface {
   _IsVolumeMonitor()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self VolumeMonitor) _IsVolumeMonitor () {}
-func (self VolumeMonitor) _getValue() unsafe.Pointer { return self._value_ }
+func (self VolumeMonitor) GetGObject() unsafe.Pointer { return self._value_ }
 func ToVolumeMonitor(value unsafe.Pointer) VolumeMonitor { return VolumeMonitor{GObjectObject{value}} }
 type DBusObjectProxy struct { GObjectObject }
 type DBusObjectProxyKind interface {
   _IsDBusObjectProxy()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusObjectProxy) _IsDBusObjectProxy () {}
-func (self DBusObjectProxy) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusObjectProxy) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusObjectProxy(value unsafe.Pointer) DBusObjectProxy { return DBusObjectProxy{GObjectObject{value}} }
 type TlsInteraction struct { GObjectObject }
 type TlsInteractionKind interface {
   _IsTlsInteraction()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TlsInteraction) _IsTlsInteraction () {}
-func (self TlsInteraction) _getValue() unsafe.Pointer { return self._value_ }
+func (self TlsInteraction) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTlsInteraction(value unsafe.Pointer) TlsInteraction { return TlsInteraction{GObjectObject{value}} }
 type NetworkAddress struct { GObjectObject }
 type NetworkAddressKind interface {
   _IsNetworkAddress()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self NetworkAddress) _IsNetworkAddress () {}
-func (self NetworkAddress) _getValue() unsafe.Pointer { return self._value_ }
+func (self NetworkAddress) GetGObject() unsafe.Pointer { return self._value_ }
 func ToNetworkAddress(value unsafe.Pointer) NetworkAddress { return NetworkAddress{GObjectObject{value}} }
 type DBusServer struct { GObjectObject }
 type DBusServerKind interface {
   _IsDBusServer()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusServer) _IsDBusServer () {}
-func (self DBusServer) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusServer) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusServer(value unsafe.Pointer) DBusServer { return DBusServer{GObjectObject{value}} }
 type ThemedIcon struct { GObjectObject }
 type ThemedIconKind interface {
   _IsThemedIcon()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ThemedIcon) _IsThemedIcon () {}
-func (self ThemedIcon) _getValue() unsafe.Pointer { return self._value_ }
+func (self ThemedIcon) GetGObject() unsafe.Pointer { return self._value_ }
 func ToThemedIcon(value unsafe.Pointer) ThemedIcon { return ThemedIcon{GObjectObject{value}} }
 type UnixInputStream struct { InputStream }
 type UnixInputStreamKind interface {
   _IsUnixInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixInputStream) _IsUnixInputStream () {}
-func (self UnixInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixInputStream(value unsafe.Pointer) UnixInputStream { return UnixInputStream{InputStream{GObjectObject{value}}} }
 type InputStream struct { GObjectObject }
 type InputStreamKind interface {
   _IsInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self InputStream) _IsInputStream () {}
-func (self InputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self InputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToInputStream(value unsafe.Pointer) InputStream { return InputStream{GObjectObject{value}} }
 type MemoryInputStream struct { InputStream }
 type MemoryInputStreamKind interface {
   _IsMemoryInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self MemoryInputStream) _IsMemoryInputStream () {}
-func (self MemoryInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self MemoryInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToMemoryInputStream(value unsafe.Pointer) MemoryInputStream { return MemoryInputStream{InputStream{GObjectObject{value}}} }
 type FileMonitor struct { GObjectObject }
 type FileMonitorKind interface {
   _IsFileMonitor()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileMonitor) _IsFileMonitor () {}
-func (self FileMonitor) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileMonitor) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileMonitor(value unsafe.Pointer) FileMonitor { return FileMonitor{GObjectObject{value}} }
 type ThreadedSocketService struct { SocketService }
 type ThreadedSocketServiceKind interface {
   _IsThreadedSocketService()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ThreadedSocketService) _IsThreadedSocketService () {}
-func (self ThreadedSocketService) _getValue() unsafe.Pointer { return self._value_ }
+func (self ThreadedSocketService) GetGObject() unsafe.Pointer { return self._value_ }
 func ToThreadedSocketService(value unsafe.Pointer) ThreadedSocketService { return ThreadedSocketService{SocketService{SocketListener{GObjectObject{value}}}} }
 type MemoryOutputStream struct { OutputStream }
 type MemoryOutputStreamKind interface {
   _IsMemoryOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self MemoryOutputStream) _IsMemoryOutputStream () {}
-func (self MemoryOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self MemoryOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToMemoryOutputStream(value unsafe.Pointer) MemoryOutputStream { return MemoryOutputStream{OutputStream{GObjectObject{value}}} }
 type FileInputStream struct { InputStream }
 type FileInputStreamKind interface {
   _IsFileInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileInputStream) _IsFileInputStream () {}
-func (self FileInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileInputStream(value unsafe.Pointer) FileInputStream { return FileInputStream{InputStream{GObjectObject{value}}} }
 type ConverterOutputStream struct { FilterOutputStream }
 type ConverterOutputStreamKind interface {
   _IsConverterOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ConverterOutputStream) _IsConverterOutputStream () {}
-func (self ConverterOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self ConverterOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToConverterOutputStream(value unsafe.Pointer) ConverterOutputStream { return ConverterOutputStream{FilterOutputStream{OutputStream{GObjectObject{value}}}} }
 type MenuAttributeIter struct { GObjectObject }
 type MenuAttributeIterKind interface {
   _IsMenuAttributeIter()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self MenuAttributeIter) _IsMenuAttributeIter () {}
-func (self MenuAttributeIter) _getValue() unsafe.Pointer { return self._value_ }
+func (self MenuAttributeIter) GetGObject() unsafe.Pointer { return self._value_ }
 func ToMenuAttributeIter(value unsafe.Pointer) MenuAttributeIter { return MenuAttributeIter{GObjectObject{value}} }
 type TlsPassword struct { GObjectObject }
 type TlsPasswordKind interface {
   _IsTlsPassword()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TlsPassword) _IsTlsPassword () {}
-func (self TlsPassword) _getValue() unsafe.Pointer { return self._value_ }
+func (self TlsPassword) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTlsPassword(value unsafe.Pointer) TlsPassword { return TlsPassword{GObjectObject{value}} }
 type Credentials struct { GObjectObject }
 type CredentialsKind interface {
   _IsCredentials()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Credentials) _IsCredentials () {}
-func (self Credentials) _getValue() unsafe.Pointer { return self._value_ }
+func (self Credentials) GetGObject() unsafe.Pointer { return self._value_ }
 func ToCredentials(value unsafe.Pointer) Credentials { return Credentials{GObjectObject{value}} }
 type DBusMethodInvocation struct { GObjectObject }
 type DBusMethodInvocationKind interface {
   _IsDBusMethodInvocation()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusMethodInvocation) _IsDBusMethodInvocation () {}
-func (self DBusMethodInvocation) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusMethodInvocation) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusMethodInvocation(value unsafe.Pointer) DBusMethodInvocation { return DBusMethodInvocation{GObjectObject{value}} }
 type OutputStream struct { GObjectObject }
 type OutputStreamKind interface {
   _IsOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self OutputStream) _IsOutputStream () {}
-func (self OutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self OutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToOutputStream(value unsafe.Pointer) OutputStream { return OutputStream{GObjectObject{value}} }
 type TlsDatabase struct { GObjectObject }
 type TlsDatabaseKind interface {
   _IsTlsDatabase()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TlsDatabase) _IsTlsDatabase () {}
-func (self TlsDatabase) _getValue() unsafe.Pointer { return self._value_ }
+func (self TlsDatabase) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTlsDatabase(value unsafe.Pointer) TlsDatabase { return TlsDatabase{GObjectObject{value}} }
 type SocketClient struct { GObjectObject }
 type SocketClientKind interface {
   _IsSocketClient()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketClient) _IsSocketClient () {}
-func (self SocketClient) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketClient) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketClient(value unsafe.Pointer) SocketClient { return SocketClient{GObjectObject{value}} }
 type MenuLinkIter struct { GObjectObject }
 type MenuLinkIterKind interface {
   _IsMenuLinkIter()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self MenuLinkIter) _IsMenuLinkIter () {}
-func (self MenuLinkIter) _getValue() unsafe.Pointer { return self._value_ }
+func (self MenuLinkIter) GetGObject() unsafe.Pointer { return self._value_ }
 func ToMenuLinkIter(value unsafe.Pointer) MenuLinkIter { return MenuLinkIter{GObjectObject{value}} }
 type GioApplication struct { GObjectObject }
 type GioApplicationKind interface {
   _IsGioApplication()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GioApplication) _IsGioApplication () {}
-func (self GioApplication) _getValue() unsafe.Pointer { return self._value_ }
+func (self GioApplication) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGioApplication(value unsafe.Pointer) GioApplication { return GioApplication{GObjectObject{value}} }
 type DBusAuthObserver struct { GObjectObject }
 type DBusAuthObserverKind interface {
   _IsDBusAuthObserver()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusAuthObserver) _IsDBusAuthObserver () {}
-func (self DBusAuthObserver) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusAuthObserver) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusAuthObserver(value unsafe.Pointer) DBusAuthObserver { return DBusAuthObserver{GObjectObject{value}} }
 type DBusMessage struct { GObjectObject }
 type DBusMessageKind interface {
   _IsDBusMessage()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusMessage) _IsDBusMessage () {}
-func (self DBusMessage) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusMessage) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusMessage(value unsafe.Pointer) DBusMessage { return DBusMessage{GObjectObject{value}} }
 type FileInfo struct { GObjectObject }
 type FileInfoKind interface {
   _IsFileInfo()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileInfo) _IsFileInfo () {}
-func (self FileInfo) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileInfo) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileInfo(value unsafe.Pointer) FileInfo { return FileInfo{GObjectObject{value}} }
 type UnixSocketAddress struct { SocketAddress }
 type UnixSocketAddressKind interface {
   _IsUnixSocketAddress()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self UnixSocketAddress) _IsUnixSocketAddress () {}
-func (self UnixSocketAddress) _getValue() unsafe.Pointer { return self._value_ }
+func (self UnixSocketAddress) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixSocketAddress(value unsafe.Pointer) UnixSocketAddress { return UnixSocketAddress{SocketAddress{GObjectObject{value}}} }
 type FilterOutputStream struct { OutputStream }
 type FilterOutputStreamKind interface {
   _IsFilterOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FilterOutputStream) _IsFilterOutputStream () {}
-func (self FilterOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self FilterOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFilterOutputStream(value unsafe.Pointer) FilterOutputStream { return FilterOutputStream{OutputStream{GObjectObject{value}}} }
 type InetSocketAddress struct { SocketAddress }
 type InetSocketAddressKind interface {
   _IsInetSocketAddress()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self InetSocketAddress) _IsInetSocketAddress () {}
-func (self InetSocketAddress) _getValue() unsafe.Pointer { return self._value_ }
+func (self InetSocketAddress) GetGObject() unsafe.Pointer { return self._value_ }
 func ToInetSocketAddress(value unsafe.Pointer) InetSocketAddress { return InetSocketAddress{SocketAddress{GObjectObject{value}}} }
 type GioSettings struct { GObjectObject }
 type GioSettingsKind interface {
   _IsGioSettings()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GioSettings) _IsGioSettings () {}
-func (self GioSettings) _getValue() unsafe.Pointer { return self._value_ }
+func (self GioSettings) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGioSettings(value unsafe.Pointer) GioSettings { return GioSettings{GObjectObject{value}} }
 type ZlibCompressor struct { GObjectObject }
 type ZlibCompressorKind interface {
   _IsZlibCompressor()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ZlibCompressor) _IsZlibCompressor () {}
-func (self ZlibCompressor) _getValue() unsafe.Pointer { return self._value_ }
+func (self ZlibCompressor) GetGObject() unsafe.Pointer { return self._value_ }
 func ToZlibCompressor(value unsafe.Pointer) ZlibCompressor { return ZlibCompressor{GObjectObject{value}} }
 type DBusMenuModel struct { MenuModel }
 type DBusMenuModelKind interface {
   _IsDBusMenuModel()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusMenuModel) _IsDBusMenuModel () {}
-func (self DBusMenuModel) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusMenuModel) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusMenuModel(value unsafe.Pointer) DBusMenuModel { return DBusMenuModel{MenuModel{GObjectObject{value}}} }
 type GioMenu struct { MenuModel }
 type GioMenuKind interface {
   _IsGioMenu()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GioMenu) _IsGioMenu () {}
-func (self GioMenu) _getValue() unsafe.Pointer { return self._value_ }
+func (self GioMenu) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGioMenu(value unsafe.Pointer) GioMenu { return GioMenu{MenuModel{GObjectObject{value}}} }
 type NetworkService struct { GObjectObject }
 type NetworkServiceKind interface {
   _IsNetworkService()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self NetworkService) _IsNetworkService () {}
-func (self NetworkService) _getValue() unsafe.Pointer { return self._value_ }
+func (self NetworkService) GetGObject() unsafe.Pointer { return self._value_ }
 func ToNetworkService(value unsafe.Pointer) NetworkService { return NetworkService{GObjectObject{value}} }
 type Emblem struct { GObjectObject }
 type EmblemKind interface {
   _IsEmblem()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Emblem) _IsEmblem () {}
-func (self Emblem) _getValue() unsafe.Pointer { return self._value_ }
+func (self Emblem) GetGObject() unsafe.Pointer { return self._value_ }
 func ToEmblem(value unsafe.Pointer) Emblem { return Emblem{GObjectObject{value}} }
 type TcpWrapperConnection struct { TcpConnection }
 type TcpWrapperConnectionKind interface {
   _IsTcpWrapperConnection()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TcpWrapperConnection) _IsTcpWrapperConnection () {}
-func (self TcpWrapperConnection) _getValue() unsafe.Pointer { return self._value_ }
+func (self TcpWrapperConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTcpWrapperConnection(value unsafe.Pointer) TcpWrapperConnection { return TcpWrapperConnection{TcpConnection{SocketConnection{IOStream{GObjectObject{value}}}}} }
 type FileIOStream struct { IOStream }
 type FileIOStreamKind interface {
   _IsFileIOStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileIOStream) _IsFileIOStream () {}
-func (self FileIOStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileIOStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileIOStream(value unsafe.Pointer) FileIOStream { return FileIOStream{IOStream{GObjectObject{value}}} }
 type SocketAddress struct { GObjectObject }
 type SocketAddressKind interface {
   _IsSocketAddress()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketAddress) _IsSocketAddress () {}
-func (self SocketAddress) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketAddress) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketAddress(value unsafe.Pointer) SocketAddress { return SocketAddress{GObjectObject{value}} }
 type DBusObjectManagerClient struct { GObjectObject }
 type DBusObjectManagerClientKind interface {
   _IsDBusObjectManagerClient()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DBusObjectManagerClient) _IsDBusObjectManagerClient () {}
-func (self DBusObjectManagerClient) _getValue() unsafe.Pointer { return self._value_ }
+func (self DBusObjectManagerClient) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusObjectManagerClient(value unsafe.Pointer) DBusObjectManagerClient { return DBusObjectManagerClient{GObjectObject{value}} }
 type FileOutputStream struct { OutputStream }
 type FileOutputStreamKind interface {
   _IsFileOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileOutputStream) _IsFileOutputStream () {}
-func (self FileOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileOutputStream(value unsafe.Pointer) FileOutputStream { return FileOutputStream{OutputStream{GObjectObject{value}}} }
 type BufferedOutputStream struct { FilterOutputStream }
 type BufferedOutputStreamKind interface {
   _IsBufferedOutputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self BufferedOutputStream) _IsBufferedOutputStream () {}
-func (self BufferedOutputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self BufferedOutputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToBufferedOutputStream(value unsafe.Pointer) BufferedOutputStream { return BufferedOutputStream{FilterOutputStream{OutputStream{GObjectObject{value}}}} }
 type DesktopAppInfo struct { GObjectObject }
 type DesktopAppInfoKind interface {
   _IsDesktopAppInfo()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DesktopAppInfo) _IsDesktopAppInfo () {}
-func (self DesktopAppInfo) _getValue() unsafe.Pointer { return self._value_ }
+func (self DesktopAppInfo) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDesktopAppInfo(value unsafe.Pointer) DesktopAppInfo { return DesktopAppInfo{GObjectObject{value}} }
 type IOModule struct { TypeModule }
 type IOModuleKind interface {
   _IsIOModule()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self IOModule) _IsIOModule () {}
-func (self IOModule) _getValue() unsafe.Pointer { return self._value_ }
+func (self IOModule) GetGObject() unsafe.Pointer { return self._value_ }
 func ToIOModule(value unsafe.Pointer) IOModule { return IOModule{TypeModule{GObjectObject{value}}} }
 type SocketService struct { SocketListener }
 type SocketServiceKind interface {
   _IsSocketService()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketService) _IsSocketService () {}
-func (self SocketService) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketService) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketService(value unsafe.Pointer) SocketService { return SocketService{SocketListener{GObjectObject{value}}} }
 type Cancellable struct { GObjectObject }
 type CancellableKind interface {
   _IsCancellable()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Cancellable) _IsCancellable () {}
-func (self Cancellable) _getValue() unsafe.Pointer { return self._value_ }
+func (self Cancellable) GetGObject() unsafe.Pointer { return self._value_ }
 func ToCancellable(value unsafe.Pointer) Cancellable { return Cancellable{GObjectObject{value}} }
 type InetAddressMask struct { GObjectObject }
 type InetAddressMaskKind interface {
   _IsInetAddressMask()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self InetAddressMask) _IsInetAddressMask () {}
-func (self InetAddressMask) _getValue() unsafe.Pointer { return self._value_ }
+func (self InetAddressMask) GetGObject() unsafe.Pointer { return self._value_ }
 func ToInetAddressMask(value unsafe.Pointer) InetAddressMask { return InetAddressMask{GObjectObject{value}} }
 type DataInputStream struct { BufferedInputStream }
 type DataInputStreamKind interface {
   _IsDataInputStream()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self DataInputStream) _IsDataInputStream () {}
-func (self DataInputStream) _getValue() unsafe.Pointer { return self._value_ }
+func (self DataInputStream) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDataInputStream(value unsafe.Pointer) DataInputStream { return DataInputStream{BufferedInputStream{FilterInputStream{InputStream{GObjectObject{value}}}}} }
 type SimpleAction struct { GObjectObject }
 type SimpleActionKind interface {
   _IsSimpleAction()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SimpleAction) _IsSimpleAction () {}
-func (self SimpleAction) _getValue() unsafe.Pointer { return self._value_ }
+func (self SimpleAction) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSimpleAction(value unsafe.Pointer) SimpleAction { return SimpleAction{GObjectObject{value}} }
 type Resolver struct { GObjectObject }
 type ResolverKind interface {
   _IsResolver()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Resolver) _IsResolver () {}
-func (self Resolver) _getValue() unsafe.Pointer { return self._value_ }
+func (self Resolver) GetGObject() unsafe.Pointer { return self._value_ }
 func ToResolver(value unsafe.Pointer) Resolver { return Resolver{GObjectObject{value}} }
 type ApplicationCommandLine struct { GObjectObject }
 type ApplicationCommandLineKind interface {
   _IsApplicationCommandLine()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ApplicationCommandLine) _IsApplicationCommandLine () {}
-func (self ApplicationCommandLine) _getValue() unsafe.Pointer { return self._value_ }
+func (self ApplicationCommandLine) GetGObject() unsafe.Pointer { return self._value_ }
 func ToApplicationCommandLine(value unsafe.Pointer) ApplicationCommandLine { return ApplicationCommandLine{GObjectObject{value}} }
 type FileEnumerator struct { GObjectObject }
 type FileEnumeratorKind interface {
   _IsFileEnumerator()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self FileEnumerator) _IsFileEnumerator () {}
-func (self FileEnumerator) _getValue() unsafe.Pointer { return self._value_ }
+func (self FileEnumerator) GetGObject() unsafe.Pointer { return self._value_ }
 func ToFileEnumerator(value unsafe.Pointer) FileEnumerator { return FileEnumerator{GObjectObject{value}} }
 type SimplePermission struct { Permission }
 type SimplePermissionKind interface {
   _IsSimplePermission()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SimplePermission) _IsSimplePermission () {}
-func (self SimplePermission) _getValue() unsafe.Pointer { return self._value_ }
+func (self SimplePermission) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSimplePermission(value unsafe.Pointer) SimplePermission { return SimplePermission{Permission{GObjectObject{value}}} }
 type SocketListener struct { GObjectObject }
 type SocketListenerKind interface {
   _IsSocketListener()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self SocketListener) _IsSocketListener () {}
-func (self SocketListener) _getValue() unsafe.Pointer { return self._value_ }
+func (self SocketListener) GetGObject() unsafe.Pointer { return self._value_ }
 func ToSocketListener(value unsafe.Pointer) SocketListener { return SocketListener{GObjectObject{value}} }
 func AppInfoCreateFromCommandline(commandline string, application_name string, flags C.GAppInfoCreateFlags) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
 	_cstring_commandline_ := C.CString(commandline)
@@ -2715,7 +2715,7 @@ func AppInfoGetRecommendedForType(content_type string) (_return_ *C.GList) {
 }
 
 func AppInfoLaunchDefaultForUri(uri string, launch_context AppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context._getValue())
+	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -2734,14 +2734,14 @@ func AppInfoResetTypeAssociations(content_type string) () {
 }
 
 func AsyncInitableNewvAsync(object_type C.GType, n_parameters uint, parameters *C.GParameter, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_n_parameters_ := (C.guint)(n_parameters)
 	C.g_async_initable_newv_async(object_type, _cgo_n_parameters_, parameters, io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
 
 func BusGet(bus_type C.GBusType, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_bus_get(bus_type, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -2754,7 +2754,7 @@ func BusGetFinish(res *C.GAsyncResult) (_go__return__ DBusConnection, _error_ un
 }
 
 func BusGetSync(bus_type C.GBusType, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusConnection
 	_return_ = C._g_bus_get_sync(bus_type, _cgo_cancellable_, _error_)
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
@@ -2772,7 +2772,7 @@ func BusOwnName(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bu
 }
 
 func BusOwnNameOnConnection(connection DBusConnectionKind, name string, flags C.GBusNameOwnerFlags, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2783,7 +2783,7 @@ func BusOwnNameOnConnection(connection DBusConnectionKind, name string, flags C.
 }
 
 func BusOwnNameOnConnectionWithClosures(connection DBusConnectionKind, name string, flags C.GBusNameOwnerFlags, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2826,7 +2826,7 @@ func BusWatchName(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags
 }
 
 func BusWatchNameOnConnection(connection DBusConnectionKind, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2837,7 +2837,7 @@ func BusWatchNameOnConnection(connection DBusConnectionKind, name string, flags 
 }
 
 func BusWatchNameOnConnectionWithClosures(connection DBusConnectionKind, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2970,7 +2970,7 @@ func ContentTypesGetRegistered() (_return_ *C.GList) {
 }
 
 func DbusAddressGetForBusSync(bus_type C.GBusType, cancellable CancellableKind) (_go__return__ string, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.gchar
 	_return_ = C._g_dbus_address_get_for_bus_sync(bus_type, _cgo_cancellable_, _error_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
@@ -2978,7 +2978,7 @@ func DbusAddressGetForBusSync(bus_type C.GBusType, cancellable CancellableKind) 
 }
 
 func DbusAddressGetStream(address string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_address_ := C.CString(address)
 	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
 	defer C.free(unsafe.Pointer(_cstring_address_))
@@ -2997,7 +2997,7 @@ func DbusAddressGetStreamFinish(res *C.GAsyncResult, out_guid string) (_go__retu
 }
 
 func DbusAddressGetStreamSync(address string, out_guid string, cancellable CancellableKind) (_go__return__ IOStream, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GIOStream
 	_cstring_address_ := C.CString(address)
 	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
@@ -3320,14 +3320,14 @@ func PollableSourceNew(pollable_stream *C.GObject) (_return_ *C.GSource) {
 }
 
 func PollableSourceNewFull(pollable_stream C.gpointer, child_source *C.GSource, cancellable CancellableKind) (_return_ *C.GSource) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_return_ = C.g_pollable_source_new_full(pollable_stream, child_source, _cgo_cancellable_)
 	return
 }
 
 func PollableStreamRead(stream InputStreamKind, buffer unsafe.Pointer, count uint64, blocking bool, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_stream_ := (*C.GInputStream)(stream._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_stream_ := (*C.GInputStream)(stream.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
 	_cgo_blocking_ := (C.gboolean)(C.FALSE)
@@ -3438,7 +3438,7 @@ func TlsBackendGetDefault() (_return_ *C.GTlsBackend) {
 }
 
 func TlsClientConnectionNew(base_io_stream IOStreamKind, server_identity *C.GSocketConnectable) (_return_ *C.GIOStream, _error_ unsafe.Pointer) {
-	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
+	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream.GetGObject())
 	_return_ = C._g_tls_client_connection_new(_cgo_base_io_stream_, server_identity, _error_)
 	return
 }
@@ -3457,8 +3457,8 @@ func TlsFileDatabaseNew(anchors string) (_return_ *C.GTlsDatabase, _error_ unsaf
 }
 
 func TlsServerConnectionNew(base_io_stream IOStreamKind, certificate TlsCertificateKind) (_return_ *C.GIOStream, _error_ unsafe.Pointer) {
-	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
-	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
+	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream.GetGObject())
+	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
 	_return_ = C._g_tls_server_connection_new(_cgo_base_io_stream_, _cgo_certificate_, _error_)
 	return
 }
@@ -3749,7 +3749,7 @@ func (_self_ *GioApplication) Quit() () {
 }
 
 func (_self_ *GioApplication) Register(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_application_register((*C.GApplication)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -3835,7 +3835,7 @@ func (_self_ *ApplicationCommandLine) SetExitStatus(exit_status C.int) () {
 }
 
 func BufferedInputStreamNew(base_stream InputStreamKind) (_go__return__ BufferedInputStream) {
-	_cgo_base_stream_ := (*C.GInputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GInputStream)(base_stream.GetGObject())
 	var _return_ *C.GInputStream
 	_return_ = C.g_buffered_input_stream_new(_cgo_base_stream_)
 	_go__return__ = ToBufferedInputStream(unsafe.Pointer(_return_))
@@ -3843,7 +3843,7 @@ func BufferedInputStreamNew(base_stream InputStreamKind) (_go__return__ Buffered
 }
 
 func BufferedInputStreamNewSized(base_stream InputStreamKind, size uint64) (_go__return__ BufferedInputStream) {
-	_cgo_base_stream_ := (*C.GInputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GInputStream)(base_stream.GetGObject())
 	var _return_ *C.GInputStream
 	_cgo_size_ := (C.gsize)(size)
 	_return_ = C.g_buffered_input_stream_new_sized(_cgo_base_stream_, _cgo_size_)
@@ -3852,7 +3852,7 @@ func BufferedInputStreamNewSized(base_stream InputStreamKind, size uint64) (_go_
 }
 
 func (_self_ *BufferedInputStream) Fill(count int64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gssize)(count)
 	var _return_ C.gssize
 	_return_ = C._g_buffered_input_stream_fill((*C.GBufferedInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, _error_)
@@ -3861,7 +3861,7 @@ func (_self_ *BufferedInputStream) Fill(count int64, cancellable CancellableKind
 }
 
 func (_self_ *BufferedInputStream) FillAsync(count int64, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gssize)(count)
 	C.g_buffered_input_stream_fill_async((*C.GBufferedInputStream)(_self_._value_), _cgo_count_, io_priority, _cgo_cancellable_, callback, user_data)
 	return
@@ -3896,7 +3896,7 @@ func (_self_ *BufferedInputStream) PeekBuffer() (_return_ unsafe.Pointer, _go_co
 }
 
 func (_self_ *BufferedInputStream) ReadByte(cancellable CancellableKind) (_return_ C.int, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_return_ = C._g_buffered_input_stream_read_byte((*C.GBufferedInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	return
 }
@@ -3908,7 +3908,7 @@ func (_self_ *BufferedInputStream) SetBufferSize(size uint64) () {
 }
 
 func BufferedOutputStreamNew(base_stream OutputStreamKind) (_go__return__ BufferedOutputStream) {
-	_cgo_base_stream_ := (*C.GOutputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GOutputStream)(base_stream.GetGObject())
 	var _return_ *C.GOutputStream
 	_return_ = C.g_buffered_output_stream_new(_cgo_base_stream_)
 	_go__return__ = ToBufferedOutputStream(unsafe.Pointer(_return_))
@@ -3916,7 +3916,7 @@ func BufferedOutputStreamNew(base_stream OutputStreamKind) (_go__return__ Buffer
 }
 
 func BufferedOutputStreamNewSized(base_stream OutputStreamKind, size uint64) (_go__return__ BufferedOutputStream) {
-	_cgo_base_stream_ := (*C.GOutputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GOutputStream)(base_stream.GetGObject())
 	var _return_ *C.GOutputStream
 	_cgo_size_ := (C.gsize)(size)
 	_return_ = C.g_buffered_output_stream_new_sized(_cgo_base_stream_, _cgo_size_)
@@ -4069,7 +4069,7 @@ func (_self_ *CharsetConverter) SetUseFallback(use_fallback bool) () {
 }
 
 func ConverterInputStreamNew(base_stream InputStreamKind, converter *C.GConverter) (_go__return__ ConverterInputStream) {
-	_cgo_base_stream_ := (*C.GInputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GInputStream)(base_stream.GetGObject())
 	var _return_ *C.GInputStream
 	_return_ = C.g_converter_input_stream_new(_cgo_base_stream_, converter)
 	_go__return__ = ToConverterInputStream(unsafe.Pointer(_return_))
@@ -4082,7 +4082,7 @@ func (_self_ *ConverterInputStream) GetConverter() (_return_ *C.GConverter) {
 }
 
 func ConverterOutputStreamNew(base_stream OutputStreamKind, converter *C.GConverter) (_go__return__ ConverterOutputStream) {
-	_cgo_base_stream_ := (*C.GOutputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GOutputStream)(base_stream.GetGObject())
 	var _return_ *C.GOutputStream
 	_return_ = C.g_converter_output_stream_new(_cgo_base_stream_, converter)
 	_go__return__ = ToConverterOutputStream(unsafe.Pointer(_return_))
@@ -4112,7 +4112,7 @@ func (_self_ *Credentials) GetUnixUser() (_return_ C.uid_t, _error_ unsafe.Point
 }
 
 func (_self_ *Credentials) IsSameUser(other_credentials CredentialsKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_other_credentials_ := (*C.GCredentials)(other_credentials._getValue())
+	_cgo_other_credentials_ := (*C.GCredentials)(other_credentials.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_credentials_is_same_user((*C.GCredentials)(_self_._value_), _cgo_other_credentials_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -4139,7 +4139,7 @@ func (_self_ *Credentials) ToString() (_go__return__ string) {
 }
 
 func DBusActionGroupGet(connection DBusConnectionKind, bus_name string, object_path string) (_go__return__ DBusActionGroup) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ *C.GDBusActionGroup
 	_cstring_bus_name_ := C.CString(bus_name)
 	_cgo_bus_name_ := (*C.gchar)(unsafe.Pointer(_cstring_bus_name_))
@@ -4170,8 +4170,8 @@ func (_self_ *DBusAuthObserver) AllowMechanism(mechanism string) (_go__return__ 
 }
 
 func (_self_ *DBusAuthObserver) AuthorizeAuthenticatedPeer(stream IOStreamKind, credentials CredentialsKind) (_go__return__ bool) {
-	_cgo_stream_ := (*C.GIOStream)(stream._getValue())
-	_cgo_credentials_ := (*C.GCredentials)(credentials._getValue())
+	_cgo_stream_ := (*C.GIOStream)(stream.GetGObject())
+	_cgo_credentials_ := (*C.GCredentials)(credentials.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_dbus_auth_observer_authorize_authenticated_peer((*C.GDBusAuthObserver)(_self_._value_), _cgo_stream_, _cgo_credentials_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -4193,8 +4193,8 @@ func DBusConnectionNewForAddressFinish(res *C.GAsyncResult) (_go__return__ DBusC
 }
 
 func DBusConnectionNewForAddressSync(address string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
-	_cgo_observer_ := (*C.GDBusAuthObserver)(observer._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusConnection
 	_cstring_address_ := C.CString(address)
 	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
@@ -4205,9 +4205,9 @@ func DBusConnectionNewForAddressSync(address string, flags C.GDBusConnectionFlag
 }
 
 func DBusConnectionNewSync(stream IOStreamKind, guid string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
-	_cgo_stream_ := (*C.GIOStream)(stream._getValue())
-	_cgo_observer_ := (*C.GDBusAuthObserver)(observer._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_stream_ := (*C.GIOStream)(stream.GetGObject())
+	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusConnection
 	_cstring_guid_ := C.CString(guid)
 	_cgo_guid_ := (*C.gchar)(unsafe.Pointer(_cstring_guid_))
@@ -4218,9 +4218,9 @@ func DBusConnectionNewSync(stream IOStreamKind, guid string, flags C.GDBusConnec
 }
 
 func DBusConnectionNew(stream IOStreamKind, guid string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_stream_ := (*C.GIOStream)(stream._getValue())
-	_cgo_observer_ := (*C.GDBusAuthObserver)(observer._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_stream_ := (*C.GIOStream)(stream.GetGObject())
+	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_guid_ := C.CString(guid)
 	_cgo_guid_ := (*C.gchar)(unsafe.Pointer(_cstring_guid_))
 	defer C.free(unsafe.Pointer(_cstring_guid_))
@@ -4229,8 +4229,8 @@ func DBusConnectionNew(stream IOStreamKind, guid string, flags C.GDBusConnection
 }
 
 func DBusConnectionNewForAddress(address string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_observer_ := (*C.GDBusAuthObserver)(observer._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_address_ := C.CString(address)
 	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
 	defer C.free(unsafe.Pointer(_cstring_address_))
@@ -4246,7 +4246,7 @@ func (_self_ *DBusConnection) AddFilter(filter_function C.GDBusMessageFilterFunc
 }
 
 func (_self_ *DBusConnection) Call(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_bus_name_ := C.CString(bus_name)
 	_cgo_bus_name_ := (*C.gchar)(unsafe.Pointer(_cstring_bus_name_))
@@ -4270,7 +4270,7 @@ func (_self_ *DBusConnection) CallFinish(res *C.GAsyncResult) (_return_ *C.GVari
 }
 
 func (_self_ *DBusConnection) CallSync(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind) (_return_ *C.GVariant, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_bus_name_ := C.CString(bus_name)
 	_cgo_bus_name_ := (*C.gchar)(unsafe.Pointer(_cstring_bus_name_))
@@ -4289,8 +4289,8 @@ func (_self_ *DBusConnection) CallSync(bus_name string, object_path string, inte
 }
 
 func (_self_ *DBusConnection) CallWithUnixFdList(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_bus_name_ := C.CString(bus_name)
 	_cgo_bus_name_ := (*C.gchar)(unsafe.Pointer(_cstring_bus_name_))
@@ -4316,8 +4316,8 @@ func (_self_ *DBusConnection) CallWithUnixFdListFinish(res *C.GAsyncResult) (_re
 }
 
 func (_self_ *DBusConnection) CallWithUnixFdListSync(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ unsafe.Pointer) {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _allocated_out_fd_list_ *C.GUnixFDList
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_bus_name_ := C.CString(bus_name)
@@ -4338,7 +4338,7 @@ func (_self_ *DBusConnection) CallWithUnixFdListSync(bus_name string, object_pat
 }
 
 func (_self_ *DBusConnection) Close(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_dbus_connection_close((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -4351,7 +4351,7 @@ func (_self_ *DBusConnection) CloseFinish(res *C.GAsyncResult) (_go__return__ bo
 }
 
 func (_self_ *DBusConnection) CloseSync(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_dbus_connection_close_sync((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -4388,7 +4388,7 @@ func (_self_ *DBusConnection) ExportActionGroup(object_path string, action_group
 }
 
 func (_self_ *DBusConnection) ExportMenuModel(object_path string, menu MenuModelKind) (_go__return__ uint, _error_ unsafe.Pointer) {
-	_cgo_menu_ := (*C.GMenuModel)(menu._getValue())
+	_cgo_menu_ := (*C.GMenuModel)(menu.GetGObject())
 	var _return_ C.guint
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
@@ -4399,7 +4399,7 @@ func (_self_ *DBusConnection) ExportMenuModel(object_path string, menu MenuModel
 }
 
 func (_self_ *DBusConnection) Flush(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_dbus_connection_flush((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -4412,7 +4412,7 @@ func (_self_ *DBusConnection) FlushFinish(res *C.GAsyncResult) (_go__return__ bo
 }
 
 func (_self_ *DBusConnection) FlushSync(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_dbus_connection_flush_sync((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -4503,7 +4503,7 @@ func (_self_ *DBusConnection) RemoveFilter(filter_id uint) () {
 }
 
 func (_self_ *DBusConnection) SendMessage(message DBusMessageKind, flags C.GDBusSendMessageFlags) (_go__return__ bool, out_serial C. guint32, _error_ unsafe.Pointer) {
-	_cgo_message_ := (*C.GDBusMessage)(message._getValue())
+	_cgo_message_ := (*C.GDBusMessage)(message.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_dbus_connection_send_message((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, &out_serial, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -4511,8 +4511,8 @@ func (_self_ *DBusConnection) SendMessage(message DBusMessageKind, flags C.GDBus
 }
 
 func (_self_ *DBusConnection) SendMessageWithReply(message DBusMessageKind, flags C.GDBusSendMessageFlags, timeout_msec int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) (out_serial C. guint32) {
-	_cgo_message_ := (*C.GDBusMessage)(message._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_message_ := (*C.GDBusMessage)(message.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	C.g_dbus_connection_send_message_with_reply((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, _cgo_timeout_msec_, &out_serial, _cgo_cancellable_, callback, user_data)
 	return
@@ -4526,8 +4526,8 @@ func (_self_ *DBusConnection) SendMessageWithReplyFinish(res *C.GAsyncResult) (_
 }
 
 func (_self_ *DBusConnection) SendMessageWithReplySync(message DBusMessageKind, flags C.GDBusSendMessageFlags, timeout_msec int, cancellable CancellableKind) (_go__return__ DBusMessage, out_serial C. guint32, _error_ unsafe.Pointer) {
-	_cgo_message_ := (*C.GDBusMessage)(message._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_message_ := (*C.GDBusMessage)(message.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusMessage
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_return_ = C._g_dbus_connection_send_message_with_reply_sync((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, _cgo_timeout_msec_, &out_serial, _cgo_cancellable_, _error_)
@@ -4604,7 +4604,7 @@ func (_self_ *DBusConnection) UnregisterSubtree(registration_id uint) (_go__retu
 }
 
 func (_self_ *DBusInterfaceSkeleton) Export(connection DBusConnectionKind, object_path string) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
@@ -4663,7 +4663,7 @@ func (_self_ *DBusInterfaceSkeleton) GetVtable() (_go__return__ *DBusInterfaceVT
 }
 
 func (_self_ *DBusInterfaceSkeleton) HasConnection(connection DBusConnectionKind) (_go__return__ bool) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_dbus_interface_skeleton_has_connection((*C.GDBusInterfaceSkeleton)(_self_._value_), _cgo_connection_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -4681,13 +4681,13 @@ func (_self_ *DBusInterfaceSkeleton) Unexport() () {
 }
 
 func (_self_ *DBusInterfaceSkeleton) UnexportFromConnection(connection DBusConnectionKind) () {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	C.g_dbus_interface_skeleton_unexport_from_connection((*C.GDBusInterfaceSkeleton)(_self_._value_), _cgo_connection_)
 	return
 }
 
 func DBusMenuModelGet(connection DBusConnectionKind, bus_name string, object_path string) (_go__return__ DBusMenuModel) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ *C.GDBusMenuModel
 	_cstring_bus_name_ := C.CString(bus_name)
 	_cgo_bus_name_ := (*C.gchar)(unsafe.Pointer(_cstring_bus_name_))
@@ -5003,7 +5003,7 @@ func (_self_ *DBusMessage) SetSignature(value string) () {
 }
 
 func (_self_ *DBusMessage) SetUnixFdList(fd_list UnixFDListKind) () {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
 	C.g_dbus_message_set_unix_fd_list((*C.GDBusMessage)(_self_._value_), _cgo_fd_list_)
 	return
 }
@@ -5112,7 +5112,7 @@ func (_self_ *DBusMethodInvocation) ReturnValue(parameters *C.GVariant) () {
 }
 
 func (_self_ *DBusMethodInvocation) ReturnValueWithUnixFdList(parameters *C.GVariant, fd_list UnixFDListKind) () {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
 	C.g_dbus_method_invocation_return_value_with_unix_fd_list((*C.GDBusMethodInvocation)(_self_._value_), parameters, _cgo_fd_list_)
 	return
 }
@@ -5137,7 +5137,7 @@ func DBusObjectManagerClientNewForBusFinish(res *C.GAsyncResult) (_go__return__ 
 }
 
 func DBusObjectManagerClientNewForBusSync(bus_type C.GBusType, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind) (_go__return__ DBusObjectManagerClient, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusObjectManager
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -5151,8 +5151,8 @@ func DBusObjectManagerClientNewForBusSync(bus_type C.GBusType, flags C.GDBusObje
 }
 
 func DBusObjectManagerClientNewSync(connection DBusConnectionKind, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind) (_go__return__ DBusObjectManagerClient, _error_ unsafe.Pointer) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusObjectManager
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -5166,8 +5166,8 @@ func DBusObjectManagerClientNewSync(connection DBusConnectionKind, flags C.GDBus
 }
 
 func DBusObjectManagerClientNew(connection DBusConnectionKind, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -5179,7 +5179,7 @@ func DBusObjectManagerClientNew(connection DBusConnectionKind, flags C.GDBusObje
 }
 
 func DBusObjectManagerClientNewForBus(bus_type C.GBusType, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -5227,13 +5227,13 @@ func DBusObjectManagerServerNew(object_path string) (_go__return__ DBusObjectMan
 }
 
 func (_self_ *DBusObjectManagerServer) Export(object DBusObjectSkeletonKind) () {
-	_cgo_object_ := (*C.GDBusObjectSkeleton)(object._getValue())
+	_cgo_object_ := (*C.GDBusObjectSkeleton)(object.GetGObject())
 	C.g_dbus_object_manager_server_export((*C.GDBusObjectManagerServer)(_self_._value_), _cgo_object_)
 	return
 }
 
 func (_self_ *DBusObjectManagerServer) ExportUniquely(object DBusObjectSkeletonKind) () {
-	_cgo_object_ := (*C.GDBusObjectSkeleton)(object._getValue())
+	_cgo_object_ := (*C.GDBusObjectSkeleton)(object.GetGObject())
 	C.g_dbus_object_manager_server_export_uniquely((*C.GDBusObjectManagerServer)(_self_._value_), _cgo_object_)
 	return
 }
@@ -5246,7 +5246,7 @@ func (_self_ *DBusObjectManagerServer) GetConnection() (_go__return__ DBusConnec
 }
 
 func (_self_ *DBusObjectManagerServer) IsExported(object DBusObjectSkeletonKind) (_go__return__ bool) {
-	_cgo_object_ := (*C.GDBusObjectSkeleton)(object._getValue())
+	_cgo_object_ := (*C.GDBusObjectSkeleton)(object.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_dbus_object_manager_server_is_exported((*C.GDBusObjectManagerServer)(_self_._value_), _cgo_object_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -5254,7 +5254,7 @@ func (_self_ *DBusObjectManagerServer) IsExported(object DBusObjectSkeletonKind)
 }
 
 func (_self_ *DBusObjectManagerServer) SetConnection(connection DBusConnectionKind) () {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	C.g_dbus_object_manager_server_set_connection((*C.GDBusObjectManagerServer)(_self_._value_), _cgo_connection_)
 	return
 }
@@ -5270,7 +5270,7 @@ func (_self_ *DBusObjectManagerServer) Unexport(object_path string) (_go__return
 }
 
 func DBusObjectProxyNew(connection DBusConnectionKind, object_path string) (_go__return__ DBusObjectProxy) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	var _return_ *C.GDBusObjectProxy
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
@@ -5298,7 +5298,7 @@ func DBusObjectSkeletonNew(object_path string) (_go__return__ DBusObjectSkeleton
 }
 
 func (_self_ *DBusObjectSkeleton) AddInterface(interface_ DBusInterfaceSkeletonKind) () {
-	_cgo_interface__ := (*C.GDBusInterfaceSkeleton)(interface_._getValue())
+	_cgo_interface__ := (*C.GDBusInterfaceSkeleton)(interface_.GetGObject())
 	C.g_dbus_object_skeleton_add_interface((*C.GDBusObjectSkeleton)(_self_._value_), _cgo_interface__)
 	return
 }
@@ -5309,7 +5309,7 @@ func (_self_ *DBusObjectSkeleton) Flush() () {
 }
 
 func (_self_ *DBusObjectSkeleton) RemoveInterface(interface_ DBusInterfaceSkeletonKind) () {
-	_cgo_interface__ := (*C.GDBusInterfaceSkeleton)(interface_._getValue())
+	_cgo_interface__ := (*C.GDBusInterfaceSkeleton)(interface_.GetGObject())
 	C.g_dbus_object_skeleton_remove_interface((*C.GDBusObjectSkeleton)(_self_._value_), _cgo_interface__)
 	return
 }
@@ -5346,7 +5346,7 @@ func DBusProxyNewForBusFinish(res *C.GAsyncResult) (_go__return__ DBusProxy, _er
 
 func DBusProxyNewForBusSync(bus_type C.GBusType, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind) (_go__return__ DBusProxy, _error_ unsafe.Pointer) {
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusProxy
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -5363,9 +5363,9 @@ func DBusProxyNewForBusSync(bus_type C.GBusType, flags C.GDBusProxyFlags, info *
 }
 
 func DBusProxyNewSync(connection DBusConnectionKind, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind) (_go__return__ DBusProxy, _error_ unsafe.Pointer) {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusProxy
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -5382,9 +5382,9 @@ func DBusProxyNewSync(connection DBusConnectionKind, flags C.GDBusProxyFlags, in
 }
 
 func DBusProxyNew(connection DBusConnectionKind, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_connection_ := (*C.GDBusConnection)(connection._getValue())
+	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -5400,7 +5400,7 @@ func DBusProxyNew(connection DBusConnectionKind, flags C.GDBusProxyFlags, info *
 
 func DBusProxyNewForBus(bus_type C.GBusType, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
@@ -5415,7 +5415,7 @@ func DBusProxyNewForBus(bus_type C.GBusType, flags C.GDBusProxyFlags, info *DBus
 }
 
 func (_self_ *DBusProxy) Call(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
@@ -5430,7 +5430,7 @@ func (_self_ *DBusProxy) CallFinish(res *C.GAsyncResult) (_return_ *C.GVariant, 
 }
 
 func (_self_ *DBusProxy) CallSync(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind) (_return_ *C.GVariant, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
@@ -5440,8 +5440,8 @@ func (_self_ *DBusProxy) CallSync(method_name string, parameters *C.GVariant, fl
 }
 
 func (_self_ *DBusProxy) CallWithUnixFdList(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
@@ -5458,8 +5458,8 @@ func (_self_ *DBusProxy) CallWithUnixFdListFinish(res *C.GAsyncResult) (_return_
 }
 
 func (_self_ *DBusProxy) CallWithUnixFdListSync(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ unsafe.Pointer) {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _allocated_out_fd_list_ *C.GUnixFDList
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_method_name_ := C.CString(method_name)
@@ -5558,8 +5558,8 @@ func (_self_ *DBusProxy) SetInterfaceInfo(info *DBusInterfaceInfo) () {
 }
 
 func DBusServerNewSync(address string, flags C.GDBusServerFlags, guid string, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusServer, _error_ unsafe.Pointer) {
-	_cgo_observer_ := (*C.GDBusAuthObserver)(observer._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusServer
 	_cstring_address_ := C.CString(address)
 	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
@@ -5609,7 +5609,7 @@ func (_self_ *DBusServer) Stop() () {
 }
 
 func DataInputStreamNew(base_stream InputStreamKind) (_go__return__ DataInputStream) {
-	_cgo_base_stream_ := (*C.GInputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GInputStream)(base_stream.GetGObject())
 	var _return_ *C.GDataInputStream
 	_return_ = C.g_data_input_stream_new(_cgo_base_stream_)
 	_go__return__ = ToDataInputStream(unsafe.Pointer(_return_))
@@ -5627,7 +5627,7 @@ func (_self_ *DataInputStream) GetNewlineType() (_return_ C.GDataStreamNewlineTy
 }
 
 func (_self_ *DataInputStream) ReadByte(cancellable CancellableKind) (_go__return__ byte, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guchar
 	_return_ = C._g_data_input_stream_read_byte((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (byte)(_return_)
@@ -5635,7 +5635,7 @@ func (_self_ *DataInputStream) ReadByte(cancellable CancellableKind) (_go__retur
 }
 
 func (_self_ *DataInputStream) ReadInt16(cancellable CancellableKind) (_go__return__ int16, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint16
 	_return_ = C._g_data_input_stream_read_int16((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (int16)(_return_)
@@ -5643,7 +5643,7 @@ func (_self_ *DataInputStream) ReadInt16(cancellable CancellableKind) (_go__retu
 }
 
 func (_self_ *DataInputStream) ReadInt32(cancellable CancellableKind) (_go__return__ int32, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint32
 	_return_ = C._g_data_input_stream_read_int32((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (int32)(_return_)
@@ -5651,7 +5651,7 @@ func (_self_ *DataInputStream) ReadInt32(cancellable CancellableKind) (_go__retu
 }
 
 func (_self_ *DataInputStream) ReadInt64(cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint64
 	_return_ = C._g_data_input_stream_read_int64((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (int64)(_return_)
@@ -5659,7 +5659,7 @@ func (_self_ *DataInputStream) ReadInt64(cancellable CancellableKind) (_go__retu
 }
 
 func (_self_ *DataInputStream) ReadLine(cancellable CancellableKind) (_return_ *C.char, _go_length_ uint64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var length C.gsize
 	_return_ = C._g_data_input_stream_read_line((*C.GDataInputStream)(_self_._value_), &length, _cgo_cancellable_, _error_)
 	_go_length_ = (uint64)(length)
@@ -5667,7 +5667,7 @@ func (_self_ *DataInputStream) ReadLine(cancellable CancellableKind) (_return_ *
 }
 
 func (_self_ *DataInputStream) ReadLineAsync(io_priority int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_io_priority_ := (C.gint)(io_priority)
 	C.g_data_input_stream_read_line_async((*C.GDataInputStream)(_self_._value_), _cgo_io_priority_, _cgo_cancellable_, callback, user_data)
 	return
@@ -5690,7 +5690,7 @@ func (_self_ *DataInputStream) ReadLineFinishUtf8(result *C.GAsyncResult) (_go__
 }
 
 func (_self_ *DataInputStream) ReadLineUtf8(cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var length C.gsize
 	var _return_ *C.char
 	_return_ = C._g_data_input_stream_read_line_utf8((*C.GDataInputStream)(_self_._value_), &length, _cgo_cancellable_, _error_)
@@ -5700,7 +5700,7 @@ func (_self_ *DataInputStream) ReadLineUtf8(cancellable CancellableKind) (_go__r
 }
 
 func (_self_ *DataInputStream) ReadUint16(cancellable CancellableKind) (_go__return__ uint16, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guint16
 	_return_ = C._g_data_input_stream_read_uint16((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (uint16)(_return_)
@@ -5708,7 +5708,7 @@ func (_self_ *DataInputStream) ReadUint16(cancellable CancellableKind) (_go__ret
 }
 
 func (_self_ *DataInputStream) ReadUint32(cancellable CancellableKind) (_go__return__ uint32, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guint32
 	_return_ = C._g_data_input_stream_read_uint32((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (uint32)(_return_)
@@ -5716,7 +5716,7 @@ func (_self_ *DataInputStream) ReadUint32(cancellable CancellableKind) (_go__ret
 }
 
 func (_self_ *DataInputStream) ReadUint64(cancellable CancellableKind) (_go__return__ uint64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guint64
 	_return_ = C._g_data_input_stream_read_uint64((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (uint64)(_return_)
@@ -5724,7 +5724,7 @@ func (_self_ *DataInputStream) ReadUint64(cancellable CancellableKind) (_go__ret
 }
 
 func (_self_ *DataInputStream) ReadUntil(stop_chars string, cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var length C.gsize
 	_cstring_stop_chars_ := C.CString(stop_chars)
 	_cgo_stop_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_stop_chars_))
@@ -5737,7 +5737,7 @@ func (_self_ *DataInputStream) ReadUntil(stop_chars string, cancellable Cancella
 }
 
 func (_self_ *DataInputStream) ReadUntilAsync(stop_chars string, io_priority int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_io_priority_ := (C.gint)(io_priority)
 	_cstring_stop_chars_ := C.CString(stop_chars)
 	_cgo_stop_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_stop_chars_))
@@ -5756,7 +5756,7 @@ func (_self_ *DataInputStream) ReadUntilFinish(result *C.GAsyncResult) (_go__ret
 }
 
 func (_self_ *DataInputStream) ReadUpto(stop_chars string, stop_chars_len int64, cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_stop_chars_len_ := (C.gssize)(stop_chars_len)
 	var length C.gsize
 	_cstring_stop_chars_ := C.CString(stop_chars)
@@ -5770,7 +5770,7 @@ func (_self_ *DataInputStream) ReadUpto(stop_chars string, stop_chars_len int64,
 }
 
 func (_self_ *DataInputStream) ReadUptoAsync(stop_chars string, stop_chars_len int64, io_priority int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_stop_chars_len_ := (C.gssize)(stop_chars_len)
 	_cgo_io_priority_ := (C.gint)(io_priority)
 	_cstring_stop_chars_ := C.CString(stop_chars)
@@ -5800,7 +5800,7 @@ func (_self_ *DataInputStream) SetNewlineType(type_ C.GDataStreamNewlineType) ()
 }
 
 func DataOutputStreamNew(base_stream OutputStreamKind) (_go__return__ DataOutputStream) {
-	_cgo_base_stream_ := (*C.GOutputStream)(base_stream._getValue())
+	_cgo_base_stream_ := (*C.GOutputStream)(base_stream.GetGObject())
 	var _return_ *C.GDataOutputStream
 	_return_ = C.g_data_output_stream_new(_cgo_base_stream_)
 	_go__return__ = ToDataOutputStream(unsafe.Pointer(_return_))
@@ -5813,7 +5813,7 @@ func (_self_ *DataOutputStream) GetByteOrder() (_return_ C.GDataStreamByteOrder)
 }
 
 func (_self_ *DataOutputStream) PutByte(data byte, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guchar)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_byte((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -5822,7 +5822,7 @@ func (_self_ *DataOutputStream) PutByte(data byte, cancellable CancellableKind) 
 }
 
 func (_self_ *DataOutputStream) PutInt16(data int16, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.gint16)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_int16((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -5831,7 +5831,7 @@ func (_self_ *DataOutputStream) PutInt16(data int16, cancellable CancellableKind
 }
 
 func (_self_ *DataOutputStream) PutInt32(data int32, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.gint32)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_int32((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -5840,7 +5840,7 @@ func (_self_ *DataOutputStream) PutInt32(data int32, cancellable CancellableKind
 }
 
 func (_self_ *DataOutputStream) PutInt64(data int64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.gint64)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_int64((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -5849,7 +5849,7 @@ func (_self_ *DataOutputStream) PutInt64(data int64, cancellable CancellableKind
 }
 
 func (_self_ *DataOutputStream) PutString(str string, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.char)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
@@ -5860,7 +5860,7 @@ func (_self_ *DataOutputStream) PutString(str string, cancellable CancellableKin
 }
 
 func (_self_ *DataOutputStream) PutUint16(data uint16, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guint16)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_uint16((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -5869,7 +5869,7 @@ func (_self_ *DataOutputStream) PutUint16(data uint16, cancellable CancellableKi
 }
 
 func (_self_ *DataOutputStream) PutUint32(data uint32, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guint32)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_uint32((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -5878,7 +5878,7 @@ func (_self_ *DataOutputStream) PutUint32(data uint32, cancellable CancellableKi
 }
 
 func (_self_ *DataOutputStream) PutUint64(data uint64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guint64)(data)
 	var _return_ C.gboolean
 	_return_ = C._g_data_output_stream_put_uint64((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
@@ -6014,7 +6014,7 @@ func (_self_ *DesktopAppInfo) HasKey(key string) (_go__return__ bool) {
 }
 
 func (_self_ *DesktopAppInfo) LaunchUrisAsManager(uris *C.GList, launch_context AppLaunchContextKind, spawn_flags C.GSpawnFlags, user_setup C.GSpawnChildSetupFunc, user_setup_data C.gpointer, pid_callback C.GDesktopAppLaunchCallback, pid_callback_data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context._getValue())
+	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_desktop_app_info_launch_uris_as_manager((*C.GDesktopAppInfo)(_self_._value_), uris, _cgo_launch_context_, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -6046,7 +6046,7 @@ func (_self_ *Emblem) GetOrigin() (_return_ C.GEmblemOrigin) {
 }
 
 func EmblemedIconNew(icon *C.GIcon, emblem EmblemKind) (_go__return__ EmblemedIcon) {
-	_cgo_emblem_ := (*C.GEmblem)(emblem._getValue())
+	_cgo_emblem_ := (*C.GEmblem)(emblem.GetGObject())
 	var _return_ *C.GIcon
 	_return_ = C.g_emblemed_icon_new(icon, _cgo_emblem_)
 	_go__return__ = ToEmblemedIcon(unsafe.Pointer(_return_))
@@ -6054,7 +6054,7 @@ func EmblemedIconNew(icon *C.GIcon, emblem EmblemKind) (_go__return__ EmblemedIc
 }
 
 func (_self_ *EmblemedIcon) AddEmblem(emblem EmblemKind) () {
-	_cgo_emblem_ := (*C.GEmblem)(emblem._getValue())
+	_cgo_emblem_ := (*C.GEmblem)(emblem.GetGObject())
 	C.g_emblemed_icon_add_emblem((*C.GEmblemedIcon)(_self_._value_), _cgo_emblem_)
 	return
 }
@@ -6075,7 +6075,7 @@ func (_self_ *EmblemedIcon) GetIcon() (_return_ *C.GIcon) {
 }
 
 func (_self_ *FileEnumerator) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_file_enumerator_close((*C.GFileEnumerator)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -6083,7 +6083,7 @@ func (_self_ *FileEnumerator) Close(cancellable CancellableKind) (_go__return__ 
 }
 
 func (_self_ *FileEnumerator) CloseAsync(io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_file_enumerator_close_async((*C.GFileEnumerator)(_self_._value_), io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -6115,7 +6115,7 @@ func (_self_ *FileEnumerator) IsClosed() (_go__return__ bool) {
 }
 
 func (_self_ *FileEnumerator) NextFile(cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_return_ = C._g_file_enumerator_next_file((*C.GFileEnumerator)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
@@ -6123,7 +6123,7 @@ func (_self_ *FileEnumerator) NextFile(cancellable CancellableKind) (_go__return
 }
 
 func (_self_ *FileEnumerator) NextFilesAsync(num_files C.int, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_file_enumerator_next_files_async((*C.GFileEnumerator)(_self_._value_), num_files, io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -6148,7 +6148,7 @@ func (_self_ *FileIOStream) GetEtag() (_go__return__ string) {
 }
 
 func (_self_ *FileIOStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
@@ -6159,7 +6159,7 @@ func (_self_ *FileIOStream) QueryInfo(attributes string, cancellable Cancellable
 }
 
 func (_self_ *FileIOStream) QueryInfoAsync(attributes string, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
@@ -6199,7 +6199,7 @@ func (_self_ *FileInfo) ClearStatus() () {
 }
 
 func (_self_ *FileInfo) CopyInto(dest_info FileInfoKind) () {
-	_cgo_dest_info_ := (*C.GFileInfo)(dest_info._getValue())
+	_cgo_dest_info_ := (*C.GFileInfo)(dest_info.GetGObject())
 	C.g_file_info_copy_into((*C.GFileInfo)(_self_._value_), _cgo_dest_info_)
 	return
 }
@@ -6658,7 +6658,7 @@ func (_self_ *FileInfo) UnsetAttributeMask() () {
 }
 
 func (_self_ *FileInputStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
@@ -6669,7 +6669,7 @@ func (_self_ *FileInputStream) QueryInfo(attributes string, cancellable Cancella
 }
 
 func (_self_ *FileInputStream) QueryInfoAsync(attributes string, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
@@ -6717,7 +6717,7 @@ func (_self_ *FileOutputStream) GetEtag() (_go__return__ string) {
 }
 
 func (_self_ *FileOutputStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
@@ -6728,7 +6728,7 @@ func (_self_ *FileOutputStream) QueryInfo(attributes string, cancellable Cancell
 }
 
 func (_self_ *FileOutputStream) QueryInfoAsync(attributes string, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
@@ -6840,7 +6840,7 @@ func (_self_ *IOStream) ClearPending() () {
 }
 
 func (_self_ *IOStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_io_stream_close((*C.GIOStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -6848,7 +6848,7 @@ func (_self_ *IOStream) Close(cancellable CancellableKind) (_go__return__ bool, 
 }
 
 func (_self_ *IOStream) CloseAsync(io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_io_stream_close_async((*C.GIOStream)(_self_._value_), io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -6896,8 +6896,8 @@ func (_self_ *IOStream) SetPending() (_go__return__ bool, _error_ unsafe.Pointer
 }
 
 func (_self_ *IOStream) SpliceAsync(stream2 IOStreamKind, flags C.GIOStreamSpliceFlags, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_stream2_ := (*C.GIOStream)(stream2._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_stream2_ := (*C.GIOStream)(stream2.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_io_stream_splice_async((*C.GIOStream)(_self_._value_), _cgo_stream2_, flags, io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -6927,7 +6927,7 @@ func InetAddressNewLoopback(family C.GSocketFamily) (_go__return__ InetAddress) 
 }
 
 func (_self_ *InetAddress) Equal(other_address InetAddressKind) (_go__return__ bool) {
-	_cgo_other_address_ := (*C.GInetAddress)(other_address._getValue())
+	_cgo_other_address_ := (*C.GInetAddress)(other_address.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_inet_address_equal((*C.GInetAddress)(_self_._value_), _cgo_other_address_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7029,7 +7029,7 @@ func (_self_ *InetAddress) ToString() (_go__return__ string) {
 }
 
 func InetAddressMaskNew(addr InetAddressKind, length uint) (_go__return__ InetAddressMask, _error_ unsafe.Pointer) {
-	_cgo_addr_ := (*C.GInetAddress)(addr._getValue())
+	_cgo_addr_ := (*C.GInetAddress)(addr.GetGObject())
 	var _return_ *C.GInetAddressMask
 	_cgo_length_ := (C.guint)(length)
 	_return_ = C._g_inet_address_mask_new(_cgo_addr_, _cgo_length_, _error_)
@@ -7048,7 +7048,7 @@ func InetAddressMaskNewFromString(mask_string string) (_go__return__ InetAddress
 }
 
 func (_self_ *InetAddressMask) Equal(mask2 InetAddressMaskKind) (_go__return__ bool) {
-	_cgo_mask2_ := (*C.GInetAddressMask)(mask2._getValue())
+	_cgo_mask2_ := (*C.GInetAddressMask)(mask2.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_inet_address_mask_equal((*C.GInetAddressMask)(_self_._value_), _cgo_mask2_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7075,7 +7075,7 @@ func (_self_ *InetAddressMask) GetLength() (_go__return__ uint) {
 }
 
 func (_self_ *InetAddressMask) Matches(address InetAddressKind) (_go__return__ bool) {
-	_cgo_address_ := (*C.GInetAddress)(address._getValue())
+	_cgo_address_ := (*C.GInetAddress)(address.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_inet_address_mask_matches((*C.GInetAddressMask)(_self_._value_), _cgo_address_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7090,7 +7090,7 @@ func (_self_ *InetAddressMask) ToString() (_go__return__ string) {
 }
 
 func InetSocketAddressNew(address InetAddressKind, port uint16) (_go__return__ InetSocketAddress) {
-	_cgo_address_ := (*C.GInetAddress)(address._getValue())
+	_cgo_address_ := (*C.GInetAddress)(address.GetGObject())
 	var _return_ *C.GSocketAddress
 	_cgo_port_ := (C.guint16)(port)
 	_return_ = C.g_inet_socket_address_new(_cgo_address_, _cgo_port_)
@@ -7132,7 +7132,7 @@ func (_self_ *InputStream) ClearPending() () {
 }
 
 func (_self_ *InputStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_input_stream_close((*C.GInputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7140,7 +7140,7 @@ func (_self_ *InputStream) Close(cancellable CancellableKind) (_go__return__ boo
 }
 
 func (_self_ *InputStream) CloseAsync(io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_input_stream_close_async((*C.GInputStream)(_self_._value_), io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -7167,7 +7167,7 @@ func (_self_ *InputStream) IsClosed() (_go__return__ bool) {
 }
 
 func (_self_ *InputStream) Read(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
 	_return_ = C._g_input_stream_read((*C.GInputStream)(_self_._value_), buffer, _cgo_count_, _cgo_cancellable_, _error_)
@@ -7176,7 +7176,7 @@ func (_self_ *InputStream) Read(buffer unsafe.Pointer, count uint64, cancellable
 }
 
 func (_self_ *InputStream) ReadAll(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ bool, _go_bytes_read_ uint64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var bytes_read C.gsize
 	var _return_ C.gboolean
@@ -7187,21 +7187,21 @@ func (_self_ *InputStream) ReadAll(buffer unsafe.Pointer, count uint64, cancella
 }
 
 func (_self_ *InputStream) ReadAsync(buffer unsafe.Pointer, count uint64, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	C.g_input_stream_read_async((*C.GInputStream)(_self_._value_), buffer, _cgo_count_, io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
 
 func (_self_ *InputStream) ReadBytes(count uint64, cancellable CancellableKind) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	_return_ = C._g_input_stream_read_bytes((*C.GInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, _error_)
 	return
 }
 
 func (_self_ *InputStream) ReadBytesAsync(count uint64, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	C.g_input_stream_read_bytes_async((*C.GInputStream)(_self_._value_), _cgo_count_, io_priority, _cgo_cancellable_, callback, user_data)
 	return
@@ -7227,7 +7227,7 @@ func (_self_ *InputStream) SetPending() (_go__return__ bool, _error_ unsafe.Poin
 }
 
 func (_self_ *InputStream) Skip(count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
 	_return_ = C._g_input_stream_skip((*C.GInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, _error_)
@@ -7236,7 +7236,7 @@ func (_self_ *InputStream) Skip(count uint64, cancellable CancellableKind) (_go_
 }
 
 func (_self_ *InputStream) SkipAsync(count uint64, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	C.g_input_stream_skip_async((*C.GInputStream)(_self_._value_), _cgo_count_, io_priority, _cgo_cancellable_, callback, user_data)
 	return
@@ -7324,13 +7324,13 @@ func (_self_ *GioMenu) Append(label string, detailed_action string) () {
 }
 
 func (_self_ *GioMenu) AppendItem(item GioMenuItemKind) () {
-	_cgo_item_ := (*C.GMenuItem)(item._getValue())
+	_cgo_item_ := (*C.GMenuItem)(item.GetGObject())
 	C.g_menu_append_item((*C.GMenu)(_self_._value_), _cgo_item_)
 	return
 }
 
 func (_self_ *GioMenu) AppendSection(label string, section MenuModelKind) () {
-	_cgo_section_ := (*C.GMenuModel)(section._getValue())
+	_cgo_section_ := (*C.GMenuModel)(section.GetGObject())
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
@@ -7339,7 +7339,7 @@ func (_self_ *GioMenu) AppendSection(label string, section MenuModelKind) () {
 }
 
 func (_self_ *GioMenu) AppendSubmenu(label string, submenu MenuModelKind) () {
-	_cgo_submenu_ := (*C.GMenuModel)(submenu._getValue())
+	_cgo_submenu_ := (*C.GMenuModel)(submenu.GetGObject())
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
@@ -7365,14 +7365,14 @@ func (_self_ *GioMenu) Insert(position int, label string, detailed_action string
 }
 
 func (_self_ *GioMenu) InsertItem(position int, item GioMenuItemKind) () {
-	_cgo_item_ := (*C.GMenuItem)(item._getValue())
+	_cgo_item_ := (*C.GMenuItem)(item.GetGObject())
 	_cgo_position_ := (C.gint)(position)
 	C.g_menu_insert_item((*C.GMenu)(_self_._value_), _cgo_position_, _cgo_item_)
 	return
 }
 
 func (_self_ *GioMenu) InsertSection(position int, label string, section MenuModelKind) () {
-	_cgo_section_ := (*C.GMenuModel)(section._getValue())
+	_cgo_section_ := (*C.GMenuModel)(section.GetGObject())
 	_cgo_position_ := (C.gint)(position)
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
@@ -7382,7 +7382,7 @@ func (_self_ *GioMenu) InsertSection(position int, label string, section MenuMod
 }
 
 func (_self_ *GioMenu) InsertSubmenu(position int, label string, submenu MenuModelKind) () {
-	_cgo_submenu_ := (*C.GMenuModel)(submenu._getValue())
+	_cgo_submenu_ := (*C.GMenuModel)(submenu.GetGObject())
 	_cgo_position_ := (C.gint)(position)
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
@@ -7403,13 +7403,13 @@ func (_self_ *GioMenu) Prepend(label string, detailed_action string) () {
 }
 
 func (_self_ *GioMenu) PrependItem(item GioMenuItemKind) () {
-	_cgo_item_ := (*C.GMenuItem)(item._getValue())
+	_cgo_item_ := (*C.GMenuItem)(item.GetGObject())
 	C.g_menu_prepend_item((*C.GMenu)(_self_._value_), _cgo_item_)
 	return
 }
 
 func (_self_ *GioMenu) PrependSection(label string, section MenuModelKind) () {
-	_cgo_section_ := (*C.GMenuModel)(section._getValue())
+	_cgo_section_ := (*C.GMenuModel)(section.GetGObject())
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
@@ -7418,7 +7418,7 @@ func (_self_ *GioMenu) PrependSection(label string, section MenuModelKind) () {
 }
 
 func (_self_ *GioMenu) PrependSubmenu(label string, submenu MenuModelKind) () {
-	_cgo_submenu_ := (*C.GMenuModel)(submenu._getValue())
+	_cgo_submenu_ := (*C.GMenuModel)(submenu.GetGObject())
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
 	defer C.free(unsafe.Pointer(_cstring_label_))
@@ -7472,7 +7472,7 @@ func GioMenuItemNew(label string, detailed_action string) (_go__return__ GioMenu
 }
 
 func MenuItemNewFromModel(model MenuModelKind, item_index int) (_go__return__ GioMenuItem) {
-	_cgo_model_ := (*C.GMenuModel)(model._getValue())
+	_cgo_model_ := (*C.GMenuModel)(model.GetGObject())
 	var _return_ *C.GMenuItem
 	_cgo_item_index_ := (C.gint)(item_index)
 	_return_ = C.g_menu_item_new_from_model(_cgo_model_, _cgo_item_index_)
@@ -7481,7 +7481,7 @@ func MenuItemNewFromModel(model MenuModelKind, item_index int) (_go__return__ Gi
 }
 
 func MenuItemNewSection(label string, section MenuModelKind) (_go__return__ GioMenuItem) {
-	_cgo_section_ := (*C.GMenuModel)(section._getValue())
+	_cgo_section_ := (*C.GMenuModel)(section.GetGObject())
 	var _return_ *C.GMenuItem
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
@@ -7492,7 +7492,7 @@ func MenuItemNewSection(label string, section MenuModelKind) (_go__return__ GioM
 }
 
 func MenuItemNewSubmenu(label string, submenu MenuModelKind) (_go__return__ GioMenuItem) {
-	_cgo_submenu_ := (*C.GMenuModel)(submenu._getValue())
+	_cgo_submenu_ := (*C.GMenuModel)(submenu.GetGObject())
 	var _return_ *C.GMenuItem
 	_cstring_label_ := C.CString(label)
 	_cgo_label_ := (*C.gchar)(unsafe.Pointer(_cstring_label_))
@@ -7553,7 +7553,7 @@ func (_self_ *GioMenuItem) SetLabel(label string) () {
 }
 
 func (_self_ *GioMenuItem) SetLink(link string, model MenuModelKind) () {
-	_cgo_model_ := (*C.GMenuModel)(model._getValue())
+	_cgo_model_ := (*C.GMenuModel)(model.GetGObject())
 	_cstring_link_ := C.CString(link)
 	_cgo_link_ := (*C.gchar)(unsafe.Pointer(_cstring_link_))
 	defer C.free(unsafe.Pointer(_cstring_link_))
@@ -7562,13 +7562,13 @@ func (_self_ *GioMenuItem) SetLink(link string, model MenuModelKind) () {
 }
 
 func (_self_ *GioMenuItem) SetSection(section MenuModelKind) () {
-	_cgo_section_ := (*C.GMenuModel)(section._getValue())
+	_cgo_section_ := (*C.GMenuModel)(section.GetGObject())
 	C.g_menu_item_set_section((*C.GMenuItem)(_self_._value_), _cgo_section_)
 	return
 }
 
 func (_self_ *GioMenuItem) SetSubmenu(submenu MenuModelKind) () {
-	_cgo_submenu_ := (*C.GMenuModel)(submenu._getValue())
+	_cgo_submenu_ := (*C.GMenuModel)(submenu.GetGObject())
 	C.g_menu_item_set_submenu((*C.GMenuItem)(_self_._value_), _cgo_submenu_)
 	return
 }
@@ -7860,7 +7860,7 @@ func (_self_ *OutputStream) ClearPending() () {
 }
 
 func (_self_ *OutputStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_output_stream_close((*C.GOutputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7868,7 +7868,7 @@ func (_self_ *OutputStream) Close(cancellable CancellableKind) (_go__return__ bo
 }
 
 func (_self_ *OutputStream) CloseAsync(io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_output_stream_close_async((*C.GOutputStream)(_self_._value_), io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -7881,7 +7881,7 @@ func (_self_ *OutputStream) CloseFinish(result *C.GAsyncResult) (_go__return__ b
 }
 
 func (_self_ *OutputStream) Flush(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_output_stream_flush((*C.GOutputStream)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7889,7 +7889,7 @@ func (_self_ *OutputStream) Flush(cancellable CancellableKind) (_go__return__ bo
 }
 
 func (_self_ *OutputStream) FlushAsync(io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_output_stream_flush_async((*C.GOutputStream)(_self_._value_), io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -7930,8 +7930,8 @@ func (_self_ *OutputStream) SetPending() (_go__return__ bool, _error_ unsafe.Poi
 }
 
 func (_self_ *OutputStream) Splice(source InputStreamKind, flags C.GOutputStreamSpliceFlags, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_source_ := (*C.GInputStream)(source._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_source_ := (*C.GInputStream)(source.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gssize
 	_return_ = C._g_output_stream_splice((*C.GOutputStream)(_self_._value_), _cgo_source_, flags, _cgo_cancellable_, _error_)
 	_go__return__ = (int64)(_return_)
@@ -7939,8 +7939,8 @@ func (_self_ *OutputStream) Splice(source InputStreamKind, flags C.GOutputStream
 }
 
 func (_self_ *OutputStream) SpliceAsync(source InputStreamKind, flags C.GOutputStreamSpliceFlags, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_source_ := (*C.GInputStream)(source._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_source_ := (*C.GInputStream)(source.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_output_stream_splice_async((*C.GOutputStream)(_self_._value_), _cgo_source_, flags, io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -7953,7 +7953,7 @@ func (_self_ *OutputStream) SpliceFinish(result *C.GAsyncResult) (_go__return__ 
 }
 
 func (_self_ *OutputStream) WriteBytes(bytes *C.GBytes, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gssize
 	_return_ = C._g_output_stream_write_bytes((*C.GOutputStream)(_self_._value_), bytes, _cgo_cancellable_, _error_)
 	_go__return__ = (int64)(_return_)
@@ -7961,7 +7961,7 @@ func (_self_ *OutputStream) WriteBytes(bytes *C.GBytes, cancellable CancellableK
 }
 
 func (_self_ *OutputStream) WriteBytesAsync(bytes *C.GBytes, io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_output_stream_write_bytes_async((*C.GOutputStream)(_self_._value_), bytes, io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -7981,7 +7981,7 @@ func (_self_ *OutputStream) WriteFinish(result *C.GAsyncResult) (_go__return__ i
 }
 
 func (_self_ *Permission) Acquire(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_permission_acquire((*C.GPermission)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7989,7 +7989,7 @@ func (_self_ *Permission) Acquire(cancellable CancellableKind) (_go__return__ bo
 }
 
 func (_self_ *Permission) AcquireAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_permission_acquire_async((*C.GPermission)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -8034,7 +8034,7 @@ func (_self_ *Permission) ImplUpdate(allowed bool, can_acquire bool, can_release
 }
 
 func (_self_ *Permission) Release(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_permission_release((*C.GPermission)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -8042,7 +8042,7 @@ func (_self_ *Permission) Release(cancellable CancellableKind) (_go__return__ bo
 }
 
 func (_self_ *Permission) ReleaseAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_permission_release_async((*C.GPermission)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -8055,7 +8055,7 @@ func (_self_ *Permission) ReleaseFinish(result *C.GAsyncResult) (_go__return__ b
 }
 
 func ProxyAddressNew(inetaddr InetAddressKind, port uint16, protocol string, dest_hostname string, dest_port uint16, username string, password string) (_go__return__ ProxyAddress) {
-	_cgo_inetaddr_ := (*C.GInetAddress)(inetaddr._getValue())
+	_cgo_inetaddr_ := (*C.GInetAddress)(inetaddr.GetGObject())
 	var _return_ *C.GSocketAddress
 	_cgo_port_ := (C.guint16)(port)
 	_cgo_dest_port_ := (C.guint16)(dest_port)
@@ -8143,8 +8143,8 @@ func ResolverGetDefault() (_go__return__ Resolver) {
 }
 
 func (_self_ *Resolver) LookupByAddress(address InetAddressKind, cancellable CancellableKind) (_go__return__ string, _error_ unsafe.Pointer) {
-	_cgo_address_ := (*C.GInetAddress)(address._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_address_ := (*C.GInetAddress)(address.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.gchar
 	_return_ = C._g_resolver_lookup_by_address((*C.GResolver)(_self_._value_), _cgo_address_, _cgo_cancellable_, _error_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
@@ -8152,8 +8152,8 @@ func (_self_ *Resolver) LookupByAddress(address InetAddressKind, cancellable Can
 }
 
 func (_self_ *Resolver) LookupByAddressAsync(address InetAddressKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_address_ := (*C.GInetAddress)(address._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_address_ := (*C.GInetAddress)(address.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_resolver_lookup_by_address_async((*C.GResolver)(_self_._value_), _cgo_address_, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -8166,7 +8166,7 @@ func (_self_ *Resolver) LookupByAddressFinish(result *C.GAsyncResult) (_go__retu
 }
 
 func (_self_ *Resolver) LookupByName(hostname string, cancellable CancellableKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_hostname_ := C.CString(hostname)
 	_cgo_hostname_ := (*C.gchar)(unsafe.Pointer(_cstring_hostname_))
 	defer C.free(unsafe.Pointer(_cstring_hostname_))
@@ -8175,7 +8175,7 @@ func (_self_ *Resolver) LookupByName(hostname string, cancellable CancellableKin
 }
 
 func (_self_ *Resolver) LookupByNameAsync(hostname string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_hostname_ := C.CString(hostname)
 	_cgo_hostname_ := (*C.gchar)(unsafe.Pointer(_cstring_hostname_))
 	defer C.free(unsafe.Pointer(_cstring_hostname_))
@@ -8189,7 +8189,7 @@ func (_self_ *Resolver) LookupByNameFinish(result *C.GAsyncResult) (_return_ *C.
 }
 
 func (_self_ *Resolver) LookupRecords(rrname string, record_type C.GResolverRecordType, cancellable CancellableKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_rrname_ := C.CString(rrname)
 	_cgo_rrname_ := (*C.gchar)(unsafe.Pointer(_cstring_rrname_))
 	defer C.free(unsafe.Pointer(_cstring_rrname_))
@@ -8198,7 +8198,7 @@ func (_self_ *Resolver) LookupRecords(rrname string, record_type C.GResolverReco
 }
 
 func (_self_ *Resolver) LookupRecordsAsync(rrname string, record_type C.GResolverRecordType, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_rrname_ := C.CString(rrname)
 	_cgo_rrname_ := (*C.gchar)(unsafe.Pointer(_cstring_rrname_))
 	defer C.free(unsafe.Pointer(_cstring_rrname_))
@@ -8212,7 +8212,7 @@ func (_self_ *Resolver) LookupRecordsFinish(result *C.GAsyncResult) (_return_ *C
 }
 
 func (_self_ *Resolver) LookupService(service string, protocol string, domain string, cancellable CancellableKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_service_ := C.CString(service)
 	_cgo_service_ := (*C.gchar)(unsafe.Pointer(_cstring_service_))
 	defer C.free(unsafe.Pointer(_cstring_service_))
@@ -8227,7 +8227,7 @@ func (_self_ *Resolver) LookupService(service string, protocol string, domain st
 }
 
 func (_self_ *Resolver) LookupServiceAsync(service string, protocol string, domain string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_service_ := C.CString(service)
 	_cgo_service_ := (*C.gchar)(unsafe.Pointer(_cstring_service_))
 	defer C.free(unsafe.Pointer(_cstring_service_))
@@ -8769,13 +8769,13 @@ func (_self_ *SimpleAsyncResult) PropagateError() (_go__return__ bool, _error_ u
 }
 
 func (_self_ *SimpleAsyncResult) RunInThread(func_ C.GSimpleAsyncThreadFunc, io_priority C.int, cancellable CancellableKind) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_simple_async_result_run_in_thread((*C.GSimpleAsyncResult)(_self_._value_), func_, io_priority, _cgo_cancellable_)
 	return
 }
 
 func (_self_ *SimpleAsyncResult) SetCheckCancellable(check_cancellable CancellableKind) () {
-	_cgo_check_cancellable_ := (*C.GCancellable)(check_cancellable._getValue())
+	_cgo_check_cancellable_ := (*C.GCancellable)(check_cancellable.GetGObject())
 	C.g_simple_async_result_set_check_cancellable((*C.GSimpleAsyncResult)(_self_._value_), _cgo_check_cancellable_)
 	return
 }
@@ -8840,7 +8840,7 @@ func SocketNewFromFd(fd int) (_go__return__ GioSocket, _error_ unsafe.Pointer) {
 }
 
 func (_self_ *GioSocket) Accept(cancellable CancellableKind) (_go__return__ GioSocket, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocket
 	_return_ = C._g_socket_accept((*C.GSocket)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
@@ -8848,7 +8848,7 @@ func (_self_ *GioSocket) Accept(cancellable CancellableKind) (_go__return__ GioS
 }
 
 func (_self_ *GioSocket) Bind(address SocketAddressKind, allow_reuse bool) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_address_ := (*C.GSocketAddress)(address._getValue())
+	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	_cgo_allow_reuse_ := (C.gboolean)(C.FALSE)
 	if allow_reuse { _cgo_allow_reuse_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
@@ -8877,7 +8877,7 @@ func (_self_ *GioSocket) ConditionCheck(condition C.GIOCondition) (_return_ C.GI
 }
 
 func (_self_ *GioSocket) ConditionTimedWait(condition C.GIOCondition, timeout int64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_ := (C.gint64)(timeout)
 	var _return_ C.gboolean
 	_return_ = C._g_socket_condition_timed_wait((*C.GSocket)(_self_._value_), condition, _cgo_timeout_, _cgo_cancellable_, _error_)
@@ -8886,7 +8886,7 @@ func (_self_ *GioSocket) ConditionTimedWait(condition C.GIOCondition, timeout in
 }
 
 func (_self_ *GioSocket) ConditionWait(condition C.GIOCondition, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_socket_condition_wait((*C.GSocket)(_self_._value_), condition, _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -8894,8 +8894,8 @@ func (_self_ *GioSocket) ConditionWait(condition C.GIOCondition, cancellable Can
 }
 
 func (_self_ *GioSocket) Connect(address SocketAddressKind, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_address_ := (*C.GSocketAddress)(address._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_socket_connect((*C.GSocket)(_self_._value_), _cgo_address_, _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -8910,7 +8910,7 @@ func (_self_ *GioSocket) ConnectionFactoryCreateConnection() (_go__return__ Sock
 }
 
 func (_self_ *GioSocket) CreateSource(condition C.GIOCondition, cancellable CancellableKind) (_return_ *C.GSource) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_return_ = C.g_socket_create_source((*C.GSocket)(_self_._value_), condition, _cgo_cancellable_)
 	return
 }
@@ -9034,7 +9034,7 @@ func (_self_ *GioSocket) IsConnected() (_go__return__ bool) {
 }
 
 func (_self_ *GioSocket) JoinMulticastGroup(group InetAddressKind, source_specific bool, iface string) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_group_ := (*C.GInetAddress)(group._getValue())
+	_cgo_group_ := (*C.GInetAddress)(group.GetGObject())
 	_cstring_iface_ := C.CString(iface)
 	_cgo_iface_ := (*C.gchar)(unsafe.Pointer(_cstring_iface_))
 	defer C.free(unsafe.Pointer(_cstring_iface_))
@@ -9047,7 +9047,7 @@ func (_self_ *GioSocket) JoinMulticastGroup(group InetAddressKind, source_specif
 }
 
 func (_self_ *GioSocket) LeaveMulticastGroup(group InetAddressKind, source_specific bool, iface string) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_group_ := (*C.GInetAddress)(group._getValue())
+	_cgo_group_ := (*C.GInetAddress)(group.GetGObject())
 	_cstring_iface_ := C.CString(iface)
 	_cgo_iface_ := (*C.gchar)(unsafe.Pointer(_cstring_iface_))
 	defer C.free(unsafe.Pointer(_cstring_iface_))
@@ -9067,7 +9067,7 @@ func (_self_ *GioSocket) Listen() (_go__return__ bool, _error_ unsafe.Pointer) {
 }
 
 func (_self_ *GioSocket) Receive(buffer string, size uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_size_ := (C.gsize)(size)
 	var _return_ C.gssize
 	_cstring_buffer_ := C.CString(buffer)
@@ -9079,7 +9079,7 @@ func (_self_ *GioSocket) Receive(buffer string, size uint64, cancellable Cancell
 }
 
 func (_self_ *GioSocket) ReceiveWithBlocking(buffer string, size uint64, blocking bool, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_size_ := (C.gsize)(size)
 	var _return_ C.gssize
 	_cstring_buffer_ := C.CString(buffer)
@@ -9191,7 +9191,7 @@ func (_self_ *SocketAddress) ToNative(dest C.gpointer, destlen uint64) (_go__ret
 }
 
 func (_self_ *SocketAddressEnumerator) Next(cancellable CancellableKind) (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketAddress
 	_return_ = C._g_socket_address_enumerator_next((*C.GSocketAddressEnumerator)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
@@ -9199,7 +9199,7 @@ func (_self_ *SocketAddressEnumerator) Next(cancellable CancellableKind) (_go__r
 }
 
 func (_self_ *SocketAddressEnumerator) NextAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_socket_address_enumerator_next_async((*C.GSocketAddressEnumerator)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -9227,7 +9227,7 @@ func (_self_ *SocketClient) AddApplicationProxy(protocol string) () {
 }
 
 func (_self_ *SocketClient) Connect(connectable *C.GSocketConnectable, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_return_ = C._g_socket_client_connect((*C.GSocketClient)(_self_._value_), connectable, _cgo_cancellable_, _error_)
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
@@ -9235,7 +9235,7 @@ func (_self_ *SocketClient) Connect(connectable *C.GSocketConnectable, cancellab
 }
 
 func (_self_ *SocketClient) ConnectAsync(connectable *C.GSocketConnectable, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_socket_client_connect_async((*C.GSocketClient)(_self_._value_), connectable, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -9248,7 +9248,7 @@ func (_self_ *SocketClient) ConnectFinish(result *C.GAsyncResult) (_go__return__
 }
 
 func (_self_ *SocketClient) ConnectToHost(host_and_port string, default_port uint16, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_host_and_port_ := C.CString(host_and_port)
@@ -9260,7 +9260,7 @@ func (_self_ *SocketClient) ConnectToHost(host_and_port string, default_port uin
 }
 
 func (_self_ *SocketClient) ConnectToHostAsync(host_and_port string, default_port uint16, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_host_and_port_ := C.CString(host_and_port)
 	_cgo_host_and_port_ := (*C.gchar)(unsafe.Pointer(_cstring_host_and_port_))
@@ -9277,7 +9277,7 @@ func (_self_ *SocketClient) ConnectToHostFinish(result *C.GAsyncResult) (_go__re
 }
 
 func (_self_ *SocketClient) ConnectToService(domain string, service string, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
@@ -9291,7 +9291,7 @@ func (_self_ *SocketClient) ConnectToService(domain string, service string, canc
 }
 
 func (_self_ *SocketClient) ConnectToServiceAsync(domain string, service string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
 	defer C.free(unsafe.Pointer(_cstring_domain_))
@@ -9310,7 +9310,7 @@ func (_self_ *SocketClient) ConnectToServiceFinish(result *C.GAsyncResult) (_go_
 }
 
 func (_self_ *SocketClient) ConnectToUri(uri string, default_port uint16, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_uri_ := C.CString(uri)
@@ -9322,7 +9322,7 @@ func (_self_ *SocketClient) ConnectToUri(uri string, default_port uint16, cancel
 }
 
 func (_self_ *SocketClient) ConnectToUriAsync(uri string, default_port uint16, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
@@ -9399,7 +9399,7 @@ func (_self_ *SocketClient) SetFamily(family C.GSocketFamily) () {
 }
 
 func (_self_ *SocketClient) SetLocalAddress(address SocketAddressKind) () {
-	_cgo_address_ := (*C.GSocketAddress)(address._getValue())
+	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	C.g_socket_client_set_local_address((*C.GSocketClient)(_self_._value_), _cgo_address_)
 	return
 }
@@ -9445,8 +9445,8 @@ func SocketConnectionFactoryRegisterType(g_type C.GType, family C.GSocketFamily,
 }
 
 func (_self_ *SocketConnection) Connect(address SocketAddressKind, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_address_ := (*C.GSocketAddress)(address._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_socket_connection_connect((*C.GSocketConnection)(_self_._value_), _cgo_address_, _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -9454,8 +9454,8 @@ func (_self_ *SocketConnection) Connect(address SocketAddressKind, cancellable C
 }
 
 func (_self_ *SocketConnection) ConnectAsync(address SocketAddressKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_address_ := (*C.GSocketAddress)(address._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_socket_connection_connect_async((*C.GSocketConnection)(_self_._value_), _cgo_address_, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -9525,7 +9525,7 @@ func SocketListenerNew() (_go__return__ SocketListener) {
 }
 
 func (_self_ *SocketListener) Accept(cancellable CancellableKind) (_go__return__ SocketConnection, source_object unsafe.Pointer, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_return_ = C._g_socket_listener_accept((*C.GSocketListener)(_self_._value_), source_object, _cgo_cancellable_, _error_)
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
@@ -9533,7 +9533,7 @@ func (_self_ *SocketListener) Accept(cancellable CancellableKind) (_go__return__
 }
 
 func (_self_ *SocketListener) AcceptAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_socket_listener_accept_async((*C.GSocketListener)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -9546,7 +9546,7 @@ func (_self_ *SocketListener) AcceptFinish(result *C.GAsyncResult) (_go__return_
 }
 
 func (_self_ *SocketListener) AcceptSocket(cancellable CancellableKind) (_go__return__ GioSocket, source_object unsafe.Pointer, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocket
 	_return_ = C._g_socket_listener_accept_socket((*C.GSocketListener)(_self_._value_), source_object, _cgo_cancellable_, _error_)
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
@@ -9554,7 +9554,7 @@ func (_self_ *SocketListener) AcceptSocket(cancellable CancellableKind) (_go__re
 }
 
 func (_self_ *SocketListener) AcceptSocketAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_socket_listener_accept_socket_async((*C.GSocketListener)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -9567,7 +9567,7 @@ func (_self_ *SocketListener) AcceptSocketFinish(result *C.GAsyncResult) (_go__r
 }
 
 func (_self_ *SocketListener) AddAddress(address SocketAddressKind, type_ C.GSocketType, protocol C.GSocketProtocol, source_object *C.GObject) (_go__return__ bool, effective_address *SocketAddress, _error_ unsafe.Pointer) {
-	_cgo_address_ := (*C.GSocketAddress)(address._getValue())
+	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	var _allocated_effective_address_ *C.GSocketAddress
 	var _return_ C.gboolean
 	_return_ = C._g_socket_listener_add_address((*C.GSocketListener)(_self_._value_), _cgo_address_, type_, protocol, source_object, unsafe.Pointer(&_allocated_effective_address_), _error_)
@@ -9592,7 +9592,7 @@ func (_self_ *SocketListener) AddInetPort(port uint16, source_object *C.GObject)
 }
 
 func (_self_ *SocketListener) AddSocket(socket GioSocketKind, source_object *C.GObject) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_socket_ := (*C.GSocket)(socket._getValue())
+	_cgo_socket_ := (*C.GSocket)(socket.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_socket_listener_add_socket((*C.GSocketListener)(_self_._value_), _cgo_socket_, source_object, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -9634,7 +9634,7 @@ func (_self_ *SocketService) Stop() () {
 }
 
 func TaskNew(source_object C.gpointer, cancellable CancellableKind, callback C.GAsyncReadyCallback, callback_data C.gpointer) (_go__return__ Task) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GTask
 	_return_ = C.g_task_new(source_object, _cgo_cancellable_, callback, callback_data)
 	_go__return__ = ToTask(unsafe.Pointer(_return_))
@@ -9819,8 +9819,8 @@ func (_self_ *TcpConnection) SetGracefulDisconnect(graceful_disconnect bool) () 
 }
 
 func TcpWrapperConnectionNew(base_io_stream IOStreamKind, socket GioSocketKind) (_go__return__ TcpWrapperConnection) {
-	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream._getValue())
-	_cgo_socket_ := (*C.GSocket)(socket._getValue())
+	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream.GetGObject())
+	_cgo_socket_ := (*C.GSocket)(socket.GetGObject())
 	var _return_ *C.GSocketConnection
 	_return_ = C.g_tcp_wrapper_connection_new(_cgo_base_io_stream_, _cgo_socket_)
 	_go__return__ = ToTcpWrapperConnection(unsafe.Pointer(_return_))
@@ -9979,7 +9979,7 @@ func (_self_ *TlsCertificate) GetIssuer() (_go__return__ TlsCertificate) {
 }
 
 func (_self_ *TlsCertificate) IsSame(cert_two TlsCertificateKind) (_go__return__ bool) {
-	_cgo_cert_two_ := (*C.GTlsCertificate)(cert_two._getValue())
+	_cgo_cert_two_ := (*C.GTlsCertificate)(cert_two.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_tls_certificate_is_same((*C.GTlsCertificate)(_self_._value_), _cgo_cert_two_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -9987,13 +9987,13 @@ func (_self_ *TlsCertificate) IsSame(cert_two TlsCertificateKind) (_go__return__
 }
 
 func (_self_ *TlsCertificate) Verify(identity *C.GSocketConnectable, trusted_ca TlsCertificateKind) (_return_ C.GTlsCertificateFlags) {
-	_cgo_trusted_ca_ := (*C.GTlsCertificate)(trusted_ca._getValue())
+	_cgo_trusted_ca_ := (*C.GTlsCertificate)(trusted_ca.GetGObject())
 	_return_ = C.g_tls_certificate_verify((*C.GTlsCertificate)(_self_._value_), identity, _cgo_trusted_ca_)
 	return
 }
 
 func (_self_ *TlsConnection) EmitAcceptCertificate(peer_cert TlsCertificateKind, errors C.GTlsCertificateFlags) (_go__return__ bool) {
-	_cgo_peer_cert_ := (*C.GTlsCertificate)(peer_cert._getValue())
+	_cgo_peer_cert_ := (*C.GTlsCertificate)(peer_cert.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C.g_tls_connection_emit_accept_certificate((*C.GTlsConnection)(_self_._value_), _cgo_peer_cert_, errors)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -10046,7 +10046,7 @@ func (_self_ *TlsConnection) GetRequireCloseNotify() (_go__return__ bool) {
 }
 
 func (_self_ *TlsConnection) Handshake(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_tls_connection_handshake((*C.GTlsConnection)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -10054,7 +10054,7 @@ func (_self_ *TlsConnection) Handshake(cancellable CancellableKind) (_go__return
 }
 
 func (_self_ *TlsConnection) HandshakeAsync(io_priority C.int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_tls_connection_handshake_async((*C.GTlsConnection)(_self_._value_), io_priority, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -10067,19 +10067,19 @@ func (_self_ *TlsConnection) HandshakeFinish(result *C.GAsyncResult) (_go__retur
 }
 
 func (_self_ *TlsConnection) SetCertificate(certificate TlsCertificateKind) () {
-	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
+	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
 	C.g_tls_connection_set_certificate((*C.GTlsConnection)(_self_._value_), _cgo_certificate_)
 	return
 }
 
 func (_self_ *TlsConnection) SetDatabase(database TlsDatabaseKind) () {
-	_cgo_database_ := (*C.GTlsDatabase)(database._getValue())
+	_cgo_database_ := (*C.GTlsDatabase)(database.GetGObject())
 	C.g_tls_connection_set_database((*C.GTlsConnection)(_self_._value_), _cgo_database_)
 	return
 }
 
 func (_self_ *TlsConnection) SetInteraction(interaction TlsInteractionKind) () {
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
 	C.g_tls_connection_set_interaction((*C.GTlsConnection)(_self_._value_), _cgo_interaction_)
 	return
 }
@@ -10097,7 +10097,7 @@ func (_self_ *TlsConnection) SetRequireCloseNotify(require_close_notify bool) ()
 }
 
 func (_self_ *TlsDatabase) CreateCertificateHandle(certificate TlsCertificateKind) (_go__return__ string) {
-	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
+	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
 	var _return_ *C.gchar
 	_return_ = C.g_tls_database_create_certificate_handle((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
@@ -10105,8 +10105,8 @@ func (_self_ *TlsDatabase) CreateCertificateHandle(certificate TlsCertificateKin
 }
 
 func (_self_ *TlsDatabase) LookupCertificateForHandle(handle string, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GTlsCertificate
 	_cstring_handle_ := C.CString(handle)
 	_cgo_handle_ := (*C.gchar)(unsafe.Pointer(_cstring_handle_))
@@ -10117,8 +10117,8 @@ func (_self_ *TlsDatabase) LookupCertificateForHandle(handle string, interaction
 }
 
 func (_self_ *TlsDatabase) LookupCertificateForHandleAsync(handle string, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_handle_ := C.CString(handle)
 	_cgo_handle_ := (*C.gchar)(unsafe.Pointer(_cstring_handle_))
 	defer C.free(unsafe.Pointer(_cstring_handle_))
@@ -10134,9 +10134,9 @@ func (_self_ *TlsDatabase) LookupCertificateForHandleFinish(result *C.GAsyncResu
 }
 
 func (_self_ *TlsDatabase) LookupCertificateIssuer(certificate TlsCertificateKind, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
-	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GTlsCertificate
 	_return_ = C._g_tls_database_lookup_certificate_issuer((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_, _cgo_interaction_, flags, _cgo_cancellable_, _error_)
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
@@ -10144,9 +10144,9 @@ func (_self_ *TlsDatabase) LookupCertificateIssuer(certificate TlsCertificateKin
 }
 
 func (_self_ *TlsDatabase) LookupCertificateIssuerAsync(certificate TlsCertificateKind, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_certificate_ := (*C.GTlsCertificate)(certificate._getValue())
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_tls_database_lookup_certificate_issuer_async((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_, _cgo_interaction_, flags, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -10164,9 +10164,9 @@ func (_self_ *TlsDatabase) LookupCertificatesIssuedByFinish(result *C.GAsyncResu
 }
 
 func (_self_ *TlsDatabase) VerifyChain(chain TlsCertificateKind, purpose string, identity *C.GSocketConnectable, interaction TlsInteractionKind, flags C.GTlsDatabaseVerifyFlags, cancellable CancellableKind) (_return_ C.GTlsCertificateFlags, _error_ unsafe.Pointer) {
-	_cgo_chain_ := (*C.GTlsCertificate)(chain._getValue())
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_chain_ := (*C.GTlsCertificate)(chain.GetGObject())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_purpose_ := C.CString(purpose)
 	_cgo_purpose_ := (*C.gchar)(unsafe.Pointer(_cstring_purpose_))
 	defer C.free(unsafe.Pointer(_cstring_purpose_))
@@ -10175,9 +10175,9 @@ func (_self_ *TlsDatabase) VerifyChain(chain TlsCertificateKind, purpose string,
 }
 
 func (_self_ *TlsDatabase) VerifyChainAsync(chain TlsCertificateKind, purpose string, identity *C.GSocketConnectable, interaction TlsInteractionKind, flags C.GTlsDatabaseVerifyFlags, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_chain_ := (*C.GTlsCertificate)(chain._getValue())
-	_cgo_interaction_ := (*C.GTlsInteraction)(interaction._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_chain_ := (*C.GTlsCertificate)(chain.GetGObject())
+	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_purpose_ := C.CString(purpose)
 	_cgo_purpose_ := (*C.gchar)(unsafe.Pointer(_cstring_purpose_))
 	defer C.free(unsafe.Pointer(_cstring_purpose_))
@@ -10191,15 +10191,15 @@ func (_self_ *TlsDatabase) VerifyChainFinish(result *C.GAsyncResult) (_return_ C
 }
 
 func (_self_ *TlsInteraction) AskPassword(password TlsPasswordKind, cancellable CancellableKind) (_return_ C.GTlsInteractionResult, _error_ unsafe.Pointer) {
-	_cgo_password_ := (*C.GTlsPassword)(password._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_password_ := (*C.GTlsPassword)(password.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_return_ = C._g_tls_interaction_ask_password((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, _error_)
 	return
 }
 
 func (_self_ *TlsInteraction) AskPasswordAsync(password TlsPasswordKind, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_password_ := (*C.GTlsPassword)(password._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_password_ := (*C.GTlsPassword)(password.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_tls_interaction_ask_password_async((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -10210,8 +10210,8 @@ func (_self_ *TlsInteraction) AskPasswordFinish(result *C.GAsyncResult) (_return
 }
 
 func (_self_ *TlsInteraction) InvokeAskPassword(password TlsPasswordKind, cancellable CancellableKind) (_return_ C.GTlsInteractionResult, _error_ unsafe.Pointer) {
-	_cgo_password_ := (*C.GTlsPassword)(password._getValue())
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_password_ := (*C.GTlsPassword)(password.GetGObject())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_return_ = C._g_tls_interaction_invoke_ask_password((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, _error_)
 	return
 }
@@ -10284,7 +10284,7 @@ func (_self_ *TlsPassword) SetWarning(warning string) () {
 }
 
 func (_self_ *UnixConnection) ReceiveCredentials(cancellable CancellableKind) (_go__return__ Credentials, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GCredentials
 	_return_ = C._g_unix_connection_receive_credentials((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = ToCredentials(unsafe.Pointer(_return_))
@@ -10292,7 +10292,7 @@ func (_self_ *UnixConnection) ReceiveCredentials(cancellable CancellableKind) (_
 }
 
 func (_self_ *UnixConnection) ReceiveCredentialsAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_unix_connection_receive_credentials_async((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -10305,7 +10305,7 @@ func (_self_ *UnixConnection) ReceiveCredentialsFinish(result *C.GAsyncResult) (
 }
 
 func (_self_ *UnixConnection) ReceiveFd(cancellable CancellableKind) (_go__return__ int, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint
 	_return_ = C._g_unix_connection_receive_fd((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = (int)(_return_)
@@ -10313,7 +10313,7 @@ func (_self_ *UnixConnection) ReceiveFd(cancellable CancellableKind) (_go__retur
 }
 
 func (_self_ *UnixConnection) SendCredentials(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_unix_connection_send_credentials((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -10321,7 +10321,7 @@ func (_self_ *UnixConnection) SendCredentials(cancellable CancellableKind) (_go_
 }
 
 func (_self_ *UnixConnection) SendCredentialsAsync(cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	C.g_unix_connection_send_credentials_async((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, callback, user_data)
 	return
 }
@@ -10334,7 +10334,7 @@ func (_self_ *UnixConnection) SendCredentialsFinish(result *C.GAsyncResult) (_go
 }
 
 func (_self_ *UnixConnection) SendFd(fd int, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
-	_cgo_cancellable_ := (*C.GCancellable)(cancellable._getValue())
+	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_fd_ := (C.gint)(fd)
 	var _return_ C.gboolean
 	_return_ = C._g_unix_connection_send_fd((*C.GUnixConnection)(_self_._value_), _cgo_fd_, _cgo_cancellable_, _error_)
@@ -10350,7 +10350,7 @@ func UnixCredentialsMessageNew() (_go__return__ UnixCredentialsMessage) {
 }
 
 func UnixCredentialsMessageNewWithCredentials(credentials CredentialsKind) (_go__return__ UnixCredentialsMessage) {
-	_cgo_credentials_ := (*C.GCredentials)(credentials._getValue())
+	_cgo_credentials_ := (*C.GCredentials)(credentials.GetGObject())
 	var _return_ *C.GSocketControlMessage
 	_return_ = C.g_unix_credentials_message_new_with_credentials(_cgo_credentials_)
 	_go__return__ = ToUnixCredentialsMessage(unsafe.Pointer(_return_))
@@ -10423,7 +10423,7 @@ func UnixFDMessageNew() (_go__return__ UnixFDMessage) {
 }
 
 func UnixFDMessageNewWithFdList(fd_list UnixFDListKind) (_go__return__ UnixFDMessage) {
-	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list._getValue())
+	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
 	var _return_ *C.GSocketControlMessage
 	_return_ = C.g_unix_fd_message_new_with_fd_list(_cgo_fd_list_)
 	_go__return__ = ToUnixFDMessage(unsafe.Pointer(_return_))
@@ -10665,7 +10665,7 @@ func (_self_ *ZlibCompressor) GetFileInfo() (_go__return__ FileInfo) {
 }
 
 func (_self_ *ZlibCompressor) SetFileInfo(file_info FileInfoKind) () {
-	_cgo_file_info_ := (*C.GFileInfo)(file_info._getValue())
+	_cgo_file_info_ := (*C.GFileInfo)(file_info.GetGObject())
 	C.g_zlib_compressor_set_file_info((*C.GZlibCompressor)(_self_._value_), _cgo_file_info_)
 	return
 }

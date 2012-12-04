@@ -25,6 +25,9 @@ func TestBasicWindow(t *testing.T) {
   window := WindowNew(WINDOW_TOPLEVEL)
 
   button := ButtonNewWithLabel("Hello, world!")
+  button.Connect("clicked", func() {
+    fmt.Printf("button clicked\n")
+  })
   window.Add(button)
   button.Show()
 

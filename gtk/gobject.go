@@ -503,226 +503,226 @@ type ParamSpecPool C.GParamSpecPool
 type ParamSpecUnichar struct { ParamSpec }
 type ParamSpecUnicharKind interface {
   _IsParamSpecUnichar()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecUnichar) _IsParamSpecUnichar () {}
-func (self ParamSpecUnichar) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecUnichar) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecUnichar(value unsafe.Pointer) ParamSpecUnichar { return ParamSpecUnichar{ParamSpec{value}} }
 type ParamSpecULong struct { ParamSpec }
 type ParamSpecULongKind interface {
   _IsParamSpecULong()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecULong) _IsParamSpecULong () {}
-func (self ParamSpecULong) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecULong) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecULong(value unsafe.Pointer) ParamSpecULong { return ParamSpecULong{ParamSpec{value}} }
 type ParamSpecDouble struct { ParamSpec }
 type ParamSpecDoubleKind interface {
   _IsParamSpecDouble()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecDouble) _IsParamSpecDouble () {}
-func (self ParamSpecDouble) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecDouble) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecDouble(value unsafe.Pointer) ParamSpecDouble { return ParamSpecDouble{ParamSpec{value}} }
 type ParamSpecInt64 struct { ParamSpec }
 type ParamSpecInt64Kind interface {
   _IsParamSpecInt64()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecInt64) _IsParamSpecInt64 () {}
-func (self ParamSpecInt64) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecInt64) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecInt64(value unsafe.Pointer) ParamSpecInt64 { return ParamSpecInt64{ParamSpec{value}} }
 type ParamSpecBoolean struct { ParamSpec }
 type ParamSpecBooleanKind interface {
   _IsParamSpecBoolean()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecBoolean) _IsParamSpecBoolean () {}
-func (self ParamSpecBoolean) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecBoolean) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecBoolean(value unsafe.Pointer) ParamSpecBoolean { return ParamSpecBoolean{ParamSpec{value}} }
 type ParamSpecParam struct { ParamSpec }
 type ParamSpecParamKind interface {
   _IsParamSpecParam()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecParam) _IsParamSpecParam () {}
-func (self ParamSpecParam) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecParam) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecParam(value unsafe.Pointer) ParamSpecParam { return ParamSpecParam{ParamSpec{value}} }
 type ParamSpecFloat struct { ParamSpec }
 type ParamSpecFloatKind interface {
   _IsParamSpecFloat()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecFloat) _IsParamSpecFloat () {}
-func (self ParamSpecFloat) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecFloat) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecFloat(value unsafe.Pointer) ParamSpecFloat { return ParamSpecFloat{ParamSpec{value}} }
 type ParamSpec struct { _value_ unsafe.Pointer }
 type ParamSpecKind interface {
   _IsParamSpec()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpec) _IsParamSpec () {}
-func (self ParamSpec) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpec) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpec(value unsafe.Pointer) ParamSpec { return ParamSpec{value} }
 type ParamSpecPointer struct { ParamSpec }
 type ParamSpecPointerKind interface {
   _IsParamSpecPointer()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecPointer) _IsParamSpecPointer () {}
-func (self ParamSpecPointer) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecPointer) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecPointer(value unsafe.Pointer) ParamSpecPointer { return ParamSpecPointer{ParamSpec{value}} }
 type ParamSpecString struct { ParamSpec }
 type ParamSpecStringKind interface {
   _IsParamSpecString()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecString) _IsParamSpecString () {}
-func (self ParamSpecString) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecString) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecString(value unsafe.Pointer) ParamSpecString { return ParamSpecString{ParamSpec{value}} }
 type ParamSpecUInt struct { ParamSpec }
 type ParamSpecUIntKind interface {
   _IsParamSpecUInt()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecUInt) _IsParamSpecUInt () {}
-func (self ParamSpecUInt) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecUInt) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecUInt(value unsafe.Pointer) ParamSpecUInt { return ParamSpecUInt{ParamSpec{value}} }
 type ParamSpecObject struct { ParamSpec }
 type ParamSpecObjectKind interface {
   _IsParamSpecObject()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecObject) _IsParamSpecObject () {}
-func (self ParamSpecObject) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecObject) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecObject(value unsafe.Pointer) ParamSpecObject { return ParamSpecObject{ParamSpec{value}} }
 type ParamSpecUChar struct { ParamSpec }
 type ParamSpecUCharKind interface {
   _IsParamSpecUChar()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecUChar) _IsParamSpecUChar () {}
-func (self ParamSpecUChar) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecUChar) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecUChar(value unsafe.Pointer) ParamSpecUChar { return ParamSpecUChar{ParamSpec{value}} }
 type ParamSpecGType struct { ParamSpec }
 type ParamSpecGTypeKind interface {
   _IsParamSpecGType()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecGType) _IsParamSpecGType () {}
-func (self ParamSpecGType) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecGType) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecGType(value unsafe.Pointer) ParamSpecGType { return ParamSpecGType{ParamSpec{value}} }
 type ParamSpecChar struct { ParamSpec }
 type ParamSpecCharKind interface {
   _IsParamSpecChar()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecChar) _IsParamSpecChar () {}
-func (self ParamSpecChar) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecChar) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecChar(value unsafe.Pointer) ParamSpecChar { return ParamSpecChar{ParamSpec{value}} }
 type ParamSpecBoxed struct { ParamSpec }
 type ParamSpecBoxedKind interface {
   _IsParamSpecBoxed()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecBoxed) _IsParamSpecBoxed () {}
-func (self ParamSpecBoxed) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecBoxed) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecBoxed(value unsafe.Pointer) ParamSpecBoxed { return ParamSpecBoxed{ParamSpec{value}} }
 type InitiallyUnowned struct { GObjectObject }
 type InitiallyUnownedKind interface {
   _IsInitiallyUnowned()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self InitiallyUnowned) _IsInitiallyUnowned () {}
-func (self InitiallyUnowned) _getValue() unsafe.Pointer { return self._value_ }
+func (self InitiallyUnowned) GetGObject() unsafe.Pointer { return self._value_ }
 func ToInitiallyUnowned(value unsafe.Pointer) InitiallyUnowned { return InitiallyUnowned{GObjectObject{value}} }
 type ParamSpecLong struct { ParamSpec }
 type ParamSpecLongKind interface {
   _IsParamSpecLong()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecLong) _IsParamSpecLong () {}
-func (self ParamSpecLong) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecLong) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecLong(value unsafe.Pointer) ParamSpecLong { return ParamSpecLong{ParamSpec{value}} }
 type ParamSpecEnum struct { ParamSpec }
 type ParamSpecEnumKind interface {
   _IsParamSpecEnum()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecEnum) _IsParamSpecEnum () {}
-func (self ParamSpecEnum) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecEnum) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecEnum(value unsafe.Pointer) ParamSpecEnum { return ParamSpecEnum{ParamSpec{value}} }
 type ParamSpecFlags struct { ParamSpec }
 type ParamSpecFlagsKind interface {
   _IsParamSpecFlags()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecFlags) _IsParamSpecFlags () {}
-func (self ParamSpecFlags) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecFlags) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecFlags(value unsafe.Pointer) ParamSpecFlags { return ParamSpecFlags{ParamSpec{value}} }
 type ParamSpecValueArray struct { ParamSpec }
 type ParamSpecValueArrayKind interface {
   _IsParamSpecValueArray()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecValueArray) _IsParamSpecValueArray () {}
-func (self ParamSpecValueArray) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecValueArray) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecValueArray(value unsafe.Pointer) ParamSpecValueArray { return ParamSpecValueArray{ParamSpec{value}} }
 type ParamSpecInt struct { ParamSpec }
 type ParamSpecIntKind interface {
   _IsParamSpecInt()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecInt) _IsParamSpecInt () {}
-func (self ParamSpecInt) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecInt) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecInt(value unsafe.Pointer) ParamSpecInt { return ParamSpecInt{ParamSpec{value}} }
 type GObjectObject struct { _value_ unsafe.Pointer }
 type GObjectObjectKind interface {
   _IsGObjectObject()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self GObjectObject) _IsGObjectObject () {}
-func (self GObjectObject) _getValue() unsafe.Pointer { return self._value_ }
+func (self GObjectObject) GetGObject() unsafe.Pointer { return self._value_ }
 func ToGObjectObject(value unsafe.Pointer) GObjectObject { return GObjectObject{value} }
 type Binding struct { GObjectObject }
 type BindingKind interface {
   _IsBinding()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self Binding) _IsBinding () {}
-func (self Binding) _getValue() unsafe.Pointer { return self._value_ }
+func (self Binding) GetGObject() unsafe.Pointer { return self._value_ }
 func ToBinding(value unsafe.Pointer) Binding { return Binding{GObjectObject{value}} }
 type ParamSpecVariant struct { ParamSpec }
 type ParamSpecVariantKind interface {
   _IsParamSpecVariant()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecVariant) _IsParamSpecVariant () {}
-func (self ParamSpecVariant) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecVariant) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecVariant(value unsafe.Pointer) ParamSpecVariant { return ParamSpecVariant{ParamSpec{value}} }
 type ParamSpecUInt64 struct { ParamSpec }
 type ParamSpecUInt64Kind interface {
   _IsParamSpecUInt64()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecUInt64) _IsParamSpecUInt64 () {}
-func (self ParamSpecUInt64) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecUInt64) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecUInt64(value unsafe.Pointer) ParamSpecUInt64 { return ParamSpecUInt64{ParamSpec{value}} }
 type TypeModule struct { GObjectObject }
 type TypeModuleKind interface {
   _IsTypeModule()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self TypeModule) _IsTypeModule () {}
-func (self TypeModule) _getValue() unsafe.Pointer { return self._value_ }
+func (self TypeModule) GetGObject() unsafe.Pointer { return self._value_ }
 func ToTypeModule(value unsafe.Pointer) TypeModule { return TypeModule{GObjectObject{value}} }
 type ParamSpecOverride struct { ParamSpec }
 type ParamSpecOverrideKind interface {
   _IsParamSpecOverride()
-  _getValue() unsafe.Pointer
+  GetGObject() unsafe.Pointer
 }
 func (self ParamSpecOverride) _IsParamSpecOverride () {}
-func (self ParamSpecOverride) _getValue() unsafe.Pointer { return self._value_ }
+func (self ParamSpecOverride) GetGObject() unsafe.Pointer { return self._value_ }
 func ToParamSpecOverride(value unsafe.Pointer) ParamSpecOverride { return ParamSpecOverride{ParamSpec{value}} }
 func BoxedCopy(boxed_type C.GType, src_boxed C.gpointer) (_return_ C.gpointer) {
 	_return_ = C._g_boxed_copy(boxed_type, src_boxed)
@@ -957,7 +957,7 @@ func CclosureNew(callback_func C.GCallback, user_data C.gpointer, destroy_data C
 }
 
 func CclosureNewObject(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *Closure) {
-	_cgo_object_ := (*C.GObject)(object._getValue())
+	_cgo_object_ := (*C.GObject)(object.GetGObject())
 	var _return_ *C.GClosure
 	_return_ = C.g_cclosure_new_object(callback_func, _cgo_object_)
 	_go__return__ = (*Closure)(unsafe.Pointer(_return_))
@@ -965,7 +965,7 @@ func CclosureNewObject(callback_func C.GCallback, object GObjectObjectKind) (_go
 }
 
 func CclosureNewObjectSwap(callback_func C.GCallback, object GObjectObjectKind) (_go__return__ *Closure) {
-	_cgo_object_ := (*C.GObject)(object._getValue())
+	_cgo_object_ := (*C.GObject)(object.GetGObject())
 	var _return_ *C.GClosure
 	_return_ = C.g_cclosure_new_object_swap(callback_func, _cgo_object_)
 	_go__return__ = (*Closure)(unsafe.Pointer(_return_))
@@ -1293,7 +1293,7 @@ func GobjectParamSpecObject(name string, nick string, blurb string, object_type 
 }
 
 func GobjectParamSpecOverride(name string, overridden ParamSpecKind) (_go__return__ ParamSpec) {
-	_cgo_overridden_ := (*C.GParamSpec)(overridden._getValue())
+	_cgo_overridden_ := (*C.GParamSpec)(overridden.GetGObject())
 	var _return_ *C.GParamSpec
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -1456,7 +1456,7 @@ func GobjectParamSpecUnichar(name string, nick string, blurb string, default_val
 }
 
 func GobjectParamSpecValueArray(name string, nick string, blurb string, element_spec ParamSpecKind, flags C.GParamFlags) (_go__return__ ParamSpec) {
-	_cgo_element_spec_ := (*C.GParamSpec)(element_spec._getValue())
+	_cgo_element_spec_ := (*C.GParamSpec)(element_spec.GetGObject())
 	var _return_ *C.GParamSpec
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -1498,7 +1498,7 @@ func ParamTypeRegisterStatic(name string, pspec_info *ParamSpecTypeInfo) (_retur
 }
 
 func ParamValueConvert(pspec ParamSpecKind, src_value *Value, dest_value *Value, strict_validation bool) (_go__return__ bool) {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_src_value_ := (*C.GValue)(unsafe.Pointer(src_value))
 	_cgo_dest_value_ := (*C.GValue)(unsafe.Pointer(dest_value))
 	_cgo_strict_validation_ := (C.gboolean)(C.FALSE)
@@ -1510,7 +1510,7 @@ func ParamValueConvert(pspec ParamSpecKind, src_value *Value, dest_value *Value,
 }
 
 func ParamValueDefaults(pspec ParamSpecKind, value *Value) (_go__return__ bool) {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ C.gboolean
 	_return_ = C.g_param_value_defaults(_cgo_pspec_, _cgo_value_)
@@ -1519,14 +1519,14 @@ func ParamValueDefaults(pspec ParamSpecKind, value *Value) (_go__return__ bool) 
 }
 
 func ParamValueSetDefault(pspec ParamSpecKind, value *Value) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	C.g_param_value_set_default(_cgo_pspec_, _cgo_value_)
 	return
 }
 
 func ParamValueValidate(pspec ParamSpecKind, value *Value) (_go__return__ bool) {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value_ := (*C.GValue)(unsafe.Pointer(value))
 	var _return_ C.gboolean
 	_return_ = C.g_param_value_validate(_cgo_pspec_, _cgo_value_)
@@ -1535,7 +1535,7 @@ func ParamValueValidate(pspec ParamSpecKind, value *Value) (_go__return__ bool) 
 }
 
 func ParamValuesCmp(pspec ParamSpecKind, value1 *Value, value2 *Value) (_go__return__ int) {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_value1_ := (*C.GValue)(unsafe.Pointer(value1))
 	_cgo_value2_ := (*C.GValue)(unsafe.Pointer(value2))
 	var _return_ C.gint
@@ -2235,7 +2235,7 @@ func ObjectInterfaceFindProperty(g_iface C.gpointer, property_name string) (_go_
 }
 
 func ObjectInterfaceInstallProperty(g_iface C.gpointer, pspec ParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	C.g_object_interface_install_property(g_iface, _cgo_pspec_)
 	return
 }
@@ -2253,7 +2253,7 @@ func (_self_ *GObjectObject) AddToggleRef(notify C.GToggleNotify, data C.gpointe
 }
 
 func (_self_ *GObjectObject) BindProperty(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags) (_go__return__ Binding) {
-	_cgo_target_ := (C.gpointer)(target._getValue())
+	_cgo_target_ := (C.gpointer)(target.GetGObject())
 	var _return_ *C.GBinding
 	_cstring_source_property_ := C.CString(source_property)
 	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
@@ -2267,7 +2267,7 @@ func (_self_ *GObjectObject) BindProperty(source_property string, target GObject
 }
 
 func (_self_ *GObjectObject) BindPropertyFull(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to C.GBindingTransformFunc, transform_from C.GBindingTransformFunc, user_data C.gpointer, notify C.GDestroyNotify) (_go__return__ Binding) {
-	_cgo_target_ := (C.gpointer)(target._getValue())
+	_cgo_target_ := (C.gpointer)(target.GetGObject())
 	var _return_ *C.GBinding
 	_cstring_source_property_ := C.CString(source_property)
 	_cgo_source_property_ := (*C.gchar)(unsafe.Pointer(_cstring_source_property_))
@@ -2281,7 +2281,7 @@ func (_self_ *GObjectObject) BindPropertyFull(source_property string, target GOb
 }
 
 func (_self_ *GObjectObject) BindPropertyWithClosures(source_property string, target GObjectObjectKind, target_property string, flags C.GBindingFlags, transform_to *Closure, transform_from *Closure) (_go__return__ Binding) {
-	_cgo_target_ := (C.gpointer)(target._getValue())
+	_cgo_target_ := (C.gpointer)(target.GetGObject())
 	_cgo_transform_to_ := (*C.GClosure)(unsafe.Pointer(transform_to))
 	_cgo_transform_from_ := (*C.GClosure)(unsafe.Pointer(transform_from))
 	var _return_ *C.GBinding
@@ -2357,7 +2357,7 @@ func (_self_ *GObjectObject) Notify(property_name string) () {
 }
 
 func (_self_ *GObjectObject) NotifyByPspec(pspec ParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	C.g_object_notify_by_pspec((*C.GObject)(_self_._value_), _cgo_pspec_)
 	return
 }
@@ -2617,7 +2617,7 @@ func (_self_ *TypeModule) Use() (_go__return__ bool) {
 }
 
 func ClosureNewObject(sizeof_closure uint, object GObjectObjectKind) (_go__return__ *Closure) {
-	_cgo_object_ := (*C.GObject)(object._getValue())
+	_cgo_object_ := (*C.GObject)(object.GetGObject())
 	var _return_ *C.GClosure
 	_cgo_sizeof_closure_ := (C.guint)(sizeof_closure)
 	_return_ = C.g_closure_new_object(_cgo_sizeof_closure_, _cgo_object_)
@@ -2701,7 +2701,7 @@ func (_self_ *GObjectObjectClass) FindProperty(property_name string) (_go__retur
 }
 
 func (_self_ *GObjectObjectClass) InstallProperty(property_id uint, pspec ParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_property_id_ := (C.guint)(property_id)
 	C.g_object_class_install_property((*C.GObjectClass)(_self_), _cgo_property_id_, _cgo_pspec_)
 	return
@@ -2724,7 +2724,7 @@ func (_self_ *GObjectObjectClass) OverrideProperty(property_id uint, name string
 }
 
 func (_self_ *ParamSpecPool) Insert(pspec ParamSpecKind, owner_type C.GType) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	C.g_param_spec_pool_insert((*C.GParamSpecPool)(_self_), _cgo_pspec_, owner_type)
 	return
 }
@@ -2754,7 +2754,7 @@ func (_self_ *ParamSpecPool) Lookup(param_name string, owner_type C.GType, walk_
 }
 
 func (_self_ *ParamSpecPool) Remove(pspec ParamSpecKind) () {
-	_cgo_pspec_ := (*C.GParamSpec)(pspec._getValue())
+	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	C.g_param_spec_pool_remove((*C.GParamSpecPool)(_self_), _cgo_pspec_)
 	return
 }
@@ -3053,13 +3053,13 @@ func (_self_ *Value) SetLong(v_long int64) () {
 }
 
 func (_self_ *Value) SetObject(v_object GObjectObjectKind) () {
-	_cgo_v_object_ := (C.gpointer)(v_object._getValue())
+	_cgo_v_object_ := (C.gpointer)(v_object.GetGObject())
 	C.g_value_set_object((*C.GValue)(_self_), _cgo_v_object_)
 	return
 }
 
 func (_self_ *Value) SetParam(param ParamSpecKind) () {
-	_cgo_param_ := (*C.GParamSpec)(param._getValue())
+	_cgo_param_ := (*C.GParamSpec)(param.GetGObject())
 	C.g_value_set_param((*C.GValue)(_self_), _cgo_param_)
 	return
 }
@@ -3136,7 +3136,7 @@ func (_self_ *Value) TakeObject(v_object C.gpointer) () {
 }
 
 func (_self_ *Value) TakeParam(param ParamSpecKind) () {
-	_cgo_param_ := (*C.GParamSpec)(param._getValue())
+	_cgo_param_ := (*C.GParamSpec)(param.GetGObject())
 	C.g_value_take_param((*C.GValue)(_self_), _cgo_param_)
 	return
 }
