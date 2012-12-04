@@ -2,6 +2,8 @@ import StringIO
 import platform
 import time
 import os
+from giscanner import ast
+from common import *
 
 class Generator:
   def __init__(self, parser):
@@ -74,7 +76,12 @@ class Generator:
     for name, c_type in self.parser.record_types.iteritems():
       print >>self.out, "type %s C.%s" % (name, c_type)
 
-    for name, field in self.parser.class_types.iteritems():
+    for name, node in self.parser.class_types.iteritems():
+      field = None
+      if not node.parent:
+        field = 'unsafe.Pointer'
+      else:
+        field = self.parser.convert_gi_name_to_go_name(node.parent.resolved)
       if field != 'unsafe.Pointer':
         print >>self.out, 'type %s struct { %s }' % (name, field)
       else:
@@ -93,3 +100,7 @@ func To{klass}(value unsafe.Pointer) {klass} {{ return {types}value{braces} }}\
     types = ''.join('%s{' % t for t in family_tree),
     braces = '}' * len(family_tree),
     )
+      if isinstance(node, ast.Class):
+        for inter in node.interfaces:
+          print >>self.out, 'func (self {klass}) _Is{interface} () {{}}'.format(
+              klass = name, interface = self.parser.convert_gi_name_to_go_name(inter.target_giname))

@@ -27,7 +27,7 @@ class Translator:
     # collect inheritance info
     for parser in self.parsers:
       if not hasattr(parser, 'nodes_of_class'): continue
-      for node in parser.nodes_of_class:
+      for node in parser.nodes_of_class + parser.nodes_of_interface:
         name = parser.convert_gi_name_to_go_name(node.gi_name)
         if self.class_parents.has_key(name):
           print 'type name conflict', name
@@ -161,11 +161,9 @@ class Parser:
     if '_' in name: return
     c_type = node.ctype
     if self.is_skip(c_type): return
-    if not node.parent:
-      self.class_types[name] = 'unsafe.Pointer'
-    else:
-      parent_name = self.convert_gi_name_to_go_name(node.parent.resolved)
-      self.class_types[name] = parent_name
+
+    self.class_types[name] = node
+
     self.translator.names.add(name)
     self._handleCompositeType(node)
 
@@ -180,7 +178,7 @@ class Parser:
     pass #TODO
 
   def handleInterface(self, interface):
-    pass #TODO
+    self.handleClass(interface)
 
   def handleUnion(self, union):
     pass #TODO
