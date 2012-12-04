@@ -62,9 +62,10 @@ class Generator:
     for symbol in self.parser.const_symbols:
       if self.parser.is_skip(symbol): continue
       go_name = symbol
-      for prefix in self.parser.prefixes:
-        if symbol.startswith(prefix.upper()):
-          go_name = symbol[len(prefix) + 1:]
+      if hasattr(self.parser, 'strip_prefix_from_const') and self.parser.strip_prefix_from_const != False:
+        for prefix in self.parser.prefixes:
+          if symbol.startswith(prefix.upper()):
+            go_name = symbol[len(prefix) + 1:]
       if hasattr(self.parser, 'conflict_const_names') and go_name in self.parser.conflict_const_names:
         go_name = symbol
       print >>self.out, "const %s = C.%s" % (go_name, symbol)
