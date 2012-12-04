@@ -1,8 +1,12 @@
+Introduction
+------------
+
+This package provides full GTK+ 3.0 support for golang
+
 Install
 -------
 
-  go get github.com/reusee/gtk-go/gtk
-
+```go get github.com/reusee/gtk-go/gtk```
 
 Demo
 ----
