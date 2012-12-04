@@ -130582,6 +130582,149 @@ func_specs = {
     parameters = [
     ],
   ),
+  'gdk_pixdata_serialize': Spec(
+    return_type = 'guint8 *',
+    parameters = [
+      Param(
+        type = 'const GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'guint *',
+        name = 'stream_length_p',
+      ),
+    ],
+  ),
+  'gdk_pixdata_deserialize': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'guint',
+        name = 'stream_length',
+      ),
+      Param(
+        type = 'const guint8 *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixdata_from_pixbuf': Spec(
+    return_type = 'gpointer',
+    parameters = [
+      Param(
+        type = 'GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'use_rle',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_from_pixdata': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'copy_pixels',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixdata_to_csource': Spec(
+    return_type = 'GString *',
+    parameters = [
+      Param(
+        type = 'GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'const gchar *',
+        name = 'name',
+      ),
+      Param(
+        type = 'GdkPixdataDumpType',
+        name = 'dump_type',
+      ),
+    ],
+  ),
+  '_gdk_pixbuf_marshal_VOID__INT_INT': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GClosure *',
+        name = 'closure',
+      ),
+      Param(
+        type = 'GValue *',
+        name = 'return_value',
+      ),
+      Param(
+        type = 'guint',
+        name = 'n_param_values',
+      ),
+      Param(
+        type = 'const GValue *',
+        name = 'param_values',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'invocation_hint',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'marshal_data',
+      ),
+    ],
+  ),
+  '_gdk_pixbuf_marshal_VOID__INT_INT_INT_INT': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GClosure *',
+        name = 'closure',
+      ),
+      Param(
+        type = 'GValue *',
+        name = 'return_value',
+      ),
+      Param(
+        type = 'guint',
+        name = 'n_param_values',
+      ),
+      Param(
+        type = 'const GValue *',
+        name = 'param_values',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'invocation_hint',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'marshal_data',
+      ),
+    ],
+  ),
   '__builtin_bswap32': Spec(
     return_type = 'uint32_t',
     parameters = [

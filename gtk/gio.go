@@ -2112,14 +2112,6 @@ type UnixConnectionKind interface {
 func (self UnixConnection) _IsUnixConnection () {}
 func (self UnixConnection) GetGObject() unsafe.Pointer { return self._value_ }
 func ToUnixConnection(value unsafe.Pointer) UnixConnection { return UnixConnection{SocketConnection{IOStream{GObjectObject{value}}}} }
-type AppLaunchContext struct { GObjectObject }
-type AppLaunchContextKind interface {
-  _IsAppLaunchContext()
-  GetGObject() unsafe.Pointer
-}
-func (self AppLaunchContext) _IsAppLaunchContext () {}
-func (self AppLaunchContext) GetGObject() unsafe.Pointer { return self._value_ }
-func ToAppLaunchContext(value unsafe.Pointer) AppLaunchContext { return AppLaunchContext{GObjectObject{value}} }
 type IOStream struct { GObjectObject }
 type IOStreamKind interface {
   _IsIOStream()
@@ -2488,6 +2480,14 @@ type DBusMenuModelKind interface {
 func (self DBusMenuModel) _IsDBusMenuModel () {}
 func (self DBusMenuModel) GetGObject() unsafe.Pointer { return self._value_ }
 func ToDBusMenuModel(value unsafe.Pointer) DBusMenuModel { return DBusMenuModel{MenuModel{GObjectObject{value}}} }
+type GioAppLaunchContext struct { GObjectObject }
+type GioAppLaunchContextKind interface {
+  _IsGioAppLaunchContext()
+  GetGObject() unsafe.Pointer
+}
+func (self GioAppLaunchContext) _IsGioAppLaunchContext () {}
+func (self GioAppLaunchContext) GetGObject() unsafe.Pointer { return self._value_ }
+func ToGioAppLaunchContext(value unsafe.Pointer) GioAppLaunchContext { return GioAppLaunchContext{GObjectObject{value}} }
 type GioMenu struct { MenuModel }
 type GioMenuKind interface {
   _IsGioMenu()
@@ -2714,7 +2714,7 @@ func AppInfoGetRecommendedForType(content_type string) (_return_ *C.GList) {
 	return
 }
 
-func AppInfoLaunchDefaultForUri(uri string, launch_context AppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func AppInfoLaunchDefaultForUri(uri string, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
@@ -3606,33 +3606,33 @@ func UnixMountsGet() (_return_ *C.GList, _go_time_read_ uint64) {
 	return
 }
 
-func AppLaunchContextNew() (_go__return__ AppLaunchContext) {
+func AppLaunchContextNew() (_go__return__ GioAppLaunchContext) {
 	var _return_ *C.GAppLaunchContext
 	_return_ = C.g_app_launch_context_new()
-	_go__return__ = ToAppLaunchContext(unsafe.Pointer(_return_))
+	_go__return__ = ToGioAppLaunchContext(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *AppLaunchContext) GetDisplay(info *C.GAppInfo, files *C.GList) (_go__return__ string) {
+func (_self_ *GioAppLaunchContext) GetDisplay(info *C.GAppInfo, files *C.GList) (_go__return__ string) {
 	var _return_ *C.char
 	_return_ = C.g_app_launch_context_get_display((*C.GAppLaunchContext)(_self_._value_), info, files)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AppLaunchContext) GetEnvironment() (_return_ unsafe.Pointer) {
+func (_self_ *GioAppLaunchContext) GetEnvironment() (_return_ unsafe.Pointer) {
 	_return_ = C._g_app_launch_context_get_environment((*C.GAppLaunchContext)(_self_._value_))
 	return
 }
 
-func (_self_ *AppLaunchContext) GetStartupNotifyId(info *C.GAppInfo, files *C.GList) (_go__return__ string) {
+func (_self_ *GioAppLaunchContext) GetStartupNotifyId(info *C.GAppInfo, files *C.GList) (_go__return__ string) {
 	var _return_ *C.char
 	_return_ = C.g_app_launch_context_get_startup_notify_id((*C.GAppLaunchContext)(_self_._value_), info, files)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *AppLaunchContext) LaunchFailed(startup_notify_id string) () {
+func (_self_ *GioAppLaunchContext) LaunchFailed(startup_notify_id string) () {
 	_cstring_startup_notify_id_ := C.CString(startup_notify_id)
 	_cgo_startup_notify_id_ := (*C.char)(unsafe.Pointer(_cstring_startup_notify_id_))
 	defer C.free(unsafe.Pointer(_cstring_startup_notify_id_))
@@ -3640,7 +3640,7 @@ func (_self_ *AppLaunchContext) LaunchFailed(startup_notify_id string) () {
 	return
 }
 
-func (_self_ *AppLaunchContext) Setenv(variable string, value string) () {
+func (_self_ *GioAppLaunchContext) Setenv(variable string, value string) () {
 	_cstring_variable_ := C.CString(variable)
 	_cgo_variable_ := (*C.char)(unsafe.Pointer(_cstring_variable_))
 	defer C.free(unsafe.Pointer(_cstring_variable_))
@@ -3651,7 +3651,7 @@ func (_self_ *AppLaunchContext) Setenv(variable string, value string) () {
 	return
 }
 
-func (_self_ *AppLaunchContext) Unsetenv(variable string) () {
+func (_self_ *GioAppLaunchContext) Unsetenv(variable string) () {
 	_cstring_variable_ := C.CString(variable)
 	_cgo_variable_ := (*C.char)(unsafe.Pointer(_cstring_variable_))
 	defer C.free(unsafe.Pointer(_cstring_variable_))
@@ -6013,7 +6013,7 @@ func (_self_ *DesktopAppInfo) HasKey(key string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *DesktopAppInfo) LaunchUrisAsManager(uris *C.GList, launch_context AppLaunchContextKind, spawn_flags C.GSpawnFlags, user_setup C.GSpawnChildSetupFunc, user_setup_data C.gpointer, pid_callback C.GDesktopAppLaunchCallback, pid_callback_data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DesktopAppInfo) LaunchUrisAsManager(uris *C.GList, launch_context GioAppLaunchContextKind, spawn_flags C.GSpawnFlags, user_setup C.GSpawnChildSetupFunc, user_setup_data C.gpointer, pid_callback C.GDesktopAppLaunchCallback, pid_callback_data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	var _return_ C.gboolean
 	_return_ = C._g_desktop_app_info_launch_uris_as_manager((*C.GDesktopAppInfo)(_self_._value_), uris, _cgo_launch_context_, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, _error_)

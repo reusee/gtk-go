@@ -5,10 +5,39 @@ Compile_error_c_symbols = [
   'g_io_module_query',
   'g_io_module_load',
   'g_io_module_unload',
+
+  'gdk_pixbuf_gettext',
+
+  'gdk_pixdata_serialize',
+  'gdk_pixdata_from_pixbuf',
+  'gdk_pixdata_to_csource',
+  'gdk_pixbuf_from_pixdata',
+
+  'GdkPixdata',
 ]
 
 Not_exported_c_macros = [
   'G_VALUE_COLLECT_FORMAT_MAX_LENGTH',
+
+  'GDK_PIXDATA_DUMP_CTYPES',
+  'GDK_PIXDATA_DUMP_MACROS',
+  'GDK_PIXDATA_DUMP_CONST',
+  'GDK_PIXDATA_ENCODING_RLE',
+  'GDK_PIXDATA_SAMPLE_WIDTH_MASK',
+  'GDK_PIXDATA_DUMP_PIXDATA_STRUCT',
+  'GDK_PIXDATA_DUMP_PIXDATA_STREAM',
+  'GDK_PIXBUF_MAGIC_NUMBER',
+  'GDK_PIXDATA_HEADER_LENGTH',
+  'GDK_PIXDATA_DUMP_RLE_DECODER',
+  'GDK_PIXDATA_DUMP_STATIC',
+  'GDK_PIXDATA_ENCODING_RAW',
+  'GDK_PIXDATA_COLOR_TYPE_MASK',
+  'GDK_PIXDATA_COLOR_TYPE_RGBA',
+  'GDK_PIXDATA_COLOR_TYPE_RGB',
+  'GDK_PIXDATA_SAMPLE_WIDTH_8',
+  'GDK_PIXDATA_DUMP_GTYPES',
+  'GDK_PIXDATA_ENCODING_MASK',
+
 ]
 
 Manually_implement_c_symbols = [
@@ -87,4 +116,5 @@ Conflict_type_names = [
     'SettingsPrivate',
     'SocketPrivate',
     'ObjectClass',
+    'AppLaunchContext',
 ]
