@@ -185,7 +185,7 @@ def collect_go_func_info(parser, generator, function, klass):
     value.cgo_argument = 'unsafe.Pointer(&_cgo_error_)'
     generator.statements_after_cgo_call.extend([
       'if _cgo_error_ != nil {',
-      '\t_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}',
+      '\t_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}',
       '\tdefer C.g_error_free(_cgo_error_)',
       '}',
     ])

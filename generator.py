@@ -50,10 +50,10 @@ class Generator:
     if not self.parser.translator.output_once:
       self.parser.translator.output_once = True
       print >>self.out, '''\
-type Error struct {
+type GoError struct {
   Message string
 }
-func (self *Error) Error() string {
+func (self *GoError) Error() string {
   return self.Message
 }
 '''
