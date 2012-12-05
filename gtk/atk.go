@@ -391,22 +391,6 @@ func ToAtkTable(value unsafe.Pointer) AtkTable {
 		value,
 	}
 }
-type Registry struct {
-	GObjectObject
-	_value_ unsafe.Pointer
-}
-type RegistryKind interface {
-  _IsRegistry()
-  GetGObject() unsafe.Pointer
-}
-func (self Registry) _IsRegistry() {}
-func (self Registry) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRegistry(value unsafe.Pointer) Registry {
-	return Registry{
-		ToGObjectObject(value),
-		value,
-	}
-}
 type NoOpObject struct {
 	AtkObject
 	AtkAction
@@ -699,10 +683,8 @@ func FocusTrackerNotify(object AtkObjectKind) () {
 	return
 }
 
-func GetDefaultRegistry() (_go__return__ Registry) {
-	var _return_ *C.AtkRegistry
+func GetDefaultRegistry() (_return_ *C.AtkRegistry) {
 	_return_ = C.atk_get_default_registry()
-	_go__return__ = ToRegistry(unsafe.Pointer(_return_))
 	return
 }
 
@@ -749,9 +731,10 @@ func RelationTypeForName(name string) (_return_ C.AtkRelationType) {
 	return
 }
 
-func RelationTypeGetName(type_ C.AtkRelationType) (_go__return__ string) {
+func RelationTypeGetName(type_ int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._atk_relation_type_get_name(type_)
+	_cgo_type__ := (C.AtkRelationType)(type_)
+	_return_ = C._atk_relation_type_get_name(_cgo_type__)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -790,16 +773,18 @@ func RoleForName(name string) (_return_ C.AtkRole) {
 	return
 }
 
-func RoleGetLocalizedName(role C.AtkRole) (_go__return__ string) {
+func RoleGetLocalizedName(role int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._atk_role_get_localized_name(role)
+	_cgo_role_ := (C.AtkRole)(role)
+	_return_ = C._atk_role_get_localized_name(_cgo_role_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func RoleGetName(role C.AtkRole) (_go__return__ string) {
+func RoleGetName(role int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._atk_role_get_name(role)
+	_cgo_role_ := (C.AtkRole)(role)
+	_return_ = C._atk_role_get_name(_cgo_role_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -820,9 +805,10 @@ func StateTypeForName(name string) (_return_ C.AtkStateType) {
 	return
 }
 
-func StateTypeGetName(type_ C.AtkStateType) (_go__return__ string) {
+func StateTypeGetName(type_ int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._atk_state_type_get_name(type_)
+	_cgo_type__ := (C.AtkStateType)(type_)
+	_return_ = C._atk_state_type_get_name(_cgo_type__)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -843,17 +829,19 @@ func TextAttributeForName(name string) (_return_ C.AtkTextAttribute) {
 	return
 }
 
-func TextAttributeGetName(attr C.AtkTextAttribute) (_go__return__ string) {
+func TextAttributeGetName(attr int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._atk_text_attribute_get_name(attr)
+	_cgo_attr_ := (C.AtkTextAttribute)(attr)
+	_return_ = C._atk_text_attribute_get_name(_cgo_attr_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func TextAttributeGetValue(attr C.AtkTextAttribute, index_ int) (_go__return__ string) {
+func TextAttributeGetValue(attr int, index_ int) (_go__return__ string) {
 	_cgo_index__ := (C.gint)(index_)
 	var _return_ *C.gchar
-	_return_ = C._atk_text_attribute_get_value(attr, _cgo_index__)
+	_cgo_attr_ := (C.AtkTextAttribute)(attr)
+	_return_ = C._atk_text_attribute_get_value(_cgo_attr_, _cgo_index__)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -966,10 +954,11 @@ func NoOpObjectFactoryNew() (_go__return__ NoOpObjectFactory) {
 	return
 }
 
-func (_self_ *AtkObject) AddRelationship(relationship C.AtkRelationType, target AtkObjectKind) (_go__return__ bool) {
+func (_self_ *AtkObject) AddRelationship(relationship int, target AtkObjectKind) (_go__return__ bool) {
 	_cgo_target_ := (*C.AtkObject)(target.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C.atk_object_add_relationship((*C.AtkObject)(_self_._value_), relationship, _cgo_target_)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	_return_ = C.atk_object_add_relationship((*C.AtkObject)(_self_._value_), _cgo_relationship_, _cgo_target_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1066,10 +1055,11 @@ func (_self_ *AtkObject) RemovePropertyChangeHandler(handler_id uint) () {
 	return
 }
 
-func (_self_ *AtkObject) RemoveRelationship(relationship C.AtkRelationType, target AtkObjectKind) (_go__return__ bool) {
+func (_self_ *AtkObject) RemoveRelationship(relationship int, target AtkObjectKind) (_go__return__ bool) {
 	_cgo_target_ := (*C.AtkObject)(target.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C.atk_object_remove_relationship((*C.AtkObject)(_self_._value_), relationship, _cgo_target_)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	_return_ = C.atk_object_remove_relationship((*C.AtkObject)(_self_._value_), _cgo_relationship_, _cgo_target_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1096,8 +1086,9 @@ func (_self_ *AtkObject) SetParent(parent AtkObjectKind) () {
 	return
 }
 
-func (_self_ *AtkObject) SetRole(role C.AtkRole) () {
-	C.atk_object_set_role((*C.AtkObject)(_self_._value_), role)
+func (_self_ *AtkObject) SetRole(role int) () {
+	_cgo_role_ := (C.AtkRole)(role)
+	C.atk_object_set_role((*C.AtkObject)(_self_._value_), _cgo_role_)
 	return
 }
 
@@ -1132,28 +1123,12 @@ func (_self_ *AtkPlug) GetId() (_go__return__ string) {
 	return
 }
 
-func (_self_ *Registry) GetFactory(type_ C.GType) (_go__return__ ObjectFactory) {
-	var _return_ *C.AtkObjectFactory
-	_return_ = C.atk_registry_get_factory((*C.AtkRegistry)(_self_._value_), type_)
-	_go__return__ = ToObjectFactory(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *Registry) GetFactoryType(type_ C.GType) (_return_ C.GType) {
-	_return_ = C.atk_registry_get_factory_type((*C.AtkRegistry)(_self_._value_), type_)
-	return
-}
-
-func (_self_ *Registry) SetFactoryType(type_ C.GType, factory_type C.GType) () {
-	C.atk_registry_set_factory_type((*C.AtkRegistry)(_self_._value_), type_, factory_type)
-	return
-}
-
-func RelationNew(targets AtkObjectKind, n_targets int, relationship C.AtkRelationType) (_go__return__ Relation) {
+func RelationNew(targets AtkObjectKind, n_targets int, relationship int) (_go__return__ Relation) {
 	_cgo_targets_ := (unsafe.Pointer)(targets.GetGObject())
 	var _return_ *C.AtkRelation
 	_cgo_n_targets_ := (C.gint)(n_targets)
-	_return_ = C._atk_relation_new(_cgo_targets_, _cgo_n_targets_, relationship)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	_return_ = C._atk_relation_new(_cgo_targets_, _cgo_n_targets_, _cgo_relationship_)
 	_go__return__ = ToRelation(unsafe.Pointer(_return_))
 	return
 }
@@ -1195,23 +1170,26 @@ func (_self_ *RelationSet) Add(relation RelationKind) () {
 	return
 }
 
-func (_self_ *RelationSet) AddRelationByType(relationship C.AtkRelationType, target AtkObjectKind) () {
+func (_self_ *RelationSet) AddRelationByType(relationship int, target AtkObjectKind) () {
 	_cgo_target_ := (*C.AtkObject)(target.GetGObject())
-	C.atk_relation_set_add_relation_by_type((*C.AtkRelationSet)(_self_._value_), relationship, _cgo_target_)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	C.atk_relation_set_add_relation_by_type((*C.AtkRelationSet)(_self_._value_), _cgo_relationship_, _cgo_target_)
 	return
 }
 
-func (_self_ *RelationSet) Contains(relationship C.AtkRelationType) (_go__return__ bool) {
+func (_self_ *RelationSet) Contains(relationship int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.atk_relation_set_contains((*C.AtkRelationSet)(_self_._value_), relationship)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	_return_ = C.atk_relation_set_contains((*C.AtkRelationSet)(_self_._value_), _cgo_relationship_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RelationSet) ContainsTarget(relationship C.AtkRelationType, targe AtkObjectKind) (_go__return__ bool) {
+func (_self_ *RelationSet) ContainsTarget(relationship int, targe AtkObjectKind) (_go__return__ bool) {
 	_cgo_targe_ := (*C.AtkObject)(targe.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C.atk_relation_set_contains_target((*C.AtkRelationSet)(_self_._value_), relationship, _cgo_targe_)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	_return_ = C.atk_relation_set_contains_target((*C.AtkRelationSet)(_self_._value_), _cgo_relationship_, _cgo_targe_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1231,9 +1209,10 @@ func (_self_ *RelationSet) GetRelation(i int) (_go__return__ Relation) {
 	return
 }
 
-func (_self_ *RelationSet) GetRelationByType(relationship C.AtkRelationType) (_go__return__ Relation) {
+func (_self_ *RelationSet) GetRelationByType(relationship int) (_go__return__ Relation) {
 	var _return_ *C.AtkRelation
-	_return_ = C.atk_relation_set_get_relation_by_type((*C.AtkRelationSet)(_self_._value_), relationship)
+	_cgo_relationship_ := (C.AtkRelationType)(relationship)
+	_return_ = C.atk_relation_set_get_relation_by_type((*C.AtkRelationSet)(_self_._value_), _cgo_relationship_)
 	_go__return__ = ToRelation(unsafe.Pointer(_return_))
 	return
 }
@@ -1273,9 +1252,10 @@ func StateSetNew() (_go__return__ StateSet) {
 	return
 }
 
-func (_self_ *StateSet) AddState(type_ C.AtkStateType) (_go__return__ bool) {
+func (_self_ *StateSet) AddState(type_ int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.atk_state_set_add_state((*C.AtkStateSet)(_self_._value_), type_)
+	_cgo_type__ := (C.AtkStateType)(type_)
+	_return_ = C.atk_state_set_add_state((*C.AtkStateSet)(_self_._value_), _cgo_type__)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1299,9 +1279,10 @@ func (_self_ *StateSet) ClearStates() () {
 	return
 }
 
-func (_self_ *StateSet) ContainsState(type_ C.AtkStateType) (_go__return__ bool) {
+func (_self_ *StateSet) ContainsState(type_ int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.atk_state_set_contains_state((*C.AtkStateSet)(_self_._value_), type_)
+	_cgo_type__ := (C.AtkStateType)(type_)
+	_return_ = C.atk_state_set_contains_state((*C.AtkStateSet)(_self_._value_), _cgo_type__)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1329,9 +1310,10 @@ func (_self_ *StateSet) OrSets(compare_set StateSetKind) (_go__return__ StateSet
 	return
 }
 
-func (_self_ *StateSet) RemoveState(type_ C.AtkStateType) (_go__return__ bool) {
+func (_self_ *StateSet) RemoveState(type_ int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.atk_state_set_remove_state((*C.AtkStateSet)(_self_._value_), type_)
+	_cgo_type__ := (C.AtkStateType)(type_)
+	_return_ = C.atk_state_set_remove_state((*C.AtkStateSet)(_self_._value_), _cgo_type__)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1416,11 +1398,12 @@ func (_self_ *Component) AddFocusHandler(handler C.AtkFocusHandler) (_go__return
 	return
 }
 
-func (_self_ *Component) Contains(x int, y int, coord_type C.AtkCoordType) (_go__return__ bool) {
+func (_self_ *Component) Contains(x int, y int, coord_type int) (_go__return__ bool) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	var _return_ C.gboolean
-	_return_ = C.atk_component_contains((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, coord_type)
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	_return_ = C.atk_component_contains((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_coord_type_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1432,8 +1415,9 @@ func (_self_ *Component) GetAlpha() (_go__return__ float64) {
 	return
 }
 
-func (_self_ *Component) GetExtents(x *C.gint, y *C.gint, width *C.gint, height *C.gint, coord_type C.AtkCoordType) () {
-	C.atk_component_get_extents((*C.AtkComponent)(_self_._value_), x, y, width, height, coord_type)
+func (_self_ *Component) GetExtents(x *C.gint, y *C.gint, width *C.gint, height *C.gint, coord_type int) () {
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	C.atk_component_get_extents((*C.AtkComponent)(_self_._value_), x, y, width, height, _cgo_coord_type_)
 	return
 }
 
@@ -1449,8 +1433,9 @@ func (_self_ *Component) GetMdiZorder() (_go__return__ int) {
 	return
 }
 
-func (_self_ *Component) GetPosition(x *C.gint, y *C.gint, coord_type C.AtkCoordType) () {
-	C.atk_component_get_position((*C.AtkComponent)(_self_._value_), x, y, coord_type)
+func (_self_ *Component) GetPosition(x *C.gint, y *C.gint, coord_type int) () {
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	C.atk_component_get_position((*C.AtkComponent)(_self_._value_), x, y, _cgo_coord_type_)
 	return
 }
 
@@ -1466,11 +1451,12 @@ func (_self_ *Component) GrabFocus() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Component) RefAccessibleAtPoint(x int, y int, coord_type C.AtkCoordType) (_go__return__ AtkObject) {
+func (_self_ *Component) RefAccessibleAtPoint(x int, y int, coord_type int) (_go__return__ AtkObject) {
 	var _return_ *C.AtkObject
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
-	_return_ = C.atk_component_ref_accessible_at_point((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, coord_type)
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	_return_ = C.atk_component_ref_accessible_at_point((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_coord_type_)
 	_go__return__ = ToAtkObject(unsafe.Pointer(_return_))
 	return
 }
@@ -1481,22 +1467,24 @@ func (_self_ *Component) RemoveFocusHandler(handler_id uint) () {
 	return
 }
 
-func (_self_ *Component) SetExtents(x int, y int, width int, height int, coord_type C.AtkCoordType) (_go__return__ bool) {
+func (_self_ *Component) SetExtents(x int, y int, width int, height int, coord_type int) (_go__return__ bool) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	var _return_ C.gboolean
-	_return_ = C.atk_component_set_extents((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, coord_type)
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	_return_ = C.atk_component_set_extents((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, _cgo_coord_type_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Component) SetPosition(x int, y int, coord_type C.AtkCoordType) (_go__return__ bool) {
+func (_self_ *Component) SetPosition(x int, y int, coord_type int) (_go__return__ bool) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	var _return_ C.gboolean
-	_return_ = C.atk_component_set_position((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, coord_type)
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	_return_ = C.atk_component_set_position((*C.AtkComponent)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_coord_type_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1654,8 +1642,9 @@ func (_self_ *AtkImage) GetImageLocale() (_go__return__ string) {
 	return
 }
 
-func (_self_ *AtkImage) GetImagePosition(x *C.gint, y *C.gint, coord_type C.AtkCoordType) () {
-	C.atk_image_get_image_position((*C.AtkImage)(_self_._value_), x, y, coord_type)
+func (_self_ *AtkImage) GetImagePosition(x *C.gint, y *C.gint, coord_type int) () {
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	C.atk_image_get_image_position((*C.AtkImage)(_self_._value_), x, y, _cgo_coord_type_)
 	return
 }
 
@@ -1996,9 +1985,12 @@ func (_self_ *Text) AddSelection(start_offset int, end_offset int) (_go__return_
 	return
 }
 
-func (_self_ *Text) GetBoundedRanges(rect *TextRectangle, coord_type C.AtkCoordType, x_clip_type C.AtkTextClipType, y_clip_type C.AtkTextClipType) (_return_ unsafe.Pointer) {
+func (_self_ *Text) GetBoundedRanges(rect *TextRectangle, coord_type int, x_clip_type int, y_clip_type int) (_return_ unsafe.Pointer) {
 	_cgo_rect_ := (*C.AtkTextRectangle)(unsafe.Pointer(rect))
-	_return_ = C._atk_text_get_bounded_ranges((*C.AtkText)(_self_._value_), _cgo_rect_, coord_type, x_clip_type, y_clip_type)
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	_cgo_x_clip_type_ := (C.AtkTextClipType)(x_clip_type)
+	_cgo_y_clip_type_ := (C.AtkTextClipType)(y_clip_type)
+	_return_ = C._atk_text_get_bounded_ranges((*C.AtkText)(_self_._value_), _cgo_rect_, _cgo_coord_type_, _cgo_x_clip_type_, _cgo_y_clip_type_)
 	return
 }
 
@@ -2022,9 +2014,10 @@ func (_self_ *Text) GetCharacterCount() (_go__return__ int) {
 	return
 }
 
-func (_self_ *Text) GetCharacterExtents(offset int, x *C.gint, y *C.gint, width *C.gint, height *C.gint, coords C.AtkCoordType) () {
+func (_self_ *Text) GetCharacterExtents(offset int, x *C.gint, y *C.gint, width *C.gint, height *C.gint, coords int) () {
 	_cgo_offset_ := (C.gint)(offset)
-	C.atk_text_get_character_extents((*C.AtkText)(_self_._value_), _cgo_offset_, x, y, width, height, coords)
+	_cgo_coords_ := (C.AtkCoordType)(coords)
+	C.atk_text_get_character_extents((*C.AtkText)(_self_._value_), _cgo_offset_, x, y, width, height, _cgo_coords_)
 	return
 }
 
@@ -2040,20 +2033,22 @@ func (_self_ *Text) GetNSelections() (_go__return__ int) {
 	return
 }
 
-func (_self_ *Text) GetOffsetAtPoint(x int, y int, coords C.AtkCoordType) (_go__return__ int) {
+func (_self_ *Text) GetOffsetAtPoint(x int, y int, coords int) (_go__return__ int) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	var _return_ C.gint
-	_return_ = C.atk_text_get_offset_at_point((*C.AtkText)(_self_._value_), _cgo_x_, _cgo_y_, coords)
+	_cgo_coords_ := (C.AtkCoordType)(coords)
+	_return_ = C.atk_text_get_offset_at_point((*C.AtkText)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_coords_)
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *Text) GetRangeExtents(start_offset int, end_offset int, coord_type C.AtkCoordType, rect *TextRectangle) () {
+func (_self_ *Text) GetRangeExtents(start_offset int, end_offset int, coord_type int, rect *TextRectangle) () {
 	_cgo_rect_ := (*C.AtkTextRectangle)(unsafe.Pointer(rect))
 	_cgo_start_offset_ := (C.gint)(start_offset)
 	_cgo_end_offset_ := (C.gint)(end_offset)
-	C.atk_text_get_range_extents((*C.AtkText)(_self_._value_), _cgo_start_offset_, _cgo_end_offset_, coord_type, _cgo_rect_)
+	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
+	C.atk_text_get_range_extents((*C.AtkText)(_self_._value_), _cgo_start_offset_, _cgo_end_offset_, _cgo_coord_type_, _cgo_rect_)
 	return
 }
 
@@ -2080,26 +2075,29 @@ func (_self_ *Text) GetText(start_offset int, end_offset int) (_go__return__ str
 	return
 }
 
-func (_self_ *Text) GetTextAfterOffset(offset int, boundary_type C.AtkTextBoundary, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+func (_self_ *Text) GetTextAfterOffset(offset int, boundary_type int, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
 	_cgo_offset_ := (C.gint)(offset)
 	var _return_ *C.gchar
-	_return_ = C.atk_text_get_text_after_offset((*C.AtkText)(_self_._value_), _cgo_offset_, boundary_type, start_offset, end_offset)
+	_cgo_boundary_type_ := (C.AtkTextBoundary)(boundary_type)
+	_return_ = C.atk_text_get_text_after_offset((*C.AtkText)(_self_._value_), _cgo_offset_, _cgo_boundary_type_, start_offset, end_offset)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Text) GetTextAtOffset(offset int, boundary_type C.AtkTextBoundary, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+func (_self_ *Text) GetTextAtOffset(offset int, boundary_type int, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
 	_cgo_offset_ := (C.gint)(offset)
 	var _return_ *C.gchar
-	_return_ = C.atk_text_get_text_at_offset((*C.AtkText)(_self_._value_), _cgo_offset_, boundary_type, start_offset, end_offset)
+	_cgo_boundary_type_ := (C.AtkTextBoundary)(boundary_type)
+	_return_ = C.atk_text_get_text_at_offset((*C.AtkText)(_self_._value_), _cgo_offset_, _cgo_boundary_type_, start_offset, end_offset)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Text) GetTextBeforeOffset(offset int, boundary_type C.AtkTextBoundary, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
+func (_self_ *Text) GetTextBeforeOffset(offset int, boundary_type int, start_offset *C.gint, end_offset *C.gint) (_go__return__ string) {
 	_cgo_offset_ := (C.gint)(offset)
 	var _return_ *C.gchar
-	_return_ = C.atk_text_get_text_before_offset((*C.AtkText)(_self_._value_), _cgo_offset_, boundary_type, start_offset, end_offset)
+	_cgo_boundary_type_ := (C.AtkTextBoundary)(boundary_type)
+	_return_ = C.atk_text_get_text_before_offset((*C.AtkText)(_self_._value_), _cgo_offset_, _cgo_boundary_type_, start_offset, end_offset)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }

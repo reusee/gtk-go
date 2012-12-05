@@ -2110,6 +2110,13 @@ import (
 	"unsafe"
 )
 
+type Error struct {
+  Message string
+}
+func (self *Error) Error() string {
+  return self.Message
+}
+
 type InitableIface C.GInitableIface
 type DBusObjectManagerServerClass C.GDBusObjectManagerServerClass
 type InetSocketAddressPrivate C.GInetSocketAddressPrivate
@@ -4461,7 +4468,8 @@ func ToTlsBackend(value unsafe.Pointer) TlsBackend {
 		value,
 	}
 }
-func AppInfoCreateFromCommandline(commandline string, application_name string, flags C.GAppInfoCreateFlags) (_go__return__ AppInfo, _error_ unsafe.Pointer) {
+func AppInfoCreateFromCommandline(commandline string, application_name string, flags C.GAppInfoCreateFlags) (_go__return__ AppInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GAppInfo
 	_cstring_commandline_ := C.CString(commandline)
 	_cgo_commandline_ := (*C.char)(unsafe.Pointer(_cstring_commandline_))
@@ -4469,7 +4477,11 @@ func AppInfoCreateFromCommandline(commandline string, application_name string, f
 	_cstring_application_name_ := C.CString(application_name)
 	_cgo_application_name_ := (*C.char)(unsafe.Pointer(_cstring_application_name_))
 	defer C.free(unsafe.Pointer(_cstring_application_name_))
-	_return_ = C._g_app_info_create_from_commandline(_cgo_commandline_, _cgo_application_name_, flags, _error_)
+	_return_ = C._g_app_info_create_from_commandline(_cgo_commandline_, _cgo_application_name_, flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToAppInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -4525,13 +4537,18 @@ func AppInfoGetRecommendedForType(content_type string) (_return_ *C.GList) {
 	return
 }
 
-func AppInfoLaunchDefaultForUri(uri string, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func AppInfoLaunchDefaultForUri(uri string, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_launch_default_for_uri(_cgo_uri_, _cgo_launch_context_, _error_)
+	_return_ = C._g_app_info_launch_default_for_uri(_cgo_uri_, _cgo_launch_context_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -4551,34 +4568,47 @@ func AsyncInitableNewvAsync(object_type C.GType, n_parameters uint, parameters *
 	return
 }
 
-func BusGet(bus_type C.GBusType, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+func BusGet(bus_type int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
-	C.g_bus_get(bus_type, _cgo_cancellable_, callback, user_data)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	C.g_bus_get(_cgo_bus_type_, _cgo_cancellable_, callback, user_data)
 	return
 }
 
-func BusGetFinish(res AsyncResultKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
+func BusGetFinish(res AsyncResultKind) (_go__return__ DBusConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusConnection
-	_return_ = C._g_bus_get_finish(_cgo_res_, _error_)
+	_return_ = C._g_bus_get_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func BusGetSync(bus_type C.GBusType, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
+func BusGetSync(bus_type int, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusConnection
-	_return_ = C._g_bus_get_sync(bus_type, _cgo_cancellable_, _error_)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_bus_get_sync(_cgo_bus_type_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func BusOwnName(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bus_acquired_handler C.GBusAcquiredCallback, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
+func BusOwnName(bus_type int, name string, flags C.GBusNameOwnerFlags, bus_acquired_handler C.GBusAcquiredCallback, name_acquired_handler C.GBusNameAcquiredCallback, name_lost_handler C.GBusNameLostCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_own_name(bus_type, _cgo_name_, flags, bus_acquired_handler, name_acquired_handler, name_lost_handler, user_data, user_data_free_func)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_bus_own_name(_cgo_bus_type_, _cgo_name_, flags, bus_acquired_handler, name_acquired_handler, name_lost_handler, user_data, user_data_free_func)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -4605,12 +4635,13 @@ func BusOwnNameOnConnectionWithClosures(connection DBusConnectionKind, name stri
 	return
 }
 
-func BusOwnNameWithClosures(bus_type C.GBusType, name string, flags C.GBusNameOwnerFlags, bus_acquired_closure *C.GClosure, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
+func BusOwnNameWithClosures(bus_type int, name string, flags C.GBusNameOwnerFlags, bus_acquired_closure *C.GClosure, name_acquired_closure *C.GClosure, name_lost_closure *C.GClosure) (_go__return__ uint) {
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_own_name_with_closures(bus_type, _cgo_name_, flags, bus_acquired_closure, name_acquired_closure, name_lost_closure)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_bus_own_name_with_closures(_cgo_bus_type_, _cgo_name_, flags, bus_acquired_closure, name_acquired_closure, name_lost_closure)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -4627,12 +4658,13 @@ func BusUnwatchName(watcher_id uint) () {
 	return
 }
 
-func BusWatchName(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
+func BusWatchName(bus_type int, name string, flags C.GBusNameWatcherFlags, name_appeared_handler C.GBusNameAppearedCallback, name_vanished_handler C.GBusNameVanishedCallback, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint) {
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_watch_name(bus_type, _cgo_name_, flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_bus_watch_name(_cgo_bus_type_, _cgo_name_, flags, name_appeared_handler, name_vanished_handler, user_data, user_data_free_func)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -4659,12 +4691,13 @@ func BusWatchNameOnConnectionWithClosures(connection DBusConnectionKind, name st
 	return
 }
 
-func BusWatchNameWithClosures(bus_type C.GBusType, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
+func BusWatchNameWithClosures(bus_type int, name string, flags C.GBusNameWatcherFlags, name_appeared_closure *C.GClosure, name_vanished_closure *C.GClosure) (_go__return__ uint) {
 	var _return_ C.guint
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
-	_return_ = C._g_bus_watch_name_with_closures(bus_type, _cgo_name_, flags, name_appeared_closure, name_vanished_closure)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_bus_watch_name_with_closures(_cgo_bus_type_, _cgo_name_, flags, name_appeared_closure, name_vanished_closure)
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -4786,10 +4819,16 @@ func ContentTypesGetRegistered() (_return_ *C.GList) {
 	return
 }
 
-func DbusAddressGetForBusSync(bus_type C.GBusType, cancellable CancellableKind) (_go__return__ string, _error_ unsafe.Pointer) {
+func DbusAddressGetForBusSync(bus_type int, cancellable CancellableKind) (_go__return__ string, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.gchar
-	_return_ = C._g_dbus_address_get_for_bus_sync(bus_type, _cgo_cancellable_, _error_)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_dbus_address_get_for_bus_sync(_cgo_bus_type_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -4803,18 +4842,24 @@ func DbusAddressGetStream(address string, cancellable CancellableKind, callback 
 	return
 }
 
-func DbusAddressGetStreamFinish(res AsyncResultKind, out_guid string) (_go__return__ IOStream, _error_ unsafe.Pointer) {
+func DbusAddressGetStreamFinish(res AsyncResultKind, out_guid string) (_go__return__ IOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GIOStream
 	_cstring_out_guid_ := C.CString(out_guid)
 	_cgo_out_guid_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_out_guid_))
 	defer C.free(unsafe.Pointer(_cstring_out_guid_))
-	_return_ = C._g_dbus_address_get_stream_finish(_cgo_res_, _cgo_out_guid_, _error_)
+	_return_ = C._g_dbus_address_get_stream_finish(_cgo_res_, _cgo_out_guid_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToIOStream(unsafe.Pointer(_return_))
 	return
 }
 
-func DbusAddressGetStreamSync(address string, out_guid string, cancellable CancellableKind) (_go__return__ IOStream, _error_ unsafe.Pointer) {
+func DbusAddressGetStreamSync(address string, out_guid string, cancellable CancellableKind) (_go__return__ IOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GIOStream
 	_cstring_address_ := C.CString(address)
@@ -4823,7 +4868,11 @@ func DbusAddressGetStreamSync(address string, out_guid string, cancellable Cance
 	_cstring_out_guid_ := C.CString(out_guid)
 	_cgo_out_guid_ := (unsafe.Pointer)(unsafe.Pointer(_cstring_out_guid_))
 	defer C.free(unsafe.Pointer(_cstring_out_guid_))
-	_return_ = C._g_dbus_address_get_stream_sync(_cgo_address_, _cgo_out_guid_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_address_get_stream_sync(_cgo_address_, _cgo_out_guid_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -4971,12 +5020,17 @@ func DbusIsName(string_ string) (_go__return__ bool) {
 	return
 }
 
-func DbusIsSupportedAddress(string_ string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func DbusIsSupportedAddress(string_ string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_is_supported_address(_cgo_string__, _error_)
+	_return_ = C._g_dbus_is_supported_address(_cgo_string__, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -5021,13 +5075,18 @@ func FileNewForUri(uri string) (_go__return__ File) {
 	return
 }
 
-func FileNewTmp(tmpl string) (_go__return__ File, iostream *FileIOStream, _error_ unsafe.Pointer) {
+func FileNewTmp(tmpl string) (_go__return__ File, iostream *FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GFile
 	var _allocated_iostream_ *C.GFileIOStream
 	_cstring_tmpl_ := C.CString(tmpl)
 	_cgo_tmpl_ := (*C.char)(unsafe.Pointer(_cstring_tmpl_))
 	defer C.free(unsafe.Pointer(_cstring_tmpl_))
-	_return_ = C._g_file_new_tmp(_cgo_tmpl_, unsafe.Pointer(&_allocated_iostream_), _error_)
+	_return_ = C._g_file_new_tmp(_cgo_tmpl_, unsafe.Pointer(&_allocated_iostream_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFile(unsafe.Pointer(_return_))
 	iostream = (*FileIOStream)(unsafe.Pointer(_allocated_iostream_))
 	return
@@ -5050,12 +5109,17 @@ func IconHash(icon C.gpointer) (_go__return__ uint) {
 	return
 }
 
-func IconNewForString(str string) (_go__return__ Icon, _error_ unsafe.Pointer) {
+func IconNewForString(str string) (_go__return__ Icon, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GIcon
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
-	_return_ = C._g_icon_new_for_string(_cgo_str_, _error_)
+	_return_ = C._g_icon_new_for_string(_cgo_str_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToIcon(unsafe.Pointer(_return_))
 	return
 }
@@ -5157,14 +5221,19 @@ func PollableSourceNewFull(pollable_stream C.gpointer, child_source *C.GSource, 
 	return
 }
 
-func PollableStreamRead(stream InputStreamKind, buffer unsafe.Pointer, count uint64, blocking bool, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func PollableStreamRead(stream InputStreamKind, buffer unsafe.Pointer, count uint64, blocking bool, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_stream_ := (*C.GInputStream)(stream.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
 	_cgo_blocking_ := (C.gboolean)(C.FALSE)
 	if blocking { _cgo_blocking_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_pollable_stream_read(_cgo_stream_, buffer, _cgo_count_, _cgo_blocking_, _cgo_cancellable_, _error_)
+	_return_ = C._g_pollable_stream_read(_cgo_stream_, buffer, _cgo_count_, _cgo_blocking_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -5196,52 +5265,77 @@ func ResourceErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func ResourceLoad(filename string) (_go__return__ *Resource, _error_ unsafe.Pointer) {
+func ResourceLoad(filename string) (_go__return__ *Resource, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GResource
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._g_resource_load(_cgo_filename_, _error_)
+	_return_ = C._g_resource_load(_cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*Resource)(unsafe.Pointer(_return_))
 	return
 }
 
-func ResourcesEnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func ResourcesEnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resources_enumerate_children(_cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resources_enumerate_children(_cgo_path_, lookup_flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func ResourcesGetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ unsafe.Pointer) {
+func ResourcesGetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ error) {
+	var _cgo_error_ *C.GError
 	var size C.gsize
 	var flags C.guint32
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	var _return_ C.gboolean
-	_return_ = C._g_resources_get_info(_cgo_path_, lookup_flags, &size, &flags, _error_)
+	_return_ = C._g_resources_get_info(_cgo_path_, lookup_flags, &size, &flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_size_ = (uint64)(size)
 	_go_flags_ = (uint32)(flags)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func ResourcesLookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
+func ResourcesLookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resources_lookup_data(_cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resources_lookup_data(_cgo_path_, lookup_flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func ResourcesOpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ InputStream, _error_ unsafe.Pointer) {
+func ResourcesOpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ InputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GInputStream
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resources_open_stream(_cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resources_open_stream(_cgo_path_, lookup_flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToInputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -5275,11 +5369,16 @@ func TlsBackendGetDefault() (_go__return__ TlsBackend) {
 	return
 }
 
-func TlsClientConnectionNew(base_io_stream IOStreamKind, server_identity SocketConnectableKind) (_go__return__ TlsClientConnection, _error_ unsafe.Pointer) {
+func TlsClientConnectionNew(base_io_stream IOStreamKind, server_identity SocketConnectableKind) (_go__return__ TlsClientConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream.GetGObject())
 	_cgo_server_identity_ := (*C.GSocketConnectable)(server_identity.GetGObject())
 	var _return_ *C.GIOStream
-	_return_ = C._g_tls_client_connection_new(_cgo_base_io_stream_, _cgo_server_identity_, _error_)
+	_return_ = C._g_tls_client_connection_new(_cgo_base_io_stream_, _cgo_server_identity_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsClientConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -5289,21 +5388,31 @@ func TlsErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func TlsFileDatabaseNew(anchors string) (_go__return__ TlsFileDatabase, _error_ unsafe.Pointer) {
+func TlsFileDatabaseNew(anchors string) (_go__return__ TlsFileDatabase, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GTlsDatabase
 	_cstring_anchors_ := C.CString(anchors)
 	_cgo_anchors_ := (*C.gchar)(unsafe.Pointer(_cstring_anchors_))
 	defer C.free(unsafe.Pointer(_cstring_anchors_))
-	_return_ = C._g_tls_file_database_new(_cgo_anchors_, _error_)
+	_return_ = C._g_tls_file_database_new(_cgo_anchors_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsFileDatabase(unsafe.Pointer(_return_))
 	return
 }
 
-func TlsServerConnectionNew(base_io_stream IOStreamKind, certificate TlsCertificateKind) (_go__return__ TlsServerConnection, _error_ unsafe.Pointer) {
+func TlsServerConnectionNew(base_io_stream IOStreamKind, certificate TlsCertificateKind) (_go__return__ TlsServerConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_base_io_stream_ := (*C.GIOStream)(base_io_stream.GetGObject())
 	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
 	var _return_ *C.GIOStream
-	_return_ = C._g_tls_server_connection_new(_cgo_base_io_stream_, _cgo_certificate_, _error_)
+	_return_ = C._g_tls_server_connection_new(_cgo_base_io_stream_, _cgo_certificate_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsServerConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -5599,10 +5708,15 @@ func (_self_ *GioApplication) Quit() () {
 	return
 }
 
-func (_self_ *GioApplication) Register(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioApplication) Register(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_application_register((*C.GApplication)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_application_register((*C.GApplication)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -5702,11 +5816,16 @@ func BufferedInputStreamNewSized(base_stream InputStreamKind, size uint64) (_go_
 	return
 }
 
-func (_self_ *BufferedInputStream) Fill(count int64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *BufferedInputStream) Fill(count int64, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gssize)(count)
 	var _return_ C.gssize
-	_return_ = C._g_buffered_input_stream_fill((*C.GBufferedInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, _error_)
+	_return_ = C._g_buffered_input_stream_fill((*C.GBufferedInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -5718,10 +5837,15 @@ func (_self_ *BufferedInputStream) FillAsync(count int64, io_priority C.int, can
 	return
 }
 
-func (_self_ *BufferedInputStream) FillFinish(result AsyncResultKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *BufferedInputStream) FillFinish(result AsyncResultKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_buffered_input_stream_fill_finish((*C.GBufferedInputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_buffered_input_stream_fill_finish((*C.GBufferedInputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -5747,9 +5871,14 @@ func (_self_ *BufferedInputStream) PeekBuffer() (_return_ unsafe.Pointer, _go_co
 	return
 }
 
-func (_self_ *BufferedInputStream) ReadByte(cancellable CancellableKind) (_return_ C.int, _error_ unsafe.Pointer) {
+func (_self_ *BufferedInputStream) ReadByte(cancellable CancellableKind) (_return_ C.int, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
-	_return_ = C._g_buffered_input_stream_read_byte((*C.GBufferedInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_buffered_input_stream_read_byte((*C.GBufferedInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -5874,9 +6003,14 @@ func (_self_ *Cancellable) Reset() () {
 	return
 }
 
-func (_self_ *Cancellable) SetErrorIfCancelled() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Cancellable) SetErrorIfCancelled() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_cancellable_set_error_if_cancelled((*C.GCancellable)(_self_._value_), _error_)
+	_return_ = C._g_cancellable_set_error_if_cancelled((*C.GCancellable)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -5886,7 +6020,8 @@ func (_self_ *Cancellable) SourceNew() (_return_ *C.GSource) {
 	return
 }
 
-func CharsetConverterNew(to_charset string, from_charset string) (_go__return__ CharsetConverter, _error_ unsafe.Pointer) {
+func CharsetConverterNew(to_charset string, from_charset string) (_go__return__ CharsetConverter, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GCharsetConverter
 	_cstring_to_charset_ := C.CString(to_charset)
 	_cgo_to_charset_ := (*C.gchar)(unsafe.Pointer(_cstring_to_charset_))
@@ -5894,7 +6029,11 @@ func CharsetConverterNew(to_charset string, from_charset string) (_go__return__ 
 	_cstring_from_charset_ := C.CString(from_charset)
 	_cgo_from_charset_ := (*C.gchar)(unsafe.Pointer(_cstring_from_charset_))
 	defer C.free(unsafe.Pointer(_cstring_from_charset_))
-	_return_ = C._g_charset_converter_new(_cgo_to_charset_, _cgo_from_charset_, _error_)
+	_return_ = C._g_charset_converter_new(_cgo_to_charset_, _cgo_from_charset_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToCharsetConverter(unsafe.Pointer(_return_))
 	return
 }
@@ -5959,32 +6098,49 @@ func CredentialsNew() (_go__return__ Credentials) {
 	return
 }
 
-func (_self_ *Credentials) GetNative(native_type C.GCredentialsType) (_return_ C.gpointer) {
-	_return_ = C.g_credentials_get_native((*C.GCredentials)(_self_._value_), native_type)
+func (_self_ *Credentials) GetNative(native_type int) (_return_ C.gpointer) {
+	_cgo_native_type_ := (C.GCredentialsType)(native_type)
+	_return_ = C.g_credentials_get_native((*C.GCredentials)(_self_._value_), _cgo_native_type_)
 	return
 }
 
-func (_self_ *Credentials) GetUnixUser() (_return_ C.uid_t, _error_ unsafe.Pointer) {
-	_return_ = C._g_credentials_get_unix_user((*C.GCredentials)(_self_._value_), _error_)
+func (_self_ *Credentials) GetUnixUser() (_return_ C.uid_t, _error_ error) {
+	var _cgo_error_ *C.GError
+	_return_ = C._g_credentials_get_unix_user((*C.GCredentials)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Credentials) IsSameUser(other_credentials CredentialsKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Credentials) IsSameUser(other_credentials CredentialsKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_other_credentials_ := (*C.GCredentials)(other_credentials.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_credentials_is_same_user((*C.GCredentials)(_self_._value_), _cgo_other_credentials_, _error_)
+	_return_ = C._g_credentials_is_same_user((*C.GCredentials)(_self_._value_), _cgo_other_credentials_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Credentials) SetNative(native_type C.GCredentialsType, native C.gpointer) () {
-	C.g_credentials_set_native((*C.GCredentials)(_self_._value_), native_type, native)
+func (_self_ *Credentials) SetNative(native_type int, native C.gpointer) () {
+	_cgo_native_type_ := (C.GCredentialsType)(native_type)
+	C.g_credentials_set_native((*C.GCredentials)(_self_._value_), _cgo_native_type_, native)
 	return
 }
 
-func (_self_ *Credentials) SetUnixUser(uid C.uid_t) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Credentials) SetUnixUser(uid C.uid_t) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_credentials_set_unix_user((*C.GCredentials)(_self_._value_), uid, _error_)
+	_return_ = C._g_credentials_set_unix_user((*C.GCredentials)(_self_._value_), uid, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6036,35 +6192,51 @@ func (_self_ *DBusAuthObserver) AuthorizeAuthenticatedPeer(stream IOStreamKind, 
 	return
 }
 
-func DBusConnectionNewFinish(res AsyncResultKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
+func DBusConnectionNewFinish(res AsyncResultKind) (_go__return__ DBusConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusConnection
-	_return_ = C._g_dbus_connection_new_finish(_cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_new_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusConnectionNewForAddressFinish(res AsyncResultKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
+func DBusConnectionNewForAddressFinish(res AsyncResultKind) (_go__return__ DBusConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusConnection
-	_return_ = C._g_dbus_connection_new_for_address_finish(_cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_new_for_address_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusConnectionNewForAddressSync(address string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
+func DBusConnectionNewForAddressSync(address string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusConnection
 	_cstring_address_ := C.CString(address)
 	_cgo_address_ := (*C.gchar)(unsafe.Pointer(_cstring_address_))
 	defer C.free(unsafe.Pointer(_cstring_address_))
-	_return_ = C._g_dbus_connection_new_for_address_sync(_cgo_address_, flags, _cgo_observer_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_new_for_address_sync(_cgo_address_, flags, _cgo_observer_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusConnectionNewSync(stream IOStreamKind, guid string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ unsafe.Pointer) {
+func DBusConnectionNewSync(stream IOStreamKind, guid string, flags C.GDBusConnectionFlags, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_stream_ := (*C.GIOStream)(stream.GetGObject())
 	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
@@ -6072,7 +6244,11 @@ func DBusConnectionNewSync(stream IOStreamKind, guid string, flags C.GDBusConnec
 	_cstring_guid_ := C.CString(guid)
 	_cgo_guid_ := (*C.gchar)(unsafe.Pointer(_cstring_guid_))
 	defer C.free(unsafe.Pointer(_cstring_guid_))
-	_return_ = C._g_dbus_connection_new_sync(_cgo_stream_, _cgo_guid_, flags, _cgo_observer_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_new_sync(_cgo_stream_, _cgo_guid_, flags, _cgo_observer_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -6124,13 +6300,19 @@ func (_self_ *DBusConnection) Call(bus_name string, object_path string, interfac
 	return
 }
 
-func (_self_ *DBusConnection) CallFinish(res AsyncResultKind) (_return_ *C.GVariant, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) CallFinish(res AsyncResultKind) (_return_ *C.GVariant, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
-	_return_ = C._g_dbus_connection_call_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_call_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *DBusConnection) CallSync(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind) (_return_ *C.GVariant, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) CallSync(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind) (_return_ *C.GVariant, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_bus_name_ := C.CString(bus_name)
@@ -6145,7 +6327,11 @@ func (_self_ *DBusConnection) CallSync(bus_name string, object_path string, inte
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
 	defer C.free(unsafe.Pointer(_cstring_method_name_))
-	_return_ = C._g_dbus_connection_call_sync((*C.GDBusConnection)(_self_._value_), _cgo_bus_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_method_name_, parameters, reply_type, flags, _cgo_timeout_msec_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_call_sync((*C.GDBusConnection)(_self_._value_), _cgo_bus_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_method_name_, parameters, reply_type, flags, _cgo_timeout_msec_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -6169,15 +6355,21 @@ func (_self_ *DBusConnection) CallWithUnixFdList(bus_name string, object_path st
 	return
 }
 
-func (_self_ *DBusConnection) CallWithUnixFdListFinish(res AsyncResultKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) CallWithUnixFdListFinish(res AsyncResultKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _allocated_out_fd_list_ *C.GUnixFDList
-	_return_ = C._g_dbus_connection_call_with_unix_fd_list_finish((*C.GDBusConnection)(_self_._value_), unsafe.Pointer(&_allocated_out_fd_list_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_call_with_unix_fd_list_finish((*C.GDBusConnection)(_self_._value_), unsafe.Pointer(&_allocated_out_fd_list_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	out_fd_list = (*UnixFDList)(unsafe.Pointer(_allocated_out_fd_list_))
 	return
 }
 
-func (_self_ *DBusConnection) CallWithUnixFdListSync(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) CallWithUnixFdListSync(bus_name string, object_path string, interface_name string, method_name string, parameters *C.GVariant, reply_type *C.GVariantType, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _allocated_out_fd_list_ *C.GUnixFDList
@@ -6194,7 +6386,11 @@ func (_self_ *DBusConnection) CallWithUnixFdListSync(bus_name string, object_pat
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
 	defer C.free(unsafe.Pointer(_cstring_method_name_))
-	_return_ = C._g_dbus_connection_call_with_unix_fd_list_sync((*C.GDBusConnection)(_self_._value_), _cgo_bus_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_method_name_, parameters, reply_type, flags, _cgo_timeout_msec_, _cgo_fd_list_, unsafe.Pointer(&_allocated_out_fd_list_), _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_call_with_unix_fd_list_sync((*C.GDBusConnection)(_self_._value_), _cgo_bus_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_method_name_, parameters, reply_type, flags, _cgo_timeout_msec_, _cgo_fd_list_, unsafe.Pointer(&_allocated_out_fd_list_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	out_fd_list = (*UnixFDList)(unsafe.Pointer(_allocated_out_fd_list_))
 	return
 }
@@ -6205,23 +6401,34 @@ func (_self_ *DBusConnection) Close(cancellable CancellableKind, callback C.GAsy
 	return
 }
 
-func (_self_ *DBusConnection) CloseFinish(res AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) CloseFinish(res AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_connection_close_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_close_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DBusConnection) CloseSync(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) CloseSync(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_connection_close_sync((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_close_sync((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DBusConnection) EmitSignal(destination_bus_name string, object_path string, interface_name string, signal_name string, parameters *C.GVariant) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) EmitSignal(destination_bus_name string, object_path string, interface_name string, signal_name string, parameters *C.GVariant) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_destination_bus_name_ := C.CString(destination_bus_name)
 	_cgo_destination_bus_name_ := (*C.gchar)(unsafe.Pointer(_cstring_destination_bus_name_))
 	defer C.free(unsafe.Pointer(_cstring_destination_bus_name_))
@@ -6235,29 +6442,43 @@ func (_self_ *DBusConnection) EmitSignal(destination_bus_name string, object_pat
 	_cgo_signal_name_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_name_))
 	defer C.free(unsafe.Pointer(_cstring_signal_name_))
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_connection_emit_signal((*C.GDBusConnection)(_self_._value_), _cgo_destination_bus_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_signal_name_, parameters, _error_)
+	_return_ = C._g_dbus_connection_emit_signal((*C.GDBusConnection)(_self_._value_), _cgo_destination_bus_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_signal_name_, parameters, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DBusConnection) ExportActionGroup(object_path string, action_group GioActionGroupKind) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) ExportActionGroup(object_path string, action_group GioActionGroupKind) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_action_group_ := (*C.GActionGroup)(action_group.GetGObject())
 	var _return_ C.guint
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	_return_ = C._g_dbus_connection_export_action_group((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_action_group_, _error_)
+	_return_ = C._g_dbus_connection_export_action_group((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_action_group_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *DBusConnection) ExportMenuModel(object_path string, menu MenuModelKind) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) ExportMenuModel(object_path string, menu MenuModelKind) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_menu_ := (*C.GMenuModel)(menu.GetGObject())
 	var _return_ C.guint
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	_return_ = C._g_dbus_connection_export_menu_model((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_menu_, _error_)
+	_return_ = C._g_dbus_connection_export_menu_model((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_menu_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -6268,18 +6489,28 @@ func (_self_ *DBusConnection) Flush(cancellable CancellableKind, callback C.GAsy
 	return
 }
 
-func (_self_ *DBusConnection) FlushFinish(res AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) FlushFinish(res AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_connection_flush_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_flush_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DBusConnection) FlushSync(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) FlushSync(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_connection_flush_sync((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_flush_sync((*C.GDBusConnection)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6338,25 +6569,35 @@ func (_self_ *DBusConnection) IsClosed() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *DBusConnection) RegisterObject(object_path string, interface_info *DBusInterfaceInfo, vtable *DBusInterfaceVTable, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) RegisterObject(object_path string, interface_info *DBusInterfaceInfo, vtable *DBusInterfaceVTable, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_interface_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(interface_info))
 	_cgo_vtable_ := (*C.GDBusInterfaceVTable)(unsafe.Pointer(vtable))
 	var _return_ C.guint
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	_return_ = C._g_dbus_connection_register_object((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_interface_info_, _cgo_vtable_, user_data, user_data_free_func, _error_)
+	_return_ = C._g_dbus_connection_register_object((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_interface_info_, _cgo_vtable_, user_data, user_data_free_func, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *DBusConnection) RegisterSubtree(object_path string, vtable *DBusSubtreeVTable, flags C.GDBusSubtreeFlags, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) RegisterSubtree(object_path string, vtable *DBusSubtreeVTable, flags C.GDBusSubtreeFlags, user_data C.gpointer, user_data_free_func C.GDestroyNotify) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_vtable_ := (*C.GDBusSubtreeVTable)(unsafe.Pointer(vtable))
 	var _return_ C.guint
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	_return_ = C._g_dbus_connection_register_subtree((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_vtable_, flags, user_data, user_data_free_func, _error_)
+	_return_ = C._g_dbus_connection_register_subtree((*C.GDBusConnection)(_self_._value_), _cgo_object_path_, _cgo_vtable_, flags, user_data, user_data_free_func, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -6367,10 +6608,15 @@ func (_self_ *DBusConnection) RemoveFilter(filter_id uint) () {
 	return
 }
 
-func (_self_ *DBusConnection) SendMessage(message DBusMessageKind, flags C.GDBusSendMessageFlags) (_go__return__ bool, out_serial C. guint32, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) SendMessage(message DBusMessageKind, flags C.GDBusSendMessageFlags) (_go__return__ bool, out_serial C. guint32, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_message_ := (*C.GDBusMessage)(message.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_connection_send_message((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, &out_serial, _error_)
+	_return_ = C._g_dbus_connection_send_message((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, &out_serial, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6383,20 +6629,30 @@ func (_self_ *DBusConnection) SendMessageWithReply(message DBusMessageKind, flag
 	return
 }
 
-func (_self_ *DBusConnection) SendMessageWithReplyFinish(res AsyncResultKind) (_go__return__ DBusMessage, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) SendMessageWithReplyFinish(res AsyncResultKind) (_go__return__ DBusMessage, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusMessage
-	_return_ = C._g_dbus_connection_send_message_with_reply_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_connection_send_message_with_reply_finish((*C.GDBusConnection)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusMessage(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *DBusConnection) SendMessageWithReplySync(message DBusMessageKind, flags C.GDBusSendMessageFlags, timeout_msec int, cancellable CancellableKind) (_go__return__ DBusMessage, out_serial C. guint32, _error_ unsafe.Pointer) {
+func (_self_ *DBusConnection) SendMessageWithReplySync(message DBusMessageKind, flags C.GDBusSendMessageFlags, timeout_msec int, cancellable CancellableKind) (_go__return__ DBusMessage, out_serial C. guint32, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_message_ := (*C.GDBusMessage)(message.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusMessage
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
-	_return_ = C._g_dbus_connection_send_message_with_reply_sync((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, _cgo_timeout_msec_, &out_serial, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_connection_send_message_with_reply_sync((*C.GDBusConnection)(_self_._value_), _cgo_message_, flags, _cgo_timeout_msec_, &out_serial, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusMessage(unsafe.Pointer(_return_))
 	return
 }
@@ -6469,13 +6725,18 @@ func (_self_ *DBusConnection) UnregisterSubtree(registration_id uint) (_go__retu
 	return
 }
 
-func (_self_ *DBusInterfaceSkeleton) Export(connection DBusConnectionKind, object_path string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusInterfaceSkeleton) Export(connection DBusConnectionKind, object_path string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_interface_skeleton_export((*C.GDBusInterfaceSkeleton)(_self_._value_), _cgo_connection_, _cgo_object_path_, _error_)
+	_return_ = C._g_dbus_interface_skeleton_export((*C.GDBusInterfaceSkeleton)(_self_._value_), _cgo_connection_, _cgo_object_path_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6608,9 +6869,14 @@ func DBusMessageNewSignal(path string, interface_ string, signal string) (_go__r
 	return
 }
 
-func (_self_ *DBusMessage) Copy() (_go__return__ DBusMessage, _error_ unsafe.Pointer) {
+func (_self_ *DBusMessage) Copy() (_go__return__ DBusMessage, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GDBusMessage
-	_return_ = C._g_dbus_message_copy((*C.GDBusMessage)(_self_._value_), _error_)
+	_return_ = C._g_dbus_message_copy((*C.GDBusMessage)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusMessage(unsafe.Pointer(_return_))
 	return
 }
@@ -6651,13 +6917,16 @@ func (_self_ *DBusMessage) GetFlags() (_return_ C.GDBusMessageFlags) {
 	return
 }
 
-func (_self_ *DBusMessage) GetHeader(header_field C.GDBusMessageHeaderField) (_return_ *C.GVariant) {
-	_return_ = C.g_dbus_message_get_header((*C.GDBusMessage)(_self_._value_), header_field)
+func (_self_ *DBusMessage) GetHeader(header_field int) (_return_ *C.GVariant) {
+	_cgo_header_field_ := (C.GDBusMessageHeaderField)(header_field)
+	_return_ = C.g_dbus_message_get_header((*C.GDBusMessage)(_self_._value_), _cgo_header_field_)
 	return
 }
 
-func (_self_ *DBusMessage) GetHeaderFields() (_return_ *C.guchar) {
+func (_self_ *DBusMessage) GetHeaderFields() (_go__return__ []byte) {
+	var _return_ *C.guchar
 	_return_ = C.g_dbus_message_get_header_fields((*C.GDBusMessage)(_self_._value_))
+	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
 	return
 }
 
@@ -6774,8 +7043,9 @@ func (_self_ *DBusMessage) SetBody(body *C.GVariant) () {
 	return
 }
 
-func (_self_ *DBusMessage) SetByteOrder(byte_order C.GDBusMessageByteOrder) () {
-	C.g_dbus_message_set_byte_order((*C.GDBusMessage)(_self_._value_), byte_order)
+func (_self_ *DBusMessage) SetByteOrder(byte_order int) () {
+	_cgo_byte_order_ := (C.GDBusMessageByteOrder)(byte_order)
+	C.g_dbus_message_set_byte_order((*C.GDBusMessage)(_self_._value_), _cgo_byte_order_)
 	return
 }
 
@@ -6800,8 +7070,9 @@ func (_self_ *DBusMessage) SetFlags(flags C.GDBusMessageFlags) () {
 	return
 }
 
-func (_self_ *DBusMessage) SetHeader(header_field C.GDBusMessageHeaderField, value *C.GVariant) () {
-	C.g_dbus_message_set_header((*C.GDBusMessage)(_self_._value_), header_field, value)
+func (_self_ *DBusMessage) SetHeader(header_field int, value *C.GVariant) () {
+	_cgo_header_field_ := (C.GDBusMessageHeaderField)(header_field)
+	C.g_dbus_message_set_header((*C.GDBusMessage)(_self_._value_), _cgo_header_field_, value)
 	return
 }
 
@@ -6821,8 +7092,9 @@ func (_self_ *DBusMessage) SetMember(value string) () {
 	return
 }
 
-func (_self_ *DBusMessage) SetMessageType(type_ C.GDBusMessageType) () {
-	C.g_dbus_message_set_message_type((*C.GDBusMessage)(_self_._value_), type_)
+func (_self_ *DBusMessage) SetMessageType(type_ int) () {
+	_cgo_type__ := (C.GDBusMessageType)(type_)
+	C.g_dbus_message_set_message_type((*C.GDBusMessage)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -6874,16 +7146,28 @@ func (_self_ *DBusMessage) SetUnixFdList(fd_list UnixFDListKind) () {
 	return
 }
 
-func (_self_ *DBusMessage) ToBlob(capabilities C.GDBusCapabilityFlags) (_return_ *C.guchar, _go_out_size_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DBusMessage) ToBlob(capabilities C.GDBusCapabilityFlags) (_go__return__ []byte, _go_out_size_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	var out_size C.gsize
-	_return_ = C._g_dbus_message_to_blob((*C.GDBusMessage)(_self_._value_), &out_size, capabilities, _error_)
+	var _return_ *C.guchar
+	_return_ = C._g_dbus_message_to_blob((*C.GDBusMessage)(_self_._value_), &out_size, capabilities, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_out_size_ = (uint64)(out_size)
+	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
 	return
 }
 
-func (_self_ *DBusMessage) ToGerror() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DBusMessage) ToGerror() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_dbus_message_to_gerror((*C.GDBusMessage)(_self_._value_), _error_)
+	_return_ = C._g_dbus_message_to_gerror((*C.GDBusMessage)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6988,23 +7272,34 @@ func (_self_ *DBusMethodInvocation) TakeError(error_ *C.GError) () {
 	return
 }
 
-func DBusObjectManagerClientNewFinish(res AsyncResultKind) (_go__return__ DBusObjectManagerClient, _error_ unsafe.Pointer) {
+func DBusObjectManagerClientNewFinish(res AsyncResultKind) (_go__return__ DBusObjectManagerClient, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusObjectManager
-	_return_ = C._g_dbus_object_manager_client_new_finish(_cgo_res_, _error_)
+	_return_ = C._g_dbus_object_manager_client_new_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusObjectManagerClient(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusObjectManagerClientNewForBusFinish(res AsyncResultKind) (_go__return__ DBusObjectManagerClient, _error_ unsafe.Pointer) {
+func DBusObjectManagerClientNewForBusFinish(res AsyncResultKind) (_go__return__ DBusObjectManagerClient, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusObjectManager
-	_return_ = C._g_dbus_object_manager_client_new_for_bus_finish(_cgo_res_, _error_)
+	_return_ = C._g_dbus_object_manager_client_new_for_bus_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusObjectManagerClient(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusObjectManagerClientNewForBusSync(bus_type C.GBusType, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind) (_go__return__ DBusObjectManagerClient, _error_ unsafe.Pointer) {
+func DBusObjectManagerClientNewForBusSync(bus_type int, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind) (_go__return__ DBusObjectManagerClient, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusObjectManager
 	_cstring_name_ := C.CString(name)
@@ -7013,12 +7308,18 @@ func DBusObjectManagerClientNewForBusSync(bus_type C.GBusType, flags C.GDBusObje
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	_return_ = C._g_dbus_object_manager_client_new_for_bus_sync(bus_type, flags, _cgo_name_, _cgo_object_path_, get_proxy_type_func, get_proxy_type_user_data, get_proxy_type_destroy_notify, _cgo_cancellable_, _error_)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_dbus_object_manager_client_new_for_bus_sync(_cgo_bus_type_, flags, _cgo_name_, _cgo_object_path_, get_proxy_type_func, get_proxy_type_user_data, get_proxy_type_destroy_notify, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusObjectManagerClient(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusObjectManagerClientNewSync(connection DBusConnectionKind, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind) (_go__return__ DBusObjectManagerClient, _error_ unsafe.Pointer) {
+func DBusObjectManagerClientNewSync(connection DBusConnectionKind, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind) (_go__return__ DBusObjectManagerClient, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusObjectManager
@@ -7028,7 +7329,11 @@ func DBusObjectManagerClientNewSync(connection DBusConnectionKind, flags C.GDBus
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	_return_ = C._g_dbus_object_manager_client_new_sync(_cgo_connection_, flags, _cgo_name_, _cgo_object_path_, get_proxy_type_func, get_proxy_type_user_data, get_proxy_type_destroy_notify, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_object_manager_client_new_sync(_cgo_connection_, flags, _cgo_name_, _cgo_object_path_, get_proxy_type_func, get_proxy_type_user_data, get_proxy_type_destroy_notify, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusObjectManagerClient(unsafe.Pointer(_return_))
 	return
 }
@@ -7046,7 +7351,7 @@ func DBusObjectManagerClientNew(connection DBusConnectionKind, flags C.GDBusObje
 	return
 }
 
-func DBusObjectManagerClientNewForBus(bus_type C.GBusType, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+func DBusObjectManagerClientNewForBus(bus_type int, flags C.GDBusObjectManagerClientFlags, name string, object_path string, get_proxy_type_func C.GDBusProxyTypeFunc, get_proxy_type_user_data C.gpointer, get_proxy_type_destroy_notify C.GDestroyNotify, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -7054,7 +7359,8 @@ func DBusObjectManagerClientNewForBus(bus_type C.GBusType, flags C.GDBusObjectMa
 	_cstring_object_path_ := C.CString(object_path)
 	_cgo_object_path_ := (*C.gchar)(unsafe.Pointer(_cstring_object_path_))
 	defer C.free(unsafe.Pointer(_cstring_object_path_))
-	C._g_dbus_object_manager_client_new_for_bus(bus_type, flags, _cgo_name_, _cgo_object_path_, get_proxy_type_func, get_proxy_type_user_data, get_proxy_type_destroy_notify, _cgo_cancellable_, callback, user_data)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	C._g_dbus_object_manager_client_new_for_bus(_cgo_bus_type_, flags, _cgo_name_, _cgo_object_path_, get_proxy_type_func, get_proxy_type_user_data, get_proxy_type_destroy_notify, _cgo_cancellable_, callback, user_data)
 	return
 }
 
@@ -7198,23 +7504,34 @@ func (_self_ *DBusObjectSkeleton) SetObjectPath(object_path string) () {
 	return
 }
 
-func DBusProxyNewFinish(res AsyncResultKind) (_go__return__ DBusProxy, _error_ unsafe.Pointer) {
+func DBusProxyNewFinish(res AsyncResultKind) (_go__return__ DBusProxy, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusProxy
-	_return_ = C._g_dbus_proxy_new_finish(_cgo_res_, _error_)
+	_return_ = C._g_dbus_proxy_new_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusProxy(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusProxyNewForBusFinish(res AsyncResultKind) (_go__return__ DBusProxy, _error_ unsafe.Pointer) {
+func DBusProxyNewForBusFinish(res AsyncResultKind) (_go__return__ DBusProxy, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GDBusProxy
-	_return_ = C._g_dbus_proxy_new_for_bus_finish(_cgo_res_, _error_)
+	_return_ = C._g_dbus_proxy_new_for_bus_finish(_cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusProxy(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusProxyNewForBusSync(bus_type C.GBusType, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind) (_go__return__ DBusProxy, _error_ unsafe.Pointer) {
+func DBusProxyNewForBusSync(bus_type int, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind) (_go__return__ DBusProxy, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusProxy
@@ -7227,12 +7544,18 @@ func DBusProxyNewForBusSync(bus_type C.GBusType, flags C.GDBusProxyFlags, info *
 	_cstring_interface_name_ := C.CString(interface_name)
 	_cgo_interface_name_ := (*C.gchar)(unsafe.Pointer(_cstring_interface_name_))
 	defer C.free(unsafe.Pointer(_cstring_interface_name_))
-	_return_ = C._g_dbus_proxy_new_for_bus_sync(bus_type, flags, _cgo_info_, _cgo_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_cancellable_, _error_)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	_return_ = C._g_dbus_proxy_new_for_bus_sync(_cgo_bus_type_, flags, _cgo_info_, _cgo_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusProxy(unsafe.Pointer(_return_))
 	return
 }
 
-func DBusProxyNewSync(connection DBusConnectionKind, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind) (_go__return__ DBusProxy, _error_ unsafe.Pointer) {
+func DBusProxyNewSync(connection DBusConnectionKind, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind) (_go__return__ DBusProxy, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_connection_ := (*C.GDBusConnection)(connection.GetGObject())
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
@@ -7246,7 +7569,11 @@ func DBusProxyNewSync(connection DBusConnectionKind, flags C.GDBusProxyFlags, in
 	_cstring_interface_name_ := C.CString(interface_name)
 	_cgo_interface_name_ := (*C.gchar)(unsafe.Pointer(_cstring_interface_name_))
 	defer C.free(unsafe.Pointer(_cstring_interface_name_))
-	_return_ = C._g_dbus_proxy_new_sync(_cgo_connection_, flags, _cgo_info_, _cgo_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_proxy_new_sync(_cgo_connection_, flags, _cgo_info_, _cgo_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusProxy(unsafe.Pointer(_return_))
 	return
 }
@@ -7268,7 +7595,7 @@ func DBusProxyNew(connection DBusConnectionKind, flags C.GDBusProxyFlags, info *
 	return
 }
 
-func DBusProxyNewForBus(bus_type C.GBusType, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+func DBusProxyNewForBus(bus_type int, flags C.GDBusProxyFlags, info *DBusInterfaceInfo, name string, object_path string, interface_name string, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_info_ := (*C.GDBusInterfaceInfo)(unsafe.Pointer(info))
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_name_ := C.CString(name)
@@ -7280,7 +7607,8 @@ func DBusProxyNewForBus(bus_type C.GBusType, flags C.GDBusProxyFlags, info *DBus
 	_cstring_interface_name_ := C.CString(interface_name)
 	_cgo_interface_name_ := (*C.gchar)(unsafe.Pointer(_cstring_interface_name_))
 	defer C.free(unsafe.Pointer(_cstring_interface_name_))
-	C._g_dbus_proxy_new_for_bus(bus_type, flags, _cgo_info_, _cgo_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_cancellable_, callback, user_data)
+	_cgo_bus_type_ := (C.GBusType)(bus_type)
+	C._g_dbus_proxy_new_for_bus(_cgo_bus_type_, flags, _cgo_info_, _cgo_name_, _cgo_object_path_, _cgo_interface_name_, _cgo_cancellable_, callback, user_data)
 	return
 }
 
@@ -7294,19 +7622,29 @@ func (_self_ *DBusProxy) Call(method_name string, parameters *C.GVariant, flags 
 	return
 }
 
-func (_self_ *DBusProxy) CallFinish(res AsyncResultKind) (_return_ *C.GVariant, _error_ unsafe.Pointer) {
+func (_self_ *DBusProxy) CallFinish(res AsyncResultKind) (_return_ *C.GVariant, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
-	_return_ = C._g_dbus_proxy_call_finish((*C.GDBusProxy)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_proxy_call_finish((*C.GDBusProxy)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *DBusProxy) CallSync(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind) (_return_ *C.GVariant, _error_ unsafe.Pointer) {
+func (_self_ *DBusProxy) CallSync(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, cancellable CancellableKind) (_return_ *C.GVariant, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_msec_ := (C.gint)(timeout_msec)
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
 	defer C.free(unsafe.Pointer(_cstring_method_name_))
-	_return_ = C._g_dbus_proxy_call_sync((*C.GDBusProxy)(_self_._value_), _cgo_method_name_, parameters, flags, _cgo_timeout_msec_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_proxy_call_sync((*C.GDBusProxy)(_self_._value_), _cgo_method_name_, parameters, flags, _cgo_timeout_msec_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -7321,15 +7659,21 @@ func (_self_ *DBusProxy) CallWithUnixFdList(method_name string, parameters *C.GV
 	return
 }
 
-func (_self_ *DBusProxy) CallWithUnixFdListFinish(res AsyncResultKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ unsafe.Pointer) {
+func (_self_ *DBusProxy) CallWithUnixFdListFinish(res AsyncResultKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _allocated_out_fd_list_ *C.GUnixFDList
-	_return_ = C._g_dbus_proxy_call_with_unix_fd_list_finish((*C.GDBusProxy)(_self_._value_), unsafe.Pointer(&_allocated_out_fd_list_), _cgo_res_, _error_)
+	_return_ = C._g_dbus_proxy_call_with_unix_fd_list_finish((*C.GDBusProxy)(_self_._value_), unsafe.Pointer(&_allocated_out_fd_list_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	out_fd_list = (*UnixFDList)(unsafe.Pointer(_allocated_out_fd_list_))
 	return
 }
 
-func (_self_ *DBusProxy) CallWithUnixFdListSync(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ unsafe.Pointer) {
+func (_self_ *DBusProxy) CallWithUnixFdListSync(method_name string, parameters *C.GVariant, flags C.GDBusCallFlags, timeout_msec int, fd_list UnixFDListKind, cancellable CancellableKind) (_return_ *C.GVariant, out_fd_list *UnixFDList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_fd_list_ := (*C.GUnixFDList)(fd_list.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _allocated_out_fd_list_ *C.GUnixFDList
@@ -7337,7 +7681,11 @@ func (_self_ *DBusProxy) CallWithUnixFdListSync(method_name string, parameters *
 	_cstring_method_name_ := C.CString(method_name)
 	_cgo_method_name_ := (*C.gchar)(unsafe.Pointer(_cstring_method_name_))
 	defer C.free(unsafe.Pointer(_cstring_method_name_))
-	_return_ = C._g_dbus_proxy_call_with_unix_fd_list_sync((*C.GDBusProxy)(_self_._value_), _cgo_method_name_, parameters, flags, _cgo_timeout_msec_, _cgo_fd_list_, unsafe.Pointer(&_allocated_out_fd_list_), _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_proxy_call_with_unix_fd_list_sync((*C.GDBusProxy)(_self_._value_), _cgo_method_name_, parameters, flags, _cgo_timeout_msec_, _cgo_fd_list_, unsafe.Pointer(&_allocated_out_fd_list_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	out_fd_list = (*UnixFDList)(unsafe.Pointer(_allocated_out_fd_list_))
 	return
 }
@@ -7429,7 +7777,8 @@ func (_self_ *DBusProxy) SetInterfaceInfo(info *DBusInterfaceInfo) () {
 	return
 }
 
-func DBusServerNewSync(address string, flags C.GDBusServerFlags, guid string, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusServer, _error_ unsafe.Pointer) {
+func DBusServerNewSync(address string, flags C.GDBusServerFlags, guid string, observer DBusAuthObserverKind, cancellable CancellableKind) (_go__return__ DBusServer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_observer_ := (*C.GDBusAuthObserver)(observer.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GDBusServer
@@ -7439,7 +7788,11 @@ func DBusServerNewSync(address string, flags C.GDBusServerFlags, guid string, ob
 	_cstring_guid_ := C.CString(guid)
 	_cgo_guid_ := (*C.gchar)(unsafe.Pointer(_cstring_guid_))
 	defer C.free(unsafe.Pointer(_cstring_guid_))
-	_return_ = C._g_dbus_server_new_sync(_cgo_address_, flags, _cgo_guid_, _cgo_observer_, _cgo_cancellable_, _error_)
+	_return_ = C._g_dbus_server_new_sync(_cgo_address_, flags, _cgo_guid_, _cgo_observer_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToDBusServer(unsafe.Pointer(_return_))
 	return
 }
@@ -7498,42 +7851,67 @@ func (_self_ *DataInputStream) GetNewlineType() (_return_ C.GDataStreamNewlineTy
 	return
 }
 
-func (_self_ *DataInputStream) ReadByte(cancellable CancellableKind) (_go__return__ byte, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadByte(cancellable CancellableKind) (_go__return__ byte, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guchar
-	_return_ = C._g_data_input_stream_read_byte((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_byte((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (byte)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadInt16(cancellable CancellableKind) (_go__return__ int16, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadInt16(cancellable CancellableKind) (_go__return__ int16, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint16
-	_return_ = C._g_data_input_stream_read_int16((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_int16((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int16)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadInt32(cancellable CancellableKind) (_go__return__ int32, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadInt32(cancellable CancellableKind) (_go__return__ int32, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint32
-	_return_ = C._g_data_input_stream_read_int32((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_int32((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int32)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadInt64(cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadInt64(cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint64
-	_return_ = C._g_data_input_stream_read_int64((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_int64((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadLine(cancellable CancellableKind) (_return_ *C.char, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadLine(cancellable CancellableKind) (_return_ *C.char, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var length C.gsize
-	_return_ = C._g_data_input_stream_read_line((*C.GDataInputStream)(_self_._value_), &length, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_line((*C.GDataInputStream)(_self_._value_), &length, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	return
 }
@@ -7545,66 +7923,101 @@ func (_self_ *DataInputStream) ReadLineAsync(io_priority int, cancellable Cancel
 	return
 }
 
-func (_self_ *DataInputStream) ReadLineFinish(result AsyncResultKind) (_return_ *C.char, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadLineFinish(result AsyncResultKind) (_return_ *C.char, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var length C.gsize
-	_return_ = C._g_data_input_stream_read_line_finish((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, _error_)
+	_return_ = C._g_data_input_stream_read_line_finish((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	return
 }
 
-func (_self_ *DataInputStream) ReadLineFinishUtf8(result AsyncResultKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadLineFinishUtf8(result AsyncResultKind) (_go__return__ string, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var length C.gsize
 	var _return_ *C.char
-	_return_ = C._g_data_input_stream_read_line_finish_utf8((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, _error_)
+	_return_ = C._g_data_input_stream_read_line_finish_utf8((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *DataInputStream) ReadLineUtf8(cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadLineUtf8(cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var length C.gsize
 	var _return_ *C.char
-	_return_ = C._g_data_input_stream_read_line_utf8((*C.GDataInputStream)(_self_._value_), &length, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_line_utf8((*C.GDataInputStream)(_self_._value_), &length, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *DataInputStream) ReadUint16(cancellable CancellableKind) (_go__return__ uint16, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUint16(cancellable CancellableKind) (_go__return__ uint16, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guint16
-	_return_ = C._g_data_input_stream_read_uint16((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_uint16((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint16)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadUint32(cancellable CancellableKind) (_go__return__ uint32, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUint32(cancellable CancellableKind) (_go__return__ uint32, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guint32
-	_return_ = C._g_data_input_stream_read_uint32((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_uint32((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint32)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadUint64(cancellable CancellableKind) (_go__return__ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUint64(cancellable CancellableKind) (_go__return__ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.guint64
-	_return_ = C._g_data_input_stream_read_uint64((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_uint64((*C.GDataInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint64)(_return_)
 	return
 }
 
-func (_self_ *DataInputStream) ReadUntil(stop_chars string, cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUntil(stop_chars string, cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var length C.gsize
 	_cstring_stop_chars_ := C.CString(stop_chars)
 	_cgo_stop_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_stop_chars_))
 	defer C.free(unsafe.Pointer(_cstring_stop_chars_))
 	var _return_ *C.char
-	_return_ = C._g_data_input_stream_read_until((*C.GDataInputStream)(_self_._value_), _cgo_stop_chars_, &length, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_until((*C.GDataInputStream)(_self_._value_), _cgo_stop_chars_, &length, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
@@ -7620,17 +8033,23 @@ func (_self_ *DataInputStream) ReadUntilAsync(stop_chars string, io_priority int
 	return
 }
 
-func (_self_ *DataInputStream) ReadUntilFinish(result AsyncResultKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUntilFinish(result AsyncResultKind) (_go__return__ string, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var length C.gsize
 	var _return_ *C.char
-	_return_ = C._g_data_input_stream_read_until_finish((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, _error_)
+	_return_ = C._g_data_input_stream_read_until_finish((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *DataInputStream) ReadUpto(stop_chars string, stop_chars_len int64, cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUpto(stop_chars string, stop_chars_len int64, cancellable CancellableKind) (_go__return__ string, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_stop_chars_len_ := (C.gssize)(stop_chars_len)
 	var length C.gsize
@@ -7638,7 +8057,11 @@ func (_self_ *DataInputStream) ReadUpto(stop_chars string, stop_chars_len int64,
 	_cgo_stop_chars_ := (*C.gchar)(unsafe.Pointer(_cstring_stop_chars_))
 	defer C.free(unsafe.Pointer(_cstring_stop_chars_))
 	var _return_ *C.char
-	_return_ = C._g_data_input_stream_read_upto((*C.GDataInputStream)(_self_._value_), _cgo_stop_chars_, _cgo_stop_chars_len_, &length, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_input_stream_read_upto((*C.GDataInputStream)(_self_._value_), _cgo_stop_chars_, _cgo_stop_chars_len_, &length, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
@@ -7655,23 +8078,30 @@ func (_self_ *DataInputStream) ReadUptoAsync(stop_chars string, stop_chars_len i
 	return
 }
 
-func (_self_ *DataInputStream) ReadUptoFinish(result AsyncResultKind) (_go__return__ string, _go_length_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *DataInputStream) ReadUptoFinish(result AsyncResultKind) (_go__return__ string, _go_length_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var length C.gsize
 	var _return_ *C.char
-	_return_ = C._g_data_input_stream_read_upto_finish((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, _error_)
+	_return_ = C._g_data_input_stream_read_upto_finish((*C.GDataInputStream)(_self_._value_), _cgo_result_, &length, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_length_ = (uint64)(length)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *DataInputStream) SetByteOrder(order C.GDataStreamByteOrder) () {
-	C.g_data_input_stream_set_byte_order((*C.GDataInputStream)(_self_._value_), order)
+func (_self_ *DataInputStream) SetByteOrder(order int) () {
+	_cgo_order_ := (C.GDataStreamByteOrder)(order)
+	C.g_data_input_stream_set_byte_order((*C.GDataInputStream)(_self_._value_), _cgo_order_)
 	return
 }
 
-func (_self_ *DataInputStream) SetNewlineType(type_ C.GDataStreamNewlineType) () {
-	C.g_data_input_stream_set_newline_type((*C.GDataInputStream)(_self_._value_), type_)
+func (_self_ *DataInputStream) SetNewlineType(type_ int) () {
+	_cgo_type__ := (C.GDataStreamNewlineType)(type_)
+	C.g_data_input_stream_set_newline_type((*C.GDataInputStream)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -7688,82 +8118,123 @@ func (_self_ *DataOutputStream) GetByteOrder() (_return_ C.GDataStreamByteOrder)
 	return
 }
 
-func (_self_ *DataOutputStream) PutByte(data byte, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutByte(data byte, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guchar)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_byte((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_byte((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutInt16(data int16, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutInt16(data int16, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.gint16)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_int16((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_int16((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutInt32(data int32, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutInt32(data int32, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.gint32)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_int32((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_int32((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutInt64(data int64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutInt64(data int64, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.gint64)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_int64((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_int64((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutString(str string, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutString(str string, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.char)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_string((*C.GDataOutputStream)(_self_._value_), _cgo_str_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_string((*C.GDataOutputStream)(_self_._value_), _cgo_str_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutUint16(data uint16, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutUint16(data uint16, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guint16)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_uint16((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_uint16((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutUint32(data uint32, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutUint32(data uint32, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guint32)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_uint32((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_uint32((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) PutUint64(data uint64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DataOutputStream) PutUint64(data uint64, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_data_ := (C.guint64)(data)
 	var _return_ C.gboolean
-	_return_ = C._g_data_output_stream_put_uint64((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, _error_)
+	_return_ = C._g_data_output_stream_put_uint64((*C.GDataOutputStream)(_self_._value_), _cgo_data_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *DataOutputStream) SetByteOrder(order C.GDataStreamByteOrder) () {
-	C.g_data_output_stream_set_byte_order((*C.GDataOutputStream)(_self_._value_), order)
+func (_self_ *DataOutputStream) SetByteOrder(order int) () {
+	_cgo_order_ := (C.GDataStreamByteOrder)(order)
+	C.g_data_output_stream_set_byte_order((*C.GDataOutputStream)(_self_._value_), _cgo_order_)
 	return
 }
 
@@ -7889,10 +8360,15 @@ func (_self_ *DesktopAppInfo) HasKey(key string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *DesktopAppInfo) LaunchUrisAsManager(uris *C.GList, launch_context GioAppLaunchContextKind, spawn_flags C.GSpawnFlags, user_setup C.GSpawnChildSetupFunc, user_setup_data C.gpointer, pid_callback C.GDesktopAppLaunchCallback, pid_callback_data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *DesktopAppInfo) LaunchUrisAsManager(uris *C.GList, launch_context GioAppLaunchContextKind, spawn_flags C.GSpawnFlags, user_setup C.GSpawnChildSetupFunc, user_setup_data C.gpointer, pid_callback C.GDesktopAppLaunchCallback, pid_callback_data C.gpointer) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_desktop_app_info_launch_uris_as_manager((*C.GDesktopAppInfo)(_self_._value_), uris, _cgo_launch_context_, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, _error_)
+	_return_ = C._g_desktop_app_info_launch_uris_as_manager((*C.GDesktopAppInfo)(_self_._value_), uris, _cgo_launch_context_, spawn_flags, user_setup, user_setup_data, pid_callback, pid_callback_data, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -7905,10 +8381,11 @@ func EmblemNew(icon IconKind) (_go__return__ Emblem) {
 	return
 }
 
-func EmblemNewWithOrigin(icon IconKind, origin C.GEmblemOrigin) (_go__return__ Emblem) {
+func EmblemNewWithOrigin(icon IconKind, origin int) (_go__return__ Emblem) {
 	_cgo_icon_ := (*C.GIcon)(icon.GetGObject())
 	var _return_ *C.GEmblem
-	_return_ = C.g_emblem_new_with_origin(_cgo_icon_, origin)
+	_cgo_origin_ := (C.GEmblemOrigin)(origin)
+	_return_ = C.g_emblem_new_with_origin(_cgo_icon_, _cgo_origin_)
 	_go__return__ = ToEmblem(unsafe.Pointer(_return_))
 	return
 }
@@ -7957,10 +8434,15 @@ func (_self_ *EmblemedIcon) GetIcon() (_go__return__ Icon) {
 	return
 }
 
-func (_self_ *FileEnumerator) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileEnumerator) Close(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_enumerator_close((*C.GFileEnumerator)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_enumerator_close((*C.GFileEnumerator)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -7971,10 +8453,15 @@ func (_self_ *FileEnumerator) CloseAsync(io_priority C.int, cancellable Cancella
 	return
 }
 
-func (_self_ *FileEnumerator) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileEnumerator) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_enumerator_close_finish((*C.GFileEnumerator)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_enumerator_close_finish((*C.GFileEnumerator)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8000,10 +8487,15 @@ func (_self_ *FileEnumerator) IsClosed() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *FileEnumerator) NextFile(cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileEnumerator) NextFile(cancellable CancellableKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
-	_return_ = C._g_file_enumerator_next_file((*C.GFileEnumerator)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_enumerator_next_file((*C.GFileEnumerator)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8014,9 +8506,14 @@ func (_self_ *FileEnumerator) NextFilesAsync(num_files C.int, io_priority C.int,
 	return
 }
 
-func (_self_ *FileEnumerator) NextFilesFinish(result AsyncResultKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *FileEnumerator) NextFilesFinish(result AsyncResultKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_file_enumerator_next_files_finish((*C.GFileEnumerator)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_enumerator_next_files_finish((*C.GFileEnumerator)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -8034,13 +8531,18 @@ func (_self_ *FileIOStream) GetEtag() (_go__return__ string) {
 	return
 }
 
-func (_self_ *FileIOStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileIOStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_io_stream_query_info((*C.GFileIOStream)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_io_stream_query_info((*C.GFileIOStream)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8054,10 +8556,15 @@ func (_self_ *FileIOStream) QueryInfoAsync(attributes string, io_priority C.int,
 	return
 }
 
-func (_self_ *FileIOStream) QueryInfoFinish(result AsyncResultKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileIOStream) QueryInfoFinish(result AsyncResultKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GFileInfo
-	_return_ = C._g_file_io_stream_query_info_finish((*C.GFileIOStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_io_stream_query_info_finish((*C.GFileIOStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8361,11 +8868,12 @@ func (_self_ *FileInfo) RemoveAttribute(attribute string) () {
 	return
 }
 
-func (_self_ *FileInfo) SetAttribute(attribute string, type_ C.GFileAttributeType, value_p C.gpointer) () {
+func (_self_ *FileInfo) SetAttribute(attribute string, type_ int, value_p C.gpointer) () {
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
-	C._g_file_info_set_attribute((*C.GFileInfo)(_self_._value_), _cgo_attribute_, type_, value_p)
+	_cgo_type__ := (C.GFileAttributeType)(type_)
+	C._g_file_info_set_attribute((*C.GFileInfo)(_self_._value_), _cgo_attribute_, _cgo_type__, value_p)
 	return
 }
 
@@ -8422,12 +8930,13 @@ func (_self_ *FileInfo) SetAttributeObject(attribute string, attr_value *C.GObje
 	return
 }
 
-func (_self_ *FileInfo) SetAttributeStatus(attribute string, status C.GFileAttributeStatus) (_go__return__ bool) {
+func (_self_ *FileInfo) SetAttributeStatus(attribute string, status int) (_go__return__ bool) {
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_info_set_attribute_status((*C.GFileInfo)(_self_._value_), _cgo_attribute_, status)
+	_cgo_status_ := (C.GFileAttributeStatus)(status)
+	_return_ = C._g_file_info_set_attribute_status((*C.GFileInfo)(_self_._value_), _cgo_attribute_, _cgo_status_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8485,8 +8994,9 @@ func (_self_ *FileInfo) SetEditName(edit_name string) () {
 	return
 }
 
-func (_self_ *FileInfo) SetFileType(type_ C.GFileType) () {
-	C.g_file_info_set_file_type((*C.GFileInfo)(_self_._value_), type_)
+func (_self_ *FileInfo) SetFileType(type_ int) () {
+	_cgo_type__ := (C.GFileType)(type_)
+	C.g_file_info_set_file_type((*C.GFileInfo)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -8554,13 +9064,18 @@ func (_self_ *FileInfo) UnsetAttributeMask() () {
 	return
 }
 
-func (_self_ *FileInputStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileInputStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_input_stream_query_info((*C.GFileInputStream)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_input_stream_query_info((*C.GFileInputStream)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8574,10 +9089,15 @@ func (_self_ *FileInputStream) QueryInfoAsync(attributes string, io_priority C.i
 	return
 }
 
-func (_self_ *FileInputStream) QueryInfoFinish(result AsyncResultKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileInputStream) QueryInfoFinish(result AsyncResultKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GFileInfo
-	_return_ = C._g_file_input_stream_query_info_finish((*C.GFileInputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_input_stream_query_info_finish((*C.GFileInputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8589,10 +9109,11 @@ func (_self_ *FileMonitor) Cancel() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *FileMonitor) EmitEvent(child FileKind, other_file FileKind, event_type C.GFileMonitorEvent) () {
+func (_self_ *FileMonitor) EmitEvent(child FileKind, other_file FileKind, event_type int) () {
 	_cgo_child_ := (*C.GFile)(child.GetGObject())
 	_cgo_other_file_ := (*C.GFile)(other_file.GetGObject())
-	C.g_file_monitor_emit_event((*C.GFileMonitor)(_self_._value_), _cgo_child_, _cgo_other_file_, event_type)
+	_cgo_event_type_ := (C.GFileMonitorEvent)(event_type)
+	C.g_file_monitor_emit_event((*C.GFileMonitor)(_self_._value_), _cgo_child_, _cgo_other_file_, _cgo_event_type_)
 	return
 }
 
@@ -8616,13 +9137,18 @@ func (_self_ *FileOutputStream) GetEtag() (_go__return__ string) {
 	return
 }
 
-func (_self_ *FileOutputStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileOutputStream) QueryInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_output_stream_query_info((*C.GFileOutputStream)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_output_stream_query_info((*C.GFileOutputStream)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8636,10 +9162,15 @@ func (_self_ *FileOutputStream) QueryInfoAsync(attributes string, io_priority C.
 	return
 }
 
-func (_self_ *FileOutputStream) QueryInfoFinish(result AsyncResultKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *FileOutputStream) QueryInfoFinish(result AsyncResultKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GFileInfo
-	_return_ = C._g_file_output_stream_query_info_finish((*C.GFileOutputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_output_stream_query_info_finish((*C.GFileOutputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -8728,10 +9259,15 @@ func IOModuleNew(filename string) (_go__return__ IOModule) {
 	return
 }
 
-func IOStreamSpliceFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func IOStreamSpliceFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_io_stream_splice_finish(_cgo_result_, _error_)
+	_return_ = C._g_io_stream_splice_finish(_cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8741,10 +9277,15 @@ func (_self_ *IOStream) ClearPending() () {
 	return
 }
 
-func (_self_ *IOStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *IOStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_io_stream_close((*C.GIOStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_io_stream_close((*C.GIOStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8755,10 +9296,15 @@ func (_self_ *IOStream) CloseAsync(io_priority C.int, cancellable CancellableKin
 	return
 }
 
-func (_self_ *IOStream) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *IOStream) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_io_stream_close_finish((*C.GIOStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_io_stream_close_finish((*C.GIOStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8791,9 +9337,14 @@ func (_self_ *IOStream) IsClosed() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *IOStream) SetPending() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *IOStream) SetPending() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_io_stream_set_pending((*C.GIOStream)(_self_._value_), _error_)
+	_return_ = C._g_io_stream_set_pending((*C.GIOStream)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8805,9 +9356,10 @@ func (_self_ *IOStream) SpliceAsync(stream2 IOStreamKind, flags C.GIOStreamSplic
 	return
 }
 
-func InetAddressNewAny(family C.GSocketFamily) (_go__return__ InetAddress) {
+func InetAddressNewAny(family int) (_go__return__ InetAddress) {
 	var _return_ *C.GInetAddress
-	_return_ = C.g_inet_address_new_any(family)
+	_cgo_family_ := (C.GSocketFamily)(family)
+	_return_ = C.g_inet_address_new_any(_cgo_family_)
 	_go__return__ = ToInetAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -8822,9 +9374,10 @@ func InetAddressNewFromString(string_ string) (_go__return__ InetAddress) {
 	return
 }
 
-func InetAddressNewLoopback(family C.GSocketFamily) (_go__return__ InetAddress) {
+func InetAddressNewLoopback(family int) (_go__return__ InetAddress) {
 	var _return_ *C.GInetAddress
-	_return_ = C.g_inet_address_new_loopback(family)
+	_cgo_family_ := (C.GSocketFamily)(family)
+	_return_ = C.g_inet_address_new_loopback(_cgo_family_)
 	_go__return__ = ToInetAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -8931,21 +9484,31 @@ func (_self_ *InetAddress) ToString() (_go__return__ string) {
 	return
 }
 
-func InetAddressMaskNew(addr InetAddressKind, length uint) (_go__return__ InetAddressMask, _error_ unsafe.Pointer) {
+func InetAddressMaskNew(addr InetAddressKind, length uint) (_go__return__ InetAddressMask, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_addr_ := (*C.GInetAddress)(addr.GetGObject())
 	var _return_ *C.GInetAddressMask
 	_cgo_length_ := (C.guint)(length)
-	_return_ = C._g_inet_address_mask_new(_cgo_addr_, _cgo_length_, _error_)
+	_return_ = C._g_inet_address_mask_new(_cgo_addr_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToInetAddressMask(unsafe.Pointer(_return_))
 	return
 }
 
-func InetAddressMaskNewFromString(mask_string string) (_go__return__ InetAddressMask, _error_ unsafe.Pointer) {
+func InetAddressMaskNewFromString(mask_string string) (_go__return__ InetAddressMask, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GInetAddressMask
 	_cstring_mask_string_ := C.CString(mask_string)
 	_cgo_mask_string_ := (*C.gchar)(unsafe.Pointer(_cstring_mask_string_))
 	defer C.free(unsafe.Pointer(_cstring_mask_string_))
-	_return_ = C._g_inet_address_mask_new_from_string(_cgo_mask_string_, _error_)
+	_return_ = C._g_inet_address_mask_new_from_string(_cgo_mask_string_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToInetAddressMask(unsafe.Pointer(_return_))
 	return
 }
@@ -9034,10 +9597,15 @@ func (_self_ *InputStream) ClearPending() () {
 	return
 }
 
-func (_self_ *InputStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_input_stream_close((*C.GInputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_input_stream_close((*C.GInputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9048,10 +9616,15 @@ func (_self_ *InputStream) CloseAsync(io_priority C.int, cancellable Cancellable
 	return
 }
 
-func (_self_ *InputStream) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_input_stream_close_finish((*C.GInputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_input_stream_close_finish((*C.GInputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9070,21 +9643,31 @@ func (_self_ *InputStream) IsClosed() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *InputStream) Read(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) Read(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
-	_return_ = C._g_input_stream_read((*C.GInputStream)(_self_._value_), buffer, _cgo_count_, _cgo_cancellable_, _error_)
+	_return_ = C._g_input_stream_read((*C.GInputStream)(_self_._value_), buffer, _cgo_count_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *InputStream) ReadAll(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ bool, _go_bytes_read_ uint64, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) ReadAll(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ bool, _go_bytes_read_ uint64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var bytes_read C.gsize
 	var _return_ C.gboolean
-	_return_ = C._g_input_stream_read_all((*C.GInputStream)(_self_._value_), buffer, _cgo_count_, &bytes_read, _cgo_cancellable_, _error_)
+	_return_ = C._g_input_stream_read_all((*C.GInputStream)(_self_._value_), buffer, _cgo_count_, &bytes_read, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_bytes_read_ = (uint64)(bytes_read)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
@@ -9097,10 +9680,15 @@ func (_self_ *InputStream) ReadAsync(buffer unsafe.Pointer, count uint64, io_pri
 	return
 }
 
-func (_self_ *InputStream) ReadBytes(count uint64, cancellable CancellableKind) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) ReadBytes(count uint64, cancellable CancellableKind) (_return_ *C.GBytes, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
-	_return_ = C._g_input_stream_read_bytes((*C.GInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, _error_)
+	_return_ = C._g_input_stream_read_bytes((*C.GInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -9111,32 +9699,52 @@ func (_self_ *InputStream) ReadBytesAsync(count uint64, io_priority C.int, cance
 	return
 }
 
-func (_self_ *InputStream) ReadBytesFinish(result AsyncResultKind) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) ReadBytesFinish(result AsyncResultKind) (_return_ *C.GBytes, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_input_stream_read_bytes_finish((*C.GInputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_input_stream_read_bytes_finish((*C.GInputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *InputStream) ReadFinish(result AsyncResultKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) ReadFinish(result AsyncResultKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_input_stream_read_finish((*C.GInputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_input_stream_read_finish((*C.GInputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *InputStream) SetPending() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) SetPending() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_input_stream_set_pending((*C.GInputStream)(_self_._value_), _error_)
+	_return_ = C._g_input_stream_set_pending((*C.GInputStream)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *InputStream) Skip(count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) Skip(count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
-	_return_ = C._g_input_stream_skip((*C.GInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, _error_)
+	_return_ = C._g_input_stream_skip((*C.GInputStream)(_self_._value_), _cgo_count_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -9148,10 +9756,15 @@ func (_self_ *InputStream) SkipAsync(count uint64, io_priority C.int, cancellabl
 	return
 }
 
-func (_self_ *InputStream) SkipFinish(result AsyncResultKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *InputStream) SkipFinish(result AsyncResultKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_input_stream_skip_finish((*C.GInputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_input_stream_skip_finish((*C.GInputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -9613,8 +10226,9 @@ func (_self_ *GioMountOperation) GetUsername() (_go__return__ string) {
 	return
 }
 
-func (_self_ *GioMountOperation) Reply(result C.GMountOperationResult) () {
-	C.g_mount_operation_reply((*C.GMountOperation)(_self_._value_), result)
+func (_self_ *GioMountOperation) Reply(result int) () {
+	_cgo_result_ := (C.GMountOperationResult)(result)
+	C.g_mount_operation_reply((*C.GMountOperation)(_self_._value_), _cgo_result_)
 	return
 }
 
@@ -9646,8 +10260,9 @@ func (_self_ *GioMountOperation) SetPassword(password string) () {
 	return
 }
 
-func (_self_ *GioMountOperation) SetPasswordSave(save C.GPasswordSave) () {
-	C.g_mount_operation_set_password_save((*C.GMountOperation)(_self_._value_), save)
+func (_self_ *GioMountOperation) SetPasswordSave(save int) () {
+	_cgo_save_ := (C.GPasswordSave)(save)
+	C.g_mount_operation_set_password_save((*C.GMountOperation)(_self_._value_), _cgo_save_)
 	return
 }
 
@@ -9670,24 +10285,34 @@ func NetworkAddressNew(hostname string, port uint16) (_go__return__ NetworkAddre
 	return
 }
 
-func NetworkAddressParse(host_and_port string, default_port uint16) (_go__return__ SocketConnectable, _error_ unsafe.Pointer) {
+func NetworkAddressParse(host_and_port string, default_port uint16) (_go__return__ SocketConnectable, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocketConnectable
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_host_and_port_ := C.CString(host_and_port)
 	_cgo_host_and_port_ := (*C.gchar)(unsafe.Pointer(_cstring_host_and_port_))
 	defer C.free(unsafe.Pointer(_cstring_host_and_port_))
-	_return_ = C._g_network_address_parse(_cgo_host_and_port_, _cgo_default_port_, _error_)
+	_return_ = C._g_network_address_parse(_cgo_host_and_port_, _cgo_default_port_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnectable(unsafe.Pointer(_return_))
 	return
 }
 
-func NetworkAddressParseUri(uri string, default_port uint16) (_go__return__ SocketConnectable, _error_ unsafe.Pointer) {
+func NetworkAddressParseUri(uri string, default_port uint16) (_go__return__ SocketConnectable, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocketConnectable
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
-	_return_ = C._g_network_address_parse_uri(_cgo_uri_, _cgo_default_port_, _error_)
+	_return_ = C._g_network_address_parse_uri(_cgo_uri_, _cgo_default_port_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnectable(unsafe.Pointer(_return_))
 	return
 }
@@ -9770,10 +10395,15 @@ func (_self_ *OutputStream) ClearPending() () {
 	return
 }
 
-func (_self_ *OutputStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) Close(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_output_stream_close((*C.GOutputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_output_stream_close((*C.GOutputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9784,18 +10414,28 @@ func (_self_ *OutputStream) CloseAsync(io_priority C.int, cancellable Cancellabl
 	return
 }
 
-func (_self_ *OutputStream) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) CloseFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_output_stream_close_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_output_stream_close_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *OutputStream) Flush(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) Flush(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_output_stream_flush((*C.GOutputStream)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_output_stream_flush((*C.GOutputStream)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9806,10 +10446,15 @@ func (_self_ *OutputStream) FlushAsync(io_priority C.int, cancellable Cancellabl
 	return
 }
 
-func (_self_ *OutputStream) FlushFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) FlushFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_output_stream_flush_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_output_stream_flush_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9835,18 +10480,28 @@ func (_self_ *OutputStream) IsClosing() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *OutputStream) SetPending() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) SetPending() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_output_stream_set_pending((*C.GOutputStream)(_self_._value_), _error_)
+	_return_ = C._g_output_stream_set_pending((*C.GOutputStream)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *OutputStream) Splice(source InputStreamKind, flags C.GOutputStreamSpliceFlags, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) Splice(source InputStreamKind, flags C.GOutputStreamSpliceFlags, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_source_ := (*C.GInputStream)(source.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_output_stream_splice((*C.GOutputStream)(_self_._value_), _cgo_source_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_output_stream_splice((*C.GOutputStream)(_self_._value_), _cgo_source_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -9858,18 +10513,28 @@ func (_self_ *OutputStream) SpliceAsync(source InputStreamKind, flags C.GOutputS
 	return
 }
 
-func (_self_ *OutputStream) SpliceFinish(result AsyncResultKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) SpliceFinish(result AsyncResultKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_output_stream_splice_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_output_stream_splice_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *OutputStream) WriteBytes(bytes *C.GBytes, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) WriteBytes(bytes *C.GBytes, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_output_stream_write_bytes((*C.GOutputStream)(_self_._value_), bytes, _cgo_cancellable_, _error_)
+	_return_ = C._g_output_stream_write_bytes((*C.GOutputStream)(_self_._value_), bytes, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -9880,26 +10545,41 @@ func (_self_ *OutputStream) WriteBytesAsync(bytes *C.GBytes, io_priority C.int, 
 	return
 }
 
-func (_self_ *OutputStream) WriteBytesFinish(result AsyncResultKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) WriteBytesFinish(result AsyncResultKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_output_stream_write_bytes_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_output_stream_write_bytes_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *OutputStream) WriteFinish(result AsyncResultKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *OutputStream) WriteFinish(result AsyncResultKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gssize
-	_return_ = C._g_output_stream_write_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_output_stream_write_finish((*C.GOutputStream)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *Permission) Acquire(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Permission) Acquire(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_permission_acquire((*C.GPermission)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_permission_acquire((*C.GPermission)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9910,10 +10590,15 @@ func (_self_ *Permission) AcquireAsync(cancellable CancellableKind, callback C.G
 	return
 }
 
-func (_self_ *Permission) AcquireFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Permission) AcquireFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_permission_acquire_finish((*C.GPermission)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_permission_acquire_finish((*C.GPermission)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9950,10 +10635,15 @@ func (_self_ *Permission) ImplUpdate(allowed bool, can_acquire bool, can_release
 	return
 }
 
-func (_self_ *Permission) Release(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Permission) Release(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_permission_release((*C.GPermission)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_permission_release((*C.GPermission)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9964,10 +10654,15 @@ func (_self_ *Permission) ReleaseAsync(cancellable CancellableKind, callback C.G
 	return
 }
 
-func (_self_ *Permission) ReleaseFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Permission) ReleaseFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_permission_release_finish((*C.GPermission)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_permission_release_finish((*C.GPermission)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -10060,11 +10755,16 @@ func ResolverGetDefault() (_go__return__ Resolver) {
 	return
 }
 
-func (_self_ *Resolver) LookupByAddress(address InetAddressKind, cancellable CancellableKind) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupByAddress(address InetAddressKind, cancellable CancellableKind) (_go__return__ string, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_address_ := (*C.GInetAddress)(address.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.gchar
-	_return_ = C._g_resolver_lookup_by_address((*C.GResolver)(_self_._value_), _cgo_address_, _cgo_cancellable_, _error_)
+	_return_ = C._g_resolver_lookup_by_address((*C.GResolver)(_self_._value_), _cgo_address_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -10076,20 +10776,30 @@ func (_self_ *Resolver) LookupByAddressAsync(address InetAddressKind, cancellabl
 	return
 }
 
-func (_self_ *Resolver) LookupByAddressFinish(result AsyncResultKind) (_go__return__ string, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupByAddressFinish(result AsyncResultKind) (_go__return__ string, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.gchar
-	_return_ = C._g_resolver_lookup_by_address_finish((*C.GResolver)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_resolver_lookup_by_address_finish((*C.GResolver)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Resolver) LookupByName(hostname string, cancellable CancellableKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupByName(hostname string, cancellable CancellableKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_hostname_ := C.CString(hostname)
 	_cgo_hostname_ := (*C.gchar)(unsafe.Pointer(_cstring_hostname_))
 	defer C.free(unsafe.Pointer(_cstring_hostname_))
-	_return_ = C._g_resolver_lookup_by_name((*C.GResolver)(_self_._value_), _cgo_hostname_, _cgo_cancellable_, _error_)
+	_return_ = C._g_resolver_lookup_by_name((*C.GResolver)(_self_._value_), _cgo_hostname_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -10102,37 +10812,55 @@ func (_self_ *Resolver) LookupByNameAsync(hostname string, cancellable Cancellab
 	return
 }
 
-func (_self_ *Resolver) LookupByNameFinish(result AsyncResultKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupByNameFinish(result AsyncResultKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_resolver_lookup_by_name_finish((*C.GResolver)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_resolver_lookup_by_name_finish((*C.GResolver)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Resolver) LookupRecords(rrname string, record_type C.GResolverRecordType, cancellable CancellableKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupRecords(rrname string, record_type int, cancellable CancellableKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_rrname_ := C.CString(rrname)
 	_cgo_rrname_ := (*C.gchar)(unsafe.Pointer(_cstring_rrname_))
 	defer C.free(unsafe.Pointer(_cstring_rrname_))
-	_return_ = C._g_resolver_lookup_records((*C.GResolver)(_self_._value_), _cgo_rrname_, record_type, _cgo_cancellable_, _error_)
+	_cgo_record_type_ := (C.GResolverRecordType)(record_type)
+	_return_ = C._g_resolver_lookup_records((*C.GResolver)(_self_._value_), _cgo_rrname_, _cgo_record_type_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Resolver) LookupRecordsAsync(rrname string, record_type C.GResolverRecordType, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+func (_self_ *Resolver) LookupRecordsAsync(rrname string, record_type int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_rrname_ := C.CString(rrname)
 	_cgo_rrname_ := (*C.gchar)(unsafe.Pointer(_cstring_rrname_))
 	defer C.free(unsafe.Pointer(_cstring_rrname_))
-	C._g_resolver_lookup_records_async((*C.GResolver)(_self_._value_), _cgo_rrname_, record_type, _cgo_cancellable_, callback, user_data)
+	_cgo_record_type_ := (C.GResolverRecordType)(record_type)
+	C._g_resolver_lookup_records_async((*C.GResolver)(_self_._value_), _cgo_rrname_, _cgo_record_type_, _cgo_cancellable_, callback, user_data)
 	return
 }
 
-func (_self_ *Resolver) LookupRecordsFinish(result AsyncResultKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupRecordsFinish(result AsyncResultKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_resolver_lookup_records_finish((*C.GResolver)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_resolver_lookup_records_finish((*C.GResolver)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Resolver) LookupService(service string, protocol string, domain string, cancellable CancellableKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupService(service string, protocol string, domain string, cancellable CancellableKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_service_ := C.CString(service)
 	_cgo_service_ := (*C.gchar)(unsafe.Pointer(_cstring_service_))
@@ -10143,7 +10871,11 @@ func (_self_ *Resolver) LookupService(service string, protocol string, domain st
 	_cstring_domain_ := C.CString(domain)
 	_cgo_domain_ := (*C.gchar)(unsafe.Pointer(_cstring_domain_))
 	defer C.free(unsafe.Pointer(_cstring_domain_))
-	_return_ = C._g_resolver_lookup_service((*C.GResolver)(_self_._value_), _cgo_service_, _cgo_protocol_, _cgo_domain_, _cgo_cancellable_, _error_)
+	_return_ = C._g_resolver_lookup_service((*C.GResolver)(_self_._value_), _cgo_service_, _cgo_protocol_, _cgo_domain_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -10162,9 +10894,14 @@ func (_self_ *Resolver) LookupServiceAsync(service string, protocol string, doma
 	return
 }
 
-func (_self_ *Resolver) LookupServiceFinish(result AsyncResultKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *Resolver) LookupServiceFinish(result AsyncResultKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_resolver_lookup_service_finish((*C.GResolver)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_resolver_lookup_service_finish((*C.GResolver)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -10689,9 +11426,14 @@ func (_self_ *SimpleAsyncResult) GetSourceTag() (_return_ C.gpointer) {
 	return
 }
 
-func (_self_ *SimpleAsyncResult) PropagateError() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *SimpleAsyncResult) PropagateError() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_simple_async_result_propagate_error((*C.GSimpleAsyncResult)(_self_._value_), _error_)
+	_return_ = C._g_simple_async_result_propagate_error((*C.GSimpleAsyncResult)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -10752,49 +11494,82 @@ func SimplePermissionNew(allowed bool) (_go__return__ SimplePermission) {
 	return
 }
 
-func GioSocketNew(family C.GSocketFamily, type_ C.GSocketType, protocol C.GSocketProtocol) (_go__return__ GioSocket, _error_ unsafe.Pointer) {
+func GioSocketNew(family int, type_ int, protocol int) (_go__return__ GioSocket, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocket
-	_return_ = C._g_socket_new(family, type_, protocol, _error_)
+	_cgo_family_ := (C.GSocketFamily)(family)
+	_cgo_type__ := (C.GSocketType)(type_)
+	_cgo_protocol_ := (C.GSocketProtocol)(protocol)
+	_return_ = C._g_socket_new(_cgo_family_, _cgo_type__, _cgo_protocol_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
 	return
 }
 
-func SocketNewFromFd(fd int) (_go__return__ GioSocket, _error_ unsafe.Pointer) {
+func SocketNewFromFd(fd int) (_go__return__ GioSocket, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocket
 	_cgo_fd_ := (C.gint)(fd)
-	_return_ = C._g_socket_new_from_fd(_cgo_fd_, _error_)
+	_return_ = C._g_socket_new_from_fd(_cgo_fd_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *GioSocket) Accept(cancellable CancellableKind) (_go__return__ GioSocket, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Accept(cancellable CancellableKind) (_go__return__ GioSocket, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocket
-	_return_ = C._g_socket_accept((*C.GSocket)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_accept((*C.GSocket)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *GioSocket) Bind(address SocketAddressKind, allow_reuse bool) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Bind(address SocketAddressKind, allow_reuse bool) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	_cgo_allow_reuse_ := (C.gboolean)(C.FALSE)
 	if allow_reuse { _cgo_allow_reuse_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
-	_return_ = C._g_socket_bind((*C.GSocket)(_self_._value_), _cgo_address_, _cgo_allow_reuse_, _error_)
+	_return_ = C._g_socket_bind((*C.GSocket)(_self_._value_), _cgo_address_, _cgo_allow_reuse_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) CheckConnectResult() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) CheckConnectResult() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_socket_check_connect_result((*C.GSocket)(_self_._value_), _error_)
+	_return_ = C._g_socket_check_connect_result((*C.GSocket)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) Close() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Close() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_socket_close((*C.GSocket)(_self_._value_), _error_)
+	_return_ = C._g_socket_close((*C.GSocket)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -10804,28 +11579,43 @@ func (_self_ *GioSocket) ConditionCheck(condition C.GIOCondition) (_return_ C.GI
 	return
 }
 
-func (_self_ *GioSocket) ConditionTimedWait(condition C.GIOCondition, timeout int64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) ConditionTimedWait(condition C.GIOCondition, timeout int64, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_timeout_ := (C.gint64)(timeout)
 	var _return_ C.gboolean
-	_return_ = C._g_socket_condition_timed_wait((*C.GSocket)(_self_._value_), condition, _cgo_timeout_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_condition_timed_wait((*C.GSocket)(_self_._value_), condition, _cgo_timeout_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) ConditionWait(condition C.GIOCondition, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) ConditionWait(condition C.GIOCondition, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_socket_condition_wait((*C.GSocket)(_self_._value_), condition, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_condition_wait((*C.GSocket)(_self_._value_), condition, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) Connect(address SocketAddressKind, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Connect(address SocketAddressKind, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_socket_connect((*C.GSocket)(_self_._value_), _cgo_address_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_connect((*C.GSocket)(_self_._value_), _cgo_address_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -10864,9 +11654,14 @@ func (_self_ *GioSocket) GetBroadcast() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *GioSocket) GetCredentials() (_go__return__ Credentials, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) GetCredentials() (_go__return__ Credentials, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GCredentials
-	_return_ = C._g_socket_get_credentials((*C.GSocket)(_self_._value_), _error_)
+	_return_ = C._g_socket_get_credentials((*C.GSocket)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToCredentials(unsafe.Pointer(_return_))
 	return
 }
@@ -10895,9 +11690,14 @@ func (_self_ *GioSocket) GetListenBacklog() (_go__return__ int) {
 	return
 }
 
-func (_self_ *GioSocket) GetLocalAddress() (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) GetLocalAddress() (_go__return__ SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocketAddress
-	_return_ = C._g_socket_get_local_address((*C.GSocket)(_self_._value_), _error_)
+	_return_ = C._g_socket_get_local_address((*C.GSocket)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -10921,9 +11721,14 @@ func (_self_ *GioSocket) GetProtocol() (_return_ C.GSocketProtocol) {
 	return
 }
 
-func (_self_ *GioSocket) GetRemoteAddress() (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) GetRemoteAddress() (_go__return__ SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocketAddress
-	_return_ = C._g_socket_get_remote_address((*C.GSocket)(_self_._value_), _error_)
+	_return_ = C._g_socket_get_remote_address((*C.GSocket)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -10961,7 +11766,8 @@ func (_self_ *GioSocket) IsConnected() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *GioSocket) JoinMulticastGroup(group InetAddressKind, source_specific bool, iface string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) JoinMulticastGroup(group InetAddressKind, source_specific bool, iface string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_group_ := (*C.GInetAddress)(group.GetGObject())
 	_cstring_iface_ := C.CString(iface)
 	_cgo_iface_ := (*C.gchar)(unsafe.Pointer(_cstring_iface_))
@@ -10969,12 +11775,17 @@ func (_self_ *GioSocket) JoinMulticastGroup(group InetAddressKind, source_specif
 	_cgo_source_specific_ := (C.gboolean)(C.FALSE)
 	if source_specific { _cgo_source_specific_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
-	_return_ = C._g_socket_join_multicast_group((*C.GSocket)(_self_._value_), _cgo_group_, _cgo_source_specific_, _cgo_iface_, _error_)
+	_return_ = C._g_socket_join_multicast_group((*C.GSocket)(_self_._value_), _cgo_group_, _cgo_source_specific_, _cgo_iface_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) LeaveMulticastGroup(group InetAddressKind, source_specific bool, iface string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) LeaveMulticastGroup(group InetAddressKind, source_specific bool, iface string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_group_ := (*C.GInetAddress)(group.GetGObject())
 	_cstring_iface_ := C.CString(iface)
 	_cgo_iface_ := (*C.gchar)(unsafe.Pointer(_cstring_iface_))
@@ -10982,31 +11793,46 @@ func (_self_ *GioSocket) LeaveMulticastGroup(group InetAddressKind, source_speci
 	_cgo_source_specific_ := (C.gboolean)(C.FALSE)
 	if source_specific { _cgo_source_specific_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
-	_return_ = C._g_socket_leave_multicast_group((*C.GSocket)(_self_._value_), _cgo_group_, _cgo_source_specific_, _cgo_iface_, _error_)
+	_return_ = C._g_socket_leave_multicast_group((*C.GSocket)(_self_._value_), _cgo_group_, _cgo_source_specific_, _cgo_iface_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) Listen() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Listen() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_socket_listen((*C.GSocket)(_self_._value_), _error_)
+	_return_ = C._g_socket_listen((*C.GSocket)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *GioSocket) Receive(buffer string, size uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Receive(buffer string, size uint64, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_size_ := (C.gsize)(size)
 	var _return_ C.gssize
 	_cstring_buffer_ := C.CString(buffer)
 	_cgo_buffer_ := (*C.gchar)(unsafe.Pointer(_cstring_buffer_))
 	defer C.free(unsafe.Pointer(_cstring_buffer_))
-	_return_ = C._g_socket_receive((*C.GSocket)(_self_._value_), _cgo_buffer_, _cgo_size_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_receive((*C.GSocket)(_self_._value_), _cgo_buffer_, _cgo_size_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *GioSocket) ReceiveWithBlocking(buffer string, size uint64, blocking bool, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) ReceiveWithBlocking(buffer string, size uint64, blocking bool, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_size_ := (C.gsize)(size)
 	var _return_ C.gssize
@@ -11015,7 +11841,11 @@ func (_self_ *GioSocket) ReceiveWithBlocking(buffer string, size uint64, blockin
 	defer C.free(unsafe.Pointer(_cstring_buffer_))
 	_cgo_blocking_ := (C.gboolean)(C.FALSE)
 	if blocking { _cgo_blocking_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_socket_receive_with_blocking((*C.GSocket)(_self_._value_), _cgo_buffer_, _cgo_size_, _cgo_blocking_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_receive_with_blocking((*C.GSocket)(_self_._value_), _cgo_buffer_, _cgo_size_, _cgo_blocking_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -11072,13 +11902,18 @@ func (_self_ *GioSocket) SetTtl(ttl uint) () {
 	return
 }
 
-func (_self_ *GioSocket) Shutdown(shutdown_read bool, shutdown_write bool) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GioSocket) Shutdown(shutdown_read bool, shutdown_write bool) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_shutdown_read_ := (C.gboolean)(C.FALSE)
 	if shutdown_read { _cgo_shutdown_read_ = (C.gboolean)(C.TRUE) }
 	_cgo_shutdown_write_ := (C.gboolean)(C.FALSE)
 	if shutdown_write { _cgo_shutdown_write_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
-	_return_ = C._g_socket_shutdown((*C.GSocket)(_self_._value_), _cgo_shutdown_read_, _cgo_shutdown_write_, _error_)
+	_return_ = C._g_socket_shutdown((*C.GSocket)(_self_._value_), _cgo_shutdown_read_, _cgo_shutdown_write_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -11110,18 +11945,28 @@ func (_self_ *SocketAddress) GetNativeSize() (_go__return__ int64) {
 	return
 }
 
-func (_self_ *SocketAddress) ToNative(dest C.gpointer, destlen uint64) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *SocketAddress) ToNative(dest C.gpointer, destlen uint64) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_destlen_ := (C.gsize)(destlen)
 	var _return_ C.gboolean
-	_return_ = C._g_socket_address_to_native((*C.GSocketAddress)(_self_._value_), dest, _cgo_destlen_, _error_)
+	_return_ = C._g_socket_address_to_native((*C.GSocketAddress)(_self_._value_), dest, _cgo_destlen_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *SocketAddressEnumerator) Next(cancellable CancellableKind) (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *SocketAddressEnumerator) Next(cancellable CancellableKind) (_go__return__ SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketAddress
-	_return_ = C._g_socket_address_enumerator_next((*C.GSocketAddressEnumerator)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_address_enumerator_next((*C.GSocketAddressEnumerator)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -11132,10 +11977,15 @@ func (_self_ *SocketAddressEnumerator) NextAsync(cancellable CancellableKind, ca
 	return
 }
 
-func (_self_ *SocketAddressEnumerator) NextFinish(result AsyncResultKind) (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *SocketAddressEnumerator) NextFinish(result AsyncResultKind) (_go__return__ SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocketAddress
-	_return_ = C._g_socket_address_enumerator_next_finish((*C.GSocketAddressEnumerator)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_socket_address_enumerator_next_finish((*C.GSocketAddressEnumerator)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -11155,11 +12005,16 @@ func (_self_ *SocketClient) AddApplicationProxy(protocol string) () {
 	return
 }
 
-func (_self_ *SocketClient) Connect(connectable SocketConnectableKind, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) Connect(connectable SocketConnectableKind, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_connectable_ := (*C.GSocketConnectable)(connectable.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_client_connect((*C.GSocketClient)(_self_._value_), _cgo_connectable_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_client_connect((*C.GSocketClient)(_self_._value_), _cgo_connectable_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -11171,22 +12026,32 @@ func (_self_ *SocketClient) ConnectAsync(connectable SocketConnectableKind, canc
 	return
 }
 
-func (_self_ *SocketClient) ConnectFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_client_connect_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_socket_client_connect_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SocketClient) ConnectToHost(host_and_port string, default_port uint16, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectToHost(host_and_port string, default_port uint16, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_host_and_port_ := C.CString(host_and_port)
 	_cgo_host_and_port_ := (*C.gchar)(unsafe.Pointer(_cstring_host_and_port_))
 	defer C.free(unsafe.Pointer(_cstring_host_and_port_))
-	_return_ = C._g_socket_client_connect_to_host((*C.GSocketClient)(_self_._value_), _cgo_host_and_port_, _cgo_default_port_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_client_connect_to_host((*C.GSocketClient)(_self_._value_), _cgo_host_and_port_, _cgo_default_port_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -11201,15 +12066,21 @@ func (_self_ *SocketClient) ConnectToHostAsync(host_and_port string, default_por
 	return
 }
 
-func (_self_ *SocketClient) ConnectToHostFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectToHostFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_client_connect_to_host_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_socket_client_connect_to_host_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SocketClient) ConnectToService(domain string, service string, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectToService(domain string, service string, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_cstring_domain_ := C.CString(domain)
@@ -11218,7 +12089,11 @@ func (_self_ *SocketClient) ConnectToService(domain string, service string, canc
 	_cstring_service_ := C.CString(service)
 	_cgo_service_ := (*C.gchar)(unsafe.Pointer(_cstring_service_))
 	defer C.free(unsafe.Pointer(_cstring_service_))
-	_return_ = C._g_socket_client_connect_to_service((*C.GSocketClient)(_self_._value_), _cgo_domain_, _cgo_service_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_client_connect_to_service((*C.GSocketClient)(_self_._value_), _cgo_domain_, _cgo_service_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -11235,22 +12110,32 @@ func (_self_ *SocketClient) ConnectToServiceAsync(domain string, service string,
 	return
 }
 
-func (_self_ *SocketClient) ConnectToServiceFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectToServiceFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_client_connect_to_service_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_socket_client_connect_to_service_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SocketClient) ConnectToUri(uri string, default_port uint16, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectToUri(uri string, default_port uint16, cancellable CancellableKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
 	_cgo_default_port_ := (C.guint16)(default_port)
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
-	_return_ = C._g_socket_client_connect_to_uri((*C.GSocketClient)(_self_._value_), _cgo_uri_, _cgo_default_port_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_client_connect_to_uri((*C.GSocketClient)(_self_._value_), _cgo_uri_, _cgo_default_port_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -11265,10 +12150,15 @@ func (_self_ *SocketClient) ConnectToUriAsync(uri string, default_port uint16, c
 	return
 }
 
-func (_self_ *SocketClient) ConnectToUriFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ unsafe.Pointer) {
+func (_self_ *SocketClient) ConnectToUriFinish(result AsyncResultKind) (_go__return__ SocketConnection, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_client_connect_to_uri_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_socket_client_connect_to_uri_finish((*C.GSocketClient)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -11328,8 +12218,9 @@ func (_self_ *SocketClient) SetEnableProxy(enable bool) () {
 	return
 }
 
-func (_self_ *SocketClient) SetFamily(family C.GSocketFamily) () {
-	C.g_socket_client_set_family((*C.GSocketClient)(_self_._value_), family)
+func (_self_ *SocketClient) SetFamily(family int) () {
+	_cgo_family_ := (C.GSocketFamily)(family)
+	C.g_socket_client_set_family((*C.GSocketClient)(_self_._value_), _cgo_family_)
 	return
 }
 
@@ -11339,13 +12230,15 @@ func (_self_ *SocketClient) SetLocalAddress(address SocketAddressKind) () {
 	return
 }
 
-func (_self_ *SocketClient) SetProtocol(protocol C.GSocketProtocol) () {
-	C.g_socket_client_set_protocol((*C.GSocketClient)(_self_._value_), protocol)
+func (_self_ *SocketClient) SetProtocol(protocol int) () {
+	_cgo_protocol_ := (C.GSocketProtocol)(protocol)
+	C.g_socket_client_set_protocol((*C.GSocketClient)(_self_._value_), _cgo_protocol_)
 	return
 }
 
-func (_self_ *SocketClient) SetSocketType(type_ C.GSocketType) () {
-	C.g_socket_client_set_socket_type((*C.GSocketClient)(_self_._value_), type_)
+func (_self_ *SocketClient) SetSocketType(type_ int) () {
+	_cgo_type__ := (C.GSocketType)(type_)
+	C.g_socket_client_set_socket_type((*C.GSocketClient)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -11367,23 +12260,32 @@ func (_self_ *SocketClient) SetTlsValidationFlags(flags C.GTlsCertificateFlags) 
 	return
 }
 
-func SocketConnectionFactoryLookupType(family C.GSocketFamily, type_ C.GSocketType, protocol_id int) (_return_ C.GType) {
+func SocketConnectionFactoryLookupType(family int, type_ int, protocol_id int) (_return_ C.GType) {
 	_cgo_protocol_id_ := (C.gint)(protocol_id)
-	_return_ = C.g_socket_connection_factory_lookup_type(family, type_, _cgo_protocol_id_)
+	_cgo_family_ := (C.GSocketFamily)(family)
+	_cgo_type__ := (C.GSocketType)(type_)
+	_return_ = C.g_socket_connection_factory_lookup_type(_cgo_family_, _cgo_type__, _cgo_protocol_id_)
 	return
 }
 
-func SocketConnectionFactoryRegisterType(g_type C.GType, family C.GSocketFamily, type_ C.GSocketType, protocol int) () {
+func SocketConnectionFactoryRegisterType(g_type C.GType, family int, type_ int, protocol int) () {
 	_cgo_protocol_ := (C.gint)(protocol)
-	C.g_socket_connection_factory_register_type(g_type, family, type_, _cgo_protocol_)
+	_cgo_family_ := (C.GSocketFamily)(family)
+	_cgo_type__ := (C.GSocketType)(type_)
+	C.g_socket_connection_factory_register_type(g_type, _cgo_family_, _cgo_type__, _cgo_protocol_)
 	return
 }
 
-func (_self_ *SocketConnection) Connect(address SocketAddressKind, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *SocketConnection) Connect(address SocketAddressKind, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_socket_connection_connect((*C.GSocketConnection)(_self_._value_), _cgo_address_, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_connection_connect((*C.GSocketConnection)(_self_._value_), _cgo_address_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -11395,24 +12297,39 @@ func (_self_ *SocketConnection) ConnectAsync(address SocketAddressKind, cancella
 	return
 }
 
-func (_self_ *SocketConnection) ConnectFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *SocketConnection) ConnectFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_socket_connection_connect_finish((*C.GSocketConnection)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_socket_connection_connect_finish((*C.GSocketConnection)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *SocketConnection) GetLocalAddress() (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *SocketConnection) GetLocalAddress() (_go__return__ SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocketAddress
-	_return_ = C._g_socket_connection_get_local_address((*C.GSocketConnection)(_self_._value_), _error_)
+	_return_ = C._g_socket_connection_get_local_address((*C.GSocketConnection)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SocketConnection) GetRemoteAddress() (_go__return__ SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *SocketConnection) GetRemoteAddress() (_go__return__ SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GSocketAddress
-	_return_ = C._g_socket_connection_get_remote_address((*C.GSocketConnection)(_self_._value_), _error_)
+	_return_ = C._g_socket_connection_get_remote_address((*C.GSocketConnection)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketAddress(unsafe.Pointer(_return_))
 	return
 }
@@ -11460,10 +12377,15 @@ func SocketListenerNew() (_go__return__ SocketListener) {
 	return
 }
 
-func (_self_ *SocketListener) Accept(cancellable CancellableKind) (_go__return__ SocketConnection, source_object unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) Accept(cancellable CancellableKind) (_go__return__ SocketConnection, source_object unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_listener_accept((*C.GSocketListener)(_self_._value_), source_object, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_listener_accept((*C.GSocketListener)(_self_._value_), source_object, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
@@ -11474,18 +12396,28 @@ func (_self_ *SocketListener) AcceptAsync(cancellable CancellableKind, callback 
 	return
 }
 
-func (_self_ *SocketListener) AcceptFinish(result AsyncResultKind) (_go__return__ SocketConnection, source_object unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AcceptFinish(result AsyncResultKind) (_go__return__ SocketConnection, source_object unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocketConnection
-	_return_ = C._g_socket_listener_accept_finish((*C.GSocketListener)(_self_._value_), _cgo_result_, source_object, _error_)
+	_return_ = C._g_socket_listener_accept_finish((*C.GSocketListener)(_self_._value_), _cgo_result_, source_object, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToSocketConnection(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SocketListener) AcceptSocket(cancellable CancellableKind) (_go__return__ GioSocket, source_object unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AcceptSocket(cancellable CancellableKind) (_go__return__ GioSocket, source_object unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GSocket
-	_return_ = C._g_socket_listener_accept_socket((*C.GSocketListener)(_self_._value_), source_object, _cgo_cancellable_, _error_)
+	_return_ = C._g_socket_listener_accept_socket((*C.GSocketListener)(_self_._value_), source_object, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
 	return
 }
@@ -11496,43 +12428,70 @@ func (_self_ *SocketListener) AcceptSocketAsync(cancellable CancellableKind, cal
 	return
 }
 
-func (_self_ *SocketListener) AcceptSocketFinish(result AsyncResultKind) (_go__return__ GioSocket, source_object unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AcceptSocketFinish(result AsyncResultKind) (_go__return__ GioSocket, source_object unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GSocket
-	_return_ = C._g_socket_listener_accept_socket_finish((*C.GSocketListener)(_self_._value_), _cgo_result_, source_object, _error_)
+	_return_ = C._g_socket_listener_accept_socket_finish((*C.GSocketListener)(_self_._value_), _cgo_result_, source_object, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToGioSocket(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *SocketListener) AddAddress(address SocketAddressKind, type_ C.GSocketType, protocol C.GSocketProtocol, source_object *C.GObject) (_go__return__ bool, effective_address *SocketAddress, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AddAddress(address SocketAddressKind, type_ int, protocol int, source_object *C.GObject) (_go__return__ bool, effective_address *SocketAddress, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_address_ := (*C.GSocketAddress)(address.GetGObject())
 	var _allocated_effective_address_ *C.GSocketAddress
 	var _return_ C.gboolean
-	_return_ = C._g_socket_listener_add_address((*C.GSocketListener)(_self_._value_), _cgo_address_, type_, protocol, source_object, unsafe.Pointer(&_allocated_effective_address_), _error_)
+	_cgo_type__ := (C.GSocketType)(type_)
+	_cgo_protocol_ := (C.GSocketProtocol)(protocol)
+	_return_ = C._g_socket_listener_add_address((*C.GSocketListener)(_self_._value_), _cgo_address_, _cgo_type__, _cgo_protocol_, source_object, unsafe.Pointer(&_allocated_effective_address_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	effective_address = (*SocketAddress)(unsafe.Pointer(_allocated_effective_address_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *SocketListener) AddAnyInetPort(source_object *C.GObject) (_go__return__ uint16, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AddAnyInetPort(source_object *C.GObject) (_go__return__ uint16, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint16
-	_return_ = C._g_socket_listener_add_any_inet_port((*C.GSocketListener)(_self_._value_), source_object, _error_)
+	_return_ = C._g_socket_listener_add_any_inet_port((*C.GSocketListener)(_self_._value_), source_object, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint16)(_return_)
 	return
 }
 
-func (_self_ *SocketListener) AddInetPort(port uint16, source_object *C.GObject) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AddInetPort(port uint16, source_object *C.GObject) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_port_ := (C.guint16)(port)
 	var _return_ C.gboolean
-	_return_ = C._g_socket_listener_add_inet_port((*C.GSocketListener)(_self_._value_), _cgo_port_, source_object, _error_)
+	_return_ = C._g_socket_listener_add_inet_port((*C.GSocketListener)(_self_._value_), _cgo_port_, source_object, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *SocketListener) AddSocket(socket GioSocketKind, source_object *C.GObject) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *SocketListener) AddSocket(socket GioSocketKind, source_object *C.GObject) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_socket_ := (*C.GSocket)(socket.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_socket_listener_add_socket((*C.GSocketListener)(_self_._value_), _cgo_socket_, source_object, _error_)
+	_return_ = C._g_socket_listener_add_socket((*C.GSocketListener)(_self_._value_), _cgo_socket_, source_object, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -11652,22 +12611,37 @@ func (_self_ *Task) HadError() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Task) PropagateBoolean() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Task) PropagateBoolean() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_task_propagate_boolean((*C.GTask)(_self_._value_), _error_)
+	_return_ = C._g_task_propagate_boolean((*C.GTask)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Task) PropagateInt() (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *Task) PropagateInt() (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gssize
-	_return_ = C._g_task_propagate_int((*C.GTask)(_self_._value_), _error_)
+	_return_ = C._g_task_propagate_int((*C.GTask)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
 
-func (_self_ *Task) PropagatePointer() (_return_ C.gpointer, _error_ unsafe.Pointer) {
-	_return_ = C._g_task_propagate_pointer((*C.GTask)(_self_._value_), _error_)
+func (_self_ *Task) PropagatePointer() (_return_ C.gpointer, _error_ error) {
+	var _cgo_error_ *C.GError
+	_return_ = C._g_task_propagate_pointer((*C.GTask)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -11868,17 +12842,23 @@ func ThreadedSocketServiceNew(max_threads C.int) (_go__return__ ThreadedSocketSe
 	return
 }
 
-func TlsCertificateNewFromFile(file string) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func TlsCertificateNewFromFile(file string) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GTlsCertificate
 	_cstring_file_ := C.CString(file)
 	_cgo_file_ := (*C.gchar)(unsafe.Pointer(_cstring_file_))
 	defer C.free(unsafe.Pointer(_cstring_file_))
-	_return_ = C._g_tls_certificate_new_from_file(_cgo_file_, _error_)
+	_return_ = C._g_tls_certificate_new_from_file(_cgo_file_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func TlsCertificateNewFromFiles(cert_file string, key_file string) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func TlsCertificateNewFromFiles(cert_file string, key_file string) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GTlsCertificate
 	_cstring_cert_file_ := C.CString(cert_file)
 	_cgo_cert_file_ := (*C.gchar)(unsafe.Pointer(_cstring_cert_file_))
@@ -11886,27 +12866,41 @@ func TlsCertificateNewFromFiles(cert_file string, key_file string) (_go__return_
 	_cstring_key_file_ := C.CString(key_file)
 	_cgo_key_file_ := (*C.gchar)(unsafe.Pointer(_cstring_key_file_))
 	defer C.free(unsafe.Pointer(_cstring_key_file_))
-	_return_ = C._g_tls_certificate_new_from_files(_cgo_cert_file_, _cgo_key_file_, _error_)
+	_return_ = C._g_tls_certificate_new_from_files(_cgo_cert_file_, _cgo_key_file_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func TlsCertificateNewFromPem(data string, length int64) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func TlsCertificateNewFromPem(data string, length int64) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GTlsCertificate
 	_cgo_length_ := (C.gssize)(length)
 	_cstring_data_ := C.CString(data)
 	_cgo_data_ := (*C.gchar)(unsafe.Pointer(_cstring_data_))
 	defer C.free(unsafe.Pointer(_cstring_data_))
-	_return_ = C._g_tls_certificate_new_from_pem(_cgo_data_, _cgo_length_, _error_)
+	_return_ = C._g_tls_certificate_new_from_pem(_cgo_data_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func TlsCertificateListNewFromFile(file string) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func TlsCertificateListNewFromFile(file string) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_file_ := C.CString(file)
 	_cgo_file_ := (*C.gchar)(unsafe.Pointer(_cstring_file_))
 	defer C.free(unsafe.Pointer(_cstring_file_))
-	_return_ = C._g_tls_certificate_list_new_from_file(_cgo_file_, _error_)
+	_return_ = C._g_tls_certificate_list_new_from_file(_cgo_file_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -11985,10 +12979,15 @@ func (_self_ *TlsConnection) GetRequireCloseNotify() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *TlsConnection) Handshake(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *TlsConnection) Handshake(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_tls_connection_handshake((*C.GTlsConnection)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_tls_connection_handshake((*C.GTlsConnection)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -11999,10 +12998,15 @@ func (_self_ *TlsConnection) HandshakeAsync(io_priority C.int, cancellable Cance
 	return
 }
 
-func (_self_ *TlsConnection) HandshakeFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *TlsConnection) HandshakeFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_tls_connection_handshake_finish((*C.GTlsConnection)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_tls_connection_handshake_finish((*C.GTlsConnection)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -12025,8 +13029,9 @@ func (_self_ *TlsConnection) SetInteraction(interaction TlsInteractionKind) () {
 	return
 }
 
-func (_self_ *TlsConnection) SetRehandshakeMode(mode C.GTlsRehandshakeMode) () {
-	C.g_tls_connection_set_rehandshake_mode((*C.GTlsConnection)(_self_._value_), mode)
+func (_self_ *TlsConnection) SetRehandshakeMode(mode int) () {
+	_cgo_mode_ := (C.GTlsRehandshakeMode)(mode)
+	C.g_tls_connection_set_rehandshake_mode((*C.GTlsConnection)(_self_._value_), _cgo_mode_)
 	return
 }
 
@@ -12045,69 +13050,99 @@ func (_self_ *TlsDatabase) CreateCertificateHandle(certificate TlsCertificateKin
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificateForHandle(handle string, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) LookupCertificateForHandle(handle string, interaction TlsInteractionKind, flags int, cancellable CancellableKind) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GTlsCertificate
 	_cstring_handle_ := C.CString(handle)
 	_cgo_handle_ := (*C.gchar)(unsafe.Pointer(_cstring_handle_))
 	defer C.free(unsafe.Pointer(_cstring_handle_))
-	_return_ = C._g_tls_database_lookup_certificate_for_handle((*C.GTlsDatabase)(_self_._value_), _cgo_handle_, _cgo_interaction_, flags, _cgo_cancellable_, _error_)
+	_cgo_flags_ := (C.GTlsDatabaseLookupFlags)(flags)
+	_return_ = C._g_tls_database_lookup_certificate_for_handle((*C.GTlsDatabase)(_self_._value_), _cgo_handle_, _cgo_interaction_, _cgo_flags_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificateForHandleAsync(handle string, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+func (_self_ *TlsDatabase) LookupCertificateForHandleAsync(handle string, interaction TlsInteractionKind, flags int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_handle_ := C.CString(handle)
 	_cgo_handle_ := (*C.gchar)(unsafe.Pointer(_cstring_handle_))
 	defer C.free(unsafe.Pointer(_cstring_handle_))
-	C._g_tls_database_lookup_certificate_for_handle_async((*C.GTlsDatabase)(_self_._value_), _cgo_handle_, _cgo_interaction_, flags, _cgo_cancellable_, callback, user_data)
+	_cgo_flags_ := (C.GTlsDatabaseLookupFlags)(flags)
+	C._g_tls_database_lookup_certificate_for_handle_async((*C.GTlsDatabase)(_self_._value_), _cgo_handle_, _cgo_interaction_, _cgo_flags_, _cgo_cancellable_, callback, user_data)
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificateForHandleFinish(result AsyncResultKind) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) LookupCertificateForHandleFinish(result AsyncResultKind) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GTlsCertificate
-	_return_ = C._g_tls_database_lookup_certificate_for_handle_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_tls_database_lookup_certificate_for_handle_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificateIssuer(certificate TlsCertificateKind, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) LookupCertificateIssuer(certificate TlsCertificateKind, interaction TlsInteractionKind, flags int, cancellable CancellableKind) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
 	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GTlsCertificate
-	_return_ = C._g_tls_database_lookup_certificate_issuer((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_, _cgo_interaction_, flags, _cgo_cancellable_, _error_)
+	_cgo_flags_ := (C.GTlsDatabaseLookupFlags)(flags)
+	_return_ = C._g_tls_database_lookup_certificate_issuer((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_, _cgo_interaction_, _cgo_flags_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificateIssuerAsync(certificate TlsCertificateKind, interaction TlsInteractionKind, flags C.GTlsDatabaseLookupFlags, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
+func (_self_ *TlsDatabase) LookupCertificateIssuerAsync(certificate TlsCertificateKind, interaction TlsInteractionKind, flags int, cancellable CancellableKind, callback C.GAsyncReadyCallback, user_data C.gpointer) () {
 	_cgo_certificate_ := (*C.GTlsCertificate)(certificate.GetGObject())
 	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
-	C.g_tls_database_lookup_certificate_issuer_async((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_, _cgo_interaction_, flags, _cgo_cancellable_, callback, user_data)
+	_cgo_flags_ := (C.GTlsDatabaseLookupFlags)(flags)
+	C.g_tls_database_lookup_certificate_issuer_async((*C.GTlsDatabase)(_self_._value_), _cgo_certificate_, _cgo_interaction_, _cgo_flags_, _cgo_cancellable_, callback, user_data)
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificateIssuerFinish(result AsyncResultKind) (_go__return__ TlsCertificate, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) LookupCertificateIssuerFinish(result AsyncResultKind) (_go__return__ TlsCertificate, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GTlsCertificate
-	_return_ = C._g_tls_database_lookup_certificate_issuer_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_tls_database_lookup_certificate_issuer_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToTlsCertificate(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *TlsDatabase) LookupCertificatesIssuedByFinish(result AsyncResultKind) (_return_ *C.GList, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) LookupCertificatesIssuedByFinish(result AsyncResultKind) (_return_ *C.GList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_tls_database_lookup_certificates_issued_by_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_tls_database_lookup_certificates_issued_by_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *TlsDatabase) VerifyChain(chain TlsCertificateKind, purpose string, identity SocketConnectableKind, interaction TlsInteractionKind, flags C.GTlsDatabaseVerifyFlags, cancellable CancellableKind) (_return_ C.GTlsCertificateFlags, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) VerifyChain(chain TlsCertificateKind, purpose string, identity SocketConnectableKind, interaction TlsInteractionKind, flags C.GTlsDatabaseVerifyFlags, cancellable CancellableKind) (_return_ C.GTlsCertificateFlags, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_chain_ := (*C.GTlsCertificate)(chain.GetGObject())
 	_cgo_identity_ := (*C.GSocketConnectable)(identity.GetGObject())
 	_cgo_interaction_ := (*C.GTlsInteraction)(interaction.GetGObject())
@@ -12115,7 +13150,11 @@ func (_self_ *TlsDatabase) VerifyChain(chain TlsCertificateKind, purpose string,
 	_cstring_purpose_ := C.CString(purpose)
 	_cgo_purpose_ := (*C.gchar)(unsafe.Pointer(_cstring_purpose_))
 	defer C.free(unsafe.Pointer(_cstring_purpose_))
-	_return_ = C._g_tls_database_verify_chain((*C.GTlsDatabase)(_self_._value_), _cgo_chain_, _cgo_purpose_, _cgo_identity_, _cgo_interaction_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_tls_database_verify_chain((*C.GTlsDatabase)(_self_._value_), _cgo_chain_, _cgo_purpose_, _cgo_identity_, _cgo_interaction_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -12131,16 +13170,26 @@ func (_self_ *TlsDatabase) VerifyChainAsync(chain TlsCertificateKind, purpose st
 	return
 }
 
-func (_self_ *TlsDatabase) VerifyChainFinish(result AsyncResultKind) (_return_ C.GTlsCertificateFlags, _error_ unsafe.Pointer) {
+func (_self_ *TlsDatabase) VerifyChainFinish(result AsyncResultKind) (_return_ C.GTlsCertificateFlags, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_tls_database_verify_chain_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_tls_database_verify_chain_finish((*C.GTlsDatabase)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *TlsInteraction) AskPassword(password TlsPasswordKind, cancellable CancellableKind) (_return_ C.GTlsInteractionResult, _error_ unsafe.Pointer) {
+func (_self_ *TlsInteraction) AskPassword(password TlsPasswordKind, cancellable CancellableKind) (_return_ C.GTlsInteractionResult, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_password_ := (*C.GTlsPassword)(password.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
-	_return_ = C._g_tls_interaction_ask_password((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, _error_)
+	_return_ = C._g_tls_interaction_ask_password((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -12151,16 +13200,26 @@ func (_self_ *TlsInteraction) AskPasswordAsync(password TlsPasswordKind, cancell
 	return
 }
 
-func (_self_ *TlsInteraction) AskPasswordFinish(result AsyncResultKind) (_return_ C.GTlsInteractionResult, _error_ unsafe.Pointer) {
+func (_self_ *TlsInteraction) AskPasswordFinish(result AsyncResultKind) (_return_ C.GTlsInteractionResult, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_tls_interaction_ask_password_finish((*C.GTlsInteraction)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_tls_interaction_ask_password_finish((*C.GTlsInteraction)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *TlsInteraction) InvokeAskPassword(password TlsPasswordKind, cancellable CancellableKind) (_return_ C.GTlsInteractionResult, _error_ unsafe.Pointer) {
+func (_self_ *TlsInteraction) InvokeAskPassword(password TlsPasswordKind, cancellable CancellableKind) (_return_ C.GTlsInteractionResult, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_password_ := (*C.GTlsPassword)(password.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
-	_return_ = C._g_tls_interaction_invoke_ask_password((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, _error_)
+	_return_ = C._g_tls_interaction_invoke_ask_password((*C.GTlsInteraction)(_self_._value_), _cgo_password_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -12231,10 +13290,15 @@ func (_self_ *TlsPassword) SetWarning(warning string) () {
 	return
 }
 
-func (_self_ *UnixConnection) ReceiveCredentials(cancellable CancellableKind) (_go__return__ Credentials, _error_ unsafe.Pointer) {
+func (_self_ *UnixConnection) ReceiveCredentials(cancellable CancellableKind) (_go__return__ Credentials, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GCredentials
-	_return_ = C._g_unix_connection_receive_credentials((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_unix_connection_receive_credentials((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToCredentials(unsafe.Pointer(_return_))
 	return
 }
@@ -12245,26 +13309,41 @@ func (_self_ *UnixConnection) ReceiveCredentialsAsync(cancellable CancellableKin
 	return
 }
 
-func (_self_ *UnixConnection) ReceiveCredentialsFinish(result AsyncResultKind) (_go__return__ Credentials, _error_ unsafe.Pointer) {
+func (_self_ *UnixConnection) ReceiveCredentialsFinish(result AsyncResultKind) (_go__return__ Credentials, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GCredentials
-	_return_ = C._g_unix_connection_receive_credentials_finish((*C.GUnixConnection)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_unix_connection_receive_credentials_finish((*C.GUnixConnection)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToCredentials(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *UnixConnection) ReceiveFd(cancellable CancellableKind) (_go__return__ int, _error_ unsafe.Pointer) {
+func (_self_ *UnixConnection) ReceiveFd(cancellable CancellableKind) (_go__return__ int, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gint
-	_return_ = C._g_unix_connection_receive_fd((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_unix_connection_receive_fd((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *UnixConnection) SendCredentials(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *UnixConnection) SendCredentials(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_unix_connection_send_credentials((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_unix_connection_send_credentials((*C.GUnixConnection)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -12275,19 +13354,29 @@ func (_self_ *UnixConnection) SendCredentialsAsync(cancellable CancellableKind, 
 	return
 }
 
-func (_self_ *UnixConnection) SendCredentialsFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *UnixConnection) SendCredentialsFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_unix_connection_send_credentials_finish((*C.GUnixConnection)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_unix_connection_send_credentials_finish((*C.GUnixConnection)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *UnixConnection) SendFd(fd int, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *UnixConnection) SendFd(fd int, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_fd_ := (C.gint)(fd)
 	var _return_ C.gboolean
-	_return_ = C._g_unix_connection_send_fd((*C.GUnixConnection)(_self_._value_), _cgo_fd_, _cgo_cancellable_, _error_)
+	_return_ = C._g_unix_connection_send_fd((*C.GUnixConnection)(_self_._value_), _cgo_fd_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -12328,18 +13417,28 @@ func UnixFDListNew() (_go__return__ UnixFDList) {
 	return
 }
 
-func (_self_ *UnixFDList) Append(fd int) (_go__return__ int, _error_ unsafe.Pointer) {
+func (_self_ *UnixFDList) Append(fd int) (_go__return__ int, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_fd_ := (C.gint)(fd)
 	var _return_ C.gint
-	_return_ = C._g_unix_fd_list_append((*C.GUnixFDList)(_self_._value_), _cgo_fd_, _error_)
+	_return_ = C._g_unix_fd_list_append((*C.GUnixFDList)(_self_._value_), _cgo_fd_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *UnixFDList) Get(index_ int) (_go__return__ int, _error_ unsafe.Pointer) {
+func (_self_ *UnixFDList) Get(index_ int) (_go__return__ int, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_index__ := (C.gint)(index_)
 	var _return_ C.gint
-	_return_ = C._g_unix_fd_list_get((*C.GUnixFDList)(_self_._value_), _cgo_index__, _error_)
+	_return_ = C._g_unix_fd_list_get((*C.GUnixFDList)(_self_._value_), _cgo_index__, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int)(_return_)
 	return
 }
@@ -12380,10 +13479,15 @@ func UnixFDMessageNewWithFdList(fd_list UnixFDListKind) (_go__return__ UnixFDMes
 	return
 }
 
-func (_self_ *UnixFDMessage) AppendFd(fd int) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *UnixFDMessage) AppendFd(fd int) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_fd_ := (C.gint)(fd)
 	var _return_ C.gboolean
-	_return_ = C._g_unix_fd_message_append_fd((*C.GUnixFDMessage)(_self_._value_), _cgo_fd_, _error_)
+	_return_ = C._g_unix_fd_message_append_fd((*C.GUnixFDMessage)(_self_._value_), _cgo_fd_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -12610,9 +13714,10 @@ func (_self_ *VolumeMonitor) GetVolumes() (_return_ *C.GList) {
 	return
 }
 
-func ZlibCompressorNew(format C.GZlibCompressorFormat, level C.int) (_go__return__ ZlibCompressor) {
+func ZlibCompressorNew(format int, level C.int) (_go__return__ ZlibCompressor) {
 	var _return_ *C.GZlibCompressor
-	_return_ = C.g_zlib_compressor_new(format, level)
+	_cgo_format_ := (C.GZlibCompressorFormat)(format)
+	_return_ = C.g_zlib_compressor_new(_cgo_format_, level)
 	_go__return__ = ToZlibCompressor(unsafe.Pointer(_return_))
 	return
 }
@@ -12630,9 +13735,10 @@ func (_self_ *ZlibCompressor) SetFileInfo(file_info FileInfoKind) () {
 	return
 }
 
-func ZlibDecompressorNew(format C.GZlibCompressorFormat) (_go__return__ ZlibDecompressor) {
+func ZlibDecompressorNew(format int) (_go__return__ ZlibDecompressor) {
 	var _return_ *C.GZlibDecompressor
-	_return_ = C.g_zlib_decompressor_new(format)
+	_cgo_format_ := (C.GZlibCompressorFormat)(format)
+	_return_ = C.g_zlib_decompressor_new(_cgo_format_)
 	_go__return__ = ToZlibDecompressor(unsafe.Pointer(_return_))
 	return
 }
@@ -12738,12 +13844,17 @@ func (_self_ *DBusMethodInfo) Unref() () {
 	return
 }
 
-func DBusNodeInfoNewForXml(xml_data string) (_go__return__ *DBusNodeInfo, _error_ unsafe.Pointer) {
+func DBusNodeInfoNewForXml(xml_data string) (_go__return__ *DBusNodeInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GDBusNodeInfo
 	_cstring_xml_data_ := C.CString(xml_data)
 	_cgo_xml_data_ := (*C.gchar)(unsafe.Pointer(_cstring_xml_data_))
 	defer C.free(unsafe.Pointer(_cstring_xml_data_))
-	_return_ = C._g_dbus_node_info_new_for_xml(_cgo_xml_data_, _error_)
+	_return_ = C._g_dbus_node_info_new_for_xml(_cgo_xml_data_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*DBusNodeInfo)(unsafe.Pointer(_return_))
 	return
 }
@@ -12807,11 +13918,12 @@ func FileAttributeInfoListNew() (_go__return__ *FileAttributeInfoList) {
 	return
 }
 
-func (_self_ *FileAttributeInfoList) Add(name string, type_ C.GFileAttributeType, flags C.GFileAttributeInfoFlags) () {
+func (_self_ *FileAttributeInfoList) Add(name string, type_ int, flags C.GFileAttributeInfoFlags) () {
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.char)(unsafe.Pointer(_cstring_name_))
 	defer C.free(unsafe.Pointer(_cstring_name_))
-	C._g_file_attribute_info_list_add((*C.GFileAttributeInfoList)(_self_), _cgo_name_, type_, flags)
+	_cgo_type__ := (C.GFileAttributeType)(type_)
+	C._g_file_attribute_info_list_add((*C.GFileAttributeInfoList)(_self_), _cgo_name_, _cgo_type__, flags)
 	return
 }
 
@@ -12967,9 +14079,10 @@ func (_self_ *IOExtensionPoint) SetRequiredType(type_ C.GType) () {
 	return
 }
 
-func IOModuleScopeNew(flags C.GIOModuleScopeFlags) (_go__return__ *IOModuleScope) {
+func IOModuleScopeNew(flags int) (_go__return__ *IOModuleScope) {
 	var _return_ *C.GIOModuleScope
-	_return_ = C.g_io_module_scope_new(flags)
+	_cgo_flags_ := (C.GIOModuleScopeFlags)(flags)
+	_return_ = C.g_io_module_scope_new(_cgo_flags_)
 	_go__return__ = (*IOModuleScope)(unsafe.Pointer(_return_))
 	return
 }
@@ -12987,9 +14100,14 @@ func (_self_ *IOModuleScope) Free() () {
 	return
 }
 
-func ResourceNewFromData(data *C.GBytes) (_go__return__ *Resource, _error_ unsafe.Pointer) {
+func ResourceNewFromData(data *C.GBytes) (_go__return__ *Resource, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GResource
-	_return_ = C._g_resource_new_from_data(data, _error_)
+	_return_ = C._g_resource_new_from_data(data, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*Resource)(unsafe.Pointer(_return_))
 	return
 }
@@ -13004,42 +14122,62 @@ func (_self_ *Resource) Unregister() () {
 	return
 }
 
-func (_self_ *Resource) EnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *Resource) EnumerateChildren(path string, lookup_flags C.GResourceLookupFlags) (_return_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resource_enumerate_children((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resource_enumerate_children((*C.GResource)(_self_), _cgo_path_, lookup_flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Resource) GetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ unsafe.Pointer) {
+func (_self_ *Resource) GetInfo(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ bool, _go_size_ uint64, _go_flags_ uint32, _error_ error) {
+	var _cgo_error_ *C.GError
 	var size C.gsize
 	var flags C.guint32
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	var _return_ C.gboolean
-	_return_ = C._g_resource_get_info((*C.GResource)(_self_), _cgo_path_, lookup_flags, &size, &flags, _error_)
+	_return_ = C._g_resource_get_info((*C.GResource)(_self_), _cgo_path_, lookup_flags, &size, &flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_size_ = (uint64)(size)
 	_go_flags_ = (uint32)(flags)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Resource) LookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ unsafe.Pointer) {
+func (_self_ *Resource) LookupData(path string, lookup_flags C.GResourceLookupFlags) (_return_ *C.GBytes, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resource_lookup_data((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resource_lookup_data((*C.GResource)(_self_), _cgo_path_, lookup_flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Resource) OpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ InputStream, _error_ unsafe.Pointer) {
+func (_self_ *Resource) OpenStream(path string, lookup_flags C.GResourceLookupFlags) (_go__return__ InputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GInputStream
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.char)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
-	_return_ = C._g_resource_open_stream((*C.GResource)(_self_), _cgo_path_, lookup_flags, _error_)
+	_return_ = C._g_resource_open_stream((*C.GResource)(_self_), _cgo_path_, lookup_flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToInputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -13082,7 +14220,8 @@ func (_self_ *SettingsSchema) Unref() () {
 	return
 }
 
-func SettingsSchemaSourceNewFromDirectory(directory string, parent *SettingsSchemaSource, trusted bool) (_go__return__ *SettingsSchemaSource, _error_ unsafe.Pointer) {
+func SettingsSchemaSourceNewFromDirectory(directory string, parent *SettingsSchemaSource, trusted bool) (_go__return__ *SettingsSchemaSource, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_parent_ := (*C.GSettingsSchemaSource)(unsafe.Pointer(parent))
 	var _return_ *C.GSettingsSchemaSource
 	_cstring_directory_ := C.CString(directory)
@@ -13090,7 +14229,11 @@ func SettingsSchemaSourceNewFromDirectory(directory string, parent *SettingsSche
 	defer C.free(unsafe.Pointer(_cstring_directory_))
 	_cgo_trusted_ := (C.gboolean)(C.FALSE)
 	if trusted { _cgo_trusted_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_settings_schema_source_new_from_directory(_cgo_directory_, _cgo_parent_, _cgo_trusted_, _error_)
+	_return_ = C._g_settings_schema_source_new_from_directory(_cgo_directory_, _cgo_parent_, _cgo_trusted_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*SettingsSchemaSource)(unsafe.Pointer(_return_))
 	return
 }
@@ -13473,12 +14616,17 @@ func (_self_ *ActionMap) RemoveAction(action_name string) () {
 	return
 }
 
-func (_self_ *AppInfo) AddSupportsType(content_type string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) AddSupportsType(content_type string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_content_type_ := C.CString(content_type)
 	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_add_supports_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, _error_)
+	_return_ = C._g_app_info_add_supports_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13573,58 +14721,88 @@ func (_self_ *AppInfo) GetSupportedTypes() (_return_ unsafe.Pointer) {
 	return
 }
 
-func (_self_ *AppInfo) Launch(files *C.GList, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) Launch(files *C.GList, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_launch((*C.GAppInfo)(_self_._value_), files, _cgo_launch_context_, _error_)
+	_return_ = C._g_app_info_launch((*C.GAppInfo)(_self_._value_), files, _cgo_launch_context_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *AppInfo) LaunchUris(uris *C.GList, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) LaunchUris(uris *C.GList, launch_context GioAppLaunchContextKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_launch_context_ := (*C.GAppLaunchContext)(launch_context.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_launch_uris((*C.GAppInfo)(_self_._value_), uris, _cgo_launch_context_, _error_)
+	_return_ = C._g_app_info_launch_uris((*C.GAppInfo)(_self_._value_), uris, _cgo_launch_context_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *AppInfo) RemoveSupportsType(content_type string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) RemoveSupportsType(content_type string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_content_type_ := C.CString(content_type)
 	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_remove_supports_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, _error_)
+	_return_ = C._g_app_info_remove_supports_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *AppInfo) SetAsDefaultForExtension(extension string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) SetAsDefaultForExtension(extension string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_extension_ := C.CString(extension)
 	_cgo_extension_ := (*C.char)(unsafe.Pointer(_cstring_extension_))
 	defer C.free(unsafe.Pointer(_cstring_extension_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_set_as_default_for_extension((*C.GAppInfo)(_self_._value_), _cgo_extension_, _error_)
+	_return_ = C._g_app_info_set_as_default_for_extension((*C.GAppInfo)(_self_._value_), _cgo_extension_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *AppInfo) SetAsDefaultForType(content_type string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) SetAsDefaultForType(content_type string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_content_type_ := C.CString(content_type)
 	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_set_as_default_for_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, _error_)
+	_return_ = C._g_app_info_set_as_default_for_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *AppInfo) SetAsLastUsedForType(content_type string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AppInfo) SetAsLastUsedForType(content_type string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_content_type_ := C.CString(content_type)
 	_cgo_content_type_ := (*C.char)(unsafe.Pointer(_cstring_content_type_))
 	defer C.free(unsafe.Pointer(_cstring_content_type_))
 	var _return_ C.gboolean
-	_return_ = C._g_app_info_set_as_last_used_for_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, _error_)
+	_return_ = C._g_app_info_set_as_last_used_for_type((*C.GAppInfo)(_self_._value_), _cgo_content_type_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13656,17 +14834,27 @@ func (_self_ *AsyncInitable) InitAsync(io_priority C.int, cancellable Cancellabl
 	return
 }
 
-func (_self_ *AsyncInitable) InitFinish(res AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AsyncInitable) InitFinish(res AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_async_initable_init_finish((*C.GAsyncInitable)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_async_initable_init_finish((*C.GAsyncInitable)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *AsyncInitable) NewFinish(res AsyncResultKind) (_return_ *C.GObject, _error_ unsafe.Pointer) {
+func (_self_ *AsyncInitable) NewFinish(res AsyncResultKind) (_return_ *C.GObject, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
-	_return_ = C._g_async_initable_new_finish((*C.GAsyncInitable)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_async_initable_new_finish((*C.GAsyncInitable)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -13687,9 +14875,14 @@ func (_self_ *AsyncResult) IsTagged(source_tag C.gpointer) (_go__return__ bool) 
 	return
 }
 
-func (_self_ *AsyncResult) LegacyPropagateError() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *AsyncResult) LegacyPropagateError() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._g_async_result_legacy_propagate_error((*C.GAsyncResult)(_self_._value_), _error_)
+	_return_ = C._g_async_result_legacy_propagate_error((*C.GAsyncResult)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13825,10 +15018,15 @@ func (_self_ *Drive) EjectWithOperation(flags C.GMountUnmountFlags, mount_operat
 	return
 }
 
-func (_self_ *Drive) EjectWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Drive) EjectWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_drive_eject_with_operation_finish((*C.GDrive)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_drive_eject_with_operation_finish((*C.GDrive)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13920,10 +15118,15 @@ func (_self_ *Drive) PollForMedia(cancellable CancellableKind, callback C.GAsync
 	return
 }
 
-func (_self_ *Drive) PollForMediaFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Drive) PollForMediaFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_drive_poll_for_media_finish((*C.GDrive)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_drive_poll_for_media_finish((*C.GDrive)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13935,10 +15138,15 @@ func (_self_ *Drive) Start(flags C.GDriveStartFlags, mount_operation GioMountOpe
 	return
 }
 
-func (_self_ *Drive) StartFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Drive) StartFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_drive_start_finish((*C.GDrive)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_drive_start_finish((*C.GDrive)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13950,18 +15158,28 @@ func (_self_ *Drive) Stop(flags C.GMountUnmountFlags, mount_operation GioMountOp
 	return
 }
 
-func (_self_ *Drive) StopFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Drive) StopFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_drive_stop_finish((*C.GDrive)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_drive_stop_finish((*C.GDrive)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) AppendTo(flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileOutputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) AppendTo(flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileOutputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileOutputStream
-	_return_ = C._g_file_append_to((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_append_to((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileOutputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -13972,19 +15190,29 @@ func (_self_ *File) AppendToAsync(flags C.GFileCreateFlags, io_priority C.int, c
 	return
 }
 
-func (_self_ *File) AppendToFinish(res AsyncResultKind) (_go__return__ FileOutputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) AppendToFinish(res AsyncResultKind) (_go__return__ FileOutputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileOutputStream
-	_return_ = C._g_file_append_to_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_append_to_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileOutputStream(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) Copy(destination FileKind, flags C.GFileCopyFlags, cancellable CancellableKind, progress_callback C.GFileProgressCallback, progress_callback_data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) Copy(destination FileKind, flags C.GFileCopyFlags, cancellable CancellableKind, progress_callback C.GFileProgressCallback, progress_callback_data C.gpointer) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_destination_ := (*C.GFile)(destination.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_copy((*C.GFile)(_self_._value_), _cgo_destination_, flags, _cgo_cancellable_, progress_callback, progress_callback_data, _error_)
+	_return_ = C._g_file_copy((*C.GFile)(_self_._value_), _cgo_destination_, flags, _cgo_cancellable_, progress_callback, progress_callback_data, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -13996,27 +15224,42 @@ func (_self_ *File) CopyAsync(destination FileKind, flags C.GFileCopyFlags, io_p
 	return
 }
 
-func (_self_ *File) CopyAttributes(destination FileKind, flags C.GFileCopyFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) CopyAttributes(destination FileKind, flags C.GFileCopyFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_destination_ := (*C.GFile)(destination.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_copy_attributes((*C.GFile)(_self_._value_), _cgo_destination_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_copy_attributes((*C.GFile)(_self_._value_), _cgo_destination_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) CopyFinish(res AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) CopyFinish(res AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_copy_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_copy_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) Create(flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileOutputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) Create(flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileOutputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileOutputStream
-	_return_ = C._g_file_create((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_create((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileOutputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14027,18 +15270,28 @@ func (_self_ *File) CreateAsync(flags C.GFileCreateFlags, io_priority C.int, can
 	return
 }
 
-func (_self_ *File) CreateFinish(res AsyncResultKind) (_go__return__ FileOutputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) CreateFinish(res AsyncResultKind) (_go__return__ FileOutputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileOutputStream
-	_return_ = C._g_file_create_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_create_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileOutputStream(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) CreateReadwrite(flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileIOStream, _error_ unsafe.Pointer) {
+func (_self_ *File) CreateReadwrite(flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileIOStream
-	_return_ = C._g_file_create_readwrite((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_create_readwrite((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14049,18 +15302,28 @@ func (_self_ *File) CreateReadwriteAsync(flags C.GFileCreateFlags, io_priority C
 	return
 }
 
-func (_self_ *File) CreateReadwriteFinish(res AsyncResultKind) (_go__return__ FileIOStream, _error_ unsafe.Pointer) {
+func (_self_ *File) CreateReadwriteFinish(res AsyncResultKind) (_go__return__ FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileIOStream
-	_return_ = C._g_file_create_readwrite_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_create_readwrite_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileIOStream(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) Delete(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) Delete(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_delete((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_delete((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14071,10 +15334,15 @@ func (_self_ *File) DeleteAsync(io_priority C.int, cancellable CancellableKind, 
 	return
 }
 
-func (_self_ *File) DeleteFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) DeleteFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_delete_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_delete_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14093,21 +15361,31 @@ func (_self_ *File) EjectMountableWithOperation(flags C.GMountUnmountFlags, moun
 	return
 }
 
-func (_self_ *File) EjectMountableWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) EjectMountableWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_eject_mountable_with_operation_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_eject_mountable_with_operation_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) EnumerateChildren(attributes string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ FileEnumerator, _error_ unsafe.Pointer) {
+func (_self_ *File) EnumerateChildren(attributes string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ FileEnumerator, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileEnumerator
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_enumerate_children((*C.GFile)(_self_._value_), _cgo_attributes_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_enumerate_children((*C.GFile)(_self_._value_), _cgo_attributes_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileEnumerator(unsafe.Pointer(_return_))
 	return
 }
@@ -14121,10 +15399,15 @@ func (_self_ *File) EnumerateChildrenAsync(attributes string, flags C.GFileQuery
 	return
 }
 
-func (_self_ *File) EnumerateChildrenFinish(res AsyncResultKind) (_go__return__ FileEnumerator, _error_ unsafe.Pointer) {
+func (_self_ *File) EnumerateChildrenFinish(res AsyncResultKind) (_go__return__ FileEnumerator, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileEnumerator
-	_return_ = C._g_file_enumerate_children_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_enumerate_children_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileEnumerator(unsafe.Pointer(_return_))
 	return
 }
@@ -14137,10 +15420,15 @@ func (_self_ *File) Equal(file2 FileKind) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *File) FindEnclosingMount(cancellable CancellableKind) (_go__return__ Mount, _error_ unsafe.Pointer) {
+func (_self_ *File) FindEnclosingMount(cancellable CancellableKind) (_go__return__ Mount, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GMount
-	_return_ = C._g_file_find_enclosing_mount((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_find_enclosing_mount((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToMount(unsafe.Pointer(_return_))
 	return
 }
@@ -14151,10 +15439,15 @@ func (_self_ *File) FindEnclosingMountAsync(io_priority C.int, cancellable Cance
 	return
 }
 
-func (_self_ *File) FindEnclosingMountFinish(res AsyncResultKind) (_go__return__ Mount, _error_ unsafe.Pointer) {
+func (_self_ *File) FindEnclosingMountFinish(res AsyncResultKind) (_go__return__ Mount, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GMount
-	_return_ = C._g_file_find_enclosing_mount_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_find_enclosing_mount_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToMount(unsafe.Pointer(_return_))
 	return
 }
@@ -14176,12 +15469,17 @@ func (_self_ *File) GetChild(name string) (_go__return__ File) {
 	return
 }
 
-func (_self_ *File) GetChildForDisplayName(display_name string) (_go__return__ File, _error_ unsafe.Pointer) {
+func (_self_ *File) GetChildForDisplayName(display_name string) (_go__return__ File, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GFile
 	_cstring_display_name_ := C.CString(display_name)
 	_cgo_display_name_ := (*C.char)(unsafe.Pointer(_cstring_display_name_))
 	defer C.free(unsafe.Pointer(_cstring_display_name_))
-	_return_ = C._g_file_get_child_for_display_name((*C.GFile)(_self_._value_), _cgo_display_name_, _error_)
+	_return_ = C._g_file_get_child_for_display_name((*C.GFile)(_self_._value_), _cgo_display_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFile(unsafe.Pointer(_return_))
 	return
 }
@@ -14281,53 +15579,83 @@ func (_self_ *File) LoadPartialContentsAsync(cancellable CancellableKind, read_m
 	return
 }
 
-func (_self_ *File) MakeDirectory(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) MakeDirectory(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_make_directory((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_make_directory((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) MakeDirectoryWithParents(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) MakeDirectoryWithParents(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_make_directory_with_parents((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_make_directory_with_parents((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) MakeSymbolicLink(symlink_value string, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) MakeSymbolicLink(symlink_value string, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_symlink_value_ := C.CString(symlink_value)
 	_cgo_symlink_value_ := (*C.char)(unsafe.Pointer(_cstring_symlink_value_))
 	defer C.free(unsafe.Pointer(_cstring_symlink_value_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_make_symbolic_link((*C.GFile)(_self_._value_), _cgo_symlink_value_, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_make_symbolic_link((*C.GFile)(_self_._value_), _cgo_symlink_value_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) Monitor(flags C.GFileMonitorFlags, cancellable CancellableKind) (_go__return__ FileMonitor, _error_ unsafe.Pointer) {
+func (_self_ *File) Monitor(flags C.GFileMonitorFlags, cancellable CancellableKind) (_go__return__ FileMonitor, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileMonitor
-	_return_ = C._g_file_monitor((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_monitor((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileMonitor(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) MonitorDirectory(flags C.GFileMonitorFlags, cancellable CancellableKind) (_go__return__ FileMonitor, _error_ unsafe.Pointer) {
+func (_self_ *File) MonitorDirectory(flags C.GFileMonitorFlags, cancellable CancellableKind) (_go__return__ FileMonitor, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileMonitor
-	_return_ = C._g_file_monitor_directory((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_monitor_directory((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileMonitor(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) MonitorFile(flags C.GFileMonitorFlags, cancellable CancellableKind) (_go__return__ FileMonitor, _error_ unsafe.Pointer) {
+func (_self_ *File) MonitorFile(flags C.GFileMonitorFlags, cancellable CancellableKind) (_go__return__ FileMonitor, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileMonitor
-	_return_ = C._g_file_monitor_file((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_monitor_file((*C.GFile)(_self_._value_), flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileMonitor(unsafe.Pointer(_return_))
 	return
 }
@@ -14339,10 +15667,15 @@ func (_self_ *File) MountEnclosingVolume(flags C.GMountMountFlags, mount_operati
 	return
 }
 
-func (_self_ *File) MountEnclosingVolumeFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) MountEnclosingVolumeFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_mount_enclosing_volume_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_mount_enclosing_volume_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14354,27 +15687,42 @@ func (_self_ *File) MountMountable(flags C.GMountMountFlags, mount_operation Gio
 	return
 }
 
-func (_self_ *File) MountMountableFinish(result AsyncResultKind) (_go__return__ File, _error_ unsafe.Pointer) {
+func (_self_ *File) MountMountableFinish(result AsyncResultKind) (_go__return__ File, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GFile
-	_return_ = C._g_file_mount_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_mount_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFile(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) Move(destination FileKind, flags C.GFileCopyFlags, cancellable CancellableKind, progress_callback C.GFileProgressCallback, progress_callback_data C.gpointer) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) Move(destination FileKind, flags C.GFileCopyFlags, cancellable CancellableKind, progress_callback C.GFileProgressCallback, progress_callback_data C.gpointer) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_destination_ := (*C.GFile)(destination.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_move((*C.GFile)(_self_._value_), _cgo_destination_, flags, _cgo_cancellable_, progress_callback, progress_callback_data, _error_)
+	_return_ = C._g_file_move((*C.GFile)(_self_._value_), _cgo_destination_, flags, _cgo_cancellable_, progress_callback, progress_callback_data, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) OpenReadwrite(cancellable CancellableKind) (_go__return__ FileIOStream, _error_ unsafe.Pointer) {
+func (_self_ *File) OpenReadwrite(cancellable CancellableKind) (_go__return__ FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileIOStream
-	_return_ = C._g_file_open_readwrite((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_open_readwrite((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14385,10 +15733,15 @@ func (_self_ *File) OpenReadwriteAsync(io_priority C.int, cancellable Cancellabl
 	return
 }
 
-func (_self_ *File) OpenReadwriteFinish(res AsyncResultKind) (_go__return__ FileIOStream, _error_ unsafe.Pointer) {
+func (_self_ *File) OpenReadwriteFinish(res AsyncResultKind) (_go__return__ FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileIOStream
-	_return_ = C._g_file_open_readwrite_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_open_readwrite_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14399,18 +15752,28 @@ func (_self_ *File) PollMountable(cancellable CancellableKind, callback C.GAsync
 	return
 }
 
-func (_self_ *File) PollMountableFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) PollMountableFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_poll_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_poll_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) QueryDefaultHandler(cancellable CancellableKind) (_go__return__ AppInfo, _error_ unsafe.Pointer) {
+func (_self_ *File) QueryDefaultHandler(cancellable CancellableKind) (_go__return__ AppInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GAppInfo
-	_return_ = C._g_file_query_default_handler((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_query_default_handler((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToAppInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -14429,13 +15792,18 @@ func (_self_ *File) QueryFileType(flags C.GFileQueryInfoFlags, cancellable Cance
 	return
 }
 
-func (_self_ *File) QueryFilesystemInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *File) QueryFilesystemInfo(attributes string, cancellable CancellableKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_query_filesystem_info((*C.GFile)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_query_filesystem_info((*C.GFile)(_self_._value_), _cgo_attributes_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -14449,21 +15817,31 @@ func (_self_ *File) QueryFilesystemInfoAsync(attributes string, io_priority C.in
 	return
 }
 
-func (_self_ *File) QueryFilesystemInfoFinish(res AsyncResultKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *File) QueryFilesystemInfoFinish(res AsyncResultKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileInfo
-	_return_ = C._g_file_query_filesystem_info_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_query_filesystem_info_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) QueryInfo(attributes string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *File) QueryInfo(attributes string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInfo
 	_cstring_attributes_ := C.CString(attributes)
 	_cgo_attributes_ := (*C.char)(unsafe.Pointer(_cstring_attributes_))
 	defer C.free(unsafe.Pointer(_cstring_attributes_))
-	_return_ = C._g_file_query_info((*C.GFile)(_self_._value_), _cgo_attributes_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_query_info((*C.GFile)(_self_._value_), _cgo_attributes_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
@@ -14477,34 +15855,54 @@ func (_self_ *File) QueryInfoAsync(attributes string, flags C.GFileQueryInfoFlag
 	return
 }
 
-func (_self_ *File) QueryInfoFinish(res AsyncResultKind) (_go__return__ FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *File) QueryInfoFinish(res AsyncResultKind) (_go__return__ FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileInfo
-	_return_ = C._g_file_query_info_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_query_info_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInfo(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) QuerySettableAttributes(cancellable CancellableKind) (_go__return__ *FileAttributeInfoList, _error_ unsafe.Pointer) {
+func (_self_ *File) QuerySettableAttributes(cancellable CancellableKind) (_go__return__ *FileAttributeInfoList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileAttributeInfoList
-	_return_ = C._g_file_query_settable_attributes((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_query_settable_attributes((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*FileAttributeInfoList)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) QueryWritableNamespaces(cancellable CancellableKind) (_go__return__ *FileAttributeInfoList, _error_ unsafe.Pointer) {
+func (_self_ *File) QueryWritableNamespaces(cancellable CancellableKind) (_go__return__ *FileAttributeInfoList, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileAttributeInfoList
-	_return_ = C._g_file_query_writable_namespaces((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_query_writable_namespaces((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*FileAttributeInfoList)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) Read(cancellable CancellableKind) (_go__return__ FileInputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) Read(cancellable CancellableKind) (_go__return__ FileInputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileInputStream
-	_return_ = C._g_file_read((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_read((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14515,15 +15913,21 @@ func (_self_ *File) ReadAsync(io_priority C.int, cancellable CancellableKind, ca
 	return
 }
 
-func (_self_ *File) ReadFinish(res AsyncResultKind) (_go__return__ FileInputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) ReadFinish(res AsyncResultKind) (_go__return__ FileInputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileInputStream
-	_return_ = C._g_file_read_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_read_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileInputStream(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) Replace(etag string, make_backup bool, flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileOutputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) Replace(etag string, make_backup bool, flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileOutputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileOutputStream
 	_cstring_etag_ := C.CString(etag)
@@ -14531,7 +15935,11 @@ func (_self_ *File) Replace(etag string, make_backup bool, flags C.GFileCreateFl
 	defer C.free(unsafe.Pointer(_cstring_etag_))
 	_cgo_make_backup_ := (C.gboolean)(C.FALSE)
 	if make_backup { _cgo_make_backup_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_file_replace((*C.GFile)(_self_._value_), _cgo_etag_, _cgo_make_backup_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_replace((*C.GFile)(_self_._value_), _cgo_etag_, _cgo_make_backup_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileOutputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14547,23 +15955,34 @@ func (_self_ *File) ReplaceAsync(etag string, make_backup bool, flags C.GFileCre
 	return
 }
 
-func (_self_ *File) ReplaceContentsFinish(res AsyncResultKind) (_go__return__ bool, new_etag unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *File) ReplaceContentsFinish(res AsyncResultKind) (_go__return__ bool, new_etag unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_replace_contents_finish((*C.GFile)(_self_._value_), _cgo_res_, new_etag, _error_)
+	_return_ = C._g_file_replace_contents_finish((*C.GFile)(_self_._value_), _cgo_res_, new_etag, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) ReplaceFinish(res AsyncResultKind) (_go__return__ FileOutputStream, _error_ unsafe.Pointer) {
+func (_self_ *File) ReplaceFinish(res AsyncResultKind) (_go__return__ FileOutputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileOutputStream
-	_return_ = C._g_file_replace_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_replace_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileOutputStream(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *File) ReplaceReadwrite(etag string, make_backup bool, flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileIOStream, _error_ unsafe.Pointer) {
+func (_self_ *File) ReplaceReadwrite(etag string, make_backup bool, flags C.GFileCreateFlags, cancellable CancellableKind) (_go__return__ FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFileIOStream
 	_cstring_etag_ := C.CString(etag)
@@ -14571,7 +15990,11 @@ func (_self_ *File) ReplaceReadwrite(etag string, make_backup bool, flags C.GFil
 	defer C.free(unsafe.Pointer(_cstring_etag_))
 	_cgo_make_backup_ := (C.gboolean)(C.FALSE)
 	if make_backup { _cgo_make_backup_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_file_replace_readwrite((*C.GFile)(_self_._value_), _cgo_etag_, _cgo_make_backup_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_replace_readwrite((*C.GFile)(_self_._value_), _cgo_etag_, _cgo_make_backup_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14587,10 +16010,15 @@ func (_self_ *File) ReplaceReadwriteAsync(etag string, make_backup bool, flags C
 	return
 }
 
-func (_self_ *File) ReplaceReadwriteFinish(res AsyncResultKind) (_go__return__ FileIOStream, _error_ unsafe.Pointer) {
+func (_self_ *File) ReplaceReadwriteFinish(res AsyncResultKind) (_go__return__ FileIOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFileIOStream
-	_return_ = C._g_file_replace_readwrite_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_replace_readwrite_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFileIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14605,18 +16033,25 @@ func (_self_ *File) ResolveRelativePath(relative_path string) (_go__return__ Fil
 	return
 }
 
-func (_self_ *File) SetAttribute(attribute string, type_ C.GFileAttributeType, value_p C.gpointer, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttribute(attribute string, type_ int, value_p C.gpointer, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute((*C.GFile)(_self_._value_), _cgo_attribute_, type_, value_p, flags, _cgo_cancellable_, _error_)
+	_cgo_type__ := (C.GFileAttributeType)(type_)
+	_return_ = C._g_file_set_attribute((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_type__, value_p, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributeByteString(attribute string, value string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributeByteString(attribute string, value string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
@@ -14625,36 +16060,51 @@ func (_self_ *File) SetAttributeByteString(attribute string, value string, flags
 	_cgo_value_ := (*C.char)(unsafe.Pointer(_cstring_value_))
 	defer C.free(unsafe.Pointer(_cstring_value_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute_byte_string((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attribute_byte_string((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributeInt32(attribute string, value int32, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributeInt32(attribute string, value int32, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_value_ := (C.gint32)(value)
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute_int32((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attribute_int32((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributeInt64(attribute string, value int64, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributeInt64(attribute string, value int64, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_value_ := (C.gint64)(value)
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute_int64((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attribute_int64((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributeString(attribute string, value string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributeString(attribute string, value string, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
@@ -14663,31 +16113,45 @@ func (_self_ *File) SetAttributeString(attribute string, value string, flags C.G
 	_cgo_value_ := (*C.char)(unsafe.Pointer(_cstring_value_))
 	defer C.free(unsafe.Pointer(_cstring_value_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute_string((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attribute_string((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributeUint32(attribute string, value uint32, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributeUint32(attribute string, value uint32, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_value_ := (C.guint32)(value)
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute_uint32((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attribute_uint32((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributeUint64(attribute string, value uint64, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributeUint64(attribute string, value uint64, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_value_ := (C.guint64)(value)
 	_cstring_attribute_ := C.CString(attribute)
 	_cgo_attribute_ := (*C.char)(unsafe.Pointer(_cstring_attribute_))
 	defer C.free(unsafe.Pointer(_cstring_attribute_))
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attribute_uint64((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attribute_uint64((*C.GFile)(_self_._value_), _cgo_attribute_, _cgo_value_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14699,32 +16163,47 @@ func (_self_ *File) SetAttributesAsync(info FileInfoKind, flags C.GFileQueryInfo
 	return
 }
 
-func (_self_ *File) SetAttributesFinish(result AsyncResultKind) (_go__return__ bool, info *FileInfo, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributesFinish(result AsyncResultKind) (_go__return__ bool, info *FileInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _allocated_info_ *C.GFileInfo
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attributes_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_allocated_info_), _error_)
+	_return_ = C._g_file_set_attributes_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_allocated_info_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	info = (*FileInfo)(unsafe.Pointer(_allocated_info_))
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetAttributesFromInfo(info FileInfoKind, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) SetAttributesFromInfo(info FileInfoKind, flags C.GFileQueryInfoFlags, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_info_ := (*C.GFileInfo)(info.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_set_attributes_from_info((*C.GFile)(_self_._value_), _cgo_info_, flags, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_attributes_from_info((*C.GFile)(_self_._value_), _cgo_info_, flags, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *File) SetDisplayName(display_name string, cancellable CancellableKind) (_go__return__ File, _error_ unsafe.Pointer) {
+func (_self_ *File) SetDisplayName(display_name string, cancellable CancellableKind) (_go__return__ File, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GFile
 	_cstring_display_name_ := C.CString(display_name)
 	_cgo_display_name_ := (*C.char)(unsafe.Pointer(_cstring_display_name_))
 	defer C.free(unsafe.Pointer(_cstring_display_name_))
-	_return_ = C._g_file_set_display_name((*C.GFile)(_self_._value_), _cgo_display_name_, _cgo_cancellable_, _error_)
+	_return_ = C._g_file_set_display_name((*C.GFile)(_self_._value_), _cgo_display_name_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFile(unsafe.Pointer(_return_))
 	return
 }
@@ -14738,10 +16217,15 @@ func (_self_ *File) SetDisplayNameAsync(display_name string, io_priority C.int, 
 	return
 }
 
-func (_self_ *File) SetDisplayNameFinish(res AsyncResultKind) (_go__return__ File, _error_ unsafe.Pointer) {
+func (_self_ *File) SetDisplayNameFinish(res AsyncResultKind) (_go__return__ File, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GFile
-	_return_ = C._g_file_set_display_name_finish((*C.GFile)(_self_._value_), _cgo_res_, _error_)
+	_return_ = C._g_file_set_display_name_finish((*C.GFile)(_self_._value_), _cgo_res_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToFile(unsafe.Pointer(_return_))
 	return
 }
@@ -14753,10 +16237,15 @@ func (_self_ *File) StartMountable(flags C.GDriveStartFlags, start_operation Gio
 	return
 }
 
-func (_self_ *File) StartMountableFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) StartMountableFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_start_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_start_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14768,10 +16257,15 @@ func (_self_ *File) StopMountable(flags C.GMountUnmountFlags, mount_operation Gi
 	return
 }
 
-func (_self_ *File) StopMountableFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) StopMountableFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_stop_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_stop_mountable_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14783,10 +16277,15 @@ func (_self_ *File) SupportsThreadContexts() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *File) Trash(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) Trash(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_trash((*C.GFile)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_file_trash((*C.GFile)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14798,10 +16297,15 @@ func (_self_ *File) UnmountMountableWithOperation(flags C.GMountUnmountFlags, mo
 	return
 }
 
-func (_self_ *File) UnmountMountableWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *File) UnmountMountableWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_file_unmount_mountable_with_operation_finish((*C.GFile)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_file_unmount_mountable_with_operation_finish((*C.GFile)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14826,18 +16330,28 @@ func (_self_ *Icon) ToString() (_go__return__ string) {
 	return
 }
 
-func (_self_ *Initable) Init(cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Initable) Init(cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_initable_init((*C.GInitable)(_self_._value_), _cgo_cancellable_, _error_)
+	_return_ = C._g_initable_init((*C.GInitable)(_self_._value_), _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *LoadableIcon) Load(size C.int, cancellable CancellableKind) (_go__return__ InputStream, type_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *LoadableIcon) Load(size C.int, cancellable CancellableKind) (_go__return__ InputStream, type_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GInputStream
-	_return_ = C._g_loadable_icon_load((*C.GLoadableIcon)(_self_._value_), size, type_, _cgo_cancellable_, _error_)
+	_return_ = C._g_loadable_icon_load((*C.GLoadableIcon)(_self_._value_), size, type_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToInputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14848,13 +16362,18 @@ func (_self_ *LoadableIcon) LoadAsync(size C.int, cancellable CancellableKind, c
 	return
 }
 
-func (_self_ *LoadableIcon) LoadFinish(res AsyncResultKind, type_ string) (_go__return__ InputStream, _error_ unsafe.Pointer) {
+func (_self_ *LoadableIcon) LoadFinish(res AsyncResultKind, type_ string) (_go__return__ InputStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_res_ := (*C.GAsyncResult)(res.GetGObject())
 	var _return_ *C.GInputStream
 	_cstring_type__ := C.CString(type_)
 	_cgo_type__ := (unsafe.Pointer)(unsafe.Pointer(_cstring_type__))
 	defer C.free(unsafe.Pointer(_cstring_type__))
-	_return_ = C._g_loadable_icon_load_finish((*C.GLoadableIcon)(_self_._value_), _cgo_res_, _cgo_type__, _error_)
+	_return_ = C._g_loadable_icon_load_finish((*C.GLoadableIcon)(_self_._value_), _cgo_res_, _cgo_type__, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToInputStream(unsafe.Pointer(_return_))
 	return
 }
@@ -14880,10 +16399,15 @@ func (_self_ *Mount) EjectWithOperation(flags C.GMountUnmountFlags, mount_operat
 	return
 }
 
-func (_self_ *Mount) EjectWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Mount) EjectWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_mount_eject_with_operation_finish((*C.GMount)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_mount_eject_with_operation_finish((*C.GMount)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -14959,17 +16483,27 @@ func (_self_ *Mount) GuessContentType(force_rescan bool, cancellable Cancellable
 	return
 }
 
-func (_self_ *Mount) GuessContentTypeFinish(result AsyncResultKind) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *Mount) GuessContentTypeFinish(result AsyncResultKind) (_return_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_mount_guess_content_type_finish((*C.GMount)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_mount_guess_content_type_finish((*C.GMount)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *Mount) GuessContentTypeSync(force_rescan bool, cancellable CancellableKind) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *Mount) GuessContentTypeSync(force_rescan bool, cancellable CancellableKind) (_return_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_force_rescan_ := (C.gboolean)(C.FALSE)
 	if force_rescan { _cgo_force_rescan_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._g_mount_guess_content_type_sync((*C.GMount)(_self_._value_), _cgo_force_rescan_, _cgo_cancellable_, _error_)
+	_return_ = C._g_mount_guess_content_type_sync((*C.GMount)(_self_._value_), _cgo_force_rescan_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -14987,10 +16521,15 @@ func (_self_ *Mount) Remount(flags C.GMountMountFlags, mount_operation GioMountO
 	return
 }
 
-func (_self_ *Mount) RemountFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Mount) RemountFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_mount_remount_finish((*C.GMount)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_mount_remount_finish((*C.GMount)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15007,10 +16546,15 @@ func (_self_ *Mount) UnmountWithOperation(flags C.GMountUnmountFlags, mount_oper
 	return
 }
 
-func (_self_ *Mount) UnmountWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Mount) UnmountWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_mount_unmount_with_operation_finish((*C.GMount)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_mount_unmount_with_operation_finish((*C.GMount)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15020,11 +16564,16 @@ func (_self_ *Mount) Unshadow() () {
 	return
 }
 
-func (_self_ *NetworkMonitor) CanReach(connectable SocketConnectableKind, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *NetworkMonitor) CanReach(connectable SocketConnectableKind, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_connectable_ := (*C.GSocketConnectable)(connectable.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_network_monitor_can_reach((*C.GNetworkMonitor)(_self_._value_), _cgo_connectable_, _cgo_cancellable_, _error_)
+	_return_ = C._g_network_monitor_can_reach((*C.GNetworkMonitor)(_self_._value_), _cgo_connectable_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15036,10 +16585,15 @@ func (_self_ *NetworkMonitor) CanReachAsync(connectable SocketConnectableKind, c
 	return
 }
 
-func (_self_ *NetworkMonitor) CanReachFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *NetworkMonitor) CanReachFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_network_monitor_can_reach_finish((*C.GNetworkMonitor)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_network_monitor_can_reach_finish((*C.GNetworkMonitor)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15071,11 +16625,16 @@ func (_self_ *PollableInputStream) IsReadable() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *PollableInputStream) ReadNonblocking(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ unsafe.Pointer) {
+func (_self_ *PollableInputStream) ReadNonblocking(buffer unsafe.Pointer, count uint64, cancellable CancellableKind) (_go__return__ int64, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_count_ := (C.gsize)(count)
 	var _return_ C.gssize
-	_return_ = C._g_pollable_input_stream_read_nonblocking((*C.GPollableInputStream)(_self_._value_), buffer, _cgo_count_, _cgo_cancellable_, _error_)
+	_return_ = C._g_pollable_input_stream_read_nonblocking((*C.GPollableInputStream)(_self_._value_), buffer, _cgo_count_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int64)(_return_)
 	return
 }
@@ -15100,12 +16659,17 @@ func (_self_ *PollableOutputStream) IsWritable() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Proxy) Connect(connection IOStreamKind, proxy_address ProxyAddressKind, cancellable CancellableKind) (_go__return__ IOStream, _error_ unsafe.Pointer) {
+func (_self_ *Proxy) Connect(connection IOStreamKind, proxy_address ProxyAddressKind, cancellable CancellableKind) (_go__return__ IOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_connection_ := (*C.GIOStream)(connection.GetGObject())
 	_cgo_proxy_address_ := (*C.GProxyAddress)(proxy_address.GetGObject())
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	var _return_ *C.GIOStream
-	_return_ = C._g_proxy_connect((*C.GProxy)(_self_._value_), _cgo_connection_, _cgo_proxy_address_, _cgo_cancellable_, _error_)
+	_return_ = C._g_proxy_connect((*C.GProxy)(_self_._value_), _cgo_connection_, _cgo_proxy_address_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -15118,10 +16682,15 @@ func (_self_ *Proxy) ConnectAsync(connection IOStreamKind, proxy_address ProxyAd
 	return
 }
 
-func (_self_ *Proxy) ConnectFinish(result AsyncResultKind) (_go__return__ IOStream, _error_ unsafe.Pointer) {
+func (_self_ *Proxy) ConnectFinish(result AsyncResultKind) (_go__return__ IOStream, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ *C.GIOStream
-	_return_ = C._g_proxy_connect_finish((*C.GProxy)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_proxy_connect_finish((*C.GProxy)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToIOStream(unsafe.Pointer(_return_))
 	return
 }
@@ -15140,12 +16709,17 @@ func (_self_ *ProxyResolver) IsSupported() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *ProxyResolver) Lookup(uri string, cancellable CancellableKind) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *ProxyResolver) Lookup(uri string, cancellable CancellableKind) (_return_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
-	_return_ = C._g_proxy_resolver_lookup((*C.GProxyResolver)(_self_._value_), _cgo_uri_, _cgo_cancellable_, _error_)
+	_return_ = C._g_proxy_resolver_lookup((*C.GProxyResolver)(_self_._value_), _cgo_uri_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -15158,9 +16732,14 @@ func (_self_ *ProxyResolver) LookupAsync(uri string, cancellable CancellableKind
 	return
 }
 
-func (_self_ *ProxyResolver) LookupFinish(result AsyncResultKind) (_return_ unsafe.Pointer, _error_ unsafe.Pointer) {
+func (_self_ *ProxyResolver) LookupFinish(result AsyncResultKind) (_return_ unsafe.Pointer, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
-	_return_ = C._g_proxy_resolver_lookup_finish((*C.GProxyResolver)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_proxy_resolver_lookup_finish((*C.GProxyResolver)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -15194,11 +16773,16 @@ func (_self_ *Seekable) CanTruncate() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Seekable) Seek(offset int64, type_ C.GSeekType, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Seekable) Seek(offset int64, type_ C.GSeekType, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_offset_ := (C.goffset)(offset)
 	var _return_ C.gboolean
-	_return_ = C._g_seekable_seek((*C.GSeekable)(_self_._value_), _cgo_offset_, type_, _cgo_cancellable_, _error_)
+	_return_ = C._g_seekable_seek((*C.GSeekable)(_self_._value_), _cgo_offset_, type_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15210,11 +16794,16 @@ func (_self_ *Seekable) Tell() (_go__return__ int64) {
 	return
 }
 
-func (_self_ *Seekable) Truncate(offset int64, cancellable CancellableKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Seekable) Truncate(offset int64, cancellable CancellableKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_cancellable_ := (*C.GCancellable)(cancellable.GetGObject())
 	_cgo_offset_ := (C.goffset)(offset)
 	var _return_ C.gboolean
-	_return_ = C._g_seekable_truncate((*C.GSeekable)(_self_._value_), _cgo_offset_, _cgo_cancellable_, _error_)
+	_return_ = C._g_seekable_truncate((*C.GSeekable)(_self_._value_), _cgo_offset_, _cgo_cancellable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15330,10 +16919,15 @@ func (_self_ *Volume) EjectWithOperation(flags C.GMountUnmountFlags, mount_opera
 	return
 }
 
-func (_self_ *Volume) EjectWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Volume) EjectWithOperationFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_volume_eject_with_operation_finish((*C.GVolume)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_volume_eject_with_operation_finish((*C.GVolume)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -15416,10 +17010,15 @@ func (_self_ *Volume) Mount(flags C.GMountMountFlags, mount_operation GioMountOp
 	return
 }
 
-func (_self_ *Volume) MountFinish(result AsyncResultKind) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Volume) MountFinish(result AsyncResultKind) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_result_ := (*C.GAsyncResult)(result.GetGObject())
 	var _return_ C.gboolean
-	_return_ = C._g_volume_mount_finish((*C.GVolume)(_self_._value_), _cgo_result_, _error_)
+	_return_ = C._g_volume_mount_finish((*C.GVolume)(_self_._value_), _cgo_result_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }

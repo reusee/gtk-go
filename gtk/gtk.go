@@ -1221,6 +1221,9 @@ GtkTextMark * _gtk_text_buffer_create_mark(GtkTextBuffer * _self_, gchar * mark_
 void _gtk_text_buffer_delete_mark_by_name(GtkTextBuffer * _self_, gchar * name) {
 	(void)gtk_text_buffer_delete_mark_by_name(_self_, (const gchar *)(name));
 }
+gboolean _gtk_text_buffer_deserialize(GtkTextBuffer * _self_, GtkTextBuffer * content_buffer, GdkAtom format, GtkTextIter * iter, guint8 * data, gsize length, void * error) {
+	return (gboolean)gtk_text_buffer_deserialize(_self_, content_buffer, format, iter, (const guint8 *)(data), length, (GError **)(error));
+}
 GtkTextMark * _gtk_text_buffer_get_mark(GtkTextBuffer * _self_, gchar * name) {
 	return (GtkTextMark *)gtk_text_buffer_get_mark(_self_, (const gchar *)(name));
 }
@@ -7269,30 +7272,33 @@ func IconSizeFromName(name string) (_return_ C.GtkIconSize) {
 	return
 }
 
-func IconSizeGetName(size C.GtkIconSize) (_go__return__ string) {
+func IconSizeGetName(size int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._gtk_icon_size_get_name(size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C._gtk_icon_size_get_name(_cgo_size_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func IconSizeLookup(size C.GtkIconSize) (_go__return__ bool, _go_width_ int, _go_height_ int) {
+func IconSizeLookup(size int) (_go__return__ bool, _go_width_ int, _go_height_ int) {
 	var width C.gint
 	var height C.gint
 	var _return_ C.gboolean
-	_return_ = C.gtk_icon_size_lookup(size, &width, &height)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C.gtk_icon_size_lookup(_cgo_size_, &width, &height)
 	_go_width_ = (int)(width)
 	_go_height_ = (int)(height)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func IconSizeLookupForSettings(settings GtkSettingsKind, size C.GtkIconSize) (_go__return__ bool, _go_width_ int, _go_height_ int) {
+func IconSizeLookupForSettings(settings GtkSettingsKind, size int) (_go__return__ bool, _go_width_ int, _go_height_ int) {
 	_cgo_settings_ := (*C.GtkSettings)(settings.GetGObject())
 	var width C.gint
 	var height C.gint
 	var _return_ C.gboolean
-	_return_ = C.gtk_icon_size_lookup_for_settings(_cgo_settings_, size, &width, &height)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C.gtk_icon_size_lookup_for_settings(_cgo_settings_, _cgo_size_, &width, &height)
 	_go_width_ = (int)(width)
 	_go_height_ = (int)(height)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -7309,11 +7315,12 @@ func IconSizeRegister(name string, width int, height int) (_return_ C.GtkIconSiz
 	return
 }
 
-func IconSizeRegisterAlias(alias string, target C.GtkIconSize) () {
+func IconSizeRegisterAlias(alias string, target int) () {
 	_cstring_alias_ := C.CString(alias)
 	_cgo_alias_ := (*C.gchar)(unsafe.Pointer(_cstring_alias_))
 	defer C.free(unsafe.Pointer(_cstring_alias_))
-	C._gtk_icon_size_register_alias(_cgo_alias_, target)
+	_cgo_target_ := (C.GtkIconSize)(target)
+	C._gtk_icon_size_register_alias(_cgo_alias_, _cgo_target_)
 	return
 }
 
@@ -7498,13 +7505,14 @@ func RenderExpander(context StyleContextKind, cr *C.cairo_t, x float64, y float6
 	return
 }
 
-func RenderExtension(context StyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side C.GtkPositionType) () {
+func RenderExtension(context StyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side int) () {
 	_cgo_context_ := (*C.GtkStyleContext)(context.GetGObject())
 	_cgo_x_ := (C.gdouble)(x)
 	_cgo_y_ := (C.gdouble)(y)
 	_cgo_width_ := (C.gdouble)(width)
 	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_extension(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, gap_side)
+	_cgo_gap_side_ := (C.GtkPositionType)(gap_side)
+	C.gtk_render_extension(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, _cgo_gap_side_)
 	return
 }
 
@@ -7528,7 +7536,7 @@ func RenderFrame(context StyleContextKind, cr *C.cairo_t, x float64, y float64, 
 	return
 }
 
-func RenderFrameGap(context StyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side C.GtkPositionType, xy0_gap float64, xy1_gap float64) () {
+func RenderFrameGap(context StyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, gap_side int, xy0_gap float64, xy1_gap float64) () {
 	_cgo_context_ := (*C.GtkStyleContext)(context.GetGObject())
 	_cgo_x_ := (C.gdouble)(x)
 	_cgo_y_ := (C.gdouble)(y)
@@ -7536,7 +7544,8 @@ func RenderFrameGap(context StyleContextKind, cr *C.cairo_t, x float64, y float6
 	_cgo_height_ := (C.gdouble)(height)
 	_cgo_xy0_gap_ := (C.gdouble)(xy0_gap)
 	_cgo_xy1_gap_ := (C.gdouble)(xy1_gap)
-	C.gtk_render_frame_gap(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, gap_side, _cgo_xy0_gap_, _cgo_xy1_gap_)
+	_cgo_gap_side_ := (C.GtkPositionType)(gap_side)
+	C.gtk_render_frame_gap(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, _cgo_gap_side_, _cgo_xy0_gap_, _cgo_xy1_gap_)
 	return
 }
 
@@ -7558,10 +7567,11 @@ func RenderIcon(context StyleContextKind, cr *C.cairo_t, pixbuf *C.GdkPixbuf, x 
 	return
 }
 
-func RenderIconPixbuf(context StyleContextKind, source *IconSource, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
+func RenderIconPixbuf(context StyleContextKind, source *IconSource, size int) (_return_ *C.GdkPixbuf) {
 	_cgo_context_ := (*C.GtkStyleContext)(context.GetGObject())
 	_cgo_source_ := (*C.GtkIconSource)(unsafe.Pointer(source))
-	_return_ = C._gtk_render_icon_pixbuf(_cgo_context_, _cgo_source_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C._gtk_render_icon_pixbuf(_cgo_context_, _cgo_source_, _cgo_size_)
 	return
 }
 
@@ -7601,13 +7611,14 @@ func RenderOption(context StyleContextKind, cr *C.cairo_t, x float64, y float64,
 	return
 }
 
-func RenderSlider(context StyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, orientation C.GtkOrientation) () {
+func RenderSlider(context StyleContextKind, cr *C.cairo_t, x float64, y float64, width float64, height float64, orientation int) () {
 	_cgo_context_ := (*C.GtkStyleContext)(context.GetGObject())
 	_cgo_x_ := (C.gdouble)(x)
 	_cgo_y_ := (C.gdouble)(y)
 	_cgo_width_ := (C.gdouble)(width)
 	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_render_slider(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, orientation)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	C.gtk_render_slider(_cgo_context_, cr, _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_, _cgo_orientation_)
 	return
 }
 
@@ -7677,13 +7688,18 @@ func SetDebugFlags(flags uint) () {
 	return
 }
 
-func ShowUri(screen *C.GdkScreen, uri string, timestamp uint32) (_go__return__ bool, _error_ unsafe.Pointer) {
+func ShowUri(screen *C.GdkScreen, uri string, timestamp uint32) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_timestamp_ := (C.guint32)(timestamp)
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_show_uri(screen, _cgo_uri_, _cgo_timestamp_, _error_)
+	_return_ = C._gtk_show_uri(screen, _cgo_uri_, _cgo_timestamp_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -8019,8 +8035,9 @@ func (_self_ *AboutDialog) SetLicense(license string) () {
 	return
 }
 
-func (_self_ *AboutDialog) SetLicenseType(license_type C.GtkLicense) () {
-	C.gtk_about_dialog_set_license_type((*C.GtkAboutDialog)(_self_._value_), license_type)
+func (_self_ *AboutDialog) SetLicenseType(license_type int) () {
+	_cgo_license_type_ := (C.GtkLicense)(license_type)
+	C.gtk_about_dialog_set_license_type((*C.GtkAboutDialog)(_self_._value_), _cgo_license_type_)
 	return
 }
 
@@ -8375,9 +8392,10 @@ func (_self_ *GtkAction) ConnectAccelerator() () {
 	return
 }
 
-func (_self_ *GtkAction) CreateIcon(icon_size C.GtkIconSize) (_go__return__ Widget) {
+func (_self_ *GtkAction) CreateIcon(icon_size int) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_action_create_icon((*C.GtkAction)(_self_._value_), icon_size)
+	_cgo_icon_size_ := (C.GtkIconSize)(icon_size)
+	_return_ = C.gtk_action_create_icon((*C.GtkAction)(_self_._value_), _cgo_icon_size_)
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
@@ -9266,15 +9284,19 @@ func (_self_ *ApplicationWindow) SetShowMenubar(show_menubar bool) () {
 	return
 }
 
-func ArrowNew(arrow_type C.GtkArrowType, shadow_type C.GtkShadowType) (_go__return__ Arrow) {
+func ArrowNew(arrow_type int, shadow_type int) (_go__return__ Arrow) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_arrow_new(arrow_type, shadow_type)
+	_cgo_arrow_type_ := (C.GtkArrowType)(arrow_type)
+	_cgo_shadow_type_ := (C.GtkShadowType)(shadow_type)
+	_return_ = C.gtk_arrow_new(_cgo_arrow_type_, _cgo_shadow_type_)
 	_go__return__ = ToArrow(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Arrow) Set(arrow_type C.GtkArrowType, shadow_type C.GtkShadowType) () {
-	C.gtk_arrow_set((*C.GtkArrow)(_self_._value_), arrow_type, shadow_type)
+func (_self_ *Arrow) Set(arrow_type int, shadow_type int) () {
+	_cgo_arrow_type_ := (C.GtkArrowType)(arrow_type)
+	_cgo_shadow_type_ := (C.GtkShadowType)(shadow_type)
+	C.gtk_arrow_set((*C.GtkArrow)(_self_._value_), _cgo_arrow_type_, _cgo_shadow_type_)
 	return
 }
 
@@ -9440,9 +9462,10 @@ func (_self_ *Assistant) SetPageTitle(page WidgetKind, title string) () {
 	return
 }
 
-func (_self_ *Assistant) SetPageType(page WidgetKind, type_ C.GtkAssistantPageType) () {
+func (_self_ *Assistant) SetPageType(page WidgetKind, type_ int) () {
 	_cgo_page_ := (*C.GtkWidget)(page.GetGObject())
-	C.gtk_assistant_set_page_type((*C.GtkAssistant)(_self_._value_), _cgo_page_, type_)
+	_cgo_type__ := (C.GtkAssistantPageType)(type_)
+	C.gtk_assistant_set_page_type((*C.GtkAssistant)(_self_._value_), _cgo_page_, _cgo_type__)
 	return
 }
 
@@ -9458,10 +9481,11 @@ func (_self_ *Bin) GetChild() (_go__return__ Widget) {
 	return
 }
 
-func BoxNew(orientation C.GtkOrientation, spacing int) (_go__return__ Box) {
+func BoxNew(orientation int, spacing int) (_go__return__ Box) {
 	var _return_ *C.GtkWidget
 	_cgo_spacing_ := (C.gint)(spacing)
-	_return_ = C.gtk_box_new(orientation, _cgo_spacing_)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_box_new(_cgo_orientation_, _cgo_spacing_)
 	_go__return__ = ToBox(unsafe.Pointer(_return_))
 	return
 }
@@ -9521,14 +9545,15 @@ func (_self_ *Box) ReorderChild(child WidgetKind, position int) () {
 	return
 }
 
-func (_self_ *Box) SetChildPacking(child WidgetKind, expand bool, fill bool, padding uint, pack_type C.GtkPackType) () {
+func (_self_ *Box) SetChildPacking(child WidgetKind, expand bool, fill bool, padding uint, pack_type int) () {
 	_cgo_child_ := (*C.GtkWidget)(child.GetGObject())
 	_cgo_padding_ := (C.guint)(padding)
 	_cgo_expand_ := (C.gboolean)(C.FALSE)
 	if expand { _cgo_expand_ = (C.gboolean)(C.TRUE) }
 	_cgo_fill_ := (C.gboolean)(C.FALSE)
 	if fill { _cgo_fill_ = (C.gboolean)(C.TRUE) }
-	C.gtk_box_set_child_packing((*C.GtkBox)(_self_._value_), _cgo_child_, _cgo_expand_, _cgo_fill_, _cgo_padding_, pack_type)
+	_cgo_pack_type_ := (C.GtkPackType)(pack_type)
+	C.gtk_box_set_child_packing((*C.GtkBox)(_self_._value_), _cgo_child_, _cgo_expand_, _cgo_fill_, _cgo_padding_, _cgo_pack_type_)
 	return
 }
 
@@ -9552,33 +9577,48 @@ func BuilderNew() (_go__return__ Builder) {
 	return
 }
 
-func (_self_ *Builder) AddFromFile(filename string) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Builder) AddFromFile(filename string) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._gtk_builder_add_from_file((*C.GtkBuilder)(_self_._value_), _cgo_filename_, _error_)
+	_return_ = C._gtk_builder_add_from_file((*C.GtkBuilder)(_self_._value_), _cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Builder) AddFromResource(resource_path string) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Builder) AddFromResource(resource_path string) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
-	_return_ = C._gtk_builder_add_from_resource((*C.GtkBuilder)(_self_._value_), _cgo_resource_path_, _error_)
+	_return_ = C._gtk_builder_add_from_resource((*C.GtkBuilder)(_self_._value_), _cgo_resource_path_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Builder) AddFromString(buffer string, length uint64) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Builder) AddFromString(buffer string, length uint64) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_length_ := (C.gsize)(length)
 	var _return_ C.guint
 	_cstring_buffer_ := C.CString(buffer)
 	_cgo_buffer_ := (*C.gchar)(unsafe.Pointer(_cstring_buffer_))
 	defer C.free(unsafe.Pointer(_cstring_buffer_))
-	_return_ = C._gtk_builder_add_from_string((*C.GtkBuilder)(_self_._value_), _cgo_buffer_, _cgo_length_, _error_)
+	_return_ = C._gtk_builder_add_from_string((*C.GtkBuilder)(_self_._value_), _cgo_buffer_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -9629,22 +9669,32 @@ func (_self_ *Builder) SetTranslationDomain(domain string) () {
 	return
 }
 
-func (_self_ *Builder) ValueFromString(pspec *C.GParamSpec, string_ string) (_go__return__ bool, value *C.GValue, _error_ unsafe.Pointer) {
+func (_self_ *Builder) ValueFromString(pspec *C.GParamSpec, string_ string) (_go__return__ bool, value *C.GValue, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
-	_return_ = C._gtk_builder_value_from_string((*C.GtkBuilder)(_self_._value_), pspec, _cgo_string__, value, _error_)
+	_return_ = C._gtk_builder_value_from_string((*C.GtkBuilder)(_self_._value_), pspec, _cgo_string__, value, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Builder) ValueFromStringType(type_ C.GType, string_ string) (_go__return__ bool, value *C.GValue, _error_ unsafe.Pointer) {
+func (_self_ *Builder) ValueFromStringType(type_ C.GType, string_ string) (_go__return__ bool, value *C.GValue, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_string__ := C.CString(string_)
 	_cgo_string__ := (*C.gchar)(unsafe.Pointer(_cstring_string__))
 	defer C.free(unsafe.Pointer(_cstring_string__))
 	var _return_ C.gboolean
-	_return_ = C._gtk_builder_value_from_string_type((*C.GtkBuilder)(_self_._value_), type_, _cgo_string__, value, _error_)
+	_return_ = C._gtk_builder_value_from_string_type((*C.GtkBuilder)(_self_._value_), type_, _cgo_string__, value, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -9784,8 +9834,9 @@ func (_self_ *Button) SetImage(image WidgetKind) () {
 	return
 }
 
-func (_self_ *Button) SetImagePosition(position C.GtkPositionType) () {
-	C.gtk_button_set_image_position((*C.GtkButton)(_self_._value_), position)
+func (_self_ *Button) SetImagePosition(position int) () {
+	_cgo_position_ := (C.GtkPositionType)(position)
+	C.gtk_button_set_image_position((*C.GtkButton)(_self_._value_), _cgo_position_)
 	return
 }
 
@@ -9797,8 +9848,9 @@ func (_self_ *Button) SetLabel(label string) () {
 	return
 }
 
-func (_self_ *Button) SetRelief(newstyle C.GtkReliefStyle) () {
-	C.gtk_button_set_relief((*C.GtkButton)(_self_._value_), newstyle)
+func (_self_ *Button) SetRelief(newstyle int) () {
+	_cgo_newstyle_ := (C.GtkReliefStyle)(newstyle)
+	C.gtk_button_set_relief((*C.GtkButton)(_self_._value_), _cgo_newstyle_)
 	return
 }
 
@@ -9816,9 +9868,10 @@ func (_self_ *Button) SetUseUnderline(use_underline bool) () {
 	return
 }
 
-func ButtonBoxNew(orientation C.GtkOrientation) (_go__return__ ButtonBox) {
+func ButtonBoxNew(orientation int) (_go__return__ ButtonBox) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_button_box_new(orientation)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_button_box_new(_cgo_orientation_)
 	_go__return__ = ToButtonBox(unsafe.Pointer(_return_))
 	return
 }
@@ -9860,8 +9913,9 @@ func (_self_ *ButtonBox) SetChildSecondary(child WidgetKind, is_secondary bool) 
 	return
 }
 
-func (_self_ *ButtonBox) SetLayout(layout_style C.GtkButtonBoxStyle) () {
-	C.gtk_button_box_set_layout((*C.GtkButtonBox)(_self_._value_), layout_style)
+func (_self_ *ButtonBox) SetLayout(layout_style int) () {
+	_cgo_layout_style_ := (C.GtkButtonBoxStyle)(layout_style)
+	C.gtk_button_box_set_layout((*C.GtkButtonBox)(_self_._value_), _cgo_layout_style_)
 	return
 }
 
@@ -10067,9 +10121,10 @@ func (_self_ *CellArea) Event(context CellAreaContextKind, widget WidgetKind, ev
 	return
 }
 
-func (_self_ *CellArea) Focus(direction C.GtkDirectionType) (_go__return__ bool) {
+func (_self_ *CellArea) Focus(direction int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_cell_area_focus((*C.GtkCellArea)(_self_._value_), direction)
+	_cgo_direction_ := (C.GtkDirectionType)(direction)
+	_return_ = C.gtk_cell_area_focus((*C.GtkCellArea)(_self_._value_), _cgo_direction_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -10250,13 +10305,14 @@ func (_self_ *CellArea) Render(context CellAreaContextKind, widget WidgetKind, c
 	return
 }
 
-func (_self_ *CellArea) RequestRenderer(renderer CellRendererKind, orientation C.GtkOrientation, widget WidgetKind, for_size int) (_go_minimum_size_ int, _go_natural_size_ int) {
+func (_self_ *CellArea) RequestRenderer(renderer CellRendererKind, orientation int, widget WidgetKind, for_size int) (_go_minimum_size_ int, _go_natural_size_ int) {
 	_cgo_renderer_ := (*C.GtkCellRenderer)(renderer.GetGObject())
 	_cgo_widget_ := (*C.GtkWidget)(widget.GetGObject())
 	_cgo_for_size_ := (C.gint)(for_size)
 	var minimum_size C.gint
 	var natural_size C.gint
-	C.gtk_cell_area_request_renderer((*C.GtkCellArea)(_self_._value_), _cgo_renderer_, orientation, _cgo_widget_, _cgo_for_size_, &minimum_size, &natural_size)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	C.gtk_cell_area_request_renderer((*C.GtkCellArea)(_self_._value_), _cgo_renderer_, _cgo_orientation_, _cgo_widget_, _cgo_for_size_, &minimum_size, &natural_size)
 	_go_minimum_size_ = (int)(minimum_size)
 	_go_natural_size_ = (int)(natural_size)
 	return
@@ -11297,8 +11353,9 @@ func (_self_ *ComboBox) SetAddTearoffs(add_tearoffs bool) () {
 	return
 }
 
-func (_self_ *ComboBox) SetButtonSensitivity(sensitivity C.GtkSensitivityType) () {
-	C.gtk_combo_box_set_button_sensitivity((*C.GtkComboBox)(_self_._value_), sensitivity)
+func (_self_ *ComboBox) SetButtonSensitivity(sensitivity int) () {
+	_cgo_sensitivity_ := (C.GtkSensitivityType)(sensitivity)
+	C.gtk_combo_box_set_button_sensitivity((*C.GtkComboBox)(_self_._value_), _cgo_sensitivity_)
 	return
 }
 
@@ -11615,8 +11672,9 @@ func (_self_ *Container) SetReallocateRedraws(needs_redraws bool) () {
 	return
 }
 
-func (_self_ *Container) SetResizeMode(resize_mode C.GtkResizeMode) () {
-	C.gtk_container_set_resize_mode((*C.GtkContainer)(_self_._value_), resize_mode)
+func (_self_ *Container) SetResizeMode(resize_mode int) () {
+	_cgo_resize_mode_ := (C.GtkResizeMode)(resize_mode)
+	C.gtk_container_set_resize_mode((*C.GtkContainer)(_self_._value_), _cgo_resize_mode_)
 	return
 }
 
@@ -11652,19 +11710,29 @@ func CssProviderGetNamed(name string, variant string) (_go__return__ CssProvider
 	return
 }
 
-func (_self_ *CssProvider) LoadFromFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *CssProvider) LoadFromFile(file *C.GFile) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._gtk_css_provider_load_from_file((*C.GtkCssProvider)(_self_._value_), file, _error_)
+	_return_ = C._gtk_css_provider_load_from_file((*C.GtkCssProvider)(_self_._value_), file, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *CssProvider) LoadFromPath(path string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *CssProvider) LoadFromPath(path string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_path_ := C.CString(path)
 	_cgo_path_ := (*C.gchar)(unsafe.Pointer(_cstring_path_))
 	defer C.free(unsafe.Pointer(_cstring_path_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_css_provider_load_from_path((*C.GtkCssProvider)(_self_._value_), _cgo_path_, _error_)
+	_return_ = C._gtk_css_provider_load_from_path((*C.GtkCssProvider)(_self_._value_), _cgo_path_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -11834,15 +11902,17 @@ func (_self_ *Entry) GetHasFrame() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Entry) GetIconActivatable(icon_pos C.GtkEntryIconPosition) (_go__return__ bool) {
+func (_self_ *Entry) GetIconActivatable(icon_pos int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_entry_get_icon_activatable((*C.GtkEntry)(_self_._value_), icon_pos)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_activatable((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Entry) GetIconArea(icon_pos C.GtkEntryIconPosition) (icon_area *C.GdkRectangle) {
-	C.gtk_entry_get_icon_area((*C.GtkEntry)(_self_._value_), icon_pos, icon_area)
+func (_self_ *Entry) GetIconArea(icon_pos int) (icon_area *C.GdkRectangle) {
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C.gtk_entry_get_icon_area((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, icon_area)
 	return
 }
 
@@ -11855,52 +11925,60 @@ func (_self_ *Entry) GetIconAtPos(x int, y int) (_go__return__ int) {
 	return
 }
 
-func (_self_ *Entry) GetIconGicon(icon_pos C.GtkEntryIconPosition) (_return_ *C.GIcon) {
-	_return_ = C.gtk_entry_get_icon_gicon((*C.GtkEntry)(_self_._value_), icon_pos)
+func (_self_ *Entry) GetIconGicon(icon_pos int) (_return_ *C.GIcon) {
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_gicon((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	return
 }
 
-func (_self_ *Entry) GetIconName(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+func (_self_ *Entry) GetIconName(icon_pos int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._gtk_entry_get_icon_name((*C.GtkEntry)(_self_._value_), icon_pos)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C._gtk_entry_get_icon_name((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Entry) GetIconPixbuf(icon_pos C.GtkEntryIconPosition) (_return_ *C.GdkPixbuf) {
-	_return_ = C.gtk_entry_get_icon_pixbuf((*C.GtkEntry)(_self_._value_), icon_pos)
+func (_self_ *Entry) GetIconPixbuf(icon_pos int) (_return_ *C.GdkPixbuf) {
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_pixbuf((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	return
 }
 
-func (_self_ *Entry) GetIconSensitive(icon_pos C.GtkEntryIconPosition) (_go__return__ bool) {
+func (_self_ *Entry) GetIconSensitive(icon_pos int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_entry_get_icon_sensitive((*C.GtkEntry)(_self_._value_), icon_pos)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_sensitive((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *Entry) GetIconStock(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+func (_self_ *Entry) GetIconStock(icon_pos int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C._gtk_entry_get_icon_stock((*C.GtkEntry)(_self_._value_), icon_pos)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C._gtk_entry_get_icon_stock((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Entry) GetIconStorageType(icon_pos C.GtkEntryIconPosition) (_return_ C.GtkImageType) {
-	_return_ = C.gtk_entry_get_icon_storage_type((*C.GtkEntry)(_self_._value_), icon_pos)
+func (_self_ *Entry) GetIconStorageType(icon_pos int) (_return_ C.GtkImageType) {
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_storage_type((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	return
 }
 
-func (_self_ *Entry) GetIconTooltipMarkup(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+func (_self_ *Entry) GetIconTooltipMarkup(icon_pos int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C.gtk_entry_get_icon_tooltip_markup((*C.GtkEntry)(_self_._value_), icon_pos)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_tooltip_markup((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Entry) GetIconTooltipText(icon_pos C.GtkEntryIconPosition) (_go__return__ string) {
+func (_self_ *Entry) GetIconTooltipText(icon_pos int) (_go__return__ string) {
 	var _return_ *C.gchar
-	_return_ = C.gtk_entry_get_icon_tooltip_text((*C.GtkEntry)(_self_._value_), icon_pos)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	_return_ = C.gtk_entry_get_icon_tooltip_text((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
@@ -12070,65 +12148,74 @@ func (_self_ *Entry) SetHasFrame(setting bool) () {
 	return
 }
 
-func (_self_ *Entry) SetIconActivatable(icon_pos C.GtkEntryIconPosition, activatable bool) () {
+func (_self_ *Entry) SetIconActivatable(icon_pos int, activatable bool) () {
 	_cgo_activatable_ := (C.gboolean)(C.FALSE)
 	if activatable { _cgo_activatable_ = (C.gboolean)(C.TRUE) }
-	C.gtk_entry_set_icon_activatable((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_activatable_)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C.gtk_entry_set_icon_activatable((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_activatable_)
 	return
 }
 
-func (_self_ *Entry) SetIconDragSource(icon_pos C.GtkEntryIconPosition, target_list *TargetList, actions C.GdkDragAction) () {
+func (_self_ *Entry) SetIconDragSource(icon_pos int, target_list *TargetList, actions C.GdkDragAction) () {
 	_cgo_target_list_ := (*C.GtkTargetList)(unsafe.Pointer(target_list))
-	C.gtk_entry_set_icon_drag_source((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_target_list_, actions)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C.gtk_entry_set_icon_drag_source((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_target_list_, actions)
 	return
 }
 
-func (_self_ *Entry) SetIconFromGicon(icon_pos C.GtkEntryIconPosition, icon *C.GIcon) () {
-	C.gtk_entry_set_icon_from_gicon((*C.GtkEntry)(_self_._value_), icon_pos, icon)
+func (_self_ *Entry) SetIconFromGicon(icon_pos int, icon *C.GIcon) () {
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C.gtk_entry_set_icon_from_gicon((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, icon)
 	return
 }
 
-func (_self_ *Entry) SetIconFromIconName(icon_pos C.GtkEntryIconPosition, icon_name string) () {
+func (_self_ *Entry) SetIconFromIconName(icon_pos int, icon_name string) () {
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	C._gtk_entry_set_icon_from_icon_name((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_icon_name_)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C._gtk_entry_set_icon_from_icon_name((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_icon_name_)
 	return
 }
 
-func (_self_ *Entry) SetIconFromPixbuf(icon_pos C.GtkEntryIconPosition, pixbuf *C.GdkPixbuf) () {
-	C.gtk_entry_set_icon_from_pixbuf((*C.GtkEntry)(_self_._value_), icon_pos, pixbuf)
+func (_self_ *Entry) SetIconFromPixbuf(icon_pos int, pixbuf *C.GdkPixbuf) () {
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C.gtk_entry_set_icon_from_pixbuf((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, pixbuf)
 	return
 }
 
-func (_self_ *Entry) SetIconFromStock(icon_pos C.GtkEntryIconPosition, stock_id string) () {
+func (_self_ *Entry) SetIconFromStock(icon_pos int, stock_id string) () {
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	C._gtk_entry_set_icon_from_stock((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_stock_id_)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C._gtk_entry_set_icon_from_stock((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_stock_id_)
 	return
 }
 
-func (_self_ *Entry) SetIconSensitive(icon_pos C.GtkEntryIconPosition, sensitive bool) () {
+func (_self_ *Entry) SetIconSensitive(icon_pos int, sensitive bool) () {
 	_cgo_sensitive_ := (C.gboolean)(C.FALSE)
 	if sensitive { _cgo_sensitive_ = (C.gboolean)(C.TRUE) }
-	C.gtk_entry_set_icon_sensitive((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_sensitive_)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C.gtk_entry_set_icon_sensitive((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_sensitive_)
 	return
 }
 
-func (_self_ *Entry) SetIconTooltipMarkup(icon_pos C.GtkEntryIconPosition, tooltip string) () {
+func (_self_ *Entry) SetIconTooltipMarkup(icon_pos int, tooltip string) () {
 	_cstring_tooltip_ := C.CString(tooltip)
 	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
 	defer C.free(unsafe.Pointer(_cstring_tooltip_))
-	C._gtk_entry_set_icon_tooltip_markup((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_tooltip_)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C._gtk_entry_set_icon_tooltip_markup((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_tooltip_)
 	return
 }
 
-func (_self_ *Entry) SetIconTooltipText(icon_pos C.GtkEntryIconPosition, tooltip string) () {
+func (_self_ *Entry) SetIconTooltipText(icon_pos int, tooltip string) () {
 	_cstring_tooltip_ := C.CString(tooltip)
 	_cgo_tooltip_ := (*C.gchar)(unsafe.Pointer(_cstring_tooltip_))
 	defer C.free(unsafe.Pointer(_cstring_tooltip_))
-	C._gtk_entry_set_icon_tooltip_text((*C.GtkEntry)(_self_._value_), icon_pos, _cgo_tooltip_)
+	_cgo_icon_pos_ := (C.GtkEntryIconPosition)(icon_pos)
+	C._gtk_entry_set_icon_tooltip_text((*C.GtkEntry)(_self_._value_), _cgo_icon_pos_, _cgo_tooltip_)
 	return
 }
 
@@ -12137,8 +12224,9 @@ func (_self_ *Entry) SetInputHints(hints C.GtkInputHints) () {
 	return
 }
 
-func (_self_ *Entry) SetInputPurpose(purpose C.GtkInputPurpose) () {
-	C.gtk_entry_set_input_purpose((*C.GtkEntry)(_self_._value_), purpose)
+func (_self_ *Entry) SetInputPurpose(purpose int) () {
+	_cgo_purpose_ := (C.GtkInputPurpose)(purpose)
+	C.gtk_entry_set_input_purpose((*C.GtkEntry)(_self_._value_), _cgo_purpose_)
 	return
 }
 
@@ -12659,12 +12747,13 @@ func (_self_ *Expander) SetUseUnderline(use_underline bool) () {
 	return
 }
 
-func FileChooserButtonNew(title string, action C.GtkFileChooserAction) (_go__return__ FileChooserButton) {
+func FileChooserButtonNew(title string, action int) (_go__return__ FileChooserButton) {
 	var _return_ *C.GtkWidget
 	_cstring_title_ := C.CString(title)
 	_cgo_title_ := (*C.gchar)(unsafe.Pointer(_cstring_title_))
 	defer C.free(unsafe.Pointer(_cstring_title_))
-	_return_ = C._gtk_file_chooser_button_new(_cgo_title_, action)
+	_cgo_action_ := (C.GtkFileChooserAction)(action)
+	_return_ = C._gtk_file_chooser_button_new(_cgo_title_, _cgo_action_)
 	_go__return__ = ToFileChooserButton(unsafe.Pointer(_return_))
 	return
 }
@@ -12719,9 +12808,10 @@ func (_self_ *FileChooserButton) SetWidthChars(n_chars int) () {
 	return
 }
 
-func FileChooserWidgetNew(action C.GtkFileChooserAction) (_go__return__ FileChooserWidget) {
+func FileChooserWidgetNew(action int) (_go__return__ FileChooserWidget) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_file_chooser_widget_new(action)
+	_cgo_action_ := (C.GtkFileChooserAction)(action)
+	_return_ = C.gtk_file_chooser_widget_new(_cgo_action_)
 	_go__return__ = ToFileChooserWidget(unsafe.Pointer(_return_))
 	return
 }
@@ -12992,8 +13082,9 @@ func (_self_ *Frame) SetLabelWidget(label_widget WidgetKind) () {
 	return
 }
 
-func (_self_ *Frame) SetShadowType(type_ C.GtkShadowType) () {
-	C.gtk_frame_set_shadow_type((*C.GtkFrame)(_self_._value_), type_)
+func (_self_ *Frame) SetShadowType(type_ int) () {
+	_cgo_type__ := (C.GtkShadowType)(type_)
+	C.gtk_frame_set_shadow_type((*C.GtkFrame)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -13014,12 +13105,13 @@ func (_self_ *Grid) Attach(child WidgetKind, left int, top int, width int, heigh
 	return
 }
 
-func (_self_ *Grid) AttachNextTo(child WidgetKind, sibling WidgetKind, side C.GtkPositionType, width int, height int) () {
+func (_self_ *Grid) AttachNextTo(child WidgetKind, sibling WidgetKind, side int, width int, height int) () {
 	_cgo_child_ := (*C.GtkWidget)(child.GetGObject())
 	_cgo_sibling_ := (*C.GtkWidget)(sibling.GetGObject())
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
-	C.gtk_grid_attach_next_to((*C.GtkGrid)(_self_._value_), _cgo_child_, _cgo_sibling_, side, _cgo_width_, _cgo_height_)
+	_cgo_side_ := (C.GtkPositionType)(side)
+	C.gtk_grid_attach_next_to((*C.GtkGrid)(_self_._value_), _cgo_child_, _cgo_sibling_, _cgo_side_, _cgo_width_, _cgo_height_)
 	return
 }
 
@@ -13066,9 +13158,10 @@ func (_self_ *Grid) InsertColumn(position int) () {
 	return
 }
 
-func (_self_ *Grid) InsertNextTo(sibling WidgetKind, side C.GtkPositionType) () {
+func (_self_ *Grid) InsertNextTo(sibling WidgetKind, side int) () {
 	_cgo_sibling_ := (*C.GtkWidget)(sibling.GetGObject())
-	C.gtk_grid_insert_next_to((*C.GtkGrid)(_self_._value_), _cgo_sibling_, side)
+	_cgo_side_ := (C.GtkPositionType)(side)
+	C.gtk_grid_insert_next_to((*C.GtkGrid)(_self_._value_), _cgo_sibling_, _cgo_side_)
 	return
 }
 
@@ -13356,12 +13449,17 @@ func (_self_ *IconTheme) ListIcons(context string) (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *IconTheme) LoadIcon(icon_name string, size int, flags C.GtkIconLookupFlags) (_return_ *C.GdkPixbuf, _error_ unsafe.Pointer) {
+func (_self_ *IconTheme) LoadIcon(icon_name string, size int, flags C.GtkIconLookupFlags) (_return_ *C.GdkPixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_size_ := (C.gint)(size)
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	_return_ = C._gtk_icon_theme_load_icon((*C.GtkIconTheme)(_self_._value_), _cgo_icon_name_, _cgo_size_, flags, _error_)
+	_return_ = C._gtk_icon_theme_load_icon((*C.GtkIconTheme)(_self_._value_), _cgo_icon_name_, _cgo_size_, flags, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -13706,14 +13804,16 @@ func (_self_ *IconView) SetCursor(path *TreePath, cell CellRendererKind, start_e
 	return
 }
 
-func (_self_ *IconView) SetDragDestItem(path *TreePath, pos C.GtkIconViewDropPosition) () {
+func (_self_ *IconView) SetDragDestItem(path *TreePath, pos int) () {
 	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	C.gtk_icon_view_set_drag_dest_item((*C.GtkIconView)(_self_._value_), _cgo_path_, pos)
+	_cgo_pos_ := (C.GtkIconViewDropPosition)(pos)
+	C.gtk_icon_view_set_drag_dest_item((*C.GtkIconView)(_self_._value_), _cgo_path_, _cgo_pos_)
 	return
 }
 
-func (_self_ *IconView) SetItemOrientation(orientation C.GtkOrientation) () {
-	C.gtk_icon_view_set_item_orientation((*C.GtkIconView)(_self_._value_), orientation)
+func (_self_ *IconView) SetItemOrientation(orientation int) () {
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	C.gtk_icon_view_set_item_orientation((*C.GtkIconView)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -13766,8 +13866,9 @@ func (_self_ *IconView) SetRowSpacing(row_spacing int) () {
 	return
 }
 
-func (_self_ *IconView) SetSelectionMode(mode C.GtkSelectionMode) () {
-	C.gtk_icon_view_set_selection_mode((*C.GtkIconView)(_self_._value_), mode)
+func (_self_ *IconView) SetSelectionMode(mode int) () {
+	_cgo_mode_ := (C.GtkSelectionMode)(mode)
+	C.gtk_icon_view_set_selection_mode((*C.GtkIconView)(_self_._value_), _cgo_mode_)
 	return
 }
 
@@ -13849,27 +13950,30 @@ func ImageNewFromFile(filename string) (_go__return__ GtkImage) {
 	return
 }
 
-func ImageNewFromGicon(icon *C.GIcon, size C.GtkIconSize) (_go__return__ GtkImage) {
+func ImageNewFromGicon(icon *C.GIcon, size int) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_image_new_from_gicon(icon, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C.gtk_image_new_from_gicon(icon, _cgo_size_)
 	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromIconName(icon_name string, size C.GtkIconSize) (_go__return__ GtkImage) {
+func ImageNewFromIconName(icon_name string, size int) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	_return_ = C._gtk_image_new_from_icon_name(_cgo_icon_name_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C._gtk_image_new_from_icon_name(_cgo_icon_name_, _cgo_size_)
 	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
 
-func ImageNewFromIconSet(icon_set *IconSet, size C.GtkIconSize) (_go__return__ GtkImage) {
+func ImageNewFromIconSet(icon_set *IconSet, size int) (_go__return__ GtkImage) {
 	_cgo_icon_set_ := (*C.GtkIconSet)(unsafe.Pointer(icon_set))
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_image_new_from_icon_set(_cgo_icon_set_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C.gtk_image_new_from_icon_set(_cgo_icon_set_, _cgo_size_)
 	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
@@ -13891,12 +13995,13 @@ func ImageNewFromResource(resource_path string) (_go__return__ GtkImage) {
 	return
 }
 
-func ImageNewFromStock(stock_id string, size C.GtkIconSize) (_go__return__ GtkImage) {
+func ImageNewFromStock(stock_id string, size int) (_go__return__ GtkImage) {
 	var _return_ *C.GtkWidget
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	_return_ = C._gtk_image_new_from_stock(_cgo_stock_id_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C._gtk_image_new_from_stock(_cgo_stock_id_, _cgo_size_)
 	_go__return__ = ToGtkImage(unsafe.Pointer(_return_))
 	return
 }
@@ -13963,22 +14068,25 @@ func (_self_ *GtkImage) SetFromFile(filename string) () {
 	return
 }
 
-func (_self_ *GtkImage) SetFromGicon(icon *C.GIcon, size C.GtkIconSize) () {
-	C.gtk_image_set_from_gicon((*C.GtkImage)(_self_._value_), icon, size)
+func (_self_ *GtkImage) SetFromGicon(icon *C.GIcon, size int) () {
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C.gtk_image_set_from_gicon((*C.GtkImage)(_self_._value_), icon, _cgo_size_)
 	return
 }
 
-func (_self_ *GtkImage) SetFromIconName(icon_name string, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromIconName(icon_name string, size int) () {
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	C._gtk_image_set_from_icon_name((*C.GtkImage)(_self_._value_), _cgo_icon_name_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C._gtk_image_set_from_icon_name((*C.GtkImage)(_self_._value_), _cgo_icon_name_, _cgo_size_)
 	return
 }
 
-func (_self_ *GtkImage) SetFromIconSet(icon_set *IconSet, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromIconSet(icon_set *IconSet, size int) () {
 	_cgo_icon_set_ := (*C.GtkIconSet)(unsafe.Pointer(icon_set))
-	C.gtk_image_set_from_icon_set((*C.GtkImage)(_self_._value_), _cgo_icon_set_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C.gtk_image_set_from_icon_set((*C.GtkImage)(_self_._value_), _cgo_icon_set_, _cgo_size_)
 	return
 }
 
@@ -13995,11 +14103,12 @@ func (_self_ *GtkImage) SetFromResource(resource_path string) () {
 	return
 }
 
-func (_self_ *GtkImage) SetFromStock(stock_id string, size C.GtkIconSize) () {
+func (_self_ *GtkImage) SetFromStock(stock_id string, size int) () {
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	C._gtk_image_set_from_stock((*C.GtkImage)(_self_._value_), _cgo_stock_id_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C._gtk_image_set_from_stock((*C.GtkImage)(_self_._value_), _cgo_stock_id_, _cgo_size_)
 	return
 }
 
@@ -14150,8 +14259,9 @@ func (_self_ *InfoBar) SetDefaultResponse(response_id int) () {
 	return
 }
 
-func (_self_ *InfoBar) SetMessageType(message_type C.GtkMessageType) () {
-	C.gtk_info_bar_set_message_type((*C.GtkInfoBar)(_self_._value_), message_type)
+func (_self_ *InfoBar) SetMessageType(message_type int) () {
+	_cgo_message_type_ := (C.GtkMessageType)(message_type)
+	C.gtk_info_bar_set_message_type((*C.GtkInfoBar)(_self_._value_), _cgo_message_type_)
 	return
 }
 
@@ -14373,8 +14483,9 @@ func (_self_ *Label) SetEllipsize(mode C.PangoEllipsizeMode) () {
 	return
 }
 
-func (_self_ *Label) SetJustify(jtype C.GtkJustification) () {
-	C.gtk_label_set_justify((*C.GtkLabel)(_self_._value_), jtype)
+func (_self_ *Label) SetJustify(jtype int) () {
+	_cgo_jtype_ := (C.GtkJustification)(jtype)
+	C.gtk_label_set_justify((*C.GtkLabel)(_self_._value_), _cgo_jtype_)
 	return
 }
 
@@ -14620,8 +14731,9 @@ func (_self_ *LevelBar) SetMinValue(value float64) () {
 	return
 }
 
-func (_self_ *LevelBar) SetMode(mode C.GtkLevelBarMode) () {
-	C.gtk_level_bar_set_mode((*C.GtkLevelBar)(_self_._value_), mode)
+func (_self_ *LevelBar) SetMode(mode int) () {
+	_cgo_mode_ := (C.GtkLevelBarMode)(mode)
+	C.gtk_level_bar_set_mode((*C.GtkLevelBar)(_self_._value_), _cgo_mode_)
 	return
 }
 
@@ -14996,13 +15108,15 @@ func (_self_ *MenuBar) GetPackDirection() (_return_ C.GtkPackDirection) {
 	return
 }
 
-func (_self_ *MenuBar) SetChildPackDirection(child_pack_dir C.GtkPackDirection) () {
-	C.gtk_menu_bar_set_child_pack_direction((*C.GtkMenuBar)(_self_._value_), child_pack_dir)
+func (_self_ *MenuBar) SetChildPackDirection(child_pack_dir int) () {
+	_cgo_child_pack_dir_ := (C.GtkPackDirection)(child_pack_dir)
+	C.gtk_menu_bar_set_child_pack_direction((*C.GtkMenuBar)(_self_._value_), _cgo_child_pack_dir_)
 	return
 }
 
-func (_self_ *MenuBar) SetPackDirection(pack_dir C.GtkPackDirection) () {
-	C.gtk_menu_bar_set_pack_direction((*C.GtkMenuBar)(_self_._value_), pack_dir)
+func (_self_ *MenuBar) SetPackDirection(pack_dir int) () {
+	_cgo_pack_dir_ := (C.GtkPackDirection)(pack_dir)
+	C.gtk_menu_bar_set_pack_direction((*C.GtkMenuBar)(_self_._value_), _cgo_pack_dir_)
 	return
 }
 
@@ -15043,8 +15157,9 @@ func (_self_ *MenuButton) SetAlignWidget(align_widget WidgetKind) () {
 	return
 }
 
-func (_self_ *MenuButton) SetDirection(direction C.GtkArrowType) () {
-	C.gtk_menu_button_set_direction((*C.GtkMenuButton)(_self_._value_), direction)
+func (_self_ *MenuButton) SetDirection(direction int) () {
+	_cgo_direction_ := (C.GtkArrowType)(direction)
+	C.gtk_menu_button_set_direction((*C.GtkMenuButton)(_self_._value_), _cgo_direction_)
 	return
 }
 
@@ -15448,9 +15563,10 @@ func (_self_ *Notebook) AppendPageMenu(child WidgetKind, tab_label WidgetKind, m
 	return
 }
 
-func (_self_ *Notebook) GetActionWidget(pack_type C.GtkPackType) (_go__return__ Widget) {
+func (_self_ *Notebook) GetActionWidget(pack_type int) (_go__return__ Widget) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_notebook_get_action_widget((*C.GtkNotebook)(_self_._value_), pack_type)
+	_cgo_pack_type_ := (C.GtkPackType)(pack_type)
+	_return_ = C.gtk_notebook_get_action_widget((*C.GtkNotebook)(_self_._value_), _cgo_pack_type_)
 	_go__return__ = ToWidget(unsafe.Pointer(_return_))
 	return
 }
@@ -15639,9 +15755,10 @@ func (_self_ *Notebook) ReorderChild(child WidgetKind, position int) () {
 	return
 }
 
-func (_self_ *Notebook) SetActionWidget(widget WidgetKind, pack_type C.GtkPackType) () {
+func (_self_ *Notebook) SetActionWidget(widget WidgetKind, pack_type int) () {
 	_cgo_widget_ := (*C.GtkWidget)(widget.GetGObject())
-	C.gtk_notebook_set_action_widget((*C.GtkNotebook)(_self_._value_), _cgo_widget_, pack_type)
+	_cgo_pack_type_ := (C.GtkPackType)(pack_type)
+	C.gtk_notebook_set_action_widget((*C.GtkNotebook)(_self_._value_), _cgo_widget_, _cgo_pack_type_)
 	return
 }
 
@@ -15720,8 +15837,9 @@ func (_self_ *Notebook) SetTabLabelText(child WidgetKind, tab_text string) () {
 	return
 }
 
-func (_self_ *Notebook) SetTabPos(pos C.GtkPositionType) () {
-	C.gtk_notebook_set_tab_pos((*C.GtkNotebook)(_self_._value_), pos)
+func (_self_ *Notebook) SetTabPos(pos int) () {
+	_cgo_pos_ := (C.GtkPositionType)(pos)
+	C.gtk_notebook_set_tab_pos((*C.GtkNotebook)(_self_._value_), _cgo_pos_)
 	return
 }
 
@@ -15847,22 +15965,32 @@ func PageSetupNew() (_go__return__ PageSetup) {
 	return
 }
 
-func PageSetupNewFromFile(file_name string) (_go__return__ PageSetup, _error_ unsafe.Pointer) {
+func PageSetupNewFromFile(file_name string) (_go__return__ PageSetup, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GtkPageSetup
 	_cstring_file_name_ := C.CString(file_name)
 	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
-	_return_ = C._gtk_page_setup_new_from_file(_cgo_file_name_, _error_)
+	_return_ = C._gtk_page_setup_new_from_file(_cgo_file_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
 
-func PageSetupNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ PageSetup, _error_ unsafe.Pointer) {
+func PageSetupNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ PageSetup, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GtkPageSetup
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
-	_return_ = C._gtk_page_setup_new_from_key_file(key_file, _cgo_group_name_, _error_)
+	_return_ = C._gtk_page_setup_new_from_key_file(key_file, _cgo_group_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPageSetup(unsafe.Pointer(_return_))
 	return
 }
@@ -15874,16 +16002,18 @@ func (_self_ *PageSetup) Copy() (_go__return__ PageSetup) {
 	return
 }
 
-func (_self_ *PageSetup) GetBottomMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetBottomMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_bottom_margin((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_bottom_margin((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PageSetup) GetLeftMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetLeftMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_left_margin((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_left_margin((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -15893,23 +16023,26 @@ func (_self_ *PageSetup) GetOrientation() (_return_ C.GtkPageOrientation) {
 	return
 }
 
-func (_self_ *PageSetup) GetPageHeight(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetPageHeight(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_page_height((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_page_height((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PageSetup) GetPageWidth(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetPageWidth(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_page_width((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_page_width((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PageSetup) GetPaperHeight(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetPaperHeight(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_paper_height((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_paper_height((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -15921,61 +16054,77 @@ func (_self_ *PageSetup) GetPaperSize() (_go__return__ *PaperSize) {
 	return
 }
 
-func (_self_ *PageSetup) GetPaperWidth(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetPaperWidth(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_paper_width((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_paper_width((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PageSetup) GetRightMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetRightMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_right_margin((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_right_margin((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PageSetup) GetTopMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PageSetup) GetTopMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_page_setup_get_top_margin((*C.GtkPageSetup)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_page_setup_get_top_margin((*C.GtkPageSetup)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PageSetup) LoadFile(file_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PageSetup) LoadFile(file_name string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_file_name_ := C.CString(file_name)
 	_cgo_file_name_ := (*C.char)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_page_setup_load_file((*C.GtkPageSetup)(_self_._value_), _cgo_file_name_, _error_)
+	_return_ = C._gtk_page_setup_load_file((*C.GtkPageSetup)(_self_._value_), _cgo_file_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *PageSetup) LoadKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PageSetup) LoadKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_page_setup_load_key_file((*C.GtkPageSetup)(_self_._value_), key_file, _cgo_group_name_, _error_)
+	_return_ = C._gtk_page_setup_load_key_file((*C.GtkPageSetup)(_self_._value_), key_file, _cgo_group_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *PageSetup) SetBottomMargin(margin float64, unit C.GtkUnit) () {
+func (_self_ *PageSetup) SetBottomMargin(margin float64, unit int) () {
 	_cgo_margin_ := (C.gdouble)(margin)
-	C.gtk_page_setup_set_bottom_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_page_setup_set_bottom_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, _cgo_unit_)
 	return
 }
 
-func (_self_ *PageSetup) SetLeftMargin(margin float64, unit C.GtkUnit) () {
+func (_self_ *PageSetup) SetLeftMargin(margin float64, unit int) () {
 	_cgo_margin_ := (C.gdouble)(margin)
-	C.gtk_page_setup_set_left_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_page_setup_set_left_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, _cgo_unit_)
 	return
 }
 
-func (_self_ *PageSetup) SetOrientation(orientation C.GtkPageOrientation) () {
-	C.gtk_page_setup_set_orientation((*C.GtkPageSetup)(_self_._value_), orientation)
+func (_self_ *PageSetup) SetOrientation(orientation int) () {
+	_cgo_orientation_ := (C.GtkPageOrientation)(orientation)
+	C.gtk_page_setup_set_orientation((*C.GtkPageSetup)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -15991,24 +16140,31 @@ func (_self_ *PageSetup) SetPaperSizeAndDefaultMargins(size *PaperSize) () {
 	return
 }
 
-func (_self_ *PageSetup) SetRightMargin(margin float64, unit C.GtkUnit) () {
+func (_self_ *PageSetup) SetRightMargin(margin float64, unit int) () {
 	_cgo_margin_ := (C.gdouble)(margin)
-	C.gtk_page_setup_set_right_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_page_setup_set_right_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, _cgo_unit_)
 	return
 }
 
-func (_self_ *PageSetup) SetTopMargin(margin float64, unit C.GtkUnit) () {
+func (_self_ *PageSetup) SetTopMargin(margin float64, unit int) () {
 	_cgo_margin_ := (C.gdouble)(margin)
-	C.gtk_page_setup_set_top_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_page_setup_set_top_margin((*C.GtkPageSetup)(_self_._value_), _cgo_margin_, _cgo_unit_)
 	return
 }
 
-func (_self_ *PageSetup) ToFile(file_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PageSetup) ToFile(file_name string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_file_name_ := C.CString(file_name)
 	_cgo_file_name_ := (*C.char)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_page_setup_to_file((*C.GtkPageSetup)(_self_._value_), _cgo_file_name_, _error_)
+	_return_ = C._gtk_page_setup_to_file((*C.GtkPageSetup)(_self_._value_), _cgo_file_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -16021,9 +16177,10 @@ func (_self_ *PageSetup) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
 	return
 }
 
-func PanedNew(orientation C.GtkOrientation) (_go__return__ Paned) {
+func PanedNew(orientation int) (_go__return__ Paned) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_paned_new(orientation)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_paned_new(_cgo_orientation_)
 	_go__return__ = ToPaned(unsafe.Pointer(_return_))
 	return
 }
@@ -16239,8 +16396,13 @@ func (_self_ *PrintOperation) GetEmbedPageSetup() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *PrintOperation) GetError() (_error_ unsafe.Pointer) {
-	C._gtk_print_operation_get_error((*C.GtkPrintOperation)(_self_._value_), _error_)
+func (_self_ *PrintOperation) GetError() (_error_ error) {
+	var _cgo_error_ *C.GError
+	C._gtk_print_operation_get_error((*C.GtkPrintOperation)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -16291,9 +16453,15 @@ func (_self_ *PrintOperation) IsFinished() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *PrintOperation) Run(action C.GtkPrintOperationAction, parent GtkWindowKind) (_return_ C.GtkPrintOperationResult, _error_ unsafe.Pointer) {
+func (_self_ *PrintOperation) Run(action int, parent GtkWindowKind) (_return_ C.GtkPrintOperationResult, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_parent_ := (*C.GtkWindow)(parent.GetGObject())
-	_return_ = C._gtk_print_operation_run((*C.GtkPrintOperation)(_self_._value_), action, _cgo_parent_, _error_)
+	_cgo_action_ := (C.GtkPrintOperationAction)(action)
+	_return_ = C._gtk_print_operation_run((*C.GtkPrintOperation)(_self_._value_), _cgo_action_, _cgo_parent_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -16392,8 +16560,9 @@ func (_self_ *PrintOperation) SetTrackPrintStatus(track_status bool) () {
 	return
 }
 
-func (_self_ *PrintOperation) SetUnit(unit C.GtkUnit) () {
-	C.gtk_print_operation_set_unit((*C.GtkPrintOperation)(_self_._value_), unit)
+func (_self_ *PrintOperation) SetUnit(unit int) () {
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_print_operation_set_unit((*C.GtkPrintOperation)(_self_._value_), _cgo_unit_)
 	return
 }
 
@@ -16411,22 +16580,32 @@ func PrintSettingsNew() (_go__return__ PrintSettings) {
 	return
 }
 
-func PrintSettingsNewFromFile(file_name string) (_go__return__ PrintSettings, _error_ unsafe.Pointer) {
+func PrintSettingsNewFromFile(file_name string) (_go__return__ PrintSettings, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GtkPrintSettings
 	_cstring_file_name_ := C.CString(file_name)
 	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
-	_return_ = C._gtk_print_settings_new_from_file(_cgo_file_name_, _error_)
+	_return_ = C._gtk_print_settings_new_from_file(_cgo_file_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
 
-func PrintSettingsNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ PrintSettings, _error_ unsafe.Pointer) {
+func PrintSettingsNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ PrintSettings, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GtkPrintSettings
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
-	_return_ = C._gtk_print_settings_new_from_key_file(key_file, _cgo_group_name_, _error_)
+	_return_ = C._gtk_print_settings_new_from_key_file(key_file, _cgo_group_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPrintSettings(unsafe.Pointer(_return_))
 	return
 }
@@ -16538,12 +16717,13 @@ func (_self_ *PrintSettings) GetIntWithDefault(key string, def int) (_go__return
 	return
 }
 
-func (_self_ *PrintSettings) GetLength(key string, unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PrintSettings) GetLength(key string, unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
-	_return_ = C._gtk_print_settings_get_length((*C.GtkPrintSettings)(_self_._value_), _cgo_key_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C._gtk_print_settings_get_length((*C.GtkPrintSettings)(_self_._value_), _cgo_key_, _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -16598,9 +16778,10 @@ func (_self_ *PrintSettings) GetPageSet() (_return_ C.GtkPageSet) {
 	return
 }
 
-func (_self_ *PrintSettings) GetPaperHeight(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PrintSettings) GetPaperHeight(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_print_settings_get_paper_height((*C.GtkPrintSettings)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_print_settings_get_paper_height((*C.GtkPrintSettings)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -16612,9 +16793,10 @@ func (_self_ *PrintSettings) GetPaperSize() (_go__return__ *PaperSize) {
 	return
 }
 
-func (_self_ *PrintSettings) GetPaperWidth(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PrintSettings) GetPaperWidth(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_print_settings_get_paper_width((*C.GtkPrintSettings)(_self_._value_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_print_settings_get_paper_width((*C.GtkPrintSettings)(_self_._value_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -16695,22 +16877,32 @@ func (_self_ *PrintSettings) HasKey(key string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *PrintSettings) LoadFile(file_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PrintSettings) LoadFile(file_name string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_file_name_ := C.CString(file_name)
 	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_print_settings_load_file((*C.GtkPrintSettings)(_self_._value_), _cgo_file_name_, _error_)
+	_return_ = C._gtk_print_settings_load_file((*C.GtkPrintSettings)(_self_._value_), _cgo_file_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *PrintSettings) LoadKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PrintSettings) LoadKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_print_settings_load_key_file((*C.GtkPrintSettings)(_self_._value_), key_file, _cgo_group_name_, _error_)
+	_return_ = C._gtk_print_settings_load_key_file((*C.GtkPrintSettings)(_self_._value_), key_file, _cgo_group_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -16768,8 +16960,9 @@ func (_self_ *PrintSettings) SetDouble(key string, value float64) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetDuplex(duplex C.GtkPrintDuplex) () {
-	C.gtk_print_settings_set_duplex((*C.GtkPrintSettings)(_self_._value_), duplex)
+func (_self_ *PrintSettings) SetDuplex(duplex int) () {
+	_cgo_duplex_ := (C.GtkPrintDuplex)(duplex)
+	C.gtk_print_settings_set_duplex((*C.GtkPrintSettings)(_self_._value_), _cgo_duplex_)
 	return
 }
 
@@ -16790,12 +16983,13 @@ func (_self_ *PrintSettings) SetInt(key string, value int) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetLength(key string, value float64, unit C.GtkUnit) () {
+func (_self_ *PrintSettings) SetLength(key string, value float64, unit int) () {
 	_cgo_value_ := (C.gdouble)(value)
 	_cstring_key_ := C.CString(key)
 	_cgo_key_ := (*C.gchar)(unsafe.Pointer(_cstring_key_))
 	defer C.free(unsafe.Pointer(_cstring_key_))
-	C._gtk_print_settings_set_length((*C.GtkPrintSettings)(_self_._value_), _cgo_key_, _cgo_value_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C._gtk_print_settings_set_length((*C.GtkPrintSettings)(_self_._value_), _cgo_key_, _cgo_value_, _cgo_unit_)
 	return
 }
 
@@ -16819,13 +17013,15 @@ func (_self_ *PrintSettings) SetNumberUp(number_up int) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetNumberUpLayout(number_up_layout C.GtkNumberUpLayout) () {
-	C.gtk_print_settings_set_number_up_layout((*C.GtkPrintSettings)(_self_._value_), number_up_layout)
+func (_self_ *PrintSettings) SetNumberUpLayout(number_up_layout int) () {
+	_cgo_number_up_layout_ := (C.GtkNumberUpLayout)(number_up_layout)
+	C.gtk_print_settings_set_number_up_layout((*C.GtkPrintSettings)(_self_._value_), _cgo_number_up_layout_)
 	return
 }
 
-func (_self_ *PrintSettings) SetOrientation(orientation C.GtkPageOrientation) () {
-	C.gtk_print_settings_set_orientation((*C.GtkPrintSettings)(_self_._value_), orientation)
+func (_self_ *PrintSettings) SetOrientation(orientation int) () {
+	_cgo_orientation_ := (C.GtkPageOrientation)(orientation)
+	C.gtk_print_settings_set_orientation((*C.GtkPrintSettings)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -16837,14 +17033,16 @@ func (_self_ *PrintSettings) SetOutputBin(output_bin string) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetPageSet(page_set C.GtkPageSet) () {
-	C.gtk_print_settings_set_page_set((*C.GtkPrintSettings)(_self_._value_), page_set)
+func (_self_ *PrintSettings) SetPageSet(page_set int) () {
+	_cgo_page_set_ := (C.GtkPageSet)(page_set)
+	C.gtk_print_settings_set_page_set((*C.GtkPrintSettings)(_self_._value_), _cgo_page_set_)
 	return
 }
 
-func (_self_ *PrintSettings) SetPaperHeight(height float64, unit C.GtkUnit) () {
+func (_self_ *PrintSettings) SetPaperHeight(height float64, unit int) () {
 	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_print_settings_set_paper_height((*C.GtkPrintSettings)(_self_._value_), _cgo_height_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_print_settings_set_paper_height((*C.GtkPrintSettings)(_self_._value_), _cgo_height_, _cgo_unit_)
 	return
 }
 
@@ -16854,14 +17052,16 @@ func (_self_ *PrintSettings) SetPaperSize(paper_size *PaperSize) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetPaperWidth(width float64, unit C.GtkUnit) () {
+func (_self_ *PrintSettings) SetPaperWidth(width float64, unit int) () {
 	_cgo_width_ := (C.gdouble)(width)
-	C.gtk_print_settings_set_paper_width((*C.GtkPrintSettings)(_self_._value_), _cgo_width_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_print_settings_set_paper_width((*C.GtkPrintSettings)(_self_._value_), _cgo_width_, _cgo_unit_)
 	return
 }
 
-func (_self_ *PrintSettings) SetPrintPages(pages C.GtkPrintPages) () {
-	C.gtk_print_settings_set_print_pages((*C.GtkPrintSettings)(_self_._value_), pages)
+func (_self_ *PrintSettings) SetPrintPages(pages int) () {
+	_cgo_pages_ := (C.GtkPrintPages)(pages)
+	C.gtk_print_settings_set_print_pages((*C.GtkPrintSettings)(_self_._value_), _cgo_pages_)
 	return
 }
 
@@ -16879,8 +17079,9 @@ func (_self_ *PrintSettings) SetPrinterLpi(lpi float64) () {
 	return
 }
 
-func (_self_ *PrintSettings) SetQuality(quality C.GtkPrintQuality) () {
-	C.gtk_print_settings_set_quality((*C.GtkPrintSettings)(_self_._value_), quality)
+func (_self_ *PrintSettings) SetQuality(quality int) () {
+	_cgo_quality_ := (C.GtkPrintQuality)(quality)
+	C.gtk_print_settings_set_quality((*C.GtkPrintSettings)(_self_._value_), _cgo_quality_)
 	return
 }
 
@@ -16917,12 +17118,17 @@ func (_self_ *PrintSettings) SetUseColor(use_color bool) () {
 	return
 }
 
-func (_self_ *PrintSettings) ToFile(file_name string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PrintSettings) ToFile(file_name string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_file_name_ := C.CString(file_name)
 	_cgo_file_name_ := (*C.gchar)(unsafe.Pointer(_cstring_file_name_))
 	defer C.free(unsafe.Pointer(_cstring_file_name_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_print_settings_to_file((*C.GtkPrintSettings)(_self_._value_), _cgo_file_name_, _error_)
+	_return_ = C._gtk_print_settings_to_file((*C.GtkPrintSettings)(_self_._value_), _cgo_file_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -17396,8 +17602,9 @@ func (_self_ *Range) SetInverted(setting bool) () {
 	return
 }
 
-func (_self_ *Range) SetLowerStepperSensitivity(sensitivity C.GtkSensitivityType) () {
-	C.gtk_range_set_lower_stepper_sensitivity((*C.GtkRange)(_self_._value_), sensitivity)
+func (_self_ *Range) SetLowerStepperSensitivity(sensitivity int) () {
+	_cgo_sensitivity_ := (C.GtkSensitivityType)(sensitivity)
+	C.gtk_range_set_lower_stepper_sensitivity((*C.GtkRange)(_self_._value_), _cgo_sensitivity_)
 	return
 }
 
@@ -17441,8 +17648,9 @@ func (_self_ *Range) SetSliderSizeFixed(size_fixed bool) () {
 	return
 }
 
-func (_self_ *Range) SetUpperStepperSensitivity(sensitivity C.GtkSensitivityType) () {
-	C.gtk_range_set_upper_stepper_sensitivity((*C.GtkRange)(_self_._value_), sensitivity)
+func (_self_ *Range) SetUpperStepperSensitivity(sensitivity int) () {
+	_cgo_sensitivity_ := (C.GtkSensitivityType)(sensitivity)
+	C.gtk_range_set_upper_stepper_sensitivity((*C.GtkRange)(_self_._value_), _cgo_sensitivity_)
 	return
 }
 
@@ -17682,17 +17890,23 @@ func (_self_ *RecentManager) HasItem(uri string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *RecentManager) LookupItem(uri string) (_go__return__ *RecentInfo, _error_ unsafe.Pointer) {
+func (_self_ *RecentManager) LookupItem(uri string) (_go__return__ *RecentInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GtkRecentInfo
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
-	_return_ = C._gtk_recent_manager_lookup_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, _error_)
+	_return_ = C._gtk_recent_manager_lookup_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*RecentInfo)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *RecentManager) MoveItem(uri string, new_uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *RecentManager) MoveItem(uri string, new_uri string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
@@ -17700,52 +17914,69 @@ func (_self_ *RecentManager) MoveItem(uri string, new_uri string) (_go__return__
 	_cgo_new_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_new_uri_))
 	defer C.free(unsafe.Pointer(_cstring_new_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_recent_manager_move_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, _cgo_new_uri_, _error_)
+	_return_ = C._gtk_recent_manager_move_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, _cgo_new_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RecentManager) PurgeItems() (_go__return__ int, _error_ unsafe.Pointer) {
+func (_self_ *RecentManager) PurgeItems() (_go__return__ int, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gint
-	_return_ = C._gtk_recent_manager_purge_items((*C.GtkRecentManager)(_self_._value_), _error_)
+	_return_ = C._gtk_recent_manager_purge_items((*C.GtkRecentManager)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (int)(_return_)
 	return
 }
 
-func (_self_ *RecentManager) RemoveItem(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *RecentManager) RemoveItem(uri string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_recent_manager_remove_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, _error_)
+	_return_ = C._gtk_recent_manager_remove_item((*C.GtkRecentManager)(_self_._value_), _cgo_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func ScaleNew(orientation C.GtkOrientation, adjustment AdjustmentKind) (_go__return__ Scale) {
+func ScaleNew(orientation int, adjustment AdjustmentKind) (_go__return__ Scale) {
 	_cgo_adjustment_ := (*C.GtkAdjustment)(adjustment.GetGObject())
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_scale_new(orientation, _cgo_adjustment_)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_scale_new(_cgo_orientation_, _cgo_adjustment_)
 	_go__return__ = ToScale(unsafe.Pointer(_return_))
 	return
 }
 
-func ScaleNewWithRange(orientation C.GtkOrientation, min float64, max float64, step float64) (_go__return__ Scale) {
+func ScaleNewWithRange(orientation int, min float64, max float64, step float64) (_go__return__ Scale) {
 	var _return_ *C.GtkWidget
 	_cgo_min_ := (C.gdouble)(min)
 	_cgo_max_ := (C.gdouble)(max)
 	_cgo_step_ := (C.gdouble)(step)
-	_return_ = C.gtk_scale_new_with_range(orientation, _cgo_min_, _cgo_max_, _cgo_step_)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_scale_new_with_range(_cgo_orientation_, _cgo_min_, _cgo_max_, _cgo_step_)
 	_go__return__ = ToScale(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Scale) AddMark(value float64, position C.GtkPositionType, markup string) () {
+func (_self_ *Scale) AddMark(value float64, position int, markup string) () {
 	_cgo_value_ := (C.gdouble)(value)
 	_cstring_markup_ := C.CString(markup)
 	_cgo_markup_ := (*C.gchar)(unsafe.Pointer(_cstring_markup_))
 	defer C.free(unsafe.Pointer(_cstring_markup_))
-	C._gtk_scale_add_mark((*C.GtkScale)(_self_._value_), _cgo_value_, position, _cgo_markup_)
+	_cgo_position_ := (C.GtkPositionType)(position)
+	C._gtk_scale_add_mark((*C.GtkScale)(_self_._value_), _cgo_value_, _cgo_position_, _cgo_markup_)
 	return
 }
 
@@ -17814,8 +18045,9 @@ func (_self_ *Scale) SetHasOrigin(has_origin bool) () {
 	return
 }
 
-func (_self_ *Scale) SetValuePos(pos C.GtkPositionType) () {
-	C.gtk_scale_set_value_pos((*C.GtkScale)(_self_._value_), pos)
+func (_self_ *Scale) SetValuePos(pos int) () {
+	_cgo_pos_ := (C.GtkPositionType)(pos)
+	C.gtk_scale_set_value_pos((*C.GtkScale)(_self_._value_), _cgo_pos_)
 	return
 }
 
@@ -17866,10 +18098,11 @@ func (_self_ *ScaleButton) SetValue(value float64) () {
 	return
 }
 
-func ScrollbarNew(orientation C.GtkOrientation, adjustment AdjustmentKind) (_go__return__ Scrollbar) {
+func ScrollbarNew(orientation int, adjustment AdjustmentKind) (_go__return__ Scrollbar) {
 	_cgo_adjustment_ := (*C.GtkAdjustment)(adjustment.GetGObject())
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_scrollbar_new(orientation, _cgo_adjustment_)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_scrollbar_new(_cgo_orientation_, _cgo_adjustment_)
 	_go__return__ = ToScrollbar(unsafe.Pointer(_return_))
 	return
 }
@@ -17992,18 +18225,22 @@ func (_self_ *ScrolledWindow) SetMinContentWidth(width int) () {
 	return
 }
 
-func (_self_ *ScrolledWindow) SetPlacement(window_placement C.GtkCornerType) () {
-	C.gtk_scrolled_window_set_placement((*C.GtkScrolledWindow)(_self_._value_), window_placement)
+func (_self_ *ScrolledWindow) SetPlacement(window_placement int) () {
+	_cgo_window_placement_ := (C.GtkCornerType)(window_placement)
+	C.gtk_scrolled_window_set_placement((*C.GtkScrolledWindow)(_self_._value_), _cgo_window_placement_)
 	return
 }
 
-func (_self_ *ScrolledWindow) SetPolicy(hscrollbar_policy C.GtkPolicyType, vscrollbar_policy C.GtkPolicyType) () {
-	C.gtk_scrolled_window_set_policy((*C.GtkScrolledWindow)(_self_._value_), hscrollbar_policy, vscrollbar_policy)
+func (_self_ *ScrolledWindow) SetPolicy(hscrollbar_policy int, vscrollbar_policy int) () {
+	_cgo_hscrollbar_policy_ := (C.GtkPolicyType)(hscrollbar_policy)
+	_cgo_vscrollbar_policy_ := (C.GtkPolicyType)(vscrollbar_policy)
+	C.gtk_scrolled_window_set_policy((*C.GtkScrolledWindow)(_self_._value_), _cgo_hscrollbar_policy_, _cgo_vscrollbar_policy_)
 	return
 }
 
-func (_self_ *ScrolledWindow) SetShadowType(type_ C.GtkShadowType) () {
-	C.gtk_scrolled_window_set_shadow_type((*C.GtkScrolledWindow)(_self_._value_), type_)
+func (_self_ *ScrolledWindow) SetShadowType(type_ int) () {
+	_cgo_type__ := (C.GtkShadowType)(type_)
+	C.gtk_scrolled_window_set_shadow_type((*C.GtkScrolledWindow)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -18025,9 +18262,10 @@ func SearchEntryNew() (_go__return__ SearchEntry) {
 	return
 }
 
-func SeparatorNew(orientation C.GtkOrientation) (_go__return__ Separator) {
+func SeparatorNew(orientation int) (_go__return__ Separator) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_separator_new(orientation)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_separator_new(_cgo_orientation_)
 	_go__return__ = ToSeparator(unsafe.Pointer(_return_))
 	return
 }
@@ -18131,9 +18369,10 @@ func (_self_ *GtkSettings) SetStringProperty(name string, v_string string, origi
 	return
 }
 
-func SizeGroupNew(mode C.GtkSizeGroupMode) (_go__return__ SizeGroup) {
+func SizeGroupNew(mode int) (_go__return__ SizeGroup) {
 	var _return_ *C.GtkSizeGroup
-	_return_ = C.gtk_size_group_new(mode)
+	_cgo_mode_ := (C.GtkSizeGroupMode)(mode)
+	_return_ = C.gtk_size_group_new(_cgo_mode_)
 	_go__return__ = ToSizeGroup(unsafe.Pointer(_return_))
 	return
 }
@@ -18174,8 +18413,9 @@ func (_self_ *SizeGroup) SetIgnoreHidden(ignore_hidden bool) () {
 	return
 }
 
-func (_self_ *SizeGroup) SetMode(mode C.GtkSizeGroupMode) () {
-	C.gtk_size_group_set_mode((*C.GtkSizeGroup)(_self_._value_), mode)
+func (_self_ *SizeGroup) SetMode(mode int) () {
+	_cgo_mode_ := (C.GtkSizeGroupMode)(mode)
+	C.gtk_size_group_set_mode((*C.GtkSizeGroup)(_self_._value_), _cgo_mode_)
 	return
 }
 
@@ -18341,8 +18581,9 @@ func (_self_ *SpinButton) SetSnapToTicks(snap_to_ticks bool) () {
 	return
 }
 
-func (_self_ *SpinButton) SetUpdatePolicy(policy C.GtkSpinButtonUpdatePolicy) () {
-	C.gtk_spin_button_set_update_policy((*C.GtkSpinButton)(_self_._value_), policy)
+func (_self_ *SpinButton) SetUpdatePolicy(policy int) () {
+	_cgo_policy_ := (C.GtkSpinButtonUpdatePolicy)(policy)
+	C.gtk_spin_button_set_update_policy((*C.GtkSpinButton)(_self_._value_), _cgo_policy_)
 	return
 }
 
@@ -18359,9 +18600,10 @@ func (_self_ *SpinButton) SetWrap(wrap bool) () {
 	return
 }
 
-func (_self_ *SpinButton) Spin(direction C.GtkSpinType, increment float64) () {
+func (_self_ *SpinButton) Spin(direction int, increment float64) () {
 	_cgo_increment_ := (C.gdouble)(increment)
-	C.gtk_spin_button_spin((*C.GtkSpinButton)(_self_._value_), direction, _cgo_increment_)
+	_cgo_direction_ := (C.GtkSpinType)(direction)
+	C.gtk_spin_button_spin((*C.GtkSpinButton)(_self_._value_), _cgo_direction_, _cgo_increment_)
 	return
 }
 
@@ -18935,8 +19177,9 @@ func (_self_ *StyleContext) SetBackground(window *C.GdkWindow) () {
 	return
 }
 
-func (_self_ *StyleContext) SetDirection(direction C.GtkTextDirection) () {
-	C.gtk_style_context_set_direction((*C.GtkStyleContext)(_self_._value_), direction)
+func (_self_ *StyleContext) SetDirection(direction int) () {
+	_cgo_direction_ := (C.GtkTextDirection)(direction)
+	C.gtk_style_context_set_direction((*C.GtkStyleContext)(_self_._value_), _cgo_direction_)
 	return
 }
 
@@ -19198,6 +19441,24 @@ func (_self_ *TextBuffer) DeleteSelection(interactive bool, default_editable boo
 	if default_editable { _cgo_default_editable_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
 	_return_ = C.gtk_text_buffer_delete_selection((*C.GtkTextBuffer)(_self_._value_), _cgo_interactive_, _cgo_default_editable_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *TextBuffer) Deserialize(content_buffer TextBufferKind, format C.GdkAtom, iter *TextIter, data []byte, length uint64) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
+	_cgo_content_buffer_ := (*C.GtkTextBuffer)(content_buffer.GetGObject())
+	_cgo_iter_ := (*C.GtkTextIter)(unsafe.Pointer(iter))
+	_cgo_length_ := (C.gsize)(length)
+	var _return_ C.gboolean
+	_cstring_data_ := C.CString(string(data))
+	defer C.free(unsafe.Pointer(_cstring_data_))
+	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
+	_return_ = C._gtk_text_buffer_deserialize((*C.GtkTextBuffer)(_self_._value_), _cgo_content_buffer_, format, _cgo_iter_, _cgo_data_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -19797,11 +20058,12 @@ func (_self_ *TextView) AddChildAtAnchor(child WidgetKind, anchor TextChildAncho
 	return
 }
 
-func (_self_ *TextView) AddChildInWindow(child WidgetKind, which_window C.GtkTextWindowType, xpos int, ypos int) () {
+func (_self_ *TextView) AddChildInWindow(child WidgetKind, which_window int, xpos int, ypos int) () {
 	_cgo_child_ := (*C.GtkWidget)(child.GetGObject())
 	_cgo_xpos_ := (C.gint)(xpos)
 	_cgo_ypos_ := (C.gint)(ypos)
-	C.gtk_text_view_add_child_in_window((*C.GtkTextView)(_self_._value_), _cgo_child_, which_window, _cgo_xpos_, _cgo_ypos_)
+	_cgo_which_window_ := (C.GtkTextWindowType)(which_window)
+	C.gtk_text_view_add_child_in_window((*C.GtkTextView)(_self_._value_), _cgo_child_, _cgo_which_window_, _cgo_xpos_, _cgo_ypos_)
 	return
 }
 
@@ -19821,12 +20083,13 @@ func (_self_ *TextView) BackwardDisplayLineStart(iter *TextIter) (_go__return__ 
 	return
 }
 
-func (_self_ *TextView) BufferToWindowCoords(win C.GtkTextWindowType, buffer_x int, buffer_y int) (_go_window_x_ int, _go_window_y_ int) {
+func (_self_ *TextView) BufferToWindowCoords(win int, buffer_x int, buffer_y int) (_go_window_x_ int, _go_window_y_ int) {
 	_cgo_buffer_x_ := (C.gint)(buffer_x)
 	_cgo_buffer_y_ := (C.gint)(buffer_y)
 	var window_x C.gint
 	var window_y C.gint
-	C.gtk_text_view_buffer_to_window_coords((*C.GtkTextView)(_self_._value_), win, _cgo_buffer_x_, _cgo_buffer_y_, &window_x, &window_y)
+	_cgo_win_ := (C.GtkTextWindowType)(win)
+	C.gtk_text_view_buffer_to_window_coords((*C.GtkTextView)(_self_._value_), _cgo_win_, _cgo_buffer_x_, _cgo_buffer_y_, &window_x, &window_y)
 	_go_window_x_ = (int)(window_x)
 	_go_window_y_ = (int)(window_y)
 	return
@@ -19855,9 +20118,10 @@ func (_self_ *TextView) GetAcceptsTab() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *TextView) GetBorderWindowSize(type_ C.GtkTextWindowType) (_go__return__ int) {
+func (_self_ *TextView) GetBorderWindowSize(type_ int) (_go__return__ int) {
 	var _return_ C.gint
-	_return_ = C.gtk_text_view_get_border_window_size((*C.GtkTextView)(_self_._value_), type_)
+	_cgo_type__ := (C.GtkTextWindowType)(type_)
+	_return_ = C.gtk_text_view_get_border_window_size((*C.GtkTextView)(_self_._value_), _cgo_type__)
 	_go__return__ = (int)(_return_)
 	return
 }
@@ -20016,8 +20280,9 @@ func (_self_ *TextView) GetVisibleRect() (visible_rect *C.GdkRectangle) {
 	return
 }
 
-func (_self_ *TextView) GetWindow(win C.GtkTextWindowType) (_return_ *C.GdkWindow) {
-	_return_ = C.gtk_text_view_get_window((*C.GtkTextView)(_self_._value_), win)
+func (_self_ *TextView) GetWindow(win int) (_return_ *C.GdkWindow) {
+	_cgo_win_ := (C.GtkTextWindowType)(win)
+	_return_ = C.gtk_text_view_get_window((*C.GtkTextView)(_self_._value_), _cgo_win_)
 	return
 }
 
@@ -20112,9 +20377,10 @@ func (_self_ *TextView) SetAcceptsTab(accepts_tab bool) () {
 	return
 }
 
-func (_self_ *TextView) SetBorderWindowSize(type_ C.GtkTextWindowType, size int) () {
+func (_self_ *TextView) SetBorderWindowSize(type_ int, size int) () {
 	_cgo_size_ := (C.gint)(size)
-	C.gtk_text_view_set_border_window_size((*C.GtkTextView)(_self_._value_), type_, _cgo_size_)
+	_cgo_type__ := (C.GtkTextWindowType)(type_)
+	C.gtk_text_view_set_border_window_size((*C.GtkTextView)(_self_._value_), _cgo_type__, _cgo_size_)
 	return
 }
 
@@ -20149,13 +20415,15 @@ func (_self_ *TextView) SetInputHints(hints C.GtkInputHints) () {
 	return
 }
 
-func (_self_ *TextView) SetInputPurpose(purpose C.GtkInputPurpose) () {
-	C.gtk_text_view_set_input_purpose((*C.GtkTextView)(_self_._value_), purpose)
+func (_self_ *TextView) SetInputPurpose(purpose int) () {
+	_cgo_purpose_ := (C.GtkInputPurpose)(purpose)
+	C.gtk_text_view_set_input_purpose((*C.GtkTextView)(_self_._value_), _cgo_purpose_)
 	return
 }
 
-func (_self_ *TextView) SetJustification(justification C.GtkJustification) () {
-	C.gtk_text_view_set_justification((*C.GtkTextView)(_self_._value_), justification)
+func (_self_ *TextView) SetJustification(justification int) () {
+	_cgo_justification_ := (C.GtkJustification)(justification)
+	C.gtk_text_view_set_justification((*C.GtkTextView)(_self_._value_), _cgo_justification_)
 	return
 }
 
@@ -20201,8 +20469,9 @@ func (_self_ *TextView) SetTabs(tabs *C.PangoTabArray) () {
 	return
 }
 
-func (_self_ *TextView) SetWrapMode(wrap_mode C.GtkWrapMode) () {
-	C.gtk_text_view_set_wrap_mode((*C.GtkTextView)(_self_._value_), wrap_mode)
+func (_self_ *TextView) SetWrapMode(wrap_mode int) () {
+	_cgo_wrap_mode_ := (C.GtkWrapMode)(wrap_mode)
+	C.gtk_text_view_set_wrap_mode((*C.GtkTextView)(_self_._value_), _cgo_wrap_mode_)
 	return
 }
 
@@ -20214,12 +20483,13 @@ func (_self_ *TextView) StartsDisplayLine(iter *TextIter) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *TextView) WindowToBufferCoords(win C.GtkTextWindowType, window_x int, window_y int) (_go_buffer_x_ int, _go_buffer_y_ int) {
+func (_self_ *TextView) WindowToBufferCoords(win int, window_x int, window_y int) (_go_buffer_x_ int, _go_buffer_y_ int) {
 	_cgo_window_x_ := (C.gint)(window_x)
 	_cgo_window_y_ := (C.gint)(window_y)
 	var buffer_x C.gint
 	var buffer_y C.gint
-	C.gtk_text_view_window_to_buffer_coords((*C.GtkTextView)(_self_._value_), win, _cgo_window_x_, _cgo_window_y_, &buffer_x, &buffer_y)
+	_cgo_win_ := (C.GtkTextWindowType)(win)
+	C.gtk_text_view_window_to_buffer_coords((*C.GtkTextView)(_self_._value_), _cgo_win_, _cgo_window_x_, _cgo_window_y_, &buffer_x, &buffer_y)
 	_go_buffer_x_ = (int)(buffer_x)
 	_go_buffer_y_ = (int)(buffer_y)
 	return
@@ -20899,8 +21169,9 @@ func (_self_ *ToolItemGroup) SetEllipsize(ellipsize C.PangoEllipsizeMode) () {
 	return
 }
 
-func (_self_ *ToolItemGroup) SetHeaderRelief(style C.GtkReliefStyle) () {
-	C.gtk_tool_item_group_set_header_relief((*C.GtkToolItemGroup)(_self_._value_), style)
+func (_self_ *ToolItemGroup) SetHeaderRelief(style int) () {
+	_cgo_style_ := (C.GtkReliefStyle)(style)
+	C.gtk_tool_item_group_set_header_relief((*C.GtkToolItemGroup)(_self_._value_), _cgo_style_)
 	return
 }
 
@@ -21040,13 +21311,15 @@ func (_self_ *ToolPalette) SetGroupPosition(group ToolItemGroupKind, position in
 	return
 }
 
-func (_self_ *ToolPalette) SetIconSize(icon_size C.GtkIconSize) () {
-	C.gtk_tool_palette_set_icon_size((*C.GtkToolPalette)(_self_._value_), icon_size)
+func (_self_ *ToolPalette) SetIconSize(icon_size int) () {
+	_cgo_icon_size_ := (C.GtkIconSize)(icon_size)
+	C.gtk_tool_palette_set_icon_size((*C.GtkToolPalette)(_self_._value_), _cgo_icon_size_)
 	return
 }
 
-func (_self_ *ToolPalette) SetStyle(style C.GtkToolbarStyle) () {
-	C.gtk_tool_palette_set_style((*C.GtkToolPalette)(_self_._value_), style)
+func (_self_ *ToolPalette) SetStyle(style int) () {
+	_cgo_style_ := (C.GtkToolbarStyle)(style)
+	C.gtk_tool_palette_set_style((*C.GtkToolPalette)(_self_._value_), _cgo_style_)
 	return
 }
 
@@ -21135,8 +21408,9 @@ func (_self_ *Toolbar) SetDropHighlightItem(tool_item ToolItemKind, index_ int) 
 	return
 }
 
-func (_self_ *Toolbar) SetIconSize(icon_size C.GtkIconSize) () {
-	C.gtk_toolbar_set_icon_size((*C.GtkToolbar)(_self_._value_), icon_size)
+func (_self_ *Toolbar) SetIconSize(icon_size int) () {
+	_cgo_icon_size_ := (C.GtkIconSize)(icon_size)
+	C.gtk_toolbar_set_icon_size((*C.GtkToolbar)(_self_._value_), _cgo_icon_size_)
 	return
 }
 
@@ -21147,8 +21421,9 @@ func (_self_ *Toolbar) SetShowArrow(show_arrow bool) () {
 	return
 }
 
-func (_self_ *Toolbar) SetStyle(style C.GtkToolbarStyle) () {
-	C.gtk_toolbar_set_style((*C.GtkToolbar)(_self_._value_), style)
+func (_self_ *Toolbar) SetStyle(style int) () {
+	_cgo_style_ := (C.GtkToolbarStyle)(style)
+	C.gtk_toolbar_set_style((*C.GtkToolbar)(_self_._value_), _cgo_style_)
 	return
 }
 
@@ -21178,24 +21453,27 @@ func (_self_ *Tooltip) SetIcon(pixbuf *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *Tooltip) SetIconFromGicon(gicon *C.GIcon, size C.GtkIconSize) () {
-	C.gtk_tooltip_set_icon_from_gicon((*C.GtkTooltip)(_self_._value_), gicon, size)
+func (_self_ *Tooltip) SetIconFromGicon(gicon *C.GIcon, size int) () {
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C.gtk_tooltip_set_icon_from_gicon((*C.GtkTooltip)(_self_._value_), gicon, _cgo_size_)
 	return
 }
 
-func (_self_ *Tooltip) SetIconFromIconName(icon_name string, size C.GtkIconSize) () {
+func (_self_ *Tooltip) SetIconFromIconName(icon_name string, size int) () {
 	_cstring_icon_name_ := C.CString(icon_name)
 	_cgo_icon_name_ := (*C.gchar)(unsafe.Pointer(_cstring_icon_name_))
 	defer C.free(unsafe.Pointer(_cstring_icon_name_))
-	C._gtk_tooltip_set_icon_from_icon_name((*C.GtkTooltip)(_self_._value_), _cgo_icon_name_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C._gtk_tooltip_set_icon_from_icon_name((*C.GtkTooltip)(_self_._value_), _cgo_icon_name_, _cgo_size_)
 	return
 }
 
-func (_self_ *Tooltip) SetIconFromStock(stock_id string, size C.GtkIconSize) () {
+func (_self_ *Tooltip) SetIconFromStock(stock_id string, size int) () {
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	C._gtk_tooltip_set_icon_from_stock((*C.GtkTooltip)(_self_._value_), _cgo_stock_id_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C._gtk_tooltip_set_icon_from_stock((*C.GtkTooltip)(_self_._value_), _cgo_stock_id_, _cgo_size_)
 	return
 }
 
@@ -21433,8 +21711,9 @@ func (_self_ *TreeSelection) SelectedForeach(func_ C.GtkTreeSelectionForeachFunc
 	return
 }
 
-func (_self_ *TreeSelection) SetMode(type_ C.GtkSelectionMode) () {
-	C.gtk_tree_selection_set_mode((*C.GtkTreeSelection)(_self_._value_), type_)
+func (_self_ *TreeSelection) SetMode(type_ int) () {
+	_cgo_type__ := (C.GtkSelectionMode)(type_)
+	C.gtk_tree_selection_set_mode((*C.GtkTreeSelection)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -22077,9 +22356,10 @@ func (_self_ *TreeView) SetCursorOnCell(path *TreePath, focus_column TreeViewCol
 	return
 }
 
-func (_self_ *TreeView) SetDragDestRow(path *TreePath, pos C.GtkTreeViewDropPosition) () {
+func (_self_ *TreeView) SetDragDestRow(path *TreePath, pos int) () {
 	_cgo_path_ := (*C.GtkTreePath)(unsafe.Pointer(path))
-	C.gtk_tree_view_set_drag_dest_row((*C.GtkTreeView)(_self_._value_), _cgo_path_, pos)
+	_cgo_pos_ := (C.GtkTreeViewDropPosition)(pos)
+	C.gtk_tree_view_set_drag_dest_row((*C.GtkTreeView)(_self_._value_), _cgo_path_, _cgo_pos_)
 	return
 }
 
@@ -22110,8 +22390,9 @@ func (_self_ *TreeView) SetFixedHeightMode(enable bool) () {
 	return
 }
 
-func (_self_ *TreeView) SetGridLines(grid_lines C.GtkTreeViewGridLines) () {
-	C.gtk_tree_view_set_grid_lines((*C.GtkTreeView)(_self_._value_), grid_lines)
+func (_self_ *TreeView) SetGridLines(grid_lines int) () {
+	_cgo_grid_lines_ := (C.GtkTreeViewGridLines)(grid_lines)
+	C.gtk_tree_view_set_grid_lines((*C.GtkTreeView)(_self_._value_), _cgo_grid_lines_)
 	return
 }
 
@@ -22547,8 +22828,9 @@ func (_self_ *TreeViewColumn) SetResizable(resizable bool) () {
 	return
 }
 
-func (_self_ *TreeViewColumn) SetSizing(type_ C.GtkTreeViewColumnSizing) () {
-	C.gtk_tree_view_column_set_sizing((*C.GtkTreeViewColumn)(_self_._value_), type_)
+func (_self_ *TreeViewColumn) SetSizing(type_ int) () {
+	_cgo_type__ := (C.GtkTreeViewColumnSizing)(type_)
+	C.gtk_tree_view_column_set_sizing((*C.GtkTreeViewColumn)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -22565,8 +22847,9 @@ func (_self_ *TreeViewColumn) SetSortIndicator(setting bool) () {
 	return
 }
 
-func (_self_ *TreeViewColumn) SetSortOrder(order C.GtkSortType) () {
-	C.gtk_tree_view_column_set_sort_order((*C.GtkTreeViewColumn)(_self_._value_), order)
+func (_self_ *TreeViewColumn) SetSortOrder(order int) () {
+	_cgo_order_ := (C.GtkSortType)(order)
+	C.gtk_tree_view_column_set_sort_order((*C.GtkTreeViewColumn)(_self_._value_), _cgo_order_)
 	return
 }
 
@@ -22621,33 +22904,48 @@ func (_self_ *UIManager) AddUi(merge_id uint, path string, name string, action s
 	return
 }
 
-func (_self_ *UIManager) AddUiFromFile(filename string) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *UIManager) AddUiFromFile(filename string) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._gtk_ui_manager_add_ui_from_file((*C.GtkUIManager)(_self_._value_), _cgo_filename_, _error_)
+	_return_ = C._gtk_ui_manager_add_ui_from_file((*C.GtkUIManager)(_self_._value_), _cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *UIManager) AddUiFromResource(resource_path string) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *UIManager) AddUiFromResource(resource_path string) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
-	_return_ = C._gtk_ui_manager_add_ui_from_resource((*C.GtkUIManager)(_self_._value_), _cgo_resource_path_, _error_)
+	_return_ = C._gtk_ui_manager_add_ui_from_resource((*C.GtkUIManager)(_self_._value_), _cgo_resource_path_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *UIManager) AddUiFromString(buffer string, length int64) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *UIManager) AddUiFromString(buffer string, length int64) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_length_ := (C.gssize)(length)
 	var _return_ C.guint
 	_cstring_buffer_ := C.CString(buffer)
 	_cgo_buffer_ := (*C.gchar)(unsafe.Pointer(_cstring_buffer_))
 	defer C.free(unsafe.Pointer(_cstring_buffer_))
-	_return_ = C._gtk_ui_manager_add_ui_from_string((*C.GtkUIManager)(_self_._value_), _cgo_buffer_, _cgo_length_, _error_)
+	_return_ = C._gtk_ui_manager_add_ui_from_string((*C.GtkUIManager)(_self_._value_), _cgo_buffer_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
@@ -22751,8 +23049,9 @@ func (_self_ *Viewport) GetViewWindow() (_return_ *C.GdkWindow) {
 	return
 }
 
-func (_self_ *Viewport) SetShadowType(type_ C.GtkShadowType) () {
-	C.gtk_viewport_set_shadow_type((*C.GtkViewport)(_self_._value_), type_)
+func (_self_ *Viewport) SetShadowType(type_ int) () {
+	_cgo_type__ := (C.GtkShadowType)(type_)
+	C.gtk_viewport_set_shadow_type((*C.GtkViewport)(_self_._value_), _cgo_type__)
 	return
 }
 
@@ -22778,8 +23077,9 @@ func WidgetPushCompositeChild() () {
 	return
 }
 
-func WidgetSetDefaultDirection(dir C.GtkTextDirection) () {
-	C.gtk_widget_set_default_direction(dir)
+func WidgetSetDefaultDirection(dir int) () {
+	_cgo_dir_ := (C.GtkTextDirection)(dir)
+	C.gtk_widget_set_default_direction(_cgo_dir_)
 	return
 }
 
@@ -22825,9 +23125,10 @@ func (_self_ *Widget) CanActivateAccel(signal_id uint) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Widget) ChildFocus(direction C.GtkDirectionType) (_go__return__ bool) {
+func (_self_ *Widget) ChildFocus(direction int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_widget_child_focus((*C.GtkWidget)(_self_._value_), direction)
+	_cgo_direction_ := (C.GtkDirectionType)(direction)
+	_return_ = C.gtk_widget_child_focus((*C.GtkWidget)(_self_._value_), _cgo_direction_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -22840,9 +23141,10 @@ func (_self_ *Widget) ChildNotify(child_property string) () {
 	return
 }
 
-func (_self_ *Widget) ComputeExpand(orientation C.GtkOrientation) (_go__return__ bool) {
+func (_self_ *Widget) ComputeExpand(orientation int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_widget_compute_expand((*C.GtkWidget)(_self_._value_), orientation)
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	_return_ = C.gtk_widget_compute_expand((*C.GtkWidget)(_self_._value_), _cgo_orientation_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -23582,9 +23884,10 @@ func (_self_ *Widget) IsToplevel() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Widget) KeynavFailed(direction C.GtkDirectionType) (_go__return__ bool) {
+func (_self_ *Widget) KeynavFailed(direction int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.gtk_widget_keynav_failed((*C.GtkWidget)(_self_._value_), direction)
+	_cgo_direction_ := (C.GtkDirectionType)(direction)
+	_return_ = C.gtk_widget_keynav_failed((*C.GtkWidget)(_self_._value_), _cgo_direction_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -23700,11 +24003,12 @@ func (_self_ *Widget) RemoveMnemonicLabel(label WidgetKind) () {
 	return
 }
 
-func (_self_ *Widget) RenderIconPixbuf(stock_id string, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
+func (_self_ *Widget) RenderIconPixbuf(stock_id string, size int) (_return_ *C.GdkPixbuf) {
 	_cstring_stock_id_ := C.CString(stock_id)
 	_cgo_stock_id_ := (*C.gchar)(unsafe.Pointer(_cstring_stock_id_))
 	defer C.free(unsafe.Pointer(_cstring_stock_id_))
-	_return_ = C._gtk_widget_render_icon_pixbuf((*C.GtkWidget)(_self_._value_), _cgo_stock_id_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C._gtk_widget_render_icon_pixbuf((*C.GtkWidget)(_self_._value_), _cgo_stock_id_, _cgo_size_)
 	return
 }
 
@@ -23795,8 +24099,9 @@ func (_self_ *Widget) SetDeviceEvents(device *C.GdkDevice, events C.GdkEventMask
 	return
 }
 
-func (_self_ *Widget) SetDirection(dir C.GtkTextDirection) () {
-	C.gtk_widget_set_direction((*C.GtkWidget)(_self_._value_), dir)
+func (_self_ *Widget) SetDirection(dir int) () {
+	_cgo_dir_ := (C.GtkTextDirection)(dir)
+	C.gtk_widget_set_direction((*C.GtkWidget)(_self_._value_), _cgo_dir_)
 	return
 }
 
@@ -23813,8 +24118,9 @@ func (_self_ *Widget) SetEvents(events int) () {
 	return
 }
 
-func (_self_ *Widget) SetHalign(align C.GtkAlign) () {
-	C.gtk_widget_set_halign((*C.GtkWidget)(_self_._value_), align)
+func (_self_ *Widget) SetHalign(align int) () {
+	_cgo_align_ := (C.GtkAlign)(align)
+	C.gtk_widget_set_halign((*C.GtkWidget)(_self_._value_), _cgo_align_)
 	return
 }
 
@@ -23974,8 +24280,9 @@ func (_self_ *Widget) SetTooltipWindow(custom_window GtkWindowKind) () {
 	return
 }
 
-func (_self_ *Widget) SetValign(align C.GtkAlign) () {
-	C.gtk_widget_set_valign((*C.GtkWidget)(_self_._value_), align)
+func (_self_ *Widget) SetValign(align int) () {
+	_cgo_align_ := (C.GtkAlign)(align)
+	C.gtk_widget_set_valign((*C.GtkWidget)(_self_._value_), _cgo_align_)
 	return
 }
 
@@ -24087,9 +24394,10 @@ func (_self_ *Widget) UnsetStateFlags(flags C.GtkStateFlags) () {
 	return
 }
 
-func WindowNew(type_ C.GtkWindowType) (_go__return__ GtkWindow) {
+func WindowNew(type_ int) (_go__return__ GtkWindow) {
 	var _return_ *C.GtkWidget
-	_return_ = C.gtk_window_new(type_)
+	_cgo_type__ := (C.GtkWindowType)(type_)
+	_return_ = C.gtk_window_new(_cgo_type__)
 	_go__return__ = ToGtkWindow(unsafe.Pointer(_return_))
 	return
 }
@@ -24123,12 +24431,17 @@ func WindowSetDefaultIcon(icon *C.GdkPixbuf) () {
 	return
 }
 
-func WindowSetDefaultIconFromFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func WindowSetDefaultIconFromFile(filename string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_window_set_default_icon_from_file(_cgo_filename_, _error_)
+	_return_ = C._gtk_window_set_default_icon_from_file(_cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -24675,12 +24988,17 @@ func (_self_ *GtkWindow) SetIcon(icon *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *GtkWindow) SetIconFromFile(filename string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *GtkWindow) SetIconFromFile(filename string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_window_set_icon_from_file((*C.GtkWindow)(_self_._value_), _cgo_filename_, _error_)
+	_return_ = C._gtk_window_set_icon_from_file((*C.GtkWindow)(_self_._value_), _cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -24737,8 +25055,9 @@ func (_self_ *GtkWindow) SetOpacity(opacity float64) () {
 	return
 }
 
-func (_self_ *GtkWindow) SetPosition(position C.GtkWindowPosition) () {
-	C.gtk_window_set_position((*C.GtkWindow)(_self_._value_), position)
+func (_self_ *GtkWindow) SetPosition(position int) () {
+	_cgo_position_ := (C.GtkWindowPosition)(position)
+	C.gtk_window_set_position((*C.GtkWindow)(_self_._value_), _cgo_position_)
 	return
 }
 
@@ -25127,22 +25446,37 @@ func (_self_ *IconInfo) GetFilename() (_go__return__ string) {
 	return
 }
 
-func (_self_ *IconInfo) LoadIcon() (_return_ *C.GdkPixbuf, _error_ unsafe.Pointer) {
-	_return_ = C._gtk_icon_info_load_icon((*C.GtkIconInfo)(_self_), _error_)
+func (_self_ *IconInfo) LoadIcon() (_return_ *C.GdkPixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
+	_return_ = C._gtk_icon_info_load_icon((*C.GtkIconInfo)(_self_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
-func (_self_ *IconInfo) LoadSymbolic(fg *C.GdkRGBA, success_color *C.GdkRGBA, warning_color *C.GdkRGBA, error_color *C.GdkRGBA) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ unsafe.Pointer) {
+func (_self_ *IconInfo) LoadSymbolic(fg *C.GdkRGBA, success_color *C.GdkRGBA, warning_color *C.GdkRGBA, error_color *C.GdkRGBA) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var was_symbolic C.gboolean
-	_return_ = C._gtk_icon_info_load_symbolic((*C.GtkIconInfo)(_self_), fg, success_color, warning_color, error_color, &was_symbolic, _error_)
+	_return_ = C._gtk_icon_info_load_symbolic((*C.GtkIconInfo)(_self_), fg, success_color, warning_color, error_color, &was_symbolic, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_was_symbolic_ = was_symbolic == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *IconInfo) LoadSymbolicForContext(context StyleContextKind) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ unsafe.Pointer) {
+func (_self_ *IconInfo) LoadSymbolicForContext(context StyleContextKind) (_return_ *C.GdkPixbuf, _go_was_symbolic_ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_context_ := (*C.GtkStyleContext)(context.GetGObject())
 	var was_symbolic C.gboolean
-	_return_ = C._gtk_icon_info_load_symbolic_for_context((*C.GtkIconInfo)(_self_), _cgo_context_, &was_symbolic, _error_)
+	_return_ = C._gtk_icon_info_load_symbolic_for_context((*C.GtkIconInfo)(_self_), _cgo_context_, &was_symbolic, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go_was_symbolic_ = was_symbolic == (C.gboolean)(C.TRUE)
 	return
 }
@@ -25188,9 +25522,10 @@ func (_self_ *IconSet) Ref() (_go__return__ *IconSet) {
 	return
 }
 
-func (_self_ *IconSet) RenderIconPixbuf(context StyleContextKind, size C.GtkIconSize) (_return_ *C.GdkPixbuf) {
+func (_self_ *IconSet) RenderIconPixbuf(context StyleContextKind, size int) (_return_ *C.GdkPixbuf) {
 	_cgo_context_ := (*C.GtkStyleContext)(context.GetGObject())
-	_return_ = C.gtk_icon_set_render_icon_pixbuf((*C.GtkIconSet)(_self_), _cgo_context_, size)
+	_cgo_size_ := (C.GtkIconSize)(size)
+	_return_ = C.gtk_icon_set_render_icon_pixbuf((*C.GtkIconSet)(_self_), _cgo_context_, _cgo_size_)
 	return
 }
 
@@ -25273,8 +25608,9 @@ func (_self_ *IconSource) GetStateWildcarded() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *IconSource) SetDirection(direction C.GtkTextDirection) () {
-	C.gtk_icon_source_set_direction((*C.GtkIconSource)(_self_), direction)
+func (_self_ *IconSource) SetDirection(direction int) () {
+	_cgo_direction_ := (C.GtkTextDirection)(direction)
+	C.gtk_icon_source_set_direction((*C.GtkIconSource)(_self_), _cgo_direction_)
 	return
 }
 
@@ -25306,8 +25642,9 @@ func (_self_ *IconSource) SetPixbuf(pixbuf *C.GdkPixbuf) () {
 	return
 }
 
-func (_self_ *IconSource) SetSize(size C.GtkIconSize) () {
-	C.gtk_icon_source_set_size((*C.GtkIconSource)(_self_), size)
+func (_self_ *IconSource) SetSize(size int) () {
+	_cgo_size_ := (C.GtkIconSize)(size)
+	C.gtk_icon_source_set_size((*C.GtkIconSource)(_self_), _cgo_size_)
 	return
 }
 
@@ -25318,8 +25655,9 @@ func (_self_ *IconSource) SetSizeWildcarded(setting bool) () {
 	return
 }
 
-func (_self_ *IconSource) SetState(state C.GtkStateType) () {
-	C.gtk_icon_source_set_state((*C.GtkIconSource)(_self_), state)
+func (_self_ *IconSource) SetState(state int) () {
+	_cgo_state_ := (C.GtkStateType)(state)
+	C.gtk_icon_source_set_state((*C.GtkIconSource)(_self_), _cgo_state_)
 	return
 }
 
@@ -25340,7 +25678,7 @@ func PaperSizeNew(name string) (_go__return__ *PaperSize) {
 	return
 }
 
-func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit C.GtkUnit) (_go__return__ *PaperSize) {
+func PaperSizeNewCustom(name string, display_name string, width float64, height float64, unit int) (_go__return__ *PaperSize) {
 	var _return_ *C.GtkPaperSize
 	_cgo_width_ := (C.gdouble)(width)
 	_cgo_height_ := (C.gdouble)(height)
@@ -25350,17 +25688,23 @@ func PaperSizeNewCustom(name string, display_name string, width float64, height 
 	_cstring_display_name_ := C.CString(display_name)
 	_cgo_display_name_ := (*C.gchar)(unsafe.Pointer(_cstring_display_name_))
 	defer C.free(unsafe.Pointer(_cstring_display_name_))
-	_return_ = C._gtk_paper_size_new_custom(_cgo_name_, _cgo_display_name_, _cgo_width_, _cgo_height_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C._gtk_paper_size_new_custom(_cgo_name_, _cgo_display_name_, _cgo_width_, _cgo_height_, _cgo_unit_)
 	_go__return__ = (*PaperSize)(unsafe.Pointer(_return_))
 	return
 }
 
-func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ *PaperSize, _error_ unsafe.Pointer) {
+func PaperSizeNewFromKeyFile(key_file *C.GKeyFile, group_name string) (_go__return__ *PaperSize, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GtkPaperSize
 	_cstring_group_name_ := C.CString(group_name)
 	_cgo_group_name_ := (*C.gchar)(unsafe.Pointer(_cstring_group_name_))
 	defer C.free(unsafe.Pointer(_cstring_group_name_))
-	_return_ = C._gtk_paper_size_new_from_key_file(key_file, _cgo_group_name_, _error_)
+	_return_ = C._gtk_paper_size_new_from_key_file(key_file, _cgo_group_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*PaperSize)(unsafe.Pointer(_return_))
 	return
 }
@@ -25392,30 +25736,34 @@ func (_self_ *PaperSize) Free() () {
 	return
 }
 
-func (_self_ *PaperSize) GetDefaultBottomMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PaperSize) GetDefaultBottomMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_bottom_margin((*C.GtkPaperSize)(_self_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_paper_size_get_default_bottom_margin((*C.GtkPaperSize)(_self_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PaperSize) GetDefaultLeftMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PaperSize) GetDefaultLeftMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_left_margin((*C.GtkPaperSize)(_self_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_paper_size_get_default_left_margin((*C.GtkPaperSize)(_self_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PaperSize) GetDefaultRightMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PaperSize) GetDefaultRightMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_right_margin((*C.GtkPaperSize)(_self_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_paper_size_get_default_right_margin((*C.GtkPaperSize)(_self_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
 
-func (_self_ *PaperSize) GetDefaultTopMargin(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PaperSize) GetDefaultTopMargin(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_default_top_margin((*C.GtkPaperSize)(_self_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_paper_size_get_default_top_margin((*C.GtkPaperSize)(_self_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -25427,9 +25775,10 @@ func (_self_ *PaperSize) GetDisplayName() (_go__return__ string) {
 	return
 }
 
-func (_self_ *PaperSize) GetHeight(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PaperSize) GetHeight(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_height((*C.GtkPaperSize)(_self_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_paper_size_get_height((*C.GtkPaperSize)(_self_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -25448,9 +25797,10 @@ func (_self_ *PaperSize) GetPpdName() (_go__return__ string) {
 	return
 }
 
-func (_self_ *PaperSize) GetWidth(unit C.GtkUnit) (_go__return__ float64) {
+func (_self_ *PaperSize) GetWidth(unit int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.gtk_paper_size_get_width((*C.GtkPaperSize)(_self_), unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	_return_ = C.gtk_paper_size_get_width((*C.GtkPaperSize)(_self_), _cgo_unit_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -25470,10 +25820,11 @@ func (_self_ *PaperSize) IsEqual(size2 *PaperSize) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *PaperSize) SetSize(width float64, height float64, unit C.GtkUnit) () {
+func (_self_ *PaperSize) SetSize(width float64, height float64, unit int) () {
 	_cgo_width_ := (C.gdouble)(width)
 	_cgo_height_ := (C.gdouble)(height)
-	C.gtk_paper_size_set_size((*C.GtkPaperSize)(_self_), _cgo_width_, _cgo_height_, unit)
+	_cgo_unit_ := (C.GtkUnit)(unit)
+	C.gtk_paper_size_set_size((*C.GtkPaperSize)(_self_), _cgo_width_, _cgo_height_, _cgo_unit_)
 	return
 }
 
@@ -25485,11 +25836,16 @@ func (_self_ *PaperSize) ToKeyFile(key_file *C.GKeyFile, group_name string) () {
 	return
 }
 
-func (_self_ *RecentInfo) CreateAppInfo(app_name string) (_return_ *C.GAppInfo, _error_ unsafe.Pointer) {
+func (_self_ *RecentInfo) CreateAppInfo(app_name string) (_return_ *C.GAppInfo, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_app_name_ := C.CString(app_name)
 	_cgo_app_name_ := (*C.gchar)(unsafe.Pointer(_cstring_app_name_))
 	defer C.free(unsafe.Pointer(_cstring_app_name_))
-	_return_ = C._gtk_recent_info_create_app_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, _error_)
+	_return_ = C._gtk_recent_info_create_app_info((*C.GtkRecentInfo)(_self_), _cgo_app_name_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	return
 }
 
@@ -25703,10 +26059,12 @@ func (_self_ *SelectionData) GetDataType() (_return_ C.GdkAtom) {
 	return
 }
 
-func (_self_ *SelectionData) GetDataWithLength() (_return_ *C.guchar, _go_length_ int) {
+func (_self_ *SelectionData) GetDataWithLength() (_go__return__ []byte, _go_length_ int) {
 	var length C.gint
+	var _return_ *C.guchar
 	_return_ = C._gtk_selection_data_get_data_with_length((*C.GtkSelectionData)(_self_), &length)
 	_go_length_ = (int)(length)
+	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
 	return
 }
 
@@ -26895,8 +27253,9 @@ func (_self_ *WidgetClass) ListStyleProperties() (_return_ unsafe.Pointer, _go_n
 	return
 }
 
-func (_self_ *WidgetClass) SetAccessibleRole(role C.AtkRole) () {
-	C.gtk_widget_class_set_accessible_role((*C.GtkWidgetClass)(_self_), role)
+func (_self_ *WidgetClass) SetAccessibleRole(role int) () {
+	_cgo_role_ := (C.AtkRole)(role)
+	C.gtk_widget_class_set_accessible_role((*C.GtkWidgetClass)(_self_), _cgo_role_)
 	return
 }
 
@@ -27523,22 +27882,32 @@ func (_self_ *FileChooser) AddFilter(filter FileFilterKind) () {
 	return
 }
 
-func (_self_ *FileChooser) AddShortcutFolder(folder string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) AddShortcutFolder(folder string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_folder_ := C.CString(folder)
 	_cgo_folder_ := (*C.char)(unsafe.Pointer(_cstring_folder_))
 	defer C.free(unsafe.Pointer(_cstring_folder_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_add_shortcut_folder((*C.GtkFileChooser)(_self_._value_), _cgo_folder_, _error_)
+	_return_ = C._gtk_file_chooser_add_shortcut_folder((*C.GtkFileChooser)(_self_._value_), _cgo_folder_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *FileChooser) AddShortcutFolderUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) AddShortcutFolderUri(uri string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_add_shortcut_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_, _error_)
+	_return_ = C._gtk_file_chooser_add_shortcut_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -27711,22 +28080,32 @@ func (_self_ *FileChooser) RemoveFilter(filter FileFilterKind) () {
 	return
 }
 
-func (_self_ *FileChooser) RemoveShortcutFolder(folder string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) RemoveShortcutFolder(folder string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_folder_ := C.CString(folder)
 	_cgo_folder_ := (*C.char)(unsafe.Pointer(_cstring_folder_))
 	defer C.free(unsafe.Pointer(_cstring_folder_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_remove_shortcut_folder((*C.GtkFileChooser)(_self_._value_), _cgo_folder_, _error_)
+	_return_ = C._gtk_file_chooser_remove_shortcut_folder((*C.GtkFileChooser)(_self_._value_), _cgo_folder_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *FileChooser) RemoveShortcutFolderUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) RemoveShortcutFolderUri(uri string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.char)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_remove_shortcut_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_, _error_)
+	_return_ = C._gtk_file_chooser_remove_shortcut_folder_uri((*C.GtkFileChooser)(_self_._value_), _cgo_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -27736,9 +28115,14 @@ func (_self_ *FileChooser) SelectAll() () {
 	return
 }
 
-func (_self_ *FileChooser) SelectFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) SelectFile(file *C.GFile) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_select_file((*C.GtkFileChooser)(_self_._value_), file, _error_)
+	_return_ = C._gtk_file_chooser_select_file((*C.GtkFileChooser)(_self_._value_), file, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -27763,8 +28147,9 @@ func (_self_ *FileChooser) SelectUri(uri string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *FileChooser) SetAction(action C.GtkFileChooserAction) () {
-	C.gtk_file_chooser_set_action((*C.GtkFileChooser)(_self_._value_), action)
+func (_self_ *FileChooser) SetAction(action int) () {
+	_cgo_action_ := (C.GtkFileChooserAction)(action)
+	C.gtk_file_chooser_set_action((*C.GtkFileChooser)(_self_._value_), _cgo_action_)
 	return
 }
 
@@ -27785,9 +28170,14 @@ func (_self_ *FileChooser) SetCurrentFolder(filename string) (_go__return__ bool
 	return
 }
 
-func (_self_ *FileChooser) SetCurrentFolderFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) SetCurrentFolderFile(file *C.GFile) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_set_current_folder_file((*C.GtkFileChooser)(_self_._value_), file, _error_)
+	_return_ = C._gtk_file_chooser_set_current_folder_file((*C.GtkFileChooser)(_self_._value_), file, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -27823,9 +28213,14 @@ func (_self_ *FileChooser) SetExtraWidget(extra_widget WidgetKind) () {
 	return
 }
 
-func (_self_ *FileChooser) SetFile(file *C.GFile) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *FileChooser) SetFile(file *C.GFile) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._gtk_file_chooser_set_file((*C.GtkFileChooser)(_self_._value_), file, _error_)
+	_return_ = C._gtk_file_chooser_set_file((*C.GtkFileChooser)(_self_._value_), file, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -28004,8 +28399,9 @@ func (_self_ *Orientable) GetOrientation() (_return_ C.GtkOrientation) {
 	return
 }
 
-func (_self_ *Orientable) SetOrientation(orientation C.GtkOrientation) () {
-	C.gtk_orientable_set_orientation((*C.GtkOrientable)(_self_._value_), orientation)
+func (_self_ *Orientable) SetOrientation(orientation int) () {
+	_cgo_orientation_ := (C.GtkOrientation)(orientation)
+	C.gtk_orientable_set_orientation((*C.GtkOrientable)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -28137,22 +28533,32 @@ func (_self_ *RecentChooser) SelectAll() () {
 	return
 }
 
-func (_self_ *RecentChooser) SelectUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *RecentChooser) SelectUri(uri string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_recent_chooser_select_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_, _error_)
+	_return_ = C._gtk_recent_chooser_select_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *RecentChooser) SetCurrentUri(uri string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *RecentChooser) SetCurrentUri(uri string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_uri_ := C.CString(uri)
 	_cgo_uri_ := (*C.gchar)(unsafe.Pointer(_cstring_uri_))
 	defer C.free(unsafe.Pointer(_cstring_uri_))
 	var _return_ C.gboolean
-	_return_ = C._gtk_recent_chooser_set_current_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_, _error_)
+	_return_ = C._gtk_recent_chooser_set_current_uri((*C.GtkRecentChooser)(_self_._value_), _cgo_uri_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -28216,8 +28622,9 @@ func (_self_ *RecentChooser) SetSortFunc(sort_func C.GtkRecentSortFunc, sort_dat
 	return
 }
 
-func (_self_ *RecentChooser) SetSortType(sort_type C.GtkRecentSortType) () {
-	C.gtk_recent_chooser_set_sort_type((*C.GtkRecentChooser)(_self_._value_), sort_type)
+func (_self_ *RecentChooser) SetSortType(sort_type int) () {
+	_cgo_sort_type_ := (C.GtkRecentSortType)(sort_type)
+	C.gtk_recent_chooser_set_sort_type((*C.GtkRecentChooser)(_self_._value_), _cgo_sort_type_)
 	return
 }
 
@@ -28264,8 +28671,9 @@ func (_self_ *Scrollable) SetHadjustment(hadjustment AdjustmentKind) () {
 	return
 }
 
-func (_self_ *Scrollable) SetHscrollPolicy(policy C.GtkScrollablePolicy) () {
-	C.gtk_scrollable_set_hscroll_policy((*C.GtkScrollable)(_self_._value_), policy)
+func (_self_ *Scrollable) SetHscrollPolicy(policy int) () {
+	_cgo_policy_ := (C.GtkScrollablePolicy)(policy)
+	C.gtk_scrollable_set_hscroll_policy((*C.GtkScrollable)(_self_._value_), _cgo_policy_)
 	return
 }
 
@@ -28275,8 +28683,9 @@ func (_self_ *Scrollable) SetVadjustment(vadjustment AdjustmentKind) () {
 	return
 }
 
-func (_self_ *Scrollable) SetVscrollPolicy(policy C.GtkScrollablePolicy) () {
-	C.gtk_scrollable_set_vscroll_policy((*C.GtkScrollable)(_self_._value_), policy)
+func (_self_ *Scrollable) SetVscrollPolicy(policy int) () {
+	_cgo_policy_ := (C.GtkScrollablePolicy)(policy)
+	C.gtk_scrollable_set_vscroll_policy((*C.GtkScrollable)(_self_._value_), _cgo_policy_)
 	return
 }
 
@@ -28619,9 +29028,10 @@ func (_self_ *TreeSortable) SetDefaultSortFunc(sort_func C.GtkTreeIterCompareFun
 	return
 }
 
-func (_self_ *TreeSortable) SetSortColumnId(sort_column_id int, order C.GtkSortType) () {
+func (_self_ *TreeSortable) SetSortColumnId(sort_column_id int, order int) () {
 	_cgo_sort_column_id_ := (C.gint)(sort_column_id)
-	C.gtk_tree_sortable_set_sort_column_id((*C.GtkTreeSortable)(_self_._value_), _cgo_sort_column_id_, order)
+	_cgo_order_ := (C.GtkSortType)(order)
+	C.gtk_tree_sortable_set_sort_column_id((*C.GtkTreeSortable)(_self_._value_), _cgo_sort_column_id_, _cgo_order_)
 	return
 }
 
