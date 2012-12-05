@@ -12,6 +12,18 @@ Compile_error_c_symbols = [
   'gdk_pixbuf_from_pixdata',
 
   'GdkPixdata',
+
+  'cogl_clutter_check_extension_CLUTTER',
+  'cogl_clutter_winsys_has_feature_CLUTTER',
+  'cogl_clutter_winsys_xlib_get_visual_info_CLUTTER',
+  'cogl_onscreen_clutter_backend_set_size_CLUTTER',
+  'cogl_xlib_renderer_add_filter_EXP',
+  'cogl_xlib_renderer_get_display_EXP',
+  'cogl_xlib_renderer_get_foreign_display_EXP',
+  'cogl_xlib_renderer_handle_event_EXP',
+  'cogl_xlib_renderer_remove_filter_EXP',
+  'cogl_xlib_renderer_set_event_retrieval_enabled',
+  'cogl_xlib_renderer_set_foreign_display_EXP',
 ]
 
 Excluded_interfaces = [
@@ -26,6 +38,9 @@ Conflict_type_names = [
   'ObjectClass',
   'Value',
   'Rectangle',
+  'Color',
+  'Path',
+  'Texture',
 ]
 
 Not_exported_c_macros = [

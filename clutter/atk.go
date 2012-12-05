@@ -9,6 +9,9 @@ package clutter
 // #include <glib-unix.h>
 // #include <atk/atk.h>
 /*
+typedef unsigned long ulong;
+typedef unsigned int uint;
+typedef unsigned char uchar;
 guint _atk_add_global_event_listener(GSignalEmissionHook listener, gchar * event_type) {
 	return (guint)atk_add_global_event_listener(listener, (const gchar *)(event_type));
 }
@@ -380,22 +383,6 @@ func ToUtil(value unsafe.Pointer) Util {
 		value,
 	}
 }
-type Registry struct {
-	GObjectObject
-	_value_ unsafe.Pointer
-}
-type RegistryKind interface {
-  _IsRegistry()
-  GetGObject() unsafe.Pointer
-}
-func (self Registry) _IsRegistry() {}
-func (self Registry) GetGObject() unsafe.Pointer { return self._value_ }
-func ToRegistry(value unsafe.Pointer) Registry {
-	return Registry{
-		ToGObjectObject(value),
-		value,
-	}
-}
 type NoOpObject struct {
 	AtkObject
 	AtkAction
@@ -699,10 +686,8 @@ func FocusTrackerNotify(object AtkObjectKind) () {
 	return
 }
 
-func GetDefaultRegistry() (_go__return__ Registry) {
-	var _return_ *C.AtkRegistry
+func GetDefaultRegistry() (_return_ *C.AtkRegistry) {
 	_return_ = C.atk_get_default_registry()
-	_go__return__ = ToRegistry(unsafe.Pointer(_return_))
 	return
 }
 
@@ -1129,23 +1114,6 @@ func (_self_ *Plug) GetId() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.atk_plug_get_id((*C.AtkPlug)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
-	return
-}
-
-func (_self_ *Registry) GetFactory(type_ C.GType) (_go__return__ ObjectFactory) {
-	var _return_ *C.AtkObjectFactory
-	_return_ = C.atk_registry_get_factory((*C.AtkRegistry)(_self_._value_), type_)
-	_go__return__ = ToObjectFactory(unsafe.Pointer(_return_))
-	return
-}
-
-func (_self_ *Registry) GetFactoryType(type_ C.GType) (_return_ C.GType) {
-	_return_ = C.atk_registry_get_factory_type((*C.AtkRegistry)(_self_._value_), type_)
-	return
-}
-
-func (_self_ *Registry) SetFactoryType(type_ C.GType, factory_type C.GType) () {
-	C.atk_registry_set_factory_type((*C.AtkRegistry)(_self_._value_), type_, factory_type)
 	return
 }
 

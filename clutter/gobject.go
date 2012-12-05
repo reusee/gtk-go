@@ -9,6 +9,9 @@ package clutter
 // #include <glib-unix.h>
 // #include <glib-object.h>
 /*
+typedef unsigned long ulong;
+typedef unsigned int uint;
+typedef unsigned char uchar;
 gpointer _g_boxed_copy(GType boxed_type, gpointer src_boxed) {
 	return (gpointer)g_boxed_copy(boxed_type, (gconstpointer)(src_boxed));
 }

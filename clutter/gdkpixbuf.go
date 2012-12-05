@@ -9,6 +9,9 @@ package clutter
 // #include <glib-unix.h>
 // #include <gdk-pixbuf/gdk-pixbuf.h>
 /*
+typedef unsigned long ulong;
+typedef unsigned int uint;
+typedef unsigned char uchar;
 GdkPixbuf * _gdk_pixbuf_new_from_file(char * filename, void * error) {
 	return (GdkPixbuf *)gdk_pixbuf_new_from_file((const char *)(filename), (GError **)(error));
 }
@@ -144,22 +147,6 @@ import (
 type PixbufLoaderClass C.GdkPixbufLoaderClass
 type PixbufFormat C.GdkPixbufFormat
 type PixbufSimpleAnimClass C.GdkPixbufSimpleAnimClass
-type PixbufSimpleAnim struct {
-	PixbufAnimation
-	_value_ unsafe.Pointer
-}
-type PixbufSimpleAnimKind interface {
-  _IsPixbufSimpleAnim()
-  GetGObject() unsafe.Pointer
-}
-func (self PixbufSimpleAnim) _IsPixbufSimpleAnim() {}
-func (self PixbufSimpleAnim) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufSimpleAnim(value unsafe.Pointer) PixbufSimpleAnim {
-	return PixbufSimpleAnim{
-		ToPixbufAnimation(value),
-		value,
-	}
-}
 type PixbufAnimation struct {
 	GObjectObject
 	_value_ unsafe.Pointer
@@ -209,19 +196,19 @@ func ToPixbufAnimationIter(value unsafe.Pointer) PixbufAnimationIter {
 		value,
 	}
 }
-type PixbufSimpleAnimIter struct {
-	PixbufAnimationIter
+type PixbufSimpleAnim struct {
+	PixbufAnimation
 	_value_ unsafe.Pointer
 }
-type PixbufSimpleAnimIterKind interface {
-  _IsPixbufSimpleAnimIter()
+type PixbufSimpleAnimKind interface {
+  _IsPixbufSimpleAnim()
   GetGObject() unsafe.Pointer
 }
-func (self PixbufSimpleAnimIter) _IsPixbufSimpleAnimIter() {}
-func (self PixbufSimpleAnimIter) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPixbufSimpleAnimIter(value unsafe.Pointer) PixbufSimpleAnimIter {
-	return PixbufSimpleAnimIter{
-		ToPixbufAnimationIter(value),
+func (self PixbufSimpleAnim) _IsPixbufSimpleAnim() {}
+func (self PixbufSimpleAnim) GetGObject() unsafe.Pointer { return self._value_ }
+func ToPixbufSimpleAnim(value unsafe.Pointer) PixbufSimpleAnim {
+	return PixbufSimpleAnim{
+		ToPixbufAnimation(value),
 		value,
 	}
 }

@@ -9,6 +9,9 @@ package clutter
 // #include <glib-unix.h>
 // #include <clutter/clutter.h>
 /*
+typedef unsigned long ulong;
+typedef unsigned int uint;
+typedef unsigned char uchar;
 void _clutter_cairo_set_source_color(cairo_t * cr, ClutterColor * color) {
 	(void)clutter_cairo_set_source_color(cr, (const ClutterColor *)(color));
 }
@@ -718,6 +721,7 @@ type CanvasPrivate C.ClutterCanvasPrivate
 type TransitionClass C.ClutterTransitionClass
 type EffectClass C.ClutterEffectClass
 type ScorePrivate C.ClutterScorePrivate
+type ClutterColor C.ClutterColor
 type BoxClass C.ClutterBoxClass
 type Size C.ClutterSize
 type TextPrivate C.ClutterTextPrivate
@@ -803,7 +807,6 @@ type AnimatorKey C.ClutterAnimatorKey
 type ScrollEvent C.ClutterScrollEvent
 type ActorMetaClass C.ClutterActorMetaClass
 type LayoutManagerClass C.ClutterLayoutManagerClass
-type Color C.ClutterColor
 type GroupClass C.ClutterGroupClass
 type PathConstraintClass C.ClutterPathConstraintClass
 type ChildMetaClass C.ClutterChildMetaClass
@@ -897,6 +900,22 @@ func ToBehaviourDepth(value unsafe.Pointer) BehaviourDepth {
 	}
 }
 func (self BehaviourDepth) _IsScriptable () {}
+type ClutterPath struct {
+	InitiallyUnowned
+	_value_ unsafe.Pointer
+}
+type ClutterPathKind interface {
+  _IsClutterPath()
+  GetGObject() unsafe.Pointer
+}
+func (self ClutterPath) _IsClutterPath() {}
+func (self ClutterPath) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClutterPath(value unsafe.Pointer) ClutterPath {
+	return ClutterPath{
+		ToInitiallyUnowned(value),
+		value,
+	}
+}
 type FlowLayout struct {
 	LayoutManager
 	_value_ unsafe.Pointer
@@ -956,22 +975,6 @@ func (self BoxLayout) GetGObject() unsafe.Pointer { return self._value_ }
 func ToBoxLayout(value unsafe.Pointer) BoxLayout {
 	return BoxLayout{
 		ToLayoutManager(value),
-		value,
-	}
-}
-type Path struct {
-	InitiallyUnowned
-	_value_ unsafe.Pointer
-}
-type PathKind interface {
-  _IsPath()
-  GetGObject() unsafe.Pointer
-}
-func (self Path) _IsPath() {}
-func (self Path) GetGObject() unsafe.Pointer { return self._value_ }
-func ToPath(value unsafe.Pointer) Path {
-	return Path{
-		ToInitiallyUnowned(value),
 		value,
 	}
 }
@@ -1039,22 +1042,6 @@ func ToClipNode(value unsafe.Pointer) ClipNode {
 		value,
 	}
 }
-type ParamSpecUnit struct {
-	ParamSpec
-	_value_ unsafe.Pointer
-}
-type ParamSpecUnitKind interface {
-  _IsParamSpecUnit()
-  GetGObject() unsafe.Pointer
-}
-func (self ParamSpecUnit) _IsParamSpecUnit() {}
-func (self ParamSpecUnit) GetGObject() unsafe.Pointer { return self._value_ }
-func ToParamSpecUnit(value unsafe.Pointer) ParamSpecUnit {
-	return ParamSpecUnit{
-		ToParamSpec(value),
-		value,
-	}
-}
 type Media struct {
 	_value_ unsafe.Pointer
 }
@@ -1088,6 +1075,34 @@ func ToAnimator(value unsafe.Pointer) Animator {
 	}
 }
 func (self Animator) _IsScriptable () {}
+type ClutterTexture struct {
+	Actor
+	ImplementorIface
+	Animatable
+	Container
+	Scriptable
+	_value_ unsafe.Pointer
+}
+type ClutterTextureKind interface {
+  _IsClutterTexture()
+  GetGObject() unsafe.Pointer
+}
+func (self ClutterTexture) _IsClutterTexture() {}
+func (self ClutterTexture) GetGObject() unsafe.Pointer { return self._value_ }
+func ToClutterTexture(value unsafe.Pointer) ClutterTexture {
+	return ClutterTexture{
+		ToActor(value),
+		ToImplementorIface(value),
+		ToAnimatable(value),
+		ToContainer(value),
+		ToScriptable(value),
+		value,
+	}
+}
+func (self ClutterTexture) _IsImplementorIface () {}
+func (self ClutterTexture) _IsAnimatable () {}
+func (self ClutterTexture) _IsContainer () {}
+func (self ClutterTexture) _IsScriptable () {}
 type BlurEffect struct {
 	OffscreenEffect
 	_value_ unsafe.Pointer
@@ -1645,34 +1660,6 @@ func ToClickAction(value unsafe.Pointer) ClickAction {
 		value,
 	}
 }
-type Texture struct {
-	Actor
-	ImplementorIface
-	Animatable
-	Container
-	Scriptable
-	_value_ unsafe.Pointer
-}
-type TextureKind interface {
-  _IsTexture()
-  GetGObject() unsafe.Pointer
-}
-func (self Texture) _IsTexture() {}
-func (self Texture) GetGObject() unsafe.Pointer { return self._value_ }
-func ToTexture(value unsafe.Pointer) Texture {
-	return Texture{
-		ToActor(value),
-		ToImplementorIface(value),
-		ToAnimatable(value),
-		ToContainer(value),
-		ToScriptable(value),
-		value,
-	}
-}
-func (self Texture) _IsImplementorIface () {}
-func (self Texture) _IsAnimatable () {}
-func (self Texture) _IsContainer () {}
-func (self Texture) _IsScriptable () {}
 type BinLayout struct {
 	LayoutManager
 	_value_ unsafe.Pointer
@@ -2434,7 +2421,7 @@ func ToDeviceManager(value unsafe.Pointer) DeviceManager {
 	}
 }
 type CairoTexture struct {
-	Texture
+	ClutterTexture
 	ImplementorIface
 	Animatable
 	Container
@@ -2449,7 +2436,7 @@ func (self CairoTexture) _IsCairoTexture() {}
 func (self CairoTexture) GetGObject() unsafe.Pointer { return self._value_ }
 func ToCairoTexture(value unsafe.Pointer) CairoTexture {
 	return CairoTexture{
-		ToTexture(value),
+		ToClutterTexture(value),
 		ToImplementorIface(value),
 		ToAnimatable(value),
 		ToContainer(value),
@@ -2478,7 +2465,7 @@ func CairoClear(cr *C.cairo_t) () {
 	return
 }
 
-func CairoSetSourceColor(cr *C.cairo_t, color *Color) () {
+func CairoSetSourceColor(cr *C.cairo_t, color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_cairo_set_source_color(cr, _cgo_color_)
 	return
@@ -2504,17 +2491,17 @@ func CheckWindowingBackend(backend_type string) (_go__return__ bool) {
 	return
 }
 
-func ColorAlloc() (_go__return__ *Color) {
+func ColorAlloc() (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
 	_return_ = C.clutter_color_alloc()
-	_go__return__ = (*Color)(unsafe.Pointer(_return_))
+	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
 
-func ColorGetStatic(color C.ClutterStaticColor) (_go__return__ *Color) {
+func ColorGetStatic(color C.ClutterStaticColor) (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
 	_return_ = C._clutter_color_get_static(color)
-	_go__return__ = (*Color)(unsafe.Pointer(_return_))
+	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2713,7 +2700,7 @@ func MatrixInitIdentity(matrix *C.ClutterMatrix) (_return_ *C.ClutterMatrix) {
 	return
 }
 
-func ClutterParamSpecColor(name string, nick string, blurb string, default_value *Color, flags C.GParamFlags) (_return_ *C.GParamSpec) {
+func ClutterParamSpecColor(name string, nick string, blurb string, default_value *ClutterColor, flags C.GParamFlags) (_return_ *C.GParamSpec) {
 	_cgo_default_value_ := (*C.ClutterColor)(unsafe.Pointer(default_value))
 	_cstring_name_ := C.CString(name)
 	_cgo_name_ := (*C.gchar)(unsafe.Pointer(_cstring_name_))
@@ -2851,10 +2838,10 @@ func ValueDupPaintNode(value *C.GValue) (_go__return__ PaintNode) {
 	return
 }
 
-func ValueGetColor(value *C.GValue) (_go__return__ *Color) {
+func ValueGetColor(value *C.GValue) (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
 	_return_ = C._clutter_value_get_color(value)
-	_go__return__ = (*Color)(unsafe.Pointer(_return_))
+	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
 
@@ -2893,7 +2880,7 @@ func ValueGetUnits(value *C.GValue) (_go__return__ *Units) {
 	return
 }
 
-func ValueSetColor(value *C.GValue, color *Color) () {
+func ValueSetColor(value *C.GValue, color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_value_set_color(value, _cgo_color_)
 	return
@@ -3120,10 +3107,10 @@ func (_self_ *Actor) GetAllocationBox() (box *ActorBox) {
 	return
 }
 
-func (_self_ *Actor) GetBackgroundColor() (color *Color) {
+func (_self_ *Actor) GetBackgroundColor() (color *ClutterColor) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_actor_get_background_color((*C.ClutterActor)(_self_._value_), &_allocated_color_)
-	color = (*Color)(unsafe.Pointer(&_allocated_color_))
+	color = (*ClutterColor)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
@@ -3871,7 +3858,7 @@ func (_self_ *Actor) SetAllocation(box *ActorBox, flags C.ClutterAllocationFlags
 	return
 }
 
-func (_self_ *Actor) SetBackgroundColor(color *Color) () {
+func (_self_ *Actor) SetBackgroundColor(color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_actor_set_background_color((*C.ClutterActor)(_self_._value_), _cgo_color_)
 	return
@@ -4628,7 +4615,7 @@ func (_self_ *Clone) SetSource(source ActorKind) () {
 	return
 }
 
-func ColorNodeNew(color *Color) (_go__return__ ColorNode) {
+func ColorNodeNew(color *ClutterColor) (_go__return__ ColorNode) {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	var _return_ *C.ClutterPaintNode
 	_return_ = C._clutter_color_node_new(_cgo_color_)
@@ -4636,7 +4623,7 @@ func ColorNodeNew(color *Color) (_go__return__ ColorNode) {
 	return
 }
 
-func ColorizeEffectNew(tint *Color) (_go__return__ ColorizeEffect) {
+func ColorizeEffectNew(tint *ClutterColor) (_go__return__ ColorizeEffect) {
 	_cgo_tint_ := (*C.ClutterColor)(unsafe.Pointer(tint))
 	var _return_ *C.ClutterEffect
 	_return_ = C._clutter_colorize_effect_new(_cgo_tint_)
@@ -4644,14 +4631,14 @@ func ColorizeEffectNew(tint *Color) (_go__return__ ColorizeEffect) {
 	return
 }
 
-func (_self_ *ColorizeEffect) GetTint() (tint *Color) {
+func (_self_ *ColorizeEffect) GetTint() (tint *ClutterColor) {
 	var _allocated_tint_ C.ClutterColor
 	C.clutter_colorize_effect_get_tint((*C.ClutterColorizeEffect)(_self_._value_), &_allocated_tint_)
-	tint = (*Color)(unsafe.Pointer(&_allocated_tint_))
+	tint = (*ClutterColor)(unsafe.Pointer(&_allocated_tint_))
 	return
 }
 
-func (_self_ *ColorizeEffect) SetTint(tint *Color) () {
+func (_self_ *ColorizeEffect) SetTint(tint *ClutterColor) () {
 	_cgo_tint_ := (*C.ClutterColor)(unsafe.Pointer(tint))
 	C._clutter_colorize_effect_set_tint((*C.ClutterColorizeEffect)(_self_._value_), _cgo_tint_)
 	return
@@ -5943,34 +5930,34 @@ func (_self_ *PanAction) SetPanAxis(axis C.ClutterPanAxis) () {
 	return
 }
 
-func PathNew() (_go__return__ Path) {
+func PathNew() (_go__return__ ClutterPath) {
 	var _return_ *C.ClutterPath
 	_return_ = C.clutter_path_new()
-	_go__return__ = ToPath(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterPath(unsafe.Pointer(_return_))
 	return
 }
 
-func PathNewWithDescription(desc string) (_go__return__ Path) {
+func PathNewWithDescription(desc string) (_go__return__ ClutterPath) {
 	var _return_ *C.ClutterPath
 	_cstring_desc_ := C.CString(desc)
 	_cgo_desc_ := (*C.gchar)(unsafe.Pointer(_cstring_desc_))
 	defer C.free(unsafe.Pointer(_cstring_desc_))
 	_return_ = C._clutter_path_new_with_description(_cgo_desc_)
-	_go__return__ = ToPath(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterPath(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Path) AddCairoPath(cpath *C.cairo_path_t) () {
+func (_self_ *ClutterPath) AddCairoPath(cpath *C.cairo_path_t) () {
 	C._clutter_path_add_cairo_path((*C.ClutterPath)(_self_._value_), cpath)
 	return
 }
 
-func (_self_ *Path) AddClose() () {
+func (_self_ *ClutterPath) AddClose() () {
 	C.clutter_path_add_close((*C.ClutterPath)(_self_._value_))
 	return
 }
 
-func (_self_ *Path) AddCurveTo(x_1 int, y_1 int, x_2 int, y_2 int, x_3 int, y_3 int) () {
+func (_self_ *ClutterPath) AddCurveTo(x_1 int, y_1 int, x_2 int, y_2 int, x_3 int, y_3 int) () {
 	_cgo_x_1_ := (C.gint)(x_1)
 	_cgo_y_1_ := (C.gint)(y_1)
 	_cgo_x_2_ := (C.gint)(x_2)
@@ -5981,27 +5968,27 @@ func (_self_ *Path) AddCurveTo(x_1 int, y_1 int, x_2 int, y_2 int, x_3 int, y_3 
 	return
 }
 
-func (_self_ *Path) AddLineTo(x int, y int) () {
+func (_self_ *ClutterPath) AddLineTo(x int, y int) () {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	C.clutter_path_add_line_to((*C.ClutterPath)(_self_._value_), _cgo_x_, _cgo_y_)
 	return
 }
 
-func (_self_ *Path) AddMoveTo(x int, y int) () {
+func (_self_ *ClutterPath) AddMoveTo(x int, y int) () {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	C.clutter_path_add_move_to((*C.ClutterPath)(_self_._value_), _cgo_x_, _cgo_y_)
 	return
 }
 
-func (_self_ *Path) AddNode(node *PathNode) () {
+func (_self_ *ClutterPath) AddNode(node *PathNode) () {
 	_cgo_node_ := (*C.ClutterPathNode)(unsafe.Pointer(node))
 	C._clutter_path_add_node((*C.ClutterPath)(_self_._value_), _cgo_node_)
 	return
 }
 
-func (_self_ *Path) AddRelCurveTo(x_1 int, y_1 int, x_2 int, y_2 int, x_3 int, y_3 int) () {
+func (_self_ *ClutterPath) AddRelCurveTo(x_1 int, y_1 int, x_2 int, y_2 int, x_3 int, y_3 int) () {
 	_cgo_x_1_ := (C.gint)(x_1)
 	_cgo_y_1_ := (C.gint)(y_1)
 	_cgo_x_2_ := (C.gint)(x_2)
@@ -6012,21 +5999,21 @@ func (_self_ *Path) AddRelCurveTo(x_1 int, y_1 int, x_2 int, y_2 int, x_3 int, y
 	return
 }
 
-func (_self_ *Path) AddRelLineTo(x int, y int) () {
+func (_self_ *ClutterPath) AddRelLineTo(x int, y int) () {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	C.clutter_path_add_rel_line_to((*C.ClutterPath)(_self_._value_), _cgo_x_, _cgo_y_)
 	return
 }
 
-func (_self_ *Path) AddRelMoveTo(x int, y int) () {
+func (_self_ *ClutterPath) AddRelMoveTo(x int, y int) () {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	C.clutter_path_add_rel_move_to((*C.ClutterPath)(_self_._value_), _cgo_x_, _cgo_y_)
 	return
 }
 
-func (_self_ *Path) AddString(str string) (_go__return__ bool) {
+func (_self_ *ClutterPath) AddString(str string) (_go__return__ bool) {
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
@@ -6036,38 +6023,38 @@ func (_self_ *Path) AddString(str string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Path) Clear() () {
+func (_self_ *ClutterPath) Clear() () {
 	C.clutter_path_clear((*C.ClutterPath)(_self_._value_))
 	return
 }
 
-func (_self_ *Path) Foreach(callback C.ClutterPathCallback, user_data C.gpointer) () {
+func (_self_ *ClutterPath) Foreach(callback C.ClutterPathCallback, user_data C.gpointer) () {
 	C.clutter_path_foreach((*C.ClutterPath)(_self_._value_), callback, user_data)
 	return
 }
 
-func (_self_ *Path) GetDescription() (_go__return__ string) {
+func (_self_ *ClutterPath) GetDescription() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C.clutter_path_get_description((*C.ClutterPath)(_self_._value_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
 	return
 }
 
-func (_self_ *Path) GetLength() (_go__return__ uint) {
+func (_self_ *ClutterPath) GetLength() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.clutter_path_get_length((*C.ClutterPath)(_self_._value_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Path) GetNNodes() (_go__return__ uint) {
+func (_self_ *ClutterPath) GetNNodes() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C.clutter_path_get_n_nodes((*C.ClutterPath)(_self_._value_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Path) GetNode(index_ uint) (node *PathNode) {
+func (_self_ *ClutterPath) GetNode(index_ uint) (node *PathNode) {
 	var _allocated_node_ C.ClutterPathNode
 	_cgo_index__ := (C.guint)(index_)
 	C.clutter_path_get_node((*C.ClutterPath)(_self_._value_), _cgo_index__, &_allocated_node_)
@@ -6075,12 +6062,12 @@ func (_self_ *Path) GetNode(index_ uint) (node *PathNode) {
 	return
 }
 
-func (_self_ *Path) GetNodes() (_return_ *C.GSList) {
+func (_self_ *ClutterPath) GetNodes() (_return_ *C.GSList) {
 	_return_ = C.clutter_path_get_nodes((*C.ClutterPath)(_self_._value_))
 	return
 }
 
-func (_self_ *Path) GetPosition(progress float64) (_go__return__ uint, position *Knot) {
+func (_self_ *ClutterPath) GetPosition(progress float64) (_go__return__ uint, position *Knot) {
 	var _allocated_position_ C.ClutterKnot
 	_cgo_progress_ := (C.gdouble)(progress)
 	var _return_ C.guint
@@ -6090,27 +6077,27 @@ func (_self_ *Path) GetPosition(progress float64) (_go__return__ uint, position 
 	return
 }
 
-func (_self_ *Path) InsertNode(index_ int, node *PathNode) () {
+func (_self_ *ClutterPath) InsertNode(index_ int, node *PathNode) () {
 	_cgo_node_ := (*C.ClutterPathNode)(unsafe.Pointer(node))
 	_cgo_index__ := (C.gint)(index_)
 	C._clutter_path_insert_node((*C.ClutterPath)(_self_._value_), _cgo_index__, _cgo_node_)
 	return
 }
 
-func (_self_ *Path) RemoveNode(index_ uint) () {
+func (_self_ *ClutterPath) RemoveNode(index_ uint) () {
 	_cgo_index__ := (C.guint)(index_)
 	C.clutter_path_remove_node((*C.ClutterPath)(_self_._value_), _cgo_index__)
 	return
 }
 
-func (_self_ *Path) ReplaceNode(index_ uint, node *PathNode) () {
+func (_self_ *ClutterPath) ReplaceNode(index_ uint, node *PathNode) () {
 	_cgo_node_ := (*C.ClutterPathNode)(unsafe.Pointer(node))
 	_cgo_index__ := (C.guint)(index_)
 	C._clutter_path_replace_node((*C.ClutterPath)(_self_._value_), _cgo_index__, _cgo_node_)
 	return
 }
 
-func (_self_ *Path) SetDescription(str string) (_go__return__ bool) {
+func (_self_ *ClutterPath) SetDescription(str string) (_go__return__ bool) {
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
@@ -6120,12 +6107,12 @@ func (_self_ *Path) SetDescription(str string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Path) ToCairoPath(cr *C.cairo_t) () {
+func (_self_ *ClutterPath) ToCairoPath(cr *C.cairo_t) () {
 	C.clutter_path_to_cairo_path((*C.ClutterPath)(_self_._value_), cr)
 	return
 }
 
-func PathConstraintNew(path PathKind, offset float64) (_go__return__ PathConstraint) {
+func PathConstraintNew(path ClutterPathKind, offset float64) (_go__return__ PathConstraint) {
 	_cgo_path_ := (*C.ClutterPath)(path.GetGObject())
 	var _return_ *C.ClutterConstraint
 	_cgo_offset_ := (C.gfloat)(offset)
@@ -6141,10 +6128,10 @@ func (_self_ *PathConstraint) GetOffset() (_go__return__ float64) {
 	return
 }
 
-func (_self_ *PathConstraint) GetPath() (_go__return__ Path) {
+func (_self_ *PathConstraint) GetPath() (_go__return__ ClutterPath) {
 	var _return_ *C.ClutterPath
 	_return_ = C.clutter_path_constraint_get_path((*C.ClutterPathConstraint)(_self_._value_))
-	_go__return__ = ToPath(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterPath(unsafe.Pointer(_return_))
 	return
 }
 
@@ -6154,7 +6141,7 @@ func (_self_ *PathConstraint) SetOffset(offset float64) () {
 	return
 }
 
-func (_self_ *PathConstraint) SetPath(path PathKind) () {
+func (_self_ *PathConstraint) SetPath(path ClutterPathKind) () {
 	_cgo_path_ := (*C.ClutterPath)(path.GetGObject())
 	C.clutter_path_constraint_set_path((*C.ClutterPathConstraint)(_self_._value_), _cgo_path_)
 	return
@@ -6743,7 +6730,7 @@ func TextNew() (_go__return__ ClutterText) {
 	return
 }
 
-func TextNewFull(font_name string, text string, color *Color) (_go__return__ ClutterText) {
+func TextNewFull(font_name string, text string, color *ClutterColor) (_go__return__ ClutterText) {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	var _return_ *C.ClutterActor
 	_cstring_font_name_ := C.CString(font_name)
@@ -6842,17 +6829,17 @@ func (_self_ *ClutterText) GetChars(start_pos int64, end_pos int64) (_go__return
 	return
 }
 
-func (_self_ *ClutterText) GetColor() (color *Color) {
+func (_self_ *ClutterText) GetColor() (color *ClutterColor) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
-	color = (*Color)(unsafe.Pointer(&_allocated_color_))
+	color = (*ClutterColor)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
-func (_self_ *ClutterText) GetCursorColor() (color *Color) {
+func (_self_ *ClutterText) GetCursorColor() (color *ClutterColor) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_cursor_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
-	color = (*Color)(unsafe.Pointer(&_allocated_color_))
+	color = (*ClutterColor)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
@@ -6958,10 +6945,10 @@ func (_self_ *ClutterText) GetSelectable() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *ClutterText) GetSelectedTextColor() (color *Color) {
+func (_self_ *ClutterText) GetSelectedTextColor() (color *ClutterColor) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_selected_text_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
-	color = (*Color)(unsafe.Pointer(&_allocated_color_))
+	color = (*ClutterColor)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
@@ -6979,10 +6966,10 @@ func (_self_ *ClutterText) GetSelectionBound() (_go__return__ int) {
 	return
 }
 
-func (_self_ *ClutterText) GetSelectionColor() (color *Color) {
+func (_self_ *ClutterText) GetSelectionColor() (color *ClutterColor) {
 	var _allocated_color_ C.ClutterColor
 	C.clutter_text_get_selection_color((*C.ClutterText)(_self_._value_), &_allocated_color_)
-	color = (*Color)(unsafe.Pointer(&_allocated_color_))
+	color = (*ClutterColor)(unsafe.Pointer(&_allocated_color_))
 	return
 }
 
@@ -7053,13 +7040,13 @@ func (_self_ *ClutterText) SetBuffer(buffer TextBufferKind) () {
 	return
 }
 
-func (_self_ *ClutterText) SetColor(color *Color) () {
+func (_self_ *ClutterText) SetColor(color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
 }
 
-func (_self_ *ClutterText) SetCursorColor(color *Color) () {
+func (_self_ *ClutterText) SetCursorColor(color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_cursor_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
@@ -7168,7 +7155,7 @@ func (_self_ *ClutterText) SetSelectable(selectable bool) () {
 	return
 }
 
-func (_self_ *ClutterText) SetSelectedTextColor(color *Color) () {
+func (_self_ *ClutterText) SetSelectedTextColor(color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_selected_text_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
@@ -7187,7 +7174,7 @@ func (_self_ *ClutterText) SetSelectionBound(selection_bound int) () {
 	return
 }
 
-func (_self_ *ClutterText) SetSelectionColor(color *Color) () {
+func (_self_ *ClutterText) SetSelectionColor(color *ClutterColor) () {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	C._clutter_text_set_selection_color((*C.ClutterText)(_self_._value_), _cgo_color_)
 	return
@@ -7314,7 +7301,7 @@ func (_self_ *TextBuffer) SetText(chars string, n_chars int) () {
 	return
 }
 
-func TextNodeNew(layout *C.PangoLayout, color *Color) (_go__return__ TextNode) {
+func TextNodeNew(layout *C.PangoLayout, color *ClutterColor) (_go__return__ TextNode) {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	var _return_ *C.ClutterPaintNode
 	_return_ = C._clutter_text_node_new(layout, _cgo_color_)
@@ -7322,7 +7309,7 @@ func TextNodeNew(layout *C.PangoLayout, color *Color) (_go__return__ TextNode) {
 	return
 }
 
-func TextureNodeNew(texture *C.CoglTexture, color *Color, min_filter C.ClutterScalingFilter, mag_filter C.ClutterScalingFilter) (_go__return__ TextureNode) {
+func TextureNodeNew(texture *C.CoglTexture, color *ClutterColor, min_filter C.ClutterScalingFilter, mag_filter C.ClutterScalingFilter) (_go__return__ TextureNode) {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	var _return_ *C.ClutterPaintNode
 	_return_ = C._clutter_texture_node_new(texture, _cgo_color_, min_filter, mag_filter)
@@ -7861,40 +7848,40 @@ func (_self_ *ActorIter) Remove() () {
 	return
 }
 
-func ColorNew(red uint8, green uint8, blue uint8, alpha uint8) (_go__return__ *Color) {
+func ColorNew(red uint8, green uint8, blue uint8, alpha uint8) (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
 	_cgo_red_ := (C.guint8)(red)
 	_cgo_green_ := (C.guint8)(green)
 	_cgo_blue_ := (C.guint8)(blue)
 	_cgo_alpha_ := (C.guint8)(alpha)
 	_return_ = C.clutter_color_new(_cgo_red_, _cgo_green_, _cgo_blue_, _cgo_alpha_)
-	_go__return__ = (*Color)(unsafe.Pointer(_return_))
+	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Color) Add(b *Color) (result *Color) {
+func (_self_ *ClutterColor) Add(b *ClutterColor) (result *ClutterColor) {
 	_cgo_b_ := (*C.ClutterColor)(unsafe.Pointer(b))
 	var _allocated_result_ C.ClutterColor
 	C._clutter_color_add((*C.ClutterColor)(_self_), _cgo_b_, &_allocated_result_)
-	result = (*Color)(unsafe.Pointer(&_allocated_result_))
+	result = (*ClutterColor)(unsafe.Pointer(&_allocated_result_))
 	return
 }
 
-func (_self_ *Color) Copy() (_go__return__ *Color) {
+func (_self_ *ClutterColor) Copy() (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
 	_return_ = C._clutter_color_copy((*C.ClutterColor)(_self_))
-	_go__return__ = (*Color)(unsafe.Pointer(_return_))
+	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Color) Darken() (result *Color) {
+func (_self_ *ClutterColor) Darken() (result *ClutterColor) {
 	var _allocated_result_ C.ClutterColor
 	C._clutter_color_darken((*C.ClutterColor)(_self_), &_allocated_result_)
-	result = (*Color)(unsafe.Pointer(&_allocated_result_))
+	result = (*ClutterColor)(unsafe.Pointer(&_allocated_result_))
 	return
 }
 
-func (_self_ *Color) Equal(v2 *Color) (_go__return__ bool) {
+func (_self_ *ClutterColor) Equal(v2 *ClutterColor) (_go__return__ bool) {
 	_cgo_v2_ := (C.gpointer)(unsafe.Pointer(v2))
 	var _return_ C.gboolean
 	_return_ = C._clutter_color_equal((*C.ClutterColor)(_self_), _cgo_v2_)
@@ -7902,12 +7889,12 @@ func (_self_ *Color) Equal(v2 *Color) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Color) Free() () {
+func (_self_ *ClutterColor) Free() () {
 	C.clutter_color_free((*C.ClutterColor)(_self_))
 	return
 }
 
-func (_self_ *Color) FromHls(hue float64, luminance float64, saturation float64) () {
+func (_self_ *ClutterColor) FromHls(hue float64, luminance float64, saturation float64) () {
 	_cgo_hue_ := (C.gfloat)(hue)
 	_cgo_luminance_ := (C.gfloat)(luminance)
 	_cgo_saturation_ := (C.gfloat)(saturation)
@@ -7915,13 +7902,13 @@ func (_self_ *Color) FromHls(hue float64, luminance float64, saturation float64)
 	return
 }
 
-func (_self_ *Color) FromPixel(pixel uint32) () {
+func (_self_ *ClutterColor) FromPixel(pixel uint32) () {
 	_cgo_pixel_ := (C.guint32)(pixel)
 	C.clutter_color_from_pixel((*C.ClutterColor)(_self_), _cgo_pixel_)
 	return
 }
 
-func (_self_ *Color) FromString(str string) (_go__return__ bool) {
+func (_self_ *ClutterColor) FromString(str string) (_go__return__ bool) {
 	_cstring_str_ := C.CString(str)
 	_cgo_str_ := (*C.gchar)(unsafe.Pointer(_cstring_str_))
 	defer C.free(unsafe.Pointer(_cstring_str_))
@@ -7931,57 +7918,57 @@ func (_self_ *Color) FromString(str string) (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Color) Hash() (_go__return__ uint) {
+func (_self_ *ClutterColor) Hash() (_go__return__ uint) {
 	var _return_ C.guint
 	_return_ = C._clutter_color_hash((*C.ClutterColor)(_self_))
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Color) Init(red uint8, green uint8, blue uint8, alpha uint8) (_go__return__ *Color) {
+func (_self_ *ClutterColor) Init(red uint8, green uint8, blue uint8, alpha uint8) (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
 	_cgo_red_ := (C.guint8)(red)
 	_cgo_green_ := (C.guint8)(green)
 	_cgo_blue_ := (C.guint8)(blue)
 	_cgo_alpha_ := (C.guint8)(alpha)
 	_return_ = C.clutter_color_init((*C.ClutterColor)(_self_), _cgo_red_, _cgo_green_, _cgo_blue_, _cgo_alpha_)
-	_go__return__ = (*Color)(unsafe.Pointer(_return_))
+	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *Color) Interpolate(final *Color, progress float64) (result *Color) {
+func (_self_ *ClutterColor) Interpolate(final *ClutterColor, progress float64) (result *ClutterColor) {
 	_cgo_final_ := (*C.ClutterColor)(unsafe.Pointer(final))
 	var _allocated_result_ C.ClutterColor
 	_cgo_progress_ := (C.gdouble)(progress)
 	C._clutter_color_interpolate((*C.ClutterColor)(_self_), _cgo_final_, _cgo_progress_, &_allocated_result_)
-	result = (*Color)(unsafe.Pointer(&_allocated_result_))
+	result = (*ClutterColor)(unsafe.Pointer(&_allocated_result_))
 	return
 }
 
-func (_self_ *Color) Lighten() (result *Color) {
+func (_self_ *ClutterColor) Lighten() (result *ClutterColor) {
 	var _allocated_result_ C.ClutterColor
 	C._clutter_color_lighten((*C.ClutterColor)(_self_), &_allocated_result_)
-	result = (*Color)(unsafe.Pointer(&_allocated_result_))
+	result = (*ClutterColor)(unsafe.Pointer(&_allocated_result_))
 	return
 }
 
-func (_self_ *Color) Shade(factor float64) (result *Color) {
+func (_self_ *ClutterColor) Shade(factor float64) (result *ClutterColor) {
 	var _allocated_result_ C.ClutterColor
 	_cgo_factor_ := (C.gdouble)(factor)
 	C._clutter_color_shade((*C.ClutterColor)(_self_), _cgo_factor_, &_allocated_result_)
-	result = (*Color)(unsafe.Pointer(&_allocated_result_))
+	result = (*ClutterColor)(unsafe.Pointer(&_allocated_result_))
 	return
 }
 
-func (_self_ *Color) Subtract(b *Color) (result *Color) {
+func (_self_ *ClutterColor) Subtract(b *ClutterColor) (result *ClutterColor) {
 	_cgo_b_ := (*C.ClutterColor)(unsafe.Pointer(b))
 	var _allocated_result_ C.ClutterColor
 	C._clutter_color_subtract((*C.ClutterColor)(_self_), _cgo_b_, &_allocated_result_)
-	result = (*Color)(unsafe.Pointer(&_allocated_result_))
+	result = (*ClutterColor)(unsafe.Pointer(&_allocated_result_))
 	return
 }
 
-func (_self_ *Color) ToHls() (_go_hue_ float64, _go_luminance_ float64, _go_saturation_ float64) {
+func (_self_ *ClutterColor) ToHls() (_go_hue_ float64, _go_luminance_ float64, _go_saturation_ float64) {
 	var hue C.gfloat
 	var luminance C.gfloat
 	var saturation C.gfloat
@@ -7992,14 +7979,14 @@ func (_self_ *Color) ToHls() (_go_hue_ float64, _go_luminance_ float64, _go_satu
 	return
 }
 
-func (_self_ *Color) ToPixel() (_go__return__ uint32) {
+func (_self_ *ClutterColor) ToPixel() (_go__return__ uint32) {
 	var _return_ C.guint32
 	_return_ = C._clutter_color_to_pixel((*C.ClutterColor)(_self_))
 	_go__return__ = (uint32)(_return_)
 	return
 }
 
-func (_self_ *Color) ToString() (_go__return__ string) {
+func (_self_ *ClutterColor) ToString() (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._clutter_color_to_string((*C.ClutterColor)(_self_))
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))

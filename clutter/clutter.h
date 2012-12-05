@@ -16,3 +16,5 @@ uint64_t __builtin_bswap64 (uint64_t x);
 #include <gdk-pixbuf/gdk-pixbuf-transform.h>
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <gdk-pixbuf/gdk-pixbuf-io.h>
+
+#include <cogl/cogl.h>
