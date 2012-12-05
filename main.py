@@ -218,7 +218,6 @@ def main():
   gir_files = glob.glob(os.path.join(os.path.abspath(sys.argv[1]), '*.gir'))
   translator = Translator()
   for f in gir_files:
-    print os.path.basename(f)
     translator.add(f)
   translator.preprocess()
   translator.parse()
