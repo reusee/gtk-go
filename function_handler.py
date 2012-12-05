@@ -286,6 +286,8 @@ def map_record_and_class_returns(parser, generator, function, klass):
           convert_to_cgo_type(ret.c_return_type)))
         if function.is_constructor:
           ret.go_return_type = parser.convert_gi_name_to_go_name(klass.gi_name)
+        elif klass and not function.is_constructor and not function.is_method and 'new' in function.symbol: # constructive static method
+          ret.go_return_type = parser.convert_gi_name_to_go_name(klass.gi_name)
         else:
           ret.go_return_type = gi_type
         generator.statements_after_cgo_call.append('_go_%s_ = To%s(unsafe.Pointer(_return_))' % (
