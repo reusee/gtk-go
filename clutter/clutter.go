@@ -2495,9 +2495,10 @@ func ColorAlloc() (_go__return__ *ClutterColor) {
 	return
 }
 
-func ColorGetStatic(color C.ClutterStaticColor) (_go__return__ *ClutterColor) {
+func ColorGetStatic(color int) (_go__return__ *ClutterColor) {
 	var _return_ *C.ClutterColor
-	_return_ = C._clutter_color_get_static(color)
+	_cgo_color_ := (C.ClutterStaticColor)(color)
+	_return_ = C._clutter_color_get_static(_cgo_color_)
 	_go__return__ = (*ClutterColor)(unsafe.Pointer(_return_))
 	return
 }
@@ -2712,7 +2713,7 @@ func ClutterParamSpecColor(name string, nick string, blurb string, default_value
 	return
 }
 
-func ClutterParamSpecUnits(name string, nick string, blurb string, default_type C.ClutterUnitType, minimum float64, maximum float64, default_value float64, flags C.GParamFlags) (_return_ *C.GParamSpec) {
+func ClutterParamSpecUnits(name string, nick string, blurb string, default_type int, minimum float64, maximum float64, default_value float64, flags C.GParamFlags) (_return_ *C.GParamSpec) {
 	_cgo_minimum_ := (C.gfloat)(minimum)
 	_cgo_maximum_ := (C.gfloat)(maximum)
 	_cgo_default_value_ := (C.gfloat)(default_value)
@@ -2725,7 +2726,8 @@ func ClutterParamSpecUnits(name string, nick string, blurb string, default_type 
 	_cstring_blurb_ := C.CString(blurb)
 	_cgo_blurb_ := (*C.gchar)(unsafe.Pointer(_cstring_blurb_))
 	defer C.free(unsafe.Pointer(_cstring_blurb_))
-	_return_ = C._clutter_param_spec_units(_cgo_name_, _cgo_nick_, _cgo_blurb_, default_type, _cgo_minimum_, _cgo_maximum_, _cgo_default_value_, flags)
+	_cgo_default_type_ := (C.ClutterUnitType)(default_type)
+	_return_ = C._clutter_param_spec_units(_cgo_name_, _cgo_nick_, _cgo_blurb_, _cgo_default_type_, _cgo_minimum_, _cgo_maximum_, _cgo_default_value_, flags)
 	return
 }
 
@@ -3461,9 +3463,10 @@ func (_self_ *Actor) GetRequestMode() (_return_ C.ClutterRequestMode) {
 	return
 }
 
-func (_self_ *Actor) GetRotationAngle(axis C.ClutterRotateAxis) (_go__return__ float64) {
+func (_self_ *Actor) GetRotationAngle(axis int) (_go__return__ float64) {
 	var _return_ C.gdouble
-	_return_ = C.clutter_actor_get_rotation_angle((*C.ClutterActor)(_self_._value_), axis)
+	_cgo_axis_ := (C.ClutterRotateAxis)(axis)
+	_return_ = C.clutter_actor_get_rotation_angle((*C.ClutterActor)(_self_._value_), _cgo_axis_)
 	_go__return__ = (float64)(_return_)
 	return
 }
@@ -3729,9 +3732,10 @@ func (_self_ *Actor) MoveBy(dx float64, dy float64) () {
 	return
 }
 
-func (_self_ *Actor) NeedsExpand(orientation C.ClutterOrientation) (_go__return__ bool) {
+func (_self_ *Actor) NeedsExpand(orientation int) (_go__return__ bool) {
 	var _return_ C.gboolean
-	_return_ = C.clutter_actor_needs_expand((*C.ClutterActor)(_self_._value_), orientation)
+	_cgo_orientation_ := (C.ClutterOrientation)(orientation)
+	_return_ = C.clutter_actor_needs_expand((*C.ClutterActor)(_self_._value_), _cgo_orientation_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -3909,8 +3913,9 @@ func (_self_ *Actor) SetContent(content ContentKind) () {
 	return
 }
 
-func (_self_ *Actor) SetContentGravity(gravity C.ClutterContentGravity) () {
-	C.clutter_actor_set_content_gravity((*C.ClutterActor)(_self_._value_), gravity)
+func (_self_ *Actor) SetContentGravity(gravity int) () {
+	_cgo_gravity_ := (C.ClutterContentGravity)(gravity)
+	C.clutter_actor_set_content_gravity((*C.ClutterActor)(_self_._value_), _cgo_gravity_)
 	return
 }
 
@@ -3919,8 +3924,10 @@ func (_self_ *Actor) SetContentRepeat(repeat C.ClutterContentRepeat) () {
 	return
 }
 
-func (_self_ *Actor) SetContentScalingFilters(min_filter C.ClutterScalingFilter, mag_filter C.ClutterScalingFilter) () {
-	C.clutter_actor_set_content_scaling_filters((*C.ClutterActor)(_self_._value_), min_filter, mag_filter)
+func (_self_ *Actor) SetContentScalingFilters(min_filter int, mag_filter int) () {
+	_cgo_min_filter_ := (C.ClutterScalingFilter)(min_filter)
+	_cgo_mag_filter_ := (C.ClutterScalingFilter)(mag_filter)
+	C.clutter_actor_set_content_scaling_filters((*C.ClutterActor)(_self_._value_), _cgo_min_filter_, _cgo_mag_filter_)
 	return
 }
 
@@ -3936,8 +3943,9 @@ func (_self_ *Actor) SetEasingDuration(msecs uint) () {
 	return
 }
 
-func (_self_ *Actor) SetEasingMode(mode C.ClutterAnimationMode) () {
-	C.clutter_actor_set_easing_mode((*C.ClutterActor)(_self_._value_), mode)
+func (_self_ *Actor) SetEasingMode(mode int) () {
+	_cgo_mode_ := (C.ClutterAnimationMode)(mode)
+	C.clutter_actor_set_easing_mode((*C.ClutterActor)(_self_._value_), _cgo_mode_)
 	return
 }
 
@@ -4041,14 +4049,16 @@ func (_self_ *Actor) SetReactive(reactive bool) () {
 	return
 }
 
-func (_self_ *Actor) SetRequestMode(mode C.ClutterRequestMode) () {
-	C.clutter_actor_set_request_mode((*C.ClutterActor)(_self_._value_), mode)
+func (_self_ *Actor) SetRequestMode(mode int) () {
+	_cgo_mode_ := (C.ClutterRequestMode)(mode)
+	C.clutter_actor_set_request_mode((*C.ClutterActor)(_self_._value_), _cgo_mode_)
 	return
 }
 
-func (_self_ *Actor) SetRotationAngle(axis C.ClutterRotateAxis, angle float64) () {
+func (_self_ *Actor) SetRotationAngle(axis int, angle float64) () {
 	_cgo_angle_ := (C.gdouble)(angle)
-	C.clutter_actor_set_rotation_angle((*C.ClutterActor)(_self_._value_), axis, _cgo_angle_)
+	_cgo_axis_ := (C.ClutterRotateAxis)(axis)
+	C.clutter_actor_set_rotation_angle((*C.ClutterActor)(_self_._value_), _cgo_axis_, _cgo_angle_)
 	return
 }
 
@@ -4072,8 +4082,9 @@ func (_self_ *Actor) SetSize(width float64, height float64) () {
 	return
 }
 
-func (_self_ *Actor) SetTextDirection(text_dir C.ClutterTextDirection) () {
-	C.clutter_actor_set_text_direction((*C.ClutterActor)(_self_._value_), text_dir)
+func (_self_ *Actor) SetTextDirection(text_dir int) () {
+	_cgo_text_dir_ := (C.ClutterTextDirection)(text_dir)
+	C.clutter_actor_set_text_direction((*C.ClutterActor)(_self_._value_), _cgo_text_dir_)
 	return
 }
 
@@ -4102,8 +4113,9 @@ func (_self_ *Actor) SetX(x float64) () {
 	return
 }
 
-func (_self_ *Actor) SetXAlign(x_align C.ClutterActorAlign) () {
-	C.clutter_actor_set_x_align((*C.ClutterActor)(_self_._value_), x_align)
+func (_self_ *Actor) SetXAlign(x_align int) () {
+	_cgo_x_align_ := (C.ClutterActorAlign)(x_align)
+	C.clutter_actor_set_x_align((*C.ClutterActor)(_self_._value_), _cgo_x_align_)
 	return
 }
 
@@ -4120,8 +4132,9 @@ func (_self_ *Actor) SetY(y float64) () {
 	return
 }
 
-func (_self_ *Actor) SetYAlign(y_align C.ClutterActorAlign) () {
-	C.clutter_actor_set_y_align((*C.ClutterActor)(_self_._value_), y_align)
+func (_self_ *Actor) SetYAlign(y_align int) () {
+	_cgo_y_align_ := (C.ClutterActorAlign)(y_align)
+	C.clutter_actor_set_y_align((*C.ClutterActor)(_self_._value_), _cgo_y_align_)
 	return
 }
 
@@ -4214,11 +4227,12 @@ func (_self_ *ActorMeta) SetName(name string) () {
 	return
 }
 
-func AlignConstraintNew(source ActorKind, axis C.ClutterAlignAxis, factor float64) (_go__return__ AlignConstraint) {
+func AlignConstraintNew(source ActorKind, axis int, factor float64) (_go__return__ AlignConstraint) {
 	_cgo_source_ := (*C.ClutterActor)(source.GetGObject())
 	var _return_ *C.ClutterConstraint
 	_cgo_factor_ := (C.gfloat)(factor)
-	_return_ = C.clutter_align_constraint_new(_cgo_source_, axis, _cgo_factor_)
+	_cgo_axis_ := (C.ClutterAlignAxis)(axis)
+	_return_ = C.clutter_align_constraint_new(_cgo_source_, _cgo_axis_, _cgo_factor_)
 	_go__return__ = ToAlignConstraint(unsafe.Pointer(_return_))
 	return
 }
@@ -4242,8 +4256,9 @@ func (_self_ *AlignConstraint) GetSource() (_go__return__ Actor) {
 	return
 }
 
-func (_self_ *AlignConstraint) SetAlignAxis(axis C.ClutterAlignAxis) () {
-	C.clutter_align_constraint_set_align_axis((*C.ClutterAlignConstraint)(_self_._value_), axis)
+func (_self_ *AlignConstraint) SetAlignAxis(axis int) () {
+	_cgo_axis_ := (C.ClutterAlignAxis)(axis)
+	C.clutter_align_constraint_set_align_axis((*C.ClutterAlignConstraint)(_self_._value_), _cgo_axis_)
 	return
 }
 
@@ -4276,18 +4291,21 @@ func (_self_ *Backend) SetFontOptions(options *C.cairo_font_options_t) () {
 	return
 }
 
-func BinLayoutNew(x_align C.ClutterBinAlignment, y_align C.ClutterBinAlignment) (_go__return__ BinLayout) {
+func BinLayoutNew(x_align int, y_align int) (_go__return__ BinLayout) {
 	var _return_ *C.ClutterLayoutManager
-	_return_ = C.clutter_bin_layout_new(x_align, y_align)
+	_cgo_x_align_ := (C.ClutterBinAlignment)(x_align)
+	_cgo_y_align_ := (C.ClutterBinAlignment)(y_align)
+	_return_ = C.clutter_bin_layout_new(_cgo_x_align_, _cgo_y_align_)
 	_go__return__ = ToBinLayout(unsafe.Pointer(_return_))
 	return
 }
 
-func BindConstraintNew(source ActorKind, coordinate C.ClutterBindCoordinate, offset float64) (_go__return__ BindConstraint) {
+func BindConstraintNew(source ActorKind, coordinate int, offset float64) (_go__return__ BindConstraint) {
 	_cgo_source_ := (*C.ClutterActor)(source.GetGObject())
 	var _return_ *C.ClutterConstraint
 	_cgo_offset_ := (C.gfloat)(offset)
-	_return_ = C.clutter_bind_constraint_new(_cgo_source_, coordinate, _cgo_offset_)
+	_cgo_coordinate_ := (C.ClutterBindCoordinate)(coordinate)
+	_return_ = C.clutter_bind_constraint_new(_cgo_source_, _cgo_coordinate_, _cgo_offset_)
 	_go__return__ = ToBindConstraint(unsafe.Pointer(_return_))
 	return
 }
@@ -4311,8 +4329,9 @@ func (_self_ *BindConstraint) GetSource() (_go__return__ Actor) {
 	return
 }
 
-func (_self_ *BindConstraint) SetCoordinate(coordinate C.ClutterBindCoordinate) () {
-	C.clutter_bind_constraint_set_coordinate((*C.ClutterBindConstraint)(_self_._value_), coordinate)
+func (_self_ *BindConstraint) SetCoordinate(coordinate int) () {
+	_cgo_coordinate_ := (C.ClutterBindCoordinate)(coordinate)
+	C.clutter_bind_constraint_set_coordinate((*C.ClutterBindConstraint)(_self_._value_), _cgo_coordinate_)
 	return
 }
 
@@ -4470,8 +4489,9 @@ func (_self_ *BoxLayout) SetHomogeneous(homogeneous bool) () {
 	return
 }
 
-func (_self_ *BoxLayout) SetOrientation(orientation C.ClutterOrientation) () {
-	C.clutter_box_layout_set_orientation((*C.ClutterBoxLayout)(_self_._value_), orientation)
+func (_self_ *BoxLayout) SetOrientation(orientation int) () {
+	_cgo_orientation_ := (C.ClutterOrientation)(orientation)
+	C.clutter_box_layout_set_orientation((*C.ClutterBoxLayout)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -4700,9 +4720,10 @@ func DeviceManagerGetDefault() (_go__return__ DeviceManager) {
 	return
 }
 
-func (_self_ *DeviceManager) GetCoreDevice(device_type C.ClutterInputDeviceType) (_go__return__ InputDevice) {
+func (_self_ *DeviceManager) GetCoreDevice(device_type int) (_go__return__ InputDevice) {
 	var _return_ *C.ClutterInputDevice
-	_return_ = C.clutter_device_manager_get_core_device((*C.ClutterDeviceManager)(_self_._value_), device_type)
+	_cgo_device_type_ := (C.ClutterInputDeviceType)(device_type)
+	_return_ = C.clutter_device_manager_get_core_device((*C.ClutterDeviceManager)(_self_._value_), _cgo_device_type_)
 	_go__return__ = ToInputDevice(unsafe.Pointer(_return_))
 	return
 }
@@ -4786,8 +4807,9 @@ func (_self_ *DragAction) SetDragArea(drag_area *Rect) () {
 	return
 }
 
-func (_self_ *DragAction) SetDragAxis(axis C.ClutterDragAxis) () {
-	C.clutter_drag_action_set_drag_axis((*C.ClutterDragAction)(_self_._value_), axis)
+func (_self_ *DragAction) SetDragAxis(axis int) () {
+	_cgo_axis_ := (C.ClutterDragAxis)(axis)
+	C.clutter_drag_action_set_drag_axis((*C.ClutterDragAction)(_self_._value_), _cgo_axis_)
 	return
 }
 
@@ -4823,9 +4845,10 @@ func FixedLayoutNew() (_go__return__ FixedLayout) {
 	return
 }
 
-func FlowLayoutNew(orientation C.ClutterFlowOrientation) (_go__return__ FlowLayout) {
+func FlowLayoutNew(orientation int) (_go__return__ FlowLayout) {
 	var _return_ *C.ClutterLayoutManager
-	_return_ = C.clutter_flow_layout_new(orientation)
+	_cgo_orientation_ := (C.ClutterFlowOrientation)(orientation)
+	_return_ = C.clutter_flow_layout_new(_cgo_orientation_)
 	_go__return__ = ToFlowLayout(unsafe.Pointer(_return_))
 	return
 }
@@ -4894,8 +4917,9 @@ func (_self_ *FlowLayout) SetHomogeneous(homogeneous bool) () {
 	return
 }
 
-func (_self_ *FlowLayout) SetOrientation(orientation C.ClutterFlowOrientation) () {
-	C.clutter_flow_layout_set_orientation((*C.ClutterFlowLayout)(_self_._value_), orientation)
+func (_self_ *FlowLayout) SetOrientation(orientation int) () {
+	_cgo_orientation_ := (C.ClutterFlowOrientation)(orientation)
+	C.clutter_flow_layout_set_orientation((*C.ClutterFlowLayout)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -5031,12 +5055,13 @@ func (_self_ *GridLayout) Attach(child ActorKind, left int, top int, width int, 
 	return
 }
 
-func (_self_ *GridLayout) AttachNextTo(child ActorKind, sibling ActorKind, side C.ClutterGridPosition, width int, height int) () {
+func (_self_ *GridLayout) AttachNextTo(child ActorKind, sibling ActorKind, side int, width int, height int) () {
 	_cgo_child_ := (*C.ClutterActor)(child.GetGObject())
 	_cgo_sibling_ := (*C.ClutterActor)(sibling.GetGObject())
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
-	C.clutter_grid_layout_attach_next_to((*C.ClutterGridLayout)(_self_._value_), _cgo_child_, _cgo_sibling_, side, _cgo_width_, _cgo_height_)
+	_cgo_side_ := (C.ClutterGridPosition)(side)
+	C.clutter_grid_layout_attach_next_to((*C.ClutterGridLayout)(_self_._value_), _cgo_child_, _cgo_sibling_, _cgo_side_, _cgo_width_, _cgo_height_)
 	return
 }
 
@@ -5088,9 +5113,10 @@ func (_self_ *GridLayout) InsertColumn(position int) () {
 	return
 }
 
-func (_self_ *GridLayout) InsertNextTo(sibling ActorKind, side C.ClutterGridPosition) () {
+func (_self_ *GridLayout) InsertNextTo(sibling ActorKind, side int) () {
 	_cgo_sibling_ := (*C.ClutterActor)(sibling.GetGObject())
-	C.clutter_grid_layout_insert_next_to((*C.ClutterGridLayout)(_self_._value_), _cgo_sibling_, side)
+	_cgo_side_ := (C.ClutterGridPosition)(side)
+	C.clutter_grid_layout_insert_next_to((*C.ClutterGridLayout)(_self_._value_), _cgo_sibling_, _cgo_side_)
 	return
 }
 
@@ -5113,8 +5139,9 @@ func (_self_ *GridLayout) SetColumnSpacing(spacing uint) () {
 	return
 }
 
-func (_self_ *GridLayout) SetOrientation(orientation C.ClutterOrientation) () {
-	C.clutter_grid_layout_set_orientation((*C.ClutterGridLayout)(_self_._value_), orientation)
+func (_self_ *GridLayout) SetOrientation(orientation int) () {
+	_cgo_orientation_ := (C.ClutterOrientation)(orientation)
+	C.clutter_grid_layout_set_orientation((*C.ClutterGridLayout)(_self_._value_), _cgo_orientation_)
 	return
 }
 
@@ -5138,29 +5165,30 @@ func ImageNew() (_go__return__ ClutterImage) {
 	return
 }
 
-func (_self_ *ClutterImage) SetArea(data []byte, pixel_format C.CoglPixelFormat, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetArea(data []byte, pixel_format int, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
 	_cstring_data_ := C.CString(string(data))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
-	_return_ = C._clutter_image_set_area((*C.ClutterImage)(_self_._value_), _cgo_data_, pixel_format, rect, _cgo_row_stride_, _error_)
+	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
+	_return_ = C._clutter_image_set_area((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, rect, _cgo_row_stride_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format C.CoglPixelFormat, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
-	_return_ = C._clutter_image_set_bytes((*C.ClutterImage)(_self_._value_), data, pixel_format, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
+	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
+	_return_ = C._clutter_image_set_bytes((*C.ClutterImage)(_self_._value_), data, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
 func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
-  _cgo_pixel_format_ := C.CoglPixelFormat(pixel_format)
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
@@ -5168,6 +5196,7 @@ func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, h
 	_cstring_data_ := C.CString(string(data))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
+	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
 	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
@@ -5455,9 +5484,10 @@ func (_self_ *KeyframeTransition) GetNKeyFrames() (_go__return__ uint) {
 	return
 }
 
-func (_self_ *KeyframeTransition) SetKeyFrame(index_ uint, key C.double, mode C.ClutterAnimationMode, value *C.GValue) () {
+func (_self_ *KeyframeTransition) SetKeyFrame(index_ uint, key C.double, mode int, value *C.GValue) () {
 	_cgo_index__ := (C.guint)(index_)
-	C._clutter_keyframe_transition_set_key_frame((*C.ClutterKeyframeTransition)(_self_._value_), _cgo_index__, key, mode, value)
+	_cgo_mode_ := (C.ClutterAnimationMode)(mode)
+	C._clutter_keyframe_transition_set_key_frame((*C.ClutterKeyframeTransition)(_self_._value_), _cgo_index__, key, _cgo_mode_, value)
 	return
 }
 
@@ -5923,8 +5953,9 @@ func (_self_ *PanAction) SetInterpolate(should_interpolate bool) () {
 	return
 }
 
-func (_self_ *PanAction) SetPanAxis(axis C.ClutterPanAxis) () {
-	C.clutter_pan_action_set_pan_axis((*C.ClutterPanAction)(_self_._value_), axis)
+func (_self_ *PanAction) SetPanAxis(axis int) () {
+	_cgo_axis_ := (C.ClutterPanAxis)(axis)
+	C.clutter_pan_action_set_pan_axis((*C.ClutterPanAction)(_self_._value_), _cgo_axis_)
 	return
 }
 
@@ -6318,9 +6349,10 @@ func SettingsGetDefault() (_go__return__ Settings) {
 	return
 }
 
-func ShaderEffectNew(shader_type C.ClutterShaderType) (_go__return__ ShaderEffect) {
+func ShaderEffectNew(shader_type int) (_go__return__ ShaderEffect) {
 	var _return_ *C.ClutterEffect
-	_return_ = C.clutter_shader_effect_new(shader_type)
+	_cgo_shader_type_ := (C.ClutterShaderType)(shader_type)
+	_return_ = C.clutter_shader_effect_new(_cgo_shader_type_)
 	_go__return__ = ToShaderEffect(unsafe.Pointer(_return_))
 	return
 }
@@ -6353,11 +6385,13 @@ func (_self_ *ShaderEffect) SetUniformValue(name string, value *C.GValue) () {
 	return
 }
 
-func SnapConstraintNew(source ActorKind, from_edge C.ClutterSnapEdge, to_edge C.ClutterSnapEdge, offset float64) (_go__return__ SnapConstraint) {
+func SnapConstraintNew(source ActorKind, from_edge int, to_edge int, offset float64) (_go__return__ SnapConstraint) {
 	_cgo_source_ := (*C.ClutterActor)(source.GetGObject())
 	var _return_ *C.ClutterConstraint
 	_cgo_offset_ := (C.gfloat)(offset)
-	_return_ = C.clutter_snap_constraint_new(_cgo_source_, from_edge, to_edge, _cgo_offset_)
+	_cgo_from_edge_ := (C.ClutterSnapEdge)(from_edge)
+	_cgo_to_edge_ := (C.ClutterSnapEdge)(to_edge)
+	_return_ = C.clutter_snap_constraint_new(_cgo_source_, _cgo_from_edge_, _cgo_to_edge_, _cgo_offset_)
 	_go__return__ = ToSnapConstraint(unsafe.Pointer(_return_))
 	return
 }
@@ -6381,8 +6415,10 @@ func (_self_ *SnapConstraint) GetSource() (_go__return__ Actor) {
 	return
 }
 
-func (_self_ *SnapConstraint) SetEdges(from_edge C.ClutterSnapEdge, to_edge C.ClutterSnapEdge) () {
-	C.clutter_snap_constraint_set_edges((*C.ClutterSnapConstraint)(_self_._value_), from_edge, to_edge)
+func (_self_ *SnapConstraint) SetEdges(from_edge int, to_edge int) () {
+	_cgo_from_edge_ := (C.ClutterSnapEdge)(from_edge)
+	_cgo_to_edge_ := (C.ClutterSnapEdge)(to_edge)
+	C.clutter_snap_constraint_set_edges((*C.ClutterSnapConstraint)(_self_._value_), _cgo_from_edge_, _cgo_to_edge_)
 	return
 }
 
@@ -6434,11 +6470,12 @@ func (_self_ *Stage) GetAcceptFocus() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Stage) GetActorAtPos(pick_mode C.ClutterPickMode, x int, y int) (_go__return__ Actor) {
+func (_self_ *Stage) GetActorAtPos(pick_mode int, x int, y int) (_go__return__ Actor) {
 	var _return_ *C.ClutterActor
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
-	_return_ = C.clutter_stage_get_actor_at_pos((*C.ClutterStage)(_self_._value_), pick_mode, _cgo_x_, _cgo_y_)
+	_cgo_pick_mode_ := (C.ClutterPickMode)(pick_mode)
+	_return_ = C.clutter_stage_get_actor_at_pos((*C.ClutterStage)(_self_._value_), _cgo_pick_mode_, _cgo_x_, _cgo_y_)
 	_go__return__ = ToActor(unsafe.Pointer(_return_))
 	return
 }
@@ -7307,10 +7344,12 @@ func TextNodeNew(layout *C.PangoLayout, color *ClutterColor) (_go__return__ Text
 	return
 }
 
-func TextureNodeNew(texture *C.CoglTexture, color *ClutterColor, min_filter C.ClutterScalingFilter, mag_filter C.ClutterScalingFilter) (_go__return__ TextureNode) {
+func TextureNodeNew(texture *C.CoglTexture, color *ClutterColor, min_filter int, mag_filter int) (_go__return__ TextureNode) {
 	_cgo_color_ := (*C.ClutterColor)(unsafe.Pointer(color))
 	var _return_ *C.ClutterPaintNode
-	_return_ = C._clutter_texture_node_new(texture, _cgo_color_, min_filter, mag_filter)
+	_cgo_min_filter_ := (C.ClutterScalingFilter)(min_filter)
+	_cgo_mag_filter_ := (C.ClutterScalingFilter)(mag_filter)
+	_return_ = C._clutter_texture_node_new(texture, _cgo_color_, _cgo_min_filter_, _cgo_mag_filter_)
 	_go__return__ = ToTextureNode(unsafe.Pointer(_return_))
 	return
 }
@@ -7502,8 +7541,9 @@ func (_self_ *Timeline) SetDelay(msecs uint) () {
 	return
 }
 
-func (_self_ *Timeline) SetDirection(direction C.ClutterTimelineDirection) () {
-	C.clutter_timeline_set_direction((*C.ClutterTimeline)(_self_._value_), direction)
+func (_self_ *Timeline) SetDirection(direction int) () {
+	_cgo_direction_ := (C.ClutterTimelineDirection)(direction)
+	C.clutter_timeline_set_direction((*C.ClutterTimeline)(_self_._value_), _cgo_direction_)
 	return
 }
 
@@ -7518,8 +7558,9 @@ func (_self_ *Timeline) SetProgressFunc(func_ C.ClutterTimelineProgressFunc, dat
 	return
 }
 
-func (_self_ *Timeline) SetProgressMode(mode C.ClutterAnimationMode) () {
-	C.clutter_timeline_set_progress_mode((*C.ClutterTimeline)(_self_._value_), mode)
+func (_self_ *Timeline) SetProgressMode(mode int) () {
+	_cgo_mode_ := (C.ClutterAnimationMode)(mode)
+	C.clutter_timeline_set_progress_mode((*C.ClutterTimeline)(_self_._value_), _cgo_mode_)
 	return
 }
 
@@ -7529,9 +7570,10 @@ func (_self_ *Timeline) SetRepeatCount(count int) () {
 	return
 }
 
-func (_self_ *Timeline) SetStepProgress(n_steps int, step_mode C.ClutterStepMode) () {
+func (_self_ *Timeline) SetStepProgress(n_steps int, step_mode int) () {
 	_cgo_n_steps_ := (C.gint)(n_steps)
-	C.clutter_timeline_set_step_progress((*C.ClutterTimeline)(_self_._value_), _cgo_n_steps_, step_mode)
+	_cgo_step_mode_ := (C.ClutterStepMode)(step_mode)
+	C.clutter_timeline_set_step_progress((*C.ClutterTimeline)(_self_._value_), _cgo_n_steps_, _cgo_step_mode_)
 	return
 }
 
@@ -7651,8 +7693,9 @@ func (_self_ *ZoomAction) GetZoomAxis() (_return_ C.ClutterZoomAxis) {
 	return
 }
 
-func (_self_ *ZoomAction) SetZoomAxis(axis C.ClutterZoomAxis) () {
-	C.clutter_zoom_action_set_zoom_axis((*C.ClutterZoomAction)(_self_._value_), axis)
+func (_self_ *ZoomAction) SetZoomAxis(axis int) () {
+	_cgo_axis_ := (C.ClutterZoomAxis)(axis)
+	C.clutter_zoom_action_set_zoom_axis((*C.ClutterZoomAction)(_self_._value_), _cgo_axis_)
 	return
 }
 

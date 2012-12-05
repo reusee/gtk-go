@@ -294,8 +294,9 @@ func CreateProgram() (_return_ C.CoglHandle) {
 	return
 }
 
-func CreateShader(shader_type C.CoglShaderType) (_return_ C.CoglHandle) {
-	_return_ = C.cogl_create_shader(shader_type)
+func CreateShader(shader_type int) (_return_ C.CoglHandle) {
+	_cgo_shader_type_ := (C.CoglShaderType)(shader_type)
+	_return_ = C.cogl_create_shader(_cgo_shader_type_)
 	return
 }
 
@@ -579,8 +580,9 @@ func PathRoundRectangle(x_1 C.float, y_1 C.float, x_2 C.float, y_2 C.float, radi
 	return
 }
 
-func PathSetFillRule(fill_rule C.CoglPathFillRule) () {
-	C.cogl_path_set_fill_rule(fill_rule)
+func PathSetFillRule(fill_rule int) () {
+	_cgo_fill_rule_ := (C.CoglPathFillRule)(fill_rule)
+	C.cogl_path_set_fill_rule(_cgo_fill_rule_)
 	return
 }
 
@@ -671,8 +673,9 @@ func PushSource(material unsafe.Pointer) () {
 	return
 }
 
-func ReadPixels(x C.int, y C.int, width C.int, height C.int, source C.CoglReadPixelsFlags, format C.CoglPixelFormat, pixels *C.guint8) () {
-	C.cogl_read_pixels(x, y, width, height, source, format, pixels)
+func ReadPixels(x C.int, y C.int, width C.int, height C.int, source C.CoglReadPixelsFlags, format int, pixels *C.guint8) () {
+	_cgo_format_ := (C.CoglPixelFormat)(format)
+	C.cogl_read_pixels(x, y, width, height, source, _cgo_format_, pixels)
 	return
 }
 
@@ -703,9 +706,10 @@ func SetBackfaceCullingEnabled(setting bool) () {
 	return
 }
 
-func SetFog(fog_color *CoglColor, mode C.CoglFogMode, density C.float, z_near C.float, z_far C.float) () {
+func SetFog(fog_color *CoglColor, mode int, density C.float, z_near C.float, z_far C.float) () {
 	_cgo_fog_color_ := (*C.CoglColor)(unsafe.Pointer(fog_color))
-	C._cogl_set_fog(_cgo_fog_color_, mode, density, z_near, z_far)
+	_cgo_mode_ := (C.CoglFogMode)(mode)
+	C._cogl_set_fog(_cgo_fog_color_, _cgo_mode_, density, z_near, z_far)
 	return
 }
 
@@ -821,7 +825,7 @@ func Translate(x C.float, y C.float, z C.float) () {
 	return
 }
 
-func VertexBufferAdd(handle C.CoglHandle, attribute_name string, n_components uint8, type_ C.CoglAttributeType, normalized bool, stride uint16, pointer unsafe.Pointer) () {
+func VertexBufferAdd(handle C.CoglHandle, attribute_name string, n_components uint8, type_ int, normalized bool, stride uint16, pointer unsafe.Pointer) () {
 	_cgo_n_components_ := (C.guint8)(n_components)
 	_cgo_stride_ := (C.guint16)(stride)
 	_cstring_attribute_name_ := C.CString(attribute_name)
@@ -829,7 +833,8 @@ func VertexBufferAdd(handle C.CoglHandle, attribute_name string, n_components ui
 	defer C.free(unsafe.Pointer(_cstring_attribute_name_))
 	_cgo_normalized_ := (C.gboolean)(C.FALSE)
 	if normalized { _cgo_normalized_ = (C.gboolean)(C.TRUE) }
-	C._cogl_vertex_buffer_add(handle, _cgo_attribute_name_, _cgo_n_components_, type_, _cgo_normalized_, _cgo_stride_, pointer)
+	_cgo_type__ := (C.CoglAttributeType)(type_)
+	C._cogl_vertex_buffer_add(handle, _cgo_attribute_name_, _cgo_n_components_, _cgo_type__, _cgo_normalized_, _cgo_stride_, pointer)
 	return
 }
 
@@ -849,13 +854,15 @@ func VertexBufferDisable(handle C.CoglHandle, attribute_name string) () {
 	return
 }
 
-func VertexBufferDraw(handle C.CoglHandle, mode C.CoglVerticesMode, first C.int, count C.int) () {
-	C.cogl_vertex_buffer_draw(handle, mode, first, count)
+func VertexBufferDraw(handle C.CoglHandle, mode int, first C.int, count C.int) () {
+	_cgo_mode_ := (C.CoglVerticesMode)(mode)
+	C.cogl_vertex_buffer_draw(handle, _cgo_mode_, first, count)
 	return
 }
 
-func VertexBufferDrawElements(handle C.CoglHandle, mode C.CoglVerticesMode, indices C.CoglHandle, min_index C.int, max_index C.int, indices_offset C.int, count C.int) () {
-	C.cogl_vertex_buffer_draw_elements(handle, mode, indices, min_index, max_index, indices_offset, count)
+func VertexBufferDrawElements(handle C.CoglHandle, mode int, indices C.CoglHandle, min_index C.int, max_index C.int, indices_offset C.int, count C.int) () {
+	_cgo_mode_ := (C.CoglVerticesMode)(mode)
+	C.cogl_vertex_buffer_draw_elements(handle, _cgo_mode_, indices, min_index, max_index, indices_offset, count)
 	return
 }
 
@@ -1183,8 +1190,9 @@ func (_self_ *Material) RemoveLayer(layer_index C.int) () {
 	return
 }
 
-func (_self_ *Material) SetAlphaTestFunction(alpha_func C.CoglMaterialAlphaFunc, alpha_reference C.float) () {
-	C.cogl_material_set_alpha_test_function((*C.CoglMaterial)(_self_), alpha_func, alpha_reference)
+func (_self_ *Material) SetAlphaTestFunction(alpha_func int, alpha_reference C.float) () {
+	_cgo_alpha_func_ := (C.CoglMaterialAlphaFunc)(alpha_func)
+	C.cogl_material_set_alpha_test_function((*C.CoglMaterial)(_self_), _cgo_alpha_func_, alpha_reference)
 	return
 }
 
@@ -1269,8 +1277,10 @@ func (_self_ *Material) SetLayerCombineConstant(layer_index C.int, constant *Cog
 	return
 }
 
-func (_self_ *Material) SetLayerFilters(layer_index C.int, min_filter C.CoglMaterialFilter, mag_filter C.CoglMaterialFilter) () {
-	C.cogl_material_set_layer_filters((*C.CoglMaterial)(_self_), layer_index, min_filter, mag_filter)
+func (_self_ *Material) SetLayerFilters(layer_index C.int, min_filter int, mag_filter int) () {
+	_cgo_min_filter_ := (C.CoglMaterialFilter)(min_filter)
+	_cgo_mag_filter_ := (C.CoglMaterialFilter)(mag_filter)
+	C.cogl_material_set_layer_filters((*C.CoglMaterial)(_self_), layer_index, _cgo_min_filter_, _cgo_mag_filter_)
 	return
 }
 
@@ -1289,23 +1299,27 @@ func (_self_ *Material) SetLayerPointSpriteCoordsEnabled(layer_index C.int, enab
 	return
 }
 
-func (_self_ *Material) SetLayerWrapMode(layer_index C.int, mode C.CoglMaterialWrapMode) () {
-	C.cogl_material_set_layer_wrap_mode((*C.CoglMaterial)(_self_), layer_index, mode)
+func (_self_ *Material) SetLayerWrapMode(layer_index C.int, mode int) () {
+	_cgo_mode_ := (C.CoglMaterialWrapMode)(mode)
+	C.cogl_material_set_layer_wrap_mode((*C.CoglMaterial)(_self_), layer_index, _cgo_mode_)
 	return
 }
 
-func (_self_ *Material) SetLayerWrapModeP(layer_index C.int, mode C.CoglMaterialWrapMode) () {
-	C.cogl_material_set_layer_wrap_mode_p((*C.CoglMaterial)(_self_), layer_index, mode)
+func (_self_ *Material) SetLayerWrapModeP(layer_index C.int, mode int) () {
+	_cgo_mode_ := (C.CoglMaterialWrapMode)(mode)
+	C.cogl_material_set_layer_wrap_mode_p((*C.CoglMaterial)(_self_), layer_index, _cgo_mode_)
 	return
 }
 
-func (_self_ *Material) SetLayerWrapModeS(layer_index C.int, mode C.CoglMaterialWrapMode) () {
-	C.cogl_material_set_layer_wrap_mode_s((*C.CoglMaterial)(_self_), layer_index, mode)
+func (_self_ *Material) SetLayerWrapModeS(layer_index C.int, mode int) () {
+	_cgo_mode_ := (C.CoglMaterialWrapMode)(mode)
+	C.cogl_material_set_layer_wrap_mode_s((*C.CoglMaterial)(_self_), layer_index, _cgo_mode_)
 	return
 }
 
-func (_self_ *Material) SetLayerWrapModeT(layer_index C.int, mode C.CoglMaterialWrapMode) () {
-	C.cogl_material_set_layer_wrap_mode_t((*C.CoglMaterial)(_self_), layer_index, mode)
+func (_self_ *Material) SetLayerWrapModeT(layer_index C.int, mode int) () {
+	_cgo_mode_ := (C.CoglMaterialWrapMode)(mode)
+	C.cogl_material_set_layer_wrap_mode_t((*C.CoglMaterial)(_self_), layer_index, _cgo_mode_)
 	return
 }
 
@@ -1465,53 +1479,60 @@ func (_self_ *CoglPath) Copy() (_go__return__ *CoglPath) {
 	return
 }
 
-func TextureNewFromBitmap(bitmap *Bitmap, flags C.CoglTextureFlags, internal_format C.CoglPixelFormat) (_go__return__ *CoglTexture) {
+func TextureNewFromBitmap(bitmap *Bitmap, flags C.CoglTextureFlags, internal_format int) (_go__return__ *CoglTexture) {
 	_cgo_bitmap_ := (*C.CoglBitmap)(unsafe.Pointer(bitmap))
 	var _return_ *C.CoglTexture
-	_return_ = C.cogl_texture_new_from_bitmap(_cgo_bitmap_, flags, internal_format)
+	_cgo_internal_format_ := (C.CoglPixelFormat)(internal_format)
+	_return_ = C.cogl_texture_new_from_bitmap(_cgo_bitmap_, flags, _cgo_internal_format_)
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))
 	return
 }
 
-func TextureNewFromData(width uint, height uint, flags C.CoglTextureFlags, format C.CoglPixelFormat, internal_format C.CoglPixelFormat, rowstride uint, data *C.guint8) (_go__return__ *CoglTexture) {
+func TextureNewFromData(width uint, height uint, flags C.CoglTextureFlags, format int, internal_format int, rowstride uint, data *C.guint8) (_go__return__ *CoglTexture) {
 	var _return_ *C.CoglTexture
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_rowstride_ := (C.guint)(rowstride)
-	_return_ = C._cogl_texture_new_from_data(_cgo_width_, _cgo_height_, flags, format, internal_format, _cgo_rowstride_, data)
+	_cgo_format_ := (C.CoglPixelFormat)(format)
+	_cgo_internal_format_ := (C.CoglPixelFormat)(internal_format)
+	_return_ = C._cogl_texture_new_from_data(_cgo_width_, _cgo_height_, flags, _cgo_format_, _cgo_internal_format_, _cgo_rowstride_, data)
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))
 	return
 }
 
-func TextureNewFromFile(filename string, flags C.CoglTextureFlags, internal_format C.CoglPixelFormat) (_go__return__ *CoglTexture, _error_ unsafe.Pointer) {
+func TextureNewFromFile(filename string, flags C.CoglTextureFlags, internal_format int) (_go__return__ *CoglTexture, _error_ unsafe.Pointer) {
 	var _return_ *C.CoglTexture
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._cogl_texture_new_from_file(_cgo_filename_, flags, internal_format, _error_)
+	_cgo_internal_format_ := (C.CoglPixelFormat)(internal_format)
+	_return_ = C._cogl_texture_new_from_file(_cgo_filename_, flags, _cgo_internal_format_, _error_)
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))
 	return
 }
 
-func TextureNewFromForeign(gl_handle C.GLuint, gl_target C.GLenum, width C.GLuint, height C.GLuint, x_pot_waste C.GLuint, y_pot_waste C.GLuint, format C.CoglPixelFormat) (_go__return__ *CoglTexture) {
+func TextureNewFromForeign(gl_handle C.GLuint, gl_target C.GLenum, width C.GLuint, height C.GLuint, x_pot_waste C.GLuint, y_pot_waste C.GLuint, format int) (_go__return__ *CoglTexture) {
 	var _return_ *C.CoglTexture
-	_return_ = C.cogl_texture_new_from_foreign(gl_handle, gl_target, width, height, x_pot_waste, y_pot_waste, format)
+	_cgo_format_ := (C.CoglPixelFormat)(format)
+	_return_ = C.cogl_texture_new_from_foreign(gl_handle, gl_target, width, height, x_pot_waste, y_pot_waste, _cgo_format_)
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))
 	return
 }
 
-func TextureNewWithSize(width uint, height uint, flags C.CoglTextureFlags, internal_format C.CoglPixelFormat) (_go__return__ *CoglTexture) {
+func TextureNewWithSize(width uint, height uint, flags C.CoglTextureFlags, internal_format int) (_go__return__ *CoglTexture) {
 	var _return_ *C.CoglTexture
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
-	_return_ = C._cogl_texture_new_with_size(_cgo_width_, _cgo_height_, flags, internal_format)
+	_cgo_internal_format_ := (C.CoglPixelFormat)(internal_format)
+	_return_ = C._cogl_texture_new_with_size(_cgo_width_, _cgo_height_, flags, _cgo_internal_format_)
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *CoglTexture) GetData(format C.CoglPixelFormat, rowstride uint, data *C.guint8) (_return_ C.int) {
+func (_self_ *CoglTexture) GetData(format int, rowstride uint, data *C.guint8) (_return_ C.int) {
 	_cgo_rowstride_ := (C.guint)(rowstride)
-	_return_ = C._cogl_texture_get_data((*C.CoglTexture)(_self_), format, _cgo_rowstride_, data)
+	_cgo_format_ := (C.CoglPixelFormat)(format)
+	_return_ = C._cogl_texture_get_data((*C.CoglTexture)(_self_), _cgo_format_, _cgo_rowstride_, data)
 	return
 }
 
@@ -1560,12 +1581,13 @@ func (_self_ *CoglTexture) NewFromSubTexture(sub_x C.int, sub_y C.int, sub_width
 	return
 }
 
-func (_self_ *CoglTexture) SetRegion(src_x C.int, src_y C.int, dst_x C.int, dst_y C.int, dst_width uint, dst_height uint, width C.int, height C.int, format C.CoglPixelFormat, rowstride uint, data *C.guint8) (_go__return__ bool) {
+func (_self_ *CoglTexture) SetRegion(src_x C.int, src_y C.int, dst_x C.int, dst_y C.int, dst_width uint, dst_height uint, width C.int, height C.int, format int, rowstride uint, data *C.guint8) (_go__return__ bool) {
 	_cgo_dst_width_ := (C.guint)(dst_width)
 	_cgo_dst_height_ := (C.guint)(dst_height)
 	_cgo_rowstride_ := (C.guint)(rowstride)
 	var _return_ C.gboolean
-	_return_ = C._cogl_texture_set_region((*C.CoglTexture)(_self_), src_x, src_y, dst_x, dst_y, _cgo_dst_width_, _cgo_dst_height_, width, height, format, _cgo_rowstride_, data)
+	_cgo_format_ := (C.CoglPixelFormat)(format)
+	_return_ = C._cogl_texture_set_region((*C.CoglTexture)(_self_), src_x, src_y, dst_x, dst_y, _cgo_dst_width_, _cgo_dst_height_, width, height, _cgo_format_, _cgo_rowstride_, data)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }

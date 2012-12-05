@@ -230,11 +230,12 @@ func PixbufErrorQuark() (_return_ C.GQuark) {
 	return
 }
 
-func PixbufNew(colorspace C.GdkColorspace, has_alpha bool, bits_per_sample C.int, width C.int, height C.int) (_go__return__ Pixbuf) {
+func PixbufNew(colorspace int, has_alpha bool, bits_per_sample C.int, width C.int, height C.int) (_go__return__ Pixbuf) {
 	var _return_ *C.GdkPixbuf
 	_cgo_has_alpha_ := (C.gboolean)(C.FALSE)
 	if has_alpha { _cgo_has_alpha_ = (C.gboolean)(C.TRUE) }
-	_return_ = C.gdk_pixbuf_new(colorspace, _cgo_has_alpha_, bits_per_sample, width, height)
+	_cgo_colorspace_ := (C.GdkColorspace)(colorspace)
+	_return_ = C.gdk_pixbuf_new(_cgo_colorspace_, _cgo_has_alpha_, bits_per_sample, width, height)
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
@@ -390,25 +391,28 @@ func (_self_ *Pixbuf) ApplyEmbeddedOrientation() (_go__return__ Pixbuf) {
 	return
 }
 
-func (_self_ *Pixbuf) Composite(dest PixbufKind, dest_x C.int, dest_y C.int, dest_width C.int, dest_height C.int, offset_x C.double, offset_y C.double, scale_x C.double, scale_y C.double, interp_type C.GdkInterpType, overall_alpha C.int) () {
+func (_self_ *Pixbuf) Composite(dest PixbufKind, dest_x C.int, dest_y C.int, dest_width C.int, dest_height C.int, offset_x C.double, offset_y C.double, scale_x C.double, scale_y C.double, interp_type int, overall_alpha C.int) () {
 	_cgo_dest_ := (*C.GdkPixbuf)(dest.GetGObject())
-	C._gdk_pixbuf_composite((*C.GdkPixbuf)(_self_._value_), _cgo_dest_, dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, interp_type, overall_alpha)
+	_cgo_interp_type_ := (C.GdkInterpType)(interp_type)
+	C._gdk_pixbuf_composite((*C.GdkPixbuf)(_self_._value_), _cgo_dest_, dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, _cgo_interp_type_, overall_alpha)
 	return
 }
 
-func (_self_ *Pixbuf) CompositeColor(dest PixbufKind, dest_x C.int, dest_y C.int, dest_width C.int, dest_height C.int, offset_x C.double, offset_y C.double, scale_x C.double, scale_y C.double, interp_type C.GdkInterpType, overall_alpha C.int, check_x C.int, check_y C.int, check_size C.int, color1 uint32, color2 uint32) () {
+func (_self_ *Pixbuf) CompositeColor(dest PixbufKind, dest_x C.int, dest_y C.int, dest_width C.int, dest_height C.int, offset_x C.double, offset_y C.double, scale_x C.double, scale_y C.double, interp_type int, overall_alpha C.int, check_x C.int, check_y C.int, check_size C.int, color1 uint32, color2 uint32) () {
 	_cgo_dest_ := (*C.GdkPixbuf)(dest.GetGObject())
 	_cgo_color1_ := (C.guint32)(color1)
 	_cgo_color2_ := (C.guint32)(color2)
-	C._gdk_pixbuf_composite_color((*C.GdkPixbuf)(_self_._value_), _cgo_dest_, dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, interp_type, overall_alpha, check_x, check_y, check_size, _cgo_color1_, _cgo_color2_)
+	_cgo_interp_type_ := (C.GdkInterpType)(interp_type)
+	C._gdk_pixbuf_composite_color((*C.GdkPixbuf)(_self_._value_), _cgo_dest_, dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, _cgo_interp_type_, overall_alpha, check_x, check_y, check_size, _cgo_color1_, _cgo_color2_)
 	return
 }
 
-func (_self_ *Pixbuf) CompositeColorSimple(dest_width C.int, dest_height C.int, interp_type C.GdkInterpType, overall_alpha C.int, check_size C.int, color1 uint32, color2 uint32) (_go__return__ Pixbuf) {
+func (_self_ *Pixbuf) CompositeColorSimple(dest_width C.int, dest_height C.int, interp_type int, overall_alpha C.int, check_size C.int, color1 uint32, color2 uint32) (_go__return__ Pixbuf) {
 	var _return_ *C.GdkPixbuf
 	_cgo_color1_ := (C.guint32)(color1)
 	_cgo_color2_ := (C.guint32)(color2)
-	_return_ = C._gdk_pixbuf_composite_color_simple((*C.GdkPixbuf)(_self_._value_), dest_width, dest_height, interp_type, overall_alpha, check_size, _cgo_color1_, _cgo_color2_)
+	_cgo_interp_type_ := (C.GdkInterpType)(interp_type)
+	_return_ = C._gdk_pixbuf_composite_color_simple((*C.GdkPixbuf)(_self_._value_), dest_width, dest_height, _cgo_interp_type_, overall_alpha, check_size, _cgo_color1_, _cgo_color2_)
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
@@ -518,9 +522,10 @@ func (_self_ *Pixbuf) NewSubpixbuf(src_x C.int, src_y C.int, width C.int, height
 	return
 }
 
-func (_self_ *Pixbuf) RotateSimple(angle C.GdkPixbufRotation) (_go__return__ Pixbuf) {
+func (_self_ *Pixbuf) RotateSimple(angle int) (_go__return__ Pixbuf) {
 	var _return_ *C.GdkPixbuf
-	_return_ = C._gdk_pixbuf_rotate_simple((*C.GdkPixbuf)(_self_._value_), angle)
+	_cgo_angle_ := (C.GdkPixbufRotation)(angle)
+	_return_ = C._gdk_pixbuf_rotate_simple((*C.GdkPixbuf)(_self_._value_), _cgo_angle_)
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
@@ -534,15 +539,17 @@ func (_self_ *Pixbuf) SaturateAndPixelate(dest PixbufKind, saturation float64, p
 	return
 }
 
-func (_self_ *Pixbuf) Scale(dest PixbufKind, dest_x C.int, dest_y C.int, dest_width C.int, dest_height C.int, offset_x C.double, offset_y C.double, scale_x C.double, scale_y C.double, interp_type C.GdkInterpType) () {
+func (_self_ *Pixbuf) Scale(dest PixbufKind, dest_x C.int, dest_y C.int, dest_width C.int, dest_height C.int, offset_x C.double, offset_y C.double, scale_x C.double, scale_y C.double, interp_type int) () {
 	_cgo_dest_ := (*C.GdkPixbuf)(dest.GetGObject())
-	C._gdk_pixbuf_scale((*C.GdkPixbuf)(_self_._value_), _cgo_dest_, dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, interp_type)
+	_cgo_interp_type_ := (C.GdkInterpType)(interp_type)
+	C._gdk_pixbuf_scale((*C.GdkPixbuf)(_self_._value_), _cgo_dest_, dest_x, dest_y, dest_width, dest_height, offset_x, offset_y, scale_x, scale_y, _cgo_interp_type_)
 	return
 }
 
-func (_self_ *Pixbuf) ScaleSimple(dest_width C.int, dest_height C.int, interp_type C.GdkInterpType) (_go__return__ Pixbuf) {
+func (_self_ *Pixbuf) ScaleSimple(dest_width C.int, dest_height C.int, interp_type int) (_go__return__ Pixbuf) {
 	var _return_ *C.GdkPixbuf
-	_return_ = C._gdk_pixbuf_scale_simple((*C.GdkPixbuf)(_self_._value_), dest_width, dest_height, interp_type)
+	_cgo_interp_type_ := (C.GdkInterpType)(interp_type)
+	_return_ = C._gdk_pixbuf_scale_simple((*C.GdkPixbuf)(_self_._value_), dest_width, dest_height, _cgo_interp_type_)
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
