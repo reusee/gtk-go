@@ -18,6 +18,9 @@ GdkPixbuf * _gdk_pixbuf_new_from_file_at_scale(char * filename, int width, int h
 GdkPixbuf * _gdk_pixbuf_new_from_file_at_size(char * filename, int width, int height, void * error) {
 	return (GdkPixbuf *)gdk_pixbuf_new_from_file_at_size((const char *)(filename), width, height, (GError **)(error));
 }
+GdkPixbuf * _gdk_pixbuf_new_from_inline(gint data_length, guint8 * data, gboolean copy_pixels, void * error) {
+	return (GdkPixbuf *)gdk_pixbuf_new_from_inline(data_length, (const guint8 *)(data), copy_pixels, (GError **)(error));
+}
 GdkPixbuf * _gdk_pixbuf_new_from_resource(char * resource_path, void * error) {
 	return (GdkPixbuf *)gdk_pixbuf_new_from_resource((const char *)(resource_path), (GError **)(error));
 }
@@ -284,6 +287,19 @@ func PixbufNewFromFileAtSize(filename string, width C.int, height C.int) (_go__r
 	return
 }
 
+func PixbufNewFromInline(data_length int, data []byte, copy_pixels bool) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+	var _return_ *C.GdkPixbuf
+	_cgo_data_length_ := (C.gint)(data_length)
+	_cgo_copy_pixels_ := (C.gboolean)(C.FALSE)
+	if copy_pixels { _cgo_copy_pixels_ = (C.gboolean)(C.TRUE) }
+	_cstring_data_ := C.CString(string(data))
+	defer C.free(unsafe.Pointer(_cstring_data_))
+	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
+	_return_ = C._gdk_pixbuf_new_from_inline(_cgo_data_length_, _cgo_data_, _cgo_copy_pixels_, _error_)
+	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
+	return
+}
+
 func PixbufNewFromResource(resource_path string) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
 	var _return_ *C.GdkPixbuf
 	_cstring_resource_path_ := C.CString(resource_path)
@@ -485,15 +501,19 @@ func (_self_ *Pixbuf) GetOption(key string) (_go__return__ string) {
 	return
 }
 
-func (_self_ *Pixbuf) GetPixels() (_return_ *C.guchar) {
+func (_self_ *Pixbuf) GetPixels() (_go__return__ []byte) {
+	var _return_ *C.guchar
 	_return_ = C._gdk_pixbuf_get_pixels((*C.GdkPixbuf)(_self_._value_))
+	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
 	return
 }
 
-func (_self_ *Pixbuf) GetPixelsWithLength() (_return_ *C.guchar, _go_length_ uint) {
+func (_self_ *Pixbuf) GetPixelsWithLength() (_go__return__ []byte, _go_length_ uint) {
 	var length C.guint
+	var _return_ *C.guchar
 	_return_ = C._gdk_pixbuf_get_pixels_with_length((*C.GdkPixbuf)(_self_._value_), &length)
 	_go_length_ = (uint)(length)
+	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
 	return
 }
 

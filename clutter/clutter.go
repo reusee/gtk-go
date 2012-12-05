@@ -207,8 +207,14 @@ GSList * _clutter_device_manager_peek_devices(ClutterDeviceManager * _self_) {
 void _clutter_drag_action_set_drag_area(ClutterDragAction * _self_, ClutterRect * drag_area) {
 	(void)clutter_drag_action_set_drag_area(_self_, (const ClutterRect *)(drag_area));
 }
+gboolean _clutter_image_set_area(ClutterImage * _self_, guint8 * data, CoglPixelFormat pixel_format, cairo_rectangle_int_t * rect, guint row_stride, void * error) {
+	return (gboolean)clutter_image_set_area(_self_, (const guint8 *)(data), pixel_format, (const cairo_rectangle_int_t *)(rect), row_stride, (GError **)(error));
+}
 gboolean _clutter_image_set_bytes(ClutterImage * _self_, GBytes * data, CoglPixelFormat pixel_format, guint width, guint height, guint row_stride, void * error) {
 	return (gboolean)clutter_image_set_bytes(_self_, data, pixel_format, width, height, row_stride, (GError **)(error));
+}
+gboolean _clutter_image_set_data(ClutterImage * _self_, guint8 * data, CoglPixelFormat pixel_format, guint width, guint height, guint row_stride, void * error) {
+	return (gboolean)clutter_image_set_data(_self_, (const guint8 *)(data), pixel_format, width, height, row_stride, (GError **)(error));
 }
 gchar * _clutter_input_device_get_device_name(ClutterInputDevice * _self_) {
 	return (gchar *)clutter_input_device_get_device_name(_self_);
@@ -5148,12 +5154,36 @@ func ImageNew() (_go__return__ Content) {
 	return
 }
 
+func (_self_ *ClutterImage) SetArea(data []byte, pixel_format C.CoglPixelFormat, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cgo_row_stride_ := (C.guint)(row_stride)
+	var _return_ C.gboolean
+	_cstring_data_ := C.CString(string(data))
+	defer C.free(unsafe.Pointer(_cstring_data_))
+	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
+	_return_ = C._clutter_image_set_area((*C.ClutterImage)(_self_._value_), _cgo_data_, pixel_format, rect, _cgo_row_stride_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
 func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format C.CoglPixelFormat, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
 	_return_ = C._clutter_image_set_bytes((*C.ClutterImage)(_self_._value_), data, pixel_format, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
+	return
+}
+
+func (_self_ *ClutterImage) SetData(data []byte, pixel_format C.CoglPixelFormat, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+	_cgo_width_ := (C.guint)(width)
+	_cgo_height_ := (C.guint)(height)
+	_cgo_row_stride_ := (C.guint)(row_stride)
+	var _return_ C.gboolean
+	_cstring_data_ := C.CString(string(data))
+	defer C.free(unsafe.Pointer(_cstring_data_))
+	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
+	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, pixel_format, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6510,12 +6540,14 @@ func (_self_ *Stage) HideCursor() () {
 	return
 }
 
-func (_self_ *Stage) ReadPixels(x int, y int, width int, height int) (_return_ *C.guchar) {
+func (_self_ *Stage) ReadPixels(x int, y int, width int, height int) (_go__return__ []byte) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
+	var _return_ *C.guchar
 	_return_ = C.clutter_stage_read_pixels((*C.ClutterStage)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
+	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
 	return
 }
 
