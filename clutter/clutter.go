@@ -9,9 +9,6 @@ package clutter
 // #include <glib-unix.h>
 // #include <clutter/clutter.h>
 /*
-typedef unsigned long ulong;
-typedef unsigned int uint;
-typedef unsigned char uchar;
 void _clutter_cairo_set_source_color(cairo_t * cr, ClutterColor * color) {
 	(void)clutter_cairo_set_source_color(cr, (const ClutterColor *)(color));
 }
@@ -4528,10 +4525,10 @@ func (_self_ *BrightnessContrastEffect) SetContrastFull(red C.float, green C.flo
 	return
 }
 
-func CanvasNew() (_go__return__ Content) {
+func CanvasNew() (_go__return__ Canvas) {
 	var _return_ *C.ClutterContent
 	_return_ = C.clutter_canvas_new()
-	_go__return__ = ToContent(unsafe.Pointer(_return_))
+	_go__return__ = ToCanvas(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5134,10 +5131,10 @@ func (_self_ *GridLayout) SetRowSpacing(spacing uint) () {
 	return
 }
 
-func ImageNew() (_go__return__ Content) {
+func ImageNew() (_go__return__ ClutterImage) {
 	var _return_ *C.ClutterContent
 	_return_ = C.clutter_image_new()
-	_go__return__ = ToContent(unsafe.Pointer(_return_))
+	_go__return__ = ToClutterImage(unsafe.Pointer(_return_))
 	return
 }
 
@@ -5162,7 +5159,8 @@ func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format C.CoglPixelFor
 	return
 }
 
-func (_self_ *ClutterImage) SetData(data []byte, pixel_format C.CoglPixelFormat, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+  _cgo_pixel_format_ := C.CoglPixelFormat(pixel_format)
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
@@ -5170,7 +5168,7 @@ func (_self_ *ClutterImage) SetData(data []byte, pixel_format C.CoglPixelFormat,
 	_cstring_data_ := C.CString(string(data))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
-	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, pixel_format, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
+	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }

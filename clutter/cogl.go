@@ -9,9 +9,6 @@ package clutter
 // #include <glib-unix.h>
 // #include <cogl/cogl.h>
 /*
-typedef unsigned long ulong;
-typedef unsigned int uint;
-typedef unsigned char uchar;
 gboolean _cogl_bitmap_get_size_from_file(char * filename, int * width, int * height) {
 	return (gboolean)cogl_bitmap_get_size_from_file((const char *)(filename), width, height);
 }

@@ -11,20 +11,27 @@ func TestTest(t *testing.T) {
   stage := StageNew()
   stage.SetBackgroundColor(ColorNew(0, 0, 0, 0))
   stage.SetSize(500, 600)
-  stage.Show()
-
-  canvas := ToCanvas(CanvasNew().GetGObject())
-  canvas.SetSize(300, 300)
 
   actor := ActorNew()
-  actor.SetContent(canvas)
-  actor.SetContentGravity(CLUTTER_CONTENT_GRAVITY_CENTER)
-  actor.SetContentScalingFilters(CLUTTER_SCALING_FILTER_TRILINEAR, CLUTTER_SCALING_FILTER_LINEAR)
-  actor.SetPivotPoint(0.5, 0.5)
-
   stage.AddChild(actor)
 
+  imageBuf, _ := PixbufNewFromFile("a.jpg")
+
+  image := ImageNew()
+  pixelFormat := COGL_PIXEL_FORMAT_RGB_888
+  if imageBuf.GetHasAlpha() {
+    pixelFormat = COGL_PIXEL_FORMAT_RGBA_8888
+  }
+  image.SetData(imageBuf.GetPixels(),
+    pixelFormat,
+    uint(imageBuf.GetWidth()),
+    uint(imageBuf.GetHeight()),
+    uint(imageBuf.GetRowstride()))
+  actor.SetContent(image)
+  actor.Show()
+
   stage.Connect("destroy", func() { MainQuit() })
+  stage.Show()
 
   Main()
 }

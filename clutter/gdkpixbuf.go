@@ -9,9 +9,6 @@ package clutter
 // #include <glib-unix.h>
 // #include <gdk-pixbuf/gdk-pixbuf.h>
 /*
-typedef unsigned long ulong;
-typedef unsigned int uint;
-typedef unsigned char uchar;
 GdkPixbuf * _gdk_pixbuf_new_from_file(char * filename, void * error) {
 	return (GdkPixbuf *)gdk_pixbuf_new_from_file((const char *)(filename), (GError **)(error));
 }

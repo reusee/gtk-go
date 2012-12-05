@@ -9,9 +9,6 @@ package clutter
 // #include <glib-unix.h>
 // #include <atk/atk.h>
 /*
-typedef unsigned long ulong;
-typedef unsigned int uint;
-typedef unsigned char uchar;
 guint _atk_add_global_event_listener(GSignalEmissionHook listener, gchar * event_type) {
 	return (guint)atk_add_global_event_listener(listener, (const gchar *)(event_type));
 }
