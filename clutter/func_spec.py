@@ -97959,6 +97959,1682 @@ func_specs = {
       ),
     ],
   ),
+  'gdk_pixbuf_error_quark': Spec(
+    return_type = 'GQuark',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_ref': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_unref': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_colorspace': Spec(
+    return_type = 'GdkColorspace',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_n_channels': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_has_alpha': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_bits_per_sample': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_pixels': Spec(
+    return_type = 'guchar *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_width': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_height': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_rowstride': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_byte_length': Spec(
+    return_type = 'gsize',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_pixels_with_length': Spec(
+    return_type = 'guchar *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'guint *',
+        name = 'length',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkColorspace',
+        name = 'colorspace',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'has_alpha',
+      ),
+      Param(
+        type = 'int',
+        name = 'bits_per_sample',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_copy': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_subpixbuf': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'src_pixbuf',
+      ),
+      Param(
+        type = 'int',
+        name = 'src_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'src_y',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_file': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_file_at_size': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_file_at_scale': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'preserve_aspect_ratio',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_resource': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'resource_path',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_resource_at_scale': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'resource_path',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'preserve_aspect_ratio',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_data': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const guchar *',
+        name = 'data',
+      ),
+      Param(
+        type = 'GdkColorspace',
+        name = 'colorspace',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'has_alpha',
+      ),
+      Param(
+        type = 'int',
+        name = 'bits_per_sample',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+      Param(
+        type = 'int',
+        name = 'rowstride',
+      ),
+      Param(
+        type = 'GdkPixbufDestroyNotify',
+        name = 'destroy_fn',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'destroy_fn_data',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_xpm_data': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const char **',
+        name = 'data',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_inline': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'gint',
+        name = 'data_length',
+      ),
+      Param(
+        type = 'const guint8 *',
+        name = 'data',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'copy_pixels',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_fill': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'guint32',
+        name = 'pixel',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_savev': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'char **',
+        name = 'option_keys',
+      ),
+      Param(
+        type = 'char **',
+        name = 'option_values',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_callback': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'GdkPixbufSaveFunc',
+        name = 'save_func',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_callbackv': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'GdkPixbufSaveFunc',
+        name = 'save_func',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'char **',
+        name = 'option_keys',
+      ),
+      Param(
+        type = 'char **',
+        name = 'option_values',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_buffer': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'gchar **',
+        name = 'buffer',
+      ),
+      Param(
+        type = 'gsize *',
+        name = 'buffer_size',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_bufferv': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'gchar **',
+        name = 'buffer',
+      ),
+      Param(
+        type = 'gsize *',
+        name = 'buffer_size',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'char **',
+        name = 'option_keys',
+      ),
+      Param(
+        type = 'char **',
+        name = 'option_values',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_stream': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GInputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_stream_async': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GInputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GAsyncReadyCallback',
+        name = 'callback',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_stream_finish': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GAsyncResult *',
+        name = 'async_result',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_stream_at_scale': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GInputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'gint',
+        name = 'width',
+      ),
+      Param(
+        type = 'gint',
+        name = 'height',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'preserve_aspect_ratio',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_new_from_stream_at_scale_async': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GInputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'gint',
+        name = 'width',
+      ),
+      Param(
+        type = 'gint',
+        name = 'height',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'preserve_aspect_ratio',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GAsyncReadyCallback',
+        name = 'callback',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_stream': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'GOutputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'const char *',
+        name = 'type',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_stream_async': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'GOutputStream *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'const gchar *',
+        name = 'type',
+      ),
+      Param(
+        type = 'GCancellable *',
+        name = 'cancellable',
+      ),
+      Param(
+        type = 'GAsyncReadyCallback',
+        name = 'callback',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'user_data',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_save_to_stream_finish': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GAsyncResult *',
+        name = 'async_result',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_add_alpha': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'substitute_color',
+      ),
+      Param(
+        type = 'guchar',
+        name = 'r',
+      ),
+      Param(
+        type = 'guchar',
+        name = 'g',
+      ),
+      Param(
+        type = 'guchar',
+        name = 'b',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_copy_area': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src_pixbuf',
+      ),
+      Param(
+        type = 'int',
+        name = 'src_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'src_y',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'dest_pixbuf',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_y',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_saturate_and_pixelate': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'dest',
+      ),
+      Param(
+        type = 'gfloat',
+        name = 'saturation',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'pixelate',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_apply_embedded_orientation': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'src',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_option': Spec(
+    return_type = 'const gchar *',
+    parameters = [
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'const gchar *',
+        name = 'key',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_scale': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'dest',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_y',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_width',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_height',
+      ),
+      Param(
+        type = 'double',
+        name = 'offset_x',
+      ),
+      Param(
+        type = 'double',
+        name = 'offset_y',
+      ),
+      Param(
+        type = 'double',
+        name = 'scale_x',
+      ),
+      Param(
+        type = 'double',
+        name = 'scale_y',
+      ),
+      Param(
+        type = 'GdkInterpType',
+        name = 'interp_type',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_composite': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'dest',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_y',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_width',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_height',
+      ),
+      Param(
+        type = 'double',
+        name = 'offset_x',
+      ),
+      Param(
+        type = 'double',
+        name = 'offset_y',
+      ),
+      Param(
+        type = 'double',
+        name = 'scale_x',
+      ),
+      Param(
+        type = 'double',
+        name = 'scale_y',
+      ),
+      Param(
+        type = 'GdkInterpType',
+        name = 'interp_type',
+      ),
+      Param(
+        type = 'int',
+        name = 'overall_alpha',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_composite_color': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'dest',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_y',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_width',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_height',
+      ),
+      Param(
+        type = 'double',
+        name = 'offset_x',
+      ),
+      Param(
+        type = 'double',
+        name = 'offset_y',
+      ),
+      Param(
+        type = 'double',
+        name = 'scale_x',
+      ),
+      Param(
+        type = 'double',
+        name = 'scale_y',
+      ),
+      Param(
+        type = 'GdkInterpType',
+        name = 'interp_type',
+      ),
+      Param(
+        type = 'int',
+        name = 'overall_alpha',
+      ),
+      Param(
+        type = 'int',
+        name = 'check_x',
+      ),
+      Param(
+        type = 'int',
+        name = 'check_y',
+      ),
+      Param(
+        type = 'int',
+        name = 'check_size',
+      ),
+      Param(
+        type = 'guint32',
+        name = 'color1',
+      ),
+      Param(
+        type = 'guint32',
+        name = 'color2',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_scale_simple': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_width',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_height',
+      ),
+      Param(
+        type = 'GdkInterpType',
+        name = 'interp_type',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_composite_color_simple': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_width',
+      ),
+      Param(
+        type = 'int',
+        name = 'dest_height',
+      ),
+      Param(
+        type = 'GdkInterpType',
+        name = 'interp_type',
+      ),
+      Param(
+        type = 'int',
+        name = 'overall_alpha',
+      ),
+      Param(
+        type = 'int',
+        name = 'check_size',
+      ),
+      Param(
+        type = 'guint32',
+        name = 'color1',
+      ),
+      Param(
+        type = 'guint32',
+        name = 'color2',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_rotate_simple': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'GdkPixbufRotation',
+        name = 'angle',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_flip': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'src',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'horizontal',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_animation_new_from_file': Spec(
+    return_type = 'GdkPixbufAnimation *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_ref': Spec(
+    return_type = 'GdkPixbufAnimation *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_unref': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_get_width': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_get_height': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_is_static_image': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_get_static_image': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_get_iter': Spec(
+    return_type = 'GdkPixbufAnimationIter *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimation *',
+        name = 'animation',
+      ),
+      Param(
+        type = 'const GTimeVal *',
+        name = 'start_time',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_iter_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_animation_iter_get_delay_time': Spec(
+    return_type = 'int',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimationIter *',
+        name = 'iter',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_iter_get_pixbuf': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimationIter *',
+        name = 'iter',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_iter_on_currently_loading_frame': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimationIter *',
+        name = 'iter',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_animation_iter_advance': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufAnimationIter *',
+        name = 'iter',
+      ),
+      Param(
+        type = 'const GTimeVal *',
+        name = 'current_time',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_simple_anim_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_simple_anim_iter_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_simple_anim_new': Spec(
+    return_type = 'GdkPixbufSimpleAnim *',
+    parameters = [
+      Param(
+        type = 'gint',
+        name = 'width',
+      ),
+      Param(
+        type = 'gint',
+        name = 'height',
+      ),
+      Param(
+        type = 'gfloat',
+        name = 'rate',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_simple_anim_add_frame': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbufSimpleAnim *',
+        name = 'animation',
+      ),
+      Param(
+        type = 'GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_simple_anim_set_loop': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbufSimpleAnim *',
+        name = 'animation',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'loop',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_simple_anim_get_loop': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufSimpleAnim *',
+        name = 'animation',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_get_formats': Spec(
+    return_type = 'GSList *',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_format_get_name': Spec(
+    return_type = 'gchar *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_get_description': Spec(
+    return_type = 'gchar *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_get_mime_types': Spec(
+    return_type = 'gchar **',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_get_extensions': Spec(
+    return_type = 'gchar **',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_is_writable': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_is_scalable': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_is_disabled': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_set_disabled': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'disabled',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_get_license': Spec(
+    return_type = 'gchar *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_get_file_info': Spec(
+    return_type = 'GdkPixbufFormat *',
+    parameters = [
+      Param(
+        type = 'const gchar *',
+        name = 'filename',
+      ),
+      Param(
+        type = 'gint *',
+        name = 'width',
+      ),
+      Param(
+        type = 'gint *',
+        name = 'height',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_copy': Spec(
+    return_type = 'GdkPixbufFormat *',
+    parameters = [
+      Param(
+        type = 'const GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_format_free': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbufFormat *',
+        name = 'format',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_loader_new': Spec(
+    return_type = 'GdkPixbufLoader *',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_loader_new_with_type': Spec(
+    return_type = 'GdkPixbufLoader *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'image_type',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_new_with_mime_type': Spec(
+    return_type = 'GdkPixbufLoader *',
+    parameters = [
+      Param(
+        type = 'const char *',
+        name = 'mime_type',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_set_size': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GdkPixbufLoader *',
+        name = 'loader',
+      ),
+      Param(
+        type = 'int',
+        name = 'width',
+      ),
+      Param(
+        type = 'int',
+        name = 'height',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_write': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufLoader *',
+        name = 'loader',
+      ),
+      Param(
+        type = 'const guchar *',
+        name = 'buf',
+      ),
+      Param(
+        type = 'gsize',
+        name = 'count',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_get_pixbuf': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufLoader *',
+        name = 'loader',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_get_animation': Spec(
+    return_type = 'GdkPixbufAnimation *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufLoader *',
+        name = 'loader',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_close': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixbufLoader *',
+        name = 'loader',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_loader_get_format': Spec(
+    return_type = 'GdkPixbufFormat *',
+    parameters = [
+      Param(
+        type = 'GdkPixbufLoader *',
+        name = 'loader',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_alpha_mode_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_colorspace_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_error_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_interp_type_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixbuf_rotation_get_type': Spec(
+    return_type = 'GType',
+    parameters = [
+    ],
+  ),
+  'gdk_pixdata_serialize': Spec(
+    return_type = 'guint8 *',
+    parameters = [
+      Param(
+        type = 'const GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'guint *',
+        name = 'stream_length_p',
+      ),
+    ],
+  ),
+  'gdk_pixdata_deserialize': Spec(
+    return_type = 'gboolean',
+    parameters = [
+      Param(
+        type = 'GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'guint',
+        name = 'stream_length',
+      ),
+      Param(
+        type = 'const guint8 *',
+        name = 'stream',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixdata_from_pixbuf': Spec(
+    return_type = 'gpointer',
+    parameters = [
+      Param(
+        type = 'GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'const GdkPixbuf *',
+        name = 'pixbuf',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'use_rle',
+      ),
+    ],
+  ),
+  'gdk_pixbuf_from_pixdata': Spec(
+    return_type = 'GdkPixbuf *',
+    parameters = [
+      Param(
+        type = 'const GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'gboolean',
+        name = 'copy_pixels',
+      ),
+      Param(
+        type = 'GError **',
+        name = 'error',
+      ),
+    ],
+  ),
+  'gdk_pixdata_to_csource': Spec(
+    return_type = 'GString *',
+    parameters = [
+      Param(
+        type = 'GdkPixdata *',
+        name = 'pixdata',
+      ),
+      Param(
+        type = 'const gchar *',
+        name = 'name',
+      ),
+      Param(
+        type = 'GdkPixdataDumpType',
+        name = 'dump_type',
+      ),
+    ],
+  ),
+  '_gdk_pixbuf_marshal_VOID__INT_INT': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GClosure *',
+        name = 'closure',
+      ),
+      Param(
+        type = 'GValue *',
+        name = 'return_value',
+      ),
+      Param(
+        type = 'guint',
+        name = 'n_param_values',
+      ),
+      Param(
+        type = 'const GValue *',
+        name = 'param_values',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'invocation_hint',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'marshal_data',
+      ),
+    ],
+  ),
+  '_gdk_pixbuf_marshal_VOID__INT_INT_INT_INT': Spec(
+    return_type = 'void',
+    parameters = [
+      Param(
+        type = 'GClosure *',
+        name = 'closure',
+      ),
+      Param(
+        type = 'GValue *',
+        name = 'return_value',
+      ),
+      Param(
+        type = 'guint',
+        name = 'n_param_values',
+      ),
+      Param(
+        type = 'const GValue *',
+        name = 'param_values',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'invocation_hint',
+      ),
+      Param(
+        type = 'gpointer',
+        name = 'marshal_data',
+      ),
+    ],
+  ),
   '__builtin_bswap32': Spec(
     return_type = 'uint32_t',
     parameters = [

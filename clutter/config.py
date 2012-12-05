@@ -1,9 +1,21 @@
 Strip_prefix_from_const = False
 
 Compile_error_c_symbols = [
-    'CLUTTER_VERSION',
+  'CLUTTER_VERSION',
 
-    'g_clear_object',
+  'g_clear_object',
+  'gdk_pixbuf_gettext',
+
+  'gdk_pixdata_serialize',
+  'gdk_pixdata_from_pixbuf',
+  'gdk_pixdata_to_csource',
+  'gdk_pixbuf_from_pixdata',
+
+  'GdkPixdata',
+]
+
+Excluded_interfaces = [
+  "Gio.Icon"
 ]
 
 Conflict_type_names = [
@@ -30,6 +42,26 @@ Not_exported_c_macros = [
   'CLUTTER_X11_FILTER_CONTINUE',
 
   'G_VALUE_COLLECT_FORMAT_MAX_LENGTH',
+
+  'GDK_PIXDATA_ENCODING_RLE',
+  'GDK_PIXDATA_ENCODING_RAW',
+  'GDK_PIXBUF_MAGIC_NUMBER',
+  'GDK_PIXDATA_SAMPLE_WIDTH_8',
+  'GDK_PIXDATA_DUMP_PIXDATA_STREAM',
+  'GDK_PIXDATA_HEADER_LENGTH',
+  'GDK_PIXDATA_COLOR_TYPE_RGBA',
+  'GDK_PIXDATA_COLOR_TYPE_MASK',
+  'GDK_PIXDATA_COLOR_TYPE_RGB',
+  'GDK_PIXDATA_DUMP_MACROS',
+  'GDK_PIXDATA_DUMP_STATIC',
+  'GDK_PIXDATA_DUMP_CTYPES',
+  'GDK_PIXDATA_DUMP_RLE_DECODER',
+  'GDK_PIXDATA_ENCODING_MASK',
+  'GDK_PIXDATA_DUMP_CONST',
+  'GDK_PIXDATA_SAMPLE_WIDTH_MASK',
+  'GDK_PIXDATA_DUMP_PIXDATA_STRUCT',
+  'GDK_PIXDATA_DUMP_GTYPES',
+
 ]
 
 Deprecated_c_symbols = [
