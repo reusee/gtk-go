@@ -84,6 +84,8 @@ class Generator:
         embedded_fields.append(self.parser.convert_gi_name_to_go_name(node.parent.resolved))
       if isinstance(node, ast.Class):
         for interface in node.interfaces:
+          if hasattr(self.parser, 'excluded_interfaces') and interface.target_giname in self.parser.excluded_interfaces:
+            continue
           embedded_fields.append(self.parser.convert_gi_name_to_go_name(interface.target_giname))
       # type def
       print >>self.out, 'type %s struct {' % name
