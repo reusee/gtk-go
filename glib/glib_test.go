@@ -93,7 +93,7 @@ func TestCallerAllocatesOutParam(t *testing.T) {
   if !ok {
     t.Fail()
   }
-  dateTime := DateTimeNewFromTimevalLocal((*GLibTimeVal)(timeVal))
+  dateTime := DateTimeNewFromTimevalLocal((*TimeVal)(timeVal))
   y, m, d := dateTime.GetYmd()
   if fmt.Sprintf("%d-%d-%d", y, m, d) != "1994-11-5" {
     t.Fail()
