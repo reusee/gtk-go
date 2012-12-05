@@ -240,39 +240,55 @@ func PixbufNew(colorspace int, has_alpha bool, bits_per_sample C.int, width C.in
 	return
 }
 
-func PixbufNewFromFile(filename string) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromFile(filename string) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._gdk_pixbuf_new_from_file(_cgo_filename_, _error_)
+	_return_ = C._gdk_pixbuf_new_from_file(_cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromFileAtScale(filename string, width C.int, height C.int, preserve_aspect_ratio bool) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromFileAtScale(filename string, width C.int, height C.int, preserve_aspect_ratio bool) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_cgo_preserve_aspect_ratio_ := (C.gboolean)(C.FALSE)
 	if preserve_aspect_ratio { _cgo_preserve_aspect_ratio_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._gdk_pixbuf_new_from_file_at_scale(_cgo_filename_, width, height, _cgo_preserve_aspect_ratio_, _error_)
+	_return_ = C._gdk_pixbuf_new_from_file_at_scale(_cgo_filename_, width, height, _cgo_preserve_aspect_ratio_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromFileAtSize(filename string, width C.int, height C.int) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromFileAtSize(filename string, width C.int, height C.int) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._gdk_pixbuf_new_from_file_at_size(_cgo_filename_, width, height, _error_)
+	_return_ = C._gdk_pixbuf_new_from_file_at_size(_cgo_filename_, width, height, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromInline(data_length int, data []byte, copy_pixels bool) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromInline(data_length int, data []byte, copy_pixels bool) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cgo_data_length_ := (C.gint)(data_length)
 	_cgo_copy_pixels_ := (C.gboolean)(C.FALSE)
@@ -280,54 +296,83 @@ func PixbufNewFromInline(data_length int, data []byte, copy_pixels bool) (_go__r
 	_cstring_data_ := C.CString(string(data))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
-	_return_ = C._gdk_pixbuf_new_from_inline(_cgo_data_length_, _cgo_data_, _cgo_copy_pixels_, _error_)
+	_return_ = C._gdk_pixbuf_new_from_inline(_cgo_data_length_, _cgo_data_, _cgo_copy_pixels_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromResource(resource_path string) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromResource(resource_path string) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.char)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
-	_return_ = C._gdk_pixbuf_new_from_resource(_cgo_resource_path_, _error_)
+	_return_ = C._gdk_pixbuf_new_from_resource(_cgo_resource_path_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromResourceAtScale(resource_path string, width C.int, height C.int, preserve_aspect_ratio bool) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromResourceAtScale(resource_path string, width C.int, height C.int, preserve_aspect_ratio bool) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.char)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
 	_cgo_preserve_aspect_ratio_ := (C.gboolean)(C.FALSE)
 	if preserve_aspect_ratio { _cgo_preserve_aspect_ratio_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._gdk_pixbuf_new_from_resource_at_scale(_cgo_resource_path_, width, height, _cgo_preserve_aspect_ratio_, _error_)
+	_return_ = C._gdk_pixbuf_new_from_resource_at_scale(_cgo_resource_path_, width, height, _cgo_preserve_aspect_ratio_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromStream(stream *C.GInputStream, cancellable *C.GCancellable) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromStream(stream *C.GInputStream, cancellable *C.GCancellable) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
-	_return_ = C._gdk_pixbuf_new_from_stream(stream, cancellable, _error_)
+	_return_ = C._gdk_pixbuf_new_from_stream(stream, cancellable, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromStreamAtScale(stream *C.GInputStream, width int, height int, preserve_aspect_ratio bool, cancellable *C.GCancellable) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromStreamAtScale(stream *C.GInputStream, width int, height int, preserve_aspect_ratio bool, cancellable *C.GCancellable) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	_cgo_preserve_aspect_ratio_ := (C.gboolean)(C.FALSE)
 	if preserve_aspect_ratio { _cgo_preserve_aspect_ratio_ = (C.gboolean)(C.TRUE) }
-	_return_ = C._gdk_pixbuf_new_from_stream_at_scale(stream, _cgo_width_, _cgo_height_, _cgo_preserve_aspect_ratio_, cancellable, _error_)
+	_return_ = C._gdk_pixbuf_new_from_stream_at_scale(stream, _cgo_width_, _cgo_height_, _cgo_preserve_aspect_ratio_, cancellable, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufNewFromStreamFinish(async_result *C.GAsyncResult) (_go__return__ Pixbuf, _error_ unsafe.Pointer) {
+func PixbufNewFromStreamFinish(async_result *C.GAsyncResult) (_go__return__ Pixbuf, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbuf
-	_return_ = C._gdk_pixbuf_new_from_stream_finish(async_result, _error_)
+	_return_ = C._gdk_pixbuf_new_from_stream_finish(async_result, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbuf(unsafe.Pointer(_return_))
 	return
 }
@@ -365,9 +410,14 @@ func PixbufNewFromStreamAtScaleAsync(stream *C.GInputStream, width int, height i
 	return
 }
 
-func PixbufSaveToStreamFinish(async_result *C.GAsyncResult) (_go__return__ bool, _error_ unsafe.Pointer) {
+func PixbufSaveToStreamFinish(async_result *C.GAsyncResult) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._gdk_pixbuf_save_to_stream_finish(async_result, _error_)
+	_return_ = C._gdk_pixbuf_save_to_stream_finish(async_result, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -554,12 +604,17 @@ func (_self_ *Pixbuf) ScaleSimple(dest_width C.int, dest_height C.int, interp_ty
 	return
 }
 
-func PixbufAnimationNewFromFile(filename string) (_go__return__ PixbufAnimation, _error_ unsafe.Pointer) {
+func PixbufAnimationNewFromFile(filename string) (_go__return__ PixbufAnimation, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbufAnimation
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._gdk_pixbuf_animation_new_from_file(_cgo_filename_, _error_)
+	_return_ = C._gdk_pixbuf_animation_new_from_file(_cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbufAnimation(unsafe.Pointer(_return_))
 	return
 }
@@ -628,29 +683,44 @@ func PixbufLoaderNew() (_go__return__ PixbufLoader) {
 	return
 }
 
-func PixbufLoaderNewWithMimeType(mime_type string) (_go__return__ PixbufLoader, _error_ unsafe.Pointer) {
+func PixbufLoaderNewWithMimeType(mime_type string) (_go__return__ PixbufLoader, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbufLoader
 	_cstring_mime_type_ := C.CString(mime_type)
 	_cgo_mime_type_ := (*C.char)(unsafe.Pointer(_cstring_mime_type_))
 	defer C.free(unsafe.Pointer(_cstring_mime_type_))
-	_return_ = C._gdk_pixbuf_loader_new_with_mime_type(_cgo_mime_type_, _error_)
+	_return_ = C._gdk_pixbuf_loader_new_with_mime_type(_cgo_mime_type_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbufLoader(unsafe.Pointer(_return_))
 	return
 }
 
-func PixbufLoaderNewWithType(image_type string) (_go__return__ PixbufLoader, _error_ unsafe.Pointer) {
+func PixbufLoaderNewWithType(image_type string) (_go__return__ PixbufLoader, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.GdkPixbufLoader
 	_cstring_image_type_ := C.CString(image_type)
 	_cgo_image_type_ := (*C.char)(unsafe.Pointer(_cstring_image_type_))
 	defer C.free(unsafe.Pointer(_cstring_image_type_))
-	_return_ = C._gdk_pixbuf_loader_new_with_type(_cgo_image_type_, _error_)
+	_return_ = C._gdk_pixbuf_loader_new_with_type(_cgo_image_type_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = ToPixbufLoader(unsafe.Pointer(_return_))
 	return
 }
 
-func (_self_ *PixbufLoader) Close() (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *PixbufLoader) Close() (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.gboolean
-	_return_ = C._gdk_pixbuf_loader_close((*C.GdkPixbufLoader)(_self_._value_), _error_)
+	_return_ = C._gdk_pixbuf_loader_close((*C.GdkPixbufLoader)(_self_._value_), unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }

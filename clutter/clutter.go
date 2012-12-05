@@ -5165,30 +5165,41 @@ func ImageNew() (_go__return__ ClutterImage) {
 	return
 }
 
-func (_self_ *ClutterImage) SetArea(data []byte, pixel_format int, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetArea(data []byte, pixel_format int, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
 	_cstring_data_ := C.CString(string(data))
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
 	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
-	_return_ = C._clutter_image_set_area((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, rect, _cgo_row_stride_, _error_)
+	_return_ = C._clutter_image_set_area((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, rect, _cgo_row_stride_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
 	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
-	_return_ = C._clutter_image_set_bytes((*C.ClutterImage)(_self_._value_), data, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
+	_return_ = C._clutter_image_set_bytes((*C.ClutterImage)(_self_._value_), data, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
@@ -5197,7 +5208,11 @@ func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, h
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
 	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
-	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, _error_)
+	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -6258,33 +6273,48 @@ func (_self_ *Script) ListObjects() (_return_ *C.GList) {
 	return
 }
 
-func (_self_ *Script) LoadFromData(data string, length int64) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Script) LoadFromData(data string, length int64) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_length_ := (C.gssize)(length)
 	var _return_ C.guint
 	_cstring_data_ := C.CString(data)
 	_cgo_data_ := (*C.gchar)(unsafe.Pointer(_cstring_data_))
 	defer C.free(unsafe.Pointer(_cstring_data_))
-	_return_ = C._clutter_script_load_from_data((*C.ClutterScript)(_self_._value_), _cgo_data_, _cgo_length_, _error_)
+	_return_ = C._clutter_script_load_from_data((*C.ClutterScript)(_self_._value_), _cgo_data_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Script) LoadFromFile(filename string) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Script) LoadFromFile(filename string) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.gchar)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._clutter_script_load_from_file((*C.ClutterScript)(_self_._value_), _cgo_filename_, _error_)
+	_return_ = C._clutter_script_load_from_file((*C.ClutterScript)(_self_._value_), _cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }
 
-func (_self_ *Script) LoadFromResource(resource_path string) (_go__return__ uint, _error_ unsafe.Pointer) {
+func (_self_ *Script) LoadFromResource(resource_path string) (_go__return__ uint, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ C.guint
 	_cstring_resource_path_ := C.CString(resource_path)
 	_cgo_resource_path_ := (*C.gchar)(unsafe.Pointer(_cstring_resource_path_))
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
-	_return_ = C._clutter_script_load_from_resource((*C.ClutterScript)(_self_._value_), _cgo_resource_path_, _error_)
+	_return_ = C._clutter_script_load_from_resource((*C.ClutterScript)(_self_._value_), _cgo_resource_path_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (uint)(_return_)
 	return
 }

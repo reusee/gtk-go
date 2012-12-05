@@ -903,12 +903,17 @@ func VertexBufferSubmit(handle C.CoglHandle) () {
 	return
 }
 
-func BitmapNewFromFile(filename string) (_go__return__ *Bitmap, _error_ unsafe.Pointer) {
+func BitmapNewFromFile(filename string) (_go__return__ *Bitmap, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.CoglBitmap
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
-	_return_ = C._cogl_bitmap_new_from_file(_cgo_filename_, _error_)
+	_return_ = C._cogl_bitmap_new_from_file(_cgo_filename_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*Bitmap)(unsafe.Pointer(_return_))
 	return
 }
@@ -1208,12 +1213,17 @@ func (_self_ *Material) SetAmbientAndDiffuse(color *CoglColor) () {
 	return
 }
 
-func (_self_ *Material) SetBlend(blend_string string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Material) SetBlend(blend_string string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_blend_string_ := C.CString(blend_string)
 	_cgo_blend_string_ := (*C.char)(unsafe.Pointer(_cstring_blend_string_))
 	defer C.free(unsafe.Pointer(_cstring_blend_string_))
 	var _return_ C.gboolean
-	_return_ = C._cogl_material_set_blend((*C.CoglMaterial)(_self_), _cgo_blend_string_, _error_)
+	_return_ = C._cogl_material_set_blend((*C.CoglMaterial)(_self_), _cgo_blend_string_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1261,12 +1271,17 @@ func (_self_ *Material) SetLayer(layer_index C.int, texture C.CoglHandle) () {
 	return
 }
 
-func (_self_ *Material) SetLayerCombine(layer_index C.int, blend_string string) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Material) SetLayerCombine(layer_index C.int, blend_string string) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cstring_blend_string_ := C.CString(blend_string)
 	_cgo_blend_string_ := (*C.char)(unsafe.Pointer(_cstring_blend_string_))
 	defer C.free(unsafe.Pointer(_cstring_blend_string_))
 	var _return_ C.gboolean
-	_return_ = C._cogl_material_set_layer_combine((*C.CoglMaterial)(_self_), layer_index, _cgo_blend_string_, _error_)
+	_return_ = C._cogl_material_set_layer_combine((*C.CoglMaterial)(_self_), layer_index, _cgo_blend_string_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1290,11 +1305,16 @@ func (_self_ *Material) SetLayerMatrix(layer_index C.int, matrix *Matrix) () {
 	return
 }
 
-func (_self_ *Material) SetLayerPointSpriteCoordsEnabled(layer_index C.int, enable bool) (_go__return__ bool, _error_ unsafe.Pointer) {
+func (_self_ *Material) SetLayerPointSpriteCoordsEnabled(layer_index C.int, enable bool) (_go__return__ bool, _error_ error) {
+	var _cgo_error_ *C.GError
 	_cgo_enable_ := (C.gboolean)(C.FALSE)
 	if enable { _cgo_enable_ = (C.gboolean)(C.TRUE) }
 	var _return_ C.gboolean
-	_return_ = C._cogl_material_set_layer_point_sprite_coords_enabled((*C.CoglMaterial)(_self_), layer_index, _cgo_enable_, _error_)
+	_return_ = C._cogl_material_set_layer_point_sprite_coords_enabled((*C.CoglMaterial)(_self_), layer_index, _cgo_enable_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
@@ -1500,13 +1520,18 @@ func TextureNewFromData(width uint, height uint, flags C.CoglTextureFlags, forma
 	return
 }
 
-func TextureNewFromFile(filename string, flags C.CoglTextureFlags, internal_format int) (_go__return__ *CoglTexture, _error_ unsafe.Pointer) {
+func TextureNewFromFile(filename string, flags C.CoglTextureFlags, internal_format int) (_go__return__ *CoglTexture, _error_ error) {
+	var _cgo_error_ *C.GError
 	var _return_ *C.CoglTexture
 	_cstring_filename_ := C.CString(filename)
 	_cgo_filename_ := (*C.char)(unsafe.Pointer(_cstring_filename_))
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_cgo_internal_format_ := (C.CoglPixelFormat)(internal_format)
-	_return_ = C._cogl_texture_new_from_file(_cgo_filename_, flags, _cgo_internal_format_, _error_)
+	_return_ = C._cogl_texture_new_from_file(_cgo_filename_, flags, _cgo_internal_format_, unsafe.Pointer(&_cgo_error_))
+	if _cgo_error_ != nil {
+		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		defer C.g_error_free(_cgo_error_)
+	}
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))
 	return
 }

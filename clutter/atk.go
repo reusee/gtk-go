@@ -165,6 +165,13 @@ import (
 	"unsafe"
 )
 
+type Error struct {
+  Message string
+}
+func (self *Error) Error() string {
+  return self.Message
+}
+
 type NoOpObjectFactoryClass C.AtkNoOpObjectFactoryClass
 type HypertextIface C.AtkHypertextIface
 type AtkObjectClass C.AtkObjectClass
