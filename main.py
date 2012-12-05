@@ -164,6 +164,7 @@ class Parser:
     name = self.convert_gi_name_to_go_name(node.gi_name)
     if '_' in name: return
     c_type = node.ctype
+    if c_type is None: return
     if self.is_skip(c_type): return
 
     self.class_types[name] = node

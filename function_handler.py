@@ -71,6 +71,12 @@ def convert_to_cgo_capatible_type(t):
     t = 'void *'
   if 'long double' in t:
     t = 'double'
+  if t == 'unsigned long':
+    t = 'gulong'
+  if t == 'unsigned int':
+    t = 'guint'
+  if t == 'unsigned char':
+    t = 'guchar'
   t = t.strip()
   return t
 
