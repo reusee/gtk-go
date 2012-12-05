@@ -195,6 +195,9 @@ gboolean _g_signal_accumulator_first_wins(GSignalInvocationHint * ihint, GValue 
 gboolean _g_signal_accumulator_true_handled(GSignalInvocationHint * ihint, GValue * return_accu, GValue * handler_return, gpointer dummy) {
 	return (gboolean)g_signal_accumulator_true_handled(ihint, return_accu, (const GValue *)(handler_return), dummy);
 }
+void _g_signal_chain_from_overridden(GValue * instance_and_params, GValue * return_value) {
+	(void)g_signal_chain_from_overridden((const GValue *)(instance_and_params), return_value);
+}
 gulong _g_signal_connect_closure(gpointer instance, gchar * detailed_signal, GClosure * closure, gboolean after) {
 	return (gulong)g_signal_connect_closure(instance, (const gchar *)(detailed_signal), closure, after);
 }
@@ -204,11 +207,17 @@ gulong _g_signal_connect_data(gpointer instance, gchar * detailed_signal, GCallb
 gulong _g_signal_connect_object(gpointer instance, gchar * detailed_signal, GCallback c_handler, gpointer gobject, GConnectFlags connect_flags) {
 	return (gulong)g_signal_connect_object(instance, (const gchar *)(detailed_signal), c_handler, gobject, connect_flags);
 }
+void _g_signal_emitv(GValue * instance_and_params, guint signal_id, GQuark detail, GValue * return_value) {
+	(void)g_signal_emitv((const GValue *)(instance_and_params), signal_id, detail, return_value);
+}
 guint _g_signal_lookup(gchar * name, GType itype) {
 	return (guint)g_signal_lookup((const gchar *)(name), itype);
 }
 gchar * _g_signal_name(guint signal_id) {
 	return (gchar *)g_signal_name(signal_id);
+}
+guint _g_signal_newv(gchar * signal_name, GType itype, GSignalFlags signal_flags, GClosure * class_closure, GSignalAccumulator accumulator, gpointer accu_data, GSignalCMarshaller c_marshaller, GType return_type, guint n_params, GType * param_types) {
+	return (guint)g_signal_newv((const gchar *)(signal_name), itype, signal_flags, class_closure, accumulator, accu_data, c_marshaller, return_type, n_params, param_types);
 }
 void _g_signal_override_class_handler(gchar * signal_name, GType instance_type, GCallback class_handler) {
 	(void)g_signal_override_class_handler((const gchar *)(signal_name), instance_type, class_handler);
@@ -336,8 +345,14 @@ GType _g_type_module_register_type(GTypeModule * _self_, GType parent_type, gcha
 void _g_type_module_set_name(GTypeModule * _self_, gchar * name) {
 	(void)g_type_module_set_name(_self_, (const gchar *)(name));
 }
+void _g_closure_invoke(GClosure * _self_, GValue * return_value, guint n_param_values, GValue * param_values, gpointer invocation_hint) {
+	(void)g_closure_invoke(_self_, return_value, n_param_values, (const GValue *)(param_values), invocation_hint);
+}
 GParamSpec * _g_object_class_find_property(GObjectClass * _self_, gchar * property_name) {
 	return (GParamSpec *)g_object_class_find_property(_self_, (const gchar *)(property_name));
+}
+void _g_object_class_install_properties(GObjectClass * _self_, guint n_pspecs, void * pspecs) {
+	(void)g_object_class_install_properties(_self_, n_pspecs, (GParamSpec **)(pspecs));
 }
 void * _g_object_class_list_properties(GObjectClass * _self_, guint * n_properties) {
 	return (void *)g_object_class_list_properties(_self_, n_properties);
@@ -1817,6 +1832,13 @@ func SignalAddEmissionHook(signal_id uint, detail C.GQuark, hook_func C.GSignalE
 	return
 }
 
+func SignalChainFromOverridden(instance_and_params unsafe.Pointer, return_value *GObjectValue) () {
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_instance_and_params_ := (*C.GValue)(instance_and_params)
+	C._g_signal_chain_from_overridden(_cgo_instance_and_params_, _cgo_return_value_)
+	return
+}
+
 func SignalConnectClosure(instance C.gpointer, detailed_signal string, closure *Closure, after bool) (_go__return__ uint64) {
 	_cgo_closure_ := (*C.GClosure)(unsafe.Pointer(closure))
 	var _return_ C.gulong
@@ -1858,6 +1880,14 @@ func SignalConnectObject(instance C.gpointer, detailed_signal string, c_handler 
 	defer C.free(unsafe.Pointer(_cstring_detailed_signal_))
 	_return_ = C._g_signal_connect_object(instance, _cgo_detailed_signal_, c_handler, gobject, connect_flags)
 	_go__return__ = (uint64)(_return_)
+	return
+}
+
+func SignalEmitv(instance_and_params unsafe.Pointer, signal_id uint, detail C.GQuark, return_value *GObjectValue) () {
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_signal_id_ := (C.guint)(signal_id)
+	_cgo_instance_and_params_ := (*C.GValue)(instance_and_params)
+	C._g_signal_emitv(_cgo_instance_and_params_, _cgo_signal_id_, detail, _cgo_return_value_)
 	return
 }
 
@@ -1945,10 +1975,12 @@ func SignalHasHandlerPending(instance C.gpointer, signal_id uint, detail C.GQuar
 	return
 }
 
-func SignalListIds(itype C.GType) (_return_ *C.guint, _go_n_ids_ uint) {
+func SignalListIds(itype C.GType) (_go__return__ unsafe.Pointer, _go_n_ids_ uint) {
 	var n_ids C.guint
+	var _return_ *C.guint
 	_return_ = C.g_signal_list_ids(itype, &n_ids)
 	_go_n_ids_ = (uint)(n_ids)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -1967,6 +1999,19 @@ func SignalName(signal_id uint) (_go__return__ string) {
 	var _return_ *C.gchar
 	_return_ = C._g_signal_name(_cgo_signal_id_)
 	_go__return__ = C.GoString((*C.char)(unsafe.Pointer(_return_)))
+	return
+}
+
+func SignalNewv(signal_name string, itype C.GType, signal_flags C.GSignalFlags, class_closure *Closure, accumulator C.GSignalAccumulator, accu_data C.gpointer, c_marshaller C.GSignalCMarshaller, return_type C.GType, n_params uint, param_types unsafe.Pointer) (_go__return__ uint) {
+	_cgo_class_closure_ := (*C.GClosure)(unsafe.Pointer(class_closure))
+	_cgo_n_params_ := (C.guint)(n_params)
+	var _return_ C.guint
+	_cstring_signal_name_ := C.CString(signal_name)
+	_cgo_signal_name_ := (*C.gchar)(unsafe.Pointer(_cstring_signal_name_))
+	defer C.free(unsafe.Pointer(_cstring_signal_name_))
+	_cgo_param_types_ := (*C.GType)(param_types)
+	_return_ = C._g_signal_newv(_cgo_signal_name_, itype, signal_flags, _cgo_class_closure_, accumulator, accu_data, c_marshaller, return_type, _cgo_n_params_, _cgo_param_types_)
+	_go__return__ = (uint)(_return_)
 	return
 }
 
@@ -2152,10 +2197,12 @@ func TypeCheckValueHolds(value *GObjectValue, type_ C.GType) (_go__return__ bool
 	return
 }
 
-func TypeChildren(type_ C.GType) (_return_ *C.GType, _go_n_children_ uint) {
+func TypeChildren(type_ C.GType) (_go__return__ unsafe.Pointer, _go_n_children_ uint) {
 	var n_children C.guint
+	var _return_ *C.GType
 	_return_ = C.g_type_children(type_, &n_children)
 	_go_n_children_ = (uint)(n_children)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -2281,17 +2328,21 @@ func TypeInterfacePeek(instance_class *TypeClass, iface_type C.GType) (_go__retu
 	return
 }
 
-func TypeInterfacePrerequisites(interface_type C.GType) (_return_ *C.GType, _go_n_prerequisites_ uint) {
+func TypeInterfacePrerequisites(interface_type C.GType) (_go__return__ unsafe.Pointer, _go_n_prerequisites_ uint) {
 	var n_prerequisites C.guint
+	var _return_ *C.GType
 	_return_ = C.g_type_interface_prerequisites(interface_type, &n_prerequisites)
 	_go_n_prerequisites_ = (uint)(n_prerequisites)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
-func TypeInterfaces(type_ C.GType) (_return_ *C.GType, _go_n_interfaces_ uint) {
+func TypeInterfaces(type_ C.GType) (_go__return__ unsafe.Pointer, _go_n_interfaces_ uint) {
 	var n_interfaces C.guint
+	var _return_ *C.GType
 	_return_ = C.g_type_interfaces(type_, &n_interfaces)
 	_go_n_interfaces_ = (uint)(n_interfaces)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -2467,6 +2518,15 @@ func (_self_ *Binding) GetTargetProperty() (_go__return__ string) {
 	return
 }
 
+func ObjectNewv(object_type C.GType, n_parameters uint, parameters unsafe.Pointer) (_go__return__ GObjectObject) {
+	var _return_ C.gpointer
+	_cgo_n_parameters_ := (C.guint)(n_parameters)
+	_cgo_parameters_ := (*C.GParameter)(parameters)
+	_return_ = C.g_object_newv(object_type, _cgo_n_parameters_, _cgo_parameters_)
+	_go__return__ = ToGObjectObject(unsafe.Pointer(_return_))
+	return
+}
+
 func ObjectInterfaceFindProperty(g_iface C.gpointer, property_name string) (_go__return__ ParamSpec) {
 	var _return_ *C.GParamSpec
 	_cstring_property_name_ := C.CString(property_name)
@@ -2483,10 +2543,12 @@ func ObjectInterfaceInstallProperty(g_iface C.gpointer, pspec ParamSpecKind) () 
 	return
 }
 
-func ObjectInterfaceListProperties(g_iface C.gpointer) (_return_ unsafe.Pointer, _go_n_properties_p_ uint) {
+func ObjectInterfaceListProperties(g_iface C.gpointer) (_go__return__ unsafe.Pointer, _go_n_properties_p_ uint) {
 	var n_properties_p C.guint
+	var _return_ unsafe.Pointer
 	_return_ = C._g_object_interface_list_properties(g_iface, &n_properties_p)
 	_go_n_properties_p_ = (uint)(n_properties_p)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -2896,6 +2958,14 @@ func (_self_ *Closure) Invalidate() () {
 	return
 }
 
+func (_self_ *Closure) Invoke(return_value *GObjectValue, n_param_values uint, param_values unsafe.Pointer, invocation_hint C.gpointer) () {
+	_cgo_return_value_ := (*C.GValue)(unsafe.Pointer(return_value))
+	_cgo_n_param_values_ := (C.guint)(n_param_values)
+	_cgo_param_values_ := (*C.GValue)(param_values)
+	C._g_closure_invoke((*C.GClosure)(_self_), _cgo_return_value_, _cgo_n_param_values_, _cgo_param_values_, invocation_hint)
+	return
+}
+
 func (_self_ *Closure) Ref() (_go__return__ *Closure) {
 	var _return_ *C.GClosure
 	_return_ = C.g_closure_ref((*C.GClosure)(_self_))
@@ -2943,6 +3013,13 @@ func (_self_ *GObjectObjectClass) FindProperty(property_name string) (_go__retur
 	return
 }
 
+func (_self_ *GObjectObjectClass) InstallProperties(n_pspecs uint, pspecs unsafe.Pointer) () {
+	_cgo_n_pspecs_ := (C.guint)(n_pspecs)
+	_cgo_pspecs_ := (unsafe.Pointer)(pspecs)
+	C._g_object_class_install_properties((*C.GObjectClass)(_self_), _cgo_n_pspecs_, _cgo_pspecs_)
+	return
+}
+
 func (_self_ *GObjectObjectClass) InstallProperty(property_id uint, pspec ParamSpecKind) () {
 	_cgo_pspec_ := (*C.GParamSpec)(pspec.GetGObject())
 	_cgo_property_id_ := (C.guint)(property_id)
@@ -2950,10 +3027,12 @@ func (_self_ *GObjectObjectClass) InstallProperty(property_id uint, pspec ParamS
 	return
 }
 
-func (_self_ *GObjectObjectClass) ListProperties() (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+func (_self_ *GObjectObjectClass) ListProperties() (_go__return__ unsafe.Pointer, _go_n_properties_ uint) {
 	var n_properties C.guint
+	var _return_ unsafe.Pointer
 	_return_ = C._g_object_class_list_properties((*C.GObjectClass)(_self_), &n_properties)
 	_go_n_properties_ = (uint)(n_properties)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -2972,10 +3051,12 @@ func (_self_ *ParamSpecPool) Insert(pspec ParamSpecKind, owner_type C.GType) () 
 	return
 }
 
-func (_self_ *ParamSpecPool) List(owner_type C.GType) (_return_ unsafe.Pointer, _go_n_pspecs_p_ uint) {
+func (_self_ *ParamSpecPool) List(owner_type C.GType) (_go__return__ unsafe.Pointer, _go_n_pspecs_p_ uint) {
 	var n_pspecs_p C.guint
+	var _return_ unsafe.Pointer
 	_return_ = C._g_param_spec_pool_list((*C.GParamSpecPool)(_self_), owner_type, &n_pspecs_p)
 	_go_n_pspecs_p_ = (uint)(n_pspecs_p)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 

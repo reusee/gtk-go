@@ -165,10 +165,10 @@ import (
 	"unsafe"
 )
 
-type Error struct {
+type GoError struct {
   Message string
 }
-func (self *Error) Error() string {
+func (self *GoError) Error() string {
   return self.Message
 }
 
@@ -1151,8 +1151,10 @@ func (_self_ *Relation) GetRelationType() (_return_ C.AtkRelationType) {
 	return
 }
 
-func (_self_ *Relation) GetTarget() (_return_ *C.GPtrArray) {
+func (_self_ *Relation) GetTarget() (_go__return__ unsafe.Pointer) {
+	var _return_ *C.GPtrArray
 	_return_ = C.atk_relation_get_target((*C.AtkRelation)(_self_._value_))
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -1992,12 +1994,14 @@ func (_self_ *AtkText) AddSelection(start_offset int, end_offset int) (_go__retu
 	return
 }
 
-func (_self_ *AtkText) GetBoundedRanges(rect *TextRectangle, coord_type int, x_clip_type int, y_clip_type int) (_return_ unsafe.Pointer) {
+func (_self_ *AtkText) GetBoundedRanges(rect *TextRectangle, coord_type int, x_clip_type int, y_clip_type int) (_go__return__ unsafe.Pointer) {
 	_cgo_rect_ := (*C.AtkTextRectangle)(unsafe.Pointer(rect))
 	_cgo_coord_type_ := (C.AtkCoordType)(coord_type)
 	_cgo_x_clip_type_ := (C.AtkTextClipType)(x_clip_type)
 	_cgo_y_clip_type_ := (C.AtkTextClipType)(y_clip_type)
+	var _return_ unsafe.Pointer
 	_return_ = C._atk_text_get_bounded_ranges((*C.AtkText)(_self_._value_), _cgo_rect_, _cgo_coord_type_, _cgo_x_clip_type_, _cgo_y_clip_type_)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 

@@ -24,14 +24,41 @@ guint _cogl_double_to_uint(double value) {
 CoglFuncPtr _cogl_get_proc_address(char * name) {
 	return (CoglFuncPtr)cogl_get_proc_address((const char *)(name));
 }
+void _cogl_get_viewport(float * v) {
+	(void)cogl_get_viewport((float *)(v));
+}
 gboolean _cogl_matrix_equal(gpointer v1, gpointer v2) {
 	return (gboolean)cogl_matrix_equal((gconstpointer)(v1), (gconstpointer)(v2));
+}
+void _cogl_path_polygon(float * coords, int num_points) {
+	(void)cogl_path_polygon((const float *)(coords), num_points);
+}
+void _cogl_path_polyline(float * coords, int num_points) {
+	(void)cogl_path_polyline((const float *)(coords), num_points);
 }
 void _cogl_polygon(CoglTextureVertex * vertices, guint n_vertices, gboolean use_color) {
 	(void)cogl_polygon((const CoglTextureVertex *)(vertices), (unsigned int)(n_vertices), use_color);
 }
 int _cogl_program_get_uniform_location(CoglHandle handle, char * uniform_name) {
 	return (int)cogl_program_get_uniform_location(handle, (const char *)(uniform_name));
+}
+void _cogl_program_set_uniform_float(CoglHandle program, int uniform_location, int n_components, int count, float * value) {
+	(void)cogl_program_set_uniform_float(program, uniform_location, n_components, count, (const float *)(value));
+}
+void _cogl_program_set_uniform_int(CoglHandle program, int uniform_location, int n_components, int count, int * value) {
+	(void)cogl_program_set_uniform_int(program, uniform_location, n_components, count, (const int *)(value));
+}
+void _cogl_program_set_uniform_matrix(CoglHandle program, int uniform_location, int dimensions, int count, gboolean transpose, float * value) {
+	(void)cogl_program_set_uniform_matrix(program, uniform_location, dimensions, count, transpose, (const float *)(value));
+}
+void _cogl_rectangle_with_multitexture_coords(float x1, float y1, float x2, float y2, float * tex_coords, int tex_coords_len) {
+	(void)cogl_rectangle_with_multitexture_coords(x1, y1, x2, y2, (const float *)(tex_coords), tex_coords_len);
+}
+void _cogl_rectangles(float * verts, guint n_rects) {
+	(void)cogl_rectangles((const float *)(verts), (unsigned int)(n_rects));
+}
+void _cogl_rectangles_with_texture_coords(float * verts, guint n_rects) {
+	(void)cogl_rectangles_with_texture_coords((const float *)(verts), (unsigned int)(n_rects));
 }
 void _cogl_set_fog(CoglColor * fog_color, CoglFogMode mode, float density, float z_near, float z_far) {
 	(void)cogl_set_fog((const CoglColor *)(fog_color), mode, density, z_near, z_far);
@@ -62,6 +89,9 @@ guint _cogl_vertex_buffer_get_n_vertices(CoglHandle handle) {
 }
 CoglHandle _cogl_vertex_buffer_indices_get_for_quads(guint n_indices) {
 	return (CoglHandle)cogl_vertex_buffer_indices_get_for_quads((unsigned int)(n_indices));
+}
+CoglHandle _cogl_vertex_buffer_indices_new(CoglIndicesType indices_type, void * indices_array, int indices_len) {
+	return (CoglHandle)cogl_vertex_buffer_indices_new(indices_type, (const void *)(indices_array), indices_len);
 }
 CoglHandle _cogl_vertex_buffer_new(guint n_vertices) {
 	return (CoglHandle)cogl_vertex_buffer_new((unsigned int)(n_vertices));
@@ -400,6 +430,13 @@ func GetSource() (_return_ unsafe.Pointer) {
 	return
 }
 
+func GetViewport() (_go_v_ unsafe.Pointer) {
+	var v *C.float
+	C._cogl_get_viewport(v)
+	_go_v_ = unsafe.Pointer(v)
+	return
+}
+
 func HandleGetType() (_return_ C.GType) {
 	_return_ = C.cogl_handle_get_type()
 	return
@@ -555,6 +592,18 @@ func CoglPathNew() () {
 	return
 }
 
+func PathPolygon(coords unsafe.Pointer, num_points C.int) () {
+	_cgo_coords_ := (*C.float)(coords)
+	C._cogl_path_polygon(_cgo_coords_, num_points)
+	return
+}
+
+func PathPolyline(coords unsafe.Pointer, num_points C.int) () {
+	_cgo_coords_ := (*C.float)(coords)
+	C._cogl_path_polyline(_cgo_coords_, num_points)
+	return
+}
+
 func PathRectangle(x_1 C.float, y_1 C.float, x_2 C.float, y_2 C.float) () {
 	C.cogl_path_rectangle(x_1, y_1, x_2, y_2)
 	return
@@ -653,6 +702,26 @@ func ProgramSetUniform1i(program C.CoglHandle, uniform_location C.int, value C.i
 	return
 }
 
+func ProgramSetUniformFloat(program C.CoglHandle, uniform_location C.int, n_components C.int, count C.int, value unsafe.Pointer) () {
+	_cgo_value_ := (*C.float)(value)
+	C._cogl_program_set_uniform_float(program, uniform_location, n_components, count, _cgo_value_)
+	return
+}
+
+func ProgramSetUniformInt(program C.CoglHandle, uniform_location C.int, n_components C.int, count C.int, value unsafe.Pointer) () {
+	_cgo_value_ := (*C.int)(value)
+	C._cogl_program_set_uniform_int(program, uniform_location, n_components, count, _cgo_value_)
+	return
+}
+
+func ProgramSetUniformMatrix(program C.CoglHandle, uniform_location C.int, dimensions C.int, count C.int, transpose bool, value unsafe.Pointer) () {
+	_cgo_transpose_ := (C.gboolean)(C.FALSE)
+	if transpose { _cgo_transpose_ = (C.gboolean)(C.TRUE) }
+	_cgo_value_ := (*C.float)(value)
+	C._cogl_program_set_uniform_matrix(program, uniform_location, dimensions, count, _cgo_transpose_, _cgo_value_)
+	return
+}
+
 func ProgramUse(handle C.CoglHandle) () {
 	C.cogl_program_use(handle)
 	return
@@ -684,8 +753,28 @@ func Rectangle(x_1 C.float, y_1 C.float, x_2 C.float, y_2 C.float) () {
 	return
 }
 
+func RectangleWithMultitextureCoords(x1 C.float, y1 C.float, x2 C.float, y2 C.float, tex_coords unsafe.Pointer, tex_coords_len C.int) () {
+	_cgo_tex_coords_ := (*C.float)(tex_coords)
+	C._cogl_rectangle_with_multitexture_coords(x1, y1, x2, y2, _cgo_tex_coords_, tex_coords_len)
+	return
+}
+
 func RectangleWithTextureCoords(x1 C.float, y1 C.float, x2 C.float, y2 C.float, tx1 C.float, ty1 C.float, tx2 C.float, ty2 C.float) () {
 	C.cogl_rectangle_with_texture_coords(x1, y1, x2, y2, tx1, ty1, tx2, ty2)
+	return
+}
+
+func Rectangles(verts unsafe.Pointer, n_rects uint) () {
+	_cgo_n_rects_ := (C.guint)(n_rects)
+	_cgo_verts_ := (*C.float)(verts)
+	C._cogl_rectangles(_cgo_verts_, _cgo_n_rects_)
+	return
+}
+
+func RectanglesWithTextureCoords(verts unsafe.Pointer, n_rects uint) () {
+	_cgo_n_rects_ := (C.guint)(n_rects)
+	_cgo_verts_ := (*C.float)(verts)
+	C._cogl_rectangles_with_texture_coords(_cgo_verts_, _cgo_n_rects_)
 	return
 }
 
@@ -892,6 +981,13 @@ func VertexBufferIndicesGetType(indices C.CoglHandle) (_return_ C.CoglIndicesTyp
 	return
 }
 
+func VertexBufferIndicesNew(indices_type int, indices_array unsafe.Pointer, indices_len C.int) (_return_ C.CoglHandle) {
+	_cgo_indices_type_ := (C.CoglIndicesType)(indices_type)
+	_cgo_indices_array_ := (unsafe.Pointer)(indices_array)
+	_return_ = C._cogl_vertex_buffer_indices_new(_cgo_indices_type_, _cgo_indices_array_, indices_len)
+	return
+}
+
 func VertexBufferNew(n_vertices uint) (_return_ C.CoglHandle) {
 	_cgo_n_vertices_ := (C.guint)(n_vertices)
 	_return_ = C._cogl_vertex_buffer_new(_cgo_n_vertices_)
@@ -911,7 +1007,7 @@ func BitmapNewFromFile(filename string) (_go__return__ *Bitmap, _error_ error) {
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_return_ = C._cogl_bitmap_new_from_file(_cgo_filename_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = (*Bitmap)(unsafe.Pointer(_return_))
@@ -1221,7 +1317,7 @@ func (_self_ *Material) SetBlend(blend_string string) (_go__return__ bool, _erro
 	var _return_ C.gboolean
 	_return_ = C._cogl_material_set_blend((*C.CoglMaterial)(_self_), _cgo_blend_string_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -1279,7 +1375,7 @@ func (_self_ *Material) SetLayerCombine(layer_index C.int, blend_string string) 
 	var _return_ C.gboolean
 	_return_ = C._cogl_material_set_layer_combine((*C.CoglMaterial)(_self_), layer_index, _cgo_blend_string_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -1312,7 +1408,7 @@ func (_self_ *Material) SetLayerPointSpriteCoordsEnabled(layer_index C.int, enab
 	var _return_ C.gboolean
 	_return_ = C._cogl_material_set_layer_point_sprite_coords_enabled((*C.CoglMaterial)(_self_), layer_index, _cgo_enable_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -1529,7 +1625,7 @@ func TextureNewFromFile(filename string, flags C.CoglTextureFlags, internal_form
 	_cgo_internal_format_ := (C.CoglPixelFormat)(internal_format)
 	_return_ = C._cogl_texture_new_from_file(_cgo_filename_, flags, _cgo_internal_format_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = (*CoglTexture)(unsafe.Pointer(_return_))

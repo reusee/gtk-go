@@ -9,7 +9,7 @@ func TestTest(t *testing.T) {
   Init(os.Args)
 
   stage := StageNew()
-  stage.SetBackgroundColor(ColorNew(0, 0, 0, 0))
+  //stage.SetBackgroundColor(ColorNew(0, 0, 0, 0))
   stage.SetSize(500, 600)
 
   actor := ActorNew()
@@ -40,8 +40,12 @@ func TestTest(t *testing.T) {
     CLUTTER_SCALING_FILTER_TRILINEAR,
     CLUTTER_SCALING_FILTER_LINEAR)
   actor.SetContent(image)
+  actor.SetPosition(1, 1)
 
-  actor.Show()
+  info := TextNewWithText("monaco", "hello, world!")
+  stage.AddChild(info)
+  info.SetPosition(0, 0)
+
   stage.Connect("destroy", func() { MainQuit() })
   stage.Show()
 

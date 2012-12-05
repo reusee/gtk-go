@@ -118,4 +118,6 @@ Deprecated_c_symbols = [
 
   'g_object_compat_control',
 
+  'cogl_program_uniform_int',
+  'cogl_program_uniform_matrix',
 ]

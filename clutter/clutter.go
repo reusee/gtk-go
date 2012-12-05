@@ -30,6 +30,9 @@ ClutterEvent * _clutter_get_current_event() {
 gchar * _clutter_get_script_id(GObject * gobject) {
 	return (gchar *)clutter_get_script_id(gobject);
 }
+ClutterMatrix * _clutter_matrix_init_from_array(ClutterMatrix * matrix, float * values) {
+	return (ClutterMatrix *)clutter_matrix_init_from_array(matrix, (const float *)(values));
+}
 ClutterMatrix * _clutter_matrix_init_from_matrix(ClutterMatrix * a, ClutterMatrix * b) {
 	return (ClutterMatrix *)clutter_matrix_init_from_matrix(a, (const ClutterMatrix *)(b));
 }
@@ -69,6 +72,15 @@ ClutterUnits * _clutter_value_get_units(GValue * value) {
 void _clutter_value_set_color(GValue * value, ClutterColor * color) {
 	(void)clutter_value_set_color(value, (const ClutterColor *)(color));
 }
+void _clutter_value_set_shader_float(GValue * value, gint size, gfloat * floats) {
+	(void)clutter_value_set_shader_float(value, size, (const gfloat *)(floats));
+}
+void _clutter_value_set_shader_int(GValue * value, gint size, gint * ints) {
+	(void)clutter_value_set_shader_int(value, size, (const gint *)(ints));
+}
+void _clutter_value_set_shader_matrix(GValue * value, gint size, gfloat * matrix) {
+	(void)clutter_value_set_shader_matrix(value, size, (const gfloat *)(matrix));
+}
 void _clutter_value_set_units(GValue * value, ClutterUnits * units) {
 	(void)clutter_value_set_units(value, (const ClutterUnits *)(units));
 }
@@ -102,8 +114,14 @@ PangoLayout * _clutter_actor_create_pango_layout(ClutterActor * _self_, gchar * 
 gboolean _clutter_actor_event(ClutterActor * _self_, ClutterEvent * event, gboolean capture) {
 	return (gboolean)clutter_actor_event(_self_, (const ClutterEvent *)(event), capture);
 }
+void _clutter_actor_get_abs_allocation_vertices(ClutterActor * _self_, ClutterVertex * verts) {
+	(void)clutter_actor_get_abs_allocation_vertices(_self_, (ClutterVertex *)(verts));
+}
 ClutterAction * _clutter_actor_get_action(ClutterActor * _self_, gchar * name) {
 	return (ClutterAction *)clutter_actor_get_action(_self_, (const gchar *)(name));
+}
+void _clutter_actor_get_allocation_vertices(ClutterActor * _self_, ClutterActor * ancestor, ClutterVertex * verts) {
+	(void)clutter_actor_get_allocation_vertices(_self_, ancestor, (ClutterVertex *)(verts));
 }
 ClutterConstraint * _clutter_actor_get_constraint(ClutterActor * _self_, gchar * name) {
 	return (ClutterConstraint *)clutter_actor_get_constraint(_self_, (const gchar *)(name));
@@ -237,6 +255,15 @@ ClutterTransition * _clutter_keyframe_transition_new(char * property_name) {
 void _clutter_keyframe_transition_set_key_frame(ClutterKeyframeTransition * _self_, guint index_, double key, ClutterAnimationMode mode, GValue * value) {
 	(void)clutter_keyframe_transition_set_key_frame(_self_, index_, key, mode, (const GValue *)(value));
 }
+void _clutter_keyframe_transition_set_key_frames(ClutterKeyframeTransition * _self_, guint n_key_frames, double * key_frames) {
+	(void)clutter_keyframe_transition_set_key_frames(_self_, n_key_frames, (const double *)(key_frames));
+}
+void _clutter_keyframe_transition_set_modes(ClutterKeyframeTransition * _self_, guint n_modes, ClutterAnimationMode * modes) {
+	(void)clutter_keyframe_transition_set_modes(_self_, n_modes, (const ClutterAnimationMode *)(modes));
+}
+void _clutter_keyframe_transition_set_values(ClutterKeyframeTransition * _self_, guint n_values, GValue * values) {
+	(void)clutter_keyframe_transition_set_values(_self_, n_values, (const GValue *)(values));
+}
 void _clutter_layout_manager_allocate(ClutterLayoutManager * _self_, ClutterContainer * container, ClutterActorBox * allocation, ClutterAllocationFlags flags) {
 	(void)clutter_layout_manager_allocate(_self_, container, (const ClutterActorBox *)(allocation), flags);
 }
@@ -252,11 +279,17 @@ GParamSpec * _clutter_layout_manager_find_child_property(ClutterLayoutManager * 
 void * _clutter_layout_manager_list_child_properties(ClutterLayoutManager * _self_, guint * n_pspecs) {
 	return (void *)clutter_layout_manager_list_child_properties(_self_, n_pspecs);
 }
+ClutterModel * _clutter_list_model_newv(guint n_columns, GType * types, void * names) {
+	return (ClutterModel *)clutter_list_model_newv(n_columns, types, (const gchar *const *)(names));
+}
 gchar * _clutter_model_get_column_name(ClutterModel * _self_, guint column) {
 	return (gchar *)clutter_model_get_column_name(_self_, column);
 }
 void _clutter_model_insert_value(ClutterModel * _self_, guint row, guint column, GValue * value) {
 	(void)clutter_model_insert_value(_self_, row, column, (const GValue *)(value));
+}
+void _clutter_model_set_names(ClutterModel * _self_, guint n_columns, void * names) {
+	(void)clutter_model_set_names(_self_, n_columns, (const gchar *const *)(names));
 }
 void _clutter_model_iter_set_value(ClutterModelIter * _self_, guint column, GValue * value) {
 	(void)clutter_model_iter_set_value(_self_, column, (const GValue *)(value));
@@ -299,6 +332,9 @@ char * _clutter_property_transition_get_property_name(ClutterPropertyTransition 
 }
 void _clutter_property_transition_set_property_name(ClutterPropertyTransition * _self_, char * property_name) {
 	(void)clutter_property_transition_set_property_name(_self_, (const char *)(property_name));
+}
+void _clutter_script_add_search_paths(ClutterScript * _self_, void * paths, gsize n_paths) {
+	(void)clutter_script_add_search_paths(_self_, (const gchar *const *)(paths), n_paths);
 }
 GObject * _clutter_script_get_object(ClutterScript * _self_, gchar * name) {
 	return (GObject *)clutter_script_get_object(_self_, (const gchar *)(name));
@@ -437,6 +473,9 @@ ClutterActorBox * _clutter_actor_box_copy(ClutterActorBox * _self_) {
 }
 gboolean _clutter_actor_box_equal(ClutterActorBox * _self_, ClutterActorBox * box_b) {
 	return (gboolean)clutter_actor_box_equal((const ClutterActorBox *)(_self_), (const ClutterActorBox *)(box_b));
+}
+void _clutter_actor_box_from_vertices(ClutterActorBox * _self_, ClutterVertex * verts) {
+	(void)clutter_actor_box_from_vertices(_self_, (const ClutterVertex *)(verts));
 }
 gfloat _clutter_actor_box_get_area(ClutterActorBox * _self_) {
 	return (gfloat)clutter_actor_box_get_area((const ClutterActorBox *)(_self_));
@@ -2511,10 +2550,12 @@ func ContainerClassFindChildProperty(klass *C.GObjectClass, property_name string
 	return
 }
 
-func ContainerClassListChildProperties(klass *C.GObjectClass) (_return_ unsafe.Pointer, _go_n_properties_ uint) {
+func ContainerClassListChildProperties(klass *C.GObjectClass) (_go__return__ unsafe.Pointer, _go_n_properties_ uint) {
 	var n_properties C.guint
+	var _return_ unsafe.Pointer
 	_return_ = C._clutter_container_class_list_child_properties(klass, &n_properties)
 	_go_n_properties_ = (uint)(n_properties)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -2688,6 +2729,12 @@ func MatrixGetType() (_return_ C.GType) {
 	return
 }
 
+func MatrixInitFromArray(matrix *C.ClutterMatrix, values unsafe.Pointer) (_return_ *C.ClutterMatrix) {
+	_cgo_values_ := (*C.float)(values)
+	_return_ = C._clutter_matrix_init_from_array(matrix, _cgo_values_)
+	return
+}
+
 func MatrixInitFromMatrix(a *C.ClutterMatrix, b *C.ClutterMatrix) (_return_ *C.ClutterMatrix) {
 	_return_ = C._clutter_matrix_init_from_matrix(a, b)
 	return
@@ -2851,24 +2898,30 @@ func ValueGetPaintNode(value *C.GValue) (_go__return__ PaintNode) {
 	return
 }
 
-func ValueGetShaderFloat(value *C.GValue) (_return_ *C.gfloat, _go_length_ uint64) {
+func ValueGetShaderFloat(value *C.GValue) (_go__return__ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
+	var _return_ *C.gfloat
 	_return_ = C._clutter_value_get_shader_float(value, &length)
 	_go_length_ = (uint64)(length)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
-func ValueGetShaderInt(value *C.GValue) (_return_ *C.gint, _go_length_ uint64) {
+func ValueGetShaderInt(value *C.GValue) (_go__return__ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
+	var _return_ *C.gint
 	_return_ = C._clutter_value_get_shader_int(value, &length)
 	_go_length_ = (uint64)(length)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
-func ValueGetShaderMatrix(value *C.GValue) (_return_ *C.gfloat, _go_length_ uint64) {
+func ValueGetShaderMatrix(value *C.GValue) (_go__return__ unsafe.Pointer, _go_length_ uint64) {
 	var length C.gsize
+	var _return_ *C.gfloat
 	_return_ = C._clutter_value_get_shader_matrix(value, &length)
 	_go_length_ = (uint64)(length)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -2888,6 +2941,27 @@ func ValueSetColor(value *C.GValue, color *ClutterColor) () {
 func ValueSetPaintNode(value *C.GValue, node PaintNodeKind) () {
 	_cgo_node_ := (C.gpointer)(node.GetGObject())
 	C.clutter_value_set_paint_node(value, _cgo_node_)
+	return
+}
+
+func ValueSetShaderFloat(value *C.GValue, size int, floats unsafe.Pointer) () {
+	_cgo_size_ := (C.gint)(size)
+	_cgo_floats_ := (*C.gfloat)(floats)
+	C._clutter_value_set_shader_float(value, _cgo_size_, _cgo_floats_)
+	return
+}
+
+func ValueSetShaderInt(value *C.GValue, size int, ints unsafe.Pointer) () {
+	_cgo_size_ := (C.gint)(size)
+	_cgo_ints_ := (*C.gint)(ints)
+	C._clutter_value_set_shader_int(value, _cgo_size_, _cgo_ints_)
+	return
+}
+
+func ValueSetShaderMatrix(value *C.GValue, size int, matrix unsafe.Pointer) () {
+	_cgo_size_ := (C.gint)(size)
+	_cgo_matrix_ := (*C.gfloat)(matrix)
+	C._clutter_value_set_shader_matrix(value, _cgo_size_, _cgo_matrix_)
 	return
 }
 
@@ -3079,6 +3153,13 @@ func (_self_ *Actor) Event(event *C.ClutterEvent, capture bool) (_go__return__ b
 	return
 }
 
+func (_self_ *Actor) GetAbsAllocationVertices() (_go_verts_ unsafe.Pointer) {
+	var verts *C.ClutterVertex
+	C._clutter_actor_get_abs_allocation_vertices((*C.ClutterActor)(_self_._value_), verts)
+	_go_verts_ = unsafe.Pointer(verts)
+	return
+}
+
 func (_self_ *Actor) GetAccessible() (_return_ *C.AtkObject) {
 	_return_ = C.clutter_actor_get_accessible((*C.ClutterActor)(_self_._value_))
 	return
@@ -3103,6 +3184,14 @@ func (_self_ *Actor) GetAllocationBox() (box *ActorBox) {
 	var _allocated_box_ C.ClutterActorBox
 	C.clutter_actor_get_allocation_box((*C.ClutterActor)(_self_._value_), &_allocated_box_)
 	box = (*ActorBox)(unsafe.Pointer(&_allocated_box_))
+	return
+}
+
+func (_self_ *Actor) GetAllocationVertices(ancestor ActorKind) (_go_verts_ unsafe.Pointer) {
+	_cgo_ancestor_ := (*C.ClutterActor)(ancestor.GetGObject())
+	var verts *C.ClutterVertex
+	C._clutter_actor_get_allocation_vertices((*C.ClutterActor)(_self_._value_), _cgo_ancestor_, verts)
+	_go_verts_ = unsafe.Pointer(verts)
 	return
 }
 
@@ -5165,17 +5254,15 @@ func ImageNew() (_go__return__ ClutterImage) {
 	return
 }
 
-func (_self_ *ClutterImage) SetArea(data []byte, pixel_format int, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ error) {
+func (_self_ *ClutterImage) SetArea(data unsafe.Pointer, pixel_format int, rect *C.cairo_rectangle_int_t, row_stride uint) (_go__return__ bool, _error_ error) {
 	var _cgo_error_ *C.GError
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
-	_cstring_data_ := C.CString(string(data))
-	defer C.free(unsafe.Pointer(_cstring_data_))
-	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
 	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
+	_cgo_data_ := (*C.guint8)(data)
 	_return_ = C._clutter_image_set_area((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, rect, _cgo_row_stride_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -5191,26 +5278,24 @@ func (_self_ *ClutterImage) SetBytes(data *C.GBytes, pixel_format int, width uin
 	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
 	_return_ = C._clutter_image_set_bytes((*C.ClutterImage)(_self_._value_), data, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
-func (_self_ *ClutterImage) SetData(data []byte, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ error) {
+func (_self_ *ClutterImage) SetData(data unsafe.Pointer, pixel_format int, width uint, height uint, row_stride uint) (_go__return__ bool, _error_ error) {
 	var _cgo_error_ *C.GError
 	_cgo_width_ := (C.guint)(width)
 	_cgo_height_ := (C.guint)(height)
 	_cgo_row_stride_ := (C.guint)(row_stride)
 	var _return_ C.gboolean
-	_cstring_data_ := C.CString(string(data))
-	defer C.free(unsafe.Pointer(_cstring_data_))
-	_cgo_data_ := (*C.guint8)(unsafe.Pointer(_cstring_data_))
 	_cgo_pixel_format_ := (C.CoglPixelFormat)(pixel_format)
+	_cgo_data_ := (*C.guint8)(data)
 	_return_ = C._clutter_image_set_data((*C.ClutterImage)(_self_._value_), _cgo_data_, _cgo_pixel_format_, _cgo_width_, _cgo_height_, _cgo_row_stride_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
@@ -5227,6 +5312,17 @@ func (_self_ *InputDevice) GetAssociatedDevice() (_go__return__ InputDevice) {
 func (_self_ *InputDevice) GetAxis(index_ uint) (_return_ C.ClutterInputAxis) {
 	_cgo_index__ := (C.guint)(index_)
 	_return_ = C.clutter_input_device_get_axis((*C.ClutterInputDevice)(_self_._value_), _cgo_index__)
+	return
+}
+
+func (_self_ *InputDevice) GetAxisValue(axes unsafe.Pointer, axis int) (_go__return__ bool, _go_value_ float64) {
+	var value C.gdouble
+	var _return_ C.gboolean
+	_cgo_axis_ := (C.ClutterInputAxis)(axis)
+	_cgo_axes_ := (*C.gdouble)(axes)
+	_return_ = C.clutter_input_device_get_axis_value((*C.ClutterInputDevice)(_self_._value_), _cgo_axes_, _cgo_axis_, &value)
+	_go_value_ = (float64)(value)
+	_go__return__ = _return_ == (C.gboolean)(C.TRUE)
 	return
 }
 
@@ -5506,6 +5602,27 @@ func (_self_ *KeyframeTransition) SetKeyFrame(index_ uint, key C.double, mode in
 	return
 }
 
+func (_self_ *KeyframeTransition) SetKeyFrames(n_key_frames uint, key_frames unsafe.Pointer) () {
+	_cgo_n_key_frames_ := (C.guint)(n_key_frames)
+	_cgo_key_frames_ := (*C.double)(key_frames)
+	C._clutter_keyframe_transition_set_key_frames((*C.ClutterKeyframeTransition)(_self_._value_), _cgo_n_key_frames_, _cgo_key_frames_)
+	return
+}
+
+func (_self_ *KeyframeTransition) SetModes(n_modes uint, modes unsafe.Pointer) () {
+	_cgo_n_modes_ := (C.guint)(n_modes)
+	_cgo_modes_ := (*C.ClutterAnimationMode)(modes)
+	C._clutter_keyframe_transition_set_modes((*C.ClutterKeyframeTransition)(_self_._value_), _cgo_n_modes_, _cgo_modes_)
+	return
+}
+
+func (_self_ *KeyframeTransition) SetValues(n_values uint, values unsafe.Pointer) () {
+	_cgo_n_values_ := (C.guint)(n_values)
+	_cgo_values_ := (*C.GValue)(values)
+	C._clutter_keyframe_transition_set_values((*C.ClutterKeyframeTransition)(_self_._value_), _cgo_n_values_, _cgo_values_)
+	return
+}
+
 func (_self_ *LayoutManager) Allocate(container ContainerKind, allocation *ActorBox, flags C.ClutterAllocationFlags) () {
 	_cgo_container_ := (*C.ClutterContainer)(container.GetGObject())
 	_cgo_allocation_ := (*C.ClutterActorBox)(unsafe.Pointer(allocation))
@@ -5577,10 +5694,12 @@ func (_self_ *LayoutManager) LayoutChanged() () {
 	return
 }
 
-func (_self_ *LayoutManager) ListChildProperties() (_return_ unsafe.Pointer, _go_n_pspecs_ uint) {
+func (_self_ *LayoutManager) ListChildProperties() (_go__return__ unsafe.Pointer, _go_n_pspecs_ uint) {
 	var n_pspecs C.guint
+	var _return_ unsafe.Pointer
 	_return_ = C._clutter_layout_manager_list_child_properties((*C.ClutterLayoutManager)(_self_._value_), &n_pspecs)
 	_go_n_pspecs_ = (uint)(n_pspecs)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -5594,6 +5713,24 @@ func (_self_ *LayoutMeta) GetManager() (_go__return__ LayoutManager) {
 	var _return_ *C.ClutterLayoutManager
 	_return_ = C.clutter_layout_meta_get_manager((*C.ClutterLayoutMeta)(_self_._value_))
 	_go__return__ = ToLayoutManager(unsafe.Pointer(_return_))
+	return
+}
+
+func ListModelNewv(n_columns uint, types unsafe.Pointer, names unsafe.Pointer) (_go__return__ ListModel) {
+	var _return_ *C.ClutterModel
+	_cgo_n_columns_ := (C.guint)(n_columns)
+	_cgo_types_ := (*C.GType)(types)
+	_cgo_names_ := (unsafe.Pointer)(names)
+	_return_ = C._clutter_list_model_newv(_cgo_n_columns_, _cgo_types_, _cgo_names_)
+	_go__return__ = ToListModel(unsafe.Pointer(_return_))
+	return
+}
+
+func (_self_ *Model) Appendv(n_columns uint, columns unsafe.Pointer, values unsafe.Pointer) () {
+	_cgo_n_columns_ := (C.guint)(n_columns)
+	_cgo_columns_ := (*C.guint)(columns)
+	_cgo_values_ := (*C.GValue)(values)
+	C.clutter_model_appendv((*C.ClutterModel)(_self_._value_), _cgo_n_columns_, _cgo_columns_, _cgo_values_)
 	return
 }
 
@@ -5689,6 +5826,23 @@ func (_self_ *Model) InsertValue(row uint, column uint, value *C.GValue) () {
 	return
 }
 
+func (_self_ *Model) Insertv(row uint, n_columns uint, columns unsafe.Pointer, values unsafe.Pointer) () {
+	_cgo_row_ := (C.guint)(row)
+	_cgo_n_columns_ := (C.guint)(n_columns)
+	_cgo_columns_ := (*C.guint)(columns)
+	_cgo_values_ := (*C.GValue)(values)
+	C.clutter_model_insertv((*C.ClutterModel)(_self_._value_), _cgo_row_, _cgo_n_columns_, _cgo_columns_, _cgo_values_)
+	return
+}
+
+func (_self_ *Model) Prependv(n_columns uint, columns unsafe.Pointer, values unsafe.Pointer) () {
+	_cgo_n_columns_ := (C.guint)(n_columns)
+	_cgo_columns_ := (*C.guint)(columns)
+	_cgo_values_ := (*C.GValue)(values)
+	C.clutter_model_prependv((*C.ClutterModel)(_self_._value_), _cgo_n_columns_, _cgo_columns_, _cgo_values_)
+	return
+}
+
 func (_self_ *Model) Remove(row uint) () {
 	_cgo_row_ := (C.guint)(row)
 	C.clutter_model_remove((*C.ClutterModel)(_self_._value_), _cgo_row_)
@@ -5705,6 +5859,13 @@ func (_self_ *Model) SetFilter(func_ C.ClutterModelFilterFunc, user_data C.gpoin
 	return
 }
 
+func (_self_ *Model) SetNames(n_columns uint, names unsafe.Pointer) () {
+	_cgo_n_columns_ := (C.guint)(n_columns)
+	_cgo_names_ := (unsafe.Pointer)(names)
+	C._clutter_model_set_names((*C.ClutterModel)(_self_._value_), _cgo_n_columns_, _cgo_names_)
+	return
+}
+
 func (_self_ *Model) SetSort(column int, func_ C.ClutterModelSortFunc, user_data C.gpointer, notify C.GDestroyNotify) () {
 	_cgo_column_ := (C.gint)(column)
 	C.clutter_model_set_sort((*C.ClutterModel)(_self_._value_), _cgo_column_, func_, user_data, notify)
@@ -5714,6 +5875,13 @@ func (_self_ *Model) SetSort(column int, func_ C.ClutterModelSortFunc, user_data
 func (_self_ *Model) SetSortingColumn(column int) () {
 	_cgo_column_ := (C.gint)(column)
 	C.clutter_model_set_sorting_column((*C.ClutterModel)(_self_._value_), _cgo_column_)
+	return
+}
+
+func (_self_ *Model) SetTypes(n_columns uint, types unsafe.Pointer) () {
+	_cgo_n_columns_ := (C.guint)(n_columns)
+	_cgo_types_ := (*C.GType)(types)
+	C.clutter_model_set_types((*C.ClutterModel)(_self_._value_), _cgo_n_columns_, _cgo_types_)
 	return
 }
 
@@ -6230,6 +6398,13 @@ func ScriptNew() (_go__return__ Script) {
 	return
 }
 
+func (_self_ *Script) AddSearchPaths(paths unsafe.Pointer, n_paths uint64) () {
+	_cgo_n_paths_ := (C.gsize)(n_paths)
+	_cgo_paths_ := (unsafe.Pointer)(paths)
+	C._clutter_script_add_search_paths((*C.ClutterScript)(_self_._value_), _cgo_paths_, _cgo_n_paths_)
+	return
+}
+
 func (_self_ *Script) ConnectSignals(user_data C.gpointer) () {
 	C.clutter_script_connect_signals((*C.ClutterScript)(_self_._value_), user_data)
 	return
@@ -6282,7 +6457,7 @@ func (_self_ *Script) LoadFromData(data string, length int64) (_go__return__ uin
 	defer C.free(unsafe.Pointer(_cstring_data_))
 	_return_ = C._clutter_script_load_from_data((*C.ClutterScript)(_self_._value_), _cgo_data_, _cgo_length_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = (uint)(_return_)
@@ -6297,7 +6472,7 @@ func (_self_ *Script) LoadFromFile(filename string) (_go__return__ uint, _error_
 	defer C.free(unsafe.Pointer(_cstring_filename_))
 	_return_ = C._clutter_script_load_from_file((*C.ClutterScript)(_self_._value_), _cgo_filename_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = (uint)(_return_)
@@ -6312,7 +6487,7 @@ func (_self_ *Script) LoadFromResource(resource_path string) (_go__return__ uint
 	defer C.free(unsafe.Pointer(_cstring_resource_path_))
 	_return_ = C._clutter_script_load_from_resource((*C.ClutterScript)(_self_._value_), _cgo_resource_path_, unsafe.Pointer(&_cgo_error_))
 	if _cgo_error_ != nil {
-		_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
+		_error_ = &GoError{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}
 		defer C.g_error_free(_cgo_error_)
 	}
 	_go__return__ = (uint)(_return_)
@@ -6592,14 +6767,14 @@ func (_self_ *Stage) HideCursor() () {
 	return
 }
 
-func (_self_ *Stage) ReadPixels(x int, y int, width int, height int) (_go__return__ []byte) {
+func (_self_ *Stage) ReadPixels(x int, y int, width int, height int) (_go__return__ unsafe.Pointer) {
 	_cgo_x_ := (C.gint)(x)
 	_cgo_y_ := (C.gint)(y)
 	_cgo_width_ := (C.gint)(width)
 	_cgo_height_ := (C.gint)(height)
 	var _return_ *C.guchar
 	_return_ = C.clutter_stage_read_pixels((*C.ClutterStage)(_self_._value_), _cgo_x_, _cgo_y_, _cgo_width_, _cgo_height_)
-	_go__return__ = C.GoBytes(unsafe.Pointer(_return_), C.int(C.strlen((*C.char)(unsafe.Pointer(_return_)))))
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -7525,11 +7700,13 @@ func (_self_ *Timeline) IsPlaying() (_go__return__ bool) {
 	return
 }
 
-func (_self_ *Timeline) ListMarkers(msecs int) (_return_ unsafe.Pointer, _go_n_markers_ uint64) {
+func (_self_ *Timeline) ListMarkers(msecs int) (_go__return__ unsafe.Pointer, _go_n_markers_ uint64) {
 	_cgo_msecs_ := (C.gint)(msecs)
 	var n_markers C.gsize
+	var _return_ unsafe.Pointer
 	_return_ = C._clutter_timeline_list_markers((*C.ClutterTimeline)(_self_._value_), _cgo_msecs_, &n_markers)
 	_go_n_markers_ = (uint64)(n_markers)
+	_go__return__ = unsafe.Pointer(_return_)
 	return
 }
 
@@ -7771,6 +7948,12 @@ func (_self_ *ActorBox) Equal(box_b *ActorBox) (_go__return__ bool) {
 
 func (_self_ *ActorBox) Free() () {
 	C.clutter_actor_box_free((*C.ClutterActorBox)(_self_))
+	return
+}
+
+func (_self_ *ActorBox) FromVertices(verts unsafe.Pointer) () {
+	_cgo_verts_ := (*C.ClutterVertex)(verts)
+	C._clutter_actor_box_from_vertices((*C.ClutterActorBox)(_self_), _cgo_verts_)
 	return
 }
 
