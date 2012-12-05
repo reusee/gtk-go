@@ -1,6 +1,7 @@
 from giscanner import ast
 from function_generator import *
 from common import *
+import re
 
 def handleFunction(parser, function, klass = None):
   generator = FunctionGenerator()
@@ -23,9 +24,8 @@ def handleFunction(parser, function, klass = None):
       map_string_returns,
       map_boolean_parameters,
       map_boolean_returns,
-      map_byte_array_parameters,
-      map_byte_array_returns,
       map_enum_parameters,
+      map_array_types,
   ]
 
   for processor in processors:
@@ -37,10 +37,6 @@ def handleFunction(parser, function, klass = None):
 
 def debug(parser, generator, function, klass):
   pass
-
-handled_param_array_types = [
-  ('guint8*', 'guint8'),
-]
 
 def check_skip(parser, generator, function, klass):
   if parser.is_skip(function.symbol):
@@ -54,10 +50,6 @@ def check_skip(parser, generator, function, klass):
       generator.skip = True
     if param.type.resolved == 'va_list':
       generator.skip = True
-    if param.type.resolved == '<array>':
-      key = (param.type.ctype, param.type.element_type.ctype)
-      if key not in handled_param_array_types:
-        generator.skip = True
     if param.direction == 'inout':
       generator.skip = True
     if parser.is_skip(param.type.ctype):
@@ -68,6 +60,7 @@ def convert_to_cgo_capatible_type(t):
     t = t.replace('*const ', '*')
   if 'const' in t:
     t = t.replace('const', '')
+  t = re.sub('\[[0-9]*\]', '*', t)
   if '**' in t:
     t = 'void *'
   if 'long double' in t:
@@ -106,7 +99,8 @@ def collect_c_func_info(parser, generator, function, klass):
     if value.c_parameter_type != param.type:
       generator.has_c_func = True
     if value.c_parameter_type != param.type:
-      value.c_argument = '(%s)(%s)' % (param.type, value.c_parameter_name)
+      cast_type = re.sub('\[[0-9]*\]', '*', param.type)
+      value.c_argument = '(%s)(%s)' % (cast_type, value.c_parameter_name)
     else:
       value.c_argument = value.c_parameter_name
     generator.c_parameters.append(value)
@@ -397,36 +391,6 @@ def map_boolean_returns(parser, generator, function, klass):
     ret.go_return_name = '_go_%s_' % ret.go_return_name
     ret.go_return_type = 'bool'
 
-def map_byte_array_parameters(parser, generator, function, klass):
-  for param in generator.go_parameters:
-    if param.gir_info.type.resolved != '<array>': continue
-    if param.gir_info.type.ctype != 'guint8*': continue
-    if param.gir_info.type.element_type.ctype != 'guint8': continue
-    generator.statements_before_cgo_call.extend([
-      '_cstring_%s_ := C.CString(string(%s))' % (param.go_parameter_name, param.go_parameter_name),
-      'defer C.free(unsafe.Pointer(_cstring_%s_))' % (param.go_parameter_name),
-      '_cgo_%s_ := (*C.guint8)(unsafe.Pointer(_cstring_%s_))' % (param.go_parameter_name, param.go_parameter_name),
-    ])
-    param.go_parameter_type = '[]byte'
-    param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
-
-def map_byte_array_returns(parser, generator, function, klass):
-  for ret in generator.go_returns:
-    if not ret.gir_info: continue
-    if ret.gir_info.type.resolved != '<array>': continue
-    if ret.gir_info.type.ctype != 'guchar*': continue
-    if ret.gir_info.type.element_type.ctype != 'guchar': continue
-    generator.statements_before_cgo_call.append(
-      'var %s *C.guchar' % ret.go_return_name)
-    generator.statements_after_cgo_call.append(
-      '_go_%s_ = C.GoBytes(unsafe.Pointer(%s), C.int(C.strlen((*C.char)(unsafe.Pointer(%s)))))' % (
-        ret.go_return_name,
-        ret.go_return_name,
-        ret.go_return_name,
-        ))
-    ret.go_return_name = '_go_%s_' % ret.go_return_name
-    ret.go_return_type = '[]byte'
-
 def map_enum_parameters(parser, generator, function, klass):
   for param in generator.go_parameters:
     if param.gir_info.type.ctype in parser.translator.enum_types:
@@ -438,3 +402,28 @@ def map_enum_parameters(parser, generator, function, klass):
           ))
       param.go_parameter_type = 'int'
       param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
+
+def map_array_types(parser, generator, function, klass):
+  # returns
+  for ret in generator.go_returns:
+    if ret.gir_info is None: continue
+    if ret.gir_info.type.resolved != '<array>': continue
+    generator.statements_before_cgo_call.append(
+      'var %s %s' % (
+        ret.go_return_name, ret.go_return_type))
+    generator.statements_after_cgo_call.append(
+      '_go_%s_ = unsafe.Pointer(%s)' % (
+        ret.go_return_name, ret.go_return_name))
+    ret.go_return_name = '_go_%s_' % ret.go_return_name
+    ret.go_return_type = 'unsafe.Pointer'
+
+  # parameters
+  for param in generator.go_parameters:
+    if param.gir_info.type.resolved != '<array>': continue
+    generator.statements_before_cgo_call.append(
+      '_cgo_%s_ := (%s)(%s)' % (
+        param.go_parameter_name,
+        param.go_parameter_type,
+        param.go_parameter_name))
+    param.cgo_argument = '_cgo_%s_' % param.go_parameter_name
+    param.go_parameter_type = 'unsafe.Pointer'
