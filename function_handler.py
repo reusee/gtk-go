@@ -25,6 +25,7 @@ def handleFunction(parser, function, klass = None):
       map_boolean_returns,
       map_byte_array_parameters,
       map_byte_array_returns,
+      map_enum_parameters,
   ]
 
   for processor in processors:
@@ -418,3 +419,15 @@ def map_byte_array_returns(parser, generator, function, klass):
         ))
     ret.go_return_name = '_go_%s_' % ret.go_return_name
     ret.go_return_type = '[]byte'
+
+def map_enum_parameters(parser, generator, function, klass):
+  for param in generator.go_parameters:
+    if param.gir_info.type.ctype in parser.translator.enum_types:
+      generator.statements_before_cgo_call.append(
+        '_cgo_%s_ := (%s)(%s)' % (
+          param.go_parameter_name,
+          param.go_parameter_type,
+          param.go_parameter_name,
+          ))
+      param.go_parameter_type = 'int'
+      param.cgo_argument = '_cgo_%s_' % param.go_parameter_name

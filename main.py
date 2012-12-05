@@ -15,6 +15,7 @@ class Translator:
     self.parsers = []
     self.names = set()
     self.namespaces = set()
+    self.enum_types = set()
 
   def add(self, filename):
     parser = Parser(filename, self)
@@ -24,8 +25,8 @@ class Translator:
     # prepare
     for parser in self.parsers:
       parser.prepare()
-    # collect inheritance info
     for parser in self.parsers:
+      # collect inheritance info
       nodes = []
       if hasattr(parser, 'nodes_of_class'):
         nodes.extend(parser.nodes_of_class)
@@ -42,6 +43,11 @@ class Translator:
         else:
           parent_name = parser.convert_gi_name_to_go_name(node.parent.resolved)
           self.class_parents[name] = parent_name
+
+      # collect enum types
+      if hasattr(parser, 'nodes_of_enum'):
+        for node in parser.nodes_of_enum:
+          self.enum_types.add(node.ctype)
 
   def parse(self):
     for parser in self.parsers:
