@@ -16,6 +16,7 @@ class Translator:
     self.names = set()
     self.namespaces = set()
     self.enum_types = set()
+    self.output_once = False
 
   def add(self, filename):
     parser = Parser(filename, self)

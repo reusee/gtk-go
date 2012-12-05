@@ -46,6 +46,17 @@ class Generator:
     print >>self.out, '\t"unsafe"'
     #print >>self.out, '\t"runtime"'
     print >>self.out, ')\n'
+    # once codes
+    if not self.parser.translator.output_once:
+      self.parser.translator.output_once = True
+      print >>self.out, '''\
+type Error struct {
+  Message string
+}
+func (self *Error) Error() string {
+  return self.Message
+}
+'''
 
     self.generate_types()
     for generator in self.parser.functions:

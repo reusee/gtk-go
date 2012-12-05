@@ -180,8 +180,15 @@ def collect_go_func_info(parser, generator, function, klass):
   if function.throws:
     value = values[-1]
     value.go_return_name = '_error_'
-    value.go_return_type = 'unsafe.Pointer'
-    value.cgo_argument = value.go_return_name
+    value.go_return_type = 'error'
+    generator.statements_before_cgo_call.append('var _cgo_error_ *C.GError')
+    value.cgo_argument = 'unsafe.Pointer(&_cgo_error_)'
+    generator.statements_after_cgo_call.extend([
+      'if _cgo_error_ != nil {',
+      '\t_error_ = &Error{C.GoString((*C.char)(unsafe.Pointer(_cgo_error_.message)))}',
+      '\tdefer C.g_error_free(_cgo_error_)',
+      '}',
+    ])
     assert value.cgo_argument != None
     generator.go_returns.append(value)
     generator.cgo_arguments.append(value)
